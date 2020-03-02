@@ -11,8 +11,9 @@ All files related to creating and updating the National Wildfire Coordinating Gr
 
 ### GitHub
 
-Initial Up;oad
+Initial Upload
 1. ...
 2. ...
 
-###For more information on Ontologies, check out the following resources:
+### For more information on Ontologies, check out the following resources:
+Introduction to the Semantic Web and Linked Data
