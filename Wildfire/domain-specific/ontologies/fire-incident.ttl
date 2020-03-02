@@ -1,0 +1,818 @@
+# baseURI: http://www.nwcg.gov/ontologies/fire-incident
+# imports: http://purl.org/dc/terms/
+# imports: http://www.nwcg.gov/ontologies/response
+# imports: http://www.opengis.net/ont/sf
+# imports: http://www.w3.org/2004/02/skos/core
+# imports: http://xmlns.com/foaf/0.1/
+
+@prefix : <http://www.nwcg.gov/ontologies/fire-incident#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix response: <http://www.nwcg.gov/ontologies/response#> .
+@prefix sf: <http://www.opengis.net/ont/sf#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://www.nwcg.gov/ontologies/fire-incident>
+  a owl:Ontology ;
+  dct:creator "Sofiane Fellah, Image Matters LLC" ;
+  dct:creator "Stephane Fellah, Image Matters LLC" ;
+  dct:description "The NWCG Fire Incident Ontology defines Fire Incident concepts, as well as Fire Aspects, Fuels, Outcomes, and Areas  " ;
+  spin:imports <http://topbraid.org/spin/owlrl-all> ;
+  spin:imports <http://topbraid.org/spin/rdfsplus> ;
+  spin:imports <http://topbraid.org/spin/skosspin> ;
+  spin:imports <http://topbraid.org/spin/spinowl> ;
+  rdfs:label "National Wildfire Coordination Group (NWCG) Fire Incident Ontology" ;
+  owl:imports dct: ;
+  owl:imports <http://www.nwcg.gov/ontologies/response> ;
+  owl:imports <http://www.opengis.net/ont/sf> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+  owl:imports foaf: ;
+  owl:versionInfo "v1" ;
+.
+:Acres
+  a :UnitOfMeasure ;
+  rdfs:label "Acres" ;
+  skos:definition "" ;
+  skos:prefLabel "Acres" ;
+.
+:Area
+  a owl:Class ;
+  rdfs:label "Area" ;
+  rdfs:subClassOf geo:SpatialThing ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :quantity ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :unitOfMeasure ;
+    ] ;
+  skos:definition "" ;
+  skos:prefLabel "Area" ;
+.
+:BehaviorAspect
+  a owl:Class ;
+  rdfs:label "Behavior aspect" ;
+  rdfs:subClassOf :FireAspect ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dct:description ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :hasFireCharacter ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :hasFlameLength ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :spreadRate ;
+    ] ;
+  skos:definition "" ;
+  skos:prefLabel "Behavior aspect" ;
+.
+:CausalAspect
+  a owl:Class ;
+  rdfs:label "Causal aspect" ;
+  rdfs:subClassOf :FireAspect ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :causedBy ;
+    ] ;
+  skos:definition "" ;
+  skos:prefLabel "Causal aspect" ;
+.
+:CauseType
+  a owl:Class ;
+  rdfs:label "Cause type" ;
+  rdfs:subClassOf skos:Concept ;
+  skos:definition "" ;
+  skos:prefLabel "Cause type" ;
+.
+:ChainsPerHour
+  a :UnitOfMeasure ;
+  rdfs:label "Chains per hour" ;
+  skos:definition "" ;
+  skos:prefLabel "Chains per hour" ;
+.
+:ClassificationAspect
+  a owl:Class ;
+  rdfs:label "Classification aspect" ;
+  rdfs:subClassOf :FireAspect ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :hasFireKind ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :isPlanned ;
+    ] ;
+  skos:definition "" ;
+  skos:prefLabel "Classification aspect" ;
+.
+:Contained
+  a :FireIncidentState ;
+  rdfs:label "Contained" ;
+  skos:definition "" ;
+  skos:prefLabel "Contained" ;
+.
+:Controlled
+  a :FireIncidentState ;
+  rdfs:label "Controlled" ;
+  skos:definition "" ;
+  skos:prefLabel "Controlled" ;
+.
+:Creeping
+  a :FireCharacter ;
+  rdfs:label "Creeping" ;
+  skos:definition "" ;
+  skos:prefLabel "Creeping" ;
+.
+:Crowning
+  a :FireCharacter ;
+  rdfs:label "Crowning" ;
+  skos:definition "" ;
+  skos:prefLabel "Crowning" ;
+.
+:EnvironmentalAspect
+  a owl:Class ;
+  rdfs:label "Environmental aspect" ;
+  rdfs:subClassOf :FireAspect ;
+  skos:definition "" ;
+  skos:prefLabel "Environmental aspect" ;
+.
+:Feet
+  a :UnitOfMeasure ;
+  rdfs:label "Feet" ;
+  skos:definition "" ;
+  skos:prefLabel "Feet" ;
+.
+:FeetPerMinute
+  a :UnitOfMeasure ;
+  rdfs:label "Feet per minute" ;
+  skos:definition "" ;
+  skos:prefLabel "Feet per minute" ;
+.
+:FireAspect
+  a owl:Class ;
+  rdfs:label "Fire aspect" ;
+  rdfs:subClassOf owl:Thing ;
+  skos:definition "" ;
+  skos:prefLabel "Fire aspect" ;
+.
+:FireCharacter
+  a owl:Class ;
+  rdfs:label "Fire character" ;
+  rdfs:subClassOf skos:Concept ;
+  skos:definition "" ;
+  skos:prefLabel "Fire character" ;
+.
+:FireIncident
+  a owl:Class ;
+  rdfs:label "Fire incident" ;
+  rdfs:subClassOf :BehaviorAspect ;
+  rdfs:subClassOf :CausalAspect ;
+  rdfs:subClassOf :ClassificationAspect ;
+  rdfs:subClassOf :FuelAspect ;
+  rdfs:subClassOf :IdentityAspect ;
+  rdfs:subClassOf :SpatialAspect ;
+  rdfs:subClassOf :StatusAspect ;
+  rdfs:subClassOf :TemporalAspect ;
+  rdfs:subClassOf :TopographyAspect ;
+  rdfs:subClassOf :WeatherAspect ;
+  rdfs:subClassOf owl:Thing ;
+.
+:FireIncidentSnapshot
+  a owl:Class ;
+  rdfs:label "Fire incident snapshot" ;
+  rdfs:subClassOf owl:Thing ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dct:temporal ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :isFireIncidentSnapshotOf ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :perimeter ;
+    ] ;
+  skos:definition "" ;
+  skos:prefLabel "Fire incident snapshot" ;
+.
+:FireIncidentState
+  a owl:Class ;
+  rdfs:label "Fire incident state" ;
+  rdfs:subClassOf skos:Concept ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :isActive ;
+    ] ;
+  skos:definition "" ;
+  skos:prefLabel "Fire incident state" ;
+.
+:FireIncident_1
+  a :FireIncident ;
+  :areaBurned [
+      a :Area ;
+      :quantity "60"^^xsd:decimal ;
+      :unitOfMeasure :Acres ;
+    ] ;
+  :causedBy :Natural ;
+  :containedAt "2019-01-04T10:40:54"^^xsd:dateTime ;
+  :controlledAt "2019-01-05T10:40:54"^^xsd:dateTime ;
+  :discoveredAt "2019-01-03T10:40:54"^^xsd:dateTime ;
+  :fireCode "3456" ;
+  :fireOutAt "2019-01-10T10:40:54"^^xsd:dateTime ;
+  :hasFireCharacter :Torching ;
+  :hasFireKind :WF ;
+  :hasFlameLength [
+      a :Length ;
+      :quantity "12"^^xsd:decimal ;
+      :unitOfMeasure :Feet ;
+    ] ;
+  :hasIdentifier [
+      a :Identifier ;
+      :authority <http://nwcg.gov> ;
+      :name "Burning Fire Incident 1" ;
+    ] ;
+  :hasIdentifier [
+      a :Identifier ;
+      :code "5435" ;
+    ] ;
+  :incidentName "Burning Fire Incident 1" ;
+  :irwinID 293479230847 ;
+  :isActive true ;
+  :isPlanned false ;
+  :pointOfOrigin [
+      a geo:Point ;
+      geo:lat "42.56" ;
+      geo:long "-116.756" ;
+    ] ;
+  :spreadRate [
+      a :Velocity ;
+      :quantity "11"^^xsd:decimal ;
+      :unitOfMeasure :FeetPerMinute ;
+    ] ;
+  :windSpeed [
+      a :Velocity ;
+      :quantity "5"^^xsd:decimal ;
+      :unitOfMeasure :MilesPerHour ;
+    ] ;
+  rdfs:label "Fire incident 1" ;
+  skos:prefLabel "Fire incident 1" ;
+.
+:FireKind
+  a owl:Class ;
+  rdfs:label "Fire kind" ;
+  rdfs:subClassOf skos:Concept ;
+  skos:definition "" ;
+  skos:prefLabel "Fire kind" ;
+.
+:FuelAspect
+  a owl:Class ;
+  rdfs:label "Fuel aspect" ;
+  rdfs:subClassOf :EnvironmentalAspect ;
+  skos:definition "" ;
+  skos:prefLabel "Fuel aspect" ;
+.
+:Fuels
+  a owl:Class ;
+  rdfs:label "Fuels" ;
+  rdfs:subClassOf owl:Thing ;
+  skos:definition "" ;
+  skos:prefLabel "Fuels" ;
+.
+:Human
+  a :CauseType ;
+  rdfs:label "Human" ;
+  skos:definition "" ;
+  skos:prefLabel "Human" ;
+.
+:Identifier
+  a owl:Class ;
+  rdfs:label "Identifier" ;
+  rdfs:subClassOf owl:Thing ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :authority ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :code ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :name ;
+    ] ;
+  skos:definition "" ;
+  skos:prefLabel "Identifier" ;
+.
+:IdentityAspect
+  a owl:Class ;
+  rdfs:label "Identity aspect" ;
+  rdfs:subClassOf :FireAspect ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :fireCode ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :incidentName ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :irwinID ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :localIncidentIdentifer ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :uniqueFireID ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty :hasIdentifier ;
+    ] ;
+  skos:definition "" ;
+  skos:prefLabel "Identity aspect" ;
+.
+:Length
+  a owl:Class ;
+  rdfs:label "Length" ;
+  rdfs:subClassOf owl:Thing ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :quantity ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :unitOfMeasure ;
+    ] ;
+  skos:definition "" ;
+  skos:prefLabel "Length" ;
+.
+:MilesPerHour
+  a :UnitOfMeasure ;
+  rdfs:label "Miles per Hour" ;
+  skos:definition "" ;
+  skos:prefLabel "Miles per Hour" ;
+.
+:Natural
+  a :CauseType ;
+  rdfs:label "Natural" ;
+  skos:definition "" ;
+  skos:prefLabel "Natural" ;
+.
+:Organization_1
+  a foaf:Organization ;
+  rdfs:label "Organization 1" ;
+  skos:definition "" ;
+  skos:prefLabel "Organization 1" ;
+.
+:Out
+  a :FireIncidentState ;
+  rdfs:label "Out" ;
+  skos:definition "" ;
+  skos:prefLabel "Out" ;
+.
+:Outcome
+  a owl:Class ;
+  rdfs:label "Outcome" ;
+  rdfs:subClassOf owl:Thing ;
+  skos:definition "" ;
+  skos:prefLabel "Outcome" ;
+.
+:OutcomeType
+  a owl:Class ;
+  rdfs:label "Outcome type" ;
+  rdfs:subClassOf skos:Concept ;
+  skos:definition "" ;
+  skos:prefLabel "Outcome type" ;
+.
+:RX
+  a :FireKind ;
+  :code "RX" ;
+  rdfs:label "PrescribedFire" ;
+  skos:definition "" ;
+  skos:prefLabel "RX" ;
+.
+:Running
+  a :FireCharacter ;
+  rdfs:label "Running" ;
+  skos:definition "" ;
+  skos:prefLabel "Running" ;
+.
+:SF
+  a :FireKind ;
+  :code "SF" ;
+  rdfs:label "Structure Fire" ;
+  skos:definition "" ;
+  skos:prefLabel "Structure Fire" ;
+.
+:Smoldering
+  a :FireCharacter ;
+  rdfs:label "Smoldering" ;
+  skos:definition "" ;
+  skos:prefLabel "Smoldering" ;
+.
+:SpatialAspect
+  a owl:Class ;
+  rdfs:label "Spatial Aspect" ;
+  rdfs:subClassOf :FireAspect ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :areaBurned ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :perimeter ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :pointOfOrigin ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty :hasPlace ;
+    ] ;
+  skos:definition "" ;
+  skos:prefLabel "Spatial Aspect" ;
+.
+:Spotting
+  a :FireCharacter ;
+  rdfs:label "Spotting" ;
+  skos:definition "" ;
+  skos:prefLabel "Spotting" ;
+.
+:SquareMiles
+  a :UnitOfMeasure ;
+  rdfs:label "Square miles" ;
+  skos:definition "" ;
+  skos:prefLabel "Square miles" ;
+.
+:StatusAspect
+  a owl:Class ;
+  rdfs:label "Status Aspect" ;
+  rdfs:subClassOf :FireAspect ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :isActive ;
+    ] ;
+  skos:definition "" ;
+  skos:prefLabel "Status Aspect" ;
+.
+:TemporalAspect
+  a owl:Class ;
+  rdfs:label "Temporal aspect" ;
+  rdfs:subClassOf :FireAspect ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :containedAt ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :controlledAt ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :discoveredAt ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :fireOutAt ;
+    ] ;
+  skos:definition "" ;
+  skos:prefLabel "Temporal aspect" ;
+.
+:TopographyAspect
+  a owl:Class ;
+  rdfs:label "Topography aspect" ;
+  rdfs:subClassOf :EnvironmentalAspect ;
+  skos:definition "" ;
+  skos:prefLabel "Topography aspect" ;
+.
+:Torching
+  a :FireCharacter ;
+  rdfs:label "Torching" ;
+  skos:definition "" ;
+  skos:prefLabel "Torching" ;
+.
+:Uncontrolled
+  a :FireIncidentState ;
+  rdfs:label "Uncontrolled" ;
+  skos:definition "" ;
+  skos:prefLabel "Uncontrolled" ;
+.
+:UnitOfMeasure
+  a owl:Class ;
+  rdfs:label "Unit of measure" ;
+  rdfs:subClassOf skos:Concept ;
+  skos:definition "" ;
+  skos:prefLabel "Unit of measure" ;
+.
+:Unknown
+  a :CauseType ;
+  rdfs:label "Unknown" ;
+  skos:definition "" ;
+  skos:prefLabel "Unknown" ;
+.
+:VF
+  a :FireKind ;
+  :code "VF" ;
+  rdfs:label "Vehicle Fire" ;
+  skos:definition "" ;
+  skos:prefLabel "Vehicle Fire" ;
+.
+:Velocity
+  a owl:Class ;
+  rdfs:label "Velocity" ;
+  rdfs:subClassOf skos:Concept ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :quantity ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :unitOfMeasure ;
+    ] ;
+  skos:definition "" ;
+  skos:prefLabel "Velocity" ;
+.
+:WF
+  a :FireKind ;
+  :code "WF" ;
+  rdfs:label "Wildfire" ;
+  skos:definition "" ;
+  skos:prefLabel "Wildland fire" ;
+.
+:WeatherAspect
+  a owl:Class ;
+  rdfs:label "Weather aspect" ;
+  rdfs:subClassOf :EnvironmentalAspect ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :windSpeed ;
+    ] ;
+  skos:definition "" ;
+  skos:prefLabel "Weather aspect" ;
+.
+:areaBurned
+  a owl:ObjectProperty ;
+  rdfs:label "area burned" ;
+  rdfs:range :Area ;
+  skos:definition "" ;
+  skos:prefLabel "area burned" ;
+.
+:authority
+  a owl:ObjectProperty ;
+  rdfs:label "authority" ;
+  skos:definition "" ;
+  skos:prefLabel "authority" ;
+.
+:causedBy
+  a owl:ObjectProperty ;
+  rdfs:label "caused by" ;
+  rdfs:range :CauseType ;
+  skos:definition "" ;
+  skos:prefLabel "caused by" ;
+.
+:code
+  a owl:DatatypeProperty ;
+  rdfs:label "code" ;
+  rdfs:range xsd:string ;
+  skos:definition "" ;
+  skos:prefLabel "code" ;
+.
+:containedAt
+  a owl:DatatypeProperty ;
+  rdfs:label "contained at" ;
+  rdfs:range xsd:dateTime ;
+  rdfs:subPropertyOf dct:temporal ;
+  skos:definition "" ;
+  skos:prefLabel "contained at" ;
+.
+:controlledAt
+  a owl:DatatypeProperty ;
+  rdfs:label "controlled at" ;
+  rdfs:range xsd:dateTime ;
+  rdfs:subPropertyOf dct:temporal ;
+  skos:definition "" ;
+  skos:prefLabel "controlled at" ;
+.
+:discoveredAt
+  a owl:DatatypeProperty ;
+  rdfs:label "discovered at" ;
+  rdfs:range xsd:dateTime ;
+  rdfs:subPropertyOf dct:temporal ;
+  skos:definition "" ;
+  skos:prefLabel "discovered at" ;
+.
+:fireCode
+  a owl:DatatypeProperty ;
+  rdfs:label "fire code" ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf dct:identifier ;
+  skos:definition "" ;
+  skos:prefLabel "fire code" ;
+.
+:fireOutAt
+  a owl:DatatypeProperty ;
+  rdfs:label "fire out at" ;
+  rdfs:range xsd:dateTime ;
+  rdfs:subPropertyOf dct:temporal ;
+  skos:definition "" ;
+  skos:prefLabel "fire out at" ;
+.
+:hasFireCharacter
+  a owl:ObjectProperty ;
+  rdfs:label "has fire character" ;
+  rdfs:range :FireCharacter ;
+  skos:definition "" ;
+  skos:prefLabel "has fire character" ;
+.
+:hasFireKind
+  a owl:ObjectProperty ;
+  rdfs:label "has fire kind" ;
+  rdfs:range :FireKind ;
+  skos:definition "" ;
+  skos:prefLabel "has fire kind" ;
+.
+:hasFlameLength
+  a owl:ObjectProperty ;
+  rdfs:label "has flame length" ;
+  rdfs:range :Length ;
+  skos:definition "" ;
+  skos:prefLabel "has flame length" ;
+.
+:hasIdentifier
+  a owl:ObjectProperty ;
+  rdfs:label "has identifier" ;
+  rdfs:range :Identifier ;
+  skos:definition "" ;
+  skos:prefLabel "has identifier" ;
+.
+:hasPlace
+  a owl:ObjectProperty ;
+  rdfs:label "has place" ;
+  rdfs:range dct:Location ;
+  rdfs:subPropertyOf dct:spatial ;
+  skos:definition "" ;
+  skos:prefLabel "has place" ;
+.
+:hasWeather
+  a owl:ObjectProperty ;
+  rdfs:label "weather" ;
+  skos:definition "" ;
+  skos:prefLabel "weather" ;
+.
+:incidentName
+  a owl:DatatypeProperty ;
+  rdfs:label "incident name" ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf dct:identifier ;
+  skos:definition "" ;
+  skos:prefLabel "incident name" ;
+.
+:irwinID
+  a owl:DatatypeProperty ;
+  rdfs:label "irwin ID" ;
+  rdfs:range xsd:integer ;
+  rdfs:subPropertyOf dct:identifier ;
+  skos:definition "" ;
+  skos:prefLabel "irwin ID" ;
+.
+:isActive
+  a owl:DatatypeProperty ;
+  rdfs:label "is active" ;
+  rdfs:range xsd:boolean ;
+  skos:definition "" ;
+  skos:prefLabel "is active" ;
+.
+:isFireIncidentSnapshotOf
+  a owl:ObjectProperty ;
+  rdfs:label "is fire incident snapshot of" ;
+  skos:definition "" ;
+  skos:prefLabel "is fire incident snapshot of" ;
+.
+:isPlanned
+  a owl:DatatypeProperty ;
+  rdfs:label "is planned" ;
+  rdfs:range xsd:boolean ;
+  skos:definition "" ;
+  skos:prefLabel "is planned" ;
+.
+:localIncidentIdentifer
+  a owl:DatatypeProperty ;
+  rdfs:label "local incident identifer" ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf dct:identifier ;
+  skos:definition "" ;
+  skos:prefLabel "local incident identifer" ;
+.
+:name
+  a owl:DatatypeProperty ;
+  rdfs:label "name" ;
+  rdfs:range xsd:string ;
+  skos:definition "" ;
+  skos:prefLabel "name" ;
+.
+:perimeter
+  a owl:ObjectProperty ;
+  rdfs:label "perimeter" ;
+  rdfs:range sf:MultiPolygon ;
+  rdfs:subPropertyOf dct:spatial ;
+  skos:definition "" ;
+  skos:prefLabel "perimeter" ;
+.
+:pointOfOrigin
+  a owl:ObjectProperty ;
+  rdfs:label "point of origin" ;
+  rdfs:range geo:Point ;
+  rdfs:subPropertyOf dct:spatial ;
+  skos:definition "" ;
+  skos:prefLabel "point of origin" ;
+.
+:quantity
+  a owl:DatatypeProperty ;
+  rdfs:label "quantity" ;
+  rdfs:range xsd:decimal ;
+  skos:definition "" ;
+  skos:prefLabel "quantity" ;
+.
+:spreadRate
+  a owl:ObjectProperty ;
+  rdfs:label "spread rate" ;
+  rdfs:range :Velocity ;
+  skos:definition "" ;
+  skos:prefLabel "spread rate" ;
+.
+:uniqueFireID
+  a owl:DatatypeProperty ;
+  rdfs:label "unique fire ID" ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf dct:identifier ;
+  skos:definition "" ;
+  skos:prefLabel "unique fire ID" ;
+.
+:unitOfMeasure
+  a owl:ObjectProperty ;
+  rdfs:label "unit of measure" ;
+  rdfs:range :UnitOfMeasure ;
+  skos:definition "" ;
+  skos:prefLabel "unit of measure" ;
+.
+:windSpeed
+  a owl:ObjectProperty ;
+  rdfs:label "wind speed" ;
+  rdfs:range :Velocity ;
+  skos:definition "" ;
+  skos:prefLabel "wind speed" ;
+.

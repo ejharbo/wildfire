@@ -1,0 +1,75 @@
+# baseURI: http://www.nwcg.gov/ontologies/fire
+# imports: http://purl.org/dc/terms/
+# imports: http://www.w3.org/2004/02/skos/core
+# imports: http://xmlns.com/foaf/0.1/
+
+@prefix : <http://www.nwcg.gov/ontologies/fire#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://www.nwcg.gov/ontologies/fire>
+  a owl:Ontology ;
+  dcterms:creator "Sofiane Fellah, Image Matters LLC" ;
+  dcterms:creator "Stephane Fellah, Image Matters LLC" ;
+  dcterms:description "The NWCG Fire Ontology defines Fire from the Phenomenon view, as well as Wildland Fire and Fire Characteristics" ;
+  rdfs:label "National Wildfire Coordination Group (NWCG) Fire Ontology" ;
+  owl:imports dcterms: ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+  owl:imports <http://xmlns.com/foaf/0.1/> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+  owl:versionInfo "v1" ;
+.
+:FireCharacteristic
+  a owl:Class ;
+  rdfs:label "Fire characteristic" ;
+  rdfs:subClassOf owl:Thing ;
+.
+:PrescribedFire
+  a :WildlandFireType ;
+  rdfs:label "Prescribed fire" ;
+  skos:definition "" ;
+  skos:prefLabel "Prescribed fire" ;
+.
+:Wildfire
+  a :WildlandFireType ;
+  rdfs:label "Wildfire" ;
+  skos:definition "" ;
+  skos:prefLabel "Wildfire" ;
+.
+:WildlandFire
+  a owl:Class ;
+  rdfs:label "Wildland fire" ;
+  rdfs:subClassOf owl:Thing ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:description ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:identifier ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:temporal ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://www.w3.org/2003/01/geo/wgs84_pos#location> ;
+    ] ;
+  skos:definition "Any non-structure fire that occurs in vegetation or natural fuels. Includes Wildfires and Prescribed Fires. " ;
+.
+:WildlandFireType
+  a owl:Class ;
+  rdfs:label "Wildland fire type" ;
+  rdfs:subClassOf skos:Concept ;
+  skos:definition "" ;
+  skos:prefLabel "Wildland fire type" ;
+.

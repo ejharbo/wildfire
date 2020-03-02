@@ -1,0 +1,531 @@
+# baseURI: http://www.nwcg.gov/ontologies/position
+# imports: http://purl.org/dc/terms/
+# imports: http://www.w3.org/2004/02/skos/core
+# imports: http://www.w3.org/ns/org
+# imports: http://xmlns.com/foaf/0.1/
+# prefix: nwcg-position
+
+@prefix : <http://www.nwcg.gov/ontologies/position#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix nwcg-position: <http://www.nwcg.gov/ontologies/position#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://www.nwcg.gov/ontologies/position>
+  a owl:Ontology ;
+  dcterms:creator "Sofiane Fellah, Image Matters LLC" ;
+  dcterms:creator "Stephane Fellah, Image Matters LLC" ;
+  dcterms:description "The NWCG Fire Position Ontology defines concepts related to Position, such as Requirement, Catalog, and Performance Category  " ;
+  rdfs:label "National Wildfire Coordination Group (NWCG) Fire Position Ontology" ;
+  owl:imports dcterms: ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+  owl:imports <http://www.w3.org/ns/org> ;
+  owl:imports <http://xmlns.com/foaf/0.1/> ;
+  owl:versionInfo "v1" ;
+.
+nwcg-position:AuthorizationRequirement
+  a owl:Class ;
+  rdfs:label "Authorization requirement" ;
+  rdfs:subClassOf nwcg-position:PositionRequirement ;
+  skos:definition "" ;
+  skos:prefLabel "Authorization requirement" ;
+.
+nwcg-position:CertificationOrLicenseRequirement
+  a owl:Class ;
+  rdfs:label "Certification or license requirement" ;
+  rdfs:subClassOf nwcg-position:PositionRequirement ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:licenseOrCertification ;
+    ] ;
+  skos:definition "" ;
+  skos:prefLabel "Certification or license requirement" ;
+.
+nwcg-position:EducationDiploma
+  a owl:Class ;
+  rdfs:label "Education diploma" ;
+  rdfs:subClassOf owl:Thing ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:educationLevel ;
+    ] ;
+  skos:definition "" ;
+  skos:prefLabel "Education diploma" ;
+.
+nwcg-position:EducationLevel
+  a owl:Class ;
+  rdfs:label "Education level" ;
+  rdfs:subClassOf skos:Concept ;
+  skos:definition "" ;
+  skos:prefLabel "Education level" ;
+.
+nwcg-position:EducationRequirement
+  a owl:Class ;
+  rdfs:label "Education requirement" ;
+  rdfs:subClassOf nwcg-position:PositionRequirement ;
+  skos:definition "" ;
+  skos:prefLabel "Education requirement" ;
+.
+nwcg-position:ExperienceRequirement
+  a owl:Class ;
+  rdfs:label "Experience requirement" ;
+  rdfs:subClassOf nwcg-position:PositionRequirement ;
+  skos:definition "" ;
+  skos:prefLabel "Experience requirement" ;
+.
+nwcg-position:FunctionalArea
+  a owl:Class ;
+  rdfs:label "Functional area" ;
+  rdfs:subClassOf skos:Concept ;
+  skos:definition "" ;
+  skos:prefLabel "Functional area" ;
+.
+nwcg-position:InProgress
+  a nwcg-position:RequirementLevel ;
+  rdfs:label "In progress" ;
+  skos:definition "" ;
+  skos:prefLabel "In progress" ;
+.
+nwcg-position:LicenseOrCertification
+  a owl:Class ;
+  rdfs:label "License or certification" ;
+  rdfs:subClassOf owl:Thing ;
+  skos:definition "" ;
+  skos:prefLabel "License or certification" ;
+.
+nwcg-position:Optional
+  a nwcg-position:RequirementLevel ;
+  rdfs:label "Optional" ;
+  skos:definition "" ;
+  skos:prefLabel "Optional" ;
+.
+nwcg-position:PhysicalFitnessLevel
+  a owl:Class ;
+  rdfs:label "Physical fitness level" ;
+  rdfs:subClassOf skos:Concept ;
+  skos:definition "" ;
+  skos:prefLabel "Physical fitness level" ;
+.
+nwcg-position:PhysicalFitnessLevelRequirement
+  a owl:Class ;
+  rdfs:label "Physical fitness level requirement" ;
+  rdfs:subClassOf nwcg-position:PositionRequirement ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:physicalFitnessLevel ;
+    ] ;
+  skos:definition "" ;
+  skos:prefLabel "Physical fitness level requirement" ;
+.
+nwcg-position:Position
+  a owl:Class ;
+  rdfs:label "Position" ;
+  rdfs:subClassOf org:Role ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:positionDescription ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:isCurrent ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:status ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:identifier ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:references ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:assignedTo ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:functionalArea ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:hasSubposition ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:hasSubposition ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:keyStakeholder ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:positionCode ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:positionTitle ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:stewardCommittee ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:subpositionOf ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty skos:changeNote ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty skos:note ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:positionRequirement ;
+    ] ;
+.
+nwcg-position:PositionCatalog
+  a owl:Class ;
+  rdfs:label "Position catalog" ;
+  rdfs:subClassOf owl:Thing ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:position ;
+    ] ;
+  skos:prefLabel "Position catalog" ;
+.
+nwcg-position:PositionDescription
+  a owl:Class ;
+  rdfs:label "Position description" ;
+  rdfs:subClassOf owl:Thing ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:hasPerformanceCategory ;
+    ] ;
+  skos:definition "" ;
+  skos:prefLabel "Position description" ;
+.
+nwcg-position:PositionDescriptionStatement
+  a owl:Class ;
+  rdfs:label "Position description statement" ;
+  rdfs:subClassOf skos:Concept ;
+  skos:definition "" ;
+  skos:prefLabel "Position description statement" ;
+.
+nwcg-position:PositionPerformanceCategory
+  a owl:Class ;
+  rdfs:label "Position description group" ;
+  rdfs:subClassOf owl:Thing ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:groupName ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:hasDescriptionStatement ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "2"^^xsd:nonNegativeInteger ;
+      owl:onProperty org:hasMember ;
+    ] ;
+  skos:definition "" ;
+  skos:prefLabel "Position description group" ;
+.
+nwcg-position:PositionRequirement
+  a owl:Class ;
+  rdfs:label "Position requirement" ;
+  rdfs:subClassOf owl:Thing ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:description ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:hasPerformanceCategory ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:position ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:requirementLevel ;
+    ] ;
+.
+nwcg-position:PositionRequirementGroup
+  a owl:Class ;
+  rdfs:label "Position requirement group" ;
+  rdfs:subClassOf nwcg-position:PositionRequirement ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:isAlternative ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+      owl:onClass nwcg-position:PositionRequirement ;
+      owl:onProperty org:member ;
+    ] ;
+  skos:definition "" ;
+  skos:prefLabel "Position requirement group" ;
+.
+nwcg-position:Recommended
+  a nwcg-position:RequirementLevel ;
+  rdfs:label "Recommended" ;
+  skos:definition "" ;
+  skos:prefLabel "Recommended" ;
+.
+nwcg-position:Required
+  a nwcg-position:RequirementLevel ;
+  rdfs:label "Required" ;
+  skos:definition "" ;
+  skos:prefLabel "Required" ;
+.
+nwcg-position:RequirementLevel
+  a owl:Class ;
+  rdfs:label "Requirement level" ;
+  rdfs:subClassOf skos:Concept ;
+  skos:definition "" ;
+  skos:prefLabel "Requirement level" ;
+.
+nwcg-position:Status
+  a owl:Class ;
+  rdfs:label "Status" ;
+  rdfs:subClassOf skos:Concept ;
+  skos:prefLabel "Status" ;
+.
+nwcg-position:Training
+  a owl:Class ;
+  rdfs:label "Training" ;
+  rdfs:subClassOf owl:Thing ;
+  skos:definition "" ;
+  skos:prefLabel "Training" ;
+.
+nwcg-position:TrainingRequirement
+  a owl:Class ;
+  rdfs:label "Training requirement" ;
+  rdfs:subClassOf nwcg-position:PositionRequirement ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:isDevelopmentTraining ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:training ;
+    ] ;
+  skos:definition "" ;
+  skos:prefLabel "Training requirement" ;
+.
+nwcg-position:assignedTo
+  a owl:ObjectProperty ;
+  rdfs:label "assigned to" ;
+  rdfs:range org:Organization ;
+  skos:definition "" ;
+  skos:prefLabel "assigned to" ;
+.
+nwcg-position:educationLevel
+  a owl:ObjectProperty ;
+  rdfs:label "education level" ;
+  rdfs:range nwcg-position:EducationLevel ;
+  skos:definition "" ;
+  skos:prefLabel "education level" ;
+.
+nwcg-position:functionalArea
+  a owl:ObjectProperty ;
+  rdfs:label "functional area" ;
+.
+nwcg-position:groupName
+  a owl:DatatypeProperty ;
+  rdfs:label "group name" ;
+  rdfs:range xsd:string ;
+  skos:definition "" ;
+  skos:prefLabel "group name" ;
+.
+nwcg-position:hasDescriptionStatement
+  a owl:ObjectProperty ;
+  rdfs:label "has description statement" ;
+  rdfs:range nwcg-position:PositionDescriptionStatement ;
+  skos:definition "" ;
+  skos:prefLabel "has description statement" ;
+.
+nwcg-position:hasPerformanceCategory
+  a owl:ObjectProperty ;
+  rdfs:label "has performance category" ;
+  rdfs:range nwcg-position:PositionPerformanceCategory ;
+  skos:definition "" ;
+  skos:prefLabel "has performance category" ;
+.
+nwcg-position:hasSubposition
+  a owl:ObjectProperty ;
+  rdfs:domain nwcg-position:Position ;
+  rdfs:label "has subposition" ;
+  rdfs:range nwcg-position:Position ;
+  owl:inverseOf nwcg-position:subpositionOf ;
+  skos:prefLabel "has subposition" ;
+.
+nwcg-position:isAlternative
+  a owl:DatatypeProperty ;
+  rdfs:label "is alternative" ;
+  rdfs:range xsd:boolean ;
+  skos:definition "" ;
+  skos:prefLabel "is alternative" ;
+.
+nwcg-position:isCurrent
+  a owl:DatatypeProperty ;
+  rdfs:label "is current" ;
+  rdfs:range xsd:boolean ;
+  skos:prefLabel "is current" ;
+.
+nwcg-position:isDevelopmentTraining
+  a owl:DatatypeProperty ;
+  rdfs:label "is development training" ;
+  rdfs:range xsd:boolean ;
+  skos:definition "" ;
+  skos:prefLabel "is development training" ;
+.
+nwcg-position:keyStakeholder
+  a owl:ObjectProperty ;
+  rdfs:label "key stakeholder" ;
+  rdfs:range org:Organization ;
+  skos:prefLabel "key stakeholder" ;
+.
+nwcg-position:licenseOrCertification
+  a owl:ObjectProperty ;
+  rdfs:label "license or certification" ;
+  rdfs:range nwcg-position:LicenseOrCertification ;
+  skos:definition "" ;
+  skos:prefLabel "license or certification" ;
+.
+nwcg-position:physicalFitnessLevel
+  a owl:ObjectProperty ;
+  rdfs:label "physical fitness level" ;
+  rdfs:range nwcg-position:PhysicalFitnessLevel ;
+  skos:definition "" ;
+  skos:prefLabel "physical fitness level" ;
+.
+nwcg-position:position
+  a owl:ObjectProperty ;
+  rdfs:label "position" ;
+  rdfs:range nwcg-position:Position ;
+  rdfs:subPropertyOf org:role ;
+  skos:prefLabel "position" ;
+.
+nwcg-position:positionCode
+  a owl:DatatypeProperty ;
+  rdfs:label "position code" ;
+  rdfs:range xsd:string ;
+.
+nwcg-position:positionDescription
+  a owl:ObjectProperty ;
+  rdfs:label "has position description" ;
+  rdfs:range nwcg-position:PositionDescription ;
+  skos:definition "" ;
+  skos:prefLabel "has position description" ;
+.
+nwcg-position:positionRequirement
+  a owl:ObjectProperty ;
+  rdfs:label "position requirement" ;
+  rdfs:range nwcg-position:PositionRequirement ;
+.
+nwcg-position:positionTitle
+  a owl:DatatypeProperty ;
+  rdfs:label "position title" ;
+  rdfs:range xsd:string ;
+.
+nwcg-position:qualifiedFor
+  a owl:ObjectProperty ;
+  rdfs:label "qualified for" ;
+  rdfs:range nwcg-position:Position ;
+  skos:definition "" ;
+  skos:prefLabel "qualified for" ;
+.
+nwcg-position:requirementLevel
+  a owl:ObjectProperty ;
+  rdfs:label "requirement level" ;
+  rdfs:range nwcg-position:RequirementLevel ;
+  skos:definition "" ;
+  skos:prefLabel "requirement level" ;
+.
+nwcg-position:status
+  a owl:ObjectProperty ;
+  rdfs:label "status" ;
+  rdfs:range nwcg-position:Status ;
+  skos:prefLabel "status" ;
+.
+nwcg-position:stewardCommittee
+  a owl:ObjectProperty ;
+  rdfs:label "steward committee" ;
+  rdfs:range org:Organization ;
+  skos:definition "" ;
+  skos:prefLabel "steward committee" ;
+.
+nwcg-position:subpositionOf
+  a owl:ObjectProperty ;
+  rdfs:domain nwcg-position:Position ;
+  rdfs:label "sub position of" ;
+  rdfs:range nwcg-position:Position ;
+  skos:prefLabel "sub position of" ;
+.
+nwcg-position:training
+  a owl:ObjectProperty ;
+  rdfs:label "training" ;
+  rdfs:range nwcg-position:Training ;
+  skos:definition "" ;
+  skos:prefLabel "training" ;
+.
+org:Post
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:position ;
+    ] ;
+.
+<http://xmlns.com/foaf/0.1/Person>
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty nwcg-position:qualifiedFor ;
+    ] ;
+.

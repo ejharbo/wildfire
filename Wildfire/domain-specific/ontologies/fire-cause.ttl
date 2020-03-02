@@ -1,0 +1,218 @@
+# baseURI: http://www.nwcg.gov/ontologies/fire-cause
+# imports: http://purl.org/dc/terms/
+# imports: http://www.w3.org/2004/02/skos/core
+
+@prefix : <http://www.nwcg.gov/ontologies/fire-cause#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://www.nwcg.gov/ontologies/fire-cause>
+  a owl:Ontology ;
+  dcterms:creator "Sofiane Fellah, Image Matters LLC" ;
+  dcterms:creator "Stephane Fellah, Image Matters LLC" ;
+  dcterms:description "The NWCG Fire Cause Ontology defines Fire Cause concepts, as well as Causal Activity, Cause Source, Prohibited Types, and Cause Types. " ;
+  spin:imports <http://topbraid.org/spin/owlrl-all> ;
+  spin:imports <http://topbraid.org/spin/rdfsplus> ;
+  spin:imports <http://topbraid.org/spin/skosspin> ;
+  spin:imports <http://topbraid.org/spin/spinowl> ;
+  rdfs:label "National Wildfire Coordination Group (NWCG) Fire Cause Ontology" ;
+  owl:imports dcterms: ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+  owl:versionInfo "v1" ;
+.
+:AgeCategory
+  a owl:Class ;
+  rdfs:label "Age category" ;
+  rdfs:subClassOf skos:Concept ;
+  skos:definition "" ;
+  skos:prefLabel "Age category" ;
+.
+:CausalActivity
+  a owl:Class ;
+  rdfs:label "Causal activity" ;
+  rdfs:subClassOf skos:Concept ;
+  skos:definition "" ;
+  skos:prefLabel "Causal activity" ;
+.
+:CausalActivityCodelist
+  a owl:Class ;
+  rdfs:label "Causal activity codelist" ;
+  rdfs:subClassOf skos:ConceptScheme ;
+  skos:definition "" ;
+  skos:prefLabel "Causal activity codelist" ;
+.
+:Cause
+  a owl:Class ;
+  rdfs:label "Cause" ;
+  rdfs:subClassOf owl:Thing ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :causeType ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :hasSource ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :activity ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :ageCategory ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :isProhibited ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :remarks ;
+    ] ;
+  skos:definition "" ;
+  skos:prefLabel "Cause" ;
+.
+:CauseSource
+  a owl:Class ;
+  rdfs:label "Cause source" ;
+  rdfs:subClassOf skos:Concept ;
+  skos:definition "" ;
+  skos:prefLabel "Cause source" ;
+.
+:CauseType
+  a owl:Class ;
+  rdfs:label "Cause type" ;
+  rdfs:subClassOf skos:Concept ;
+  skos:definition "" ;
+  skos:prefLabel "Cause type" ;
+.
+:CauseTypeTaxonomy
+  a owl:Class ;
+  rdfs:label "Cause type taxonomy" ;
+  rdfs:subClassOf skos:ConceptScheme ;
+  skos:definition "" ;
+  skos:prefLabel "Cause type taxonomy" ;
+.
+:ConceptWithRemarks
+  a owl:Class ;
+  rdfs:label "Concept with remarks" ;
+  rdfs:subClassOf skos:Concept ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :remarks ;
+    ] ;
+  skos:definition "" ;
+  skos:prefLabel "Concept with remarks" ;
+.
+:HumanSource
+  a :CauseSource ;
+  rdfs:label "Human source" ;
+  skos:definition "" ;
+  skos:prefLabel "Human source" ;
+.
+:NaturalSource
+  a :CauseSource ;
+  rdfs:label "Natural source" ;
+  skos:definition "" ;
+  skos:prefLabel "Natural source" ;
+.
+:No
+  a :ProhibitedType ;
+  rdfs:label "No" ;
+  skos:definition "The cause is not prohibited" ;
+  skos:prefLabel "No" ;
+.
+:ProhibitedType
+  a owl:Class ;
+  rdfs:label "Prohibited type" ;
+  rdfs:subClassOf skos:Concept ;
+  skos:definition "" ;
+  skos:prefLabel "Prohibited type" ;
+.
+:SpecificCauseDetail
+  a owl:Class ;
+  rdfs:label "Specific cause detail" ;
+  rdfs:subClassOf skos:Concept ;
+  skos:definition "" ;
+  skos:prefLabel "Specific cause detail" ;
+.
+:UnderterminedSource
+  a :CauseSource ;
+  rdfs:label "Undertermined source" ;
+  skos:definition "" ;
+  skos:prefLabel "Undertermined source" ;
+.
+:Unknown
+  a :ProhibitedType ;
+  rdfs:label "Unknown" ;
+  skos:definition "The cause has not been determined to be prohibited" ;
+  skos:prefLabel "Unknown" ;
+.
+:Yes
+  a :ProhibitedType ;
+  rdfs:label "Yes" ;
+  skos:definition "The cause is prohibited" ;
+  skos:prefLabel "Yes" ;
+.
+:activity
+  a owl:ObjectProperty ;
+  rdfs:label "activity" ;
+  rdfs:range :CausalActivity ;
+  skos:definition "" ;
+  skos:prefLabel "activity" ;
+.
+:ageCategory
+  a owl:ObjectProperty ;
+  rdfs:label "age category" ;
+  rdfs:range :AgeCategory ;
+  skos:definition "" ;
+  skos:prefLabel "age category" ;
+.
+:causeType
+  a owl:ObjectProperty ;
+  rdfs:label "cause type" ;
+  rdfs:range :CauseType ;
+  skos:definition "" ;
+  skos:prefLabel "cause type" ;
+.
+:hasSource
+  a owl:ObjectProperty ;
+  rdfs:label "has source" ;
+  owl:inverseOf :sourceOf ;
+  skos:definition "" ;
+  skos:prefLabel "has source" ;
+.
+:isProhibited
+  a owl:DatatypeProperty ;
+  a owl:FunctionalProperty ;
+  rdfs:label "is prohibited" ;
+  rdfs:range xsd:boolean ;
+  skos:definition "" ;
+  skos:prefLabel "is prohibited" ;
+.
+:remarks
+  a owl:DatatypeProperty ;
+  rdfs:label "remarks" ;
+  rdfs:range xsd:string ;
+  skos:definition "" ;
+  skos:prefLabel "remarks" ;
+.
+:sourceOf
+  a owl:ObjectProperty ;
+  rdfs:label "source of" ;
+  owl:inverseOf :hasSource ;
+  skos:definition "" ;
+  skos:prefLabel "source of" ;
+.

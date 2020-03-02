@@ -1,0 +1,368 @@
+# baseURI: http://www.nwcg.gov/ontologies/fire-resource
+# imports: http://purl.org/dc/terms/
+# imports: http://www.nwcg.gov/ontologies/response
+# imports: http://www.w3.org/2004/02/skos/core
+# imports: http://www.w3.org/ns/org
+# imports: http://xmlns.com/foaf/0.1/
+
+@prefix : <http://www.nwcg.gov/ontologies/fire-resource#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix response: <http://www.nwcg.gov/ontologies/response#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://purl.org/goodrelations/v1#BusinessEntity>
+  a owl:Class ;
+  rdfs:label "Business entity" ;
+  rdfs:subClassOf org:FormalOrganization ;
+  skos:definition "" ;
+  skos:prefLabel "Business entity" ;
+.
+<http://www.nwcg.gov/ontologies/fire-resource>
+  a owl:Ontology ;
+  dcterms:creator "Sofiane Fellah, Image Matters LLC" ;
+  dcterms:creator "Stephane Fellah, Image Matters LLC" ;
+  dcterms:description "The NWCG Fire Resource Ontology defines Fire Resource concepts, such as different types of resources, Resource Kinds, Teams, Crews, etc. " ;
+  spin:imports <http://topbraid.org/spin/owlrl-all> ;
+  spin:imports <http://topbraid.org/spin/rdfsplus> ;
+  spin:imports <http://topbraid.org/spin/skosspin> ;
+  spin:imports <http://topbraid.org/spin/spinowl> ;
+  rdfs:label "National Wildfire Coordination Group (NWCG) Fire Resource Ontology" ;
+  owl:imports dcterms: ;
+  owl:imports <http://www.nwcg.gov/ontologies/response> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+  owl:imports <http://www.w3.org/ns/org> ;
+  owl:imports <http://xmlns.com/foaf/0.1/> ;
+  owl:versionInfo "v1" ;
+.
+:Agency
+  a owl:Class ;
+  rdfs:label "Agency" ;
+  rdfs:subClassOf org:FormalOrganization ;
+  skos:definition "" ;
+  skos:prefLabel "Agency" ;
+.
+:Crew
+  a owl:Class ;
+  rdfs:label "Crew" ;
+  rdfs:subClassOf :OperationalOrganization ;
+  rdfs:subClassOf org:OrganizationalUnit ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :hasCrewType ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty :hasSquad ;
+    ] ;
+  owl:disjointWith :Module ;
+  owl:disjointWith :Squad ;
+  owl:disjointWith :TaskForce ;
+  owl:disjointWith :Team ;
+  skos:definition "" ;
+  skos:prefLabel "Crew" ;
+.
+:CrewType
+  a owl:Class ;
+  rdfs:label "Crew type" ;
+  rdfs:subClassOf skos:Concept ;
+  skos:definition "" ;
+  skos:prefLabel "Crew type" ;
+.
+:DigitalResource
+  a owl:Class ;
+  rdfs:label "Digital resource" ;
+  rdfs:subClassOf :Resource ;
+  skos:definition "" ;
+  skos:prefLabel "Digital resource" ;
+.
+:Equipment
+  a owl:Class ;
+  rdfs:label "Equipment" ;
+  rdfs:subClassOf :PhysicalResource ;
+  skos:definition "" ;
+  skos:prefLabel "Equipment" ;
+.
+:FinancialResource
+  a owl:Class ;
+  rdfs:label "Financial resource" ;
+  rdfs:subClassOf :Resource ;
+  skos:definition "" ;
+  skos:prefLabel "Financial resource" ;
+.
+:FireResourceKindCS
+  a owl:Class ;
+  rdfs:comment "Standard data values are provided when a data attribute has a pre-determined set of terms, codes, and/or numbers that must be used in order for the data to be valid. The purpose of standard data values is to ensure consistency and accuracy within a system and across multiple systems." ;
+  rdfs:label "Fire Resource Kind Concept Scheme" ;
+  rdfs:subClassOf skos:ConceptScheme ;
+  skos:definition "This is a Code List defining the Fire Resource Kind" ;
+  skos:prefLabel "Fire Resource Kind Concept Scheme" ;
+.
+:HumanResource
+  a owl:Class ;
+  rdfs:label "Human resources" ;
+  rdfs:subClassOf :Resource ;
+  skos:definition "" ;
+  skos:prefLabel "Human resources" ;
+.
+:IncidentOrganization
+  a owl:Class ;
+  rdfs:label "Incident org" ;
+  rdfs:subClassOf org:Organization ;
+  skos:definition "" ;
+  skos:prefLabel "Incident org" ;
+.
+:ManagementOrganization
+  a owl:Class ;
+  rdfs:label "Management organization" ;
+  rdfs:subClassOf :IncidentOrganization ;
+  skos:definition "" ;
+  skos:prefLabel "Management organization" ;
+.
+:Module
+  a owl:Class ;
+  rdfs:label "Module" ;
+  rdfs:subClassOf :OperationalOrganization ;
+  rdfs:subClassOf org:OrganizationalUnit ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :hasModuleType ;
+    ] ;
+  owl:disjointWith :Crew ;
+  owl:disjointWith :Squad ;
+  owl:disjointWith :TaskForce ;
+  owl:disjointWith :Team ;
+  skos:definition "" ;
+  skos:prefLabel "Module" ;
+.
+:ModuleType
+  a owl:Class ;
+  rdfs:label "Module type" ;
+  rdfs:subClassOf skos:Concept ;
+  skos:definition "" ;
+  skos:prefLabel "Module type" ;
+.
+:OperationalOrganization
+  a owl:Class ;
+  rdfs:label "Operational organization" ;
+  rdfs:subClassOf :IncidentOrganization ;
+  skos:definition "" ;
+  skos:prefLabel "Operational organization" ;
+.
+:OrganizationResource
+  a owl:Class ;
+  rdfs:label "Organization resource" ;
+  rdfs:subClassOf :Resource ;
+  skos:definition "" ;
+  skos:prefLabel "Organization resource" ;
+.
+:PhysicalResource
+  a owl:Class ;
+  rdfs:label "Physical resource" ;
+  rdfs:subClassOf :Resource ;
+  skos:definition "" ;
+  skos:prefLabel "Physical resource" ;
+.
+:Resource
+  a owl:Class ;
+  rdfs:label "Resource" ;
+  rdfs:subClassOf owl:Thing ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:spatial ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :hasStatus ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:identifier ;
+    ] ;
+  skos:prefLabel "Resource" ;
+.
+:ResourceCategory
+  a owl:Class ;
+  rdfs:label "Resource category" ;
+  rdfs:subClassOf skos:Concept ;
+  skos:definition "" ;
+  skos:prefLabel "Resource category" ;
+.
+:ResourceKind
+  a owl:Class ;
+  rdfs:isDefinedBy <https://www.nwcg.gov/sites/default/files/stds/fire_resource_kct/definition.pdf> ;
+  rdfs:label "Fire Resource Kind" ;
+  rdfs:subClassOf skos:Concept ;
+  skos:definition "Fire Resource Kind is the most general classification of operational resources available to respond to a fire. " ;
+  skos:prefLabel "Fire Resource Kind" ;
+.
+:ResourceStatus
+  a owl:Class ;
+  rdfs:label "Status" ;
+  rdfs:subClassOf skos:Concept ;
+  skos:definition "" ;
+  skos:prefLabel "Status" ;
+.
+:ResourceType
+  a owl:Class ;
+  rdfs:label "Resource type" ;
+  rdfs:subClassOf skos:Concept ;
+  skos:definition "" ;
+  skos:prefLabel "Resource type" ;
+.
+:Squad
+  a owl:Class ;
+  rdfs:label "Squad" ;
+  rdfs:subClassOf :OperationalOrganization ;
+  rdfs:subClassOf org:OrganizationalUnit ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :hasSquadType ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:onClass :Crew ;
+      owl:onProperty org:subOrganizationOf ;
+      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+    ] ;
+  owl:disjointWith :Crew ;
+  owl:disjointWith :Module ;
+  owl:disjointWith :TaskForce ;
+  owl:disjointWith :Team ;
+  skos:definition "" ;
+  skos:prefLabel "Squad" ;
+.
+:SquadType
+  a owl:Class ;
+  rdfs:label "Squad type" ;
+  rdfs:subClassOf skos:Concept ;
+  skos:definition "" ;
+  skos:prefLabel "Squad type" ;
+.
+:TaskForce
+  a owl:Class ;
+  rdfs:label "Task force" ;
+  rdfs:subClassOf :OperationalOrganization ;
+  rdfs:subClassOf org:OrganizationalUnit ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :hasTaskForceType ;
+    ] ;
+  owl:disjointWith :Crew ;
+  owl:disjointWith :Module ;
+  owl:disjointWith :Squad ;
+  owl:disjointWith :Team ;
+  skos:definition "" ;
+  skos:prefLabel "Task force" ;
+.
+:TaskForceType
+  a owl:Class ;
+  rdfs:label "Task force type" ;
+  rdfs:subClassOf skos:Concept ;
+  skos:definition "" ;
+  skos:prefLabel "Task force type" ;
+.
+:Team
+  a owl:Class ;
+  rdfs:label "Team" ;
+  rdfs:subClassOf :OperationalOrganization ;
+  rdfs:subClassOf org:OrganizationalUnit ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty :hasTeamType ;
+    ] ;
+  owl:disjointWith :Crew ;
+  owl:disjointWith :Module ;
+  owl:disjointWith :Squad ;
+  owl:disjointWith :TaskForce ;
+  skos:definition "" ;
+  skos:prefLabel "Team" ;
+.
+:TeamType
+  a owl:Class ;
+  rdfs:label "Team type" ;
+  rdfs:subClassOf skos:Concept ;
+  skos:definition "" ;
+  skos:prefLabel "Team type" ;
+.
+:hasAvailabilityPeriod
+  a owl:ObjectProperty ;
+  rdfs:label "has availability period" ;
+  rdfs:range dcterms:PeriodOfTime ;
+  rdfs:subPropertyOf dcterms:temporal ;
+  skos:definition "" ;
+  skos:prefLabel "has availability period" ;
+.
+:hasCrewType
+  a owl:ObjectProperty ;
+  rdfs:label "has crew type" ;
+  rdfs:range :CrewType ;
+  skos:definition "" ;
+  skos:prefLabel "has crew type" ;
+.
+:hasModuleType
+  a owl:ObjectProperty ;
+  rdfs:label "has module type" ;
+  rdfs:range :Module ;
+  skos:definition "" ;
+  skos:prefLabel "has module type" ;
+.
+:hasSquad
+  a owl:ObjectProperty ;
+  rdfs:domain :Crew ;
+  rdfs:label "has squad" ;
+  rdfs:range :Squad ;
+  skos:definition "" ;
+  skos:prefLabel "has squad" ;
+.
+:hasSquadType
+  a owl:ObjectProperty ;
+  rdfs:label "has squad type" ;
+  rdfs:range :SquadType ;
+  skos:definition "" ;
+  skos:prefLabel "has squad type" ;
+.
+:hasStatus
+  a owl:ObjectProperty ;
+  rdfs:label "has status" ;
+  rdfs:range :ResourceStatus ;
+  skos:definition "" ;
+  skos:prefLabel "has status" ;
+.
+:hasTaskForceType
+  a owl:ObjectProperty ;
+  rdfs:label "has task force type" ;
+  rdfs:range :TaskForceType ;
+  skos:definition "" ;
+  skos:prefLabel "has task force type" ;
+.
+:hasTeamType
+  a owl:ObjectProperty ;
+  rdfs:label "has team type" ;
+  rdfs:range :TeamType ;
+  skos:definition "" ;
+  skos:prefLabel "has team type" ;
+.
+org:Post
+  rdfs:subClassOf :HumanResource ;
+.
+<http://xmlns.com/foaf/0.1/Organization>
+  rdfs:subClassOf :OrganizationResource ;
+.
+<http://xmlns.com/foaf/0.1/Person>
+  rdfs:subClassOf :HumanResource ;
+.
