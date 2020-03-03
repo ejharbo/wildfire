@@ -1,0 +1,87 @@
+# baseURI: http://topbraid.org/crosswalk
+# prefix: crosswalk
+
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://topbraid.org/crosswalk>
+  a owl:Ontology ;
+  rdfs:comment "A simple mapping vocabulary to drive applications such as the TopBraid Crosswalk Editor." ;
+  owl:versionInfo "0.1.0" ;
+.
+crosswalk:DefaultResultsGenerator
+  a crosswalk:ResultsGenerator ;
+  crosswalk:resultsGeneratorId "crosswalks:MatchingResultsGenerator" ;
+  rdfs:label "Default results generator" ;
+.
+crosswalk:Mapping
+  a rdfs:Class ;
+  rdfs:comment "A reified triple representing a single mapping, and possibly other metadata such as a comment. Subject is from graph1, Object from graph2." ;
+  rdfs:label "Mapping" ;
+  rdfs:subClassOf rdf:Statement ;
+.
+crosswalk:ResultsGenerator
+  a owl:Class ;
+  rdfs:comment "Instances of this class will be presented to the user to select from the available generators.  The value of crosswalk:resultsGeneratorId should match the id specified in the Java class" ;
+  rdfs:label "Results generator" ;
+  rdfs:subClassOf owl:Thing ;
+.
+crosswalk:autoAcceptMatches
+  a rdf:Property ;
+  rdfs:comment "If true, automatically accept all matches that have 100% confidence" ;
+  rdfs:label "Auto accept matches" ;
+  rdfs:range xsd:boolean ;
+.
+crosswalk:closeMatch
+  a rdf:Property ;
+  rdfs:comment "Establishes a relationship between two closely related resources, similar to skos:closeMatch." ;
+  rdfs:label "close match" ;
+  rdfs:range rdfs:Resource ;
+.
+crosswalk:defaultPredicate
+  a rdf:Property ;
+  rdfs:comment "The property to link the mapped resources (from 1 to 2)." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "default predicate" ;
+  rdfs:range rdf:Property ;
+.
+crosswalk:graph1
+  a rdf:Property ;
+  rdfs:comment "The first graph in the mapping." ;
+  rdfs:label "graph 1" ;
+  rdfs:range owl:Ontology ;
+.
+crosswalk:graph2
+  a rdf:Property ;
+  rdfs:comment "The second graph in the mapping." ;
+  rdfs:label "graph 2" ;
+  rdfs:range owl:Ontology ;
+.
+crosswalk:matchPredicate
+  a rdf:Property ;
+  rdfs:comment "The custom match property to link the mapped resources (from 1 to 2)." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "match predicate" ;
+  rdfs:range rdf:Property ;
+.
+crosswalk:resultsGeneratorId
+  a owl:DatatypeProperty ;
+  rdfs:domain crosswalk:ResultsGenerator ;
+  rdfs:label "results generator id" ;
+  rdfs:range xsd:string ;
+.
+crosswalk:type1
+  a rdf:Property ;
+  rdfs:comment "The type of the instances in the first graph." ;
+  rdfs:label "type 1" ;
+  rdfs:range rdfs:Class ;
+.
+crosswalk:type2
+  a rdf:Property ;
+  rdfs:comment "The type of the instances in the second graph." ;
+  rdfs:label "type 2" ;
+  rdfs:range rdfs:Class ;
+.

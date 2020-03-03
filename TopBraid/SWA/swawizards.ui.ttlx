@@ -1,0 +1,278 @@
+# baseURI: http://topbraid.org/swawizards
+# imports: http://topbraid.org/swa
+
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix default: <http://uispin.org/default#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+swa:GetSuitableWizards
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:focusNode ;
+      rdfs:comment "The focus node to run the wizard on." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:wizardClass ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The type of wizards to return." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<swon:Object>
+    <swon:Value arg:name=\"description\" arg:value=\"{= spl:objectInGraph(?wizardClass, rdfs:comment, ui:graph) }\"/>
+    <swon:Value arg:name=\"title\" arg:value=\"{= spl:objectInGraph(?wizardClass, rdfs:label, ui:graph) }\"/>
+    <swon:Value arg:name=\"wizards\">
+        <swon:RSObjectArray arg:resultSet=\"{#
+                SELECT ?label ?uri ?description ?args ?update ?mutationFieldName
+                WHERE {
+                    GRAPH ui:graph {
+                        ?wizard a ?wizardClass .
+                        FILTER NOT EXISTS {
+                            ?wizard ui:abstract true .
+                        } .
+                        ?wizard rdfs:label ?label .
+                        ?wizard rdfs:comment ?description .
+                        ?wizard swa:valueWizardUpdate ?u .
+                        BIND (swa:getValueWizardArgs(?u) AS ?args) .
+                        BIND (str(?wizard) AS ?uri) .
+                        BIND (str(?u) AS ?update) .
+                        BIND (spl:object(?u, ui:mutationFieldName) AS ?mutationFieldName) .
+                    } .
+                }
+                ORDER BY (?label) }\"/>
+    </swon:Value>
+</swon:Object>
+"""^^ui:Literal ;
+  rdfs:label "Get suitable wizards" ;
+  rdfs:subClassOf ui:JSONServices ;
+.
+swa:GetWizardBody
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:focusNode ;
+      rdfs:comment "The focus node to pass into the wizard." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:wizard ;
+      spl:valueType swa:ValueWizard ;
+      rdfs:comment "The wizard (element class)." ;
+    ] ;
+  ui:prototype """
+<ui:dynamicView arg:focusNode=\"{= ?focusNode }\" ui:class=\"{= ?wizard }\"/>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Get wizard body" ;
+  rdfs:subClassOf swa:WizardElements ;
+.
+swa:ValueWizard
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Value wizard" ;
+  rdfs:subClassOf ui:ViewElement ;
+.
+swa:ValueWizardUpdate
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Value wizard update" ;
+  rdfs:subClassOf ui:Service ;
+.
+swa:ValueWizardUpdates
+  a swa:ValueWizardUpdate ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:focusNode ;
+      rdfs:comment "The focus node to operate on." ;
+    ] ;
+  ui:abstract true ;
+  rdfs:label "Value wizard updates" ;
+  rdfs:subClassOf ui:JSONServices ;
+.
+swa:ValueWizards
+  a swa:ValueWizard ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:focusNode ;
+      rdfs:comment "The focus node to produce a value for." ;
+    ] ;
+  ui:abstract true ;
+  rdfs:comment "Base class of wizards that produce a value for a given focus node that is typically the selected node in the user interface when the wizard starts." ;
+  rdfs:label "Value wizards" ;
+  rdfs:subClassOf swa:Wizards ;
+.
+swa:WizardElements
+  a ui:NodeClass ;
+  ui:abstract true ;
+  rdfs:comment "Abstract base class grouping together most component of the SWA wizards framework." ;
+  rdfs:label "Wizard elements" ;
+  rdfs:subClassOf swa:Elements ;
+.
+swa:Wizards
+  a ui:NodeClass ;
+  rdfs:comment "Abstract base class of wizards." ;
+  rdfs:label "Wizards" ;
+  rdfs:subClassOf swa:WizardElements ;
+.
+swa:getValueWizardArgs
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "argName" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            a sp:GroupConcat ;
+            sp:expression [
+                sp:varName "argName" ;
+              ] ;
+            sp:separator " " ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "constraint" ;
+                    ] ;
+                  sp:predicate spin:constraint ;
+                  sp:subject [
+                      sp:varName "update" ;
+                    ] ;
+                ]
+                [
+                  sp:object spl:Argument ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "constraint" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "predicate" ;
+                    ] ;
+                  sp:predicate spl:predicate ;
+                  sp:subject [
+                      sp:varName "constraint" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a afn:localname ;
+                      sp:arg1 [
+                          sp:varName "predicate" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "argName" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode ui:graph ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:update ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The SWP element defining the arguments." ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:string ;
+  rdfs:label "get value wizard args" ;
+  rdfs:subClassOf swa:Functions ;
+.
+swa:valueWizardUpdate
+  a rdf:Property ;
+  rdfs:domain swa:ValueWizard ;
+  rdfs:label "value wizard update" ;
+  rdfs:range swa:ValueWizardUpdate ;
+.
+<http://topbraid.org/swawizards>
+  a owl:Ontology ;
+  rdfs:comment "A library for SWA components to produce wizards that create RDF nodes. These wizards are supposed to be executed from modal dialogs, e.g. to produce otherwise complex node structures such as blank nodes." ;
+  rdfs:label "SWA Wizards Framework" ;
+  owl:imports <http://topbraid.org/swa> ;
+.

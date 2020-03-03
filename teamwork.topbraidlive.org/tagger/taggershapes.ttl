@@ -1,0 +1,71 @@
+# baseURI: http://topbraid.org/taggershapes
+# imports: http://datashapes.org/dash
+# prefix: taggershapes
+
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggershapes: <http://topbraid.org/taggershapes#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://topbraid.org/taggershapes>
+  rdf:type owl:Ontology ;
+  owl:imports <http://datashapes.org/dash> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+  sh:declare [
+      rdf:type sh:PrefixDeclaration ;
+      sh:namespace "http://evn.topbraidlive.org/tagger#"^^xsd:anyURI ;
+      sh:prefix "tagger" ;
+    ] ;
+  sh:declare [
+      rdf:type sh:PrefixDeclaration ;
+      sh:namespace "http://uispin.org/ui#"^^xsd:anyURI ;
+      sh:prefix "ui" ;
+    ] ;
+.
+taggershapes:NoUntypedResourcesShape
+  rdf:type sh:NodeShape ;
+  rdfs:comment "A shape that applies to all ContentTagSets. The file where this shape is defined in is a default owl:import into any Content Tag Set (Tagger vocabulary). The shape verifies that all subjects and objects used in tagger triples are typed resources, i.e. have not been deleted." ;
+  rdfs:label "No untyped resources shape" ;
+  sh:sparql [
+      rdf:type sh:SPARQLConstraint ;
+      dash:suggestionGenerator <http://topbraid.org/tosh#DeleteTripleSuggestionGenerator> ;
+      sh:message "Untyped concept used in tag via {$path}: {$value}" ;
+      sh:prefixes <http://topbraid.org/taggershapes> ;
+      sh:select """SELECT DISTINCT $this (?predicate AS ?path) (?object AS ?value)
+WHERE {
+	?projectGraph tagger:objectGraph ?objectGraph .
+	BIND (ui:graphWithImports(?objectGraph) AS ?objectGraphWithImports) .
+    ?projectGraph tagger:defaultTagProperty|tagger:tagProperty ?predicate .
+	$this ?predicate ?object .
+	FILTER NOT EXISTS {
+		GRAPH ?objectGraphWithImports {
+			?object a ?anyType .
+		}
+	}
+}""" ;
+    ] ;
+  sh:sparql [
+      rdf:type sh:SPARQLConstraint ;
+      dash:suggestionGenerator <http://topbraid.org/tosh#DeleteTripleSuggestionGenerator> ;
+      sh:message "Untyped content subject used in tag via {$path}: {$this}" ;
+      sh:prefixes <http://topbraid.org/taggershapes> ;
+      sh:select """SELECT DISTINCT $this (?predicate AS ?path) (?object AS ?value)
+WHERE {
+	?projectGraph tagger:subjectGraph ?subjectGraph .
+	BIND (ui:graphWithImports(?subjectGraph) AS ?subjectGraphWithImports) .
+    ?projectGraph tagger:defaultTagProperty|tagger:tagProperty ?predicate .
+	$this ?predicate ?object .
+	FILTER NOT EXISTS {
+		GRAPH ?subjectGraphWithImports {
+			$this a ?anyType .
+		}
+	}
+}""" ;
+    ] ;
+  sh:target dash:AllSubjects ;
+.

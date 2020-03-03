@@ -1,0 +1,84 @@
+# baseURI: http://edg.topbraid.solutions/1.0/schema/controllers
+# imports: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://www.w3.org/2004/02/skos/core
+
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix html: <http://uispin.org/html#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/schema/controllers>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/schema/controllers/GMD_controllers> ;
+  rdfs:label "EDG Schema - Controllers" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/core> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+edg:Elements
+  a ui:NodeClass ;
+  rdfs:label "Elements" ;
+  rdfs:subClassOf teamwork:Elements ;
+.
+edg:compatibleWith
+  a owl:ObjectProperty ;
+  a owl:SymmetricProperty ;
+  rdfs:label "compatible with" ;
+.
+edg:disabled
+  a owl:AnnotationProperty ;
+  rdfs:label "disabled" ;
+  rdfs:range xsd:boolean ;
+.
+<http://edg.topbraid.solutions/schema/controllers/GMD_controllers>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:SchemaGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/schema/controllers> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+edg.v:MenuEntry
+  sh:property [
+      sh:path edg.c:controlledBy ;
+      sh:class edg.c:Controller ;
+      sh:maxCount 1 ;
+    ] ;
+.
+html:data-info
+  a rdf:Property ;
+  rdfs:range xsd:string ;
+  skos:prefLabel "data-info" ;
+.

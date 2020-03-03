@@ -1,0 +1,235 @@
+# baseURI: http://topbraid.org/swashacl
+# imports: http://topbraid.org/swa
+# prefix: swashacl
+
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix default: <http://uispin.org/default#> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+arg:order
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+swa:PropertyGroupsDialog
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resourceSelectedEvent ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The resource selection event." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:shape ;
+      spl:valueType sh:NodeShape ;
+      rdfs:comment "The currently selected shape." ;
+    ] ;
+  ui:prototype """
+<ui:group let:id=\"{= ui:uniqueId() }\">
+    <ui:loadable ui:loadId=\"{= ?id }\">
+        <swa:PropertyGroupsPanel arg:resourceSelectedEvent=\"{= ?resourceSelectedEvent }\" arg:shape=\"{= ?shape }\"/>
+    </ui:loadable>
+    <script>swa.registerSubscription(gadgets.Hub.subscribe(swa.EDIT_EVENT, function(event, data) {
+		swa.load('{= ?id }')
+	}), null, 'swa-property-groups-editor-dialog');</script>
+    <script>swa.registerSubscription(gadgets.Hub.subscribe('{= ?resourceSelectedEvent }', function(event, data) {
+		swa.doIf('spl:instanceOf', '&lt;' + data + '&gt;', '&lt;http://www.w3.org/ns/shacl#NodeShape&gt;', null, function() {
+			swa.loadWithResource('{= ?id }', 'shape', data);
+		});
+	}), null, 'swa-property-groups-editor-dialog');</script>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Property groups dialog" ;
+  rdfs:subClassOf swa:DialogElements ;
+.
+swa:PropertyGroupsPanel
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resourceSelectedEvent ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:shape ;
+      spl:valueType sh:NodeShape ;
+      rdfs:comment "The shape to edit the property groups of." ;
+    ] ;
+  ui:prototype """
+<ui:group letrs:groups='{#
+        SELECT DISTINCT ?group ?order
+        WHERE {
+            ?shape (rdfs:subClassOf)* ?s .
+            ?s sh:property|sh:parameter ?ps .
+            ?ps sh:group ?group .
+            FILTER isIRI(?group) .
+            FILTER (!dash:isDeactivated(?ps)) .
+            BIND (COALESCE(spl:object(?group, sh:order), \"?\") AS ?order) .
+        }
+        ORDER BY (?order) (?group) }'>
+    <div class=\"swa-sub-title\" title=\"{= ?shape }\">{= IF(spl:instanceOf(?shape, rdfs:Class), \"Class\", \"Shape\") }: {= ui:label(?shape) }</div>
+    <ui:if ui:condition=\"{= spr:isEmpty(?groups) }\">
+        <p>No property groups have been found for {= ui:label(?shape) }.</p>
+        <p>To get started, define some property shapes and assign them to property groups.</p>
+        <p>Groups and properties will be sorted by their <em>order</em> values, which can be integers or floating point numbers.</p>
+    </ui:if>
+    <ui:else>
+        <table>
+            <tr>
+                <th class=\"swa-property-groups-editor-th\">Order</th>
+                <th class=\"swa-property-groups-editor-th\">Property Group</th>
+            </tr>
+            <tr/>
+            <ui:forEach ui:resultSet=\"{= ?groups }\">
+                <tr class=\"swa-property-groups-editor-group\" let:oldOrder=\"{= spl:object(?group, sh:order) }\">
+                    <td class=\"swa-property-groups-editor-group-order\" onclick=\"{= ui:functionCall(&quot;swa.editPropertyGroupsOrder&quot;, ?group, ?oldOrder, ((!bound(?oldOrder)) || (!spif:isReadOnlyTriple(?group, sh:order, ?oldOrder)))) }\">{= ?order }</td>
+                    <td title=\"{= ?group }\">
+                        <span class=\"swa-property-groups-editor-group-label\" onclick=\"gadgets.Hub.publish('{= ?resourceSelectedEvent }', '{= ?group }');\">{= ui:label(?group) }</span>
+                        <ui:group letrs:paths='{#
+                                SELECT ?path ?porder ?ps ?inheritedFrom ?isInverse ?predicate
+                                WHERE {
+                                    ?shape (rdfs:subClassOf)* ?s .
+                                    ?s sh:property|sh:parameter ?ps .
+                                    ?ps sh:group ?group .
+                                    FILTER (!dash:isDeactivated(?ps)) .
+                                    ?ps sh:path ?path .
+                                    BIND (EXISTS {
+                                        ?path sh:inversePath ?anyInverse .
+                                        FILTER isIRI(?anyInverse) .
+                                    } AS ?isInverse) .
+                                    FILTER (isIRI(?path) || ?isInverse) .
+                                    BIND (COALESCE(spl:object(?ps, sh:order), \"?\") AS ?porder) .
+                                    BIND (IF((?shape != ?s), ?s, ?none) AS ?inheritedFrom) .
+                                    BIND (IF(?isInverse, spl:object(?path, sh:inversePath), ?path) AS ?predicate) .
+                                }
+                                ORDER BY (?porder) (?path) }'>
+                            <ui:if ui:condition=\"{= spr:isEmpty(?paths) }\">
+                                <div>(No properties in this group)</div>
+                            </ui:if>
+                            <ui:else>
+                                <table>
+                                    <ui:forEach ui:resultSet=\"{= ?paths }\">
+                                        <tr class=\"swa-property-groups-editor-property\" let:oldOrder=\"{= spl:object(?ps, sh:order) }\" title=\"{= ?ps }\">
+                                            <td>
+                                                <div class=\"swa-icon swa-property-groups-editor-property-icon {= swa:resourceIcon(?predicate) }-constraint\"/>
+                                            </td>
+                                            <td class=\"swa-property-groups-editor-property-order\" onclick=\"{= ui:functionCall(&quot;swa.editPropertyGroupsOrder&quot;, ?ps, ?oldOrder, ((!bound(?oldOrder)) || (!spif:isReadOnlyTriple(?ps, sh:order, ?oldOrder)))) }\">{= ?porder }</td>
+                                            <td class=\"swa-property-groups-editor-property-label\" onclick=\"gadgets.Hub.publish('{= ?resourceSelectedEvent }', '{= IF(isBlank(?ps), swa:bnodeId(?ps), str(?ps)) }');\">
+                                                <span>{= ui:label(?predicate) }</span>
+                                                <ui:if ui:condition=\"{= ?isInverse }\">
+                                                    <span> (inverse)</span>
+                                                </ui:if>
+                                                <ui:if ui:condition=\"{= bound(?inheritedFrom) }\">
+                                                    <swa:Space/>
+                                                    <span class=\"swa-property-groups-editor-property-label-inherited\">(from {= ui:label(?inheritedFrom) })</span>
+                                                </ui:if>
+                                            </td>
+                                        </tr>
+                                    </ui:forEach>
+                                </table>
+                            </ui:else>
+                        </ui:group>
+                    </td>
+                </tr>
+            </ui:forEach>
+        </table>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Property groups panel" ;
+  rdfs:subClassOf swa:FormElements ;
+.
+swa:SetOrderService
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:order ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subject ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:setPropertyValue arg:property=\"{= sh:order }\" arg:value=\"{= COALESCE(xsd:integer(?order), xsd:decimal(?order)) }\" ui:this=\"{= ?subject }\"/>
+"""^^ui:Literal ;
+  rdfs:label "Set order service" ;
+  rdfs:subClassOf ui:JSONServices ;
+.
+<http://topbraid.org/swashacl>
+  a owl:Ontology ;
+  owl:imports <http://topbraid.org/swa> ;
+.

@@ -1,0 +1,1249 @@
+# baseURI: http://topbraid.org/nlp/autoclassifier-preproc
+# imports: http://evn.topbraidlive.org/autotagger
+# imports: http://evn.topbraidlive.org/taggerprojects
+# imports: http://evn.topbraidlive.org/ui
+# imports: http://spinrdf.org/spin
+# imports: http://teamwork.topbraidlive.org/ontologyprojects
+# imports: http://topbraid.org/swa
+# prefix: acpp
+
+@prefix acjob: <http://evn.topbraidlive.org/tagger/acjob#> .
+@prefix acpp: <http://topbraid.org/nlp/autoclassifier-preproc#> .
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix autotagger: <http://evn.topbraidlive.org/autotagger#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix default: <http://uispin.org/default#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evn: <http://topbraid.org/evn/evn#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evnimport: <http://evn.topbraidlive.org/uispin/evnimport#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnprojects: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix extjs: <http://uispin.com/extjs#> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix ontologyviewer: <http://topbraid.org/swa/ontologyviewer#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sharepoint: <http://topbraid.org/sharepoint#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix taggerspin: <http://evn.topbraidlive.org/taggerspin#> .
+@prefix taggerui: <http://evn.topbraidlive.org/taggerui#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworkdashboard: <http://topbraid.org/teamworkdashboard#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+arg:targetProperty
+  rdf:type rdf:Property ;
+  rdfs:comment "" ;
+  rdfs:label "target property" ;
+  rdfs:range rdf:Property ;
+.
+<http://topbraid.org/nlp/autoclassifier-preproc>
+  rdf:type owl:Ontology ;
+  ui:view """
+<div/>
+"""^^ui:Literal ;
+  owl:imports <http://evn.topbraidlive.org/autotagger> ;
+  owl:imports <http://evn.topbraidlive.org/taggerprojects> ;
+  owl:imports <http://evn.topbraidlive.org/ui> ;
+  owl:imports <http://spinrdf.org/spin> ;
+  owl:imports <http://teamwork.topbraidlive.org/ontologyprojects> ;
+  owl:imports <http://topbraid.org/swa> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+acpp:CopyRdfsLabelIfNoPrefLabel
+  rdf:type spin:UpdateTemplate ;
+  spin:body [
+      rdf:type sp:Modify ;
+      sp:insertPattern (
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "fixedValue" ;
+                    ] ;
+                  sp:predicate skos:prefLabel ;
+                  sp:subject [
+                      sp:varName "tag" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "targetGraph" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:TriplePath ;
+            sp:object rdfs:label ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subPropertyOf ;
+              ] ;
+            sp:subject [
+                sp:varName "subproperty" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:notExists ;
+                sp:elements (
+                    [
+                      rdf:type sp:TriplePath ;
+                      sp:object skos:prefLabel ;
+                      sp:path [
+                          rdf:type sp:ModPath ;
+                          sp:modMax -2 ;
+                          sp:modMin 0 ;
+                          sp:subPath rdfs:subPropertyOf ;
+                        ] ;
+                      sp:subject [
+                          sp:varName "subproperty" ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:notExists ;
+                sp:elements (
+                    [
+                      rdf:type sp:TriplePath ;
+                      sp:object skos:altLabel ;
+                      sp:path [
+                          rdf:type sp:ModPath ;
+                          sp:modMax -2 ;
+                          sp:modMin 0 ;
+                          sp:subPath rdfs:subPropertyOf ;
+                        ] ;
+                      sp:subject [
+                          sp:varName "subproperty" ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:notExists ;
+                sp:elements (
+                    [
+                      rdf:type sp:TriplePath ;
+                      sp:object skos:hiddenLabel ;
+                      sp:path [
+                          rdf:type sp:ModPath ;
+                          sp:modMax -2 ;
+                          sp:modMin 0 ;
+                          sp:subPath rdfs:subPropertyOf ;
+                        ] ;
+                      sp:subject [
+                          sp:varName "subproperty" ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object skos:Concept ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "tag" ;
+                    ] ;
+                ]
+                [
+                  rdf:type sp:Filter ;
+                  sp:expression [
+                      rdf:type sp:notExists ;
+                      sp:elements (
+                          [
+                            sp:object [
+                                sp:varName "any" ;
+                              ] ;
+                            sp:predicate skos:prefLabel ;
+                            sp:subject [
+                                sp:varName "tag" ;
+                              ] ;
+                          ]
+                        ) ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "targetGraph" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "value" ;
+              ] ;
+            sp:predicate [
+                sp:varName "subproperty" ;
+              ] ;
+            sp:subject [
+                sp:varName "tag" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:if ;
+                sp:arg1 [
+                    rdf:type sp:bound ;
+                    sp:arg1 [
+                        sp:varName "language" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    rdf:type acpp:fixLanguage ;
+                    sp:arg1 [
+                        sp:varName "value" ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "language" ;
+                      ] ;
+                  ] ;
+                sp:arg3 [
+                    sp:varName "value" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "fixedValue" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:or ;
+                sp:arg1 [
+                    rdf:type sp:not ;
+                    sp:arg1 [
+                        rdf:type sp:bound ;
+                        sp:arg1 [
+                            sp:varName "language" ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    rdf:type sp:ne ;
+                    sp:arg1 [
+                        sp:varName "fixedValue" ;
+                      ] ;
+                    sp:arg2 "false"^^xsd:boolean ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate arg:targetGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph where the processed tag will be stored" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:language ;
+      spl:valueType xsd:string ;
+      rdfs:comment "If a language tag is provided, only matching literals will be kept." ;
+    ] ;
+  rdfs:comment "For all tags mentioned in the target graph that don't have a skos:prefLabel, copies rdfs:label values from the context graph. Does subproperty inference. Will ignore subproperties of skos:prefLabel, skos:altLabel and skos:hiddenLabel, as those are handled by different transformation rules." ;
+  rdfs:label "copy rdfs:label if no skos:prefLabel" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+acpp:CopyTagPropertyWithSubproperties
+  rdf:type spin:UpdateTemplate ;
+  spin:body [
+      rdf:type sp:Modify ;
+      sp:insertPattern (
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "fixedValue" ;
+                    ] ;
+                  sp:predicate [
+                      sp:varName "p" ;
+                    ] ;
+                  sp:subject [
+                      sp:varName "tag" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "targetGraph" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:coalesce ;
+                sp:arg1 [
+                    sp:varName "targetProperty" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "property" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "p" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "property" ;
+              ] ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subPropertyOf ;
+              ] ;
+            sp:subject [
+                sp:varName "subproperty" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object skos:Concept ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "tag" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "targetGraph" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "value" ;
+              ] ;
+            sp:predicate [
+                sp:varName "subproperty" ;
+              ] ;
+            sp:subject [
+                sp:varName "tag" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:if ;
+                sp:arg1 [
+                    rdf:type sp:bound ;
+                    sp:arg1 [
+                        sp:varName "language" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    rdf:type acpp:fixLanguage ;
+                    sp:arg1 [
+                        sp:varName "value" ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "language" ;
+                      ] ;
+                  ] ;
+                sp:arg3 [
+                    sp:varName "value" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "fixedValue" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:or ;
+                sp:arg1 [
+                    rdf:type sp:not ;
+                    sp:arg1 [
+                        rdf:type sp:bound ;
+                        sp:arg1 [
+                            sp:varName "language" ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    rdf:type sp:ne ;
+                    sp:arg1 [
+                        sp:varName "fixedValue" ;
+                      ] ;
+                    sp:arg2 "false"^^xsd:boolean ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate arg:property ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property whose values are to be copied" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate arg:targetGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph where the processed tag will be stored" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:language ;
+      spl:valueType xsd:string ;
+      rdfs:comment "If a language tag is provided, only matching literals will be kept." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:targetProperty ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "Optionally, a property to be used in the target graph instead of arg:property" ;
+    ] ;
+  rdfs:comment "For all tags mentioned in the target graph, copies triples of a given property from the context graph, with subproperty inference. Copies found triples over into the target graph, using the canonical property name." ;
+  rdfs:label "copy tag property with subproperties" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+acpp:CopyTagRelationshipWithSubproperties
+  rdf:type spin:UpdateTemplate ;
+  spin:body [
+      rdf:type sp:Modify ;
+      sp:insertPattern (
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "tag2" ;
+                    ] ;
+                  sp:predicate [
+                      sp:varName "p" ;
+                    ] ;
+                  sp:subject [
+                      sp:varName "tag1" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "targetGraph" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:coalesce ;
+                sp:arg1 [
+                    sp:varName "targetProperty" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "property" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "p" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "property" ;
+              ] ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subPropertyOf ;
+              ] ;
+            sp:subject [
+                sp:varName "subproperty" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object skos:Concept ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "tag1" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "targetGraph" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "tag2" ;
+              ] ;
+            sp:predicate [
+                sp:varName "subproperty" ;
+              ] ;
+            sp:subject [
+                sp:varName "tag1" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object skos:Concept ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "tag2" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "targetGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate arg:property ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property whose values are to be copied" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate arg:targetGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph where the processed tag will be stored" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:targetProperty ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "Optionally, a property to be used in the target graph instead of arg:property" ;
+    ] ;
+  rdfs:comment "For all tags mentioned in the target graph, finds triples of a given property in the context graph that connect two such tags, with subproperty inference. Copies found triples over into the target graph, using the canonical property name." ;
+  rdfs:label "copy tag relationship with subproperties" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+acpp:FindTagsFromOntology
+  rdf:type spin:UpdateTemplate ;
+  spin:body [
+      rdf:type sp:Modify ;
+      sp:insertPattern (
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object skos:Concept ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "tag" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "targetGraph" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "rootClass" ;
+              ] ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -1 ;
+                sp:modMin 0 ;
+                sp:subPath [
+                    rdf:type sp:SeqPath ;
+                    sp:path1 rdfs:subClassOf ;
+                    sp:path2 [
+                        rdf:type sp:ModPath ;
+                        sp:modMax -1 ;
+                        sp:modMin 0 ;
+                        sp:subPath [
+                            rdf:type sp:SeqPath ;
+                            sp:path1 rdfs:subClassOf ;
+                            sp:path2 [
+                                rdf:type sp:ModPath ;
+                                sp:modMax -1 ;
+                                sp:modMin 0 ;
+                                sp:subPath [
+                                    rdf:type sp:SeqPath ;
+                                    sp:path1 rdfs:subClassOf ;
+                                    sp:path2 [
+                                        rdf:type sp:ModPath ;
+                                        sp:modMax -1 ;
+                                        sp:modMin 0 ;
+                                        sp:subPath [
+                                            rdf:type sp:SeqPath ;
+                                            sp:path1 rdfs:subClassOf ;
+                                            sp:path2 [
+                                                rdf:type sp:ModPath ;
+                                                sp:modMax -1 ;
+                                                sp:modMin 0 ;
+                                                sp:subPath [
+                                                    rdf:type sp:SeqPath ;
+                                                    sp:path1 rdfs:subClassOf ;
+                                                    sp:path2 [
+                                                        rdf:type sp:ModPath ;
+                                                        sp:modMax -1 ;
+                                                        sp:modMin 0 ;
+                                                        sp:subPath [
+                                                            rdf:type sp:SeqPath ;
+                                                            sp:path1 rdfs:subClassOf ;
+                                                            sp:path2 [
+                                                                rdf:type sp:ModPath ;
+                                                                sp:modMax -1 ;
+                                                                sp:modMin 0 ;
+                                                                sp:subPath [
+                                                                    rdf:type sp:SeqPath ;
+                                                                    sp:path1 rdfs:subClassOf ;
+                                                                    sp:path2 [
+                                                                        rdf:type sp:ModPath ;
+                                                                        sp:modMax -1 ;
+                                                                        sp:modMin 0 ;
+                                                                        sp:subPath [
+                                                                            rdf:type sp:SeqPath ;
+                                                                            sp:path1 rdfs:subClassOf ;
+                                                                            sp:path2 [
+                                                                                rdf:type sp:ModPath ;
+                                                                                sp:modMax -1 ;
+                                                                                sp:modMin 0 ;
+                                                                                sp:subPath [
+                                                                                    rdf:type sp:SeqPath ;
+                                                                                    sp:path1 rdfs:subClassOf ;
+                                                                                    sp:path2 [
+                                                                                        rdf:type sp:ModPath ;
+                                                                                        sp:modMax -1 ;
+                                                                                        sp:modMin 0 ;
+                                                                                        sp:subPath [
+                                                                                            rdf:type sp:SeqPath ;
+                                                                                            sp:path1 rdfs:subClassOf ;
+                                                                                            sp:path2 [
+                                                                                                rdf:type sp:ModPath ;
+                                                                                                sp:modMax -1 ;
+                                                                                                sp:modMin 0 ;
+                                                                                                sp:subPath [
+                                                                                                    rdf:type sp:SeqPath ;
+                                                                                                    sp:path1 rdfs:subClassOf ;
+                                                                                                    sp:path2 [
+                                                                                                        rdf:type sp:ModPath ;
+                                                                                                        sp:modMax -1 ;
+                                                                                                        sp:modMin 0 ;
+                                                                                                        sp:subPath [
+                                                                                                            rdf:type sp:SeqPath ;
+                                                                                                            sp:path1 rdfs:subClassOf ;
+                                                                                                            sp:path2 [
+                                                                                                                rdf:type sp:ModPath ;
+                                                                                                                sp:modMax -1 ;
+                                                                                                                sp:modMin 0 ;
+                                                                                                                sp:subPath [
+                                                                                                                    rdf:type sp:SeqPath ;
+                                                                                                                    sp:path1 rdfs:subClassOf ;
+                                                                                                                    sp:path2 [
+                                                                                                                        rdf:type sp:ModPath ;
+                                                                                                                        sp:modMax -1 ;
+                                                                                                                        sp:modMin 0 ;
+                                                                                                                        sp:subPath [
+                                                                                                                            rdf:type sp:SeqPath ;
+                                                                                                                            sp:path1 rdfs:subClassOf ;
+                                                                                                                            sp:path2 [
+                                                                                                                                rdf:type sp:ModPath ;
+                                                                                                                                sp:modMax -1 ;
+                                                                                                                                sp:modMin 0 ;
+                                                                                                                                sp:subPath [
+                                                                                                                                    rdf:type sp:SeqPath ;
+                                                                                                                                    sp:path1 rdfs:subClassOf ;
+                                                                                                                                    sp:path2 [
+                                                                                                                                        rdf:type sp:ModPath ;
+                                                                                                                                        sp:modMax -1 ;
+                                                                                                                                        sp:modMin 0 ;
+                                                                                                                                        sp:subPath [
+                                                                                                                                            rdf:type sp:SeqPath ;
+                                                                                                                                            sp:path1 rdfs:subClassOf ;
+                                                                                                                                            sp:path2 [
+                                                                                                                                                rdf:type sp:ModPath ;
+                                                                                                                                                sp:modMax -1 ;
+                                                                                                                                                sp:modMin 0 ;
+                                                                                                                                                sp:subPath [
+                                                                                                                                                    rdf:type sp:SeqPath ;
+                                                                                                                                                    sp:path1 rdfs:subClassOf ;
+                                                                                                                                                    sp:path2 [
+                                                                                                                                                        rdf:type sp:ModPath ;
+                                                                                                                                                        sp:modMax -1 ;
+                                                                                                                                                        sp:modMin 0 ;
+                                                                                                                                                        sp:subPath [
+                                                                                                                                                            rdf:type sp:SeqPath ;
+                                                                                                                                                            sp:path1 rdfs:subClassOf ;
+                                                                                                                                                            sp:path2 [
+                                                                                                                                                                rdf:type sp:ModPath ;
+                                                                                                                                                                sp:modMax -1 ;
+                                                                                                                                                                sp:modMin 0 ;
+                                                                                                                                                                sp:subPath [
+                                                                                                                                                                    rdf:type sp:ModPath ;
+                                                                                                                                                                    sp:modMax -1 ;
+                                                                                                                                                                    sp:modMin 0 ;
+                                                                                                                                                                    sp:subPath rdfs:subClassOf ;
+                                                                                                                                                                  ] ;
+                                                                                                                                                              ] ;
+                                                                                                                                                          ] ;
+                                                                                                                                                      ] ;
+                                                                                                                                                  ] ;
+                                                                                                                                              ] ;
+                                                                                                                                          ] ;
+                                                                                                                                      ] ;
+                                                                                                                                  ] ;
+                                                                                                                              ] ;
+                                                                                                                          ] ;
+                                                                                                                      ] ;
+                                                                                                                  ] ;
+                                                                                                              ] ;
+                                                                                                          ] ;
+                                                                                                      ] ;
+                                                                                                  ] ;
+                                                                                              ] ;
+                                                                                          ] ;
+                                                                                      ] ;
+                                                                                  ] ;
+                                                                              ] ;
+                                                                          ] ;
+                                                                      ] ;
+                                                                  ] ;
+                                                              ] ;
+                                                          ] ;
+                                                      ] ;
+                                                  ] ;
+                                              ] ;
+                                          ] ;
+                                      ] ;
+                                  ] ;
+                              ] ;
+                          ] ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:subject [
+                sp:varName "tag" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:defaultValue rdfs:Resource ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:rootClass ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "Only subclasses of this class will be considered as tags; defaults to rdfs:Resource" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate arg:targetGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The target graph where a type triple for each tag will be stored" ;
+    ] ;
+  rdfs:comment "Finds all resources that are eligible as AutoClassifier tags from an ontology project, and inserts a skos:Concept type triple for each into the target graph. The implementation should just use { ?tag (rdfs:subClassOf)* ?rootClass } but this is extremely slow in Jena 2.11, so instead we use a graph pattern with a hardcoded path length that will return the same result as long as the class tree is not nested deeper than 20." ;
+  rdfs:label "find tags from ontology" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+acpp:FindTagsFromTaxonomy
+  rdf:type spin:UpdateTemplate ;
+  spin:body [
+      rdf:type sp:Modify ;
+      sp:insertPattern (
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object skos:Concept ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "tag" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "targetGraph" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "rootClass" ;
+              ] ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "class" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "class" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "tag" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:defaultValue skos:Concept ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:rootClass ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "Only instances of this class (and its subclasses) will be considered as tags; defaults to skos:Concept" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate arg:targetGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The target graph where a type triple for each tag will be stored" ;
+    ] ;
+  rdfs:comment "Finds all resources that are eligible as AutoClassifier tags from a taxonomy project, and inserts a skos:Concept type triple for each into the target graph." ;
+  rdfs:label "find tags from taxonomy" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+acpp:PreprocessContentTagSetForAutoClassifier
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType taggerprojects:ContentTagSet ;
+      rdfs:comment "The taxonomy or ontology to pre-process" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate arg:targetGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph where the processed vocabulary will be stored; may be a ui:tempGraph" ;
+    ] ;
+  ui:prototype """
+<ui:setContext ui:queryGraph=\"{= ?projectGraph }\">
+    <acpp:PreprocessVocabularyForAutoClassifier arg:language=\"{= spl:object(?projectGraph, tagger:autoTaggerLanguage) }\" arg:projectGraph=\"{= spl:object(?projectGraph, tagger:objectGraph) }\" arg:targetGraph=\"{= ?targetGraph }\"/>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:comment "An element that preprocesses and normalizes the vocabulary (either a taxonomy or an ontology) of a content tag set for use with the AutoClassifier. The result will be placed into the target graph, which may be a ui:tempGraph." ;
+  rdfs:label "acpp:PreprocessContentTagSetForAutoClassifier element" ;
+  rdfs:subClassOf ui:Element ;
+.
+acpp:PreprocessOntologyForAutoClassifier
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate arg:targetGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph where the processed vocabulary will be stored; may be a ui:tempGraph" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:language ;
+      spl:valueType xsd:string ;
+      rdfs:comment "If a language tag is provided, only matching literals will be kept." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:rootClass ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The root class of the hierarchy." ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:if ui:condition=\"{= acpp:containsSkosConcepts() }\">
+        <ui:call arg:rootClass=\"{= skos:Concept }\" arg:targetGraph=\"{= ?targetGraph }\" ui:template=\"{= acpp:FindTagsFromTaxonomy }\"/>
+    </ui:if>
+    <ui:else>
+        <ui:call arg:rootClass=\"{= ?rootClass }\" arg:targetGraph=\"{= ?targetGraph }\" ui:template=\"{= acpp:FindTagsFromOntology }\"/>
+    </ui:else>
+    <ui:call arg:language=\"{= ?language }\" arg:property=\"{= skos:prefLabel }\" arg:targetGraph=\"{= ?targetGraph }\" ui:template=\"{= acpp:CopyTagPropertyWithSubproperties }\"/>
+    <ui:call arg:language=\"{= ?language }\" arg:targetGraph=\"{= ?targetGraph }\" ui:template=\"{= acpp:CopyRdfsLabelIfNoPrefLabel }\"/>
+    <ui:call arg:language=\"{= ?language }\" arg:property=\"{= skos:altLabel }\" arg:targetGraph=\"{= ?targetGraph }\" ui:template=\"{= acpp:CopyTagPropertyWithSubproperties }\"/>
+    <ui:call arg:language=\"{= ?language }\" arg:property=\"{= skos:hiddenLabel }\" arg:targetGraph=\"{= ?targetGraph }\" ui:template=\"{= acpp:CopyTagPropertyWithSubproperties }\"/>
+    <ui:call arg:property=\"{= skos:broader }\" arg:targetGraph=\"{= ?targetGraph }\" ui:template=\"{= acpp:CopyTagRelationshipWithSubproperties }\"/>
+    <ui:call arg:property=\"{= rdfs:subClassOf }\" arg:targetGraph=\"{= ?targetGraph }\" arg:targetProperty=\"{= skos:broader }\" ui:template=\"{= acpp:CopyTagRelationshipWithSubproperties }\"/>
+    <ui:call arg:property=\"{= skos:narrower }\" arg:targetGraph=\"{= ?targetGraph }\" ui:template=\"{= acpp:CopyTagRelationshipWithSubproperties }\"/>
+    <ui:call arg:property=\"{= owl:equivalentClass }\" arg:targetGraph=\"{= ?targetGraph }\" arg:targetProperty=\"{= skos:related }\" ui:template=\"{= acpp:CopyTagRelationshipWithSubproperties }\"/>
+    <ui:call arg:property=\"{= owl:sameAs }\" arg:targetGraph=\"{= ?targetGraph }\" arg:targetProperty=\"{= skos:related }\" ui:template=\"{= acpp:CopyTagRelationshipWithSubproperties }\"/>
+    <ui:call arg:property=\"{= skos:related }\" arg:targetGraph=\"{= ?targetGraph }\" ui:template=\"{= acpp:CopyTagRelationshipWithSubproperties }\"/>
+    <ui:call arg:property=\"{= skos:hasTopConcept }\" arg:targetGraph=\"{= ?targetGraph }\" ui:template=\"{= acpp:CopyTagRelationshipWithSubproperties }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "An element that preprocesses an ontology for use with the AutoClassifier. The ontology is assumed to be contained in the context graph. Results will be stored in the target graph. Ontology preprocessing differs from taxonomy preprocessing in the rules for selection of potential tags (If skos:Concpets are present, use them; otherwise use all subclasses of the root class) and in the fact that RDFS/OWL properties such as rdfs:label, rdfs:subClassOf and owl:sameAs will be translated to semantically similar SKOS properties (skos:prefLabel, skos:broader, etc.)." ;
+  rdfs:label "acpp:PreprocessOntologyForAutoClassifier element" ;
+  rdfs:subClassOf ui:Element ;
+.
+acpp:PreprocessTaxonomyForAutoClassifier
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:defaultValue skos:Concept ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:rootClass ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "Only instances of this class (and its subclasses) will be considered as tags; defaults to skos:Concept" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate arg:targetGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph where the processed vocabulary will be stored; may be a ui:tempGraph" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:language ;
+      spl:valueType xsd:string ;
+      rdfs:comment "If a language tag is provided, only matching literals will be kept." ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:call arg:rootClass=\"{= ?rootClass }\" arg:targetGraph=\"{= ?targetGraph }\" ui:template=\"{= acpp:FindTagsFromTaxonomy }\"/>
+    <ui:call arg:language=\"{= ?language }\" arg:property=\"{= skos:prefLabel }\" arg:targetGraph=\"{= ?targetGraph }\" ui:template=\"{= acpp:CopyTagPropertyWithSubproperties }\"/>
+    <ui:call arg:language=\"{= ?language }\" arg:property=\"{= skos:altLabel }\" arg:targetGraph=\"{= ?targetGraph }\" ui:template=\"{= acpp:CopyTagPropertyWithSubproperties }\"/>
+    <ui:call arg:language=\"{= ?language }\" arg:property=\"{= skos:hiddenLabel }\" arg:targetGraph=\"{= ?targetGraph }\" ui:template=\"{= acpp:CopyTagPropertyWithSubproperties }\"/>
+    <ui:call arg:property=\"{= skos:broader }\" arg:targetGraph=\"{= ?targetGraph }\" ui:template=\"{= acpp:CopyTagRelationshipWithSubproperties }\"/>
+    <ui:call arg:property=\"{= skos:narrower }\" arg:targetGraph=\"{= ?targetGraph }\" ui:template=\"{= acpp:CopyTagRelationshipWithSubproperties }\"/>
+    <ui:call arg:property=\"{= skos:related }\" arg:targetGraph=\"{= ?targetGraph }\" ui:template=\"{= acpp:CopyTagRelationshipWithSubproperties }\"/>
+    <ui:call arg:property=\"{= skos:hasTopConcept }\" arg:targetGraph=\"{= ?targetGraph }\" ui:template=\"{= acpp:CopyTagRelationshipWithSubproperties }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "An element that preprocesses a taxonomy for use with the AutoClassifier. The taxonomy is assumed to be contained in the context graph. Results will be stored in the target graph." ;
+  rdfs:label "acpp:PreprocessTaxonomyForAutoClassifier element" ;
+  rdfs:subClassOf ui:Element ;
+.
+acpp:PreprocessVocabularyForAutoClassifier
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType teamwork:Vocabulary ;
+      rdfs:comment "The taxonomy or ontology to pre-process" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate arg:targetGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph where the processed vocabulary will be stored; may be a ui:tempGraph" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:language ;
+      spl:valueType xsd:string ;
+      rdfs:comment "If a language tag is provided, only matching literals will be kept." ;
+    ] ;
+  ui:prototype """
+<ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?projectGraph) }\">
+    <ui:if ui:condition=\"{= spl:instanceOf(?projectGraph, ontologyprojects:Ontology) }\">
+        <acpp:PreprocessOntologyForAutoClassifier arg:language=\"{= ?language }\" arg:rootClass=\"{= COALESCE(spl:object(?projectGraph, teamwork:rootClass), rdfs:Resource) }\" arg:targetGraph=\"{= ?targetGraph }\"/>
+    </ui:if>
+    <ui:else>
+        <acpp:PreprocessTaxonomyForAutoClassifier arg:language=\"{= ?language }\" arg:rootClass=\"{= COALESCE(IF(isIRI(teamwork:currentTeamGraph()), evnui:getRootClass(), skos:Concept), skos:Concept) }\" arg:targetGraph=\"{= ?targetGraph }\"/>
+    </ui:else>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:comment "An element that preprocesses and normalizes a vocabulary (either a taxonomy or an ontology) for use with the AutoClassifier. The result will be placed into the target graph, which may be a ui:tempGraph." ;
+  rdfs:label "acpp:PreprocessVocabularyForAutoClassifier element" ;
+  rdfs:subClassOf ui:Element ;
+.
+acpp:containsSkosConcepts
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Ask ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "conceptClass" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "concept" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:TriplePath ;
+            sp:object skos:Concept ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "conceptClass" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "Returns true if the context graph contains instances of skos:Concept or one of its subclasses." ;
+  rdfs:label "contains SKOS concepts" ;
+  rdfs:subClassOf spin:Functions ;
+.
+acpp:fixLanguage
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                rdf:type sp:if ;
+                sp:arg1 [
+                    rdf:type sp:not ;
+                    sp:arg1 [
+                        rdf:type sp:bound ;
+                        sp:arg1 spin:_arg2 ;
+                      ] ;
+                  ] ;
+                sp:arg2 spin:_arg1 ;
+                sp:arg3 [
+                    sp:varName "arg1fixed" ;
+                  ] ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:eq ;
+                sp:arg1 [
+                    rdf:type sp:lang ;
+                    sp:arg1 spin:_arg1 ;
+                  ] ;
+                sp:arg2 "" ;
+              ] ;
+            sp:variable [
+                sp:varName "noLanguageTag" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:langMatches ;
+                sp:arg1 [
+                    rdf:type sp:lang ;
+                    sp:arg1 spin:_arg1 ;
+                  ] ;
+                sp:arg2 [
+                    rdf:type sp:str ;
+                    sp:arg1 spin:_arg2 ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "matchingLanguageTag" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:strlang ;
+                sp:arg1 [
+                    rdf:type sp:str ;
+                    sp:arg1 spin:_arg1 ;
+                  ] ;
+                sp:arg2 [
+                    rdf:type sp:str ;
+                    sp:arg1 spin:_arg2 ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "arg1coerced" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:if ;
+                sp:arg1 [
+                    rdf:type sp:or ;
+                    sp:arg1 [
+                        sp:varName "noLanguageTag" ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "matchingLanguageTag" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "arg1coerced" ;
+                  ] ;
+                sp:arg3 "false"^^xsd:boolean ;
+              ] ;
+            sp:variable [
+                sp:varName "arg1fixed" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Literal ;
+      rdfs:comment "The literal whose language tag is to be filtered/coerced" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The language tag to force onto the literal (e.g., \"en\")" ;
+    ] ;
+  rdfs:comment "Coerces the language tag of a literal to a given language, or returns false if the given language doesn't match the literal's language tag." ;
+  rdfs:label "fix language" ;
+  rdfs:subClassOf spin:Functions ;
+.

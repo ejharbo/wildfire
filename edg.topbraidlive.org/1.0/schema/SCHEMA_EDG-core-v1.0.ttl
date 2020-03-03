@@ -1,0 +1,3381 @@
+# baseURI: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://datashapes.org/graphql
+# imports: http://edg.topbraid.solutions/1.0/schema/base
+# imports: http://edg.topbraid.solutions/1.0/schema/enumerations
+# imports: http://edg.topbraid.solutions/1.0/schema/governance/core
+# imports: http://edg.topbraid.solutions/1.0/surrogate/prov
+# imports: http://topbraid.org/tosh
+# imports: http://www.linkedmodel.org/schema/dtype
+# imports: http://www.w3.org/ns/shacl#
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+dash:canEditPropertyReificationValues
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "can edit properity reification values" ;
+.
+dash:propertyReificationUsesAssetValues
+  a rdf:Property ;
+  rdfs:comment "Set to true to specify that the values of reified properties are taken from the same properties of the asset instance." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "property reification uses asset values" ;
+.
+dash:reifiableBy
+  a rdf:Property ;
+  rdfs:comment "Used to express how a property occurrence in a model can be reified, by referencing a user-defined sub-class of \"rdf:Statement\"." ;
+  rdfs:domain sh:PropertyShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "reifiable by" ;
+  rdfs:range rdf:Statement ;
+.
+<http://edg.topbraid.solutions/1.0/schema/core>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/schema/core/GMD_core> ;
+  vaem:hasGraphRole vaem:SchemaGraph ;
+  rdfs:label "EDG Schema - Core" ;
+  owl:imports <http://datashapes.org/graphql> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/base> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/enumerations> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/surrogate/prov> ;
+  owl:imports <http://topbraid.org/tosh> ;
+  owl:imports <http://www.linkedmodel.org/schema/dtype> ;
+  owl:imports sh: ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+  sh:declare edg:PrefixDeclaration ;
+.
+<http://edg.topbraid.solutions/1.0/schema/glossary>
+  prov:wasInfluencedBy "Some properties were based on Lowell Fryman's 2015 DGIQ slides." ;
+.
+edg:AccessControl
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  edg:acronym "AC" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Access Control" ;
+  rdfs:subClassOf edg:Asset ;
+  sh:property edg:AccessControl-accessRestriction ;
+  sh:property edg:AccessControl-confidentiality ;
+  sh:property edg:AccessControl-pertainsToParty ;
+  sh:property edg:AccessControl-pertainsToProject ;
+  sh:property edg:AccessControl-pertainsToRole ;
+.
+edg:AccessControl-accessRestriction
+  a sh:PropertyShape ;
+  sh:path edg:accessRestriction ;
+  rdfs:comment "Specifies a restriction on access control for the designated roles" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:AccessRightRestriction ;
+  sh:group edg:AccessControlPropertiesGroup ;
+  sh:name "access restriction" ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:AccessControl-confidentiality
+  a sh:PropertyShape ;
+  sh:path edg:confidentiality ;
+  rdfs:comment "Specifies a confidentiality level" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:ConfidentialityLevel ;
+  sh:group edg:AccessControlPropertiesGroup ;
+  sh:name "confidentiality" ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:AccessControl-pertainsToParty
+  a sh:PropertyShape ;
+  sh:path edg:pertainsToParty ;
+  rdfs:comment "Specifies a party scope for an access control" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class edg:Party ;
+  sh:group edg:AccessControlPropertiesGroup ;
+  sh:name "access control for party" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:AccessControl-pertainsToProject
+  a sh:PropertyShape ;
+  sh:path edg:pertainsToProject ;
+  rdfs:comment "Specifies a party scope for an access control" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class edg:Project ;
+  sh:group edg:AccessControlPropertiesGroup ;
+  sh:name "access control for project" ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:AccessControl-pertainsToRole
+  a sh:PropertyShape ;
+  sh:path edg:pertainsToRole ;
+  rdfs:comment "Specifies a role scope for an access control" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:WorkflowParticipantProperty ;
+  sh:group edg:AccessControlPropertiesGroup ;
+  sh:name "access control for role" ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:AccessControlGroup
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  edg:acronym "ACG" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Access Control Group" ;
+  rdfs:subClassOf edg:Asset ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:Identifiable ;
+  rdfs:subClassOf edg:Narratable ;
+  sh:property edg:AccessControlable-accessControl ;
+.
+edg:AccessControlMethod
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  graphql:name "AccessControlMethod" ;
+  edg:acronym "ACM" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Access Control Method" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:AccessControlPropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Access Control Properties" ;
+  sh:order "70"^^xsd:decimal ;
+.
+edg:AccessControlable-accessControl
+  a sh:PropertyShape ;
+  sh:path edg:accessControl ;
+  rdfs:comment "Specifies an access control that acts as a rule for granting access" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class edg:AccessControl ;
+  sh:group edg:AccessControlPropertiesGroup ;
+  sh:name "access control" ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:AccessControllable
+  a edg:AspectClass ;
+  rdfs:comment "Access control systems perform identification authentication and authorization of users and entities using required login credentials. These can include passwords, personal identification numbers (PINs), biometric scans, security tokens or other authentication factors. Multifactor authentication, which requires two or more authentication factors, is often an important aspect for protecting access control systems. By identifying an individual or entity, a system can verifying that the person or application is who or what it claims to be, and authorizing the access level and set of actions associated with the username or IP address. Directory services and protocols, including the Local Directory Access Protocol (LDAP) and the Security Assertion Markup Language (SAML), provide access controls for authenticating and authorizing users and entities. Thereby enabling them to access hosted resources, or example. distributed applications and web servers." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Access Aspect" ;
+  rdfs:subClassOf edg:Aspect ;
+  sh:property edg:AccessControllable-accessControlMethod ;
+  sh:property edg:AccessControllable-authenticationMethod ;
+  sh:property edg:AccessControllable-authorizationMethod ;
+  sh:property edg:AccessControllable-belongsToAccessControlGroup ;
+.
+edg:AccessControllable-accessControlMethod
+  a sh:PropertyShape ;
+  sh:path edg:accessControlMethod ;
+  rdfs:comment "Informal notes on access control" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:AccessControlMethod ;
+  sh:group edg:AccessControlPropertiesGroup ;
+  sh:name "access control method" ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:AccessControllable-accessControlNotes
+  a sh:PropertyShape ;
+  sh:path edg:accessControlNotes ;
+  rdfs:comment "Informal notes on access control" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:AccessControlPropertiesGroup ;
+  sh:name "access control notes" ;
+  sh:order "60"^^xsd:decimal ;
+.
+edg:AccessControllable-accessControlPolicy
+  a sh:PropertyShape ;
+  sh:path edg:accessControlPolicy ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class edg:Policy ;
+  sh:group edg:AccessControlPropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:AccessControllable-authenticationMethod
+  a sh:PropertyShape ;
+  sh:path edg:authenticationMethod ;
+  rdfs:comment "Informal notes on access control" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:AuthenticationMethod ;
+  sh:group edg:AccessControlPropertiesGroup ;
+  sh:name "authentication method" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:AccessControllable-authorizationMethod
+  a sh:PropertyShape ;
+  sh:path edg:authorizationMethod ;
+  rdfs:comment "Informal notes on access control" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:AuthorizationMethod ;
+  sh:group edg:AccessControlPropertiesGroup ;
+  sh:name "authorization method" ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:AccessControllable-belongsToAccessControlGroup
+  a sh:PropertyShape ;
+  sh:path edg:belongsToAccessControlGroup ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class edg:AccessControlGroup ;
+  sh:group edg:AccessControlPropertiesGroup ;
+  sh:order "130"^^xsd:decimal ;
+.
+edg:AccessRightRestriction
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  edg:acronym "ARR" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Access Right Restriction" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:AffirmationConstraint
+  a sh:NodeShape ;
+  rdfs:comment "Confirmation or ratification of the truth, or validity, of something." ;
+  rdfs:label "Affirmation constraint" ;
+  sh:in (
+      "Y"
+      "YES"
+      "N"
+      "NO"
+      "NOT GIVEN"
+      ""
+    ) ;
+.
+edg:AnyClass-label
+  a sh:PropertyShape ;
+  sh:path rdfs:label ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:deactivated true ;
+  sh:group edg:AnyClassPropertiesDeactivationGroup ;
+.
+edg:AnyClass-type
+  a sh:PropertyShape ;
+  sh:path rdf:type ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:deactivated true ;
+  sh:group edg:AnyClassPropertiesDeactivationGroup ;
+.
+edg:AnyClassPropertiesDeactivationGroup
+  a sh:PropertyGroup ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Hidden Properties Group" ;
+  sh:order "2"^^xsd:decimal ;
+.
+edg:Aspect
+  a edg:AspectClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Aspect/Feature" ;
+  rdfs:subClassOf owl:Thing ;
+  sh:property edg:Identifiable-type ;
+.
+edg:AspectClass
+  a rdfs:Class ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Aspect Class" ;
+  rdfs:subClassOf owl:Class ;
+  rdfs:subClassOf sh:NodeShape ;
+.
+edg:Asset
+  a edg:AssetClass ;
+  dash:abstract true ;
+  rdfs:comment "An 'Asset' is an abstract superclass for EDG entities. This is the parent class for things such as  'Data Assets', 'Enterprise Assets' and 'Techical Assets'." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Asset" ;
+  rdfs:subClassOf edg:Provenance ;
+.
+edg:AssetClass
+  a rdfs:Class ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Asset Class" ;
+  rdfs:subClassOf edg:ConstructClass ;
+  rdfs:subClassOf sh:NodeShape ;
+  sh:property edg:AssetClass-acronym ;
+  sh:property edg:AssetClass-canEditPropertyReificationValues ;
+  sh:property edg:AssetClass-propertyReificationUsesAssetValues ;
+.
+edg:AssetClass-acronym
+  a sh:PropertyShape ;
+  sh:path edg:acronym ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Asset class - acronym" ;
+  sh:datatype xsd:string ;
+  sh:group edg:AssetClassPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 0 ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:AssetClass-canEditPropertyReificationValues
+  a sh:PropertyShape ;
+  sh:path dash:canEditPropertyReificationValues ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "can edit property reification asset values" ;
+  sh:datatype xsd:boolean ;
+  sh:group edg:AssetClassPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 0 ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:AssetClass-instancesHeldInAssetCollectionType
+  sh:group edg:AssetClassPropertyGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:AssetClass-propertyReificationUsesAssetValues
+  a sh:PropertyShape ;
+  sh:path dash:propertyReificationUsesAssetValues ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Property reification uses asset values" ;
+  sh:datatype xsd:boolean ;
+  sh:group edg:AssetClassPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 0 ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:AssetClassPropertyGroup
+  a sh:PropertyGroup ;
+.
+edg:AssetStatus
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  graphql:name "AssetStatus" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Asset Status" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:AuthenticationMethod
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  graphql:name "AuthenticationMethod" ;
+  edg:acronym "ATHNTCTNM" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Authentication Method" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:AuthorizationMethod
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  graphql:name "AuthorizationMethod" ;
+  edg:acronym "ATHRZTNM" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Authorization Method" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:Avro
+  prov:wasInfluencedBy "http://hadoopecosystemtable.github.io/"^^xsd:anyURI ;
+.
+edg:BigDataAsset
+  prov:wasInfluencedBy "http://hadoopecosystemtable.github.io/"^^xsd:anyURI ;
+.
+edg:BigDataCatalog
+  prov:wasInfluencedBy "http://hadoopecosystemtable.github.io/"^^xsd:anyURI ;
+.
+edg:BusinessApplication
+  a edg:AssetClass ;
+  rdfs:comment "Business Application is any software or set of computer programs used by business users to perform various business functions." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:subClassOf edg:Resourceable ;
+.
+edg:BusinessArea
+  a edg:AssetClass ;
+  rdfs:comment "A 'Business Area' is a particular operational business unit such as Finance, Materials Management, and Customer Service. Granularity of the business areas can vary - business areas can have sub areas. Also known as 'Line of Business'." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Business Area" ;
+  rdfs:subClassOf edg:SubjectArea ;
+.
+edg:BusinessCapability
+  a edg:AssetClass ;
+  rdfs:comment "Business Capability defines what a business does at its core. This differs from how things are done or where they are done." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Business Capability" ;
+  rdfs:subClassOf edg:Capability ;
+  rdfs:subClassOf edg:EnterpriseAsset ;
+  rdfs:subClassOf edg:Identifiable ;
+  rdfs:subClassOf edg:Narratable ;
+  rdfs:subClassOf edg:StatusAspect ;
+.
+edg:BusinessModel
+  a owl:Class ;
+  rdfs:comment "A business model describes the rationale of how an organization creates, delivers, and captures value, in economic, social, cultural or other contexts." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Business Model" ;
+  rdfs:subClassOf edg:Model ;
+.
+edg:CMMIcapabilityMaturityLevel
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  edg:acronym "CCML" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "CMMI Capability Maturity Level" ;
+  rdfs:subClassOf edg:OrdinalScale ;
+.
+edg:Capability
+  a edg:AssetClass ;
+  edg:acronym "CAP" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Capability" ;
+  rdfs:subClassOf edg:Asset ;
+.
+edg:Capable
+  a edg:AspectClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Capable" ;
+  rdfs:subClassOf edg:Aspect ;
+.
+edg:Cardinality
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  edg:acronym "CRDNLTY" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Cardinality" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:Category
+  a owl:Class ;
+  dcterms:description "A 'Category' provides a typing construct as an alternate to subclassing." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Category" ;
+  rdfs:subClassOf edg:Construct ;
+.
+edg:Compliance-license
+  a sh:PropertyShape ;
+  sh:path edg:license ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:ComplianceGroup ;
+  sh:maxCount 1 ;
+  sh:order "5"^^xsd:decimal ;
+.
+edg:ComplianceAspect
+  a edg:AspectClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Compliance" ;
+  rdfs:subClassOf edg:Aspect ;
+.
+edg:ComplianceStatus
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  graphql:name "ComplianceStatus" ;
+  edg:acronym "CSTAT" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Compliance Status" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:ConfidentialityLevel
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Confidentiality Level" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:Construct
+  a owl:Class ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "EDG Construct" ;
+  rdfs:subClassOf edg:Narratable ;
+.
+edg:ConstructClass
+  a rdfs:Class ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Construct class" ;
+  rdfs:subClassOf owl:Class ;
+.
+edg:Country
+  a owl:Class ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Country" ;
+  rdfs:subClassOf edg:GeoLocation ;
+.
+edg:CustomEnumerationViewpoint
+  a edg:ViewpointClass ;
+  dash:abstract true ;
+  edg:acronym "ENUM" ;
+  rdfs:comment "This menu covers custom enumerations and enumerations created using EDG. A 'permissible value selectors' menu option is also provided for data element value constraints that are specified by enumeration properties." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Custom Enumerations" ;
+  rdfs:subClassOf edg:Viewpoint ;
+.
+edg:DataAsset
+  a edg:AssetClass ;
+  rdfs:comment "A 'Data Asset' is an entity that contains valuable data. It can be a database, a document or any type of information that is managed as a single entity." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Data Asset" ;
+  rdfs:subClassOf edg:Asset ;
+  rdfs:subClassOf edg:Identifiable ;
+  rdfs:subClassOf edg:Narratable ;
+  rdfs:subClassOf edg:Provenance ;
+  rdfs:subClassOf edg:StatusAspect ;
+.
+edg:DataContainer
+  a edg:AssetClass ;
+  dash:abstract false ;
+  edg:acronym "DCNTR" ;
+  rdfs:comment "A 'Data container' is a collection of logical structures of data, or schema objects. In a relational database a container would contain tables. For example, for Oracle databases a data container is called a 'Schema'."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Data Container" ;
+  rdfs:subClassOf edg:Governance ;
+  rdfs:subClassOf edg:Locatable ;
+  rdfs:subClassOf edg:PhysicalDataAsset ;
+.
+edg:DataContainerType
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  edg:acronym "DCNTNRTYPE" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Data Container Type" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:DataDomain-subDomainOf
+  a sh:PropertyShape ;
+  sh:path edg:subDomainOf ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class edg:DataSubjectArea ;
+  sh:group edg:DataDomainGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:DataDomainGroup
+  a sh:PropertyGroup ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Data Domain Metadata" ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:DataElement
+  a edg:AssetClass ;
+  rdfs:comment "The class for  'atomic' units of data. This is subclassed into various types of data assets such as report items, database columns and report columns." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Data Element" ;
+  rdfs:subClassOf edg:PhysicalDataAsset ;
+  rdfs:subClassOf edg:Processable ;
+  rdfs:subClassOf prov:Entity ;
+.
+edg:DataElement-dataElementCriticality
+  a sh:PropertyShape ;
+  sh:path edg:dataElementCriticality ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+.
+edg:DataElement-permissibleValues
+  a sh:PropertyShape ;
+  sh:path edg:permissibleValues ;
+  tosh:editWidget swa:InstancesSelectEditor ;
+  tosh:viewWidget edg.v:ValueConstructViewer ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class edg:PermissibleValuesAsset ;
+  sh:maxCount 1 ;
+.
+edg:DataElementCriticality-forOrganization
+  a sh:PropertyShape ;
+  sh:path edg:forOrganization ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class edg:Organization ;
+.
+edg:DataExchangeFrequency
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  edg:acronym "DEXCHFRQ" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Data Exchange Frequency" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:DataGovernanceMaturityLevel
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  edg:acronym "DGML" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Data Governance Maturity Level" ;
+  rdfs:subClassOf edg:OrdinalScale ;
+.
+edg:DataGraphSchema
+  a vaem:GraphRole ;
+  vaem:filePrefix "DGSCHEMA" ;
+  rdfs:comment "A graph that can be used as a schema for an EDG Data Graph." ;
+  rdfs:comment "A graph which can be used as a schema for EDG Data Graphs." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Data Graph Schema" ;
+.
+edg:DataKind
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Data Kind" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:DataPolicy
+  a edg:AssetClass ;
+  edg:acronym "DPLCY" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Data Policy" ;
+  rdfs:subClassOf edg:Policy ;
+.
+edg:DataQualityStatus
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Data Quality Status" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:DataQualityVerificationMethod
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Data Quality Verification Method" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:DataSetElement
+  rdfs:subClassOf edg:AccessControllable ;
+.
+edg:DataSubjectArea
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  edg:acronym "DSA" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Data Subject Area" ;
+  rdfs:subClassOf edg:Asset ;
+  rdfs:subClassOf edg:SubjectArea ;
+  sh:property edg:DataDomain-subDomainOf ;
+.
+edg:DataValueRule
+  a edg:AssetClass ;
+  swa:instancesHaveRandomURI true ;
+  rdfs:comment "A 'Data Value Rule' specifies conditions a data value has to be evaluated against in order to, for example, determine if it represents a glossary term. For example, given a term \"Country of Incorporation\", associated data value rule may say that the values must be 2 character ISO Country Codes. Data value such as \"US\" may be evaluated against the rule to determine if it satisfies a condition of representing a country of incorporation." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Data Value Rule" ;
+  rdfs:subClassOf edg:Asset ;
+  rdfs:subClassOf sh:NodeShape ;
+.
+edg:Database
+  a edg:AssetClass ;
+  edg:acronym "DB" ;
+  rdfs:comment "A database is an efficient storage and retrieval structure comprising tables and data elements. The parent type 'database' has sub-types for relational and nosql databases, and also data warehouses." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Database" ;
+  rdfs:subClassOf edg:PhysicalDataAsset ;
+  rdfs:subClassOf edg:Resourceable ;
+.
+edg:Datatype
+  a edg:AssetClass ;
+  edg:acronym "DTYPE" ;
+  rdfs:comment "<em>EDG Datatype</em> is the parent class for all datatypes: scalars, enumerated values including scales, and structured types. For scalar types, it is intended for specifying datatypes such as <em>Strings</em> and <em>Integers</em> as objects as opposed to strings. This is because even a scalar type can have attributes, such as min and max values. It should also be noted that a string is not a scalar but a single dimension array of characters."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Datatype" ;
+  rdfs:subClassOf edg:Asset ;
+  rdfs:subClassOf edg:Identifiable ;
+  rdfs:subClassOf edg:Narratable ;
+  rdfs:subClassOf edg:Provenance ;
+  rdfs:subClassOf edg:StatusAspect ;
+  rdfs:subClassOf edg:TypeConstruct ;
+.
+edg:Department
+  a edg:AssetClass ;
+  edg:acronym "DEPT" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Department" ;
+  rdfs:subClassOf edg:Organization ;
+  sh:property edg:Department-department ;
+.
+edg:Department-department
+  a sh:PropertyShape ;
+  sh:path edg:department ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class edg:Department ;
+.
+edg:Document
+  a edg:AssetClass ;
+  edg:acronym "DOC" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Document" ;
+  rdfs:subClassOf edg:InformationAsset ;
+  sh:property edg:Document-abstract ;
+  sh:property edg:Document-title ;
+.
+edg:Document-abstract
+  a sh:PropertyShape ;
+  sh:path edg:abstract ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:NarratablePropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Document-title
+  a sh:PropertyShape ;
+  sh:path edg:title ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:group edg:IdentifiersGroup ;
+  sh:or (
+      [
+        sh:datatype xsd:string ;
+      ]
+      [
+        sh:datatype rdf:langString ;
+      ]
+    ) ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:Drill
+  prov:wasInfluencedBy "http://hadoopecosystemtable.github.io/"^^xsd:anyURI ;
+.
+edg:EDGenumeratedValue
+  a edg:EnumerationClass ;
+  a sh:NodeShape ;
+  dash:abstract true ;
+  graphql:name "EDGenumeratedValue" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "EDG Enumeration (system)" ;
+  rdfs:subClassOf edg:EnumeratedValue ;
+.
+edg:EDGenumerationClass
+  edg:editingProhibited true ;
+.
+edg:EmptyAspect
+  a edg:AspectClass ;
+  rdfs:comment "The \"Empty Aspect\" exists to serve as a root for all classes that have no aspect properties. This is done only to make the intent of a class explicit so as to support maintenance work." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Empty Aspect" ;
+  rdfs:subClassOf edg:Aspect ;
+.
+edg:EnterpriseAsset
+  a edg:AssetClass ;
+  edg:acronym "EA" ;
+  rdfs:comment "<p>An <em>Enterprise Asset</em> is a container that organizes enterprise assets. It includes such things as <em>Business Activities</em>, <em>Business Functions</em>, <em>Business Capabilities</em>, <em>Job Roles</em>, <em>Organizations</em>, <em>Parties</em>,  and <em>Information Assets</em>.</p>"^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Enterprise Asset" ;
+  rdfs:subClassOf edg:Asset ;
+  rdfs:subClassOf edg:Traceable ;
+.
+edg:EnterpriseCapable
+  a edg:AspectClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Enterprise capable" ;
+  rdfs:subClassOf edg:Capable ;
+.
+edg:EnumeratedValue
+  a edg:EnumerationClass ;
+  dash:abstract true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Enumerated Value" ;
+  rdfs:subClassOf edg:Identifiable ;
+  rdfs:subClassOf edg:Narratable ;
+  rdfs:subClassOf edg:StatusAspect ;
+  rdfs:subClassOf edg:TypeConstruct ;
+.
+edg:EnumerationClass
+  rdfs:subClassOf edg:PermissibleValuesAsset ;
+.
+edg:EnumerationViewpoint
+  a edg:ViewpointClass ;
+  dash:abstract true ;
+  rdfs:comment "This menu covers system-level enumerations and enumerations created using EDG. A 'permissible value selectors' menu option is also provided for data element value constraints that are specified by enumeration properties." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Enumerations and Property Value Selectors" ;
+  rdfs:subClassOf edg:Viewpoint ;
+.
+edg:EnumerationsOntology
+  a vaem:GraphRole ;
+  vaem:filePrefix "ENUMOTOLGY" ;
+  rdfs:comment "A graph which is used to define enumeration classes, and optionally, their instances." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Enumerations Ontology" ;
+.
+edg:EnvironmentType
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  edg:acronym "ENVTYPE" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Environment type" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:Event
+  a owl:Class ;
+  rdfs:comment "An 'Event' is a type of signal produced or observed by software." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Event" ;
+  rdfs:subClassOf edg:Construct ;
+.
+edg:EventsGroup
+  a sh:PropertyGroup ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Events Metadata" ;
+  sh:description "Groups properties that are relevant to events." ;
+  sh:order 7 ;
+.
+edg:File-sourceLink
+  sh:path edg:sourceLink ;
+.
+edg:FiveLevelRatingScale
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  edg:acronym "FIVELRS" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Rating scale - five values" ;
+  rdfs:subClassOf edg:OrdinalScale ;
+.
+edg:FormatType
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Format type" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:Formula
+  a edg:FormulaClass ;
+  rdfs:comment "A Formula is a function that returns a computed value"^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Formula" ;
+  rdfs:subClassOf edg:Construct ;
+.
+edg:FormulaClass
+  a rdfs:Class ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Formula Class" ;
+  rdfs:subClassOf edg:ConstructClass ;
+  rdfs:subClassOf sh:NodeShape ;
+.
+edg:FrequencyOfChange
+  a edg:EDGenumerationClass ;
+  edg:acronym "FRQCHG" ;
+  rdfs:comment "A class containing controlled values to be used to identify frequency of changes to data." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "frequency of change" ;
+  rdfs:subClassOf edg:EnumeratedValue ;
+.
+edg:GeoLocation
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Geographical Location" ;
+  rdfs:subClassOf edg:Location ;
+.
+edg:Glossary-originatedByOrganization
+  sh:path edg:originatedByOrganization ;
+.
+edg:GlossaryTerm
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Glossary Term" ;
+  rdfs:subClassOf edg:Asset ;
+  rdfs:subClassOf edg:Identifiable ;
+  rdfs:subClassOf edg:StatusAspect ;
+.
+edg:Governance
+  a edg:AspectClass ;
+  rdfs:comment "<strong>Governance</strong> is about establishing, through information artefacts, organizational structures, processes, policies and measures that help achieve strong participation across the organization for critical decisions affecting assets. Data governance structures are groups that are comprised of data management stakeholders, whose function is to ensure the data management program is held accountable to organization-wide needs and is oriented toward the fulfillment of business and data management objectives. Governance groups can be established for specific purposes, such as approving enterprise requirements for a reference data system, and may also be standing bodies with sustained responsibilities, such as establishing policies and monitoring compliance." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Governance" ;
+  rdfs:subClassOf edg:Aspect ;
+.
+edg:GovernanceAsset
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Governance Asset" ;
+  rdfs:subClassOf edg:Asset ;
+.
+edg:GovernancePolicy
+  a edg:AssetClass ;
+  rdfs:comment "One or more guiding principles established by management that is adopted by an organization for governance."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Governance Policy" ;
+  rdfs:subClassOf edg:Policy ;
+  sh:property edg:GovernancePolicy-subItem ;
+.
+edg:HBase
+  prov:wasInfluencedBy "http://hadoopecosystemtable.github.io/"^^xsd:anyURI ;
+.
+edg:HCatalog
+  prov:wasInfluencedBy "http://hadoopecosystemtable.github.io/"^^xsd:anyURI ;
+.
+edg:HDFS
+  prov:wasInfluencedBy "http://hadoopecosystemtable.github.io/"^^xsd:anyURI ;
+.
+edg:Identifiable
+  a edg:AspectClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Identifiable" ;
+  rdfs:subClassOf edg:Aspect ;
+  skos:prefLabel "Identifiers, Codes and other Designators" ;
+  sh:property edg:Identifiable-acronym ;
+  sh:property edg:Identifiable-altLabel ;
+  sh:property edg:Identifiable-identifier ;
+  sh:property edg:Identifiable-label ;
+  sh:property edg:Identifiable-tag ;
+.
+edg:Identifiable-acronym
+  a sh:PropertyShape ;
+  sh:path edg:acronym ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:group edg:IdentifiersGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 0 ;
+  sh:or (
+      [
+        sh:datatype xsd:string ;
+      ]
+      [
+        sh:datatype rdf:langString ;
+      ]
+    ) ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:Identifiable-altLabel
+  a sh:PropertyShape ;
+  sh:path skos:altLabel ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:description "Uses skos:altLabel to provide alternate labels for the resource." ;
+  sh:group edg:IdentifiersGroup ;
+  sh:or (
+      [
+        sh:datatype xsd:string ;
+      ]
+      [
+        sh:datatype rdf:langString ;
+      ]
+    ) ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:Identifiable-assetName
+  a sh:PropertyShape ;
+  sh:path edg:name ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:datatype xsd:string ;
+  sh:maxCount 1 ;
+.
+edg:Identifiable-creationDate
+  a sh:PropertyShape ;
+  sh:path dcterms:created ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:datatype xsd:date ;
+  sh:group edg:IdentifiersGroup ;
+  sh:maxCount 1 ;
+  sh:order 120 ;
+.
+edg:Identifiable-identifier
+  a sh:PropertyShape ;
+  sh:path edg:identifier ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:group edg:IdentifiersGroup ;
+  sh:maxCount 1 ;
+  sh:or (
+      [
+        sh:datatype xsd:string ;
+      ]
+      [
+        sh:datatype rdf:langString ;
+      ]
+    ) ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:Identifiable-label
+  a sh:PropertyShape ;
+  sh:path rdfs:label ;
+  graphql:name "rdfs_label" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:group edg:IdentifiersGroup ;
+  sh:maxCount 10 ;
+  sh:minCount 0 ;
+  sh:or (
+      [
+        sh:datatype xsd:string ;
+      ]
+      [
+        sh:datatype rdf:langString ;
+      ]
+    ) ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Identifiable-name
+  sh:group edg:IdentifiersGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:Identifiable-subtitle
+  a sh:PropertyShape ;
+  sh:path edg:subtitle ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:datatype xsd:string ;
+  sh:group edg:IdentifiersGroup ;
+  sh:maxCount 1 ;
+  sh:order "110"^^xsd:decimal ;
+.
+edg:Identifiable-symbolDesignator
+  a sh:PropertyShape ;
+  sh:path edg:symbolDesignator ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:group edg:IdentifiersGroup ;
+  sh:maxCount 1 ;
+  sh:or (
+      [
+        sh:datatype xsd:string ;
+      ]
+      [
+        sh:datatype rdf:langString ;
+      ]
+    ) ;
+  sh:order "8"^^xsd:decimal ;
+.
+edg:Identifiable-tag
+  a sh:PropertyShape ;
+  sh:path edg:tag ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:group edg:IdentifiersGroup ;
+  sh:minCount 0 ;
+  sh:or (
+      [
+        sh:datatype xsd:string ;
+      ]
+      [
+        sh:datatype rdf:langString ;
+      ]
+    ) ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:Identifiable-title
+  a sh:PropertyShape ;
+  sh:path edg:title ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:datatype xsd:string ;
+  sh:group edg:IdentifiersGroup ;
+  sh:maxCount 1 ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:Identifiable-type
+  a sh:PropertyShape ;
+  sh:path rdf:type ;
+  graphql:name "rdf_type" ;
+  tosh:editWidget edg:RDFTypeEditor ;
+  tosh:searchWidget edg:RDFTypeSelectFacet ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class rdfs:Class ;
+  sh:group edg:IdentifiersGroup ;
+  sh:order "1"^^xsd:decimal ;
+.
+edg:IdentificationMethod
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  graphql:name "IdentificationMethoc" ;
+  edg:acronym "IDNTFCTNM" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Identification Method" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:IdentifiersGroup
+  a sh:PropertyGroup ;
+  tosh:closed false ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Identifiers Metadata" ;
+  sh:description "Groups properties that are general enough to be considered as unique identifiers for a resource." ;
+  sh:order "5"^^xsd:decimal ;
+.
+edg:ImpactGroup
+  a sh:PropertyGroup ;
+  tosh:viewGadget edg:ImpactGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Impact" ;
+  sh:description "Groups properties that are relevant to impact" ;
+  sh:order 300 ;
+.
+edg:ImpactScale
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Impact scale" ;
+  rdfs:subClassOf edg:OrdinalScale ;
+.
+edg:InformationAsset
+  a edg:AssetClass ;
+  a owl:Class ;
+  dash:abstract true ;
+  edg:acronym "INFOASSET" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Information Asset" ;
+  rdfs:subClassOf edg:Asset ;
+  rdfs:subClassOf edg:Identifiable ;
+  rdfs:subClassOf edg:Narratable ;
+  rdfs:subClassOf edg:Provenance ;
+  rdfs:subClassOf edg:StatusAspect ;
+  rdfs:subClassOf edg:TypeConstruct ;
+  rdfs:subClassOf prov:Entity ;
+.
+edg:InformationPackage
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Information Package" ;
+  rdfs:subClassOf edg:DataExchangeable ;
+  rdfs:subClassOf edg:Narratable ;
+  sh:property edg:InformationPackage-contains ;
+.
+edg:IntegerUnionList
+  a rdf:List ;
+  rdf:first (
+      [
+        sh:datatype xsd:integer ;
+      ]
+    ) ;
+  rdf:rest (
+      [
+        sh:datatype xsd:int ;
+      ]
+      [
+        sh:datatype xsd:nonNegativeInteger ;
+      ]
+      [
+        sh:datatype xsd:positiveInteger ;
+      ]
+    ) ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Integer union list" ;
+.
+edg:Issue-issueStatus
+  sh:class edg:IssueStatus ;
+.
+edg:IssueStatus
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Issue Status" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:JobTitle
+  a edg:AssetClass ;
+  rdfs:comment "A 'Job Title' describes in a few words or less the position held by an employee." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Job Title" ;
+  rdfs:subClassOf edg:Party ;
+.
+edg:Kudu
+  prov:wasInfluencedBy "http://hadoopecosystemtable.github.io/"^^xsd:anyURI ;
+.
+edg:LinkUnionList
+  a rdf:List ;
+  rdf:first [
+      sh:datatype rdf:HTML ;
+    ] ;
+  rdf:rest (
+      [
+        sh:datatype xsd:anyURI ;
+      ]
+    ) ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Link union list" ;
+.
+edg:Locatable
+  a edg:AspectClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Locatable" ;
+  rdfs:subClassOf edg:Aspect ;
+  sh:property edg:Locatable-location ;
+  sh:property edg:Locatable-locationLink ;
+  sh:property edg:Locatable-locationNotes ;
+.
+edg:Locatable-location
+  a sh:PropertyShape ;
+  sh:path edg:location ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class edg:Location ;
+  sh:group edg:LocatablePropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Locatable-locationLink
+  a sh:PropertyShape ;
+  sh:path edg:locationLink ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:datatype xsd:anyURI ;
+  sh:group edg:LocatablePropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:Locatable-locationNotes
+  a sh:PropertyShape ;
+  sh:path edg:locationNotes ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:LocatablePropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:LocatablePropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Location" ;
+  sh:order "38"^^xsd:decimal ;
+.
+edg:Location
+  a owl:Class ;
+  a sh:NodeShape ;
+  edg:hideSubClasses true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Location" ;
+  rdfs:subClassOf edg:Construct ;
+  sh:property edg:Location-country ;
+  sh:property edg:Location-region ;
+.
+edg:Location-country
+  a sh:PropertyShape ;
+  sh:path edg:country ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class edg:Location ;
+  sh:group edg:LocationGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Location-region
+  a sh:PropertyShape ;
+  sh:path edg:region ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class edg:Location ;
+  sh:group edg:LocationGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:LocationGroup
+  a sh:PropertyGroup ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Location Details" ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:LogicalDataAsset
+  a edg:AssetClass ;
+.
+edg:LogicalDatatype
+  a edg:AssetClass ;
+  dash:abstract true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Logical Datatype" ;
+  rdfs:subClassOf edg:Datatype ;
+.
+edg:Measure
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Measure" ;
+.
+edg:Metric-metricType
+  sh:class edg:MetricType ;
+.
+edg:MetricType
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Metric type" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:Model
+  a edg:AssetClass ;
+  dash:abstract true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Model" ;
+  rdfs:subClassOf edg:Asset ;
+  rdfs:subClassOf edg:Identifiable ;
+  rdfs:subClassOf edg:Narratable ;
+  rdfs:subClassOf edg:StatusAspect ;
+.
+edg:Narratable
+  a edg:AspectClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Narratable" ;
+  rdfs:subClassOf edg:Aspect ;
+  sh:property edg:Narratable-description ;
+  sh:property edg:Narratable-documentLink ;
+  sh:property edg:Narratable-purpose ;
+  sh:property edg:Narratable-referenceLink ;
+  sh:property edg:Narratable-seeAlso ;
+  sh:property edg:Narratable-shortDescription ;
+.
+edg:Narratable-definition
+  a sh:PropertyShape ;
+  sh:path skos:definition ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:datatype rdf:HTML ;
+  sh:maxCount 1 ;
+.
+edg:Narratable-description
+  a sh:PropertyShape ;
+  sh:path edg:description ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:group edg:NarratablePropertiesGroup ;
+  sh:or edg:TextUnionList ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:Narratable-documentLink
+  a sh:PropertyShape ;
+  sh:path edg:documentLink ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:NarratablePropertiesGroup ;
+  sh:order "80"^^xsd:decimal ;
+.
+edg:Narratable-guidanceLink
+  a sh:PropertyShape ;
+  sh:path edg:guidanceLink ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:group edg:NarratablePropertiesGroup ;
+  sh:or edg:TextUnionList ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:Narratable-notes
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/core> ;
+  sh:group edg:NarratablePropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:Narratable-purpose
+  a sh:PropertyShape ;
+  sh:path edg:purpose ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:NarratablePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:Narratable-referenceLink
+  a sh:PropertyShape ;
+  sh:path edg:referenceLink ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:group edg:NarratablePropertiesGroup ;
+  sh:or edg:LinkUnionList ;
+  sh:order "90"^^xsd:decimal ;
+.
+edg:Narratable-seeAlso
+  a sh:PropertyShape ;
+  sh:path rdfs:seeAlso ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:group edg:NarratablePropertiesGroup ;
+  sh:nodeKind sh:IRI ;
+  sh:order "120"^^xsd:decimal ;
+.
+edg:Narratable-shortDescription
+  a sh:PropertyShape ;
+  sh:path edg:shortDescription ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:group edg:NarratablePropertiesGroup ;
+  sh:or edg:TextUnionList ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:NarratablePropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Documentation" ;
+  sh:description "Groups properties that can be used for describing, explaining or adding notes to a resource." ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:NonNegativeIntegerUnionList
+  a rdf:List ;
+  rdf:first [
+      sh:datatype xsd:nonNegativeInteger ;
+    ] ;
+  rdf:rest (
+      [
+        sh:datatype xsd:positiveInteger ;
+      ]
+    ) ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Non-negative union list" ;
+.
+edg:NumericUnionList
+  a rdf:List ;
+  rdf:first [
+      sh:datatype xsd:integer ;
+    ] ;
+  rdf:rest (
+      [
+        sh:datatype xsd:double ;
+      ]
+      [
+        sh:datatype xsd:float ;
+      ]
+      [
+        sh:datatype xsd:decimal ;
+      ]
+    ) ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Numeric union list" ;
+.
+edg:OntologyAsset
+  a owl:Class ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Ontology Asset" ;
+  rdfs:subClassOf edg:Asset ;
+  rdfs:subClassOf edg:Governance ;
+  rdfs:subClassOf edg:Traceable ;
+.
+edg:OntologyClass
+  a owl:Class ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Ontology Class" ;
+  rdfs:subClassOf edg:OntologyAsset ;
+.
+edg:OntologyDataset
+  a owl:Class ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Ontology Dataset" ;
+  rdfs:subClassOf edg:OntologyGraph ;
+.
+edg:OntologyGraph
+  a owl:Class ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Ontology Graph" ;
+  rdfs:subClassOf edg:OntologyAsset ;
+.
+edg:OntologySchema
+  a owl:Class ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Ontology Schema" ;
+  rdfs:subClassOf edg:OntologyGraph ;
+.
+edg:OntologyVocabulary
+  a owl:Class ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Ontology Vocabulary" ;
+  rdfs:subClassOf edg:OntologyGraph ;
+.
+edg:OrdinalScale
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  dash:abstract true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Ordinal Scale" ;
+  rdfs:subClassOf edg:Scale ;
+.
+edg:OversightPolicy
+  a edg:AssetClass ;
+  edg:acronym "OVPLCY" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Oversight Policy" ;
+  rdfs:subClassOf edg:Policy ;
+.
+edg:Party
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  rdfs:comment "A 'Party' is an abstract super-class to allow a reference to be made to an organizational entity, party or role designation." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Party" ;
+  rdfs:subClassOf edg:Asset ;
+  rdfs:subClassOf edg:EnterpriseCapable ;
+  rdfs:subClassOf prov:Agent ;
+.
+edg:PermissibleValuesAsset
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "'Permissible Values Asset' is a construct for specifying allowed values of a data element such as  'Null', scalar datatypes including enumerations, and reference data values. A sub-type of this parent type should be chosen. The possible sub-types are 'Property Value' and 'Taxonomy Node Values'. Use 'Property Value' for enumerations and 'Taxonomy Node Values' for codes based on a sub-tree of a taxonomy." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Permissible Values" ;
+.
+edg:Person
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  rdfs:comment "A class that holds contact details for a person." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Person" ;
+  rdfs:subClassOf edg:Party ;
+  sh:property edg:Person-email ;
+.
+edg:PersonalDataCategory
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  edg:acronym "PDCAT" ;
+  edg:description """<p>The data protection act (DPA) defines personal data as information about:</p>
+<ol>
+<li>racial or ethnic origin of the data subject;</li>
+<li>political opinions;</li>
+<li>religious beliefs or other beliefs of a similar nature;</li>
+<li>membership of a trade union;</li>
+<li>physical or mental health or condition;</li>
+<li>sexual orientation;</li>
+<li>commission or alleged commission of any offence; o</li>
+<li>any proceedings for any offence committed or alleged to have been committed by the data subject, the disposal of such proceedings or the sentence of any court in such proceedings.</li>
+</ol>
+<p>Definition under the GDPR: data consisting of racial or ethnic origin, political opinions, religious or philosophical beliefs, or trade union membership, genetic data, biometric data, data concerning health or data concerning a natural person's sex life or sexual orientation.</p>"""^^rdf:HTML ;
+  rdfs:comment "The data protection act (DPA) defines personal data as information about: racial or ethnic origin of the data subject; political opinions; religious beliefs or other beliefs of a similar nature; membership of a trade union; physical or mental health or condition; sexual orientation; commission or alleged commission of any offence; any proceedings for any offence committed or alleged to have been committed by the data subject, the disposal of such proceedings or the sentence of any court in such proceedings. Under the  European General Data Protection Regulation (GDPR) personal data is any data consisting of racial or ethnic origin, political opinions, religious or philosophical beliefs, or trade union membership, genetic data, biometric data, data concerning health or data concerning a natural person's sex life or sexual orientation." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Personal data category" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:PhysicalDataAsset
+  a edg:AssetClass ;
+  a edg:ViewpointClass ;
+  dash:abstract true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Physical Data Asset" ;
+  rdfs:subClassOf edg:DataAsset ;
+.
+edg:PhysicalDatatype
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Physical Datatype" ;
+  rdfs:subClassOf edg:Datatype ;
+.
+edg:Place
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  edg:acronym "PLACE" ;
+  rdfs:comment "A place is a an abstract class for subclasses that can specify such things as buildings, facilities, laboratories  and hospitals." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Place" ;
+  rdfs:subClassOf edg:Asset ;
+  rdfs:subClassOf edg:EnterpriseCapable ;
+  rdfs:subClassOf edg:Locatable ;
+.
+edg:Plan
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Plan" ;
+  rdfs:subClassOf edg:Document ;
+  rdfs:subClassOf edg:Governance ;
+.
+edg:Policy
+  a edg:AssetClass ;
+  edg:acronym "POLICY" ;
+  rdfs:comment "A policy is a statement of rules and guiding principles that an organization stipulates to achieve compliance, enforce required practices, and assist decision making." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Policy" ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:GovernanceAsset ;
+  rdfs:subClassOf edg:Identifiable ;
+  rdfs:subClassOf edg:Narratable ;
+  sh:property edg:Policy-subPolicy ;
+.
+edg:Policy-subPolicy
+  a sh:PropertyShape ;
+  sh:path edg:subPolicy ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class edg:Policy ;
+  sh:group edg:PolicyPropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:PolicyCompliance
+  a edg:AssetClass ;
+  dcterms:description "A 'Policy Compliance' specifies how assurance for a policy has been undertaken." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Policy Compliance" ;
+  rdfs:subClassOf edg:GovernanceAsset ;
+  sh:class edg:Policy ;
+  sh:property edg:PolicyCompliance-forPolicy ;
+.
+edg:PolicyCompliance-forPolicy
+  a sh:PropertyShape ;
+  sh:path edg:forPolicy ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:group edg:PolicyCompliancePropertiesGroup ;
+  sh:minCount 1 ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:PolicyPropertiesGroup
+  sh:order "30"^^xsd:decimal ;
+.
+edg:PrefixDeclaration
+  a sh:PrefixDeclaration ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "EDG prefix declaration" ;
+  sh:namespace "http://edg.topbraid.solutions/model/"^^xsd:anyURI ;
+  sh:prefix "edg" ;
+.
+edg:PrivacyPolicy
+  a edg:AssetClass ;
+  edg:acronym "PPLCY" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Privacy Policy" ;
+  rdfs:subClassOf edg:Policy ;
+.
+edg:Process
+  a edg:AssetClass ;
+  rdfs:comment "A pocess, or business process, is a collection of activities performed by actors (people or machines) that in a specific sequence produces information assets. Serving specific business goals, business processes make up business capabilities." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:subClassOf edg:EnterpriseAsset ;
+.
+edg:ProcessAsset
+  a owl:Class ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Process Asset" ;
+  rdfs:subClassOf edg:Asset ;
+  rdfs:subClassOf edg:Governance ;
+  rdfs:subClassOf edg:Traceable ;
+.
+edg:Processable
+  a edg:AspectClass ;
+  edg:description "<strong>Processable</strong> is an <em>Aspect</em class that allows subclasses to participate as inputs and/or outputs in instances of software classes such as software programs, pipelines, jobs and transforms."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Processable" ;
+  rdfs:subClassOf edg:Aspect ;
+.
+edg:Project
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  rdfs:comment "A project that requires data governance or has access control restrictions for datasets." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Project" ;
+  rdfs:subClassOf edg:Asset ;
+  rdfs:subClassOf edg:BusinessModelViewpoint ;
+  rdfs:subClassOf edg:EnterpriseAsset ;
+  rdfs:subClassOf edg:EnterpriseViewFromTechnicalAssets ;
+  sh:property edg:Project-subProject ;
+.
+edg:Project-subProject
+  a sh:PropertyShape ;
+  sh:path edg:subProject ;
+  rdfs:comment "Specifies a party scope for an access control" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class edg:Project ;
+  sh:group edg:ProjectPropertiesGroup ;
+  sh:name "sub-project" ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:ProjectPropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Project Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:PropertyValueSet
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  edg:acronym "PVS" ;
+  rdfs:comment "A 'Property Value Selector' references values from a class in a given graph for a specific property. A typical use is to express permitted values on a data element. For example the permitted values for a country code might be the ISO 2 character or 3 character country codes from a reference dataset. In this case the class would be the main, and only, class of the reference dataset."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Property Value Selector" ;
+  rdfs:subClassOf edg:CustomEnumerationViewpoint ;
+  rdfs:subClassOf edg:EnumerationViewpoint ;
+  rdfs:subClassOf edg:PermissibleValuesAsset ;
+  sh:property edg:PropertyValueSet-class ;
+  sh:property edg:PropertyValueSet-graph ;
+  sh:property edg:PropertyValueSet-property ;
+.
+edg:PropertyValueSet-class
+  a sh:PropertyShape ;
+  sh:path edg:class ;
+  rdfs:comment "Note that this constraint does not restrict sh:class because the values may live outside of the imports closure and therefore be untyped." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:description "points to the class on which a given property will be referenced" ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:nodeKind sh:IRI ;
+.
+edg:PropertyValueSet-graph
+  a sh:PropertyShape ;
+  sh:path edg:graph ;
+  rdfs:comment "Note that this constraint does not restrict sh:class because the values may live outside of the imports closure and therefore be untyped." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class owl:Ontology ;
+  sh:description "refers to the graph where the permissible values will be found." ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:nodeKind sh:IRI ;
+.
+edg:PropertyValueSet-property
+  a sh:PropertyShape ;
+  sh:path edg:property ;
+  rdfs:comment "Note that this constraint does not restrict sh:class because the values may live outside of the imports closure and therefore be untyped." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:description "specifies the property that will be used to obtain the values from the given class." ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:nodeKind sh:IRI ;
+.
+edg:ProtectionMethod
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  edg:acronym "PRTNMTHD" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Protection Method" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:Provenance
+  a edg:AspectClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Provenance" ;
+  rdfs:seeAlso edg:ProvenanceTimestamps ;
+  rdfs:subClassOf edg:Aspect ;
+  sh:property edg:Provenance-impact ;
+  sh:property edg:Provenance-originatedBy ;
+  sh:property edg:Provenance-source ;
+  sh:property edg:Provenance-wasDerivedFrom ;
+  sh:property edg:Provenance-wasInfluencedBy ;
+.
+edg:Provenance-impact
+  a sh:PropertyShape ;
+  sh:path edg:isProvenanceImpactGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:datatype xsd:boolean ;
+  sh:group edg:ImpactGroup ;
+  sh:name "is gadget" ;
+  sh:order "110"^^xsd:decimal ;
+.
+edg:Provenance-originatedBy
+  a sh:PropertyShape ;
+  sh:path edg:originatedBy ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class edg:Party ;
+  sh:description "traces an asset to the party that created it. A party can be an organization, a person, or a job title." ;
+  sh:group edg:ProvenanceGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:Provenance-source
+  a sh:PropertyShape ;
+  sh:path dcterms:source ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:description "A rich text field for documenting an authorative source" ;
+  sh:group edg:ProvenanceGroup ;
+  sh:or edg:LinkUnionList ;
+  sh:order "70"^^xsd:decimal ;
+.
+edg:Provenance-wasDerivedFrom
+  a sh:PropertyShape ;
+  sh:path prov:wasDerivedFrom ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class prov:Entity ;
+  sh:description "Depicta a dependency of an asset using the provenance ontology 'prov:wasDerviedFrom' property this property references subclasses of 'prov:Entity;." ;
+  sh:group edg:ProvenanceGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:Provenance-wasInfluencedBy
+  a sh:PropertyShape ;
+  sh:path prov:wasInfluencedBy ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:group edg:ProvenanceGroup ;
+  sh:order "60"^^xsd:decimal ;
+  sh:property [
+      sh:path prov:wasInfluencedBy ;
+      sh:or (
+          [
+            sh:datatype xsd:string ;
+          ]
+          [
+            sh:datatype rdf:HTML ;
+          ]
+          [
+            sh:datatype xsd:anyURI ;
+          ]
+        ) ;
+    ] ;
+.
+edg:ProvenanceGroup
+  a sh:PropertyGroup ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Provenance" ;
+  sh:closed true ;
+  sh:order "201"^^xsd:decimal ;
+.
+edg:ProvenanceTimestamps
+  a edg:AspectClass ;
+  rdfs:comment "'ProvenanceTimestamps' is an aspect class that gives asset classes a record of modification timestamps." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "Provenance Timestamps Aspect" ;
+  rdfs:seeAlso edg:Provenance ;
+  rdfs:subClassOf edg:Aspect ;
+  sh:property edg:ProvenanceTimestamps-lastImported ;
+  sh:property edg:ProvenanceTimestamps-lastModifiedByImport ;
+.
+edg:ProvenanceTimestamps-lastImported
+  a sh:PropertyShape ;
+  sh:path edg:lastImported ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:description "A timestamp for recording modifications made by imports" ;
+  sh:group edg:ProvenanceGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:ProvenanceTimestamps-lastModifiedByImport
+  a sh:PropertyShape ;
+  sh:path edg:lastModifedByImport ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:description "A timestamp for recording modifications that occurred as a result of imports" ;
+  sh:group edg:ProvenanceGroup ;
+  sh:order "12"^^xsd:decimal ;
+.
+edg:Publication
+  a edg:AssetClass ;
+  edg:acronym "PUB" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Publication" ;
+  rdfs:subClassOf edg:Document ;
+  rdfs:subClassOf edg:Governance ;
+.
+edg:QualityAssuranceAspect
+  a edg:AspectClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Quality Assurance Aspect" ;
+  rdfs:subClassOf edg:Aspect ;
+  sh:property edg:QualityAssuranceAspect_metricQuery ;
+  sh:property edg:QualityAssuranceAspect_qualityQuery ;
+.
+edg:QualityAssuranceAspect_metricQuery
+  a sh:PropertyShape ;
+  sh:path edg:metricQuery ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class sp:Query ;
+  sh:group edg:QualityAssurancePropertiesGroup ;
+  sh:order "25"^^xsd:decimal ;
+.
+edg:QualityAssuranceAspect_qualityQuery
+  a sh:PropertyShape ;
+  sh:path edg:qualityQuery ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class sp:Query ;
+  sh:group edg:QualityAssurancePropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:QualityAssurancePropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Quality Assurance Metadata" ;
+  sh:order "80"^^xsd:decimal ;
+.
+edg:Record
+  a edg:AssetClass ;
+  rdfs:comment "An information asset that" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Record" ;
+  rdfs:subClassOf edg:PhysicalDataAsset ;
+.
+edg:Report
+  a edg:AssetClass ;
+  rdfs:comment "A kind of document that is produced, or consumed, as an information asset." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Report" ;
+  rdfs:subClassOf edg:Document ;
+.
+edg:ReportType
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  edg:acronym "REPTYPE" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Report Type" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:RequirementStatus
+  a sh:NodeShape ;
+.
+edg:ResearchPaper
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Research Paper" ;
+  rdfs:subClassOf edg:Document ;
+.
+edg:ResourceLocalNameConstructMethod
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  edg:acronym "RLNC_METHOD" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Resource Local Name Construct Method" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:Resourceable
+  a edg:AspectClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Resourceable" ;
+  rdfs:subClassOf edg:Aspect ;
+.
+edg:Responsive
+  a edg:AspectClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Responsive" ;
+  rdfs:subClassOf edg:Aspect ;
+  sh:property edg:Responsive-generatesEvent ;
+  sh:property edg:Responsive-respondsToEvent ;
+.
+edg:Responsive-generatesEvent
+  a sh:PropertyShape ;
+  sh:path edg:generatesEvent ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class edg:Event ;
+.
+edg:Responsive-respondsToEvent
+  a sh:PropertyShape ;
+  sh:path edg:respondsToEvent ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class edg:Event ;
+.
+edg:Scale
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  dash:abstract true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Scale" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:Sociable
+  a edg:AspectClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Socialization" ;
+  rdfs:subClassOf edg:Aspect ;
+  sh:property edg:Sociable-collaborator ;
+  sh:property edg:Sociable-negativeSentimentCount ;
+  sh:property edg:Sociable-owner ;
+  sh:property edg:Sociable-positiveSentimentCount ;
+  sh:property edg:Sociable-usabilityRating ;
+  sh:property edg:Sociable-users ;
+.
+edg:Sociable-collaborator
+  a sh:PropertyShape ;
+  sh:path edg:collaborator ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class edg:Party ;
+  sh:group edg:SociablePropertiesGroup ;
+  sh:order "60"^^xsd:decimal ;
+.
+edg:Sociable-negativeSentimentCount
+  a sh:PropertyShape ;
+  sh:path edg:negativeSentimentCount ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:SociablePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:Sociable-owner
+  a sh:PropertyShape ;
+  sh:path edg:owner ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class edg:Party ;
+  sh:group edg:SociablePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Sociable-positiveSentimentCount
+  a sh:PropertyShape ;
+  sh:path edg:positiveSentimentCount ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:SociablePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:Sociable-usabilityRating
+  a sh:PropertyShape ;
+  sh:path edg:usabilityRating ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:datatype xsd:float ;
+  sh:group edg:SociablePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:Sociable-users
+  a sh:PropertyShape ;
+  sh:path edg:countOfUsers ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:group edg:SociablePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:SociablePropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Social Metadata" ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:SoftwareCapable
+  a edg:AspectClass ;
+  rdfs:comment "An aspect class that specifies properties pertinent to all software executables" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Software capable" ;
+  rdfs:subClassOf edg:Capable ;
+.
+edg:SoftwareModel
+  a edg:AssetClass ;
+  dash:abstract true ;
+  edg:acronym "SMODEL" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Software Model" ;
+  rdfs:subClassOf edg:Model ;
+.
+edg:SoftwareProgram-sourceLink
+  sh:path edg:sourceLink ;
+.
+edg:Specification
+  a edg:AssetClass ;
+  edg:acronym "SPEC" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Specification" ;
+  rdfs:subClassOf edg:Document ;
+.
+edg:Statistics
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "<em>Statistics</em> is an abstract class for statistics records" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Statistics" ;
+  rdfs:subClassOf owl:Thing ;
+  sh:property edg:Statistics-timestamp ;
+.
+edg:Statistics-timestamp
+  a sh:PropertyShape ;
+  sh:path edg:timestamp ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:datatype xsd:dateTime ;
+  sh:maxCount 1 ;
+.
+edg:StatusAspect
+  a edg:AspectClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Status Aspect" ;
+  rdfs:subClassOf edg:Aspect ;
+  sh:description "A shape for common properties for expressing the status of an asset." ;
+  sh:order "15"^^xsd:decimal ;
+  sh:property edg:StatusAspect-effectiveEndDate ;
+  sh:property edg:StatusAspect-effectiveStartDate ;
+  sh:property edg:StatusAspect-issue ;
+  sh:property edg:StatusAspect-status ;
+  sh:property edg:StatusAspect-supercededBy ;
+.
+edg:StatusAspect-created
+  sh:group edg:StatusAspectGroup ;
+  sh:order "90"^^xsd:decimal ;
+.
+edg:StatusAspect-effectiveEndDate
+  a sh:PropertyShape ;
+  sh:path edg:effectiveEndDate ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:datatype xsd:date ;
+  sh:group edg:StatusAspectGroup ;
+  sh:maxCount 1 ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:StatusAspect-effectiveStartDate
+  a sh:PropertyShape ;
+  sh:path edg:effectiveStartDate ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:datatype xsd:date ;
+  sh:group edg:StatusAspectGroup ;
+  sh:maxCount 1 ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:StatusAspect-issue
+  a sh:PropertyShape ;
+  sh:path edg:issue ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class edg:Issue ;
+  sh:group edg:StatusAspectGroup ;
+  sh:order "60"^^xsd:decimal ;
+.
+edg:StatusAspect-lastModified
+  sh:group edg:StatusAspectGroup ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:StatusAspect-status
+  a sh:PropertyShape ;
+  sh:path edg:status ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class edg:AssetStatus ;
+  sh:group edg:StatusAspectGroup ;
+  sh:maxCount 1 ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:StatusAspect-supercededBy
+  a sh:PropertyShape ;
+  sh:path edg:supercededBy ;
+  tosh:editWidget edg:SameTypeURIResourceEditor ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class edg:Asset ;
+  sh:group edg:StatusAspectGroup ;
+  sh:maxCount 1 ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:StatusAspect-version
+  sh:group edg:StatusAspectGroup ;
+  sh:order "70"^^xsd:decimal ;
+.
+edg:StatusAspect-versionNotes
+  sh:group edg:StatusAspectGroup ;
+  sh:order "80"^^xsd:decimal ;
+.
+edg:StatusAspectGroup
+  a sh:PropertyGroup ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Status" ;
+  sh:order "12"^^xsd:decimal ;
+.
+edg:StringOrHTMLunionShape
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "String or HTML union shape" ;
+  sh:or (
+      [
+        sh:datatype rdf:HTML ;
+      ]
+      [
+        sh:datatype xsd:string ;
+      ]
+    ) ;
+.
+edg:SubjectArea
+  a owl:Class ;
+  rdfs:comment "A 'Subject Area' is a named group that serves to encompass the high level data areas of a solution. One use of subject areas is for mapping data assets.  The terminology and definitions associated with a subject area should be understandable by the business. All asset collections are associated with either a business area or a subject area. The association of a subject area (or an asset collection) to a governance role is through the 'edg:requiredGovernanceRole' property. Objects of these triples are instances of 'edg:WorkflowParticipantProperty'. There is no direct connection between these roles and users or parties. It is \"inferred\" through a triple with a subject area/asset collection as a subject, workflow participant property as a predicate and a user or a party as an object."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Subject Area" ;
+  rdfs:subClassOf edg:Category ;
+.
+edg:TaxonomyNodeValueSet
+  a edg:AssetClass ;
+  edg:acronym "TNVS" ;
+  rdfs:comment "'Taxonomy Node Value Set' references values from a taxonomy in a given graph for the transitive leaf nodes of a given tree node. A typical use is to express permitted values on a data element. " ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Taxonomy Node Value" ;
+  rdfs:subClassOf edg:PermissibleValuesAsset ;
+  sh:property edg:TaxonomyNodeValueSet-graph ;
+  sh:property edg:TaxonomyNodeValueSet-node ;
+.
+edg:TaxonomyNodeValueSet-graph
+  a sh:PropertyShape ;
+  sh:path edg:graph ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:description "refers to the graph where the permissible values will be found." ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:nodeKind sh:IRI ;
+.
+edg:TaxonomyNodeValueSet-node
+  a sh:PropertyShape ;
+  sh:path edg:node ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class skos:Concept ;
+  sh:description "points to the node of a tree whose sub-node leaves will be used for values." ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:nodeKind sh:IRI ;
+.
+edg:TechnicalAsset
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Technical Asset" ;
+  rdfs:subClassOf edg:Asset ;
+  rdfs:subClassOf edg:Identifiable ;
+  rdfs:subClassOf edg:Narratable ;
+  rdfs:subClassOf edg:StatusAspect ;
+.
+edg:TechnicalViewpoint
+  a edg:ViewpointClass ;
+  a sh:NodeShape ;
+  dash:abstract true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Technical Asset Viewpoint" ;
+  rdfs:subClassOf edg:Viewpoint ;
+.
+edg:TextUnionList
+  a rdf:List ;
+  rdf:first [
+      sh:datatype rdf:HTML ;
+    ] ;
+  rdf:rest (
+      [
+        sh:datatype xsd:string ;
+      ]
+    ) ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Text union list" ;
+.
+edg:ThreeLevelRatingScale
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  edg:acronym "THREELRS" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Rating scale - three values" ;
+  rdfs:subClassOf edg:OrdinalScale ;
+.
+edg:Thrift
+  prov:wasInfluencedBy "http://hadoopecosystemtable.github.io/"^^xsd:anyURI ;
+.
+edg:Traceable
+  a edg:AspectClass ;
+  rdfs:comment "<strong>Traceable</strong> is a <em>Feature</em> class that holds properties that express a high-level notion of derivation." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Traceable" ;
+  rdfs:subClassOf edg:Aspect ;
+  sh:property edg:Traceable-derivedFrom ;
+  sh:property edg:Traceable-mapsToTerm ;
+.
+edg:Traceable-derivedFrom
+  a sh:PropertyShape ;
+  sh:path edg:derivedFrom ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:group edg:TraceableGroup ;
+.
+edg:Traceable-mapsToTerm
+  a sh:PropertyShape ;
+  sh:path edg:mapsToTerm ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class edg:GlossaryTerm ;
+  sh:description "Captures a mapping from an asset to a glossary term." ;
+  sh:group edg:TraceableGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Traceable-requirement
+  a sh:PropertyShape ;
+  sh:path edg:requirement ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:class edg:Requirement ;
+  sh:group edg:TraceableGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:TraceableGroup
+  a sh:PropertyGroup ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Traceability" ;
+  sh:description "The 'TraceabilityGroup', defined in the SHAPES-UI graph for requirements model, is used to organize properties such as links that are used for requirements and terms." ;
+  sh:order "300"^^xsd:decimal ;
+.
+edg:TypeConstruct
+  a owl:Class ;
+  rdfs:comment "A 'TypeConstruct' is intended for specifying datatypes such as 'Strings' and 'Integers' as objects as opposed to strings. An enumeraion is also considered to be a type construct." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Type" ;
+  rdfs:subClassOf edg:Construct ;
+.
+edg:UIproperty
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:label "UI property" ;
+  rdfs:subClassOf rdf:Property ;
+.
+edg:UIpropertyConstraint
+  a rdfs:Class ;
+  vaem:isElaboratedIn "http://edg.topbraid.solutions/1.0/schema/core"^^xsd:anyURI ;
+  rdfs:comment "The class of constraints that are about a given subject/predicate combination for UI use. These properties are not needed as schema but for controlling search."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "UI Property constraint" ;
+  rdfs:subClassOf sh:PropertyShape ;
+.
+edg:UNKNOWN
+  a edg:UNKNOWN-TYPE ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "UNKNOWN" ;
+.
+edg:UNKNOWN-DOWNSTREAM
+  a edg:UNKNOWN-TYPE ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Unknown Impact" ;
+.
+edg:UNKNOWN-TYPE
+  a edg:AssetClass ;
+  edg:acronym "UTYPE" ;
+  rdfs:comment "A diagram node that is generated when the type of some asset is not found in the EDG knowledge graph." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Unknown Type" ;
+  rdfs:subClassOf edg:Construct ;
+.
+edg:UNKNOWN-UPSTREAM
+  a edg:UNKNOWN-TYPE ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Unknown Lineage" ;
+.
+edg:Viewpoint
+  a edg:ViewpointClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Viewpoint" ;
+  rdfs:subClassOf edg:Aspect ;
+.
+edg:ViewpointClass
+  a rdfs:Class ;
+  rdfs:comment "\"ViewpointClass\" is a meta-class for classes that specify menu hierarchies in the UI. They are used to set \"teamwork:mainClass\" - the root class of a project type." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Viewpoint Class" ;
+  rdfs:subClassOf owl:Class ;
+  rdfs:subClassOf sh:NodeShape ;
+.
+edg:abbreviation
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "abbreviation" ;
+.
+edg:abstract
+  a owl:DatatypeProperty ;
+  rdfs:comment "Metadata for documents, reports, presentations, and other information assets to provide a rich text field for a synopsis." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "document abstract" ;
+  rdfs:range rdf:HTML ;
+.
+edg:accessControl
+  a rdf:Property ;
+  rdfs:comment "an access control specifies what can be done and by whom" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "access control" ;
+  rdfs:range rdf:HTML ;
+.
+edg:accessControlMethod
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "access control method" ;
+.
+edg:accessControlNotes
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "access control notes" ;
+.
+edg:accessControlPolicy
+  a rdf:Property ;
+  rdfs:comment "Specifies access control details" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "access control policy" ;
+.
+edg:acronym
+  a rdf:Property ;
+  rdfs:comment "A well-known abbreviation." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "acronym" ;
+.
+edg:aspectClass
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "aspectClass" ;
+  rdfs:range edg:Aspect ;
+.
+edg:assetType
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "asset type" ;
+.
+edg:associatedWith
+  a owl:ObjectProperty ;
+  rdfs:comment "'associated with' provides a way to make a semantic connection to either a resource in a graph or in some other external place such as a content management system." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "associated with" ;
+.
+edg:authenticationMethod
+  a rdf:Property ;
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "authentication method" ;
+.
+edg:authorizationMethod
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "authorization method" ;
+.
+edg:belongsTo
+  a owl:ObjectProperty ;
+  rdfs:comment "'belongs to' is a generic property used to express different semantics of 'ownership' depending on context of use." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "belongs to" ;
+.
+edg:belongsToAccessControlGroup
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "belongs to access control group" ;
+.
+edg:category
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "category" ;
+.
+edg:class
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "class" ;
+  rdfs:range rdfs:Resource ;
+.
+edg:codeValue
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "code value" ;
+.
+edg:collaborator
+  a rdf:Property ;
+  rdfs:comment "A party that is a collaborator" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "collaborator" ;
+.
+edg:collectionGuidance
+  a owl:DatatypeProperty ;
+  rdfs:comment "Collection guidance refers to recommended practices for the acquistion of content." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "collection guidance" ;
+  rdfs:subPropertyOf edg:guidance ;
+.
+edg:columnIndex
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "column index" ;
+  rdfs:range xsd:integer ;
+.
+edg:columnOf
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+.
+edg:compatibleWith
+  a owl:ObjectProperty ;
+  rdfs:comment "used to express a semantic closeness that is dependent on context of use. For example,  a vendor datatype may be compatible with another." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "compatible with" ;
+.
+edg:compositionProperty
+  a rdf:Property ;
+  rdfs:comment "abstract parent property for properties that make up compositions" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "composition property" ;
+.
+edg:comprisedOf
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "comprisedOf" ;
+.
+edg:confidential
+  a rdf:Property ;
+  rdfs:comment "A string value that is confirmation or ratification of the truth or validity of something. The value is constrained by the shape \"edg:AffirmationConstraint\" to values such as \"yes\" or \"no\", \"Y\"or \"N\", etc." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "confidential" ;
+.
+edg:confidentiality
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "confidentiality" ;
+.
+edg:contains
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "contains" ;
+.
+edg:continuation
+  a owl:ObjectProperty ;
+  rdfs:comment "Provides a means to specify a function for subsequent processing as used in 'Continuation Style Programming' (CPS)" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "continuation" ;
+.
+edg:countOfUsers
+  a owl:DatatypeProperty ;
+  rdfs:comment "number of users" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "count of users" ;
+.
+edg:country
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "country" ;
+.
+edg:created
+  a owl:DatatypeProperty ;
+  rdfs:comment "Specifies a date and time for when some subject of interest was created." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "created" ;
+  rdfs:range xsd:dateTime ;
+.
+edg:criticality
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "criticality" ;
+.
+edg:dataElementCriticality
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "data element criticality" ;
+.
+edg:dataQualityStatus
+  a owl:ObjectProperty ;
+  rdfs:comment "Specifies the data quality of the data instances associated with the asset." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "data quality status" ;
+  rdfs:range edg:DataQualityStatus ;
+.
+edg:dataSteward
+  rdfs:label "data steward" ;
+.
+edg:dataValueRule
+  a owl:ObjectProperty ;
+  rdfs:comment "connects an entity with a data value rule" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "data value rule" ;
+.
+edg:datatype
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "datatype" ;
+.
+edg:dependencyOf
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "dependency of" ;
+  rdfs:range edg:Event ;
+  owl:inverseOf edg:dependsOnDataFrom ;
+.
+edg:dependsOnDataFrom
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "depends on data from" ;
+.
+edg:derivedFrom
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "derived from" ;
+.
+edg:description
+  a owl:AnnotationProperty ;
+  rdfs:comment "A detailed description." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "description" ;
+.
+edg:documentLink
+  a owl:DatatypeProperty ;
+  rdfs:comment "A URL link to where a document can be found either in the enterprise or on the WEB." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "document link" ;
+  rdfs:subPropertyOf edg:link ;
+.
+edg:downloads
+  a owl:DatatypeProperty ;
+  rdfs:comment "number of downloads" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "downloads" ;
+.
+edg:editingProhibited
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "editing prohibited" ;
+  rdfs:range xsd:boolean ;
+.
+edg:effectiveEndDate
+  a owl:DatatypeProperty ;
+  rdfs:comment "Specifies a date after which some subject of interest is no longer applicable." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "effective end date" ;
+  rdfs:range xsd:date ;
+.
+edg:effectiveStartDate
+  a owl:DatatypeProperty ;
+  rdfs:comment "Specifies a date before which some subject of interest is no longer applicable." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "effective start date" ;
+  rdfs:range xsd:date ;
+.
+edg:enablesEnterpriseCapability
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:comment "A property that is used to expresses how an enterprise capability is supported by an asset or by a lineage model." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "enables enterprise capability" ;
+.
+edg:enablesSoftwareCapability
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "enables software capability" ;
+.
+edg:endDate
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "end date" ;
+  rdfs:range xsd:date ;
+.
+edg:environmentType
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "environment type" ;
+.
+edg:errorMsg
+  a owl:DatatypeProperty ;
+  rdfs:comment "An error message string affecting a resource." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "error" ;
+  rdfs:range xsd:string ;
+.
+edg:exchangeFrequency
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+.
+edg:forAssetCollection
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "for asset collection" ;
+.
+edg:forOrganization
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "for organization" ;
+.
+edg:forPolicy
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "for policy" ;
+.
+edg:format
+  a rdf:Property ;
+  rdfs:comment "Specifies the format of a file, or dataset, using an enumeration of values." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "format" ;
+.
+edg:formula
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "formula" ;
+.
+edg:frequencyOfChange
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "frequency of change" ;
+.
+edg:function
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "function" ;
+.
+edg:generatesEvent
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:range edg:Event ;
+.
+edg:goals
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "goals" ;
+  rdfs:range rdf:HTML ;
+.
+edg:graph
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "graph" ;
+  rdfs:range rdfs:Resource ;
+.
+edg:guidance
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "guidance" ;
+.
+edg:guidanceLink
+  a owl:DatatypeProperty ;
+  rdfs:comment "A URL link to guidance information either in the enterprise or on the WEB." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "guidance link" ;
+  rdfs:subPropertyOf edg:link ;
+.
+edg:hasPart
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "has part" ;
+  owl:inverseOf edg:partOf ;
+.
+edg:hideClass
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "hide class" ;
+  rdfs:range xsd:boolean ;
+.
+edg:hideSubClasses
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "hide sub-classes" ;
+  rdfs:range xsd:boolean ;
+.
+edg:id
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "id" ;
+.
+edg:identicationMethod
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "identication method" ;
+.
+edg:identifier
+  a owl:DatatypeProperty ;
+  rdfs:comment "A unique string that identifies the resource." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "identifier" ;
+.
+edg:informationType
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "information type" ;
+.
+edg:informationTypeKind
+  a rdf:Property ;
+  rdfs:comment "The 'information Type kind' is a reference to a category specifier for information assets.  Information types can be organized as a taxonomy. Examples of information types are: 'Aged Invoices Report', 'Non-Disclosure Agreement', and 'Active Product Evaluations List\"" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "information type kind" ;
+.
+edg:informativeReference
+  a owl:ObjectProperty ;
+  rdfs:comment "provides an association to a reference that provides information that informs the comprehension of the item of interest." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "informative reference" ;
+.
+edg:interestedParty
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "interested party" ;
+.
+edg:inverseLabel
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "inverse label" ;
+  rdfs:range xsd:string ;
+  skos:prefLabel "inverse label" ;
+.
+edg:isCritical
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "critical" ;
+.
+edg:isDepictionType
+  a rdf:Property ;
+  rdfs:comment "A property that is used in visualizations to control which class in an inheritance path is used to depict an instance. When a class has a subclass hierarchy, an instance of a lower subclass need not have its own depiction icon or graphic. A function is used to find the nearest parent class that carries a true value on this property." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "is depiction type" ;
+  rdfs:range xsd:boolean ;
+.
+edg:isEncrypted
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "is encrypted" ;
+.
+edg:isGadget
+  a edg:UIproperty ;
+  rdfs:comment "The parent property that is sub-propertied, as appropriate, to enable a gadget to appear as a (pseudo) property group in forms." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "is gadget" ;
+.
+edg:isPersonallyIdentifiableInformation
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "personally Identifiable Information (PII)" ;
+.
+edg:isProvenanceImpactGadget
+  a edg:UIproperty ;
+  rdfs:label "is provenance impact gadget" ;
+  rdfs:subPropertyOf edg:isGadget ;
+.
+edg:isSummaryGadget
+  a rdf:Property ;
+.
+edg:lastImported
+  a rdf:Property ;
+  rdfs:comment "Specifies a date and time for when a database was last imported. This is a date and time when import ran successfully even if there were no changes. The property 'lastModifiedByImport' records the date time when anything was last changed as a result of an import. " ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "last imported" ;
+  rdfs:range xsd:dateTime ;
+.
+edg:lastModifedByImport
+  a rdf:Property ;
+  rdfs:comment "Specifies a date and time for when a database was last changed by an import" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "last modified by import" ;
+  rdfs:range xsd:dateTime ;
+.
+edg:lastModified
+  a owl:DatatypeProperty ;
+  rdfs:comment "Specifies a date and time on when some subject of interest was last changed." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "last modified" ;
+  rdfs:range xsd:dateTime ;
+.
+edg:lastModifiedByImport
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "last modified by import" ;
+.
+edg:length
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "length" ;
+  skos:prefLabel "length" ;
+.
+edg:level
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "level" ;
+.
+edg:license
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "license" ;
+.
+edg:link
+  a owl:DatatypeProperty ;
+  rdfs:comment "A link to something either in the enterprise or on the WEB." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "link" ;
+.
+edg:locality
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "locality" ;
+.
+edg:locatedIn
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "located in" ;
+.
+edg:location
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "location" ;
+.
+edg:locationLink
+  a owl:DatatypeProperty ;
+  rdfs:comment "URL from where an asset can be accessed" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "location link" ;
+  rdfs:subPropertyOf edg:link ;
+.
+edg:locationNotes
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "location notes" ;
+.
+edg:mapsTo
+  a owl:ObjectProperty ;
+  rdfs:comment "A property that is the parent property for all 'mapsTo' references." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "maps to" ;
+  rdfs:subPropertyOf prov:wasDerivedFrom ;
+.
+edg:mapsToTerm
+  a owl:ObjectProperty ;
+  rdfs:comment "Used on assets to specify a reference to a glossary term." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "maps to term" ;
+  rdfs:subPropertyOf edg:mapsTo ;
+.
+edg:metricQuery
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:comment "Used to run a query for a metric" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "metric query" ;
+.
+edg:name
+  a owl:DatatypeProperty ;
+  rdfs:comment "A string property for holding a designator that may or may not be unique for the asset." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "asset name" ;
+  rdfs:range xsd:string ;
+.
+edg:negativeSentimentCount
+  a owl:DatatypeProperty ;
+  rdfs:comment "count of how many people expressed negative feedback on the dataset" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "negative votes" ;
+.
+edg:node
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "node" ;
+.
+edg:normativeReference
+  a owl:ObjectProperty ;
+  rdfs:comment "provides an association to a governing reference that stipulates the terms, conditions and other clauses that provide underlying justification and rationale." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "normative reference" ;
+.
+edg:notes
+  a owl:DatatypeProperty ;
+  rdfs:comment "Informal notes for the resource. For more formal notes consider using SKOS note properties." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "notes" ;
+.
+edg:occursIn
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "occurs in" ;
+.
+edg:order
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "order" ;
+  rdfs:range xsd:integer ;
+.
+edg:originatedBy
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "originated by"@en ;
+.
+edg:originatedByOrganization
+  a owl:ObjectProperty ;
+  rdfs:comment "refers to the orginization that created an entity" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "orginated by organization" ;
+  rdfs:range edg:Organization ;
+.
+edg:originationDate
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "origination date" ;
+.
+edg:ownedBy
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "owned by" ;
+.
+edg:owner
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "owner" ;
+.
+edg:partOf
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "part of" ;
+  owl:inverseOf edg:hasPart ;
+.
+edg:participant
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "participant"@en ;
+.
+edg:participatesIn
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "participates in" ;
+.
+edg:permissibleValues
+  a owl:ObjectProperty ;
+  rdfs:comment "Specifies where the values of a resource, such as a data element, can come from. This could be a reference data set, an enumeration or other set of values held in an ontology." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "permissible values" ;
+.
+edg:pertainsToParty
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "pertains to party" ;
+.
+edg:pertainsToProject
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "pertains to project" ;
+.
+edg:pertainsToRole
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "pertains to role" ;
+.
+edg:positiveSentimentCount
+  a rdf:Property ;
+  rdfs:comment "count of how many people expressed positive feedback on the dataset" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "positive votes" ;
+.
+edg:practice
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "practice" ;
+.
+edg:producesInformationAsset
+  a owl:ObjectProperty ;
+  rdfs:comment "Provides a link to express how the creation of an information asset is dependent on an asset" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "produces information asset" ;
+.
+edg:profileSampleCount
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "data profile sample count" ;
+  rdfs:range xsd:integer ;
+.
+edg:property
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "property" ;
+  rdfs:range rdfs:Resource ;
+.
+edg:purpose
+  a owl:DatatypeProperty ;
+  rdfs:comment "A text field for expressing the intent of an asset." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "purpose" ;
+.
+edg:qualityQuery
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:comment "Used to run a query for assessing quality" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "quality query" ;
+.
+edg:quantityKind
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "quantity kind" ;
+  skos:prefLabel "quantity kind" ;
+.
+edg:rationale
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "rationale" ;
+  rdfs:range rdf:HTML ;
+.
+edg:realizedAs
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "realized as" ;
+.
+edg:realizes
+  a owl:ObjectProperty ;
+  rdfs:comment "Specifies how a physical concept implements a logical concept." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "realizes" ;
+.
+edg:referenceLink
+  a owl:DatatypeProperty ;
+  rdfs:comment "A URL link to information either in the enterprise or on the WEB." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "reference link" ;
+  rdfs:range xsd:anyURI ;
+  rdfs:subPropertyOf edg:link ;
+.
+edg:region
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "region" ;
+.
+edg:replacedBy
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "replaced by" ;
+.
+edg:residesIn
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "resides in" ;
+.
+edg:resource
+  a owl:ObjectProperty ;
+  rdfs:comment "A reference to any type of resource in EDG" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "resource" ;
+.
+edg:resourceURIconstructorFunction
+  a rdf:Property ;
+  rdfs:comment "Can be used to provide a specific URI constructor function for a resource" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "resource URI Constructor Function" ;
+  rdfs:range spin:Function ;
+.
+edg:resourceUsedBy
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "resource used by" ;
+.
+edg:respondsToEvent
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:range edg:Event ;
+.
+edg:scope
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "scope" ;
+.
+edg:script
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "script" ;
+.
+edg:scriptContainer
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "script container" ;
+.
+edg:service
+  a owl:ObjectProperty ;
+  rdfs:comment "refers to an executable service for delivering a payload" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "service" ;
+.
+edg:shortDescription
+  a rdf:Property ;
+  rdfs:comment "A string property for holding a consise version of a description." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "short description" ;
+.
+edg:sourceLink
+  a owl:DatatypeProperty ;
+  rdfs:comment "A URL link to where the source of a software program can be found either in the enterprise or on the WEB." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "source link" ;
+  rdfs:subPropertyOf edg:link ;
+.
+edg:specifiedIn
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "specified in" ;
+.
+edg:startDate
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "start date" ;
+  rdfs:range xsd:date ;
+.
+edg:statistics
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "statistics" ;
+  skos:prefLabel "statistics" ;
+.
+edg:status
+  a owl:ObjectProperty ;
+  rdfs:comment "Specifies the staus of an asset using a controlled vocabulary of status values. The codelist for status is defined in the graph CODELIST_EDG-core-status-v1.o.ttl. For this to be in effect a project type needs to declare a teamworks:owlimports statement for the codelist." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "status" ;
+.
+edg:subDomainOf
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "sub-domain of" ;
+  rdfs:range edg:DataSubjectArea ;
+  owl:inverseOf edg:dependsOnDataFrom ;
+.
+edg:subPolicy
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "sub-policy" ;
+.
+edg:subProject
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "sub-project" ;
+.
+edg:subtitle
+  a rdf:Property ;
+  rdfs:comment "The sub-title of a document." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "sub-title" ;
+.
+edg:supercededBy
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:comment "Links a resource to a more current version of the resource. " ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "superceded by" ;
+.
+edg:supports
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "supports" ;
+.
+edg:supportsBusinessActivity
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "supports business activity" ;
+  rdfs:subPropertyOf edg:supports ;
+.
+edg:supportsBusinessCapability
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "supports business capability" ;
+  rdfs:subPropertyOf edg:supports ;
+.
+edg:supportsParty
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "supports party" ;
+.
+edg:suppress
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "suppress" ;
+  rdfs:range xsd:boolean ;
+.
+edg:symbolDesignator
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "symbol designator" ;
+.
+edg:tag
+  a owl:DatatypeProperty ;
+  rdfs:comment "One or more tags that categorize the resource." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "tag" ;
+  rdfs:range xsd:string ;
+.
+edg:timestamp
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "timestamp" ;
+  rdfs:range xsd:datetime ;
+.
+edg:title
+  a rdf:Property ;
+  rdfs:comment "The published name of a document." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "title" ;
+.
+edg:type
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "type" ;
+  rdfs:range xsd:string ;
+.
+edg:usabilityRating
+  a rdf:Property ;
+  rdfs:comment "a calculated rating of usability based on feedback" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "usability rating" ;
+.
+edg:usedBy
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "used by" ;
+.
+edg:usesJob
+  a owl:ObjectProperty ;
+  rdfs:comment "Associates a software asset type with a job that it needs to execute." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "uses job" ;
+.
+edg:usesPipeline
+  a owl:ObjectProperty ;
+  rdfs:comment "Associates a software asset with a pipeline of executing steps." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "uses pipeline" ;
+.
+edg:variable
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "variable" ;
+.
+edg:version
+  a rdf:Property ;
+  rdfs:comment "A datatype property for specifying the version of a resource" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "version" ;
+.
+edg:versionNotes
+  a owl:DatatypeProperty ;
+  rdfs:comment "A datatype property for notes on the version of a resource" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "version notes" ;
+.
+edg:workProduct
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "work product" ;
+.
+edg:year
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "year" ;
+.
+<http://edg.topbraid.solutions/schema/core/GMD_core>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2017-07-25"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:SchemaGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/schema/core> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource edg:Organization ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:usesNonImportedResource <http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+dcterms:description
+  a rdf:Property ;
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "description" ;
+  rdfs:range xsd:string ;
+.
+dcterms:source
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "source" ;
+  rdfs:range xsd:anyURI ;
+.
+<http://rdm.topbraidlive.org/rdmprojects#ReferenceDataset>
+  a edg:ModelClass ;
+  a rdfs:Class ;
+  a sh:NodeShape ;
+.
+arg:container
+  a rdf:Property ;
+  rdfs:comment "'container' is a generic property for building composite structures." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "container" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:sourceType
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "source type" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:targetType
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "target type" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://topbraid.org/rdmfact#FactsShape_fact>
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/core> ;
+  rdfs:isDefinedBy <http://topbraid.org/rdmfact#> ;
+  sh:deactivated true ;
+.
+swa:instancesHaveRandomURI
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:isDefinedBy <http://topbraid.org/swa> ;
+  rdfs:label "instances have random URI" ;
+  rdfs:range xsd:boolean ;
+.
+rdfs:isDefinedBy
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/core> ;
+  rdfs:isDefinedBy rdfs: ;
+  rdfs:label "is defined by" ;
+.
+rdfs:seeAlso
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/core> ;
+  rdfs:isDefinedBy rdfs: ;
+  rdfs:label "see also" ;
+.
+<http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing>
+  a owl:Class ;
+  rdfs:label "Spatial thing" ;
+  rdfs:subClassOf edg:Location ;
+.
+skos:altLabel
+  rdfs:comment "A string property for an alternate label for a resource." ;
+.
+prov:Agent
+  a rdfs:Class ;
+  rdfs:isDefinedBy <http://www.w3.org/ns/prov> ;
+  rdfs:label "Agent (prov)" ;
+  rdfs:subClassOf edg:EnterpriseCapable ;
+  rdfs:subClassOf edg:Interoperable ;
+.
+prov:generatedAtTime
+  a owl:DatatypeProperty ;
+  rdfs:comment "records the date and time that EDG acquired information." ;
+  rdfs:isDefinedBy prov: ;
+  rdfs:label "generated at time" ;
+  rdfs:range xsd:dateTime ;
+.
+prov:wasDerivedFrom
+  a rdf:Property ;
+  rdfs:label "was derived from" ;
+.
+prov:wasInfluencedBy
+  a rdf:Property ;
+  rdfs:isDefinedBy prov: ;
+  rdfs:label "was influenced by" ;
+.

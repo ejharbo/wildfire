@@ -1,0 +1,128 @@
+# baseURI: http://qudt.org/spin/unitconversion
+# imports: http://qudt.org/vocab/unit
+# imports: http://spinrdf.org/spl
+
+# c14n-version: 3
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix qudtspin: <http://qudt.org/spin/qudtspin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+qudtspin:Test-convert-1
+  rdf:type spl:TestCase ;
+  spl:testExpression [
+      rdf:type qudtspin:convert ;
+      sp:arg1 42 ;
+      sp:arg2 <http://qudt.org/vocab/unit#Centimeter> ;
+      sp:arg3 <http://qudt.org/vocab/unit#Meter> ;
+    ] ;
+  spl:testResult "0.42"^^xsd:double ;
+.
+qudtspin:convert
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "value"^^xsd:string ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "M1"^^xsd:string ;
+              ] ;
+            sp:predicate <http://qudt.org/schema/qudt#conversionMultiplier> ;
+            sp:subject spin:_arg2 ;
+          ]
+          [
+            sp:object [
+                sp:varName "O1"^^xsd:string ;
+              ] ;
+            sp:predicate <http://qudt.org/schema/qudt#conversionOffset> ;
+            sp:subject spin:_arg2 ;
+          ]
+          [
+            sp:object [
+                sp:varName "M2"^^xsd:string ;
+              ] ;
+            sp:predicate <http://qudt.org/schema/qudt#conversionMultiplier> ;
+            sp:subject spin:_arg3 ;
+          ]
+          [
+            sp:object [
+                sp:varName "O2"^^xsd:string ;
+              ] ;
+            sp:predicate <http://qudt.org/schema/qudt#conversionOffset> ;
+            sp:subject spin:_arg3 ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:divide ;
+                sp:arg1 [
+                    rdf:type sp:sub ;
+                    sp:arg1 [
+                        rdf:type sp:add ;
+                        sp:arg1 [
+                            rdf:type sp:mul ;
+                            sp:arg1 spin:_arg1 ;
+                            sp:arg2 [
+  sp:varName "M1"^^xsd:string ;
+] ;
+                          ] ;
+                        sp:arg2 [
+                            sp:varName "O1"^^xsd:string ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "O2"^^xsd:string ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "M2"^^xsd:string ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "value"^^xsd:string ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:double ;
+      rdfs:comment "The numerical value to convert."^^xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType <http://qudt.org/schema/qudt#Unit> ;
+      rdfs:comment "The original unit of measure."^^xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg3 ;
+      spl:valueType <http://qudt.org/schema/qudt#Unit> ;
+      rdfs:comment "The target unit of measure."^^xsd:string ;
+    ] ;
+  spin:returnType xsd:double ;
+  rdfs:comment "Converts a numerical value (a xsd:double specified in ?arg1) from one unit of measure (specified in ?arg2) to another (specified in ?arg3). The source and target units of measure must be comparable."^^xsd:string ;
+  rdfs:label "convert"^^xsd:string ;
+  rdfs:subClassOf spl:MathematicalFunctions ;
+.
+<http://qudt.org/spin/unitconversion>
+  rdf:type owl:Ontology ;
+  dc:creator "Holger Knublauch"^^xsd:string ;
+  dc:description "Defines SPIN function(s) to convert between units expressed in QUDT."^^xsd:string ;
+  vaem:dateCreated "2011-06-02"^^vaem:dateUnion ;
+  owl:imports <http://qudt.org/vocab/unit> ;
+  owl:imports <http://spinrdf.org/spl> ;
+  owl:versionInfo "1.1.0"^^xsd:string ;
+.

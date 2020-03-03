@@ -1,0 +1,2534 @@
+# baseURI: http://edg.topbraid.solutions/1.0/diagram/lg/lineagemodel
+# imports: http://debug.topbraidlive.org/1.0/swa
+# imports: http://edg.topbraid.solutions/1.0/diagram/lg/data-asset
+# imports: http://edg.topbraid.solutions/1.0/diagram/lg/glossary
+# imports: http://edg.topbraid.solutions/1.0/diagram/lg/library-common
+# imports: http://edg.topbraid.solutions/1.0/diagram/lg/pipeline
+# imports: http://edg.topbraid.solutions/1.0/diagram/lg/software
+# imports: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://edg.topbraid.solutions/1.0/schema/diagrams
+# imports: http://edg.topbraid.solutions/1.0/schema/lineage-models
+# imports: http://edg.topbraid.solutions/1.0/schema/technical-assets
+# imports: http://edg.topbraid.solutions/1.0/spin/jsfunctions
+# imports: http://edg.topbraid.solutions/1.0/spin/library
+# imports: http://spinrdf.org/spinx
+# imports: http://topbraid.org/swa
+# imports: http://topbraid.org/teamwork.ui
+
+@prefix acjob: <http://evn.topbraidlive.org/tagger/acjob#> .
+@prefix acpp: <http://topbraid.org/nlp/autoclassifier-preproc#> .
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix autotagger: <http://evn.topbraidlive.org/autotagger#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix conceptmatch: <http://topbraid.org/conceptmatch#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix config-importers: <http://edg.topbraidlive.org/config/importers#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix core-soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix corpus: <http://topbraid.org/corpus#> .
+@prefix corpusprojects: <http://topbraid.org/corpus-projects#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkapp: <http://topbraid.org/swa/crosswalkapp#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dashboard: <http://example.org/dashboard#> .
+@prefix datagraph: <http://teamwork.topbraidlive.org/datagraph/datagraphprojects#> .
+@prefix dataset: <http://teamwork.topbraidlive.org/dataset#> .
+@prefix datasetapp: <http://topbraid.org/swa/datasetapp#> .
+@prefix datasetviewer: <http://topbraid.org/swa/datasetviewer#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ddl: <http://edg.topbraidlive.org/1.0/importers/ddl#> .
+@prefix debug-swa: <http://debug.topbraidlive.org/1.0/swa/> .
+@prefix default: <http://uispin.org/default#> .
+@prefix defaultapp: <http://topbraid.org/swa/defaultapp#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix document: <http://topbraid.org/document#> .
+@prefix documents: <http://edg.topbraid.solutions/1.0/shapes/documents#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg-config: <http://edg.ext.topbraidlive.org/schema/config/importers#> .
+@prefix edg-importer: <http://edg.topbraidlive.org/importer/> .
+@prefix edg-qa: <http://edg.topbraidlive.org/utility/qa/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.global: <urn:x-evn-global:> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix edgproduct: <http://edg.topbraidlive.org/edgproduct#> .
+@prefix eeh-lib: <http://www.environmenthub.no/spin/1.0/eeh-lib#> .
+@prefix eeh-reportlib: <http://www.environmenthub.no/spin/1.0/eeh-reportlib#> .
+@prefix elements: <http://purl.org/dc/elements/1.1/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evn: <http://topbraid.org/evn/evn#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evnimport: <http://evn.topbraidlive.org/uispin/evnimport#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix ex: <http://example.org/> .
+@prefix extjs: <http://uispin.com/extjs#> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix forms: <http://www.topbraid.org/2007/01/forms.owl#> .
+@prefix frbr: <http://purl.org/vocab/frbr/core#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix governance: <http://topbraid.org/teamworkgovernance.ui#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix graphql.search: <http://teamwork.topbraidlive.org/graphql.search#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix inference: <http://www.topbraid.org/2007/06/inference.owl#> .
+@prefix jdbc: <http://edg.topbraidlive.org/1.0/importers/jdbc#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix kennedys: <http://topbraid.org/examples/kennedys#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix lib-importer: <http://edg.topbraid.solutions/importer/lib#> .
+@prefix lineage-transform: <http://edg.topbraid.solutions/transform/importer/lineage#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix o2o: <http://lib.topquadrant.com/owl/srg/o2o#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix ontologyviewer: <http://topbraid.org/swa/ontologyviewer#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix proxy-lineage: <http://edg.topbraid.solutions/proxy/importer/lineage#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmapp: <http://rdm.topbraidlive.org/rdmapp#> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix rdmviewer: <http://rdm.topbraidlive.org/rdmviewer#> .
+@prefix saf: <http://topbraid.org/saf/> .
+@prefix safconfig: <http://topbraid.org/safconfig/> .
+@prefix safindex: <http://topbraid.org/safindex#> .
+@prefix safm: <http://saf.topbraidlive.org/metaschema/> .
+@prefix savedQueries: <http://teamwork.topbraidlive.org/ui/savedQueries#> .
+@prefix scheduler: <http://topbraid.org/scheduler#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix server: <http://server.topbraidlive.org/server.ui#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix shapesgraph: <http://teamwork.topbraidlive.org/shapesgraph/shapesgraphprojects#> .
+@prefix sharepoint: <http://topbraid.org/sharepoint#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skosshapes: <http://topbraid.org/skos.shapes#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparql: <http://datashapes.org/sparql#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spin.ui: <http://spinrdf.org/spin.ui#> .
+@prefix spinmap: <http://spinrdf.org/spinmap#> .
+@prefix spinmapl: <http://topbraid.org/spin/spinmapl#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix ss: <http://www.topbraidcomposer.org/owl/2006/08/spreadsheets.owl#> .
+@prefix stats: <http://topbraid.org/statistics#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swadoc: <http://topbraid.org/swadoc#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tablesmap: <http://topbraid.org/spin/tablesmap#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix taggerspin: <http://evn.topbraidlive.org/taggerspin#> .
+@prefix taggerui: <http://evn.topbraidlive.org/taggerui#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix tblui: <http://server.topbraidlive.org/tblui#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkAdmin: <http://teamwork.topbraidlive.org/doc/teamworkAdmin#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworkconstraints: <http://topbraid.org/teamworkconstraints#> .
+@prefix teamworkdashboard: <http://topbraid.org/teamworkdashboard#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix teamworkupdate: <http://teamworkAPI.topbraid.com/teamworkUpdate#> .
+@prefix textindex: <http://topbraid.org/textindex#> .
+@prefix tika-importer: <http://teamwork.topbraidlive.org/corpus/tika-importer#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix tracker: <http://teamwork.topbraidlive.org/ui/tracker#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uitest: <http://uispin.org/test#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix userdat: <http://teamwork.topbraidlive.org/ui/userdata> .
+@prefix userdata: <http://teamwork.topbraidlive.org/ui/userdata#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix victory: <http://edg.topbraid.solutions/victory/> .
+@prefix visual: <http://topbraid.org/visual#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xhtml: <http://topbraid.org/xhtml#> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/diagram/lg/lineagemodel>
+  a owl:Ontology ;
+  owl:imports <http://debug.topbraidlive.org/1.0/swa> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/diagram/lg/data-asset> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/diagram/lg/glossary> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/diagram/lg/library-common> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/diagram/lg/pipeline> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/diagram/lg/software> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/diagrams> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/lineage-models> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/spin/jsfunctions> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/spin/library> ;
+  owl:imports <http://spinrdf.org/spinx> ;
+  owl:imports <http://topbraid.org/swa> ;
+  owl:imports <http://topbraid.org/teamwork.ui> ;
+  owl:versionInfo "Created with TBC" ;
+.
+edg:BuildJSONforBusinessActivityLineageGram
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:defaultValue 0 ;
+      spl:optional true ;
+      spl:predicate edg:offset ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:breadth ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:maxTierNodeCount ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:reach ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:focusNode ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:dataGraph=\"{= IRI(?graph) }\" let:lineageBreadth=\"{= COALESCE(?breadth, 10) }\" let:lineageReach=\"{= COALESCE(?reach, 1) }\" let:myFocusNode=\"{= IRI(spif:decodeURL(?focusNode)) }\" let:myMaxTierNodeCount=\"{= COALESCE(?maxTierNodeCount, 20) }\" let:myOffset=\"{= COALESCE(?offset, 0) }\">
+    <ui:try>
+        <ui:if ui:condition=\"{= !bound(?dataGraph) }\">
+            <ui:throw ui:message=\"No data graph provided\"/>
+        </ui:if>
+        <ui:if ui:condition=\"{= !bound(?myFocusNode) }\">
+            <ui:throw ui:message=\"No business activity specified\"/>
+        </ui:if>
+        <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?dataGraph) }\">
+            <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+                <!--ui:dumpScope ui:message=\"AAA1:edg:BuildJSONforBusinessActivityLineageGram\"/-->
+                <edg:MakeSingleViewFrameResourceOccurrence edg:activeResource=\"{= ?myFocusNode }\" edg:resource=\"{= ?myFocusNode }\" edg:viewFrame=\"{= edg:VF_TargetFrame }\"/>
+                <ui:call edg:resource=\"{= ?myFocusNode }\" ui:template=\"{= edg:GetEnterpriseObjectSoftwareDependencies }\" ui:varName=\"softwareDependencies\">
+                    <!--ui:dumpResultSet ui:message=\"AAA2:edg:BuildJSONforBusinessActivityLineageGram\"
+  ui:resultSet=\"{= ?softwareDependencies }\"/-->
+                    <ui:forEach ui:limit=\"{= ?lineageBreadth }\" ui:offset=\"{= ?myOffset }\" ui:resultSet=\"{= ?softwareDependencies }\">
+                        <edg:DetermineTransitiveUpstreamSoftwareExecutableDependencies arg:iteration=\"{= 2 }\" arg:traceabilityTemplate=\"{= edg:GetUpstreamDependencies }\" edg:activeResource=\"{= ?software }\" edg:breadth=\"{= ?lineageBreadth }\" edg:maxBreadth=\"{= ?lineageBreadth }\" edg:maxTierNodeCount=\"{= ?myMaxTierNodeCount }\" edg:offset=\"{= ?myOffset }\" edg:reach=\"{= ?lineageReach }\" edg:targetViewFrame=\"{= edg:VF_SoftwareFrame }\"/>
+                        <edg:MakeViewFrameResourceNodeAndLinks edg:dependencyType=\"{= ?dependencyType }\" edg:resource=\"{= ?software }\" edg:targetNode=\"{= ?myFocusNode }\" edg:targetViewFrame=\"{= edg:VF_TargetFrame }\" edg:viewFrame=\"{= edg:VF_SoftwareFrame }\"/>
+                    </ui:forEach>
+                    <edg:DetermineNeedForMoreFanInPlaceholderNode arg:dependencyTemplate=\"{= edg:GetEnterpriseObjectSoftwareDependencies }\" arg:resource=\"{= ?myFocusNode }\" edg:breadth=\"{= ?lineageBreadth }\" edg:offset=\"{= ?myOffset }\" edg:targetViewFrame=\"{= edg:VF_EnterpriseFrame }\" edg:viewFrame=\"{= edg:VF_SoftwareFrame }\"/>
+                </ui:call>
+                <ui:group>
+                    <!-- provision for future option flag - set to true for now -->
+                    <ui:if ui:condition=\"{= true }\">
+                        <edg:MakeResourceNodesAndLinksForNonGeneratedRequiredInformationAssets arg:resourceType=\"{= edg:BusinessActivity }\" edg:sourceViewFrame=\"{= edg:VF_TargeFrame }\" edg:targetViewFrame=\"{= edg:VF_InfoAssetsFrame }\"/>
+                    </ui:if>
+                    <ui:if ui:condition=\"{= false }\">
+                        <edg:MakeResourceNodesAndLinksForNonGeneratedRequiredInformationAssets arg:resourceType=\"{= edg:BusinessApplication }\" edg:sourceViewFrame=\"{= edg:VF_SoftwareFrame }\" edg:targetViewFrame=\"{= edg:VF_InfoAssetsFrame }\"/>
+                    </ui:if>
+                    <!--edg:MakeResourceNodesAndLinksForInputsOfFirstSoftwareExecutables/-->
+                </ui:group>
+                <ui:group>
+                    <ui:if ui:condition=\"{= true }\">
+                        <ui:call arg:resource=\"{= ?myFocusNode }\" ui:template=\"{= edg:GetEnterpriseWorkProducts }\" ui:varName=\"outputs\">
+                            <!--ui:dumpResultSet ui:message=\"AAA3: edg:BuildJSONforBusinessActivityLineageGram - {= ?myFocusNode }\"
+  ui:resultSet=\"{= ?outputs }\"/-->
+                            <edg:MakeLineageGramNodeAndLinksForInformationAssets arg:resource=\"{= ?myFocusNode }\" arg:resultSet=\"{= ?outputs }\" edg:sourceViewFrame=\"{= edg:VF_TargetFrame }\" edg:targetViewFrame=\"{= edg:VF_InfoAssetsFrame }\"/>
+                        </ui:call>
+                    </ui:if>
+                </ui:group>
+                <!-- Show Business Areas -->
+                <ui:if ui:condition=\"{= true }\">
+                    <edg:BuildSourceNodesForPropertyAndResource arg:property=\"{= edg:activity }\" arg:resource=\"{= ?myFocusNode }\" arg:reverseNodes=\"{= false }\" edg:breadth=\"{= ?lineageBreadth }\" edg:explanation=\"BuildJSONforBusinessActivityLineageGram\" edg:offset=\"{= ?myOffset }\" edg:targetViewFrame=\"{= edg:VF_EnterpriseFrame }\"/>
+                </ui:if>
+                <!-- Show Processes Used -->
+                <ui:if ui:condition=\"{= true }\">
+                    <edg:BuildTargetNodesForGivenProperty arg:property=\"{= edg:usesProcess }\" arg:resource=\"{= ?myFocusNode }\" arg:reverseNodes=\"{= false }\" edg:breadth=\"{= ?lineageBreadth }\" edg:offset=\"{= ?myOffset }\" edg:sourceViewFrame=\"{= edg:VF_TargetFrame }\"/>
+                </ui:if>
+                <edg:GenerateJSONforLineageGram arg:diagramType=\"{= edg:DIAGTYPE_UPSTREAM-DEPENDENCYGRAM }\" edg:resource=\"{= ?myFocusNode }\"/>
+            </ui:setContext>
+        </ui:setContext>
+        <edg:DumpTempGraphForLineageGram/>
+    </ui:try>
+    <ui:catch>
+        <swon:Object>
+            <swon:Value arg:name=\"exception\" arg:value=\"{= ?exception }\"/>
+        </swon:Object>
+    </ui:catch>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:label "Build JSON for business activity lineagegram" ;
+  rdfs:subClassOf edg:LineageGramServices ;
+.
+edg:BuildJSONforBusinessApplicationLineageGram
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:maxTierNodeCount ;
+      spl:valueType xsd:integer ;
+    ] ;
+.
+edg:BuildJSONforBusinessAreaActivityTargets
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:actionScript ;
+      spl:valueType ui:NodeClass ;
+      rdfs:comment "An optional SWP component that is called for each target." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:breadth ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:offset ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:sourceViewFrame ;
+      spl:valueType edg:ViewFrame ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:targetViewFrame ;
+      spl:valueType edg:ViewFrame ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:property ;
+      spl:valueType rdf:Property ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:reverseNodes ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:source ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:target ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group let:mySourceViewFrame=\"{= COALESCE(?sourceViewFrame, edg:VF_EnterpriseFrame) }\" let:myTargetViewFrame=\"{= COALESCE(?targetViewFrame, edg:VF_EnterpriseFrame) }\">
+    <!--ui:dumpScope ui:message=\"AAA1: edg:BuildJSONforBusinessAreaActivityTargets\"/-->
+    <!-- Show Processes Used -->
+    <ui:if ui:condition=\"{= true }\">
+        <edg:BuildTargetNodesForGivenProperty arg:actionScript=\"{= edg:BuildJSONforProcessDependencies }\" arg:property=\"{= edg:usesProcess }\" arg:resource=\"{= ?target }\" arg:reverseNodes=\"{= true }\" edg:breadth=\"{= ?breadth }\" edg:offset=\"{= ?offset }\" edg:sourceViewFrame=\"{= ?mySourceViewFrame }\"/>
+        <edg:BuildSourceNodesForPropertyAndResource arg:property=\"{= edg:supports }\" arg:resource=\"{= ?target }\" arg:reverseNodes=\"{= true }\" edg:breadth=\"{= ?breadth }\" edg:offset=\"{= ?offset }\" edg:sourceViewFrame=\"{= ?mySourceViewFrame }\" edg:targetViewFrame=\"{= ?myTargetViewFrame }\"/>
+    </ui:if>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment "Creates nodes and links for the targets of a resource and property." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/diagram/lg/library-common> ;
+  rdfs:label "Build JSON for business area activity targets" ;
+  rdfs:subClassOf edg:LineageGramServices ;
+.
+edg:BuildJSONforBusinessAreaLineageGram
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:defaultValue 0 ;
+      spl:optional true ;
+      spl:predicate edg:offset ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:breadth ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:reach ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:focusNode ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:dataGraph=\"{= IRI(?graph) }\" let:lineageBreadth=\"{= COALESCE(?breadth, 10) }\" let:lineageReach=\"{= COALESCE(?reach, 10) }\" let:myFocusNode=\"{= IRI(spif:decodeURL(?focusNode)) }\" let:myOffset=\"{= COALESCE(?offset, 0) }\">
+    <ui:try>
+        <!--ui:dumpScope ui:message=\"AAA1: edg:BuildJSONforBusinessAreaLineageGram\"/-->
+        <ui:if ui:condition=\"{= !bound(?dataGraph) }\">
+            <ui:throw ui:message=\"No data graph provided\"/>
+        </ui:if>
+        <ui:if ui:condition=\"{= !bound(?myFocusNode) }\">
+            <ui:throw ui:message=\"No business area specified\"/>
+        </ui:if>
+        <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?dataGraph) }\">
+            <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+                <edg:MakeSingleViewFrameResourceOccurrence edg:activeResource=\"{= ?myFocusNode }\" edg:resource=\"{= ?myFocusNode }\" edg:viewFrame=\"{= edg:VF_EnterpriseFrame }\"/>
+                <!-- Show business activities -->
+                <ui:if ui:condition=\"{= true }\">
+                    <edg:BuildTargetNodesForGivenProperty arg:actionScript=\"{= edg:BuildJSONforBusinessAreaActivityTargets }\" arg:property=\"{= edg:activity }\" arg:resource=\"{= ?myFocusNode }\" arg:reverseNodes=\"{= true }\" edg:breadth=\"{= ?lineageBreadth }\" edg:offset=\"{= ?myOffset }\" edg:sourceViewFrame=\"{= edg:VF_EnterpriseFrame }\"/>
+                </ui:if>
+                <!-- Show Stewards -->
+                <ui:if ui:condition=\"{= false }\">
+                    <edg:BuildTargetNodesForGivenProperty arg:property=\"{= edg:usesProcess }\" arg:resource=\"{= ?myFocusNode }\" arg:reverseNodes=\"{= false }\" edg:breadth=\"{= ?lineageBreadth }\" edg:offset=\"{= ?myOffset }\" edg:sourceViewFrame=\"{= edg:VF_EnterpriseFrame }\"/>
+                </ui:if>
+                <edg:GenerateJSONforLineageGram arg:diagramType=\"{= edg:DIAGTYPE_UPSTREAM-DEPENDENCYGRAM }\" edg:resource=\"{= ?myFocusNode }\"/>
+            </ui:setContext>
+        </ui:setContext>
+        <edg:DumpTempGraphForLineageGram/>
+    </ui:try>
+    <ui:catch>
+        <swon:Object>
+            <swon:Value arg:name=\"exception\" arg:value=\"{= ?exception }\"/>
+        </swon:Object>
+    </ui:catch>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:label "Build JSON for business area lineagegram" ;
+  rdfs:subClassOf edg:LineageGramServices ;
+.
+edg:BuildJSONforBusinessFunctionNode
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:parent ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:node ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:private true ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:ultimateParent=\"{= ?parent }\">
+    <edg:BuildJSONforLineageGramNode arg:collapsed=\"{= true }\" arg:label=\"{= ui:label(?node) }\" arg:node=\"{= ?node }\" arg:parent=\"{= ?ultimateParent }\"/>
+    <ui:call arg:class=\"{= edg:BusinessFunction }\" arg:property=\"{= edg:businessSubFunction }\" arg:resource=\"{= ?node }\" ui:template=\"{= edg:getPropertyValuesForResource }\" ui:varName=\"subfunctions\">
+        <ui:if ui:condition=\"{= !spr:isEmpty(?subfunctions) }\">
+            <ui:group let:subfunctionsId=\"SUBS_{= ui:uniqueId() }\">
+                <edg:BuildJSONforLineageGramNode arg:collapsed=\"{= true }\" arg:icon=\"fa fa-table\" arg:label=\"Sub-functions\" arg:node=\"{= ?subfunctionsId }\" arg:parent=\"{= ?node }\"/>
+                <ui:forEach ui:resultSet=\"{= ?subfunctions }\">
+                    <edg:BuildJSONforLineageGramNode arg:label=\"{= ?label }\" arg:node=\"{= ?value }\" arg:parent=\"{= ?subfunctionsId }\"/>
+                </ui:forEach>
+            </ui:group>
+        </ui:if>
+    </ui:call>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/diagram/lg/software> ;
+  rdfs:label "Build JSON for business function node" ;
+  rdfs:subClassOf edg:DerivationMapServicesForCompositeNodes ;
+.
+edg:BuildJSONforLineageGramStub
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:defaultValue 0 ;
+      spl:optional true ;
+      spl:predicate edg:offset ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:breadth ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:reach ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:focusNode ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:dataGraph=\"{= IRI(?graph) }\" let:lineageBreadth=\"{= COALESCE(?breadth, 10) }\" let:lineageReach=\"{= COALESCE(?reach, 1) }\" let:myFocusNode=\"{= IRI(spif:decodeURL(?focusNode)) }\" let:myOffset=\"{= COALESCE(?offset, 0) }\">
+    <ui:try>
+        <ui:if ui:condition=\"{= !bound(?dataGraph) }\">
+            <ui:throw ui:message=\"No data graph provided\"/>
+        </ui:if>
+        <ui:if ui:condition=\"{= !bound(?myFocusNode) }\">
+            <ui:throw ui:message=\"No business activity specified\"/>
+        </ui:if>
+        <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?dataGraph) }\">
+            <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+                <edg:MakeSingleViewFrameResourceOccurrence edg:activeResource=\"{= ?myFocusNode }\" edg:resource=\"{= ?myFocusNode }\" edg:viewFrame=\"{= edg:VF_EnterpriseFrame }\"/>
+                <edg:GenerateJSONforLineageGram arg:diagramType=\"{= edg:DIAGTYPE_UPSTREAM-DEPENDENCYGRAM }\" edg:resource=\"{= ?myFocusNode }\"/>
+            </ui:setContext>
+        </ui:setContext>
+        <edg:DumpTempGraphForLineageGram/>
+    </ui:try>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:label "Build JSON for lineagegram stub" ;
+  rdfs:seeAlso edg:BuildJSONforBusinessActivityLineageGram ;
+  rdfs:subClassOf edg:LineageGramServices ;
+.
+edg:BuildJSONforLineageModelLineageGram
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:breadth ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:maxTierNodeCount ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:offset ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:reach ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:focusNode ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:private true ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:dataGraph=\"{= IRI(?graph) }\" let:myBreadth=\"{= COALESCE(?breadth, 10) }\" let:myFocusNode=\"{= IRI(spif:decodeURL(?focusNode)) }\" let:myMaxTierNodeCount=\"{= COALESCE(?maxTierNodeCount, 20) }\" let:myOffset=\"{= COALESCE(?offset, 0) }\" let:myReach=\"{= COALESCE(?reach, 10) }\">
+    <ui:try>
+        <ui:if ui:condition=\"{= !bound(?dataGraph) }\">
+            <ui:throw ui:message=\"No data graph provided\"/>
+        </ui:if>
+        <ui:if ui:condition=\"{= !bound(?myFocusNode) }\">
+            <ui:throw ui:message=\"No lineage model specified\"/>
+        </ui:if>
+        <!--ui:dumpScope ui:message=\"AAA1: edg:BuildJSONforLineageModelLineageGram\"/-->
+        <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?dataGraph) }\">
+            <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+                <ui:group let:depictedResource=\"{= edg:highestDepictionForSoftwareExecutable(?myFocusNode) }\">
+                    <!--ui:dumpScope ui:message=\"AAA2: edg:BuildJSONforLineageModelLineageGram\"/-->
+                    <edg:MakeSingleViewFrameResourceOccurrence edg:activeResource=\"{= ?myFocusNode }\" edg:explanation=\"Depicted resource {= ?depictedResource } for focus node {= ?myFocusNode }\" edg:resource=\"{= ?depictedResource }\" edg:viewFrame=\"{= edg:VF_TargetFrame }\"/>
+                    <ui:if ui:condition=\"{= true }\">
+                        <edg:DetermineTransitiveUpstreamSoftwareExecutableDependencies arg:iteration=\"{= 1 }\" arg:traceabilityTemplate=\"{= edg:GetUpstreamDependencies }\" edg:activeResource=\"{= ?myFocusNode }\" edg:breadth=\"{= ?myBreadth }\" edg:maxBreadth=\"{= ?myBreadth }\" edg:maxTierNodeCount=\"{= ?myMaxTierNodeCount }\" edg:offset=\"{= ?myOffset }\" edg:reach=\"{= ?myReach }\" edg:targetViewFrame=\"{= edg:VF_TargetFrame }\"/>
+                        <ui:if ui:condition=\"{= true }\">
+                            <ui:call arg:resource=\"{= ?myFocusNode }\" ui:template=\"{= edg:GetLineageModelSoftwareExecutablesOutputs }\" ui:varName=\"finalStageSoftwareAndDataAssets\">
+                                <!--ui:dumpResultSet ui:message=\"AAA2: edg:BuildJSONforLineageModelLineageGram\"
+  ui:resultSet=\"{= ?finalStageSoftwareAndDataAssets }\"/-->
+                                <edg:MakeLineageGramNodeAndLinksForLastSoftwareExecutables arg:focusNode=\"{= ?depictedResource }\" arg:resultSet=\"{= ?finalStageSoftwareAndDataAssets }\" edg:sourceViewFrame=\"{= edg:VF_TargetFrame }\"/>
+                            </ui:call>
+                        </ui:if>
+                    </ui:if>
+                    <ui:if ui:condition=\"{= true }\">
+                        <edg:MakeResourceNodesAndLinksForFirstStageSoftwareExecutableInputs arg:focusNode=\"{= ?myFocusNode }\" edg:breadth=\"{= ?myBreadth }\" edg:maxTierNodeCount=\"{= ?myMaxTierNodeCount }\" edg:offset=\"{= ?myOffset }\" edg:reach=\"{= ?myReach }\" edg:viewFrameStructure=\"{= edg:VFS_LG-ProvenanceModel }\"/>
+                    </ui:if>
+                    <ui:if ui:condition=\"{= true }\">
+                        <ui:call arg:software=\"{= ?myFocusNode }\" ui:template=\"{= edg:GetSoftwareExecutableEnterpriseWorkProductOutputs }\" ui:varName=\"outputs\">
+                            <!--ui:dumpResultSet ui:message=\"AAA3: edg:BuildJSONforLineageModelLineageGram }\"
+  ui:resultSet=\"{= ?outputs }\"/-->
+                            <edg:MakeLineageGramNodeAndLinksForInformationAssets arg:resource=\"{= ?depictedResource }\" arg:resultSet=\"{= ?outputs }\" edg:activeResource=\"{= ?myFocusNode }\" edg:sourceViewFrame=\"{= edg:VF_TargetFrame }\" edg:targetViewFrame=\"{= edg:VF_InfoAssetsFrame }\"/>
+                        </ui:call>
+                    </ui:if>
+                    <ui:if ui:condition=\"{= true }\">
+                        <edg:BuildSoftwareExecutableEnablements arg:resource=\"{= ?depictedResource }\" arg:reverseNodes=\"{= true }\" edg:activeResource=\"{= ?myFocusNode }\" edg:breadth=\"{= ?lineageBreadth }\" edg:offset=\"{= ?myOffset }\" edg:sourceViewFrame=\"{= edg:VF_TargetFrame }\"/>
+                    </ui:if>
+                    <edg:GenerateJSONforLineageGram arg:diagramType=\"{= edg:DIAGTYPE_UPSTREAM-LINEAGEGRAM }\" arg:focusNode=\"{= ?depictedResource }\" edg:activeResource=\"{= ?myFocusNode }\" edg:resource=\"{= ?depictedResource }\"/>
+                </ui:group>
+            </ui:setContext>
+        </ui:setContext>
+        <edg:DumpTempGraphForLineageGram/>
+    </ui:try>
+    <ui:catch>
+        <swon:Object>
+            <swon:Value arg:name=\"exception\" arg:value=\"{= ?exception }\"/>
+        </swon:Object>
+    </ui:catch>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:label "Build JSON for lineage model lineagegram" ;
+  rdfs:subClassOf edg:LineageGramServices ;
+.
+edg:BuildJSONforProcessDependencies
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:actionScript ;
+      spl:valueType ui:NodeClass ;
+      rdfs:comment "An optional SWP component that is called for each target." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:breadth ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:offset ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:sourceViewFrame ;
+      spl:valueType edg:ViewFrame ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:targetViewFrame ;
+      spl:valueType edg:ViewFrame ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:property ;
+      spl:valueType rdf:Property ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:reverseNodes ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:source ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:target ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <!--ui:dumpScope ui:message=\"AAA1: edg:BuildJSONforProcessDependencies\"/-->
+    <!-- Show Processes Used -->
+    <ui:if ui:condition=\"{= true }\">
+        <ui:call edg:compositionProperty=\"{= edg:activity }\" edg:resource=\"{= ?target }\" ui:template=\"{= edg:GetEnterpriseObjectSoftwareDependencies }\" ui:varName=\"softwareDependencies\">
+            <!--ui:dumpResultSet ui:message=\"AAA1:edg:BuildJSONforProcessDependencies\"
+  ui:resultSet=\"{= ?softwareDependencies }\"/-->
+            <ui:forEach ui:limit=\"{= ?lineageBreadth }\" ui:offset=\"{= ?offset }\" ui:resultSet=\"{= ?softwareDependencies }\">
+                <edg:MakeViewFrameResourceNodeAndLinks edg:dependencyType=\"{= ?dependencyType }\" edg:explanation=\"created by edg:BuildJSONforProcessDependencies\" edg:resource=\"{= edg:highestDepictionForSoftwareExecutable(?software) }\" edg:targetNode=\"{= ?target }\" edg:targetViewFrame=\"{= edg:VF_EnterpriseFrame }\" edg:viewFrame=\"{= edg:VF_SoftwareFrame }\"/>
+            </ui:forEach>
+            <edg:DetermineNeedForMoreFanInPlaceholderNode arg:dependencyTemplate=\"{= edg:GetEnterpriseObjectSoftwareDependencies }\" arg:resource=\"{= ?target }\" edg:breadth=\"{= ?breadth }\" edg:offset=\"{= ?offset }\" edg:targetViewFrame=\"{= edg:VF_EnterpriseFrame }\" edg:viewFrame=\"{= edg:VF_EnterpriseFrame }\"/>
+        </ui:call>
+    </ui:if>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment "Creates nodes and links for the information-based depedencies of a process." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/diagram/lg/library-common> ;
+  rdfs:label "Build JSON for process dependencies" ;
+  rdfs:subClassOf edg:LineageGramServices ;
+.
+edg:BuildJSONforProcessLineageGram
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:defaultValue 0 ;
+      spl:optional true ;
+      spl:predicate edg:offset ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:breadth ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:maxTierNodeCount ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:reach ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:focusNode ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:dataGraph=\"{= IRI(?graph) }\" let:lineageBreadth=\"{= COALESCE(?breadth, 10) }\" let:lineageReach=\"{= COALESCE(?reach, 10) }\" let:myFocusNode=\"{= IRI(spif:decodeURL(?focusNode)) }\" let:myMaxTierNodeCount=\"{= COALESCE(?maxTierNodeCount, 20) }\" let:myOffset=\"{= COALESCE(?offset, 0) }\">
+    <ui:try>
+        <ui:if ui:condition=\"{= !bound(?dataGraph) }\">
+            <ui:throw ui:message=\"No data graph provided\"/>
+        </ui:if>
+        <ui:if ui:condition=\"{= !bound(?myFocusNode) }\">
+            <ui:throw ui:message=\"No process specified\"/>
+        </ui:if>
+        <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?dataGraph) }\">
+            <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+                <!--ui:dumpScope ui:message=\"AAA1:edg:BuildJSONforProcessLineageGram\"/-->
+                <edg:MakeSingleViewFrameResourceOccurrence edg:activeResource=\"{= ?myFocusNode }\" edg:resource=\"{= ?myFocusNode }\" edg:viewFrame=\"{= edg:VF_TargetFrame }\"/>
+                <ui:call edg:resource=\"{= ?myFocusNode }\" ui:template=\"{= edg:GetEnterpriseObjectSoftwareDependencies }\" ui:varName=\"softwareDependencies\">
+                    <!--ui:dumpResultSet ui:message=\"AAA2:edg:BuildJSONforProcessLineageGram\"
+  ui:resultSet=\"{= ?softwareDependencies }\"/-->
+                    <ui:forEach ui:limit=\"{= ?lineageBreadth }\" ui:offset=\"{= ?myOffset }\" ui:resultSet=\"{= ?softwareDependencies }\">
+                        <edg:DetermineTransitiveUpstreamSoftwareExecutableDependencies arg:iteration=\"{= 1 }\" arg:traceabilityTemplate=\"{= edg:GetUpstreamDependencies }\" edg:activeResource=\"{= ?software }\" edg:breadth=\"{= ?lineageBreadth }\" edg:maxBreadth=\"{= ?lineageBreadth }\" edg:maxTierNodeCount=\"{= ?myMaxTierNodeCount }\" edg:offset=\"{= ?myOffset }\" edg:reach=\"{= ?lineageReach }\"/>
+                        <edg:MakeViewFrameResourceNodeAndLinks edg:dependencyType=\"{= ?dependencyType }\" edg:resource=\"{= ?myFocusNode }\" edg:targetNode=\"{= ?myFocusNode }\" edg:targetViewFrame=\"{= edg:VF_EnterpriseFrame }\" edg:viewFrame=\"{= edg:VF_TargetFrame }\"/>
+                    </ui:forEach>
+                    <edg:DetermineNeedForMoreFanInPlaceholderNode arg:dependencyTemplate=\"{= edg:GetEnterpriseObjectSoftwareDependencies }\" arg:resource=\"{= ?myFocusNode }\" edg:breadth=\"{= ?lineageBreadth }\" edg:offset=\"{= ?myOffset }\" edg:targetViewFrame=\"{= edg:VF_EnterpriseFrame }\" edg:viewFrame=\"{= edg:VF_EnterpriseFrame }\"/>
+                </ui:call>
+                <ui:group>
+                    <ui:if ui:condition=\"{= true }\">
+                        <edg:MakeResourceNodesAndLinksForNonGeneratedRequiredInformationAssets arg:resourceType=\"{= edg:Process }\" edg:sourceViewFrame=\"{= edg:VF_TargetFrame }\" edg:targetViewFrame=\"{= edg:VF_InfoAssetsFrame }\"/>
+                    </ui:if>
+                    <ui:if ui:condition=\"{= true }\">
+                        <edg:MakeResourceNodesAndLinksForNonGeneratedRequiredInformationAssets arg:resourceType=\"{= edg:BusinessApplication }\" edg:sourceViewFrame=\"{= edg:VF_SoftwareFrame }\" edg:targetViewFrame=\"{= edg:VF_InfoAssetsFrame }\"/>
+                    </ui:if>
+                </ui:group>
+                <ui:group>
+                    <ui:if ui:condition=\"{= true }\">
+                        <ui:call arg:resource=\"{= ?myFocusNode }\" ui:template=\"{= edg:GetEnterpriseWorkProducts }\" ui:varName=\"outputs\">
+                            <!--ui:dumpResultSet ui:message=\"AAA2: edg:BuildJSONforProcessLineageGram - {= ?myFocusNode }\"
+  ui:resultSet=\"{= ?outputs }\"/-->
+                            <edg:MakeLineageGramNodeAndLinksForInformationAssets arg:resource=\"{= ?myFocusNode }\" arg:resultSet=\"{= ?outputs }\" edg:sourceViewFrame=\"{= edg:VF_TargetFrame }\" edg:targetViewFrame=\"{= edg:VF_InfoAssetsFrame }\"/>
+                        </ui:call>
+                    </ui:if>
+                </ui:group>
+                <ui:if ui:condition=\"{= true }\">
+                    <edg:BuildTargetNodesForGivenProperty arg:property=\"{= edg:activity }\" arg:resource=\"{= ?myFocusNode }\" arg:reverseNodes=\"{= true }\" edg:breadth=\"{= ?lineageBreadth }\" edg:offset=\"{= ?myOffset }\" edg:sourceViewFrame=\"{= edg:VF_TargetFrame }\"/>
+                </ui:if>
+            </ui:setContext>
+        </ui:setContext>
+        <edg:GenerateJSONforLineageGram arg:diagramType=\"{= edg:DIAGTYPE_UPSTREAM-LINEAGEGRAM }\" arg:focusNode=\"{= ?myFocusNode }\" edg:activeResource=\"{= ?myFocusNode }\" edg:resource=\"{= ?myFocusNode }\"/>
+        <edg:DumpTempGraphForLineageGram/>
+    </ui:try>
+    <ui:catch>
+        <swon:Object>
+            <swon:Value arg:name=\"exception\" arg:value=\"{= ?exception }\"/>
+        </swon:Object>
+    </ui:catch>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:label "Build JSON for ProcessLlineageGram" ;
+  rdfs:subClassOf edg:LineageGramServices ;
+.
+edg:BusinessApplication
+  ui:instanceView """
+<ui:group ui:id=\"derivation-map-data-service-other-node-from-business-activity\" ui:priority=\"{= 10 }\">
+    <!--ui:dumpScope ui:message=\"AAA5: edg:BusinessApplication {= ?this } to {= ?rightNode }\"/-->
+    <edg:GenerateJSONforBusinessApplicationToBusinessActivityDependencyDetails arg:leftNode=\"{= ?leftNode }\" arg:rightNode=\"{= ?rightNode }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"derivation-map-data-service-other-node-from-lineage-model\" ui:priority=\"{= 10 }\">
+    <edg:GenerateJSONforBusinessApplicationToLineageModelDependencyDetails arg:leftNode=\"{= ?leftNode }\" arg:rightNode=\"{= ?rightNode }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:BusinessArea
+  ui:instanceView """
+<ui:group ui:id=\"lineagegram-data-provider\" ui:priority=\"{= 20 }\">
+    <edg:BuildJSONforLineageGramDataProviderDataService arg:dataProvider=\"{= edg:BuildJSONforBusinessAreaLineageGram }\" arg:provider=\"{= edg:BusinessArea }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"lineagegram-viewframes\" ui:priority=\"{= 10 }\">
+    <edg:BuildJSONforLineageGramViewFramesDataService arg:provider=\"{= edg:BusinessArea }\" edg:viewFrameStructure=\"{= edg:VFS_LG-EnterpriseModel }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"lineagegram\" ui:priority=\"{= 20 }\">
+    <edg:LineageGramTemplate arg:dataProvider=\"{= edg:BuildJSONforBusinessAreaLineageGram }\" arg:focusNode=\"{= ?this }\" arg:graph=\"{= ?graph }\" edg:breadth=\"{= ?breadth }\" edg:reach=\"{= ?reach }\" edg:viewFrameStructure=\"{= edg:VFS_EnterpriseModel }\" edg:viewFramesGraph=\"{= ?viewFramesGraph }\">
+        <ui:insert ui:into=\"header\">
+            <teamwork:Header arg:title=\"Enterprise View of Business Area: {= ui:label(?this) }\"/>
+        </ui:insert>
+    </edg:LineageGramTemplate>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:BusinessFunction
+  ui:instanceView """
+<ui:group ui:id=\"derivation-map-composite-node\" ui:priority=\"{= 10 }\">
+    <edg:BuildJSONforBusinessFunctionNode arg:node=\"{= ?this }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"derivation-map-data-service\" ui:priority=\"{= 10 }\">
+    <!--ui:dumpScope ui:message=\"AAA1: edg:BusinessFunction {= ?this } to {= ?rightNode }\"/-->
+    <ui:resourceView arg:leftNode=\"{= ?leftNode }\" arg:rightNode=\"{= ?this }\" edg:linkType=\"{= ?linkType }\" ui:matchIds=\"derivation-map-data-service-other-node-from-business-function\" ui:resource=\"{= ?leftNode }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:GenerateJSONforBusinessApplicationToBusinessActivityDependencyDetails
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:leftNode ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:rightNode ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <ui:group let:businessAreas=\"BusinessAreas_{= ui:uniqueId() }\">
+        <swon:Object>
+            <swon:Value arg:name=\"nodes\">
+                <swon:Array>
+                    <edg:BuildJSONforLineageGramNode arg:label=\"{= edg:MakeNodeLabel(?leftNode) }\" arg:node=\"{= ?leftNode }\"/>
+                    <edg:BuildJSONforLineageGramNode arg:label=\"{= edg:MakeNodeLabel(?rightNode) }\" arg:node=\"{= ?rightNode }\"/>
+                    <swon:Object>
+                        <swon:Value arg:name=\"id\" arg:value=\"{= ?businessAreas }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"Business Areas\"/>
+                        <swon:Value arg:name=\"resourceType\" arg:value=\"\"/>
+                        <swon:Value arg:name=\"type\" arg:value=\"\"/>
+                    </swon:Object>
+                    <ui:forEach ui:resultSet=\"{#
+                            SELECT ?businessArea ?label
+                            WHERE {
+                                ?businessArea edg:activity ?rightNode .
+                                BIND (ui:label(?businessArea) AS ?label) .
+                            }
+                            ORDER BY (?label) }\">
+                        <edg:BuildJSONforLineageGramNode arg:label=\"{= ?label }\" arg:node=\"{= ?businessArea }\" arg:parent=\"{= ?businessAreas }\"/>
+                    </ui:forEach>
+                </swon:Array>
+            </swon:Value>
+            <swon:Value arg:name=\"edges\">
+                <swon:Array>
+                    <edg:BuildJSONforDerviationMapLink arg:label=\"supports\" arg:leftNode=\"{= ?leftNode }\" arg:property=\"{= edg:supportsBusinessActivity }\" arg:rightNode=\"{= ?rightNode }\"/>
+                    <edg:BuildJSONforDerviationMapLink arg:label=\"for\" arg:leftNode=\"{= ?rightNode }\" arg:property=\"{= edg:activity }\" arg:rightNode=\"{= ?businessAreas }\"/>
+                </swon:Array>
+            </swon:Value>
+        </swon:Object>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/diagram/lg/library-common> ;
+  rdfs:label "Generate JSON for Business application to business activity dependency details" ;
+  rdfs:subClassOf edg:DerivationMapServices ;
+.
+edg:GenerateJSONforBusinessApplicationToLineageModelDependencyDetails
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:leftNode ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:rightNode ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <edg:BuildJSONforDerivationMapNodePair arg:inverse=\"{= true }\" arg:leftNode=\"{= ?leftNode }\" arg:property=\"{= edg:usesSoftwareExecutable }\" arg:rightNode=\"{= ?rightNode }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/diagram/lg/library-common> ;
+  rdfs:label "Generate JSON for Business application to lineage model dependency details" ;
+  rdfs:subClassOf edg:DerivationMapServices ;
+.
+edg:GetBusinessAreasWithGivenBusinessActivity
+  a spin:Template ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            a ui:label ;
+            sp:arg1 [
+                sp:varName "businessArea" ;
+              ] ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "businessArea" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "resource" ;
+              ] ;
+            sp:predicate edg:activity ;
+            sp:subject [
+                sp:varName "businessArea" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType edg:BusinessActivity ;
+    ] ;
+  rdfs:comment "Returns what a business application enables or supports." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/diagram/lg/library-common> ;
+  rdfs:label "Get business areas with given business activity" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:GetEnterpriseObjectSoftwareDependencies
+  a spin:Template ;
+  spin:body [
+      a sp:Select ;
+      sp:distinct true ;
+      sp:resultVariables (
+          [
+            sp:varName "software" ;
+          ]
+          [
+            sp:varName "supportsProperty" ;
+          ]
+          [
+            sp:varName "dependencyType" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Union ;
+            sp:elements (
+                (
+                  [
+                    a sp:TriplePath ;
+                    sp:object edg:supports ;
+                    sp:path [
+                        a sp:ModPath ;
+                        sp:modMax -2 ;
+                        sp:modMin 0 ;
+                        sp:subPath rdfs:subPropertyOf ;
+                      ] ;
+                    sp:subject [
+                        sp:varName "supportsProperty" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "resource" ;
+                      ] ;
+                    sp:predicate [
+                        sp:varName "supportsProperty" ;
+                      ] ;
+                    sp:subject [
+                        sp:varName "software" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression edg:DEPTYPE_SUPPORTS ;
+                    sp:variable [
+                        sp:varName "dependencyType" ;
+                      ] ;
+                  ]
+                )
+                (
+                  (
+                    [
+                      a sp:Filter ;
+                      sp:expression [
+                          a sp:bound ;
+                          sp:arg1 [
+                              sp:varName "compositionProperty" ;
+                            ] ;
+                        ] ;
+                    ]
+                  )
+                  [
+                    a sp:TriplePath ;
+                    sp:object edg:supports ;
+                    sp:path [
+                        a sp:ModPath ;
+                        sp:modMax -2 ;
+                        sp:modMin 0 ;
+                        sp:subPath rdfs:subPropertyOf ;
+                      ] ;
+                    sp:subject [
+                        sp:varName "supportsProperty" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "partOfResource" ;
+                      ] ;
+                    sp:predicate [
+                        sp:varName "compositionProperty" ;
+                      ] ;
+                    sp:subject [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "partOfResource" ;
+                      ] ;
+                    sp:predicate [
+                        sp:varName "supportsProperty" ;
+                      ] ;
+                    sp:subject [
+                        sp:varName "software" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression edg:DEPTYPE_SUPPORTS ;
+                    sp:variable [
+                        sp:varName "dependencyType" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    sp:object [
+                        sp:varName "informationObject" ;
+                      ] ;
+                    sp:predicate edg:requiresInformationAsset ;
+                    sp:subject [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "informationObject" ;
+                      ] ;
+                    sp:predicate edg:producesInformationAsset ;
+                    sp:subject [
+                        sp:varName "software" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression edg:DEPTYPE_INFO-IO ;
+                    sp:variable [
+                        sp:varName "dependencyType" ;
+                      ] ;
+                  ]
+                )
+              ) ;
+          ]
+          [
+            sp:object [
+                sp:varName "softwareExecutableType" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "software" ;
+              ] ;
+          ]
+          [
+            a sp:TriplePath ;
+            sp:object [
+                sp:varName "parentClass" ;
+              ] ;
+            sp:path [
+                a sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "softwareExecutableType" ;
+              ] ;
+          ]
+          [
+            a sp:Values ;
+            sp:bindings (
+                (
+                  edg:BusinessApplication
+                )
+                (
+                  edg:SoftwareProgram
+                )
+              ) ;
+            sp:varNames (
+                "parentClass"
+              ) ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate edg:compositionProperty ;
+      spl:valueType rdf:Property ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:resource ;
+      spl:valueType edg:BusinessActivity ;
+    ] ;
+  rdfs:comment "Returns the applications that support an enterprise object. An enterprise obect can be a business capability, activity, or process." ;
+  rdfs:label "Get enterprise object software  dependencies" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:GetFinalStageSoftwareExecutablesAndDataAssets
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "infoAsset" ;
+          ]
+          [
+            sp:varName "tableOrViewOrDataset" ;
+          ]
+          [
+            sp:varName "dataElement" ;
+          ]
+          [
+            sp:varName "software" ;
+          ]
+          [
+            sp:varName "pipeLine" ;
+          ]
+          [
+            sp:varName "pipeLineStep" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Union ;
+            sp:elements (
+                (
+                  [
+                    sp:object [
+                        sp:varName "infoAsset" ;
+                      ] ;
+                    sp:predicate edg:producesInformationAsset ;
+                    sp:subject [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a spl:subject ;
+                        sp:arg1 edg:partOf ;
+                        sp:arg2 [
+                            sp:varName "infoAsset" ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "tableOrViewOrDataset" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a spl:subject ;
+                        sp:arg1 edg:columnOf ;
+                        sp:arg2 [
+                            sp:varName "tableOrViewOrDataset" ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "dataElement" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    sp:object [
+                        sp:varName "?0" ;
+                      ] ;
+                    sp:predicate edg:getPipelineStepsAndSoftwareExecutables ;
+                    sp:subject [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "pipeLine" ;
+                      ] ;
+                    sp:predicate rdf:first ;
+                    sp:subject [
+                        sp:varName "?0" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "?1" ;
+                      ] ;
+                    sp:predicate rdf:rest ;
+                    sp:subject [
+                        sp:varName "?0" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "pipeLineStep" ;
+                      ] ;
+                    sp:predicate rdf:first ;
+                    sp:subject [
+                        sp:varName "?1" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "?2" ;
+                      ] ;
+                    sp:predicate rdf:rest ;
+                    sp:subject [
+                        sp:varName "?1" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "software" ;
+                      ] ;
+                    sp:predicate rdf:first ;
+                    sp:subject [
+                        sp:varName "?2" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "?3" ;
+                      ] ;
+                    sp:predicate rdf:rest ;
+                    sp:subject [
+                        sp:varName "?2" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "output" ;
+                      ] ;
+                    sp:predicate rdf:first ;
+                    sp:subject [
+                        sp:varName "?3" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "?4" ;
+                      ] ;
+                    sp:predicate rdf:rest ;
+                    sp:subject [
+                        sp:varName "?3" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "outputType" ;
+                      ] ;
+                    sp:predicate rdf:first ;
+                    sp:subject [
+                        sp:varName "?4" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object () ;
+                    sp:predicate rdf:rest ;
+                    sp:subject [
+                        sp:varName "?4" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        sp:varName "output" ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "dataElement" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a spl:object ;
+                        sp:arg1 [
+                            sp:varName "output" ;
+                          ] ;
+                        sp:arg2 edg:columnOf ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "tableOrViewOrDataset" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a spl:object ;
+                        sp:arg1 [
+                            sp:varName "tableOrViewOrDataset" ;
+                          ] ;
+                        sp:arg2 edg:partOf ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "infoAsset" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    sp:object [
+                        sp:varName "infoAsset" ;
+                      ] ;
+                    sp:predicate edg:producesInformationAsset ;
+                    sp:subject [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Union ;
+                    sp:elements (
+                        (
+                          [
+                            a sp:Bind ;
+                            sp:expression [
+                                a spl:object ;
+                                sp:arg1 [
+                                    sp:varName "tableOrViewOrDataset" ;
+                                  ] ;
+                                sp:arg2 edg:partOf ;
+                              ] ;
+                            sp:variable [
+                                sp:varName "maybeInfoAsset" ;
+                              ] ;
+                          ]
+                          [
+                            a sp:Bind ;
+                            sp:expression [
+                                a sp:coalesce ;
+                                sp:arg1 [
+                                    sp:varName "maybeInfoAsset" ;
+                                  ] ;
+                                sp:arg2 edg:UNKNOWN ;
+                              ] ;
+                            sp:variable [
+                                sp:varName "infoAsset" ;
+                              ] ;
+                          ]
+                          [
+                            a sp:Optional ;
+                            sp:elements (
+                                [
+                                  sp:object [
+                                      sp:varName "tableOrViewOrDataset" ;
+                                    ] ;
+                                  sp:predicate edg:output ;
+                                  sp:subject [
+                                      sp:varName "software" ;
+                                    ] ;
+                                ]
+                              ) ;
+                          ]
+                        )
+                        (
+                          [
+                            a sp:Bind ;
+                            sp:expression [
+                                a spl:object ;
+                                sp:arg1 [
+                                    sp:varName "tableOrViewOrDataset" ;
+                                  ] ;
+                                sp:arg2 edg:partOf ;
+                              ] ;
+                            sp:variable [
+                                sp:varName "maybeInfoAsset" ;
+                              ] ;
+                          ]
+                          [
+                            a sp:Bind ;
+                            sp:expression [
+                                a sp:coalesce ;
+                                sp:arg1 [
+                                    sp:varName "maybeInfoAsset" ;
+                                  ] ;
+                                sp:arg2 edg:UNKNOWN ;
+                              ] ;
+                            sp:variable [
+                                sp:varName "infoAsset" ;
+                              ] ;
+                          ]
+                          [
+                            a sp:Optional ;
+                            sp:elements (
+                                [
+                                  sp:object [
+                                      sp:varName "tableOrViewOrDataset" ;
+                                    ] ;
+                                  sp:predicate edg:columnOf ;
+                                  sp:subject [
+                                      sp:varName "dataElement" ;
+                                    ] ;
+                                ]
+                                [
+                                  sp:object [
+                                      sp:varName "dataElement" ;
+                                    ] ;
+                                  sp:predicate edg:output ;
+                                  sp:subject [
+                                      sp:varName "software" ;
+                                    ] ;
+                                ]
+                              ) ;
+                          ]
+                        )
+                      ) ;
+                  ]
+                )
+                (
+                  [
+                    a sp:TriplePath ;
+                    sp:object [
+                        sp:varName "software" ;
+                      ] ;
+                    sp:path [
+                        a sp:AltPath ;
+                        sp:path1 edg:usesSoftwareExecutable ;
+                        sp:path2 edg:usesSoftwareProgram ;
+                      ] ;
+                    sp:subject [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "output" ;
+                      ] ;
+                    sp:predicate edg:output ;
+                    sp:subject [
+                        sp:varName "software" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "outputType" ;
+                      ] ;
+                    sp:predicate rdf:type ;
+                    sp:subject [
+                        sp:varName "output" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Union ;
+                    sp:elements (
+                        (
+                          [
+                            a sp:TriplePath ;
+                            sp:object edg:DataElement ;
+                            sp:path [
+                                a sp:ModPath ;
+                                sp:modMax -2 ;
+                                sp:modMin 0 ;
+                                sp:subPath rdfs:subClassOf ;
+                              ] ;
+                            sp:subject [
+                                sp:varName "outputType" ;
+                              ] ;
+                          ]
+                          [
+                            sp:object [
+                                sp:varName "tableOrViewOrDataset" ;
+                              ] ;
+                            sp:predicate edg:columnOf ;
+                            sp:subject [
+                                sp:varName "output" ;
+                              ] ;
+                          ]
+                          [
+                            sp:object [
+                                sp:varName "infoAsset" ;
+                              ] ;
+                            sp:predicate edg:partOf ;
+                            sp:subject [
+                                sp:varName "tableOrViewOrDataset" ;
+                              ] ;
+                          ]
+                          [
+                            a sp:Bind ;
+                            sp:expression [
+                                sp:varName "output" ;
+                              ] ;
+                            sp:variable [
+                                sp:varName "dataElement" ;
+                              ] ;
+                          ]
+                        )
+                        (
+                          [
+                            a sp:TriplePath ;
+                            sp:object edg:Table ;
+                            sp:path [
+                                a sp:ModPath ;
+                                sp:modMax -2 ;
+                                sp:modMin 0 ;
+                                sp:subPath rdfs:subClassOf ;
+                              ] ;
+                            sp:subject [
+                                sp:varName "outputType" ;
+                              ] ;
+                          ]
+                          [
+                            a sp:Bind ;
+                            sp:expression [
+                                sp:varName "output" ;
+                              ] ;
+                            sp:variable [
+                                sp:varName "infoAsset" ;
+                              ] ;
+                          ]
+                        )
+                        (
+                          [
+                            a sp:TriplePath ;
+                            sp:object edg:Report ;
+                            sp:path [
+                                a sp:ModPath ;
+                                sp:modMax -2 ;
+                                sp:modMin 0 ;
+                                sp:subPath rdfs:subClassOf ;
+                              ] ;
+                            sp:subject [
+                                sp:varName "outputType" ;
+                              ] ;
+                          ]
+                          [
+                            a sp:Bind ;
+                            sp:expression [
+                                sp:varName "output" ;
+                              ] ;
+                            sp:variable [
+                                sp:varName "tableOrViewOrDataset" ;
+                              ] ;
+                          ]
+                        )
+                      ) ;
+                  ]
+                )
+              ) ;
+          ]
+        ) ;
+    ] ;
+.
+edg:GetLastSoftwareExecutablesAndInfoAssetsList
+  vaem:todo "DEPRECATE?" ;
+.
+edg:GetLineageModelFirstSoftwareExecutables
+  a spin:Template ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "softwareDependency" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Union ;
+            sp:elements (
+                (
+                  [
+                    sp:object [
+                        sp:varName "?0" ;
+                      ] ;
+                    sp:predicate edg:GetSourceSoftwareExecutable ;
+                    sp:subject [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "softwareDependency" ;
+                      ] ;
+                    sp:predicate rdf:first ;
+                    sp:subject [
+                        sp:varName "?0" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object () ;
+                    sp:predicate rdf:rest ;
+                    sp:subject [
+                        sp:varName "?0" ;
+                      ] ;
+                  ]
+                )
+                (
+                  (
+                    [
+                      sp:object [
+                          sp:varName "pipeLine" ;
+                        ] ;
+                      sp:predicate edg:usesPipeline ;
+                      sp:subject [
+                          sp:varName "resource" ;
+                        ] ;
+                    ]
+                    [
+                      a sp:Bind ;
+                      sp:expression [
+                          a edg:getLastPipelineStepOfPipeline ;
+                          arg:pipeline [
+                              sp:varName "pipeLine" ;
+                            ] ;
+                        ] ;
+                      sp:variable [
+                          sp:varName "lastPipeLineStep" ;
+                        ] ;
+                    ]
+                    [
+                      a sp:Filter ;
+                      sp:expression [
+                          a sp:bound ;
+                          sp:arg1 [
+                              sp:varName "lastPipeLineStep" ;
+                            ] ;
+                        ] ;
+                    ]
+                  )
+                  [
+                    a sp:TriplePath ;
+                    sp:object [
+                        sp:varName "softwareDependency" ;
+                      ] ;
+                    sp:path [
+                        a sp:AltPath ;
+                        sp:path1 edg:usesSoftwareExecutable ;
+                        sp:path2 edg:usesSoftwareProgram ;
+                      ] ;
+                    sp:subject [
+                        sp:varName "lastPipeLineStep" ;
+                      ] ;
+                  ]
+                )
+              ) ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType edg:LineageModel ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "Given a lineagemodel gets the first software executables that it is linked to." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/diagram/lg/library-common> ;
+  rdfs:label "Get first software executable for given input" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:GetLineageModelSoftwareExecutablesOutputs
+  a spin:Template ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "informationAsset" ;
+          ]
+          [
+            sp:varName "tableOrViewOrDataset" ;
+          ]
+          [
+            sp:varName "dataElement" ;
+          ]
+          [
+            sp:varName "software" ;
+          ]
+          [
+            sp:varName "report" ;
+          ]
+          [
+            sp:varName "outputType" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Union ;
+            sp:elements (
+                (
+                  [
+                    sp:object [
+                        sp:varName "output" ;
+                      ] ;
+                    sp:predicate edg:producesInformationAsset ;
+                    sp:subject [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "?0" ;
+                      ] ;
+                    sp:predicate edg:determineOutputType ;
+                    sp:subject [
+                        sp:varName "output" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "informationAsset" ;
+                      ] ;
+                    sp:predicate rdf:first ;
+                    sp:subject [
+                        sp:varName "?0" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "?1" ;
+                      ] ;
+                    sp:predicate rdf:rest ;
+                    sp:subject [
+                        sp:varName "?0" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "tableOrViewOrDataset" ;
+                      ] ;
+                    sp:predicate rdf:first ;
+                    sp:subject [
+                        sp:varName "?1" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "?2" ;
+                      ] ;
+                    sp:predicate rdf:rest ;
+                    sp:subject [
+                        sp:varName "?1" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "dataElement" ;
+                      ] ;
+                    sp:predicate rdf:first ;
+                    sp:subject [
+                        sp:varName "?2" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "?3" ;
+                      ] ;
+                    sp:predicate rdf:rest ;
+                    sp:subject [
+                        sp:varName "?2" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "report" ;
+                      ] ;
+                    sp:predicate rdf:first ;
+                    sp:subject [
+                        sp:varName "?3" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "?4" ;
+                      ] ;
+                    sp:predicate rdf:rest ;
+                    sp:subject [
+                        sp:varName "?3" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "outputType" ;
+                      ] ;
+                    sp:predicate rdf:first ;
+                    sp:subject [
+                        sp:varName "?4" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object () ;
+                    sp:predicate rdf:rest ;
+                    sp:subject [
+                        sp:varName "?4" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        sp:varName "resource" ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "software" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    sp:object [
+                        sp:varName "pipeLine" ;
+                      ] ;
+                    sp:predicate edg:usesPipeline ;
+                    sp:subject [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "software" ;
+                      ] ;
+                    sp:predicate edg:pipelineStep ;
+                    sp:subject [
+                        sp:varName "pipeLine" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Optional ;
+                    sp:elements (
+                        [
+                          a sp:TriplePath ;
+                          sp:object [
+                              sp:varName "output" ;
+                            ] ;
+                          sp:path [
+                              a sp:AltPath ;
+                              sp:path1 edg:output ;
+                              sp:path2 edg:producesInformationAsset ;
+                            ] ;
+                          sp:subject [
+                              sp:varName "software" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "maybeOutputType" ;
+                            ] ;
+                          sp:predicate rdf:type ;
+                          sp:subject [
+                              sp:varName "output" ;
+                            ] ;
+                        ]
+                        [
+                          a sp:Bind ;
+                          sp:expression [
+                              a sp:coalesce ;
+                              sp:arg1 [
+                                  sp:varName "maybeOutputType" ;
+                                ] ;
+                              sp:arg2 edg:UNKNOWN-TYPE ;
+                            ] ;
+                          sp:variable [
+                              sp:varName "outputType" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "?5" ;
+                            ] ;
+                          sp:predicate edg:determineOutputType ;
+                          sp:subject [
+                              sp:varName "output" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "informationAsset" ;
+                            ] ;
+                          sp:predicate rdf:first ;
+                          sp:subject [
+                              sp:varName "?5" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "?6" ;
+                            ] ;
+                          sp:predicate rdf:rest ;
+                          sp:subject [
+                              sp:varName "?5" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "tableOrViewOrDataset" ;
+                            ] ;
+                          sp:predicate rdf:first ;
+                          sp:subject [
+                              sp:varName "?6" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "?7" ;
+                            ] ;
+                          sp:predicate rdf:rest ;
+                          sp:subject [
+                              sp:varName "?6" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "dataElement" ;
+                            ] ;
+                          sp:predicate rdf:first ;
+                          sp:subject [
+                              sp:varName "?7" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "?8" ;
+                            ] ;
+                          sp:predicate rdf:rest ;
+                          sp:subject [
+                              sp:varName "?7" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "report" ;
+                            ] ;
+                          sp:predicate rdf:first ;
+                          sp:subject [
+                              sp:varName "?8" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "?9" ;
+                            ] ;
+                          sp:predicate rdf:rest ;
+                          sp:subject [
+                              sp:varName "?8" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "outputType" ;
+                            ] ;
+                          sp:predicate rdf:first ;
+                          sp:subject [
+                              sp:varName "?9" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object () ;
+                          sp:predicate rdf:rest ;
+                          sp:subject [
+                              sp:varName "?9" ;
+                            ] ;
+                        ]
+                      ) ;
+                  ]
+                )
+                (
+                  [
+                    sp:object [
+                        sp:varName "software" ;
+                      ] ;
+                    sp:predicate edg:usesPipeline ;
+                    sp:subject [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Optional ;
+                    sp:elements (
+                        [
+                          a sp:TriplePath ;
+                          sp:object [
+                              sp:varName "output" ;
+                            ] ;
+                          sp:path [
+                              a sp:AltPath ;
+                              sp:path1 edg:output ;
+                              sp:path2 edg:producesInformationAsset ;
+                            ] ;
+                          sp:subject [
+                              sp:varName "software" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "maybeOutputType" ;
+                            ] ;
+                          sp:predicate rdf:type ;
+                          sp:subject [
+                              sp:varName "output" ;
+                            ] ;
+                        ]
+                        [
+                          a sp:Bind ;
+                          sp:expression [
+                              a sp:coalesce ;
+                              sp:arg1 [
+                                  sp:varName "maybeOutputType" ;
+                                ] ;
+                              sp:arg2 edg:UNKNOWN-TYPE ;
+                            ] ;
+                          sp:variable [
+                              sp:varName "outputType" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "?10" ;
+                            ] ;
+                          sp:predicate edg:determineOutputType ;
+                          sp:subject [
+                              sp:varName "output" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "informationAsset" ;
+                            ] ;
+                          sp:predicate rdf:first ;
+                          sp:subject [
+                              sp:varName "?10" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "?11" ;
+                            ] ;
+                          sp:predicate rdf:rest ;
+                          sp:subject [
+                              sp:varName "?10" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "tableOrViewOrDataset" ;
+                            ] ;
+                          sp:predicate rdf:first ;
+                          sp:subject [
+                              sp:varName "?11" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "?12" ;
+                            ] ;
+                          sp:predicate rdf:rest ;
+                          sp:subject [
+                              sp:varName "?11" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "dataElement" ;
+                            ] ;
+                          sp:predicate rdf:first ;
+                          sp:subject [
+                              sp:varName "?12" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "?13" ;
+                            ] ;
+                          sp:predicate rdf:rest ;
+                          sp:subject [
+                              sp:varName "?12" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "report" ;
+                            ] ;
+                          sp:predicate rdf:first ;
+                          sp:subject [
+                              sp:varName "?13" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "?14" ;
+                            ] ;
+                          sp:predicate rdf:rest ;
+                          sp:subject [
+                              sp:varName "?13" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "outputType" ;
+                            ] ;
+                          sp:predicate rdf:first ;
+                          sp:subject [
+                              sp:varName "?14" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object () ;
+                          sp:predicate rdf:rest ;
+                          sp:subject [
+                              sp:varName "?14" ;
+                            ] ;
+                        ]
+                      ) ;
+                  ]
+                )
+                (
+                  [
+                    sp:object [
+                        sp:varName "software" ;
+                      ] ;
+                    sp:predicate edg:usesSoftwareProgram ;
+                    sp:subject [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Optional ;
+                    sp:elements (
+                        [
+                          a sp:TriplePath ;
+                          sp:object [
+                              sp:varName "output" ;
+                            ] ;
+                          sp:path [
+                              a sp:AltPath ;
+                              sp:path1 edg:output ;
+                              sp:path2 edg:producesInformationAsset ;
+                            ] ;
+                          sp:subject [
+                              sp:varName "software" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "?15" ;
+                            ] ;
+                          sp:predicate edg:determineOutputType ;
+                          sp:subject [
+                              sp:varName "output" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "informationAsset" ;
+                            ] ;
+                          sp:predicate rdf:first ;
+                          sp:subject [
+                              sp:varName "?15" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "?16" ;
+                            ] ;
+                          sp:predicate rdf:rest ;
+                          sp:subject [
+                              sp:varName "?15" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "tableOrViewOrDataset" ;
+                            ] ;
+                          sp:predicate rdf:first ;
+                          sp:subject [
+                              sp:varName "?16" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "?17" ;
+                            ] ;
+                          sp:predicate rdf:rest ;
+                          sp:subject [
+                              sp:varName "?16" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "dataElement" ;
+                            ] ;
+                          sp:predicate rdf:first ;
+                          sp:subject [
+                              sp:varName "?17" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "?18" ;
+                            ] ;
+                          sp:predicate rdf:rest ;
+                          sp:subject [
+                              sp:varName "?17" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "report" ;
+                            ] ;
+                          sp:predicate rdf:first ;
+                          sp:subject [
+                              sp:varName "?18" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "?19" ;
+                            ] ;
+                          sp:predicate rdf:rest ;
+                          sp:subject [
+                              sp:varName "?18" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "outputType" ;
+                            ] ;
+                          sp:predicate rdf:first ;
+                          sp:subject [
+                              sp:varName "?19" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object () ;
+                          sp:predicate rdf:rest ;
+                          sp:subject [
+                              sp:varName "?19" ;
+                            ] ;
+                        ]
+                      ) ;
+                  ]
+                )
+              ) ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType edg:SoftwareExecutable ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "?resource edg:getPipelineStepsAndSoftwareExecutables ( ?pipeLine ?pipeLineStep ?software ?output ?outputType ) ." ;
+  rdfs:comment "Returns the pipelines, software executables and data assets that make up the final stage of a lineage model." ;
+  rdfs:label "Get lineage model software executables outputs" ;
+  rdfs:seeAlso edg:GetLineageGramFinalSoftwareExecutablesAndDataAssets ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:GetPipelineDependencies
+  a spin:Template ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "pipeLine" ;
+          ]
+          [
+            sp:varName "pipeLineStep" ;
+          ]
+          [
+            sp:varName "software" ;
+          ]
+          [
+            sp:varName "output" ;
+          ]
+          [
+            sp:varName "outputType" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "pipeLine" ;
+              ] ;
+            sp:predicate edg:usesPipeline ;
+            sp:subject [
+                sp:varName "resource" ;
+              ] ;
+          ]
+          [
+            sp:object edg:Pipeline ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "pipeLine" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "pipeLineStep" ;
+              ] ;
+            sp:predicate edg:pipelineStep ;
+            sp:subject [
+                sp:varName "pipeLine" ;
+              ] ;
+          ]
+          [
+            a sp:TriplePath ;
+            sp:object [
+                sp:varName "software" ;
+              ] ;
+            sp:path [
+                a sp:SeqPath ;
+                sp:path1 [
+                    a sp:ModPath ;
+                    sp:modMax -1 ;
+                    sp:modMin 0 ;
+                    sp:subPath edg:pipelineStep ;
+                  ] ;
+                sp:path2 [
+                    a sp:AltPath ;
+                    sp:path1 edg:usesSoftwareExecutable ;
+                    sp:path2 edg:usesSoftwareProgram ;
+                  ] ;
+              ] ;
+            sp:subject [
+                sp:varName "pipeLine" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "output" ;
+              ] ;
+            sp:predicate edg:output ;
+            sp:subject [
+                sp:varName "software" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "outputType" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "output" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType edg:LineageModel ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "Returns all pipelines and their steps together with their software dependencies.  The outputs of the software are also returned." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/diagram/lg/library-common> ;
+  rdfs:label "Get pipeline deoendencies" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:LineageModel
+  ui:instanceView """
+<ui:group let:moreNode=\"MORE-NODE\" ui:id=\"derivation-map-data-service-more-fanout-from-lineage-model\" ui:priority=\"{= 10 }\">
+    <!--ui:dumpScope ui:message=\"AAA2: edg:LineageModel from {= ?this } to {= ?rightNode }\"/-->
+    <swon:Object>
+        <swon:Values arg:name=\"nodes\">
+            <ui:resourceView ui:matchIds=\"derivation-map-composite-node\" ui:resource=\"{= ?leftNode }\"/>
+            <edg:BuildJSONforLineageGramNode arg:label=\"More can be explored from the LineageGram\" arg:node=\"{= ?moreNode }\"/>
+        </swon:Values>
+        <swon:Value arg:name=\"edges\">
+            <swon:Array>
+                <edg:BuildJSONforDerviationMapLink arg:explanation=\"more fanout\" arg:label=\" \" arg:leftNode=\"{= ?leftNode }\" arg:rightNode=\"{= ?moreNode }\"/>
+            </swon:Array>
+        </swon:Value>
+    </swon:Object>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"derivation-map-data-service-other-node-from-lineage-model\" ui:priority=\"{= 10 }\">
+    <!--ui:dumpScope ui:message=\"AAA3: edg:LineageModel from {= ?this } to {= ?rightNode }\"/-->
+    <edg:FallbackDerivationMapDataService arg:leftNode=\"{= ?leftNode }\" arg:rightNode=\"{= ?rightNode }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"derivation-map-data-service\" ui:priority=\"{= 10 }\">
+    <!--ui:dumpScope ui:message=\"AAA1: edg:LineageModel {= ?this } to {= ?rightNode }\"/-->
+    <ui:if ui:condition=\"{= ?linkType = &quot;more-fanout&quot; }\">
+        <ui:resourceView arg:leftNode=\"{= ?leftNode }\" arg:rightNode=\"{= ?this }\" ui:matchIds=\"derivation-map-data-service-more-fanout-from-lineage-model\" ui:resource=\"{= ?leftNode }\"/>
+    </ui:if>
+    <ui:else>
+        <ui:resourceView arg:leftNode=\"{= ?leftNode }\" arg:rightNode=\"{= ?this }\" ui:matchIds=\"derivation-map-data-service-other-node-from-lineage-model\" ui:resource=\"{= ?leftNode }\"/>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"lineagegram-data-provider\" ui:priority=\"{= 20 }\">
+    <edg:BuildJSONforLineageGramDataProviderDataService arg:dataProvider=\"{= edg:BuildJSONforLineageModelLineageGram }\" arg:provider=\"{= edg:LineageModel }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"lineagegram-viewframes\" ui:priority=\"{= 20 }\">
+    <edg:BuildJSONforLineageGramViewFramesDataService arg:provider=\"{= edg:LineageModel }\" edg:viewFrameStructure=\"{= edg:VFS_LG-ProvenanceModel }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"lineagegram\" ui:priority=\"{= -1 }\">
+    <edg:LineageGramTemplate arg:dataProvider=\"{= edg:BuildJSONforLineageModelLineageGram }\" arg:focusNode=\"{= ?this }\" arg:graph=\"{= ?graph }\" edg:breadth=\"{= ?breadth }\" edg:reach=\"{= ?reach }\" edg:viewFrameStructure=\"{= edg:VFS_LG-ProvenanceModel }\" edg:viewFramesGraph=\"{= ?viewFramesGraph }\">
+        <ui:insert ui:into=\"header\">
+            <edg:LineageGramHeader arg:title=\"LineageGram&trade; for Lineage Model: {= ui:label(?this) }\"/>
+        </ui:insert>
+    </edg:LineageGramTemplate>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:Process
+  ui:instanceView """
+<ui:group ui:id=\"lineagegram-data-provider\" ui:priority=\"{= 20 }\">
+    <edg:BuildJSONforLineageGramDataProviderDataService arg:dataProvider=\"{= edg:BuildJSONforProcessLineageGram }\" arg:provider=\"{= edg:Process }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"lineagegram-viewframes\" ui:priority=\"{= 20 }\">
+    <edg:BuildJSONforLineageGramViewFramesDataService arg:provider=\"{= edg:Process }\" edg:viewFrameStructure=\"{= edg:VFS_LG-ProvenanceModel }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"lineagegram\" ui:priority=\"{= 20 }\">
+    <edg:LineageGramTemplate arg:dataProvider=\"{= edg:BuildJSONforProcessLineageGram }\" arg:focusNode=\"{= ?this }\" arg:graph=\"{= ?graph }\" edg:breadth=\"{= ?breadth }\" edg:reach=\"{= ?reach }\" edg:viewFrameStructure=\"{= edg:VFS_LG-ProvenanceModel }\" edg:viewFramesGraph=\"{= ?viewFramesGraph }\">
+        <ui:insert ui:into=\"header\">
+            <teamwork:Header arg:title=\"Upstream LineageGram&trade; for Process: {= ui:label(?this) }\"/>
+        </ui:insert>
+    </edg:LineageGramTemplate>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:ProcessActivity
+  ui:instanceView """
+<ui:group ui:id=\"lineagegram-viewframes\" ui:priority=\"{= 20 }\">
+    <edg:BuildJSONforLineageGramViewFramesDataService arg:provider=\"{= edg:BuainessActivity }\" edg:viewFrameStructure=\"{= edg:VFS_LG-LineageModel }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:VFS_LG-InformationAsset
+  edg:viewFrame edg:VF_InfoAssetsFrame ;
+.
+arg:model
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+[
+  spl:optional true ;
+].
+[
+  rdfs:comment "The resource type" ;
+].

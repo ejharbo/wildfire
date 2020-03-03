@@ -1,0 +1,953 @@
+# baseURI: http://edg.topbraid.solutions/1.0/schema/governance
+# imports: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://edg.topbraid.solutions/1.0/schema/enterprise-models
+# imports: http://edg.topbraid.solutions/1.0/schema/governance/core
+# imports: http://edg.topbraid.solutions/1.0/schema/requirements-model
+
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/schema/governance>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/schema/governance/GMD_governance-assets> ;
+  rdfs:label "EDG Schema - Governance Assets" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+edg:ApprovablePropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/governance> ;
+  rdfs:label "Approval Properties" ;
+  sh:order "15"^^xsd:decimal ;
+.
+edg:Approval-approvalDate
+  sh:group edg:ApprovablePropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:Approval-approvalNotes
+  sh:group edg:ApprovablePropertiesGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:Approval-approvalStatus
+  sh:group edg:ApprovablePropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Approval-approver
+  sh:group edg:ApprovablePropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:BusinessPerformanceIndicator
+  a edg:AssetClass ;
+  edg:acronym "BIZPIND" ;
+  rdfs:comment "Key performance indicators are measures and metrics that are used to identify the level of achievement of objectives or results identiﬁed by the organization as important."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "Business Performance Indicator" ;
+  rdfs:subClassOf edg:Indicator ;
+.
+edg:ComplianceAspect
+  sh:property edg:ComplianceAspect-assuranceOfPolicyCompliance ;
+  sh:property edg:ComplianceAspect-complianceIndicator ;
+  sh:property edg:ComplianceAspect-complianceStatus ;
+  sh:property edg:ComplianceAspect-compliesWithPolicyRequirement ;
+  sh:property edg:ComplianceAspect-normativeReference ;
+  sh:property edg:ComplianceAspect-regulation ;
+.
+edg:ComplianceAspect-assuranceOfPolicyCompliance
+  a sh:PropertyShape ;
+  sh:path edg:assuranceOfPolicyCompliance ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:class edg:PolicyCompliance ;
+  sh:group edg:ComplianceGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:ComplianceAspect-complianceIndicator
+  a sh:PropertyShape ;
+  sh:path edg:complianceIndicator ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:class edg:ComplianceIndicator ;
+  sh:description "Refers to one or more indicators that can be used to assess compiance." ;
+  sh:group edg:ComplianceGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:ComplianceAspect-complianceStatus
+  a sh:PropertyShape ;
+  sh:path edg:complianceStatus ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:class edg:ComplianceStatus ;
+  sh:group edg:ComplianceGroup ;
+  sh:maxCount 1 ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:ComplianceAspect-compliesWithPolicyRequirement
+  a sh:PropertyShape ;
+  sh:path edg:compliesWithPolicyRequirement ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:class edg:Policy ;
+  sh:group edg:ComplianceGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:ComplianceAspect-compliesWithPrivacyRequirement
+  a sh:PropertyShape ;
+  sh:path edg:compliesWithPrivacyRequirement ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:class edg:PrivacyPolicy ;
+  sh:group edg:ComplianceGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:ComplianceAspect-compliesWithRegulatoryRequirement
+  a sh:PropertyShape ;
+  sh:path edg:compliesWithRegulatoryRequirement ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:class edg:RegulatoryRequirement ;
+  sh:group edg:ComplianceGroup ;
+  sh:order "70"^^xsd:decimal ;
+.
+edg:ComplianceAspect-compliesWithSecurityRequirement
+  a sh:PropertyShape ;
+  sh:path edg:compliesWithSecurityRequirement ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:class edg:SecurityRequirement ;
+  sh:group edg:ComplianceGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:ComplianceAspect-normativeReference
+  a sh:PropertyShape ;
+  sh:path edg:normativeReference ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:class edg:Document ;
+  sh:group edg:ComplianceGroup ;
+  sh:order "90"^^xsd:decimal ;
+.
+edg:ComplianceAspect-regulation
+  a sh:PropertyShape ;
+  sh:path edg:regulation ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:class edg:RegulationsDocument ;
+  sh:group edg:ComplianceGroup ;
+  sh:name "complies with regulations" ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:ComplianceGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Compliance" ;
+  sh:order "90"^^xsd:decimal ;
+.
+edg:ComplianceIndicator
+  a edg:AssetClass ;
+  edg:acronym "CIND" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "Compliance Indicator" ;
+  rdfs:subClassOf edg:Indicator ;
+.
+edg:Dashboard
+  rdfs:subClassOf edg:DashboardModelsViewpoint ;
+.
+edg:Dashboard-activated
+  sh:group edg:DashboardPropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:Dashboard-ownedBy
+  sh:group edg:DashboardPropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Dashboard-replacedBy
+  sh:group edg:DashboardPropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:DashboardCollectionPropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Dashboard Collection Properties" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:DashboardGadget-belongsTo
+  sh:group edg:DashboardGadgetPropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:DashboardGadget-metricQuery
+  sh:group edg:DashboardGadgetPropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:DashboardGadget-order
+  sh:group edg:DashboardGadgetPropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:DashboardGadgetCollection-belongsTo
+  sh:group edg:DashboardCollectionPropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:DashboardGadgetCollection-order
+  sh:group edg:DashboardCollectionPropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:DashboardGadgetPropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Dashboard Gadget Properties" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:DashboardGadgetTab
+  rdfs:subClassOf edg:DashboardModelsViewpoint ;
+.
+edg:DashboardGadgetTab-activated
+  sh:group edg:DashboardPropertiesGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:DashboardGadgetTab-belongsTo
+  sh:group edg:DashboardPropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:DashboardGadgetTab-order
+  sh:group edg:DashboardPropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:DashboardModelsViewpoint
+  a edg:ViewpointClass ;
+  dash:abstract true ;
+  rdfs:label "Dashboard Assets" ;
+  rdfs:subClassOf edg:Viewpoint ;
+.
+edg:DashboardPropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Dashboard Properties" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:DashboardScriptClass
+  edg:hideSubClasses true ;
+.
+edg:DashboardTabScriptContainer-script
+  sh:group edg:DashboardPropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:DataAccessPolicy
+  a edg:AssetClass ;
+  edg:acronym "DACCPLCY" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "Data Access Policy" ;
+  rdfs:subClassOf edg:DataPolicy ;
+.
+edg:DataGovernanceIndicator
+  a edg:AssetClass ;
+  edg:acronym "DGIND" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "Data Governance Indicator" ;
+  rdfs:subClassOf edg:Indicator ;
+.
+edg:DataQualityIndicator
+  a edg:AssetClass ;
+  edg:acronym "DQIND" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "Data Quality KPI" ;
+  rdfs:subClassOf edg:Indicator ;
+.
+edg:DataQualityPolicy
+  a edg:AssetClass ;
+  edg:acronym "DQPLCY" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "Data Quality Policy" ;
+  rdfs:subClassOf edg:DataPolicy ;
+.
+edg:DataRetentionPolicy
+  a edg:AssetClass ;
+  edg:acronym "DRNPLCY" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "Data Retention Policy" ;
+  rdfs:subClassOf edg:DataPolicy ;
+.
+edg:DataSecurityPolicy
+  a edg:AssetClass ;
+  edg:acronym "DSECPLCY" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "Data Security Policy" ;
+  rdfs:subClassOf edg:DataPolicy ;
+.
+edg:Formula
+  dash:abstract true ;
+.
+edg:Governance
+  sh:property edg:Governance-criticality ;
+  sh:property edg:Governance-dataQualityIndicator ;
+  sh:property edg:Governance-dataQualityStatus ;
+  sh:property edg:Governance-effectiveEndDate ;
+  sh:property edg:Governance-effectiveStartDate ;
+  sh:property edg:Governance-governanceMeasure ;
+  sh:property edg:Governance-governancePolicy ;
+  sh:property edg:Governance-issue ;
+  sh:property edg:Governance-originationDate ;
+  sh:property edg:Governance-ownedBy ;
+  sh:property edg:Governance-rationale ;
+  sh:property edg:Governance-risk ;
+.
+edg:Governance-criticality
+  a sh:PropertyShape ;
+  sh:path edg:criticality ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:class edg:FiveLevelRatingScale ;
+  sh:group edg:GovernancePropertyGroup ;
+  sh:maxCount 1 ;
+  sh:order "120"^^xsd:decimal ;
+.
+edg:Governance-dataQualityIndicator
+  a sh:PropertyShape ;
+  sh:path edg:dataQualityIndicator ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:class edg:DataQualityIndicator ;
+  sh:group edg:GovernancePropertyGroup ;
+  sh:order "80"^^xsd:decimal ;
+.
+edg:Governance-dataQualityStatus
+  a sh:PropertyShape ;
+  sh:path edg:dataQualityStatus ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:class edg:FiveLevelRatingScale ;
+  sh:group edg:GovernancePropertyGroup ;
+  sh:maxCount 1 ;
+  sh:order "70"^^xsd:decimal ;
+.
+edg:Governance-effectiveEndDate
+  a sh:PropertyShape ;
+  sh:path <http://topbraid.org/metadata#effectiveEndDate> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:datatype xsd:date ;
+  sh:group edg:GovernancePropertyGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:Governance-effectiveStartDate
+  a sh:PropertyShape ;
+  sh:path <http://topbraid.org/metadata#effectiveStartDate> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:datatype xsd:date ;
+  sh:group edg:GovernancePropertyGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:Governance-governanceMeasure
+  a sh:PropertyShape ;
+  sh:path edg:governanceMeasure ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:class edg:GovernanceMeasure ;
+  sh:group edg:GovernancePropertyGroup ;
+  sh:maxCount 1 ;
+  sh:order "90"^^xsd:decimal ;
+.
+edg:Governance-governancePolicy
+  a sh:PropertyShape ;
+  sh:path edg:governancePolicy ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:class edg:Policy ;
+  sh:group edg:GovernancePropertyGroup ;
+  sh:maxCount 1 ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:Governance-governanceProcess
+  sh:group edg:GovernancePropertyGroup ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:Governance-governanceRationale
+  sh:group edg:GovernancePropertyGroup ;
+  sh:order "60"^^xsd:decimal ;
+.
+edg:Governance-issue
+  sh:group edg:GovernancePropertyGroup ;
+  sh:order "130"^^xsd:decimal ;
+.
+edg:Governance-originationDate
+  a sh:PropertyShape ;
+  sh:path edg:originationDate ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:datatype xsd:date ;
+  sh:group edg:GovernancePropertyGroup ;
+  sh:maxCount 1 ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Governance-ownedBy
+  a sh:PropertyShape ;
+  sh:path edg:ownedBy ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:class edg:Organization ;
+  sh:group edg:GovernancePropertyGroup ;
+  sh:order "140"^^xsd:decimal ;
+.
+edg:Governance-rationale
+  a sh:PropertyShape ;
+  sh:path edg:rationale ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:GovernancePropertyGroup ;
+  sh:order "130"^^xsd:decimal ;
+.
+edg:Governance-risk
+  a sh:PropertyShape ;
+  sh:path edg:risk ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:class edg:Risk ;
+  sh:group edg:GovernancePropertyGroup ;
+  sh:order "130"^^xsd:decimal ;
+.
+edg:GovernanceAsset
+  dcterms:description """<p>Governance is the process by which a Board of Directors defines key objectives for an organization and oversees progress towards achieving those objectives.</p>
+<p>A <strong>Governance Asset</strong> is a grouping construct for information artefacts, organizational structures, processes, policies and measures that help achieve strong participation across the organization for critical decisions affecting assets. Data governance structures are groups that are comprised of data management stakeholders, whose function is to ensure the data management program is held accountable to organization-wide needs and is oriented toward the fulllment of business and data management objectives. Governance groups can be established for specic purposes, such as approving enterprise requirements for a reference data system, and may also be standing bodies with sustained responsibilities, such as establishing policies and monitoring compliance.</p>"""^^rdf:HTML ;
+  rdfs:subClassOf edg:Asset ;
+.
+edg:GovernancePolicy-subItem
+  a sh:PropertyShape ;
+  sh:path edg:subItem ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:class edg:Policy ;
+.
+edg:GovernancePropertyGroup
+  a sh:PropertyGroup ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/governance> ;
+  rdfs:label "Governance" ;
+  sh:order "60"^^xsd:decimal ;
+.
+edg:GovernanceViewpoint
+  a edg:ViewpointClass ;
+  dash:abstract true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "Governance Viewpoint" ;
+  rdfs:subClassOf edg:Viewpoint ;
+.
+edg:Indicator
+  a edg:AssetClass ;
+  edg:acronym "IND" ;
+  edg:hideClass true ;
+  rdfs:comment "Indicators are measures and metrics that are used to identify the level of achievement of objectives or results identiﬁed by the organization as important."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "Indicator" ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:GovernanceAsset ;
+  rdfs:subClassOf edg:Identifiable ;
+  rdfs:subClassOf edg:Narratable ;
+  rdfs:subClassOf edg:StatusAspect ;
+  rdfs:subClassOf edg:Traceable ;
+  sh:property edg:Indicator-measurementOverview ;
+  sh:property edg:Indicator-variable ;
+.
+edg:Indicator-measurementOverview
+  a sh:PropertyShape ;
+  sh:path edg:measurementOverview ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:IndicatorPropertiesGroup ;
+.
+edg:Indicator-variable
+  a sh:PropertyShape ;
+  sh:path edg:variable ;
+  rdfs:comment "A reference to the data element that delivers the value of the indicator" ;
+  sh:class edg:DataElement ;
+  sh:group edg:IndicatorPropertiesGroup ;
+  sh:order "60"^^xsd:decimal ;
+.
+edg:IndicatorPropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Indicator Properties" ;
+  sh:order "80"^^xsd:decimal ;
+.
+edg:Issue
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "Issue" ;
+  rdfs:subClassOf edg:GovernanceAsset ;
+  rdfs:subClassOf edg:GovernanceViewpoint ;
+  sh:property edg:Issue-description ;
+  sh:property edg:Issue-disposition ;
+  sh:property edg:Issue-id ;
+  sh:property edg:Issue-issueNotes ;
+  sh:property edg:Issue-issueStatus ;
+  sh:property edg:Issue-label ;
+  sh:property edg:Issue-name ;
+  sh:property edg:Issue-subIssue ;
+.
+edg:Issue-description
+  a sh:PropertyShape ;
+  sh:path edg:description ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:IssuePropertiesGroup ;
+  sh:order "70"^^xsd:decimal ;
+.
+edg:Issue-disposition
+  a sh:PropertyShape ;
+  sh:path edg:disposition ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:IssuePropertiesGroup ;
+  sh:order "80"^^xsd:decimal ;
+.
+edg:Issue-id
+  a sh:PropertyShape ;
+  sh:path edg:id ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:datatype xsd:string ;
+  sh:group edg:IdentifiersGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:Issue-issueNotes
+  a sh:PropertyShape ;
+  sh:path edg:issueNotes ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:IssuePropertiesGroup ;
+  sh:order "90"^^xsd:decimal ;
+.
+edg:Issue-issueStatus
+  a sh:PropertyShape ;
+  sh:path edg:issueStatus ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:group edg:IssuePropertiesGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:Issue-label
+  a sh:PropertyShape ;
+  sh:path rdfs:label ;
+  graphql:name "rdfs_label" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:datatype xsd:string ;
+  sh:group edg:IdentifiersGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Issue-name
+  a sh:PropertyShape ;
+  sh:path edg:name ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:datatype xsd:string ;
+  sh:group edg:IdentifiersGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:Issue-rationale
+  a sh:PropertyShape ;
+  sh:path edg:rationale ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:datatype rdf:HTML ;
+.
+edg:Issue-subIssue
+  a sh:PropertyShape ;
+  sh:path edg:subIssue ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:class edg:Issue ;
+  sh:group edg:IssuePropertiesGroup ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:IssuePropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Issue Details" ;
+  sh:order "35"^^xsd:decimal ;
+.
+edg:JobTitle
+  edg:acronym "JTITLE" ;
+.
+edg:KeyPerformanceIndicator
+  a edg:AssetClass ;
+  edg:acronym "KPI" ;
+  rdfs:comment "A 'Key Performance Indicator'" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "Key Performance Indicator" ;
+  rdfs:subClassOf edg:Indicator ;
+.
+edg:Measure
+  edg:acronym "MSR" ;
+  rdfs:comment "A measure is a quantiﬁable result that is used for reporting and monitoring. Measures may be tracked and intended to create a baseline. Examples of measures include number of defects, transaction counts, number of lines of code, number of duplicates."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "Measure" ;
+  rdfs:subClassOf edg:Indicator ;
+  sh:property edg:Measure-rationale ;
+.
+edg:Measure-indicator
+  a sh:PropertyShape ;
+  sh:path edg:indicator ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:class edg:Indicator ;
+.
+edg:Measure-rationale
+  a sh:PropertyShape ;
+  sh:path edg:rationale ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:NarratablePropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:Metric
+  a edg:AssetClass ;
+  edg:hideSubClasses true ;
+  rdfs:comment "A Metric is a calculated or composite measure that uses one or more data-points. A governance metric is used to track and assess the status of an asset, the performance of a business process, or other measures that gauge progress towards quantified objectives . In addition a metric denes the calculation method and the intent and context of the dependent measurements. Metrics targeting critical areas of performance are called Key Performance Indicators (KPIs)."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "Metric" ;
+  rdfs:subClassOf edg:GovernanceAsset ;
+  rdfs:subClassOf edg:GovernanceViewpoint ;
+  rdfs:subClassOf edg:StatusAspect ;
+  sh:property edg:Metric-formula ;
+  sh:property edg:Metric-metricType ;
+.
+edg:Metric-formula
+  a sh:PropertyShape ;
+  sh:path edg:formula ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:class edg:FormulaClass ;
+  sh:group edg:MetricPropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:Metric-metricType
+  a sh:PropertyShape ;
+  sh:path edg:metricType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:group edg:MetricPropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:MetricPropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Metrics Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:Plan-rationale
+  a sh:PropertyShape ;
+  sh:path edg:rationale ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:datatype rdf:HTML ;
+.
+edg:Policy
+  rdfs:subClassOf edg:GovernanceViewpoint ;
+.
+edg:PolicyCompliance
+  rdfs:subClassOf edg:Identifiable ;
+  rdfs:subClassOf edg:Narratable ;
+.
+edg:PolicyCompliance-forPolicy
+  sh:class edg:Policy ;
+.
+edg:Publication
+  rdfs:subClassOf edg:GovernanceAsset ;
+.
+edg:RegulationsDocument
+  a edg:AssetClass ;
+  edg:acronym "REGDOC" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "Regulations Document" ;
+  rdfs:subClassOf edg:Document ;
+.
+edg:RegulatoryRequirement
+  a edg:AssetClass ;
+  edg:acronym "REGREQ" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "Regulatory Requirement" ;
+  rdfs:subClassOf edg:Requirement ;
+  sh:property edg:RegulatoryRequirement-subItem ;
+.
+edg:RegulatoryRequirement-subItem
+  a sh:PropertyShape ;
+  sh:path edg:subItem ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:class edg:RegulatoryRequirement ;
+.
+edg:RequirementsTraceabilityAspect-supportsActivity
+  a sh:PropertyShape ;
+  sh:path edg:supportsActivity ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:class edg:BusinessActivity ;
+  sh:maxCount 1 ;
+.
+edg:Responsive
+  sh:property edg:Responsive-performanceIndicator ;
+.
+edg:Responsive-performanceIndicator
+  a sh:PropertyShape ;
+  sh:path edg:performanceIndicator ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+.
+edg:Risk
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "Risk" ;
+  rdfs:subClassOf edg:GovernanceAsset ;
+  rdfs:subClassOf edg:GovernanceViewpoint ;
+  sh:property edg:Risk-likelihood ;
+  sh:property edg:Risk-mitigation ;
+  sh:property edg:Risk-riskImpact ;
+.
+edg:Risk-likelihood
+  a sh:PropertyShape ;
+  sh:path edg:likelihood ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:class edg:FiveLevelRatingScale ;
+  sh:group edg:RiskPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Risk-mitigation
+  a sh:PropertyShape ;
+  sh:path edg:mitigation ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:RiskPropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:Risk-riskImpact
+  a sh:PropertyShape ;
+  sh:path edg:riskImpact ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:class edg:ImpactScale ;
+  sh:group edg:RiskPropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:RiskPropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Risk Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:ScriptClass
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Script Class" ;
+  rdfs:subClassOf rdfs:Class ;
+.
+edg:SecurityRequirement
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "Security Requirement" ;
+  rdfs:subClassOf edg:Requirement ;
+  sh:property edg:SecurityRequirement-subItem ;
+.
+edg:SecurityRequirement-subItem
+  a sh:PropertyShape ;
+  sh:path edg:subItem ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  sh:class edg:SecurityRequirement ;
+.
+edg:TestCase-subItem
+  a sh:PropertyShape ;
+  sh:path edg:subItem ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+.
+edg:Traceable
+  sh:property edg:Traceable-requirement ;
+.
+edg:activated
+  a owl:DatatypeProperty ;
+  rdfs:label "activated" ;
+.
+edg:assuranceOfPolicyCompliance
+  a owl:ObjectProperty ;
+  rdfs:comment "provides evidence of compliance to a policy" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "assurance of policy compliance" ;
+.
+edg:calculationMethod
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "calculation method" ;
+.
+edg:complianceIndicator
+  a owl:ObjectProperty ;
+  rdfs:comment "references an indicator that can be used to assess compiance." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "compliance indicator" ;
+  rdfs:range edg:ComplianceIndicator ;
+  rdfs:subPropertyOf edg:indicator ;
+.
+edg:complianceStatus
+  a owl:ObjectProperty ;
+  rdfs:comment "refers to an enumeraiton of status values for compliance status." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "compliance status" ;
+.
+edg:compliesWithPolicyRequirement
+  a owl:ObjectProperty ;
+  rdfs:comment "asserts compliance to a policy requirement. This can alternatively be expressed with more specialized properties." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "complies with policy requirement" ;
+  rdfs:subPropertyOf edg:tracesTo ;
+.
+edg:compliesWithPrivacyRequirement
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:comment "asserts compliance to a privacy requirement" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "complies with privacy requirement" ;
+  rdfs:subPropertyOf edg:compliesWithPolicyRequirement ;
+.
+edg:compliesWithRegulatoryRequirement
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:comment "asserts compliance to a regulatory requirement" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "complies with regulatory requirement" ;
+  rdfs:subPropertyOf edg:compliesWithPolicyRequirement ;
+.
+edg:compliesWithSecurityRequirement
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:comment "asserts compliance to a security requirement" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "complies with security requirement" ;
+  rdfs:subPropertyOf edg:compliesWithPolicyRequirement ;
+.
+edg:dataManagementMaturityLevel
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "data management maturity level" ;
+.
+edg:dataQualityIndicator
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "data quality indicator" ;
+.
+edg:exception
+  a rdf:Property ;
+  rdfs:comment "A text property for providing an explanation of how something need not be given any undertaking," ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "exception" ;
+.
+edg:governanceMeasure
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "governance measure" ;
+  rdfs:subPropertyOf edg:indicator ;
+.
+edg:governancePolicy
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "governance policy" ;
+.
+edg:governanceProcess
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:comment "Documents the processes that are defined specifically for goverance of a specific asset." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "governance process" ;
+.
+edg:governanceRationale
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "governance rationale" ;
+.
+edg:indicator
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "indicator" ;
+.
+edg:likelihood
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "likelihood" ;
+.
+edg:measurementOverview
+  a rdf:Property ;
+  rdfs:label "measurement overview" ;
+.
+edg:metricType
+  a owl:ObjectProperty ;
+  rdfs:comment "Distinquishes different types of metrics with a controlled vocabulary, as opposed to making subtypes that add no new properties to the parent class." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "metric type" ;
+.
+edg:mitigation
+  a owl:DatatypeProperty ;
+  rdfs:comment "A text property for providing an explanation of how something will be mitigated." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "mitigation" ;
+.
+edg:performanceIndicator
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "performance indicator" ;
+  rdfs:subPropertyOf edg:indicator ;
+.
+edg:plan
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "plan" ;
+.
+edg:regulation
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+.
+edg:responsibilityMatrix
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "responsiblity matrix" ;
+.
+edg:risk
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "risk" ;
+.
+edg:riskImpact
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "risk impact" ;
+.
+edg:subIssue
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "sub-issue" ;
+.
+edg:tracesTo
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "traces to" ;
+.
+<http://edg.topbraid.solutions/schema/governance/GMD_governance-assets>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:SchemaGraph ;
+  vaem:hasLicenseType <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2018-07-26"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+dcterms:description
+  a rdf:Property ;
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "description" ;
+.
+dcterms:source
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "source" ;
+  rdfs:range xsd:anyURI ;
+.
+<http://topbraid.org/metadata#effectiveEndDate>
+  rdfs:domain edg:Governance ;
+.
+<http://topbraid.org/metadata#effectiveStartDate>
+  rdfs:domain edg:Governance ;
+.
+provo:wasInfluencedBy
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  rdfs:label "was influenced by" ;
+  rdfs:range xsd:anyURI ;
+.

@@ -1,0 +1,519 @@
+# baseURI: http://topbraid.org/swaspin
+# imports: http://topbraid.org/swa
+
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix default: <http://uispin.org/default#> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+arg:arg
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:groupId
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:mainSubject
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:newTemplateType
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+spin:constraint
+  swa:specialAddButtonFunctionName "swaspin.addSPINConstraintRow" ;
+.
+swa:ArgumentEditor
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:object ;
+      rdfs:comment "The value of the argument (if any)." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:groupId ;
+      spl:valueType xsd:string ;
+      rdfs:comment "An id for all argument editors on the same widget." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:mainSubject ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The subject holding the reference to the template call." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:predicate ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The predicate to edit." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subject ;
+      spl:valueType spin:Templates ;
+      rdfs:comment "The template call." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:template ;
+      spl:valueType spin:Template ;
+      rdfs:comment "The spin:Template (class) being edited." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:uid ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The uid of the editing context." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:valueType ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The value type to use" ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:if ui:condition=\"{= (!bound(?valueType)) || (?valueType = rdfs:Literal) }\">
+        <ui:loadable class=\"swa-dependant-argument-editor-{= ?groupId }\" ui:loadId=\"dependant-{= ?uid }-{= afn:localname(?predicate) }\">
+            <ui:group let:p=\"{= COALESCE(?property, spl:object(?subject, arg:property)) }\">
+                <ui:group let:range=\"{= IF(bound(?p), swa:localRangeAtClass(swa:resourceType(), ?p), xsd:string) }\">
+                    <swa:ArgumentEditor arg:valueType=\"{= IF((bound(?range) &amp;&amp; (?range != rdfs:Literal)), ?range, xsd:string) }\" ui:args=\"*\"/>
+                </ui:group>
+            </ui:group>
+        </ui:loadable>
+    </ui:if>
+    <ui:elseif ui:condition=\"{= swa:isDatatypeRange(?valueType) }\">
+        <ui:if ui:condition=\"{= ?valueType = xsd:string }\">
+            <swa:TextFieldArgumentEditor arg:width=\"100px\" ui:args=\"*\"/>
+        </ui:if>
+        <ui:elseif ui:condition=\"{= ?valueType = xsd:date }\">
+            <swa:DateArgumentEditor ui:args=\"*\"/>
+        </ui:elseif>
+        <ui:else>
+            <swa:TextFieldArgumentEditor arg:width=\"60px\" ui:args=\"*\"/>
+        </ui:else>
+    </ui:elseif>
+    <ui:elseif ui:condition=\"{= rdfs:Class = ?valueType }\">
+        <swa:ClassArgumentEditor ui:args=\"*\"/>
+    </ui:elseif>
+    <ui:else>
+        <swa:ResourceArgumentEditor ui:args=\"*\"/>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Argument editor" ;
+  rdfs:subClassOf swa:TemplateElements ;
+.
+swa:ClassArgumentEditor
+  a ui:NodeClass ;
+  ui:prototype """
+<swa:AutoComplete arg:class=\"swa-resource-argument-editor swa-text-field {= swa:testClass(?predicate) }\" arg:id=\"new-{= ?uid }\" arg:initialValue=\"{= ?object }\" arg:type=\"{= ?valueType }\"/>
+"""^^ui:Literal ;
+  rdfs:label "Class argument editor" ;
+  rdfs:subClassOf swa:ArgumentEditor ;
+.
+swa:DateArgumentEditor
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group>
+    <swa:ObjectEditorHiddenDatatypeField arg:datatype=\"{= xsd:date }\" arg:uid=\"{= ?uid }\"/>
+    <input class=\"form-control\" id=\"dateEditor-{= ?uid }\" size=\"10\" type=\"text\" value=\"{= ?object }\"/>
+    <input id=\"new-{= ?uid }\" name=\"new-{= ?uid }\" type=\"hidden\" value=\"{= ?object }\"/>
+    <swa:WidgetInitializer arg:script=\"swa.initDatePicker('{= ?uid }')\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Date argument editor" ;
+  rdfs:subClassOf swa:ArgumentEditor ;
+.
+swa:Elements
+  ui:headIncludes """
+<ui:group/>
+"""^^ui:Literal ;
+.
+swa:ResourceArgumentEditor
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group let:byDomain=\"{= spl:subClassOf(?template, spl:PropertyConstraintTemplates) }\">
+    <swa:AutoComplete arg:class=\"swa-resource-argument-editor swa-text-field {= swa:testClass(?predicate) }\" arg:filterFunction=\"{= IF(?byDomain, swa:filterByDomain, ?none) }\" arg:filterFunctionArgument=\"{= ?mainSubject }\" arg:id=\"new-{= ?uid }\" arg:initialValue=\"{= ?object }\" arg:onSelect=\"swaspin.reloadDependingArgumentEditors(&quot;{= ?groupId }&quot;, resource)\" arg:type=\"{= ?valueType }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Resource argument editor" ;
+  rdfs:subClassOf swa:ArgumentEditor ;
+.
+swa:TemplateCallEditor
+  a swa:ObjectEditorClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:newTemplateType ;
+      spl:valueType spin:Template ;
+      rdfs:comment "A new template type if called via Add button." ;
+    ] ;
+  swa:objectWidgetWeight [
+      a swa:WeightedExpression ;
+      swa:expression [
+          a sp:and ;
+          sp:arg1 [
+              a sp:and ;
+              sp:arg1 [
+                  a sp:bound ;
+                  sp:arg1 [
+                      sp:varName "object" ;
+                    ] ;
+                ] ;
+              sp:arg2 [
+                  a sp:isBlank ;
+                  sp:arg1 [
+                      sp:varName "object" ;
+                    ] ;
+                ] ;
+            ] ;
+          sp:arg2 [
+              a sp:in ;
+              sp:arg1 [
+                  sp:varName "predicate" ;
+                ] ;
+              sp:arg2 spin:constraint ;
+              sp:arg3 spin:rule ;
+            ] ;
+        ] ;
+      swa:weight 1 ;
+    ] ;
+  ui:prototype """
+<table class=\"swa-template-call\" let:tcall=\"{= COALESCE(?object, IRI(CONCAT(&quot;urn:x-new-bnode:&quot;, ui:uniqueId()))) }\" let:template=\"{= COALESCE(?newTemplateType, spl:object(?object, rdf:type)) }\">
+    <tr let:groupId=\"{= ui:uniqueId() }\" let:lang=\"{= ui:lang() }\">
+        <ui:forEach ui:resultSet=\"{#
+                SELECT ?segment
+                WHERE {
+                    ( ?template ?lang ) spif:labelTemplateSegment ?segment .
+                } }\">
+            <ui:if ui:condition=\"{= isIRI(?segment) }\">
+                <td class=\"swa-argument-editor swa-template-call-arg-segment\" let:arg=\"{= IF(bound(?object), spl:object(?object, ?segment), ?none) }\" let:uid=\"{= ui:uniqueId() }\">
+                    <swa:ObjectEditorHiddenFields arg:object=\"{= ?arg }\" arg:predicate=\"{= ?segment }\" arg:subject=\"{= ?tcall }\" arg:uid=\"{= ?uid }\"/>
+                    <swa:ArgumentEditor arg:groupId=\"{= ?groupId }\" arg:mainSubject=\"{= ?subject }\" arg:object=\"{= ?arg }\" arg:predicate=\"{= ?segment }\" arg:subject=\"{= ?tcall }\" arg:template=\"{= ?template }\" arg:uid=\"{= ?uid }\" arg:valueType=\"{= swa:localRangeAtClass(?template, ?segment) }\"/>
+                </td>
+            </ui:if>
+            <ui:else>
+                <td class=\"swa-template-call-text-segment swa-shifted-label\">{= ?segment }</td>
+            </ui:else>
+        </ui:forEach>
+    </tr>
+    <ui:if ui:condition=\"{= bound(?newTemplateType) }\">
+        <ui:group let:id=\"{= ui:uniqueId() }\">
+            <input name=\"resource-{= ?id }\" type=\"hidden\" value=\"{= ui:encodeNode(?tcall, true) }\"/>
+            <input name=\"path-{= ?id }\" type=\"hidden\" value=\"{= ui:encodeNode(rdf:type) }\"/>
+            <input name=\"new-{= ?id }\" type=\"hidden\" value=\"{= ui:encodeNode(?newTemplateType) }\"/>
+        </ui:group>
+    </ui:if>
+    <input name=\"new-{= ?uid }\" type=\"hidden\" value=\"{= ui:encodeNode(?tcall, true) }\"/>
+</table>
+"""^^ui:Literal ;
+  rdfs:label "Template call editor" ;
+  rdfs:subClassOf swa:ObjectEditor ;
+.
+swa:TemplateCallViewer
+  a swa:ObjectViewerClass ;
+  swa:objectWidgetWeight [
+      a swa:WeightedExpression ;
+      swa:expression [
+          a sp:and ;
+          sp:arg1 [
+              a sp:eq ;
+              sp:arg1 [
+                  sp:varName "kind" ;
+                ] ;
+              sp:arg2 "blank" ;
+            ] ;
+          sp:arg2 [
+              a spl:subClassOf ;
+              sp:arg1 [
+                  sp:varName "type" ;
+                ] ;
+              sp:arg2 spin:Templates ;
+            ] ;
+        ] ;
+      swa:weight 1 ;
+    ] ;
+  ui:prototype """
+<div class=\"swa-template-call\" let:lang=\"{= ui:lang() }\">
+    <ui:forEach ui:resultSet=\"{#
+            SELECT ?segment
+            WHERE {
+                ?object a ?template .
+                ( ?template ?lang ) spif:labelTemplateSegment ?segment .
+            } }\">
+        <ui:if ui:condition=\"{= isIRI(?segment) }\">
+            <ui:group let:arg=\"{= spl:object(?object, ?segment) }\">
+                <ui:if ui:condition=\"{= bound(?arg) }\">
+                    <div class=\"swa-template-call-arg-segment swa-float-left\">{= ui:label(?arg) }</div>
+                </ui:if>
+                <ui:else>
+                    <div class=\"swa-template-call-arg-segment swa-float-left\">_</div>
+                </ui:else>
+            </ui:group>
+        </ui:if>
+        <ui:else>
+            <div class=\"swa-template-call-text-segment swa-float-left\">{= ?segment }</div>
+        </ui:else>
+    </ui:forEach>
+    <div class=\"swa-clear-both\"/>
+</div>
+"""^^ui:Literal ;
+  rdfs:label "Template call viewer" ;
+  rdfs:subClassOf swa:ObjectViewer ;
+.
+swa:TemplateElements
+  a ui:NodeClass ;
+  ui:abstract true ;
+  rdfs:comment "Abstract base class for elements related to SPIN templates." ;
+  rdfs:label "Template elements" ;
+  rdfs:subClassOf swa:Elements ;
+.
+swa:TextFieldArgumentEditor
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:width ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The width of the input field." ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <swa:ObjectEditorHiddenDatatypeField arg:datatype=\"{= ?valueType }\" arg:uid=\"{= ?uid }\"/>
+    <input class=\"form-control swa-text-field {= swa:testClass(?predicate) }\" name=\"new-{= ?uid }\" style=\"width: {= COALESCE(?width, &quot;80px&quot;) }\" type=\"text\" value=\"{= ?object }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Text field argument editor" ;
+  rdfs:subClassOf swa:ArgumentEditor ;
+.
+swa:filterByDomain
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "domain" ;
+              ] ;
+            sp:predicate rdfs:domain ;
+            sp:subject [
+                sp:varName "node" ;
+              ] ;
+          ]
+          [
+            a sp:TriplePath ;
+            sp:object [
+                sp:varName "domain" ;
+              ] ;
+            sp:path [
+                a sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "type" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:type ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The class (must be second argument of swa:AutoComplete)." ;
+    ] ;
+  rdfs:label "filter by domain" ;
+  rdfs:subClassOf swa:FilterFunctions ;
+.
+swa:templateSummary
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:GroupConcat ;
+                sp:expression [
+                    sp:varName "str" ;
+                  ] ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              a sp:Bind ;
+              sp:expression [
+                  a ui:lang ;
+                ] ;
+              sp:variable [
+                  sp:varName "lang" ;
+                ] ;
+            ]
+          )
+          [
+            sp:object [
+                sp:varName "template" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "lang" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "segment" ;
+              ] ;
+            sp:predicate spif:labelTemplateSegment ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    a sp:isIRI ;
+                    sp:arg1 [
+                        sp:varName "segment" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a sp:concat ;
+                    sp:arg1 " [" ;
+                    sp:arg2 [
+                        a afn:localname ;
+                        sp:arg1 [
+                            sp:varName "segment" ;
+                          ] ;
+                      ] ;
+                    sp:arg3 "] " ;
+                  ] ;
+                sp:arg3 [
+                    sp:varName "segment" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "str" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:template ;
+      spl:valueType spin:Template ;
+      rdfs:comment "The SPIN template to render." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:label "template summary" ;
+  rdfs:subClassOf swa:Functions ;
+.
+<http://topbraid.org/swaspin>
+  a owl:Ontology ;
+  owl:imports <http://topbraid.org/swa> ;
+.

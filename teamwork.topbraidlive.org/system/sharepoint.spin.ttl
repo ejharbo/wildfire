@@ -1,0 +1,55 @@
+# baseURI: http://topbraid.org/sharepoint.spin
+# imports: http://spinrdf.org/spin
+# imports: http://topbraid.org/sharepoint
+
+# c14n-version: 3
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+<http://topbraid.org/sharepoint#matchingDocument>
+  rdf:type spin:MagicProperty ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate sp:arg3 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The user name."^^xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate sp:arg4 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The password."^^xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The keyword to look for."^^xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The SharePoint server URL."^^xsd:string ;
+    ] ;
+  rdfs:comment """Retrieves documents from a given SharePoint server, if they have a matching keyword.
+
+Usage:
+
+	(?keyword ?server ?userName ?password) sharepoint:matchingDocument (?title ?path ?extension ?author ?size ?lastMod) ."""^^xsd:string ;
+  rdfs:label "matching document"^^xsd:string ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+<http://topbraid.org/sharepoint.spin>
+  rdf:type owl:Ontology ;
+  owl:imports <http://spinrdf.org/spin> ;
+  owl:imports <http://topbraid.org/sharepoint> ;
+  owl:versionInfo "Created with TopBraid Composer"^^xsd:string ;
+.

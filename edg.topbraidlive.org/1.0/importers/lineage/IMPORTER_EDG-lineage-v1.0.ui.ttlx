@@ -1,0 +1,2759 @@
+# baseURI: http://edg.topbraidlive.org/1.0/importer/lineage
+# imports: http://edg.topbraid.solutions/1.0/collection/schema-models
+# imports: http://edg.topbraid.solutions/1.0/importer/lib
+# imports: http://edg.topbraid.solutions/1.0/proxy/importer/lineage
+# imports: http://edg.topbraid.solutions/1.0/schema/config/importers
+# imports: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://edg.topbraid.solutions/1.0/transform/importer/lineage
+# imports: http://edg.topbraidlive.org/1.0/config/importers
+# imports: http://topbraid.org/spin/spinmapl
+# imports: http://topbraid.org/swa
+# imports: http://topbraid.org/teamwork.ui
+# imports: http://topbraid.org/teamworkimporters.ui
+
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix autotagger: <http://evn.topbraidlive.org/autotagger#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix conceptmatch: <http://topbraid.org/conceptmatch#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix config-importers: <http://edg.topbraidlive.org/config/importers#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix core-soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkapp: <http://topbraid.org/swa/crosswalkapp#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dashboard: <http://example.org/dashboard#> .
+@prefix dataset: <http://teamwork.topbraidlive.org/dataset#> .
+@prefix datasetapp: <http://topbraid.org/swa/datasetapp#> .
+@prefix datasetviewer: <http://topbraid.org/swa/datasetviewer#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ddl: <http://edg.topbraidlive.org/1.0/importers/ddl#> .
+@prefix default: <http://uispin.org/default#> .
+@prefix defaultapp: <http://topbraid.org/swa/defaultapp#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg-config: <http://edg.ext.topbraidlive.org/schema/config/importers#> .
+@prefix edg-importer: <http://edg.topbraidlive.org/importer/> .
+@prefix edg-qa: <http://edg.topbraidlive.org/utility/qa/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.global: <urn:x-evn-global:> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix eeh-lib: <http://www.environmenthub.no/spin/1.0/eeh-lib#> .
+@prefix eeh-reportlib: <http://www.environmenthub.no/spin/1.0/eeh-reportlib#> .
+@prefix elements: <http://purl.org/dc/elements/1.1/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evn: <http://topbraid.org/evn/evn#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evnimport: <http://evn.topbraidlive.org/uispin/evnimport#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix ex: <http://example.org/> .
+@prefix extjs: <http://uispin.com/extjs#> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix forms: <http://www.topbraid.org/2007/01/forms.owl#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix governance: <http://topbraid.org/teamworkgovernance.ui#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix graphql.search: <http://teamwork.topbraidlive.org/graphql.search#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix inference: <http://www.topbraid.org/2007/06/inference.owl#> .
+@prefix jdbc: <http://edg.topbraidlive.org/1.0/importers/jdbc#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix kennedys: <http://topbraid.org/examples/kennedys#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix lib-importer: <http://edg.topbraid.solutions/importer/lib#> .
+@prefix lineage-transform: <http://edg.topbraid.solutions/transform/importer/lineage#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix ontologyviewer: <http://topbraid.org/swa/ontologyviewer#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix proxy-lineage: <http://edg.topbraid.solutions/proxy/importer/lineage#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmapp: <http://rdm.topbraidlive.org/rdmapp#> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix rdmviewer: <http://rdm.topbraidlive.org/rdmviewer#> .
+@prefix saf: <http://topbraid.org/saf/> .
+@prefix safconfig: <http://topbraid.org/safconfig/> .
+@prefix safm: <http://saf.topbraidlive.org/metaschema/> .
+@prefix savedQueries: <http://teamwork.topbraidlive.org/ui/savedQueries#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix server: <http://server.topbraidlive.org/server.ui#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sharepoint: <http://topbraid.org/sharepoint#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spin.ui: <http://spinrdf.org/spin.ui#> .
+@prefix spinmap: <http://spinrdf.org/spinmap#> .
+@prefix spinmapl: <http://topbraid.org/spin/spinmapl#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix ss: <http://www.topbraidcomposer.org/owl/2006/08/spreadsheets.owl#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swadoc: <http://topbraid.org/swadoc#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tablesmap: <http://topbraid.org/spin/tablesmap#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix tblui: <http://server.topbraidlive.org/tblui#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkAdmin: <http://teamwork.topbraidlive.org/doc/teamworkAdmin#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworkconstraints: <http://topbraid.org/teamworkconstraints#> .
+@prefix teamworkdashboard: <http://topbraid.org/teamworkdashboard#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix teamworkupdate: <http://teamworkAPI.topbraid.com/teamworkUpdate#> .
+@prefix textindex: <http://topbraid.org/textindex#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix tracker: <http://teamwork.topbraidlive.org/ui/tracker#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uitest: <http://uispin.org/test#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix userdat: <http://teamwork.topbraidlive.org/ui/userdata> .
+@prefix userdata: <http://teamwork.topbraidlive.org/ui/userdata#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix victory: <http://edg.topbraid.solutions/victory/> .
+@prefix visual: <http://topbraid.org/visual#> .
+@prefix voag: <http://voag.linkedmodel.org/voag#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xhtml: <http://topbraid.org/xhtml#> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+edg:SubElements
+  a ui:NodeClass ;
+  rdfs:label "Sub elements" ;
+  rdfs:subClassOf ui:Element ;
+.
+edg:defaultTitleFunction
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "title" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:coalesce ;
+                sp:arg1 [
+                    a spl:object ;
+                    sp:arg1 [
+                        sp:varName "resource" ;
+                      ] ;
+                    sp:arg2 dcterms:description ;
+                  ] ;
+                sp:arg2 [
+                    a spl:object ;
+                    sp:arg1 [
+                        sp:varName "resource" ;
+                      ] ;
+                    sp:arg2 rdfs:comment ;
+                  ] ;
+                sp:arg3 [
+                    a xsd:string ;
+                    sp:arg1 [
+                        sp:varName "resource" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "title" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  rdfs:label "default title function" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg.v:Menu
+  sh:property [
+      sh:path edg:name ;
+      sh:datatype xsd:string ;
+      sh:name "name" ;
+    ] ;
+.
+<http://edg.topbraidlive.org/1.0/importer/lineage>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraidlive.org/importer/lineage/GMD_lineage> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/collection/schema-models> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/importer/lib> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/proxy/importer/lineage> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/config/importers> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/transform/importer/lineage> ;
+  owl:imports <http://edg.topbraidlive.org/1.0/config/importers> ;
+  owl:imports <http://topbraid.org/spin/spinmapl> ;
+  owl:imports <http://topbraid.org/swa> ;
+  owl:imports <http://topbraid.org/teamwork.ui> ;
+  owl:imports <http://topbraid.org/teamworkimporters.ui> ;
+.
+edg-importer:CheckIfConstraintViolations
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:shaclGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:tag ;
+      spl:valueType teamwork:Tag ;
+    ] ;
+  ui:prototype """
+<ui:group let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <ui:group let:graphForValidation=\"{= ui:unionOfGraphs(ui:graphWithImports(?shaclGraph), ui:tempGraphProxy) }\">
+        <ui:setContext ui:queryGraph=\"{= ?graphForValidation }\">
+            <sml:ValidateGraph>
+                <ui:call arg:dataGraph=\"{= ?graphForValidation }\" ui:template=\"{= tosh.ui:ValidationResults }\">
+                    <ui:if ui:condition=\"{= spr:rowCount(?rs) &gt; 0 }\">
+                        <ui:setGlobalVar ui:name=\"violationsExist\" ui:value=\"{= true }\"/>
+                        <teamwork:Chrome arg:pageType=\"import-page\" arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= teamwork:ImportProjectTab }\" arg:tag=\"{= ?tag }\">
+                            <teamwork:ReportSubtitle arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\"/>
+                            <div style=\"margin-bottom:15px;margin-top:-5px\">Total results: {= spr:rowCount(?rs) }<br/>
+                            </div>
+                            <ui:group let:sessionGraph=\"{= ui:createSessionGraph() }\">
+                                <ui:update ui:updateQuery=\"{!
+                                        INSERT {
+                                            GRAPH ?sessionGraph {
+                                                ?s ?p ?o .
+                                            } .
+                                        }
+                                        WHERE {
+                                            ?s ?p ?o .
+                                        } }\"/>
+                                <script>swa.applySuggestion = function(suggestionNodeId, resultElementId) {swa.callApplySuggestionService(suggestionNodeId, '{= ?sessionGraph }', '{= IF(bound(?tag), ui:graphWithoutImports(?dataGraph), teamwork:masterGraphForCurrentUser(ui:graphWithoutImports(?graphForValidation))) }');$(\"#\" + resultElementId).remove();}</script>
+                                <ui:forEach ui:resultSet=\"{= ?rs }\">
+                                    <swa:ValidationResultView arg:canApply=\"{= teamwork:currentUserHasPrivilege(COALESCE(?tag, ?teamGraph), teamwork:editor, ?teamGraph) }\" arg:dataGraph=\"{= ?graphForValidation }\" arg:result=\"{= ?result }\"/>
+                                </ui:forEach>
+                            </ui:group>
+                        </teamwork:Chrome>
+                    </ui:if>
+                    <ui:else>
+                        <ui:setGlobalVar ui:name=\"violationsExist\" ui:value=\"{= false }\"/>
+                    </ui:else>
+                </ui:call>
+            </sml:ValidateGraph>
+        </ui:setContext>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Check if constraint violations" ;
+  rdfs:subClassOf ui:Operations ;
+.
+edg-importer:CopyGraphToCurrentQueryGraph
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:update ui:updateQuery=\"{!
+        INSERT {
+            ?s ?p ?o .
+        }
+        WHERE {
+            GRAPH ?graph {
+                ?s ?p ?o .
+            } .
+        } }\"/>
+"""^^ui:Literal ;
+  rdfs:label "Copy graph to current query graph" ;
+  rdfs:subClassOf ui:Operations ;
+.
+edg-importer:CreateLineageModelInstance
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:namespace ;
+      spl:valueType xsd:string ;
+      rdfs:comment "This is the default namespace of the current Lineage Model" ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ui:tempGraphProxy {
+                    ?lineageUri a edg:LineageModel .
+                    ?lineageUri rdfs:label ?label .
+                } .
+                GRAPH ui:tempGraphInference {
+                    ?lineageUri a edg:LineageModel .
+                    ?lineageUri rdfs:label ?label .
+                } .
+            }
+            WHERE {
+                BIND (afn:localname(?graph) AS ?label) .
+                BIND (lib-importer:BuildLineageUri(?label, ?namespace) AS ?lineageUri) .
+            } }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "CreateLineageModelInstance" ;
+  rdfs:subClassOf ui:Operations ;
+.
+edg-importer:Elements
+  a ui:NodeClass ;
+  ui:headIncludes """
+<ui:group>
+    <title>EDG Importers</title>
+    <script>$.jqplot.config.enablePlugins = true;</script>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:subClassOf ui:Element ;
+.
+edg-importer:Functions
+  a spin:Function ;
+  rdfs:label "Functions" ;
+  rdfs:subClassOf spin:Functions ;
+.
+edg-importer:GetIncludedDataAssetModels
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "includedProjectGraph" ;
+          ]
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "includedProjectGraph" ;
+                    ] ;
+                  sp:predicate owl:imports ;
+                  sp:subject [
+                      sp:varName "projectGraph" ;
+                    ] ;
+                ]
+                [
+                  a sp:Filter ;
+                  sp:expression [
+                      a sp:and ;
+                      sp:arg1 [
+                          a teamwork:hasTeamGraph ;
+                          sp:arg1 [
+                              sp:varName "includedProjectGraph" ;
+                            ] ;
+                        ] ;
+                      sp:arg2 [
+                          a smf:canRead ;
+                          sp:arg1 [
+                              sp:varName "includedProjectGraph" ;
+                            ] ;
+                        ] ;
+                    ] ;
+                ]
+                [
+                  a sp:Filter ;
+                  sp:expression [
+                      a sp:eq ;
+                      sp:arg1 [
+                          a teamwork:getProjectType ;
+                          arg:projectGraph [
+                              sp:varName "includedProjectGraph" ;
+                            ] ;
+                        ] ;
+                      sp:arg2 edg:DataAssetsProjectType ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "projectGraph" ;
+              ] ;
+          ]
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a ui:label ;
+                      sp:arg1 [
+                          sp:varName "includedProjectGraph" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "label" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "includedProjectGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType owl:Ontology ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "Returns any graphs included into the given project graph that are (i) under Teamwork control, (ii) readable by the current user, and (iii) are EDG Data Asset Models." ;
+  rdfs:label "Get data asset models" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+edg-importer:GetIncludedEnterpriseAssetModels
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "includedProjectGraph" ;
+          ]
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "includedProjectGraph" ;
+                    ] ;
+                  sp:predicate owl:imports ;
+                  sp:subject [
+                      sp:varName "projectGraph" ;
+                    ] ;
+                ]
+                [
+                  a sp:Filter ;
+                  sp:expression [
+                      a sp:and ;
+                      sp:arg1 [
+                          a teamwork:hasTeamGraph ;
+                          sp:arg1 [
+                              sp:varName "includedProjectGraph" ;
+                            ] ;
+                        ] ;
+                      sp:arg2 [
+                          a smf:canRead ;
+                          sp:arg1 [
+                              sp:varName "includedProjectGraph" ;
+                            ] ;
+                        ] ;
+                    ] ;
+                ]
+                [
+                  a sp:Filter ;
+                  sp:expression [
+                      a sp:eq ;
+                      sp:arg1 [
+                          a teamwork:getProjectType ;
+                          arg:projectGraph [
+                              sp:varName "includedProjectGraph" ;
+                            ] ;
+                        ] ;
+                      sp:arg2 edg:EnterpriseModelsProjectType ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "projectGraph" ;
+              ] ;
+          ]
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a ui:label ;
+                      sp:arg1 [
+                          sp:varName "includedProjectGraph" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "label" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "includedProjectGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType owl:Ontology ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "Returns any graphs included into the given project graph that are (i) under Teamwork control, (ii) readable by the current user, and (iii) are EDG Enterprise Asset Models." ;
+  rdfs:label "Get included Technical asset models" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+edg-importer:GetIncludedTechnicalAssetModels
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "includedProjectGraph" ;
+          ]
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "includedProjectGraph" ;
+                    ] ;
+                  sp:predicate owl:imports ;
+                  sp:subject [
+                      sp:varName "projectGraph" ;
+                    ] ;
+                ]
+                [
+                  a sp:Filter ;
+                  sp:expression [
+                      a sp:and ;
+                      sp:arg1 [
+                          a teamwork:hasTeamGraph ;
+                          sp:arg1 [
+                              sp:varName "includedProjectGraph" ;
+                            ] ;
+                        ] ;
+                      sp:arg2 [
+                          a smf:canRead ;
+                          sp:arg1 [
+                              sp:varName "includedProjectGraph" ;
+                            ] ;
+                        ] ;
+                    ] ;
+                ]
+                [
+                  a sp:Filter ;
+                  sp:expression [
+                      a sp:eq ;
+                      sp:arg1 [
+                          a teamwork:getProjectType ;
+                          arg:projectGraph [
+                              sp:varName "includedProjectGraph" ;
+                            ] ;
+                        ] ;
+                      sp:arg2 edg:TechnicalAssetsProjectType ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "projectGraph" ;
+              ] ;
+          ]
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a ui:label ;
+                      sp:arg1 [
+                          sp:varName "includedProjectGraph" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "label" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "includedProjectGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType owl:Ontology ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "Returns any graphs included into the given project graph that are (i) under Teamwork control, (ii) readable by the current user, and (iii) are EDG Technical Asset Models." ;
+  rdfs:label "Get included Technical asset models" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+edg-importer:ImportLineageOnlyValidateService
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:fileName ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The file name, if available." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:dataAssetModel ;
+      spl:valueType owl:Ontology ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:enterpriseAssetModel ;
+      spl:valueType owl:Ontology ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:file ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The serialization of an RDF file, according to the format." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:overwrite ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:tag ;
+      spl:valueType teamwork:Tag ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:technicalAssetModel ;
+      spl:valueType owl:Ontology ;
+    ] ;
+  ui:prototype """
+<ui:group let:csvPath=\"{= CONCAT(&quot;/&quot;, spl:objectInGraph(config:configuration, cfg:teamworkRootProject, &lt;http://server.topbraidlive.org/dynamic/config&gt;), &quot;/&quot;, &quot;ImportedLineageSpreadsheets-&quot;, str(spif:random()), &quot;.csv&quot;) }\" let:currentLineageModel=\"{= teamwork:projectOrTagGraph(?projectGraph, ?tag) }\" let:currentLineageModelNamespace=\"{= swa:getDefaultNamespace(?projectGraph) }\" let:dataModelNamespace=\"{= lib-importer:GetDefaultNamespace(?dataAssetModel) }\" let:enterpriseModelNamespace=\"{= lib-importer:GetDefaultNamespace(?enterpriseAssetModel) }\" let:technicalModelNamespace=\"{= lib-importer:GetDefaultNamespace(?technicalAssetModel) }\">
+    <ui:group let:configImporterGraph=\"{= IRI(lib-importer:GetConfigBaseUri()) }\">
+        <ui:group let:shaclGraph=\"{= IRI(edg-importer:getShaclFile(?configImporterGraph)) }\" let:transformGraph=\"{= IRI(edg-importer:getTransformFile(?configImporterGraph)) }\">
+            <sml:ExportToTextFile sml:replace=\"{= true }\" sml:targetFilePath=\"{= ?csvPath }\" sml:text=\"{= ?file }\"/>
+            <sml:ImportRDFFromWorkspace sml:sourceFilePath=\"{= ?csvPath }\">
+                <ui:update ui:updateQuery=\"{!
+                        INSERT {
+                            GRAPH ui:tempGraph {
+                                ?s ?p ?o .
+                            } .
+                        }
+                        WHERE {
+                            ?s ?p ?o .
+                        } }\"/>
+            </sml:ImportRDFFromWorkspace>
+            <edg-importer:RenameProperties arg:configGraph=\"{= ?configImporterGraph }\" arg:fileName=\"{= ?fileName }\" arg:path=\"{= ?csvPath }\"/>
+            <edg-importer:CheckIfConstraintViolations arg:projectGraph=\"{= ?projectGraph }\" arg:shaclGraph=\"{= ?shaclGraph }\" arg:tag=\"{= ?tag }\"/>
+            <ui:if ui:condition=\"{= ui:globalVarValue(&quot;violationsExist&quot;) != true }\">
+                <!-- There were no violations-->
+                <teamwork:Chrome arg:projectTab=\"{= teamwork:ImportProjectTab }\" ui:args=\"*\">
+                    <h1>There were no data violations in the Lineage Spreadsheet file</h1>
+                    <teamwork:ButtonReturnToProjectOrTagPage arg:projectTab=\"{= teamwork:ImportProjectTab }\" ui:args=\"*\"/>
+                </teamwork:Chrome>
+            </ui:if>
+        </ui:group>
+    </ui:group>
+    <sml:DeleteFile sml:filePath=\"{= ?csvPath }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:comment """This service will import the lineage csv in an intermediate ImportedLineageSpreadsheets.csv in default project root and then it will validate it.
+No triples will be imported in the current Lineage Model""" ;
+  rdfs:label ":ImportLineageOnlyValidateService" ;
+  rdfs:subClassOf teamwork:MustHaveAccessToTagPage ;
+.
+edg-importer:ImportLineageService
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:fileName ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The file name, if available." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:dataAssetModel ;
+      spl:valueType owl:Ontology ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:enterpriseAssetModel ;
+      spl:valueType owl:Ontology ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:file ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The serialization of an RDF file, according to the format." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:overwrite ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:tag ;
+      spl:valueType teamwork:Tag ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:technicalAssetModel ;
+      spl:valueType owl:Ontology ;
+    ] ;
+  ui:prototype """
+<ui:group let:csvPath=\"{= CONCAT(&quot;/&quot;, spl:objectInGraph(config:configuration, cfg:teamworkRootProject, &lt;http://server.topbraidlive.org/dynamic/config&gt;), &quot;/&quot;, &quot;ImportedLineageSpreadsheets-&quot;, str(spif:random()), &quot;.csv&quot;) }\" let:currentLineageModel=\"{= teamwork:projectOrTagGraph(?projectGraph, ?tag) }\" let:currentLineageModelNamespace=\"{= swa:getDefaultNamespace(?projectGraph) }\" let:dataModelNamespace=\"{= lib-importer:GetDefaultNamespace(?dataAssetModel) }\" let:enterpriseModelNamespace=\"{= lib-importer:GetDefaultNamespace(?enterpriseAssetModel) }\" let:technicalModelNamespace=\"{= lib-importer:GetDefaultNamespace(?technicalAssetModel) }\">
+    <ui:group let:configImporterGraph=\"{= IRI(lib-importer:GetConfigBaseUri()) }\">
+        <ui:group let:shaclGraph=\"{= IRI(edg-importer:getShaclFile(?configImporterGraph)) }\" let:transformGraph=\"{= IRI(edg-importer:getTransformFile(?configImporterGraph)) }\">
+            <ui:try>
+                <sml:ExportToTextFile sml:replace=\"{= true }\" sml:targetFilePath=\"{= ?csvPath }\" sml:text=\"{= ?file }\"/>
+                <sml:ImportRDFFromWorkspace sml:sourceFilePath=\"{= ?csvPath }\">
+                    <ui:update ui:updateQuery=\"{!
+                            INSERT {
+                                GRAPH ui:tempGraph {
+                                    ?s ?p ?o .
+                                } .
+                            }
+                            WHERE {
+                                ?s ?p ?o .
+                            } }\"/>
+                </sml:ImportRDFFromWorkspace>
+                <edg-importer:RenameProperties arg:configGraph=\"{= ?configImporterGraph }\" arg:fileName=\"{= ?fileName }\" arg:path=\"{= ?csvPath }\"/>
+                <edg-importer:CheckIfConstraintViolations arg:projectGraph=\"{= ?projectGraph }\" arg:shaclGraph=\"{= ?shaclGraph }\" arg:tag=\"{= ?tag }\"/>
+                <ui:if ui:condition=\"{= ui:globalVarValue(&quot;violationsExist&quot;) = true }\">
+                    <!-- There has been a least one constraint violation at any level-->
+                    <ui:throw ui:message=\"There has been a constraint violation\"/>
+                </ui:if>
+                <edg-importer:CreateLineageModelInstance arg:graph=\"{= ui:graphWithImports(teamwork:projectOrTagGraph(?projectGraph, ?tag)) }\" arg:namespace=\"{= ?currentLineageModelNamespace }\"/>
+                <!-- We will create triples in tempGraphProxy to store namespaces and model graphs so to use the in spin rules -->
+                <ui:update ui:updateQuery=\"{!
+                        INSERT {
+                            GRAPH ui:tempGraphProxy {
+                                &lt;http://temp.com/dataAssetNamespace&gt; rdfs:label ?dataModelNamespace .
+                                &lt;http://temp.com/technicalAssetNamespace&gt; rdfs:label ?technicalModelNamespace .
+                                &lt;http://temp.com/enterpriseAssetNamespace&gt; rdfs:label ?enterpriseModelNamespace .
+                                &lt;http://temp.com/lineageModelNamespace&gt; rdfs:label ?currentLineageModelNamespace .
+                                &lt;http://temp.com/dataAssetModel&gt; rdfs:label ?dataAssetModel .
+                                &lt;http://temp.com/technicalAssetModel&gt; rdfs:label ?technicalAssetModel .
+                                &lt;http://temp.com/enterpriseAssetModel&gt; rdfs:label ?enterpriseAssetModel .
+                                &lt;http://temp.com/lineageModel&gt; rdfs:label ?currentLineageModel .
+                            } .
+                        }
+                        WHERE {
+                        } }\"/>
+                <ui:setContext ui:queryGraph=\"{= ui:unionOfGraphs(ui:tempGraphProxy, ui:graphWithImports(?transformGraph)) }\">
+                    <sml:ApplyTopSPIN sml:replace=\"{= true }\" sml:singlePass=\"{= true }\">
+                        <ui:update ui:updateQuery=\"{!
+                                INSERT {
+                                    GRAPH ui:tempGraphInference {
+                                        ?s ?p ?o .
+                                    } .
+                                }
+                                WHERE {
+                                    ?s ?p ?o .
+                                } }\"/>
+                    </sml:ApplyTopSPIN>
+                </ui:setContext>
+                <edg-importer:RemoveDerivedFromTriples/>
+                <edg-importer:StoreInAppropriateGraphs ui:args=\"*\"/>
+                <ui:if ui:condition=\"{= bound(?dataAssetModel) }\">
+                    <ui:setContext ui:queryGraph=\"{= lib-importer:GetHistoryOrWorkingCopyGraph(?dataAssetModel) }\">
+                        <ui:transaction ui:logMessage=\"Import Lineage file {= ?fileName } in data asset {= ?dataAssetModel }\">
+                            <edg-importer:CopyGraphToCurrentQueryGraph arg:graph=\"{= ui:tempGraphDataAsset }\"/>
+                        </ui:transaction>
+                    </ui:setContext>
+                </ui:if>
+                <ui:if ui:condition=\"{= bound(?technicalAssetModel) }\">
+                    <ui:setContext ui:queryGraph=\"{= lib-importer:GetHistoryOrWorkingCopyGraph(?technicalAssetModel) }\">
+                        <ui:transaction ui:logMessage=\"Import Lineage file {= ?fileName } in technical asset {= ?technicalAssetModel }\">
+                            <edg-importer:CopyGraphToCurrentQueryGraph arg:graph=\"{= ui:tempGraphTechnicalAsset }\"/>
+                        </ui:transaction>
+                    </ui:setContext>
+                </ui:if>
+                <ui:if ui:condition=\"{= bound(?enterpriseAssetModel) }\">
+                    <ui:setContext ui:queryGraph=\"{= lib-importer:GetHistoryOrWorkingCopyGraph(?enterpriseAssetModel) }\">
+                        <ui:transaction ui:logMessage=\"Import Lineage file {= ?fileName } in enterprise asset {= ?enterpriseAssetModel }\">
+                            <edg-importer:CopyGraphToCurrentQueryGraph arg:graph=\"{= ui:tempGraphEnterpriseAsset }\"/>
+                        </ui:transaction>
+                    </ui:setContext>
+                </ui:if>
+                <ui:setContext ui:queryGraph=\"{= lib-importer:GetHistoryOrWorkingCopyGraph(?projectGraph) }\" ui:silentTransactions=\"{= true }\">
+                    <ui:transaction ui:logMessage=\"Import Lineage file {= ?fileName } in lineage asset {= ?lineageAssetModel }\">
+                        <ui:update ui:updateQuery=\"{!
+                                INSERT {
+                                    ?s ?p ?o .
+                                }
+                                WHERE {
+                                    GRAPH ui:tempGraphLineageAsset {
+                                        ?s ?p ?o .
+                                    } .
+                                } }\"/>
+                    </ui:transaction>
+                </ui:setContext>
+                <ui:group let:dataAssetTriplesInserted=\"{#
+                        SELECT (COUNT(*) AS ?datacount)
+                        WHERE {
+                            GRAPH ui:tempGraphDataAsset {
+                                ?datas ?datap ?datao .
+                            } .
+                        } }\" let:enterpriseAssetTriplesInserted=\"{#
+                        SELECT (COUNT(*) AS ?enterpriseCount)
+                        WHERE {
+                            GRAPH ui:tempGraphEnterpriseAsset {
+                                ?enterprises ?enterprisep ?enterpriseo .
+                            } .
+                        } }\" let:lineageAssetTriplesInserted=\"{#
+                        SELECT (COUNT(*) AS ?lineagecount)
+                        WHERE {
+                            GRAPH ui:tempGraphLineageAsset {
+                                ?lineages ?lineagep ?lineageo .
+                            } .
+                        } }\" let:technicalAssetTriplesInserted=\"{#
+                        SELECT (COUNT(*) AS ?technicalcount)
+                        WHERE {
+                            GRAPH ui:tempGraphTechnicalAsset {
+                                ?technicals ?technicalp ?technicalo .
+                            } .
+                        } }\">
+                    <teamwork:Chrome arg:projectTab=\"{= teamwork:ImportProjectTab }\" ui:args=\"*\">
+                        <h1>The input Lineage CSV file has been processed</h1>
+                        <br/>
+                        <h3>{= ?lineageAssetTriplesInserted } triples were inserted in the current Lineage Model</h3>
+                        <h3>{= ?dataAssetTriplesInserted } triples were inserted in {= STRAFTER(str(?dataAssetModel), \"urn:x-evn-master:\") } Data Model</h3>
+                        <h3>{= ?technicalAssetTriplesInserted } triples were inserted in {= STRAFTER(str(?technicalAssetModel), \"urn:x-evn-master:\") } Technical Model</h3>
+                        <h3>{= ?enterpriseAssetTriplesInserted } triples were inserted in {= STRAFTER(str(?enterpriseAssetModel), \"urn:x-evn-master:\") } Enterprise Model</h3>
+                        <teamwork:ButtonReturnToProjectOrTagPage arg:projectTab=\"{= teamwork:ImportProjectTab }\" ui:args=\"*\"/>
+                    </teamwork:Chrome>
+                </ui:group>
+            </ui:try>
+            <ui:catch>
+                <ui:if ui:condition=\"{= ui:globalVarValue(&quot;violationsExist&quot;) = true }\">
+                    <ui:group let:t13=\"{= smf:trace(&quot;Constraint violations occured in import&quot;) }\"/>
+                </ui:if>
+                <ui:else>
+                    <teamwork:Chrome arg:projectTab=\"{= teamwork:ImportProjectTab }\" ui:args=\"*\">
+                        <h2 style=\"position: absolute;right: 600px\">Error: {= ?exception }</h2>
+                    </teamwork:Chrome>
+                </ui:else>
+            </ui:catch>
+        </ui:group>
+    </ui:group>
+    <sml:DeleteFile sml:filePath=\"{= ?csvPath }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:comment """This service will import the lineage csv in an intermediate ImportedLineageSpreadsheets.csv in default project root and then it will transfrom it.
+The transformation and shacl file used are declared in CONFIG_EDG file.""" ;
+  rdfs:label "ImportLineageService" ;
+  rdfs:subClassOf teamwork:MustHaveAccessToTagPage ;
+.
+edg-importer:ImportLineageSpreadsheetOnlyValidatePage
+  a ui:NodeClass ;
+  ui:errorPrototype """
+<ui:group let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+        <ui:if ui:condition=\"{= (!bound(?teamGraph)) || (!teamwork:currentUserHasPrivilege(COALESCE(?tag, ?teamGraph), teamwork:manager, ?teamGraph)) }\">
+            <teamwork:ErrorPage arg:message=\"You need to be manager of this {= IF(bound(?tag), &quot;working copy&quot;, &quot;project&quot;) } to import files into it.\"/>
+        </ui:if>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  ui:headIncludes """
+<ui:group>
+    <script>function handleImporterSubmit() {
+  var fileElement = $('[name=\"file\"]');
+  $('[name=\"fileName\"]').val(fileElement.val());
+
+ }</script>
+</ui:group>
+"""^^ui:Literal ;
+  ui:prototype """
+<teamwork:Chrome arg:pageType=\"import-page\" arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= teamwork:ImportProjectTab }\" arg:tag=\"{= ?tag }\" let:graph=\"{= ui:currentQueryGraph() }\" let:projectType=\"{= teamwork:getProjectType(?projectGraph) }\" let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <ui:try>
+        <form action=\"swp\" enctype=\"multipart/form-data\" id=\"theForm\" method=\"post\">
+            <h1>Validate Lineage using Standard Single Worksheet Template</h1>
+            <p/>
+            <p class=\"text-info\">Select CSV Lineage Spreadsheet file to validate</p>
+            <br/>
+            <input name=\"_progressId\" type=\"hidden\" value=\"{= ?progressId }\"/>
+            <input name=\"_base\" type=\"hidden\" value=\"{= teamwork:projectOrTagGraph(?projectGraph, ?tag) }\"/>
+            <input name=\"_viewClass\" type=\"hidden\" value=\"{= edg-importer:ImportLineageOnlyValidateService }\"/>
+            <div class=\"form-group\">
+                <input id=\"file\" name=\"file\" required=\"required\" type=\"file\"/>
+            </div>
+            <input name=\"projectGraph\" type=\"hidden\" value=\"{= ?projectGraph }\"/>
+            <input name=\"tag\" type=\"hidden\" value=\"{= ?tag }\"/>
+            <input name=\"fileName\" type=\"hidden\" value=\"\"/>
+            <p/>
+            <div class=\"form-group\">
+                <p> The service will only validate the imported spreadsheet and list potential data violations that might occur if the spreadsheet will be imported in the Data Asset, Technical Asset and Enterprise Asset Models. No data will actually be imported in the following models.</p>
+                <label for=\"dataAssetModel\">Model for Data Asset Definitions</label>
+                <div class=\"row\">
+                    <div class=\"col-xs-6\">
+                        <select aria-describedby=\"AssetsModelHelp\" class=\"form-control input-sm\" id=\"dataAssetModel\" name=\"dataAssetModel\">
+                            <optgroup label=\"Included Data Asset Models\">
+                                <ui:call arg:projectGraph=\"{= ?projectGraph }\" ui:template=\"{= edg-importer:GetIncludedDataAssetModels }\">
+                                    <ui:forEach ui:bindVars=\"?includedProjectGraph , ?label\" ui:resultSet=\"{= ?rs }\">
+                                        <option value=\"{= ?includedProjectGraph }\">
+                                            <ui:if ui:condition=\"{= bound(?tag) }\">Production copy of </ui:if>{= ?label }</option>
+                                    </ui:forEach>
+                                    <ui:if ui:condition=\"{= spr:rowCount(?rs) = 0 }\">
+                                        <ui:throw ui:message=\"You must include by reference one Data Asset Model and one Technical Asset Model in the {= swa:labelInGraph(teamwork:GeneralProjectTab, &lt;http://topbraid.org/teamwork.ui&gt;) } tab\"/>
+                                    </ui:if>
+                                </ui:call>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <p/>
+                </div>
+                <p/>
+                <label for=\"tecnicalAssetModel\">Model for Technical Asset Definitions</label>
+                <div class=\"row\">
+                    <div class=\"col-xs-6\">
+                        <select aria-describedby=\"AssetsModelHelp\" class=\"form-control input-sm\" id=\"technicalAssetModel\" name=\"technicalAssetModel\">
+                            <optgroup label=\"Included Technical Asset Models\">
+                                <ui:call arg:projectGraph=\"{= ?projectGraph }\" ui:template=\"{= edg-importer:GetIncludedTechnicalAssetModels }\">
+                                    <ui:forEach ui:bindVars=\"?includedProjectGraph , ?label\" ui:resultSet=\"{= ?rs }\">
+                                        <option value=\"{= ?includedProjectGraph }\">
+                                            <ui:if ui:condition=\"{= bound(?tag) }\">Production copy of </ui:if>{= ?label }</option>
+                                    </ui:forEach>
+                                    <ui:if ui:condition=\"{= spr:rowCount(?rs) = 0 }\">
+                                        <ui:throw ui:message=\"You must include one Technical Asset Model\"/>
+                                    </ui:if>
+                                </ui:call>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+                <p/>
+                <label for=\"enterpriseAssetModel\">Model for Enterprise Asset Definitions</label>
+                <div class=\"row\">
+                    <div class=\"col-xs-6\">
+                        <select aria-describedby=\"AssetsModelHelp\" class=\"form-control input-sm\" id=\"enterpriseAssetModel\" name=\"enterpriseAssetModel\">
+                            <optgroup label=\"Included Enterprise Asset Models\">
+                                <ui:call arg:projectGraph=\"{= ?projectGraph }\" ui:template=\"{= edg-importer:GetIncludedEnterpriseAssetModels }\">
+                                    <ui:forEach ui:bindVars=\"?includedProjectGraph , ?label\" ui:resultSet=\"{= ?rs }\">
+                                        <option value=\"{= ?includedProjectGraph }\">
+                                            <ui:if ui:condition=\"{= bound(?tag) }\">Production copy of </ui:if>{= ?label }</option>
+                                    </ui:forEach>
+                                    <ui:if ui:condition=\"{= spr:rowCount(?rs) = 0 }\">
+                                        <option disabled=\"disabled\">(None)</option>
+                                        <p>Enterprise model is not included. *Note* Enterprise Definitions will be ignored  </p>
+                                    </ui:if>
+                                </ui:call>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+                <div class=\"help-block\" id=\"AssetsModelHelp\">
+                    <p>Only Data Assets, Technical Assets and Enterprise Assets Models included by reference into this Lineage Model are shown. See <em>Includes</em> on the <em>
+                            <ui:createLink arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= teamwork:GeneralProjectTab }\" ui:viewClass=\"{= teamwork:ProjectPage }\">
+                                <a href=\"{= ?link }\">{= swa:labelInGraph(teamwork:GeneralProjectTab, ui:graph) }</a>
+                            </ui:createLink>
+                        </em> tab.</p>
+                    <p>Enterprise Asset Model is optional but if it is missing then relevant information that exists in the CSV will be ignored</p>
+                </div>
+            </div>
+            <div class=\"form-group\">
+                <button class=\"btn btn-default\" id=\"submitButton\" onclick=\"handleImporterSubmit()\" type=\"submit\">Import</button>
+            </div>
+            <div class=\"vspace-30\"/>
+            <span id=\"loader\"/>
+            <div class=\"vspace-30\"/>
+            <span id=\"loader\"/>
+        </form>
+    </ui:try>
+    <ui:catch>
+        <div>The import can not proceed: {= STRAFTER(str(?exception), \"SWPException:\") }</div>
+    </ui:catch>
+</teamwork:Chrome>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "ImportLineageSpreadsheetOnlyValidate" ;
+  rdfs:subClassOf teamwork:MustHaveAccessToTagPage ;
+.
+edg-importer:ImportLineageSpreadsheetPage
+  a ui:NodeClass ;
+  ui:errorPrototype """
+<ui:group let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+        <ui:if ui:condition=\"{= (!bound(?teamGraph)) || (!teamwork:currentUserHasPrivilege(COALESCE(?tag, ?teamGraph), teamwork:manager, ?teamGraph)) }\">
+            <teamwork:ErrorPage arg:message=\"You need to be manager of this {= IF(bound(?tag), &quot;working copy&quot;, &quot;project&quot;) } to import files into it.\"/>
+        </ui:if>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  ui:headIncludes """
+<ui:group>
+    <script>function handleImporterSubmit() {
+  var fileElement = $('[name=\"file\"]');
+  $('[name=\"fileName\"]').val(fileElement.val());
+
+ }</script>
+</ui:group>
+"""^^ui:Literal ;
+  ui:prototype """
+<teamwork:Chrome arg:pageType=\"import-page\" arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= teamwork:ImportProjectTab }\" arg:tag=\"{= ?tag }\" let:graph=\"{= ui:currentQueryGraph() }\" let:projectType=\"{= teamwork:getProjectType(?projectGraph) }\" let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <ui:try>
+        <form action=\"swp\" enctype=\"multipart/form-data\" id=\"theForm\" method=\"post\">
+            <h1>Validate and Import Lineage using Standard Single Worksheet Template</h1>
+            <p/>
+            <p class=\"text-info\">Select input CSV Lineage Spreadsheet file</p>
+            <br/>
+            <input name=\"_progressId\" type=\"hidden\" value=\"{= ?progressId }\"/>
+            <input name=\"_base\" type=\"hidden\" value=\"{= teamwork:projectOrTagGraph(?projectGraph, ?tag) }\"/>
+            <input name=\"_viewClass\" type=\"hidden\" value=\"{= edg-importer:ImportLineageService }\"/>
+            <div class=\"form-group\">
+                <input id=\"file\" name=\"file\" required=\"required\" type=\"file\"/>
+            </div>
+            <input name=\"projectGraph\" type=\"hidden\" value=\"{= ?projectGraph }\"/>
+            <input name=\"tag\" type=\"hidden\" value=\"{= ?tag }\"/>
+            <input name=\"fileName\" type=\"hidden\" value=\"\"/>
+            <p/>
+            <div class=\"form-group\">
+                <p> The import will first validate and if there are no violations will store appropriate definitions in the below selected Data Asset, Technical Asset and Enterprise Asset Models</p>
+                <label for=\"dataAssetModel\">Model for Data Asset Definitions</label>
+                <div class=\"row\">
+                    <div class=\"col-xs-6\">
+                        <select aria-describedby=\"AssetsModelHelp\" class=\"form-control input-sm\" id=\"dataAssetModel\" name=\"dataAssetModel\">
+                            <optgroup label=\"Included Data Asset Models\">
+                                <ui:call arg:projectGraph=\"{= ?projectGraph }\" ui:template=\"{= edg-importer:GetIncludedDataAssetModels }\">
+                                    <ui:forEach ui:bindVars=\"?includedProjectGraph , ?label\" ui:resultSet=\"{= ?rs }\">
+                                        <option value=\"{= ?includedProjectGraph }\">
+                                            <ui:if ui:condition=\"{= bound(?tag) }\">Production copy of </ui:if>{= ?label }</option>
+                                    </ui:forEach>
+                                    <ui:if ui:condition=\"{= spr:rowCount(?rs) = 0 }\">
+                                        <ui:throw ui:message=\"You must include by reference one Data Asset Model and one Technical Asset Model in the {= swa:labelInGraph(teamwork:GeneralProjectTab, &lt;http://topbraid.org/teamwork.ui&gt;) } tab\"/>
+                                    </ui:if>
+                                </ui:call>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <p/>
+                </div>
+                <p/>
+                <label for=\"tecnicalAssetModel\">Model for Technical Asset Definitions</label>
+                <div class=\"row\">
+                    <div class=\"col-xs-6\">
+                        <select aria-describedby=\"AssetsModelHelp\" class=\"form-control input-sm\" id=\"technicalAssetModel\" name=\"technicalAssetModel\">
+                            <optgroup label=\"Included Technical Asset Models\">
+                                <ui:call arg:projectGraph=\"{= ?projectGraph }\" ui:template=\"{= edg-importer:GetIncludedTechnicalAssetModels }\">
+                                    <ui:forEach ui:bindVars=\"?includedProjectGraph , ?label\" ui:resultSet=\"{= ?rs }\">
+                                        <option value=\"{= ?includedProjectGraph }\">
+                                            <ui:if ui:condition=\"{= bound(?tag) }\">Production copy of </ui:if>{= ?label }</option>
+                                    </ui:forEach>
+                                    <ui:if ui:condition=\"{= spr:rowCount(?rs) = 0 }\">
+                                        <ui:throw ui:message=\"You must include one Technical Asset Model\"/>
+                                    </ui:if>
+                                </ui:call>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+                <p/>
+                <label for=\"enterpriseAssetModel\">Model for Enterprise Asset Definitions</label>
+                <div class=\"row\">
+                    <div class=\"col-xs-6\">
+                        <select aria-describedby=\"AssetsModelHelp\" class=\"form-control input-sm\" id=\"enterpriseAssetModel\" name=\"enterpriseAssetModel\">
+                            <optgroup label=\"Included Enterprise Asset Models\">
+                                <ui:call arg:projectGraph=\"{= ?projectGraph }\" ui:template=\"{= edg-importer:GetIncludedEnterpriseAssetModels }\">
+                                    <ui:forEach ui:bindVars=\"?includedProjectGraph , ?label\" ui:resultSet=\"{= ?rs }\">
+                                        <option value=\"{= ?includedProjectGraph }\">
+                                            <ui:if ui:condition=\"{= bound(?tag) }\">Production copy of </ui:if>{= ?label }</option>
+                                    </ui:forEach>
+                                    <ui:if ui:condition=\"{= spr:rowCount(?rs) = 0 }\">
+                                        <option disabled=\"disabled\">(None)</option>
+                                        <p>Enterprise model is not included. *Note* Enterprise Definitions will be ignored  </p>
+                                    </ui:if>
+                                </ui:call>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+                <div class=\"help-block\" id=\"AssetsModelHelp\">
+                    <p>Only Data Assets, Technical Assets and Enterprise Assets Models included by reference into this Lineage Model are shown. See <em>Includes</em> on the <em>
+                            <ui:createLink arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= teamwork:GeneralProjectTab }\" ui:viewClass=\"{= teamwork:ProjectPage }\">
+                                <a href=\"{= ?link }\">{= swa:labelInGraph(teamwork:GeneralProjectTab, ui:graph) }</a>
+                            </ui:createLink>
+                        </em> tab.</p>
+                    <p>Enterprise Asset Model is optional but if it is missing then relevant information that exists in the CSV will be ignored</p>
+                </div>
+            </div>
+            <div class=\"form-group\">
+                <button class=\"btn btn-default\" id=\"submitButton\" onclick=\"handleImporterSubmit()\" type=\"submit\">Import</button>
+            </div>
+            <div class=\"vspace-30\"/>
+            <span id=\"loader\"/>
+            <div class=\"vspace-30\"/>
+            <span id=\"loader\"/>
+        </form>
+    </ui:try>
+    <ui:catch>
+        <div>The import can not proceed: {= STRAFTER(str(?exception), \"SWPException:\") }</div>
+    </ui:catch>
+</teamwork:Chrome>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "ImportLineageSpreadsheetPage" ;
+  rdfs:subClassOf teamwork:MustHaveAccessToTagPage ;
+.
+edg-importer:ImportLineageSpreadsheetWithoutValidationPage
+  a ui:NodeClass ;
+  ui:errorPrototype """
+<ui:group let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+        <ui:if ui:condition=\"{= (!bound(?teamGraph)) || (!teamwork:currentUserHasPrivilege(COALESCE(?tag, ?teamGraph), teamwork:manager, ?teamGraph)) }\">
+            <teamwork:ErrorPage arg:message=\"You need to be manager of this {= IF(bound(?tag), &quot;working copy&quot;, &quot;project&quot;) } to import files into it.\"/>
+        </ui:if>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  ui:headIncludes """
+<ui:group>
+    <script>function handleImporterSubmit() {
+  var fileElement = $('[name=\"file\"]');
+  $('[name=\"fileName\"]').val(fileElement.val());
+
+ }</script>
+</ui:group>
+"""^^ui:Literal ;
+  ui:prototype """
+<teamwork:Chrome arg:pageType=\"import-page\" arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= teamwork:ImportProjectTab }\" arg:tag=\"{= ?tag }\" let:graph=\"{= ui:currentQueryGraph() }\" let:projectType=\"{= teamwork:getProjectType(?projectGraph) }\" let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <ui:try>
+        <form action=\"swp\" enctype=\"multipart/form-data\" id=\"theForm\" method=\"post\">
+            <h1>Import Lineage using Standard Single Worksheet Template</h1>
+            <p class=\"text-info\">
+                <b>NOTE:</b> The input Spreadsheet will not be validated before import.
+We advise to first run the Validate Standard Lineage Spreadsheet service</p>
+            <p/>
+            <p class=\"text-info\">Select input CSV Lineage Spreadsheet file</p>
+            <br/>
+            <input name=\"_progressId\" type=\"hidden\" value=\"{= ?progressId }\"/>
+            <input name=\"_base\" type=\"hidden\" value=\"{= teamwork:projectOrTagGraph(?projectGraph, ?tag) }\"/>
+            <input name=\"_viewClass\" type=\"hidden\" value=\"{= edg-importer:ImportLineageWithoutValidationService }\"/>
+            <div class=\"form-group\">
+                <input id=\"file\" name=\"file\" required=\"required\" type=\"file\"/>
+            </div>
+            <input name=\"projectGraph\" type=\"hidden\" value=\"{= ?projectGraph }\"/>
+            <input name=\"tag\" type=\"hidden\" value=\"{= ?tag }\"/>
+            <input name=\"fileName\" type=\"hidden\" value=\"\"/>
+            <p/>
+            <div class=\"form-group\">
+                <p> The import will store appropriate definitions in the below selected Data Asset, Technical Asset and Enterprise Asset Models</p>
+                <label for=\"dataAssetModel\">Model for Data Asset Definitions</label>
+                <div class=\"row\">
+                    <div class=\"col-xs-6\">
+                        <select aria-describedby=\"AssetsModelHelp\" class=\"form-control input-sm\" id=\"dataAssetModel\" name=\"dataAssetModel\">
+                            <optgroup label=\"Included Data Asset Models\">
+                                <ui:call arg:projectGraph=\"{= ?projectGraph }\" ui:template=\"{= edg-importer:GetIncludedDataAssetModels }\">
+                                    <ui:forEach ui:bindVars=\"?includedProjectGraph , ?label\" ui:resultSet=\"{= ?rs }\">
+                                        <option value=\"{= ?includedProjectGraph }\">
+                                            <ui:if ui:condition=\"{= bound(?tag) }\">Production copy of </ui:if>{= ?label }</option>
+                                    </ui:forEach>
+                                    <ui:if ui:condition=\"{= spr:rowCount(?rs) = 0 }\">
+                                        <ui:throw ui:message=\"You must include by reference one Data Asset Model and one Technical Asset Model in the {= swa:labelInGraph(teamwork:GeneralProjectTab, &lt;http://topbraid.org/teamwork.ui&gt;) } tab\"/>
+                                    </ui:if>
+                                </ui:call>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <p/>
+                </div>
+                <p/>
+                <label for=\"tecnicalAssetModel\">Model for Technical Asset Definitions</label>
+                <div class=\"row\">
+                    <div class=\"col-xs-6\">
+                        <select aria-describedby=\"AssetsModelHelp\" class=\"form-control input-sm\" id=\"technicalAssetModel\" name=\"technicalAssetModel\">
+                            <optgroup label=\"Included Technical Asset Models\">
+                                <ui:call arg:projectGraph=\"{= ?projectGraph }\" ui:template=\"{= edg-importer:GetIncludedTechnicalAssetModels }\">
+                                    <ui:forEach ui:bindVars=\"?includedProjectGraph , ?label\" ui:resultSet=\"{= ?rs }\">
+                                        <option value=\"{= ?includedProjectGraph }\">
+                                            <ui:if ui:condition=\"{= bound(?tag) }\">Production copy of </ui:if>{= ?label }</option>
+                                    </ui:forEach>
+                                    <ui:if ui:condition=\"{= spr:rowCount(?rs) = 0 }\">
+                                        <ui:throw ui:message=\"You must include one Technical Asset Model\"/>
+                                    </ui:if>
+                                </ui:call>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+                <p/>
+                <label for=\"enterpriseAssetModel\">Model for Enterprise Asset Definitions</label>
+                <div class=\"row\">
+                    <div class=\"col-xs-6\">
+                        <select aria-describedby=\"AssetsModelHelp\" class=\"form-control input-sm\" id=\"enterpriseAssetModel\" name=\"enterpriseAssetModel\">
+                            <optgroup label=\"Included Enterprise Asset Models\">
+                                <ui:call arg:projectGraph=\"{= ?projectGraph }\" ui:template=\"{= edg-importer:GetIncludedEnterpriseAssetModels }\">
+                                    <ui:forEach ui:bindVars=\"?includedProjectGraph , ?label\" ui:resultSet=\"{= ?rs }\">
+                                        <option value=\"{= ?includedProjectGraph }\">
+                                            <ui:if ui:condition=\"{= bound(?tag) }\">Production copy of </ui:if>{= ?label }</option>
+                                    </ui:forEach>
+                                    <ui:if ui:condition=\"{= spr:rowCount(?rs) = 0 }\">
+                                        <option disabled=\"disabled\">(None)</option>
+                                        <p>Enterprise model is not included. *Note* Enterprise Definitions will be ignored  </p>
+                                    </ui:if>
+                                </ui:call>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+                <div class=\"help-block\" id=\"AssetsModelHelp\">
+                    <p>Only Data Assets, Technical Assets and Enterprise Assets Models included by reference into this Lineage Model are shown. See <em>Includes</em> on the <em>
+                            <ui:createLink arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= teamwork:GeneralProjectTab }\" ui:viewClass=\"{= teamwork:ProjectPage }\">
+                                <a href=\"{= ?link }\">{= swa:labelInGraph(teamwork:GeneralProjectTab, ui:graph) }</a>
+                            </ui:createLink>
+                        </em> tab.</p>
+                    <p>Enterprise Asset Model is optional but if it is missing then relevant information that exists in the CSV will be ignored</p>
+                </div>
+            </div>
+            <div class=\"form-group\">
+                <button class=\"btn btn-default\" id=\"submitButton\" onclick=\"handleImporterSubmit()\" type=\"submit\">Import</button>
+            </div>
+            <div class=\"vspace-30\"/>
+            <span id=\"loader\"/>
+            <div class=\"vspace-30\"/>
+            <span id=\"loader\"/>
+        </form>
+    </ui:try>
+    <ui:catch>
+        <div>The import can not proceed: {= STRAFTER(str(?exception), \"Exception:\") }</div>
+    </ui:catch>
+</teamwork:Chrome>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "ImportLineageSpreadsheetWithoutValidation" ;
+  rdfs:subClassOf teamwork:MustHaveAccessToTagPage ;
+.
+edg-importer:ImportLineageWithoutValidationService
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:fileName ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The file name, if available." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:dataAssetModel ;
+      spl:valueType owl:Ontology ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:enterpriseAssetModel ;
+      spl:valueType owl:Ontology ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:file ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The serialization of an RDF file, according to the format." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:overwrite ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:tag ;
+      spl:valueType teamwork:Tag ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:technicalAssetModel ;
+      spl:valueType owl:Ontology ;
+    ] ;
+  ui:prototype """
+<ui:group let:csvPath=\"{= CONCAT(&quot;/&quot;, spl:objectInGraph(config:configuration, cfg:teamworkRootProject, &lt;http://server.topbraidlive.org/dynamic/config&gt;), &quot;/&quot;, &quot;ImportedLineageSpreadsheets-&quot;, str(spif:random()), &quot;.csv&quot;) }\" let:currentLineageModel=\"{= teamwork:projectOrTagGraph(?projectGraph, ?tag) }\" let:currentLineageModelNamespace=\"{= swa:getDefaultNamespace(?projectGraph) }\" let:dataModelNamespace=\"{= lib-importer:GetDefaultNamespace(?dataAssetModel) }\" let:enterpriseModelNamespace=\"{= lib-importer:GetDefaultNamespace(?enterpriseAssetModel) }\" let:technicalModelNamespace=\"{= lib-importer:GetDefaultNamespace(?technicalAssetModel) }\">
+    <ui:group let:configImporterGraph=\"{= IRI(lib-importer:GetConfigBaseUri()) }\">
+        <ui:group let:shaclGraph=\"{= IRI(edg-importer:getShaclFile(?configImporterGraph)) }\" let:transformGraph=\"{= IRI(edg-importer:getTransformFile(?configImporterGraph)) }\">
+            <ui:try>
+                <sml:ExportToTextFile sml:replace=\"{= true }\" sml:targetFilePath=\"{= ?csvPath }\" sml:text=\"{= ?file }\"/>
+                <sml:ImportRDFFromWorkspace sml:sourceFilePath=\"{= ?csvPath }\">
+                    <ui:update ui:updateQuery=\"{!
+                            INSERT {
+                                GRAPH ui:tempGraph {
+                                    ?s ?p ?o .
+                                } .
+                            }
+                            WHERE {
+                                ?s ?p ?o .
+                            } }\"/>
+                </sml:ImportRDFFromWorkspace>
+                <edg-importer:RenameProperties arg:configGraph=\"{= ?configImporterGraph }\" arg:fileName=\"{= ?fileName }\" arg:path=\"{= ?csvPath }\"/>
+                <!--edg-importer:CheckIfConstraintViolations arg:projectGraph=\"{= ?projectGraph }\"
+  arg:shaclGraph=\"{= ?shaclGraph }\"
+  arg:tag=\"{= ?tag }\"/-->
+                <ui:if ui:condition=\"{= ui:globalVarValue(&quot;violationsExist&quot;) = true }\">
+                    <!-- There has been a least one constraint violation at any level-->
+                    <ui:throw ui:message=\"There has been a constraint violation\"/>
+                </ui:if>
+                <edg-importer:CreateLineageModelInstance arg:graph=\"{= ui:graphWithImports(teamwork:projectOrTagGraph(?projectGraph, ?tag)) }\" arg:namespace=\"{= ?currentLineageModelNamespace }\"/>
+                <!-- We will create triples in tempGraphProxy to store namespaces and model graphs so to use the in spin rules -->
+                <ui:update ui:updateQuery=\"{!
+                        INSERT {
+                            GRAPH ui:tempGraphProxy {
+                                &lt;http://temp.com/dataAssetNamespace&gt; rdfs:label ?dataModelNamespace .
+                                &lt;http://temp.com/technicalAssetNamespace&gt; rdfs:label ?technicalModelNamespace .
+                                &lt;http://temp.com/enterpriseAssetNamespace&gt; rdfs:label ?enterpriseModelNamespace .
+                                &lt;http://temp.com/lineageModelNamespace&gt; rdfs:label ?currentLineageModelNamespace .
+                                &lt;http://temp.com/dataAssetModel&gt; rdfs:label ?dataAssetModel .
+                                &lt;http://temp.com/technicalAssetModel&gt; rdfs:label ?technicalAssetModel .
+                                &lt;http://temp.com/enterpriseAssetModel&gt; rdfs:label ?enterpriseAssetModel .
+                                &lt;http://temp.com/lineageModel&gt; rdfs:label ?currentLineageModel .
+                            } .
+                        }
+                        WHERE {
+                        } }\"/>
+                <ui:setContext ui:queryGraph=\"{= ui:unionOfGraphs(ui:tempGraphProxy, ui:graphWithImports(?transformGraph)) }\">
+                    <sml:ApplyTopSPIN sml:replace=\"{= true }\" sml:singlePass=\"{= true }\">
+                        <ui:update ui:updateQuery=\"{!
+                                INSERT {
+                                    GRAPH ui:tempGraphInference {
+                                        ?s ?p ?o .
+                                    } .
+                                }
+                                WHERE {
+                                    ?s ?p ?o .
+                                } }\"/>
+                    </sml:ApplyTopSPIN>
+                </ui:setContext>
+                <edg-importer:RemoveDerivedFromTriples/>
+                <edg-importer:StoreInAppropriateGraphs ui:args=\"*\"/>
+                <ui:if ui:condition=\"{= bound(?dataAssetModel) }\">
+                    <ui:setContext ui:queryGraph=\"{= lib-importer:GetHistoryOrWorkingCopyGraph(?dataAssetModel) }\">
+                        <ui:transaction ui:logMessage=\"Import Lineage file {= ?fileName } in data asset {= ?dataAssetModel }\">
+                            <edg-importer:CopyGraphToCurrentQueryGraph arg:graph=\"{= ui:tempGraphDataAsset }\"/>
+                        </ui:transaction>
+                    </ui:setContext>
+                </ui:if>
+                <ui:if ui:condition=\"{= bound(?technicalAssetModel) }\">
+                    <ui:setContext ui:queryGraph=\"{= lib-importer:GetHistoryOrWorkingCopyGraph(?technicalAssetModel) }\">
+                        <ui:transaction ui:logMessage=\"Import Lineage file {= ?fileName } in technical asset {= ?technicalAssetModel }\">
+                            <edg-importer:CopyGraphToCurrentQueryGraph arg:graph=\"{= ui:tempGraphTechnicalAsset }\"/>
+                        </ui:transaction>
+                    </ui:setContext>
+                </ui:if>
+                <ui:if ui:condition=\"{= bound(?enterpriseAssetModel) }\">
+                    <ui:setContext ui:queryGraph=\"{= lib-importer:GetHistoryOrWorkingCopyGraph(?enterpriseAssetModel) }\">
+                        <ui:transaction ui:logMessage=\"Import Lineage file {= ?fileName } in enterprise asset {= ?enterpriseAssetModel }\">
+                            <edg-importer:CopyGraphToCurrentQueryGraph arg:graph=\"{= ui:tempGraphEnterpriseAsset }\"/>
+                        </ui:transaction>
+                    </ui:setContext>
+                </ui:if>
+                <ui:setContext ui:queryGraph=\"{= lib-importer:GetHistoryOrWorkingCopyGraph(?projectGraph) }\" ui:silentTransactions=\"{= true }\">
+                    <ui:transaction ui:logMessage=\"Import Lineage file {= ?fileName } in lineage asset {= ?lineageAssetModel }\">
+                        <ui:update ui:updateQuery=\"{!
+                                INSERT {
+                                    ?s ?p ?o .
+                                }
+                                WHERE {
+                                    GRAPH ui:tempGraphLineageAsset {
+                                        ?s ?p ?o .
+                                    } .
+                                } }\"/>
+                    </ui:transaction>
+                </ui:setContext>
+                <ui:group let:dataAssetTriplesInserted=\"{#
+                        SELECT (COUNT(*) AS ?datacount)
+                        WHERE {
+                            GRAPH ui:tempGraphDataAsset {
+                                ?datas ?datap ?datao .
+                            } .
+                        } }\" let:enterpriseAssetTriplesInserted=\"{#
+                        SELECT (COUNT(*) AS ?enterpriseCount)
+                        WHERE {
+                            GRAPH ui:tempGraphEnterpriseAsset {
+                                ?enterprises ?enterprisep ?enterpriseo .
+                            } .
+                        } }\" let:lineageAssetTriplesInserted=\"{#
+                        SELECT (COUNT(*) AS ?lineagecount)
+                        WHERE {
+                            GRAPH ui:tempGraphLineageAsset {
+                                ?lineages ?lineagep ?lineageo .
+                            } .
+                        } }\" let:technicalAssetTriplesInserted=\"{#
+                        SELECT (COUNT(*) AS ?technicalcount)
+                        WHERE {
+                            GRAPH ui:tempGraphTechnicalAsset {
+                                ?technicals ?technicalp ?technicalo .
+                            } .
+                        } }\">
+                    <teamwork:Chrome arg:projectTab=\"{= teamwork:ImportProjectTab }\" ui:args=\"*\">
+                        <h1>The input Lineage CSV file has been processed</h1>
+                        <br/>
+                        <h3>{= ?lineageAssetTriplesInserted } triples were inserted in the current Lineage Model</h3>
+                        <h3>{= ?dataAssetTriplesInserted } triples were inserted in {= STRAFTER(str(?dataAssetModel), \"urn:x-evn-master:\") } Data Model</h3>
+                        <h3>{= ?technicalAssetTriplesInserted } triples were inserted in {= STRAFTER(str(?technicalAssetModel), \"urn:x-evn-master:\") } Technical Model</h3>
+                        <h3>{= ?enterpriseAssetTriplesInserted } triples were inserted in {= STRAFTER(str(?enterpriseAssetModel), \"urn:x-evn-master:\") } Enterprise Model</h3>
+                        <teamwork:ButtonReturnToProjectOrTagPage arg:projectTab=\"{= teamwork:ImportProjectTab }\" ui:args=\"*\"/>
+                    </teamwork:Chrome>
+                </ui:group>
+            </ui:try>
+            <ui:catch>
+                <ui:if ui:condition=\"{= ui:globalVarValue(&quot;violationsExist&quot;) = true }\">
+                    <ui:group let:t13=\"{= smf:trace(&quot;Constraint violations occured in import&quot;) }\"/>
+                </ui:if>
+                <ui:else>
+                    <teamwork:Chrome arg:projectTab=\"{= teamwork:ImportProjectTab }\" ui:args=\"*\">
+                        <h2 style=\"position: absolute;right: 600px\">Error: {= ?exception }</h2>
+                    </teamwork:Chrome>
+                </ui:else>
+            </ui:catch>
+        </ui:group>
+    </ui:group>
+    <sml:DeleteFile sml:filePath=\"{= ?csvPath }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:comment """This service will import the lineage csv in an intermediate ImportedLineageSpreadsheets.csv in default project root and then it will transfrom it.
+The transformation file and proxy classes used are declared in CONFIG_EDG file.
+This service is similar with ImportLineageService but it doesn't validate constraints""" ;
+  rdfs:label "edg-importer:ImportLineageWithoutValidationService" ;
+  rdfs:subClassOf teamwork:MustHaveAccessToTagPage ;
+.
+edg-importer:ImportSpreadsheet
+  a ui:NodeClass ;
+  ui:headIncludes """
+<ui:group>
+    <meta content=\"edg-importer:SubElements\" name=\"edg-importer-sub-manifest-start\"/>
+    <link href=\"{= ui:lib() }/edg/css/chosen.css\\\" rel=\"stylesheet\"/>
+    <meta content=\"edg-importer:SubElements\" name=\"edg-importer-sub-manifest-start\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Import spreadsheet" ;
+  rdfs:subClassOf teamwork:AbstractSpreadsheetImportPage ;
+.
+edg-importer:LineageImportPlugins
+  a teamwork:ImportPlugin ;
+  ui:abstract true ;
+  rdfs:label "Lineage import plugins" ;
+  rdfs:subClassOf teamwork:ImportPlugins ;
+.
+edg-importer:LineageImporterOnlyValidatePlugin
+  a teamwork:ImportPlugin ;
+  teamwork:pluginIndex 1 ;
+  teamwork:validForTags true ;
+  ui:prototype """
+<ui:createLink arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\" ui:viewClass=\"{= edg-importer:ImportLineageSpreadsheetOnlyValidatePage }\">
+    <teamwork:ActionLink arg:comment=\"Validate a Lineage spreadsheet based on the standard Lineage Template.\" arg:icon=\"lib/edg/build/images/check.svg\" arg:link=\"{= ?link }\" arg:title=\"Validate Standard Lineage Spreadsheet\"/>
+</ui:createLink>
+"""^^ui:Literal ;
+  rdfs:label "Validate standard lineage spreadsheet plugin" ;
+  rdfs:subClassOf edg-importer:LineageImportPlugins ;
+.
+edg-importer:LineageImporterPlugin
+  a teamwork:ImportPlugin ;
+  teamwork:pluginIndex 1 ;
+  teamwork:validForTags true ;
+  ui:prototype """
+<ui:createLink arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\" ui:viewClass=\"{= edg-importer:ImportLineageSpreadsheetPage }\">
+    <teamwork:ActionLink arg:comment=\"Validate and Import a Lineage spreadsheet based on the standard Lineage Template.\" arg:icon=\"lib/teamwork/build/images/teamwork/import.svg\" arg:link=\"{= ?link }\" arg:title=\"Validate and Import Standard Lineage Spreadsheet\"/>
+</ui:createLink>
+"""^^ui:Literal ;
+  rdfs:label "Validate and import standard lineage spreadsheet plugin" ;
+  rdfs:subClassOf edg-importer:LineageImportPlugins ;
+.
+edg-importer:LineageImporterWithoutValidationPlugin
+  a teamwork:ImportPlugin ;
+  teamwork:pluginIndex 1 ;
+  teamwork:validForTags true ;
+  ui:prototype """
+<ui:createLink arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\" ui:viewClass=\"{= edg-importer:ImportLineageSpreadsheetWithoutValidationPage }\">
+    <teamwork:ActionLink arg:comment=\"Direct Import a Lineage spreadsheet based on the standard Lineage Template WITHOUT validating constraints.\" arg:icon=\"lib/edg/build/images/import2.svg\" arg:link=\"{= ?link }\" arg:title=\"Import Standard Lineage Spreadsheet\"/>
+</ui:createLink>
+"""^^ui:Literal ;
+  rdfs:label "Import standard lineage spreadsheet plugin" ;
+  rdfs:subClassOf edg-importer:LineageImportPlugins ;
+.
+edg-importer:RemoveDerivedFromTriples
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group>
+    <ui:update ui:updateQuery=\"{!
+            DELETE {
+                GRAPH ui:tempGraphInference {
+                    ?s ?p ?o .
+                } .
+            }
+            WHERE {
+                GRAPH ui:tempGraphInference {
+                    ?s ?p ?o .
+                    FILTER CONTAINS(str(?p), &quot;derived&quot;) .
+                } .
+            } }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "RemoveDerivedFromTriples" ;
+  rdfs:subClassOf ui:Operations ;
+.
+edg-importer:RenameProperties
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:configGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:fileName ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:path ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:prototype """
+<ui:group let:configImporterGraph=\"{= IRI(?configGraph) }\">
+    <ui:group letrs:rs=\"{#
+            SELECT ?proxyClass ?proxyNamespace
+            WHERE {
+                GRAPH ?configImporterGraph {
+                    config-importers:TransformLineageTemplate config-importers:baseUri ?scriptGraph .
+                    config-importers:TransformLineageTemplate config-importers:proxyBasicClass ?proxyClass .
+                    config-importers:TransformLineageTemplate config-importers:proxyNamespace ?proxyNamespace .
+                } .
+            } }\">
+        <ui:forEach ui:resultSet=\"{= ?rs }\">
+            <ui:update ui:updateQuery=\"{!
+                    INSERT {
+                        GRAPH ui:tempGraphProxy {
+                            ?newS ?newProperty ?o .
+                            ?newS a ?newType .
+                        } .
+                    }
+                    WHERE {
+                        GRAPH ui:tempGraph {
+                            BIND (CONCAT(&quot;file://&quot;, ?path, &quot;#&quot;) AS ?namespaceFromExcel) .
+                            ?s ?p ?o .
+                            ?s a ?type .
+                            BIND (afn:namespace(?p) AS ?oldPropertyNamespace) .
+                            FILTER (?oldPropertyNamespace = ?namespaceFromExcel) .
+                            BIND (IRI(spif:replaceAll(xsd:string(?s), ?namespaceFromExcel, CONCAT(&quot;http://&quot;, STRAFTER(spif:replaceAll(?fileName, &quot; &quot;, &quot;&quot;), &quot;path&quot;), &quot;#&quot;))) AS ?newS) .
+                            BIND (spif:localName(?p) AS ?propertyLocalname) .
+                            BIND (IRI(CONCAT(?proxyNamespace, ?propertyLocalname)) AS ?newProperty) .
+                            BIND (?proxyClass AS ?newType) .
+                        } .
+                    } }\"/>
+        </ui:forEach>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Rename properties" ;
+  rdfs:subClassOf edg-importer:SubElements ;
+.
+edg-importer:SelectTemplates
+  a spin:SelectTemplate ;
+  rdfs:label "Select templates" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg-importer:Services
+  a ui:Service ;
+  rdfs:label "Services" ;
+  rdfs:subClassOf ui:Services ;
+.
+edg-importer:StoreInAppropriateGraphs
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:dataAssetModel ;
+      spl:valueType owl:Ontology ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:overwrite ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:record ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:tag ;
+      spl:valueType teamwork:Tag ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:setContext ui:queryGraph=\"{= ui:unionOfGraphs(ui:graphWithImports(&lt;http://edg.topbraid.solutions/1.0/collection/all&gt;)) }\">
+        <ui:update ui:updateQuery=\"{!
+                INSERT {
+                    GRAPH ui:tempGraphDataAsset {
+                        ?s ?p ?o .
+                    } .
+                }
+                WHERE {
+                    ?superClass edg:instancesHeldInAssetCollectionType edg:DataAssetsProjectType .
+                    ?class (rdfs:subClassOf)* ?superClass .
+                    GRAPH ui:tempGraphInference {
+                        ?s a ?class .
+                        ?s ?p ?o .
+                    } .
+                } }\"/>
+        <!-- Here we will exclude also Lineage Model triple because for an unknown reason LineageModel is a subclass of technical asset
+but we don't want it stored in the  Technical Asset graph-->
+        <ui:update ui:updateQuery=\"{!
+                INSERT {
+                    GRAPH ui:tempGraphTechnicalAsset {
+                        ?s ?p ?o .
+                    } .
+                }
+                WHERE {
+                    ?superClass edg:instancesHeldInAssetCollectionType edg:TechnicalAssetsProjectType .
+                    ?class (rdfs:subClassOf)* ?superClass .
+                    GRAPH ui:tempGraphInference {
+                        ?s a ?class .
+                        FILTER (?class != edg:LineageModel) .
+                        ?s ?p ?o .
+                    } .
+                } }\"/>
+        <ui:update ui:updateQuery=\"{!
+                INSERT {
+                    GRAPH ui:tempGraphEnterpriseAsset {
+                        ?s ?p ?o .
+                    } .
+                }
+                WHERE {
+                    ?superClass edg:instancesHeldInAssetCollectionType edg:EnterpriseModelsProjectType .
+                    ?class (rdfs:subClassOf)* ?superClass .
+                    GRAPH ui:tempGraphInference {
+                        ?s a ?class .
+                        ?s ?p ?o .
+                    } .
+                } }\"/>
+        <ui:update ui:updateQuery=\"{!
+                INSERT {
+                    GRAPH ui:tempGraphLineageAsset {
+                        ?s ?p ?o .
+                    } .
+                }
+                WHERE {
+                    ?superClass edg:instancesHeldInAssetCollectionType edg:LineageModelProjectType .
+                    ?class (rdfs:subClassOf)* ?superClass .
+                    GRAPH ui:tempGraphInference {
+                        ?s a ?class .
+                        ?s ?p ?o .
+                    } .
+                } }\"/>
+    </ui:setContext>
+    <!-- Store Custom element also in the graph that the new class belongs too.
+We find that out based on the namespace we have created in the spin rules
+If the new class is not declared, then the triples will be left only in data Assets graph-->
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ui:tempGraphTechnicalAsset {
+                    ?s ?p ?o .
+                } .
+            }
+            WHERE {
+                GRAPH ui:tempGraphInference {
+                    ?s a ?class .
+                    FILTER (?class = edg:CustomElement) .
+                    ?s ?p ?o .
+                    BIND (str(?s) AS ?customUriStr) .
+                } .
+                GRAPH ui:tempGraphProxy {
+                    &lt;http://temp.com/technicalAssetNamespace&gt; rdfs:label ?technicalModelNamespace .
+                } .
+                FILTER fn:starts-with(?customUriStr, ?technicalModelNamespace) .
+                FILTER ((?p != edg:dataElementOf) &amp;&amp; (?o != edg:CustomElement)) .
+            } }\"/>
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ui:tempGraphEnterpriseAsset {
+                    ?s ?p ?o .
+                } .
+            }
+            WHERE {
+                GRAPH ui:tempGraphInference {
+                    ?s a ?class .
+                    FILTER (?class = edg:CustomElement) .
+                    ?s ?p ?o .
+                    BIND (str(?s) AS ?customUriStr) .
+                } .
+                GRAPH ui:tempGraphProxy {
+                    &lt;http://temp.com/enterpriseAssetNamespace&gt; rdfs:label ?enterpriseModelNamespace .
+                } .
+                FILTER fn:starts-with(?customUriStr, ?enterpriseModelNamespace) .
+                FILTER ((?p != edg:dataElementOf) &amp;&amp; (?o != edg:CustomElement)) .
+            } }\"/>
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ui:tempGraphLineageAsset {
+                    ?s ?p ?o .
+                } .
+            }
+            WHERE {
+                GRAPH ui:tempGraphInference {
+                    ?s a ?class .
+                    FILTER (?class = edg:CustomElement) .
+                    ?s ?p ?o .
+                    BIND (str(?s) AS ?customUriStr) .
+                } .
+                GRAPH ui:tempGraphProxy {
+                    &lt;http://temp.com/lineageAssetNamespace&gt; rdfs:label ?lineageModelNamespace .
+                } .
+                FILTER fn:starts-with(?customUriStr, ?lineageModelNamespace) .
+                FILTER ((?p != edg:dataElementOf) &amp;&amp; (?o != edg:CustomElement)) .
+            } }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Store in appropriate graphs" ;
+  rdfs:subClassOf ui:Operations ;
+.
+edg-importer:SubElements
+  a ui:NodeClass ;
+  ui:headIncludes """
+<ui:group>
+    <meta content=\"edg-importer:SubElements\" name=\"edg-importer-sub-manifest-start\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Sub elements" ;
+  rdfs:subClassOf edg-importer:Elements ;
+.
+edg-importer:UpdateTargetGraphs
+  a ui:Service ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <ui:setContext ui:silentTransactions=\"{= true }\">
+        <ui:update ui:updateQuery=\"{!
+                INSERT {
+                }
+                WHERE {
+                } }\"/>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Update target graphs" ;
+  rdfs:subClassOf edg-importer:Services ;
+.
+edg-importer:getIncludedDataAssetGraphs
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "graphLabel" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "graphBaseUri" ;
+          ]
+          [
+            sp:varName "graphLabel" ;
+          ]
+          [
+            sp:varName "databaseTables" ;
+          ]
+          [
+            sp:varName "databaseColumns" ;
+          ]
+          [
+            sp:varName "databaseViews" ;
+          ]
+          [
+            sp:varName "databaseContainers" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "graphBaseUri" ;
+              ] ;
+            sp:predicate owl:imports ;
+            sp:subject [
+                sp:varName "projectGraph" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a edg-importer:getProjectType ;
+                arg:graph [
+                    sp:varName "graphBaseUri" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "graphProjectType" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:eq ;
+                sp:arg1 [
+                    sp:varName "graphProjectType" ;
+                  ] ;
+                sp:arg2 edg:DataAssetsProject ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "graphLabel" ;
+              ] ;
+            sp:predicate rdfs:label ;
+            sp:subject [
+                sp:varName "graphBaseUri" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a edg-importer:getInstancesCountByType ;
+                sp:arg1 [
+                    sp:varName "graphBaseUri" ;
+                  ] ;
+                sp:arg2 edg:DatabaseTable ;
+              ] ;
+            sp:variable [
+                sp:varName "databaseTables" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a edg-importer:getInstancesCountByType ;
+                sp:arg1 [
+                    sp:varName "graphBaseUri" ;
+                  ] ;
+                sp:arg2 edg:DatabaseView ;
+              ] ;
+            sp:variable [
+                sp:varName "databaseViews" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a edg-importer:getInstancesCountByType ;
+                sp:arg1 [
+                    sp:varName "graphBaseUri" ;
+                  ] ;
+                sp:arg2 edg:DatabaseColumn ;
+              ] ;
+            sp:variable [
+                sp:varName "databaseColumns" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a edg-importer:getInstancesCountByType ;
+                sp:arg1 [
+                    sp:varName "graphBaseUri" ;
+                  ] ;
+                sp:arg2 edg:DatabaseView ;
+              ] ;
+            sp:variable [
+                sp:varName "databaseContainers" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:private true ;
+  rdfs:label "getIncludedDataAssetGraphs" ;
+  rdfs:subClassOf edg-importer:SelectTemplates ;
+.
+edg-importer:getIncludedEnterpriseAssetGraphs
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "graphLabel" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "graphBaseUri" ;
+          ]
+          [
+            sp:varName "graphLabel" ;
+          ]
+          [
+            sp:varName "organizations" ;
+          ]
+          [
+            sp:varName "requirements" ;
+          ]
+          [
+            sp:varName "forms" ;
+          ]
+          [
+            sp:varName "reports" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "graphBaseUri" ;
+              ] ;
+            sp:predicate owl:imports ;
+            sp:subject [
+                sp:varName "projectGraph" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a edg-importer:getProjectType ;
+                arg:graph [
+                    sp:varName "graphBaseUri" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "graphProjectType" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:eq ;
+                sp:arg1 [
+                    sp:varName "graphProjectType" ;
+                  ] ;
+                sp:arg2 edg:EnterpriseModelsProject ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "graphLabel" ;
+              ] ;
+            sp:predicate rdfs:label ;
+            sp:subject [
+                sp:varName "graphBaseUri" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a edg-importer:getInstancesCountByType ;
+                sp:arg1 [
+                    sp:varName "graphBaseUri" ;
+                  ] ;
+                sp:arg2 metadata:Organization ;
+              ] ;
+            sp:variable [
+                sp:varName "organizations" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a edg-importer:getInstancesCountByType ;
+                sp:arg1 [
+                    sp:varName "graphBaseUri" ;
+                  ] ;
+                sp:arg2 edg:Requirement ;
+              ] ;
+            sp:variable [
+                sp:varName "requirements" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a edg-importer:getInstancesCountByType ;
+                sp:arg1 [
+                    sp:varName "graphBaseUri" ;
+                  ] ;
+                sp:arg2 edg:Form ;
+              ] ;
+            sp:variable [
+                sp:varName "forms" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a edg-importer:getInstancesCountByType ;
+                sp:arg1 [
+                    sp:varName "graphBaseUri" ;
+                  ] ;
+                sp:arg2 edg:Report ;
+              ] ;
+            sp:variable [
+                sp:varName "reports" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:private true ;
+  rdfs:label "getIncludedEnterpriseAssetGraphs" ;
+  rdfs:subClassOf edg-importer:SelectTemplates ;
+.
+edg-importer:getIncludedGraphs
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "graphLabel" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "graphBaseUri" ;
+          ]
+          [
+            sp:varName "graphLabel" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "graphBaseUri" ;
+              ] ;
+            sp:predicate owl:imports ;
+            sp:subject [
+                sp:varName "projectGraph" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a edg-importer:getProjectType ;
+                arg:graph [
+                    sp:varName "graphBaseUri" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "graphProjectType" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:eq ;
+                sp:arg1 [
+                    sp:varName "graphProjectType" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "projectType" ;
+                  ] ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "graphLabel" ;
+              ] ;
+            sp:predicate rdfs:label ;
+            sp:subject [
+                sp:varName "graphBaseUri" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectType ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:private true ;
+  rdfs:label "getIncludedGraphs" ;
+  rdfs:subClassOf edg-importer:SelectTemplates ;
+.
+edg-importer:getIncludedTechnicalAssetGraphs
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "graphLabel" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "graphBaseUri" ;
+          ]
+          [
+            sp:varName "graphLabel" ;
+          ]
+          [
+            sp:varName "softwareApplications" ;
+          ]
+          [
+            sp:varName "SQLscripts" ;
+          ]
+          [
+            sp:varName "ETLscripts" ;
+          ]
+          [
+            sp:varName "storedProcedures" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "graphBaseUri" ;
+              ] ;
+            sp:predicate owl:imports ;
+            sp:subject [
+                sp:varName "projectGraph" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a edg-importer:getProjectType ;
+                arg:graph [
+                    sp:varName "graphBaseUri" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "graphProjectType" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:eq ;
+                sp:arg1 [
+                    sp:varName "graphProjectType" ;
+                  ] ;
+                sp:arg2 edg:TechnicalAssetsProject ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "graphLabel" ;
+              ] ;
+            sp:predicate rdfs:label ;
+            sp:subject [
+                sp:varName "graphBaseUri" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a edg-importer:getInstancesCountByType ;
+                sp:arg1 [
+                    sp:varName "graphBaseUri" ;
+                  ] ;
+                sp:arg2 edg:SoftwareApplication ;
+              ] ;
+            sp:variable [
+                sp:varName "softwareApplications" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a edg-importer:getInstancesCountByType ;
+                sp:arg1 [
+                    sp:varName "graphBaseUri" ;
+                  ] ;
+                sp:arg2 edg:SQLscript ;
+              ] ;
+            sp:variable [
+                sp:varName "SQLscripts" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a edg-importer:getInstancesCountByType ;
+                sp:arg1 [
+                    sp:varName "graphBaseUri" ;
+                  ] ;
+                sp:arg2 edg:ETLscript ;
+              ] ;
+            sp:variable [
+                sp:varName "ETLscripts" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a edg-importer:getInstancesCountByType ;
+                sp:arg1 [
+                    sp:varName "graphBaseUri" ;
+                  ] ;
+                sp:arg2 edg:StoredProcedure ;
+              ] ;
+            sp:variable [
+                sp:varName "storedProcedures" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:private true ;
+  rdfs:label "getIncludedTechnicalAssetGraphs" ;
+  rdfs:subClassOf edg-importer:SelectTemplates ;
+.
+edg-importer:getInstancesCountByType
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:Count ;
+                sp:expression [
+                    sp:varName "s" ;
+                  ] ;
+              ] ;
+            sp:varName "count" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  a sp:TriplePath ;
+                  sp:object spin:_arg2 ;
+                  sp:path [
+                      a sp:ModPath ;
+                      sp:modMax -2 ;
+                      sp:modMin 0 ;
+                      sp:subPath rdfs:subClassOf ;
+                    ] ;
+                  sp:subject [
+                      sp:varName "class" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "class" ;
+                    ] ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "s" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode spin:_arg1 ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "this is the input graph" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "This is the class for which we want to count instances" ;
+    ] ;
+  spin:returnType xsd:integer ;
+  rdfs:label "get instances count by type" ;
+  rdfs:subClassOf edg-importer:Functions ;
+.
+edg-importer:getProjectType
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "graphType" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "graphType" ;
+                    ] ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "graph" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "graph" ;
+              ] ;
+          ]
+          [
+            sp:object edg:ModelClass ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "graphTypes" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:in ;
+                sp:arg1 [
+                    sp:varName "graphType" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "graphTypes" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:label "get project type" ;
+  rdfs:subClassOf edg-importer:Functions ;
+.
+edg-importer:getShaclFile
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "shapes" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "shapes" ;
+                    ] ;
+                  sp:predicate config-importers:shapesBaseUri ;
+                  sp:subject config-importers:DefaultLineageConfigurationTemplate ;
+                ]
+              ) ;
+            sp:graphNameNode spin:_arg1 ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "this is the config graph" ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:label "getShaclFile" ;
+  rdfs:subClassOf edg-importer:Functions ;
+.
+edg-importer:getTransformFile
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "transform" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "transform" ;
+                    ] ;
+                  sp:predicate config-importers:baseUri ;
+                  sp:subject config-importers:TransformLineageTemplate ;
+                ]
+              ) ;
+            sp:graphNameNode spin:_arg1 ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "this is the config graph" ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:label "get instances count by type" ;
+  rdfs:subClassOf edg-importer:Functions ;
+.
+edg-importer:isExistingViolation
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object sh:ValidationResult ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "s" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode ui:tempGraphViolations ;
+          ]
+        ) ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:label "isExistingViolation" ;
+  rdfs:subClassOf edg-importer:Functions ;
+.
+edg-importer:isMemberOf
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Union ;
+            sp:elements (
+                (
+                  [
+                    a sp:Filter ;
+                    sp:expression [
+                        a sp:lt ;
+                        sp:arg1 [
+                            sp:varName "row" ;
+                          ] ;
+                        sp:arg2 0 ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression false ;
+                    sp:variable [
+                        sp:varName "result" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    a sp:Filter ;
+                    sp:expression [
+                        a sp:ge ;
+                        sp:arg1 [
+                            sp:varName "row" ;
+                          ] ;
+                        sp:arg2 0 ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a sp:if ;
+                        sp:arg1 [
+                            a sp:ne ;
+                            sp:arg1 [
+                                a spr:cell ;
+                                sp:arg1 [
+                                    sp:varName "resultSet" ;
+                                  ] ;
+                                sp:arg2 [
+                                    sp:varName "row" ;
+                                  ] ;
+                                sp:arg3 0 ;
+                              ] ;
+                            sp:arg2 [
+                                sp:varName "element" ;
+                              ] ;
+                          ] ;
+                        sp:arg2 [
+                            a edg-importer:isMemberOf ;
+                            arg:element [
+                                sp:varName "element" ;
+                              ] ;
+                            arg:resultSet [
+                                sp:varName "resultSet" ;
+                              ] ;
+                            arg:row [
+                                a sp:sub ;
+                                sp:arg1 [
+                                    sp:varName "row" ;
+                                  ] ;
+                                sp:arg2 1 ;
+                              ] ;
+                          ] ;
+                        sp:arg3 true ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "result" ;
+                      ] ;
+                  ]
+                )
+              ) ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:element ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resultSet ;
+      spl:valueType sp:Select ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:row ;
+      spl:valueType xsd:integer ;
+    ] ;
+  rdfs:label "is member of" ;
+  rdfs:subClassOf edg-importer:Functions ;
+.
+<http://edg.topbraidlive.org/importer/lineage/GMD_lineage>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:ImporterGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraidlive.org/1.0/importer/lineage> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource voag:TopQuadrant_ONTOLOGY-LICENSE ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+arg:columns
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:dataAssetModel
+  a rdf:Property ;
+  rdfs:label "data asset model" ;
+  rdfs:range owl:Ontology ;
+.
+arg:enterpriseAssetModel
+  a rdf:Property ;
+  rdfs:label "enterprise asset model" ;
+  rdfs:range owl:Ontology ;
+.
+arg:overwrite
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:shaclGraph
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:technicalAssetModel
+  a rdf:Property ;
+  rdfs:label "technical asset model" ;
+  rdfs:range owl:Ontology ;
+.
+arg:titleFunction
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+sml:ImportRDFFromWorkspace
+  rdfs:subClassOf sml:Elements ;
+.
+sh:PropertyGroup
+  ui:instanceView """
+<ui:group ui:id=\"edgQA\" ui:priority=\"{= 1 }\">
+    <div class=\"pl10px pt5px\" let:pgDesc=\"{= spl:object(?this, sh:description) }\">
+   TODO</div>
+</ui:group>
+"""^^ui:Literal ;
+.
+sh:Shape
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:class ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+.
+sh:shapesGraph
+  rdfs:label "shapes graph" ;
+.
+<urn:x-tb:evnimport#DataLineageInputTemplate-crrm.c>
+  rdfs:subClassOf <http://edg.topbraid.solutions/importer/Spreadsheet> ;
+.

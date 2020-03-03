@@ -1,0 +1,256 @@
+# baseURI: http://topbraid.org/email
+# imports: http://www.topbraid.org/2007/05/composite.owl
+# prefix: email
+
+@prefix email: <http://topbraid.org/email#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://topbraid.org/email>
+  a owl:Ontology ;
+  owl:imports <http://www.topbraid.org/2007/05/composite.owl> ;
+  owl:versionInfo "1.1.0" ;
+.
+email:Address
+  a owl:Class ;
+  rdfs:label "Address" ;
+  rdfs:subClassOf owl:Thing ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:int ;
+      owl:onProperty email:server ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:int ;
+      owl:onProperty email:address ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:int ;
+      owl:onProperty email:name ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:int ;
+      owl:onProperty email:password ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:int ;
+      owl:onProperty email:protocol ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:int ;
+      owl:onProperty email:userName ;
+    ] ;
+.
+email:Attachment
+  a owl:Class ;
+  rdfs:label "Attachment" ;
+  rdfs:subClassOf owl:Thing ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:int ;
+      owl:onProperty email:fileName ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:int ;
+      owl:onProperty email:mimeType ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:int ;
+      owl:onProperty email:size ;
+    ] ;
+.
+email:Message
+  a owl:Class ;
+  rdfs:label "Message" ;
+  rdfs:subClassOf owl:Thing ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:int ;
+      owl:onProperty email:body ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:int ;
+      owl:onProperty email:date ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:int ;
+      owl:onProperty email:from ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:int ;
+      owl:onProperty email:number ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:int ;
+      owl:onProperty email:subject ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:int ;
+      owl:onProperty email:attachment ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:int ;
+      owl:onProperty email:bcc ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:int ;
+      owl:onProperty email:cc ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:int ;
+      owl:onProperty email:to ;
+    ] ;
+.
+email:Server
+  a owl:Class ;
+  rdfs:comment "Connection metadata for an SMTP (outgoing) email server." ;
+  rdfs:label "Server" ;
+  rdfs:subClassOf owl:Thing ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:int ;
+      owl:onProperty email:server ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:int ;
+      owl:onProperty email:password ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:int ;
+      owl:onProperty email:port ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:int ;
+      owl:onProperty email:userName ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty email:ssl ;
+    ] ;
+.
+email:address
+  a owl:DatatypeProperty ;
+  rdfs:label "address" ;
+  rdfs:range xsd:string ;
+.
+email:attachment
+  a owl:ObjectProperty ;
+  rdfs:comment "attachment filepath must comply with URI specification as defined by RFC 2396" ;
+  rdfs:label "attachment" ;
+  rdfs:range email:Attachment ;
+  rdfs:subPropertyOf <http://www.topbraid.org/2007/05/composite.owl#child> ;
+.
+email:bcc
+  a owl:ObjectProperty ;
+  rdfs:label "bcc" ;
+  rdfs:range email:Address ;
+.
+email:body
+  a owl:DatatypeProperty ;
+  rdfs:label "body" ;
+  rdfs:range xsd:string ;
+.
+email:cc
+  a owl:ObjectProperty ;
+  rdfs:label "cc" ;
+  rdfs:range email:Address ;
+.
+email:date
+  a owl:DatatypeProperty ;
+  rdfs:label "date" ;
+  rdfs:range xsd:dateTime ;
+.
+email:fileName
+  a owl:DatatypeProperty ;
+  rdfs:label "file name" ;
+  rdfs:range xsd:string ;
+.
+email:from
+  a owl:ObjectProperty ;
+  rdfs:label "from" ;
+  rdfs:range email:Address ;
+.
+email:mimeType
+  a owl:DatatypeProperty ;
+  rdfs:label "mime type" ;
+  rdfs:range xsd:string ;
+.
+email:name
+  a owl:DatatypeProperty ;
+  rdfs:label "name" ;
+  rdfs:range xsd:string ;
+.
+email:number
+  a owl:DatatypeProperty ;
+  rdfs:label "number" ;
+  rdfs:range xsd:int ;
+  rdfs:subPropertyOf <http://www.topbraid.org/2007/05/composite.owl#index> ;
+.
+email:password
+  a owl:DatatypeProperty ;
+  rdfs:label "password" ;
+  rdfs:range xsd:string ;
+.
+email:port
+  a owl:DatatypeProperty ;
+  rdfs:label "port" ;
+  rdfs:range xsd:int ;
+.
+email:protocol
+  a owl:DatatypeProperty ;
+  rdfs:label "protocol" ;
+  rdfs:range xsd:string ;
+.
+email:server
+  a owl:DatatypeProperty ;
+  rdfs:label "server" ;
+  rdfs:range xsd:string ;
+.
+email:size
+  a owl:DatatypeProperty ;
+  rdfs:label "size" ;
+  rdfs:range xsd:int ;
+.
+email:ssl
+  a owl:DatatypeProperty ;
+  rdfs:comment "Indicates whether the SSL protocol shall be used to connect to a server." ;
+  rdfs:label "ssl" ;
+  rdfs:range xsd:boolean ;
+.
+email:subject
+  a owl:DatatypeProperty ;
+  rdfs:comment "The subject of an email message" ;
+  rdfs:label "subject" ;
+  rdfs:range xsd:string ;
+.
+email:to
+  a owl:ObjectProperty ;
+  rdfs:label "to" ;
+  rdfs:range email:Address ;
+.
+email:userName
+  a owl:DatatypeProperty ;
+  rdfs:label "user name" ;
+  rdfs:range xsd:string ;
+.

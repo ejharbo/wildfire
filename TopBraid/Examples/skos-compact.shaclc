@@ -1,0 +1,17 @@
+BASE <http://example.org/skos-compact>
+
+IMPORTS <http://www.w3.org/2004/02/skos/core>
+
+PREFIX ex: <http://example.org/skos-compact#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+shape ex:ConceptShape -> skos:Concept {
+	skos:prefLabel xsd:string|rdf:langString .
+	skos:definition xsd:string|rdf:langString|rdf:HTML .
+	skos:broader @ex:ConceptShape .
+	^skos:hasTopConcept [0..1] .
+}
+
+shape ex:ConceptSchemeShape -> skos:ConceptScheme {
+	skos:hasTopConcept IRI skos:Concept @ex:ConceptShape .
+}

@@ -1,0 +1,362 @@
+# baseURI: http://www.semanticweb.org/ontologies/2010/01/core-soa.owl
+
+@prefix : <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://www.semanticweb.org/ontologies/2010/01/core-soa.owl>
+  rdf:type owl:Ontology ;
+  <http://www.linkedmodel.org/schema/vaem#hasGraphMetadata> <http://www.semanticweb.org/ontologies/core-soa.owl/GMD_core-soa.owl> ;
+.
+:Composition
+  rdf:type owl:Class ;
+  rdfs:subClassOf :System ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:int ;
+      owl:onProperty :compositionPattern ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:int ;
+      owl:onProperty :orchestratedBy ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "0"^^xsd:int ;
+      owl:onProperty :orchestratedBy ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:int ;
+      owl:onProperty :compositionPattern ;
+    ] ;
+  owl:disjointWith :Task ;
+.
+:Effect
+  rdf:type owl:Class ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:int ;
+      owl:onProperty :isSpecifiedBy ;
+    ] ;
+  owl:disjointWith :InformationType ;
+  owl:disjointWith :Policy ;
+  owl:disjointWith :ServiceInterface ;
+.
+:Element
+  rdf:type owl:Class ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:int ;
+      owl:onProperty :orchestrates ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "0"^^xsd:int ;
+      owl:onProperty :orchestrates ;
+    ] ;
+  owl:disjointWith :Policy ;
+.
+:Event
+  rdf:type owl:Class ;
+  owl:disjointWith :Policy ;
+  owl:disjointWith :ServiceContract ;
+  owl:disjointWith :ServiceInterface ;
+.
+:HumanActor
+  rdf:type owl:Class ;
+  rdfs:subClassOf :Element ;
+  owl:disjointWith :Service ;
+  owl:disjointWith :ServiceContract ;
+  owl:disjointWith :ServiceInterface ;
+  owl:disjointWith :Task ;
+.
+:InformationType
+  rdf:type owl:Class ;
+  owl:disjointWith :Effect ;
+  owl:disjointWith :Policy ;
+  owl:disjointWith :ServiceContract ;
+.
+:Policy
+  rdf:type owl:Class ;
+  owl:disjointWith :Effect ;
+  owl:disjointWith :Element ;
+  owl:disjointWith :Event ;
+  owl:disjointWith :InformationType ;
+  owl:disjointWith :ServiceContract ;
+  owl:disjointWith :ServiceInterface ;
+.
+:Process
+  rdf:type owl:Class ;
+  rdfs:subClassOf :Composition ;
+  owl:disjointWith :ServiceContract ;
+  owl:disjointWith :ServiceInterface ;
+.
+:Service
+  rdf:type owl:Class ;
+  rdfs:subClassOf :Element ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:int ;
+      owl:onProperty :hasInterface ;
+    ] ;
+  owl:disjointWith :HumanActor ;
+  owl:disjointWith :ServiceInterface ;
+  owl:disjointWith :System ;
+  owl:disjointWith :Task ;
+.
+:ServiceComposition
+  rdf:type owl:Class ;
+  rdfs:subClassOf :Composition ;
+  owl:disjointWith :ServiceContract ;
+  owl:disjointWith :ServiceInterface ;
+.
+:ServiceContract
+  rdf:type owl:Class ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:int ;
+      owl:onProperty :interactionAspect ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:int ;
+      owl:onProperty :legalAspect ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:int ;
+      owl:onProperty :interactionAspect ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:int ;
+      owl:onProperty :isContractFor ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:int ;
+      owl:onProperty :legalAspect ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:int ;
+      owl:onProperty :specifies ;
+    ] ;
+  owl:disjointWith :Event ;
+  owl:disjointWith :HumanActor ;
+  owl:disjointWith :InformationType ;
+  owl:disjointWith :Policy ;
+  owl:disjointWith :Process ;
+  owl:disjointWith :ServiceComposition ;
+  owl:disjointWith :ServiceInterface ;
+  owl:disjointWith :Task ;
+.
+:ServiceInterface
+  rdf:type owl:Class ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:int ;
+      owl:onProperty :constraints ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:int ;
+      owl:onProperty :constraints ;
+    ] ;
+  owl:disjointWith :Effect ;
+  owl:disjointWith :Event ;
+  owl:disjointWith :HumanActor ;
+  owl:disjointWith :Policy ;
+  owl:disjointWith :Process ;
+  owl:disjointWith :Service ;
+  owl:disjointWith :ServiceComposition ;
+  owl:disjointWith :ServiceContract ;
+  owl:disjointWith :Task ;
+.
+:System
+  rdf:type owl:Class ;
+  rdfs:subClassOf :Element ;
+  owl:disjointWith :Service ;
+  owl:disjointWith :Task ;
+.
+:Task
+  rdf:type owl:Class ;
+  rdfs:subClassOf :Element ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:int ;
+      owl:onProperty :doneBy ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "0"^^xsd:int ;
+      owl:onProperty :doneBy ;
+    ] ;
+  owl:disjointWith :Composition ;
+  owl:disjointWith :HumanActor ;
+  owl:disjointWith :Policy ;
+  owl:disjointWith :Service ;
+  owl:disjointWith :ServiceContract ;
+  owl:disjointWith :ServiceInterface ;
+  owl:disjointWith :System ;
+.
+:appliesTo
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain :Policy ;
+.
+:compositionPattern
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain :Composition ;
+.
+:constraints
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain :ServiceInterface ;
+.
+:does
+  rdf:type owl:ObjectProperty ;
+  owl:inverseOf :doneBy ;
+.
+:doneBy
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain :Task ;
+  rdfs:range :HumanActor ;
+.
+:generatedBy
+  rdf:type owl:ObjectProperty ;
+.
+:hasContract
+  rdf:type owl:ObjectProperty ;
+  owl:inverseOf :isContractFor ;
+.
+:hasInput
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain :ServiceInterface ;
+  rdfs:range :InformationType ;
+.
+:hasInterface
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain :Service ;
+  rdfs:range :ServiceInterface ;
+.
+:hasOutput
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain :ServiceInterface ;
+  rdfs:range :InformationType ;
+.
+:interactionAspect
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain :ServiceContract ;
+.
+:involvesParty
+  rdf:type owl:ObjectProperty ;
+  owl:inverseOf :isPartyTo ;
+.
+:isContractFor
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain :ServiceContract ;
+  rdfs:range :Service ;
+.
+:isInputAt
+  rdf:type owl:ObjectProperty ;
+  owl:inverseOf :hasInput ;
+.
+:isInterfaceOf
+  rdf:type owl:ObjectProperty ;
+  owl:inverseOf :hasInterface ;
+.
+:isOutputAt
+  rdf:type owl:ObjectProperty ;
+  owl:inverseOf :hasOutput ;
+.
+:isPartyTo
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain :HumanActor ;
+  rdfs:range :ServiceContract ;
+.
+:isSetBy
+  rdf:type owl:ObjectProperty ;
+  owl:inverseOf :setsPolicy ;
+.
+:isSpecifiedBy
+  rdf:type owl:ObjectProperty ;
+  owl:inverseOf :specifies ;
+.
+:isSubjectTo
+  rdf:type owl:ObjectProperty ;
+  owl:inverseOf :appliesTo ;
+.
+:legalAspect
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain :ServiceContract ;
+.
+:orchestratedBy
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain :Composition ;
+  rdfs:range :Element ;
+.
+:orchestrates
+  rdf:type owl:ObjectProperty ;
+  owl:inverseOf :orchestratedBy ;
+.
+:performedBy
+  rdf:type owl:ObjectProperty ;
+.
+:representedBy
+  rdf:type owl:ObjectProperty ;
+  owl:inverseOf :represents ;
+.
+:represents
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain :Element ;
+  rdfs:range :Element ;
+.
+:respondedToBy
+  rdf:type owl:ObjectProperty ;
+.
+:setsPolicy
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain :HumanActor ;
+  rdfs:range :Policy ;
+.
+:specifies
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain :ServiceContract ;
+  rdfs:range :Effect ;
+.
+:usedBy
+  rdf:type owl:ObjectProperty ;
+  owl:inverseOf :uses ;
+.
+:uses
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain :Element ;
+  rdfs:range :Element ;
+.
+<http://www.semanticweb.org/ontologies/core-soa.owl/GMD_core-soa.owl>
+  rdf:type <http://www.linkedmodel.org/schema/vaem#GraphMetaData> ;
+  <http://purl.org/dc/terms/modified> "2016-12-18"^^xsd:date ;
+  <http://purl.org/dc/terms/rights> "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  <http://www.linkedmodel.org/schema/vaem#hasGraphRole> <http://www.linkedmodel.org/schema/vaem#UnspecifiedGraphRole> ;
+  <http://www.linkedmodel.org/schema/vaem#hasLicenseType> <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  <http://www.linkedmodel.org/schema/vaem#hasOwner> <http://www.linkedmodel.org/schema/vaem#TopQuadrant> ;
+  <http://www.linkedmodel.org/schema/vaem#hasSteward> <http://www.linkedmodel.org/schema/vaem#TopQuadrant> ;
+  <http://www.linkedmodel.org/schema/vaem#isMetadataFor> <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl> ;
+  <http://www.linkedmodel.org/schema/vaem#name> "EDG" ;
+  <http://www.linkedmodel.org/schema/vaem#namespace> "http://edg.topbraid.solutions/model/" ;
+  <http://www.linkedmodel.org/schema/vaem#namespacePrefix> "edg" ;
+  <http://www.linkedmodel.org/schema/vaem#owner> "TopQuadrant, Inc." ;
+  <http://www.linkedmodel.org/schema/vaem#releaseDate> "2016-12-18"^^xsd:date ;
+  <http://www.linkedmodel.org/schema/vaem#revision> "1.0" ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://purl.org/dc/terms/abstract> ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://purl.org/dc/terms/author> ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://purl.org/dc/terms/created> ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://purl.org/dc/terms/modified> ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://purl.org/dc/terms/rights> ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://purl.org/dc/terms/title> ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  <http://www.linkedmodel.org/schema/vaem#withAttributionTo> "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.

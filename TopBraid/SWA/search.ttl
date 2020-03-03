@@ -1,0 +1,471 @@
+# baseURI: http://topbraid.org/search
+# imports: http://datashapes.org/dash
+# imports: http://spinrdf.org/spin
+# imports: http://www.w3.org/2004/02/skos/core
+# prefix: search
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://topbraid.org/search>
+  a owl:Ontology ;
+  rdfs:comment "A schema that can be used to represent searches, e.g. as entered by the SWA search forms. A Search is a tree of blank nodes, with specific facet types for each value entered by the user." ;
+  owl:imports <http://datashapes.org/dash> ;
+  owl:imports <http://spinrdf.org/spin> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+.
+search:AbstractSearch
+  a rdfs:Class ;
+  rdfs:comment "Shared base class of Search and NestedFacetValue. Both describe a single class (or variable) and share properties." ;
+  rdfs:label "Abstract search" ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+search:AnyFacetValue
+  a rdfs:Class ;
+  rdfs:comment "Represents a filter condition in which the matching instance must have any value for the given facet - it doesn't matter which value but it must have at least one value." ;
+  rdfs:label "Any facet value" ;
+  rdfs:subClassOf search:FacetValue ;
+.
+search:CardinalityFacetValue
+  a rdfs:Class ;
+  rdfs:comment "Represents a filter condition in which the matching instance must have a number of values within an interval specified by >= the given min value and <= the given max value. Either one of those may be empty." ;
+  rdfs:label "Cardinality facet value" ;
+  rdfs:subClassOf search:FacetValue ;
+.
+search:ColumnType
+  a rdfs:Class ;
+  rdfs:label "Column type" ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+search:ConceptFacetValue
+  a rdfs:Class ;
+  rdfs:comment "Represents a filter condition in which the matching instance must have the given value (rootConcept) or a skos:Concept that is skos:narrower than that. For example, if someone enters \"Europe\" on a search form, then this would also match instances that have \"Liechtenstein\" as a value for the given facet." ;
+  rdfs:label "Concept facet value" ;
+  rdfs:subClassOf search:FacetValue ;
+.
+search:ContainsStringFacetValue
+  a rdfs:Class ;
+  rdfs:label "Contains string facet value" ;
+  rdfs:subClassOf search:FacetValue ;
+.
+search:CountColumnType
+  a search:ColumnType ;
+  rdfs:label "Count column type" ;
+.
+search:DefaultSearch
+  a search:Search ;
+  search:rootType rdfs:Resource ;
+  rdfs:comment "The default search configuration that shall be used for faceted search if no more detailed search has been specified in the class hierarchy." ;
+  rdfs:label "Default search" ;
+.
+search:Facet
+  a rdfs:Class ;
+  rdfs:label "Facet" ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+search:FacetCount
+  a rdfs:Class ;
+  rdfs:comment "A single value-count pair as displayed as result of faceted search (example: Book (93))." ;
+  rdfs:label "Facet count" ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+search:FacetValue
+  a rdfs:Class ;
+  rdfs:label "Facet value" ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+search:IntersectionSetFacetValue
+  a rdfs:Class ;
+  rdfs:label "Intersection set facet value" ;
+  rdfs:subClassOf search:SetFacetValue ;
+.
+search:InversePropertyColumn
+  a rdfs:Class ;
+  rdfs:comment "A column backed by an InversePropertyFacet." ;
+  rdfs:label "Inverse property column" ;
+  rdfs:subClassOf search:SinglePropertyColumn ;
+.
+search:InversePropertyFacet
+  a rdfs:Class ;
+  rdfs:label "Inverse property facet" ;
+  rdfs:subClassOf search:SinglePropertyFacet ;
+.
+search:LabelRegexFacetValue
+  a rdfs:Class ;
+  rdfs:comment "Represents a filter condition in which the matching instance must have values that have a label that contains the provided regular expression." ;
+  rdfs:label "Label regex facet value" ;
+  rdfs:subClassOf search:FacetValue ;
+.
+search:NestedFacetValue
+  a rdfs:Class ;
+  rdfs:comment "A nested facet value is a pointer to another resource that may have additional filter criteria. The provided nestedSubjectVarName is matched with the subjectVarName of the Facets appearing as nested search conditions." ;
+  rdfs:label "Nested facet value" ;
+  rdfs:subClassOf search:AbstractSearch ;
+  rdfs:subClassOf search:FacetValue ;
+.
+search:NoneFacetValue
+  a rdfs:Class ;
+  rdfs:comment "Represents a filter condition in which the matching instance must have no value for the given facet." ;
+  rdfs:label "None facet value" ;
+  rdfs:subClassOf search:FacetValue ;
+.
+search:ObjectFacetValue
+  a rdfs:Class ;
+  rdfs:comment "Represents a filter condition in which the matching instance must have exactly the given object as a value for the facet." ;
+  rdfs:label "Object facet value" ;
+  rdfs:subClassOf search:FacetValue ;
+.
+search:PropertiesUnionFacet
+  a rdfs:Class ;
+  rdfs:label "Properties union facet" ;
+  rdfs:subClassOf search:Facet ;
+.
+search:PropertyColumn
+  a rdfs:Class ;
+  rdfs:comment "A column backed by a PropertyFacet." ;
+  rdfs:label "Property column" ;
+  rdfs:subClassOf search:SinglePropertyColumn ;
+.
+search:PropertyFacet
+  a rdfs:Class ;
+  rdfs:label "Property facet" ;
+  rdfs:subClassOf search:SinglePropertyFacet ;
+.
+search:RangeFacetValue
+  a rdfs:Class ;
+  rdfs:comment "Represents a filter condition in which the matching instance must have values >= the given min value and <= the given max value. Either one of those may be empty." ;
+  rdfs:label "Range facet value" ;
+  rdfs:subClassOf search:FacetValue ;
+.
+search:RegexFacetValue
+  a rdfs:Class ;
+  rdfs:comment "Represents a filter condition in which the matching instance must have values that match the provided regular expression, and (optionally) a language tag." ;
+  rdfs:label "Regex facet value" ;
+  rdfs:subClassOf search:FacetValue ;
+.
+search:Search
+  a rdfs:Class ;
+  rdfs:comment "A Search represents information that can be sent to a search engine to perform a search. In a nutshell, a Search points to a collection of Facets, and each Facet may have a FacetValue. Facets that do not have FacetValues mean that the client is only interested in the counts of faceted search, while the actual FacetValues narrow down the result space." ;
+  rdfs:label "Search" ;
+  rdfs:subClassOf search:AbstractSearch ;
+.
+search:SearchResultsTestCase
+  a rdfs:Class ;
+  a sh:Shape ;
+  rdfs:comment "A type of test cases that run a (stored) Search against a given query graph and compare the sets of result resources with those that are stored as \"expected\" resources with the test case." ;
+  rdfs:label "Search results test case" ;
+  rdfs:subClassOf <http://datashapes.org/dash#TestCase> ;
+  sh:property [
+      sh:path <http://datashapes.org/dash#expectedResult> ;
+      sh:datatype xsd:string ;
+      sh:description "Points at the expected JSON result set." ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "expected result" ;
+    ] ;
+  sh:property [
+      sh:path search:queryGraph ;
+      sh:description "The graph being queried." ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "query graph" ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      sh:path search:search ;
+      sh:class search:Search ;
+      sh:description "The search:Search to run." ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "search" ;
+    ] ;
+.
+search:SetFacetValue
+  a rdfs:Class ;
+  rdfs:label "Set facet value" ;
+  rdfs:subClassOf search:FacetValue ;
+.
+search:SinglePropertyColumn
+  a rdfs:Class ;
+  rdfs:label "Single property column" ;
+  rdfs:subClassOf <http://spinrdf.org/spin#Column> ;
+.
+search:SinglePropertyFacet
+  a rdfs:Class ;
+  rdfs:label "Single property facet" ;
+  rdfs:subClassOf search:Facet ;
+.
+search:Template
+  a rdfs:Class ;
+  rdfs:label "Template" ;
+  rdfs:subClassOf <http://spinrdf.org/spin#Module> ;
+  rdfs:subClassOf <http://spinrdf.org/spin#TableDataProvider> ;
+.
+search:UnionSetFacetValue
+  a rdfs:Class ;
+  rdfs:label "Union set facet value" ;
+  rdfs:subClassOf search:SetFacetValue ;
+.
+search:body
+  a rdf:Property ;
+  rdfs:comment "Links a Search Template with a Search that can be used to create the executable query. The body Search may point to the argument variables of the Template anywhere, e.g. as value of search:object or search:max." ;
+  rdfs:domain search:Template ;
+  rdfs:label "body" ;
+  rdfs:range search:Search ;
+.
+search:closed
+  a rdf:Property ;
+  rdfs:comment "If set to true then the user can not add new properties to the associated search:Search." ;
+  rdfs:domain search:AbstractSearch ;
+  rdfs:label "closed" ;
+  rdfs:range xsd:boolean ;
+.
+search:columnProperty
+  a rdf:Property ;
+  rdfs:comment "Represents the property behind the values of the column." ;
+  rdfs:domain search:SinglePropertyColumn ;
+  rdfs:label "column property" ;
+  rdfs:range rdf:Property ;
+.
+search:columnSubjectVarName
+  a rdf:Property ;
+  rdfs:domain search:SinglePropertyColumn ;
+  rdfs:label "column subject var name" ;
+  rdfs:range xsd:string ;
+.
+search:columnType
+  a rdf:Property ;
+  rdfs:comment "Can be set to search:CountColumnType to indicate that this is a COUNT aggregation column." ;
+  rdfs:domain search:SinglePropertyColumn ;
+  rdfs:label "column type" ;
+  rdfs:range search:ColumnType ;
+.
+search:count
+  a rdf:Property ;
+  rdfs:domain search:FacetCount ;
+  rdfs:label "count" ;
+  rdfs:range xsd:integer ;
+.
+search:countValue
+  a rdf:Property ;
+  rdfs:domain search:FacetCount ;
+  rdfs:label "count value" ;
+.
+search:creator
+  a rdf:Property ;
+  rdfs:domain search:Search ;
+  rdfs:label "creator" ;
+  rdfs:range rdfs:Resource ;
+.
+search:defaultSearch
+  a rdf:Property ;
+  rdfs:comment "Links a class with a Search instance that informs the search forms about its initial state, e.g. which key properties to select." ;
+  rdfs:domain rdfs:Class ;
+  rdfs:label "default search" ;
+  rdfs:range search:Search ;
+.
+search:directInstancesSearch
+  a rdf:Property ;
+  rdfs:comment "Indicates that the search shall be executed over direct instances of the root class only, i.e. instances of subclasses will be ignored if set to true." ;
+  rdfs:domain search:AbstractSearch ;
+  rdfs:label "direct instances search" ;
+  rdfs:range xsd:boolean ;
+.
+search:excludedFacetProperty
+  a rdf:Property ;
+  rdfs:comment "Can point to rdf:Properties that shall not be available as choices when the user adds a property to a faceted search. This can be used to block properties that either do not make sense as facets (due to their value space) or may lead to significant performance issues if selected." ;
+  rdfs:domain search:AbstractSearch ;
+  rdfs:label "excluded facet property" ;
+  rdfs:range rdf:Property ;
+.
+search:expanded
+  a rdf:Property ;
+  rdfs:comment "Indicates whether the facet shall be displayed as \"expanded\" in a faceted search UI. By default, facets are collapsed." ;
+  rdfs:domain search:Facet ;
+  rdfs:label "expanded" ;
+  rdfs:range xsd:boolean ;
+.
+search:facet
+  a rdf:Property ;
+  rdfs:comment """Links a Search with a collection of Facets. The existence of a Facet means that the search engine shall return faceted results (counting of equal results) when run in faceted search mode. A Facet may also have FacetValues, in which case it means that a search condition is present.
+
+Note that earlier versions of this ontology had this point from FacetValues to Facets, but the domain has been changed to Search since 4.3.""" ;
+  rdfs:domain search:AbstractSearch ;
+  rdfs:label "facet" ;
+  rdfs:range search:Facet ;
+.
+search:facetCount
+  a rdf:Property ;
+  rdfs:comment "If this Search has been created as a result of a search execution, then a Facet may point to one or more FacetCounts that hold the numbers for each value." ;
+  rdfs:domain search:Facet ;
+  rdfs:label "facet count" ;
+  rdfs:range search:FacetCount ;
+.
+search:facetIndex
+  a rdf:Property ;
+  rdfs:comment "An optional index that can be used to determine the ordering of facets on a screen. Values should be from 0 onwards, meaning that 0 will be placed on top of the screen." ;
+  rdfs:domain search:Facet ;
+  rdfs:label "facet index" ;
+  rdfs:range xsd:integer ;
+.
+search:facetValue
+  a rdf:Property ;
+  rdfs:comment """Links a Facet with (at most one) FacetValue.
+
+Note that earlier versions of this ontology had this point from the Search to multiple FacetValues. This has been changed since 4.3.""" ;
+  rdfs:domain search:Facet ;
+  rdfs:label "facet value" ;
+  rdfs:range search:FacetValue ;
+.
+search:facetedSearch
+  a rdf:Property ;
+  rdfs:comment "Links a class with one or more faceted search configurations. Faceted search gadgets can walk up the class hierarchy to pick the most suitable faceted search for a given root class." ;
+  rdfs:domain rdfs:Class ;
+  rdfs:label "faceted search" ;
+  rdfs:range search:Search ;
+.
+search:inverseKeyProperty
+  a owl:DeprecatedProperty ;
+  rdfs:comment "Deprecated as of TopBraid 4.3: Use search:InversePropertyColumn via spin:column instead." ;
+  rdfs:domain search:Search ;
+  rdfs:label "inverse key property" ;
+  rdfs:range rdf:Property ;
+.
+search:keyProperty
+  a owl:DeprecatedProperty ;
+  rdfs:comment "Deprecated as of TopBraid 4.3: Use search:PropertyColumn via spin:column instead." ;
+  rdfs:domain search:Search ;
+  rdfs:label "key property" ;
+  rdfs:range rdf:Property ;
+.
+search:lang
+  a rdf:Property ;
+  rdfs:label "lang" ;
+  rdfs:range xsd:string ;
+.
+search:local
+  a rdf:Property ;
+  rdfs:comment "True if this search should return the locally defined resources only, i.e. their rdf:type must be in the base graph of the current query graph." ;
+  rdfs:domain search:Search ;
+  rdfs:label "local" ;
+  rdfs:range xsd:boolean ;
+.
+search:max
+  a rdf:Property ;
+  rdfs:domain search:RangeFacetValue ;
+  rdfs:label "max" ;
+.
+search:maxCardinality
+  a rdf:Property ;
+  rdfs:domain search:CardinalityFacetValue ;
+  rdfs:label "max cardinality" ;
+  rdfs:range xsd:integer ;
+.
+search:min
+  a rdf:Property ;
+  rdfs:domain search:RangeFacetValue ;
+  rdfs:label "min" ;
+.
+search:minCardinality
+  a rdf:Property ;
+  rdfs:domain search:CardinalityFacetValue ;
+  rdfs:label "min cardinality" ;
+  rdfs:range xsd:integer ;
+.
+search:nestedSubjectVarName
+  a rdf:Property ;
+  rdfs:domain search:NestedFacetValue ;
+  rdfs:label "nested subject var name" ;
+  rdfs:range xsd:string ;
+.
+search:object
+  a rdf:Property ;
+  rdfs:domain search:ObjectFacetValue ;
+  rdfs:label "object" ;
+.
+search:pattern
+  a rdf:Property ;
+  rdfs:label "pattern" ;
+  rdfs:range xsd:string ;
+.
+search:property
+  a rdf:Property ;
+  rdfs:domain search:SinglePropertyFacet ;
+  rdfs:label "property" ;
+  rdfs:range rdf:Property ;
+.
+search:queryGraph
+  a rdf:Property ;
+  rdfs:comment "The graph to execute the query over." ;
+  rdfs:domain search:Search ;
+  rdfs:label "query graph" ;
+  rdfs:range rdfs:Resource ;
+.
+search:rootConcept
+  a rdf:Property ;
+  rdfs:domain search:ConceptFacetValue ;
+  rdfs:label "root concept" ;
+  rdfs:range <http://www.w3.org/2004/02/skos/core#Concept> ;
+.
+search:rootType
+  a rdf:Property ;
+  rdfs:comment "The class associated with the search - only instances of that class or its subclasses are valid matches." ;
+  rdfs:domain search:AbstractSearch ;
+  rdfs:label "root type" ;
+  rdfs:range rdfs:Class ;
+.
+search:savedSearch
+  a rdf:Property ;
+  rdfs:comment "Links a class with one or more \"saved searches\". Saved searches are typically created by a user to remember the state of a search form." ;
+  rdfs:domain rdfs:Class ;
+  rdfs:label "saved search" ;
+  rdfs:range search:Search ;
+.
+search:setObject
+  a rdf:Property ;
+  rdfs:domain search:SetFacetValue ;
+  rdfs:label "set object" ;
+.
+search:string
+  a rdf:Property ;
+  rdfs:comment "A global query string for full text search." ;
+  rdfs:domain search:Search ;
+  rdfs:label "string" ;
+  rdfs:range xsd:string ;
+.
+search:stringCaseSensitive
+  a rdf:Property ;
+  rdfs:comment "Can be set to interpret the search:string as case-sensitive  full text search." ;
+  rdfs:domain search:Search ;
+  rdfs:label "string case sensitive" ;
+  rdfs:range xsd:boolean ;
+.
+search:subString
+  a rdf:Property ;
+  rdfs:comment "The string that must be contained in the matching values." ;
+  rdfs:domain search:ContainsStringFacetValue ;
+  rdfs:label "sub-string" ;
+  rdfs:range xsd:string ;
+.
+search:subjectVarName
+  a rdf:Property ;
+  rdfs:domain search:Facet ;
+  rdfs:label "subject var name" ;
+  rdfs:range xsd:string ;
+.
+search:unionProperty
+  a rdf:Property ;
+  rdfs:domain search:PropertiesUnionFacet ;
+  rdfs:label "union property" ;
+  rdfs:range rdf:Property ;
+.
+search:widget
+  a rdf:Property ;
+  rdfs:domain search:FacetValue ;
+  rdfs:label "widget" ;
+  rdfs:range rdfs:Resource ;
+.

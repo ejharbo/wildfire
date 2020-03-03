@@ -1,0 +1,102 @@
+# baseURI: http://evn.topbraidlive.org/tagger
+# prefix: tagger
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://evn.topbraidlive.org/tagger>
+  a owl:Ontology ;
+  rdfs:comment "A system namespace used by EVN to represent metadata on Tagger models." ;
+  owl:versionInfo "0.1.0" ;
+.
+tagger:PredicateGraph
+  a rdfs:Class ;
+  rdfs:comment "The class of owl:Ontologies (graphs) that can potentially be used as predicate vocabularies in Tagger. The corresponding triples are kept in the TBL config graph." ;
+  rdfs:label "Predicate graph" ;
+  rdfs:subClassOf owl:Ontology ;
+.
+tagger:SubjectGraph
+  a rdfs:Class ;
+  rdfs:comment "The class of owl:Ontologies (graphs) that can potentially be tagged using Tagger. The corresponding triples are kept in the TBL config graph." ;
+  rdfs:label "Subject graph" ;
+  rdfs:subClassOf owl:Ontology ;
+.
+tagger:autoTaggerLanguage
+  a rdf:Property ;
+  rdfs:comment "The ISO 639-1 code of the language that the AutoClassifier will use for this content tag set. Must be a language supported by the AutoClassifier, such as \"en\"." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "auto tagger language" ;
+  rdfs:range xsd:string ;
+.
+tagger:autoTaggerProbabilityThreshold
+  a rdf:Property ;
+  rdfs:comment "The Auto-Tagger will discard taggings with a probability lower than this value. Specified as a percentage between 0 (keep all taggings) and 100 (discard all taggings)." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "Auto-Tagger probability threshold" ;
+  rdfs:range xsd:float ;
+.
+tagger:defaultTagProperty
+  a rdf:Property ;
+  rdfs:comment "Links a tagger project (owl:Ontology) with the default property that shall appear in the drop down box." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "default tag property" ;
+  rdfs:range rdf:Property ;
+.
+tagger:objectGraph
+  a rdf:Property ;
+  rdfs:comment "Links a tagger graph with a concept graph (SKOS). This is commonly a ui:graphWithImports, pointing to another EVN vocabulary." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "object graph" ;
+  rdfs:range owl:Ontology ;
+.
+tagger:subjectGraph
+  a rdf:Property ;
+  rdfs:comment "Links a tagger graph with a content graph. This is commonly a ui:graphWithImports." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "subject graph" ;
+  rdfs:range owl:Ontology ;
+.
+tagger:subjectRootClass
+  a rdf:Property ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "subject root class" ;
+  rdfs:range rdfs:Class ;
+.
+tagger:tagProperty
+  a rdf:Property ;
+  rdfs:comment "Links a tagger project (owl:Ontology) with the properties that shall appear in the drop down box. The properties should have skos:Concept as their range." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "tag property" ;
+  rdfs:range rdf:Property ;
+.
+tagger:trainingContentProperty
+  a rdf:Property ;
+  rdfs:comment "Links a tagger project (owl:Ontology) with the properties that are used in the content graph to hold text content usable for training the Auto-Tagger." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "training content property" ;
+  rdfs:range rdf:Property ;
+.
+tagger:trainingSampleSize
+  a rdf:Property ;
+  rdfs:comment "When the AutoClassifier is trained on a Content Tag Set, and the number of content resources available for training exceeds the training sample size, then a random subset is selected and used for training. If not set, all avaialble content resources will be used for training." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "training sample size" ;
+  rdfs:range xsd:integer ;
+.
+tagger:triggerAutoClassifier
+  a owl:ObjectProperty ;
+  rdfs:comment "Connects a content graph (subject) to a content tag set (object). Indicates that a change to a content resource in the content graph should trigger AutoClassification of that resource in the content tag set." ;
+  rdfs:domain rdfs:Resource ;
+  rdfs:label "trigger AutoClassifier" ;
+  rdfs:range rdfs:Resource ;
+.
+tagger:useTrainingModelFrom
+  a rdf:Property ;
+  rdfs:comment "Points from one Tagger project to another, indicating that the AutoClassifier when running on the subject project should use the training model of the object project, instead of its own." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "use training model from" ;
+  rdfs:range owl:Ontology ;
+.

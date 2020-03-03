@@ -1,0 +1,109 @@
+# baseURI: http://uispin.org/uidb
+# imports: http://uispin.org/ui
+# prefix: uidb
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uidb: <http://uispin.org/uidb#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://spinrdf.org/arg#password>
+  a rdf:Property ;
+  rdfs:subPropertyOf <http://spinrdf.org/sp#arg> ;
+.
+<http://spinrdf.org/arg#sql>
+  a rdf:Property ;
+  rdfs:subPropertyOf <http://spinrdf.org/sp#arg> ;
+.
+<http://spinrdf.org/arg#url>
+  a rdf:Property ;
+  rdfs:subPropertyOf <http://spinrdf.org/sp#arg> ;
+.
+<http://spinrdf.org/arg#userName>
+  a rdf:Property ;
+  rdfs:subPropertyOf <http://spinrdf.org/sp#arg> ;
+.
+<http://spinrdf.org/arg#varName>
+  a rdf:Property ;
+  rdfs:subPropertyOf <http://spinrdf.org/sp#arg> ;
+.
+<http://uispin.org/uidb>
+  a owl:Ontology ;
+  rdfs:comment "An extension of SWP defining control elements operating on relational databases using JDBC." ;
+  owl:imports <http://uispin.org/ui> ;
+.
+uidb:select
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate <http://spinrdf.org/arg#password> ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The password if needed. Falls back to TopBraid's secure storage mechanism if left empty." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate <http://spinrdf.org/arg#userName> ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The database user name (if needed for the connection)." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate <http://spinrdf.org/arg#varName> ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The name of the variable holding the result set. Defaults to \"rs\"." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#sql> ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The SQL query string." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#url> ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The URL of the database." ;
+    ] ;
+  rdfs:comment "Performs a SELECT query against a given JDBC database and produces a (SPARQL) result set that can be queried and walked through, for example using ui:forEach. The child elements can access the result set using the provided variable name (which defaults to ?rs)." ;
+  rdfs:label "select" ;
+  rdfs:subClassOf ui:ControlElement ;
+.
+uidb:update
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate <http://spinrdf.org/arg#password> ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The password if needed. Falls back to TopBraid's secure storage mechanism if left empty." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate <http://spinrdf.org/arg#userName> ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The database user name (if needed for the connection)." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#sql> ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The SQL update string." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#url> ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The URL of the database." ;
+    ] ;
+  rdfs:comment "Performs an UPDATE against a given JDBC database." ;
+  rdfs:label "update" ;
+  rdfs:subClassOf ui:ControlElement ;
+.

@@ -1,0 +1,452 @@
+# baseURI: http://saf.topbraidlive.org/metaschema/
+# imports: http://spinrdf.org/spin
+# imports: http://uispin.org/ui
+# prefix: safm
+
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix safm: <http://saf.topbraidlive.org/metaschema/> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+safm:
+  rdf:type owl:Ontology ;
+  owl:imports <http://spinrdf.org/spin> ;
+  owl:imports <http://uispin.org/ui> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+safm:ClickableSearchStyle
+  rdf:type owl:Class ;
+  rdfs:comment "The Clickable search style is a contract for displaying properties that can be selected/clicked to start a new search (target properties should be limited to known facets)." ;
+  rdfs:label "Clickable search style" ;
+  rdfs:subClassOf safm:Style ;
+.
+safm:CommentLikeStyle
+  rdf:type owl:Class ;
+  rdfs:comment "The Comment like style is a contract for displaying large text/html (like rdfs:comment or skos:note)." ;
+  rdfs:label "Comment like style" ;
+  rdfs:subClassOf safm:Style ;
+.
+safm:DetailView
+  rdf:type owl:Class ;
+  rdfs:label "Detail view" ;
+  rdfs:subClassOf safm:View ;
+.
+safm:FollowYourNoseStyle
+  rdf:type owl:Class ;
+  rdfs:comment "The \"Follow your nose\" style is a contract for displaying information of a related object." ;
+  rdfs:label "Follow your nose style" ;
+  rdfs:subClassOf safm:Style ;
+.
+safm:Function
+  rdf:type spin:Function ;
+  rdf:type owl:Class ;
+  spin:abstract "true"^^xsd:boolean ;
+  rdfs:comment "Just an abstract superclass to group together the various functions from this namespace in tree viewers." ;
+  rdfs:label "Function" ;
+  rdfs:subClassOf spin:Functions ;
+  rdfs:subClassOf owl:Thing ;
+.
+safm:HyperlinkStyle
+  rdf:type owl:Class ;
+  rdfs:comment "The Hyperlink style is a contract for displaying navigable URIs (this can be an IRI or a text value representing a URL)." ;
+  rdfs:label "Hyperlink style " ;
+  rdfs:subClassOf safm:Style ;
+.
+safm:ImageLikeStyle
+  rdf:type owl:Class ;
+  rdfs:comment "The Image like style is a contract for displaying image elements." ;
+  rdfs:label "Image like style" ;
+  rdfs:subClassOf safm:Style ;
+.
+safm:LabelLikeStyle
+  rdf:type owl:Class ;
+  rdfs:comment "The Label like style is a contract for displaying short text (like rdfs:label, skos:pref:Label)" ;
+  rdfs:label "Label like style" ;
+  rdfs:subClassOf safm:Style ;
+.
+safm:MailToStyle
+  rdf:type owl:Class ;
+  rdfs:comment "The Mail to style is a contract for displaying mailto anchor tags." ;
+  rdfs:label "Mail to style" ;
+  rdfs:subClassOf safm:Style ;
+.
+safm:ResultSetFunction
+  rdf:type owl:Class ;
+  rdfs:label "Result set function" ;
+  rdfs:subClassOf safm:Function ;
+.
+safm:Style
+  rdf:type owl:Class ;
+  rdfs:comment "All sub classes of Style are meant to define abstractions, leaving the implementation details of the actual UI Element for a class down stream assigned via the ui:viewElement property.  Styles may be implemented to handle one or more resources/values (for example, LabelLikeStyle can present all labels separated with commas)." ;
+  rdfs:label "Style" ;
+  rdfs:subClassOf owl:Thing ;
+.
+safm:SummaryView
+  rdf:type owl:Class ;
+  rdfs:label "Summary view" ;
+  rdfs:subClassOf safm:View ;
+.
+safm:View
+  rdf:type owl:Class ;
+  rdfs:label "View" ;
+  rdfs:subClassOf owl:Thing ;
+.
+safm:contentForView
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "order" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "order" ;
+          ]
+          [
+            sp:varName "pred" ;
+          ]
+          [
+            sp:varName "label" ;
+          ]
+          [
+            sp:varName "style" ;
+          ]
+          [
+            sp:varName "objList" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "view" ;
+              ] ;
+            sp:predicate safm:onView ;
+            sp:subject [
+                sp:varName "pred" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "order" ;
+              ] ;
+            sp:predicate safm:viewOrder ;
+            sp:subject [
+                sp:varName "pred" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "style" ;
+              ] ;
+            sp:predicate safm:style ;
+            sp:subject [
+                sp:varName "pred" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type ui:label ;
+                sp:arg1 [
+                    sp:varName "pred" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "label" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type safm:delimitedObjectList ;
+                arg:pred [
+                    sp:varName "pred" ;
+                  ] ;
+                arg:subj [
+                    sp:varName "subj" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "objList" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:ne ;
+                sp:arg1 [
+                    sp:varName "objList" ;
+                  ] ;
+                sp:arg2 "" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:subj ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The s in ?s ?p ?o." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:view ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The view needing content provided to." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Gathers content for ?subj on a specific ?view in a consistent result set." ;
+  rdfs:label "content for view" ;
+  rdfs:subClassOf safm:ResultSetFunction ;
+.
+safm:delimitedObjectList
+  rdf:type spin:Function ;
+  rdf:type owl:Class ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                rdf:type sp:GroupConcat ;
+                sp:expression [
+                    rdf:type ui:encodeNode ;
+                    sp:arg1 [
+                        sp:varName "obj" ;
+                      ] ;
+                  ] ;
+                sp:separator "^|" ;
+              ] ;
+            sp:varName "object" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "subj" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "pred" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "obj" ;
+              ] ;
+            sp:predicate safm:orderedObject ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:pred ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The p in ?s ?p ?o." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:subj ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The s in ?s ?p ?o." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Creates ^| delimited object (?s ?p ?object <--) list." ;
+  rdfs:label "delimited object list" ;
+  rdfs:subClassOf safm:Function ;
+.
+safm:facetOrder
+  rdf:type rdf:Property ;
+  rdf:type owl:AnnotationProperty ;
+  rdfs:domain rdf:Property ;
+  rdfs:label "facet order" ;
+  rdfs:range xsd:integer ;
+.
+safm:facetable
+  rdf:type rdf:Property ;
+  rdf:type owl:AnnotationProperty ;
+  rdfs:domain rdf:Property ;
+  rdfs:label "facetable" ;
+  rdfs:range xsd:boolean ;
+.
+safm:graphSearchable
+  rdf:type rdf:Property ;
+  rdf:type owl:AnnotationProperty ;
+  rdfs:comment "Determines whether the graph will be included in the Lucene Index for Search The EDG" ;
+  rdfs:domain owl:Thing ;
+  rdfs:label "graph searchable" ;
+  rdfs:range xsd:boolean ;
+.
+safm:onView
+  rdf:type rdf:Property ;
+  rdf:type owl:AnnotationProperty ;
+  rdfs:domain rdf:Property ;
+  rdfs:label "on view" ;
+  rdfs:range rdfs:Resource ;
+.
+safm:orderedObject
+  rdf:type spin:MagicProperty ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "value" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "value" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "value" ;
+              ] ;
+            sp:predicate spin:_arg2 ;
+            sp:subject spin:_arg1 ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The subject to get the objects of." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The predicate" ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Produces an ordered iterator over the objects of a given subject/predicate combination. This is required by safm:delimitedObjectList because the GROUP_CONCAT is applied before ORDER BY (probably a Jena bug)." ;
+  rdfs:label "ordered object labels" ;
+  rdfs:subClassOf safm:Function ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+safm:searchable
+  rdf:type rdf:Property ;
+  rdf:type owl:AnnotationProperty ;
+  rdfs:domain owl:Thing ;
+  rdfs:label "searchable" ;
+  rdfs:range xsd:boolean ;
+.
+safm:selectedBy
+  rdf:type owl:AnnotationProperty ;
+  rdfs:label "reference count" ;
+  rdfs:range rdfs:Resource ;
+.
+safm:semanticSearchable
+  rdf:type rdf:Property ;
+  rdf:type owl:AnnotationProperty ;
+  rdfs:domain rdf:Property ;
+  rdfs:label "semantic searchable" ;
+  rdfs:range xsd:boolean ;
+.
+safm:skippable
+  rdf:type rdf:Property ;
+  rdf:type owl:AnnotationProperty ;
+  rdfs:domain owl:Thing ;
+  rdfs:label "skippable" ;
+  rdfs:range xsd:boolean ;
+.
+safm:style
+  rdf:type rdf:Property ;
+  rdf:type owl:AnnotationProperty ;
+  rdfs:domain rdf:Property ;
+  rdfs:label "style" ;
+  rdfs:range rdfs:Resource ;
+.
+safm:suggestable
+  rdf:type rdf:Property ;
+  rdf:type owl:AnnotationProperty ;
+  rdfs:domain rdf:Property ;
+  rdfs:label "suggestable" ;
+  rdfs:range xsd:boolean ;
+.
+safm:textSearchable
+  rdf:type rdf:Property ;
+  rdf:type owl:AnnotationProperty ;
+  rdfs:domain rdf:Property ;
+  rdfs:label "text searchable" ;
+  rdfs:range xsd:boolean ;
+.
+safm:treeState
+  rdf:type owl:AnnotationProperty ;
+  rdfs:label "tree state" ;
+  rdfs:range xsd:decimal ;
+.
+safm:viewOrder
+  rdf:type rdf:Property ;
+  rdf:type owl:AnnotationProperty ;
+  rdfs:domain rdf:Property ;
+  rdfs:label "view order" ;
+  rdfs:range xsd:integer ;
+.
+arg:alpha
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:bob
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:pred
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:subj
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:subj_1
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:view
+  rdf:type sp:Query ;
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:zeta
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.

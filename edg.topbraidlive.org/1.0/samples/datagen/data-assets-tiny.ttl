@@ -1,0 +1,63 @@
+# baseURI: http://example.org/datagen/data-assets-tiny
+# imports: http://datashapes.org/datagen
+# imports: http://edg.topbraid.solutions/1.0/schema/datamodels
+# prefix: data-assets
+
+@prefix data-assets: <http://example.org/datagen/data-assets#> .
+@prefix datagen: <http://datashapes.org/datagen#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/model/DataElement-medianLength>
+  sh:maxInclusive "100"^^xsd:float ;
+  sh:minInclusive "10"^^xsd:float ;
+.
+<http://edg.topbraid.solutions/model/DatabaseColumn>
+  datagen:minInstanceCount 500 ;
+.
+<http://edg.topbraid.solutions/model/DatabaseColumn-columnOf>
+  datagen:minValueCount 1 ;
+.
+<http://edg.topbraid.solutions/model/DatabaseTable>
+  datagen:maxInstanceCount 200 ;
+  datagen:minInstanceCount 100 ;
+.
+<http://edg.topbraid.solutions/model/Identifiable-acronym>
+  sh:maxLength 8 ;
+  sh:minLength 3 ;
+.
+<http://edg.topbraid.solutions/model/Narratable-description>
+  datagen:maxValueCount 1 ;
+  datagen:minValueCount 1 ;
+.
+<http://edg.topbraid.solutions/model/SoftwareExecutable-input>
+  datagen:maxValueCount 5 ;
+  datagen:minValueCount 3 ;
+.
+<http://edg.topbraid.solutions/model/SoftwareExecutable-output>
+  datagen:maxValueCount 5 ;
+  datagen:minValueCount 3 ;
+.
+<http://edg.topbraid.solutions/model/SoftwareProgram>
+  datagen:maxInstanceCount 100 ;
+  datagen:minInstanceCount 100 ;
+.
+<http://edg.topbraid.solutions/model/StatusAspect>
+  sh:property [
+      rdf:type sh:PropertyShape ;
+      sh:path <http://edg.topbraid.solutions/model/supercededBy> ;
+      sh:maxCount 0 ;
+    ] ;
+.
+<http://edg.topbraid.solutions/model/Traceable-mapsToTerm>
+  datagen:maxValueCount 3 ;
+.
+<http://example.org/datagen/data-assets-tiny>
+  rdf:type owl:Ontology ;
+  rdfs:comment "An example specification file for TopBraid's data generator. Can be used to produce some sample instances of various EDG data asset classes." ;
+  owl:imports <http://datashapes.org/datagen> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+.

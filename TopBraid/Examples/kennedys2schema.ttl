@@ -1,0 +1,153 @@
+# baseURI: http://example.org/kennedys2schema
+# imports: http://spinrdf.org/spin
+# imports: http://topbraid.org/examples/kennedys
+# imports: http://topbraid.org/examples/schemakennedys
+# imports: http://topbraid.org/spin/spinmapl
+
+@prefix : <http://example.org/kennedys2schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spinmap: <http://spinrdf.org/spinmap#> .
+@prefix spinmapl: <http://topbraid.org/spin/spinmapl#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/kennedys2schema>
+  a owl:Ontology ;
+  owl:imports <http://spinrdf.org/spin> ;
+  owl:imports <http://topbraid.org/examples/kennedys> ;
+  owl:imports <http://topbraid.org/examples/schemakennedys> ;
+  owl:imports <http://topbraid.org/spin/spinmapl> ;
+.
+:College-CollegeOrUniversity
+  a spinmap:Context ;
+  spinmap:sourceClass <http://topbraid.org/examples/kennedys#College> ;
+  spinmap:target [
+      a spinmapl:self ;
+      spinmap:source spinmap:_source ;
+    ] ;
+  spinmap:targetClass <http://schema.org/CollegeOrUniversity> ;
+.
+:Person-Person
+  a spinmap:Context ;
+  spinmap:sourceClass <http://topbraid.org/examples/kennedys#Person> ;
+  spinmap:target [
+      a spinmapl:self ;
+      spinmap:source spinmap:_source ;
+    ] ;
+  spinmap:targetClass <http://schema.org/Person> ;
+.
+<http://topbraid.org/examples/kennedys#College>
+  spinmap:rule [
+      a spinmap:Mapping-0-1 ;
+      spinmap:context :College-CollegeOrUniversity ;
+      spinmap:expression <http://schema.org/CollegeOrUniversity> ;
+      spinmap:targetPredicate1 rdf:type ;
+    ] ;
+  spinmap:rule [
+      a spinmap:Mapping-1-1 ;
+      spinmap:context :College-CollegeOrUniversity ;
+      spinmap:expression spin:_arg1 ;
+      spinmap:sourcePredicate1 <http://topbraid.org/examples/kennedys#photo> ;
+      spinmap:targetPredicate1 <http://schema.org/image> ;
+    ] ;
+  spinmap:rule [
+      a spinmap:Mapping-1-1 ;
+      spinmap:context :College-CollegeOrUniversity ;
+      spinmap:expression spin:_arg1 ;
+      spinmap:sourcePredicate1 rdfs:label ;
+      spinmap:targetPredicate1 rdfs:label ;
+    ] ;
+.
+<http://topbraid.org/examples/kennedys#Person>
+  spinmap:rule [
+      a spinmap:Mapping-0-1 ;
+      spinmap:context :Person-Person ;
+      spinmap:expression <http://schema.org/Person> ;
+      spinmap:targetPredicate1 rdf:type ;
+    ] ;
+  spinmap:rule [
+      a spinmap:Mapping-1-1 ;
+      spinmap:context :Person-Person ;
+      spinmap:expression spin:_arg1 ;
+      spinmap:sourcePredicate1 <http://topbraid.org/examples/kennedys#almaMater> ;
+      spinmap:targetPredicate1 <http://schema.org/alumniOf> ;
+    ] ;
+  spinmap:rule [
+      a spinmap:Mapping-1-1 ;
+      spinmap:context :Person-Person ;
+      spinmap:expression spin:_arg1 ;
+      spinmap:sourcePredicate1 <http://topbraid.org/examples/kennedys#firstName> ;
+      spinmap:targetPredicate1 <http://schema.org/givenName> ;
+    ] ;
+  spinmap:rule [
+      a spinmap:Mapping-1-1 ;
+      spinmap:context :Person-Person ;
+      spinmap:expression spin:_arg1 ;
+      spinmap:sourcePredicate1 <http://topbraid.org/examples/kennedys#lastName> ;
+      spinmap:targetPredicate1 <http://schema.org/familyName> ;
+    ] ;
+  spinmap:rule [
+      a spinmap:Mapping-1-1 ;
+      spinmap:context :Person-Person ;
+      spinmap:expression spin:_arg1 ;
+      spinmap:sourcePredicate1 <http://topbraid.org/examples/kennedys#name> ;
+      spinmap:targetPredicate1 rdfs:label ;
+    ] ;
+  spinmap:rule [
+      a spinmap:Mapping-1-1 ;
+      spinmap:context :Person-Person ;
+      spinmap:expression spin:_arg1 ;
+      spinmap:sourcePredicate1 <http://topbraid.org/examples/kennedys#parent> ;
+      spinmap:targetPredicate1 <http://schema.org/parent> ;
+    ] ;
+  spinmap:rule [
+      a spinmap:Mapping-1-1 ;
+      spinmap:context :Person-Person ;
+      spinmap:expression spin:_arg1 ;
+      spinmap:sourcePredicate1 <http://topbraid.org/examples/kennedys#photo> ;
+      spinmap:targetPredicate1 <http://schema.org/image> ;
+    ] ;
+  spinmap:rule [
+      a spinmap:Mapping-1-1 ;
+      spinmap:context :Person-Person ;
+      spinmap:expression spin:_arg1 ;
+      spinmap:sourcePredicate1 <http://topbraid.org/examples/kennedys#spouse> ;
+      spinmap:targetPredicate1 <http://schema.org/spouse> ;
+    ] ;
+  spinmap:rule [
+      a spinmap:Mapping-1-1 ;
+      spinmap:context :Person-Person ;
+      spinmap:expression spin:_arg1 ;
+      spinmap:sourcePredicate1 <http://topbraid.org/examples/kennedys#suffix> ;
+      spinmap:targetPredicate1 <http://schema.org/honorificSuffix> ;
+    ] ;
+  spinmap:rule [
+      a spinmap:Mapping-1-1 ;
+      spinmap:context :Person-Person ;
+      spinmap:expression [
+          a spif:name ;
+          sp:arg1 spin:_arg1 ;
+        ] ;
+      spinmap:sourcePredicate1 <http://topbraid.org/examples/kennedys#gender> ;
+      spinmap:targetPredicate1 <http://schema.org/gender> ;
+    ] ;
+  spinmap:rule [
+      a spinmap:Mapping-1-1 ;
+      spinmap:context :Person-Person ;
+      spinmap:expression [
+          a spif:name ;
+          sp:arg1 spin:_arg1 ;
+        ] ;
+      spinmap:sourcePredicate1 <http://topbraid.org/examples/kennedys#profession> ;
+      spinmap:targetPredicate1 <http://schema.org/jobTitle> ;
+    ] ;
+.
+<http://topbraid.org/examples/kennedys#spouse>
+  rdfs:domain <http://topbraid.org/examples/kennedys#Person> ;
+  rdfs:range <http://topbraid.org/examples/kennedys#Person> ;
+.

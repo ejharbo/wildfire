@@ -1,0 +1,159 @@
+# baseURI: http://qudt.org/2.0/schema/qudt/glossary
+# imports: http://www.linkedmodel.org/schema/dtype
+# imports: http://www.linkedmodel.org/schema/vaem
+
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix voag: <http://voag.linkedmodel.org/schema/voag#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+dct:abstract
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy dct: ;
+  rdfs:label "abstract" ;
+  rdfs:range xsd:string ;
+.
+dct:author
+  a rdf:Property ;
+  rdfs:range xsd:string ;
+.
+dct:contributor
+  a rdf:Property ;
+  rdfs:range xsd:string ;
+.
+dct:created
+  a rdf:Property ;
+  rdfs:label "created" ;
+  rdfs:range xsd:date ;
+.
+dct:creator
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy <http://qudt.org/schema/qudt> ;
+  rdfs:label "creator" ;
+  rdfs:range xsd:string ;
+.
+dct:description
+  a rdf:Property ;
+  a owl:AnnotationProperty ;
+  rdfs:label "description" ;
+  rdfs:range xsd:string ;
+.
+dct:modified
+  a rdf:Property ;
+  rdfs:label "modified" ;
+  rdfs:range xsd:date ;
+.
+dct:rights
+  a owl:AnnotationProperty ;
+  rdfs:label "rights" ;
+  rdfs:range xsd:string ;
+.
+dct:source
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy dct: ;
+  rdfs:label "source" ;
+  rdfs:range xsd:anyURI ;
+.
+dct:subject
+  a owl:AnnotationProperty ;
+  rdfs:label "subject" ;
+  rdfs:range xsd:string ;
+.
+dct:title
+  a owl:AnnotationProperty ;
+  rdfs:label "title" ;
+  rdfs:range xsd:string ;
+.
+<http://qudt.org/2.0/schema/qudt/glossary>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata qudt:GMD_qudt-glossary ;
+  rdfs:label "Quantities, Units, Dimensions and Types (QUDT) Glossary Schema" ;
+  owl:imports <http://www.linkedmodel.org/schema/dtype> ;
+  owl:imports <http://www.linkedmodel.org/schema/vaem> ;
+  owl:versionIRI <http://qudt.org/2.0/schema/qudt/glossary> ;
+.
+qudt:Acronym
+  a owl:Class ;
+  qudt:description "<strong>qudt:Acronym</strong> is a sub-class of <em>qudt:Term</em>. The need for a class for acronyms arises because of the need to hold knowledge of where an acronym is used."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/qudt> ;
+  rdfs:isDefinedBy <http://qudt.org/schema/qudt> ;
+  rdfs:label "Acronym" ;
+  rdfs:subClassOf qudt:Term ;
+.
+qudt:GMD_qudt-glossary
+  a vaem:GraphMetaData ;
+  dct:modified "2016-12-18"^^xsd:date ;
+  dct:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:SchemaGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:isMetadataFor <http://qudt.org/2.0/schema/qudt/glossary> ;
+  vaem:name "QUDT" ;
+  vaem:namespace "http://qudt.org/schema/qudt/" ;
+  vaem:namespacePrefix "qudt" ;
+  vaem:owner "QUDT.org" ;
+  vaem:releaseDate "2019-06-18"^^xsd:date ;
+  vaem:revision "2.0" ;
+  vaem:usesNonImportedResource dct:abstract ;
+  vaem:usesNonImportedResource dct:author ;
+  vaem:usesNonImportedResource dct:created ;
+  vaem:usesNonImportedResource dct:modified ;
+  vaem:usesNonImportedResource dct:rights ;
+  vaem:usesNonImportedResource dct:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to QUDT.org" ;
+.
+qudt:GlossaryTerm
+  a owl:Class ;
+  qudt:description "<strong>qudt:Glossary Tern</strong> is a sub-class of <em>qudt:Term</em>. The need for a class for glossary terms arises because of the need to hold knowledge of where a term is used."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/qudt> ;
+  rdfs:isDefinedBy <http://qudt.org/schema/qudt> ;
+  rdfs:label "Glossary term" ;
+  rdfs:subClassOf qudt:Term ;
+.
+qudt:Term
+  a owl:Class ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/qudt> ;
+  rdfs:isDefinedBy <http://qudt.org/schema/qudt> ;
+  rdfs:label "Term" ;
+  rdfs:subClassOf owl:Thing ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality 1 ;
+      owl:onProperty qudt:acronym ;
+    ] ;
+.
+vaem:QUDT
+  a vaem:Party ;
+  dct:description "QUDT is a non-profit organization that governs the QUDT ontologies." ;
+  vaem:name "qudt.org" ;
+  vaem:url "http:/www.qudt.org"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/qudt> ;
+  rdfs:isDefinedBy <http://qudt.org/schema/qudt> ;
+  rdfs:label "QUDT" ;
+.
+<http://www.w3.org/2004/02/skos/core>
+  vaem:namespace "http://www.w3.org/2004/02/skos/core#"^^xsd:anyURI ;
+  vaem:namespacePrefix "skos" ;
+.
+skos:closeMatch
+  a rdf:Property ;
+  rdfs:label "close match" ;
+.
+skos:exactMatch
+  a rdf:Property ;
+  rdfs:label "exact match" ;
+.
+prov:wasInfluencedBy
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy prov: ;
+.

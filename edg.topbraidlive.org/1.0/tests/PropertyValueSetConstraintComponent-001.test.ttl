@@ -1,0 +1,85 @@
+# baseURI: http://edg.topbraidlive.org/1.0/tests/PropertyValueSetConstraintComponent-001.test
+# imports: http://edg.topbraid.solutions/1.0/schema/base
+# prefix: ex
+
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix ex: <http://edg.topbraidlive.org/1.0/tests/PropertyValueSetConstraintComponent-001.test#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraidlive.org/1.0/tests/PropertyValueSetConstraintComponent-001.test>
+  rdf:type owl:Ontology ;
+  rdfs:label "Test of PropertyValueSetConstraintComponent-001" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/base> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+ex:Color
+  rdf:type owl:Class ;
+  rdfs:label "Color" ;
+  rdfs:subClassOf owl:Thing ;
+.
+ex:GraphValidationTestCase
+  rdf:type dash:GraphValidationTestCase ;
+  dash:expectedResult [
+      rdf:type sh:ValidationReport ;
+      sh:conforms "false"^^xsd:boolean ;
+      sh:result [
+          rdf:type sh:ValidationResult ;
+          sh:focusNode ex:InvalidInstance1 ;
+          sh:resultPath ex:testProperty ;
+          sh:resultSeverity sh:Violation ;
+          sh:sourceConstraintComponent edg:PropertyValueSetConstraintComponent ;
+          sh:sourceShape _:b98706 ;
+          sh:value "yellow" ;
+        ] ;
+    ] ;
+.
+ex:InvalidInstance1
+  rdf:type ex:TestClass ;
+  ex:testProperty "yellow" ;
+.
+ex:TestClass
+  rdf:type owl:Class ;
+  rdfs:label "Test class" ;
+  rdfs:subClassOf owl:Thing ;
+.
+ex:TestPropertyValueSet
+  rdf:type edg:PropertyValueSet ;
+  edg:class ex:Color ;
+  edg:graph <http://edg.topbraidlive.org/1.0/tests/PropertyValueSetConstraintComponent-001.test> ;
+  edg:property rdfs:label ;
+  rdfs:label "Test property value set" ;
+.
+ex:TestShape
+  rdf:type sh:NodeShape ;
+  rdfs:label "Test shape" ;
+  sh:property _:b98706 ;
+  sh:targetClass ex:TestClass ;
+.
+ex:ValidInstance1
+  rdf:type ex:TestClass ;
+  ex:testProperty "blue" ;
+  ex:testProperty "green" ;
+  ex:testProperty "red" ;
+.
+ex:blue
+  rdf:type ex:Color ;
+  rdfs:label "blue" ;
+.
+ex:green
+  rdf:type ex:Color ;
+  rdfs:label "green" ;
+.
+ex:red
+  rdf:type ex:Color ;
+  rdfs:label "red" ;
+.
+_:b98706
+  sh:path ex:testProperty ;
+  edg:propertyValueSet ex:TestPropertyValueSet ;
+  sh:name "test property" ;
+.

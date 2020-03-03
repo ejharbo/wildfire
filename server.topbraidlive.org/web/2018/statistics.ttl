@@ -1,0 +1,121 @@
+# baseURI: http://topbraid.org/statistics
+# imports: http://spinrdf.org/spl
+# imports: http://uispin.org/ui
+# prefix: stats
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix stats: <http://topbraid.org/statistics#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://topbraid.org/statistics>
+  a owl:Ontology ;
+  owl:imports <http://spinrdf.org/spl> ;
+  owl:imports <http://uispin.org/ui> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+stats:TripleCount
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "The number local triples in a graph at a specific point in time" ;
+  rdfs:label "Triple Count" ;
+  rdfs:subClassOf <http://uispin.org/ui#NodeClass> ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path stats:baseUri ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:node stats:TripleCount ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path stats:timestamp ;
+      sh:datatype xsd:dateTime ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:node stats:TripleCount ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path stats:triples ;
+      sh:datatype xsd:integer ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "triples" ;
+      sh:node stats:TripleCount ;
+    ] ;
+.
+stats:TripleCountExecution
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "The number local triples in a graph at a specific point in time" ;
+  rdfs:label "Triple Count Execution" ;
+  rdfs:subClassOf <http://uispin.org/ui#NodeClass> ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path stats:executionState ;
+      sh:class stats:TripleCountExecutionStatus ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "execution state" ;
+      sh:node stats:TripleCountExecution ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path stats:startTime ;
+      sh:datatype xsd:dateTime ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:node stats:TripleCountExecution ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path stats:tripleCount ;
+      sh:class stats:TripleCount ;
+      sh:node stats:TripleCountExecution ;
+    ] ;
+.
+stats:TripleCountExecutionStatus
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "Enumerates the exection state of a TripleCountExecution" ;
+  rdfs:label "Triple Count Execution Status" ;
+  rdfs:subClassOf <http://uispin.org/ui#NodeClass> ;
+.
+stats:baseUri
+  a rdf:Property ;
+  rdfs:label "base uri" ;
+.
+stats:executing
+  a stats:TripleCountExecutionStatus ;
+  rdfs:label "executing" ;
+.
+stats:executionCanceled
+  a stats:TripleCountExecutionStatus ;
+  rdfs:label "execution canceled" ;
+.
+stats:executionFinished
+  a stats:TripleCountExecutionStatus ;
+  rdfs:label "execution finished" ;
+.
+stats:executionState
+  a rdf:Property ;
+  rdfs:comment "the state of a job execution" ;
+  rdfs:label "execution state" ;
+.
+stats:startTime
+  a rdf:Property ;
+  rdfs:label "start time" ;
+.
+stats:timestamp
+  a rdf:Property ;
+  rdfs:label "time stamp" ;
+.
+stats:tripleCount
+  a rdf:Property ;
+  rdfs:label "triple count" ;
+.

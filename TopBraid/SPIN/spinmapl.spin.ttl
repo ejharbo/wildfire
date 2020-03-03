@@ -1,0 +1,3627 @@
+# baseURI: http://topbraid.org/spin/spinmapl
+# imports: http://spinrdf.org/spinmap
+# imports: http://topbraid.org/sparqlmotionfunctions
+# prefix: spinmapl
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spinmap: <http://spinrdf.org/spinmap#> .
+@prefix spinmapl: <http://topbraid.org/spin/spinmapl#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+arg:template
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+spif:cast
+  spinmap:suggestion-1-1 [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object spif:cast ;
+            sp:predicate rdf:type ;
+            sp:subject _:b47219 ;
+          ]
+          [
+            sp:object rdf:HTML ;
+            sp:predicate arg:datatype ;
+            sp:subject _:b47219 ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a swa:localRangeAtClass ;
+                sp:arg1 [
+                    sp:varName "targetClass" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "targetPredicate1" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "range" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:eq ;
+                sp:arg1 [
+                    sp:varName "range" ;
+                  ] ;
+                sp:arg2 rdf:HTML ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+.
+spif:parseDate
+  spinmap:suggestion-1-1 [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object spif:parseDate ;
+            sp:predicate rdf:type ;
+            sp:subject _:b95532 ;
+          ]
+          [
+            sp:object [
+                sp:varName "pattern" ;
+              ] ;
+            sp:predicate arg:pattern ;
+            sp:subject _:b95532 ;
+          ]
+          [
+            sp:object [
+                sp:varName "count" ;
+              ] ;
+            sp:predicate spinmap:suggestionScore ;
+            sp:subject _:b95532 ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              a sp:Bind ;
+              sp:expression [
+                  a swa:localRangeAtClass ;
+                  sp:arg1 [
+                      sp:varName "targetClass" ;
+                    ] ;
+                  sp:arg2 [
+                      sp:varName "targetPredicate1" ;
+                    ] ;
+                ] ;
+              sp:variable [
+                  sp:varName "range" ;
+                ] ;
+            ]
+            [
+              a sp:Filter ;
+              sp:expression [
+                  a sp:or ;
+                  sp:arg1 [
+                      a sp:or ;
+                      sp:arg1 [
+                          a sp:eq ;
+                          sp:arg1 [
+                              sp:varName "range" ;
+                            ] ;
+                          sp:arg2 xsd:date ;
+                        ] ;
+                      sp:arg2 [
+                          a sp:eq ;
+                          sp:arg1 [
+                              sp:varName "range" ;
+                            ] ;
+                          sp:arg2 xsd:dateTime ;
+                        ] ;
+                    ] ;
+                  sp:arg2 [
+                      a sp:eq ;
+                      sp:arg1 [
+                          sp:varName "range" ;
+                        ] ;
+                      sp:arg2 xsd:time ;
+                    ] ;
+                ] ;
+            ]
+          )
+          [
+            sp:object spif:parseDate ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "fc" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "pattern" ;
+              ] ;
+            sp:predicate arg:pattern ;
+            sp:subject [
+                sp:varName "fc" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "fc" ;
+              ] ;
+            sp:predicate spl:testExpression ;
+            sp:subject [
+                sp:varName "testCase" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spinmapl:countInstancesWithDatePattern ;
+                arg:pattern [
+                    sp:varName "pattern" ;
+                  ] ;
+                spinmapl:predicate [
+                    sp:varName "sourcePredicate1" ;
+                  ] ;
+                spinmapl:type [
+                    sp:varName "sourceClass" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "count" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:gt ;
+                sp:arg1 [
+                    sp:varName "count" ;
+                  ] ;
+                sp:arg2 0 ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+.
+smf:dbpedia
+  spinmap:suggestion-1-1 [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object smf:dbpedia ;
+            sp:predicate rdf:type ;
+            sp:subject [] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:in ;
+                sp:arg1 [
+                    sp:varName "targetPredicate1" ;
+                  ] ;
+                sp:arg2 owl:sameAs ;
+                sp:arg3 rdfs:seeAlso ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+.
+smf:setLanguage
+  spinmap:suggestion-1-1 [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object smf:setLanguage ;
+            sp:predicate rdf:type ;
+            sp:subject _:b8405 ;
+          ]
+          [
+            sp:object "en" ;
+            sp:predicate arg:language ;
+            sp:subject _:b8405 ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:in ;
+                sp:arg1 [
+                    sp:varName "targetPredicate1" ;
+                  ] ;
+                sp:arg2 skos:prefLabel ;
+                sp:arg3 skos:altLabel ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+.
+<http://topbraid.org/spin/spinmapl>
+  a owl:Ontology ;
+  owl:imports <http://spinrdf.org/spinmap> ;
+  owl:imports <http://topbraid.org/sparqlmotionfunctions> ;
+  owl:versionInfo "1.0.0" ;
+.
+spinmapl:Test-changeNamespace-1
+  a spl:TestCase ;
+  spl:testExpression [
+      a spinmapl:changeNamespace ;
+      spinmap:source owl:Thing ;
+      spinmapl:targetNamespace "http://example.org/test#" ;
+    ] ;
+  spl:testResult <http://example.org/test#Thing> ;
+.
+spinmapl:Test-fixedLengthPathParent-1
+  a spl:TestCase ;
+  spl:testExpression [
+      a spinmapl:fixedLengthPathParent ;
+      sp:arg1 "W010203" ;
+      spinmapl:segmentLength 2 ;
+    ] ;
+  spl:testResult "W0102" ;
+  rdfs:label "Test-fixed length path parent-1" ;
+.
+spinmapl:Test-pathParent-1
+  a spl:TestCase ;
+  spl:testExpression [
+      a spinmapl:pathParent ;
+      sp:arg1 "World > Europe > Germany" ;
+      spinmapl:separator ">" ;
+    ] ;
+  spl:testResult "Europe" ;
+.
+spinmapl:Test-pathParent-2
+  a spl:TestCase ;
+  spl:testExpression [
+      a spinmapl:pathParent ;
+      sp:arg1 "Europe,Germany" ;
+      spinmapl:separator "," ;
+    ] ;
+  spl:testResult "Europe" ;
+.
+spinmapl:Test-pathParent-3
+  a spl:TestCase ;
+  spl:testExpression [
+      a spinmapl:pathParent ;
+      sp:arg1 "World" ;
+      spinmapl:separator ">" ;
+    ] ;
+.
+spinmapl:buildURI
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:buildURI ;
+                sp:arg1 [
+                    sp:varName "template" ;
+                  ] ;
+                sp:arg2 spin:_arg1 ;
+              ] ;
+            sp:variable [
+                sp:varName "result" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:template ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The URI template, referencing the value to insert as {?1}." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      rdfs:comment "The value to insert into the template at {?1}." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "A variation of spif:buildURI that can be used in conjunction with SPINMap. This takes the template as second argument, making it possible to enter a template that uses {?1} from the values of the first parameter." ;
+  rdfs:label "build URI" ;
+  rdfs:subClassOf spl:URIFunctions ;
+.
+spinmapl:buildURI1
+  a spinmap:TargetFunction ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:iri ;
+                sp:arg1 [
+                    sp:varName "uri" ;
+                  ] ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:object ;
+                sp:arg1 [
+                    sp:varName "source" ;
+                  ] ;
+                sp:arg2 spin:_arg1 ;
+              ] ;
+            sp:variable [
+                sp:varName "value" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:buildURI ;
+                sp:arg1 [
+                    sp:varName "template" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "value" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "uri" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property to get the value of." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:template ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The template string, \"ex:Instance-{?1}\"." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  spinmap:shortLabel "build URI" ;
+  rdfs:comment "Builds a new URI using the value of a given property (?arg1) from a given subject (?source) and a given template (?template). The template may reference the value of the property using {?1}." ;
+  rdfs:label "build URI (with 1 argument)" ;
+  rdfs:subClassOf spinmap:TargetFunctions ;
+.
+spinmapl:buildURI2
+  a spinmap:TargetFunction ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:iri ;
+                sp:arg1 [
+                    sp:varName "uri" ;
+                  ] ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:object ;
+                sp:arg1 [
+                    sp:varName "source" ;
+                  ] ;
+                sp:arg2 spin:_arg1 ;
+              ] ;
+            sp:variable [
+                sp:varName "value1" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:object ;
+                sp:arg1 [
+                    sp:varName "source" ;
+                  ] ;
+                sp:arg2 spin:_arg2 ;
+              ] ;
+            sp:variable [
+                sp:varName "value2" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:buildURI ;
+                sp:arg1 [
+                    sp:varName "template" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "value1" ;
+                  ] ;
+                sp:arg3 [
+                    sp:varName "value2" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "uri" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The first property to get the value of." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The second property." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:template ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The template string, \"ex:Instance-{?1}\"." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  spinmap:shortLabel "build URI" ;
+  rdfs:comment "Builds URIs of the target resources using values of two given properties (?arg1 and ?arg2) for the source resources and a given template (?template). The template may reference the values of the properties using {?1} and {?2} respectively." ;
+  rdfs:label "build URI (with 2 arguments)" ;
+  rdfs:subClassOf spinmap:TargetFunctions ;
+.
+spinmapl:buildURI3
+  a spinmap:TargetFunction ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:iri ;
+                sp:arg1 [
+                    sp:varName "uri" ;
+                  ] ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:object ;
+                sp:arg1 [
+                    sp:varName "source" ;
+                  ] ;
+                sp:arg2 spin:_arg1 ;
+              ] ;
+            sp:variable [
+                sp:varName "value1" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:object ;
+                sp:arg1 [
+                    sp:varName "source" ;
+                  ] ;
+                sp:arg2 spin:_arg2 ;
+              ] ;
+            sp:variable [
+                sp:varName "value2" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:object ;
+                sp:arg1 [
+                    sp:varName "source" ;
+                  ] ;
+                sp:arg2 spin:_arg3 ;
+              ] ;
+            sp:variable [
+                sp:varName "value3" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:buildURI ;
+                sp:arg1 [
+                    sp:varName "template" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "value1" ;
+                  ] ;
+                sp:arg3 [
+                    sp:varName "value2" ;
+                  ] ;
+                sp:arg4 [
+                    sp:varName "value3" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "uri" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The first property to get the value of." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The second property." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg3 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The third property." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:template ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The template string, \"ex:Instance-{?1}\"." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  spinmap:shortLabel "build URI" ;
+  rdfs:comment "Builds URIs of the target resources using values of three given properties (?arg1, ?arg2 and ?arg3) for the source resources and a given template (?template). The template may reference the values of the properties using {?1}, {?2} and {?3} respectively." ;
+  rdfs:label "build URI (with 3 arguments)" ;
+  rdfs:subClassOf spinmap:TargetFunctions ;
+.
+spinmapl:buildURI4
+  a spinmap:TargetFunction ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:iri ;
+                sp:arg1 [
+                    sp:varName "uri" ;
+                  ] ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:object ;
+                sp:arg1 [
+                    sp:varName "source" ;
+                  ] ;
+                sp:arg2 spin:_arg1 ;
+              ] ;
+            sp:variable [
+                sp:varName "value1" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:object ;
+                sp:arg1 [
+                    sp:varName "source" ;
+                  ] ;
+                sp:arg2 spin:_arg2 ;
+              ] ;
+            sp:variable [
+                sp:varName "value2" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:object ;
+                sp:arg1 [
+                    sp:varName "source" ;
+                  ] ;
+                sp:arg2 spin:_arg3 ;
+              ] ;
+            sp:variable [
+                sp:varName "value3" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:object ;
+                sp:arg1 [
+                    sp:varName "source" ;
+                  ] ;
+                sp:arg2 spin:_arg4 ;
+              ] ;
+            sp:variable [
+                sp:varName "value4" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:buildURI ;
+                sp:arg1 [
+                    sp:varName "template" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "value1" ;
+                  ] ;
+                sp:arg3 [
+                    sp:varName "value2" ;
+                  ] ;
+                sp:arg4 [
+                    sp:varName "value3" ;
+                  ] ;
+                sp:arg5 [
+                    sp:varName "value4" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "uri" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The first property to get the value of." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The second property." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg3 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The third property." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg4 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The forth property." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:template ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The template string, \"ex:Instance-{?1}\"." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  spinmap:shortLabel "build URI" ;
+  rdfs:comment "Builds URIs of the target resources using values of four given properties (?arg1, ?arg2, ?arg3 and ?arg4) for the source resources and a given template (?template). The template may reference the values of the properties using {?1}, {?2}, {?3} and {?4} respectively." ;
+  rdfs:label "build URI (with 4 arguments)" ;
+  rdfs:subClassOf spinmap:TargetFunctions ;
+.
+spinmapl:buildURI5
+  a spinmap:TargetFunction ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:iri ;
+                sp:arg1 [
+                    sp:varName "uri" ;
+                  ] ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:object ;
+                sp:arg1 [
+                    sp:varName "source" ;
+                  ] ;
+                sp:arg2 spin:_arg1 ;
+              ] ;
+            sp:variable [
+                sp:varName "value1" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:object ;
+                sp:arg1 [
+                    sp:varName "source" ;
+                  ] ;
+                sp:arg2 spin:_arg2 ;
+              ] ;
+            sp:variable [
+                sp:varName "value2" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:object ;
+                sp:arg1 [
+                    sp:varName "source" ;
+                  ] ;
+                sp:arg2 spin:_arg3 ;
+              ] ;
+            sp:variable [
+                sp:varName "value3" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:object ;
+                sp:arg1 [
+                    sp:varName "source" ;
+                  ] ;
+                sp:arg2 spin:_arg4 ;
+              ] ;
+            sp:variable [
+                sp:varName "value4" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:object ;
+                sp:arg1 [
+                    sp:varName "source" ;
+                  ] ;
+                sp:arg2 spin:_arg5 ;
+              ] ;
+            sp:variable [
+                sp:varName "value5" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:buildURI ;
+                sp:arg1 [
+                    sp:varName "template" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "value1" ;
+                  ] ;
+                sp:arg3 [
+                    sp:varName "value2" ;
+                  ] ;
+                sp:arg4 [
+                    sp:varName "value3" ;
+                  ] ;
+                sp:arg5 [
+                    sp:varName "value4" ;
+                  ] ;
+                sp:arg6 [
+                    sp:varName "value5" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "uri" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The first property to get the value of." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The second property." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg3 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The third property." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg4 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The forth property." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg5 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The firth property." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:template ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The template string, \"ex:Instance-{?1}\"." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  spinmap:shortLabel "build URI" ;
+  rdfs:comment "Builds URIs of the target resources using values of five given properties (?arg1, ?arg2, ?arg3, ?arg4 and ?arg5) for the source resources and a given template (?template). The template may reference the values of the properties using {?1}, {?2}, {?3}, {?4} and {?5} respectively." ;
+  rdfs:label "build URI (with 5 arguments)" ;
+  rdfs:subClassOf spinmap:TargetFunctions ;
+.
+spinmapl:buildURICounter
+  a spinmap:TargetFunction ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:iri ;
+                sp:arg1 [
+                    sp:varName "uri" ;
+                  ] ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:add ;
+                sp:arg1 [
+                    a sp:add ;
+                    sp:arg1 [
+                        a spl:object ;
+                        sp:arg1 [
+                            sp:varName "source" ;
+                          ] ;
+                        sp:arg2 spin:_arg1 ;
+                      ] ;
+                    sp:arg2 [
+                        a xsd:int ;
+                        sp:arg1 spin:_arg2 ;
+                      ] ;
+                  ] ;
+                sp:arg2 10 ;
+              ] ;
+            sp:variable [
+                sp:varName "value" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:buildURI ;
+                sp:arg1 [
+                    sp:varName "template" ;
+                  ] ;
+                sp:arg2 [
+                    a xsd:string ;
+                    sp:arg1 [
+                        sp:varName "value" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "uri" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The first property to get the value of." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:template ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The template string, \"ex:Instance-{?1}\"." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  spinmap:shortLabel "build URI" ;
+  rdfs:comment "Builds URIs of the target resources using the currently existing counter method for the project graph" ;
+  rdfs:label "build URI (for counter)" ;
+  rdfs:subClassOf spinmap:TargetFunctions ;
+.
+spinmapl:buildURIUUID
+  a spinmap:TargetFunction ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:iri ;
+                sp:arg1 [
+                    sp:varName "uri" ;
+                  ] ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    a sp:ne ;
+                    sp:arg1 spin:_arg4 ;
+                    sp:arg2 skos:prefLabel ;
+                  ] ;
+                sp:arg2 [
+                    a spl:object ;
+                    sp:arg1 [
+                        sp:varName "source" ;
+                      ] ;
+                    sp:arg2 spin:_arg3 ;
+                  ] ;
+                sp:arg3 [
+                    a spinmapl:getValueNodeForTree ;
+                    sp:arg1 [
+                        sp:varName "source" ;
+                      ] ;
+                    sp:arg2 spin:_arg5 ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "valueNode" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:generateUUIDForImports ;
+                sp:arg1 [
+                    a spl:object ;
+                    sp:arg1 [
+                        sp:varName "source" ;
+                      ] ;
+                    sp:arg2 spin:_arg1 ;
+                  ] ;
+                sp:arg2 [
+                    a sp:iri ;
+                    sp:arg1 spin:_arg2 ;
+                  ] ;
+                sp:arg3 spin:_arg4 ;
+                sp:arg4 [
+                    sp:varName "valueNode" ;
+                  ] ;
+                sp:arg5 [
+                    sp:varName "template" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "value" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:buildURI ;
+                sp:arg1 [
+                    sp:varName "template" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "value" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "uri" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg3 ;
+      spl:valueType rdf:Property ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg4 ;
+      spl:valueType rdf:Property ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg5 ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:template ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The template string, \"ex:Instance-{?1}\"." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  spinmap:shortLabel "build URI with uuid" ;
+  rdfs:comment "Builds a new URI with a uuid for a spin mapping" ;
+  rdfs:label "build UUID URI" ;
+  rdfs:subClassOf spinmap:TargetFunctions ;
+.
+spinmapl:changeNamespace
+  a spinmap:TargetFunction ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "target" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a afn:localname ;
+                sp:arg1 [
+                    sp:varName "source" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "localName" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:iri ;
+                sp:arg1 [
+                    a sp:concat ;
+                    sp:arg1 [
+                        sp:varName "targetNamespace" ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "localName" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "target" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:targetNamespace ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The target namespace." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "Replaces the namespace of the source URIs by a given target namespace to create URIs of the target resources." ;
+  rdfs:label "change namespace" ;
+  rdfs:subClassOf spinmap:TargetFunctions ;
+.
+spinmapl:composeURI
+  a spinmap:TargetFunction ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:iri ;
+                sp:arg1 [
+                    sp:varName "uri" ;
+                  ] ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:localName ;
+                sp:arg1 [
+                    sp:varName "source" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "value" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:buildURI ;
+                sp:arg1 [
+                    sp:varName "template" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "value" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "uri" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:template ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The template string, \"ex:Instance-{?1}\"." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  spinmap:shortLabel "build URI" ;
+  rdfs:comment "Builds URIs of the target resources using the local name of the source resources and a template given as ?template. The template may reference the value of the local name of a source resource using {?1}." ;
+  rdfs:label "compose URI" ;
+  rdfs:subClassOf spinmap:TargetFunctions ;
+.
+spinmapl:concatWithSeparator
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a xsd:string ;
+                sp:arg1 [
+                    sp:varName "untyped" ;
+                  ] ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:concat ;
+                sp:arg1 [
+                    a xsd:string ;
+                    sp:arg1 spin:_arg1 ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "separator" ;
+                  ] ;
+                sp:arg3 [
+                    a xsd:string ;
+                    sp:arg1 spin:_arg2 ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "untyped" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      rdfs:comment "The first value to concatenate." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      rdfs:comment "The second value to concatenate." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:separator ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The separator to put between the two values." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Creates the value(s) for the target property by concatenating the value(s) of the source properties as provided by the arguments (?arg1) and (?arg2) with a given separator in between (?separator)." ;
+  rdfs:label "concat with separator" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spinmapl:constantResource
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where () ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      rdfs:comment "The input value (will be ignored)." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:result ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The result resource." ;
+    ] ;
+  rdfs:comment "Gives the target property values that are equal to a constant resource provided as (?result) argument. This can be used to create a constant value for the target whenever a given (?arg1) property of the source has a value." ;
+  rdfs:label "constant resource" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+spinmapl:context
+  a rdf:Property ;
+  rdfs:label "context" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+spinmapl:countInstancesWithDatePattern
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:limit "100"^^xsd:long ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:Count ;
+                sp:expression [
+                    sp:varName "instance" ;
+                  ] ;
+              ] ;
+            sp:varName "theResult" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "value" ;
+              ] ;
+            sp:predicate [
+                sp:varName "predicate" ;
+              ] ;
+            sp:subject [
+                sp:varName "instance" ;
+              ] ;
+          ]
+          [
+            a sp:TriplePath ;
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:path [
+                a sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "class" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "class" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "instance" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:eq ;
+                sp:arg1 [
+                    a sp:datatype ;
+                    sp:arg1 [
+                        sp:varName "value" ;
+                      ] ;
+                  ] ;
+                sp:arg2 xsd:string ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:parseDate ;
+                arg:pattern [
+                    sp:varName "pattern" ;
+                  ] ;
+                sp:arg1 [
+                    sp:varName "value" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "result" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:bound ;
+                sp:arg1 [
+                    sp:varName "result" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:pattern ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The pattern to try." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:predicate ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The predicate to test." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:type ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The type of instances." ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:integer ;
+  rdfs:label "count instances with date pattern" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+spinmapl:first10Values
+  a spin:MagicProperty ;
+  spin:body [
+      a sp:Select ;
+      sp:limit "10"^^xsd:long ;
+      sp:resultVariables (
+          [
+            sp:varName "value" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:TriplePath ;
+            sp:object spin:_arg1 ;
+            sp:path [
+                a sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "type" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "instance" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "value" ;
+              ] ;
+            sp:predicate spin:_arg2 ;
+            sp:subject [
+                sp:varName "instance" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The class to walk the instances of." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The predicate to get the objects of." ;
+    ] ;
+  spin:private true ;
+  rdfs:label "first10Values" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+spinmapl:fixedLengthPathParent
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              a sp:Bind ;
+              sp:expression [
+                  a sp:strlen ;
+                  sp:arg1 [
+                      a sp:str ;
+                      sp:arg1 spin:_arg1 ;
+                    ] ;
+                ] ;
+              sp:variable [
+                  sp:varName "length" ;
+                ] ;
+            ]
+            [
+              a sp:Filter ;
+              sp:expression [
+                  a sp:gt ;
+                  sp:arg1 [
+                      sp:varName "length" ;
+                    ] ;
+                  sp:arg2 [
+                      sp:varName "segmentLength" ;
+                    ] ;
+                ] ;
+            ]
+          )
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:datatype ;
+                sp:arg1 spin:_arg1 ;
+              ] ;
+            sp:variable [
+                sp:varName "dt" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a fn:substring ;
+                sp:arg1 [
+                    a sp:str ;
+                    sp:arg1 spin:_arg1 ;
+                  ] ;
+                sp:arg2 1 ;
+                sp:arg3 [
+                    a sp:sub ;
+                    sp:arg1 [
+                        sp:varName "length" ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "segmentLength" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "substr" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    a sp:bound ;
+                    sp:arg1 [
+                        sp:varName "dt" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a spif:cast ;
+                    arg:datatype [
+                        sp:varName "dt" ;
+                      ] ;
+                    sp:arg1 [
+                        sp:varName "substr" ;
+                      ] ;
+                  ] ;
+                sp:arg3 [
+                    sp:varName "substr" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "result" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The path expression, e.g. \"W010203\"" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:segmentLength ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The number of characters to remove from the end of the input string." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """Creates a value for the target property by removing a set number of characters given as ?segmentLength argument from the end of the values of the source property specified as (?arg1) argument. This can be used to derive a ‘parent’ value from a ‘child’ path expression, e.g., parent of ‘W01020’ is ‘W010’. Useful when parsing hierarchies where hierarchical relationships are encoded in the identifiers or ‘hierarchical path strings’.
+
+Note that this function preserves the original datatype of the input value for the result.""" ;
+  rdfs:label "fixed length path parent" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spinmapl:fixedLengthPathParentTarget
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a spinmap:targetResource ;
+                sp:arg1 [
+                    sp:varName "source" ;
+                  ] ;
+                spinmap:context [
+                    sp:varName "context" ;
+                  ] ;
+              ] ;
+            sp:varName "target" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spinmapl:fixedLengthPathParent ;
+                sp:arg1 spin:_arg1 ;
+                spinmapl:segmentLength [
+                    sp:varName "segmentLength" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "parentName" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:bound ;
+                sp:arg1 [
+                    sp:varName "parentName" ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:subject ;
+                sp:arg1 [
+                    sp:varName "predicate" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "parentName" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "source" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:bound ;
+                sp:arg1 [
+                    sp:varName "source" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The path expression." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:context ;
+      spl:valueType spinmap:Context ;
+      rdfs:comment "The context to use for deriving the target from the source instance." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:predicate ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The predicate that holds the parent path value in the source instance." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:segmentLength ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The number of characters to remove from the end of the path expression." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "Gets the parent of a path expression (using the function fixedLengthPathParent) and finds a source instance with a matching value for a given property. Then it finds the target resource for that source instance." ;
+  rdfs:label "fixed length path parent target" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spinmapl:getValueNodeForTree
+  a spinmap:TargetFunction ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "valueNode" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression "urn:x-tb:evnimport#_" ;
+            sp:variable [
+                sp:varName "uriStart" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:add ;
+                sp:arg1 [
+                    sp:varName "uriStart" ;
+                  ] ;
+                sp:arg2 [
+                    a xsd:string ;
+                    sp:arg1 spin:_arg2 ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "fullURI" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:object ;
+                sp:arg1 spin:_arg1 ;
+                sp:arg2 [
+                    a sp:iri ;
+                    sp:arg1 [
+                        sp:varName "fullURI" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "val" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    a sp:bound ;
+                    sp:arg1 [
+                        sp:varName "val" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "val" ;
+                  ] ;
+                sp:arg3 [
+                    a sp:if ;
+                    sp:arg1 [
+                        a sp:gt ;
+                        sp:arg1 [
+                            a xsd:integer ;
+                            sp:arg1 spin:_arg2 ;
+                          ] ;
+                        sp:arg2 0 ;
+                      ] ;
+                    sp:arg2 [
+                        a spinmapl:getValueNodeForTree ;
+                        sp:arg1 spin:_arg1 ;
+                        sp:arg2 [
+                            a sp:sub ;
+                            sp:arg1 [
+                                a xsd:integer ;
+                                sp:arg1 spin:_arg2 ;
+                              ] ;
+                            sp:arg2 1 ;
+                          ] ;
+                      ] ;
+                    sp:arg3 [
+                        sp:varName "nil" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "valueNode" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  spinmap:shortLabel "build URI with uuid" ;
+  rdfs:comment "Builds a new URI with a uuid for a spin mapping" ;
+  rdfs:label "build UUID URI" ;
+  rdfs:subClassOf spinmap:TargetFunctions ;
+.
+spinmapl:hasBooleanValue
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            sp:object spin:_arg1 ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object spin:_arg2 ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "value" ;
+              ] ;
+            sp:predicate spinmapl:first10Values ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:and ;
+                sp:arg1 [
+                    a sp:isLiteral ;
+                    sp:arg1 [
+                        sp:varName "value" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a sp:in ;
+                    sp:arg1 [
+                        a sp:lcase ;
+                        sp:arg1 [
+                            a sp:str ;
+                            sp:arg1 [
+                                sp:varName "value" ;
+                              ] ;
+                          ] ;
+                      ] ;
+                    sp:arg2 "yes" ;
+                    sp:arg3 "no" ;
+                    sp:arg4 "true" ;
+                    sp:arg5 "false" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The source class." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property." ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Helper function to determine whether yes/no or true/false to xsd:boolean conversion can be called on at least one of the first 10 values of a given class/property pair." ;
+  rdfs:label "has boolean value" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+spinmapl:hasValueBoolean
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            sp:object spin:_arg1 ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object spin:_arg2 ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "value" ;
+              ] ;
+            sp:predicate spinmapl:first10Values ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a xsd:boolean ;
+                sp:arg1 [
+                    sp:varName "value" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "result" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:bound ;
+                sp:arg1 [
+                    sp:varName "result" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The source class." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property." ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Helper function to determine whether xsd:boolean conversion can be called on at least one of the first 10 values of a given class/property pair." ;
+  rdfs:label "has value boolean" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+spinmapl:hasValueDateTime
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            sp:object spin:_arg1 ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object spin:_arg2 ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "value" ;
+              ] ;
+            sp:predicate spinmapl:first10Values ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a xsd:dateTime ;
+                sp:arg1 [
+                    sp:varName "value" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "result" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:bound ;
+                sp:arg1 [
+                    sp:varName "result" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The source class." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property." ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Helper function to determine whether xsd:dateTime conversion can be called on at least one of the first 10 values of a given class/property pair." ;
+  rdfs:label "has value dateTime" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+spinmapl:hasValueDecimal
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            sp:object spin:_arg1 ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object spin:_arg2 ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "value" ;
+              ] ;
+            sp:predicate spinmapl:first10Values ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a xsd:decimal ;
+                sp:arg1 [
+                    sp:varName "value" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "result" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:bound ;
+                sp:arg1 [
+                    sp:varName "result" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The source class." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property." ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Helper function to determine whether xsd:decimal conversion can be called on at least one of the first 10 values of a given class/property pair." ;
+  rdfs:label "has value decimal" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+spinmapl:hasValueFloat
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            sp:object spin:_arg1 ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object spin:_arg2 ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "value" ;
+              ] ;
+            sp:predicate spinmapl:first10Values ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a xsd:float ;
+                sp:arg1 [
+                    sp:varName "value" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "result" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:bound ;
+                sp:arg1 [
+                    sp:varName "result" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The source class." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property." ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Helper function to determine whether xsd:float conversion can be called on at least one of the first 10 values of a given class/property pair." ;
+  rdfs:label "has value float" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+spinmapl:hasValueInteger
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            sp:object spin:_arg1 ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object spin:_arg2 ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "value" ;
+              ] ;
+            sp:predicate spinmapl:first10Values ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a xsd:integer ;
+                sp:arg1 [
+                    sp:varName "value" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "result" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:bound ;
+                sp:arg1 [
+                    sp:varName "result" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The source class." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property." ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Helper function to determine whether xsd:integer conversion can be called on at least one of the first 10 values of a given class/property pair." ;
+  rdfs:label "has value integer" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+spinmapl:pathEnd
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    a sp:bound ;
+                    sp:arg1 [
+                        sp:varName "last" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a spif:trim ;
+                    sp:arg1 [
+                        a smf:subString ;
+                        arg:fromIndex [
+                            a sp:add ;
+                            sp:arg1 [
+                                sp:varName "last" ;
+                              ] ;
+                            sp:arg2 1 ;
+                          ] ;
+                        sp:arg1 spin:_arg1 ;
+                      ] ;
+                  ] ;
+                sp:arg3 spin:_arg1 ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:lastIndexOf ;
+                sp:arg1 spin:_arg1 ;
+                sp:arg2 [
+                    sp:varName "separator" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "last" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The path expression." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:separator ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The separator of path elements. Elements will be trimmed for white spaces, so the separator does not need to specify them." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Takes a path expression such as \"World > Europe > Germany\" provided as values of ?arg1 and a ?separator such as “>” and returns the last element, e.g. \"Germany\" ." ;
+  rdfs:label "path end" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spinmapl:pathParent
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "parent" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:lastIndexOf ;
+                sp:arg1 spin:_arg1 ;
+                sp:arg2 [
+                    sp:varName "separator" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "last" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:bound ;
+                sp:arg1 [
+                    sp:varName "last" ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:lastIndexOf ;
+                sp:arg1 spin:_arg1 ;
+                sp:arg2 [
+                    sp:varName "separator" ;
+                  ] ;
+                sp:arg3 [
+                    a sp:sub ;
+                    sp:arg1 [
+                        sp:varName "last" ;
+                      ] ;
+                    sp:arg2 1 ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "last1" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    a sp:bound ;
+                    sp:arg1 [
+                        sp:varName "last1" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a sp:add ;
+                    sp:arg1 [
+                        sp:varName "last1" ;
+                      ] ;
+                    sp:arg2 1 ;
+                  ] ;
+                sp:arg3 0 ;
+              ] ;
+            sp:variable [
+                sp:varName "start" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:trim ;
+                sp:arg1 [
+                    a smf:subString ;
+                    arg:fromIndex [
+                        sp:varName "start" ;
+                      ] ;
+                    arg:toIndex [
+                        sp:varName "last" ;
+                      ] ;
+                    sp:arg1 spin:_arg1 ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "parent" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The path expression." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:separator ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The separator of path elements. Elements will be trimmed for white spaces, so the separator does not need to specify them." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Takes a path expression such as \"World > Europe > Germany\" provided as values of ?arg1 and a ?separator such as “>” and returns the last but one element, e.g. \"Europe\"." ;
+  rdfs:label "path parent" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spinmapl:pathParentTarget
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "target" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spinmapl:pathParent ;
+                sp:arg1 spin:_arg1 ;
+                spinmapl:separator [
+                    sp:varName "separator" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "parentName" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:bound ;
+                sp:arg1 [
+                    sp:varName "parentName" ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:subject ;
+                sp:arg1 [
+                    sp:varName "predicate" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "parentName" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "source" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spinmap:targetResource ;
+                sp:arg1 [
+                    sp:varName "source" ;
+                  ] ;
+                spinmap:context [
+                    sp:varName "context" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "target" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The path expression." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:context ;
+      spl:valueType spinmap:Context ;
+      rdfs:comment "The context to use for deriving the target from the source instance." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:predicate ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The predicate that holds the parent path value in the source instance." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:separator ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The path separator, e.g. \">\"." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "Gets the parent of a path expression (using the function pathParent) and finds a source instance with a matching value for a given property. Then it finds the target resource for that source instance. This is a highly specialized function for a design pattern often used in spreadsheets, where one column contains the full path expression, and the other contains the name of the item." ;
+  rdfs:label "path parent target" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spinmapl:predicate
+  a rdf:Property ;
+  rdfs:label "predicate" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+spinmapl:relatedObjectContext
+  a spinmap:TargetFunction ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a spinmap:targetResource ;
+                sp:arg1 [
+                    sp:varName "object" ;
+                  ] ;
+                spinmap:context [
+                    sp:varName "context" ;
+                  ] ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "object" ;
+              ] ;
+            sp:predicate [
+                sp:varName "predicate" ;
+              ] ;
+            sp:subject [
+                sp:varName "source" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:context ;
+      spl:valueType spinmap:Context ;
+      rdfs:comment "The Context to apply to the related source resource to create the target resource." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:predicate ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The predicate that connects resources from the source class to related resources." ;
+    ] ;
+  rdfs:comment "This function uses a property given as ?predicate argument to find resources related to the resources in the source class as objects in a triple {?source ?predicate ?object}. It then applies mapping for these “related objects” as specified in a context given as ?context argument to build the target resource. This is useful if the source instances we want to use for the target are one step away from the current source instances, but we want to give the targets some of the properties of the current source instances." ;
+  rdfs:label "related object context" ;
+  rdfs:subClassOf spinmap:TargetFunctions ;
+.
+spinmapl:relatedSubjectContext
+  a spinmap:TargetFunction ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a spinmap:targetResource ;
+                sp:arg1 [
+                    sp:varName "subject" ;
+                  ] ;
+                spinmap:context [
+                    sp:varName "context" ;
+                  ] ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "source" ;
+              ] ;
+            sp:predicate [
+                sp:varName "predicate" ;
+              ] ;
+            sp:subject [
+                sp:varName "subject" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:context ;
+      spl:valueType spinmap:Context ;
+      rdfs:comment "The SPINMap Context to apply to the related source resource to create the target resource." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:predicate ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The predicate that connects resources from the source class to related resources." ;
+    ] ;
+  rdfs:comment "This function uses a property given as ?predicate argument to find resources related to the resources in the source class as subjects in a triple {?subject ?predicate ?source}. It then applies mapping for these related subjects as specified in a context given as ?context argument to build target resources. This is useful if the source instances we want to use for the target are one step away from the current source instances, but we want to give the targets some of the properties of the current source instances." ;
+  rdfs:label "related subject context" ;
+  rdfs:subClassOf spinmap:TargetFunctions ;
+.
+spinmapl:resourceWithPrimaryKey
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "resource" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a swa:primaryKeyURIStart ;
+                sp:arg1 [
+                    sp:varName "class" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "uriStart" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:iri ;
+                sp:arg1 [
+                    a sp:concat ;
+                    sp:arg1 [
+                        sp:varName "uriStart" ;
+                      ] ;
+                    sp:arg2 [
+                        a sp:encode_for_uri ;
+                        sp:arg1 [
+                            a xsd:string ;
+                            sp:arg1 spin:_arg1 ;
+                          ] ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "resource" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:class ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The class (that has a primary key)." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      rdfs:comment "The value to build the primary key with." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  spinmap:suggestion-1-1 [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object spinmapl:resourceWithPrimaryKey ;
+            sp:predicate rdf:type ;
+            sp:subject _:b82358 ;
+          ]
+          [
+            sp:object [
+                sp:varName "range" ;
+              ] ;
+            sp:predicate arg:class ;
+            sp:subject _:b82358 ;
+          ]
+          [
+            sp:object 50 ;
+            sp:predicate spinmap:suggestionScore ;
+            sp:subject _:b82358 ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a swa:localRangeAtClass ;
+                sp:arg1 [
+                    sp:varName "targetClass" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "targetPredicate1" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "range" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a swa:hasPrimaryKey ;
+                sp:arg1 [
+                    sp:varName "range" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "Takes a value and builds a URI for an instance of a given class, using the primary key defined for that class." ;
+  rdfs:label "resource with primary key" ;
+  rdfs:subClassOf spl:URIFunctions ;
+.
+spinmapl:resourceWithValue
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "subject" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object spin:_arg1 ;
+            sp:predicate [
+                sp:varName "predicate" ;
+              ] ;
+            sp:subject [
+                sp:varName "subject" ;
+              ] ;
+          ]
+          [
+            a sp:TriplePath ;
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:path [
+                a sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "t" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "t" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "subject" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate spinmapl:type ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The (optional) type of the result object, to narrow down the search space." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      rdfs:comment "The value to match against." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:predicate ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property that must be used in the result resource." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "Takes a value (?arg1) and a property (?predicate), as well as an optional type, and returns a resource that has the given value as object for the predicate. For example, this can be used to find an instance of the class Country that has \"Australia\" as its label." ;
+  rdfs:label "resource with value" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+spinmapl:result
+  a rdf:Property ;
+  rdfs:label "result" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+spinmapl:segmentLength
+  a rdf:Property ;
+  rdfs:label "segment length" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+spinmapl:self
+  a spinmap:TargetFunction ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "source" ;
+          ]
+        ) ;
+      sp:where () ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "A simple function that returns the source instance itself, reusing exactly the same URIs and blank node identifiers." ;
+  rdfs:label "self" ;
+  rdfs:subClassOf spinmap:TargetFunctions ;
+.
+spinmapl:selfJoin
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a spinmap:targetResource ;
+                sp:arg1 [
+                    sp:varName "source" ;
+                  ] ;
+                spinmap:context [
+                    sp:varName "context" ;
+                  ] ;
+              ] ;
+            sp:varName "target" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object spin:_arg1 ;
+            sp:predicate [
+                sp:varName "predicate" ;
+              ] ;
+            sp:subject [
+                sp:varName "source" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "sourceClass" ;
+              ] ;
+            sp:predicate spinmap:sourceClass ;
+            sp:subject [
+                sp:varName "context" ;
+              ] ;
+          ]
+          [
+            a sp:TriplePath ;
+            sp:object [
+                sp:varName "sourceClass" ;
+              ] ;
+            sp:path [
+                a sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "type" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "source" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      rdfs:comment "The value(s) that the source instance must have for the predicate." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:context ;
+      spl:valueType spinmap:Context ;
+      rdfs:comment "The context to create the result resource with." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:predicate ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The predicate to look for." ;
+    ] ;
+  rdfs:comment "Can be used to construct \"self-join\" matches, where the result is a resource from the target ontology." ;
+  rdfs:label "self join" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+spinmapl:separator
+  a rdf:Property ;
+  rdfs:label "separator" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+spinmapl:suffix
+  a rdf:Property ;
+  rdfs:label "suffix" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+spinmapl:targetNamespace
+  a rdf:Property ;
+  rdfs:label "target namespace" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+spinmapl:template
+  a rdf:Property ;
+  rdfs:label "template" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+spinmapl:toBoolean
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:lcase ;
+                sp:arg1 [
+                    a sp:str ;
+                    sp:arg1 spin:_arg1 ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "str" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    a sp:in ;
+                    sp:arg1 [
+                        sp:varName "str" ;
+                      ] ;
+                    sp:arg2 "yes" ;
+                    sp:arg3 "true" ;
+                  ] ;
+                sp:arg2 true ;
+                sp:arg3 [
+                    a sp:if ;
+                    sp:arg1 [
+                        a sp:in ;
+                        sp:arg1 [
+                            sp:varName "str" ;
+                          ] ;
+                        sp:arg2 "no" ;
+                        sp:arg3 "false" ;
+                      ] ;
+                    sp:arg2 false ;
+                    sp:arg3 [
+                        sp:varName "none" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "result" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The (string) value to convert. Should be \"yes\" or \"no\"." ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  spinmap:suggestion-1-1 [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object spinmapl:toBoolean ;
+            sp:predicate rdf:type ;
+            sp:subject _:b92072 ;
+          ]
+          [
+            sp:object 50 ;
+            sp:predicate spinmap:suggestionScore ;
+            sp:subject _:b92072 ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object xsd:boolean ;
+            sp:predicate rdfs:range ;
+            sp:subject [
+                sp:varName "targetPredicate1" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a spinmapl:hasBooleanValue ;
+                sp:arg1 [
+                    sp:varName "sourceClass" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "sourcePredicate1" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "Takes true/false or yes/no values (ignoring case) and maps them to true/false as xsd:boolean literals." ;
+  rdfs:label "to boolean" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spinmapl:type
+  a rdf:Property ;
+  rdfs:label "type" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+spinmapl:usePrimaryKey
+  a spinmap:TargetFunction ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "uri" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            (
+              [
+                sp:object [
+                    sp:varName "targetClass" ;
+                  ] ;
+                sp:predicate spinmap:targetClass ;
+                sp:subject [
+                    sp:varName "context" ;
+                  ] ;
+              ]
+              [
+                a sp:Bind ;
+                sp:expression [
+                    a swa:primaryKeyProperty ;
+                    sp:arg1 [
+                        sp:varName "targetClass" ;
+                      ] ;
+                  ] ;
+                sp:variable [
+                    sp:varName "targetProperty" ;
+                  ] ;
+              ]
+              [
+                a sp:Bind ;
+                sp:expression [
+                    a swa:primaryKeyURIStart ;
+                    sp:arg1 [
+                        sp:varName "targetClass" ;
+                      ] ;
+                  ] ;
+                sp:variable [
+                    sp:varName "uriStart" ;
+                  ] ;
+              ]
+              [
+                a sp:Filter ;
+                sp:expression [
+                    a sp:and ;
+                    sp:arg1 [
+                        a sp:bound ;
+                        sp:arg1 [
+                            sp:varName "uriStart" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        a sp:bound ;
+                        sp:arg1 [
+                            sp:varName "targetProperty" ;
+                          ] ;
+                      ] ;
+                  ] ;
+              ]
+            )
+            [
+              sp:object [
+                  sp:varName "targetProperty" ;
+                ] ;
+              sp:predicate spinmap:targetPredicate1 ;
+              sp:subject [
+                  sp:varName "mapping" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "context" ;
+                ] ;
+              sp:predicate spinmap:context ;
+              sp:subject [
+                  sp:varName "mapping" ;
+                ] ;
+            ]
+            [
+              sp:object spinmap:Mapping-1-1 ;
+              sp:predicate rdf:type ;
+              sp:subject [
+                  sp:varName "mapping" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "sourceProperty" ;
+                ] ;
+              sp:predicate spinmap:sourcePredicate1 ;
+              sp:subject [
+                  sp:varName "mapping" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "expression" ;
+                ] ;
+              sp:predicate spinmap:expression ;
+              sp:subject [
+                  sp:varName "mapping" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "sourceValue" ;
+                ] ;
+              sp:predicate [
+                  sp:varName "sourceProperty" ;
+                ] ;
+              sp:subject [
+                  sp:varName "source" ;
+                ] ;
+            ]
+            [
+              a sp:Bind ;
+              sp:expression [
+                  a spin:eval ;
+                  sp:arg1 [
+                      sp:varName "expression" ;
+                    ] ;
+                  sp:arg2 sp:arg1 ;
+                  sp:arg3 [
+                      sp:varName "sourceValue" ;
+                    ] ;
+                ] ;
+              sp:variable [
+                  sp:varName "targetValue" ;
+                ] ;
+            ]
+            [
+              a sp:Filter ;
+              sp:expression [
+                  a sp:bound ;
+                  sp:arg1 [
+                      sp:varName "targetValue" ;
+                    ] ;
+                ] ;
+            ]
+          )
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:iri ;
+                sp:arg1 [
+                    a sp:concat ;
+                    sp:arg1 [
+                        sp:varName "uriStart" ;
+                      ] ;
+                    sp:arg2 [
+                        a sp:encode_for_uri ;
+                        sp:arg1 [
+                            a xsd:string ;
+                            sp:arg1 [
+                                sp:varName "targetValue" ;
+                              ] ;
+                          ] ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "uri" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmapl:context ;
+      spl:valueType spinmap:Context ;
+      rdfs:comment "The SPINMap Context to apply to the related source resource to create the target resource." ;
+    ] ;
+  rdfs:comment "Builds a URI based on a primary key definition. Assumes that the target class of the given SPINMap Context has an spl:PrimaryKeyPropertyConstraint - either directly or via class inheritance. There also must be a 1-1 mapping associated with that Context that produces values for primary key property. The function runs that mapping to produce the value of the primary key property for the given source instance and then uses that value to build a URI, using the uriStart of the primary key declaration." ;
+  rdfs:label "use primary key" ;
+  rdfs:subClassOf spinmap:TargetFunctions ;
+.
+xsd:boolean
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      rdfs:comment "The input value." ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "As a SPARQL function, this converts a given node (?arg1) to an xsd:boolean literal." ;
+.
+xsd:date
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      rdfs:comment "The input value." ;
+    ] ;
+  spin:returnType xsd:date ;
+  rdfs:comment "As a SPARQL function, this converts a given node (?arg1) to an xsd:date literal." ;
+.
+xsd:dateTime
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      rdfs:comment "The input value." ;
+    ] ;
+  spin:returnType xsd:dateTime ;
+  spinmap:suggestion-1-1 [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object xsd:dateTime ;
+            sp:predicate rdf:type ;
+            sp:subject _:b73668 ;
+          ]
+          [
+            sp:object 101 ;
+            sp:predicate spinmap:suggestionScore ;
+            sp:subject _:b73668 ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a swa:localRangeAtClass ;
+                sp:arg1 [
+                    sp:varName "targetClass" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "targetPredicate1" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "range" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:eq ;
+                sp:arg1 [
+                    sp:varName "range" ;
+                  ] ;
+                sp:arg2 xsd:dateTime ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a spinmapl:hasValueDateTime ;
+                sp:arg1 [
+                    sp:varName "sourceClass" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "sourcePredicate1" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "As a SPARQL function, this converts a given node (?arg1) to an xsd:dateTime literal." ;
+.
+xsd:decimal
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      rdfs:comment "The input value." ;
+    ] ;
+  spin:returnType xsd:decimal ;
+  spinmap:suggestion-1-1 [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object xsd:decimal ;
+            sp:predicate rdf:type ;
+            sp:subject _:b39264 ;
+          ]
+          [
+            sp:object 50 ;
+            sp:predicate spinmap:suggestionScore ;
+            sp:subject _:b39264 ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a swa:localRangeAtClass ;
+                sp:arg1 [
+                    sp:varName "targetClass" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "targetPredicate1" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "range" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:eq ;
+                sp:arg1 [
+                    sp:varName "range" ;
+                  ] ;
+                sp:arg2 xsd:decimal ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a spinmapl:hasValueDecimal ;
+                sp:arg1 [
+                    sp:varName "sourceClass" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "sourcePredicate1" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+.
+xsd:float
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      rdfs:comment "The input value." ;
+    ] ;
+  spin:returnType xsd:float ;
+  spinmap:suggestion-1-1 [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object xsd:float ;
+            sp:predicate rdf:type ;
+            sp:subject _:b96926 ;
+          ]
+          [
+            sp:object 50 ;
+            sp:predicate spinmap:suggestionScore ;
+            sp:subject _:b96926 ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a swa:localRangeAtClass ;
+                sp:arg1 [
+                    sp:varName "targetClass" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "targetPredicate1" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "range" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:eq ;
+                sp:arg1 [
+                    sp:varName "range" ;
+                  ] ;
+                sp:arg2 xsd:float ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a spinmapl:hasValueFloat ;
+                sp:arg1 [
+                    sp:varName "sourceClass" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "sourcePredicate1" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "As a SPARQL function, this converts a given node (?arg1) to an xsd:float literal." ;
+.
+xsd:integer
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      rdfs:comment "The input value." ;
+    ] ;
+  spin:returnType xsd:integer ;
+  spinmap:suggestion-1-1 [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object xsd:integer ;
+            sp:predicate rdf:type ;
+            sp:subject _:b26191 ;
+          ]
+          [
+            sp:object 50 ;
+            sp:predicate spinmap:suggestionScore ;
+            sp:subject _:b26191 ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a swa:localRangeAtClass ;
+                sp:arg1 [
+                    sp:varName "targetClass" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "targetPredicate1" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "range" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:eq ;
+                sp:arg1 [
+                    sp:varName "range" ;
+                  ] ;
+                sp:arg2 xsd:integer ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a spinmapl:hasValueInteger ;
+                sp:arg1 [
+                    sp:varName "sourceClass" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "sourcePredicate1" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "As a SPARQL function, this converts a given node (?arg1) to an xsd:integer literal." ;
+.
+xsd:string
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      rdfs:comment "The input node." ;
+    ] ;
+  spin:returnType xsd:string ;
+  spinmap:suggestion-1-1 [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object xsd:string ;
+            sp:predicate rdf:type ;
+            sp:subject _:b991 ;
+          ]
+          [
+            sp:object 1 ;
+            sp:predicate spinmap:suggestionScore ;
+            sp:subject _:b991 ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a swa:localRangeAtClass ;
+                sp:arg1 [
+                    sp:varName "targetClass" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "targetPredicate1" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "range" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:eq ;
+                sp:arg1 [
+                    sp:varName "range" ;
+                  ] ;
+                sp:arg2 xsd:string ;
+              ] ;
+          ]
+        ) ;
+      rdfs:comment "Any value can be converted to xsd:string, so this is always a fall-back" ;
+    ] ;
+  rdfs:comment "As a SPARQL function, this converts a given node (?arg1) to an xsd:string literal. If the input is a resource, then the URI of that resource will be returned." ;
+.
+xsd:time
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      rdfs:comment "The input value." ;
+    ] ;
+  spin:returnType xsd:time ;
+  rdfs:comment "As a SPARQL function, this converts a given node (?arg1) to an xsd:time literal." ;
+.

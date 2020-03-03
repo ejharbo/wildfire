@@ -1,0 +1,3511 @@
+# baseURI: http://edg.topbraid.solutions/1.0/schema/datamodels
+# imports: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://edg.topbraid.solutions/1.0/schema/datatypes
+# imports: http://edg.topbraid.solutions/1.0/schema/glossary
+# imports: http://edg.topbraid.solutions/1.0/schema/governance
+# imports: http://edg.topbraid.solutions/1.0/schema/quantities
+# imports: http://edg.topbraid.solutions/1.0/schema/technical-assets
+# imports: http://qudt.org/2.0/refdata/scalar-datatypes
+# imports: http://topbraid.org/metadata
+# imports: http://topbraid.org/tosh
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparql: <http://datashapes.org/sparql#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix voag: <http://voag.linkedmodel.org/schema/voag#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/schema/datamodels>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/schema/datamodels/GMD_datamodels> ;
+  vaem:hasGraphRole vaem:SchemaGraph ;
+  rdfs:label "EDG Schema - Data Models" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/datatypes> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/quantities> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  owl:imports <http://qudt.org/2.0/refdata/scalar-datatypes> ;
+  owl:imports <http://topbraid.org/metadata> ;
+  owl:imports <http://topbraid.org/tosh> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+edg:AvroSchemaFile
+  a edg:AssetClass ;
+  edg:acronym "AVRSF" ;
+  edg:description """<p><strong>Avro</strong> is a data serialization system that relies on schemas. When Avro data is read, the schema used when writing it is always present. This permits each datum to be written with no per-value overheads, making serialization both fast and small. This also facilitates use with dynamic, scripting languages, since data, together with its schema, is fully self-describing.</p>
+<p>When Avro data is stored in a file, its schema is stored with it, so that files may be processed later by any program. If the program reading the data expects a different schema this can be easily resolved, since both schemas are present.</p>
+<p>When Avro is used in RPC, the client and server exchange schemas in the connection handshake. (This can be optimized so that, for most calls, no schemas are actually transmitted.) Since both client and server both have the other's full schema, correspondence between same named fields, missing fields, extra fields, etc. can all be easily resolved.</p>
+<p>Avro schemas are defined with JSON . This facilitates implementation in languages that already have JSON libraries.</p>
+<p>An <strong>Avro Schema</strong> is represented as follows:</p>
+<ol>
+<li>A JSON string, naming a defined type. A JSON object, of the form:</li>
+<pre>{\"type\": \"typeName\" ...attributes...}</pre>
+<p>where, <em>typeName</em> is either a primitive or derived type name, as defined below. Attributes are permitted as metadata, but must not affect the format of serialized data.</p>
+<li>A JSON array, representing a union of embedded types.</li>
+</ol>"""^^rdf:HTML ;
+  rdfs:comment """Avro is a data serialization system that relies on schemas. When Avro data is read, the schema used when writing it is always present. This permits each datum to be written with no per-value overheads, making serialization both fast and small. This also facilitates use with dynamic, scripting languages, since data, together with its schema, is fully self-describing.
+Avro schemas are defined with JSON . This facilitates implementation in languages that already have JSON libraries."""^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Avro Schema File" ;
+  rdfs:subClassOf edg:FileAsset ;
+  rdfs:subClassOf edg:Schema ;
+  provo:wasInfluencedBy "http://avro.apache.org/docs/current/#schemas"^^xsd:anyURI ;
+  provo:wasInfluencedBy "https://docs.oracle.com/cd/NOSQL/html/GettingStartedGuide/avroschemas.html"^^xsd:anyURI ;
+.
+edg:CRDNLTY_ANY-OR-NONE
+  a edg:Cardinality ;
+  dtype:literal "zero-or-many" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "0 .. * (Zero Or Many)" ;
+.
+edg:CRDNLTY_AT-LEAST-ONE
+  a edg:Cardinality ;
+  dtype:literal "one-or-many" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "1 .. * (One or Many)" ;
+.
+edg:CRDNLTY_AT-MOST-ONE
+  a edg:Cardinality ;
+  dtype:literal "zero-or-one" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "0 .. 1 (Zero or One)" ;
+.
+edg:CRDNLTY_EXACTLY-ONE
+  a edg:Cardinality ;
+  dtype:literal "exactly-one" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "1 .. 1 (Exactly 1)" ;
+.
+edg:CRDNLTY_MANY
+  a edg:Cardinality ;
+  dtype:literal "many" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label ".. * (Many)" ;
+.
+edg:CalculatedDataElement
+  a edg:AssetClass ;
+  edg:acronym "CALCDE" ;
+  rdfs:comment "A data element that is calculated using a formula"^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Calculated Data Element" ;
+  rdfs:subClassOf edg:DataElement ;
+  sh:property edg:ComputedDataElement-formula ;
+  sh:property edg:ComputedDataElement-variable ;
+.
+edg:ClassificationScheme
+  a edg:AssetClass ;
+  edg:acronym "CSCHEME" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Classification Scheme" ;
+  rdfs:subClassOf edg:Provenance ;
+  rdfs:subClassOf edg:Schema ;
+.
+edg:ComputedDataElement-formula
+  a sh:PropertyShape ;
+  sh:path edg:formula ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:string ;
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:ComputedDataElement-variable
+  a sh:PropertyShape ;
+  sh:path edg:variable ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DataElement ;
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:order "110"^^xsd:decimal ;
+.
+edg:CustomElement
+  a edg:AssetClass ;
+  edg:acronym "CUSTELEM" ;
+  rdfs:comment "Supports data imports that have incomplete or customer-specific elements."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Custom Element" ;
+  rdfs:subClassOf edg:DataElement ;
+  rdfs:subClassOf edg:DataQualityAspect ;
+  sh:property edg:CustomElement-compositeHierarchy ;
+  sh:property edg:CustomElement-dataElementOf ;
+.
+edg:CustomElement-compositeHierarchy
+  a sh:PropertyShape ;
+  sh:path edg:compositeHierarchy ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:string ;
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:CustomElement-dataElementOf
+  a sh:PropertyShape ;
+  sh:path edg:dataElementOf ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DataContainer ;
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "110"^^xsd:decimal ;
+.
+edg:DataAsset
+  dash:abstract true ;
+  vaem:isElaboratedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:subClassOf edg:Asset ;
+  rdfs:subClassOf edg:DataAssetsViewpoint ;
+  rdfs:subClassOf provo:Entity ;
+  sh:property edg:Identifiable-assetName ;
+.
+edg:DataAsset-derivedFrom
+  a sh:PropertyShape ;
+  sh:path edg:derivedFrom ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DataAsset ;
+  sh:group edg:TraceableGroup ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:DataAssetsProject
+  graphql:name "dataAssetsCatalog" ;
+  graphql:protectedClass edg:GlossaryTerm ;
+  graphql:publicClass edg:DataAssetsViewpoint ;
+.
+edg:DataAssetsViewpoint
+  a edg:ViewpointClass ;
+  dash:abstract true ;
+  rdfs:comment "Provides a menu container for all data asset types." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Data Assets Viewpoint" ;
+  rdfs:subClassOf edg:Viewpoint ;
+.
+edg:DataContainer
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:Traceable ;
+  sh:property edg:DataContainer-hostedOn ;
+.
+edg:DataContainer-hostedOn
+  a sh:PropertyShape ;
+  sh:path edg:hostedOn ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:Server ;
+  sh:group edg:DataContainerPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:order "70"^^xsd:decimal ;
+.
+edg:DataContainerPropertyGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Data Container Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:DataElement
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:Protectable ;
+  rdfs:subClassOf edg:Traceable ;
+  sh:property edg:DataElement-confidential ;
+  sh:property edg:DataElement-confidentiality ;
+  sh:property edg:DataElement-derivedFrom ;
+  sh:property edg:DataElement-generatedValue ;
+  sh:property edg:DataElement-isCritical ;
+  sh:property edg:DataElement-mapsToLogicalAttribute ;
+  sh:property edg:DataElement-mapsToProperty ;
+  sh:property edg:DataElement-maxLength ;
+  sh:property edg:DataElement-maxSize ;
+  sh:property edg:DataElement-maxValue ;
+  sh:property edg:DataElement-meanLength ;
+  sh:property edg:DataElement-medianLength ;
+  sh:property edg:DataElement-minLength ;
+  sh:property edg:DataElement-permissibleValues ;
+  sh:property edg:DataElement-physicalDatatype ;
+  sh:property edg:DataProfileable-standardDeviation ;
+.
+edg:DataElement-confidential
+  a sh:PropertyShape ;
+  sh:path edg:confidential ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:string ;
+  sh:group edg:ProtectablePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 0 ;
+  sh:node edg:AffirmationConstraint ;
+  sh:order 100 ;
+.
+edg:DataElement-confidentiality
+  a sh:PropertyShape ;
+  sh:path edg:confidentiality ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:ConfidentialityLevel ;
+  sh:group edg:ProtectablePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 110 ;
+.
+edg:DataElement-criticality
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:order 20 ;
+.
+edg:DataElement-datatype
+  a sh:PropertyShape ;
+  sh:path edg:datatype ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:Datatype ;
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 40 ;
+.
+edg:DataElement-derivedFrom
+  a sh:PropertyShape ;
+  sh:path edg:derivedFrom ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DataElement ;
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:order "47"^^xsd:decimal ;
+.
+edg:DataElement-generatedValue
+  a sh:PropertyShape ;
+  sh:path edg:generatedValue ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:boolean ;
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 140 ;
+.
+edg:DataElement-isCritical
+  a sh:PropertyShape ;
+  sh:path edg:isCritical ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:boolean ;
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 0 ;
+  sh:order 20 ;
+.
+edg:DataElement-length
+  a sh:PropertyShape ;
+  sh:path edg:length ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 51 ;
+.
+edg:DataElement-mapsToLogicalAttribute
+  a sh:PropertyShape ;
+  sh:path edg:mapsToLogicalAttribute ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:LogicalAttribute ;
+  sh:group edg:TraceableGroup ;
+  sh:order 80 ;
+.
+edg:DataElement-mapsToProperty
+  a sh:PropertyShape ;
+  sh:path edg:mapsToProperty ;
+  tosh:editWidget edg:FilteredURIResourceEditor ;
+  tosh:searchWidget swa:ExistingValuesSelectFacet ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class rdf:Property ;
+  sh:group edg:TraceableGroup ;
+  sh:not tosh:SystemNamespaceShape ;
+  sh:order 90 ;
+.
+edg:DataElement-maxLength
+  a sh:PropertyShape ;
+  sh:path edg:maxLength ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:DataProfilePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:name "maximum length" ;
+  sh:order 170 ;
+.
+edg:DataElement-maxSize
+  a sh:PropertyShape ;
+  sh:path edg:maxSize ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:name "maximum size (characters or bytes)" ;
+  sh:order 50 ;
+.
+edg:DataElement-maxValue
+  a sh:PropertyShape ;
+  sh:path edg:maxValue ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:group edg:DataProfilePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 130 ;
+.
+edg:DataElement-maybeSameAs
+  a sh:PropertyShape ;
+  sh:path edg:maybeSameAs ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DataElement ;
+.
+edg:DataElement-meanLength
+  a sh:PropertyShape ;
+  sh:path edg:meanLength ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:decimal ;
+  sh:group edg:DataProfilePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 200 ;
+.
+edg:DataElement-medianLength
+  a sh:PropertyShape ;
+  sh:path edg:medianLength ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:decimal ;
+  sh:group edg:DataProfilePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 190 ;
+.
+edg:DataElement-minLength
+  a sh:PropertyShape ;
+  sh:path edg:minLength ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:DataProfilePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 180 ;
+.
+edg:DataElement-obfuscatedBy
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:order 60 ;
+.
+edg:DataElement-permissibleValues
+  a sh:PropertyShape ;
+  sh:path edg:permissibleValues ;
+  sh:class edg:PermissibleValuesAsset ;
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 80 ;
+.
+edg:DataElement-physicalDatatype
+  a sh:PropertyShape ;
+  sh:path edg:physicalDatatype ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:PhysicalDatatype ;
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 45 ;
+.
+edg:DataElement-precision
+  a sh:PropertyShape ;
+  sh:path edg:precision ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 51 ;
+.
+edg:DataElement-scale
+  a sh:PropertyShape ;
+  sh:path edg:scale ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 51 ;
+.
+edg:DataElementCriticality-forOrganization
+  a sh:PropertyShape ;
+  sh:path edg:forOrganization ;
+  sh:group edg:DataElementCriticalityPropertyGroup ;
+  sh:order 25 ;
+.
+edg:DataElementCriticalityPropertyGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Data Element Criticality Metadata" ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:DataElementPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Data Element Properties" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:DataPackage
+  a edg:AssetClass ;
+  edg:acronym "DPACKAGE" ;
+  edg:hideClass true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Data Package" ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:PhysicalDataAsset ;
+  rdfs:subClassOf edg:PhysicalFlowPayloadable ;
+  rdfs:subClassOf edg:Traceable ;
+  sh:property edg:DataPackage-contains ;
+.
+edg:DataPackage-contains
+  a sh:PropertyShape ;
+  sh:path edg:contains ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:PhysicalFlowPayloadable ;
+  sh:group edg:DataPackagePropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:DataPackagePropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Data Package Properties" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:DataProfilePropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Data Profile" ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:DataProfileViewpoint
+  a edg:ViewpointClass ;
+  rdfs:label "Data Profile Viewpoint" ;
+  rdfs:subClassOf edg:Viewpoint ;
+.
+edg:DataProfileable
+  a edg:AspectClass ;
+  rdfs:comment "'Data Profileable' is an  aspect class that is taken up by asset classes for whcy a profile of data is applicable." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Data Profileable" ;
+  rdfs:subClassOf edg:Aspect ;
+  sh:property edg:DataProfileable-distinctValuesCount ;
+  sh:property edg:DataProfileable-enumeration ;
+  sh:property edg:DataProfileable-frequenciesStatistic ;
+  sh:property edg:DataProfileable-lastProfiled ;
+  sh:property edg:DataProfileable-meanValue ;
+  sh:property edg:DataProfileable-medianValue ;
+  sh:property edg:DataProfileable-minValue ;
+  sh:property edg:DataProfileable-nonNullValuesCount ;
+  sh:property edg:DataProfileable-nullValuesCount ;
+  sh:property edg:DataProfileable-quantileStatistic ;
+  sh:property edg:DataProfileable-standardDeviation ;
+  sh:property edg:DataProfileable-valuesSum ;
+  sh:property edg:DataProfileable-variance ;
+.
+edg:DataProfileable-countOfTableColumns
+  a sh:PropertyShape ;
+  sh:path edg:countOfTableColumns ;
+  sh:datatype xsd:integer ;
+  sh:group edg:DataProfilePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:name "count of table columns" ;
+  sh:order "115"^^xsd:decimal ;
+  sh:values [
+      sh:count [
+          sh:path (
+              [
+                sh:inversePath edg:tableOf ;
+              ]
+              [
+                sh:inversePath edg:columnOf ;
+              ]
+            ) ;
+        ] ;
+    ] ;
+.
+edg:DataProfileable-countOfTables
+  a sh:PropertyShape ;
+  sh:path edg:countOfTables ;
+  sh:datatype xsd:integer ;
+  sh:group edg:DataProfilePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "110"^^xsd:decimal ;
+  sh:values [
+      sh:count [
+          sh:path [
+              sh:inversePath edg:tableOf ;
+            ] ;
+        ] ;
+    ] ;
+.
+edg:DataProfileable-countOfViewColumns
+  a sh:PropertyShape ;
+  sh:path edg:countOfColumns ;
+  sh:datatype xsd:integer ;
+  sh:group edg:DataProfilePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:name "count of view columns" ;
+  sh:order "125"^^xsd:decimal ;
+  sh:values [
+      sh:count [
+          sh:path (
+              [
+                sh:inversePath edg:viewOf ;
+              ]
+              [
+                sh:inversePath edg:columnOf ;
+              ]
+            ) ;
+        ] ;
+    ] ;
+.
+edg:DataProfileable-countOfViews
+  a sh:PropertyShape ;
+  sh:path edg:countOfViews ;
+  sh:datatype xsd:integer ;
+  sh:group edg:DataProfilePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "120"^^xsd:decimal ;
+  sh:values [
+      sh:count [
+          sh:path [
+              sh:inversePath edg:viewOf ;
+            ] ;
+        ] ;
+    ] ;
+.
+edg:DataProfileable-distinctValuesCount
+  a sh:PropertyShape ;
+  sh:path edg:distinctValuesCount ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:DataProfilePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 110 ;
+.
+edg:DataProfileable-enumeration
+  a sh:PropertyShape ;
+  sh:path edg:enumeration ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:boolean ;
+  sh:group edg:DataProfilePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 230 ;
+.
+edg:DataProfileable-frequenciesStatistic
+  a sh:PropertyShape ;
+  sh:path edg:frequenciesStatistic ;
+  tosh:viewWidget swa:SummaryTableViewer ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:FrequenciesRecord ;
+  sh:group edg:FrequenciesPropertyGroup ;
+  sh:order 130 ;
+.
+edg:DataProfileable-lastProfiled
+  a sh:PropertyShape ;
+  sh:path edg:lastProfiled ;
+  dash:readOnly true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:dateTime ;
+  sh:group edg:DataProfilePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 100 ;
+.
+edg:DataProfileable-meanValue
+  a sh:PropertyShape ;
+  sh:path edg:meanValue ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:decimal ;
+  sh:group edg:DataProfilePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 150 ;
+.
+edg:DataProfileable-medianValue
+  a sh:PropertyShape ;
+  sh:path edg:medianValue ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:decimal ;
+  sh:group edg:DataProfilePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 160 ;
+.
+edg:DataProfileable-minValue
+  a sh:PropertyShape ;
+  sh:path edg:minValue ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:group edg:DataProfilePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 140 ;
+.
+edg:DataProfileable-nonNullValuesCount
+  a sh:PropertyShape ;
+  sh:path edg:nonNullValuesCount ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:DataProfilePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 40 ;
+.
+edg:DataProfileable-nullValuesCount
+  a sh:PropertyShape ;
+  sh:path edg:nullValuesCount ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:DataProfilePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 120 ;
+.
+edg:DataProfileable-numberOfTables
+  a sh:PropertyShape ;
+  sh:path edg:numberOfTables ;
+  dash:readOnly true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:DataProfilePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:name "number of profiled tables and views" ;
+  sh:order 105 ;
+.
+edg:DataProfileable-quantileStatistic
+  a sh:PropertyShape ;
+  sh:path edg:quantileStatistic ;
+  tosh:viewWidget swa:SummaryTableViewer ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:QuantilesRecord ;
+  sh:group edg:QuantilesPropertyGroup ;
+  sh:order 250 ;
+.
+edg:DataProfileable-standardDeviation
+  a sh:PropertyShape ;
+  sh:path edg:standardDeviation ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:decimal ;
+  sh:group edg:DataProfilePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 260 ;
+.
+edg:DataProfileable-valuesSum
+  a sh:PropertyShape ;
+  sh:path edg:valuesSum ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:group edg:DataProfilePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 270 ;
+.
+edg:DataProfileable-variance
+  a sh:PropertyShape ;
+  sh:path edg:variance ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:decimal ;
+  sh:group edg:DataProfilePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 280 ;
+.
+edg:DataQuality-dataQualityStatus
+  a sh:PropertyShape ;
+  sh:path edg:dataQualityStatus ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:FiveLevelRatingScale ;
+  sh:group edg:StatusAspectGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:DataQualityAspect
+  a edg:AspectClass ;
+  rdfs:comment "'Data Quality Aspect' is an  aspect class that is taken up by asset classes for which  data quality assessment is applicable." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Data Quality Aspect" ;
+  rdfs:subClassOf edg:Aspect ;
+  sh:property edg:DataQuality-dataQualityStatus ;
+  sh:property edg:DataQualityAspect-dataQualityRecord ;
+.
+edg:DataQualityAspect-dataQualityRecord
+  a sh:PropertyShape ;
+  sh:path edg:dataQualityRecord ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DataQualityRecord ;
+  sh:group edg:DataQualityRecordTableGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:DataQualityIssueRecord
+  a edg:AssetClass ;
+  edg:acronym "DQIR" ;
+  swa:instancesHaveRandomURI true ;
+  rdfs:comment "Record of a specific quality issue discovered for an asset at a specific point in time" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Data Quality Issue Record" ;
+  rdfs:subClassOf edg:Asset ;
+  rdfs:subClassOf edg:DataQualityViewpoint ;
+  sh:property edg:DataQualityIssueRecord-numberOfViolations ;
+  sh:property edg:DataQualityIssueRecord-violatedRule ;
+  sh:property edg:DataQualityIssueRecord-violationNotes ;
+.
+edg:DataQualityIssueRecord-numberOfViolations
+  a sh:PropertyShape ;
+  sh:path edg:numberOfViolations ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:DataQualityPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:DataQualityIssueRecord-violatedRule
+  a sh:PropertyShape ;
+  sh:path edg:violatedRule ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DataValueRule ;
+  sh:group edg:DataQualityPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:DataQualityIssueRecord-violationNotes
+  a sh:PropertyShape ;
+  sh:path edg:violationNotes ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:DataQualityPropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:DataQualityPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Data Quality Properties" ;
+  sh:order "60"^^xsd:decimal ;
+.
+edg:DataQualityRecord
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  edg:acronym "DQRCRD" ;
+  swa:instancesHaveRandomURI true ;
+  rdfs:comment "Record of data quality of an asset at a given point in time" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Data Quality Record" ;
+  rdfs:subClassOf edg:Asset ;
+  rdfs:subClassOf edg:DataQualityViewpoint ;
+  sh:property edg:DataQualityRecord-created ;
+  sh:property edg:DataQualityRecord-dataQualityIssue ;
+  sh:property edg:DataQualityRecord-dataQualityNotes ;
+  sh:property edg:DataQualityRecord-dataQualityStatus ;
+  sh:property edg:DataQualityRecord-totalNumberOfQualityIssues ;
+  sh:property edg:DataQualityRecord-totalNumberOfVerifiedValues ;
+  sh:property edg:DataQualityRecord-verificationMethod ;
+.
+edg:DataQualityRecord-created
+  a sh:PropertyShape ;
+  sh:path edg:created ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:dateTime ;
+  sh:group edg:DataQualityPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:DataQualityRecord-dataQualityIssue
+  a sh:PropertyShape ;
+  sh:path edg:dataQualityIssue ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DataQualityIssueRecord ;
+  sh:group edg:DataQualityPropertiesGroup ;
+  sh:order "110"^^xsd:decimal ;
+.
+edg:DataQualityRecord-dataQualityNotes
+  a sh:PropertyShape ;
+  sh:path edg:dataQualityNotes ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:DataQualityPropertiesGroup ;
+  sh:name "data quality notes" ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:DataQualityRecord-dataQualityStatus
+  a sh:PropertyShape ;
+  sh:path edg:dataQualityStatus ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DataQualityStatus ;
+  sh:group edg:DataQualityPropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:DataQualityRecord-totalNumberOfQualityIssues
+  a sh:PropertyShape ;
+  sh:path edg:totalNumberOfQualityIssues ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:DataQualityPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:DataQualityRecord-totalNumberOfVerifiedValues
+  a sh:PropertyShape ;
+  sh:path edg:totalNumberOfVerifiedValues ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:DataQualityPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:DataQualityRecord-verificationMethod
+  a sh:PropertyShape ;
+  sh:path edg:verificationMethod ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DataQualityVerificationMethod ;
+  sh:group edg:DataQualityPropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:DataQualityRecordTableGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  tosh:viewGadget edg:DataQualityRecordGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Data Quality Records" ;
+  sh:order "70"^^xsd:decimal ;
+.
+edg:DataQualityViewpoint
+  a edg:ViewpointClass ;
+  dash:abstract true ;
+  rdfs:comment "Provides a menu container for all data asset types." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Data Quality Viewpoint" ;
+  rdfs:subClassOf edg:DataAssetsViewpoint ;
+.
+edg:DataSamplePropertyGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  tosh:viewGadget edg:DataSampleGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Data Sample" ;
+  sh:order "65"^^xsd:decimal ;
+.
+edg:DataSet
+  a edg:AssetClass ;
+  edg:hideSubClasses true ;
+  rdfs:comment "A 'Dataset' is a collection of related data that is composed of separate elements that can be processed as a composite structure by software. Elements of a dataset can be sequenced, designated as mandatory, be attributed with verification rules that should be employed, and have security constraints governing their access." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Dataset" ;
+  rdfs:subClassOf edg:AccessControllable ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:DataQualityAspect ;
+  rdfs:subClassOf edg:PhysicalDataAsset ;
+  rdfs:subClassOf edg:PhysicalFlowPayloadable ;
+  rdfs:subClassOf edg:ProvenanceTimestamps ;
+  rdfs:subClassOf edg:Resourceable ;
+  rdfs:subClassOf edg:Sociable ;
+  rdfs:subClassOf edg:Traceable ;
+  sh:property edg:Compliance-license ;
+  sh:property edg:DataSet-changeFrequency ;
+  sh:property edg:DataSet-dataElementOf-inverse ;
+  sh:property edg:DataSet-dataSetSpecification ;
+  sh:property edg:DataSet-derivedFrom ;
+  sh:property edg:DataSet-formatType ;
+  sh:property edg:DataSet-partOf ;
+  sh:property edg:DataSet-recordCount ;
+  sh:property edg:DataSet-scope ;
+  sh:property edg:DataSet-sizeInBytes ;
+  sh:property edg:Identifiable-creationDate ;
+  sh:property edg:Identifiable-subtitle ;
+  sh:property edg:Identifiable-title ;
+.
+edg:DataSet-changeFrequency
+  a sh:PropertyShape ;
+  sh:path edg:FrequencyOfChange ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:FrequencyOfChange ;
+  sh:group edg:DataSetPropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:DataSet-dataElementOf-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:dataElementOf ;
+    ] ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DataSetElement ;
+  sh:group edg:DataSetPropertiesGroup ;
+  sh:name "elements:" ;
+  sh:order 50 ;
+.
+edg:DataSet-dataSetSpecification
+  a sh:PropertyShape ;
+  sh:path edg:dataSetSpecification ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DataSetSchema ;
+  sh:group edg:DataSetPropertiesGroup ;
+  sh:order "4"^^xsd:decimal ;
+.
+edg:DataSet-derivedFrom
+  a sh:PropertyShape ;
+  sh:path edg:derivedFrom ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DataSet ;
+  sh:group edg:TraceableGroup ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:DataSet-endDate
+  a sh:PropertyShape ;
+  sh:path edg:endDate ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:date ;
+  sh:group edg:DataSetPropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:DataSet-formatType
+  a sh:PropertyShape ;
+  sh:path edg:format ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:FormatType ;
+  sh:group edg:DataSetPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:DataSet-partOf
+  a sh:PropertyShape ;
+  sh:path edg:partOf ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DataSetCollection ;
+  sh:group edg:DataSetPropertiesGroup ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:DataSet-partOf-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:partOf ;
+    ] ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DataSet ;
+  sh:group edg:DataSetCollectionPropertiesGroup ;
+  sh:name "datasets" ;
+  sh:order 50 ;
+.
+edg:DataSet-recordCount
+  a sh:PropertyShape ;
+  sh:path edg:recordCount ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:DataSetPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 30 ;
+.
+edg:DataSet-scope
+  a sh:PropertyShape ;
+  sh:path edg:scope ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:DataSetPropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:DataSet-sizeInBytes
+  a sh:PropertyShape ;
+  sh:path edg:sizeInBytes ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:string ;
+  sh:group edg:DataSetPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "70"^^xsd:decimal ;
+.
+edg:DataSet-startDate
+  a sh:PropertyShape ;
+  sh:path edg:startDate ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:date ;
+  sh:group edg:DataSetPropertiesGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:DataSetCollection
+  a edg:AssetClass ;
+  edg:acronym "DSCLCTN" ;
+  edg:hideSubClasses true ;
+  rdfs:comment "A 'Dataset Collection' groups together relevant datasets." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "DataSet Collection" ;
+  rdfs:subClassOf edg:AccessControllable ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:DataExchangeable ;
+  rdfs:subClassOf edg:DataStructure ;
+  rdfs:subClassOf edg:PhysicalDataAsset ;
+  rdfs:subClassOf edg:PhysicalFlowPayloadable ;
+  rdfs:subClassOf edg:ProvenanceTimestamps ;
+  rdfs:subClassOf edg:Resourceable ;
+  rdfs:subClassOf edg:Sociable ;
+  rdfs:subClassOf edg:Traceable ;
+  sh:property edg:Compliance-license ;
+  sh:property edg:DataSet-partOf-inverse ;
+  sh:property edg:DataSetCollection-sizeInBytes ;
+  sh:property edg:Identifiable-subtitle ;
+  sh:property edg:Identifiable-title ;
+.
+edg:DataSetCollection-sizeInBytes
+  a sh:PropertyShape ;
+  sh:path edg:sizeInBytes ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:string ;
+  sh:group edg:DataSetCollectionPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "70"^^xsd:decimal ;
+.
+edg:DataSetCollectionPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Dataset Collection Metadata" ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:DataSetElement
+  a edg:AssetClass ;
+  edg:acronym "DSELMNT" ;
+  edg:hideSubClasses true ;
+  rdfs:comment "A 'Dataset Element' defines a member of a 'DataSet'. As a sub-type of 'Data Element' they refer back to their parent datasets." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "DataSet Element" ;
+  rdfs:subClassOf edg:DataElement ;
+  rdfs:subClassOf edg:DataQualityAspect ;
+  sh:property edg:DataSetElement-dataElementOf ;
+  sh:property edg:DataSetElement-dataElementOf-inverse ;
+.
+edg:DataSetElement-dataElementOf
+  a sh:PropertyShape ;
+  sh:path edg:dataElementOf ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DataSet ;
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:order 20 ;
+.
+edg:DataSetElement-dataElementOf-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:dataElementOf ;
+    ] ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DataSet ;
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:name "composed of" ;
+  sh:order 50 ;
+.
+edg:DataSetElement-datatype
+  a sh:PropertyShape ;
+  sh:path edg:datatype ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:Datatype ;
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:DataSetElement-refersTo
+  a sh:PropertyShape ;
+  sh:path edg:refersTo ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DataSet ;
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:DataSetPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Dataset Metadata" ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:DataSetSchema
+  a edg:AssetClass ;
+  edg:acronym "DSSCHEMA" ;
+  rdfs:comment "A 'Data Set Schema (DSS)' specifies the structure for a group of data elements and the conditions under which this group is collected. They can define the sequence in which data elements are included, whether they are mandatory, what verification rules should be employed and the characteristics of the collection (e.g. its scope)."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Dataset Schema" ;
+  rdfs:subClassOf edg:Schema ;
+  sh:property edg:DataSet-changeFrequency ;
+  sh:property edg:DataSet-endDate ;
+  sh:property edg:DataSet-formatType ;
+  sh:property edg:DataSet-scope ;
+  sh:property edg:DataSet-startDate ;
+.
+edg:DataStructure
+  a edg:AssetClass ;
+  dash:abstract true ;
+  edg:acronym "DSTRUCT" ;
+  rdfs:comment "A 'Data Structure' is composed of data elements and possibly other data structures." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Data Structure" ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:PhysicalDataAsset ;
+  rdfs:subClassOf edg:Processable ;
+  rdfs:subClassOf edg:Traceable ;
+.
+edg:DataStructurePropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Data Structure Properties" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:DataValueRule
+  rdfs:subClassOf edg:DataQualityViewpoint ;
+.
+edg:DataWarehouse
+  a edg:AssetClass ;
+  edg:acronym "DWH" ;
+  rdfs:comment "A 'Data Warehouse' is a kind of database optimized to serve as a repository for integrated data from one or more disparate sources. They store current and historical data in one single place and are typically used for creating analytical reports." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Data Warehouse" ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:Database ;
+.
+edg:Database
+  a edg:AssetClass ;
+  edg:hideSubClasses true ;
+  rdfs:label "Database" ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:DataContainer ;
+  rdfs:subClassOf edg:DataQualityAspect ;
+  rdfs:subClassOf edg:ProvenanceTimestamps ;
+  rdfs:subClassOf edg:Traceable ;
+  sh:property edg:DataProfileable-countOfTableColumns ;
+  sh:property edg:DataProfileable-countOfTables ;
+  sh:property edg:DataProfileable-countOfViewColumns ;
+  sh:property edg:DataProfileable-countOfViews ;
+  sh:property edg:DataProfileable-lastProfiled ;
+  sh:property edg:DataProfileable-numberOfTables ;
+  sh:property edg:Database-criticality ;
+  sh:property edg:Database-dataContainerType ;
+  sh:property edg:Database-dependsOnDataFrom ;
+  sh:property edg:Database-derivedFrom ;
+  sh:property edg:Database-environmentType ;
+  sh:property edg:Database-locationLink ;
+  sh:property edg:Database-providedAsService ;
+  sh:property edg:Database-tableOf-inverse ;
+.
+edg:Database-criticality
+  a sh:PropertyShape ;
+  sh:path edg:criticality ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:FiveLevelRatingScale ;
+  sh:group edg:DataContainerPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Database-dataContainerType
+  a sh:PropertyShape ;
+  sh:path edg:dataContainerType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DataContainerType ;
+  sh:group edg:DatabasePropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Database-dependsOnDataFrom
+  a sh:PropertyShape ;
+  sh:path edg:dependsOnDataFrom ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:description "Expresses a direct dependency for a database. The dependency can be to another database or some other software asset." ;
+  sh:group edg:TraceableGroup ;
+  sh:or (
+      [
+        sh:class edg:Database ;
+      ]
+      [
+        sh:class edg:SoftwareAsset ;
+      ]
+    ) ;
+  sh:order "60"^^xsd:decimal ;
+.
+edg:Database-derivedFrom
+  a sh:PropertyShape ;
+  sh:path edg:derivedFrom ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:Database ;
+  sh:group edg:TraceableGroup ;
+  sh:order "90"^^xsd:decimal ;
+.
+edg:Database-environmentType
+  a sh:PropertyShape ;
+  sh:path edg:environmentType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:EnvironmentType ;
+  sh:group edg:DataContainerPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:Database-locationLink
+  a sh:PropertyShape ;
+  sh:path edg:locationLink ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:anyURI ;
+  sh:group edg:DataContainerPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:Database-numberOfInstances
+  sh:group edg:QualityAssurancePropertiesGroup ;
+  sh:order "70"^^xsd:decimal ;
+.
+edg:Database-providedAsService
+  a sh:PropertyShape ;
+  sh:path edg:providedAsService ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:SoftwareService ;
+  sh:group edg:DataContainerPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:order "80"^^xsd:decimal ;
+.
+edg:Database-tableOf-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:tableOf ;
+    ] ;
+  graphql:name "tables" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DatabaseTable ;
+  sh:description "The tables of a database." ;
+  sh:group edg:DataContainerPropertyGroup ;
+  sh:name "tables" ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:DatabaseColumn
+  a edg:AssetClass ;
+  edg:acronym "DBCOL" ;
+  rdfs:comment "A column of a database table. Columns refer back to their parent tables." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Database Column" ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:DataElement ;
+  rdfs:subClassOf edg:DataProfileable ;
+  rdfs:subClassOf edg:DataQualityAspect ;
+  rdfs:subClassOf edg:Traceable ;
+  sh:property edg:DatabaseColumn-autoIncremented ;
+  sh:property edg:DatabaseColumn-columnOf ;
+  sh:property edg:DatabaseColumn-databaseRemarks ;
+  sh:property edg:DatabaseColumn-isForeignKey ;
+  sh:property edg:DatabaseColumn-isNullable ;
+  sh:property edg:DatabaseColumn-isPrimaryKey ;
+  sh:property edg:DatabaseColumn-nullOptions ;
+  sh:property edg:Traceable-mapsToColumn ;
+.
+edg:DatabaseColumn-autoIncremented
+  a sh:PropertyShape ;
+  sh:path edg:autoIncremented ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:boolean ;
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:maxCount 1 ;
+.
+edg:DatabaseColumn-columnOf
+  a sh:PropertyShape ;
+  sh:path edg:columnOf ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:Table ;
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:DatabaseColumn-databaseRemarks
+  a sh:PropertyShape ;
+  sh:path edg:databaseRemarks ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:string ;
+  sh:group edg:NarratablePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:DatabaseColumn-isForeignKey
+  a sh:PropertyShape ;
+  sh:path edg:isForeignKey ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:boolean ;
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "35"^^xsd:decimal ;
+.
+edg:DatabaseColumn-isNullable
+  a sh:PropertyShape ;
+  sh:path edg:isNullable ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:boolean ;
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:DatabaseColumn-isPrimaryKey
+  a sh:PropertyShape ;
+  sh:path edg:isPrimaryKey ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:boolean ;
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:DatabaseColumn-nullOptions
+  a sh:PropertyShape ;
+  sh:path edg:nullOptions ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:string ;
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "60"^^xsd:decimal ;
+.
+edg:DatabaseColumnPropertyGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Database Column Metadata" ;
+  sh:order "35"^^xsd:decimal ;
+.
+edg:DatabaseColumnTraceabilityGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Database Column Traceability Metadata" ;
+  sh:order "2"^^xsd:decimal ;
+.
+edg:DatabaseExtract
+  a edg:AssetClass ;
+  edg:acronym "DBEXTRCT" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Database Extract" ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:PhysicalDataAsset ;
+  rdfs:subClassOf edg:PhysicalFlowPayloadable ;
+  rdfs:subClassOf edg:Traceable ;
+  sh:property edg:DatabaseExtract-contains ;
+  sh:property edg:DatabaseExtract-extractFrom ;
+.
+edg:DatabaseExtract-contains
+  a sh:PropertyShape ;
+  sh:path edg:contains ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DatabaseView ;
+  sh:group edg:DatabaseExtractPropertiesGroup ;
+  sh:or (
+      [
+        sh:class edg:DatabaseView ;
+      ]
+      [
+        sh:class edg:DatabaseColumn ;
+      ]
+    ) ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:DatabaseExtract-extractFrom
+  a sh:PropertyShape ;
+  sh:path edg:extractFrom ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:Database ;
+  sh:group edg:DatabaseExtractPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:DatabaseExtractPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Database Extract Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:DatabasePropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Database Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:DatabaseSchema
+  a edg:AssetClass ;
+  edg:acronym "DBSCHEMA" ;
+  rdfs:comment "A 'Database Schema' is a collection of database objects associated with a database. It is sometimes also associated with a database user name. If so, the user name is called the schema owner, or the owner of the related group of objects. There may be one or multiple schemas in a database. The user is only associated with the schema of the same name and often the terms will be used interchangeably."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Database Schema" ;
+  rdfs:subClassOf edg:Provenance ;
+  rdfs:subClassOf edg:Schema ;
+  sh:property edg:DatabaseSchema-specificationFor ;
+.
+edg:DatabaseSchema-specificationFor
+  a sh:PropertyShape ;
+  sh:path edg:specificationFor ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:Database ;
+  sh:group edg:DatabaseSchemaPropertyGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:DatabaseSchemaPropertyGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Database Schema Metadata" ;
+  sh:order "35"^^xsd:decimal ;
+.
+edg:DatabaseSynonym
+  a edg:AssetClass ;
+  edg:acronym "DBSYN" ;
+  edg:name "SYNONYM" ;
+  rdfs:comment """A Synonym is an alternative name for a table, view, sequence, operator, procedure, stored function, package, materialized view, Java class schema object, user-defined object type, or another synonym. A synonym places a dependency on its target object and becomes invalid if the target object is changed or dropped.
+Synonyms provide both data independence and location transparency. Synonyms permit applications to function without modification regardless of which user owns the table or view and regardless of which database holds the table or view. However, synonyms are not a substitute for privileges on database objects. Appropriate privileges must be granted to a user before the user can use the synonym.
+Synonyms can be used in the following DML statements: SELECT, INSERT, UPDATE, DELETE, FLASHBACK TABLE, EXPLAIN PLAN, and LOCK TABLE."""^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Database Synonym" ;
+  rdfs:subClassOf edg:PhysicalDataAsset ;
+  rdfs:subClassOf edg:Processable ;
+  provo:wasInfluencedBy "https://docs.oracle.com/database/122/SQLRF/CREATE-SYNONYM.htm#SQLRF01401"^^xsd:anyURI ;
+  sh:property edg:DatabaseSynonym-belongsToSchema ;
+  sh:property edg:DatabaseSynonym-synonymFor ;
+  sh:property edg:DatabaseSynonym-synonymOf ;
+.
+edg:DatabaseSynonym-belongsToSchema
+  a sh:PropertyShape ;
+  sh:path edg:belongsToSchema ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DatabaseSchema ;
+  sh:group edg:DatabaseSynonymPropertyGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:DatabaseSynonym-synonymFor
+  a sh:PropertyShape ;
+  sh:path edg:synonymFor ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:group edg:DatabaseSynonymPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:or edg:DatabaseSynonymUnionList ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:DatabaseSynonym-synonymOf
+  a sh:PropertyShape ;
+  sh:path edg:synonymOf ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:Database ;
+  sh:group edg:DatabaseSynonymPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:DatabaseSynonymPropertyGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Database Synonym Properties" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:DatabaseSynonymUnionList
+  a rdf:List ;
+  rdf:first (
+      [
+        sh:class edg:Table ;
+      ]
+    ) ;
+  rdf:rest (
+      [
+        sh:class edg:View ;
+      ]
+      [
+        sh:class edg:StoredProcedure ;
+      ]
+    ) ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Numeric union list" ;
+.
+edg:DatabaseTable
+  a edg:AssetClass ;
+  edg:acronym "DB-TBL" ;
+  edg:name "TABLE" ;
+  rdfs:comment "A table of a database. This is a sub-type of 'Table'. Tables refer to their parent databases." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Database Table" ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:Processable ;
+  rdfs:subClassOf edg:Table ;
+  rdfs:subClassOf edg:Traceable ;
+  sh:property edg:DatabaseTable-columnOf-inverse ;
+  sh:property edg:DatabaseTable-foreignKey ;
+  sh:property edg:DatabaseTable-tableOf ;
+.
+edg:DatabaseTable-columnOf-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:columnOf ;
+    ] ;
+  graphql:name "columns" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DatabaseColumn ;
+  sh:description "The columns of a database table." ;
+  sh:group edg:DataStructurePropertiesGroup ;
+  sh:name "columns" ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:DatabaseTable-foreignKey
+  a sh:PropertyShape ;
+  sh:path edg:foreignKey ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:ForeignKey ;
+  sh:group edg:DataStructurePropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:DatabaseTable-tableOf
+  a sh:PropertyShape ;
+  sh:path edg:tableOf ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:Database ;
+  sh:group edg:DataStructurePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:DatabaseTableReference
+  a edg:ConstructClass ;
+  a sh:NodeShape ;
+  rdfs:comment "<p>TBD</p>"^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Database Table Reference" ;
+  rdfs:subClassOf edg:Construct ;
+.
+edg:DatabaseView
+  a edg:AssetClass ;
+  edg:acronym "DBVIEW" ;
+  edg:name "VIEW" ;
+  rdfs:comment "A database view is a selective collection of columns from one or more tables. The view can also contain derived fields." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Database View" ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:Processable ;
+  rdfs:subClassOf edg:Table ;
+  rdfs:subClassOf edg:Traceable ;
+  rdfs:subClassOf edg:View ;
+  sh:property edg:DatabaseView-viewInputColumn ;
+  sh:property edg:DatabaseView-viewOf ;
+  sh:property edg:DatabaseView-viewOutputColumn ;
+.
+edg:DatabaseView-columnOf-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:columnOf ;
+    ] ;
+  dash:composite true ;
+  graphql:name "column" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:group edg:DataStructurePropertiesGroup ;
+  sh:name "database columns" ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:DatabaseView-viewInputColumn
+  a sh:PropertyShape ;
+  sh:path edg:viewInputColumn ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DatabaseColumn ;
+  sh:group edg:DataStructurePropertiesGroup ;
+  sh:minCount 0 ;
+  sh:order "60"^^xsd:decimal ;
+.
+edg:DatabaseView-viewOf
+  a sh:PropertyShape ;
+  sh:path edg:viewOf ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:Database ;
+  sh:group edg:DataStructurePropertiesGroup ;
+  sh:minCount 1 ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:DatabaseView-viewOutputColumn
+  a sh:PropertyShape ;
+  sh:path edg:viewOutputColumn ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DatabaseColumn ;
+  sh:group edg:DataStructurePropertiesGroup ;
+  sh:minCount 0 ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:DatatypeViewpoint
+  rdfs:subClassOf edg:DataAssetsViewpoint ;
+.
+edg:EnumeratedValueViewpoint
+  rdfs:subClassOf edg:DataAssetsViewpoint ;
+.
+edg:ExchangeableEntity
+  a edg:AssetClass ;
+  dash:abstract true ;
+  rdfs:comment "An 'Exchangeable Entity' is one that can be referred to on a logical flow as an \"Involved Entity\"." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Exchangeable Entity" ;
+  rdfs:subClassOf edg:Traceable ;
+.
+edg:ExternalDataSet
+  a edg:AssetClass ;
+  edg:acronym "EXTDSET" ;
+  rdfs:comment "A dataset whose specification is externally held oustide of EDG." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "External Dataset" ;
+  rdfs:subClassOf edg:DataSet ;
+.
+edg:File-formatType
+  a sh:PropertyShape ;
+  sh:path edg:format ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:FormatType ;
+  sh:group edg:FilePropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:File-name
+  a sh:PropertyShape ;
+  sh:path edg:name ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:string ;
+  sh:group edg:FilePropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:File-residesIn
+  a sh:PropertyShape ;
+  sh:path edg:residesIn ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:FileSystem ;
+  sh:group edg:FilePropertiesGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:File-sourceLink
+  a sh:PropertyShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:anyURI ;
+  sh:group edg:FilePropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:FileAsset
+  a edg:AssetClass ;
+  dash:abstract false ;
+  edg:acronym "FILE" ;
+  edg:hideSubClasses true ;
+  edg:name "FILE" ;
+  rdfs:comment "Any kind of file that stores data structure specifications." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "File Asset" ;
+  rdfs:subClassOf edg:AccessControllable ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:DataQualityAspect ;
+  rdfs:subClassOf edg:PhysicalDataAsset ;
+  rdfs:subClassOf edg:Processable ;
+  rdfs:subClassOf edg:Protectable ;
+  rdfs:subClassOf edg:ProvenanceTimestamps ;
+  rdfs:subClassOf edg:Traceable ;
+  sh:property edg:File-formatType ;
+  sh:property edg:File-name ;
+  sh:property edg:File-residesIn ;
+  sh:property edg:File-sourceLink ;
+.
+edg:FilePropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "File Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:FileSystem
+  a edg:AssetClass ;
+  edg:acronym "FSYS" ;
+  rdfs:comment "A 'File System' is a kind of 'Data Container' where there are structured records that support create, read, update and delete operations in an efficient way." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "File System" ;
+  rdfs:subClassOf edg:DataContainer ;
+  sh:property edg:FileSystem-directoryPath ;
+.
+edg:FileSystem-directoryPath
+  a sh:PropertyShape ;
+  sh:path edg:directoryPath ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:string ;
+  sh:group edg:FileSystemPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:FileSystemPropertyGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "File System Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:FileTable
+  a edg:AssetClass ;
+  edg:name "FILE-TABLE" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "File Table" ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:Processable ;
+  rdfs:subClassOf edg:Table ;
+  rdfs:subClassOf edg:Traceable ;
+  sh:property edg:FileTable-residesIn ;
+.
+edg:FileTable-residesIn
+  a sh:PropertyShape ;
+  sh:path edg:residesIn ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:FileAsset ;
+  sh:group edg:DataStructurePropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:Flow
+  rdfs:subClassOf edg:Protectable ;
+.
+edg:ForeignKey
+  a edg:AssetClass ;
+  a edg:ConstructClass ;
+  a sh:NodeShape ;
+  edg:acronym "FKEY" ;
+  edg:description """<p>Ensuring the referential integrity of the data in one table matches values in another table, is done using the <em>SQL FOREIGN KEY CONSTRAINT</em>. The FOREIGN KEY CONSTRAINT is a column or list of columns which points to the PRIMARY KEY of another table.  The main purpose of FOREIGN KEY is, only those values will appear which are present in the primary key table. For each row in the referencing table( the table contains the FOREIGN KEY), the foreign key must match an existing primary key in the referenced table (the table contains the PRIMARY KEY). This enforcement of FOREIGN KEY is called the <em>Referential Integrity</em>.</p>
+<p>A foreign key means that values in one table must must appear in another table. The structure and data type of PRIMARY KEY and FOREIGN KEY must be same. The referenced table is called the parent table while the table with the foreign key is called the child table. The foreign key in the child table will generally reference a primary key in the parent table. A foreign key can be defined in either a CREATE TABLE statement or an ALTER TABLE statement.</p>
+<p>References:</p>
+<ol>
+<li><a href=\"https://www.techonthenet.com/oracle/foreign_keys/foreign_keys.php\">https://www.techonthenet.com/oracle/foreign_keys/foreign_keys.php</a></li>
+<li><a href=\"http://www.w3resource.com/sql/creating-and-maintaining-tables/foreign-key.php\">http://www.w3resource.com/sql/creating-and-maintaining-tables/foreign-key.php</a></li>
+</ol>"""^^rdf:HTML ;
+  edg:hideClass true ;
+  rdfs:comment "A foreign key means that values in one table must must appear in another table. The referenced table is called the parent table while the table with the foreign key is called the child table. The foreign key in the child table will generally reference a primary key in the parent table."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Foreign Key" ;
+  rdfs:subClassOf edg:PhysicalDataAsset ;
+  sh:property edg:ForeignKey-childColumn ;
+  sh:property edg:ForeignKey-parentColumn ;
+  sh:property edg:ForeignKey-referenceTable ;
+.
+edg:ForeignKey-childColumn
+  a sh:PropertyShape ;
+  sh:path edg:childColumn ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:group edg:ForeignKeyPropertiesGroup ;
+  sh:node dash:ListShape ;
+  sh:order "120"^^xsd:decimal ;
+  sh:property [
+      sh:path (
+          [
+            sh:zeroOrMorePath rdf:rest ;
+          ]
+          rdf:first
+        ) ;
+      sh:class edg:DatabaseColumn ;
+    ] ;
+.
+edg:ForeignKey-parentColumn
+  a sh:PropertyShape ;
+  sh:path edg:parentColumn ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:group edg:ForeignKeyPropertiesGroup ;
+  sh:node dash:ListShape ;
+  sh:order "110"^^xsd:decimal ;
+  sh:property [
+      sh:path (
+          [
+            sh:zeroOrMorePath rdf:rest ;
+          ]
+          rdf:first
+        ) ;
+      sh:class edg:DatabaseColumn ;
+    ] ;
+.
+edg:ForeignKey-referenceTable
+  a sh:PropertyShape ;
+  sh:path edg:referencesTable ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DatabaseTable ;
+  sh:group edg:ForeignKeyPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:ForeignKeyPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Foreign Key Mappings" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:FormItem
+  rdfs:subClassOf edg:DataElement ;
+  rdfs:subClassOf edg:InformationAssetViewpoint ;
+  rdfs:subClassOf edg:PhysicalDataAsset ;
+.
+edg:FrequenciesPropertyGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Frequencies" ;
+  sh:order "60"^^xsd:decimal ;
+.
+edg:FrequenciesRecord
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "holds data values frequency statistics for a data element" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Frequencies record" ;
+  rdfs:subClassOf edg:DataProfileViewpoint ;
+  rdfs:subClassOf edg:Statistics ;
+  sh:property edg:FrequenciesRecord-frequencyCount ;
+.
+edg:FrequenciesRecord-frequencyCount
+  a sh:PropertyShape ;
+  sh:path edg:frequencyCount ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:integer ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+.
+edg:GovernanceViewpoint
+  rdfs:subClassOf edg:DataAssetsViewpoint ;
+.
+edg:GraphStore
+  a edg:AssetClass ;
+  edg:acronym "GSTORE" ;
+  rdfs:comment "A 'GraphStore' is store that has a schema based on nodes and property links." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Graph Store" ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:Database ;
+.
+edg:Identifiable-assetName
+  sh:group edg:IdentifiersGroup ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:ImagesDataSet
+  a edg:AssetClass ;
+  edg:acronym "JSONDSET" ;
+  rdfs:comment "A dataset consisting of images." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Images Dataset" ;
+  rdfs:subClassOf edg:DataSet ;
+.
+edg:InformationRecord
+  a edg:AssetClass ;
+  edg:acronym "INFOREC" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Record" ;
+  rdfs:subClassOf edg:Governance ;
+  rdfs:subClassOf edg:InformationAsset ;
+  rdfs:subClassOf edg:Traceable ;
+.
+edg:JSONdataSet
+  a edg:AssetClass ;
+  edg:acronym "JSONDSET" ;
+  rdfs:comment "A JSON dataset whose specification is a JSON structure." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "JSON Dataset" ;
+  rdfs:subClassOf edg:DataSet ;
+  sh:property edg:JSONdataSet-jsonMetadata ;
+.
+edg:JSONdataSet-jsonMetadata
+  a sh:PropertyShape ;
+  sh:path edg:jsonMetadata ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:DataSetPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "35"^^xsd:decimal ;
+.
+edg:Locatable-locationLink
+  sh:order "20"^^xsd:decimal ;
+.
+edg:Locatable-locationNotes
+  sh:order "30"^^xsd:decimal ;
+.
+edg:LogicalAttribute
+  a edg:AssetClass ;
+  edg:acronym "LATT" ;
+  rdfs:comment "A 'Logical Attribute' is a scalar datatype that is a defining property for the definition of a 'Logical Entity'." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Logical Attribute" ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:LogicalDataAsset ;
+  rdfs:subClassOf edg:Protectable ;
+  rdfs:subClassOf edg:Traceable ;
+  sh:property edg:LogicalAttribute-attributeOf ;
+  sh:property edg:LogicalAttribute-isForeignKey ;
+  sh:property edg:LogicalAttribute-isLogicalOnly ;
+  sh:property edg:LogicalAttribute-isNullable ;
+  sh:property edg:LogicalAttribute-isPrimaryKey ;
+  sh:property edg:LogicalAttribute-isRequired ;
+  sh:property edg:LogicalAttribute-logicalDatatype ;
+.
+edg:LogicalAttribute-attributeOf
+  a sh:PropertyShape ;
+  sh:path edg:attributeOf ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:LogicalEntity ;
+  sh:group edg:LogicalAttributePropertiesGroup ;
+  sh:minCount 1 ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:LogicalAttribute-isForeignKey
+  a sh:PropertyShape ;
+  sh:path edg:isForeignKey ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:boolean ;
+  sh:group edg:LogicalAttributePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:LogicalAttribute-isLogicalOnly
+  a sh:PropertyShape ;
+  sh:path edg:isLogicalOnly ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:boolean ;
+  sh:group edg:LogicalAttributePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "60"^^xsd:decimal ;
+.
+edg:LogicalAttribute-isNullable
+  a sh:PropertyShape ;
+  sh:path edg:isNullable ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:boolean ;
+  sh:group edg:LogicalAttributePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:LogicalAttribute-isPrimaryKey
+  a sh:PropertyShape ;
+  sh:path edg:isPrimaryKey ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:boolean ;
+  sh:group edg:LogicalAttributePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:LogicalAttribute-isRequired
+  a sh:PropertyShape ;
+  sh:path edg:isRequired ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:boolean ;
+  sh:group edg:LogicalAttributePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:LogicalAttribute-logicalDatatype
+  a sh:PropertyShape ;
+  sh:path edg:logicalDatatype ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:Datatype ;
+  sh:group edg:LogicalAttributePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "70"^^xsd:decimal ;
+.
+edg:LogicalAttributePropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Logical Attribute Metadata" ;
+  sh:order "35"^^xsd:decimal ;
+.
+edg:LogicalDataAsset
+  a edg:ViewpointClass ;
+  dash:abstract true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Logical Data Asset" ;
+  rdfs:subClassOf edg:DataAsset ;
+  rdfs:subClassOf edg:DataAssetViewFromEnterpriseAssets ;
+.
+edg:LogicalDataModel
+  a edg:AssetClass ;
+  edg:acronym "LDM" ;
+  rdfs:comment "A 'Logical Data Model' is a specification of the entities, attributes and releationships that define information structures of a subject area of interest. the models is referred to as 'logical' because is technology-free." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Logical Data Model" ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:LogicalDataAsset ;
+  rdfs:subClassOf edg:Model ;
+  rdfs:subClassOf edg:Traceable ;
+  sh:property edg:LogicalDataModel-diagram ;
+  sh:property edg:LogicalDataModel-logicalEntities ;
+.
+edg:LogicalDataModel-diagram
+  a sh:PropertyShape ;
+  sh:path edg:isDiagramGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:boolean ;
+  sh:group edg:LogicalDataModelDiagramGroup ;
+  sh:name "logical data model diagram" ;
+  sh:order "50"^^xsd:decimal ;
+  sh:values true ;
+.
+edg:LogicalDataModel-logicalEntities
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:entityOflogicalDataModel ;
+    ] ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:LogicalDataModel ;
+  sh:group edg:LogicalDataModelLogicalEntitiesGroup ;
+  sh:name "logical entity" ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:LogicalDataModelDiagramGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  tosh:viewGadget edg:LogicalDataModelDiagramGadget ;
+  rdfs:label "Logical Data Model Diagram" ;
+  sh:name "Logical Data Model Diagram" ;
+  sh:order "500"^^xsd:decimal ;
+.
+edg:LogicalDataModelLogicalEntitiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  tosh:viewGadget edg:GenericInversePropertyGadget ;
+  rdfs:label "Logical Entities" ;
+  sh:name "Logical Entities" ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:LogicalDataModelPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Logical Data Model Properties" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:LogicalEntity
+  a edg:AssetClass ;
+  edg:acronym "LENT" ;
+  rdfs:comment "A 'Logical Entity' is a data structure in a logical model that may have attributes and named associations with other entities." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Logical Entity" ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:ExchangeableEntity ;
+  rdfs:subClassOf edg:LogicalDataAsset ;
+  rdfs:subClassOf edg:Traceable ;
+  sh:property edg:LogicalEntity-attributeOf-inverse ;
+  sh:property edg:LogicalEntity-attributes ;
+  sh:property edg:LogicalEntity-diagram ;
+  sh:property edg:LogicalEntity-logicalDataModel ;
+  sh:property edg:LogicalEntity-logicalRelationParticipant ;
+  sh:property edg:LogicalEntity-relationships ;
+.
+edg:LogicalEntity-attributeOf-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:attributeOf ;
+    ] ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:LogicalAttribute ;
+  sh:group edg:LogicalEntityPropertiesGroup ;
+  sh:name "attributes" ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:LogicalEntity-attributes
+  a sh:PropertyShape ;
+  sh:path edg:isGadget ;
+  dash:viewer edg:LogicalEntityAttributesGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:group edg:LogicalEntityAttributesGroup ;
+  sh:name "Relationships" ;
+  sh:order "45"^^xsd:decimal ;
+  sh:values "true" ;
+.
+edg:LogicalEntity-diagram
+  a sh:PropertyShape ;
+  sh:path edg:isDiagramGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:boolean ;
+  sh:description "Logical Entity Diagram" ;
+  sh:group edg:LogicalEntityDiagramGroup ;
+  sh:name "diagram" ;
+  sh:order "10"^^xsd:decimal ;
+  sh:values true ;
+.
+edg:LogicalEntity-logicalDataModel
+  a sh:PropertyShape ;
+  sh:path edg:entityOflogicalDataModel ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:LogicalDataModel ;
+  sh:group edg:ProvenanceGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:LogicalEntity-logicalRelationParticipant
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:logicalEntity ;
+    ] ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:LogicalRelationParticipant ;
+  sh:description "Refers to a participation" ;
+  sh:group edg:TraceableGroup ;
+  sh:name "participates in" ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:LogicalEntity-relationships
+  a sh:PropertyShape ;
+  sh:path edg:isLogicalEntityRelationshipsGadget ;
+  dash:viewer edg:LogicalEntityRelationshipsGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:group edg:LogicalEntityRelationshipsGroup ;
+  sh:name "Relationships" ;
+  sh:order "50"^^xsd:decimal ;
+  sh:values "true" ;
+.
+edg:LogicalEntityAttributesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  tosh:viewGadget edg:LogicalEntityAttributesGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Attributes" ;
+  sh:order "54"^^xsd:decimal ;
+.
+edg:LogicalEntityDiagramGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  tosh:viewGadget edg:LogicalEntityDiagramGadget ;
+  rdfs:label "Logical Entity Diagram" ;
+  sh:name "Logical Entity Diagram" ;
+  sh:order "500"^^xsd:decimal ;
+.
+edg:LogicalEntityPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Logical Entity Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:LogicalEntityRelationshipsGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  tosh:viewGadget edg:LogicalEntityRelationshipsGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Relationships" ;
+  sh:order "55"^^xsd:decimal ;
+.
+edg:LogicalFlowPayloadable
+  a edg:AspectClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Logical Flow Payload" ;
+  rdfs:subClassOf edg:Payloadable ;
+.
+edg:LogicalRelation
+  a edg:AssetClass ;
+  edg:acronym "LREL" ;
+  rdfs:comment "An assoication between logical entities in a logical model." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Logical Relation" ;
+  rdfs:subClassOf edg:LogicalDataAsset ;
+  sh:property edg:LogicalRelation-participant ;
+  sh:property edg:LogicalRelation-participantsTable ;
+.
+edg:LogicalRelation-participant
+  a sh:PropertyShape ;
+  sh:path edg:participant ;
+  dash:composite true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:LogicalRelationParticipant ;
+  sh:maxCount 2 ;
+  sh:minCount 2 ;
+  sh:name "participating entity" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:LogicalRelation-participantsTable
+  a sh:PropertyShape ;
+  sh:path edg:isGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:group edg:LogicalRelationParticipantsGroup ;
+  sh:name "Relation Participants" ;
+  sh:order "50"^^xsd:decimal ;
+  sh:values "true" ;
+.
+edg:LogicalRelationParticipant
+  a edg:ConstructClass ;
+  edg:acronym "LRELP" ;
+  swa:instancesHaveRandomURI true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Logical Relation Participant" ;
+  rdfs:subClassOf edg:Construct ;
+  sh:property edg:LogicalRelationParticipant-cardinality ;
+  sh:property edg:LogicalRelationParticipant-logicalEntity ;
+  sh:property edg:LogicalRelationParticipant-relation-inverse ;
+.
+edg:LogicalRelationParticipant-cardinality
+  a sh:PropertyShape ;
+  sh:path edg:cardinality ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:Cardinality ;
+  sh:group edg:LogicalRelationParticipantPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:LogicalRelationParticipant-logicalEntity
+  a sh:PropertyShape ;
+  sh:path edg:logicalEntity ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:LogicalEntity ;
+  sh:description "Refers to one of the logical entities that participate in the relationship" ;
+  sh:group edg:LogicalRelationParticipantPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:LogicalRelationParticipant-relation-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:participant ;
+    ] ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:LogicalRelation ;
+  sh:group edg:LogicalRelationParticipantPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:name "owning relatonship" ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:LogicalRelationParticipantPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Relation Participant Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:LogicalRelationParticipantsGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  tosh:viewGadget edg:LogicalRelationParticipantsGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Relationship Participants" ;
+  sh:order "55"^^xsd:decimal ;
+.
+edg:LogicalRelationPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Logical Relation Properties" ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:NoSQLdatabase
+  a edg:AssetClass ;
+  edg:acronym "NOSQL" ;
+  rdfs:comment "A NoSQL (or \"non SQL\" or \"non relational\") database is a computational mechanism for storage and retrieval of data that is modeled typiccally as property-value structures or in other ways different from tabular relations used in relational databases.  NoSQL systems are also sometimes called \"Not only SQL\" to imply that they may support SQL-like query languages." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "NoSQL Database" ;
+  rdfs:subClassOf edg:Database ;
+  sh:property edg:NoSQLdatabase-numberOfProperties ;
+.
+edg:NoSQLdatabase-numberOfProperties
+  a sh:PropertyShape ;
+  sh:path edg:numberOfProperties ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:QualityAssurancePropertiesGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:NumericDataElement
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Numeric Data Element" ;
+  rdfs:subClassOf edg:DataElement ;
+  sh:property edg:DataElement-precision ;
+  sh:property edg:DataElement-scale ;
+.
+edg:Payloadable
+  a edg:AspectClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Payload" ;
+  rdfs:subClassOf edg:Processable ;
+.
+edg:PermissibleValuesAsset
+  rdfs:subClassOf edg:Construct ;
+.
+edg:PhysicalDataAsset
+  rdfs:subClassOf edg:DataAssetViewFromEnterpriseAssets ;
+.
+edg:PhysicalDataModel
+  a edg:AssetClass ;
+  edg:acronym "PDM" ;
+  rdfs:comment "A 'Physical Data Model' is a technology-independent representaiton of the information structures of a subject area of interest." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Physical Data Model" ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:Model ;
+  rdfs:subClassOf edg:PhysicalDataAsset ;
+  rdfs:subClassOf edg:ProvenanceTimestamps ;
+  rdfs:subClassOf edg:Traceable ;
+  sh:property edg:PhysicalDataModel-realizedAs ;
+  sh:property edg:PhysicalDataModel-tableOf-inverse ;
+  sh:property edg:PhysicalDataModel-viewOf-inverse ;
+.
+edg:PhysicalDataModel-realizedAs
+  a sh:PropertyShape ;
+  sh:path edg:realizedAs ;
+  dash:composite true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DataContainer ;
+  sh:group edg:PhysicalModelPropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:PhysicalDataModel-tableOf-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:tableOf ;
+    ] ;
+  dash:composite true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:group edg:PhysicalModelPropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:PhysicalDataModel-viewOf-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:viewOf ;
+    ] ;
+  dash:composite true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+.
+edg:PhysicalDataModelDatabaseColumn
+  a edg:AssetClass ;
+  edg:acronym "PDMCOL" ;
+  rdfs:comment "A 'Physical Data Model Database Column' is a technology-independent representaiton of a database column." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Physical Data Model Database Column" ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:PhysicalDataAsset ;
+  rdfs:subClassOf edg:Traceable ;
+  sh:property edg:DatabaseColumn-autoIncremented ;
+  sh:property edg:DatabaseColumn-isForeignKey ;
+  sh:property edg:DatabaseColumn-isNullable ;
+  sh:property edg:DatabaseColumn-isPrimaryKey ;
+  sh:property edg:DatabaseColumn-nullOptions ;
+  sh:property edg:PhysicalDataModelDatabaseColumn-columnOf ;
+.
+edg:PhysicalDataModelDatabaseColumn-columnOf
+  a sh:PropertyShape ;
+  sh:path edg:columnOf ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:PhysicalDataModelDatabaseTable ;
+  sh:group edg:DatabaseColumnPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:PhysicalDataModelDatabaseSchema
+  a edg:AssetClass ;
+  edg:acronym "PDMDBSCHEMA" ;
+  rdfs:comment "A 'Physical Data Model Database Schema' is a collection of database objects associated with a database specified in a technology-independent way. It is sometimes also associated with a database user name. If so, the user name is called the schema owner, or the owner of the related group of objects. There may be one or multiple schemas in a database. The user is only associated with the schema of the same name and often the terms will be used interchangeably."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Physical Data Model Database Schema" ;
+  rdfs:subClassOf edg:DatabaseSchema ;
+  rdfs:subClassOf edg:Provenance ;
+  sh:property edg:DatabaseSchema-specificationFor ;
+.
+edg:PhysicalDataModelDatabaseTable
+  a edg:AssetClass ;
+  edg:acronym "PDMDBTBL" ;
+  edg:name "PDMDBTABLE" ;
+  rdfs:comment "A table of a database as modeled in a 'Physical Data Model' in a technology-independent way. This is a sub-type of 'Table'. Tables refer to their parent databases." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Physical Data Model Database Table" ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:Processable ;
+  rdfs:subClassOf edg:Table ;
+  rdfs:subClassOf edg:Traceable ;
+  sh:property edg:DatabaseTable-columnOf-inverse ;
+  sh:property edg:DatabaseTable-foreignKey ;
+  sh:property edg:PhysicalDataModelDatabaseTable-tableOf ;
+.
+edg:PhysicalDataModelDatabaseTable-tableOf
+  a sh:PropertyShape ;
+  sh:path edg:tableOf ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:Database ;
+  sh:group edg:DataStructurePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:PhysicalDatabaseSchema
+  a edg:AssetClass ;
+  edg:acronym "PDBSCHEMA" ;
+  rdfs:comment "A 'Physical Database Schema' is a collection of database objects associated with a database realized in a specific technology such as ORACLE. It is sometimes also associated with a database user name. If so, the user name is called the schema owner, or the owner of the related group of objects. There may be one or multiple schemas in a database. The user is only associated with the schema of the same name and often the terms will be used interchangeably."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Physical Database Schema" ;
+  rdfs:subClassOf edg:DatabaseSchema ;
+  rdfs:subClassOf edg:Provenance ;
+  sh:property edg:DatabaseSchema-specificationFor ;
+.
+edg:PhysicalFlowPayloadable
+  a edg:AspectClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Physical Flow Payload" ;
+  rdfs:subClassOf edg:Payloadable ;
+.
+edg:PhysicalModelPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Physical Model Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:PhysicallDataModel-logicalEntity_TBD
+  a sh:PropertyShape ;
+  sh:path edg:logicalEntity ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:LogicalEntity ;
+.
+edg:PropertyValueSet
+  edg:acronym "PVS" ;
+.
+edg:QuantilesPropertyGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Quantiles" ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:QuantilesRecord
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "holds data values quantiles for a data element" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Quantiles record" ;
+  rdfs:subClassOf edg:DataProfileViewpoint ;
+  rdfs:subClassOf edg:Statistics ;
+  sh:property edg:QuantilesRecord-quantilePercentile ;
+.
+edg:QuantilesRecord-quantilePercentile
+  a sh:PropertyShape ;
+  sh:path edg:quantilePercentile ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:decimal ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+.
+edg:QuantityKind
+  a edg:AssetClass ;
+  edg:acronym "QK" ;
+  edg:hideClass true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Quantity Kind" ;
+  rdfs:subClassOf edg:Construct ;
+  rdfs:subClassOf qudt:QuantityKind ;
+.
+edg:Record
+  rdfs:subClassOf edg:DataQualityAspect ;
+.
+edg:RelationalDatabase
+  a edg:AssetClass ;
+  edg:acronym "RDB" ;
+  rdfs:comment "A 'Relational Database' is a database structure that organizes data into one or more tables (or \"relations\") of columns and rows, with a unique key identifying each row. Rows are also called records or tuples. Columns are also called attributes. A table/ or relation represents an \"entity type\" (such as company or product). The rows represent instances of that type of entity (such as \"TopQuadrant\" or \"TopBraid EDG\") and the columns representing values attributed to that instance (such as name or product code)." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Relational Database" ;
+  rdfs:subClassOf edg:Database ;
+  sh:property edg:RelationalDatabase-numberOfColumns ;
+  sh:property edg:RelationalDatabase-physicalModel ;
+.
+edg:RelationalDatabase-numberOfColumns
+  a sh:PropertyShape ;
+  sh:path edg:numberOfColumns ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:DataContainerPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:RelationalDatabase-physicalModel
+  a sh:PropertyShape ;
+  sh:path edg:physicalModel ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:PhysicalDataModel ;
+  sh:group edg:DataContainerPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:ReportColumn
+  edg:hideClass true ;
+  rdfs:comment "A 'Report Column' distinguishes a type of data column that makes up a report specification as opposed to a column in a database table." ;
+.
+edg:ReportDataSet
+  rdfs:comment "A 'Report Dataset' distinguishes a dataset that is part of a report." ;
+.
+edg:ResearchPaper
+  sh:property edg:ResearchPaper-reportType ;
+.
+edg:ResearchPaper-reportType
+  a sh:PropertyShape ;
+  sh:path edg:reportType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:ReportType ;
+.
+edg:Schema
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Schema" ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:DataQualityAspect ;
+  rdfs:subClassOf edg:PhysicalDataAsset ;
+  rdfs:subClassOf edg:Traceable ;
+.
+edg:Sociable-users
+  sh:datatype xsd:integer ;
+.
+edg:Statistics
+  sh:property edg:Statistics-dataValue ;
+.
+edg:Statistics-dataValue
+  a sh:PropertyShape ;
+  sh:path edg:dataValue ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:maxCount 1 ;
+.
+edg:Statistics-timestamp
+  sh:group edg:StatisticsPropertiesGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:StatisticsPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Statistics" ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:StringDataElement
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "String Data Element" ;
+  rdfs:subClassOf edg:DataElement ;
+  sh:property edg:DataElement-length ;
+.
+edg:Table
+  a edg:AssetClass ;
+  a edg:ViewpointClass ;
+  dash:abstract true ;
+  rdfs:comment "A 'Table' is a structured data asset that can be a 'Database Table' as implemented in a database, or as specified in a 'Physical Data Model', a 'Database View', or a 'File Table'." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Table" ;
+  rdfs:subClassOf edg:DataQualityAspect ;
+  rdfs:subClassOf edg:DataStructure ;
+  rdfs:subClassOf edg:PhysicalDataAsset ;
+  sh:property edg:Table-belongsToSchema ;
+  sh:property edg:Table-dataSample ;
+  sh:property edg:Table-databaseRemarks ;
+  sh:property edg:Table-derivedFrom ;
+  sh:property edg:Table-mapsToClass ;
+  sh:property edg:Table-mapsToLogicalEntity ;
+  sh:property edg:Table-physicalModel ;
+  sh:property edg:Table-recordCount ;
+  sh:property edg:Table-tableKind ;
+.
+edg:Table-belongsToSchema
+  a sh:PropertyShape ;
+  sh:path edg:belongsToSchema ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DatabaseSchema ;
+  sh:group edg:DataStructurePropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:Table-columnOf-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:columnOf ;
+    ] ;
+  dash:composite true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:TableColumn ;
+  sh:group edg:DataStructurePropertiesGroup ;
+  sh:name "columns" ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:Table-dataSample
+  a sh:PropertyShape ;
+  sh:path edg:dataSample ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:group edg:DataSamplePropertyGroup ;
+  sh:nodeKind sh:BlankNodeOrIRI ;
+.
+edg:Table-databaseRemarks
+  a sh:PropertyShape ;
+  sh:path edg:databaseRemarks ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:string ;
+  sh:group edg:NarratablePropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:Table-derivedFrom
+  a sh:PropertyShape ;
+  sh:path edg:derivedFrom ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DataAsset ;
+  sh:group edg:TraceableGroup ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:Table-mapsToClass
+  a sh:PropertyShape ;
+  sh:path edg:mapsToClass ;
+  tosh:editWidget edg:FilteredURIResourceEditor ;
+  tosh:searchWidget swa:ExistingValuesSelectFacet ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class rdfs:Class ;
+  sh:group edg:TraceableGroup ;
+  sh:maxCount 1 ;
+  sh:order "60"^^xsd:decimal ;
+.
+edg:Table-mapsToLogicalEntity
+  a sh:PropertyShape ;
+  sh:path edg:mapsToLogicalEntity ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:LogicalEntity ;
+  sh:group edg:TraceableGroup ;
+  sh:maxCount 1 ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:Table-physicalModel
+  a sh:PropertyShape ;
+  sh:path edg:physicalModel ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:PhysicalDataModel ;
+  sh:group edg:DataStructurePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:Table-recordCount
+  a sh:PropertyShape ;
+  sh:path edg:recordCount ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:DataStructurePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 30 ;
+.
+edg:Table-tableKind
+  a sh:PropertyShape ;
+  sh:path edg:tableKind ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DataKind ;
+  sh:group edg:DataStructurePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:Table-tableOf
+  sh:order "10"^^xsd:decimal ;
+.
+edg:TableColumn
+  a edg:AssetClass ;
+  edg:acronym "TBLCOL" ;
+  rdfs:comment "A general type for defining columns that make up a table." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "Table Column" ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:DataElement ;
+  rdfs:subClassOf edg:DataQualityAspect ;
+  rdfs:subClassOf edg:PhysicalDataAsset ;
+  rdfs:subClassOf edg:Traceable ;
+  sh:property edg:TableColumn-columnOf ;
+.
+edg:TableColumn-columnOf
+  a sh:PropertyShape ;
+  sh:path edg:columnOf ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:Table ;
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:Traceable
+  sh:property edg:Traceable-dataRequirement ;
+.
+edg:Traceable-belongsTo
+  sh:group edg:IdentifiersGroup ;
+  sh:order "90"^^xsd:decimal ;
+.
+edg:Traceable-dataRequirement
+  a sh:PropertyShape ;
+  sh:path edg:dataRequirement ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DataRequirement ;
+  sh:group edg:TraceableGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:Traceable-derivedFrom
+  sh:group edg:TraceableGroup ;
+  sh:order "90"^^xsd:decimal ;
+.
+edg:Traceable-mapsToColumn
+  a sh:PropertyShape ;
+  sh:path edg:mapsToColumn ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:DatabaseColumn ;
+  sh:description "Specifies a direct mapping from a column to another column." ;
+  sh:group edg:TraceableGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:View
+  a edg:AssetClass ;
+  rdfs:comment "A 'View' is typically a database construct for exposing a specific set of data  fomr one or more database tables along with computed variables." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "View" ;
+  rdfs:subClassOf edg:Construct ;
+  sh:property edg:Table-mapsToClass ;
+  sh:property edg:Table-mapsToLogicalEntity ;
+.
+edg:XMLschemaFile
+  a edg:AssetClass ;
+  edg:acronym "XSD" ;
+  rdfs:comment "A schema, expressed itself as an XML file, that defines the structure of an XML file." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "XML Schema File" ;
+  rdfs:subClassOf edg:FileAsset ;
+  rdfs:subClassOf edg:Schema ;
+.
+edg:attributeOf
+  a owl:ObjectProperty ;
+  rdfs:domain edg:LogicalAttribute ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "attribute of" ;
+  rdfs:range edg:LogicalEntity ;
+.
+edg:autoIncremented
+  a owl:DatatypeProperty ;
+  rdfs:comment "boolean indicating whether the data in a column is auto-incremented or not" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "auto incremented" ;
+.
+edg:belongsToSchema
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "belongs to schema" ;
+.
+edg:cardinality
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "cardinality" ;
+.
+edg:childColumn
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "child column" ;
+.
+edg:columnMapping
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "column mapping" ;
+.
+edg:columnOf
+  a owl:ObjectProperty ;
+  edg:inverseLabel "Columns" ;
+  rdfs:comment "Associates a database column to its table." ;
+  rdfs:label "column of" ;
+  rdfs:subPropertyOf edg:partOf ;
+.
+edg:columnSize
+  a owl:DatatypeProperty ;
+  rdfs:comment "size of a column in a table" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "column size" ;
+.
+edg:compositeHierarchy
+  a owl:DatatypeProperty ;
+  rdfs:comment "Used to hold a path structure that describes the composite nature of a custom element" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "composite hierarchy" ;
+.
+edg:confidentiality
+  rdfs:comment "Using an enumeration, specifies the confidentiality of the data instances described by this metadata." ;
+  rdfs:label "confidentiality" ;
+.
+edg:countOfTableColumns
+  a rdf:Property ;
+  rdfs:comment "number of table columns represented in EDG" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "count of table columns" ;
+.
+edg:countOfTables
+  a rdf:Property ;
+  rdfs:comment "number of tables" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "count of tables" ;
+.
+edg:countOfViewColumns
+  a rdf:Property ;
+  rdfs:comment "number of view columns" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "count of view columns" ;
+.
+edg:countOfViews
+  a owl:DatatypeProperty ;
+  rdfs:comment "number of views" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "count of views" ;
+.
+edg:dataContainerType
+  a owl:ObjectProperty ;
+  rdfs:comment "Using an enumeration, specifies the type of the data container" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "data container type" ;
+.
+edg:dataElementLevelKind
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "data element level kind" ;
+.
+edg:dataElementOf
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "data element of" ;
+.
+edg:dataExchange
+  a owl:ObjectProperty ;
+  rdfs:comment "data flowing on a flow connection" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "data exchange" ;
+.
+edg:dataQualityIndicator
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+.
+edg:dataQualityIssue
+  a owl:ObjectProperty ;
+  rdfs:comment "points to a specific data quality issue record" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "data quality issue" ;
+.
+edg:dataQualityNotes
+  a owl:DatatypeProperty ;
+  rdfs:comment "notes about quality of a data asset" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "data quality notes" ;
+.
+edg:dataQualityRecord
+  a owl:ObjectProperty ;
+  rdfs:comment "points to a stored record documenting data quality of an asset" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "data quality record" ;
+.
+edg:dataQualityStatus
+  a owl:ObjectProperty ;
+  rdfs:comment "Specifies the data quality of the data instances associated with the asset." ;
+  rdfs:label "data quality status" ;
+.
+edg:dataRequirement
+  rdfs:domain edg:LogicalAttribute ;
+.
+edg:dataSample
+  a owl:ObjectProperty ;
+  rdfs:comment "links a data structure definition with a sample data record" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "data sample" ;
+.
+edg:dataSetSpecification
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "dataset specification" ;
+.
+edg:dataSource
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "data source" ;
+.
+edg:dataSourceFieldName
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "data source field name" ;
+.
+edg:dataValue
+  a owl:DatatypeProperty ;
+  rdfs:comment "a data value for which some analytics have been gathered" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "data value" ;
+.
+edg:databaseRemarks
+  a owl:DatatypeProperty ;
+  rdfs:comment "remarks on a database element as defined in the physical host" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "database remark" ;
+.
+edg:dataset
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "dataset" ;
+  rdfs:range edg:DataSet ;
+.
+edg:datasetElementOf
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "dataset element of" ;
+.
+edg:datatype
+  a owl:DatatypeProperty ;
+  rdfs:comment "Specifies the datatype of the data instances described by this metadata." ;
+.
+edg:derivedByFunction
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "derived by function" ;
+  rdfs:subPropertyOf provo:wasDerivedFrom ;
+.
+edg:directoryPath
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "directory path" ;
+.
+edg:distinctValuesCount
+  a owl:DatatypeProperty ;
+  rdfs:comment "number of distinct values for a data element in a data structure, is always less or equal than the record count" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "distinct values count" ;
+.
+edg:elementPosition
+  a owl:DatatypeProperty ;
+  rdfs:comment "index of a data element within a source data structure" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "element position" ;
+.
+edg:entityOflogicalDataModel
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "logical data model" ;
+.
+edg:entityType
+  a owl:ObjectProperty ;
+  rdfs:comment "Specifies the type of a logical entity" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "entity type" ;
+.
+edg:enumeration
+  a owl:DatatypeProperty ;
+  rdfs:comment "boolean value, yes means that the value of a data element comes from some reference or controlled dataset" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "enumeration" ;
+.
+edg:extractFrom
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "extract from" ;
+.
+edg:fileSize
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "file size" ;
+  rdfs:range xsd:string ;
+.
+edg:foreignKey
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "foreign key" ;
+.
+edg:frequenciesStatistic
+  a owl:ObjectProperty ;
+  rdfs:comment "connects a data element with the information about frequency of values" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "frequencies statistic" ;
+.
+edg:frequencyCount
+  a owl:DatatypeProperty ;
+  rdfs:comment "a number of occurences of some value for a given data element" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "frequency count" ;
+.
+edg:frequencyNotes
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "frequency notes" ;
+  rdfs:range rdf:HTML ;
+.
+edg:generatedValue
+  a owl:DatatypeProperty ;
+  rdfs:comment "boolean indicating whether data element is generated or not" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "generated value" ;
+.
+edg:isDiagramGadget
+  a rdf:Property ;
+  rdfs:subPropertyOf edg:isGadget ;
+.
+edg:isForeignKey
+  a owl:DatatypeProperty ;
+  edg:acronym "FK" ;
+  rdfs:comment "A boolean property to specify if the column is a foreign key." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "is foreign key" ;
+  rdfs:range xsd:boolean ;
+.
+edg:isLogicalEntityAttribuesGadget
+  a rdf:Property ;
+  rdfs:subPropertyOf edg:isGadget ;
+.
+edg:isLogicalEntityRelationshipsGadget
+  a rdf:Property ;
+  rdfs:subPropertyOf edg:isGadget ;
+.
+edg:isLogicalFlowsGadget
+  a rdf:Property ;
+.
+edg:isLogicalOnly
+  a owl:DatatypeProperty ;
+  rdfs:domain edg:LogicalAttribute ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "is logical only" ;
+  rdfs:range xsd:boolean ;
+.
+edg:isNullable
+  a owl:DatatypeProperty ;
+  rdfs:comment "A boolean property to specify if the column can have a null value." ;
+  rdfs:domain edg:DatabaseColumn ;
+  rdfs:domain edg:LogicalAttribute ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "is nullable" ;
+  rdfs:range xsd:boolean ;
+.
+edg:isPhysicalFlowsGadget
+  a rdf:Property ;
+.
+edg:isPrimaryKey
+  a owl:DatatypeProperty ;
+  edg:acronym "PK" ;
+  rdfs:comment "A boolean property to specify that the column is a primry key." ;
+  rdfs:domain edg:DatabaseColumn ;
+  rdfs:domain edg:LogicalAttribute ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "is primary key" ;
+  rdfs:range xsd:boolean ;
+.
+edg:isRequired
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "is required" ;
+  rdfs:range xsd:boolean ;
+.
+edg:jsonMetadata
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "json metadata" ;
+.
+edg:lastProfiled
+  a rdf:Property ;
+  rdfs:comment "Specifies a date and time for when a database was last profiled by an import" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "last profiled" ;
+  rdfs:range xsd:dateTime ;
+.
+edg:logicalEntity
+  a owl:ObjectProperty ;
+  rdfs:domain edg:LogicalDataModel ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "logical entity" ;
+  rdfs:range edg:LogicalEntity ;
+.
+edg:logicalModelName
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "logical model name" ;
+.
+edg:mapsToClass
+  a owl:ObjectProperty ;
+  rdfs:comment "Associates a table with a class in an ontology. The filtering of classes is over the ontologies that are included by the instance of the model that is being edited." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "maps to class" ;
+  rdfs:subPropertyOf edg:mapsTo ;
+.
+edg:mapsToColumn
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "maps to column" ;
+  rdfs:subPropertyOf provo:wasDerivedFrom ;
+.
+edg:mapsToLogicalAttribute
+  a owl:ObjectProperty ;
+  rdfs:comment "Associates an asset, such as a data elementt, with a logical attribute in a database logical model." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "maps to logical attribute" ;
+  rdfs:subPropertyOf edg:mapsTo ;
+.
+edg:mapsToLogicalEntity
+  a owl:ObjectProperty ;
+  rdfs:comment "Associates aa table with a logical entity" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "maps to logical entity" ;
+  rdfs:subPropertyOf edg:mapsTo ;
+.
+edg:mapsToProperty
+  a owl:ObjectProperty ;
+  rdfs:comment "Associates an asset, such as a data elementt, with a datatype or object property in an ontology. The filtering of values is over the ontologies that are included by the instance of the model that is being edited." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "maps to property" ;
+  rdfs:subPropertyOf edg:mapsTo ;
+.
+edg:mapsToReferenceData
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "maps to reference data" ;
+  rdfs:subPropertyOf edg:mapsTo ;
+.
+edg:maxLength
+  a owl:DatatypeProperty ;
+  rdfs:comment "maximum number of characters for a data element as found in a data structure" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "max length" ;
+.
+edg:maxSize
+  a owl:DatatypeProperty ;
+  rdfs:comment "maximum number of characters for a data element as specified on the datatype. For example 'VARCHAR2(500)'" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "max size" ;
+.
+edg:maxValue
+  a owl:DatatypeProperty ;
+  rdfs:comment "maximum value for a data element as found in a data structure" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "max value" ;
+.
+edg:maybeSameAs
+  a owl:ObjectProperty ;
+  a owl:SymmetricProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "maybe same as" ;
+.
+edg:meanLength
+  a owl:DatatypeProperty ;
+  rdfs:comment "mean number of characters for a data element as found in a data structure" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "mean length" ;
+.
+edg:meanValue
+  a owl:DatatypeProperty ;
+  rdfs:comment "mean value for a data element as found in a data structure, excluding nulls" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "mean value" ;
+.
+edg:medianLength
+  a owl:DatatypeProperty ;
+  rdfs:comment "median number of characters for a data element as found in a data structure" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "median length" ;
+.
+edg:medianValue
+  a owl:DatatypeProperty ;
+  rdfs:comment "median value for a data element as found in a data structure" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "median value" ;
+.
+edg:minLength
+  a owl:DatatypeProperty ;
+  rdfs:comment "minimum number of characters for a data element as found in a data structure" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "min length" ;
+.
+edg:minValue
+  a owl:DatatypeProperty ;
+  rdfs:comment "minimum value for a data element as found in a data structure" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "min value" ;
+.
+edg:nonNullValuesCount
+  a owl:DatatypeProperty ;
+  rdfs:comment "number of records having a non-null value" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "total number of values" ;
+.
+edg:nullOptions
+  a owl:DatatypeProperty ;
+  rdfs:comment "A string that holds any options for a nullable column." ;
+  rdfs:domain edg:DatabaseColumn ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "null options" ;
+  rdfs:range xsd:string ;
+.
+edg:nullValuesCount
+  a owl:DatatypeProperty ;
+  rdfs:comment "number of times the value of a data element in a data structure is NULL - is always less or equal than the record count." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "null values count" ;
+.
+edg:numberOfColumns
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "number of columns" ;
+  skos:prefLabel "number of columns" ;
+.
+edg:numberOfInstances
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "number of instances" ;
+  skos:prefLabel "number of instances" ;
+.
+edg:numberOfProperties
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "number of properties" ;
+  skos:prefLabel "number of properties" ;
+.
+edg:numberOfTables
+  a rdf:Property ;
+  rdfs:comment "number of tables determined by profiling" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "number of tables" ;
+.
+edg:numberOfViolations
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "number of violations" ;
+.
+edg:obfuscatedBy
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "obfuscated by"@en ;
+.
+edg:parentColumn
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "parent column" ;
+.
+edg:participant
+  swa:blankNodeProperty true ;
+.
+edg:personalDataCategory
+  a owl:ObjectProperty ;
+  rdfs:comment "Using an enumeration, specifies the categoryof the data instances described by this metadata." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "personal data category" ;
+.
+edg:physicalModel
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "physical model" ;
+.
+edg:primaryKeyColumn
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "primary key column" ;
+.
+edg:propertyOf
+  a owl:ObjectProperty ;
+  rdfs:domain edg:BigDataProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "property of" ;
+  rdfs:range edg:BigDataTable ;
+  skos:prefLabel "property of" ;
+.
+edg:quantilePercentile
+  a owl:DatatypeProperty ;
+  rdfs:comment "a value that identifies a specific subset among the total number of subsets that data element values were partioned into e.g., if there are 4 quantiles, we can identify 0% quantile, 25% quantile, 50% quantile, 75% quantile and 100% quantile." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "quantile percentile" ;
+.
+edg:quantileStatistic
+  a owl:ObjectProperty ;
+  rdfs:comment "connects a data element with the information of values' quantiles" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "quantile statistic" ;
+.
+edg:recordCount
+  a owl:DatatypeProperty ;
+  rdfs:comment "number of records" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "record count" ;
+.
+edg:referencesTable
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "references table" ;
+.
+edg:refersTo
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "refers to" ;
+.
+edg:reportType
+  a owl:ObjectProperty ;
+  rdfs:domain edg:Report ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "report type" ;
+  rdfs:range edg:ReportType ;
+.
+edg:reportingEndDate
+  a owl:DatatypeProperty ;
+  rdfs:comment "The date this type of data asset is stopped being produced" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "reporting end date" ;
+  rdfs:range xsd:date ;
+.
+edg:reportingStartDate
+  a owl:DatatypeProperty ;
+  rdfs:comment "the date this type of data asset was first produced" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "reporting start date" ;
+  rdfs:range xsd:date ;
+.
+edg:sizeInBytes
+  a rdf:Property ;
+  rdfs:comment "Number of bytes in the dataset." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "size (bytes)" ;
+.
+edg:specificationFor
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "specificationFor" ;
+.
+edg:standardDeviation
+  a owl:DatatypeProperty ;
+  rdfs:comment "statistical standard deviation of numeric values for a data element in a data structure" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "standard deviation" ;
+.
+edg:synonymFor
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "synonym for"@en ;
+.
+edg:synonymOf
+  a owl:ObjectProperty ;
+  edg:inverseLabel "Tables" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "synonym of" ;
+.
+edg:table
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "table" ;
+.
+edg:tableKind
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "table kind" ;
+.
+edg:tableOf
+  a owl:ObjectProperty ;
+  edg:inverseLabel "Tables" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "table of" ;
+  rdfs:subPropertyOf edg:partOf ;
+.
+edg:totalNumberOfQualityIssues
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "total number of quality issues" ;
+.
+edg:totalNumberOfVerifiedValues
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "total number of verified values" ;
+.
+edg:transfersPackage
+  a rdf:Property ;
+.
+edg:valuesSum
+  a owl:DatatypeProperty ;
+  rdfs:comment "sum of numeric values for a data element in a data structure" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "values sum" ;
+.
+edg:variance
+  a owl:DatatypeProperty ;
+  rdfs:comment "statistical variance of numeric values for a data element in a data structure" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "variance" ;
+.
+edg:verificationMethod
+  a owl:ObjectProperty ;
+  rdfs:comment "approach used to verify" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "verification method" ;
+.
+edg:viewInputColumn
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "view input column" ;
+.
+edg:viewOf
+  a owl:ObjectProperty ;
+  edg:inverseLabel "Views" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "view of" ;
+  rdfs:subPropertyOf edg:partOf ;
+.
+edg:viewOutputColumn
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "view output column" ;
+.
+edg:violatedRule
+  a owl:ObjectProperty ;
+  rdfs:comment "identifies a data quality rule that is violated" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "violated rule" ;
+.
+edg:violationNotes
+  a owl:DatatypeProperty ;
+  rdfs:comment "notes about nature of the violation" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:label "violation notes" ;
+.
+<http://edg.topbraid.solutions/schema/datamodels/GMD_datamodels>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:SchemaGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource edg:Server ;
+  vaem:usesNonImportedResource edg:SoftwareService ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+dcterms:description
+  a rdf:Property ;
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "description" ;
+  rdfs:range xsd:string ;
+.
+dcterms:source
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "source" ;
+  rdfs:range xsd:anyURI ;
+.
+qudt:DataSetElement-elementLabel
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+qudt:DataSetElement-elementType
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+qudt:DataSetElement-optional
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:DataSetElement-quantityKind
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:order "60"^^xsd:decimal ;
+.
+provo:wasInfluencedBy
+  a rdf:Property ;
+  rdfs:label "was influenced by" ;
+  rdfs:range xsd:anyURI ;
+.

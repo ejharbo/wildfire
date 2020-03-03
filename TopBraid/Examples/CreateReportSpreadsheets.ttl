@@ -1,0 +1,151 @@
+# baseURI: http://sparqlmotion.org/examples/CreateReportSpreadsheets
+# imports: http://topbraid.org/sparqlmotionfunctions
+# imports: http://topbraid.org/sparqlmotionlib
+
+@prefix : <http://sparqlmotion.org/examples/CreateReportSpreadsheets#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://sparqlmotion.org/examples/CreateReportSpreadsheets>
+  rdf:type owl:Ontology ;
+  owl:imports <http://topbraid.org/sparqlmotionfunctions> ;
+  owl:imports <http://topbraid.org/sparqlmotionlib> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+:CreateReportSpreadsheet
+  rdf:type sml:CreateSpreadsheet ;
+  sm:next :ExportSpreadsheetToFile ;
+  sm:nodeX 237 ;
+  sm:nodeY 313 ;
+  sm:outputVariable "text" ;
+  sml:selectQuery [
+      rdf:type sp:Select ;
+      sp:orderBy (
+          _:b92719
+        ) ;
+      sp:resultVariables (
+          _:b92719
+          _:b48426
+        ) ;
+      sp:where (
+          [
+            sp:object _:b48426 ;
+            sp:predicate rdfs:subClassOf ;
+            sp:subject _:b92719 ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:isIRI ;
+                sp:arg1 _:b48426 ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Create report spreadsheet" ;
+.
+:ExportSpreadsheetToFile
+  rdf:type sml:ExportToTextFile ;
+  sm:nodeX 242 ;
+  sm:nodeY 448 ;
+  sml:targetFilePath "{?file}-report.txt" ;
+  rdfs:label "Export spreadsheet to file" ;
+.
+:ImportFile
+  rdf:type sml:ImportRDFFromWorkspace ;
+  sm:next :CreateReportSpreadsheet ;
+  sm:nodeX 265 ;
+  sm:nodeY 169 ;
+  sml:ignoreImports "false"^^xsd:boolean ;
+  sml:sourceFilePath "{?file}" ;
+  rdfs:label "Import file" ;
+.
+:IterateOverFiles
+  rdf:type sml:IterateOverSelect ;
+  sm:body :ImportFile ;
+  sm:nodeX 31 ;
+  sm:nodeY 127 ;
+  sml:selectQuery [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          _:b75289
+        ) ;
+      sp:where (
+          [
+            sp:object _:b33596 ;
+            sp:predicate <http://www.topbraid.org/tops#files> ;
+            sp:subject _:b75289 ;
+          ]
+          [
+            sp:object [
+                sp:varName "rootFolder" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject _:b33596 ;
+          ]
+          [
+            sp:object _:b49932 ;
+            sp:predicate rdf:rest ;
+            sp:subject _:b33596 ;
+          ]
+          [
+            sp:object "true"^^xsd:boolean ;
+            sp:predicate rdf:first ;
+            sp:subject _:b49932 ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject _:b49932 ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:or ;
+                sp:arg1 [
+                    rdf:type fn:ends-with ;
+                    sp:arg1 _:b75289 ;
+                    sp:arg2 ".rdf" ;
+                  ] ;
+                sp:arg2 [
+                    rdf:type fn:ends-with ;
+                    sp:arg1 _:b75289 ;
+                    sp:arg2 ".owl" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Iterate over files" ;
+.
+:SetRootFolder
+  rdf:type sml:BindWithConstant ;
+  sm:next :IterateOverFiles ;
+  sm:nodeX 30 ;
+  sm:nodeY 2 ;
+  sm:outputVariable "rootFolder" ;
+  sml:value "/Demos" ;
+  rdfs:label "Set root folder" ;
+.
+_:b33596
+  sp:varName "?0" ;
+.
+_:b48426
+  sp:varName "superClass" ;
+.
+_:b49932
+  sp:varName "?1" ;
+.
+_:b75289
+  sp:varName "file" ;
+.
+_:b92719
+  sp:varName "subClass" ;
+.

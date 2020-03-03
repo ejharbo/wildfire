@@ -1,0 +1,2896 @@
+# baseURI: http://edg.topbraid.solutions/1.0/editor/core
+# imports: http://edg.topbraid.solutions/1.0/collection/schema-models
+# imports: http://edg.topbraid.solutions/1.0/project/common
+# imports: http://edg.topbraid.solutions/1.0/schema/controllers
+# imports: http://edg.topbraid.solutions/1.0/schema/edg
+# imports: http://edg.topbraid.solutions/1.0/shapes/core
+# imports: http://edg.topbraid.solutions/1.0/spin/library
+# imports: http://rdm.topbraidlive.org/rdmprojects
+# imports: http://spinrdf.org/spin
+# imports: http://topbraid.org/metadata
+# imports: http://topbraid.org/teamwork
+# imports: http://uispin.org/ui
+# imports: http://www.w3.org/2004/02/skos/core
+
+@prefix acjob: <http://evn.topbraidlive.org/tagger/acjob#> .
+@prefix acpp: <http://topbraid.org/nlp/autoclassifier-preproc#> .
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix autotagger: <http://evn.topbraidlive.org/autotagger#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix conceptmatch: <http://topbraid.org/conceptmatch#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix config-importers: <http://edg.topbraidlive.org/config/importers#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix core-soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix corpus: <http://topbraid.org/corpus#> .
+@prefix corpusprojects: <http://topbraid.org/corpus-projects#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkapp: <http://topbraid.org/swa/crosswalkapp#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dashboard: <http://example.org/dashboard#> .
+@prefix datagraph: <http://teamwork.topbraidlive.org/datagraph/datagraphprojects#> .
+@prefix dataset: <http://teamwork.topbraidlive.org/dataset#> .
+@prefix datasetapp: <http://topbraid.org/swa/datasetapp#> .
+@prefix datasetviewer: <http://topbraid.org/swa/datasetviewer#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ddl: <http://edg.topbraidlive.org/1.0/importers/ddl#> .
+@prefix default: <http://uispin.org/default#> .
+@prefix defaultapp: <http://topbraid.org/swa/defaultapp#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix document: <http://topbraid.org/document#> .
+@prefix documents: <http://edg.topbraid.solutions/1.0/shapes/documents#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg-config: <http://edg.ext.topbraidlive.org/schema/config/importers#> .
+@prefix edg-importer: <http://edg.topbraidlive.org/importer/> .
+@prefix edg-qa: <http://edg.topbraidlive.org/utility/qa/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.global: <urn:x-evn-global:> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix edgproduct: <http://edg.topbraidlive.org/edgproduct#> .
+@prefix eeh-lib: <http://www.environmenthub.no/spin/1.0/eeh-lib#> .
+@prefix eeh-reportlib: <http://www.environmenthub.no/spin/1.0/eeh-reportlib#> .
+@prefix elements: <http://purl.org/dc/elements/1.1/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evn: <http://topbraid.org/evn/evn#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evnimport: <http://evn.topbraidlive.org/uispin/evnimport#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix ex: <http://example.org/> .
+@prefix extjs: <http://uispin.com/extjs#> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix forms: <http://www.topbraid.org/2007/01/forms.owl#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix governance: <http://topbraid.org/teamworkgovernance.ui#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix graphql.search: <http://teamwork.topbraidlive.org/graphql.search#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix inference: <http://www.topbraid.org/2007/06/inference.owl#> .
+@prefix jdbc: <http://edg.topbraidlive.org/1.0/importers/jdbc#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix kennedys: <http://topbraid.org/examples/kennedys#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix lib-importer: <http://edg.topbraid.solutions/importer/lib#> .
+@prefix lineage-transform: <http://edg.topbraid.solutions/transform/importer/lineage#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix ontologyviewer: <http://topbraid.org/swa/ontologyviewer#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix proxy-lineage: <http://edg.topbraid.solutions/proxy/importer/lineage#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmapp: <http://rdm.topbraidlive.org/rdmapp#> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix rdmviewer: <http://rdm.topbraidlive.org/rdmviewer#> .
+@prefix saf: <http://topbraid.org/saf/> .
+@prefix safconfig: <http://topbraid.org/safconfig/> .
+@prefix safindex: <http://topbraid.org/safindex#> .
+@prefix safm: <http://saf.topbraidlive.org/metaschema/> .
+@prefix savedQueries: <http://teamwork.topbraidlive.org/ui/savedQueries#> .
+@prefix scheduler: <http://topbraid.org/scheduler#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix server: <http://server.topbraidlive.org/server.ui#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix shapesgraph: <http://teamwork.topbraidlive.org/shapesgraph/shapesgraphprojects#> .
+@prefix sharepoint: <http://topbraid.org/sharepoint#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skosshapes: <http://topbraid.org/skos.shapes#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spin.ui: <http://spinrdf.org/spin.ui#> .
+@prefix spinmap: <http://spinrdf.org/spinmap#> .
+@prefix spinmapl: <http://topbraid.org/spin/spinmapl#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix ss: <http://www.topbraidcomposer.org/owl/2006/08/spreadsheets.owl#> .
+@prefix stats: <http://topbraid.org/statistics#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swadoc: <http://topbraid.org/swadoc#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tablesmap: <http://topbraid.org/spin/tablesmap#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix taggerspin: <http://evn.topbraidlive.org/taggerspin#> .
+@prefix taggerui: <http://evn.topbraidlive.org/taggerui#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix tblui: <http://server.topbraidlive.org/tblui#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkAdmin: <http://teamwork.topbraidlive.org/doc/teamworkAdmin#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworkconstraints: <http://topbraid.org/teamworkconstraints#> .
+@prefix teamworkdashboard: <http://topbraid.org/teamworkdashboard#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix teamworkupdate: <http://teamworkAPI.topbraid.com/teamworkUpdate#> .
+@prefix textindex: <http://topbraid.org/textindex#> .
+@prefix tika-importer: <http://teamwork.topbraidlive.org/corpus/tika-importer#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix tracker: <http://teamwork.topbraidlive.org/ui/tracker#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uitest: <http://uispin.org/test#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix userdat: <http://teamwork.topbraidlive.org/ui/userdata> .
+@prefix userdata: <http://teamwork.topbraidlive.org/ui/userdata#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix victory: <http://edg.topbraid.solutions/victory/> .
+@prefix visual: <http://topbraid.org/visual#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xhtml: <http://topbraid.org/xhtml#> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/editor/core>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/editor/core/GMD_core> ;
+  rdfs:label "core" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/collection/schema-models> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/project/common> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/controllers> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/edg> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/shapes/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/spin/library> ;
+  owl:imports <http://rdm.topbraidlive.org/rdmprojects> ;
+  owl:imports <http://spinrdf.org/spin> ;
+  owl:imports <http://topbraid.org/metadata> ;
+  owl:imports <http://topbraid.org/teamwork> ;
+  owl:imports <http://uispin.org/ui> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+<http://edg.topbraid.solutions/editor/core/GMD_core>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:EditorGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/editor/core> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2018-07-26"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+edg:AppElements
+  a ui:NodeClass ;
+  ui:headIncludes """
+<ui:group>
+    <meta charset=\"utf-8\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "App elements" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:ClassTreeNavigationCallback
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:class ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The root class." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<swon:Array>
+    <ui:forEach ui:resultSet=\"{#
+            SELECT DISTINCT ?subClass ?label (GROUP_CONCAT(?c1; SEPARATOR='|') AS ?comment)
+            WHERE {
+                ?subClass rdfs:subClassOf ?class .
+                FILTER NOT EXISTS {
+                    ?subClass dash:abstract true .
+                    FILTER NOT EXISTS {
+                        ?subClass a edg:ViewpointClass .
+                    } .
+                } .
+                OPTIONAL {
+                    ?subClass rdfs:comment ?c1 .
+                } .
+                BIND (ui:label(?subClass) AS ?label) .
+            }
+            GROUP BY ?subClass ?label
+            ORDER BY (?label) }\">
+        <swon:Object>
+            <swon:Value arg:name=\"URI\" arg:value=\"{= str(?subClass) }\"/>
+            <swon:Value arg:name=\"label\" arg:value=\"{= ?label }\"/>
+            <swon:Value arg:name=\"comment\" arg:value=\"{= ?comment }\"/>
+        </swon:Object>
+    </ui:forEach>
+</swon:Array>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment """FILTER NOT EXISTS {
+                    ?subClass edg:hideClass true .
+                } .""" ;
+  rdfs:label "Class tree navigation callback" ;
+  rdfs:subClassOf swa:TreeElements ;
+.
+edg:ClassTreeNavigationElement
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:rootClass ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The root class." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:selected ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The currently selected class." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:treeMode ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  ui:prototype """
+<ui:group let:rootClass=\"{= COALESCE(teamwork:perhapsGetSingleChildOfAbstractClass(?rootClass), ?rootClass) }\">
+    <select class=\"form-control datasetapp-header-class-select\" id=\"resourceTypeSelect\">
+        <edg:ClassTreeNavigationNode arg:class=\"{= ?rootClass }\" arg:indentation=\"\" arg:selected=\"{= ?selected }\" arg:visitedGraph=\"{= ui:tempGraphClassTreeNavigationElement }\" edg:level=\"{= 1 }\"/>
+    </select>
+    <script>$(\"#resourceTypeSelect\").change(function() {
+		var iri = $(this).val().substring(1, $(this).val().length - 1);
+		edg.navigateTo(\"{= teamwork:currentGraphId() }\",
+			\"{= teamwork:currentTagId() }\",
+			iri,
+  			{= ?treeMode },
+  			\"{= ?none }\",
+ 			\"{= ?rootClass }\");
+	});</script>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Class tree navigation element" ;
+  rdfs:subClassOf swa:Elements ;
+.
+edg:ClassTreeNavigationNode
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:level ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The URI of the temp graph holding the visited nodes, e.g. ui:tempGraphTree1." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:class ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The root class." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:indentation ;
+      spl:valueType xsd:string ;
+      rdfs:comment "An intendation string, e.g. \"    \" for the first level of children." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:selected ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The class that shall be selected." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:visitedGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The URI of the temp graph holding the visited nodes, e.g. ui:tempGraphTree1." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:indicatorOfSubClasses=\"{= IF(isIRI(spl:subjectInGraph(rdfs:subClassOf, ?class, ui:graph)), &quot; ...&quot;, &quot;&quot;) }\">
+    <ui:group let:menuLabel=\"{= ui:label(?class) }{= COALESCE(?indicatorOfSubClasses, &quot;&quot;) }\" let:toolTip=\"{= spl:objectInGraph(?class, rdfs:comment, ui:graph) }\">
+        <ui:if ui:condition=\"{= edg:isViewpointClass(?class) }\">
+            <ui:transaction>
+                <ui:update ui:updateQuery=\"{!
+                        DELETE {
+                            GRAPH ?visitedGraph {
+                                ?s ?p ?o .
+                            } .
+                        }
+                        WHERE {
+                            GRAPH ?visitedGraph {
+                                ?s ?p ?o .
+                            } .
+                        } }\"/>
+                <ui:update ui:updateQuery=\"{!
+                        INSERT {
+                            GRAPH ?visitedGraph {
+                                ?hiddenClass edg:hideClass true .
+                                ?hiddenClass edg:derivedFrom ?class .
+                                ?hiddenClass dcterms:source ?viewControllerGraph .
+                            } .
+                        }
+                        WHERE {
+                            ?childClass (rdfs:subClassOf)+ ?class .
+                            {
+                                ?childClass edg:hideSubClasses true .
+                                ?hiddenClass (rdfs:subClassOf)+ ?childClass .
+                                ( ?childClass edg:hideSubClasses true ) tops:statementDefinedIn ?viewControllerGraph .
+                            }
+                            UNION
+                            {
+                                ?childClass edg:hideClass true .
+                                BIND (?childClass AS ?hiddenClass) .
+                                ( ?childClass edg:hideClass true ) tops:statementDefinedIn ?viewControllerGraph .
+                            } .
+                        } }\"/>
+            </ui:transaction>
+            <option selected=\"{= IF((?class = ?selected), &quot;selected&quot;, ?none) }\" title=\"{= ?toolTip }\" value=\"{= ui:encodeNode(?class, true, true) }\">{= ?indentation }{= ?menuLabel }</option>
+        </ui:if>
+        <ui:else>
+            <option selected=\"{= IF((?class = ?selected), &quot;selected&quot;, ?none) }\" title=\"{= ?toolTip }\" value=\"{= ui:encodeNode(?class, true, true) }\">{= ?indentation }{= ?menuLabel }</option>
+            <!--option class=\"topbraid-popover\" data-content=\"{= ?toolTip }\" data-loadable=\"{= ui:uniqueId() }\" data-original-title=\"{= ?menuLabel }\" data-toggle=\"popover\" selected=\"{= IF((?class = ?selected), &quot;selected&quot;, ?none) }\" title=\"\" value=\"{= ui:encodeNode(?class, true, true) }\">{= ?indentation }{= ?menuLabel }</option-->
+        </ui:else>
+        <ui:call arg:class=\"{= ?class }\" arg:visitedGraph=\"{= ?visitedGraph }\" ui:template=\"{= edg:getViewpointMenu }\" ui:varName=\"menu\">
+            <ui:forEach ui:resultSet=\"{= ?menu }\">
+                <edg:ClassTreeNavigationNode arg:class=\"{= ?subClass }\" arg:indentation=\"{= ?indentation }&nbsp;&nbsp;&nbsp;&nbsp;\" arg:selected=\"{= ?selected }\" arg:visitedGraph=\"{= ?visitedGraph }\" edg:level=\"{= ?level + 1 }\"/>
+            </ui:forEach>
+        </ui:call>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Produces nodes in a pseudo-tree consisting of <option> elements where the labels are indented depending on the depth of the tree traversal." ;
+  rdfs:subClassOf swa:TreeElements ;
+.
+edg:ClassTreeNavigationSelector
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:constrainRoot ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:id ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:rootClass ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The root class." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:selected ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The currently selected class." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:style ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:treeMode ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <div class=\"viewpoint-selector {= COALESCE(?style, &quot;&quot;) }\" data-base-graph=\"{= ui:currentQueryGraph() }\" data-constrain-root=\"{= COALESCE(?constrainRoot, false) }\" data-graph-id=\"{= teamwork:currentGraphId() }\" data-root-class=\"{= str(?rootClass) }\" data-root-class-label=\"{= ui:label(?rootClass) }\" data-selected-class=\"{= str(?selected) }\" data-selected-class-label=\"{= ui:label(?selected) }\" data-tag-id=\"{= teamwork:currentTagId() }\" data-tree-mode=\"{= ?treeMode }\" id=\"{= COALESCE(?id, &quot;edgResourceTypeSelect&quot;) }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Class tree navigation selector" ;
+  rdfs:subClassOf swa:Elements ;
+.
+edg:ClassTreeShortestPathCallback
+  a ui:JSONService ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:root ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The root resource to stop at." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:node ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The node resource to start traversal at." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:call arg:node=\"{= ?node }\" arg:root=\"{= ?root }\" ui:template=\"{= swa:ClassTreePath }\">
+    <ui:if ui:condition=\"{= spr:rowCount(?rs) &gt; 0 }\">
+        <ui:group let:path=\"{= spr:cell(?rs, 0, 0) }\">
+            <ui:if ui:condition=\"{= isLiteral(?path) }\">
+                <swon:RSObjectArray arg:resultSet='{#
+                        SELECT ?uri (ui:label(IRI(?uri)) AS ?label)
+                        WHERE {
+                            ?uri spif:split ( ?path \" \" ) .
+                        } }'/>
+            </ui:if>
+            <ui:else>{}</ui:else>
+        </ui:group>
+    </ui:if>
+    <ui:else>{}</ui:else>
+</ui:call>
+"""^^ui:Literal ;
+  rdfs:label "Tree shortest path callback" ;
+  rdfs:subClassOf edg:JSONServices ;
+  rdfs:subClassOf swa:TreeElements ;
+.
+edg:CreateEnumerationClassResourceHandler
+  a ui:NodeClass ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <!--ui:dumpScope ui:message=\"AAA: edg:CreateEnumerationClassResourceHandler\"/-->
+    <ui:transaction ui:checkConstraints=\"{= true }\" ui:logMessage=\"Create Enumeration {= ui:label(?resourceType) } with URI {= ?uri }\" ui:metadata=\"{= ?metadata }\">
+        <ui:preCondition ui:errorMessage=\"{= COALESCE(swa:labelExistsPreCondition(?label), swa:validURIPreCondition(?uri), swa:unusedURIPreCondition(IRI(str(?uri))), swa:nonAbstractClassPreCondition(?resourceType)) }\">
+            <ui:preCondition ui:errorMessage=\"{= IF(spl:hasValue(?resourceType, owl:oneOf), &quot;Cannot create new instances of a class with an owl:oneOf&quot;, ?none) }\">
+                <ui:update ui:updateQuery=\"{!
+                        INSERT {
+                            ?resource a edg:CustomEnumerationClass .
+                            ?resource a sh:NodeShape .
+                            ?resource rdfs:subClassOf edg:CustomEnumeratedValue .
+                            ?resource ?labelProperty ?prefLabel .
+                            ?resource graphql:name ?graphqlName .
+                        }
+                        WHERE {
+                            BIND (IRI(str(?uri)) AS ?resource) .
+                            BIND (IF(bound(?labelLang), STRLANG(?label, ?labelLang), ?label) AS ?prefLabel) .
+                            BIND (swa:labelProperty(?resourceType) AS ?labelProperty) .
+                            BIND (spif:camelCase(?label) AS ?graphqlName) .
+                        } }\"/>
+                <swa:createPrimaryKeyTriple ui:args=\"*\"/>
+                <swa:addDefaultValues arg:resource=\"{= IRI(str(?uri)) }\"/>
+            </ui:preCondition>
+        </ui:preCondition>
+    </ui:transaction>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "The updates that need to happen to create a new enumeration class resource." ;
+  rdfs:label "Create resource handler" ;
+  rdfs:subClassOf swa:CreateHandlers ;
+.
+edg:CreateFlowResourceHandler
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:source ;
+      spl:valueType edg:Interoperable ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:target ;
+      spl:valueType edg:Interoperable ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <!--ui:dumpScope ui:message=\"AAA: edg:CreateFlowResourceHandler\"/-->
+    <ui:transaction ui:checkConstraints=\"{= true }\" ui:logMessage=\"Create {= ui:label(?resourceType) } with URI {= ?uri }\" ui:metadata=\"{= ?metadata }\">
+        <ui:preCondition ui:errorMessage=\"{= swa:labelExistsPreCondition(?label) }\">
+            <ui:update ui:updateQuery=\"{!
+                    INSERT {
+                        ?resource a ?resourceType .
+                        ?resource ?labelProperty ?prefLabel .
+                        ?resource edg:source ?source .
+                        ?resource edg:target ?target .
+                    }
+                    WHERE {
+                        BIND (IRI(str(?uri)) AS ?resource) .
+                        BIND (IF(bound(?labelLang), STRLANG(?label, ?labelLang), ?label) AS ?prefLabel) .
+                        BIND (swa:labelProperty(?resourceType) AS ?labelProperty) .
+                    } }\"/>
+            <!--swa:createPrimaryKeyTriple ui:args=\"*\"/-->
+            <swa:addDefaultValues arg:resource=\"{= IRI(str(?uri)) }\"/>
+        </ui:preCondition>
+    </ui:transaction>
+    <ui:group let:result=\"{= ui:setSessionAttribute(&quot;flowContext&quot;, &quot;&quot;) }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "The updates that need to happen to create a new resource with a given type." ;
+  rdfs:label "Create flow resource handler" ;
+  rdfs:subClassOf swa:CreateHandlers ;
+.
+edg:CreateInstanceDialog
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:contextResource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The (optional) context resource that will be passed into the create handler." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:createHandler ;
+      spl:valueType ui:NodeClass ;
+      rdfs:comment "A subclass of swa:CreateResourceHandler that shall be called when the dialog completes. This only needs to be specified if the callback is the default function swa.createResource()." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:label ;
+      spl:valueType xsd:string ;
+      rdfs:comment "An optional label to override the default label \"Create <label-of-type>\"." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:resourceSelectedEvent ;
+      spl:valueType xsd:string ;
+      rdfs:comment "An optional event that shall be published after the new resource has been created. The payload of this event will be the new URI." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:suppressTypeSelection ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to suppress the type selection box." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:callback ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The name of a JavaScript function that shall be called if the user Oks the dialog. This must take arguments as: function(typeURI, resourceURI, label, labelLang) where label and labelLang are optional." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:loadId ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The ui:loadId of the resulting ui:loadable." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The type of resource to create. If the type has subclasses, then a drop down box is displaying those alternatives." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <div id=\"div-{= ?loadId }\" let:abstractClassDynamicView=\"{= COALESCE(swa:bestCreateResourceDialogPlugin(?contextResource, ?resourceType), swa:CreateResourceDialogForAbstractClassPlugin) }\" let:isAbstractClass=\"{= swa:isAbstractClass(?resourceType) }\" let:nonAbstractClassDynamicView=\"{= COALESCE(swa:bestCreateResourceDialogPlugin(?contextResource, ?resourceType), swa:DefaultCreateResourceDialogPluginForAssetCollection) }\">
+        <!--ui:dumpScope ui:message=\"AAA: edg:CreateInstanceDialog\"/-->
+        <ui:if ui:condition=\"{= ?isAbstractClass }\">
+            <ui:dynamicView arg:contextResource=\"{= ?contextResource }\" arg:resourceType=\"{= ?contextResource }\" arg:suppressTypeSelection=\"{= ?suppressTypeSelection }\" ui:class=\"{= ?abstractClassDynamicView }\"/>
+        </ui:if>
+        <ui:else>
+            <ui:dynamicView arg:contextResource=\"{= ?contextResource }\" arg:resourceType=\"{= ?contextResource }\" arg:suppressTypeSelection=\"{= ?suppressTypeSelection }\" ui:class=\"{= ?nonAbstractClassDynamicView }\"/>
+        </ui:else>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  vaem:todo "Explore if this class is needed." ;
+  rdfs:comment "The EDG create dialog that can be used to create a new instance of a given class." ;
+  rdfs:label "Create instance dialog" ;
+  rdfs:subClassOf swa:DialogElements ;
+.
+edg:CreateResourceDialogForAbstractClassPlugin
+  a swa:CreateResourceDialogPlugin ;
+  ui:prototype """
+<ui:loadable let:useConstructMethod=\"{= swa:getURIConstructMethod() }\" ui:loadId=\"create-resource-dialog-body\">
+    <ui:group let:myGraph=\"{= str(teamwork:masterGraph(teamwork:currentGraphId())) } \">
+        <!--ui:dumpScope ui:message=\"AAA: edg:CreateResourceDialogForAbstractClassPlugin\"/-->
+        <ui:if ui:condition=\"{= bound(?primaryKeyClass) || swa:hasPrimaryKey(?resourceType) }\">
+            <swa:CreateResourceWithPrimaryKeyDialogPlugin arg:resourceType=\"{= ?primaryKeyClass }\" ui:args=\"*\"/>
+        </ui:if>
+        <ui:else>
+            <edg:CreateResourceDialogTypeSelectionPanel arg:resourceType=\"{= ?resourceType }\" arg:suppressTypeSelection=\"{= ?suppressTypeSelection }\"/>
+            <script>$(\"#create-resource-dialog-body select\").on('change',function(){
+$(\".edg-create-instance\").show();
+var selectedValue = $(this).val().trim();
+var useLabel = {= ?useConstructMethod } == 'label' ? true : false;
+edg.selectorUpdateForNewResourceField('label-input', 'uri-input',selectedValue, useLabel );
+});</script>
+            <div class=\"edg-create-instance ui-helper-hidden-accessible\">
+                <swa:LabeledElement arg:label=\"Label:\">
+                    <input autocomplete=\"off\" class=\"form-control swa-create-resource-label-input\" id=\"label-input\" type=\"text\"/>
+                    <swa:LangSelector arg:uid=\"label\"/>
+                </swa:LabeledElement>
+                <edg:URIField arg:resourceType=\"{= ?resourceType }\"/>
+            </div>
+        </ui:else>
+    </ui:group>
+</ui:loadable>
+"""^^ui:Literal ;
+  rdfs:label "Create resource dialog for abstract class plugin" ;
+  rdfs:subClassOf swa:CreateResourceDialogPlugins ;
+.
+edg:CreateResourceDialogForEnumerations
+  a swa:CreateResourceDialogPlugin ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate edg:resourceURIconstructorFunction ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  swa:createResourceDialogPluginWeight [
+      a swa:WeightedExpression ;
+      swa:expression [
+          a sp:exists ;
+          sp:elements (
+              [
+                a sp:TriplePath ;
+                sp:object edg:CustomEnumerationClass ;
+                sp:path [
+                    a sp:ModPath ;
+                    sp:modMax -2 ;
+                    sp:modMin 0 ;
+                    sp:subPath rdfs:subClassOf ;
+                  ] ;
+                sp:subject [
+                    sp:varName "resourceType" ;
+                  ] ;
+              ]
+            ) ;
+        ] ;
+      swa:weight 100 ;
+    ] ;
+  ui:prototype """
+<ui:group let:resourceSpecificConstructor=\"{= edg:getClassPropertyValue(?resourceType, edg:resourceURIconstructorFunction) }\" let:uid=\"{= ui:uniqueId() }\" let:useConstructMethod=\"{= swa:getURIConstructMethod() }\">
+    <ui:loadable let:resourceURIconstructor=\"{= COALESCE(?resourceURIconstructorFunction, ?resourceSpecificConstructor, edg:newResourceWithUUID) }\" ui:loadId=\"create-resource-dialog-body\">
+        <!--ui:dumpScope ui:message=\"AAA: edg:CreateResourceDialogForEnumerations\"/-->
+        <!--script src=\"{= ui:lib() }/edg/js/edgxtra.js\"/-->
+        <div data-handler=\"edg:CreateEnumerationClassResourceHandler\" id=\"swa-modal-config\">
+            <ui:if ui:condition=\"{= ?useConstructMethod = &quot;label&quot; }\">
+                <swa:CreateResourceDialogUsingLabel arg:resourceType=\"{= edg:CustomEnumerationClass }\"/>
+            </ui:if>
+            <ui:elseif ui:condition=\"{= ?useConstructMethod = &quot;custom&quot; }\">
+                <swa:CreateResourceDialogUsingCustom arg:resourceType=\"{= edg:CustomEnumerationClass }\"/>
+            </ui:elseif>
+            <ui:else>
+                <!--ui:dumpScope ui:message=\"AAA3: edg:CreateResourceDialogForEnumerations\"/-->
+                <swa:LabeledElement arg:label=\"Label:\">
+                    <input autocomplete=\"off\" class=\"form-control swa-create-resource-label-input\" id=\"label-input\" type=\"text\"/>
+                    <swa:LangSelector arg:uid=\"label\"/>
+                </swa:LabeledElement>
+                <swa:URIFieldForAssetCollection arg:ignoreURIconfigParameters=\"{= COALESCE(?ignoreURIconfigParameters, false) }\" arg:resourceType=\"{= edg:CustomEnumerationClass }\"/>
+                <script>let useLabel = '{= ?useConstructMethod }' === 'label' ? true : false;
+swa.initCreateResourceLabelFieldForAssetCollection('label-input', 'uri-input','{= swa:newResourceForAssetCollection(?resourceType) }',useLabel )</script>
+            </ui:else>
+        </div>
+        <input data-property=\"contextResource\" type=\"hidden\" value=\"{= ?contextResource }\"/>
+        <input data-ref=\"{= ui:label(edg:CustomEnumerationClass) }\" id=\"type-select\" type=\"hidden\" value=\"{= edg:CustomEnumerationClass }\"/>
+    </ui:loadable>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A create dialog for enumeration." ;
+  rdfs:label "Create resource dialog for enumerations" ;
+  rdfs:subClassOf edg:DialogElements ;
+  rdfs:subClassOf swa:CreateResourceDialogPlugins ;
+.
+edg:CreateResourceDialogTypeSelectionPanel
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:suppressTypeSelection ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to suppress the type selection box." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The type of resource being created." ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:if ui:condition=\"{= ((!bound(?suppressTypeSelection)) || (!?suppressTypeSelection)) &amp;&amp; spl:hasValue(?any, rdfs:subClassOf, ?resourceType) }\">
+        <swa:LabeledElement arg:label=\"Type:\">
+            <select autocomplete=\"off\" class=\"form-control\" id=\"type-select\" onchange=\"edg.updateCreateResourceDialog()\">
+                <option data-abstract=\"true\" selected=\"false\" value=\"{= ?none }\">Select {= ui:label(?resourceType) } type</option>
+                <ui:forEach ui:resultSet=\"{#
+                        SELECT DISTINCT ?resourceLabel ?class ?primary
+                        WHERE {
+                            {
+                                ?class (rdfs:subClassOf)* ?resourceType .
+                                FILTER ((!swa:isAbstractClass(?class)) &amp;&amp; NOT EXISTS {
+                                    ?class edg:editingProhibited true .
+                                }) .
+                            } .
+                            BIND (ui:label(?class) AS ?resourceLabel) .
+                            BIND (swa:hasPrimaryKey(?class) AS ?primary) .
+                        }
+                        ORDER BY (?resourceLabel) }\">
+                    <option selected=\"{= IF((?resourceType = ?class), &quot;selected&quot;, ?none) }\" value=\"{= IF(?primary, &quot;-&quot;, ?none) }{= ?class }\">{= ?resourceLabel }{= IF(?primary, \" (*)\", ?none) }</option>
+                </ui:forEach>
+            </select>
+        </swa:LabeledElement>
+    </ui:if>
+    <ui:else>
+        <input id=\"type-select\" type=\"hidden\" value=\"{= ?resourceType }\"/>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Create resource dialog type selection panel" ;
+  rdfs:subClassOf edg:DialogElements ;
+.
+edg:DataTableResultsBody
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:columnsService ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:createResourceHandler ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:createService ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:dataEndpoint ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:dtType ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:editButton ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:editable ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:gridId ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The id of the grid to generate." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:hasComparisonMatrix ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:searchGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph containing the search:Search to execute." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:selectAll ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resourceSelectedEvent ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The name of an event to publish when the user clicks on a result. The data payload of this event is the URI of the resource." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <ui:group let:tableId=\"{= COALESCE(?gridId, ui:uniqueId()) }\">
+        <div data-columns-endpoint=\"{= ?columnsService }\" data-create-service=\"{= COALESCE(?createService, swa:CreateResourceDialogJSON) }\" data-create-service-handler=\"{= COALESCE(?createResourceHandler, swa:CreateResourceHandler) }\" data-datatable=\"true\" data-datatable-type=\"{= COALESCE(?dtType, &quot;dataTable&quot;) }\" data-editable=\"{= COALESCE(?editable, false) }\" data-endpoint=\"{= ?dataEndpoint }\" data-has-comparison-matrix=\"{= COALESCE(?hasComparisonMatrix, ?nil) }\" data-has-edit-button=\"{= COALESCE(?editButton, ?nil) }\" data-has-select-all=\"{= COALESCE(?selectAll, ?nil) }\" data-resource-selected-event=\"{= COALESCE(?resourceSelectedEvent, ?nil) }\" data-resource-type=\"{= COALESCE(?resourceType, ?nil) }\" data-search-graph=\"{= ?searchGraph }\" id=\"{= ?tableId }\"/>
+        <script>gadgets.Hub.publish('org.topbraid.swa.rebuildTable','{= ?tableId }');</script>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Used in the generic editable grid gadget to show table results." ;
+  rdfs:label "Data table results body" ;
+  rdfs:subClassOf swa:GridElements ;
+.
+edg:Dataflow
+  ui:instanceView """
+<ui:group ui:id=\"results-table-config\" ui:priority=\"{= 1 }\">
+    <swon:Array>
+        <swon:Object>
+            <swon:Value arg:name=\"createService\" arg:value=\"{= swa:CreateResourceDialogBodyForAssetCollection }\"/>
+            <swon:Value arg:name=\"createResourceHandler\" arg:value=\"{= edg:CreateFlowResourceHandler }\"/>
+        </swon:Object>
+    </swon:Array>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:DialogElements
+  a ui:NodeClass ;
+  ui:headIncludes """
+<ui:group>
+    <meta content=\"edg:DialogElements\" name=\"edg-manifest-start\"/>
+    <!--script src=\"{= ui:lib() }/edg/js/edgCreateResource.js\"/-->
+    <meta content=\"edg:DialogElements\" name=\"edg-manifest-end\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Dialog elements" ;
+  rdfs:subClassOf swa:DialogElements ;
+.
+edg:EDGenumerationClass
+  ui:instanceView """
+<ui:group ui:id=\"datatables-builder\" ui:priority=\"{= 10 }\">
+    <!--ui:dumpScope ui:message=\"AAA: edg:EDGenumerationClass\"/-->
+    <edg:EditableGridGadget arg:createResourceHandler=\"{= edg:CreateEnumerationClassResourceHandler }\" arg:deleteHandler=\"{= ?deleteHandler }\" arg:readOnly=\"{= true }\" arg:resourceSelectedEvent=\"{= ?instanceSelectedEvent }\" arg:resourceType=\"{= ?this }\" arg:rowCount=\"{= 20 }\" ui:args=\"*\"/>
+</ui:group>
+"""^^ui:Literal ;
+  vaem:todo "Decide on the instance view - is it needed?" ;
+.
+edg:EditableGridGadget
+  a swa:Gadget ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:createResourceHandler ;
+      spl:valueType swa:CreateResourceService ;
+      rdfs:comment "An (optional) custom handler for the create button." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:createService ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:deleteHandler ;
+      spl:valueType swa:DeleteResourcesService ;
+      rdfs:comment "An SWP service that is called when the user presses the delete button." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:multiSelect ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:readOnly ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to operate in view-only mode." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:rowCount ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The default number of rows to display." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:rowNumCookie ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The name of a cookie remembering the number of rows." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:suppressLabelColumn ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to suppress the first column." ;
+    ] ;
+  ui:prototype """
+<ui:group let:gridId=\"{= ui:uniqueId() }\" let:id=\"{= ui:uniqueId() }\" let:myCreateResourceService=\"{= COALESCE(?createService, swa:CreateResourceDialogBodyForAssetCollection) }\" let:pagerId=\"{= ui:uniqueId() }\">
+    <!--ui:dumpScope ui:message=\"AAA: edg:EditableGridGadget\"/-->
+    <swa:Subscribe arg:code=\"swa.searchPerformed=true;swa.loadWithResource('{= ?id }-loadable', 'searchGraph', data)\" arg:event=\"{= swa:searchEvent(?searchEvent) }\"/>
+    <swa:Subscribe arg:code=\"swa.handleChangeForGrid(data, 'DataTables_Table_1')\" arg:event=\"org.topbraid.swa.change\"/>
+    <ui:loadable class=\"ui-layout-content\" ui:loadId=\"{= ?id }-loadable\" ui:loadOnDemand=\"{= true }\">
+        <swa:DataTableSearchResultsBody arg:createResourceHandler=\"{= ?createResourceHandler }\" arg:createService=\"{= ?createService }\" arg:editable=\"{= !?readOnly }\" arg:exports=\"{= true }\" arg:filter=\"{= true }\" arg:hasCloneButton=\"{= true }\" arg:multiSelect=\"{= COALESCE(?multiSelect, true) }\" arg:resourceType=\"{= ?resourceType }\" arg:selectAll=\"{= true }\" ui:args=\"*\"/>
+    </ui:loadable>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A gadget displaying a grid where each row represents one resource. The grid has editing support via Add, Edit and Delete buttons at the bottom. The rows of the grid are derived from a search, e.g. combined with a swa:FormSearchGadget or a swa:FacetedSearchGadget. By default, the grid typically displays all instances, i.e. an \"empty\" search that can be started using arg:autoStart=\"true\" at the associated swa:FormSearchGadget." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/editor/core> ;
+  rdfs:label "Editable grid gadget" ;
+  rdfs:subClassOf swa:SearchResultsGadgets ;
+.
+edg:EditorApplications
+  a ui:NodeClass ;
+  rdfs:label "Editor applications" ;
+  rdfs:subClassOf edg:AppElements ;
+  rdfs:subClassOf edg:Page ;
+  rdfs:subClassOf swa:Applications ;
+.
+edg:EnumeratedValue
+  ui:instanceView """
+<ui:group ui:id=\"datatable-columns\" ui:priority=\"{= -1 }\">
+    <swon:Array>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"uri\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"uri\"/>
+            <swon:Value arg:name=\"searchable\" arg:value=\"{= false }\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= false }\"/>
+            <swon:Value arg:name=\"orderable\" arg:value=\"{= false }\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"'{= ui:label(?this) }' Enumerated Value\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"enumeratedValue\"/>
+            <swon:Value arg:name=\"searchable\" arg:value=\"{= false }\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"type\" arg:value=\"label\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Value\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"value\"/>
+            <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+            <swon:Value arg:name=\"type\" arg:value=\"string\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= false }\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Literal\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"literal\"/>
+            <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+            <swon:Value arg:name=\"type\" arg:value=\"string\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Code\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"code\"/>
+            <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+            <swon:Value arg:name=\"type\" arg:value=\"string\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Order\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"order\"/>
+            <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+            <swon:Value arg:name=\"type\" arg:value=\"num\"/>
+        </swon:Object>
+    </swon:Array>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"datatable-data\" ui:priority=\"{= -1 }\">
+    <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+        <ui:call arg:class=\"{= ?this }\" ui:template=\"{= edg:ValuesOfEnumeration }\">
+            <ui:if ui:condition=\"{= !spr:isEmpty(?rs) }\">
+                <swon:Object>
+                    <swon:Value arg:name=\"data\">
+                        <swon:Array>
+                            <ui:forEach ui:resultSet=\"{= ?rs }\">
+                                <swon:Object>
+                                    <swon:Value arg:name=\"uri\" arg:value=\"{= str(?instance) }\"/>
+                                    <swon:Value arg:name=\"enumeratedValue\" arg:value=\"{= ui:label(?instance) }\"/>
+                                    <swon:Value arg:name=\"value\" arg:value=\"{= ui:label(?instance) }\"/>
+                                    <swon:Value arg:name=\"literal\" arg:value=\"{= COALESCE(?literal, &quot;&quot;) }\"/>
+                                    <swon:Value arg:name=\"code\" arg:value=\"{= str(COALESCE(?codeValue, &quot;&quot;)) }\"/>
+                                    <swon:Value arg:name=\"order\" arg:value=\"{= COALESCE(?order, &quot;&quot;) }\"/>
+                                </swon:Object>
+                            </ui:forEach>
+                        </swon:Array>
+                    </swon:Value>
+                </swon:Object>
+            </ui:if>
+            <ui:else>
+                <swon:Object/>
+            </ui:else>
+        </ui:call>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:EnumerationClass
+  ui:instanceView """
+<ui:group ui:id=\"datatables-builder\" ui:priority=\"{= 10 }\">
+    <!--ui:dumpScope ui:message=\"AAA: edg:EnumerationClass\"/-->
+    <edg:EditableGridGadget arg:createResourceHandler=\"{= edg:CreateEnumerationClassResourceHandler }\" arg:deleteHandler=\"{= ?deleteHandler }\" arg:readOnly=\"{= ?frozen }\" arg:resourceSelectedEvent=\"{= ?instanceSelectedEvent }\" arg:resourceType=\"{= ?this }\" arg:rowCount=\"{= 20 }\" ui:args=\"*\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:EnumerationClassFormBody
+  a ui:ResourceViewClass ;
+  ui:private true ;
+  ui:prototype """
+<ui:group default:hideIfEmpty=\"{= true }\" default:subject=\"{= ?resource }\" let:enumeratedValueSelectedEvent=\"edg.enumeratedValue.selected\" let:frozen=\"{= teamwork:isExplorerUser(smf:userWithName(smf:currentUserName())) || teamwork:isCurrentGraphFrozen() }\" let:makeResourcePersistent=\"{= ui:setSessionAttribute(&quot;persistresource&quot;, str(?resource)) }\">
+    <ui:group let:loadId=\"{= ui:uniqueId() }\">
+        <swa:LoadableFormSection arg:loadId=\"{= ?loadId }\">
+            <ui:loadable class=\"swa-loadable-form-section-body\" ui:loadId=\"{= ?loadId }\" ui:loadOnDemand=\"{= false }\">
+                <edg:MinimalClassFormBody arg:resource=\"{= ?this }\"/>
+                <hr/>
+                <div class=\"swa-sub-title\">Values</div>
+                <edg:GenericEditableGridGadget arg:columnsService=\"{= edg:ResourceDataTableColumnsForClass }\" arg:createResourceHandler=\"{= swa:CreateResourceHandler }\" arg:createService=\"{= edg:CreateInstanceDialog }\" arg:dataEndpoint=\"{= edg:DataTableResultsCallbackForClass }\" arg:deleteHandler=\"{= swa:DefaultDeleteResourcesService }\" arg:dtType=\"enumerations\" arg:readOnly=\"{= ?frozen }\" arg:resourceType=\"{= ?resource }\" arg:rowCount=\"{= 20 }\" ui:args=\"*\"/>
+                <!--swa:Subscribe arg:code=\"swa.openSwitchableResourceDialog(data)\"
+   arg:event=\"{= ?enumeratedValueSelectedEvent }\"/-->
+            </ui:loadable>
+        </swa:LoadableFormSection>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  vaem:comment "arg:resourceSelectedEvent=\"{= ?enumeratedValueSelectedEvent }\"" ;
+  rdfs:comment "The form view for edg:EnumerationClass." ;
+  rdfs:label "Class form body" ;
+  rdfs:subClassOf swa:FormBody ;
+.
+edg:EnumerationClassHandler
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:if ui:condition=\"{= swa:mode() = swa:SearchMode }\">
+        <ui:group let:metaclass=\"{= edg:EnumerationClass }\">
+            <ui:call arg:subject=\"{= ?metaclass }\" ui:template=\"{= swa:modeProperty(swa:formObjectPredicateSelectionTemplate) }\">
+                <swa:ObjectsGroup arg:filterFunction=\"{= swa:isAnnotationProperty }\" arg:label=\"Annotations\" arg:predicates=\"{= ?rs }\" arg:subject=\"{= ?metaclass }\"/>
+                <swa:ObjectsGroup arg:filterFunction=\"{= swa:isNonClassAxiomProperty }\" arg:label=\"Properties\" arg:predicates=\"{= ?rs }\" arg:subject=\"{= ?metaclass }\"/>
+            </ui:call>
+        </ui:group>
+    </ui:if>
+    <ui:elseif ui:condition=\"{= ?resource = &lt;urn:x-swa:MultiResource&gt; }\">
+        <p class=\"text-info\">Batch editing of Enumeration classes is not supported. Selected properties of an enumeration class can be edited in the details panel.</p>
+    </ui:elseif>
+    <ui:else>
+        <edg:EnumerationClassFormBody arg:resource=\"{= ?resource }\"/>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Enumeration class handler" ;
+  rdfs:subClassOf swa:Elements ;
+.
+edg:EnumerationViewpoint
+  a ui:NodeClass ;
+  ui:instanceView """
+<ui:group ui:id=\"datatables-builder\" ui:priority=\"{= 10 }\">
+    <!--ui:dumpScope ui:message=\"AAA: edg:EnumerationViewpoint\"/-->
+    <edg:EditableGridGadget arg:createResourceHandler=\"{= edg:CreateEnumerationClassResourceHandler }\" arg:deleteHandler=\"{= ?deleteHandler }\" arg:readOnly=\"{= ?frozen }\" arg:resourceSelectedEvent=\"{= ?instanceSelectedEvent }\" arg:resourceType=\"{= ?this }\" arg:rowCount=\"{= 20 }\" ui:args=\"*\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"form\" ui:priority=\"{= 90 }\">
+    <ui:resourceView ui:matchIds=\"viewpoint-delegation\" ui:resource=\"{= ?this }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:EnumerationsValuesWidgetSection
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:class ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The class to display the relevant properties of." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:template ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The template delivering the properties." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:title ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The title of the heading." ;
+    ] ;
+  ui:prototype """
+<ui:call arg:class=\"{= ?class }\" ui:template=\"{= ?template }\">
+    <ui:if ui:condition=\"{= !spr:isEmpty(?rs) }\">
+        <div class=\"swa-sub-title\">Enumerated Values</div>
+        <table class=\"swa-relevant-properties\">
+            <tr>
+                <th class=\"swa-relevant-properties\">Value</th>
+                <th class=\"swa-relevant-properties\">Code</th>
+                <th class=\"swa-relevant-properties\">Literal</th>
+                <th class=\"swa-relevant-properties\">Order</th>
+            </tr>
+            <ui:forEach ui:resultSet=\"{= ?rs }\">
+                <tr>
+                    <td class=\"swa-relevant-properties edg-code-list-values-widget-section-min-width\">
+                        <swa:URIResourceViewer arg:object=\"{= ?instance }\"/>
+                    </td>
+                    <td class=\"swa-relevant-properties\">{= ?codeValue }</td>
+                    <td class=\"swa-relevant-properties\">{= ?literal }</td>
+                    <td class=\"swa-relevant-properties\">{= ?order }</td>
+                </tr>
+            </ui:forEach>
+        </table>
+    </ui:if>
+</ui:call>
+"""^^ui:Literal ;
+  rdfs:label "Enumeration values widget section" ;
+  rdfs:subClassOf swa:FormElements ;
+.
+edg:FilteredURIResourceEditor
+  a swa:ObjectEditorClass ;
+  ui:private true ;
+  ui:prototype """
+<ui:setContext let:range=\"{= swa:localRange(?predicate, ?subject) }\" ui:queryGraph=\"{= swa:dataGraph() }\">
+    <swa:AutoComplete arg:class=\"swa-text-field\" arg:filterFunction=\"{= edg:isValidObjectForPredicateAtSubjectFiltered }\" arg:filterFunctionArgument=\"{= ui:encodeNode(?predicate, true, true) }\" arg:filterFunctionArgument2=\"{= ui:encodeNode(?subject, true, true) }\" arg:id=\"new-{= ?uid }\" arg:initialValue=\"{= ?object }\" arg:menuFilterNode=\"{= ?predicate }\" arg:onSelect=\"{= ui:functionCall(&quot;swa.publishEditWidgetChangeEvent&quot;, ?uid, ?subject, ?predicate) }\" arg:placeholder=\"{= IF(bound(?range), CONCAT(&quot;Select &quot;, ui:label(?range)), ?none) }\" arg:type=\"{= ?range }\" arg:withSelectMenu=\"{= true }\"/>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:comment "A variant of swa:URIResourceEditor that filters out certain resources by \"system\" namespaces such as SPIN, OWL, SHACL etc." ;
+  rdfs:label "Filtered URI resource editor" ;
+  rdfs:subClassOf swa:ObjectEditor ;
+.
+edg:GenericEditableGridGadget
+  a swa:Gadget ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:columnsService ;
+      spl:valueType ui:Service ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:createResourceHandler ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:createService ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:dataEndpoint ;
+      spl:valueType ui:Service ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:deleteHandler ;
+      spl:valueType swa:DeleteResourcesService ;
+      rdfs:comment "An SWP service that is called when the user presses the delete button." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:dtType ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:readOnly ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to operate in view-only mode." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:rowCount ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The default number of rows to display." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:rowNumCookie ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The name of a cookie remembering the number of rows." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:suppressLabelColumn ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to suppress the first column." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resourceSelectedEvent ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The name of an event to publish when the user clicks on a result. The data payload of this event is the URI of the resource." ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <!--ui:dumpScope ui:message=\"AAA: edg:GenericEditableGridGadget\"/-->
+    <edg:DataTableResultsBody arg:createResourceHandler=\"{= ?createResourceHandler }\" arg:createService=\"{= ?createService }\" arg:dtType=\"{= COALESCE(?dtType, ?nil) }\" arg:editable=\"{= !?readOnly }\" arg:resourceSelectedEvent=\"{= COALESCE(?resourceSelectedEvent, ?nil) }\" arg:resourceType=\"{= ?resourceType }\" arg:selectAll=\"{= true }\" ui:args=\"*\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A gadget displaying a grid where each row represents one resource. The grid has editing support via Add, Edit and Delete buttons at the bottom." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/editor/core> ;
+  rdfs:label "Generic editable grid gadget" ;
+  rdfs:subClassOf swa:Gadgets ;
+.
+edg:GenericInversePropertyGadget
+  a ui:NodeClass ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:pathResult=\"{= ui:setSessionAttribute(&quot;persistresource&quot;, str(?focusNode)) }\" let:resourceResult=\"{= ui:setSessionAttribute(&quot;persistpath&quot;, str(?path)) }\">
+    <ui:loadable class=\"swa-labeled-objects\" let:gid=\"{= ui:uniqueId() }\" ui:loadId=\"{= ui:uniqueId() }\">
+        <ui:setContext let:matchIds=\"inverse-property-table-{= afn:localname(?path) }\" ui:queryGraph=\"{= ui:unionGraph }\">
+            <!--ui:dumpScope ui:message=\"AAA1: edg:GenericInversePropertyGadget\"/-->
+            <ui:if ui:condition=\"{= bound(?focusNode) }\">
+                <ui:resourceView arg:property=\"{= ?path }\" ui:matchIds=\"{= ?matchIds }\" ui:resource=\"{= ?focusNode }\"/>
+            </ui:if>
+        </ui:setContext>
+    </ui:loadable>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A gadget for viewing the subjects that refer to the current object (focusNode) using the property passed in the variable 'path'." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/editor/core> ;
+  rdfs:label "Generic Inverse Property Gadget" ;
+  rdfs:subClassOf edg:PathElements ;
+.
+edg:InstanceViewViewer
+  a swa:ObjectViewerClass ;
+  swa:objectWidgetWeight [
+      a swa:WeightedExpression ;
+      swa:expression [
+          a sp:and ;
+          sp:arg1 [
+              a sp:eq ;
+              sp:arg1 [
+                  sp:varName "kind" ;
+                ] ;
+              sp:arg2 "blank" ;
+            ] ;
+          sp:arg2 [
+              a sp:eq ;
+              sp:arg1 [
+                  sp:varName "predicate" ;
+                ] ;
+              sp:arg2 ui:instanceView ;
+            ] ;
+        ] ;
+      swa:weight 70 ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<div class=\"swa-shifted-label\">
+    <pre class=\"swa-source-code-viewer\">{= ?object }</pre>
+</div>
+"""^^ui:Literal ;
+  rdfs:comment "A viewer for a ui:instanceView" ;
+  rdfs:label "Instance view viewer" ;
+  rdfs:subClassOf swa:ObjectViewer ;
+.
+edg:MinimalClassFormBody
+  a ui:ResourceViewClass ;
+  ui:private true ;
+  ui:prototype """
+<div default:hideIfEmpty=\"{= true }\" default:subject=\"{= ?resource }\">
+    <ui:if ui:condition=\"{= swa:isViewMode() }\">
+        <teamwork:ResourceHistoryPanel arg:resource=\"{= ?resource }\"/>
+    </ui:if>
+    <swa:ObjectsEnum arg:label=\"Labels and Description\">
+        <swa:Objects arg:predicate=\"{= rdfs:label }\"/>
+        <!--swa:Objects arg:editWidget=\"swa:RichTextEditor\"
+ arg:predicate=\"rdfs:comment\"
+ arg:viewWidget=\"swa:RichTextViewer\"/-->
+        <swa:ObjectsPlaceholder arg:filterFunction=\"{= swa:isAnnotationProperty }\" arg:suppressShapeSection=\"{= true }\"/>
+    </swa:ObjectsEnum>
+    <ui:if ui:condition=\"{= bound(?resource) &amp;&amp; spl:instanceOf(?resource, sh:Shape) }\">
+        <swa:ObjectsEnum arg:label=\"Constraints\">
+            <swa:Objects arg:editWidget=\"{= teamwork:PropertyShapeEditor }\" arg:label=\"property shapes\" arg:predicate=\"{= sh:property }\"/>
+            <swa:Objects arg:hideInModes=\"edit,search\" arg:predicate=\"{= sh:sparql }\"/>
+            <swa:Objects arg:hideInModes=\"edit\" arg:predicate=\"{= sh:targetClass }\"/>
+            <swa:Objects arg:hideInModes=\"edit\" arg:predicate=\"{= sh:targetNode }\"/>
+            <swa:Objects arg:hideInModes=\"edit\" arg:predicate=\"{= sh:target }\"/>
+            <swa:Objects arg:hideInModes=\"edit\" arg:predicate=\"{= sh:targetObjectsOf }\"/>
+            <swa:Objects arg:hideInModes=\"edit\" arg:predicate=\"{= sh:targetSubjectsOf }\"/>
+        </swa:ObjectsEnum>
+        <ui:if ui:condition=\"{= swa:isViewMode() }\">
+            <teamwork:InheritedConstraintsSection arg:resource=\"{= ?resource }\"/>
+        </ui:if>
+    </ui:if>
+</div>
+"""^^ui:Literal ;
+  vaem:todo """    <!--swa:Objects arg:editWidget=\"swa:RichTextEditor\"
+         arg:predicate=\"rdfs:comment\"
+         arg:viewWidget=\"swa:RichTextViewer\"/-->""" ;
+  rdfs:label "Minimal class form body" ;
+  rdfs:subClassOf swa:FormBody ;
+.
+edg:ObjectsEnum
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:alwaysDisplay ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to have this always displayed, even if no properties are inside." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:hideIfEmpty ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to hide the whole group if the subject has no value for any property in it." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:open ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "If arg:openable=\"true\" then this can be set to true to have the content visible by default." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:openable ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to have an open/close icon appear next to the label. Requires a label to be present. The content will appear hidden by default, but arg:open=\"true\" can be used to control the initial state." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:subject ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The subject resource to display." ;
+    ] ;
+  ui:prototype """
+<ui:if let:tp=\"{= ?thisParent }\" ui:condition=\"{= (((((!bound(?subject)) || swa:isEditMode()) || (COALESCE(?hideIfEmpty, false) = false)) || swa:subjectHasObjectFromEnum(?subject, ?thisParent)) || swa:objectHasSubjectFromEnum(?subject, ?thisParent)) || ?alwaysDisplay }\">
+    <div class=\"swa-objects-group {= IF((((swa:isEditMode() || swa:isSearchMode()) &amp;&amp; (!swa:objectsEnumPropertiesHaveType(?tp))) &amp;&amp; swa:falseOrUnbound(?alwaysDisplay)), &quot;ui-helper-hidden-accessible&quot;, ?none) }\" let:bodyId=\"{= ui:uniqueId() }\">
+        <ui:if ui:condition=\"{= ?openable }\">
+            <div class=\"edg-sub-title blue1 size12px\" let:id=\"{= ui:uniqueId() }\">
+                <div class=\"swa-openable-object-icon ui-icon ui-icon-triangle-1-{= IF((bound(?open) &amp;&amp; ?open), &quot;s&quot;, &quot;e&quot;) }\" id=\"{= ?id }\" onclick=\"swa.toggleOpenableObject('{= ?bodyId }', '{= ?id }')\"/>
+                <div class=\"swa-float-left\">{= ?label }</div>
+                <div class=\"swa-clear-both\"/>
+            </div>
+        </ui:if>
+        <ui:elseif ui:condition=\"{= bound(?label) }\">
+            <div class=\"edg-sub-title blue size12px\">{= ?label }</div>
+        </ui:elseif>
+        <div class=\"{= IF((?openable &amp;&amp; ((!bound(?open)) || (!?open))), &quot;ui-helper-hidden-accessible&quot;, ?none) }\" id=\"{= ?bodyId }\">
+            <ui:insertionPoint ui:pointId=\"body\"/>
+        </div>
+    </div>
+</ui:if>
+"""^^ui:Literal ;
+  rdfs:comment "A container around a finite list of swa:Objects (or swa:Subjects) elements - not computed through a filter function but explicitly enumerated. Can be used in conjunction with swa:ObjectsPlaceholder. By default all swa:Objects inside of an ObjectsEnum are displayed under a simple title. However, if arg:openable=\"true\" then the body can be expanded and collapsed via an arrow icon. This can be used to organize forms into optional sections." ;
+  rdfs:label "Objects enum" ;
+  rdfs:subClassOf swa:ObjectGroupElements ;
+.
+edg:PVSclassSelector
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:loadId ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "PVS property div id" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType edg:PropertyValueSet ;
+      rdfs:comment "The PVS instance" ;
+    ] ;
+  ui:prototype """
+<ui:group let:currentPVS=\"{= IRI(?resource) }\" let:uid=\"{= ui:uniqueId() }\">
+    <swa:LabeledElement arg:label=\"class:\" let:currentClass=\"{= spl:object(?currentPVS, edg:class) }\" let:currentGraph=\"{= COALESCE(?graph, spl:object(?currentPVS, edg:graph)) }\">
+        <!--ui:dumpScope ui:message=\"AAA: edg:PVSclassSelector - {= ui:currentQueryGraph() }\"/-->
+        <edg:PVSinitialize arg:projectGraph=\"{= ?projectGraph }\" arg:resource=\"{= ?currentPVS }\"/>
+        <swa:ObjectEditorHiddenFields arg:object=\"{= ?currentClass }\" arg:predicate=\"{= edg:class }\" arg:subject=\"{= ?currentPVS }\" arg:uid=\"{= ?uid }-class\"/>
+        <ui:if ui:condition=\"{= bound(?currentGraph) }\">
+            <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?currentGraph) }\">
+                <swa:AutoComplete arg:class=\"swa-text-field\" arg:filterFunction=\"{= edg:isPermissibleValueClass }\" arg:filterFunctionArgument=\"{= ?currentGraph }\" arg:id=\"new-{= ?uid }-class\" arg:initialValue=\"{= ?currentClass }\" arg:onSelect=\"edgxtra.pvsClassKnown( { graph : '&lt;{= ?currentGraph }&gt;', resource : '{= ?resource }', class : '&lt;' + resource + '&gt;', 'propertyDivId': '{= ?loadId }'})\" arg:placeholder=\"Select class\" arg:type=\"{= rdfs:Class }\"/>
+            </ui:setContext>
+        </ui:if>
+        <ui:else>
+            <span>No graph selected</span>
+        </ui:else>
+    </swa:LabeledElement>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "PVS Class Selector" ;
+  rdfs:subClassOf swa:Elements ;
+.
+edg:PVShandler
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType edg:PropertyValueSet ;
+      rdfs:comment "The PVS instance" ;
+    ] ;
+  ui:prototype """
+<ui:group default:hideIfEmpty=\"{= true }\" default:subject=\"{= ?resource }\" let:projectGraph=\"{= teamwork:currentMasterGraph() }\" let:uid=\"{= ui:uniqueId() }\">
+    <!--ui:dumpScope ui:message=\"AAA: edg:PVShandler - {= ui:currentQueryGraph() }\"/-->
+    <script src=\"{= ui:lib() }/edg/js/edgxtra.js\"/>
+    <div class=\"teamworkSummary\">{= spl:objectInGraph(edg:PropertyValueSet, rdfs:comment, ui:graph) }</div>
+    <ui:if ui:condition=\"{= swa:isEditMode() }\">
+        <swa:LabeledElement arg:label=\"graph:\" let:currentGraph=\"{= spl:object(?this, edg:graph) }\">
+            <swa:ObjectEditorHiddenFields arg:object=\"{= ?currentGraph }\" arg:predicate=\"{= edg:graph }\" arg:subject=\"{= ?subject }\" arg:uid=\"{= ?uid }\"/>
+            <ui:call arg:projectGraph=\"{= ?projectGraph }\" ui:template=\"{= edg:getGraphsForPermissibleValueClasses }\" ui:varName=\"importedGraphs\">
+                <select class=\"form-control\" id=\"{= ?uid }-graph-select\" name=\"new-{= ?uid }\">
+                    <option label=\"Select Asset Collection ...\" selected=\"{= true }\"/>
+                    <ui:forEach ui:indexVar=\"index\" ui:resultSet=\"{= ?importedGraphs }\">
+                        <option value=\"{= ui:encodeNode(?graph, true, true) }\">{= ?graphLabel }</option>
+                    </ui:forEach>
+                </select>
+                <script>$(\"#{= ?uid }-graph-select\").change(function() {
+  var data = { graph : $(this).val(), resource : '{= ?subject }' ,
+  'projectGraph' : '{= ?projectGraph }',
+  'classDivId' : '{= ?uid }-class-loadable',
+  'propertyDivId' : '{= ?uid }-property-loadable' };
+  edgxtra.pvsGraphKnown(data)})</script>
+            </ui:call>
+        </swa:LabeledElement>
+        <ui:loadable ui:loadId=\"{= ?uid }-class-loadable\"/>
+        <ui:loadable ui:loadId=\"{= ?uid }-property-loadable\"/>
+    </ui:if>
+    <ui:else>
+        <ui:setContext ui:varName=\"swa-no-edit-button\" ui:varValue=\"{= true }\">
+            <swa:Objects arg:predicate=\"{= edg:graph }\" arg:viewWidget=\"{= edg:PropertyValueSetGraphViewer }\"/>
+            <swa:Objects arg:predicate=\"{= edg:class }\" arg:viewWidget=\"{= edg:PropertyValueSetValueInGraphViewer }\"/>
+            <swa:Objects arg:predicate=\"{= edg:property }\" arg:viewWidget=\"{= edg:PropertyValueSetValueInGraphViewer }\"/>
+            <edg:ShowSampleOfPropertyValues arg:subject=\"{= ?subject }\"/>
+        </ui:setContext>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "PVS Handler" ;
+  rdfs:subClassOf swa:Elements ;
+.
+edg:PVSinitialize
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType edg:PropertyValueSet ;
+      rdfs:comment "The PVS instance" ;
+    ] ;
+  ui:prototype """
+<ui:group let:currentPVS=\"{= IRI(?resource) }\">
+    <ui:if ui:condition=\"{= bound(?projectGraph) }\">
+        <ui:setContext ui:silentTransactions=\"{= true }\">
+            <ui:transaction>
+                <ui:update ui:updateQuery=\"{!
+                        DELETE {
+                            GRAPH ?projectGraph {
+                                ?currentPVS edg:class ?class .
+                                ?currentPVS edg:property ?property .
+                            } .
+                        }
+                        WHERE {
+                            GRAPH ?projectGraph {
+                                ?currentPVS edg:class ?class .
+                                OPTIONAL {
+                                    ?currentPVS edg:property ?property .
+                                } .
+                            } .
+                        } }\"/>
+            </ui:transaction>
+        </ui:setContext>
+    </ui:if>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "PVS Initialize" ;
+  rdfs:subClassOf swa:Elements ;
+.
+edg:PVSpropertySelector
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:class ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:loadId ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "PVS property div id" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType edg:PropertyValueSet ;
+      rdfs:comment "The PVS instance" ;
+    ] ;
+  ui:prototype """
+<ui:group let:currentPVS=\"{= IRI(?resource) }\" let:uid=\"{= ui:uniqueId() }\">
+    <swa:LabeledElement arg:label=\"property:\" let:currentProperty=\"{= spl:object(?resource, edg:property) }\" let:knownClass=\"{= COALESCE(?class, spl:object(?resource, edg:class)) }\">
+        <!--ui:dumpScope ui:message=\"AAA: edg:PVSpropertySelector\"/-->
+        <swa:ObjectEditorHiddenFields arg:object=\"{= ?currentProperty }\" arg:predicate=\"{= edg:property }\" arg:subject=\"{= ?currentPVS }\" arg:uid=\"{= ?uid }-property\"/>
+        <ui:if ui:condition=\"{= !bound(?graph) }\">
+            <span>No graph selected</span>
+        </ui:if>
+        <ui:elseif ui:condition=\"{= !bound(?knownClass) }\">
+            <span>No class selected</span>
+        </ui:elseif>
+        <ui:else>
+            <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?graph) }\">
+                <select class=\"form-control\" name=\"new-{= ?uid }-property\">
+                    <ui:if ui:condition=\"{= !bound(?currentProperty) }\">
+                        <option label=\"Select property ...\"/>
+                    </ui:if>
+                    <ui:forEach ui:resultSet=\"{#
+                            SELECT ?property ?label
+                            WHERE {
+                                ?knownClass swa:relevantClassOfProperty ?property .
+                                FILTER (!swa:isHiddenProperty(?property)) .
+                                BIND (ui:label(?property) AS ?label) .
+                                BIND (swa:localRangeAtClass(?knownClass, ?property) AS ?range) .
+                                VALUES ?range {
+                                    xsd:string
+                                    xsd:integer
+                                } .
+                            }
+                            ORDER BY (?label) }\">
+                        <option selected=\"{= IF((?property = ?currentProperty), &quot;selected&quot;, ?none) }\" value=\"{= ui:encodeNode(?property, true, true) }\">{= ?label }</option>
+                    </ui:forEach>
+                </select>
+            </ui:setContext>
+        </ui:else>
+    </swa:LabeledElement>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "PVS Property Selector" ;
+  rdfs:subClassOf swa:Elements ;
+.
+edg:PropertyValueSet
+  ui:instanceView """
+<ui:group ui:id=\"form\" ui:priority=\"{= 1 }\">
+    <!--ui:dumpScope ui:message=\"AAA: PVS - {= ui:currentQueryGraph() }\"/-->
+    <edg:PVShandler arg:resource=\"{= ?this }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:seeAlso edg:PVSclassSelector ;
+  rdfs:seeAlso edg:PVSpropertySelector ;
+.
+edg:PropertyValueSetGraphViewer
+  a swa:ObjectViewerClass ;
+  ui:private true ;
+  ui:prototype """
+<div class=\"swa-shifted-label\" title=\"{= ?object }\">
+    <span class=\"swa-label\">{= teamwork:graphLabel(?object) }</span>
+</div>
+"""^^ui:Literal ;
+  rdfs:label "Property value set graph viewer" ;
+  rdfs:subClassOf swa:ObjectViewer ;
+.
+edg:PropertyValueSetValueInGraphViewer
+  a swa:ObjectViewerClass ;
+  ui:private true ;
+  ui:prototype """
+<div class=\"swa-shifted-label\" let:graph=\"{= spl:object(?subject, edg:graph) }\" title=\"{= ?object }\">
+    <span class=\"swa-label\">{= IF(bound(?graph), swa:labelInGraph(?object, ui:graphWithImports(?graph)), ?object) }</span>
+</div>
+"""^^ui:Literal ;
+  rdfs:label "Property value set value in graph viewer" ;
+  rdfs:subClassOf swa:ObjectViewer ;
+.
+edg:RDFTypeEditor
+  a swa:ObjectEditorClass ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:rootClass=\"{= teamwork:getMainClass(teamwork:currentMasterGraph()) }\">
+    <ui:if ui:condition=\"{= bound(?rootClass) &amp;&amp; spl:instanceOf(?subject, ?rootClass) }\">
+        <select class=\"form-control\" id=\"rdfTypeEditorSelect\" name=\"new-{= ?uid }\">
+            <ui:forEach ui:resultSet=\"{#
+                    SELECT ?class ?label
+                    WHERE {
+                        ?class (rdfs:subClassOf)* ?rootClass .
+                        FILTER (!swa:isAbstractClass(?class)) .
+                        BIND (ui:label(?class) AS ?label) .
+                    }
+                    ORDER BY (?label) }\">
+                <option selected=\"{= IF((?object = ?class), &quot;selected&quot;, ?none) }\" value=\"{= ui:encodeNode(?class) }\">{= ?label }</option>
+            </ui:forEach>
+        </select>
+    </ui:if>
+    <ui:else>
+        <swa:URIResourceEditor ui:args=\"*\"/>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment """The default editor for rdf:type triples in EDG models.
+
+If the given resource is an instance of the teamwork:mainClass then the widget will only display a drop down of the subclasses of that rootClass, i.e. the resource needs to stay within its boundaries. Otherwise, it just falls back to the normal SWA auto-complete field.""" ;
+  rdfs:label "EDG rdf:type editor" ;
+  rdfs:subClassOf swa:ObjectEditor ;
+.
+edg:ResourceDataTableColumnsForClass
+  a ui:NodeClass ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:class=\"{= IRI(ui:getSessionAttribute(&quot;persistresource&quot;)) }\">
+    <ui:classView ui:class=\"{= ?class }\" ui:matchIds=\"datatable-columns\" ui:resource=\"{= ?class }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment "JSON representation of the columns needed for a resource in a DataTable. This is used in cases where a search form is not involved." ;
+  rdfs:label "Resource data table columns for class" ;
+  rdfs:subClassOf ui:JSONServices ;
+.
+edg:ResourceFormBodyNoIncomingReferences
+  a ui:ResourceViewClass ;
+  ui:private true ;
+  ui:prototype """
+<teamwork:SimpleResourceFormBody arg:hideSubjects=\"{= true }\" arg:resource=\"{= ?resource }\"/>
+"""^^ui:Literal ;
+  rdfs:comment "A view for rdfs:Resource, with widget groups for Annotation Properties and Other Properties without incoming references" ;
+  rdfs:label "Resource form body" ;
+  rdfs:subClassOf swa:FormBody ;
+.
+edg:SameTypeURIResourceEditor
+  a swa:ObjectEditorClass ;
+  ui:private true ;
+  ui:prototype """
+<ui:setContext let:range=\"{= spl:object(?subject, rdf:type) }\" ui:queryGraph=\"{= swa:dataGraph() }\">
+    <swa:AutoComplete arg:allowURIs=\"{= true }\" arg:class=\"swa-text-field\" arg:filterFunction=\"{= swa:isValidObjectForPredicateAtSubject }\" arg:filterFunctionArgument=\"{= ui:encodeNode(?predicate, true, true) }\" arg:filterFunctionArgument2=\"{= ui:encodeNode(?subject, true, true) }\" arg:id=\"new-{= ?uid }\" arg:initialValue=\"{= ?object }\" arg:menuFilterNode=\"{= ?predicate }\" arg:onSelect=\"{= ui:functionCall(&quot;swa.publishEditWidgetChangeEvent&quot;, ?uid, ?subject, ?predicate) }\" arg:placeholder=\"{= IF(bound(?range), CONCAT(&quot;Select &quot;, ui:label(?range)), ?none) }\" arg:type=\"{= ?range }\" arg:withSelectMenu=\"{= true }\"/>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:comment "An editor for properties where the type of the values must be identical to the type of the subject." ;
+  rdfs:label "Same type URI resource editor" ;
+  rdfs:subClassOf swa:ObjectEditor ;
+.
+edg:ShowSampleOfPropertyValues
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subject ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group let:class=\"{= spl:object(?subject, edg:class) }\" let:graph=\"{= spl:object(?subject, edg:graph) }\" let:property=\"{= spl:object(?subject, edg:property) }\">
+    <ui:if ui:condition=\"{= (bound(?graph) &amp;&amp; bound(?class)) &amp;&amp; bound(?property) }\">
+        <div class=\"edg-boxed-text size-12\">
+            <b>Sample values (10): </b>
+            <br/>
+            <ui:forEach ui:resultSet=\"{#
+                    SELECT ?value ?valueLabel
+                    WHERE {
+                        GRAPH ?graph {
+                            ?type (rdfs:subClassOf)* ?class .
+                            ?instance a ?type .
+                            ?instance ?property ?value .
+                            BIND (ui:label(?value) AS ?valueLabel) .
+                        } .
+                    }
+                    ORDER BY (?value)
+                    LIMIT 10 }\" ui:separator=\", \">
+                <span>{= ?valueLabel }</span>
+            </ui:forEach>
+        </div>
+    </ui:if>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:SubPropertySelectionEditor
+  a swa:ObjectEditorClass ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:participantId=\"participant-{= ?uid }\">
+    <select class=\"form-control\" name=\"new-{= ?uid }\">
+        <option selected=\"selected\" value=\"{= rdf:nil }\">Select the {= ui:label(?predicate) }</option>
+        <ui:forEach ui:resultSet=\"{#
+                SELECT ?property ?label
+                WHERE {
+                    ?property (rdfs:subPropertyOf)+ ?predicate .
+                    BIND (ui:label(?property) AS ?label) .
+                }
+                ORDER BY (?label) }\">
+            <option selected=\"{= ?none }\" value=\"{= ui:encodeNode(?property) }\">{= ?label }</option>
+        </ui:forEach>
+    </select>
+    <hr/>
+    <ui:loadable ui:loadId=\"{= ?participantId }\">
+        <p>Need a JS callback for the selected property. Test with edg:applicationSteward</p>
+        <swa:Objects arg:predicate=\"{= edg:applicationSteward }\"/>
+    </ui:loadable>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Not used - still in research" ;
+  rdfs:label "Sub-property selection editor" ;
+  rdfs:subClassOf swa:ObjectEditor ;
+.
+edg:SubjectsGroupEnumeratedLists
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:filterFunction ;
+      spl:valueType spin:Function ;
+      rdfs:comment "An optional filter function that takes a predicate, subject and subjectType as arguments and returns true for all predicates that should be displayed." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:label ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The title label." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:object ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource to display. May be unbound if in search mode." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:predicates ;
+      spl:valueType sp:Select ;
+      rdfs:comment "A result set (e.g., SPARQL SELECT query) that delivers the predicates in this group." ;
+    ] ;
+  ui:prototype """
+<ui:group letrs:rs=\"{#
+        SELECT ?predicate
+        WHERE {
+            ( ?predicates 0 ) spr:colCells ?predicate .
+            FILTER ((!bound(?filterFunction)) || spif:invoke(?filterFunction, ?predicate, ?object)) .
+            FILTER (!swa:isHiddenProperty(?predicate)) .
+            FILTER (?predicate = rdf:type) .
+        } }\">
+    <ui:if ui:condition=\"{= spr:rowCount(?rs) &gt; 0 }\">
+        <div class=\"swa-objects-group\">
+            <div class=\"swa-sub-title\">{= ?label }</div>
+            <ui:forEach ui:resultSet=\"{= ?rs }\">
+                <swa:Subjects arg:label=\"related values\" arg:object=\"{= ?object }\" arg:predicate=\"{= ?predicate }\"/>
+            </ui:forEach>
+        </div>
+    </ui:if>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A group of subject widgets for enumerated lists." ;
+  rdfs:label "Subjects group for enumerated lists" ;
+  rdfs:subClassOf swa:FormElements ;
+.
+edg:TaxonomyNodeValueSet
+  ui:instanceView """
+<ui:group default:hideIfEmpty=\"{= true }\" default:subject=\"{= ?this }\" let:uid=\"{= ui:uniqueId() }\" ui:id=\"form\">
+    <ui:if ui:condition=\"{= swa:isEditMode() }\">
+        <swa:LabeledElement arg:label=\"graph:\" let:currentGraph=\"{= spl:object(?this, edg:graph) }\">
+            <swa:ObjectEditorHiddenFields arg:object=\"{= ?currentGraph }\" arg:predicate=\"{= edg:graph }\" arg:subject=\"{= ?this }\" arg:uid=\"{= ?uid }\"/>
+            <select class=\"form-control\" id=\"{= ?uid }-graph-select\" name=\"new-{= ?uid }\">
+                <ui:if ui:condition=\"{= !bound(?currentGraph) }\">
+                    <option/>
+                </ui:if>
+                <ui:forEach ui:indexVar=\"index\" ui:resultSet=\"{#
+                        SELECT DISTINCT ?graph ?label
+                        WHERE {
+                            rdf:nil teamwork:readableGraphsUnderTeamControl ( ?graph ?tch ) .
+                            FILTER edg:isTaxonomy(?graph) .
+                            BIND (teamwork:graphLabel(?graph) AS ?label) .
+                        }
+                        ORDER BY (?label) }\">
+                    <option selected=\"{= IF((?graph = ?currentGraph), &quot;selected&quot;, ?none) }\" value=\"{= ui:encodeNode(?graph, true, true) }\">{= ?label }</option>
+                </ui:forEach>
+            </select>
+            <script>$(\"#{= ?uid }-graph-select\").change(function() { var params = { graph : $(this).val() }; swa.load(\"{= ?uid }-class-loadable\", params); })</script>
+        </swa:LabeledElement>
+        <ui:loadable ui:loadId=\"{= ?uid }-class-loadable\">
+            <swa:LabeledElement arg:label=\"node:\" let:currentNode=\"{= spl:object(?this, edg:node) }\" let:graph=\"{= COALESCE(?graph, spl:object(?this, edg:graph, ?graph)) }\">
+                <swa:ObjectEditorHiddenFields arg:object=\"{= ?currentClass }\" arg:predicate=\"{= edg:node }\" arg:subject=\"{= ?this }\" arg:uid=\"{= ?uid }-node\"/>
+                <ui:if ui:condition=\"{= bound(?graph) }\">
+                    <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?graph) }\">
+                        <swa:AutoComplete arg:class=\"swa-text-field\" arg:id=\"new-{= ?uid }-node\" arg:initialValue=\"{= ?currentNode }\" arg:placeholder=\"Select concept\" arg:type=\"{= skos:Concept }\"/>
+                    </ui:setContext>
+                </ui:if>
+                <ui:else>
+                    <span>No graph selected</span>
+                </ui:else>
+            </swa:LabeledElement>
+        </ui:loadable>
+    </ui:if>
+    <ui:else>
+        <swa:Objects arg:predicate=\"{= edg:graph }\" arg:viewWidget=\"{= edg:PropertyValueSetGraphViewer }\"/>
+        <swa:Objects arg:predicate=\"{= edg:node }\" arg:viewWidget=\"{= edg:PropertyValueSetValueInGraphViewer }\"/>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:UsagesLoadableFormSection
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource to display the usages of." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:if let:loadId=\"{= ui:uniqueId() }\" ui:condition=\"{= !spl:instanceOf(?resource, edg:AssetCollection) }\">
+    <swa:LoadableFormSection arg:label=\"Usages in Other Asset Collections\" arg:loadId=\"{= ?loadId }\">
+        <ui:loadable class=\"swa-loadable-form-section-body\" ui:loadId=\"{= ?loadId }\" ui:loadOnDemand=\"{= true }\">
+            <ui:call arg:resource=\"{= ?resource }\" ui:template=\"{= edg:ExternalReferences }\">
+                <div class=\"swa-base-font\">{= spr:rowCount(?rs) } usages found.</div>
+                <ui:if ui:condition=\"{= !spr:isEmpty(?rs) }\">
+                    <table class=\"swa-relevant-properties\">
+                        <tr>
+                            <th class=\"swa-relevant-properties\">Referent</th>
+                            <th class=\"swa-relevant-properties\">Relationship</th>
+                            <th class=\"swa-relevant-properties\">In</th>
+                        </tr>
+                        <ui:forEach ui:resultSet=\"{= ?rs }\">
+                            <tr let:editor=\"{= teamwork:editorLink(?graph) }\">
+                                <td class=\"swa-relevant-properties\" title=\"{= ?subject }\">
+                                    <a href=\"{= ?editor }#{= ui:encodeURL(?subject) }\">{= ?subjectLabel }</a>
+                                </td>
+                                <td class=\"swa-relevant-properties\" title=\"{= ?predicate }\">{= ?predicateLabel }</td>
+                                <td class=\"swa-relevant-properties\" title=\"{= ?graph }\">
+                                    <a href=\"{= ?editor }\">{= teamwork:projectLabel(?graph) }</a>
+                                </td>
+                            </tr>
+                        </ui:forEach>
+                    </table>
+                </ui:if>
+            </ui:call>
+            <swaclasses:RelevantPropertiesWidget arg:class=\"{= ?resource }\"/>
+        </ui:loadable>
+    </swa:LoadableFormSection>
+</ui:if>
+"""^^ui:Literal ;
+  rdfs:subClassOf swa:FormElements ;
+.
+edg:ValuesOfEnumeration
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "instance" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "instance" ;
+          ]
+          [
+            sp:varName "codeValue" ;
+          ]
+          [
+            sp:varName "order" ;
+          ]
+          [
+            sp:varName "literal" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "class" ;
+                    ] ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "instance" ;
+                    ] ;
+                ]
+                [
+                  a sp:Optional ;
+                  sp:elements (
+                      [
+                        sp:object [
+                            sp:varName "codeValue" ;
+                          ] ;
+                        sp:predicate dtype:code ;
+                        sp:subject [
+                            sp:varName "instance" ;
+                          ] ;
+                      ]
+                    ) ;
+                ]
+                [
+                  a sp:Optional ;
+                  sp:elements (
+                      [
+                        sp:object [
+                            sp:varName "order" ;
+                          ] ;
+                        sp:predicate dtype:order ;
+                        sp:subject [
+                            sp:varName "instance" ;
+                          ] ;
+                      ]
+                    ) ;
+                ]
+                [
+                  a sp:Optional ;
+                  sp:elements (
+                      [
+                        sp:object [
+                            sp:varName "literal" ;
+                          ] ;
+                        sp:predicate dtype:literal ;
+                        sp:subject [
+                            sp:varName "instance" ;
+                          ] ;
+                      ]
+                    ) ;
+                ]
+              ) ;
+            sp:graphNameNode ui:unionGraph ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:class ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The class with possible qualified cardinality restrictions" ;
+    ] ;
+  spin:private true ;
+  rdfs:label "Values of a given Enumerated list" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+edg:bestCreateResourceDialogPlugin
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "plugin" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              a sp:NamedGraph ;
+              sp:elements (
+                  [
+                    a sp:SubQuery ;
+                    sp:query [
+                        a sp:Select ;
+                        sp:orderBy (
+                            [
+                              a sp:Desc ;
+                              sp:expression [
+                                  sp:varName "weight" ;
+                                ] ;
+                            ]
+                          ) ;
+                        sp:where (
+                            [
+                              sp:object [
+                                  sp:varName "w" ;
+                                ] ;
+                              sp:predicate swa:createResourceDialogPluginWeight ;
+                              sp:subject [
+                                  sp:varName "plugin" ;
+                                ] ;
+                            ]
+                            [
+                              sp:object [
+                                  sp:varName "expression" ;
+                                ] ;
+                              sp:predicate swa:expression ;
+                              sp:subject [
+                                  sp:varName "w" ;
+                                ] ;
+                            ]
+                            [
+                              a sp:Bind ;
+                              sp:expression [
+                                  a sp:coalesce ;
+                                  sp:arg1 [
+                                      a spl:object ;
+                                      sp:arg1 [
+                                          sp:varName "w" ;
+                                        ] ;
+                                      sp:arg2 swa:weight ;
+                                    ] ;
+                                  sp:arg2 0 ;
+                                ] ;
+                              sp:variable [
+                                  sp:varName "weight" ;
+                                ] ;
+                            ]
+                          ) ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Filter ;
+                    sp:expression [
+                        a spin:eval ;
+                        sp:arg1 [
+                            sp:varName "expression" ;
+                          ] ;
+                        sp:arg2 arg:resourceType ;
+                        sp:arg3 [
+                            sp:varName "resourceType" ;
+                          ] ;
+                        sp:arg4 arg:contextResource ;
+                        sp:arg5 [
+                            sp:varName "contextResource" ;
+                          ] ;
+                        sp:arg6 arg:appName ;
+                        sp:arg7 [
+                            a sp:coalesce ;
+                            sp:arg1 [
+                                a swa:appName ;
+                              ] ;
+                            sp:arg2 "NONE" ;
+                          ] ;
+                      ] ;
+                  ]
+                ) ;
+              sp:graphNameNode ui:unionGraph ;
+            ]
+          )
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:contextResource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The context resource." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The resource type." ;
+    ] ;
+  spin:private true ;
+  spin:returnType swa:CreateResourceDialogPlugin ;
+  rdfs:label "best create resource dialog plugin" ;
+  rdfs:subClassOf swa:Functions ;
+.
+edg:getRelevantCollectionGraphsForClassesOfGraphInstances
+  a spin:Template ;
+  spin:body [
+      a sp:Select ;
+      sp:distinct true ;
+      sp:resultVariables (
+          [
+            sp:varName "teamGraph" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "class" ;
+                    ] ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "s" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "graph" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "class" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "class" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object rdf:type ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?2" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?2" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?2" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "catalogGraph" ;
+              ] ;
+            sp:predicate tops:statementDefinedIn ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a fn:starts-with ;
+                sp:arg1 [
+                    sp:varName "catalogGraph" ;
+                  ] ;
+                sp:arg2 "urn" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:iri ;
+                sp:arg1 [
+                    sp:varName "catalogGraph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "teamGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  rdfs:label "get relevant collection graphs for classes of greaph instances" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:getViewpointMenu
+  a spin:Template ;
+  spin:body [
+      a sp:Select ;
+      sp:distinct true ;
+      sp:orderBy (
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "subClass" ;
+          ]
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "class" ;
+              ] ;
+            sp:predicate rdfs:subClassOf ;
+            sp:subject [
+                sp:varName "subClass" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:notExists ;
+                sp:elements (
+                    [
+                      a sp:NamedGraph ;
+                      sp:elements (
+                          [
+                            sp:object true ;
+                            sp:predicate edg:hideClass ;
+                            sp:subject [
+                                sp:varName "subClass" ;
+                              ] ;
+                          ]
+                        ) ;
+                      sp:graphNameNode [
+                          sp:varName "visitedGraph" ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a ui:label ;
+                sp:arg1 [
+                    sp:varName "subClass" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "label" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:class ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:visitedGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  rdfs:label "get viewpoint menu" ;
+  rdfs:subClassOf edg:Templates ;
+.
+edg:isInstance
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+.
+edg:isPermissibleValueClass
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:Union ;
+            sp:elements (
+                (
+                  [
+                    sp:object edg:EnumerationsProject ;
+                    sp:predicate rdf:type ;
+                    sp:subject spin:_arg2 ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "classType" ;
+                      ] ;
+                    sp:predicate rdf:type ;
+                    sp:subject spin:_arg1 ;
+                  ]
+                  [
+                    a sp:Values ;
+                    sp:bindings (
+                        (
+                          edg:EnumerationClass
+                        )
+                        (
+                          edg:CustomEnumerationClass
+                        )
+                        (
+                          edg:EDGenumerationClass
+                        )
+                      ) ;
+                    sp:varNames (
+                        "classType"
+                      ) ;
+                  ]
+                )
+                (
+                  [
+                    sp:object rdmprojects:ReferenceDataset ;
+                    sp:predicate rdf:type ;
+                    sp:subject spin:_arg2 ;
+                  ]
+                  [
+                    sp:object spin:_arg1 ;
+                    sp:predicate teamwork:mainClass ;
+                    sp:subject [
+                        sp:varName "graphURI" ;
+                      ] ;
+                  ]
+                )
+              ) ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:gt ;
+                sp:arg1 [
+                    a edg:getClassInstanceCount ;
+                    arg:class spin:_arg1 ;
+                    arg:graph spin:_arg2 ;
+                  ] ;
+                sp:arg2 0 ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "graph" ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:label "is taxonomy" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:isTaxonomy
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object taxonomies:Taxonomy ;
+                  sp:predicate rdf:type ;
+                  sp:subject spin:_arg1 ;
+                ]
+              ) ;
+            sp:graphNameNode spin:_arg1 ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType owl:Ontology ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:label "is taxonomy" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:isValidObjectForPredicateAtSubjectFiltered
+  a spin:Function ;
+  edg:systemNS "http://datashapes.org/dash#" ;
+  edg:systemNS "http://spinrdf.org/sp#" ;
+  edg:systemNS "http://spinrdf.org/spin#" ;
+  edg:systemNS "http://spinrdf.org/spl#" ;
+  edg:systemNS "http://spinrdf.org/spr#" ;
+  edg:systemNS "http://topbraid.org/metadata#" ;
+  edg:systemNS "http://topbraid.org/raci#" ;
+  edg:systemNS "http://topbraid.org/tosh#" ;
+  edg:systemNS "http://www.w3.org/1999/02/22-rdf-syntax-ns#" ;
+  edg:systemNS "http://www.w3.org/2000/01/rdf-schema#" ;
+  edg:systemNS "http://www.w3.org/2001/XMLSchema#" ;
+  edg:systemNS "http://www.w3.org/2002/07/owl#" ;
+  edg:systemNS "http://www.w3.org/ns/shacl#" ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          (
+            [
+              a sp:Filter ;
+              sp:expression [
+                  a swa:isValidObjectForPredicateAtSubject ;
+                  arg:object [
+                      sp:varName "object" ;
+                    ] ;
+                  arg:predicate [
+                      sp:varName "predicate" ;
+                    ] ;
+                  arg:subject [
+                      sp:varName "subject" ;
+                    ] ;
+                ] ;
+            ]
+          )
+          [
+            a sp:Bind ;
+            sp:expression [
+                a afn:namespace ;
+                sp:arg1 [
+                    sp:varName "object" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "ns" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:notExists ;
+                sp:elements (
+                    [
+                      a sp:NamedGraph ;
+                      sp:elements (
+                          [
+                            sp:object [
+                                sp:varName "ns" ;
+                              ] ;
+                            sp:predicate edg:systemNS ;
+                            sp:subject [
+                                sp:varName "x" ;
+                              ] ;
+                          ]
+                        ) ;
+                      sp:graphNameNode ui:graph ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "A variant of its superclass, doing everything that the superclass does but also eliminating resources by certain \"system\" namespaces." ;
+  rdfs:label "is valid object for predicate at subject filtered" ;
+  rdfs:subClassOf swa:isValidObjectForPredicateAtSubject ;
+.
+edg:isViewMode
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:or ;
+                sp:arg1 [
+                    a sp:eq ;
+                    sp:arg1 [
+                        a swa:mode ;
+                      ] ;
+                    sp:arg2 swa:ViewMode ;
+                  ] ;
+                sp:arg2 [
+                    a sp:eq ;
+                    sp:arg1 [
+                        a swa:mode ;
+                      ] ;
+                    sp:arg2 edg:ResponsiveViewMode ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks whether the SWP engine is currently in view mode, i.e. has the swa:mode set to swa:ViewMode." ;
+  rdfs:label "is view mode" ;
+  rdfs:subClassOf swa:Functions ;
+.
+edg:newResourceWithUUID
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Union ;
+            sp:elements (
+                (
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a swa:getURIClassPrefix ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "useClassPrefix" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a spl:object ;
+                        sp:arg1 spin:_arg1 ;
+                        sp:arg2 edg:acronym ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "maybeAcronym" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a fn:upper-case ;
+                        sp:arg1 [
+                            a afn:localname ;
+                            sp:arg1 spin:_arg1 ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "className" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a sp:if ;
+                        sp:arg1 [
+                            a sp:eq ;
+                            sp:arg1 [
+                                sp:varName "useClassPrefix" ;
+                              ] ;
+                            sp:arg2 "acronym" ;
+                          ] ;
+                        sp:arg2 [
+                            a sp:coalesce ;
+                            sp:arg1 [
+                                sp:varName "maybeAcronym" ;
+                              ] ;
+                            sp:arg2 [
+                                sp:varName "className" ;
+                              ] ;
+                          ] ;
+                        sp:arg3 [
+                            a sp:if ;
+                            sp:arg1 [
+                                a sp:eq ;
+                                sp:arg1 [
+                                    sp:varName "useClassPrefix" ;
+                                  ] ;
+                                sp:arg2 "name" ;
+                              ] ;
+                            sp:arg2 [
+                                sp:varName "className" ;
+                              ] ;
+                            sp:arg3 [
+                                sp:varName "className" ;
+                              ] ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "name" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a sp:if ;
+                        sp:arg1 [
+                            a sp:and ;
+                            sp:arg1 [
+                                a sp:bound ;
+                                sp:arg1 spin:_arg2 ;
+                              ] ;
+                            sp:arg2 [
+                                a sp:ne ;
+                                sp:arg1 [
+                                    a sp:strlen ;
+                                    sp:arg1 spin:_arg2 ;
+                                  ] ;
+                                sp:arg2 0 ;
+                              ] ;
+                          ] ;
+                        sp:arg2 [
+                            a sp:concat ;
+                            sp:arg1 spin:_arg2 ;
+                            sp:arg2 "-" ;
+                          ] ;
+                        sp:arg3 "" ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "preamble" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a swa:getDefaultNamespace ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "base" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a sp:iri ;
+                        sp:arg1 [
+                            a sp:concat ;
+                            sp:arg1 [
+                                a sp:str ;
+                                sp:arg1 [
+                                    sp:varName "base" ;
+                                  ] ;
+                              ] ;
+                            sp:arg2 [
+                                sp:varName "name" ;
+                              ] ;
+                            sp:arg3 "-" ;
+                            sp:arg4 [
+                                sp:varName "preamble" ;
+                              ] ;
+                            sp:arg5 [
+                                a spif:generateUUID ;
+                              ] ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "result" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a swa:getURIClassPrefix ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "useClassPrefix" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a swa:getDefaultNamespace ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "base" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a sp:iri ;
+                        sp:arg1 [
+                            a sp:concat ;
+                            sp:arg1 [
+                                a sp:str ;
+                                sp:arg1 [
+                                    sp:varName "base" ;
+                                  ] ;
+                              ] ;
+                            sp:arg2 [
+                                a spif:generateUUID ;
+                              ] ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "result" ;
+                      ] ;
+                  ]
+                )
+              ) ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "An optional preamble before the UUID" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The type of the new resource." ;
+    ] ;
+  spin:private true ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "Produces a suggestion for a URI for a new resource. This uses the URI of the main owl:Ontology as base, and then adds the type local name and then a UUID." ;
+  rdfs:label "new resource with UUID (EDG)" ;
+  rdfs:subClassOf swa:Functions ;
+.
+arg:createResourceHandler
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:createService
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:dtType
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:indentation
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+teamwork:SimpleFormEditorApplication
+  rdfs:subClassOf edg:EditorApplications ;
+.
+html:swa-label
+  a html:Attribute ;
+  rdfs:label "swa-label" ;
+  rdfs:subPropertyOf html:attributes ;
+.
+rdfs:Class
+  ui:instanceView """
+<ui:group ui:id=\"datatables-builder\" ui:priority=\"{= 1 }\">
+    <!--ui:dumpScope ui:message=\"AAA: rdfs:Class\"/-->
+    <edg:EditableGridGadget arg:deleteHandler=\"{= ?deleteHandler }\" arg:readOnly=\"{= ?frozen }\" arg:resourceSelectedEvent=\"{= ?instanceSelectedEvent }\" arg:resourceType=\"{= ?this }\" arg:rowCount=\"{= 20 }\" ui:args=\"*\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+rdfs:Resource
+  ui:instanceView """
+<ui:group ui:id=\"datatables-builder\" ui:priority=\"{= 1 }\">
+    <!--ui:dumpScope ui:message=\"AAA: rdfs:Resource\"/-->
+    <edg:EditableGridGadget arg:deleteHandler=\"{= ?deleteHandler }\" arg:readOnly=\"{= ?frozen }\" arg:resourceSelectedEvent=\"{= ?instanceSelectedEvent }\" arg:resourceType=\"{= ?this }\" arg:rowCount=\"{= 20 }\" ui:args=\"*\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"nested\" ui:priority=\"{= 5 }\">
+    <edg:ResourceFormBodyNoIncomingReferences arg:resource=\"{= ?this }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.

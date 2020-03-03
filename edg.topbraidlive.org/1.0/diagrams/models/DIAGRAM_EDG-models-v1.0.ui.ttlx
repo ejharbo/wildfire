@@ -1,0 +1,2153 @@
+# baseURI: http://edg.topbraid.solutions/1.0/swp/diagrams/models
+# imports: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://edg.topbraid.solutions/1.0/schema/datamodels
+# imports: http://edg.topbraid.solutions/1.0/swp/diagrams/reactivegrams
+# imports: http://edg.topbraid.solutions/1.0/swp/library
+# imports: http://edg.topbraidlive.org/1.0/config/diagrams
+# imports: http://spinrdf.org/spinx
+# imports: http://topbraid.org/swa
+# imports: http://topbraid.org/teamwork
+# imports: http://topbraid.org/teamwork.spin
+# imports: http://uispin.org/svg
+# imports: http://www.w3.org/ns/shacl#
+
+@prefix acjob: <http://evn.topbraidlive.org/tagger/acjob#> .
+@prefix acpp: <http://topbraid.org/nlp/autoclassifier-preproc#> .
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix autotagger: <http://evn.topbraidlive.org/autotagger#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix conceptmatch: <http://topbraid.org/conceptmatch#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix config-importers: <http://edg.topbraidlive.org/config/importers#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix core-soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix corpus: <http://topbraid.org/corpus#> .
+@prefix corpusprojects: <http://topbraid.org/corpus-projects#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkapp: <http://topbraid.org/swa/crosswalkapp#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dashboard: <http://example.org/dashboard#> .
+@prefix datagraph: <http://teamwork.topbraidlive.org/datagraph/datagraphprojects#> .
+@prefix dataset: <http://teamwork.topbraidlive.org/dataset#> .
+@prefix datasetapp: <http://topbraid.org/swa/datasetapp#> .
+@prefix datasetviewer: <http://topbraid.org/swa/datasetviewer#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ddl: <http://edg.topbraidlive.org/1.0/importers/ddl#> .
+@prefix default: <http://uispin.org/default#> .
+@prefix defaultapp: <http://topbraid.org/swa/defaultapp#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix document: <http://topbraid.org/document#> .
+@prefix documents: <http://edg.topbraid.solutions/1.0/shapes/documents#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg-config: <http://edg.ext.topbraidlive.org/schema/config/importers#> .
+@prefix edg-importer: <http://edg.topbraidlive.org/importer/> .
+@prefix edg-qa: <http://edg.topbraidlive.org/utility/qa/> .
+@prefix edg.avro: <http://edg.topbraidlive.org/avro/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.global: <urn:x-evn-global:> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.reactivegram: <http://edg.topbraid.solutions/diagram/reactivegram/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix edg.xform.html: <http://edg.topbraid.solutions/transfrom/html/> .
+@prefix edgproduct: <http://edg.topbraidlive.org/edgproduct#> .
+@prefix eeh-lib: <http://www.environmenthub.no/spin/1.0/eeh-lib#> .
+@prefix eeh-reportlib: <http://www.environmenthub.no/spin/1.0/eeh-reportlib#> .
+@prefix egl-align: <https://edg.graph.link/shapes/alignment#> .
+@prefix egl-lib: <https://edg.graph.link/1.0/lib/functions#> .
+@prefix elements: <http://purl.org/dc/elements/1.1/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evn: <http://topbraid.org/evn/evn#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evnimport: <http://evn.topbraidlive.org/uispin/evnimport#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix ex: <http://example.org/> .
+@prefix extjs: <http://uispin.com/extjs#> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix forms: <http://www.topbraid.org/2007/01/forms.owl#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix governance: <http://topbraid.org/teamworkgovernance.ui#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix graphql.search: <http://teamwork.topbraidlive.org/graphql.search#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix inference: <http://www.topbraid.org/2007/06/inference.owl#> .
+@prefix jdbc: <http://edg.topbraidlive.org/1.0/importers/jdbc#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix kennedys: <http://topbraid.org/examples/kennedys#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix lib-importer: <http://edg.topbraid.solutions/importer/lib#> .
+@prefix lineage-transform: <http://edg.topbraid.solutions/transform/importer/lineage#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix o2o: <http://lib.topquadrant.com/owl/srg/o2o#> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix ontologyviewer: <http://topbraid.org/swa/ontologyviewer#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix proxy-lineage: <http://edg.topbraid.solutions/proxy/importer/lineage#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmapp: <http://rdm.topbraidlive.org/rdmapp#> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix rdmviewer: <http://rdm.topbraidlive.org/rdmviewer#> .
+@prefix reif: <https://edg.graph.link/1.0/shapes/reification#> .
+@prefix saf: <http://topbraid.org/saf/> .
+@prefix safconfig: <http://topbraid.org/safconfig/> .
+@prefix safindex: <http://topbraid.org/safindex#> .
+@prefix safm: <http://saf.topbraidlive.org/metaschema/> .
+@prefix savedQueries: <http://teamwork.topbraidlive.org/ui/savedQueries#> .
+@prefix scheduler: <http://topbraid.org/scheduler#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix server: <http://server.topbraidlive.org/server.ui#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix shapesgraph: <http://teamwork.topbraidlive.org/shapesgraph/shapesgraphprojects#> .
+@prefix sharepoint: <http://topbraid.org/sharepoint#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skosshapes: <http://topbraid.org/skos.shapes#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparql: <http://datashapes.org/sparql#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spin.ui: <http://spinrdf.org/spin.ui#> .
+@prefix spinmap: <http://spinrdf.org/spinmap#> .
+@prefix spinmapl: <http://topbraid.org/spin/spinmapl#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix ss: <http://www.topbraidcomposer.org/owl/2006/08/spreadsheets.owl#> .
+@prefix stats: <http://topbraid.org/statistics#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swadoc: <http://topbraid.org/swadoc#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tablesmap: <http://topbraid.org/spin/tablesmap#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix taggerspin: <http://evn.topbraidlive.org/taggerspin#> .
+@prefix taggerui: <http://evn.topbraidlive.org/taggerui#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix tblui: <http://server.topbraidlive.org/tblui#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkAdmin: <http://teamwork.topbraidlive.org/doc/teamworkAdmin#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworkconstraints: <http://topbraid.org/teamworkconstraints#> .
+@prefix teamworkdashboard: <http://topbraid.org/teamworkdashboard#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix teamworkupdate: <http://teamworkAPI.topbraid.com/teamworkUpdate#> .
+@prefix textindex: <http://topbraid.org/textindex#> .
+@prefix tika-importer: <http://teamwork.topbraidlive.org/corpus/tika-importer#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix tr-org: <http://permid.org/ontology/organization/> .
+@prefix tracker: <http://teamwork.topbraidlive.org/ui/tracker#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uitest: <http://uispin.org/test#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix userdat: <http://teamwork.topbraidlive.org/ui/userdata> .
+@prefix userdata: <http://teamwork.topbraidlive.org/ui/userdata#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix victory: <http://edg.topbraid.solutions/victory/> .
+@prefix visual: <http://topbraid.org/visual#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xhtml: <http://topbraid.org/xhtml#> .
+@prefix xhtml1: <http://www.w3.org/1999/xhtml#> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/swp/diagrams/models>
+  a owl:Ontology ;
+  rdfs:label "EDG SWP Library - diagrams" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/swp/diagrams/reactivegrams> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/swp/library> ;
+  owl:imports <http://edg.topbraidlive.org/1.0/config/diagrams> ;
+  owl:imports <http://spinrdf.org/spinx> ;
+  owl:imports <http://topbraid.org/swa> ;
+  owl:imports <http://topbraid.org/teamwork> ;
+  owl:imports <http://topbraid.org/teamwork.spin> ;
+  owl:imports <http://uispin.org/svg> ;
+  owl:imports sh: ;
+.
+edg:ClassDiagram
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:focusClass ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The focus class of interest." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:associationEdges ;
+      spl:valueType sp:Select ;
+      rdfs:comment "The list of classes to draw - first column of the result set called ?class must be the classes." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:classes ;
+      spl:valueType sp:Select ;
+      rdfs:comment "The list of classes to draw - first column of the result set called ?class must be the classes." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:inheritanceEdges ;
+      spl:valueType sp:Select ;
+      rdfs:comment "The list of classes to draw - first column of the result set called ?class must be the classes." ;
+    ] ;
+  ui:prototype """
+<ui:group let:myAttributesFilterFunction=\"{= COALESCE(?attributesFilterFunction, edg:DeactivatedAttributesFilterFunction) }\">
+    <ui:setContext let:id=\"{= ui:uniqueId() }\" ui:varName=\"swaSystemLabels\" ui:varValue=\"{= ?systemLabels }\">
+        <!--ui:dumpScope ui:message=\"AAA1: edg:ClassDiagram\"/-->
+        <!--ui:dumpResultSet ui:message=\"AAA2: edg:ClassDiagram Associations\" ui:resultSet=\"{= ?associationEdges }\"/-->
+        <div class=\"swauml-diagram\" id=\"{= ?id }\">
+            <svg height=\"100%\" width=\"100%\">
+                <defs>
+                    <marker id=\"associationMarker\" markerHeight=\"10\" markerWidth=\"10\" orient=\"auto\" refX=\"10\" refY=\"5\">
+                        <path class=\"swauml-association-edge-marker\" d=\"M10,5 L0,10 L0,0 Z\"/>
+                    </marker>
+                    <marker id=\"subClassMarker\" markerHeight=\"20\" markerWidth=\"20\" orient=\"auto\" refX=\"0\" refY=\"10\">
+                        <polygon class=\"swauml-subclass-edge-marker\" points=\"0,10 10,6 10,14\"/>
+                    </marker>
+                </defs>
+                <ui:forEach ui:resultSet=\"{= ?inheritanceEdges }\">
+                    <swauml:SubClassEdge arg:subClass=\"{= ?class }\" arg:superClass=\"{= ?superClass }\"/>
+                </ui:forEach>
+                <ui:forEach ui:resultSet=\"{= ?associationEdges }\">
+                    <swauml:AssociationEdge arg:predicate=\"{= ?predicate }\" arg:sourceClass=\"{= ?sourceClass }\" arg:targetClass=\"{= ?targetClass }\"/>
+                </ui:forEach>
+            </svg>
+            <ui:forEach ui:resultSet=\"{= ?classes }\">
+                <edg:SWAUMLclassNode arg:attributesFilterFunction=\"{= ?myAttributesFilterFunction }\" arg:class=\"{= ?class }\" arg:focused=\"{= ?class = ?focusClass }\"/>
+            </ui:forEach>
+            <ui:forEach ui:resultSet=\"{= ?associationEdges }\">
+                <swauml:AssociationEdgeLabel arg:predicate=\"{= ?predicate }\" arg:sourceClass=\"{= ?sourceClass }\" arg:targetClass=\"{= ?targetClass }\"/>
+            </ui:forEach>
+        </div>
+        <script>swa.initClassDiagram(\"{= ?id }\",<swon:Array>
+                <ui:forEach ui:resultSet=\"{= ?inheritanceEdges }\" ui:separator=\",\">
+                    <swon:Object>
+                        <swon:Value arg:name=\"superClass\" arg:value=\"{= ?superClass }\"/>
+                        <swon:Value arg:name=\"subClass\" arg:value=\"{= ?class }\"/>
+                    </swon:Object>
+                </ui:forEach>
+            </swon:Array>
+            <swon:Comma/>
+            <swon:Array>
+                <ui:forEach ui:resultSet=\"{= ?associationEdges }\" ui:separator=\",\">
+                    <swon:Object>
+                        <swon:Value arg:name=\"sourceClass\" arg:value=\"{= ?sourceClass }\"/>
+                        <swon:Value arg:name=\"targetClass\" arg:value=\"{= ?targetClass }\"/>
+                        <swon:Value arg:name=\"predicate\" arg:value=\"{= ?predicate }\"/>
+                    </swon:Object>
+                </ui:forEach>
+            </swon:Array>)</script>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "Class diagram" ;
+  rdfs:subClassOf swa:AbstractClassDiagram ;
+.
+edg:ClassDiagramLoader
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:focusNode ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The root class." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:type ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <ui:if ui:condition=\"{= ?type = &quot;inh&quot; }\">
+        <edg:ClassDiagramShowingInheritance arg:focusClass=\"{= ?focusNode }\"/>
+    </ui:if>
+    <ui:if ui:condition=\"{= ?type = &quot;inh-na&quot; }\">
+        <edg:ClassDiagramShowingInheritance arg:attributesFilterFunction=\"{= edg:NoAttributesFilterFunction }\" arg:focusClass=\"{= ?focusNode }\"/>
+    </ui:if>
+    <ui:if ui:condition=\"{= ?type = &quot;ass-1&quot; }\">
+        <edg:ClassDiagramShowingAssociations arg:degreeOfSeparation=\"{= 1 }\" arg:focusClass=\"{= ?focusNode }\"/>
+    </ui:if>
+    <ui:if ui:condition=\"{= ?type = &quot;ass-1-na&quot; }\">
+        <edg:ClassDiagramShowingAssociations arg:attributesFilterFunction=\"{= edg:NoAttributesFilterFunction }\" arg:degreeOfSeparation=\"{= 1 }\" arg:focusClass=\"{= ?focusNode }\"/>
+    </ui:if>
+    <ui:if ui:condition=\"{= ?type = &quot;ass-2&quot; }\">
+        <edg:ClassDiagramShowingAssociations arg:degreeOfSeparation=\"{= 2 }\" arg:focusClass=\"{= ?focusNode }\"/>
+    </ui:if>
+    <ui:if ui:condition=\"{= ?type = &quot;ass-2-na&quot; }\">
+        <edg:ClassDiagramShowingAssociations arg:attributesFilterFunction=\"{= edg:NoAttributesFilterFunction }\" arg:degreeOfSeparation=\"{= 2 }\" arg:focusClass=\"{= ?focusNode }\"/>
+    </ui:if>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "Class diagram loader" ;
+  rdfs:subClassOf swa:GraphElements ;
+.
+edg:ClassDiagramShowingAssociations
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:defaultValue "1" ;
+      spl:optional true ;
+      spl:predicate arg:degreeOfSeparation ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "number of levels of association to generate (currently only supports 1 or 2)" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:defaultValue false ;
+      spl:optional true ;
+      spl:predicate arg:showClassInheritance ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:focusClass ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The focus class of interest." ;
+    ] ;
+  ui:prototype """
+<ui:group let:myAssociationsFilter=\"{= COALESCE(?associationsFilterFunction, edg:DeactivatedAssociationsFilterFunction) }\" let:myAttributesFilter=\"{= COALESCE(?attributesFilterFunction, edg:DeactivatedAttributesFilterFunction) }\">
+    <ui:call arg:focusClass=\"{= ?focusClass }\" ui:template=\"{= edg:makeResultSetForSingleClass }\" ui:varName=\"initialClasses\">
+        <ui:call arg:associationsFilterFunction=\"{= ?myAssociationsFilter }\" arg:continue=\"{= true }\" arg:resultSet=\"{= ?initialClasses }\" ui:template=\"{= edg:getAssociatedClassesForGivenClasses }\" ui:varName=\"initialClassesAndFirstNeighbors\">
+            <ui:call arg:associationsFilterFunction=\"{= ?myAssociationsFilter }\" arg:continue=\"{= ?degreeOfSeparation = 2 }\" arg:resultSet=\"{= ?initialClassesAndFirstNeighbors }\" ui:template=\"{= edg:getAssociatedClassesForGivenClasses }\" ui:varName=\"classes\">
+                <ui:call arg:associationsFilterFunction=\"{= ?myAssociationsFilter }\" arg:classes=\"{= ?classes }\" ui:template=\"{= edg:getAssociationsForGivenClasses }\" ui:varName=\"associationEdges\">
+                    <edg:ClassDiagram arg:associationEdges=\"{= ?associationEdges }\" arg:attributesFilterFunction=\"{= ?myAttributesFilter }\" arg:classes=\"{= ?classes }\" ui:args=\"*\"/>
+                </ui:call>
+            </ui:call>
+        </ui:call>
+    </ui:call>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:comment "A class diagram showing two levels of neighborhood for a given focus class. An optional argument 'showClassInheritance' is used to turn on the generation of the inhertance lattice for allsuperclasses of all classes." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "Class diagram showing assoications" ;
+  rdfs:subClassOf swa:AbstractClassDiagram ;
+.
+edg:ClassDiagramShowingInheritance
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:focusClass ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The focus class of interest." ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:call arg:focusClass=\"{= ?focusClass }\" ui:template=\"{= edg:getFocusNodeSuperClassesAndSubclasses }\" ui:varName=\"classes\">
+        <ui:setContext let:id=\"{= ui:uniqueId() }\" letrs:superClassEdges=\"{#
+                SELECT ?class ?superClass
+                WHERE {
+                    {
+                        ?classes spr:rowIndices ?rowIndex .
+                        BIND (spr:cell(?classes, ?rowIndex, 0) AS ?class) .
+                    } .
+                    ?class rdfs:subClassOf ?superClass .
+                    FILTER swauml:contains(?classes, ?superClass) .
+                } }\" ui:varName=\"swaSystemLabels\" ui:varValue=\"{= ?systemLabels }\">
+            <edg:ClassDiagram arg:classes=\"{= ?classes }\" arg:inheritanceEdges=\"{= ?superClassEdges }\" ui:args=\"*\"/>
+        </ui:setContext>
+    </ui:call>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "Class diagram showing inheritamce" ;
+  rdfs:subClassOf swa:AbstractClassDiagram ;
+.
+edg:DeactivatedAssociationsFilterFunction
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:notExists ;
+                sp:elements (
+                    [
+                      sp:object [
+                          sp:varName "propertyShape" ;
+                        ] ;
+                      sp:predicate sh:property ;
+                      sp:subject [
+                          sp:varName "targetClass" ;
+                        ] ;
+                    ]
+                    [
+                      sp:object [
+                          sp:varName "predicate" ;
+                        ] ;
+                      sp:predicate sh:path ;
+                      sp:subject [
+                          sp:varName "propertyShape" ;
+                        ] ;
+                    ]
+                    [
+                      sp:object true ;
+                      sp:predicate sh:deactivated ;
+                      sp:subject [
+                          sp:varName "propertyShape" ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "Deactivated associations filter function" ;
+  rdfs:subClassOf swa:AssociationsFilterFunctions ;
+.
+edg:DeactivatedAttributesFilterFunction
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          (
+            [
+              a sp:Filter ;
+              sp:expression [
+                  a sp:notExists ;
+                  sp:elements (
+                      [
+                        a sp:TriplePath ;
+                        sp:object [
+                            sp:varName "aProperty" ;
+                          ] ;
+                        sp:path [
+                            a sp:ModPath ;
+                            sp:modMax -2 ;
+                            sp:modMin 0 ;
+                            sp:subPath rdfs:subPropertyOf ;
+                          ] ;
+                        sp:subject spin:_arg1 ;
+                      ]
+                      [
+                        sp:object edg:UIproperty ;
+                        sp:predicate rdf:type ;
+                        sp:subject [
+                            sp:varName "aProperty" ;
+                          ] ;
+                      ]
+                    ) ;
+                ] ;
+            ]
+          )
+          (
+            [
+              a sp:Union ;
+              sp:elements (
+                  (
+                    [
+                      a sp:Filter ;
+                      sp:expression [
+                          a sp:notExists ;
+                          sp:elements (
+                              [
+                                sp:object [
+                                    sp:varName "propertyShape" ;
+                                  ] ;
+                                sp:predicate sh:property ;
+                                sp:subject spin:_arg2 ;
+                              ]
+                              [
+                                sp:object spin:_arg1 ;
+                                sp:predicate sh:path ;
+                                sp:subject [
+                                    sp:varName "propertyShape" ;
+                                  ] ;
+                              ]
+                              [
+                                sp:object true ;
+                                sp:predicate sh:deactivated ;
+                                sp:subject [
+                                    sp:varName "propertyShape" ;
+                                  ] ;
+                              ]
+                            ) ;
+                        ] ;
+                    ]
+                  )
+                  (
+                    [
+                      a sp:Filter ;
+                      sp:expression [
+                          a sp:notExists ;
+                          sp:elements (
+                              [
+                                sp:object rdfs:Literal ;
+                                sp:predicate rdfs:range ;
+                                sp:subject spin:_arg1 ;
+                              ]
+                            ) ;
+                        ] ;
+                    ]
+                  )
+                ) ;
+            ]
+          )
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdf:Property ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdfs:Class ;
+    ] ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "Deactivated attributes filter function" ;
+  rdfs:subClassOf swa:AttributesFilterFunctions ;
+.
+edg:Functions
+  a spin:Function ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "Functions" ;
+  rdfs:subClassOf spin:Functions ;
+.
+edg:GetClassAttributesForClassDiagram
+  a spin:SelectTemplate ;
+  a spin:Template ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "property" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "property" ;
+              ] ;
+            sp:predicate swauml:property ;
+            sp:subject [
+                sp:varName "class" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:or ;
+                sp:arg1 [
+                    a sp:not ;
+                    sp:arg1 [
+                        a sp:bound ;
+                        sp:arg1 [
+                            sp:varName "attributesFilterFunction" ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a spif:invoke ;
+                    sp:arg1 [
+                        sp:varName "attributesFilterFunction" ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "property" ;
+                      ] ;
+                    sp:arg3 [
+                        sp:varName "class" ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:attributesFilterFunction ;
+      spl:valueType spin:Function ;
+      rdfs:comment "An optional function(?property, ?class) returning true to include a given property at a given class node." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:class ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The class to render." ;
+    ] ;
+  spin:private true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "Get class attributes for class diagram" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:GetEntitiesInLogicalRelation
+  a spin:SelectTemplate ;
+  spin:returnType rdfs:Class ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "get root class" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:GetLogicalDataModelCardinalities
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:distinct true ;
+      sp:resultVariables (
+          [
+            sp:varName "cardinality" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "resource" ;
+              ] ;
+            sp:predicate edg:entityOflogicalDataModel ;
+            sp:subject [
+                sp:varName "entity" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "entity" ;
+              ] ;
+            sp:predicate edg:logicalEntity ;
+            sp:subject [
+                sp:varName "participant" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "cardinality" ;
+              ] ;
+            sp:predicate edg:cardinality ;
+            sp:subject [
+                sp:varName "participant" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType edg:LogicalDataModel ;
+    ] ;
+  spin:private true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "Get logical data model cardinalities" ;
+  rdfs:subClassOf edg:Templates ;
+.
+edg:GetLogicalEntities
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:distinct true ;
+      sp:resultVariables (
+          [
+            sp:varName "entity" ;
+          ]
+          [
+            sp:varName "entityName" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "resource" ;
+              ] ;
+            sp:predicate edg:entityOflogicalDataModel ;
+            sp:subject [
+                sp:varName "entity" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a ui:label ;
+                sp:arg1 [
+                    sp:varName "entity" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "entityName" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType edg:LogicalDataModel ;
+    ] ;
+  spin:private true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "Get logical entities" ;
+  rdfs:subClassOf edg:Templates ;
+.
+edg:GetLogicalEntityAssociationsFromTempGraph
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:distinct true ;
+      sp:resultVariables (
+          [
+            sp:varName "association" ;
+          ]
+          [
+            sp:varName "associationName" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object true ;
+                  sp:predicate edg:isKnown ;
+                  sp:subject [
+                      sp:varName "association" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode ui:tempGraphLDM ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a ui:label ;
+                sp:arg1 [
+                    sp:varName "association" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "associationName" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "Get logical entity associations from temp graph" ;
+  rdfs:subClassOf edg:Templates ;
+.
+edg:GetLogicalRelationCardinalities
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:distinct true ;
+      sp:resultVariables (
+          [
+            sp:varName "cardinality" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:TriplePath ;
+            sp:object [
+                sp:varName "cardinality" ;
+              ] ;
+            sp:path [
+                a sp:SeqPath ;
+                sp:path1 edg:participant ;
+                sp:path2 edg:cardinality ;
+              ] ;
+            sp:subject [
+                sp:varName "association" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:association ;
+      spl:valueType edg:LogicalRelation ;
+    ] ;
+  spin:private true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "Get logical relation cardinalities" ;
+  rdfs:subClassOf edg:Templates ;
+.
+edg:GraphElements
+  a ui:NodeClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "Graph elements" ;
+  rdfs:subClassOf swa:GraphElements ;
+.
+edg:LogicalDataModelCardinalityDefs
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group>
+    <marker id=\"cardinality-many\" markerHeight=\"10\" markerUnits=\"strokeWidth\" markerWidth=\"12\" orient=\"auto\" refX=\"0\" refY=\"0\" style=\"fill: white; stroke: black; stroke-width: 2px\" viewbox=\"-20 -5 20 10\">
+        <path class=\"logical-relation-edge-marker\" d=\"M 0 6 L -10 0 M 0 -6 L -10 0 z\"/>
+    </marker>
+    <marker id=\"cardinality-many-reverse\" markerHeight=\"10\" markerUnits=\"strokeWidth\" markerWidth=\"12\" orient=\"auto-start-reverse\" refX=\"0\" refY=\"0\" style=\"fill: white; stroke: black; stroke-width: 2px\" viewbox=\"-20 -5 20 10\">
+        <path class=\"logical-relation-edge-marker\" d=\"M 0 6 L -10 0 M 0 -6 L -10 0 z\"/>
+    </marker>
+    <marker id=\"cardinality-zero-or-many\" markerHeight=\"10\" markerUnits=\"strokeWidth\" markerWidth=\"12\" orient=\"auto\" refX=\"0\" refY=\"0\" style=\"fill: white; stroke: black; stroke-width: 2px\" viewbox=\"-20 -5 20 10\">
+        <circle cx=\"-14\" cy=\"0\" r=\"5\"/>
+        <path class=\"logical-relation-edge-marker\" d=\"M 0 6 L -10 0 M 0 -6 L -10 0 z\"/>
+    </marker>
+    <marker id=\"cardinality-zero-or-many-reverse\" markerHeight=\"10\" markerUnits=\"strokeWidth\" markerWidth=\"12\" orient=\"auto-start-reverse\" refX=\"0\" refY=\"0\" style=\"fill: white; stroke: black; stroke-width: 2px\" viewbox=\"-20 -5 20 10\">
+        <circle cx=\"-14\" cy=\"0\" r=\"5\"/>
+        <path class=\"logical-relation-edge-marker\" d=\"M 0 6 L -10 0 M 0 -6 L -10 0 z\"/>
+    </marker>
+    <marker id=\"cardinality-one-or-many\" markerHeight=\"10\" markerUnits=\"strokeWidth\" markerWidth=\"12\" orient=\"auto\" refX=\"0\" refY=\"0\" style=\"fill: white; stroke: black; stroke-width: 1px\" viewbox=\"-11 -5 12 10\">
+        <path class=\"logical-relation-edge-marker\" d=\"M 0 4 L -10 0 M 0 -4 L -10 0 M -10 20  L -10 -10 z\"/>
+    </marker>
+    <marker id=\"cardinality-one-or-many-reverse\" markerHeight=\"10\" markerUnits=\"strokeWidth\" markerWidth=\"12\" orient=\"auto-start-reverse\" refX=\"0\" refY=\"0\" style=\"fill: white; stroke: black; stroke-width: 1px\" viewbox=\"-11 -5 12 10\">
+        <path class=\"logical-relation-edge-marker\" d=\"M 0 4 L -10 0 M 0 -4 L -10 0 M -10 20  L -10 -10 z\"/>
+    </marker>
+    <marker id=\"cardinality-zero-or-one\" markerHeight=\"10\" markerUnits=\"strokeWidth\" markerWidth=\"12\" orient=\"auto\" refX=\"0\" refY=\"0\" style=\"fill: white; stroke: black; stroke-width: 2px\" viewbox=\"-16 -5 16 10\">
+        <circle cx=\"-6\" cy=\"0\" r=\"5\"/>
+        <path class=\"logical-relation-edge-marker\" d=\"M -14 0 L -14 -14  L -14, 14\"/>
+    </marker>
+    <marker id=\"cardinality-zero-or-one-reverse\" markerHeight=\"10\" markerUnits=\"strokeWidth\" markerWidth=\"12\" orient=\"auto-start-reverse\" refX=\"0\" refY=\"0\" style=\"fill: white; stroke: black; stroke-width: 2px\" viewbox=\"-16 -5 16 10\">
+        <circle cx=\"-6\" cy=\"0\" r=\"5\"/>
+        <path class=\"logical-relation-edge-marker\" d=\"M -14 0 L -14 -14  L -14, 14\"/>
+    </marker>
+    <marker id=\"cardinality-exactly-one\" markerHeight=\"10\" markerUnits=\"strokeWidth\" markerWidth=\"12\" orient=\"auto\" refX=\"0\" refY=\"0\" style=\"fill: white; stroke: black; stroke-width: 1px\" viewbox=\"-11 -5 12 10\">
+        <path class=\"logical-relation-edge-marker\" d=\"M -5 0 L -5 -5 L -5, 5 \"/>
+    </marker>
+    <marker id=\"cardinality-exactly-one-reverse\" markerHeight=\"10\" markerUnits=\"strokeWidth\" markerWidth=\"12\" orient=\"auto-start-reverse\" refX=\"0\" refY=\"0\" style=\"fill: white; stroke: black; stroke-width: 1px\" viewbox=\"-11 -5 12 10\">
+        <path class=\"logical-relation-edge-marker\" d=\"M -5 0 L -5 -5 L -5, 5 \"/>
+    </marker>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "Logical data model cardinality defs" ;
+  rdfs:subClassOf edg:GraphElements ;
+.
+edg:LogicalDataModelDiagram
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:resource ;
+      spl:valueType edg:LogicalDataModel ;
+      rdfs:comment "The focus class of interest." ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <!--ui:dumpScope ui:message=\"AAA1: edg:LogicalDataModelDiagram {= ?resource }\"/-->
+    <ui:if ui:condition=\"{= bound(?resource) }\">
+        <script src=\"{= ui:lib() }/edg/js/edg-diagrams.js\"/>
+        <ui:setContext let:id=\"{= ui:uniqueId() }\" ui:varName=\"swaSystemLabels\" ui:varValue=\"{= ?systemLabels }\">
+            <!-- Processing is entity-centric -->
+            <ui:call arg:resource=\"{= ?resource }\" ui:template=\"{= edg:GetLogicalEntities }\" ui:varName=\"entities\">
+                <!--ui:dumpResultSet ui:message=\"AAA1: edg:LogicalDataModelDiagram {= ?resource }\"
+  ui:resultSet=\"{= ?entities }\"/-->
+                <!-- Get the assoications in which each entity participates.-->
+                <ui:forEach ui:resultSet=\"{= ?entities }\">
+                    <ui:call arg:logicalEntity=\"{= ?entity }\" ui:template=\"{= edg:GetLogicalEntityAssociations }\" ui:varName=\"associations\">
+                        <!--ui:dumpResultSet ui:message=\"AAA1: edg:LogicalDataModelDiagram {= ?entity }\"
+  ui:resultSet=\"{= ?associations }\"/-->
+                        <!-- Place the association found in a temp graph. We need a distinct list across all entities. -->
+                        <!-- The tempgraph carries each association as a subject. -->
+                        <!-- This avoids duplicates that may arise because of other entities mentioning the same association -->
+                        <ui:forEach ui:resultSet=\"{= ?associations }\">
+                            <edg:MakeAssociationEntry arg:association=\"{= ?association }\"/>
+                        </ui:forEach>
+                    </ui:call>
+                </ui:forEach>
+                <!--ui:dumpGraph ui:filePath=\"/edg.topbraidlive.org/1.0/dynamic/debug/tempGraphLDM.ttl\"
+  ui:graph=\"ui:tempGraphLDM\"/-->
+                <ui:call ui:template=\"{= edg:GetLogicalEntityAssociationsFromTempGraph }\" ui:varName=\"distinctAssociations\">
+                    <!--ui:dumpResultSet ui:message=\"AAA2: edg:LogicalDataModelDiagram\"
+  ui:resultSet=\"{= ?distinctAssociations }\"/-->
+                    <div class=\"swauml-diagram\" id=\"{= ?id }\">
+                        <svg height=\"100%\" width=\"100%\">
+                            <defs>
+                                <edg:LogicalDataModelCardinalityDefs/>
+                            </defs>
+                            <ui:forEach ui:resultSet=\"{= ?distinctAssociations }\">
+                                <ui:call arg:association=\"{= ?association }\" ui:template=\"{= edg:GetEntitiesInLogicalRelation }\" ui:varName=\"participants\">
+                                    <!--ui:dumpResultSet ui:message=\"AAA4: edg:LogicalDataModelDiagram\"
+              ui:resultSet=\"{= ?participants }\"/-->
+                                    <ui:if ui:condition=\"{= !spr:isEmpty(?participants) }\">
+                                        <ui:forEach ui:resultSet=\"{= ?participants }\">
+                                            <swauml:BuildLogicalRelationEdge arg:association=\"{= ?association }\" arg:sourceEntity=\"{= ?entity1 }\" arg:targetEntity=\"{= ?entity2 }\"/>
+                                        </ui:forEach>
+                                    </ui:if>
+                                </ui:call>
+                            </ui:forEach>
+                        </svg>
+                        <ui:forEach ui:resultSet=\"{= ?entities }\">
+                            <swauml:AssetNode arg:focused=\"{= false }\" arg:resource=\"{= ?entity }\"/>
+                        </ui:forEach>
+                        <ui:forEach ui:resultSet=\"{= ?distinctAssociations }\">
+                            <ui:call arg:association=\"{= ?association }\" ui:template=\"{= edg:GetEntitiesInLogicalRelation }\" ui:varName=\"participants\">
+                                <ui:if ui:condition=\"{= !spr:isEmpty(?participants) }\">
+                                    <ui:forEach ui:resultSet=\"{= ?participants }\">
+                                        <swauml:LogicalRelationEdgeLabel arg:association=\"{= ?association }\" arg:sourceEntity=\"{= ?entity1 }\" arg:targetEntity=\"{= ?entity2 }\"/>
+                                    </ui:forEach>
+                                </ui:if>
+                                <!--ui:dumpResultSet ui:message=\"AAA5: edg:LogicalDataModelDiagram\"
+      ui:resultSet=\"{= ?participants }\"/-->
+                            </ui:call>
+                        </ui:forEach>
+                        <script>edgdiagram.initInstanceDiagram(\"{= ?id }\",<swon:Array/>
+                            <swon:Comma/>
+                            <swon:Array>
+                                <ui:call ui:template=\"{= edg:GetLogicalEntityAssociationsFromTempGraph }\" ui:varName=\"associations\">
+                                    <ui:forEach ui:resultSet=\"{= ?distinctAssociations }\">
+                                        <ui:call arg:association=\"{= ?association }\" ui:template=\"{= edg:GetEntitiesInLogicalRelation }\" ui:varName=\"participants\">
+                                            <ui:if ui:condition=\"{= !spr:isEmpty(?participants) }\">
+                                                <ui:forEach ui:resultSet=\"{= ?participants }\">
+                                                    <swon:Object>
+                                                        <swon:Value arg:name=\"sourceEntity\" arg:value=\"{= ?entity1 }\"/>
+                                                        <swon:Value arg:name=\"targetEntity\" arg:value=\"{= ?entity2 }\"/>
+                                                        <swon:Value arg:name=\"association\" arg:value=\"{= ?association }\"/>
+                                                    </swon:Object>
+                                                </ui:forEach>
+                                            </ui:if>
+                                        </ui:call>
+                                    </ui:forEach>
+                                </ui:call>
+                            </swon:Array>)</script>
+                    </div>
+                </ui:call>
+            </ui:call>
+        </ui:setContext>
+    </ui:if>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Builds a logical data model using dagre." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "Logical Data Model diagram" ;
+  rdfs:subClassOf swa:AbstractClassDiagram ;
+.
+edg:LogicalEntityDiagram
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The focus class of interest." ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:if ui:condition=\"{= bound(?resource) }\">
+        <script src=\"{= ui:lib() }/edg/js/edg-diagrams.js\"/>
+        <!--ui:dumpScope ui:message=\"AAA1: edg:LogicalEntityDiagram {= ui:label(?resource) }\"/-->
+        <script src=\"{= ui:lib() }/edg/js/edg-diagrams.js\"/>
+        <ui:setContext let:id=\"{= ui:uniqueId() }\" ui:varName=\"swaSystemLabels\" ui:varValue=\"{= ?systemLabels }\">
+            <ui:call arg:logicalEntity=\"{= ?resource }\" ui:template=\"{= edg:GetLogicalEntityAssociations }\" ui:varName=\"associations\">
+                <!--ui:dumpResultSet ui:message=\"AAA1: edg:LogicalEntityDiagram {= ui:label(?resource) }\"
+  ui:resultSet=\"{= ?associations }\"/-->
+                <div class=\"swauml-instance-diagram\" id=\"{= ?id }\">
+                    <svg height=\"100%\" width=\"100%\">
+                        <defs>
+                            <edg:LogicalDataModelCardinalityDefs/>
+                        </defs>
+                        <ui:forEach ui:resultSet=\"{= ?associations }\">
+                            <ui:call arg:association=\"{= ?association }\" ui:template=\"{= edg:GetEntitiesInLogicalRelation }\" ui:varName=\"participants\">
+                                <ui:forEach ui:resultSet=\"{= ?participants }\">
+                                    <ui:if ui:condition=\"{= bound(?entity1) &amp;&amp; bound(?entity2) }\">
+                                        <swauml:BuildLogicalRelationEdge arg:association=\"{= ?association }\" arg:sourceEntity=\"{= ?entity1 }\" arg:targetEntity=\"{= ?entity2 }\"/>
+                                    </ui:if>
+                                </ui:forEach>
+                            </ui:call>
+                        </ui:forEach>
+                    </svg>
+                    <ui:group let:ldm=\"{= spl:object(?resource, edg:entityOflogicalDataModel) }\">
+                        <ui:if ui:condition=\"{= bound(?ldm) }\">
+                            <swauml:AssetNode arg:focused=\"{= false }\" arg:headerStyle=\"swauml-instance-offpage-header\" arg:nodeStyle=\"swauml-instance-offpage-node\" arg:resource=\"{= ?ldm }\" arg:suppressAttributes=\"{= true }\"/>
+                        </ui:if>
+                    </ui:group>
+                    <swauml:AssetNode arg:attributesFilterFunction=\"{= ?attributesFilterFunction }\" arg:focused=\"{= true }\" arg:resource=\"{= ?resource }\"/>
+                    <ui:forEach ui:resultSet=\"{= ?associations }\">
+                        <ui:call arg:association=\"{= ?association }\" ui:template=\"{= edg:GetEntitiesInLogicalRelation }\" ui:varName=\"participants\">
+                            <!--ui:dumpResultSet ui:message=\"AAA1: edg:LogicalEntityDiagram {= ui:label(?association) }\"
+  ui:resultSet=\"{= ?participants }\"/-->
+                            <ui:forEach ui:resultSet=\"{= ?participants }\">
+                                <swauml:AssetNode arg:attributesFilterFunction=\"{= ?attributesFilterFunction }\" arg:focused=\"{= false }\" arg:resource=\"{= ?entity1 }\"/>
+                                <swauml:AssetNode arg:attributesFilterFunction=\"{= ?attributesFilterFunction }\" arg:focused=\"{= false }\" arg:resource=\"{= ?entity2 }\"/>
+                            </ui:forEach>
+                        </ui:call>
+                    </ui:forEach>
+                    <ui:forEach ui:resultSet=\"{= ?associations }\">
+                        <ui:call arg:association=\"{= ?association }\" ui:template=\"{= edg:GetEntitiesInLogicalRelation }\" ui:varName=\"participants\">
+                            <ui:forEach ui:resultSet=\"{= ?participants }\">
+                                <swauml:LogicalRelationEdgeLabel arg:association=\"{= ?association }\" arg:sourceEntity=\"{= ?entity1 }\" arg:targetEntity=\"{= ?entity2 }\"/>
+                            </ui:forEach>
+                        </ui:call>
+                    </ui:forEach>
+                    <script>edgdiagram.initInstanceDiagram(\"{= ?id }\",<swon:Array/>
+                        <swon:Comma/>
+                        <swon:Array>
+                            <ui:forEach ui:resultSet=\"{= ?associations }\" ui:separator=\",\">
+                                <ui:call arg:association=\"{= ?association }\" ui:template=\"{= edg:GetEntitiesInLogicalRelation }\" ui:varName=\"participants\">
+                                    <ui:forEach ui:resultSet=\"{= ?participants }\">
+                                        <swon:Object>
+                                            <swon:Value arg:name=\"sourceEntity\" arg:value=\"{= ?entity1 }\"/>
+                                            <swon:Value arg:name=\"targetEntity\" arg:value=\"{= ?entity2 }\"/>
+                                            <swon:Value arg:name=\"association\" arg:value=\"{= ?association }\"/>
+                                        </swon:Object>
+                                    </ui:forEach>
+                                </ui:call>
+                            </ui:forEach>
+                        </swon:Array>)</script>
+                </div>
+            </ui:call>
+        </ui:setContext>
+    </ui:if>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "Logical Entity diagram" ;
+  rdfs:subClassOf swa:AbstractClassDiagram ;
+.
+edg:LogicalEntityDiagramGadget
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:dependencyTemplate ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:loadable class=\"swa-labeled-objects\" let:gid=\"{= ui:uniqueId() }\" ui:loadId=\"{= ui:uniqueId() }\">
+        <!--ui:dumpScope ui:message=\"AAA1: edg:LogicalEntityDiagramGadget -  {= ?focusNode }\"/-->
+        <ui:if ui:condition=\"{= swa:isViewMode() }\">
+            <div class=\"mgl-3em\" style=\"margin-top: 8px\">
+                <swa:CollapsibleLoadableFormSection arg:label=\"Logical Entity Diagram\" arg:loadId=\"DIA1_{= ?loadId }\">
+                    <ui:loadable class=\"swa-loadable-form-section-body\" ui:loadId=\"DIA1_{= ?loadId }\" ui:loadOnDemand=\"{= true }\">
+                        <edg:LogicalEntityDiagram arg:resource=\"{= ?focusNode }\" ui:args=\"*\"/>
+                    </ui:loadable>
+                </swa:CollapsibleLoadableFormSection>
+            </div>
+        </ui:if>
+    </ui:loadable>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "Logical Entity Diagram Gadget" ;
+  rdfs:subClassOf edg:PathElements ;
+.
+edg:MakeAssociationEntry
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:association ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ui:tempGraphLDM {
+                    ?association edg:isKnown true .
+                } .
+            }
+            WHERE {
+                ?association a edg:LogicalRelation .
+            } }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "Make association entry" ;
+  rdfs:subClassOf edg:Services ;
+.
+edg:NoAttributesFilterFunction
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:Filter ;
+            sp:expression false ;
+          ]
+        ) ;
+    ] ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "No attributes filter function" ;
+  rdfs:subClassOf swa:AttributesFilterFunctions ;
+.
+edg:SWAUMLclassNode
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:attributesFilterFunction ;
+      spl:valueType spin:Function ;
+      rdfs:comment "An optional function(?property, ?class) returning true to include a given property at a given class node." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:focused ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to have this focused." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:class ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The class to render." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<div about=\"{= ?class }\" class=\"swauml-class-node\" let:systemLabels=\"{= COALESCE(ui:contextValue(&quot;swaSystemLabels&quot;), false) }\">
+    <div class=\"swauml-class-header\" letrs:metaClasses=\"{#
+            SELECT ?metaClass
+            WHERE {
+                ?class a ?metaClass .
+                FILTER (?metaClass NOT IN (rdfs:Class, owl:Class, sh:NodeShape)) .
+            } }\" style=\"{= IF(?focused, &quot;font-weight: bold&quot;, ?none) }\">
+        <ui:if ui:condition=\"{= !spr:isEmpty(?metaClasses) }\">
+            <div class=\"swauml-class-header-metaclass\">
+                <ui:forEach ui:resultSet=\"{= ?metaClasses }\" ui:separator=\"&nbsp;\">
+                    <swa:Link arg:labelOverride=\"&lt;&lt;{= IF(?systemLabels, smf:qname(?metaClass), ui:label(?metaClass)) }&gt;&gt;\" arg:resource=\"{= ?metaClass }\"/>
+                </ui:forEach>
+            </div>
+        </ui:if>
+        <swa:Link arg:labelOverride=\"{= IF(?systemLabels, smf:qname(?class), ?none) }\" arg:resource=\"{= ?class }\"/>
+    </div>
+    <div class=\"swauml-class-attributes\">
+        <ui:call arg:attributesFilterFunction=\"{= ?attributesFilterFunction }\" arg:class=\"{= ?class }\" ui:template=\"{= edg:GetClassAttributesForClassDiagram }\" ui:varName=\"attributes\">
+            <!--ui:dumpResultSet ui:message=\"AAA2: edg:SWAUMLclassNode - {= ui:label(?class) }\"
+                  ui:resultSet=\"{= ?attributes }\"/-->
+            <ui:forEach ui:resultSet=\"{= ?attributes }\">
+                <swauml:Attribute arg:class=\"{= ?class }\" arg:property=\"{= ?property }\"/>
+            </ui:forEach>
+        </ui:call>
+    </div>
+</div>
+"""^^ui:Literal ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "Class node (EDG)" ;
+  rdfs:subClassOf swa:GraphElements ;
+.
+edg:SelectTemplates
+  a spin:Template ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "Select templates" ;
+  rdfs:subClassOf edg:Templates ;
+.
+edg:Services
+  a ui:Service ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "Services" ;
+  rdfs:subClassOf ui:Services ;
+.
+edg:SingleClassDiagram
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:focusClass ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The focus class of interest." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:associationEdges ;
+      spl:valueType sp:Select ;
+      rdfs:comment "The list of classes to draw - first column of the result set called ?class must be the classes." ;
+    ] ;
+  ui:prototype """
+<ui:setContext let:id=\"{= ui:uniqueId() }\" ui:varName=\"swaSystemLabels\" ui:varValue=\"{= ?systemLabels }\">
+    <ui:if ui:condition=\"{= bound(?focusClass) }\">
+        <div class=\"swauml-diagram\" id=\"{= ?id }\">
+            <svg height=\"100%\" width=\"100%\">
+                <defs>
+                    <marker id=\"associationMarker\" markerHeight=\"10\" markerWidth=\"10\" orient=\"auto\" refX=\"10\" refY=\"5\">
+                        <path class=\"swauml-association-edge-marker\" d=\"M10,5 L0,10 L0,0 Z\"/>
+                    </marker>
+                    <marker id=\"subClassMarker\" markerHeight=\"20\" markerWidth=\"20\" orient=\"auto\" refX=\"0\" refY=\"10\">
+                        <polygon class=\"swauml-subclass-edge-marker\" points=\"0,10 10,6 10,14\"/>
+                    </marker>
+                </defs>
+                <ui:forEach ui:resultSet=\"{= ?associationEdges }\">
+                    <swauml:AssociationEdge arg:predicate=\"{= ?predicate }\" arg:sourceClass=\"{= ?sourceClass }\" arg:targetClass=\"{= ?targetClass }\"/>
+                </ui:forEach>
+            </svg>
+            <swauml:ClassNode arg:attributesFilterFunction=\"{= ?attributesFilterFunction }\" arg:class=\"{= ?focusClass }\" arg:focused=\"{= true }\"/>
+            <ui:forEach ui:resultSet=\"{= ?associationEdges }\">
+                <swauml:AssociationEdgeLabel arg:predicate=\"{= ?predicate }\" arg:sourceClass=\"{= ?sourceClass }\" arg:targetClass=\"{= ?targetClass }\"/>
+            </ui:forEach>
+        </div>
+        <script>swa.initClassDiagram(\"{= ?id }\",<swon:Array/>
+            <swon:Comma/>
+            <swon:Array>
+                <ui:forEach ui:resultSet=\"{= ?associationEdges }\" ui:separator=\",\">
+                    <swon:Object>
+                        <swon:Value arg:name=\"sourceClass\" arg:value=\"{= ?sourceClass }\"/>
+                        <swon:Value arg:name=\"targetClass\" arg:value=\"{= ?targetClass }\"/>
+                        <swon:Value arg:name=\"predicate\" arg:value=\"{= ?predicate }\"/>
+                    </swon:Object>
+                </ui:forEach>
+            </swon:Array>)</script>
+    </ui:if>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "Single Class diagram" ;
+  rdfs:subClassOf swa:AbstractClassDiagram ;
+.
+edg:Templates
+  a spin:Template ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "Templates" ;
+  rdfs:subClassOf spin:Templates ;
+.
+edg:getAssociatedClassesForGivenClasses
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:distinct true ;
+      sp:resultVariables (
+          [
+            sp:varName "class" ;
+          ]
+          [
+            sp:varName "predicate" ;
+          ]
+          [
+            sp:varName "initialClass" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Union ;
+            sp:elements (
+                (
+                  [
+                    sp:object [
+                        sp:varName "rowIndex" ;
+                      ] ;
+                    sp:predicate spr:rowIndices ;
+                    sp:subject [
+                        sp:varName "resultSet" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a spr:cell ;
+                        sp:arg1 [
+                            sp:varName "resultSet" ;
+                          ] ;
+                        sp:arg2 [
+                            sp:varName "rowIndex" ;
+                          ] ;
+                        sp:arg3 0 ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "class" ;
+                      ] ;
+                  ]
+                )
+                (
+                  (
+                    [
+                      a sp:Filter ;
+                      sp:expression [
+                          sp:varName "continue" ;
+                        ] ;
+                    ]
+                  )
+                  [
+                    sp:object [
+                        sp:varName "rowIndex" ;
+                      ] ;
+                    sp:predicate spr:rowIndices ;
+                    sp:subject [
+                        sp:varName "resultSet" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a spr:cell ;
+                        sp:arg1 [
+                            sp:varName "resultSet" ;
+                          ] ;
+                        sp:arg2 [
+                            sp:varName "rowIndex" ;
+                          ] ;
+                        sp:arg3 0 ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "initialClass" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "predicate" ;
+                      ] ;
+                    sp:predicate swauml:property ;
+                    sp:subject [
+                        sp:varName "initialClass" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a swauml:valueType ;
+                        sp:arg1 [
+                            sp:varName "predicate" ;
+                          ] ;
+                        sp:arg2 [
+                            sp:varName "initialClass" ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "class" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Filter ;
+                    sp:expression [
+                        a sp:or ;
+                        sp:arg1 [
+                            a sp:not ;
+                            sp:arg1 [
+                                a sp:bound ;
+                                sp:arg1 [
+                                    sp:varName "associationsFilterFunction" ;
+                                  ] ;
+                              ] ;
+                          ] ;
+                        sp:arg2 [
+                            a spif:invoke ;
+                            sp:arg1 [
+                                sp:varName "associationsFilterFunction" ;
+                              ] ;
+                            sp:arg2 [
+                                sp:varName "predicate" ;
+                              ] ;
+                            sp:arg3 [
+                                sp:varName "class" ;
+                              ] ;
+                          ] ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Filter ;
+                    sp:expression [
+                        a sp:and ;
+                        sp:arg1 [
+                            a sp:and ;
+                            sp:arg1 [
+                                a sp:bound ;
+                                sp:arg1 [
+                                    sp:varName "class" ;
+                                  ] ;
+                              ] ;
+                            sp:arg2 [
+                                a sp:isIRI ;
+                                sp:arg1 [
+                                    sp:varName "class" ;
+                                  ] ;
+                              ] ;
+                          ] ;
+                        sp:arg2 [
+                            a sp:not ;
+                            sp:arg1 [
+                                a swa:isDatatypeRange ;
+                                arg:range [
+                                    sp:varName "class" ;
+                                  ] ;
+                              ] ;
+                          ] ;
+                      ] ;
+                  ]
+                )
+              ) ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:defaultValue "false" ;
+      spl:optional true ;
+      spl:predicate arg:continue ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "number of levels of association to generate (currently only supports 1 or 2)" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:associationsFilterFunction ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "An optional filter function that can be used to suppress showing certain relationships. The functions should be subclass of swa:AssociationsFilterFunctions." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:resultSet ;
+      spl:valueType sp:Select ;
+      rdfs:comment "The focus class of interest." ;
+    ] ;
+  spin:private true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "get associated classes for given classes" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:getAssociationsForGivenClasses
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "sourceClass" ;
+          ]
+          [
+            sp:varName "targetClass" ;
+          ]
+          [
+            sp:varName "predicate" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              sp:object [
+                  sp:varName "rowIndex" ;
+                ] ;
+              sp:predicate spr:rowIndices ;
+              sp:subject [
+                  sp:varName "classes" ;
+                ] ;
+            ]
+            [
+              a sp:Bind ;
+              sp:expression [
+                  a spr:cell ;
+                  sp:arg1 [
+                      sp:varName "classes" ;
+                    ] ;
+                  sp:arg2 [
+                      sp:varName "rowIndex" ;
+                    ] ;
+                  sp:arg3 0 ;
+                ] ;
+              sp:variable [
+                  sp:varName "sourceClass" ;
+                ] ;
+            ]
+          )
+          [
+            sp:object [
+                sp:varName "predicate" ;
+              ] ;
+            sp:predicate swauml:property ;
+            sp:subject [
+                sp:varName "sourceClass" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a swauml:valueType ;
+                sp:arg1 [
+                    sp:varName "predicate" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "sourceClass" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "targetClass" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:and ;
+                sp:arg1 [
+                    a sp:bound ;
+                    sp:arg1 [
+                        sp:varName "targetClass" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a swauml:contains ;
+                    sp:arg1 [
+                        sp:varName "classes" ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "targetClass" ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:or ;
+                sp:arg1 [
+                    a sp:not ;
+                    sp:arg1 [
+                        a sp:bound ;
+                        sp:arg1 [
+                            sp:varName "associationsFilterFunction" ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a spif:invoke ;
+                    sp:arg1 [
+                        sp:varName "associationsFilterFunction" ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "predicate" ;
+                      ] ;
+                    sp:arg3 [
+                        sp:varName "sourceClass" ;
+                      ] ;
+                    sp:arg4 [
+                        sp:varName "targetClass" ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:associationsFilterFunction ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "An optional filter function that can be used to suppress showing certain relationships. The functions should be subclass of swa:AssociationsFilterFunctions." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:classes ;
+      spl:valueType sp:Select ;
+    ] ;
+  spin:private true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "get associations for given classes" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:getFocusNodeSuperClassesAndSubclasses
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "class" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Union ;
+            sp:elements (
+                (
+                  [
+                    a sp:TriplePath ;
+                    sp:object [
+                        sp:varName "class" ;
+                      ] ;
+                    sp:path [
+                        a sp:ModPath ;
+                        sp:modMax -2 ;
+                        sp:modMin 0 ;
+                        sp:subPath rdfs:subClassOf ;
+                      ] ;
+                    sp:subject [
+                        sp:varName "focusClass" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    sp:object [
+                        sp:varName "focusClass" ;
+                      ] ;
+                    sp:predicate rdfs:subClassOf ;
+                    sp:subject [
+                        sp:varName "class" ;
+                      ] ;
+                  ]
+                )
+              ) ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:and ;
+                sp:arg1 [
+                    a sp:isIRI ;
+                    sp:arg1 [
+                        sp:varName "class" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a sp:not ;
+                    sp:arg1 [
+                        a swauml:isRootClass ;
+                        sp:arg1 [
+                            sp:varName "class" ;
+                          ] ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:focusClass ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The focus class of interest." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:classes ;
+      spl:valueType sp:Select ;
+    ] ;
+  spin:private true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "get focus node super classes and subclasses" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:getLogicalEntityCardinality
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "cardinality" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "participant" ;
+              ] ;
+            sp:predicate edg:participant ;
+            sp:subject [
+                sp:varName "association" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "logicalEntity" ;
+              ] ;
+            sp:predicate edg:logicalEntity ;
+            sp:subject [
+                sp:varName "participant" ;
+              ] ;
+          ]
+          [
+            a sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "maybeCardinality" ;
+                    ] ;
+                  sp:predicate edg:cardinality ;
+                  sp:subject [
+                      sp:varName "participant" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:coalesce ;
+                sp:arg1 [
+                    sp:varName "maybeCardinality" ;
+                  ] ;
+                sp:arg2 edg:CRDNLTY_ANY-OR-NONE ;
+              ] ;
+            sp:variable [
+                sp:varName "cardinality" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:logicalEntity ;
+      spl:valueType edg:LogicalEntity ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:association ;
+      spl:valueType edg:LogicalRelation ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "get logical entity cardinality" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:isDiagram
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+.
+edg:isDiagramGadget
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:subPropertyOf edg:isGadget ;
+.
+edg:isGadget
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+.
+edg:isKnown
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "is known" ;
+  rdfs:range xsd:boolean ;
+.
+edg:makeResultSetForSingleClass
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "class" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                sp:varName "focusClass" ;
+              ] ;
+            sp:variable [
+                sp:varName "class" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:focusClass ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The focus class of interest." ;
+    ] ;
+  spin:private true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "make result set for single class" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+arg:association
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:associationEdges
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:continue
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:degreeOfSeparation
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:headerStyle
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:inheritanceEdges
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:nodeStyle
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:showClassInheritance
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:sourceEntity
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:suppressAttributes
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:targetEntity
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:subPropertyOf sp:arg ;
+.
+swauml:AssetNode
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:attributesFilterFunction ;
+      spl:valueType spin:Function ;
+      rdfs:comment "An optional function(?property, ?class) returning true to include a given property at a given class node." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:focused ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to have this focused." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:headerStyle ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:nodeStyle ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:suppressAttributes ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The class to render." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:myHeaderStyle=\"{= COALESCE(?headerStyle, &quot;swauml-instance-header&quot;) }\" let:myNodeStyle=\"{= COALESCE(?nodeStyle, &quot;swauml-instance-node&quot;) }\">
+    <!--ui:dumpScope ui:message=\"AAA1: swauml:AssetNode\"/-->
+    <div about=\"{= ?resource }\" class=\"{= ?myNodeStyle }\" let:systemLabels=\"{= COALESCE(ui:contextValue(&quot;swaSystemLabels&quot;), false) }\">
+        <div class=\"{= ?myHeaderStyle }\" letrs:metaClasses=\"{#
+                SELECT ?metaClass
+                WHERE {
+                    ?resource a ?metaClass .
+                    FILTER (?metaClass NOT IN (rdfs:Class, owl:Class, sh:NodeShape)) .
+                } }\" style=\"{= IF(?focused, &quot;font-weight: bold&quot;, ?none) }\">
+            <ui:if ui:condition=\"{= !spr:isEmpty(?metaClasses) }\">
+                <div class=\"swauml-instance-header-metaclass\">
+                    <ui:forEach ui:resultSet=\"{= ?metaClasses }\" ui:separator=\"&nbsp;\">
+                        <!--swa:Link arg:labelOverride=\"&lt;&lt;{= IF(?systemLabels, smf:qname(?metaClass), ui:label(?metaClass)) }&gt;&gt;\"
+                  arg:resource=\"{= ?metaClass }\"/-->
+                        <edg:ResourceLink arg:labelOverride=\"&lt;&lt;{= IF(?systemLabels, smf:qname(?metaClass), ui:label(?metaClass)) }&gt;&gt;\" arg:resource=\"{= ?metaClass }\"/>
+                    </ui:forEach>
+                </div>
+            </ui:if>
+            <edg:ResourceLink arg:resource=\"{= ?resource }\"/>
+        </div>
+        <ui:if ui:condition=\"{= (!bound(?suppressAttributes)) || (?suppressAttributes = false) }\">
+            <div class=\"swauml-instance-attributes\">
+                <ui:forEach ui:resultSet=\"{#
+                        SELECT ?value
+                        WHERE {
+                            ?value edg:attributeOf ?resource .
+                            FILTER (!isLiteral(?value)) .
+                            FILTER ((!bound(?attributesFilterFunction)) || spif:invoke(?attributesFilterFunction, ?property, ?resource)) .
+                        }
+                        ORDER BY (ui:label(?value)) }\">
+                    <swauml:ResourceValue arg:property=\"{= edg:attributeOf }\" arg:resource=\"{= ?resource }\" arg:value=\"{= ?value }\"/>
+                </ui:forEach>
+            </div>
+        </ui:if>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "Asset node" ;
+  rdfs:subClassOf swa:GraphElements ;
+.
+swauml:BuildLogicalRelationEdge
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:association ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The (forward) predicate." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:sourceEntity ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The start of the association" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:targetEntity ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The end of the association." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:sourceCardinality=\"{= edg:getLogicalEntityCardinality(?association, ?sourceEntity) }\" let:targetCardinality=\"{= edg:getLogicalEntityCardinality(?association, ?targetEntity) }\">
+    <ui:group let:aboutString=\"{= ?sourceEntity } {= ?targetEntity } {= ?association }\" let:sourceCardinalityId=\"{= spl:object(?sourceCardinality, dtype:literal) }\" let:targetCardinalityId=\"{= spl:object(?targetCardinality, dtype:literal) }\">
+        <!--ui:dumpScope ui:message=\"AAA1: swauml:LogicalRelationEdge - {= ?association }\"/-->
+        <polyline about=\"{= ?aboutString }\" class=\"swauml-logical-relation-edge-line\" marker-end=\"url({= CONCAT(&quot;#cardinality-&quot;, ?targetCardinalityId) })\" marker-start=\"url({= CONCAT(&quot;#cardinality-&quot;, ?sourceCardinalityId, &quot;-reverse&quot;) })\"/>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Builds an SVG polyline for a logical relation. References to the end-point markers are build for the value of dtype:literal on a cardinality enumerated value.  A relation is binary and can only have one source and one target." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "Build logical relation edge" ;
+  rdfs:subClassOf swa:GraphElements ;
+.
+swauml:LogicalRelationEdgeLabel
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:association ;
+      spl:valueType edg:LogicalRelation ;
+      rdfs:comment "The (forward) predicate." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:sourceEntity ;
+      spl:valueType edg:LogicalEntity ;
+      rdfs:comment "The start of the association" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:targetEntity ;
+      spl:valueType edg:LogicalEntity ;
+      rdfs:comment "The end of the association." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:systemLabels=\"{= ui:contextValue(&quot;swaSystemLabels&quot;) }\">
+    <div about=\"label {= ?sourceEntity } {= ?targetEntity } {= ?association }\" class=\"swauml-logical-relation-edge-label\">
+        <swa:URIResourceViewer arg:object=\"{= ?association }\"/>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "Logical relation edge label" ;
+  rdfs:subClassOf swa:GraphElements ;
+.
+swauml:ResourceValue
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:property ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The attribute property." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The class to display the attribute in." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:value ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:isForeignKey=\"{= COALESCE(spl:object(?value, edg:isForeignKey), false) }\" let:isPrimaryKey=\"{= COALESCE(spl:object(?value, edg:isPrimaryKey), false) }\" let:type=\"{= spl:object(?value, edg:logicalDatatype) }\">
+    <ui:group let:typeString=\"{= IF(bound(?type), ui:label(?type), &quot;missing type&quot;) }\">
+        <ui:setContext ui:varName=\"swaNodeClass\" ui:varValue=\"{= ?resource }\">
+            <!--ui:dumpScope ui:message=\"AAA1: swauml:ResourceValue - {= ?resource }\"/-->
+            <div class=\"swauml-instance-attribute\" let:prefix=\"{= IF(?isPrimaryKey, &quot;P&quot;, IF(?isForeignKey, &quot;F&quot;, &quot;&nbsp;&quot;)) }\" let:systemLabels=\"{= ui:contextValue(&quot;swaSystemLabels&quot;) }\">
+                <div class=\"swauml-instance-attribute-name\" let:loadId=\"{= ui:uniqueId() }\">
+                    <div class=\"float-left\" style=\"width:16px; color:red\">{= ?prefix }</div>
+                    <div class=\"float-left\" data-uri=\"{= ?value }\" id=\"resource-tool-tip-data-{= ?loadId }\" let:op=\"{= ui:contextValue(&quot;swaOnOpenResource&quot;) }\">
+                        <swa:Link arg:id=\"resource-tool-tip-{= ?loadId }\" arg:resource=\"{= ?value }\"/>
+                        <ui:if ui:condition=\"{= bound(?op) }\">
+                            <a class=\"swa-uri-resource-viewer-menu swa-icon ui-icon ui-icon-arrow-1-e\" href=\"javascript:void(0)\" onclick=\"var resource='{= ui:encodeNode(?value, true, true) }';{= ?op };\" title=\"Open in a new Window\"/>
+                        </ui:if>
+                        <script>gadgets.Hub.publish('org.topbraid.swa.resourceTooltip', 'resource-tool-tip-{= ?loadId }');</script>
+                    </div>
+                    <div class=\"float-left\">{= CONCAT(\" :: \", ?typeString) }</div>
+                    <div class=\"clear-both\"/>
+                </div>
+            </div>
+        </ui:setContext>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "Resource Value" ;
+  rdfs:subClassOf swa:GraphElements ;
+.
+html:Circle
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate html:cx ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate html:cy ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate html:r ;
+      spl:valueType xsd:string ;
+    ] ;
+.
+html:Marker
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate html:viewbox ;
+      spl:valueType xsd:string ;
+    ] ;
+.
+html:Polyline
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate html:marker-end ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate html:marker-start ;
+      spl:valueType xsd:string ;
+    ] ;
+.
+html:cx
+  a html:Attribute ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "cx" ;
+  rdfs:subPropertyOf html:attributes ;
+.
+html:cy
+  a html:Attribute ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "cy" ;
+  rdfs:subPropertyOf html:attributes ;
+.
+html:marker-end
+  a html:Attribute ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "marker-end" ;
+  rdfs:subPropertyOf html:attributes ;
+.
+html:marker-start
+  a html:Attribute ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "marker-start" ;
+  rdfs:subPropertyOf html:attributes ;
+.
+html:r
+  a html:Attribute ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "r" ;
+  rdfs:subPropertyOf html:attributes ;
+.
+html:viewbox
+  a html:Attribute ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  rdfs:label "viewbox" ;
+  rdfs:subPropertyOf html:attributes ;
+.

@@ -1,0 +1,40 @@
+# baseURI: http://teamwork.topbraidlive.org/graphql.search
+# imports: http://topbraid.org/search
+# prefix: graphql.search
+
+@prefix graphql.search: <http://teamwork.topbraidlive.org/graphql.search#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://teamwork.topbraidlive.org/graphql.search>
+  rdf:type owl:Ontology ;
+  owl:imports <http://topbraid.org/search> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+graphql.search:GQLSearch
+  rdf:type rdfs:Class ;
+  rdfs:label "GQLSearch" ;
+  rdfs:subClassOf <http://topbraid.org/search#Search> ;
+.
+graphql.search:appState
+  rdf:type rdf:Property ;
+  rdfs:domain graphql.search:GQLSearch ;
+  rdfs:label "redux state" ;
+  rdfs:range xsd:string ;
+.
+graphql.search:defaultSearch
+  rdf:type rdf:Property ;
+  rdfs:comment "Links a class with a GraphQL Search instance that informs the search forms about its initial state, e.g. which key properties to select." ;
+  rdfs:domain rdfs:Class ;
+  rdfs:label "default search" ;
+  rdfs:range graphql.search:GQLSearch ;
+.
+graphql.search:queryTemplate
+  rdf:type rdf:Property ;
+  rdfs:domain graphql.search:GQLSearch ;
+  rdfs:label "template" ;
+  rdfs:range xsd:string ;
+.

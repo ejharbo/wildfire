@@ -1,0 +1,702 @@
+# baseURI: http://server.topbraidlive.org/system-applications/teamworkconfig
+# imports: http://server.topbraidlive.org/system-applications/tbladmin
+# imports: http://server.topbraidlive.org/web/2009/config
+# imports: http://teamwork.topbraidlive.org/ontologyprojects
+# imports: http://topbraid.org/swa
+# imports: http://topbraid.org/teamwork.ui
+# prefix: teamworkconfig
+
+@prefix acjob: <http://evn.topbraidlive.org/tagger/acjob#> .
+@prefix acpp: <http://topbraid.org/nlp/autoclassifier-preproc#> .
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix autotagger: <http://evn.topbraidlive.org/autotagger#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix conceptmatch: <http://topbraid.org/conceptmatch#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix config-importers: <http://edg.topbraidlive.org/config/importers#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix core-soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix corpus: <http://topbraid.org/corpus#> .
+@prefix corpusprojects: <http://topbraid.org/corpus-projects#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkapp: <http://topbraid.org/swa/crosswalkapp#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dashboard: <http://example.org/dashboard#> .
+@prefix datagraph: <http://teamwork.topbraidlive.org/datagraph/datagraphprojects#> .
+@prefix dataset: <http://teamwork.topbraidlive.org/dataset#> .
+@prefix datasetapp: <http://topbraid.org/swa/datasetapp#> .
+@prefix datasetviewer: <http://topbraid.org/swa/datasetviewer#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ddl: <http://edg.topbraidlive.org/1.0/importers/ddl#> .
+@prefix default: <http://uispin.org/default#> .
+@prefix defaultapp: <http://topbraid.org/swa/defaultapp#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix document: <http://topbraid.org/document#> .
+@prefix documents: <http://edg.topbraid.solutions/1.0/shapes/documents#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg-config: <http://edg.ext.topbraidlive.org/schema/config/importers#> .
+@prefix edg-importer: <http://edg.topbraidlive.org/importer/> .
+@prefix edg-qa: <http://edg.topbraidlive.org/utility/qa/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.global: <urn:x-evn-global:> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix edgproduct: <http://edg.topbraidlive.org/edgproduct#> .
+@prefix eeh-lib: <http://www.environmenthub.no/spin/1.0/eeh-lib#> .
+@prefix eeh-reportlib: <http://www.environmenthub.no/spin/1.0/eeh-reportlib#> .
+@prefix elements: <http://purl.org/dc/elements/1.1/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evn: <http://topbraid.org/evn/evn#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evnimport: <http://evn.topbraidlive.org/uispin/evnimport#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix ex: <http://example.org/> .
+@prefix extjs: <http://uispin.com/extjs#> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix forms: <http://www.topbraid.org/2007/01/forms.owl#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix governance: <http://topbraid.org/teamworkgovernance.ui#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix graphql.search: <http://teamwork.topbraidlive.org/graphql.search#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix inference: <http://www.topbraid.org/2007/06/inference.owl#> .
+@prefix jdbc: <http://edg.topbraidlive.org/1.0/importers/jdbc#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix kennedys: <http://topbraid.org/examples/kennedys#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix lib-importer: <http://edg.topbraid.solutions/importer/lib#> .
+@prefix lineage-transform: <http://edg.topbraid.solutions/transform/importer/lineage#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix ontologyviewer: <http://topbraid.org/swa/ontologyviewer#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix proxy-lineage: <http://edg.topbraid.solutions/proxy/importer/lineage#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmapp: <http://rdm.topbraidlive.org/rdmapp#> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix rdmviewer: <http://rdm.topbraidlive.org/rdmviewer#> .
+@prefix saf: <http://topbraid.org/saf/> .
+@prefix safconfig: <http://topbraid.org/safconfig/> .
+@prefix safindex: <http://topbraid.org/safindex#> .
+@prefix safm: <http://saf.topbraidlive.org/metaschema/> .
+@prefix savedQueries: <http://teamwork.topbraidlive.org/ui/savedQueries#> .
+@prefix scheduler: <http://topbraid.org/scheduler#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix server: <http://server.topbraidlive.org/server.ui#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix shapesgraph: <http://teamwork.topbraidlive.org/shapesgraph/shapesgraphprojects#> .
+@prefix sharepoint: <http://topbraid.org/sharepoint#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skosshapes: <http://topbraid.org/skos.shapes#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spin.ui: <http://spinrdf.org/spin.ui#> .
+@prefix spinmap: <http://spinrdf.org/spinmap#> .
+@prefix spinmapl: <http://topbraid.org/spin/spinmapl#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix ss: <http://www.topbraidcomposer.org/owl/2006/08/spreadsheets.owl#> .
+@prefix stats: <http://topbraid.org/statistics#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swadoc: <http://topbraid.org/swadoc#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tablesmap: <http://topbraid.org/spin/tablesmap#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix taggerspin: <http://evn.topbraidlive.org/taggerspin#> .
+@prefix taggerui: <http://evn.topbraidlive.org/taggerui#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix tblui: <http://server.topbraidlive.org/tblui#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkAdmin: <http://teamwork.topbraidlive.org/doc/teamworkAdmin#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworkconstraints: <http://topbraid.org/teamworkconstraints#> .
+@prefix teamworkdashboard: <http://topbraid.org/teamworkdashboard#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix teamworkupdate: <http://teamworkAPI.topbraid.com/teamworkUpdate#> .
+@prefix textindex: <http://topbraid.org/textindex#> .
+@prefix tika-importer: <http://teamwork.topbraidlive.org/corpus/tika-importer#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix tracker: <http://teamwork.topbraidlive.org/ui/tracker#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uitest: <http://uispin.org/test#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix userdat: <http://teamwork.topbraidlive.org/ui/userdata> .
+@prefix userdata: <http://teamwork.topbraidlive.org/ui/userdata#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix victory: <http://edg.topbraid.solutions/victory/> .
+@prefix visual: <http://topbraid.org/visual#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xhtml: <http://topbraid.org/xhtml#> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://server.topbraidlive.org/system-applications/teamworkconfig>
+  a owl:Ontology ;
+  rdfs:comment "Simple SWA-based user interface to edit EVN-specific system configuration parameters. The application consists of an editable SWA form with a save button." ;
+  owl:imports <http://server.topbraidlive.org/system-applications/tbladmin> ;
+  owl:imports <http://server.topbraidlive.org/web/2009/config> ;
+  owl:imports <http://teamwork.topbraidlive.org/ontologyprojects> ;
+  owl:imports <http://topbraid.org/swa> ;
+  owl:imports <http://topbraid.org/teamwork.ui> ;
+  owl:versionInfo "0.0.1" ;
+.
+teamworkconfig:ConfigEditor
+  a ui:NodeClass ;
+  ui:headIncludes """
+<script>function editDefaultIncludes(projectType) {
+		var loadId = 'myEditDefaultIncludesDialog';
+		var params = {
+			_base: swa.queryGraphURI,
+			loadId: loadId,
+			projectType: '&lt;' + projectType + '&gt;'
+		};
+		swa.loadModalDialog('teamworkconfig:EditDefaultIncludesDialog', loadId, params, 400);
+	}</script>
+"""^^ui:Literal ;
+  ui:headIncludes """
+<title>{= teamwork:getProductAbbreviation() } Configuration Parameters</title>
+"""^^ui:Literal ;
+  ui:prototype """
+<tblui:PageContainer arg:title=\"{= teamwork:getProductAbbreviation() } Configuration Parameters\">
+    <ui:setContext ui:queryGraph=\"{= ui:unionOfGraphs(ui:graphWithImports(&lt;http://server.topbraidlive.org/dynamic/config&gt;), ui:graphWithImports(&lt;http://teamwork.topbraidlive.org/system/configconstraints&gt;)) }\">
+        <script>swa.queryGraphURI = '{= ui:currentQueryGraph() }';</script>
+        <div class=\"ui-helper-hidden-accessible\" id=\"swa-dialog-parent\"/>
+        <tblui:FormSection arg:label=\"Server Configuration\">
+            <swa:SwitchableForm arg:editable=\"{= true }\" arg:hideVisualizationsButton=\"{= true }\" arg:matchIds=\"evnform\" arg:resource=\"{= config:configuration }\" arg:showURI=\"{= false }\" arg:suppressHeader=\"{= true }\" arg:suppressInlineEditing=\"{= true }\"/>
+        </tblui:FormSection>
+        <ui:forEach ui:resultSet=\"{#
+                SELECT ?plugin
+                WHERE {
+                    GRAPH ui:graph {
+                        ?plugin rdfs:subClassOf teamworkconfig:ConfigSectionPlugins .
+                    } .
+                }
+                ORDER BY (?plugin) }\">
+            <ui:dynamicView ui:class=\"{= ?plugin }\"/>
+        </ui:forEach>
+    </ui:setContext>
+</tblui:PageContainer>
+"""^^ui:Literal ;
+  rdfs:comment "Simple application to edit the EDG system configuration." ;
+  rdfs:subClassOf tbladmin:AdminPages ;
+.
+teamworkconfig:ConfigForm
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:config ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The config instance." ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <swa:ObjectsEnum arg:label=\"Teamwork Platform Parameters\" default:labelWidth=\"250px\" default:subject=\"{= ?config }\">
+        <swa:Object arg:predicate=\"{= cfg:teamworkEditorChoices }\"/>
+        <swa:Object arg:predicate=\"{= cfg:teamworkCommentsActivated }\"/>
+        <swa:Object arg:predicate=\"{= cfg:teamworkTasksActivated }\"/>
+        <swa:Object arg:predicate=\"{= cfg:teamworkTaskEmails }\"/>
+        <ui:if ui:condition=\"{= teamwork:product() = edgproduct:EDG }\">
+            <swa:Object arg:predicate=\"{= cfg:metricsDashboardsActivated }\"/>
+        </ui:if>
+        <swa:Object arg:editWidget=\"{= teamworkconfig:DatabaseDriverEditor }\" arg:predicate=\"{= cfg:teamworkActiveDatabaseDriver }\" arg:viewWidget=\"{= teamworkconfig:DatabaseDriverViewer }\"/>
+        <swa:Object arg:predicate=\"{= cfg:teamworkDefaultDefaultNamespace }\"/>
+        <swa:Object arg:editWidget=\"{= swa:RoleDropDownEditor }\" arg:predicate=\"{= cfg:teamworkAdminRole }\"/>
+        <swa:Object arg:predicate=\"{= cfg:teamworkDisableSourceCodeEditing }\"/>
+        <swa:Object arg:predicate=\"{= cfg:teamworkEnableJobTitles }\"/>
+        <swa:Object arg:predicate=\"{= cfg:preserveReificationStatements }\"/>
+        <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= cfg:teamworkRootProject }\"/>
+    </swa:ObjectsEnum>
+    <ui:forEach ui:resultSet=\"{#
+            SELECT ?plugin
+            WHERE {
+                GRAPH ui:graph {
+                    ?plugin rdfs:subClassOf teamworkconfig:ConfigFormPlugins .
+                } .
+            }
+            ORDER BY (?plugin) }\">
+        <ui:dynamicView arg:labelWidth=\"250px\" arg:subject=\"{= ?config }\" ui:class=\"{= ?plugin }\"/>
+    </ui:forEach>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Teamwork config form" ;
+  rdfs:subClassOf swa:Elements ;
+.
+teamworkconfig:ConfigFormPlugins
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:labelWidth ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The default label width to be used." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subject ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The subject to use." ;
+    ] ;
+  ui:abstract true ;
+  rdfs:label "Config form plugins" ;
+  rdfs:subClassOf swa:Elements ;
+.
+teamworkconfig:ConfigSectionPlugins
+  a ui:NodeClass ;
+  rdfs:comment "Abstract superclass of sections that will appear under the config form. This is used by Tagger to define custom admin components." ;
+  rdfs:label "Config section plugins" ;
+  rdfs:subClassOf swa:Elements ;
+.
+teamworkconfig:ConfigureProjectTypesPlugin
+  a ui:NodeClass ;
+  ui:prototype """
+<tblui:Section arg:label=\"Configure Asset Collection Types\">
+    <table class=\"table table-compact table-nonfluid\">
+        <thead>
+            <tr>
+                <th>Active</th>
+                <th>Type</th>
+                <th>Default Includes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ui:forEach ui:resultSet=\"{#
+                    SELECT ?projectType ?label ?licensed ?disabled
+                    WHERE {
+                        GRAPH ui:graph {
+                            BIND (teamwork:product() AS ?product) .
+                            ?product teamwork:defaultProjectType ?projectType .
+                            BIND (teamwork:pluralProjectTypeLabel(?projectType) AS ?label) .
+                            BIND (teamwork:hasProjectTypeLicense(?projectType) AS ?licensed) .
+                            BIND (teamwork:isProjectTypeDisabled(?projectType) AS ?disabled) .
+                            BIND (spl:object(?projectType, teamwork:projectTypeWeight) AS ?weight) .
+                        } .
+                    }
+                    ORDER BY (?weight) }\">
+                <tr>
+                    <td let:id=\"{= ui:uniqueId() }\">
+                        <ui:if ui:condition=\"{= ?licensed }\">
+                            <ui:setContext ui:queryGraph=\"{= swa:configGraph() }\">
+                                <input checked=\"{= IF(?disabled, ?none, &quot;checked&quot;) }\" disabled=\"{= IF(teamwork:isSingletonProjectType(?projectType), &quot;disabled&quot;, ?none) }\" id=\"{= ?id }\" type=\"checkbox\">
+                                    <ui:handle arg:checked=\"$('#{= ?id }').is(':checked')\" ui:event=\"onclick\">
+                                        <ui:if ui:condition=\"{= ?checked }\">
+                                            <ui:removePropertyValue arg:property=\"{= teamwork:projectTypeDisabled }\" arg:value=\"{= true }\" ui:this=\"{= ?projectType }\"/>
+                                        </ui:if>
+                                        <ui:else>
+                                            <ui:addPropertyValue arg:property=\"{= teamwork:projectTypeDisabled }\" arg:value=\"{= true }\" ui:this=\"{= ?projectType }\"/>
+                                        </ui:else>
+                                    </ui:handle>
+                                </input>
+                            </ui:setContext>
+                        </ui:if>
+                    </td>
+                    <td class=\"{= IF((!?licensed), &quot;teamworkconfig-configure-project-types-plugin-td-grey&quot;, ?none) }\">{= ?label }</td>
+                    <td>
+                        <ui:loadable ui:loadId=\"{= afn:localname(?projectType) }-default-includes\">
+                            <ui:if ui:condition=\"{= ?licensed }\">
+                                <button class=\"btn btn-default btn-xs\" onclick=\"editDefaultIncludes('{= ?projectType }')\">Edit Default Includes</button>
+                            </ui:if>
+                            <ui:else>
+                                <button class=\"btn btn-default btn-xs\" disabled=\"disabled\">Edit Default Includes</button>
+                            </ui:else>
+                            <swa:Spaces/>
+                            <ui:forEach ui:resultSet=\"{#
+                                    SELECT ?extra ?extraLabel
+                                    WHERE {
+                                        BIND (swa:configGraph() AS ?configGraph) .
+                                        GRAPH ?configGraph {
+                                            ?projectType teamwork:owlImports ?extraStr .
+                                        } .
+                                        BIND (IRI(?extraStr) AS ?extra) .
+                                        BIND (teamwork:projectLabel(?extra) AS ?extraLabel) .
+                                    }
+                                    ORDER BY (?extraLabel) }\" ui:separator=\", \">
+                                <span>{= ?extraLabel }</span>
+                            </ui:forEach>
+                        </ui:loadable>
+                    </td>
+                </tr>
+            </ui:forEach>
+        </tbody>
+    </table>
+</tblui:Section>
+"""^^ui:Literal ;
+  rdfs:comment "Presents a list of all declared teamwork:ProjectTypes, with a checkbox to activate/deactivate them. This box is not selectable for types where no license exists. There is also a column to add/remove extra default includes, which are stored in the uiconfig graph and used when new collections of this type are created." ;
+  rdfs:subClassOf teamworkconfig:ConfigSectionPlugins ;
+.
+teamworkconfig:DataPlatformConfigFormPlugin
+  a ui:NodeClass ;
+  ui:prototype """
+<swa:ObjectsEnum arg:label=\"Data Platform Configuration Parameters\" default:labelWidth=\"250px\" default:subject=\"{= ?subject }\">
+    <tbladmin:ServerRestartWarning/>
+    <swa:Object arg:editWidget=\"{= swa:BooleanEditor }\" arg:predicate=\"{= cfg:dpFeature }\"/>
+    <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= cfg:dpServerURL }\"/>
+    <!-- Changing this will loose alignment with the server : don't display
+<swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= cfg:dpZone }\"/>
+-->
+</swa:ObjectsEnum>
+"""^^ui:Literal ;
+  rdfs:subClassOf teamworkconfig:ConfigFormPlugins ;
+.
+teamworkconfig:DatabaseDriverEditor
+  a swa:ObjectEditorClass ;
+  ui:prototype """
+<span let:name=\"new-{= ?uid }\" let:range=\"{= swa:localRangeAtClass(swa:resourceType(?subject), ?predicate) }\">
+    <ui:call arg:resource=\"{= ?range }\" ui:template=\"{= swa:OneOfItems }\">
+        <div class=\"form-check\">
+            <ui:forEach ui:indexVar=\"index\" ui:resultSet=\"{= ?rs }\">
+                <ui:if ui:condition=\"{= ?index &gt; 0 }\">
+                    <br/>
+                </ui:if>
+                <label id=\"{= ui:encodeNode(?item, true, true) }\">
+                    <input checked=\"{= IF((?item = ?object), &quot;checked&quot;, ?none) }\" name=\"{= ?name }\" type=\"radio\" value=\"{= ui:encodeNode(?item, true, true) }\"/>&nbsp; {= ui:label(spl:subject(cfg:systemName, ?item)) }</label>
+            </ui:forEach>
+        </div>
+    </ui:call>
+</span>
+"""^^ui:Literal ;
+  rdfs:label "Database driver editor" ;
+  rdfs:subClassOf swa:ObjectEditor ;
+.
+teamworkconfig:DatabaseDriverViewer
+  a swa:ObjectViewerClass ;
+  ui:private true ;
+  ui:prototype """
+<div class=\"swa-shifted-label\">{= IF(bound(?object), ui:label(spl:subject(cfg:systemName, ?object)), ?none) }</div>
+"""^^ui:Literal ;
+  rdfs:subClassOf swa:ObjectViewer ;
+.
+teamworkconfig:EditDefaultIncludesDialog
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:loadId ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectType ;
+      spl:valueType teamwork:ProjectType ;
+      rdfs:comment "The teamwork:ProjectType being edited." ;
+    ] ;
+  ui:prototype """
+<div id=\"div-{= ?loadId }\" title=\"Default Includes of {= teamwork:pluralProjectTypeLabel(?projectType) }\">
+    <div>
+        <ui:setContext ui:queryGraph=\"{= swa:configGraph() }\">
+            <ui:forEach ui:resultSet=\"{#
+                    SELECT ?ontology ?label
+                    WHERE {
+                        rdf:nil teamwork:graphsUnderTeamControl ( ?ontology ?teamGraph ) .
+                        FILTER (teamwork:getProjectType(?ontology) = ontologyprojects:ProjectType) .
+                        BIND (teamwork:projectLabel(?ontology) AS ?label) .
+                    }
+                    ORDER BY (?label) }\">
+                <div class=\"checkbox\" let:id=\"{= ui:uniqueId() }\" let:str=\"{= str(?ontology) }\">
+                    <input checked=\"{= IF(EXISTS {
+                        ?projectType teamwork:owlImports ?str .
+                    }, &quot;checked&quot;, ?none) }\" id=\"{= ?id }\" type=\"checkbox\">
+                        <ui:handle arg:checked=\"$('#{= ?id }').is(':checked')\" ui:event=\"onclick\" ui:thenLoadId=\"{= afn:localname(?projectType) }-default-includes\">
+                            <ui:transaction>
+                                <ui:if ui:condition=\"{= ?checked }\">
+                                    <ui:update ui:updateQuery=\"{!
+                                            INSERT {
+                                                ?projectType teamwork:owlImports ?str .
+                                            }
+                                            WHERE {
+                                            } }\"/>
+                                </ui:if>
+                                <ui:else>
+                                    <ui:update ui:updateQuery=\"{!
+                                            DELETE {
+                                                ?projectType teamwork:owlImports ?str .
+                                            }
+                                            WHERE {
+                                            } }\"/>
+                                </ui:else>
+                            </ui:transaction>
+                        </ui:handle>
+                    </input>
+                    <span class=\"swa-checkbox-span\">{= ?label }</span>
+                </div>
+            </ui:forEach>
+        </ui:setContext>
+    </div>
+</div>
+"""^^ui:Literal ;
+  rdfs:label "Edit default includes dialog" ;
+  rdfs:subClassOf swa:DialogElements ;
+.
+teamworkconfig:EditDefaultNamespacesPage
+  a ui:NodeClass ;
+  ui:prototype """
+<tblui:PageContainer arg:title=\"Default Namespaces and Prefixes\">
+    <tblui:Section>
+        <p>
+			The following text area shows the system-wide default namespace/prefix declarations in Turtle notation.
+		</p>
+        <ul>
+            <li>These prefixes are automatically copied into every newly created EDG Asset Collection</li>
+            <li>The prefixes are also used to abbreviate reified triples using the <code>urn:triple:</code> naming conventions</li>
+        </ul>
+        <p class=\"text-danger\">
+            <b>Editing the default namespace prefixes is a potentially dangerous, low-level operation.</b>
+			Please make sure you are aware of potential consequences before proceeding.
+			These prefixes here are used to abbreviate reified triples.
+			So if there is already data on this server that uses the currently defined prefixes and you change
+			or delete them, <b>the reified triples may no longer be found</b> and remain as \"orphans\" in the graphs.
+			In an ideal world, try to define your enterprise-wide prefixes once in the beginning of your use of EDG.
+			If you want to start using a new prefix, then add it while no reified triples still use it.
+			For example, add it here immediately after a new asset collection was created that uses a fresh prefix.
+		</p>
+        <p>
+            <textarea class=\"teamwork-namespaces-textarea\" id=\"textarea\">{= smf:configParam(\"defaultPrefixMap\") }</textarea>
+            <div/>
+            <button class=\"form-control btn-primary\" id=\"submit\" onclick=\"TBUtils.editDefaultNamespaces($('#textarea'), $('#errorMessage'))\">Submit</button>
+            <div class=\"text-danger\" id=\"errorMessage\"/>
+        </p>
+    </tblui:Section>
+</tblui:PageContainer>
+"""^^ui:Literal ;
+  rdfs:comment "A page that can be used to edit the system-wide default namespaces and prefixes." ;
+  rdfs:label "Edit default namespaces page" ;
+  rdfs:subClassOf tbladmin:AdminPages ;
+.
+teamworkconfig:ExplorerConfigFormPlugin
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group default:labelWidth=\"{= ?labelWidth }\" default:subject=\"{= ?subject }\" let:passwordElementId=\"evnViewerServerPassword\" let:userNameElementId=\"evnViewerServerUserName\">
+    <ui:if ui:condition=\"{= teamwork:hasEVNViewerLicense() }\">
+        <swa:ObjectsEnum arg:label=\"Explorer Parameters\">
+            <!--div id=\"legacyExplorerConfigSection\">
+<swa:Object arg:editWidget=\"swa:PlainTextFieldEditor\" arg:predicate=\"cfg:evnViewerServer\"/>
+<swa:Object arg:editWidget=\"teamworkconfig:ToggleUserAndPasswordOnChangeBooleanEditor\"
+arg:predicate=\"cfg:evnViewerServerIsAnonymous\"/>
+<swa:Object arg:editWidget=\"swa:PlainTextFieldEditor\"
+arg:elementId=\"{= ?userNameElementId }\"
+arg:predicate=\"cfg:evnViewerServerUserName\"/>
+<tbladmin:PasswordSection arg:config=\"{= ?subject }\"
+  arg:divId=\"{= ?passwordElementId }\"
+  arg:name=\"Legacy Explorer server password\"
+  arg:urlProperty=\"cfg:evnViewerServer\"
+  arg:userNameProperty=\"cfg:evnViewerServerUserName\"/>
+<swa:Object arg:editWidget=\"swa:PlainTextFieldEditor\" arg:predicate=\"cfg:evnEditorServer\"/>
+<swa:Object arg:editWidget=\"swa:PlainTextFieldEditor\" arg:predicate=\"cfg:evnEditorServerUserName\"/>
+<tbladmin:PasswordSection arg:config=\"{= ?subject }\"
+  arg:name=\"Editor server password\"
+  arg:urlProperty=\"cfg:evnEditorServer\"
+  arg:userNameProperty=\"cfg:evnEditorServerUserName\"/>
+</div-->
+            <div id=\"newExplorerConfigSection\">
+                <swa:Object arg:editWidget=\"{= swa:BooleanEditor }\" arg:predicate=\"{= cfg:explorerUsersCanUseSPARQLEndpoint }\"/>
+                <swa:Object arg:editWidget=\"{= swa:BooleanEditor }\" arg:predicate=\"{= cfg:explorerUsersCanViewWorkingCopies }\"/>
+                <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= cfg:explorerServer }\"/>
+                <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:elementId=\"{= ?userNameElementId }\" arg:predicate=\"{= cfg:explorerServerUserName }\"/>
+                <tbladmin:PasswordSection arg:config=\"{= ?subject }\" arg:divId=\"{= ?passwordElementId }\" arg:name=\"Explorer server password\" arg:urlProperty=\"{= cfg:explorerServer }\" arg:userNameProperty=\"{= cfg:explorerServerUserName }\"/>
+                <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= cfg:editorServer }\"/>
+                <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= cfg:editorServerUserName }\"/>
+                <tbladmin:PasswordSection arg:config=\"{= ?subject }\" arg:name=\"Editor server password\" arg:urlProperty=\"{= cfg:editorServer }\" arg:userNameProperty=\"{= cfg:editorServerUserName }\"/>
+            </div>
+        </swa:ObjectsEnum>
+        <ui:if ui:condition=\"{= spl:object(?subject, cfg:evnViewerServerIsAnonymous) }\">
+            <ui:if ui:condition=\"{= swa:isViewMode() }\">
+                <script>$().ready(tbladmin.hideUserAndPassword);</script>
+            </ui:if>
+            <ui:else>
+                <script>$().ready(tbladmin.toggleUserAndPassword);</script>
+            </ui:else>
+        </ui:if>
+        <script>$().ready(tbladmin.toggleLegacyExplorer);</script>
+    </ui:if>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:subClassOf teamworkconfig:ConfigFormPlugins ;
+.
+teamworkconfig:RDBMSConfigFormPlugin
+  a ui:NodeClass ;
+  ui:prototype """
+<swa:ObjectsEnum arg:label=\"RDBMS Configuration Parameters\" default:labelWidth=\"250px\" default:subject=\"{= ?subject }\">
+    <tbladmin:ServerRestartWarning/>
+    <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= cfg:sdbURL }\"/>
+    <swa:Object arg:predicate=\"{= cfg:sdbType }\"/>
+    <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= cfg:sdbUserName }\"/>
+    <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= cfg:sdbBatchSize }\"/>
+    <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= cfg:sdbFetchSize }\"/>
+    <tbladmin:PasswordSection arg:config=\"{= ?subject }\" arg:name=\"RDBMS password\" arg:urlProperty=\"{= cfg:sdbURL }\" arg:userNameProperty=\"{= cfg:sdbUserName }\"/>
+</swa:ObjectsEnum>
+"""^^ui:Literal ;
+  rdfs:subClassOf teamworkconfig:ConfigFormPlugins ;
+.
+teamworkconfig:SetDefaultPrefixMapService
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:ttl ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The turtle source code of the new prefixes." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:if ui:condition=\"{= uix:isAdmin() }\">
+    <ui:setContext ui:queryGraph=\"{= &lt;http://server.topbraidlive.org/dynamic/config&gt; }\" ui:silentTransactions=\"{= true }\">
+        <ui:transaction>
+            <ui:setPropertyValue arg:property=\"{= cfg:defaultPrefixMap }\" arg:value=\"{= ?ttl }\" ui:this=\"{= config:configuration }\"/>
+        </ui:transaction>
+    </ui:setContext>
+    <teamwork:setDefaultPrefixMap arg:ttl=\"{= COALESCE(?ttl, &quot;&quot;) }\"/>
+</ui:if>
+"""^^ui:Literal ;
+  ui:responseType ui:TEXT ;
+  rdfs:subClassOf tbladmin:AdminServices ;
+.
+teamworkconfig:ToggleLegacyExplorerOnChangeBooleanEditor
+  a swa:ObjectEditorClass ;
+  ui:private true ;
+  ui:prototype """
+<swa:BooleanEditor arg:elementId=\"useLegacyExplorer\" arg:inlineEditCancelCallback=\"tbladmin.toggleLegacyExplorer()\" arg:inlineEditSaveCallback=\"tbladmin.toggleLegacyExplorer()\" arg:onChange=\"tbladmin.toggleLegacyExplorer();\" ui:args=\"*\"/>
+"""^^ui:Literal ;
+  rdfs:comment "Toggle the legacy Explorer fields upon changing the boolean value" ;
+  rdfs:subClassOf swa:BooleanEditor ;
+.
+teamworkconfig:ToggleUserAndPasswordOnChangeBooleanEditor
+  a swa:ObjectEditorClass ;
+  ui:private true ;
+  ui:prototype """
+<swa:BooleanEditor arg:elementId=\"evnViewerServerIsAnonymous\" arg:onChange=\"tbladmin.toggleUserAndPassword();\" ui:args=\"*\"/>
+"""^^ui:Literal ;
+  rdfs:comment "Toggle the user name and password fields upon changing the boolean value" ;
+  rdfs:subClassOf swa:BooleanEditor ;
+.
+cfg:ServerConfiguration
+  ui:instanceView """
+<teamworkconfig:ConfigForm arg:config=\"{= ?this }\" ui:id=\"evnform\"/>
+"""^^ui:Literal ;
+.
+arg:config
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:divId
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:graph
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:template
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:urlProperty
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:userNameProperty
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+teamwork:setDefaultPrefixMap
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:ttl ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:private true ;
+  rdfs:subClassOf ui:ControlElement ;
+.

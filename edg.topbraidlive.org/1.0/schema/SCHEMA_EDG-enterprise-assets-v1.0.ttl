@@ -1,0 +1,2662 @@
+# baseURI: http://edg.topbraid.solutions/1.0/schema/enterprise-models
+# imports: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://edg.topbraid.solutions/1.0/schema/governance
+# imports: http://edg.topbraid.solutions/1.0/schema/requirements-model
+# imports: http://edg.topbraid.solutions/1.0/schema/technical-assets
+# imports: http://www.linkedmodel.org/schema/vaem
+# imports: http://www.w3.org/2004/02/skos/core
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/schema/enterprise-models>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/schema/enterprise-models/GMD_enterprise-models> ;
+  rdfs:label "EDG Schema - Enterprise Models" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  owl:imports <http://www.linkedmodel.org/schema/vaem> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+edg:AccessSecurityAspect
+  a edg:AspectClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Access Security Aspect" ;
+  rdfs:subClassOf edg:Governance ;
+  sh:property edg:AccessSecurityAspect-role ;
+.
+edg:AccessSecurityAspect-role
+  a sh:PropertyShape ;
+  sh:path teamwork:role ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessActivity ;
+.
+edg:Agency
+  a edg:AssetClass ;
+  rdfs:comment "An 'Agency' is typically a governent body but can also be an organization such as an 'Advertising Agency'." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Agency" ;
+  rdfs:subClassOf edg:Enterprise ;
+.
+edg:AgreementDocument
+  a edg:AssetClass ;
+  edg:acronym "AGRDOC" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Agreement Document" ;
+  rdfs:subClassOf edg:Document ;
+  rdfs:subClassOf edg:Governance ;
+.
+edg:AssetManagementPlan
+  a edg:AssetClass ;
+  edg:acronym "AMP" ;
+  rdfs:comment "An Asset Management Plan (AMP) is a tactical plan for managing an organization’s infrastructure and other assets to deliver an agreed standard of service. Typically, an Asset Management Plan will cover more than a single asset, taking a system approach – especially where a number of assets are co-dependent and are required to work together to deliver an agreed standard of service." ;
+  rdfs:label "Asset management plan" ;
+  rdfs:subClassOf edg:Plan ;
+.
+edg:Association
+  a edg:AssetClass ;
+  edg:acronym "ASSOC" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Association" ;
+  rdfs:subClassOf edg:Enterprise ;
+.
+edg:Board
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Board" ;
+  rdfs:subClassOf edg:Organization ;
+.
+edg:Building
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  rdfs:label "Building" ;
+  rdfs:subClassOf edg:Place ;
+  sh:name "located in (inverse)" ;
+.
+edg:BuildingComplex
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  rdfs:label "Building Complex" ;
+  rdfs:subClassOf edg:Place ;
+  sh:name "located in (inverse)" ;
+.
+edg:BuildingUnit
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  rdfs:label "Building Unit" ;
+  rdfs:subClassOf edg:Place ;
+  sh:property edg:Locatable-locatedIn ;
+  sh:property edg:Locatable-locatedIn-inverse ;
+.
+edg:BuildingUnitPropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Business Unit Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:BusinessActivity
+  a edg:AssetClass ;
+  rdfs:comment "A 'Business Activity' is a grouping concept that encompasses the functions, processes, tasks and transactions of an organisation and its employees for an area of endevaour." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Business Activity" ;
+  rdfs:seeAlso edg:ProcessActivity ;
+  rdfs:subClassOf edg:BusinessModelViewpoint ;
+  rdfs:subClassOf edg:EnterpriseAsset ;
+  rdfs:subClassOf edg:InvolvedParties ;
+  rdfs:subClassOf edg:ProducerConsumerAspect ;
+  sh:property edg:BusinessActivity-businessArea_inverse ;
+  sh:property edg:BusinessActivity-businessFunction ;
+  sh:property edg:BusinessActivity-nextActivity ;
+  sh:property edg:BusinessActivity-nextActivity-inverse ;
+  sh:property edg:BusinessActivity-softwareCapability-inverse ;
+  sh:property edg:BusinessActivity-subActivity ;
+  sh:property edg:BusinessActivity-supportsActivity ;
+  sh:property edg:BusinessActivity-supportsBusinessActivity-inverse ;
+  sh:property edg:BusinessActivity-usesProcess ;
+.
+edg:BusinessActivity-businessArea_inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:activity ;
+    ] ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessArea ;
+  sh:group edg:BusinessActivityPropertiesGroup ;
+  sh:name "in business area" ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:BusinessActivity-businessFunction
+  a sh:PropertyShape ;
+  sh:path edg:businessFunction ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessFunction ;
+  sh:group edg:BusinessActivityPropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:BusinessActivity-nextActivity
+  a sh:PropertyShape ;
+  sh:path edg:nextActivity ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessActivity ;
+  sh:group edg:BusinessActivityPropertiesGroup ;
+  sh:order "35"^^xsd:decimal ;
+.
+edg:BusinessActivity-nextActivity-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:nextActivity ;
+    ] ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessActivity ;
+  sh:group edg:BusinessActivityPropertiesGroup ;
+  sh:name "previous activity" ;
+  sh:order "36"^^xsd:decimal ;
+.
+edg:BusinessActivity-softwareCapability-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:supportsBusinessActivity ;
+    ] ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:SoftwareCapable ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:name "supported by software" ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:BusinessActivity-subActivity
+  a sh:PropertyShape ;
+  sh:path edg:subActivity ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessActivity ;
+  sh:group edg:BusinessActivityPropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:BusinessActivity-supportsActivity
+  a sh:PropertyShape ;
+  sh:path edg:supportsActivity ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessActivity ;
+  sh:description "Specifies how a business activity supports another business activity." ;
+  sh:group edg:BusinessActivityPropertiesGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:BusinessActivity-supportsBusinessActivity-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:supportsBusinessActivity ;
+    ] ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:EnterpriseCapable ;
+  sh:group edg:BusinessActivityPropertiesGroup ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:BusinessActivity-usesProcess
+  a sh:PropertyShape ;
+  sh:path edg:usesProcess ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Process ;
+  sh:description "Specifies how a business activity uses a process." ;
+  sh:group edg:BusinessActivityPropertiesGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:BusinessActivityPropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Enterprise Context" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:BusinessApplication
+  edg:acronym "APP" ;
+  rdfs:subClassOf edg:TechnicalAssetViewFromEnterpriseAssets ;
+.
+edg:BusinessArea
+  edg:acronym "BIZAREA" ;
+  rdfs:seeAlso edg:DataSubjectArea ;
+  sh:property edg:BusinessArea-activity ;
+  sh:property edg:BusinessArea-providesBusinessFunction ;
+  sh:property edg:BusinessArea-providesCapability ;
+  sh:property edg:BusinessArea-subArea ;
+.
+edg:BusinessArea-activity
+  a sh:PropertyShape ;
+  sh:path edg:activity ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessActivity ;
+  sh:description "Associates a business activity with a business area." ;
+  sh:group edg:BusinessAreaPropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:BusinessArea-providesBusinessFunction
+  a sh:PropertyShape ;
+  sh:path edg:businessFunction ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessFunction ;
+  sh:group edg:BusinessAreaPropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:BusinessArea-providesCapability
+  a sh:PropertyShape ;
+  sh:path edg:providesCapability ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessCapability ;
+  sh:group edg:BusinessAreaPropertiesGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:BusinessArea-subArea
+  a sh:PropertyShape ;
+  sh:path edg:subArea ;
+  dash:composite true ;
+  sh:class edg:SubjectArea ;
+  sh:group edg:BusinessAreaPropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:BusinessAreaPropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Business Area Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:BusinessCapability
+  a edg:AssetClass ;
+  edg:acronym "CAP" ;
+  rdfs:subClassOf edg:BusinessModelViewpoint ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:EnterpriseAsset ;
+  rdfs:subClassOf edg:Governance ;
+  rdfs:subClassOf edg:InvolvedParties ;
+  rdfs:subClassOf edg:ProducerConsumerAspect ;
+  sh:property edg:BusinessCapability-assistedBy ;
+  sh:property edg:BusinessCapability-enablesBusinessCapability-inverse ;
+  sh:property edg:BusinessCapability-level ;
+  sh:property edg:BusinessCapability-ownedBy ;
+  sh:property edg:BusinessCapability-performedBy ;
+  sh:property edg:BusinessCapability-requiresActivity ;
+  sh:property edg:BusinessCapability-subCapability ;
+  sh:property edg:BusinessCapability-supportsActivity ;
+  sh:property edg:BusinessCapability-supportsOrganization ;
+  sh:property edg:BusinessCapability-supportsProcess ;
+  sh:property edg:BusinessCapability-usedByJobTitle ;
+.
+edg:BusinessCapability-assistedBy
+  a sh:PropertyShape ;
+  sh:path edg:assistedBy ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Party ;
+  sh:group edg:BusinessCapabilityPropertiesGroup ;
+  sh:order "110"^^xsd:decimal ;
+.
+edg:BusinessCapability-enablesBusinessCapability-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:enablesBusinessCapability ;
+    ] ;
+  graphql:name "enablers" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:Interoperable ;
+  sh:description "The systems, and other interoperable resources, that enable a business capability." ;
+  sh:group edg:BusinessCapabilityPropertiesGroup ;
+  sh:name "enablers" ;
+  sh:order "150"^^xsd:decimal ;
+.
+edg:BusinessCapability-level
+  a sh:PropertyShape ;
+  sh:path edg:level ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:BusinessCapabilityPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:BusinessCapability-ownedBy
+  a sh:PropertyShape ;
+  sh:path edg:ownedBy ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Organization ;
+  sh:group edg:BusinessCapabilityPropertiesGroup ;
+  sh:order "120"^^xsd:decimal ;
+.
+edg:BusinessCapability-performedBy
+  a sh:PropertyShape ;
+  sh:path edg:performedBy ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Capable ;
+  sh:group edg:BusinessCapabilityPropertiesGroup ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:BusinessCapability-requiresActivity
+  a sh:PropertyShape ;
+  sh:path edg:requiresActivity ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessActivity ;
+  sh:group edg:BusinessCapabilityPropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:BusinessCapability-subCapability
+  a sh:PropertyShape ;
+  sh:path edg:subCapability ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessCapability ;
+  sh:group edg:BusinessCapabilityPropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:BusinessCapability-supportsActivity
+  a sh:PropertyShape ;
+  sh:path edg:supportsActivity ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessActivity ;
+  sh:group edg:BusinessCapabilityPropertiesGroup ;
+  sh:order "90"^^xsd:decimal ;
+.
+edg:BusinessCapability-supportsOrganization
+  a sh:PropertyShape ;
+  sh:path edg:supportsOrganization ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Organization ;
+  sh:group edg:BusinessCapabilityPropertiesGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:BusinessCapability-supportsProcess
+  a sh:PropertyShape ;
+  sh:path edg:supportsProcess ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Process ;
+  sh:description "Specifies how a business capability supports a business process." ;
+  sh:group edg:BusinessCapabilityPropertiesGroup ;
+  sh:order "60"^^xsd:decimal ;
+.
+edg:BusinessCapability-usedByJobTitle
+  a sh:PropertyShape ;
+  sh:path edg:usedByJobTitle ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:JobTitle ;
+  sh:group edg:BusinessCapabilityPropertiesGroup ;
+  sh:order "80"^^xsd:decimal ;
+.
+edg:BusinessCapabilityPropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Business Capability Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:BusinessEvent
+  a edg:AssetClass ;
+  rdfs:comment "A 'Business Event' can be a meeting, an encounter, or any other happening that carries out an activity" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Business Event" ;
+  rdfs:subClassOf edg:BusinessModelViewpoint ;
+  rdfs:subClassOf edg:EnterpriseAsset ;
+  rdfs:subClassOf edg:InvolvedParties ;
+  rdfs:subClassOf edg:Locatable ;
+  sh:property edg:BusinessEvent-participatingParty ;
+  sh:property edg:BusinessEvent-requiresActivity ;
+  sh:property edg:BusinessEvent-supportsActivity ;
+.
+edg:BusinessEvent-participatingParty
+  a sh:PropertyShape ;
+  sh:path edg:participatingParty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Party ;
+  sh:group edg:BusinessEventPropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:BusinessEvent-requiresActivity
+  a sh:PropertyShape ;
+  sh:path edg:requiresActivity ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessActivity ;
+  sh:group edg:BusinessEventPropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:BusinessEvent-supportsActivity
+  a sh:PropertyShape ;
+  sh:path edg:supportsActivity ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessActivity ;
+  sh:group edg:BusinessEventPropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:BusinessEventPropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Business Event Properties" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:BusinessFunction
+  a edg:AssetClass ;
+  edg:acronym "BIZFUN" ;
+  rdfs:comment "A 'Business Function' is a statement of purpose that summarizes some aspect of the 'reason for being' of a business. The statement is typically expressed as a verb phrase and often is organized as a hierarchy." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Business Function" ;
+  rdfs:subClassOf edg:BusinessModelViewpoint ;
+  rdfs:subClassOf edg:EnterpriseAsset ;
+  sh:property edg:BusinessFunction-businessSubFunction ;
+  sh:property edg:BusinessFunction-supportsBusinessFunction-inverse ;
+.
+edg:BusinessFunction-businessSubFunction
+  a sh:PropertyShape ;
+  sh:path edg:businessSubFunction ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessFunction ;
+  sh:group edg:BusinessFunctionPropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:BusinessFunction-supportsBusinessFunction-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:supportsBusinessFunction ;
+    ] ;
+  graphql:name "supporting_systems" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:Interoperable ;
+  sh:description "The systems, and other interoperable resources, that support a business function." ;
+  sh:group edg:BusinessFunctionPropertiesGroup ;
+  sh:name "supported by" ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:BusinessFunctionPropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Business Function Properties" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:BusinessModelViewpoint
+  a edg:ViewpointClass ;
+  dash:abstract true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Business Model Viewpoint" ;
+  rdfs:subClassOf edg:EnterpriseViewpoint ;
+.
+edg:BusinessOutcome
+  a edg:AssetClass ;
+  edg:acronym "BIZOTCM" ;
+  rdfs:comment "A 'Business Outcome' is a quantifiable measure of satisfication for a business objective" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Business Outcome" ;
+  rdfs:subClassOf edg:BusinessModelViewpoint ;
+  rdfs:subClassOf edg:EnterpriseAsset ;
+  sh:property edg:BusinessOutcome-enablesBusinessCapability ;
+  sh:property edg:BusinessOutcome-exception ;
+  sh:property edg:BusinessOutcome-measure ;
+  sh:property edg:BusinessOutcome-mitigation ;
+.
+edg:BusinessOutcome-enablesBusinessCapability
+  a sh:PropertyShape ;
+  sh:path edg:enablesBusinessCapability ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessCapability ;
+  sh:group edg:EnterpriseRolePropertiesGroup ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:BusinessOutcome-exception
+  a sh:PropertyShape ;
+  sh:path edg:exception ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:EnterpriseRolePropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:BusinessOutcome-measure
+  a sh:PropertyShape ;
+  sh:path edg:measure ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Measure ;
+  sh:group edg:EnterpriseRolePropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:BusinessOutcome-mitigation
+  a sh:PropertyShape ;
+  sh:path edg:mitigation ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:EnterpriseRolePropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:BusinessOutcomePropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Business Outcome Properties" ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:BusinessPlan
+  a edg:AssetClass ;
+  edg:acronym "BIZPLAN" ;
+  rdfs:label "Business plan" ;
+  rdfs:subClassOf edg:Plan ;
+.
+edg:Capable
+  rdfs:label "Capable" ;
+.
+edg:Charter
+  a edg:AssetClass ;
+  edg:acronym "CHRTR" ;
+  rdfs:comment """<p>The charter is a critical document for a data governance program. It has several purposes: </p>
+<ol>
+<li>Set out the operating framework;</li>
+<li>Document the purpose and objectives of the program;</li>
+<li>Identify the various components, such as councils or sponsors;</li>
+<li>Establish the level of authority the DG operating bodies will have;</li>
+<li>Identify the type of federation;</li>
+<li>Identify the names of participants.</li>
+</ol>
+<p>Consider that you may need a charter for each “layer” of your operating framework. A separate charter for sponsors, councils, and forums might be necessary in larger organizations. The charter is a living document, and should adapt to the growth and changes in data governance as the program evolves. Below is a basic outline featuring important aspects of charter documents, along with an explanation of each section.</p>
+<hr/>
+<p>Reference: Ladley, John. Data Governance: How to Design, Deploy and Sustain an Effective Data Governance Program (The Morgan Kaufmann Series on Business Intelligence) (Kindle Locations 3601-3610). Elsevier Science. Kindle Edition.</p>"""^^rdf:HTML ;
+  rdfs:label "Charter" ;
+  rdfs:subClassOf edg:InformationAsset ;
+  rdfs:subClassOf edg:InformationAssetViewpoint ;
+  sh:property edg:Charter-amendments ;
+  sh:property edg:Charter-authority ;
+  sh:property edg:Charter-background ;
+  sh:property edg:Charter-context ;
+  sh:property edg:Charter-execution ;
+  sh:property edg:Charter-forums ;
+  sh:property edg:Charter-framework ;
+  sh:property edg:Charter-glossary ;
+  sh:property edg:Charter-metrics ;
+  sh:property edg:Charter-mission ;
+  sh:property edg:Charter-objectives ;
+  sh:property edg:Charter-sponsors ;
+  sh:property edg:Charter-strategy ;
+  sh:property edg:Charter-structure ;
+  sh:property edg:Charter-summary ;
+  sh:property edg:Charter-valueProposition ;
+  sh:property edg:Charter-vision ;
+  sh:property edg:Charter-website ;
+.
+edg:Charter-amendments
+  a sh:PropertyShape ;
+  sh:path edg:amendments ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:CharterPropertiesGroup ;
+  sh:order "210"^^xsd:decimal ;
+.
+edg:Charter-authority
+  a sh:PropertyShape ;
+  sh:path edg:authority ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:CharterPropertiesGroup ;
+  sh:order "150"^^xsd:decimal ;
+.
+edg:Charter-background
+  a sh:PropertyShape ;
+  sh:path edg:background ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:CharterPropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:Charter-context
+  a sh:PropertyShape ;
+  sh:path edg:context ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:CharterPropertiesGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:Charter-execution
+  a sh:PropertyShape ;
+  sh:path edg:execution ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:CharterPropertiesGroup ;
+  sh:order "140"^^xsd:decimal ;
+.
+edg:Charter-forums
+  a sh:PropertyShape ;
+  sh:path edg:forums ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:CharterPropertiesGroup ;
+  sh:order "170"^^xsd:decimal ;
+.
+edg:Charter-framework
+  a sh:PropertyShape ;
+  sh:path edg:framework ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:CharterPropertiesGroup ;
+  sh:order "130"^^xsd:decimal ;
+.
+edg:Charter-glossary
+  a sh:PropertyShape ;
+  sh:path edg:glossary ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:CharterPropertiesGroup ;
+  sh:order "200"^^xsd:decimal ;
+.
+edg:Charter-metrics
+  a sh:PropertyShape ;
+  sh:path edg:metrics ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:CharterPropertiesGroup ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:Charter-mission
+  a sh:PropertyShape ;
+  sh:path edg:mission ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:CharterPropertiesGroup ;
+  sh:order "70"^^xsd:decimal ;
+.
+edg:Charter-objectives
+  a sh:PropertyShape ;
+  sh:path edg:objectives ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:CharterPropertiesGroup ;
+  sh:order "90"^^xsd:decimal ;
+.
+edg:Charter-purpose
+  a sh:PropertyShape ;
+  sh:path edg:purpose ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:CharterPropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:Charter-sponsors
+  a sh:PropertyShape ;
+  sh:path edg:sponsors ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:CharterPropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:Charter-strategy
+  a sh:PropertyShape ;
+  sh:path edg:strategy ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:CharterPropertiesGroup ;
+  sh:order "80"^^xsd:decimal ;
+.
+edg:Charter-structure
+  a sh:PropertyShape ;
+  sh:path edg:structure ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:CharterPropertiesGroup ;
+  sh:order "120"^^xsd:decimal ;
+.
+edg:Charter-summary
+  a sh:PropertyShape ;
+  sh:path edg:summary ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:CharterPropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Charter-valueProposition
+  a sh:PropertyShape ;
+  sh:path edg:valueProposition ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:CharterPropertiesGroup ;
+  sh:order "110"^^xsd:decimal ;
+.
+edg:Charter-vision
+  a sh:PropertyShape ;
+  sh:path edg:vision ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:CharterPropertiesGroup ;
+  sh:order "60"^^xsd:decimal ;
+.
+edg:Charter-website
+  a sh:PropertyShape ;
+  sh:path edg:website ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:CharterPropertiesGroup ;
+  sh:order "180"^^xsd:decimal ;
+.
+edg:CharterPropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Charter Content" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:Committee
+  a edg:AssetClass ;
+  edg:acronym "CMTTE" ;
+  edg:hideClass true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Committee" ;
+  rdfs:subClassOf edg:Organization ;
+.
+edg:Company
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Company" ;
+  rdfs:subClassOf edg:Enterprise ;
+.
+edg:Council
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Council" ;
+  rdfs:subClassOf edg:Organization ;
+.
+edg:Dashboard
+  a edg:AssetClass ;
+  rdfs:label "Dashboard" ;
+  rdfs:subClassOf edg:DashboardModelsViewpoint ;
+.
+edg:DashboardGadgetTab
+  a edg:AssetClass ;
+  rdfs:label "Dashboard gadget tab" ;
+  rdfs:subClassOf edg:DashboardModelsViewpoint ;
+.
+edg:DataAsset
+  rdfs:subClassOf edg:DataAssetViewFromTechnicalAssets ;
+.
+edg:DataAssetViewFromEnterpriseAssets
+  a edg:ViewpointClass ;
+  dash:abstract true ;
+  vaem:isElaboratedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:comment "A 'Data Asset' is an entity that contains valuable data. It can be a database, a document or any type of information that is managed as a single entity." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Data Asset Viewpoint" ;
+  rdfs:subClassOf edg:EnterpriseViewpoint ;
+.
+edg:DataExchange
+  a edg:AssetClass ;
+  edg:acronym "DEX" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Data Exchange" ;
+  rdfs:subClassOf edg:BusinessModelViewpoint ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:EnterpriseAsset ;
+  sh:property edg:DataExchange-consumer ;
+  sh:property edg:DataExchange-exchangeFrequency ;
+  sh:property edg:DataExchange-package ;
+  sh:property edg:DataExchange-producer ;
+  sh:property edg:DataExchange-sourceApplication ;
+  sh:property edg:DataExchange-targetApplication ;
+.
+edg:DataExchange-consumer
+  a sh:PropertyShape ;
+  sh:path edg:consumer ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Party ;
+  sh:group edg:DataExchangePropertiesGroup ;
+  sh:minCount 1 ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:DataExchange-exchangeFrequency
+  a sh:PropertyShape ;
+  sh:path edg:exchangeFrequency ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:DataExchangeFrequency ;
+  sh:group edg:DataExchangePropertiesGroup ;
+  sh:order "60"^^xsd:decimal ;
+.
+edg:DataExchange-package
+  a sh:PropertyShape ;
+  sh:path edg:package ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:DataPackage ;
+  sh:group edg:DataExchangePropertiesGroup ;
+  sh:minCount 1 ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:DataExchange-producer
+  a sh:PropertyShape ;
+  sh:path edg:producer ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Party ;
+  sh:group edg:DataExchangePropertiesGroup ;
+  sh:minCount 1 ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:DataExchange-sourceApplication
+  a sh:PropertyShape ;
+  sh:path edg:sourceApplication ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessApplication ;
+  sh:group edg:DataExchangePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:DataExchange-targetApplication
+  a sh:PropertyShape ;
+  sh:path edg:targetApplication ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessApplication ;
+  sh:group edg:DataExchangePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:DataExchangePropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Data Exchange Properties" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:DataExchangeable
+  a edg:AspectClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Exchangeable Data" ;
+  rdfs:subClassOf edg:Aspect ;
+.
+edg:DataRequirementsSpecification
+  a edg:AssetClass ;
+  edg:acronym "DRS" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Data Requirements Specification (DRS)" ;
+  rdfs:subClassOf edg:Specification ;
+  sh:property edg:DataRequirementsSpecification-dataRequirement ;
+.
+edg:DataRequirementsSpecification-dataRequirement
+  a sh:PropertyShape ;
+  sh:path edg:dataRequirement ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:DataRequirement ;
+  sh:group edg:SpecificationPropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:DataSet
+  rdfs:subClassOf edg:DataExchangeable ;
+.
+edg:DataStewardPropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Data Steward Properties" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:DataSubjectArea
+  rdfs:seeAlso edg:BusinessArea ;
+  sh:property edg:DataSubjectArea-subArea ;
+.
+edg:DataSubjectArea-subArea
+  a sh:PropertyShape ;
+  sh:path edg:subArea ;
+  dash:composite true ;
+  sh:class edg:DataSubjectArea ;
+  sh:group edg:DataSubjectAreaPropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:DataSubjectAreaPropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Data Subject Area Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:DataWarehouse
+  rdfs:subClassOf edg:TechnicalAssetViewFromEnterpriseAssets ;
+.
+edg:Division
+  a edg:AssetClass ;
+  edg:acronym "DIVN" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Division" ;
+  rdfs:subClassOf edg:Enterprise ;
+.
+edg:Document
+  rdfs:subClassOf edg:DataExchangeable ;
+  rdfs:subClassOf edg:InformationAssetViewpoint ;
+.
+edg:Dutiable
+  a edg:AspectClass ;
+  rdfs:comment "<em>Duitable</em> groups properties that ascribe duties (responsibilities) to an entity, usually a <em>Person</em> or <em>Party</em>."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Dutiable" ;
+  rdfs:subClassOf edg:Aspect ;
+  sh:property edg:Dutiable-responsibleFor ;
+.
+edg:Dutiable-responsibleFor
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:responsible ;
+    ] ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:group edg:DutiablePropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:DutiablePropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Responsibilities" ;
+  sh:order "25"^^xsd:decimal ;
+.
+edg:Enterprise
+  a edg:AssetClass ;
+  edg:acronym "ENT" ;
+  rdfs:comment "<p>An <em>Enterprise</em> is a registered organization.</p>"^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Enterprise" ;
+  rdfs:subClassOf edg:Organization ;
+  sh:property edg:Enterprise-businessArea ;
+  sh:property edg:Enterprise-department ;
+  sh:property edg:Enterprise-divison ;
+  sh:property edg:Enterprise-faxNumber ;
+.
+edg:Enterprise-businessArea
+  a sh:PropertyShape ;
+  sh:path edg:businessArea ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessArea ;
+  sh:group edg:OrganizationPropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Enterprise-department
+  a sh:PropertyShape ;
+  sh:path edg:department ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Department ;
+  sh:group edg:OrganizationPropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:Enterprise-divison
+  a sh:PropertyShape ;
+  sh:path edg:division ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Division ;
+  sh:group edg:OrganizationPropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:Enterprise-faxNumber
+  a sh:PropertyShape ;
+  sh:path edg:faxNumber ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype xsd:string ;
+  sh:group edg:OrganizationPropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:EnterpriseAsset
+  dash:abstract true ;
+  rdfs:subClassOf edg:EnterpriseViewpoint ;
+  rdfs:subClassOf edg:Identifiable ;
+  rdfs:subClassOf edg:Narratable ;
+.
+edg:EnterpriseCapable
+  sh:property edg:EnterpriseCapable-performsActivity ;
+  sh:property edg:EnterpriseCapable-performsCapability ;
+  sh:property edg:EnterpriseCapable-performsFunction ;
+.
+edg:EnterpriseCapable-performsActivity
+  a sh:PropertyShape ;
+  sh:path edg:performsActivity ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessActivity ;
+  sh:group edg:EnterpriseRolePropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:EnterpriseCapable-performsCapability
+  a sh:PropertyShape ;
+  sh:path edg:performsCapability ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessCapability ;
+  sh:group edg:EnterpriseRolePropertiesGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:EnterpriseCapable-performsFunction
+  a sh:PropertyShape ;
+  sh:path edg:performsFunction ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessFunction ;
+  sh:group edg:EnterpriseRolePropertiesGroup ;
+  sh:order "60"^^xsd:decimal ;
+.
+edg:EnterpriseCapable-servesPurpose
+  sh:order "10"^^xsd:decimal ;
+.
+edg:EnterpriseModelTraceabilityGroup
+  a sh:PropertyGroup ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Enterprise Model Traceability Metadata" ;
+  sh:order "58"^^xsd:decimal ;
+.
+edg:EnterpriseModelsProject
+  graphql:name "enterpriseAssetsCatalog" ;
+  graphql:publicClass edg:EnterpriseViewpoint ;
+.
+edg:EnterpriseObject-forOrganization
+  a sh:PropertyShape ;
+  sh:path edg:forOrganization ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:or (
+      [
+        sh:class edg:Organization ;
+      ]
+      [
+        sh:class edg:OrganizationEntity ;
+      ]
+    ) ;
+.
+edg:EnterpriseRolePropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Enterprise Aspect" ;
+  sh:closed true ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:EnterpriseViewpoint
+  a edg:ViewpointClass ;
+  dash:abstract true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Enterprise Viewpoint" ;
+  rdfs:subClassOf edg:Viewpoint ;
+.
+edg:Form
+  a edg:AssetClass ;
+  rdfs:comment "A form is a collection of form items. It may also be organized with schedules." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Form" ;
+  rdfs:subClassOf edg:DataExchangeable ;
+  rdfs:subClassOf edg:Governance ;
+  rdfs:subClassOf edg:InformationAsset ;
+  rdfs:subClassOf edg:InformationAssetViewpoint ;
+  rdfs:subClassOf edg:Narratable ;
+  sh:property edg:Form-form-inverse ;
+  sh:property edg:Form-schedule ;
+.
+edg:Form-form-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:form ;
+    ] ;
+  sh:class edg:Form ;
+  sh:group edg:FormItemAsSubjectPropertiesGroup ;
+  sh:name "Form Items" ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:Form-schedule
+  a sh:PropertyShape ;
+  sh:path edg:schedule ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:FormSchedule ;
+  sh:group edg:InformationAssetPropertiesGroup ;
+  sh:name "has schedule" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:FormItem
+  a edg:AssetClass ;
+  rdfs:comment "A form item is a line item on a form.  The value of the form item is expressed as a 'quantity kind'. This gives a name to the type of variable that determines the permissible values. The variable can be computed or be based on a data element." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Form Item" ;
+  sh:property edg:FormItem-fieldId ;
+  sh:property edg:FormItem-form ;
+  sh:property edg:FormItem-quantityKind ;
+  sh:property edg:FormItem-scheduleItem ;
+  sh:property edg:FormItem-sectionId ;
+.
+edg:FormItem-fieldId
+  a sh:PropertyShape ;
+  sh:path edg:fieldId ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype xsd:string ;
+  sh:group edg:FormItemtPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "120"^^xsd:decimal ;
+.
+edg:FormItem-form
+  a sh:PropertyShape ;
+  sh:path edg:form ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Form ;
+  sh:group edg:FormItemtPropertiesGroup ;
+  sh:name "item on form" ;
+  sh:order "110"^^xsd:decimal ;
+.
+edg:FormItem-quantityKind
+  a sh:PropertyShape ;
+  sh:path qudt:quantityKind ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:DataElement ;
+  sh:group edg:FormItemtPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:name "quantity kind" ;
+  sh:order "150"^^xsd:decimal ;
+.
+edg:FormItem-scheduleItem
+  a sh:PropertyShape ;
+  sh:path edg:scheduleItem ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:FormSchedule ;
+  sh:group edg:FormItemtPropertiesGroup ;
+  sh:name "item on schedule" ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:FormItem-sectionId
+  a sh:PropertyShape ;
+  sh:path edg:sectionId ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype xsd:string ;
+  sh:group edg:FormItemtPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "110"^^xsd:decimal ;
+.
+edg:FormItemAsSubjectPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  tosh:viewGadget edg:GenericInversePropertyGadget ;
+  rdfs:label "Items" ;
+  sh:name "Items" ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:FormItemtPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Form Item Properties" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:FormSchedule
+  a edg:AssetClass ;
+  edg:acronym "FSCHD" ;
+  rdfs:comment "Form schedules make up fprms and, as for a form, a schedule is a collection of form items. The form items point to a schedule as opposed to the schedule referring to the form. Schedules can have sub-schedules. A schedule has a section id that orders the sequence of schedules in a report." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Form Schedule" ;
+  rdfs:subClassOf edg:InformationAsset ;
+  rdfs:subClassOf edg:InformationAssetViewpoint ;
+  sh:property edg:FormSchedule-form-inverse ;
+  sh:property edg:FormSchedule-parentSchedule-inverse ;
+  sh:property edg:FormSchedule-scheduleItem-inverse ;
+  sh:property edg:FormSchedule-sectionId ;
+  sh:property edg:FormSchedule-subSchedule ;
+  sh:property edg:FormSchedule-title ;
+.
+edg:FormSchedule-form-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:schedule ;
+    ] ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:FormSchedule ;
+  sh:group edg:InformationAssetPropertiesGroup ;
+  sh:name "part of form" ;
+  sh:order "44"^^xsd:decimal ;
+.
+edg:FormSchedule-parentSchedule-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:subSchedule ;
+    ] ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:FormSchedule ;
+  sh:group edg:InformationAssetPropertiesGroup ;
+  sh:name "part of schedule" ;
+  sh:order "45"^^xsd:decimal ;
+.
+edg:FormSchedule-scheduleItem-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:scheduleItem ;
+    ] ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:FormSchedule ;
+  sh:group edg:FormItemAsSubjectPropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:FormSchedule-sectionId
+  a sh:PropertyShape ;
+  sh:path edg:sectionId ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype xsd:string ;
+  sh:group edg:InformationAssetPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:FormSchedule-subSchedule
+  a sh:PropertyShape ;
+  sh:path edg:subSchedule ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:FormSchedule ;
+  sh:group edg:InformationAssetPropertiesGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:FormSchedule-title
+  a sh:PropertyShape ;
+  sh:path edg:title ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype xsd:string ;
+  sh:group edg:InformationAssetPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:FunctionalRolesGroup
+  a sh:PropertyGroup ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/governance> ;
+  rdfs:label "Functional Roles" ;
+  sh:order "60"^^xsd:decimal ;
+.
+edg:GovernanceViewpoint
+  rdfs:subClassOf edg:EnterpriseViewpoint ;
+.
+edg:GroupPropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Group Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:GuidanceDocument
+  a edg:AssetClass ;
+  edg:acronym "GUIDDOC" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Guidance Document" ;
+  rdfs:subClassOf edg:Document ;
+  rdfs:subClassOf edg:Governance ;
+.
+edg:Identifiable-definition
+  a sh:PropertyShape ;
+  sh:path skos:definition ;
+  graphql:name "skos_preflabel" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:IdentifiersGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 0 ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:Identifiable-prefLabel
+  a sh:PropertyShape ;
+  sh:path skos:prefLabel ;
+  graphql:name "skos_preflabel" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:group edg:IdentifiersGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 0 ;
+  sh:or (
+      [
+        sh:datatype xsd:string ;
+      ]
+      [
+        sh:datatype rdf:langString ;
+      ]
+    ) ;
+  sh:order "5"^^xsd:decimal ;
+.
+edg:IdentificationLabel
+  a edg:AssetClass ;
+  edg:acronym "IDLABEL" ;
+  rdfs:comment "A label that uniquely identifies an object (or person). Examples are product labels, visitor badges and hospital wrist bands." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Identification Label" ;
+  rdfs:subClassOf edg:DataExchangeable ;
+  rdfs:subClassOf edg:InformationAsset ;
+  rdfs:subClassOf edg:InformationAssetViewpoint ;
+.
+edg:Indicator
+  rdfs:subClassOf edg:GovernanceViewpoint ;
+.
+edg:InformationAsset
+  a edg:AssetClass ;
+  a edg:ViewpointClass ;
+  dash:abstract true ;
+  edg:hideSubClasses true ;
+  rdfs:comment "An 'Information Asset' is an artefact that is managed by an organizational entity. These include documents, forms, schedules, and any other work-product that is constructed from data assets and used both within and across organizational boundaries." ;
+  rdfs:label "Information Asset" ;
+  rdfs:subClassOf edg:EnterpriseAsset ;
+  rdfs:subClassOf edg:InvolvedParties ;
+  rdfs:subClassOf edg:LogicalFlowPayloadable ;
+  sh:property edg:Identifiable-definition ;
+  sh:property edg:Identifiable-prefLabel ;
+  sh:property edg:InformationAsset-consumers ;
+  sh:property edg:InformationAsset-exchanges ;
+  sh:property edg:InformationAsset-forBusinessActivity ;
+  sh:property edg:InformationAsset-producers ;
+.
+edg:InformationAsset-consumers
+  a sh:PropertyShape ;
+  sh:path edg:consumer ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Interoperable ;
+  sh:description "Shows the consumers of an information asset." ;
+  sh:group edg:InformationAssetPropertiesGroup ;
+  sh:order "102"^^xsd:decimal ;
+  sh:values [
+      sh:path [
+          sh:inversePath edg:requiresInformationAsset ;
+        ] ;
+    ] ;
+.
+edg:InformationAsset-exchanges
+  a sh:PropertyShape ;
+  sh:path edg:isInformationAssetExchangesGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype xsd:boolean ;
+  sh:description "Shows the flows that involve an information asset." ;
+  sh:group edg:InformationAssetExchangesGadgetGroup ;
+  sh:order "200"^^xsd:decimal ;
+  sh:values true ;
+.
+edg:InformationAsset-forBusinessActivity
+  a sh:PropertyShape ;
+  sh:path edg:forBusinessActivity ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessActivity ;
+  sh:description "Context of use for the information asset." ;
+  sh:group edg:InformationAssetPropertiesGroup ;
+  sh:order "80"^^xsd:decimal ;
+.
+edg:InformationAsset-producers
+  a sh:PropertyShape ;
+  sh:path edg:producer ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Interoperable ;
+  sh:description "Shows the producers of an information asset." ;
+  sh:group edg:InformationAssetPropertiesGroup ;
+  sh:order "100"^^xsd:decimal ;
+  sh:values [
+      sh:path [
+          sh:inversePath edg:producesInformationAsset ;
+        ] ;
+    ] ;
+.
+edg:InformationAssetExchangesGadgetGroup
+  a sh:PropertyGroup ;
+  tosh:viewGadget edg:InformationAssetExchangesGadget ;
+  rdfs:label "Exchanges" ;
+  sh:order "200"^^xsd:decimal ;
+.
+edg:InformationAssetPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Asset Properties" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:InformationAssetViewpoint
+  a edg:ViewpointClass ;
+  dash:abstract true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Information Viewpoint" ;
+  rdfs:subClassOf edg:EnterpriseViewpoint ;
+  rdfs:subClassOf edg:Viewpoint ;
+.
+edg:InformationPackage
+  a edg:AssetClass ;
+  rdfs:subClassOf edg:DataExchangeable ;
+  rdfs:subClassOf edg:InformationAsset ;
+  rdfs:subClassOf edg:InformationAssetViewpoint ;
+  rdfs:subClassOf edg:Narratable ;
+  sh:property edg:InformationPackage-contains ;
+.
+edg:InformationPackage-contains
+  a sh:PropertyShape ;
+  sh:path edg:contains ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:LogicalFlowPayloadable ;
+  sh:group edg:InformationAssetPropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:InformationRecord
+  rdfs:subClassOf edg:InformationAssetViewpoint ;
+.
+edg:InteroperabilityPropertiesGroup
+  a sh:PropertyGroup ;
+  sh:order "34"^^xsd:decimal ;
+.
+edg:InventoryDocument
+  a edg:AssetClass ;
+  edg:acronym "INVDOC" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Inventory Document" ;
+  rdfs:subClassOf edg:Document ;
+  rdfs:subClassOf edg:Governance ;
+.
+edg:Invoice
+  a edg:AssetClass ;
+  edg:acronym "INVOICE" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Invoice" ;
+  rdfs:subClassOf edg:Document ;
+  rdfs:subClassOf edg:Form ;
+.
+edg:InvolvedParties
+  a edg:AspectClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Involved Parties" ;
+  rdfs:subClassOf edg:Aspect ;
+  sh:property edg:InvolvedParties-accountable ;
+  sh:property edg:InvolvedParties-assistedBy ;
+  sh:property edg:InvolvedParties-consulted ;
+  sh:property edg:InvolvedParties-informed ;
+  sh:property edg:InvolvedParties-performedBy ;
+  sh:property edg:InvolvedParties-responsible ;
+.
+edg:InvolvedParties-accountable
+  a sh:PropertyShape ;
+  sh:path edg:accoutable ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Party ;
+  sh:group edg:FunctionalRolesGroup ;
+  sh:name "accountable party" ;
+  sh:order "204"^^xsd:decimal ;
+.
+edg:InvolvedParties-assistedBy
+  a sh:PropertyShape ;
+  sh:path edg:assistedBy ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Party ;
+  sh:group edg:FunctionalRolesGroup ;
+  sh:name "assisted by" ;
+  sh:order "250"^^xsd:decimal ;
+.
+edg:InvolvedParties-consulted
+  a sh:PropertyShape ;
+  sh:path edg:consulted ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Party ;
+  sh:group edg:FunctionalRolesGroup ;
+  sh:name "consulted party" ;
+  sh:order "206"^^xsd:decimal ;
+.
+edg:InvolvedParties-informed
+  a sh:PropertyShape ;
+  sh:path edg:informed ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Party ;
+  sh:group edg:FunctionalRolesGroup ;
+  sh:name "informed party" ;
+  sh:order "202"^^xsd:decimal ;
+.
+edg:InvolvedParties-performedBy
+  a sh:PropertyShape ;
+  sh:path edg:performedBy ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Party ;
+  sh:group edg:FunctionalRolesGroup ;
+  sh:name "performed by" ;
+  sh:order "240"^^xsd:decimal ;
+.
+edg:InvolvedParties-responsible
+  a sh:PropertyShape ;
+  sh:path edg:responsible ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Party ;
+  sh:group edg:FunctionalRolesGroup ;
+  sh:name "responsible party" ;
+  sh:order "200"^^xsd:decimal ;
+.
+edg:JobDescriptionDocument
+  a edg:AssetClass ;
+  edg:acronym "JDDOC" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Job Description Document" ;
+  rdfs:subClassOf edg:Document ;
+  rdfs:subClassOf edg:Governance ;
+.
+edg:JobRolePropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Role Metadata" ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:Locatable
+  sh:property edg:Locatable-locatedIn ;
+.
+edg:Locatable-locatedIn
+  a sh:PropertyShape ;
+  sh:path edg:locatedIn ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Place ;
+  sh:group edg:LocatablePropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Locatable-locatedIn-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:locatedIn ;
+    ] ;
+  graphql:name "placefor" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Locatable ;
+  sh:group edg:LocatablePropertiesGroup ;
+  sh:name "place for" ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:LogicalFlow
+  rdfs:subClassOf edg:TechnicalAssetViewFromEnterpriseAssets ;
+.
+edg:LogicalFlowPayloadable
+  a edg:AspectClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Logical Flow Payload" ;
+  rdfs:subClassOf edg:Payloadable ;
+.
+edg:Metric
+  rdfs:subClassOf edg:Identifiable ;
+  rdfs:subClassOf edg:Narratable ;
+.
+edg:Narratable
+  sh:property edg:Narratable-otherComments ;
+.
+edg:Narratable-otherComments
+  a sh:PropertyShape ;
+  sh:path edg:otherComments ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:NarratablePropertiesGroup ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:NoticeDocument
+  a edg:AssetClass ;
+  edg:acronym "NTCEDOC" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Notice Document" ;
+  rdfs:subClassOf edg:Document ;
+  rdfs:subClassOf edg:Governance ;
+.
+edg:Office
+  a edg:AssetClass ;
+  rdfs:comment "An organizational unit that has specific responsibilites and accpointabilities in an organization." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Office" ;
+  rdfs:subClassOf edg:Organization ;
+.
+edg:Organization
+  a edg:AssetClass ;
+  edg:acronym "ORG" ;
+  rdfs:comment "An 'Organization' can be an Enterprise, a business unit, a department, an office, a council, or a group such as a committee, working group or team." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Organization" ;
+  rdfs:subClassOf edg:Identifiable ;
+  rdfs:subClassOf edg:Narratable ;
+  rdfs:subClassOf edg:Party ;
+  sh:property edg:Organization-email ;
+  sh:property edg:Organization-jobTitle ;
+  sh:property edg:Organization-providesCapability ;
+  sh:property edg:Organization-responsibility ;
+  sh:property edg:Organization-subOrganization ;
+  sh:property edg:Organization-telephone ;
+  sh:property edg:Organization-url ;
+.
+edg:Organization-email
+  a sh:PropertyShape ;
+  sh:path edg:email ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype xsd:string ;
+  sh:group edg:OrganizationPropertiesGroup ;
+  sh:order "90"^^xsd:decimal ;
+.
+edg:Organization-jobTitle
+  a sh:PropertyShape ;
+  sh:path edg:jobTitle ;
+  dash:composite true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:JobTitle ;
+  sh:group edg:OrganizationPropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:Organization-providesCapability
+  a sh:PropertyShape ;
+  sh:path edg:providesCapability ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessCapability ;
+  sh:group edg:OrganizationPropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:Organization-responsibility
+  a sh:PropertyShape ;
+  sh:path edg:responsibility ;
+  dash:composite true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Responsibility ;
+  sh:group edg:OrganizationPropertiesGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:Organization-subOrganization
+  a sh:PropertyShape ;
+  sh:path edg:subOrganization ;
+  dash:composite true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Organization ;
+  sh:group edg:OrganizationPropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:Organization-telephone
+  a sh:PropertyShape ;
+  sh:path edg:telephone ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype xsd:string ;
+  sh:group edg:OrganizationPropertiesGroup ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:Organization-url
+  a sh:PropertyShape ;
+  sh:path edg:url ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:group edg:OrganizationPropertiesGroup ;
+  sh:order "80"^^xsd:decimal ;
+.
+edg:OrganizationEntity
+  dash:abstract true ;
+.
+edg:OrganizationPropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Organization Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:Party
+  rdfs:subClassOf edg:BusinessModelViewpoint ;
+  rdfs:subClassOf edg:EnterpriseAsset ;
+.
+edg:PartyAsRole
+  a edg:AssetClass ;
+  edg:acronym "PAR" ;
+  rdfs:comment "A 'Party in Role' is a way of designating the kind of action that a party plays." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Party Role" ;
+  rdfs:subClassOf edg:Party ;
+.
+edg:PerfomancePropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Perfomance Metadata" ;
+  sh:description "The 'performance properties' group contains properties pertinent to how an activity, function or task is performed. Example properties are 'performance indicator', 'performed by role' and 'assisted by role'." ;
+  sh:order "35"^^xsd:decimal ;
+.
+edg:Performance-assistedBy
+  a sh:PropertyShape ;
+  sh:path edg:assistedBy ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Party ;
+  sh:group edg:PerfomancePropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:Performance-performanceIndicator
+  a sh:PropertyShape ;
+  sh:path edg:performanceIndicator ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessPerformanceIndicator ;
+  sh:group edg:PerfomancePropertiesGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:Performance-performedByJobTitle
+  a sh:PropertyShape ;
+  sh:path edg:performedBy ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:JobTitle ;
+  sh:group edg:PerfomancePropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:Person
+  a sh:NodeShape ;
+  rdfs:subClassOf edg:Dutiable ;
+  rdfs:subClassOf edg:Party ;
+  sh:property edg:Person-email ;
+.
+edg:Person-email
+  a sh:PropertyShape ;
+  sh:path edg:email ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype xsd:string ;
+  sh:group edg:PersonDetailsGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:PersonDetailsGroup
+  a sh:PropertyGroup ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Person Details Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:Place
+  rdfs:subClassOf edg:BusinessModelViewpoint ;
+  rdfs:subClassOf edg:EnterpriseAsset ;
+  sh:property edg:Locatable-locatedIn-inverse ;
+.
+edg:PolicyCompliancePropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-model> ;
+  rdfs:label "Policy Compliance Details" ;
+.
+edg:PolicyDocument
+  a edg:AssetClass ;
+  edg:acronym "PLCYDOC" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Policy Document" ;
+  rdfs:subClassOf edg:Document ;
+  rdfs:subClassOf edg:Governance ;
+.
+edg:PolicyPropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-model> ;
+  rdfs:label "Policy Metadata" ;
+.
+edg:Presentation
+  a edg:AssetClass ;
+  edg:acronym "PLCYDOC" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Presentation" ;
+  rdfs:subClassOf edg:Document ;
+  rdfs:subClassOf edg:Governance ;
+  sh:property edg:Presentation-numberOfSlides ;
+.
+edg:Presentation-numberOfSlides
+  a sh:PropertyShape ;
+  sh:path edg:numberOfSlides ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:InformationAssetPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:name "slides" ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:Procedure
+  a edg:AssetClass ;
+  edg:acronym "PROC" ;
+  edg:hideSubClasses true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Procedure" ;
+  rdfs:subClassOf edg:BusinessModelViewpoint ;
+  rdfs:subClassOf edg:EnterpriseAsset ;
+  sh:property edg:Procedure-specifiesNeedFor ;
+  sh:property edg:Procedure-specifiesWorkOn ;
+  sh:property edg:Procedure-subProcedure ;
+  sh:property edg:Procedure-successor ;
+.
+edg:Procedure-specifiesNeedFor
+  a sh:PropertyShape ;
+  sh:path edg:specifiesNeedFor ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessCapability ;
+  sh:group edg:ProcedurePropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Procedure-specifiesWorkOn
+  a sh:PropertyShape ;
+  sh:path edg:specifiesWorkOn ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessCapability ;
+  sh:group edg:ProcedurePropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:Procedure-subProcedure
+  a sh:PropertyShape ;
+  sh:path edg:subProcedure ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Procedure ;
+  sh:group edg:ProcedurePropertiesGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:Procedure-successor
+  a sh:PropertyShape ;
+  sh:path edg:successor ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Procedure ;
+  sh:group edg:ProcedurePropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:ProcedureDocument
+  a edg:AssetClass ;
+  edg:acronym "PROCDOC" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Procedure Document" ;
+  rdfs:subClassOf edg:Document ;
+  rdfs:subClassOf edg:Governance ;
+.
+edg:ProcedurePropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Procedure Metadata" ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Process
+  edg:hideSubClasses true ;
+  rdfs:label "Process" ;
+  rdfs:subClassOf edg:BusinessModelViewpoint ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:EnterpriseAsset ;
+  rdfs:subClassOf edg:InvolvedParties ;
+  rdfs:subClassOf edg:ProducerConsumerAspect ;
+  sh:property edg:Process-activity ;
+  sh:property edg:Process-subProcess ;
+.
+edg:Process-activity
+  a sh:PropertyShape ;
+  sh:path edg:activity ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:ProcessActivity ;
+  sh:description "Associates a process with a process activity." ;
+  sh:group edg:ProcessPropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:Process-subProcess
+  a sh:PropertyShape ;
+  sh:path edg:subProcess ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Process ;
+  sh:group edg:ProcessPropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:ProcessActivity
+  a edg:AssetClass ;
+  edg:acronym "PROCESSACT" ;
+  edg:hideSubClasses true ;
+  rdfs:comment "A Process Acrtivity corresponds to a 'Business Process Modeling (BPM)' notiion of activity, and is distinguished from a Business Activity." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Process Activity" ;
+  rdfs:seeAlso edg:BusinessActivity ;
+  rdfs:subClassOf edg:BusinessModelViewpoint ;
+  rdfs:subClassOf edg:EnterpriseAsset ;
+  rdfs:subClassOf edg:InvolvedParties ;
+  rdfs:subClassOf edg:ProducerConsumerAspect ;
+  sh:property edg:ProcessActivity-procedure ;
+  sh:property edg:ProcessActivity-subActivity ;
+  sh:property edg:ProcessActivity-successor ;
+.
+edg:ProcessActivity-procedure
+  a sh:PropertyShape ;
+  sh:path edg:task ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Procedure ;
+  sh:group edg:ProcessActivityPropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:ProcessActivity-subActivity
+  a sh:PropertyShape ;
+  sh:path edg:subActivity ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:ProcessActivity ;
+  sh:group edg:ProcessActivityPropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:ProcessActivity-successor
+  a sh:PropertyShape ;
+  sh:path edg:successor ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:ProcessActivity ;
+  sh:group edg:ProcessActivityPropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:ProcessActivityPropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Process Activity Metadata" ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:ProcessPropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Process Metadata" ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:ProducerConsumerAspect
+  a edg:AspectClass ;
+  dash:abstract true ;
+  rdfs:comment "The 'Producer-Consumer' aspect captures required and produced information assets." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Producer-Consumer Aspect" ;
+  rdfs:subClassOf edg:Aspect ;
+  sh:property edg:ProducerConsumerAspect-producesInformationAsset ;
+  sh:property edg:ProducerConsumerAspect-requiresInformationAsset ;
+.
+edg:ProducerConsumerAspect-producesInformationAsset
+  a sh:PropertyShape ;
+  sh:path edg:producesInformationAsset ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:InformationAsset ;
+  sh:description "Allows a technical asset to specify what information assets it produces." ;
+  sh:group edg:ProducerConsumerPropertiesGroucp ;
+  sh:order "2"^^xsd:decimal ;
+.
+edg:ProducerConsumerAspect-requiresInformationAsset
+  a sh:PropertyShape ;
+  sh:path edg:requiresInformationAsset ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:InformationAsset ;
+  sh:description "Allows a technical asset to specify what information assets it requires." ;
+  sh:group edg:ProducerConsumerPropertiesGroucp ;
+  sh:order "3"^^xsd:decimal ;
+.
+edg:ProducerConsumerPropertiesGroucp
+  a sh:PropertyGroup ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Producer-Consumer Properties" ;
+  sh:order "55"^^xsd:decimal ;
+.
+edg:Program
+  a edg:AssetClass ;
+  edg:acronym "PROG" ;
+  rdfs:comment "A 'Program' is a specification of an initiative that a business has performed, is performing or intends to undertake." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Program" ;
+  rdfs:subClassOf edg:BusinessModelViewpoint ;
+  rdfs:subClassOf edg:EnterpriseAsset ;
+  sh:property edg:Program-charter ;
+.
+edg:Program-charter
+  a sh:PropertyShape ;
+  sh:path edg:charter ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Charter ;
+  sh:group edg:ProgramPropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:ProgramPropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Program Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:ProjectTeam
+  a edg:AssetClass ;
+  edg:acronym "PRJTTEAM" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Project Team" ;
+  rdfs:subClassOf edg:Team ;
+.
+edg:Purpose
+  a edg:ConstructClass ;
+  a sh:NodeShape ;
+  rdfs:comment "Expresses an intent that something's existence is motivated or justified by." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Purpose" ;
+  rdfs:subClassOf edg:Construct ;
+.
+edg:Record
+  rdfs:subClassOf edg:DataExchangeable ;
+.
+edg:Report-dependsOnDataFrom
+  sh:order "20"^^xsd:decimal ;
+.
+edg:ReportColumn
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Report Column" ;
+  rdfs:subClassOf edg:DataElement ;
+  sh:property edg:ReportColumn-columnOf ;
+.
+edg:ReportColumn-columnOf
+  a sh:PropertyShape ;
+  sh:path edg:columnOf ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:ReportDataSet ;
+  sh:group edg:InformationAssetPropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:ReportDataSet
+  a edg:AssetClass ;
+  edg:acronym "REPTDS" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Report Data Set" ;
+  rdfs:subClassOf edg:DataSet ;
+  rdfs:subClassOf edg:InformationAsset ;
+  rdfs:subClassOf edg:InformationAssetViewpoint ;
+  sh:property edg:ReportDataSet-partOf ;
+  sh:property edg:ReportDataSet-recordCount ;
+  sh:property edg:ReportDataSet-reportColumn ;
+.
+edg:ReportDataSet-partOf
+  a sh:PropertyShape ;
+  sh:path edg:partOf ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Report ;
+  sh:group edg:ReportDatasetPropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:ReportDataSet-recordCount
+  a sh:PropertyShape ;
+  sh:path edg:recordCount ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:ReportDatasetPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 30 ;
+.
+edg:ReportDataSet-reportColumn
+  a sh:PropertyShape ;
+  sh:path edg:reportColumn ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:ReportColumn ;
+  sh:group edg:ReportDatasetPropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:ReportDatasetPropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Report Dataset Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:Requirement
+  sh:property edg:Requirement-satisfiedBy ;
+.
+edg:RequirementsTraceabilityAspect-satisfies
+  sh:group edg:EnterpriseModelTraceabilityGroup ;
+.
+edg:RequirementsTraceabilityAspect-supportsActivity
+  sh:group edg:EnterpriseModelTraceabilityGroup ;
+.
+edg:Responsibility
+  a edg:AssetClass ;
+  rdfs:comment "Responsibiities are high-level statements that summarize the business functions and/or work items that are assigned fo an organization (or job title)." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Responsibility" ;
+  rdfs:subClassOf edg:BusinessModelViewpoint ;
+  rdfs:subClassOf edg:EnterpriseAsset ;
+  sh:property edg:Responsibility-title ;
+.
+edg:Responsibility-description
+  sh:group edg:ResponsibilityProperiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:Responsibility-title
+  a sh:PropertyShape ;
+  sh:path edg:title ;
+  edg:hideClass true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:group edg:ResponsibilityProperiesGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 0 ;
+  sh:or (
+      [
+        sh:datatype xsd:string ;
+      ]
+      [
+        sh:datatype rdf:langString ;
+      ]
+    ) ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:ResponsibilityProperiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Responsibility Details" ;
+.
+edg:Room
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  rdfs:label "Room" ;
+  rdfs:subClassOf edg:BuildingUnit ;
+.
+edg:SoftwareCapability-enablesEnterpriseCapability
+  a sh:PropertyShape ;
+  sh:path edg:enablesEnterpriseCapability ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:BusinessCapability ;
+.
+edg:SoftwareCapability-enablesSoftwareCapability
+  a sh:PropertyShape ;
+  sh:path edg:enablesSoftwareCapability ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+.
+edg:SoftwareModule
+  rdfs:subClassOf edg:AccessControllable ;
+  rdfs:subClassOf edg:Configurable ;
+  rdfs:subClassOf edg:Interoperable ;
+  rdfs:subClassOf edg:TechnicalAssetViewFromEnterpriseAssets ;
+.
+edg:SoftwareService
+  rdfs:subClassOf edg:TechnicalAssetViewFromEnterpriseAssets ;
+.
+edg:SpecificationPropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Specification Properties" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:StakeholderGroup
+  a edg:AssetClass ;
+  edg:acronym "SHGRP" ;
+  edg:isDepictionType true ;
+  rdfs:comment "A 'StakeholderGroup' can be users, managers, sponsers or other interested group of parties." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Stakeholder Group" ;
+  rdfs:subClassOf edg:Party ;
+  sh:property edg:StakeholderGroup-stakeholder ;
+.
+edg:StakeholderGroup-stakeholder
+  a sh:PropertyShape ;
+  sh:path edg:stakeholder ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  sh:class edg:Party ;
+  sh:group edg:OrganizationPropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:SubjectArea
+  a sh:NodeShape ;
+.
+edg:Suite
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  rdfs:label "Suite" ;
+  rdfs:subClassOf edg:BuildingUnit ;
+.
+edg:Team
+  a edg:AssetClass ;
+  dash:abstract true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Team" ;
+  rdfs:subClassOf edg:Organization ;
+.
+edg:TechnicalAssetViewFromEnterpriseAssets
+  a edg:ViewpointClass ;
+  dash:abstract true ;
+  vaem:isElaboratedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Technical Asset Viewpoint" ;
+  rdfs:subClassOf edg:EnterpriseViewpoint ;
+.
+edg:WorkingGroup
+  a edg:AssetClass ;
+  edg:acronym "WG" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "Working Group" ;
+  rdfs:subClassOf edg:Organization ;
+.
+edg:activity
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "activity" ;
+.
+edg:amendments
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "amendments" ;
+.
+edg:assignedJobTitle
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "assigned job title" ;
+.
+edg:assistedBy
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "assisted by" ;
+.
+edg:authority
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "authority" ;
+.
+edg:background
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "background" ;
+.
+edg:businessArea
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "business area" ;
+.
+edg:businessFunction
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "business function" ;
+  rdfs:subPropertyOf edg:function ;
+.
+edg:businessFunctionImpact
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "business function impact" ;
+.
+edg:businessSubFunction
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "business subfunction" ;
+  rdfs:subPropertyOf edg:function ;
+.
+edg:businessUnit
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "business unit" ;
+.
+edg:charter
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "charter" ;
+.
+edg:columnOf
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+.
+edg:consumer
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "consumer" ;
+.
+edg:context
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "context" ;
+.
+edg:dataContainerType
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+.
+edg:dataElement
+  a rdf:Property ;
+.
+edg:department
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "department" ;
+.
+edg:division
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "division" ;
+.
+edg:email
+  a owl:DatatypeProperty ;
+  rdfs:comment "An email address." ;
+  rdfs:label "email" ;
+  rdfs:range xsd:string ;
+.
+edg:enablesBusinessCapability
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+.
+edg:enablesSoftwareCapability
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+.
+edg:execution
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "execution" ;
+.
+edg:faxNumber
+  a owl:DatatypeProperty ;
+  rdfs:label "fax number" ;
+  rdfs:range xsd:string ;
+.
+edg:fieldId
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "field id" ;
+.
+edg:forBusinessActivity
+  a rdf:Property ;
+  rdfs:comment "a reusable way of referening to a business activity." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "for business activity" ;
+.
+edg:form
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "form" ;
+.
+edg:formItem
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "form item" ;
+  rdfs:subPropertyOf edg:compositionProperty ;
+.
+edg:forums
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "forums" ;
+.
+edg:framework
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "framework" ;
+.
+edg:glossary
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "glossary" ;
+.
+edg:group
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "group" ;
+.
+edg:jobTitle
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "job title" ;
+.
+edg:measure
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "measure" ;
+.
+edg:metrics
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "metrics" ;
+.
+edg:mission
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "mission" ;
+.
+edg:nextActivity
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "next activity" ;
+.
+edg:numberOfSlides
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "number of slides" ;
+.
+edg:objectives
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "objectives" ;
+.
+edg:organization
+  a owl:ObjectProperty ;
+  rdfs:label "organization" ;
+  sh:group edg:OrganizationPropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:originatedBy
+  rdfs:range edg:Organization ;
+.
+edg:originatedByOrganization
+  a owl:ObjectProperty ;
+.
+edg:otherComments
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "other comments" ;
+.
+edg:package
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "package" ;
+.
+edg:participatingParty
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "participating party"@en ;
+.
+edg:performedBy
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "performed by" ;
+.
+edg:performs
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "performs" ;
+.
+edg:performsActivity
+  a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "performs activity" ;
+  rdfs:subClassOf edg:performs ;
+.
+edg:performsCapability
+  a rdf:Property ;
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "performs capability" ;
+  rdfs:subClassOf edg:performs ;
+.
+edg:performsFunction
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "performs function" ;
+  rdfs:subClassOf edg:performs ;
+.
+edg:procedure
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "procedure" ;
+.
+edg:producer
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "producer" ;
+.
+edg:providesCapability
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "provides capability" ;
+.
+edg:reportColumn
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "report column" ;
+.
+edg:requiresActivity
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "requires activity" ;
+.
+edg:requiresInformationAsset
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "requires information asset" ;
+.
+edg:resourceUsedBy
+  rdfs:range edg:Process ;
+.
+edg:responsibility
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "responsibility" ;
+.
+edg:schedule
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "schedule" ;
+.
+edg:scheduleItem
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "schedule item" ;
+.
+edg:sectionId
+  a rdf:Property ;
+  rdfs:label "section id" ;
+.
+edg:sponsors
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "sponsors" ;
+.
+edg:stakeholder
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "stakeholder" ;
+.
+edg:strategy
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "strategy" ;
+.
+edg:structure
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "structure" ;
+.
+edg:subActivity
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "sub-activity" ;
+.
+edg:subArea
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:label "sub-area" ;
+.
+edg:subCapability
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "sub-capability" ;
+.
+edg:subOrganization
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "sub-organization" ;
+  sh:group edg:OrganizationPropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:subProcedure
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "sub-procedure" ;
+.
+edg:subProcess
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "sub-process" ;
+.
+edg:subSchedule
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "sub-schedule" ;
+.
+edg:successor
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "successor" ;
+.
+edg:summary
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "summary" ;
+.
+edg:supportsActivity
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "supports activity" ;
+  rdfs:subPropertyOf edg:supports ;
+.
+edg:supportsOrganization
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "supports organization" ;
+  rdfs:subPropertyOf edg:supports ;
+.
+edg:supportsProcess
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "supports process" ;
+  rdfs:subPropertyOf edg:supports ;
+.
+edg:task
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "task" ;
+.
+edg:team
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "team" ;
+.
+edg:telephone
+  a owl:DatatypeProperty ;
+  rdfs:label "telephone" ;
+  rdfs:range xsd:string ;
+.
+edg:url
+  a owl:DatatypeProperty ;
+  rdfs:label "URL" ;
+  rdfs:range xsd:anyURI ;
+.
+edg:usedByJobTitle
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "used by job title" ;
+  rdfs:subPropertyOf edg:usedBy ;
+.
+edg:usedByOrganization
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "used by organization" ;
+  rdfs:subPropertyOf edg:usedBy ;
+.
+edg:usesProcess
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "uses process" ;
+.
+edg:valueProposition
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "value proposition" ;
+.
+edg:vision
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "vision" ;
+.
+edg:website
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "website" ;
+.
+<http://edg.topbraid.solutions/schema/enterprise-models/GMD_enterprise-models>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:SchemaGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource edg:DataPackage ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:usesNonImportedResource provo:Attribution ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+qudt:quantityKind
+  a rdf:Property ;
+.

@@ -1,0 +1,130 @@
+# baseURI: urn:x-evn-master:logical_model_tests
+# imports: http://edg.topbraid.solutions/1.0/schema/datamodels
+# imports: http://edg.topbraid.solutions/1.0/schema/edg
+# imports: http://edg.topbraid.solutions/1.0/schema/glossary
+# imports: http://edg.topbraid.solutions/1.0/schema/governance
+# imports: http://edg.topbraid.solutions/1.0/schema/requirements-model
+# imports: http://edg.topbraid.solutions/1.0/shapes/core
+# imports: http://edg.topbraid.solutions/1.0/shapes/datamodels
+# imports: http://edg.topbraid.solutions/1.0/shapes/governance
+# imports: http://edg.topbraid.solutions/1.0/shapes/requirements-model
+# imports: http://topbraid.org/teamworkconstraints
+
+@prefix dac-lm: <http://edg.topbraid.solutions/dac/lm/> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+dac-lm:DATAELEMENT-1001
+  a edg:DataElement ;
+  rdfs:label "ALLOWANCE FOR LOAN AND LEASE LOSSES" ;
+.
+dac-lm:LATT-LE1-LA1
+  a edg:LogicalAttribute ;
+  edg:attributeOf dac-lm:LENTITY-LE1 ;
+  edg:isPrimaryKey true ;
+  rdfs:label "LE1-LA1" ;
+.
+dac-lm:LATT-LE1-LA2
+  a edg:LogicalAttribute ;
+  edg:attributeOf dac-lm:LENTITY-LE1 ;
+  rdfs:label "LE1-LA2" ;
+.
+dac-lm:LDM-Logical_Model_Tests
+  a edg:LogicalDataModel ;
+  rdfs:label "Logical Model Tests" ;
+.
+dac-lm:LENTITY-LE1
+  a edg:LogicalEntity ;
+  edg:description "Entity for test purposes"^^rdf:HTML ;
+  edg:entityOflogicalDataModel dac-lm:LDM-Logical_Model_Tests ;
+  edg:name "LE1" ;
+  rdfs:label "LE1" ;
+.
+dac-lm:LENTITY-LE2
+  a edg:LogicalEntity ;
+  edg:entityOflogicalDataModel dac-lm:LDM-Logical_Model_Tests ;
+  rdfs:label "LE2" ;
+.
+dac-lm:LENTITY-LE3
+  a edg:LogicalEntity ;
+  edg:entityOflogicalDataModel dac-lm:LDM-Logical_Model_Tests ;
+  rdfs:label "LE3" ;
+.
+dac-lm:LREL-744eef94-2bfc-11b2-8025-3e987db74b8c
+  a edg:LogicalRelationParticipant ;
+  rdfs:label "LRP3" ;
+.
+dac-lm:LREL-LR1
+  a edg:LogicalRelation ;
+  edg:participant dac-lm:LRP-LR1-P1 ;
+  edg:participant dac-lm:LRP-LR1-P2 ;
+  rdfs:label "LR1" ;
+.
+dac-lm:LREL-LR2
+  a edg:LogicalRelation ;
+  rdfs:label "LR2" ;
+.
+dac-lm:LREL-owned_by
+  a edg:LogicalRelation ;
+  edg:participant dac-lm:LRELP-744eef96-2bfc-11b2-8025-3e987db74b8c ;
+  edg:status edg:ASSETSTAT_InReviewStatus ;
+  rdfs:label "owned by" ;
+.
+dac-lm:LREL-sdsd
+  a edg:LogicalRelationParticipant ;
+  rdfs:label "sdsd" ;
+.
+dac-lm:LRELP-744eef96-2bfc-11b2-8025-3e987db74b8c
+  a edg:LogicalRelationParticipant ;
+  edg:cardinality edg:CRDNLTY_ANY-OR-NONE ;
+  edg:logicalEntity dac-lm:LENTITY-LE3 ;
+  rdfs:label "LE3-P1" ;
+.
+dac-lm:LRP-LR1-P1
+  a edg:LogicalRelationParticipant ;
+  edg:cardinality edg:CRDNLTY_AT-MOST-ONE ;
+  edg:logicalEntity dac-lm:LENTITY-LE1 ;
+  rdfs:label "LRP-LR1-P1" ;
+.
+dac-lm:LRP-LR1-P2
+  a edg:LogicalRelationParticipant ;
+  edg:cardinality edg:CRDNLTY_EXACTLY-ONE ;
+  edg:logicalEntity dac-lm:LENTITY-LE2 ;
+  rdfs:label "LRP-LR1-P2" ;
+.
+dac-lm:frb_fy_data_elements
+  a edg:DataAssetsProject ;
+  a teamwork:Vocabulary ;
+  metadata:status metadata:UnderDevelopmentStatus ;
+  swa:defaultNamespace "http://edg.frb.topbraid.solutions/frb/" ;
+  teamwork:URIClassPrefix "acronym" ;
+  teamwork:URIConstructMethod "label" ;
+  teamwork:userCannotModifyURI false ;
+  rdfs:label "FRB FY Data Elements" ;
+.
+edg:DataAssetsProject
+  rdfs:subClassOf teamwork:Vocabulary ;
+.
+teamwork:Vocabulary
+  rdfs:subClassOf owl:Ontology ;
+.
+<urn:x-evn-master:logical_model_tests>
+  a owl:Ontology ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/edg> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/shapes/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/shapes/datamodels> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/shapes/governance> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/shapes/requirements-model> ;
+  owl:imports <http://topbraid.org/teamworkconstraints> ;
+.

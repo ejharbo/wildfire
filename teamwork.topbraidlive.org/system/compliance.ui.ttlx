@@ -1,0 +1,590 @@
+# baseURI: http://topbraid.org/compliance.ui
+# imports: http://topbraid.org/compliance
+# imports: http://topbraid.org/swa
+# imports: http://topbraid.org/teamwork
+# prefix: compliance.ui
+
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix compliance.ui: <http://topbraid.org/compliance.ui#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix default: <http://uispin.org/default#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+arg:json
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:report
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:resultsGraph
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:softwareSystem
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:softwareSystemName
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+compliance:PropertyMismatch
+  ui:instanceView """
+<span let:correct=\"{= spl:object(?this, compliance:correctValue) }\" let:graph=\"{= ui:contextValue(&quot;graph&quot;) }\" ui:id=\"summary\">
+    <ui:if ui:condition=\"{= bound(?graph) }\">Incorrect value <span class=\"value incorrect\">{= swa:labelInGraph(spl:object(?this, compliance:incorrectValue), ?graph) }</span> of property <span class=\"property\">{= swa:labelInGraph(spl:object(?this, compliance:property), ?graph) }</span>
+        <ui:if ui:condition=\"{= bound(?correct) }\">
+            <span> (Suggestion: <span class=\"value correct\">{= swa:labelInGraph(?correct, ?graph) }</span>)</span>
+        </ui:if>
+    </ui:if>
+</span>
+"""^^ui:Literal ;
+.
+compliance:StatusResult
+  ui:instanceView """
+<span ui:id=\"summary\">Status is <span class=\"status\">{= swa:labelInGraph(spl:object(?this, compliance:status), ui:graph) }</span>
+</span>
+"""^^ui:Literal ;
+.
+compliance:UnknownResource
+  ui:instanceView """
+<span ui:id=\"summary\">Unknown resource</span>
+"""^^ui:Literal ;
+.
+<http://topbraid.org/compliance.ui>
+  rdf:type owl:Ontology ;
+  rdfs:comment "APIs to display the differences between a given set of input resources and a given base graph. This can be used to (periodically) check the compliance of data used by external applications against reference datasets managed by TopBraid." ;
+  rdfs:label "Compliance Reports" ;
+  owl:imports <http://topbraid.org/compliance> ;
+  owl:imports <http://topbraid.org/swa> ;
+  owl:imports <http://topbraid.org/teamwork> ;
+.
+teamwork:AbstractComplianceReport
+  rdf:type ui:ViewElement ;
+  ui:headIncludes """
+<style>body { font-family: sans-serif; }
+
+table {
+	border: 1px solid black;
+	border-collapse: collapse;
+	background: #f9f9f9;
+}
+
+th {
+ 	background: #f0f0f0;
+	border: 1px solid grey;
+	padding-left: 8px;
+	padding-right: 8px;
+	text-align: left;
+}
+
+td {
+	border: 1px solid grey;
+	padding-left: 8px;
+	padding-right: 8px;
+	vertical-align: top;
+}
+
+ul {
+	margin: 0px;
+	padding-left: 20px;
+}
+
+.correct {
+	color: green;
+}
+
+.incorrect {
+	color: red;
+}
+
+.property {
+	font-weight: bold;
+}
+
+.status {
+	font-weight: bold;
+	color: red;
+}
+
+.value {
+	font-weight: bold;
+}</style>
+"""^^ui:Literal ;
+  ui:headIncludes """
+<title>TopBraid EDG Compliance Report</title>
+"""^^ui:Literal ;
+  rdfs:label "Abstract compliance report" ;
+  rdfs:subClassOf ui:ViewElements ;
+.
+teamwork:ComplianceReport
+  rdf:type ui:ViewElement ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The vocabulary graph." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:report ;
+      spl:valueType compliance:Report ;
+      rdfs:comment "The Report to render." ;
+    ] ;
+  ui:prototype """
+<ui:setContext ui:varName=\"graph\" ui:varValue=\"{= ?graph }\">
+    <h1>Compliance Report against {= teamwork:projectLabel(ui:graphWithoutImports(?graph)) }</h1>
+    <p>Produced by TopBraid Server on {= ui:label(spl:object(?report, compliance:timeStamp)) }</p>
+    <ui:group letrs:resources=\"{#
+            SELECT DISTINCT ?resource ?primaryKey
+            WHERE {
+                ?report compliance:result ?result .
+                ?result compliance:resource ?resource .
+                BIND (spl:object(?result, compliance:primaryKey) AS ?primaryKey) .
+                FILTER NOT EXISTS {
+                    ?result a compliance:UnknownResource .
+                } .
+            }
+            ORDER BY (swa:labelInGraph(?resource, ?graph)) }\" letrs:rows=\"{#
+            SELECT *
+            WHERE {
+                ?report compliance:result ?result .
+            } }\" letrs:unknowns=\"{#
+            SELECT ?result ?primaryKey
+            WHERE {
+                ?report compliance:result ?result .
+                ?result a compliance:UnknownResource .
+                BIND (spl:object(?result, compliance:primaryKey) AS ?primaryKey) .
+            }
+            ORDER BY (?primaryKey) }\">
+        <p>
+            <b>Found {= spr:rowCount(?rows) } entries for {= spr:rowCount(?resources) + spr:rowCount(?unknowns) } resources</b>
+        </p>
+        <table>
+            <tr>
+                <th>Resource</th>
+                <th>Primary Key</th>
+                <th>Details</th>
+            </tr>
+            <ui:forEach ui:resultSet=\"{= ?resources }\">
+                <tr>
+                    <td>
+                        <span class=\"resource\">{= swa:labelInGraph(?resource, ?graph) }</span>
+                    </td>
+                    <td>{= ?primaryKey }</td>
+                    <td>
+                        <ul letrs:results=\"{#
+                                SELECT ?result
+                                WHERE {
+                                    ?report compliance:result ?result .
+                                    ?result compliance:resource ?resource .
+                                } }\">
+                            <ui:forEach ui:resultSet=\"{= ?results }\">
+                                <li>
+                                    <ui:resourceView ui:matchIds=\"summary\" ui:resource=\"{= ?result }\"/>
+                                </li>
+                            </ui:forEach>
+                        </ul>
+                    </td>
+                </tr>
+            </ui:forEach>
+            <ui:forEach ui:resultSet=\"{= ?unknowns }\">
+                <tr>
+                    <td/>
+                    <td>{= ?primaryKey }</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <ui:resourceView ui:matchIds=\"summary\" ui:resource=\"{= ?result }\"/>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </ui:forEach>
+        </table>
+    </ui:group>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:label "Compliance report" ;
+  rdfs:subClassOf teamwork:AbstractComplianceReport ;
+.
+teamwork:CreateComplianceReport
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:class ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The class of resources contained in the JSON payload." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:json ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The input json rendering of the used resources, e.g. produced by teamwork:GetUsedResources or a third-party software system. May just be an array of objects containing name-value pairs, in which case it will use the default JSON-LD context produced by the tbl/jsonldContext servlet." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:resultsGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph to write the results to." ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype """
+<ui:group let:primaryKeyProperty=\"{= swa:primaryKeyProperty(?class) }\" let:report=\"{= IRI(CONCAT(&quot;urn:x-compliance-report:&quot;, afn:localname(ui:graphWithoutImports(ui:currentQueryGraph())), &quot;:&quot;, str(now()))) }\" let:teamGraph=\"{= teamwork:teamGraph(ui:graphWithoutImports(ui:currentQueryGraph())) }\">
+    <ui:parseJSONLD ui:defaultContextClass=\"{= ?class }\" ui:str=\"{= ?json }\" ui:targetGraph=\"{= ui:tempGraph }\"/>
+    <ui:if ui:condition=\"{= bound(?class) &amp;&amp; swa:hasPrimaryKey(?class) }\">
+        <ui:update ui:updateQuery=\"{!
+                INSERT {
+                    GRAPH ui:tempGraph1 {
+                        ?resource owl:sameAs ?iri .
+                    } .
+                }
+                WHERE {
+                    GRAPH ui:tempGraph {
+                        ?resource ?p ?o .
+                        FILTER (isBlank(?resource) &amp;&amp; NOT EXISTS {
+                            ?resource a ?anyType .
+                        }) .
+                        ?resource ?primaryKeyProperty ?primaryKey .
+                    } .
+                    BIND (IRI(CONCAT(swa:primaryKeyURIStart(?class), ENCODE_FOR_URI(str(?primaryKey)))) AS ?iri) .
+                } }\"/>
+        <ui:update ui:updateQuery=\"{!
+                INSERT {
+                    GRAPH ui:tempGraph {
+                        ?iri a ?class .
+                        ?iri ?p ?newO .
+                    } .
+                }
+                WHERE {
+                    GRAPH ui:tempGraph {
+                        GRAPH ui:tempGraph1 {
+                            ?resource owl:sameAs ?iri .
+                        } .
+                        ?resource ?p ?oldO .
+                    } .
+                    BIND (spl:objectInGraph(?oldO, owl:sameAs, ui:tempGraph1) AS ?newObject) .
+                    BIND (COALESCE(?newObject, ?oldO) AS ?newO) .
+                } }\"/>
+    </ui:if>
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ?resultsGraph {
+                    ?report a compliance:Report .
+                    ?report compliance:vocabulary ?vocabulary .
+                    ?report compliance:timeStamp ?timeStamp .
+                } .
+            }
+            WHERE {
+                BIND (now() AS ?timeStamp) .
+                BIND (ui:graphWithoutImports(ui:currentQueryGraph()) AS ?vocabulary) .
+            } }\"/>
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ?resultsGraph {
+                    _:b0 a compliance:PropertyMismatch .
+                    _:b0 compliance:resource ?resource .
+                    _:b0 compliance:primaryKey ?primaryKey .
+                    _:b0 compliance:property ?p .
+                    _:b0 compliance:incorrectValue ?o .
+                    _:b0 compliance:correctValue ?correctValue .
+                    ?report compliance:result _:b0 .
+                } .
+            }
+            WHERE {
+                {
+                    {
+                        GRAPH ui:tempGraph {
+                            ?resource a ?someClass .
+                            ?resource ?p ?o .
+                        } .
+                        FILTER ((?p != rdf:type) || (?o != ?class)) .
+                        FILTER spl:instanceOf(?resource, ?class) .
+                        FILTER NOT EXISTS {
+                            ?resource ?p ?o .
+                        } .
+                    } .
+                    BIND (IF(bound(?primaryKeyProperty), spl:object(?resource, ?primaryKeyProperty), ?none) AS ?primaryKey) .
+                } .
+                BIND (spl:object(?resource, ?p) AS ?correctValue) .
+            } }\"/>
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ?resultsGraph {
+                    _:b0 a compliance:StatusResult .
+                    _:b0 compliance:resource ?resource .
+                    _:b0 compliance:primaryKey ?primaryKey .
+                    _:b0 compliance:status ?status .
+                    ?report compliance:result _:b0 .
+                } .
+            }
+            WHERE {
+                GRAPH ui:tempGraph {
+                    ?resource a ?someClass .
+                } .
+                ?resource status:status ?status .
+                FILTER (?status != status:approved) .
+                BIND (IF(bound(?primaryKeyProperty), spl:object(?resource, ?primaryKeyProperty), ?none) AS ?primaryKey) .
+            } }\"/>
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ?resultsGraph {
+                    _:b0 a compliance:UnknownResource .
+                    _:b0 compliance:resource ?resource .
+                    _:b0 compliance:primaryKey ?primaryKey .
+                    ?report compliance:result _:b0 .
+                } .
+            }
+            WHERE {
+                GRAPH ui:tempGraph {
+                    ?resource a ?someClass .
+                } .
+                FILTER (!spl:instanceOf(?resource, ?class)) .
+                BIND (IF(bound(?primaryKeyProperty), spif:decodeURL(SUBSTR(str(?resource), (1 + STRLEN(swa:primaryKeyURIStart(?class))))), ?none) AS ?primaryKey) .
+            } }\"/>
+    <ui:if ui:condition=\"{= bound(?softwareSystem) &amp;&amp; bound(?teamGraph) }\">
+        <ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+            <ui:update ui:updateQuery=\"{!
+                    INSERT {
+                        ?s ?p ?o .
+                    }
+                    WHERE {
+                        GRAPH ?resultsGraph {
+                            ?s ?p ?o .
+                        } .
+                    } }\"/>
+        </ui:setContext>
+    </ui:if>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Create compliance report" ;
+  rdfs:subClassOf ui:Operations ;
+.
+teamwork:GetUsedResources
+  rdf:type ui:Service ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:class ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The class of resources to return." ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ui:tempGraph {
+                    ?resource ?p ?o .
+                } .
+            }
+            WHERE {
+                ?type (rdfs:subClassOf)* ?class .
+                ?resource a ?type .
+                ?resource ?p ?o .
+            } }\"/>
+    <ui:setContext ui:queryGraph=\"{= ui:tempGraph }\">{= smf:convertRDFToText(sml:JSONLD) }</ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Creates a JSON-LD rendering of the instances of a given class and their properties. This service answers with the same parameters in the same format as expected by the verification services." ;
+  rdfs:label "Get used resources" ;
+  rdfs:subClassOf ui:JSONServices ;
+.
+teamwork:VerifyUsedResources
+  rdf:type ui:Service ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:class ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The class of resources contained in the JSON payload." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:softwareSystemName ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The name of the software system that compliance is tested of." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:json ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The input json rendering of the used resources, e.g. produced by teamwork:GetUsedResources or a third-party software system. May just be an array of objects containing name-value pairs, in which case it will use the default JSON-LD context produced by the tbl/jsonldContext servlet." ;
+    ] ;
+  ui:prototype """
+<ui:group let:resultsGraph=\"{= ui:tempGraph2 }\">
+    <teamwork:CreateComplianceReport ui:args=\"*\"/>
+    <ui:setContext ui:queryGraph=\"{= ?resultsGraph }\">
+        <ui:if ui:condition=\"{= EXISTS {
+            ?any a ?anyType .
+        } }\">{= smf:convertRDFToText(sml:JSONLD, &lt;http://topbraid.org/compliance.context.jsonld&gt;) }</ui:if>
+        <ui:else>{}</ui:else>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment """Produces a report about the differences between a given set of resources (serialized in JSON-LD) and those resources within a given base dataset. The output format is (nicely formatted) JSON-LD using instances of the status:ComplianceResult class. The operation will be performed against the default query graph, specified using _base and (possibly) _withImports.
+
+Example:
+
+http://localhost:8083/tbl/swp?_viewClass=http%3A%2F%2Ftopbraid.org%2Fteamwork%23VerifyUsedResources&_base=urn%3Ax-evn-master%3Acountry-codes&_withImports=true&class=http://topbraid.org/dataset/CountryCodes_Schema%23ISOCountry&json=[{%22iso3166_2AlphaCountryCode%22:%22DE%22,%22fullName%22:%22German%22}]""" ;
+  rdfs:label "Verify used resources" ;
+  rdfs:subClassOf ui:JSONServices ;
+.
+teamwork:VerifyUsedResourcesHTML
+  rdf:type ui:Service ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:class ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The class of resources contained in the JSON payload." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:softwareSystemName ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The name of the software system that compliance is tested of." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:json ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The input json rendering of the used resources, e.g. produced by teamwork:GetUsedResources or a third-party software system. May just be an array of objects containing name-value pairs, in which case it will use the default JSON-LD context produced by the tbl/jsonldContext servlet." ;
+    ] ;
+  ui:prototype """
+<ui:group let:graph=\"{= ui:currentQueryGraph() }\" let:resultsGraph=\"{= ui:tempGraph2 }\">
+    <teamwork:CreateComplianceReport ui:args=\"*\"/>
+    <ui:setContext let:report=\"{#
+            SELECT ?report
+            WHERE {
+                ?report a compliance:Report .
+            } }\" ui:queryGraph=\"{= ?resultsGraph }\">
+        <teamwork:ComplianceReport arg:graph=\"{= ?graph }\" arg:softwareSystemName=\"{= ?softwareSystemName }\"/>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:comment "Produces an HTML report about the differences between a given set of resources (serialized in JSON-LD) and those resources within a given base dataset. See teamwork:VerifyUsedResources for details. The only difference is that this service here is producing an HTML formatted report for human readers." ;
+  rdfs:label "Verify used resources HTML" ;
+  rdfs:subClassOf teamwork:AbstractComplianceReport ;
+.
+teamwork:ViewComplianceReport
+  rdf:type ui:ViewElement ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:report ;
+      spl:valueType compliance:Report ;
+      rdfs:comment "The compliance report to render." ;
+    ] ;
+  ui:prototype """
+<ui:group let:projectGraph=\"{= ui:graphWithoutImports(ui:currentQueryGraph()) }\">
+    <ui:setContext ui:queryGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+        <teamwork:ComplianceReport arg:graph=\"{= ui:graphWithImports(?projectGraph) }\" arg:report=\"{= ?report }\"/>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "View compliance report" ;
+  rdfs:subClassOf teamwork:AbstractComplianceReport ;
+.

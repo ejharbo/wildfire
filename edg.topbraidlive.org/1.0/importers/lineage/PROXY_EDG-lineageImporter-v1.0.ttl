@@ -1,0 +1,591 @@
+# baseURI: http://edg.topbraid.solutions/1.0/proxy/importer/lineage
+# imports: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://topbraid.org/tables
+# imports: http://topbraid.org/tosh
+
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix proxy-lineage: <http://edg.topbraid.solutions/proxy/importer/lineage#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/proxy/importer/lineage>
+  rdf:type owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/proxy/importer/lineage/GMD_lineage> ;
+  rdfs:label "lineage" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/core> ;
+  owl:imports <http://topbraid.org/tables> ;
+  owl:imports <http://topbraid.org/tosh> ;
+.
+<http://edg.topbraid.solutions/model/derivedFromSource>
+  rdf:type owl:ObjectProperty ;
+  rdf:type owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/proxy/importer/lineage> ;
+  rdfs:label "derived from source" ;
+.
+<http://edg.topbraid.solutions/model/derivedFromTarget>
+  rdf:type owl:ObjectProperty ;
+  rdf:type owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/proxy/importer/lineage> ;
+  rdfs:label "derived from target" ;
+.
+<http://edg.topbraid.solutions/model/derivedParentFromSource>
+  rdf:type owl:ObjectProperty ;
+  rdf:type owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/proxy/importer/lineage> ;
+  rdfs:label "derivedParentFromSource" ;
+.
+<http://edg.topbraid.solutions/model/derivedParentFromTarget>
+  rdf:type owl:ObjectProperty ;
+  rdf:type owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/proxy/importer/lineage> ;
+  rdfs:label "derivedParentFromTarget" ;
+.
+<http://edg.topbraid.solutions/model/derivedSourceElement>
+  rdf:type owl:ObjectProperty ;
+  rdf:type owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/proxy/importer/lineage> ;
+  rdfs:label "http://edg.topbraid.solutions/model/derivedSourceElement" ;
+.
+<http://edg.topbraid.solutions/model/derivedTargetElement>
+  rdf:type owl:ObjectProperty ;
+  rdf:type owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/proxy/importer/lineage> ;
+  rdfs:label "derivedTargetElement" ;
+.
+proxy-lineage:Executable
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Executable" ;
+  rdfs:subClassOf proxy-lineage:SecondaryInstanceExecutableFactory ;
+.
+proxy-lineage:ExecutableContainer
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Executable Container" ;
+  rdfs:subClassOf proxy-lineage:PrimaryInstanceExecutableFactory ;
+.
+proxy-lineage:ExecutableCustom
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "ExecutableCustom" ;
+  rdfs:subClassOf proxy-lineage:SecondaryInstanceExecutableFactory ;
+.
+proxy-lineage:ExecutableCustomConnector
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:comment "Class to represent custom connector executable types (\"FILE\" and \"TABLE)" ;
+  rdfs:label "Custom Connector" ;
+  rdfs:subClassOf proxy-lineage:SecondaryInstanceExecutableFactory ;
+.
+proxy-lineage:ExecutableDataContainer
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:subClassOf proxy-lineage:ExecutableDatabase ;
+.
+proxy-lineage:ExecutableDataWarehouse
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "ExecutableDataWarehouse" ;
+  rdfs:subClassOf proxy-lineage:ExecutableDatabase ;
+.
+proxy-lineage:ExecutableDatabase
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Executable database" ;
+  rdfs:subClassOf proxy-lineage:SecondaryInstanceExecutableFactory ;
+.
+proxy-lineage:ExecutableInformaticaSession
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "ExecutableInformaticaSession" ;
+  rdfs:subClassOf proxy-lineage:SecondaryInstanceExecutableFactory ;
+.
+proxy-lineage:ExecutableRelationalDatabase
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "ExecutableRelationalDatabase" ;
+  rdfs:subClassOf proxy-lineage:ExecutableDatabase ;
+.
+proxy-lineage:ExecutableRepository
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Executable Repository" ;
+  rdfs:subClassOf proxy-lineage:ExecutableDatabase ;
+.
+proxy-lineage:ExecutableSchema
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "ExecutableSchema" ;
+  rdfs:subClassOf proxy-lineage:SecondaryInstanceExecutableFactory ;
+.
+proxy-lineage:ExecutableScript
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "ExecutableScript" ;
+  rdfs:subClassOf proxy-lineage:SecondaryInstanceExecutableFactory ;
+.
+proxy-lineage:ExecutableServer
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "ExecutableServer" ;
+  rdfs:subClassOf proxy-lineage:SecondaryInstanceExecutableFactory ;
+.
+proxy-lineage:ExecutableWorkflow
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Executable Workflow" ;
+  rdfs:subClassOf proxy-lineage:SecondaryInstanceExecutableFactory ;
+.
+proxy-lineage:LineageTemplate
+  rdf:type owl:Class ;
+  tables:sheetIndex "0"^^xsd:int ;
+  rdfs:label "DataLineageInputTemplate1-crrm2" ;
+.
+proxy-lineage:PrimaryInstanceExecutableFactory
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Primary instance executable factory" ;
+  rdfs:subClassOf proxy-lineage:PrimaryInstanceFactory ;
+.
+proxy-lineage:PrimaryInstanceFactory
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Primary Instance Factory" ;
+.
+proxy-lineage:PrimaryInstanceSourceFactory
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Primary instance source factory" ;
+  rdfs:subClassOf proxy-lineage:PrimaryInstanceFactory ;
+.
+proxy-lineage:PrimaryInstanceTargetFactory
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Primary instance target factory" ;
+  rdfs:subClassOf proxy-lineage:PrimaryInstanceFactory ;
+.
+proxy-lineage:SecondaryInstanceExecutableFactory
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Secondary Instance Executable Factory" ;
+  rdfs:subClassOf proxy-lineage:SecondaryInstanceFactory ;
+.
+proxy-lineage:SecondaryInstanceFactory
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Secondary Instance Factory" ;
+.
+proxy-lineage:SecondaryInstanceSourceFactory
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Secondary Instance Source Factory" ;
+  rdfs:subClassOf proxy-lineage:SecondaryInstanceFactory ;
+.
+proxy-lineage:SecondaryInstanceTargetFactory
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Secondary Instance Target Factory" ;
+  rdfs:subClassOf proxy-lineage:SecondaryInstanceFactory ;
+.
+proxy-lineage:SourceCustomElement
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Source custom element" ;
+  rdfs:subClassOf proxy-lineage:SecondaryInstanceSourceFactory ;
+.
+proxy-lineage:SourceDataContainer
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Source DataContainer" ;
+  rdfs:subClassOf proxy-lineage:SourceDatabase ;
+.
+proxy-lineage:SourceDataWarehouse
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Source data warehouse" ;
+  rdfs:subClassOf proxy-lineage:SourceDatabase ;
+.
+proxy-lineage:SourceDatabase
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Source database" ;
+  rdfs:subClassOf proxy-lineage:PrimaryInstanceSourceFactory ;
+.
+proxy-lineage:SourceDatabaseColumn
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Source database column" ;
+  rdfs:subClassOf proxy-lineage:SecondaryInstanceSourceFactory ;
+.
+proxy-lineage:SourceDatabaseSynonym
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Source database synonym" ;
+  rdfs:subClassOf proxy-lineage:SecondaryInstanceSourceFactory ;
+.
+proxy-lineage:SourceDatabaseTable
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Source database table" ;
+  rdfs:subClassOf proxy-lineage:SecondaryInstanceSourceFactory ;
+.
+proxy-lineage:SourceDatabaseView
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Source database view" ;
+  rdfs:subClassOf proxy-lineage:SecondaryInstanceSourceFactory ;
+.
+proxy-lineage:SourceDataset
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Source dataset" ;
+  rdfs:subClassOf proxy-lineage:PrimaryInstanceSourceFactory ;
+.
+proxy-lineage:SourceElement
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Source element" ;
+  rdfs:subClassOf proxy-lineage:PrimaryInstanceSourceFactory ;
+.
+proxy-lineage:SourceFile
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Source file" ;
+  rdfs:subClassOf proxy-lineage:SecondaryInstanceSourceFactory ;
+.
+proxy-lineage:SourceFileColumn
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Source file column" ;
+  rdfs:subClassOf proxy-lineage:SecondaryInstanceSourceFactory ;
+.
+proxy-lineage:SourceFileSystem
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Source file system" ;
+  rdfs:subClassOf proxy-lineage:SourceDatabase ;
+.
+proxy-lineage:SourceRelationalDatabase
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Source relational database" ;
+  rdfs:subClassOf proxy-lineage:SourceDatabase ;
+.
+proxy-lineage:SourceSchema
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Source schema" ;
+  rdfs:subClassOf proxy-lineage:PrimaryInstanceSourceFactory ;
+.
+proxy-lineage:SourceServer
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Source server" ;
+  rdfs:subClassOf proxy-lineage:PrimaryInstanceSourceFactory ;
+.
+proxy-lineage:TargetCustomElement
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Target custom element" ;
+  rdfs:subClassOf proxy-lineage:SecondaryInstanceTargetFactory ;
+.
+proxy-lineage:TargetDataContainer
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Target Data Container" ;
+  rdfs:subClassOf proxy-lineage:TargetDatabase ;
+.
+proxy-lineage:TargetDataWarehouse
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Target data warehouse" ;
+  rdfs:subClassOf proxy-lineage:TargetDatabase ;
+.
+proxy-lineage:TargetDatabase
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Target database" ;
+  rdfs:subClassOf proxy-lineage:PrimaryInstanceTargetFactory ;
+.
+proxy-lineage:TargetDatabaseColumn
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Target database column" ;
+  rdfs:subClassOf proxy-lineage:SecondaryInstanceTargetFactory ;
+.
+proxy-lineage:TargetDatabaseSynonym
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "TargetDatabaseSynonym" ;
+  rdfs:subClassOf proxy-lineage:SecondaryInstanceTargetFactory ;
+.
+proxy-lineage:TargetDatabaseTable
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Target database table" ;
+  rdfs:subClassOf proxy-lineage:SecondaryInstanceTargetFactory ;
+.
+proxy-lineage:TargetDatabaseView
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "TargetDatabaseView" ;
+  rdfs:subClassOf proxy-lineage:SecondaryInstanceTargetFactory ;
+.
+proxy-lineage:TargetDataset
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Target dataset" ;
+  rdfs:subClassOf proxy-lineage:PrimaryInstanceTargetFactory ;
+.
+proxy-lineage:TargetElement
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Source element" ;
+  rdfs:subClassOf proxy-lineage:PrimaryInstanceTargetFactory ;
+.
+proxy-lineage:TargetFile
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Target file" ;
+  rdfs:subClassOf proxy-lineage:SecondaryInstanceTargetFactory ;
+.
+proxy-lineage:TargetFileColumn
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Target file column" ;
+  rdfs:subClassOf proxy-lineage:SecondaryInstanceTargetFactory ;
+.
+proxy-lineage:TargetFileSystem
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Target file system" ;
+  rdfs:subClassOf proxy-lineage:TargetDatabase ;
+.
+proxy-lineage:TargetRelationalDatabase
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Target relational database" ;
+  rdfs:subClassOf proxy-lineage:TargetDatabase ;
+.
+proxy-lineage:TargetSchema
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Target schema" ;
+  rdfs:subClassOf proxy-lineage:PrimaryInstanceTargetFactory ;
+.
+proxy-lineage:TargetServer
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Target server" ;
+  rdfs:subClassOf proxy-lineage:PrimaryInstanceTargetFactory ;
+.
+proxy-lineage:Transform
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Transform" ;
+  rdfs:subClassOf proxy-lineage:SecondaryInstanceSourceFactory ;
+.
+proxy-lineage:eDGETYPE
+  rdf:type owl:DatatypeProperty ;
+  tables:columnIndex "22"^^xsd:int ;
+  rdfs:domain proxy-lineage:LineageTemplate ;
+  rdfs:label "EDGE_TYPE" ;
+  rdfs:range xsd:string ;
+.
+proxy-lineage:eXECUTABLEACCESSOR
+  rdf:type owl:DatatypeProperty ;
+  tables:columnIndex "10"^^xsd:int ;
+  rdfs:domain proxy-lineage:LineageTemplate ;
+  rdfs:label "EXECUTABLE_ACCESSOR" ;
+  rdfs:range xsd:string ;
+.
+proxy-lineage:eXECUTABLEDATABASENAME
+  rdf:type owl:DatatypeProperty ;
+  tables:columnIndex "11"^^xsd:int ;
+  rdfs:domain proxy-lineage:LineageTemplate ;
+  rdfs:label "EXECUTABLE_DATABASE_NAME" ;
+  rdfs:range xsd:string ;
+.
+proxy-lineage:eXECUTABLENAME
+  rdf:type owl:DatatypeProperty ;
+  tables:columnIndex "13"^^xsd:int ;
+  rdfs:domain proxy-lineage:LineageTemplate ;
+  rdfs:label "EXECUTABLE_NAME" ;
+  rdfs:range xsd:string ;
+.
+proxy-lineage:eXECUTABLESCHEMANAME
+  rdf:type owl:DatatypeProperty ;
+  tables:columnIndex "12"^^xsd:int ;
+  rdfs:domain proxy-lineage:LineageTemplate ;
+  rdfs:label "EXECUTABLE_SCHEMA_NAME" ;
+  rdfs:range xsd:string ;
+.
+proxy-lineage:eXECUTABLESERVERNAME
+  rdf:type owl:DatatypeProperty ;
+  tables:columnIndex "10"^^xsd:int ;
+  rdfs:domain proxy-lineage:LineageTemplate ;
+  rdfs:label "EXECUTABLE_SERVER_NAME" ;
+  rdfs:range xsd:string ;
+.
+proxy-lineage:eXECUTABLESYSTEMTYPE
+  rdf:type owl:DatatypeProperty ;
+  tables:columnIndex "9"^^xsd:int ;
+  rdfs:domain proxy-lineage:LineageTemplate ;
+  rdfs:label "EXECUTABLE_SYSTEM_TYPE" ;
+  rdfs:range xsd:string ;
+.
+proxy-lineage:eXECUTABLETYPE
+  rdf:type owl:DatatypeProperty ;
+  tables:columnIndex "14"^^xsd:int ;
+  rdfs:domain proxy-lineage:LineageTemplate ;
+  rdfs:label "EXECUTABLE_TYPE" ;
+  rdfs:range xsd:string ;
+.
+proxy-lineage:edgType
+  rdf:type owl:DatatypeProperty ;
+  tables:columnIndex "21"^^xsd:int ;
+  rdfs:domain proxy-lineage:LineageTemplate ;
+  rdfs:label "Edg Type" ;
+  rdfs:range xsd:string ;
+.
+proxy-lineage:pIPELINENAME
+  rdf:type owl:DatatypeProperty ;
+  tables:columnIndex "0"^^xsd:int ;
+  rdfs:domain proxy-lineage:LineageTemplate ;
+  rdfs:label "PIPELINE_NAME" ;
+  rdfs:range xsd:string ;
+.
+proxy-lineage:pIPELINESTEP
+  rdf:type owl:DatatypeProperty ;
+  tables:columnIndex "1"^^xsd:int ;
+  rdfs:domain proxy-lineage:LineageTemplate ;
+  rdfs:label "PIPELINE_STEP" ;
+  rdfs:range xsd:string ;
+.
+proxy-lineage:sOURCEDATABASENAME
+  rdf:type owl:DatatypeProperty ;
+  tables:columnIndex "4"^^xsd:int ;
+  rdfs:domain proxy-lineage:LineageTemplate ;
+  rdfs:label "SOURCE_DATABASE_NAME" ;
+  rdfs:range xsd:string ;
+.
+proxy-lineage:sOURCEDATABASESCHEMA
+  rdf:type owl:DatatypeProperty ;
+  tables:columnIndex "5"^^xsd:int ;
+  rdfs:domain proxy-lineage:LineageTemplate ;
+  rdfs:label "SOURCE_SCHEMA_NAME" ;
+  rdfs:range xsd:string ;
+.
+proxy-lineage:sOURCEDATABASETYPE
+  rdf:type owl:DatatypeProperty ;
+  tables:columnIndex "2"^^xsd:int ;
+  rdfs:domain proxy-lineage:LineageTemplate ;
+  rdfs:label "SOURCE_DATABASE_TYPE" ;
+  rdfs:range xsd:string ;
+.
+proxy-lineage:sOURCEDATAELEMENTNAME
+  rdf:type owl:DatatypeProperty ;
+  tables:columnIndex "8"^^xsd:int ;
+  rdfs:domain proxy-lineage:LineageTemplate ;
+  rdfs:label "SOURCE_DATA_ELEMENT_NAME" ;
+  rdfs:range xsd:string ;
+.
+proxy-lineage:sOURCEDATASETNAME
+  rdf:type owl:DatatypeProperty ;
+  tables:columnIndex "6"^^xsd:int ;
+  rdfs:domain proxy-lineage:LineageTemplate ;
+  rdfs:label "SOURCE_DATASET_NAME" ;
+  rdfs:range xsd:string ;
+.
+proxy-lineage:sOURCEDATASETTYPE
+  rdf:type owl:DatatypeProperty ;
+  tables:columnIndex "7"^^xsd:int ;
+  rdfs:domain proxy-lineage:LineageTemplate ;
+  rdfs:label "SOURCE_DATASET_TYPE" ;
+  rdfs:range xsd:string ;
+.
+proxy-lineage:sOURCESERVERNAME
+  rdf:type owl:DatatypeProperty ;
+  tables:columnIndex "3"^^xsd:int ;
+  rdfs:domain proxy-lineage:LineageTemplate ;
+  rdfs:label "SOURCE_SERVER_NAME" ;
+  rdfs:range xsd:string ;
+.
+proxy-lineage:tARGETDATABASENAME
+  rdf:type owl:DatatypeProperty ;
+  tables:columnIndex "17"^^xsd:int ;
+  rdfs:domain proxy-lineage:LineageTemplate ;
+  rdfs:label "TARGET_DATABASE_NAME" ;
+  rdfs:range xsd:string ;
+.
+proxy-lineage:tARGETDATABASESCHEMA
+  rdf:type owl:DatatypeProperty ;
+  tables:columnIndex "18"^^xsd:int ;
+  rdfs:domain proxy-lineage:LineageTemplate ;
+  rdfs:label "TARGET DATABASE SCHEMA" ;
+  rdfs:range xsd:string ;
+.
+proxy-lineage:tARGETDATABASETYPE
+  rdf:type owl:DatatypeProperty ;
+  tables:columnIndex "15"^^xsd:int ;
+  rdfs:domain proxy-lineage:LineageTemplate ;
+  rdfs:label "TARGET_DATABASE_TYPE" ;
+  rdfs:range xsd:string ;
+.
+proxy-lineage:tARGETDATAELEMENTNAME
+  rdf:type owl:DatatypeProperty ;
+  tables:columnIndex "21"^^xsd:int ;
+  rdfs:domain proxy-lineage:LineageTemplate ;
+  rdfs:label "TARGET_DATA_ELEMENT_NAME" ;
+  rdfs:range xsd:string ;
+.
+proxy-lineage:tARGETDATASETNAME
+  rdf:type owl:DatatypeProperty ;
+  tables:columnIndex "19"^^xsd:int ;
+  rdfs:domain proxy-lineage:LineageTemplate ;
+  rdfs:label "TARGET_DATASET_NAME" ;
+  rdfs:range xsd:string ;
+.
+proxy-lineage:tARGETDATASETTYPE
+  rdf:type owl:DatatypeProperty ;
+  tables:columnIndex "20"^^xsd:int ;
+  rdfs:domain proxy-lineage:LineageTemplate ;
+  rdfs:label "TARGET_DATASET_TYPE" ;
+  rdfs:range xsd:string ;
+.
+proxy-lineage:tARGETSERVERNAME
+  rdf:type owl:DatatypeProperty ;
+  tables:columnIndex "16"^^xsd:int ;
+  rdfs:domain proxy-lineage:LineageTemplate ;
+  rdfs:label "TARGET_SERVER_NAME" ;
+  rdfs:range xsd:string ;
+.
+<http://edg.topbraid.solutions/proxy/importer/lineage/GMD_lineage>
+  rdf:type vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:ProxyGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/proxy/importer/lineage> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.

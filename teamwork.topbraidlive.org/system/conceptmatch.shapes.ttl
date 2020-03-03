@@ -1,0 +1,148 @@
+# baseURI: http://topbraid.org/conceptmatch
+# imports: http://datashapes.org/dash
+# imports: http://topbraid.org/crosswalk
+# imports: http://www.w3.org/2004/02/skos/core
+# prefix: conceptmatch
+
+@prefix conceptmatch: <http://topbraid.org/conceptmatch#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://topbraid.org/conceptmatch>
+  rdf:type owl:Ontology ;
+  rdfs:comment """A collection of SHACL functions that can be used with triple rules to define mappings from a string property to resources.
+
+Example 1: Match values of ex:myTermString to ex:myTerm (instances of ex:Term):
+
+ex:MyClass
+	a sh:NodeShape, rdfs:Class ;
+	sh:rule [
+		a sh:TripleRule ;
+		sh:subject sh:this ;
+		sh:predicate ex:myTerm ;
+		sh:object [
+			conceptmatch:resourceWithLabel (
+				[ sh:path ex:myTermString ] ;
+				ex:Term
+			) ;
+		] ;
+	] ;
+
+Example 2: Match values of ex:myTermString to ex:targetTerm, where target term is defined using a crosswalk:
+
+...
+	sh:rule [
+		a sh:TripleRule ;
+		sh:subject sh:this ;
+		sh:predicate ex:targetTerm ;
+		sh:object [
+			conceptmatch:targetResource (
+				[
+					conceptmatch:resourceWithLabel (
+						[ sh:path ex:myTermString ] ;
+						ex:Term
+					) ;
+				]
+			) ;
+		] ;
+	] ;
+
+The equivalent SPARQL would be:
+
+	CONSTRUCT {
+    	$this ex:targetTerm ?object .
+	}
+	WHERE {
+    	$this ex:myTermString ?b1 .
+    	BIND(conceptmatch:resourceWithLabel(?b1, ex:Term) AS ?a1) .
+    	BIND(conceptmatch:targetResource(?a1) AS ?object) .
+	}""" ;
+  owl:imports <http://datashapes.org/dash> ;
+  owl:imports <http://topbraid.org/crosswalk> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+  sh:declare [
+      rdf:type sh:PrefixDeclaration ;
+      sh:namespace "http://topbraid.org/crosswalk#"^^xsd:anyURI ;
+      sh:prefix "crosswalk" ;
+    ] ;
+.
+conceptmatch:resourceWithLabel
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Gets an instance of a given class that has a given value as its skos:prefLabel, rdfs:label or skos:altLabel, including the case where the language tag equals a given language." ;
+  rdfs:label "resource with label" ;
+  sh:parameter [
+      rdf:type sh:Parameter ;
+      sh:path conceptmatch:label ;
+      sh:datatype xsd:string ;
+      sh:description "The label that the matching resource must have." ;
+      sh:name "label" ;
+      sh:order 0 ;
+    ] ;
+  sh:parameter [
+      rdf:type sh:Parameter ;
+      sh:path conceptmatch:language ;
+      sh:datatype xsd:string ;
+      sh:description "An optional language tag that the value(s) may also have. Note that this would not match values with \"en-UK\" if the language is \"en\"." ;
+      sh:name "language" ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 2 ;
+    ] ;
+  sh:parameter [
+      rdf:type sh:Parameter ;
+      sh:path conceptmatch:type ;
+      sh:class rdfs:Class ;
+      sh:description "The type that the matching instance must have." ;
+      sh:name "type" ;
+      sh:nodeKind sh:IRI ;
+      sh:order 1 ;
+    ] ;
+  sh:prefixes <http://topbraid.org/conceptmatch> ;
+  sh:returnType rdfs:Resource ;
+  sh:select """SELECT ?result
+WHERE {
+	{
+    	?result skos:prefLabel|rdfs:label|skos:altLabel $label .
+	}
+	UNION
+	{
+		{
+			FILTER bound($language)
+		}
+		BIND (strlang($label, $language) AS ?match)
+		?result skos:prefLabel|rdfs:label|skos:altLabel ?match .
+	}
+	?result rdf:type/rdfs:subClassOf* $type .
+}""" ;
+.
+conceptmatch:targetResource
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Gets the target resource of a given source resource, as defined by crosswalk:closeMatch. A type can be provided in case there are multiple crosswalks defined. Note this will return a random match if there are multiple target resources." ;
+  rdfs:label "target resource" ;
+  sh:parameter [
+      rdf:type sh:Parameter ;
+      sh:path conceptmatch:source ;
+      sh:description "The \"from\" resource." ;
+      sh:name "source" ;
+      sh:order 0 ;
+    ] ;
+  sh:parameter [
+      rdf:type sh:Parameter ;
+      sh:path <http://topbraid.org/crosswalk#type> ;
+      sh:class rdfs:Class ;
+      sh:description "The type that target resources must have." ;
+      sh:name "type" ;
+      sh:nodeKind sh:IRI ;
+      sh:optional "true"^^xsd:boolean ;
+      sh:order 1 ;
+    ] ;
+  sh:prefixes <http://topbraid.org/conceptmatch> ;
+  sh:select """SELECT ?result
+WHERE {
+    ?source crosswalk:closeMatch ?result .
+	FILTER (!bound($type) || EXISTS { ?result rdf:type/rdfs:subClassOf* $type }) .
+}""" ;
+.

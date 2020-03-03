@@ -1,0 +1,341 @@
+# baseURI: http://edg.topbraid.solutions/1.0/schema/glossary
+# imports: http://datashapes.org/graphql
+# imports: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://edg.topbraid.solutions/1.0/schema/governance/core
+# imports: http://www.linkedmodel.org/schema/vaem
+# imports: http://www.w3.org/2004/02/skos/core
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/schema/glossary>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/schema/glossary/GMD_glossary> ;
+  rdfs:label "EDG Schema - Glossary" ;
+  owl:imports <http://datashapes.org/graphql> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  owl:imports <http://www.linkedmodel.org/schema/vaem> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+edg:BusinessTerm
+  a edg:AssetClass ;
+  edg:acronym "BTERM" ;
+  rdfs:comment "A 'Business Term' represents a concept that can be realized as a data element." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  rdfs:label "Business Term" ;
+  rdfs:subClassOf edg:GlossaryTerm ;
+.
+edg:Glossary-originatedByOrganization
+  a sh:PropertyShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  sh:class edg:Organization ;
+  sh:maxCount 1 ;
+.
+edg:GlossaryAlignmentGroup
+  a sh:PropertyGroup ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  rdfs:label "Glossary Alignment Metadata" ;
+.
+edg:GlossaryTerm
+  a edg:AssetClass ;
+  edg:acronym "GTERM" ;
+  rdfs:comment "A 'Glossary Term' is a word or phrase used to describe a thing or to express a concept. Glossary terms are organized into glossaries." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  rdfs:label "Glossary Term" ;
+  rdfs:subClassOf edg:GlossaryTermRelatable ;
+  rdfs:subClassOf edg:Narratable ;
+  rdfs:subClassOf edg:Provenance ;
+  rdfs:subClassOf edg:StatusAspect ;
+  rdfs:subClassOf provo:Entity ;
+  sh:property edg:GlossaryTerm-businessRule ;
+  sh:property edg:GlossaryTerm-changeNote ;
+  sh:property edg:GlossaryTerm-dataRequiredForBusinessActivity ;
+  sh:property edg:GlossaryTerm-dataValueRule ;
+  sh:property edg:GlossaryTerm-definition ;
+  sh:property edg:GlossaryTerm-editorialNote ;
+  sh:property edg:GlossaryTerm-historyNote ;
+  sh:property edg:GlossaryTerm-requirement ;
+  sh:property edg:GlossaryTerm-scopeNote ;
+  sh:property edg:GlossaryTerm-termUsedBy ;
+.
+edg:GlossaryTerm-businessRule
+  a sh:PropertyShape ;
+  sh:path edg:businessRule ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  sh:datatype rdf:HTML ;
+.
+edg:GlossaryTerm-changeNote
+  a sh:PropertyShape ;
+  sh:path skos:changeNote ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  sh:datatype rdf:HTML ;
+  sh:maxCount 1 ;
+.
+edg:GlossaryTerm-dataRequiredForBusinessActivity
+  a sh:PropertyShape ;
+  sh:path edg:dataRequiredForBusinessActivity ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  sh:class edg:BusinessActivity ;
+.
+edg:GlossaryTerm-dataValueRule
+  a sh:PropertyShape ;
+  sh:path edg:dataValueRule ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  sh:class edg:DataValueRule ;
+  sh:description "Points at SHACL shape declarations." ;
+  sh:nodeKind sh:BlankNodeOrIRI ;
+.
+edg:GlossaryTerm-definition
+  a sh:PropertyShape ;
+  sh:path skos:definition ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  sh:maxCount 1 ;
+  sh:or (
+      [
+        sh:datatype rdf:HTML ;
+      ]
+      [
+        sh:datatype xsd:string ;
+      ]
+    ) ;
+.
+edg:GlossaryTerm-description
+  a sh:PropertyShape ;
+  sh:path edg:description ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  sh:datatype rdf:HTML ;
+  sh:maxCount 1 ;
+.
+edg:GlossaryTerm-editorialNote
+  a sh:PropertyShape ;
+  sh:path skos:editorialNote ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  sh:datatype rdf:HTML ;
+  sh:maxCount 1 ;
+.
+edg:GlossaryTerm-historyNote
+  a sh:PropertyShape ;
+  sh:path skos:historyNote ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  sh:datatype rdf:HTML ;
+  sh:maxCount 1 ;
+.
+edg:GlossaryTerm-prefLabel
+  a sh:PropertyShape ;
+  sh:path skos:prefLabel ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  sh:maxCount 1 ;
+  sh:or (
+      [
+        sh:datatype xsd:string ;
+      ]
+      [
+        sh:datatype rdf:langString ;
+      ]
+    ) ;
+.
+edg:GlossaryTerm-requirement
+  a sh:PropertyShape ;
+  sh:path edg:requirement ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  sh:class edg:Requirement ;
+.
+edg:GlossaryTerm-scopeNote
+  a sh:PropertyShape ;
+  sh:path skos:scopeNote ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  sh:datatype rdf:HTML ;
+  sh:maxCount 1 ;
+.
+edg:GlossaryTerm-source
+  a sh:PropertyShape ;
+  sh:path dcterms:source ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  sh:datatype xsd:anyURI ;
+.
+edg:GlossaryTerm-termUsedBy
+  a sh:PropertyShape ;
+  sh:path edg:termUsedByOrganization ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  sh:class edg:Organization ;
+.
+edg:GlossaryTermRelatable
+  a edg:AspectClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  rdfs:label "Glossary Term Relatable" ;
+  rdfs:subClassOf edg:Aspect ;
+  sh:property edg:GlossaryTermRelatable-broadMatch ;
+  sh:property edg:GlossaryTermRelatable-broaderTerm ;
+  sh:property edg:GlossaryTermRelatable-closeMatch ;
+  sh:property edg:GlossaryTermRelatable-exactMatch ;
+  sh:property edg:GlossaryTermRelatable-narrower ;
+  sh:property edg:GlossaryTermRelatable-relatedMatch ;
+  sh:property edg:GlossaryTermRelatable-relatedTerm ;
+.
+edg:GlossaryTermRelatable-broadMatch
+  a sh:PropertyShape ;
+  sh:path skos:broadMatch ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  sh:class edg:GlossaryTerm ;
+.
+edg:GlossaryTermRelatable-broaderTerm
+  a sh:PropertyShape ;
+  sh:path skos:broader ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  sh:class edg:GlossaryTerm ;
+.
+edg:GlossaryTermRelatable-closeMatch
+  a sh:PropertyShape ;
+  sh:path skos:closeMatch ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  sh:class edg:GlossaryTerm ;
+.
+edg:GlossaryTermRelatable-exactMatch
+  a sh:PropertyShape ;
+  sh:path skos:exactMatch ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  sh:class edg:GlossaryTerm ;
+.
+edg:GlossaryTermRelatable-narrower
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath skos:broader ;
+    ] ;
+  graphql:name "narrower" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  sh:class edg:GlossaryTerm ;
+  sh:name "narrower" ;
+.
+edg:GlossaryTermRelatable-relatedMatch
+  a sh:PropertyShape ;
+  sh:path skos:relatedMatch ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  sh:class edg:GlossaryTerm ;
+.
+edg:GlossaryTermRelatable-relatedTerm
+  a sh:PropertyShape ;
+  sh:path skos:related ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  sh:class edg:GlossaryTerm ;
+.
+edg:IndustryTerm
+  a edg:AssetClass ;
+  edg:acronym "INDTERM" ;
+  rdfs:comment "An 'industry term' is an established name that is shared across all enterprises." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  rdfs:label "Industry Term" ;
+  rdfs:subClassOf edg:GlossaryTerm ;
+.
+edg:PIIterm
+  a edg:AssetClass ;
+  rdfs:comment "'Personal Identifiable Information (PII) Terms' are terms that can. either directly or in combination with other terms, be used to identify a person." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  rdfs:label "PII Term" ;
+  rdfs:subClassOf edg:BusinessTerm ;
+.
+edg:SkosNotesAspect-note
+  a sh:PropertyShape ;
+  sh:path skos:note ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  sh:datatype rdf:HTML ;
+.
+edg:TaxonomyAspect-broader
+  a sh:PropertyShape ;
+  sh:path skos:broader ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+.
+edg:TaxonomyAspect-closeMatch
+  a sh:PropertyShape ;
+  sh:path skos:closeMatch ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+.
+edg:TaxonomyAspect-exactMatch
+  a sh:PropertyShape ;
+  sh:path skos:exactMatch ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+.
+edg:TaxonomyAspect-related
+  a sh:PropertyShape ;
+  sh:path skos:related ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+.
+edg:TechnicalTerm
+  a edg:AssetClass ;
+  edg:acronym "TECHTERM" ;
+  rdfs:comment "A 'technical term' is an established technical name that is shared across all enterprises." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  rdfs:label "Technical Term" ;
+  rdfs:subClassOf edg:GlossaryTerm ;
+.
+edg:businessRule
+  a owl:DatatypeProperty ;
+  rdfs:comment "Verbal description of the operations, definitions and constraints that apply to the glossary term." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  rdfs:label "business rule" ;
+.
+edg:termUsedByOrganization
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  rdfs:label "used by organization" ;
+  rdfs:subPropertyOf edg:usedBy ;
+.
+<http://edg.topbraid.solutions/schema/glossary/GMD_glossary>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:SchemaGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+.

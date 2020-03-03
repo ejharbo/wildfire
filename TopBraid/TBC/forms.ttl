@@ -1,0 +1,264 @@
+# baseURI: http://www.topbraid.org/2007/01/forms.owl
+# prefix: forms
+
+@prefix forms: <http://www.topbraid.org/2007/01/forms.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://www.topbraid.org/2007/01/forms.owl>
+  a owl:Ontology ;
+  rdfs:comment "An RDF Schema to capture the contents and layout of resource forms in the TopBraid platform." ;
+  owl:versionInfo "1.2.2" ;
+.
+forms:CheckBox
+  a owl:Class ;
+  forms:widgetTypeRange xsd:boolean ;
+  rdfs:comment "A check box to select a boolean value." ;
+  rdfs:label "Check box" ;
+  rdfs:subClassOf forms:PropertyWidget ;
+.
+forms:ComboBox
+  a owl:Class ;
+  forms:widgetTypeRange rdfs:Literal ;
+  forms:widgetTypeRange rdfs:Resource ;
+  rdfs:comment "A combo box to pick one out of several enumerated values." ;
+  rdfs:label "Combo box" ;
+  rdfs:subClassOf forms:PropertyWidget ;
+.
+forms:Composite
+  a owl:Class ;
+  rdfs:comment "A Control that may contain child panels. This class should not be directly instantiated, but instead serves as an \"abstract\" superclass only." ;
+  rdfs:subClassOf forms:Control ;
+.
+forms:Control
+  a owl:Class ;
+  rdfs:comment "An abstract top-level concept representing a rectangular area on the screen. This class should not be instantiated directly." ;
+.
+forms:EditForm
+  a owl:Class ;
+  rdfs:label "Edit form" ;
+  rdfs:subClassOf forms:Form ;
+.
+forms:Form
+  a owl:Class ;
+  rdfs:comment "A Composite representing a resource. Forms are typically selected on a by type basis, using the subjectType predicate. rdfs:label can be used to specify a title." ;
+  rdfs:subClassOf forms:Composite ;
+.
+forms:Label
+  a owl:Class ;
+  rdfs:comment "A static user interface component displaying text stored as rdfs:label." ;
+  rdfs:subClassOf forms:Control ;
+.
+forms:ListBox
+  a owl:Class ;
+  forms:widgetTypeRange rdfs:Literal ;
+  forms:widgetTypeRange rdfs:Resource ;
+  rdfs:comment "A list displaying multiple values to choose from." ;
+  rdfs:label "List box" ;
+  rdfs:subClassOf forms:PropertyWidget ;
+.
+forms:Panel
+  a owl:Class ;
+  rdfs:comment "A Composite that can be used to group and lay out child components." ;
+  rdfs:subClassOf forms:Composite ;
+.
+forms:PasswordTextInput
+  a owl:Class ;
+  forms:widgetTypeRange rdfs:Literal ;
+  rdfs:comment "A line of text that hides the entered characters with *s." ;
+  rdfs:label "Password text input" ;
+  rdfs:subClassOf forms:TextInput ;
+.
+forms:PropertyWidget
+  a owl:Class ;
+  rdfs:comment "A Control displaying values of a given property. Unless an rdfs:label is specified, the title of the widget should be derived from the predicate." ;
+  rdfs:subClassOf forms:Control ;
+.
+forms:PropertyWidgetGroup
+  a owl:Class ;
+  rdfs:comment "A virtual placeholder for zero or more Widgets for properties of a certain type." ;
+  rdfs:subClassOf forms:Control ;
+.
+forms:RadioButtons
+  a owl:Class ;
+  forms:widgetTypeRange rdfs:Literal ;
+  forms:widgetTypeRange rdfs:Resource ;
+  rdfs:comment "Radio buttons to select one of our several enumerated values. For datatype properties, this assumes that the range is a datatype enumeration (owl:oneOf). For object properties, it will enumerate all instances of the range class, or use those defined by an OWL enumerated class." ;
+  rdfs:label "Radio buttons" ;
+  rdfs:subClassOf forms:PropertyWidget ;
+.
+forms:ReferencesWidgetGroup
+  a owl:Class ;
+  rdfs:comment "A virtual placeholder for all properties that point to the current resource via an object, predicate->subject relationship. The form engine should create one reference widget for each property with incoming values." ;
+  rdfs:label "References widget group" ;
+  rdfs:subClassOf forms:Control ;
+.
+forms:RichTextArea
+  a owl:Class ;
+  forms:widgetTypeRange rdfs:Literal ;
+  rdfs:comment "A multi-line area of text including HTML markup, ideally rendered as WYSIWYG." ;
+  rdfs:label "Rich text area" ;
+  rdfs:subClassOf forms:PropertyWidget ;
+.
+forms:SearchForm
+  a owl:Class ;
+  rdfs:label "Search form" ;
+  rdfs:subClassOf forms:Form ;
+.
+forms:Section
+  a owl:Class ;
+  rdfs:comment "A labeled Composite that can be expanded or collapsed. The label can be specified using rdfs:label." ;
+  rdfs:subClassOf forms:Composite ;
+.
+forms:Separator
+  a owl:Class ;
+  rdfs:comment "A panel serving as visual separator, e.g. using a horizontal line." ;
+  rdfs:subClassOf forms:Control ;
+.
+forms:Table
+  a owl:Class ;
+  forms:widgetTypeRange rdfs:Resource ;
+  rdfs:comment "A tabular display of resources in one or more columns." ;
+  rdfs:label "Table" ;
+  rdfs:subClassOf forms:PropertyWidget ;
+.
+forms:TextArea
+  a owl:Class ;
+  forms:widgetTypeRange xsd:string ;
+  rdfs:comment "A multi-line text area." ;
+  rdfs:label "Text area" ;
+  rdfs:subClassOf forms:PropertyWidget ;
+.
+forms:TextInput
+  a owl:Class ;
+  forms:widgetTypeRange rdfs:Literal ;
+  forms:widgetTypeRange rdfs:Resource ;
+  rdfs:comment "A single line of text." ;
+  rdfs:label "Text input" ;
+  rdfs:subClassOf forms:PropertyWidget ;
+.
+forms:Tree
+  a owl:Class ;
+  forms:widgetTypeRange rdfs:Resource ;
+  rdfs:label "Tree" ;
+  rdfs:subClassOf forms:PropertyWidget ;
+.
+forms:Wizard
+  a owl:Class ;
+  rdfs:label "Wizard" ;
+  rdfs:subClassOf forms:Form ;
+.
+forms:autoExpand
+  a owl:DatatypeProperty ;
+  rdfs:comment "If true, then the widget will try to expand all its initial values into \"nested\" forms (or whatever default viewer has been configured, such as image viewer)." ;
+  rdfs:domain forms:PropertyWidget ;
+  rdfs:label "auto expand" ;
+  rdfs:range xsd:string ;
+.
+forms:childIndex
+  a owl:DatatypeProperty ;
+  rdfs:comment "The index of a child Control among among its siblings. The values of this are typically ordered continuously from 0 upwards." ;
+  rdfs:domain forms:Control ;
+  rdfs:range xsd:int ;
+.
+forms:collapsed
+  a owl:DatatypeProperty ;
+  rdfs:comment "Specifies whether a Section shall appear collapsed by default." ;
+  rdfs:domain forms:Section ;
+  rdfs:range xsd:boolean ;
+.
+forms:formType
+  a owl:ObjectProperty ;
+  rdfs:comment "Can be used to restrict widget types to certain form types. The value range of this property is one of the top-level form type classes, e.g. forms:SearchForm. Values indicate that this form type is only permitted as child of forms of the given type." ;
+  rdfs:label "form type" ;
+  rdfs:range rdfs:Class ;
+.
+forms:hiddenIfNoValue
+  a owl:DatatypeProperty ;
+  rdfs:comment "Specifies if a Widget shall be hidden if the subject has no value for the given property." ;
+  rdfs:domain forms:PropertyWidget ;
+  rdfs:range xsd:boolean ;
+.
+forms:keyProperties
+  a owl:ObjectProperty ;
+  rdfs:comment "A list of rdf:Properties for a class, indicating which properties are most important for that class. This information can be used, for example, to determine which properties to show in TopBraid Composer's Instances View, and TopBraid Live's search window." ;
+  rdfs:domain rdfs:Class ;
+  rdfs:range rdf:List ;
+.
+forms:maxCardinality
+  a owl:DatatypeProperty ;
+  rdfs:comment "The maximum number of values permitted in a given widget." ;
+  rdfs:domain forms:PropertyWidget ;
+  rdfs:range xsd:int ;
+.
+forms:minCardinality
+  a owl:DatatypeProperty ;
+  rdfs:comment "The minimum number of values expected for a widget." ;
+  rdfs:domain forms:PropertyWidget ;
+  rdfs:range xsd:int ;
+.
+forms:numColumns
+  a owl:DatatypeProperty ;
+  rdfs:comment "Specifies the number of columns for layout purposes. If no value is specified, a default of 1 will be assumed." ;
+  rdfs:domain forms:Composite ;
+  rdfs:range xsd:int ;
+.
+forms:parentOf
+  a owl:ObjectProperty ;
+  rdfs:comment "Holds the child control of a parent Composite." ;
+  rdfs:domain forms:Composite ;
+  rdfs:range forms:Control ;
+.
+forms:predicate
+  a owl:ObjectProperty ;
+  rdfs:comment """Assigns a property to a widget. The value of this may either be a plain property or it may be a property expression. Currently only one type of property expressions is supported by TopBraid, using owl:inverseOf. For example, to specify that the value of a widget shall be an inverse of my:child, then the triples would be
+?widget forms:predicate ?anon .
+?anon owl:inverseOf my:child .
+where ?anon should be a blank node.""" ;
+  rdfs:domain forms:PropertyWidget ;
+  rdfs:range rdf:Property ;
+.
+forms:predicateType
+  a owl:ObjectProperty ;
+  rdfs:comment "Assigns a property type (e.g. owl:AnnotationProperties) to a WidgetGroup." ;
+  rdfs:domain forms:PropertyWidgetGroup ;
+  rdfs:range rdfs:Class ;
+.
+forms:subjectType
+  a owl:ObjectProperty ;
+  rdfs:comment "Specifies the type of subjects for a form." ;
+  rdfs:domain forms:Form ;
+  rdfs:range rdfs:Class ;
+.
+forms:treePredicate
+  a owl:ObjectProperty ;
+  rdfs:domain forms:Tree ;
+  rdfs:label "tree predicate" ;
+  rdfs:range rdf:Property ;
+.
+forms:treeRoot
+  a owl:ObjectProperty ;
+  rdfs:comment "Can be used to specify the root resource of a forms:Tree widget." ;
+  rdfs:domain forms:Tree ;
+  rdfs:label "tree root" ;
+.
+forms:useDomain
+  a owl:DatatypeProperty ;
+  rdfs:comment "Can be used to indicate that a Form should contain all properties with matching domains, even if the subject does not have any values for the properties.  Default is false, i.e. only those properties with values are shown on a form." ;
+  rdfs:domain forms:Form ;
+  rdfs:range xsd:boolean ;
+.
+forms:useLabels
+  a owl:DatatypeProperty ;
+  rdfs:comment "Indicates whether widgets shall use the rdfs:label of the predicate if no other value has been specified." ;
+  rdfs:domain forms:Control ;
+  rdfs:range xsd:boolean ;
+.
+forms:widgetTypeRange
+  a owl:ObjectProperty ;
+  rdfs:comment "Can be used to link a WidgetType with one or more range classes (such as xsd:string). Special meaning have rdfs:Literal (means any literal datatype and rangeless datatype properties) and rdfs:Resource (for rangeless object properties)." ;
+  rdfs:label "widget type range" ;
+  rdfs:range rdfs:Resource ;
+.

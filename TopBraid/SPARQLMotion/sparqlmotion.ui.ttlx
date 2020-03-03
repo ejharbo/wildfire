@@ -1,0 +1,150 @@
+# baseURI: http://topbraid.org/sparqlmotion.ui
+# imports: http://spinrdf.org/spin.ui
+# imports: http://topbraid.org/sparqlmotionlib
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix default: <http://uispin.org/default#> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spin.ui: <http://spinrdf.org/spin.ui#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+arg:subject
+  a rdf:Property ;
+  rdfs:label "subject" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+sm:CommentBox
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subject ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The subject to display the comment of." ;
+    ] ;
+  ui:prototype """
+<ui:group let:comment=\"{= spl:object(?subject, rdfs:comment) }\">
+    <ui:if ui:condition=\"{= bound(?comment) }\">
+        <div class=\"swa-font-small\">
+            <ui:parse ui:str=\"{= html:encodeBRs(?comment) }\"/>
+        </div>
+    </ui:if>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A boxed area containing the rdfs:comment of a given resource (arg:subject). Line breaks will be converted to proper HTML BR elements." ;
+  rdfs:label "Comment box" ;
+  rdfs:subClassOf sm:Elements ;
+.
+sm:Elements
+  a ui:NodeClass ;
+  ui:abstract true ;
+  rdfs:label "Elements" ;
+  rdfs:subClassOf ui:Element ;
+.
+sm:Module
+  ui:instanceView """
+<sm:ModuleView arg:resource=\"{= ?this }\"/>
+"""^^ui:Literal ;
+  ui:view """
+<spin.ui:ModulesPage arg:moduleClass=\"{= ?this }\"/>
+"""^^ui:Literal ;
+.
+sm:ModuleView
+  a ui:NodeClass ;
+  ui:prototype """
+<div class=\"spinFunction\">
+    <table>
+        <tr>
+            <td class=\"sm-module-view-h2\">
+                <h2>{= smf:qname(?resource) } ({= smf:qname(spl:object(?resource, rdf:type)) })</h2>
+                <p>
+                    <sm:CommentBox arg:subject=\"{= ?resource }\"/>
+                </p>
+            </td>
+            <td class=\"swa-align-top\" let:iconName=\"{= IF(spl:instanceOf(?resource, spin:SelectTemplate), &quot;TemplateModule&quot;, afn:localname(?resource)) }\">&nbsp;<br/>&nbsp;
+<img alt=\"Template Module\" height=\"48\" src=\"{= CONCAT(&quot;http://www.topquadrant.com/sparqlmotion/icons/&quot;, ?iconName, &quot;-48.png&quot;) }\" width=\"48\"/>
+            </td>
+        </tr>
+    </table>
+    <sm:SeeAlsoList arg:subject=\"{= ?resource }\"/>
+    <spin.ui:ArgumentsList arg:module=\"{= ?resource }\"/>
+</div>
+"""^^ui:Literal ;
+  rdfs:label "Module view" ;
+  rdfs:subClassOf ui:ResourceViews ;
+.
+sm:SeeAlsoList
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subject ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The subject to get the rdfs:seeAlsos from." ;
+    ] ;
+  ui:prototype """
+<ui:let letrs:rs=\"{#
+        SELECT ?seeAlso
+        WHERE {
+            ?subject rdfs:seeAlso ?seeAlso .
+            FILTER isIRI(?seeAlso) .
+        }
+        ORDER BY (xsd:string(?seeAlso)) }\">
+    <ui:if ui:condition=\"{= spr:rowCount(?rs) &gt; 0 }\">
+        <h3>See Also</h3>
+        <ul>
+            <ui:forEach ui:resultSet=\"{= ?rs }\">
+                <li>
+                    <ui:if ui:condition=\"{= EXISTS {
+                        ?seeAlso a ?someThing .
+                    } }\">{= smf:qname(?seeAlso) }</ui:if>
+                    <ui:else>
+                        <a href=\"{= xsd:string(?seeAlso) }\">{= xsd:string(?seeAlso) }</a>
+                    </ui:else>
+                </li>
+            </ui:forEach>
+        </ul>
+    </ui:if>
+</ui:let>
+"""^^ui:Literal ;
+  rdfs:comment "A list of hyperlinks stored under rdfs:seeAlso of a given subject." ;
+  rdfs:label "See also list" ;
+  rdfs:subClassOf sm:Elements ;
+.
+<http://topbraid.org/sparqlmotion.ui>
+  a owl:Ontology ;
+  owl:imports <http://spinrdf.org/spin.ui> ;
+  owl:imports <http://topbraid.org/sparqlmotionlib> ;
+.

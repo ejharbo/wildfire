@@ -1,0 +1,1316 @@
+# baseURI: http://topbraid.org/tasks.spin
+# imports: http://spinrdf.org/spin
+# imports: http://topbraid.org/tasks
+# prefix: tasks.spin
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://spinrdf.org/arg#matchStatus>
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://spinrdf.org/arg#matchUser>
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://spinrdf.org/arg#projectGraph>
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://spinrdf.org/arg#status>
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://spinrdf.org/arg#task>
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://spinrdf.org/arg#teamGraph>
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://spinrdf.org/arg#user>
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://topbraid.org/tasks#AllTasks>
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:limit "100"^^xsd:long ;
+      sp:orderBy (
+          [
+            rdf:type sp:Desc ;
+            sp:expression [
+                sp:varName "created" ;
+              ] ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "comment" ;
+          ]
+          [
+            sp:varName "user" ;
+          ]
+          [
+            sp:varName "created" ;
+          ]
+          [
+            sp:varName "modified" ;
+          ]
+          [
+            sp:varName "dueDate" ;
+          ]
+          [
+            sp:varName "resource" ;
+          ]
+          [
+            sp:varName "resourceGraph" ;
+          ]
+          [
+            sp:varName "status" ;
+          ]
+          [
+            sp:varName "task" ;
+          ]
+          [
+            sp:varName "emailAddress" ;
+          ]
+          [
+            sp:varName "assignedUser" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object <http://topbraid.org/tasks#Task> ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "task" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "comment" ;
+              ] ;
+            sp:predicate rdfs:comment ;
+            sp:subject [
+                sp:varName "task" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "created" ;
+              ] ;
+            sp:predicate <http://purl.org/dc/terms/created> ;
+            sp:subject [
+                sp:varName "task" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "modified" ;
+              ] ;
+            sp:predicate <http://purl.org/dc/terms/modified> ;
+            sp:subject [
+                sp:varName "task" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "dueDate" ;
+                    ] ;
+                  sp:predicate <http://www.w3.org/2005/01/wf/flow#dateDue> ;
+                  sp:subject [
+                      sp:varName "task" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:coalesce ;
+                sp:arg1 [
+                    rdf:type spl:object ;
+                    sp:arg1 [
+                        sp:varName "task" ;
+                      ] ;
+                    sp:arg2 <http://topbraid.org/tasks#taskStatus> ;
+                  ] ;
+                sp:arg2 <http://topbraid.org/tasks#TaskStatusOpen> ;
+              ] ;
+            sp:variable [
+                sp:varName "status" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type spl:object ;
+                sp:arg1 [
+                    sp:varName "task" ;
+                  ] ;
+                sp:arg2 <http://topbraid.org/tasks#resource> ;
+              ] ;
+            sp:variable [
+                sp:varName "resource" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type spl:object ;
+                sp:arg1 [
+                    sp:varName "task" ;
+                  ] ;
+                sp:arg2 <http://topbraid.org/tasks#resourceGraph> ;
+              ] ;
+            sp:variable [
+                sp:varName "resourceGraph" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:coalesce ;
+                sp:arg1 [
+                    rdf:type spl:object ;
+                    sp:arg1 [
+                        sp:varName "task" ;
+                      ] ;
+                    sp:arg2 <http://rdfs.org/sioc/ns#has_creator> ;
+                  ] ;
+                sp:arg2 <urn:x-tb-users:anonymous> ;
+              ] ;
+            sp:variable [
+                sp:varName "user" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type spl:object ;
+                sp:arg1 [
+                    sp:varName "task" ;
+                  ] ;
+                sp:arg2 <http://topbraid.org/tasks#assignedTo> ;
+              ] ;
+            sp:variable [
+                sp:varName "assignedUser" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type spl:object ;
+                sp:arg1 [
+                    sp:varName "task" ;
+                  ] ;
+                sp:arg2 teamwork:commentTag ;
+              ] ;
+            sp:variable [
+                sp:varName "postTag" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type spl:object ;
+                sp:arg1 [
+                    sp:varName "task" ;
+                  ] ;
+                sp:arg2 teamwork:emailAddress ;
+              ] ;
+            sp:variable [
+                sp:varName "emailAddress" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:or ;
+                sp:arg1 [
+                    rdf:type sp:not ;
+                    sp:arg1 [
+                        rdf:type sp:bound ;
+                        sp:arg1 [
+                            sp:varName "matchStatus" ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    rdf:type sp:and ;
+                    sp:arg1 [
+                        rdf:type sp:bound ;
+                        sp:arg1 [
+                            sp:varName "matchStatus" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        rdf:type sp:eq ;
+                        sp:arg1 [
+                            sp:varName "matchStatus" ;
+                          ] ;
+                        sp:arg2 [
+                            sp:varName "status" ;
+                          ] ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:or ;
+                sp:arg1 [
+                    rdf:type sp:not ;
+                    sp:arg1 [
+                        rdf:type sp:bound ;
+                        sp:arg1 [
+                            sp:varName "matchUser" ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    rdf:type sp:and ;
+                    sp:arg1 [
+                        rdf:type sp:bound ;
+                        sp:arg1 [
+                            sp:varName "matchUser" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        rdf:type sp:eq ;
+                        sp:arg1 [
+                            sp:varName "matchUser" ;
+                          ] ;
+                        sp:arg2 [
+                            sp:varName "assignedUser" ;
+                          ] ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate <http://spinrdf.org/arg#matchStatus> ;
+      spl:valueType <http://topbraid.org/tasks#TaskStatus> ;
+      rdfs:comment "The status to match against (or unbound)." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate <http://spinrdf.org/arg#matchUser> ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "filter on assigned user" ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  rdfs:comment "Gets all tasks as stored in the task database. Assumes that the graph containing the resource is a teamwork project." ;
+  rdfs:label "All Tasks" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+<http://topbraid.org/tasks#AvailableTaskStatuses>
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "s" ;
+          ]
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object <http://topbraid.org/tasks#TaskStatus> ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "s" ;
+                    ] ;
+                ]
+                [
+                  rdf:type sp:Bind ;
+                  sp:expression [
+                      rdf:type ui:label ;
+                      sp:arg1 [
+                          sp:varName "s" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "label" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode ui:graph ;
+          ]
+        ) ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  rdfs:comment "Gets the available statuses that tasks can have." ;
+  rdfs:label "Available task statuses" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+<http://topbraid.org/tasks#ChangeHistoryForTask>
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "date" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "comment" ;
+          ]
+          [
+            sp:varName "user" ;
+          ]
+          [
+            sp:varName "date" ;
+          ]
+          [
+            sp:varName "change" ;
+          ]
+          [
+            sp:varName "emailAddress" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "task" ;
+              ] ;
+            sp:predicate <http://topbraid.org/tasks#changeTo> ;
+            sp:subject [
+                sp:varName "change" ;
+              ] ;
+          ]
+          [
+            sp:object <http://www.w3.org/2005/01/wf/flow#Change> ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "change" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "comment" ;
+              ] ;
+            sp:predicate rdfs:comment ;
+            sp:subject [
+                sp:varName "change" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "date" ;
+              ] ;
+            sp:predicate <http://purl.org/dc/terms/created> ;
+            sp:subject [
+                sp:varName "change" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:coalesce ;
+                sp:arg1 [
+                    rdf:type spl:object ;
+                    sp:arg1 [
+                        sp:varName "change" ;
+                      ] ;
+                    sp:arg2 <http://rdfs.org/sioc/ns#has_creator> ;
+                  ] ;
+                sp:arg2 <urn:x-tb-users:anonymous> ;
+              ] ;
+            sp:variable [
+                sp:varName "user" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type spl:object ;
+                sp:arg1 [
+                    sp:varName "change" ;
+                  ] ;
+                sp:arg2 teamwork:emailAddress ;
+              ] ;
+            sp:variable [
+                sp:varName "emailAddress" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#task> ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The task for which to get comments" ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  rdfs:comment "Gets all changes for a given task, as stored in the current team graph" ;
+  rdfs:label "Change history for task" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+<http://topbraid.org/tasks#CommentsForTask>
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "date" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "comment" ;
+          ]
+          [
+            sp:varName "user" ;
+          ]
+          [
+            sp:varName "date" ;
+          ]
+          [
+            sp:varName "post" ;
+          ]
+          [
+            sp:varName "emailAddress" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "task" ;
+              ] ;
+            sp:predicate <http://rdfs.org/sioc/ns#about> ;
+            sp:subject [
+                sp:varName "post" ;
+              ] ;
+          ]
+          [
+            sp:object <http://rdfs.org/sioc/ns#Post> ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "post" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "comment" ;
+              ] ;
+            sp:predicate rdfs:comment ;
+            sp:subject [
+                sp:varName "post" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "date" ;
+              ] ;
+            sp:predicate <http://purl.org/dc/terms/created> ;
+            sp:subject [
+                sp:varName "post" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:coalesce ;
+                sp:arg1 [
+                    rdf:type spl:object ;
+                    sp:arg1 [
+                        sp:varName "post" ;
+                      ] ;
+                    sp:arg2 <http://rdfs.org/sioc/ns#has_creator> ;
+                  ] ;
+                sp:arg2 <urn:x-tb-users:anonymous> ;
+              ] ;
+            sp:variable [
+                sp:varName "user" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type spl:object ;
+                sp:arg1 [
+                    sp:varName "post" ;
+                  ] ;
+                sp:arg2 teamwork:emailAddress ;
+              ] ;
+            sp:variable [
+                sp:varName "emailAddress" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#task> ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The task for which to get comments" ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  rdfs:comment "Gets all comments for a given task, as stored in the current team graph" ;
+  rdfs:label "Comments for task" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+<http://topbraid.org/tasks#TasksForGraph>
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:orderBy (
+          [
+            rdf:type sp:Desc ;
+            sp:expression [
+                sp:varName "created" ;
+              ] ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "comment" ;
+          ]
+          [
+            sp:varName "user" ;
+          ]
+          [
+            sp:varName "created" ;
+          ]
+          [
+            sp:varName "modified" ;
+          ]
+          [
+            sp:varName "dueDate" ;
+          ]
+          [
+            sp:varName "resource" ;
+          ]
+          [
+            sp:varName "resourceGraph" ;
+          ]
+          [
+            sp:varName "status" ;
+          ]
+          [
+            sp:varName "task" ;
+          ]
+          [
+            sp:varName "emailAddress" ;
+          ]
+          [
+            sp:varName "assignedUser" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "resource" ;
+              ] ;
+            sp:predicate <http://topbraid.org/tasks#resource> ;
+            sp:subject [
+                sp:varName "task" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "resourceGraph" ;
+              ] ;
+            sp:predicate <http://topbraid.org/tasks#resourceGraph> ;
+            sp:subject [
+                sp:varName "task" ;
+              ] ;
+          ]
+          [
+            sp:object <http://topbraid.org/tasks#Task> ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "task" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "comment" ;
+              ] ;
+            sp:predicate rdfs:comment ;
+            sp:subject [
+                sp:varName "task" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "created" ;
+              ] ;
+            sp:predicate <http://purl.org/dc/terms/created> ;
+            sp:subject [
+                sp:varName "task" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "modified" ;
+              ] ;
+            sp:predicate <http://purl.org/dc/terms/modified> ;
+            sp:subject [
+                sp:varName "task" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "dueDate" ;
+                    ] ;
+                  sp:predicate <http://www.w3.org/2005/01/wf/flow#dateDue> ;
+                  sp:subject [
+                      sp:varName "task" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:coalesce ;
+                sp:arg1 [
+                    rdf:type spl:object ;
+                    sp:arg1 [
+                        sp:varName "task" ;
+                      ] ;
+                    sp:arg2 <http://topbraid.org/tasks#taskStatus> ;
+                  ] ;
+                sp:arg2 <http://topbraid.org/tasks#TaskStatusOpen> ;
+              ] ;
+            sp:variable [
+                sp:varName "status" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:coalesce ;
+                sp:arg1 [
+                    rdf:type spl:object ;
+                    sp:arg1 [
+                        sp:varName "task" ;
+                      ] ;
+                    sp:arg2 <http://rdfs.org/sioc/ns#has_creator> ;
+                  ] ;
+                sp:arg2 <urn:x-tb-users:anonymous> ;
+              ] ;
+            sp:variable [
+                sp:varName "user" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type spl:object ;
+                sp:arg1 [
+                    sp:varName "task" ;
+                  ] ;
+                sp:arg2 <http://topbraid.org/tasks#assignedTo> ;
+              ] ;
+            sp:variable [
+                sp:varName "assignedUser" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type spl:object ;
+                sp:arg1 [
+                    sp:varName "task" ;
+                  ] ;
+                sp:arg2 teamwork:emailAddress ;
+              ] ;
+            sp:variable [
+                sp:varName "emailAddress" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:or ;
+                sp:arg1 [
+                    rdf:type sp:not ;
+                    sp:arg1 [
+                        rdf:type sp:bound ;
+                        sp:arg1 [
+                            sp:varName "matchStatus" ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    rdf:type sp:and ;
+                    sp:arg1 [
+                        rdf:type sp:bound ;
+                        sp:arg1 [
+                            sp:varName "matchStatus" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        rdf:type sp:eq ;
+                        sp:arg1 [
+                            sp:varName "matchStatus" ;
+                          ] ;
+                        sp:arg2 [
+                            sp:varName "status" ;
+                          ] ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:or ;
+                sp:arg1 [
+                    rdf:type sp:not ;
+                    sp:arg1 [
+                        rdf:type sp:bound ;
+                        sp:arg1 [
+                            sp:varName "matchUser" ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    rdf:type sp:and ;
+                    sp:arg1 [
+                        rdf:type sp:bound ;
+                        sp:arg1 [
+                            sp:varName "matchUser" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        rdf:type sp:eq ;
+                        sp:arg1 [
+                            sp:varName "matchUser" ;
+                          ] ;
+                        sp:arg2 [
+                            sp:varName "assignedUser" ;
+                          ] ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate <http://spinrdf.org/arg#matchStatus> ;
+      spl:valueType <http://topbraid.org/tasks#taskStatus> ;
+      rdfs:comment "Filter on a particular status" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate <http://spinrdf.org/arg#matchUser> ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "filter on assigned user" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate <http://spinrdf.org/arg#resourceGraph> ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph in which the resource is found." ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  rdfs:comment "Gets all tasks for a given graph, as stored in the current team graph" ;
+  rdfs:label "Tasks for graph" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+<http://topbraid.org/tasks#TasksForResource>
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:orderBy (
+          [
+            rdf:type sp:Desc ;
+            sp:expression [
+                sp:varName "created" ;
+              ] ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "comment" ;
+          ]
+          [
+            sp:varName "user" ;
+          ]
+          [
+            sp:varName "created" ;
+          ]
+          [
+            sp:varName "modified" ;
+          ]
+          [
+            sp:varName "dueDate" ;
+          ]
+          [
+            sp:varName "resourceGraph" ;
+          ]
+          [
+            sp:varName "status" ;
+          ]
+          [
+            sp:varName "task" ;
+          ]
+          [
+            sp:varName "assignedUser" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "resource" ;
+              ] ;
+            sp:predicate <http://topbraid.org/tasks#resource> ;
+            sp:subject [
+                sp:varName "task" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "resourceGraph" ;
+              ] ;
+            sp:predicate <http://topbraid.org/tasks#resourceGraph> ;
+            sp:subject [
+                sp:varName "task" ;
+              ] ;
+          ]
+          [
+            sp:object <http://topbraid.org/tasks#Task> ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "task" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "comment" ;
+              ] ;
+            sp:predicate rdfs:comment ;
+            sp:subject [
+                sp:varName "task" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "created" ;
+              ] ;
+            sp:predicate <http://purl.org/dc/terms/created> ;
+            sp:subject [
+                sp:varName "task" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "modified" ;
+              ] ;
+            sp:predicate <http://purl.org/dc/terms/modified> ;
+            sp:subject [
+                sp:varName "task" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "dueDate" ;
+                    ] ;
+                  sp:predicate <http://www.w3.org/2005/01/wf/flow#dateDue> ;
+                  sp:subject [
+                      sp:varName "task" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:coalesce ;
+                sp:arg1 [
+                    rdf:type spl:object ;
+                    sp:arg1 [
+                        sp:varName "task" ;
+                      ] ;
+                    sp:arg2 <http://topbraid.org/tasks#taskStatus> ;
+                  ] ;
+                sp:arg2 <http://topbraid.org/tasks#TaskStatusOpen> ;
+              ] ;
+            sp:variable [
+                sp:varName "status" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:coalesce ;
+                sp:arg1 [
+                    rdf:type spl:object ;
+                    sp:arg1 [
+                        sp:varName "task" ;
+                      ] ;
+                    sp:arg2 <http://rdfs.org/sioc/ns#has_creator> ;
+                  ] ;
+                sp:arg2 <urn:x-tb-users:anonymous> ;
+              ] ;
+            sp:variable [
+                sp:varName "user" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type spl:object ;
+                sp:arg1 [
+                    sp:varName "task" ;
+                  ] ;
+                sp:arg2 <http://topbraid.org/tasks#assignedTo> ;
+              ] ;
+            sp:variable [
+                sp:varName "assignedUser" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type spl:object ;
+                sp:arg1 [
+                    sp:varName "task" ;
+                  ] ;
+                sp:arg2 teamwork:emailAddress ;
+              ] ;
+            sp:variable [
+                sp:varName "emailAddress" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#resource> ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource  for which to get the tasks." ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  rdfs:comment "Gets all tasks for a given resource, as stored in the current team graph" ;
+  rdfs:label "Tasks for resource" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+<http://topbraid.org/tasks#isUser>
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Ask ;
+      sp:where (
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object <http://rdfs.org/sioc/ns#UserAccount> ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "user" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode <http://server.topbraidlive.org/dynamic/users> ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#user> ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "A user account" ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:label "Is user" ;
+  rdfs:subClassOf spin:Functions ;
+.
+<http://topbraid.org/tasks#taskCount>
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "date" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                rdf:type sp:Count ;
+                sp:expression [
+                    sp:varName "task" ;
+                  ] ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "resource" ;
+                    ] ;
+                  sp:predicate <http://topbraid.org/tasks#resource> ;
+                  sp:subject [
+                      sp:varName "task" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "resourceGraph" ;
+                    ] ;
+                  sp:predicate <http://topbraid.org/tasks#resourceGraph> ;
+                  sp:subject [
+                      sp:varName "task" ;
+                    ] ;
+                ]
+                [
+                  sp:object <http://topbraid.org/tasks#Task> ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "task" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "comment" ;
+                    ] ;
+                  sp:predicate rdfs:comment ;
+                  sp:subject [
+                      sp:varName "task" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "created" ;
+                    ] ;
+                  sp:predicate <http://purl.org/dc/terms/created> ;
+                  sp:subject [
+                      sp:varName "task" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "modified" ;
+                    ] ;
+                  sp:predicate <http://purl.org/dc/terms/modified> ;
+                  sp:subject [
+                      sp:varName "task" ;
+                    ] ;
+                ]
+                [
+                  rdf:type sp:Bind ;
+                  sp:expression [
+                      rdf:type sp:coalesce ;
+                      sp:arg1 [
+                          rdf:type spl:object ;
+                          sp:arg1 [
+                              sp:varName "task" ;
+                            ] ;
+                          sp:arg2 <http://topbraid.org/tasks#taskStatus> ;
+                        ] ;
+                      sp:arg2 <http://topbraid.org/tasks#TaskStatusOpen> ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "status" ;
+                    ] ;
+                ]
+                [
+                  rdf:type sp:Bind ;
+                  sp:expression [
+                      rdf:type spl:object ;
+                      sp:arg1 [
+                          sp:varName "task" ;
+                        ] ;
+                      sp:arg2 <http://rdfs.org/sioc/ns#has_creator> ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "user" ;
+                    ] ;
+                ]
+                [
+                  rdf:type sp:Bind ;
+                  sp:expression [
+                      rdf:type spl:object ;
+                      sp:arg1 [
+                          sp:varName "task" ;
+                        ] ;
+                      sp:arg2 <http://topbraid.org/tasks#assignedTo> ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "assignedUser" ;
+                    ] ;
+                ]
+                [
+                  rdf:type sp:Bind ;
+                  sp:expression [
+                      rdf:type spl:object ;
+                      sp:arg1 [
+                          sp:varName "task" ;
+                        ] ;
+                      sp:arg2 teamwork:emailAddress ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "emailAddress" ;
+                    ] ;
+                ]
+                [
+                  rdf:type sp:Bind ;
+                  sp:expression [
+                      rdf:type sp:if ;
+                      sp:arg1 [
+                          rdf:type sp:bound ;
+                          sp:arg1 [
+                              sp:varName "user" ;
+                            ] ;
+                        ] ;
+                      sp:arg2 [
+                          rdf:type teamwork:userName ;
+                          sp:arg1 [
+                              sp:varName "user" ;
+                            ] ;
+                        ] ;
+                      sp:arg3 "Anonymous" ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "userName" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "teamGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#resource> ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource for which to count the tasks." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#teamGraph> ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The TCH graph to query." ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  spin:returnType xsd:integer ;
+  rdfs:label "Task count" ;
+  rdfs:subClassOf spin:Functions ;
+.
+<http://topbraid.org/tasks#taskCountWithStatus>
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                rdf:type sp:Count ;
+                sp:expression [
+                    sp:varName "task" ;
+                  ] ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type teamwork:teamGraph ;
+                sp:arg1 [
+                    sp:varName "projectGraph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "teamGraph" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "status" ;
+                    ] ;
+                  sp:predicate <http://topbraid.org/tasks#taskStatus> ;
+                  sp:subject [
+                      sp:varName "task" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "teamGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#projectGraph> ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The project graph - the actual tasks are stored in the TCH graph of that." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#status> ;
+      spl:valueType <http://topbraid.org/tasks#TaskStatus> ;
+      rdfs:comment "The status to filter by." ;
+    ] ;
+  spin:returnType xsd:integer ;
+  rdfs:label "task count with status" ;
+  rdfs:subClassOf spin:Functions ;
+.
+<http://topbraid.org/tasks.spin>
+  rdf:type owl:Ontology ;
+  owl:imports <http://spinrdf.org/spin> ;
+  owl:imports <http://topbraid.org/tasks> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.

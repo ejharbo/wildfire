@@ -1,0 +1,203 @@
+# baseURI: http://datashapes.org/generic
+# imports: http://datashapes.org/graphql
+# imports: http://datashapes.org/sparql
+# prefix: generic
+
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix generic: <http://datashapes.org/generic#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sparql: <http://datashapes.org/sparql#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://datashapes.org/generic>
+  a owl:Ontology ;
+  rdfs:comment """A collection of shapes supporting the 'generic' GraphQL schema that can be used to query any resource.
+
+This is a \"hard-coded\" system graph of the TopBraid platform, but you can substitute it by creating a new graph http://datashapes.org/metashx and uploading it into your workspace. In typical use cases, this new graph would owl:import the base graph and then add sh:property constraints to it.""" ;
+  rdfs:label "Generic shapes for GraphQL/SHACL" ;
+  owl:imports <http://datashapes.org/graphql> ;
+  owl:imports <http://datashapes.org/sparql> ;
+.
+generic:AboutPropertyGroup
+  a sh:PropertyGroup ;
+  rdfs:label "About" ;
+  sh:order "0"^^xsd:decimal ;
+.
+generic:Resource
+  a sh:NodeShape ;
+  dash:applicableToClass rdfs:Resource ;
+  rdfs:comment "A shape suitable for any resource." ;
+  rdfs:label "Resource" ;
+  sh:property generic:Resource-allTypes ;
+  sh:property generic:Resource-description ;
+  sh:property generic:Resource-hasType ;
+  sh:property generic:Resource-homeGraph ;
+  sh:property generic:Resource-iconClass ;
+  sh:property generic:Resource-isImported ;
+  sh:property generic:Resource-turtleSourceCode ;
+  sh:property generic:Resource-turtleSourceCodeImported ;
+  sh:property [
+      sh:path generic:rootQueryField ;
+    ] ;
+.
+generic:Resource-allTypes
+  a sh:PropertyShape ;
+  sh:path (
+      rdf:type
+      [
+        sh:zeroOrMorePath rdfs:subClassOf ;
+      ]
+    ) ;
+  graphql:name "allTypes" ;
+  sh:class rdfs:Class ;
+  sh:description "Gets all types that the resource has, including their superclasses." ;
+  sh:name "all types" ;
+.
+generic:Resource-description
+  a sh:PropertyShape ;
+  sh:path generic:description ;
+  sh:datatype xsd:string ;
+  sh:description "Returns a human-readable description of the resource." ;
+  sh:maxCount 1 ;
+  sh:name "description" ;
+  sh:values [
+      swa:getDescription (
+          sh:this
+        ) ;
+    ] ;
+.
+generic:Resource-hasType
+  a sh:PropertyShape ;
+  sh:path generic:hasType ;
+  sh:datatype xsd:boolean ;
+  sh:description "Checks if the resource has any rdf:type." ;
+  sh:maxCount 1 ;
+  sh:name "has type" ;
+  sh:values [
+      sh:exists [
+          sh:path rdf:type ;
+        ] ;
+    ] ;
+.
+generic:Resource-homeGraph
+  a sh:PropertyShape ;
+  sh:path generic:homeGraph ;
+  sh:description "Gets the resource of the home graph that this resource is defined in (i.e. where it's rdf:type triple is stored)." ;
+  sh:maxCount 1 ;
+  sh:name "home graph" ;
+  sh:nodeKind sh:IRI ;
+  sh:values [
+      sparql:iri (
+          [
+            <http://topbraid.org/sparqlmotionfunctions#definedIn> (
+                sh:this
+              ) ;
+          ]
+        ) ;
+    ] ;
+.
+generic:Resource-iconClass
+  a sh:PropertyShape ;
+  sh:path generic:iconClass ;
+  sh:datatype xsd:string ;
+  sh:description "An identifier for a suitable icon. For internal use right now." ;
+  sh:maxCount 1 ;
+  sh:name "icon class" ;
+  sh:values [
+      tosh:iconClass (
+          sh:this
+        ) ;
+    ] ;
+.
+generic:Resource-isImported
+  a sh:PropertyShape ;
+  sh:path generic:isImported ;
+  sh:datatype xsd:boolean ;
+  sh:description "True if this is not from the base graph." ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:name "is imported" ;
+  sh:values [
+      swa:isImportedResource (
+          sh:this
+        ) ;
+    ] ;
+.
+generic:Resource-rootQueryField
+  a sh:PropertyShape ;
+  sh:path generic:iconClass ;
+  sh:datatype xsd:string ;
+  sh:description "An identifier for a suitable icon. For internal use right now." ;
+  sh:maxCount 1 ;
+  sh:name "icon class" ;
+  sh:values [
+      tosh:iconClass (
+          sh:this
+        ) ;
+    ] ;
+.
+generic:Resource-turtleSourceCode
+  a sh:PropertyShape ;
+  sh:path generic:turtleSourceCode ;
+  sh:datatype xsd:string ;
+  sh:description "The Turtle source code of the bounded description of the resource. The resulting GraphQL field is writable via updateResource. Note however, that if you write to this field then no other fields should be part of the update." ;
+  sh:maxCount 1 ;
+  sh:name "turtle source code" ;
+  sh:values [
+      generic:getTurtleSourceCode (
+          sh:this
+          false
+        ) ;
+    ] ;
+.
+generic:Resource-turtleSourceCodeImported
+  a sh:PropertyShape ;
+  sh:path generic:turtleSourceCodeImported ;
+  sh:datatype xsd:string ;
+  sh:description "The Turtle source code of the imported triples from the bounded description of the resource." ;
+  sh:maxCount 1 ;
+  sh:name "turtle source code imported" ;
+  sh:values [
+      generic:getTurtleSourceCode (
+          sh:this
+          true
+        ) ;
+    ] ;
+.
+generic:ResourceView
+  a sh:NodeShape ;
+  dash:applicableToClass rdfs:Resource ;
+  rdfs:comment "A generic shape that applies to many resources, with shapes for rdfs:label and rdfs:comment." ;
+  rdfs:label "Basic View" ;
+  sh:property generic:ResourceView-comment ;
+  sh:property generic:ResourceView-label ;
+.
+generic:ResourceView-comment
+  a sh:PropertyShape ;
+  sh:path rdfs:comment ;
+  sh:description "Explanatory description(s) of the asset." ;
+  sh:group generic:AboutPropertyGroup ;
+  sh:or dash:HTMLOrStringOrLangString ;
+  sh:order "1"^^xsd:decimal ;
+.
+generic:ResourceView-label
+  a sh:PropertyShape ;
+  sh:path rdfs:label ;
+  graphql:name "rdfs_label" ;
+  sh:description "The display label(s) of the asset." ;
+  sh:group generic:AboutPropertyGroup ;
+  sh:or dash:StringOrLangString ;
+  sh:order "0"^^xsd:decimal ;
+.
+generic:Schema
+  a graphql:Schema ;
+  graphql:publicShape generic:Resource ;
+  rdfs:comment "The generic GraphQL schema for working with any kind of resource." ;
+  rdfs:label "Generic GraphQL Schema" ;
+.

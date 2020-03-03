@@ -1,0 +1,254 @@
+# baseURI: http://edg.topbraid.solutions/1.0/schema/base
+# imports: http://datashapes.org/dash
+# imports: http://datashapes.org/graphql
+# imports: http://www.linkedmodel.org/schema/dtype
+
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/schema/base>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/schema/base/GMD_core> ;
+  rdfs:label "EDG SCHEMA - BASE" ;
+  owl:imports <http://datashapes.org/dash> ;
+  owl:imports <http://datashapes.org/graphql> ;
+  owl:imports <http://www.linkedmodel.org/schema/dtype> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+  sh:declare [
+      a sh:PrefixDeclaration ;
+      sh:namespace "http://edg.topbraid.solutions/model/"^^xsd:anyURI ;
+      sh:prefix "edg" ;
+    ] ;
+.
+<http://edg.topbraid.solutions/1.0/schema/glossary>
+  prov:wasInfluencedBy "Some properties were based on Lowell Fryman's 2015 DGIQ slides." ;
+.
+edg:Aspect
+  a edg:AspectClass ;
+  rdfs:comment "<strong>Aspect</strong> superclass is an abstract class that has sub-classes that specify distinct sets of properties. These serve as 'features' for reuse to avoid composition properties."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/base> ;
+  rdfs:label "Aspect/Feature" ;
+  rdfs:subClassOf owl:Thing ;
+.
+edg:AspectClass
+  a rdfs:Class ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/base> ;
+  rdfs:label "Aspect Class" ;
+  rdfs:subClassOf owl:Class ;
+  rdfs:subClassOf sh:NodeShape ;
+.
+edg:AssetClass
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/base> ;
+  rdfs:label "Asset Class" ;
+  rdfs:subClassOf edg:ConstructClass ;
+  rdfs:subClassOf sh:NodeShape ;
+  sh:property edg:AssetClass-instancesHeldInAssetCollectionType ;
+.
+edg:AssetClass-instancesHeldInAssetCollectionType
+  a sh:PropertyShape ;
+  sh:path edg:instancesHeldInAssetCollectionType ;
+  sh:class teamwork:ProjectType ;
+  sh:deactivated true ;
+  sh:maxCount 1 ;
+  sh:minCount 0 ;
+.
+edg:Construct
+  a owl:Class ;
+  rdfs:comment "A <em>Construct</em> is an abstract superclass that specifies properties that pertain to non-asset entities, held as sub-classes. The <em>EDG</em> model distinguishes 'Construct' classes from 'Feature' classes and 'Asset classes."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/base> ;
+  rdfs:label "EDG Construct" ;
+  rdfs:subClassOf owl:Thing ;
+.
+edg:CustomAssetClass
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Custom asset class" ;
+  rdfs:subClassOf edg:AssetClass ;
+.
+edg:CustomEnumerationClass
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "An \"Enumeration\" is a controlled set of values that defines permissible values of a data attribute. Enumerations are also referred to as codelists and picklists.  Used in TopBraid EDG models to define enumerations by a customer." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/base> ;
+  rdfs:label "Custom Enumeration Class" ;
+  rdfs:subClassOf edg:EnumerationClass ;
+.
+edg:EDGenumerationClass
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "Enumerations used by TopBraid EDG models." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/base> ;
+  rdfs:label "EDG Product Enumeration" ;
+  rdfs:subClassOf edg:EnumerationClass ;
+.
+edg:EnumerationClass
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "Abstract metaclass for enumerations." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/base> ;
+  rdfs:label "Enumeration Class" ;
+  rdfs:subClassOf edg:ConstructClass ;
+.
+edg:PropertyValueSet-class
+  a sh:PropertyShape ;
+  sh:path edg:class ;
+  rdfs:comment "Note that this constraint does not restrict sh:class because the values may live outside of the imports closure and therefore be untyped." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/base> ;
+  sh:description "points to the class on which a given property will be referenced" ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:nodeKind sh:IRI ;
+.
+edg:PropertyValueSet-property
+  a sh:PropertyShape ;
+  sh:path edg:property ;
+  rdfs:comment "Note that this constraint does not restrict sh:class because the values may live outside of the imports closure and therefore be untyped." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/base> ;
+  sh:description "specifies the property that will be used to obtain the values from the given class." ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:nodeKind sh:IRI ;
+.
+edg:PropertyValueSetConstraintComponent
+  a sh:ConstraintComponent ;
+  rdfs:comment "A constraint component that can be used to state that all value nodes must be members of a given edg:PropertyValueSet." ;
+  rdfs:label "Property value set constraint component" ;
+  sh:message "Value(s) must be in property value set {$propertyValueSet}" ;
+  sh:parameter edg:PropertyValueSetConstraintComponent-propertyValueSet ;
+  sh:targetClass sh:Shape ;
+  sh:validator [
+      a sh:SPARQLAskValidator ;
+      sh:ask """ASK {
+    $propertyValueSet edg:graph ?graph .
+	$propertyValueSet edg:class ?class .
+	$propertyValueSet edg:property ?property .
+	GRAPH ?graph {
+		?instance ?property $value .
+		?instance a ?type .
+		?type rdfs:subClassOf* ?class .
+	}
+}""" ;
+      sh:prefixes <http://edg.topbraid.solutions/1.0/schema/base> ;
+    ] ;
+.
+edg:PropertyValueSetConstraintComponent-propertyValueSet
+  a sh:Parameter ;
+  sh:path edg:propertyValueSet ;
+  sh:class edg:PropertyValueSet ;
+  sh:nodeKind sh:IRI ;
+.
+edg:Viewpoint
+  a edg:ViewpointClass ;
+  rdfs:comment "<p><em>Viewpoint</em> is an abstract class that organizes classes for such things as UI, API and other views into the EDG modes. It can be likened to the notion of viewpoinrts in enterprise architecture models and ISO RM-ODP. Viewpoint is a subclass of <em>Aspect</em> to support type selection in the UI.</</p>"^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/base> ;
+  rdfs:label "Viewpoint" ;
+  rdfs:subClassOf edg:Aspect ;
+.
+edg:ViewpointClass
+  a rdfs:Class ;
+  rdfs:comment "\"ViewpointClass\" is a meta-class for classes that specify menu hierarchies in the UI. They are used to set \"teamwork:mainClass\" - the root class of a project type." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/base> ;
+  rdfs:label "Viewpoint Class" ;
+  rdfs:subClassOf sh:NodeShape ;
+.
+edg:class
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/base> ;
+  rdfs:label "class" ;
+  rdfs:range rdfs:Resource ;
+.
+edg:graph
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/base> ;
+  rdfs:label "graph" ;
+  rdfs:range rdfs:Resource ;
+.
+edg:instancesHeldInAssetCollectionType
+  a owl:ObjectProperty ;
+  rdfs:comment "A reference held on an Asset Class to specify the asset collection type that will hold instances of the class." ;
+  rdfs:domain edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/base> ;
+  rdfs:label "instances held in asset collection type" ;
+  rdfs:range teamwork:ProjectType ;
+.
+edg:property
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/base> ;
+  rdfs:label "property" ;
+  rdfs:range rdfs:Resource ;
+.
+edg:propertyValueSet
+  a owl:ObjectProperty ;
+  rdfs:comment "The property value set that all value nodes must be in." ;
+  rdfs:label "property value set" ;
+.
+<http://edg.topbraid.solutions/schema/base/GMD_core>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:SchemaGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/schema/core> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+dcterms:description
+  a rdf:Property ;
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy dcterms: ;
+.
+dcterms:source
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "source" ;
+  rdfs:range xsd:anyURI ;
+.
+skos:altLabel
+  rdfs:comment "A string property for an alternate label for a resource." ;
+.
+prov:generatedAtTime
+  a owl:DatatypeProperty ;
+  rdfs:comment "records the date and time that EDG acquired information." ;
+  rdfs:isDefinedBy prov: ;
+  rdfs:label "generated at time" ;
+  rdfs:range xsd:dateTime ;
+.
+prov:wasDerivedFrom
+  a rdf:Property ;
+  rdfs:label "was derived from" ;
+.
+prov:wasInfluencedBy
+  a rdf:Property ;
+  rdfs:domain edg:Provenance ;
+  rdfs:isDefinedBy prov: ;
+  rdfs:label "was influenced by" ;
+.

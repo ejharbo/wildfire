@@ -1,0 +1,476 @@
+# baseURI: http://topbraid.org/teamworkrules
+# imports: http://topbraid.org/solr
+# imports: http://topbraid.org/sparqlmotionlib-swp
+# imports: http://topbraid.org/tasks
+# imports: http://topbraid.org/teamwork.spin
+# imports: http://uispin.org/html
+# imports: http://uispin.org/ui
+# prefix: teamworkrules
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix default: <http://uispin.org/default#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+arg:expression
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:notification
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:task
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:text
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+teamwork:ChangedIndexableSubjects
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:distinct true ;
+      sp:resultVariables (
+          [
+            sp:varName "subject" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Union ;
+            sp:elements (
+                (
+                  [
+                    a sp:NamedGraph ;
+                    sp:elements (
+                        [
+                          sp:object [
+                              sp:varName "o" ;
+                            ] ;
+                          sp:predicate [
+                              sp:varName "p" ;
+                            ] ;
+                          sp:subject [
+                              sp:varName "subject" ;
+                            ] ;
+                        ]
+                      ) ;
+                    sp:graphNameNode ui:addedGraph ;
+                  ]
+                )
+                (
+                  [
+                    a sp:NamedGraph ;
+                    sp:elements (
+                        [
+                          sp:object [
+                              sp:varName "o" ;
+                            ] ;
+                          sp:predicate [
+                              sp:varName "p" ;
+                            ] ;
+                          sp:subject [
+                              sp:varName "subject" ;
+                            ] ;
+                        ]
+                      ) ;
+                    sp:graphNameNode ui:deletedGraph ;
+                  ]
+                )
+              ) ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:isIRI ;
+                sp:arg1 [
+                    sp:varName "subject" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "Gets all subjects from the current ui:addedGraph and ui:deletedGraph that shall be re-indexed (on Solr)." ;
+  rdfs:label "Changed indexable subjects" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+teamwork:CommitRule
+  a rdfs:Class ;
+  rdfs:comment "A rule that is executed when a working copy is being committed. ui:addedGraph and ui:deletedGraph will contain the changes as usual. It is valid to define rules that are both EditRules and CommitRules." ;
+  rdfs:label "Commit rule" ;
+  rdfs:subClassOf ui:Rule ;
+.
+teamwork:CommitRules
+  a teamwork:CommitRule ;
+  ui:abstract true ;
+  rdfs:comment "Base class of rules that shall be executed whenever a working copy has been committed. This requires special handling because it includes a large number of changes that can be queried while the rule executes, using ui:addedGraph and ui:deletedGraph." ;
+  rdfs:label "Commit rules" ;
+  rdfs:subClassOf ui:Rules ;
+.
+teamwork:EditRule
+  a rdfs:Class ;
+  rdfs:comment """A rule that is executed after SWA edits have happened - either form-based or through ui:transactions.
+
+Note that rules are only fired for changes that are wrapped into a ui:transaction and if the current query graph is an EVN project graph.""" ;
+  rdfs:label "Edit rule" ;
+  rdfs:subClassOf ui:Rule ;
+.
+teamwork:EditRules
+  a teamwork:EditRule ;
+  ui:abstract true ;
+  rdfs:comment """Abstract superclass of all edit rules.
+
+Note that rules are only fired for changes that are wrapped into a ui:transaction and if the current query graph is an EVN vocabulary graph. This means that rules should not switch to another default graph using ui:setContext.""" ;
+  rdfs:label "Edit rules" ;
+  rdfs:subClassOf ui:Rules ;
+.
+teamwork:IncrementCounterEditRule
+  a teamwork:EditRule ;
+  teamwork:ruleMayUpdate true ;
+  ui:prototype """
+<ui:forEach ui:resultSet=\"{#
+        SELECT DISTINCT ?item ?resourceType
+        WHERE {
+            {
+                GRAPH ui:addedGraph {
+                    ?item a ?resourceType .
+                } .
+            } .
+        } }\">
+    <ui:group let:classPrefix=\"{= swa:getURIClassPrefix() }\" let:constructMethod=\"{= swa:getURIConstructMethod() }\" let:counterOffset=\"{= swa:getURICounterOffset(?resourceType) }\" let:teamGraph=\"{= teamwork:currentTeamGraph() }\">
+        <ui:if ui:condition=\"{= (?constructMethod = &quot;counter&quot;) &amp;&amp; STRENDS(xsd:string(?item), xsd:string(?counterOffset)) }\">
+            <ui:group let:counterScope=\"{= IF(((?classPrefix = &quot;name&quot;) || (?classPrefix = &quot;acronym&quot;)), ?resourceType, ?teamGraph) }\" let:newOffset=\"{= xsd:int(swa:getURICounterOffset(?resourceType)) + 1 }\">
+                <ui:update ui:updateQuery=\"{!
+                        DELETE {
+                            GRAPH ?teamGraph {
+                                ?counterScope teamwork:URICounterOffset ?value .
+                            } .
+                        }
+                        WHERE {
+                            GRAPH ?teamGraph {
+                                ?counterScope teamwork:URICounterOffset ?value .
+                            } .
+                        } }\"/>
+                <ui:update ui:updateQuery=\"{!
+                        INSERT {
+                            GRAPH ?teamGraph {
+                                ?counterScope teamwork:URICounterOffset ?newOffset .
+                            } .
+                        }
+                        WHERE {
+                        } }\"/>
+            </ui:group>
+        </ui:if>
+    </ui:group>
+</ui:forEach>
+"""^^ui:Literal ;
+  rdfs:comment "Ensures the counter value gets updated each time a resource is created" ;
+  rdfs:label "Increment counter edit rule" ;
+  rdfs:subClassOf teamwork:EditRules ;
+.
+teamwork:MasterEditRule
+  a rdfs:Class ;
+  rdfs:comment "Metaclass of rules that shall fire after direct edits to a master graph (without user name)." ;
+  rdfs:label "Master edit rule" ;
+  rdfs:subClassOf ui:Rule ;
+.
+teamwork:MasterEditRules
+  a teamwork:MasterEditRule ;
+  rdfs:label "Master edit rules" ;
+  rdfs:subClassOf ui:Rules ;
+.
+teamwork:PreCommitRule
+  a rdfs:Class ;
+  rdfs:comment """A rule that is executed right before a working copy is being committed. This can be used to perform last-minute modifications to the change history entries of the working copy before they are being committed.
+
+The only changes to RDF graphs that these rules are permitted to perform are to the teamwork:Change entries of the working copy that is being handled here. The active query graph when these rules execute is the current TCH graph. The variable ?projectGraph points at the current master graph. The variable ?tag points at the current working copy.""" ;
+  rdfs:label "Pre-commit rule" ;
+  rdfs:subClassOf ui:Rule ;
+.
+teamwork:PreCommitRules
+  a teamwork:PreCommitRule ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The master graph for which the working copy is being committed." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:tag ;
+      spl:valueType teamwork:Tag ;
+      rdfs:comment "The working copy that is committed." ;
+    ] ;
+  ui:abstract true ;
+  rdfs:comment "Base class of rules that shall be executed whenever a working copy is about to be committed. See teamwork:PreCommitRule for documentation." ;
+  rdfs:label "Pre-commit rules" ;
+  rdfs:subClassOf ui:Rules ;
+.
+teamwork:StatusChangeRule
+  a rdfs:Class ;
+  rdfs:comment "A rule that is executed when a working copy is changing its status. See teamwork:StatusChangeRules for details." ;
+  rdfs:label "Status change rule" ;
+  rdfs:subClassOf ui:Rule ;
+.
+teamwork:StatusChangeRules
+  a teamwork:StatusChangeRule ;
+  ui:abstract true ;
+  rdfs:comment """Superclass of rules that will fire whenever the status of a working copy has been changed. When the rules execute, they operate on the teamwork (TCH) graph as the current query graph. The special named graphs ui:addedGraph and ui:deletedGraph can be used to find out what has actually changed. For example, if a working copy <A> changes its teamwork:status from teamwork:Uncommitted to teamwork:FrozenForReview, then the following triples will be present:
+
+GRAPH ui:addedGraph {
+	<A> teamwork:status teamwork:FrozenForReview .
+}
+
+GRAPH ui:deletedGraph {
+	<A> teamwork:status teamwork:Uncommitted .
+}
+
+Using those triples, the body of the rule (ui:prototype) can perform side effects, especially calls to SPARQLMotion modules such as sml:SendEmails.""" ;
+  rdfs:label "Status change rules" ;
+  rdfs:subClassOf ui:Rules ;
+.
+teamwork:SymmetricPropertyUpdaterRule
+  a teamwork:EditRule ;
+  teamwork:ruleMayUpdate true ;
+  ui:prototype """
+<ui:forEach ui:resultSet=\"{#
+        SELECT DISTINCT ?p
+        WHERE {
+            {
+                BIND (ui:graphWithImports(ui:currentQueryGraph()) AS ?graph) .
+                GRAPH ?graph {
+                    ?p a owl:SymmetricProperty .
+                } .
+            }
+            UNION
+            {
+                GRAPH ui:addedGraph {
+                    ?p a owl:SymmetricProperty .
+                } .
+            } .
+        } }\">
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                ?o ?p ?s .
+            }
+            WHERE {
+                GRAPH ui:addedGraph {
+                    ?s ?p ?o .
+                } .
+                FILTER NOT EXISTS {
+                    ?o ?p ?s .
+                } .
+                FILTER EXISTS {
+                    ?o ?anyP ?anyO .
+                } .
+            } }\"/>
+    <ui:update ui:updateQuery=\"{!
+            DELETE {
+                ?o ?p ?s .
+            }
+            WHERE {
+                GRAPH ui:deletedGraph {
+                    ?s ?p ?o .
+                } .
+                FILTER EXISTS {
+                    ?o ?p ?s .
+                } .
+            } }\"/>
+</ui:forEach>
+"""^^ui:Literal ;
+  rdfs:comment "Maintains the invariant that symmetric properties should go in both directions. When a new (forward) triple is added, then this rule will also create its inverse triple. Likewise if a triple gets deleted. Note that no triple is added if the object of the forward triple is an external resource that doesn't have any other properties." ;
+  rdfs:label "Symmetric property updater rule" ;
+  rdfs:subClassOf teamwork:EditRules ;
+.
+teamwork:TCHEditRule
+  a rdfs:Class ;
+  rdfs:comment "Metaclass of rules that are executed after edits to the TCH graph, e.g. via the Metadata tab in EDG." ;
+  rdfs:label "TCH edit rule" ;
+  rdfs:subClassOf ui:Rule ;
+.
+teamwork:TCHEditRules
+  a teamwork:TCHEditRule ;
+  ui:abstract true ;
+  rdfs:comment "Abstract base class for the TCH Edit Rules." ;
+  rdfs:label "TCH edit rules" ;
+  rdfs:subClassOf ui:Rules ;
+.
+teamwork:isPredicateInChangeGraphs
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:or ;
+                sp:arg1 [
+                    a sp:exists ;
+                    sp:elements (
+                        [
+                          a sp:NamedGraph ;
+                          sp:elements (
+                              [
+                                sp:object [
+                                    sp:varName "any" ;
+                                  ] ;
+                                sp:predicate [
+                                    sp:varName "predicate" ;
+                                  ] ;
+                                sp:subject spin:_arg1 ;
+                              ]
+                            ) ;
+                          sp:graphNameNode ui:addedGraph ;
+                        ]
+                      ) ;
+                  ] ;
+                sp:arg2 [
+                    a sp:exists ;
+                    sp:elements (
+                        [
+                          a sp:NamedGraph ;
+                          sp:elements (
+                              [
+                                sp:object [
+                                    sp:varName "any" ;
+                                  ] ;
+                                sp:predicate [
+                                    sp:varName "predicate" ;
+                                  ] ;
+                                sp:subject spin:_arg1 ;
+                              ]
+                            ) ;
+                          sp:graphNameNode ui:deletedGraph ;
+                        ]
+                      ) ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The subject." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:predicate ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The predicate to check for." ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks if a given predicate is used in either ui:addedGraph or ui:deletedGraph." ;
+  rdfs:label "is predicate in change graphs" ;
+  rdfs:subClassOf spin:Functions ;
+.
+teamwork:ruleMayUpdate
+  a rdf:Property ;
+  rdfs:comment "Must be set to true if the associated rule may perform additional ui:updates on the query graph. Rules that do not have updates will be executed when the user hits the Undo button." ;
+  rdfs:domain teamwork:EditRule ;
+  rdfs:label "rule may update" ;
+  rdfs:range xsd:boolean ;
+.
+<http://topbraid.org/teamworkrules>
+  a owl:Ontology ;
+  rdfs:comment """A simple rule engine for the Teamwork Framework. All instances of teamwork:EditRule will be executed after each ui:transaction or form-based edit. Rules may perform additional ui:updates that will be added to the current transaction.
+
+Another not completely separate feature covered here is a Notifications mechanism, allowing text messages to be sent to subscribers (e.g. RACI roles).""" ;
+  owl:imports <http://topbraid.org/solr> ;
+  owl:imports <http://topbraid.org/sparqlmotionlib-swp> ;
+  owl:imports <http://topbraid.org/tasks> ;
+  owl:imports <http://topbraid.org/teamwork.spin> ;
+  owl:imports <http://uispin.org/html> ;
+  owl:imports <http://uispin.org/ui> ;
+  owl:versionInfo "0.2.0" ;
+.

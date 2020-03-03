@@ -1,0 +1,2349 @@
+# baseURI: http://edg.topbraid.solutions/1.0/project/data-models
+# imports: http://edg.topbraid.solutions/1.0/collection/schema-models
+# imports: http://edg.topbraid.solutions/1.0/project/common
+# imports: http://edg.topbraid.solutions/1.0/schema/controllers
+# imports: http://edg.topbraid.solutions/1.0/schema/edg
+# imports: http://edg.topbraid.solutions/1.0/spin/library
+# imports: http://edg.topbraidlive.org/1.0/importers/ddl
+# imports: http://edg.topbraidlive.org/1.0/importers/jdbc
+# imports: http://spinrdf.org/spin
+# imports: http://teamwork.topbraidlive.org/ui/savedQueries
+# imports: http://teamwork.topbraidlive.org/ui/teamworkgraphql
+# imports: http://topbraid.org/metadata
+# imports: http://topbraid.org/teamwork
+# imports: http://uispin.org/ui
+
+@prefix acjob: <http://evn.topbraidlive.org/tagger/acjob#> .
+@prefix acpp: <http://topbraid.org/nlp/autoclassifier-preproc#> .
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix autotagger: <http://evn.topbraidlive.org/autotagger#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix conceptmatch: <http://topbraid.org/conceptmatch#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix config-importers: <http://edg.topbraidlive.org/config/importers#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix core-soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix corpus: <http://topbraid.org/corpus#> .
+@prefix corpusprojects: <http://topbraid.org/corpus-projects#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkapp: <http://topbraid.org/swa/crosswalkapp#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dashboard: <http://example.org/dashboard#> .
+@prefix datagraph: <http://teamwork.topbraidlive.org/datagraph/datagraphprojects#> .
+@prefix dataset: <http://teamwork.topbraidlive.org/dataset#> .
+@prefix datasetapp: <http://topbraid.org/swa/datasetapp#> .
+@prefix datasetviewer: <http://topbraid.org/swa/datasetviewer#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ddl: <http://edg.topbraidlive.org/1.0/importers/ddl#> .
+@prefix default: <http://uispin.org/default#> .
+@prefix defaultapp: <http://topbraid.org/swa/defaultapp#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix document: <http://topbraid.org/document#> .
+@prefix documents: <http://edg.topbraid.solutions/1.0/shapes/documents#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg-config: <http://edg.ext.topbraidlive.org/schema/config/importers#> .
+@prefix edg-importer: <http://edg.topbraidlive.org/importer/> .
+@prefix edg-qa: <http://edg.topbraidlive.org/utility/qa/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.global: <urn:x-evn-global:> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix edgproduct: <http://edg.topbraidlive.org/edgproduct#> .
+@prefix eeh-lib: <http://www.environmenthub.no/spin/1.0/eeh-lib#> .
+@prefix eeh-reportlib: <http://www.environmenthub.no/spin/1.0/eeh-reportlib#> .
+@prefix elements: <http://purl.org/dc/elements/1.1/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evn: <http://topbraid.org/evn/evn#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evnimport: <http://evn.topbraidlive.org/uispin/evnimport#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix ex: <http://example.org/> .
+@prefix extjs: <http://uispin.com/extjs#> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix forms: <http://www.topbraid.org/2007/01/forms.owl#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix governance: <http://topbraid.org/teamworkgovernance.ui#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix graphql.search: <http://teamwork.topbraidlive.org/graphql.search#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix inference: <http://www.topbraid.org/2007/06/inference.owl#> .
+@prefix jdbc: <http://edg.topbraidlive.org/1.0/importers/jdbc#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix kennedys: <http://topbraid.org/examples/kennedys#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix lib-importer: <http://edg.topbraid.solutions/importer/lib#> .
+@prefix lineage-transform: <http://edg.topbraid.solutions/transform/importer/lineage#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix ontologyviewer: <http://topbraid.org/swa/ontologyviewer#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix proxy-lineage: <http://edg.topbraid.solutions/proxy/importer/lineage#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmapp: <http://rdm.topbraidlive.org/rdmapp#> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix rdmviewer: <http://rdm.topbraidlive.org/rdmviewer#> .
+@prefix saf: <http://topbraid.org/saf/> .
+@prefix safconfig: <http://topbraid.org/safconfig/> .
+@prefix safindex: <http://topbraid.org/safindex#> .
+@prefix safm: <http://saf.topbraidlive.org/metaschema/> .
+@prefix savedQueries: <http://teamwork.topbraidlive.org/ui/savedQueries#> .
+@prefix scheduler: <http://topbraid.org/scheduler#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix server: <http://server.topbraidlive.org/server.ui#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix shapesgraph: <http://teamwork.topbraidlive.org/shapesgraph/shapesgraphprojects#> .
+@prefix sharepoint: <http://topbraid.org/sharepoint#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skosshapes: <http://topbraid.org/skos.shapes#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparql: <http://datashapes.org/sparql#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spin.ui: <http://spinrdf.org/spin.ui#> .
+@prefix spinmap: <http://spinrdf.org/spinmap#> .
+@prefix spinmapl: <http://topbraid.org/spin/spinmapl#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix ss: <http://www.topbraidcomposer.org/owl/2006/08/spreadsheets.owl#> .
+@prefix stats: <http://topbraid.org/statistics#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swadoc: <http://topbraid.org/swadoc#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tablesmap: <http://topbraid.org/spin/tablesmap#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix taggerspin: <http://evn.topbraidlive.org/taggerspin#> .
+@prefix taggerui: <http://evn.topbraidlive.org/taggerui#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix tblui: <http://server.topbraidlive.org/tblui#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkAdmin: <http://teamwork.topbraidlive.org/doc/teamworkAdmin#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworkconstraints: <http://topbraid.org/teamworkconstraints#> .
+@prefix teamworkdashboard: <http://topbraid.org/teamworkdashboard#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix teamworkupdate: <http://teamworkAPI.topbraid.com/teamworkUpdate#> .
+@prefix textindex: <http://topbraid.org/textindex#> .
+@prefix tika-importer: <http://teamwork.topbraidlive.org/corpus/tika-importer#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix tracker: <http://teamwork.topbraidlive.org/ui/tracker#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uitest: <http://uispin.org/test#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix userdat: <http://teamwork.topbraidlive.org/ui/userdata> .
+@prefix userdata: <http://teamwork.topbraidlive.org/ui/userdata#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix victory: <http://edg.topbraid.solutions/victory/> .
+@prefix visual: <http://topbraid.org/visual#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xhtml: <http://topbraid.org/xhtml#> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/project/data-models>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/project/data-models/GMD_data-models> ;
+  rdfs:label "data-models" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/collection/schema-models> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/project/common> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/controllers> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/edg> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/spin/library> ;
+  owl:imports <http://edg.topbraidlive.org/1.0/importers/ddl> ;
+  owl:imports <http://edg.topbraidlive.org/1.0/importers/jdbc> ;
+  owl:imports <http://spinrdf.org/spin> ;
+  owl:imports <http://teamwork.topbraidlive.org/ui/savedQueries> ;
+  owl:imports <http://teamwork.topbraidlive.org/ui/teamworkgraphql> ;
+  owl:imports <http://topbraid.org/metadata> ;
+  owl:imports <http://topbraid.org/teamwork> ;
+  owl:imports <http://uispin.org/ui> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+edg:
+  tosh:systemNamespace true ;
+.
+edg:AVROschemaExportPlugin
+  a teamwork:ExportPlugin ;
+  teamwork:pluginIndex 2 ;
+  teamwork:pluginMayNotScale true ;
+  teamwork:validForACResults true ;
+  teamwork:validForTags true ;
+  ui:prototype """
+<ui:createLink arg:projectGraph=\"{= ?projectGraph }\" arg:serialization=\"{= sml:JSON }\" arg:tag=\"{= ?tag }\" ui:queryGraph=\"{= teamwork:projectOrTagGraph(?projectGraph, ?tag) }\" ui:viewClass=\"{= edg:ExportAvroSchemas }\">
+    <teamwork:ActionLink arg:comment=\"Creates one or more Avro files in JSON format from Physical Data Model tables.\" arg:icon=\"lib/teamwork/build/images/teamwork/icon-json.svg\" arg:link=\"{= ?link }\" arg:title=\"Export Avro JSON\"/>
+</ui:createLink>
+"""^^ui:Literal ;
+  rdfs:label "Export Avro JSON plugin" ;
+  rdfs:subClassOf teamwork:ExportPlugins ;
+.
+edg:ColumnsForLogicalEntities
+  a ui:NodeClass ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <!--ui:dumpScope ui:message=\"AAA: edg:ColumnsForLogicalEntities\"/-->
+    <swon:Array>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"uri\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"uri\"/>
+            <swon:Value arg:name=\"searchable\" arg:value=\"{= false }\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= false }\"/>
+            <swon:Value arg:name=\"orderable\" arg:value=\"{= false }\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Logical Entity\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"logicalEntity\"/>
+            <swon:Value arg:name=\"searchable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"render\" arg:value=\"detailsLink\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Name\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"name\"/>
+            <swon:Value arg:name=\"searchable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= false }\"/>
+            <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"type\" arg:value=\"label\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Attribute Count\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"attributeCount\"/>
+            <swon:Value arg:name=\"searchable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"type\" arg:value=\"num\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Relation Count\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"relationCount\"/>
+            <swon:Value arg:name=\"searchable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"type\" arg:value=\"num\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Physical Mapping Count\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"physicalMappingCount\"/>
+            <swon:Value arg:name=\"searchable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"type\" arg:value=\"num\"/>
+        </swon:Object>
+    </swon:Array>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:seeAlso edg:DataTableResultsCallbackForLogicalEntities ;
+  rdfs:subClassOf edg:JSONServices ;
+.
+edg:ConfirmAvroTransformJobs
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resources ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:prototype """
+<ui:group let:projectGraph=\"{= IRI(?graph) }\">
+    <ui:setContext ui:queryGraph=\"{= ui:graphWithoutImports(?projectGraph) }\">
+        <!--ui:debug>
+<ui:dumpScope ui:message=\"edg:ConfirmAvroTransformJobs\"/>
+</ui:debug-->
+        <p class=\"text-info\">The following tables will be transformed to Avro Schemas. A REST service can also be directly invoked.</p>
+        <sml:ConvertJSONToRDF sm:outputVariable=\"jobs\" sml:text=\"{= ?resources }\">
+            <table class=\"swa-relevant-properties\">
+                <thead class=\"swa-relevant-properties\">
+                    <tr class=\"swa-relevant-properties\">
+                        <th class=\"swa-relevant-properties\">Table</th>
+                        <th class=\"swa-relevant-properties\">Columns</th>
+                        <th class=\"swa-relevant-properties\">REST Service</th>
+                    </tr>
+                </thead>
+                <tbody class=\"swa-relevant-properties\">
+                    <ui:forEach ui:resultSet=\"{#
+                            SELECT ?tableU ?table
+                            WHERE {
+                                ?s a json:Object .
+                                ?s json:resource ?table .
+                                BIND (IRI(?table) AS ?tableU) .
+                            } }\">
+                        <ui:setContext ui:queryGraph=\"{= ui:graphWithoutImports(?projectGraph) }\">
+                            <ui:group let:id=\"{= ui:uniqueId() }\" let:restCall=\"{= CONCAT(edg:ConstructParameterlessRESTcall(&quot;edg:GenerateAvroSchema&quot;), &quot;&amp;table=&quot;, spif:encodeURL(str(?table)), &quot;&amp;graph=&quot;, spif:encodeURL(str(?graph))) }\">
+                                <tr class=\"swa-relevant-properties\" let:rowId=\"{= fn:concat(&quot;ROW_&quot;, ?id) }\">
+                                    <td class=\"swa-relevant-properties\" let:tableDescription=\"{= spl:object(?tableU, edg:description) }\">
+                                        <label for=\"{= ?rowId }\" title=\"{= ?tableDescription }\">{= ui:label(?tableU) }</label>
+                                    </td>
+                                    <td class=\"swa-relevant-properties\">{= edg:countOfColumnsInTable(?tableU) }</td>
+                                    <td class=\"swa-relevant-properties\">
+                                        <a href=\"{= ?restCall }\">{= ?restCall }</a>
+                                    </td>
+                                </tr>
+                            </ui:group>
+                        </ui:setContext>
+                    </ui:forEach>
+                </tbody>
+            </table>
+        </sml:ConvertJSONToRDF>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Confirm Avro transform jobs" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:CreateDataQualityRecordHandler
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:myParent=\"{= ui:getSessionAttribute(&quot;persistresource&quot;) }\" let:myURI=\"{= IRI(?uri) }\">
+    <!--ui:dumpScope ui:message=\"AAA: edg:CreateDataQualityRecordHandler\"/-->
+    <ui:if ui:condition=\"{= bound(?myURI) }\">
+        <ui:transaction ui:checkConstraints=\"{= true }\" ui:logMessage=\"Create {= ui:label(?resourceType) } with URI {= ?resource }\" ui:metadata=\"{= ?metadata }\">
+            <ui:preCondition ui:errorMessage=\"{= swa:labelExistsPreCondition(?label) }\">
+                <ui:update ui:updateQuery=\"{!
+                        INSERT {
+                            ?myURI a ?resourceType .
+                            ?myURI ?labelProperty ?prefLabel .
+                            ?myURI edg:created ?now .
+                            ?myParentU edg:dataQualityRecord ?myURI .
+                        }
+                        WHERE {
+                            BIND (IF(bound(?labelLang), STRLANG(?label, ?labelLang), ?label) AS ?prefLabel) .
+                            BIND (swa:labelProperty(?resourceType) AS ?labelProperty) .
+                            BIND (afn:now() AS ?now) .
+                            BIND (IRI(?myParent) AS ?myParentU) .
+                        } }\"/>
+                <swa:createPrimaryKeyTriple ui:args=\"*\"/>
+                <swa:addDefaultValues arg:resource=\"{= IRI(str(?myURI)) }\"/>
+            </ui:preCondition>
+        </ui:transaction>
+    </ui:if>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "The updates that need to happen to create a new resource with a given type." ;
+  rdfs:label "Create data quality record handler" ;
+  rdfs:subClassOf swa:CreateHandlers ;
+.
+edg:CreateLogicalAttributeHandler
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:datatype ;
+      spl:valueType edg:Datatype ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:isForeignKey ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:isNullable ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:isPrimaryKey ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:logicalEntity ;
+      spl:valueType edg:LogicalEntity ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:dataGraph=\"{= swa:dataGraph() }\" let:masterGraph=\"{= teamwork:currentMasterGraph() }\">
+    <ui:group let:graphId=\"{= teamwork:graphIdFromGraph(?masterGraph) }\">
+        <!--ui:dumpScope ui:message=\"AAA: edg:CreateLogicalAttributeHandler\"/-->
+        <ui:transaction ui:checkConstraints=\"{= true }\" ui:logMessage=\"Create {= ui:label(?resourceType) } with URI {= ?uri }\" ui:metadata=\"{= ?metadata }\">
+            <!--ui:dumpScope ui:message=\"AAA1: swa:CreateResourceHandler\"/-->
+            <ui:preCondition ui:errorMessage=\"{= COALESCE(swa:labelExistsPreCondition(?label), swa:URIExistsPreCondition(?uri), swa:validURIPreCondition(?uri), swa:unusedURIPreCondition(IRI(str(?uri))), swa:nonEmptyPrimaryKeyPreCondition(?resourceType, IRI(str(?uri))), swa:nonAbstractClassPreCondition(?resourceType)) }\">
+                <ui:preCondition ui:errorMessage=\"{= IF(spl:hasValue(?resourceType, owl:oneOf), &quot;Cannot create new instances of a class with an owl:oneOf&quot;, ?none) }\">
+                    <ui:update ui:updateQuery=\"{!
+                            INSERT {
+                                ?resource a ?resourceType .
+                                ?resource ?labelProperty ?prefLabel .
+                                ?resource edg:logicalDatatype ?datatype .
+                                ?resource edg:attributeOf ?logicalEntity .
+                                ?resource edg:isPrimaryKey ?isPrimaryKey .
+                                ?resource edg:isForeignKey ?isForeignKey .
+                                ?resource edg:isNullable ?isNullable .
+                            }
+                            WHERE {
+                                BIND (IRI(str(?uri)) AS ?resource) .
+                                BIND (IF(bound(?labelLang), STRLANG(?label, ?labelLang), ?label) AS ?prefLabel) .
+                                BIND (swa:labelProperty(?resourceType) AS ?labelProperty) .
+                            } }\"/>
+                    <swa:addDefaultValues arg:resource=\"{= IRI(str(?uri)) }\"/>
+                </ui:preCondition>
+            </ui:preCondition>
+        </ui:transaction>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment "Creates a logical attribute and connects it to an owning logical entity." ;
+  rdfs:label "Create logical attribute handler" ;
+  rdfs:seeAlso edg:CreateResourceDialogForLogicalAttributePlugin ;
+  rdfs:seeAlso edg:DataTableResultsCallbackForLogicalEntityAttributes ;
+  rdfs:seeAlso edg:LogicalRelationIdentifierSetter ;
+  rdfs:seeAlso edg:ResourceDataTableLogicalEntityAttributesColumns ;
+  rdfs:subClassOf swa:CreateHandlers ;
+.
+edg:CreateLogicalRelationHandler
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:source ;
+      spl:valueType edg:LogicalEntity ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:target ;
+      spl:valueType edg:LogicalEntity ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:sourceCardinality ;
+      spl:valueType edg:Cardinality ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:targetCardinality ;
+      spl:valueType edg:Cardinality ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:dataGraph=\"{= swa:dataGraph() }\" let:masterGraph=\"{= teamwork:currentMasterGraph() }\">
+    <ui:group let:graphId=\"{= teamwork:graphIdFromGraph(?masterGraph) }\">
+        <!--ui:dumpScope ui:message=\"AAA: edg:CreateLogicalRelationHandler\"/-->
+        <ui:transaction ui:checkConstraints=\"{= true }\" ui:logMessage=\"Create {= ui:label(?resourceType) } with URI {= ?uri }\" ui:metadata=\"{= ?metadata }\">
+            <ui:preCondition ui:errorMessage=\"{= COALESCE(swa:labelExistsPreCondition(?label), swa:URIExistsPreCondition(?uri), swa:validURIPreCondition(?uri), swa:unusedURIPreCondition(IRI(str(?uri))), swa:nonEmptyPrimaryKeyPreCondition(?resourceType, IRI(str(?uri))), swa:nonAbstractClassPreCondition(?resourceType)) }\">
+                <ui:preCondition ui:errorMessage=\"{= IF(spl:hasValue(?resourceType, owl:oneOf), &quot;Cannot create new instances of a class with an owl:oneOf&quot;, ?none) }\">
+                    <!--ui:dumpScope ui:message=\"AAA2: edg:CreateLogicalRelationHandler\"/-->
+                    <ui:update ui:updateQuery=\"{!
+                            INSERT {
+                                ?resource a ?resourceType .
+                                ?resource ?labelProperty ?prefLabel .
+                                ?resource edg:participant ?sourceParticipant .
+                                ?resource edg:participant ?targetParticipant .
+                                ?sourceParticipant a edg:LogicalRelationParticipant .
+                                ?sourceParticipant edg:logicalEntity ?source .
+                                ?sourceParticipant edg:cardinality ?sourceCardinality .
+                                ?targetParticipant a edg:LogicalRelationParticipant .
+                                ?targetParticipant edg:logicalEntity ?target .
+                                ?targetParticipant edg:cardinality ?targetCardinality .
+                            }
+                            WHERE {
+                                BIND (IRI(str(?uri)) AS ?resource) .
+                                BIND (IF(bound(?labelLang), STRLANG(?label, ?labelLang), ?label) AS ?prefLabel) .
+                                BIND (swa:labelProperty(?resourceType) AS ?labelProperty) .
+                                BIND (edg:newResourceWithUUID(edg:LogicalRelationParticipant, &quot;&quot;) AS ?sourceParticipant) .
+                                BIND (edg:newResourceWithUUID(edg:LogicalRelationParticipant, &quot;&quot;) AS ?targetParticipant) .
+                            } }\"/>
+                    <swa:createPrimaryKeyTriple ui:args=\"*\"/>
+                    <swa:addDefaultValues arg:resource=\"{= IRI(str(?uri)) }\"/>
+                </ui:preCondition>
+            </ui:preCondition>
+        </ui:transaction>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment "The updates that need to happen to create a new resource with a given type." ;
+  rdfs:label "Create logical relation handler" ;
+  rdfs:seeAlso edg:CreateResourceDialogForLogicalRelationPlugin ;
+  rdfs:seeAlso edg:DataTableResultsCallbackForLogicalEntityRelationships ;
+  rdfs:seeAlso edg:LogicalRelation ;
+  rdfs:seeAlso edg:LogicalRelationIdentifierSetter ;
+  rdfs:seeAlso edg:ResourceDataTableLogicalEntityRelationshipsColumns ;
+  rdfs:subClassOf swa:CreateHandlers ;
+.
+edg:CreateLogicalRelationParticipantHandler
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:cardinality ;
+      spl:valueType edg:Cardinality ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:logicalEntity ;
+      spl:valueType edg:LogicalEntity ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:logicalRelation ;
+      spl:valueType edg:LogicalRelation ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:dataGraph=\"{= swa:dataGraph() }\" let:masterGraph=\"{= teamwork:currentMasterGraph() }\">
+    <ui:group let:graphId=\"{= teamwork:graphIdFromGraph(?masterGraph) }\">
+        <!--ui:dumpScope ui:message=\"AAA: edg:CreateLogicalRelationHandler\"/-->
+        <ui:transaction ui:checkConstraints=\"{= true }\" ui:logMessage=\"Create {= ui:label(?resourceType) } with URI {= ?uri }\" ui:metadata=\"{= ?metadata }\">
+            <ui:preCondition ui:errorMessage=\"{= swa:labelExistsPreCondition(?label) }\">
+                <ui:update ui:updateQuery=\"{!
+                        INSERT {
+                            ?resource a ?resourceType .
+                            ?resource ?labelProperty ?prefLabel .
+                            ?resource edg:logicalEntity ?logicalEntity .
+                            ?logicalRelation edg:participant ?resource .
+                        }
+                        WHERE {
+                            BIND (IRI(str(?uri)) AS ?resource) .
+                            BIND (IF(bound(?labelLang), STRLANG(?label, ?labelLang), ?label) AS ?prefLabel) .
+                            BIND (swa:labelProperty(?resourceType) AS ?labelProperty) .
+                        } }\"/>
+                <swa:addDefaultValues arg:resource=\"{= IRI(str(?uri)) }\"/>
+            </ui:preCondition>
+        </ui:transaction>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment "Creates an object for a participant in a logical relation and its cardinality." ;
+  rdfs:label "Create logical relation participant handler" ;
+  rdfs:seeAlso edg:CreateResourceDialogForLogicalRelationParticipantPlugin ;
+  rdfs:seeAlso edg:DataTableResultsCallbackForLogicalRelationParticipants ;
+  rdfs:seeAlso edg:LogicalRelationParticipant ;
+  rdfs:seeAlso edg:ResourceDataTableLogicalLogicalRelationParticipantsColumns ;
+  rdfs:subClassOf swa:CreateHandlers ;
+.
+edg:CreateResourceDialogForLogicalAttributePlugin
+  a swa:CreateResourceDialogPlugin ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate edg:resourceURIconstructorFunction ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  swa:createResourceDialogPluginWeight [
+      a swa:WeightedExpression ;
+      swa:expression [
+          a sp:exists ;
+          sp:elements (
+              [
+                a sp:TriplePath ;
+                sp:object edg:LogicalAttribute ;
+                sp:path [
+                    a sp:ModPath ;
+                    sp:modMax -2 ;
+                    sp:modMin 0 ;
+                    sp:subPath rdfs:subClassOf ;
+                  ] ;
+                sp:subject [
+                    sp:varName "resourceType" ;
+                  ] ;
+              ]
+            ) ;
+        ] ;
+      swa:weight 100 ;
+    ] ;
+  ui:prototype """
+<ui:group let:mySuppressTypeSelection=\"{= COALESCE(?suppressTypeSelection, true) }\" let:resourceSpecificConstructor=\"{= edg:getClassPropertyValue(?resourceType, edg:resourceURIconstructorFunction) }\" let:uid=\"{= ui:uniqueId() }\">
+    <ui:group let:entity=\"{= IF(bound(?contextResource), ?contextResource, rdf:nil) }\">
+        <ui:loadable let:entityDivId=\"entity-{= ?uid }\" let:identifierDivId=\"identifier-{= ?uid }\" let:resourceURIconstructor=\"{= COALESCE(?resourceURIconstructorFunction, ?resourceSpecificConstructor, edg:newResourceWithUUID) }\" ui:loadId=\"create-resource-dialog-body\">
+            <!--ui:dumpScope ui:message=\"AAA: edg:CreateResourceDialogForLogicalAttributePlugin\"/-->
+            <script src=\"{= ui:lib() }/edg/js/edgxtra.js\"/>
+            <div data-handler=\"edg:CreateLogicalAttributeHandler\" data-height=\"380\" id=\"swa-modal-config\">
+                <swa:CreateResourceDialogTypeSelectionPanelForAssetCollection arg:resourceType=\"{= ?resourceType }\" arg:suppressTypeSelection=\"{= ?mySuppressTypeSelection }\"/>
+                <swa:LabeledElement arg:label=\"Label:\">
+                    <input autocomplete=\"off\" class=\"form-control swa-create-resource-label-input\" id=\"label-input\" type=\"text\"/>
+                    <swa:LangSelector arg:uid=\"label\"/>
+                </swa:LabeledElement>
+                <ui:if ui:condition=\"{= bound(?contextResource) }\">
+                    <input arg:dataAttributeProperty=\"contextResource\" data-property=\"contextResource\" id=\"contextResource\" name=\"contextResource\" type=\"hidden\" value=\"{= str(?contextResource) }\"/>
+                </ui:if>
+                <swa:LabeledElement arg:label=\"Entity:\">
+                    <ui:if ui:condition=\"{= ?entity != rdf:nil }\">
+                        <input arg:dataAttributeProperty=\"logicalEntity\" autocomplete=\"off\" class=\"form-control swa-create-resource-label-input\" data-property=\"logicalEntity\" id=\"entity-{= ?uid }\" name=\"entity-{= ?uid }\" readonly=\"readonly\" swa-label=\"{= ui:label(?entityDivId) }\" type=\"hidden\" value=\"{= ui:encodeNode(?entity, true, true) }\"/>
+                        <input class=\"form-control swa-create-resource-label-input\" readonly=\"readonly\" type=\"text\" value=\"{= ui:label(?entity) }\"/>
+                        <script>edgxtra.attributeOf( { graph : '&lt;{= ui:currentQueryGraph() }&gt;', resourceType : '{= ?resourceType }', 'entity' : '{= ui:encodeNode(?entity, true, true) }' ,'identifierDivId': '{= ?loadId }'})</script>
+                    </ui:if>
+                    <ui:else>
+                        <edg:AutoComplete arg:class=\"swa-text-field\" arg:dataAttributeProperty=\"logicalEntity\" arg:id=\"{= ?entityDivId }\" arg:onSelect=\"edgxtra.attributeOf( { graph : '&lt;{= ui:currentQueryGraph() }&gt;', resourceType : '{= ?resourceType }', entity : '&lt;' + resource + '&gt;', 'entityDivId': '{= ?entityDivId }', 'identifierDivId': '{= ?identifierDivId }'})\" arg:placeholder=\"Select entity\" arg:type=\"{= edg:LogicalEntity }\"/>
+                    </ui:else>
+                </swa:LabeledElement>
+                <swa:LabeledElement arg:label=\"Datatype:\">
+                    <edg:AutoComplete arg:class=\"swa-text-field\" arg:dataAttributeProperty=\"datatype\" arg:id=\"entity-attribute-datatype\" arg:placeholder=\"Select datatype\" arg:type=\"{= edg:ScalarDatatypeUnion }\"/>
+                </swa:LabeledElement>
+                <swa:LabeledElement arg:label=\"Primary Key?\">
+                    <input arg:dataAttributeProperty=\"isPrimaryKey\" autocomplete=\"off\" class=\"form-control\" data-property=\"isPrimaryKey\" id=\"isPrimaryKey\" name=\"isPrimaryKey\" onclick=\"edgxtra.checkbox( {'checkboxId': 'isPrimaryKey'})\" type=\"checkbox\" value=\"{= false }\"/>
+                </swa:LabeledElement>
+                <swa:LabeledElement arg:label=\"Foreign Key?\">
+                    <input arg:dataAttributeProperty=\"isForeignKey\" autocomplete=\"off\" class=\"form-control\" data-property=\"isForeignKey\" id=\"isForeignKey\" name=\"isForeignKey\" onclick=\"edgxtra.checkbox( { 'checkboxId': 'isForeignKey'})\" type=\"checkbox\" value=\"{= false }\"/>
+                </swa:LabeledElement>
+                <swa:LabeledElement arg:label=\"Nullable?\">
+                    <input arg:dataAttributeProperty=\"isNullable\" autocomplete=\"off\" class=\"form-control\" data-property=\"isNullable\" id=\"isNullable\" name=\"isNullable\" onclick=\"edgxtra.checkbox( {  'checkboxId': 'isNullable'})\" type=\"checkbox\" value=\"{= false }\"/>
+                </swa:LabeledElement>
+            </div>
+        </ui:loadable>
+        <ui:loadable let:uri=\"{= edg:newResourceWithUUID(?resourceType, &quot;&quot;) }\" ui:loadId=\"{= ?identifierDivId }\">
+            <swa:LabeledElement arg:label=\"Identifier:\">
+                <span class=\"text-info\">{= ?uri }</span>
+                <p class=\"text-info pt20px\">
+                    <i>
+                        <b>Note:</b> Identifiers for <b>{= ui:label(?resourceType) }</b> instances are generated using a prefix followed by a UUID.</i>
+                </p>
+            </swa:LabeledElement>
+            <input class=\"form-control swa-uri-field swa-create-resource-with-primary-key-dialog-plugin-identifier\" id=\"uri-input\" type=\"hidden\" value=\"{= ?uri }\"/>
+        </ui:loadable>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A create dialog for logical attributes." ;
+  rdfs:label "Create resource dialog for logical attributes plugin" ;
+  rdfs:seeAlso edg:CreateLogicalAttributeHandler ;
+  rdfs:subClassOf edg:DialogElements ;
+  rdfs:subClassOf swa:CreateResourceDialogPlugins ;
+.
+edg:CreateResourceDialogForLogicalRelationParticipantPlugin
+  a swa:CreateResourceDialogPlugin ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate edg:resourceURIconstructorFunction ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  swa:createResourceDialogPluginWeight [
+      a swa:WeightedExpression ;
+      swa:expression [
+          a sp:exists ;
+          sp:elements (
+              [
+                a sp:TriplePath ;
+                sp:object edg:LogicalRelationParticipant ;
+                sp:path [
+                    a sp:ModPath ;
+                    sp:modMax -2 ;
+                    sp:modMin 0 ;
+                    sp:subPath rdfs:subClassOf ;
+                  ] ;
+                sp:subject [
+                    sp:varName "resourceType" ;
+                  ] ;
+              ]
+            ) ;
+        ] ;
+      swa:weight 100 ;
+    ] ;
+  ui:prototype """
+<ui:group let:resourceSpecificConstructor=\"{= edg:getClassPropertyValue(?resourceType, edg:resourceURIconstructorFunction) }\" let:uid=\"{= ui:uniqueId() }\">
+    <ui:loadable let:entityDivId=\"entity-{= ?uid }\" let:identifierDivId=\"identifier-{= ?uid }\" let:resourceURIconstructor=\"{= COALESCE(?resourceURIconstructorFunction, ?resourceSpecificConstructor, edg:newResourceWithUUID) }\" ui:loadId=\"create-resource-dialog-body\">
+        <!--ui:dumpScope ui:message=\"AAA: edg:CreateResourceDialogForLogicalRelationParticipantPlugin\"/-->
+        <script src=\"{= ui:lib() }/edg/js/edgxtra.js\"/>
+        <div data-handler=\"edg:CreateLogicalRelationHandler\" data-height=\"380\" id=\"swa-modal-config\">
+            <swa:CreateResourceDialogTypeSelectionPanelForAssetCollection arg:resourceType=\"{= ?resourceType }\" arg:suppressTypeSelection=\"{= true }\"/>
+            <ui:if ui:condition=\"{= bound(?contextResource) }\">
+                <input arg:dataAttributeProperty=\"contextResource\" data-property=\"contextResource\" id=\"contextResource\" name=\"contextResource\" type=\"hidden\" value=\"{= str(?contextResource) }\"/>
+            </ui:if>
+            <!--swa:LabeledElement arg:label=\"Relationship:\">
+<span class=\"text-info\">{= ui:label(?contextResource) }</span>
+</swa:LabeledElement-->
+            <input class=\"form-control\" data-property=\"logicalRelation\" readonly=\"readonly\" type=\"hidden\" value=\"{= str(?contextResource) }\"/>
+            <swa:LabeledElement arg:label=\"Label:\">
+                <input autocomplete=\"off\" class=\"form-control swa-create-resource-label-input\" id=\"label-input\" type=\"text\"/>
+                <swa:LangSelector arg:uid=\"label\"/>
+            </swa:LabeledElement>
+            <swa:LabeledElement arg:label=\"Entity:\">
+                <edg:AutoComplete arg:class=\"swa-text-field\" arg:dataAttributeProperty=\"logicalEntity\" arg:id=\"{= ?entityDivId }\" arg:placeholder=\"Select entity\" arg:type=\"{= edg:LogicalEntity }\"/>
+            </swa:LabeledElement>
+            <swa:LabeledElement arg:label=\"Entity Cardinality:\">
+                <edg:AutoComplete arg:class=\"swa-text-field\" arg:dataAttributeProperty=\"cardinality\" arg:id=\"relation-entity-cardinality\" arg:placeholder=\"Select cardinality\" arg:type=\"{= edg:Cardinality }\"/>
+            </swa:LabeledElement>
+            <ui:loadable let:uri=\"{= edg:newResourceWithUUID(?resourceType, &quot;&quot;) }\" ui:loadId=\"{= ?identifierDivId }\">
+                <swa:LabeledElement arg:label=\"Identifier:\">
+                    <span class=\"text-info\">{= ?uri }</span>
+                    <p class=\"text-info pt20px\">
+                        <i>
+                            <b>Note:</b> Identifiers for <b>{= ui:label(?resourceType) }</b> instances are generated using a prefix followed by a UUID.</i>
+                    </p>
+                </swa:LabeledElement>
+                <input class=\"form-control swa-uri-field swa-create-resource-with-primary-key-dialog-plugin-identifier\" id=\"uri-input\" type=\"hidden\" value=\"{= ?uri }\"/>
+            </ui:loadable>
+        </div>
+    </ui:loadable>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A create dialog for logical relation participants that use prefixed GUIDs for paricipants." ;
+  rdfs:label "Create resource dialog for logical relation participants plugin" ;
+  rdfs:seeAlso edg:CreateLogicalRelationParticipantHandler ;
+  rdfs:subClassOf edg:DialogElements ;
+  rdfs:subClassOf swa:CreateResourceDialogPlugins ;
+.
+edg:CreateResourceDialogForLogicalRelationPlugin
+  a swa:CreateResourceDialogPlugin ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate edg:resourceURIconstructorFunction ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  swa:createResourceDialogPluginWeight [
+      a swa:WeightedExpression ;
+      swa:expression [
+          a sp:exists ;
+          sp:elements (
+              [
+                a sp:TriplePath ;
+                sp:object edg:LogicalRelation ;
+                sp:path [
+                    a sp:ModPath ;
+                    sp:modMax -2 ;
+                    sp:modMin 0 ;
+                    sp:subPath rdfs:subClassOf ;
+                  ] ;
+                sp:subject [
+                    sp:varName "resourceType" ;
+                  ] ;
+              ]
+            ) ;
+        ] ;
+      swa:weight 100 ;
+    ] ;
+  ui:prototype """
+<ui:group let:resourceSpecificConstructor=\"{= edg:getClassPropertyValue(?resourceType, edg:resourceURIconstructorFunction) }\" let:uid=\"{= ui:uniqueId() }\">
+    <ui:group>
+        <ui:group let:source=\"{= IF(bound(?contextResource), ?contextResource, rdf:nil) }\">
+            <ui:loadable let:identifierDivId=\"identifier-{= ?uid }\" let:resourceURIconstructor=\"{= COALESCE(?resourceURIconstructorFunction, ?resourceSpecificConstructor, edg:newResourceWithUUID) }\" let:sourceDivId=\"source-{= ?uid }\" let:targetDivId=\"target-{= ?uid }\" ui:loadId=\"create-resource-dialog-body\">
+                <!--ui:dumpScope ui:message=\"AAA: edg:CreateResourceDialogForLogicalRelationPlugin\"/-->
+                <script src=\"{= ui:lib() }/edg/js/edgxtra.js\"/>
+                <div data-handler=\"edg:CreateFlowResourceHandler\" data-height=\"380\" id=\"swa-modal-config\">
+                    <swa:CreateResourceDialogTypeSelectionPanelForAssetCollection arg:resourceType=\"{= ?resourceType }\" arg:suppressTypeSelection=\"{= ?suppressTypeSelection }\"/>
+                    <ui:if ui:condition=\"{= bound(?contextResource) }\">
+                        <input arg:dataAttributeProperty=\"contextResource\" data-property=\"contextResource\" id=\"contextResource\" name=\"contextResource\" type=\"hidden\" value=\"{= str(?contextResource) }\"/>
+                    </ui:if>
+                    <swa:LabeledElement arg:label=\"Label:\">
+                        <input autocomplete=\"off\" class=\"form-control swa-create-resource-label-input\" id=\"label-input\" type=\"text\"/>
+                        <swa:LangSelector arg:uid=\"label\"/>
+                    </swa:LabeledElement>
+                    <swa:LabeledElement arg:label=\"Source Entity:\">
+                        <ui:if ui:condition=\"{= ?source != rdf:nil }\">
+                            <input arg:dataAttributeProperty=\"source\" autocomplete=\"off\" class=\"form-control swa-create-resource-label-input\" data-property=\"source\" id=\"source-{= ?uid }\" name=\"source-{= ?uid }\" readonly=\"readonly\" swa-label=\"{= ui:label(?source) }\" type=\"hidden\" value=\"{= ui:encodeNode(?source, true, true) }\"/>
+                            <input class=\"form-control swa-create-resource-label-input\" readonly=\"readonly\" type=\"text\" value=\"{= ui:label(?source) }\"/>
+                            <script>edgxtra.relationSource( { graph : '&lt;{= ui:currentQueryGraph() }&gt;', resourceType : '{= ?resourceType }', 'source' : '{= ui:encodeNode(?source, true, true) }' ,'identifierDivId': '{= ?loadId }','targetDivId': '{= ?targetDivId }'})</script>
+                        </ui:if>
+                        <ui:else>
+                            <edg:AutoComplete arg:class=\"swa-text-field\" arg:dataAttributeProperty=\"source\" arg:id=\"{= ?sourceDivId }\" arg:placeholder=\"Select source\" arg:type=\"{= edg:LogicalEntity }\"/>
+                        </ui:else>
+                    </swa:LabeledElement>
+                    <swa:LabeledElement arg:label=\"Source Entity Cardinality:\">
+                        <edg:AutoComplete arg:class=\"swa-text-field\" arg:dataAttributeProperty=\"sourceCardinality\" arg:id=\"relation-source-cardinality\" arg:placeholder=\"Select cardinality\" arg:type=\"{= edg:Cardinality }\"/>
+                    </swa:LabeledElement>
+                    <hr/>
+                    <ui:loadable ui:loadId=\"LOADABLE_{= ?targetDivId }\">
+                        <swa:LabeledElement arg:label=\"Target Entity:\">
+                            <edg:AutoComplete arg:class=\"swa-text-field\" arg:dataAttributeProperty=\"target\" arg:id=\"{= ?targetDivId }\" arg:placeholder=\"Select target\" arg:type=\"{= edg:LogicalEntity }\"/>
+                        </swa:LabeledElement>
+                        <swa:LabeledElement arg:label=\"Target Entity Cardinality:\">
+                            <edg:AutoComplete arg:class=\"swa-text-field\" arg:dataAttributeProperty=\"targetCardinality\" arg:id=\"relation-target-cardinality\" arg:placeholder=\"Select cardinality\" arg:type=\"{= edg:Cardinality }\"/>
+                        </swa:LabeledElement>
+                    </ui:loadable>
+                    <ui:loadable let:uri=\"{= edg:newResourceWithUUID(?resourceType, &quot;&quot;) }\" ui:loadId=\"{= ?identifierDivId }\">
+                        <swa:LabeledElement arg:label=\"Identifier:\">
+                            <span class=\"text-info\">{= ?uri }</span>
+                            <p class=\"text-info pt20px\">
+                                <i>
+                                    <b>Note:</b> Identifiers for <b>{= ui:label(?resourceType) }</b> instances are generated using a prefix followed by a UUID.</i>
+                            </p>
+                        </swa:LabeledElement>
+                        <input class=\"form-control swa-uri-field swa-create-resource-with-primary-key-dialog-plugin-identifier\" id=\"uri-input\" type=\"hidden\" value=\"{= ?uri }\"/>
+                    </ui:loadable>
+                </div>
+            </ui:loadable>
+        </ui:group>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A create dialog for logical relations that use anonymous nodes expressed as prefixed GUIDs for paricipants," ;
+  rdfs:label "Create resource dialog for logical relations plugin" ;
+  rdfs:seeAlso edg:CreateLogicalRelationHandler ;
+  rdfs:seeAlso edg:DataTableResultsCallbackForLogicalEntityRelationships ;
+  rdfs:seeAlso edg:LogicalRelation ;
+  rdfs:subClassOf edg:DialogElements ;
+  rdfs:subClassOf swa:CreateResourceDialogPlugins ;
+.
+edg:DataAsset
+  edg:instancesHeldInAssetCollectionType edg:DataAssetsProjectType ;
+.
+edg:DataAssetsProject
+  a rdfs:Class ;
+  rdfs:subClassOf teamwork:Vocabulary ;
+.
+edg:DataAssetsProjectType
+  a edg:ProjectType ;
+  edg:permitsImportOf <http://edg.topbraid.solutions/1.0/datatypes/avro> ;
+  edg:permitsImportOf <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  edg:permittedProjectType edg:DataAssetsProjectType ;
+  edg:permittedProjectType edg:EDGenumerationsProjectType ;
+  edg:permittedProjectType edg:EnumerationsProjectType ;
+  edg:permittedProjectType edg:GlossaryProjectType ;
+  edg:permittedProjectType edg:GovernanceModelProjectType ;
+  edg:permittedProjectType edg:PlatformGovernanceModelProjectType ;
+  edg:permittedProjectType edg:RequirementsModelProjectType ;
+  edg:permittedProjectType taxonomies:ProjectType ;
+  edg:permittedProjectType rdmprojects:ProjectType ;
+  edg:permittedProjectType ontologyprojects:ProjectType ;
+  edg:requiredProjectType edg:DatatypesProjectType ;
+  edg:selectResourceType edg:DataAsset ;
+  edg.v:icon "tq-dataasset-icon" ;
+  teamwork:dashboardGadget tasks:TaskStatusDashboardGadget ;
+  teamwork:dashboardGadget teamwork:CompletenessDashboardGadget ;
+  teamwork:dashboardGadget teamwork:TagStatusDashboardGadget ;
+  teamwork:dashboardGadget teamwork:ValidationDashboardGadget ;
+  teamwork:deletePlugin teamwork:RemoveFromLuceneIndexDeletePlugin ;
+  teamwork:editableImportsTemplate edg:EditableImports ;
+  teamwork:isReadOnlyTypeFunction edg:isReadOnlyType ;
+  teamwork:mainClass edg:DataAsset ;
+  teamwork:navMenuLabel "Data Assets" ;
+  teamwork:navigationTreeChildSelectTemplate edg.c:NavigationTreeChildSelectTemplate ;
+  teamwork:navigationTreeRootSelectTemplate edg.c:NavigationTreeRootSelectTemplate ;
+  teamwork:owlImports "http://edg.topbraid.solutions/1.0/codelist/datamodels" ;
+  teamwork:owlImports "http://edg.topbraid.solutions/1.0/schema/datamodels" ;
+  teamwork:owlImports "http://edg.topbraid.solutions/1.0/schema/edg" ;
+  teamwork:owlImports "http://edg.topbraid.solutions/1.0/schema/glossary" ;
+  teamwork:owlImports "http://edg.topbraid.solutions/1.0/schema/governance" ;
+  teamwork:owlImports "http://edg.topbraid.solutions/1.0/schema/requirements-model" ;
+  teamwork:owlImports "http://edg.topbraid.solutions/1.0/shapes/core" ;
+  teamwork:owlImports "http://edg.topbraid.solutions/1.0/shapes/datamodels" ;
+  teamwork:owlImports "http://edg.topbraid.solutions/1.0/shapes/governance" ;
+  teamwork:owlImports "http://edg.topbraid.solutions/1.0/shapes/requirements-model" ;
+  teamwork:owlImports "http://topbraid.org/teamworkconstraints" ;
+  teamwork:owlImports "urn:x-evn-master:edg_enumerations_singleton" ;
+  teamwork:pluralLabel "Data Assets Collections" ;
+  teamwork:projectEditorClass edg:ResultsModelEditor ;
+  teamwork:projectPlugin edg:AVROschemaExportPlugin ;
+  teamwork:projectPlugin edg:MainClassOverrideManagePlugin ;
+  teamwork:projectPlugin edg-importer:DDLImportPlugin ;
+  teamwork:projectPlugin edg-importer:DeleteSamplesPlugin ;
+  teamwork:projectPlugin edg-importer:JDBCImportPlugin ;
+  teamwork:projectPlugin savedQueries:ExportSavedSPARQLQueriesPlugin ;
+  teamwork:projectPlugin savedQueries:SPARQLEndpointPlugin ;
+  teamwork:projectPlugin teamwork:ComparisonReportPlugin ;
+  teamwork:projectPlugin teamwork:DefaultNamespacePlugin ;
+  teamwork:projectPlugin teamwork:ExportSavedSearchPlugin ;
+  teamwork:projectPlugin teamwork:GeneralPlugins ;
+  teamwork:projectPlugin teamwork:GraphURIPlugin ;
+  teamwork:projectPlugin teamwork:ImportedByGeneralPlugin ;
+  teamwork:projectPlugin teamwork:ImportsGeneralPlugin ;
+  teamwork:projectPlugin teamwork:LocalSearchManagePlugin ;
+  teamwork:projectPlugin teamwork:NotificationsManagePlugin ;
+  teamwork:projectPlugin teamwork:ProblemsAndSuggestionsReportPlugin ;
+  teamwork:projectPlugin teamwork:PublishExportPlugin ;
+  teamwork:projectPlugin teamwork:RDFFileImporterPlugin ;
+  teamwork:projectPlugin teamwork:ScriptBasedImportPlugin ;
+  teamwork:projectPlugin teamwork:SetImportSubjectAreaGraphsPlugin ;
+  teamwork:projectPlugin teamwork:SetPerResourceGovernanceRolesManagePlugin ;
+  teamwork:projectPlugin teamwork:SetSimpleSearchModePlugin ;
+  teamwork:projectPlugin teamwork:SpreadsheetImportPlugin ;
+  teamwork:projectPlugin teamwork:SpreadsheetUsingTemplateImportPlugin ;
+  teamwork:projectPlugin teamwork:StatisticsReportPlugin ;
+  teamwork:projectPlugin teamwork:URIConstructionRulesManagePlugin ;
+  teamwork:projectTypeWeight -70 ;
+  teamwork:singularLabel "Data Assets Collection" ;
+  teamwork:supportedNotification tasks:TaskCreatedNotification ;
+  teamwork:supportedNotification tasks:TaskStatusChangedNotification ;
+  teamwork:supportedNotification teamwork:FileImportedNotification ;
+  teamwork:supportedNotification teamwork:SpreadsheetImportedNotification ;
+  teamwork:supportedNotification teamwork:TagCreatedNotification ;
+  teamwork:supportedNotification teamwork:TagStatusChangedNotification ;
+  teamwork:supportedNotification teamwork:VocabularyClearedNotification ;
+  teamwork:supportedNotification teamwork:VocabularyStatusChangedNotification ;
+  teamwork:vocabularyType edg:DataAssetsProject ;
+  rdfs:comment "Data Assets Collections let you specify data objects that make up a data ecosystem. Data assets include databases, database columns and tables, data elements, datasets and their dataset type specifications, and logical and physical models. Data Assets Collections use EDG ontology models (extended by customers as needed) as a definition or schema for these items." ;
+  rdfs:label "Data Assets Collection Type" ;
+.
+edg:DataAssetsTutorialQueryConcat
+  a teamwork:GraphQLTutorialQuery ;
+  graphql:queryString """{
+	databaseTables {
+		name
+		columns_CONCAT (orderBy: label, separator: \" + \")
+	}
+}""" ;
+  teamwork:projectType edg:DataAssetsProjectType ;
+  teamwork:sectionId "concatenating" ;
+  rdfs:comment "The example below produces a list of database tables together with a single string field containing the ordered labels of all columns, separated with a \" + \"." ;
+.
+edg:DataAssetsTutorialQueryCounting
+  a teamwork:GraphQLTutorialQuery ;
+  graphql:queryString """{
+	databaseTables {
+		name
+		columns_COUNT
+	}
+}""" ;
+  teamwork:projectType edg:DataAssetsProjectType ;
+  teamwork:sectionId "counting" ;
+  rdfs:comment "The example below produces a list of database tables together with their number of columns." ;
+.
+edg:DataAssetsTutorialQueryCounting2
+  a teamwork:GraphQLTutorialQuery ;
+  graphql:queryString """{
+	databaseTables {
+		name
+		nullableColumns: columns_COUNT (isNullable: false)
+	}
+}""" ;
+  teamwork:projectType edg:DataAssetsProjectType ;
+  teamwork:sectionId "counting" ;
+  rdfs:comment "The next (more complex) example produces a list of database tables together with the number of columns where the field <code>isNullable</code> is false. Note that the query uses the GraphQL alias syntax to rename this field from <code>column_COUNT</code> to <code>nullableColumns</code> in the resulting JSON." ;
+.
+edg:DataAssetsTutorialQueryDeriveStrLength
+  a teamwork:GraphQLTutorialQuery ;
+  graphql:queryString """{
+	databaseTables {
+		name
+		nameLength: deriveInt (expr: \"STRLEN($name)\")
+	}
+}""" ;
+  teamwork:projectType edg:DataAssetsProjectType ;
+  teamwork:sectionId "deriving" ;
+  rdfs:comment "The example below produces a list of database tables with their name and a <code>nameLength</code> field that is computed on the fly as the length of the name." ;
+.
+edg:DataAssetsTutorialQueryFilteringFilterBound
+  a teamwork:GraphQLTutorialQuery ;
+  graphql:queryString """{
+	databaseColumns (filter:\"bound($isNullable)\") {
+		label
+	}
+}""" ;
+  teamwork:projectType edg:DataAssetsProjectType ;
+  teamwork:sectionId "filtering-filter" ;
+  rdfs:comment "In the following example, the SPARQL function <code>bound</code> is used to check whether the current database column has <em>any</em> value of the property <code>isNullable</code>. Try changing it to <code>!bound($isNullable)</code> to see the opposite instances." ;
+.
+edg:DataAssetsTutorialQueryFilteringHasValue
+  a teamwork:GraphQLTutorialQuery ;
+  graphql:queryString """{
+	databaseColumns (isNullable: false) {
+		label
+		uri
+	}
+}""" ;
+  teamwork:projectType edg:DataAssetsProjectType ;
+  teamwork:sectionId "filtering-hasValue" ;
+  rdfs:comment "The following example query is producing a JSON array consisting one JSON object for each database column that is not nullable. Your current example data asset collection may not have such matches. Try other values including <code>null</code> to check for 'unspecified'." ;
+.
+edg:DataAssetsTutorialQueryFilteringQueryText
+  a teamwork:GraphQLTutorialQuery ;
+  graphql:queryString """{
+	databaseTables (queryText: \"customer\") {
+		label
+	}
+	databaseColumns (queryText: \"customer\") {
+		label
+	}
+}""" ;
+  teamwork:projectType edg:DataAssetsProjectType ;
+  teamwork:sectionId "filtering-queryText" ;
+  rdfs:comment "The following example produces two lists of database tables and columns where any string value includes the search term \"customer\"." ;
+.
+edg:DataAssetsTutorialQueryFilteringWhere
+  a teamwork:GraphQLTutorialQuery ;
+  graphql:queryString """{
+	databaseTables (where: {
+									columns: {
+										minCount: 2,
+										maxCount: 4
+									}
+								}) {
+		label
+	}
+}""" ;
+  teamwork:projectType edg:DataAssetsProjectType ;
+  teamwork:sectionId "filtering-where" ;
+  rdfs:comment "The following example produces a list of database tables that have between 2 and 4 columns. For each of them, it retrieves the label." ;
+.
+edg:DataAssetsTutorialQueryIntroduction
+  a teamwork:GraphQLTutorialQuery ;
+  graphql:queryString """{
+	databaseTables (orderBy: name) {
+		name
+ 		columns (isNullable: false, orderBy: name) {
+			name
+			isCritical
+			isNullable
+		}
+	}
+}""" ;
+  teamwork:projectType edg:DataAssetsProjectType ;
+  teamwork:sectionId "introduction" ;
+  rdfs:comment "The following example query is producing a JSON array consisting of database tables (from the current data assets collection). For each database table, we also show the columns, and for each of them we request the name, criticality and nullability. Note that if your current example has no matching tables or columns, then you may get empty results back." ;
+.
+edg:DataAssetsTutorialQueryOrderByDesc
+  a teamwork:GraphQLTutorialQuery ;
+  graphql:queryString """{
+	databaseTables (orderBy: name, orderByDesc: true, orderByExpr: \"LCASE($value)\")  {
+		name
+	}
+}""" ;
+  teamwork:projectType edg:DataAssetsProjectType ;
+  teamwork:sectionId "ordering" ;
+  rdfs:comment "In the example below, the results are produced in descending order, sorted by database table name, ignoring the case of the name." ;
+.
+edg:DataAssetsTutorialQueryPaging
+  a teamwork:GraphQLTutorialQuery ;
+  graphql:queryString """query ($skip: Int) {
+	databaseTables (orderBy: name, first: 5, skip: $skip)  {
+		name
+	}
+}""" ;
+  graphql:variables """{
+	\"skip\": 5
+}""" ;
+  teamwork:projectType edg:DataAssetsProjectType ;
+  teamwork:sectionId "paging" ;
+  rdfs:comment "In the example below, the second page of results (in batches of five) are produced. Note that the value of <code>$skip</code> comes in as a variable, using GraphQL standard mechanisms. Make sure to open the <em>Query Variables</em> section to see the current values." ;
+.
+edg:DataAssetsTutorialQuerySimple
+  a teamwork:GraphQLTutorialQuery ;
+  graphql:queryString """{
+	databaseTables {
+		label
+		uri
+	}
+}""" ;
+  teamwork:projectType edg:DataAssetsProjectType ;
+  teamwork:sectionId "query-simple" ;
+  rdfs:comment "The following example query is producing a JSON array consisting of one JSON object for each database table from the current data assets collection." ;
+.
+edg:DataQualityAspect
+  ui:instanceView """
+<ui:group ui:id=\"datatables-results\" ui:priority=\"{= 10 }\">
+    <!--ui:dumpScope ui:message=\"AAA: edg:DataQualityAspect - datatables-results\"/-->
+    <swa:SimpleDataTableResults arg:hasFixedHeader=\"{= true }\" arg:hasFixedToolbar=\"{= true }\" ui:args=\"*\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:DataQualityRecordGadget
+  a ui:NodeClass ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:result=\"{= ui:setSessionAttribute(&quot;persistresource&quot;, str(?focusNode)) }\">
+    <ui:loadable class=\"swa-labeled-objects\" let:gid=\"{= ui:uniqueId() }\" ui:loadId=\"{= ui:uniqueId() }\">
+        <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+            <!--ui:dumpScope ui:message=\"AAA1: edg:DataQualityRecordGadget\"/-->
+            <ui:if ui:condition=\"{= bound(?focusNode) }\">
+                <div class=\"box-rounded\">
+                    <div class=\"size18px dark-blue\">Data Quality Records</div>
+                    <edg:ResourceInstancesDataTable arg:canEdit=\"{= true }\" arg:columnService=\"{= edg:ResourceDataTableDataQualityRecordColumns }\" arg:createResourceHandler=\"{= edg:CreateDataQualityRecordHandler }\" arg:dataEndpoint=\"{= edg:DataTableResultsCallbackForDataQualityRecords }\" arg:resource=\"{= ?focusNode }\" arg:resourceType=\"{= edg:DataQualityRecord }\"/>
+                </div>
+            </ui:if>
+        </ui:setContext>
+    </ui:loadable>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A gadget for viewing instances of edg:DataQualityRecord." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/data-models> ;
+  rdfs:label "Data Quality Record Gadget" ;
+  rdfs:subClassOf edg:PathElements ;
+.
+edg:DataTableResultsCallbackForDataQualityRecords
+  a ui:Service ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:focusNode=\"{= COALESCE(?resource, IRI(ui:getSessionAttribute(&quot;persistresource&quot;))) }\">
+    <ui:group let:dataGraph=\"{= swa:dataGraph() }\" let:masterGraph=\"{= teamwork:currentMasterGraph() }\">
+        <ui:group let:graphId=\"{= teamwork:graphIdFromGraph(?masterGraph) }\">
+            <!--ui:dumpScope ui:message=\"AAA1: edg:DataTableResultsCallbackForDataQualityRecords\"/-->
+            <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+                <swon:Object>
+                    <swon:Value arg:name=\"data\">
+                        <swon:Array>
+                            <ui:forEach ui:resultSet='{#
+                                    SELECT ?dataQualityRecordLabel ?created ?dataQualityRecord ?dataQualityStatus ?totalNumberOfQualityIssues ?totalNumberOfVerifiedValues ?verificationMethod
+                                    WHERE {
+                                        ?focusNode edg:dataQualityRecord ?dataQualityRecord .
+                                        BIND (COALESCE(spl:object(?dataQualityRecord, rdfs:label), \"\") AS ?dataQualityRecordLabel) .
+                                        OPTIONAL {
+                                            ?dataQualityRecord edg:created ?created .
+                                        } .
+                                        OPTIONAL {
+                                            ?dataQualityRecord edg:dataQualityStatus ?dataQualityStatus .
+                                        } .
+                                        OPTIONAL {
+                                            ?dataQualityRecord edg:totalNumberOfQualityIssues ?totalNumberOfQualityIssues .
+                                        } .
+                                        OPTIONAL {
+                                            ?dataQualityRecord edg:totalNumberOfVerifiedValues ?totalNumberOfVerifiedValues .
+                                        } .
+                                        OPTIONAL {
+                                            ?dataQualityRecord edg:verificationMethod ?verificationMethod .
+                                        } .
+                                    } }'>
+                                <swon:Object>
+                                    <swon:Value arg:name=\"uri\" arg:value=\"{= ?dataQualityRecord }\"/>
+                                    <swon:Value arg:name=\"label\" arg:value=\"{= ?dataQualityRecordLabel }\"/>
+                                    <swon:Value arg:name=\"created\" arg:value=\"{= ?created }\"/>
+                                    <swon:Value arg:name=\"dataQualityStatus\" arg:value=\"{= ui:label(?dataQualityStatus) }\"/>
+                                    <swon:Value arg:name=\"totalNumberOfQualityIssues\" arg:value=\"{= ?totalNumberOfQualityIssues }\"/>
+                                    <swon:Value arg:name=\"totalNumberOfVerifiedValues\" arg:value=\"{= ?totalNumberOfVerifiedValues }\"/>
+                                    <ui:if ui:condition=\"{= bound(?verificationMethod) }\">
+                                        <swon:Value arg:name=\"verificationMethod\">
+                                            <swon:Object>
+                                                <swon:Value arg:name=\"label\" arg:value=\"{= ui:label(?verificationMethod) }\"/>
+                                                <swon:Value arg:name=\"uri\" arg:value=\"{= str(?verificationMethod) }\"/>
+                                                <swon:Value arg:name=\"graphId\" arg:value=\"{= ?graphId }\"/>
+                                            </swon:Object>
+                                        </swon:Value>
+                                    </ui:if>
+                                </swon:Object>
+                            </ui:forEach>
+                        </swon:Array>
+                    </swon:Value>
+                </swon:Object>
+            </ui:setContext>
+        </ui:group>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  vaem:todo """Do we need to summarize the data quality issues, by extending this to work over all issues?
+
+  <swon:Value arg:name=\"dataQualityIssues\"
+                                        arg:value=\"{= IF(bound(?dataQualityIssue), edg:constructHTMLforDataQualityIssue(?dataQualityIssue), &quot;-&quot;) }\"/>
+                     """ ;
+  rdfs:seeAlso edg:DataQualityRecord ;
+  rdfs:seeAlso edg:ResourceDataTableDataQualityRecordColumns ;
+  rdfs:subClassOf edg:DataTableResults ;
+.
+edg:DataTableResultsCallbackForLogicalEntities
+  a ui:Service ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:focusNode=\"{= COALESCE(?resource, IRI(ui:getSessionAttribute(&quot;persistresource&quot;))) }\" let:masterGraph=\"{= teamwork:currentMasterGraph() }\" let:path=\"{= IRI(ui:getSessionAttribute(&quot;persistpath&quot;)) }\">
+    <ui:group let:dataGraph=\"{= swa:dataGraph() }\" let:graphId=\"{= teamwork:graphIdFromGraph(?masterGraph) }\">
+        <!--ui:dumpScope ui:message=\"AAA1: edg:DataTableResultsCallbackForLogicalEntities\"/-->
+        <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+            <swon:Object>
+                <swon:Value arg:name=\"data\">
+                    <swon:Array>
+                        <ui:call arg:object=\"{= ?focusNode }\" arg:property=\"{= ?path }\" ui:template=\"{= edg:SubjectsForObject }\" ui:varName=\"entities\">
+                            <ui:forEach ui:resultSet=\"{= ?entities }\">
+                                <ui:group>
+                                    <swon:Object>
+                                        <swon:Value arg:name=\"uri\" arg:value=\"{= ?subject }\"/>
+                                        <swon:Value arg:name=\"logicalEntity\">
+                                            <swon:Object>
+                                                <swon:Value arg:name=\"label\" arg:value=\"{= ui:label(?subject) }\"/>
+                                                <swon:Value arg:name=\"uri\" arg:value=\"{= str(?subject) }\"/>
+                                                <swon:Value arg:name=\"graphId\" arg:value=\"{= ?graphId }\"/>
+                                            </swon:Object>
+                                        </swon:Value>
+                                        <swon:Value arg:name=\"name\" arg:value=\"{= ui:label(?subject) }\"/>
+                                        <swon:Value arg:name=\"attributeCount\" arg:value=\"{= spif:countMatches(?attribute, edg:attributeOf, ?subject) }\"/>
+                                        <swon:Value arg:name=\"relationCount\" arg:value=\"{= spif:countMatches(?participant, edg:logicalEntity, ?subject) }\"/>
+                                        <swon:Value arg:name=\"physicalMappingCount\" arg:value=\"{= 0 }\"/>
+                                    </swon:Object>
+                                </ui:group>
+                            </ui:forEach>
+                        </ui:call>
+                    </swon:Array>
+                </swon:Value>
+            </swon:Object>
+        </ui:setContext>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:seeAlso edg:ColumnsForLogicalEntities ;
+  rdfs:subClassOf edg:DataTableResults ;
+.
+edg:DataTableResultsCallbackForLogicalEntityAttributes
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:specificResource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:focusNode=\"{= COALESCE(?resource, IRI(ui:getSessionAttribute(&quot;persistresource&quot;))) }\">
+    <ui:group let:dataGraph=\"{= swa:dataGraph() }\" let:masterGraph=\"{= teamwork:currentMasterGraph() }\">
+        <ui:group let:graphId=\"{= teamwork:graphIdFromGraph(?masterGraph) }\">
+            <!--ui:dumpScope ui:message=\"AAA1: edg:DataTableResultsCallbackForLogicalEntityAttributes\"/-->
+            <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+                <swon:Object>
+                    <swon:Value arg:name=\"data\">
+                        <swon:Array>
+                            <ui:if ui:condition=\"{= bound(?specificResource) }\">
+                                <swon:Object let:datatype=\"{= spl:object(?specificResource, edg:logicalDatatype) }\" let:foreignKey=\"{= spl:object(?specificResource, edg:isForeignKey) }\" let:nullable=\"{= spl:object(?specificResource, edg:isNullable) }\" let:primaryKey=\"{= spl:object(?specificResource, edg:isPrimaryKey) }\">
+                                    <swon:Value arg:name=\"uri\" arg:value=\"{= str(?specificResource) }\"/>
+                                    <swon:Value arg:name=\"label\" arg:value=\"{= ui:label(?specificResource) }\"/>
+                                    <swon:Value arg:name=\"attribute\">
+                                        <swon:Object>
+                                            <swon:Value arg:name=\"label\" arg:value=\"{= ui:label(?specificResource) }\"/>
+                                            <swon:Value arg:name=\"uri\" arg:value=\"{= str(?specificResource) }\"/>
+                                            <swon:Value arg:name=\"graphId\" arg:value=\"{= ?graphId }\"/>
+                                        </swon:Object>
+                                    </swon:Value>
+                                    <swon:Value arg:name=\"datatype\">
+                                        <swon:Object>
+                                            <swon:Value arg:name=\"label\" arg:value=\"{= ui:label(?datatype) }\"/>
+                                            <swon:Value arg:name=\"uri\" arg:value=\"{= str(?datatype) }\"/>
+                                            <swon:Value arg:name=\"graphId\" arg:value=\"{= ?graphId }\"/>
+                                        </swon:Object>
+                                    </swon:Value>
+                                    <swon:Value arg:name=\"primaryKey\" arg:value=\"{= ?primaryKey }\"/>
+                                    <swon:Value arg:name=\"foreignKey\" arg:value=\"{= ?foreignKey }\"/>
+                                    <swon:Value arg:name=\"nullable\" arg:value=\"{= ?nullable }\"/>
+                                </swon:Object>
+                            </ui:if>
+                            <ui:else>
+                                <ui:call arg:property=\"{= edg:attributeOf }\" arg:resource=\"{= ?focusNode }\" ui:template=\"{= edg:getSubjectsWithPropertyAndObject }\" ui:varName=\"attributes\">
+                                    <!--ui:dumpResultSet ui:message=\"AAA2: edg:DataTableResultsCallbackForLogicalEntityAttributes\"
+  ui:resultSet=\"{= ?attributes }\"/-->
+                                    <ui:forEach ui:resultSet=\"{= ?attributes }\">
+                                        <swon:Object let:datatype=\"{= spl:object(?subject, edg:logicalDatatype) }\" let:foreignKey=\"{= spl:object(?subject, edg:isForeignKey) }\" let:nullable=\"{= spl:object(?subject, edg:isNullable) }\" let:primaryKey=\"{= spl:object(?subject, edg:isPrimaryKey) }\">
+                                            <swon:Value arg:name=\"uri\" arg:value=\"{= str(?subject) }\"/>
+                                            <swon:Value arg:name=\"label\" arg:value=\"{= ?subjectLabel }\"/>
+                                            <swon:Value arg:name=\"attribute\">
+                                                <swon:Object>
+                                                    <swon:Value arg:name=\"label\" arg:value=\"{= ?subjectLabel }\"/>
+                                                    <swon:Value arg:name=\"uri\" arg:value=\"{= str(?subject) }\"/>
+                                                    <swon:Value arg:name=\"graphId\" arg:value=\"{= ?graphId }\"/>
+                                                </swon:Object>
+                                            </swon:Value>
+                                            <swon:Value arg:name=\"datatype\">
+                                                <swon:Object>
+                                                    <swon:Value arg:name=\"label\" arg:value=\"{= ui:label(?datatype) }\"/>
+                                                    <swon:Value arg:name=\"uri\" arg:value=\"{= str(?datatype) }\"/>
+                                                    <swon:Value arg:name=\"graphId\" arg:value=\"{= ?graphId }\"/>
+                                                </swon:Object>
+                                            </swon:Value>
+                                            <swon:Value arg:name=\"primaryKey\" arg:value=\"{= ?primaryKey }\"/>
+                                            <swon:Value arg:name=\"foreignKey\" arg:value=\"{= ?foreignKey }\"/>
+                                            <swon:Value arg:name=\"nullable\" arg:value=\"{= ?nullable }\"/>
+                                        </swon:Object>
+                                    </ui:forEach>
+                                </ui:call>
+                            </ui:else>
+                        </swon:Array>
+                    </swon:Value>
+                </swon:Object>
+            </ui:setContext>
+        </ui:group>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:seeAlso edg:CreateLogicalAttributeHandler ;
+  rdfs:seeAlso edg:CreateResourceDialogForLogicalAttributePlugin ;
+  rdfs:seeAlso edg:ResourceDataTableLogicalEntityAttributesColumns ;
+  rdfs:subClassOf edg:DataTableResults ;
+.
+edg:DataTableResultsCallbackForLogicalEntityRelationships
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:specificResource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:focusNode=\"{= COALESCE(?resource, IRI(ui:getSessionAttribute(&quot;persistresource&quot;))) }\">
+    <ui:group let:dataGraph=\"{= swa:dataGraph() }\" let:masterGraph=\"{= teamwork:currentMasterGraph() }\">
+        <ui:group let:graphId=\"{= teamwork:graphIdFromGraph(?masterGraph) }\">
+            <!--ui:dumpScope ui:message=\"AAA1: edg:DataTableResultsCallbackForLogicalEntityRelationships\"/-->
+            <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+                <swon:Object>
+                    <swon:Value arg:name=\"data\">
+                        <swon:Array>
+                            <ui:call arg:logicalEntity=\"{= ?focusNode }\" arg:logicalModel=\"{= spl:subject(edg:entityOflogicalDataModel, ?focusNode) }\" arg:specificResource=\"{= ?specificResource }\" ui:template=\"{= edg:GetLogicalEntityAssociations }\" ui:varName=\"relations\">
+                                <!--ui:dumpResultSet ui:message=\"AAA2: edg:DataTableResultsCallbackForLogicalEntityRelationships\"
+  ui:resultSet=\"{= ?relations }\"/-->
+                                <ui:forEach ui:resultSet=\"{= ?relations }\">
+                                    <swon:Object let:cardinality=\"{= COALESCE(edg:getLogicalEntityCardinality(?association, ?focusNode), edg:CRDNLTY_ANY-OR-NONE) }\" let:otherEntity=\"{= edg:getOtherEntityInLogicalRelation(?association, ?focusNode) }\">
+                                        <ui:group let:otherCardinality=\"{= COALESCE(edg:getLogicalEntityCardinality(?association, ?focusNode), edg:CRDNLTY_ANY-OR-NONE) }\">
+                                            <!--ui:dumpScope ui:message=\"AAA2: edg:DataTableResultsCallbackForLogicalEntityRelationships {= ?association }\"/-->
+                                            <swon:Value arg:name=\"uri\" arg:value=\"{= ?association }\"/>
+                                            <swon:Value arg:name=\"label\" arg:value=\"{= str(?association) }\"/>
+                                            <swon:Value arg:name=\"entity\">
+                                                <swon:Object>
+                                                    <swon:Value arg:name=\"label\" arg:value=\"{= ui:label(?focusNode) }\"/>
+                                                    <swon:Value arg:name=\"uri\" arg:value=\"{= str(?focusNode) }\"/>
+                                                    <swon:Value arg:name=\"graphId\" arg:value=\"{= ?graphId }\"/>
+                                                </swon:Object>
+                                            </swon:Value>
+                                            <swon:Value arg:name=\"cardinality\">
+                                                <swon:Object>
+                                                    <swon:Value arg:name=\"label\" arg:value=\"{= ui:label(?cardinality) }\"/>
+                                                    <swon:Value arg:name=\"uri\" arg:value=\"{= edg:getLogicalEntityRelationParticipation(?association, ?focusNode) }\"/>
+                                                    <swon:Value arg:name=\"graphId\" arg:value=\"{= ?graphId }\"/>
+                                                </swon:Object>
+                                            </swon:Value>
+                                            <swon:Value arg:name=\"relation\">
+                                                <swon:Object>
+                                                    <swon:Value arg:name=\"label\" arg:value=\"{= ui:label(?association) }\"/>
+                                                    <swon:Value arg:name=\"uri\" arg:value=\"{= str(?association) }\"/>
+                                                    <swon:Value arg:name=\"graphId\" arg:value=\"{= ?graphId }\"/>
+                                                </swon:Object>
+                                            </swon:Value>
+                                            <!--swon:Value arg:name=\"label\" arg:value=\"{= ?associationName }\"/-->
+                                            <ui:if ui:condition=\"{= bound(?otherEntity) }\">
+                                                <swon:Value arg:name=\"otherEntity\">
+                                                    <swon:Object>
+                                                        <swon:Value arg:name=\"label\" arg:value=\"{= ui:label(?otherEntity) }\"/>
+                                                        <swon:Value arg:name=\"uri\" arg:value=\"{= str(?otherEntity) }\"/>
+                                                        <swon:Value arg:name=\"graphId\" arg:value=\"{= ?graphId }\"/>
+                                                    </swon:Object>
+                                                </swon:Value>
+                                            </ui:if>
+                                            <swon:Value arg:name=\"otherCardinality\">
+                                                <swon:Object>
+                                                    <swon:Value arg:name=\"label\" arg:value=\"{= ui:label(?otherCardinality) }\"/>
+                                                    <swon:Value arg:name=\"uri\" arg:value=\"{= edg:getLogicalEntityRelationParticipation(?association, ?otherEntity) }\"/>
+                                                    <swon:Value arg:name=\"graphId\" arg:value=\"{= ?graphId }\"/>
+                                                </swon:Object>
+                                            </swon:Value>
+                                        </ui:group>
+                                    </swon:Object>
+                                </ui:forEach>
+                            </ui:call>
+                        </swon:Array>
+                    </swon:Value>
+                </swon:Object>
+            </ui:setContext>
+        </ui:group>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:seeAlso edg:CreateResourceDialogForLogicalRelationPlugin ;
+  rdfs:seeAlso edg:ResourceDataTableLogicalEntityRelationshipsColumns ;
+  rdfs:subClassOf edg:DataTableResults ;
+.
+edg:DataTableResultsCallbackForLogicalRelationParticipants
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:specificResource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:dataGraph=\"{= swa:dataGraph() }\" let:focusNode=\"{= COALESCE(?resource, IRI(ui:getSessionAttribute(&quot;persistresource&quot;))) }\" let:masterGraph=\"{= teamwork:currentMasterGraph() }\">
+    <ui:group let:graphId=\"{= teamwork:graphIdFromGraph(?masterGraph) }\">
+        <!--ui:dumpScope ui:message=\"AAA1: edg:DataTableResultsCallbackForLogicalRelationParticipants\"/-->
+        <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+            <swon:Object>
+                <swon:Value arg:name=\"data\">
+                    <swon:Array>
+                        <ui:if ui:condition=\"{= bound(?specificResource) }\">
+                            <swon:Object let:cardinality=\"{= spl:object(?specificResource, edg:cardinality) }\" let:entity=\"{= spl:object(?specificResource, edg:logicalEntity) }\">
+                                <swon:Value arg:name=\"uri\" arg:value=\"{= ?focusNode }\"/>
+                                <swon:Value arg:name=\"label\" arg:value=\"{= ui:label(?focusNode) }\"/>
+                                <ui:if ui:condition=\"{= bound(?entity) }\">
+                                    <swon:Value arg:name=\"entity\">
+                                        <swon:Object>
+                                            <swon:Value arg:name=\"label\" arg:value=\" {= ui:label(?entity) }\"/>
+                                            <swon:Value arg:name=\"uri\" arg:value=\"{= str(?entity) }\"/>
+                                            <swon:Value arg:name=\"graphId\" arg:value=\"{= ?graphId }\"/>
+                                        </swon:Object>
+                                    </swon:Value>
+                                    <swon:Value arg:name=\"label\" arg:value=\"{= ui:label(?entity) }\"/>
+                                </ui:if>
+                                <ui:else>
+                                    <swon:Value arg:name=\"label\" arg:value=\"no entity specified\"/>
+                                </ui:else>
+                                <ui:if ui:condition=\"{= bound(?cardinality) }\">
+                                    <swon:Value arg:name=\"cardinality\">
+                                        <swon:Object>
+                                            <swon:Value arg:name=\"label\" arg:value=\" {= ui:label(?cardinality) }\"/>
+                                            <swon:Value arg:name=\"uri\" arg:value=\"{= str(?object) }\"/>
+                                            <swon:Value arg:name=\"graphId\" arg:value=\"{= ?graphId }\"/>
+                                        </swon:Object>
+                                    </swon:Value>
+                                </ui:if>
+                            </swon:Object>
+                        </ui:if>
+                        <ui:else>
+                            <ui:call arg:property=\"{= edg:participant }\" arg:subject=\"{= ?focusNode }\" ui:template=\"{= edg:ObjectsForGivenPropertySubject }\" ui:varName=\"participants\">
+                                <!--ui:dumpResultSet ui:message=\"AAA2: edg:DataTableResultsCallbackForLogicalRelationParticipants\"
+  ui:resultSet=\"{= ?participants }\"/-->
+                                <ui:forEach ui:resultSet=\"{= ?participants }\">
+                                    <swon:Object let:cardinality=\"{= spl:object(?object, edg:cardinality) }\" let:entity=\"{= spl:object(?object, edg:logicalEntity) }\">
+                                        <swon:Value arg:name=\"uri\" arg:value=\"{= ?focusNode }\"/>
+                                        <swon:Value arg:name=\"label\" arg:value=\"{= ui:label(?focusNode) }\"/>
+                                        <ui:if ui:condition=\"{= bound(?entity) }\">
+                                            <swon:Value arg:name=\"entity\">
+                                                <swon:Object>
+                                                    <swon:Value arg:name=\"label\" arg:value=\" {= ui:label(?entity) }\"/>
+                                                    <swon:Value arg:name=\"uri\" arg:value=\"{= str(?entity) }\"/>
+                                                    <swon:Value arg:name=\"graphId\" arg:value=\"{= ?graphId }\"/>
+                                                </swon:Object>
+                                            </swon:Value>
+                                            <swon:Value arg:name=\"label\" arg:value=\"{= ui:label(?entity) }\"/>
+                                        </ui:if>
+                                        <ui:else>
+                                            <swon:Value arg:name=\"label\" arg:value=\"no entity specified\"/>
+                                        </ui:else>
+                                        <ui:if ui:condition=\"{= bound(?cardinality) }\">
+                                            <swon:Value arg:name=\"cardinality\">
+                                                <swon:Object>
+                                                    <swon:Value arg:name=\"label\" arg:value=\" {= ui:label(?cardinality) }\"/>
+                                                    <swon:Value arg:name=\"uri\" arg:value=\"{= str(?object) }\"/>
+                                                    <swon:Value arg:name=\"graphId\" arg:value=\"{= ?graphId }\"/>
+                                                </swon:Object>
+                                            </swon:Value>
+                                        </ui:if>
+                                    </swon:Object>
+                                </ui:forEach>
+                            </ui:call>
+                        </ui:else>
+                    </swon:Array>
+                </swon:Value>
+            </swon:Object>
+        </ui:setContext>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:seeAlso edg:ResourceDataTableLogicalLogicalRelationParticipantsColumns ;
+  rdfs:subClassOf edg:DataTableResults ;
+.
+edg:ExportAvroSchemas
+  a ui:NodeClass ;
+  ui:prototype """
+<teamwork:Chrome arg:pageType=\"project-page avro-export\" arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= teamwork:ImportProjectTab }\" arg:tag=\"{= ?tag }\" let:graph=\"{= ui:currentQueryGraph() }\" let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <ui:try>
+        <h1>Avro Exporter for {= ui:label(?projectGraph) }</h1>
+        <ui:setContext ui:queryGraph=\"{= ui:graphWithoutImports(?graph) }\">
+            <p class=\"text-info\">The Avro exporter requires a physical data model or database, one or more tables of which will be transformed to an Avro Schema. </p>
+            <p class=\"text-info\">A service interface allows a REST call to be executed on a table by table basis.</p>
+            <ui:call ui:template=\"{= edg:getTableContainers }\" ui:varName=\"TableContainers\">
+                <ui:group let:tcCount=\"{= spr:rowCount(?TableContainers) }\">
+                    <ui:if ui:condition=\"{= ?tcCount = 0 }\">
+                        <p class=\"text-info\">No Tables to generate</p>
+                    </ui:if>
+                    <ui:else>
+                        <div class=\"d-inline-block\">
+                            <p class=\"text-info\">The current model has {= ?tcCount } physical data models or databases, as listed below.</p>
+                            <table class=\"swa-relevant-properties\">
+                                <thead class=\"swa-relevant-properties\">
+                                    <tr class=\"swa-relevant-properties\">
+                                        <th class=\"swa-relevant-properties\">Table Container</th>
+                                        <th class=\"swa-relevant-properties\">Tables</th>
+                                    </tr>
+                                </thead>
+                                <tbody class=\"swa-relevant-properties\">
+                                    <ui:forEach ui:resultSet=\"{= ?TableContainers }\">
+                                        <ui:group let:id=\"{= ui:uniqueId() }\">
+                                            <tr class=\"swa-relevant-properties\" let:rowId=\"{= fn:concat(&quot;CB_&quot;, ?id) }\">
+                                                <td class=\"swa-relevant-properties\" let:description=\"{= spl:object(?pdm, edg:description) }\">
+                                                    <label for=\"{= ?rowId }\" title=\"{= ?description }\">{= ui:label(?tableContainer) }</label>
+                                                </td>
+                                                <td class=\"swa-relevant-properties\">{= edg:countOfTablesInTableContainer(?pdm) }</td>
+                                            </tr>
+                                        </ui:group>
+                                    </ui:forEach>
+                                </tbody>
+                            </table>
+                            <p class=\"text-info\">Make a selection:</p>
+                            <div>
+                                <select class=\"form-control chosen-select edg-avro-schema-export-plugin-select-width\" data-project-graph=\"{= ?projectGraph }\" id=\"pdm-selector\" tabindex=\"2\">
+                                    <option disabled=\"disabled\" selected=\"true\" value=\"\">Choose Table ...</option>
+                                    <ui:forEach ui:resultSet=\"{= ?TableContainers }\">
+                                        <option value=\"{= ?tableContainer }\">{= ui:label(?tableContainer) }</option>
+                                    </ui:forEach>
+                                </select>
+                            </div>
+                            <div id=\"edg-exporter-canvas\"/>
+                        </div>
+                    </ui:else>
+                </ui:group>
+            </ui:call>
+        </ui:setContext>
+    </ui:try>
+    <ui:catch>
+        <p class=\"text-info\">Exception in edg:ExportAvroSchemas: {= ?exception }</p>
+    </ui:catch>
+</teamwork:Chrome>
+"""^^ui:Literal ;
+  rdfs:label "Export avro schemas" ;
+  rdfs:subClassOf edg:Elements ;
+  rdfs:subClassOf teamwork:MustHaveAccessToTagPage ;
+.
+edg:ExportOneAvroSchema
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group let:projectGraph=\"{= ?graph }\" let:tableContainer=\"{= IRI(?resource) }\">
+    <ui:if ui:condition=\"{= bound(?projectGraph) }\">
+        <ui:setContext ui:queryGraph=\"{= ui:graphWithoutImports(?projectGraph) }\">
+            <div id=\"edg-exporter-canvas\">
+                <ui:call arg:resource=\"{= ?tableContainer }\" ui:template=\"{= edg:getTablesInContainer }\" ui:varName=\"tables\">
+                    <ui:if ui:condition=\"{= spr:rowCount(?tables) &gt; 0 }\">
+                        <div id=\"export-accordion\">
+                            <div class=\"panel-heading\">
+                                <h4 class=\"text-info\">Tables</h4>
+                            </div>
+                            <div class=\"panel-body\">
+                                <button class=\"btn btn-primary btn-margin-right-8px\" onclick=\"edgExporter.selectAll('{= ?tableId }')\">Select All</button>
+                                <button class=\"btn btn-primary btn-margin-right-8px\" onclick=\"edgExporter.clearSelection('{= ?tableId }')\">Clear Selections</button>
+                                <button class=\"btn btn-primary\" onclick=\"edgExporter.acceptSelection('edg:ConfirmAvroTransformJobs', '{= xsd:string(?graph) }')\">Accept Selections</button>
+                                <table class=\"swa-relevant-properties\">
+                                    <thead class=\"swa-relevant-properties\">
+                                        <tr class=\"swa-relevant-properties\">
+                                            <th class=\"swa-relevant-properties\">Table</th>
+                                            <th class=\"swa-relevant-properties\">Columns</th>
+                                            <th class=\"swa-relevant-properties\">Selector</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class=\"swa-relevant-properties\">
+                                        <ui:forEach ui:resultSet=\"{= ?tables }\">
+                                            <ui:group let:id=\"{= ui:uniqueId() }\">
+                                                <tr class=\"swa-relevant-properties\" let:rowId=\"{= fn:concat(&quot;CB_&quot;, ?id) }\">
+                                                    <td class=\"swa-relevant-properties\" let:tableDescription=\"{= spl:object(?table, edg:description) }\">
+                                                        <label for=\"{= ?rowId }\" title=\"{= ?tableDescription }\">{= spl:object(?table, edg:name) }</label>
+                                                    </td>
+                                                    <td class=\"swa-relevant-properties\">{= edg:countOfColumnsInTable(?table) }</td>
+                                                    <td class=\"swa-relevant-properties\">
+                                                        <div class=\"checkbox\">
+                                                            <input data-uri=\"{= xsd:string(?table) }\" id=\"{= ?rowId }\" type=\"checkbox\"/>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </ui:group>
+                                        </ui:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class=\"panel-heading\">
+                                <h4 class=\"text-info\">Avro Transform Jobs</h4>
+                            </div>
+                            <div class=\"panel-body\" id=\"transform-jobs\"/>
+                        </div>
+                    </ui:if>
+                    <ui:else>
+                        <p>No tables found</p>
+                    </ui:else>
+                </ui:call>
+            </div>
+        </ui:setContext>
+    </ui:if>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Export one Avro schema" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:FileAsset
+  edg:hideSubClasses true ;
+  rdfs:subClassOf edg:DataAssetsViewpoint ;
+.
+edg:ForeignKey
+  edg:hideClass true ;
+  rdfs:subClassOf edg:PhysicalModelViewpoint ;
+.
+edg:LogicalAttribute
+  ui:instanceView """
+<ui:group ui:id=\"datatables-results\" ui:priority=\"{= 10 }\">
+    <!--ui:dumpScope ui:message=\"AAA: edg:LogicalAttribute datatable-results\"/-->
+    <swa:SimpleDataTableResults arg:createResourceHandler=\"{= edg:CreateLogicalAttributeHandler }\" arg:frozen=\"{= ?frozen }\" arg:hasFixedHeader=\"{= true }\" arg:hasFixedToolbar=\"{= true }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"results-table-config\" ui:priority=\"{= 10 }\">
+    <!--ui:dumpScope ui:message=\"AAA: edg:LogicalAttribute results-table-config\"/-->
+    <swon:Array>
+        <swon:Object>
+            <swon:Value arg:name=\"createService\" arg:value=\"edg:CreateResourceDialogForLogicalAttributePlugin\"/>
+            <swon:Value arg:name=\"createResourceHandler\" arg:value=\"edg:CreateLogicalAttributeHandler\"/>
+            <swon:Value arg:name=\"isDefault\">
+                <swon:Literal arg:value=\"{= true }\"/>
+            </swon:Value>
+        </swon:Object>
+    </swon:Array>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:subClassOf edg:LogicalModelViewpoint ;
+.
+edg:LogicalDataModel
+  ui:instanceView """
+<ui:group ui:id=\"inverse-property-table-entityOflogicalDataModel\" ui:priority=\"{= 10 }\">
+    <!--ui:dumpScope ui:message=\"AAA1: edg:LogicalDataModel\"/-->
+    <div class=\"box-rounded\">
+        <div class=\"size18px dark-blue\">Logical Entities</div>
+        <edg:ResourceInstancesDataTable arg:canEdit=\"{= false }\" arg:columnService=\"{= edg:ColumnsForLogicalEntities }\" arg:dataEndpoint=\"{= edg:DataTableResultsCallbackForLogicalEntities }\" arg:hasViewableDetails=\"{= true }\" arg:resource=\"{= ?focusNode }\" arg:resourceType=\"{= edg:FormItem }\"/>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:subClassOf edg:LogicalModelViewpoint ;
+.
+edg:LogicalDataModelDiagramGadget
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:dependencyTemplate ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:loadable class=\"swa-labeled-objects\" let:gid=\"{= ui:uniqueId() }\" ui:loadId=\"{= ui:uniqueId() }\">
+        <!--ui:dumpScope ui:message=\"AAA1: edg:LogicalDataModelDiagramGadget -  {= ?focusNode }\"/-->
+        <ui:if ui:condition=\"{= swa:isViewMode() }\">
+            <div class=\"mgl-3em\" style=\"margin-top: 8px\">
+                <swa:CollapsibleLoadableFormSection arg:label=\"Logical Data Model Diagram\" arg:loadId=\"DIA1_{= ?loadId }\">
+                    <ui:loadable class=\"swa-loadable-form-section-body\" ui:loadId=\"DIA1_{= ?loadId }\" ui:loadOnDemand=\"{= true }\">
+                        <edg:LogicalDataModelDiagram arg:resource=\"{= ?focusNode }\" ui:args=\"*\"/>
+                    </ui:loadable>
+                </swa:CollapsibleLoadableFormSection>
+            </div>
+        </ui:if>
+    </ui:loadable>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "Logical Data Model Diagram Gadget" ;
+  rdfs:subClassOf edg:PathElements ;
+.
+edg:LogicalEntity
+  ui:instanceView """
+<ui:group ui:id=\"edg-autocomplete-input-element\" ui:priority=\"{= 10 }\">
+    <ui:dumpScope ui:message=\"AAA3: edg:LogicalEntity\"/>
+    <input class=\"{= ?hiddenInputClass }\" data-property=\"logicalEntity\" id=\"{= ?id }\" name=\"{= ?name }\" type=\"hidden\" value=\"{= ?value }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:LogicalEntityAttributesGadget
+  a ui:NodeClass ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:result=\"{= ui:setSessionAttribute(&quot;persistresource&quot;, str(?focusNode)) }\">
+    <ui:loadable class=\"swa-labeled-objects\" let:gid=\"{= ui:uniqueId() }\" ui:loadId=\"{= ui:uniqueId() }\">
+        <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+            <!--ui:dumpScope ui:message=\"AAA1: edg:LogicalEntityAttributesGadget\"/-->
+            <ui:if ui:condition=\"{= bound(?focusNode) }\">
+                <div class=\"box-rounded\">
+                    <div class=\"size18px dark-blue\">Attributes for <b>{= ui:label(?focusNode) }</b>
+                    </div>
+                    <edg:ResourceInstancesDataTable arg:canEdit=\"{= true }\" arg:columnService=\"{= edg:ResourceDataTableLogicalEntityAttributesColumns }\" arg:createResourceHandler=\"{= edg:CreateLogicalAttributeHandler }\" arg:createService=\"{= swa:CreateResourceDialogJSON }\" arg:dataEndpoint=\"{= edg:DataTableResultsCallbackForLogicalEntityAttributes }\" arg:multiSelect=\"{= true }\" arg:resource=\"{= ?focusNode }\" arg:resourceType=\"{= edg:LogicalAttribute }\"/>
+                </div>
+            </ui:if>
+        </ui:setContext>
+    </ui:loadable>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A gadget for viewing the attributes of a logical entity. A table is shown and the 'new' button creates new instance of the passed resource type, edg:LogicaAttribute." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/data-models> ;
+  rdfs:label "Logical Entity Attributes Gadget" ;
+  rdfs:seeAlso edg:CreateResourceDialogForLogicalAttributePlugin ;
+  rdfs:subClassOf edg:PathElements ;
+.
+edg:LogicalEntityRelationshipsGadget
+  a ui:NodeClass ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:result=\"{= ui:setSessionAttribute(&quot;persistresource&quot;, str(?focusNode)) }\">
+    <ui:loadable class=\"swa-labeled-objects\" let:gid=\"{= ui:uniqueId() }\" ui:loadId=\"{= ui:uniqueId() }\">
+        <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+            <!--ui:dumpScope ui:message=\"AAA1: edg:DataQualityRecordGadget\"/-->
+            <ui:if ui:condition=\"{= bound(?focusNode) }\">
+                <div class=\"box-rounded\">
+                    <div class=\"size18px dark-blue\">Relationships for <b>{= ui:label(?focusNode) }</b>
+                    </div>
+                    <edg:ResourceInstancesDataTable arg:canEdit=\"{= true }\" arg:columnService=\"{= edg:ResourceDataTableLogicalEntityRelationshipsColumns }\" arg:createResourceHandler=\"{= edg:CreateLogicalRelationHandler }\" arg:createService=\"{= swa:CreateResourceDialogJSON }\" arg:dataEndpoint=\"{= edg:DataTableResultsCallbackForLogicalEntityRelationships }\" arg:multiSelect=\"{= false }\" arg:resource=\"{= ?focusNode }\" arg:resourceType=\"{= edg:LogicalRelation }\"/>
+                </div>
+            </ui:if>
+        </ui:setContext>
+    </ui:loadable>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A gadget for viewing instances of logical relations. A table of relationships is shown and the 'new' button creates new instance of the passed resource type, edg:LogicalRelation." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/data-models> ;
+  rdfs:label "Logical Entity Relationships Gadget" ;
+  rdfs:seeAlso edg:CreateResourceDialogForLogicalRelationPlugin ;
+  rdfs:seeAlso edg:LogicalRelationIdentifierSetter ;
+  rdfs:seeAlso edg:LogicalRelationTargetSelector ;
+  rdfs:subClassOf edg:PathElements ;
+.
+edg:LogicalModelViewpoint
+  a edg:ViewpointClass ;
+  dash:abstract true ;
+  rdfs:comment "A menu container for types that define components of an information system in a technology-independent manner." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/datamodels> ;
+  rdfs:label "Logical Model Viewpoint" ;
+  rdfs:subClassOf edg:DataAssetsViewpoint ;
+.
+edg:LogicalRelationIdentifierSetter
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:source ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The PVS instance" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:source ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The PVS instance" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:target ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The PVS instance" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:target ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The PVS instance" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:loadId ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "PVS property div id" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The PVS instance" ;
+    ] ;
+  ui:instanceView """
+<ui:group>
+    <!--ui:dumpScope ui:message=\"AAA: edg:LogicalRelationIdentifierSetter\"/-->
+    <ui:if ui:condition=\"{= bound(?graph) }\">
+        <ui:setContext ui:queryGraph=\"{= ?graph }\">
+            <ui:group>
+                <swa:LabeledElement arg:label=\"Identifier:\" let:uri=\"{= edg:newResourceWithUUID(?resourceType, &quot;&quot;) }\">
+                    <input class=\"form-control swa-uri-field swa-create-resource-with-primary-key-dialog-plugin-identifier\" disabled=\"disabled\" id=\"uri-input\" size=\"{= fn:string-length(?uri) + 90 } \" type=\"text\" value=\"{= ?uri }\"/>
+                </swa:LabeledElement>
+            </ui:group>
+        </ui:setContext>
+    </ui:if>
+    <ui:else>
+        <ui:throw ui:message=\"Failed to create new logical relation - graph missing for identifier creation\"/>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  vaem:todo "Verify call to edg:newResourceWithUUID is needed." ;
+  rdfs:label "Flow Identifier Setter" ;
+  rdfs:subClassOf swa:Elements ;
+.
+edg:LogicalRelationParticipant
+  ui:instanceView """
+<ui:group ui:id=\"form\" ui:priority=\"{= 10 }\">
+    <!--ui:dumpScope ui:message=\"AAA: edg:LogicalRelationParticipant\"/-->
+    <swa:ResourceFormBody arg:resource=\"{= ?this }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:LogicalRelationParticipantsGadget
+  a ui:NodeClass ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:result=\"{= ui:setSessionAttribute(&quot;persistresource&quot;, str(?focusNode)) }\">
+    <ui:loadable class=\"swa-labeled-objects\" let:gid=\"{= ui:uniqueId() }\" ui:loadId=\"{= ui:uniqueId() }\">
+        <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+            <!--ui:dumpScope ui:message=\"AAA1: edg:LogicalRelationPartipcantsGadget\"/-->
+            <ui:if ui:condition=\"{= bound(?focusNode) }\">
+                <div class=\"box-rounded\">
+                    <div class=\"size18px dark-blue\">Participants</div>
+                    <edg:ResourceInstancesDataTable arg:canEdit=\"{= true }\" arg:columnService=\"{= edg:ResourceDataTableLogicalLogicalRelationParticipantsColumns }\" arg:createResourceHandler=\"{= edg:CreateLogicalRelationParticipantHandler }\" arg:createService=\"{= swa:CreateResourceDialogJSON }\" arg:dataEndpoint=\"{= edg:DataTableResultsCallbackForLogicalRelationParticipants }\" arg:multiSelect=\"{= false }\" arg:resource=\"{= ?focusNode }\" arg:resourceType=\"{= edg:LogicalRelationParticipant }\"/>
+                </div>
+            </ui:if>
+        </ui:setContext>
+    </ui:loadable>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A gadget for viewing partipcants of logical relations. A table of relation participant is shown.  The 'new' button creates new instance of the passed resource type." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/data-models> ;
+  rdfs:label "Logical Relation Participants Gadget" ;
+  rdfs:seeAlso edg:CreateLogicalRelationParticipantHandler ;
+  rdfs:seeAlso edg:CreateResourceDialogForLogicalRelationParticipantPlugin ;
+  rdfs:seeAlso edg:LogicalRelationIdentifierSetter ;
+  rdfs:seeAlso edg:LogicalRelationParticipant ;
+  rdfs:subClassOf edg:PathElements ;
+.
+edg:LogicalRelationTargetSelector
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:source ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The PVS instance" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:loadId ;
+      spl:valueType xsd:string ;
+      rdfs:comment "PVS property div id" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The PVS instance" ;
+    ] ;
+  ui:prototype """
+<ui:group let:uid=\"{= ui:uniqueId() }\">
+    <!--ui:dumpScope ui:message=\"AAA: edg:LogicalRelationTargetSelector\"/-->
+    <ui:if ui:condition=\"{= bound(?graph) }\">
+        <ui:setContext ui:queryGraph=\"{= ?graph }\">
+            <swa:LabeledElement arg:label=\"Target Entity:\">
+                <edg:AutoComplete arg:class=\"swa-text-field\" arg:dataAttributeProperty=\"targetEntity\" arg:id=\"relation-target\" arg:onSelect=\"edgxtra.relationTarget( { graph : '&lt;{= ui:currentQueryGraph() }&gt;', resourceType : '{= ?resourceType }', source : '&lt;' + '{= ?source }' + '&gt;',  target : '&lt;' + resource + '&gt;','identifierDivId': '{= ?loadId }','targetDivId': 'relation-target'})\" arg:placeholder=\"Select target entity\" arg:type=\"{= edg:LogicalEntity }\"/>
+            </swa:LabeledElement>
+            <swa:LabeledElement arg:label=\"Target Entity Cardinality:\">
+                <edg:AutoComplete arg:class=\"swa-text-field\" arg:dataAttributeProperty=\"targetCardinality\" arg:id=\"relation-target-cardinality\" arg:placeholder=\"Select cardinality\" arg:type=\"{= edg:Cardinality }\"/>
+            </swa:LabeledElement>
+        </ui:setContext>
+    </ui:if>
+    <ui:else>
+        <ui:throw ui:message=\"Failed to create new logical relation - graph missing\"/>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Flow Target Selector" ;
+  rdfs:subClassOf swa:Elements ;
+.
+edg:PermissibleValuesAsset
+  rdfs:subClassOf edg:DataAssetsViewpoint ;
+.
+edg:PhysicalDataModel
+  rdfs:subClassOf edg:PhysicalModelViewpoint ;
+.
+edg:PhysicalModelViewpoint
+  a edg:ViewpointClass ;
+  dash:abstract true ;
+  rdfs:comment "A menu container for types that define components of an information system as a technology-specific specification." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/datamodels> ;
+  rdfs:label "Physical Model Viewpoint Items" ;
+  rdfs:subClassOf edg:DataAssetsViewpoint ;
+.
+edg:QuantityKind
+  edg:hideClass true ;
+  rdfs:subClassOf edg:DataAssetsViewpoint ;
+.
+edg:ResourceDataTableDataQualityRecordColumns
+  a ui:NodeClass ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <!--ui:dumpScope ui:message=\"AAA: edg:ResourceDataTableDataQualityRecordColumns\"/-->
+    <swon:Array>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"uri\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"uri\"/>
+            <swon:Value arg:name=\"searchable\" arg:value=\"{= false }\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= false }\"/>
+            <swon:Value arg:name=\"orderable\" arg:value=\"{= false }\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Data Quality Record\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"label\"/>
+            <swon:Value arg:name=\"searchable\" arg:value=\"{= false }\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"orderable\" arg:value=\"{= false }\"/>
+            <swon:Value arg:name=\"type\" arg:value=\"label\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Created\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"created\"/>
+            <swon:Value arg:name=\"searchable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+            <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"render\" arg:value=\"dateFormat\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Data Quality Status\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"dataQualityStatus\"/>
+            <swon:Value arg:name=\"searchable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+            <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"type\" arg:value=\"string\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Quality Issues\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"totalNumberOfQualityIssues\"/>
+            <swon:Value arg:name=\"searchable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+            <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"type\" arg:value=\"num\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Verified Values\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"totalNumberOfVerifiedValues\"/>
+            <swon:Value arg:name=\"searchable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+            <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"type\" arg:value=\"num\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Verification Method\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"verificationMethod\"/>
+            <swon:Value arg:name=\"searchable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+            <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"render\" arg:value=\"detailsLink\"/>
+        </swon:Object>
+    </swon:Array>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment "JSON representation of the columns of a data quality record. " ;
+  rdfs:seeAlso edg:DataQualityRecord ;
+  rdfs:seeAlso edg:DataTableResultsCallbackForDataQualityRecords ;
+  rdfs:subClassOf edg:DataTableColumns ;
+.
+edg:ResourceDataTableLogicalEntityAttributesColumns
+  a ui:NodeClass ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:dataGraph=\"{= swa:dataGraph() }\" let:masterGraph=\"{= teamwork:currentMasterGraph() }\" let:resource=\"{= IRI(ui:getSessionAttribute(&quot;persistresource&quot;)) }\">
+    <ui:group let:graphId=\"{= teamwork:graphIdFromGraph(?masterGraph) }\">
+        <!--ui:dumpScope ui:message=\"AAA: ResourceDataTableLogicalEntityAttributesColumns\"/-->
+        <swon:Array>
+            <swon:Object>
+                <swon:Value arg:name=\"title\" arg:value=\"uri\"/>
+                <swon:Value arg:name=\"data\" arg:value=\"uri\"/>
+                <swon:Value arg:name=\"searchable\" arg:value=\"{= false }\"/>
+                <swon:Value arg:name=\"visible\" arg:value=\"{= false }\"/>
+                <swon:Value arg:name=\"orderable\" arg:value=\"{= false }\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"title\" arg:value=\"Attribute\"/>
+                <swon:Value arg:name=\"data\" arg:value=\"label\"/>
+                <swon:Value arg:name=\"searchable\" arg:value=\"{= false }\"/>
+                <swon:Value arg:name=\"visible\" arg:value=\"{= false }\"/>
+                <swon:Value arg:name=\"orderable\" arg:value=\"{= false }\"/>
+                <swon:Value arg:name=\"type\" arg:value=\"label\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"title\" arg:value=\"Attribute\"/>
+                <swon:Value arg:name=\"data\" arg:value=\"attribute\"/>
+                <swon:Value arg:name=\"searchable\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+                <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"render\" arg:value=\"detailsLink\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"title\" arg:value=\"Datatype\"/>
+                <swon:Value arg:name=\"data\" arg:value=\"datatype\"/>
+                <swon:Value arg:name=\"searchable\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+                <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"render\" arg:value=\"detailsLink\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"title\" arg:value=\"Primary Key\"/>
+                <swon:Value arg:name=\"data\" arg:value=\"primaryKey\"/>
+                <swon:Value arg:name=\"searchable\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+                <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"type\" arg:value=\"bool\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"title\" arg:value=\"Foreign Key\"/>
+                <swon:Value arg:name=\"data\" arg:value=\"foreignKey\"/>
+                <swon:Value arg:name=\"searchable\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+                <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"type\" arg:value=\"bool\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"title\" arg:value=\"Nullable\"/>
+                <swon:Value arg:name=\"data\" arg:value=\"nullable\"/>
+                <swon:Value arg:name=\"searchable\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+                <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"type\" arg:value=\"bool\"/>
+            </swon:Object>
+        </swon:Array>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:seeAlso edg:CreateLogicalAttributeHandler ;
+  rdfs:seeAlso edg:CreateResourceDialogForLogicalAttributePlugin ;
+  rdfs:seeAlso edg:DataTableResultsCallbackForLogicalEntityAttributes ;
+  rdfs:subClassOf edg:DataTableColumns ;
+.
+edg:ResourceDataTableLogicalEntityRelationshipsColumns
+  a ui:NodeClass ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:dataGraph=\"{= swa:dataGraph() }\" let:masterGraph=\"{= teamwork:currentMasterGraph() }\" let:resource=\"{= IRI(ui:getSessionAttribute(&quot;persistresource&quot;)) }\">
+    <ui:group let:graphId=\"{= teamwork:graphIdFromGraph(?masterGraph) }\">
+        <!--ui:dumpScope ui:message=\"AAA: ResourceDataTableDataLogicalEntityaRelationshipsColumns\"/-->
+        <swon:Array>
+            <swon:Object>
+                <swon:Value arg:name=\"title\" arg:value=\"uri\"/>
+                <swon:Value arg:name=\"data\" arg:value=\"uri\"/>
+                <swon:Value arg:name=\"searchable\" arg:value=\"{= false }\"/>
+                <swon:Value arg:name=\"visible\" arg:value=\"{= false }\"/>
+                <swon:Value arg:name=\"orderable\" arg:value=\"{= false }\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"title\" arg:value=\"Logical Relation\"/>
+                <swon:Value arg:name=\"data\" arg:value=\"label\"/>
+                <swon:Value arg:name=\"searchable\" arg:value=\"{= false }\"/>
+                <swon:Value arg:name=\"visible\" arg:value=\"{= false }\"/>
+                <swon:Value arg:name=\"orderable\" arg:value=\"{= false }\"/>
+                <swon:Value arg:name=\"type\" arg:value=\"label\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"title\" arg:value=\"Entity\"/>
+                <swon:Value arg:name=\"data\" arg:value=\"entity\"/>
+                <swon:Value arg:name=\"searchable\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+                <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"render\" arg:value=\"detailsLink\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"title\" arg:value=\"has cardinality in\"/>
+                <swon:Value arg:name=\"data\" arg:value=\"cardinality\"/>
+                <swon:Value arg:name=\"searchable\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+                <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"render\" arg:value=\"detailsLink\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"title\" arg:value=\"Relation\"/>
+                <swon:Value arg:name=\"data\" arg:value=\"relation\"/>
+                <swon:Value arg:name=\"searchable\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+                <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"render\" arg:value=\"detailsLink\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"title\" arg:value=\"with cardinality\"/>
+                <swon:Value arg:name=\"data\" arg:value=\"otherCardinality\"/>
+                <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+                <swon:Value arg:name=\"searchable\" arg:value=\"{= false }\"/>
+                <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"render\" arg:value=\"detailsLink\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"title\" arg:value=\"on Entity\"/>
+                <swon:Value arg:name=\"data\" arg:value=\"otherEntity\"/>
+                <swon:Value arg:name=\"searchable\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+                <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+                <swon:Value arg:name=\"render\" arg:value=\"detailsLink\"/>
+            </swon:Object>
+        </swon:Array>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:seeAlso edg:CreateLogicalRelationHandler ;
+  rdfs:seeAlso edg:DataTableResultsCallbackForLogicalEntityRelationships ;
+  rdfs:seeAlso edg:LogicalRelation ;
+  rdfs:seeAlso edg:ResourceDataTableLogicalEntityRelationshipsColumns ;
+  rdfs:subClassOf edg:DataTableColumns ;
+.
+edg:constructHTMLforDataQualityIssue
+  a ui:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:returnType xsd:string ;
+  ui:prototype """
+<ui:group let:violationNotes=\"{= spl:object(?resource, edg:violationNotes) }\" let:violationsCount=\"{= spl:object(?resource, edg:numberOfViolations) }\">
+    <ui:bind>
+        <ui:stringify ui:varName=\"html\">
+            <div class=\"size12px\">
+                <ui:if ui:condition=\"{= bound(?violationsCount) }\">
+                    <em>Number of Violations:&nbsp;</em>{= ?violationsCount }</ui:if>
+                <ui:if ui:condition=\"{= bound(?violationNotes) }\">
+                    <br/>
+                    <em>Violation Notes:</em>
+                    <br/>{= spl:object(?resource, edg:violationNotes) }</ui:if>
+            </div>
+        </ui:stringify>
+        <ui:return ui:result=\"{= ?html }\"/>
+    </ui:bind>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "construct HTML for Data Quality Issue" ;
+  rdfs:subClassOf edg:UIfunctions ;
+.
+edg:getLogicalEntityRelationParticipation
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "participant" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "participant" ;
+              ] ;
+            sp:predicate edg:participant ;
+            sp:subject [
+                sp:varName "association" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "logicalEntity" ;
+              ] ;
+            sp:predicate edg:logicalEntity ;
+            sp:subject [
+                sp:varName "participant" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:logicalEntity ;
+      spl:valueType edg:LogicalEntity ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:association ;
+      spl:valueType edg:LogicalRelation ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:label "get logical entity relationship participation" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:isDiagramGadget
+  a rdf:Property ;
+  rdfs:subPropertyOf edg:isGadget ;
+.
+edg:isGadget
+  a rdf:Property ;
+.
+<http://edg.topbraid.solutions/project/data-models/GMD_data-models>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:ProjectGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/project/data-models> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+arg:sourceCardinality
+  a rdf:Property ;
+  rdfs:label "source cardinality" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:specificResource
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:targetCardinality
+  a rdf:Property ;
+  rdfs:label "source cardinality" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+swauml:InstanceAssociationEdge
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:predicate ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The (forward) predicate." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:sourceClass ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The start of the association" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:targetClass ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The end of the association." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <!--polyline about=\"{= ?sourceClass } {= ?targetClass } {= ?predicate }\" class=\"swauml-association-edge-line\"/-->
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Instance Association edge" ;
+  rdfs:subClassOf swa:GraphElements ;
+.
+swauml:ResourceProperty
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:value ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+.

@@ -1,0 +1,126 @@
+# baseURI: http://topbraid.org/skos-generic-shapes
+# imports: http://datashapes.org/metash
+# imports: http://topbraid.org/skos.shapes
+# prefix: skosgeneric
+
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosgeneric: <http://topbraid.org/skos-generic-shapes#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://topbraid.org/skos-generic-shapes>
+  a owl:Ontology ;
+  rdfs:comment "These shapes are driving the GraphQL schema /skosshapes, providing extended API access for SKOS concepts." ;
+  rdfs:label "SKOS Generic Shapes" ;
+  owl:imports <http://datashapes.org/metash> ;
+  owl:imports <http://topbraid.org/skos.shapes> ;
+.
+skosgeneric:Concept
+  a sh:NodeShape ;
+  dash:applicableToClass skos:Concept ;
+  rdfs:label "Concept Generic Shape" ;
+  sh:property <http://datashapes.org/metash#Resource-isImported> ;
+  sh:property skosgeneric:Concept-hasNarrower ;
+  sh:property skosgeneric:Concept-narrowerClass ;
+  sh:property skosgeneric:Concept-narrowerTransitive ;
+  sh:property skos:Concept-altLabel ;
+  sh:property skos:Concept-broadMatch ;
+  sh:property skos:Concept-broader ;
+  sh:property skos:Concept-broader-inverse ;
+  sh:property skos:Concept-broader-nonRecursive ;
+  sh:property skos:Concept-changeNote ;
+  sh:property skos:Concept-closeMatch ;
+  sh:property skos:Concept-definition ;
+  sh:property skos:Concept-editorialNote ;
+  sh:property skos:Concept-exactMatch ;
+  sh:property skos:Concept-example ;
+  sh:property skos:Concept-hasTopConcept-inverse ;
+  sh:property skos:Concept-hiddenLabel ;
+  sh:property skos:Concept-historyNote ;
+  sh:property skos:Concept-notation ;
+  sh:property skos:Concept-note ;
+  sh:property skos:Concept-pathToConceptScheme ;
+  sh:property skos:Concept-prefLabel ;
+  sh:property skos:Concept-related ;
+  sh:property skos:Concept-relatedMatch ;
+  sh:property skos:Concept-scopeNote ;
+  sh:property skos:Concept-type ;
+.
+skosgeneric:Concept-hasNarrower
+  a sh:PropertyShape ;
+  sh:path skos:hasNarrower ;
+  sh:datatype xsd:boolean ;
+  sh:description "Returns true if the concept has at least one child." ;
+  sh:maxCount 1 ;
+  sh:name "has narrower" ;
+  sh:values [
+      sh:exists [
+          sh:path [
+              sh:inversePath skos:broader ;
+            ] ;
+        ] ;
+    ] ;
+.
+skosgeneric:Concept-narrowerClass
+  a sh:PropertyShape ;
+  sh:path skosgeneric:narrowerClass ;
+  sh:class rdfs:Class ;
+  sh:description """Returns the class defined by the nearest occurrence of following pattern at the types of this concept:
+
+ex:Continent
+    sh:property [
+        sh:path [ sh:inversePath skos:broader ] ;
+        sh:class ex:Country ;
+    ] .""" ;
+  sh:maxCount 1 ;
+  sh:name "narrower class" ;
+  sh:values [
+      <http://evn.topbraidlive.org/ui#narrowerClass> (
+          sh:this
+        ) ;
+    ] ;
+.
+skosgeneric:Concept-narrowerTransitive
+  a sh:PropertyShape ;
+  sh:path skos:narrowerTransitive ;
+  sh:description "Gets the concept plus all narrower concepts, recursively." ;
+  sh:name "narrower transitive" ;
+  sh:node skosgeneric:Concept ;
+  sh:nodeKind sh:IRI ;
+  sh:values [
+      sh:path [
+          sh:zeroOrMorePath [
+              sh:inversePath skos:broader ;
+            ] ;
+        ] ;
+    ] ;
+.
+skosgeneric:ConceptScheme-hasChild
+  a sh:PropertyShape ;
+  sh:path skos:hasChild ;
+  sh:datatype xsd:boolean ;
+  sh:description "Returns true if the concept scheme has at least one top concept." ;
+  sh:maxCount 1 ;
+  sh:name "has child" ;
+  sh:values [
+      sh:exists [
+          sh:path skos:hasTopConcept ;
+        ] ;
+    ] ;
+.
+skosgeneric:Schema
+  a graphql:Schema ;
+  graphql:name "skosshapes" ;
+  graphql:publicClass skosgeneric:Concept ;
+  graphql:publicClass skos:ConceptScheme ;
+  rdfs:label "SKOS Taxonomy" ;
+.
+skos:ConceptScheme
+  sh:property <http://datashapes.org/metash#Resource-isImported> ;
+  sh:property skosgeneric:ConceptScheme-hasChild ;
+.

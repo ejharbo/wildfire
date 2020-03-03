@@ -1,0 +1,1507 @@
+# baseURI: http://topbraid.org/corpus-projects
+# imports: http://edg.topbraid.solutions/1.0/editor/tabular
+# imports: http://edg.topbraid.solutions/1.0/schema/edg
+# imports: http://teamwork.topbraidlive.org/corpus/tika-importer
+# imports: http://topbraid.org/corpus
+# imports: http://topbraid.org/corpus-spin
+# imports: http://topbraid.org/corpus-ui
+# imports: http://topbraid.org/teamwork.ui
+# imports: http://topbraid.org/teamworknotifications
+# prefix: corpusprojects
+
+@prefix acjob: <http://evn.topbraidlive.org/tagger/acjob#> .
+@prefix acpp: <http://topbraid.org/nlp/autoclassifier-preproc#> .
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix autotagger: <http://evn.topbraidlive.org/autotagger#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix conceptmatch: <http://topbraid.org/conceptmatch#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix config-importers: <http://edg.topbraidlive.org/config/importers#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix core-soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix corpus: <http://topbraid.org/corpus#> .
+@prefix corpusprojects: <http://topbraid.org/corpus-projects#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkapp: <http://topbraid.org/swa/crosswalkapp#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dashboard: <http://example.org/dashboard#> .
+@prefix datagraph: <http://teamwork.topbraidlive.org/datagraph/datagraphprojects#> .
+@prefix dataset: <http://teamwork.topbraidlive.org/dataset#> .
+@prefix datasetapp: <http://topbraid.org/swa/datasetapp#> .
+@prefix datasetviewer: <http://topbraid.org/swa/datasetviewer#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ddl: <http://edg.topbraidlive.org/1.0/importers/ddl#> .
+@prefix default: <http://uispin.org/default#> .
+@prefix defaultapp: <http://topbraid.org/swa/defaultapp#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix document: <http://topbraid.org/document#> .
+@prefix documents: <http://edg.topbraid.solutions/1.0/shapes/documents#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg-config: <http://edg.ext.topbraidlive.org/schema/config/importers#> .
+@prefix edg-importer: <http://edg.topbraidlive.org/importer/> .
+@prefix edg-qa: <http://edg.topbraidlive.org/utility/qa/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.global: <urn:x-evn-global:> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix edgproduct: <http://edg.topbraidlive.org/edgproduct#> .
+@prefix eeh-lib: <http://www.environmenthub.no/spin/1.0/eeh-lib#> .
+@prefix eeh-reportlib: <http://www.environmenthub.no/spin/1.0/eeh-reportlib#> .
+@prefix elements: <http://purl.org/dc/elements/1.1/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evn: <http://topbraid.org/evn/evn#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evnimport: <http://evn.topbraidlive.org/uispin/evnimport#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix ex: <http://example.org/> .
+@prefix extjs: <http://uispin.com/extjs#> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix forms: <http://www.topbraid.org/2007/01/forms.owl#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix governance: <http://topbraid.org/teamworkgovernance.ui#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix graphql.search: <http://teamwork.topbraidlive.org/graphql.search#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix inference: <http://www.topbraid.org/2007/06/inference.owl#> .
+@prefix jdbc: <http://edg.topbraidlive.org/1.0/importers/jdbc#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix kennedys: <http://topbraid.org/examples/kennedys#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix lib-importer: <http://edg.topbraid.solutions/importer/lib#> .
+@prefix lineage-transform: <http://edg.topbraid.solutions/transform/importer/lineage#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix ontologyviewer: <http://topbraid.org/swa/ontologyviewer#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix proxy-lineage: <http://edg.topbraid.solutions/proxy/importer/lineage#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmapp: <http://rdm.topbraidlive.org/rdmapp#> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix rdmviewer: <http://rdm.topbraidlive.org/rdmviewer#> .
+@prefix saf: <http://topbraid.org/saf/> .
+@prefix safconfig: <http://topbraid.org/safconfig/> .
+@prefix safindex: <http://topbraid.org/safindex#> .
+@prefix safm: <http://saf.topbraidlive.org/metaschema/> .
+@prefix savedQueries: <http://teamwork.topbraidlive.org/ui/savedQueries#> .
+@prefix scheduler: <http://topbraid.org/scheduler#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix server: <http://server.topbraidlive.org/server.ui#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix shapesgraph: <http://teamwork.topbraidlive.org/shapesgraph/shapesgraphprojects#> .
+@prefix sharepoint: <http://topbraid.org/sharepoint#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skosshapes: <http://topbraid.org/skos.shapes#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spin.ui: <http://spinrdf.org/spin.ui#> .
+@prefix spinmap: <http://spinrdf.org/spinmap#> .
+@prefix spinmapl: <http://topbraid.org/spin/spinmapl#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix ss: <http://www.topbraidcomposer.org/owl/2006/08/spreadsheets.owl#> .
+@prefix stats: <http://topbraid.org/statistics#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swadoc: <http://topbraid.org/swadoc#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tablesmap: <http://topbraid.org/spin/tablesmap#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix taggerspin: <http://evn.topbraidlive.org/taggerspin#> .
+@prefix taggerui: <http://evn.topbraidlive.org/taggerui#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix tblui: <http://server.topbraidlive.org/tblui#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkAdmin: <http://teamwork.topbraidlive.org/doc/teamworkAdmin#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworkconstraints: <http://topbraid.org/teamworkconstraints#> .
+@prefix teamworkdashboard: <http://topbraid.org/teamworkdashboard#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix teamworkupdate: <http://teamworkAPI.topbraid.com/teamworkUpdate#> .
+@prefix textindex: <http://topbraid.org/textindex#> .
+@prefix tika-importer: <http://teamwork.topbraidlive.org/corpus/tika-importer#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix tracker: <http://teamwork.topbraidlive.org/ui/tracker#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uitest: <http://uispin.org/test#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix userdat: <http://teamwork.topbraidlive.org/ui/userdata> .
+@prefix userdata: <http://teamwork.topbraidlive.org/ui/userdata#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix victory: <http://edg.topbraid.solutions/victory/> .
+@prefix visual: <http://topbraid.org/visual#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xhtml: <http://topbraid.org/xhtml#> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+arg:cmisBindingType
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:cmisPassword
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:cmisRepositoryUrl
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:cmisUsername
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+corpus:CmisCorpus
+  corpus:configurationFormClass corpusprojects:CmisConfigForm ;
+  corpus:configurationHandlerClass corpusprojects:CmisConfigHandler ;
+.
+corpus:S3Corpus
+  corpus:configurationFormClass corpusprojects:S3ConfigForm ;
+  corpus:configurationHandlerClass corpusprojects:S3ConfigHandler ;
+.
+corpus:SitemapCorpus
+  corpus:configurationFormClass corpusprojects:SitemapConfigForm ;
+  corpus:configurationHandlerClass corpusprojects:SitemapConfigHandler ;
+.
+corpus:UrlListCorpus
+  corpus:configurationFormClass corpusprojects:UrlListConfigForm ;
+  corpus:configurationHandlerClass corpusprojects:UrlListConfigHandler ;
+.
+corpus:configurationFormClass
+  a rdf:Property ;
+  rdfs:comment "View class whose prototype renders the configuration form fields for this corpus subclass. Value should be a subclass of corpusprojects:ConnectorConfigForm." ;
+  rdfs:domain rdfs:Class ;
+  rdfs:label "configuration form class" ;
+  rdfs:range ui:ViewElement ;
+.
+corpus:configurationHandlerClass
+  a rdf:Property ;
+  rdfs:comment "Operation class whose prototype handles the configuration form fields for this corpus subclass, as part of the configuration service. Value should be a subclass of corpusprojects:ConnectorConfigHandler." ;
+  rdfs:domain rdfs:Class ;
+  rdfs:label "configuration handler class" ;
+  rdfs:range ui:Operation ;
+.
+<http://topbraid.org/corpus-projects>
+  a owl:Ontology ;
+  rdfs:label "corpus-projects" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/editor/tabular> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/edg> ;
+  owl:imports <http://teamwork.topbraidlive.org/corpus/tika-importer> ;
+  owl:imports <http://topbraid.org/corpus> ;
+  owl:imports <http://topbraid.org/corpus-spin> ;
+  owl:imports <http://topbraid.org/corpus-ui> ;
+  owl:imports <http://topbraid.org/teamwork.ui> ;
+  owl:imports <http://topbraid.org/teamworknotifications> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+corpusprojects:CheckForUpdatesPlugin
+  a teamwork:ManagePlugin ;
+  teamwork:pluginIndex -20 ;
+  ui:prototype """
+<ui:setContext ui:queryGraph=\"{= ?projectGraph }\">
+    <ui:if ui:condition=\"{= corpus:hasRemoteConnector() }\">
+        <teamwork:ActionLinkContainer arg:comment=\"Checks the remote connection ({= corpus:getConnectorTypeLabel(?projectGraph) }) for new and changed content.\" arg:faIcon=\"fa-play\">
+            <a href=\"javascript:void(0);\">Check for Updates<ui:handle ui:event=\"onclick\" ui:script=\"swa.populateModalDialog('Corpus contents will be updated in the background.');\">
+                    <corpus:CheckForUpdates arg:corpus=\"{= ?projectGraph }\"/>
+                </ui:handle>
+            </a>
+        </teamwork:ActionLinkContainer>
+    </ui:if>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:label "Connector check for updates plugin" ;
+  rdfs:subClassOf teamwork:ManagePlugins ;
+.
+corpusprojects:ClearPlugin
+  a teamwork:ClearPlugin ;
+  ui:prototype """
+<corpus:ClearCrawlStore arg:corpus=\"{= ?projectGraph }\"/>
+"""^^ui:Literal ;
+  rdfs:comment "Clears the associated store, if any. This typically means deleting files form the workspace directory in the Corpora workspace project." ;
+  rdfs:label "Clear plugin" ;
+  rdfs:subClassOf ui:Methods ;
+.
+corpusprojects:CmisConfigForm
+  a ui:NodeClass ;
+  ui:prototype """
+<div class=\"form-horizontal\" let:authEnabled=\"{= COALESCE(spl:object(?projectGraph, corpus:cmisAuthEnabled), true) }\" let:binding=\"{= spl:object(?projectGraph, corpus:cmisBindingType) }\" let:obfuscatedPassword=\"*******\" let:passwdid=\"{= ui:uniqueId() }\" let:repositoryId=\"{= spl:object(?projectGraph, corpus:cmisRepositoryId) }\" let:url=\"{= spl:object(?projectGraph, corpus:cmisRepositoryUrl) }\" let:userName=\"{= spl:object(?projectGraph, corpus:cmisUsername) }\">
+    <div class=\"form-group\">
+        <label class=\"col-sm-2 control-label\" for=\"cmisRepositoryUrl\">CMIS Site URL</label>
+        <div class=\"col-sm-5\">
+            <input class=\"form-control\" id=\"cmisRepositoryUrl\" name=\"cmisRepositoryUrl\" placeholder=\"http://example.com/\" required=\"required\" type=\"text\" value=\"{= ?url }\"/>
+            <span class=\"help-block\">Required</span>
+        </div>
+    </div>
+    <div class=\"form-group\">
+        <label class=\"col-sm-2 control-label\"/>
+        <div class=\"checkbox col-sm-3\">
+            <input checked=\"{= IF(?authEnabled, &quot;checked&quot;, ?none) }\" id=\"cmisAuth\" name=\"cmisAuth\" onchange=\"{= ui:functionCall(&quot;teamwork.toogleCredentialsFields&quot;, ?passwdid) }\" type=\"checkbox\" value=\"true\">
+                <swa:Space/>
+                <span>Authentication credentials required</span>
+            </input>
+        </div>
+    </div>
+    <div class=\"form-group\">
+        <label class=\"col-sm-2 control-label\" for=\"cmisUsername\">Username</label>
+        <div class=\"col-sm-3\">
+            <input class=\"form-control\" disabled=\"{= IF(?authEnabled, ?none, &quot;disabled&quot;) }\" id=\"cmisUsername\" name=\"cmisUsername\" required=\"required\" type=\"text\" value=\"{= ?userName }\"/>
+        </div>
+    </div>
+    <div class=\"form-group\">
+        <label class=\"col-sm-2 control-label\" for=\"cmisPassword\">Password</label>
+        <div class=\"col-sm-3\">
+            <ui:if ui:condition=\"{= smf:hasPassword(fn:concat(?userName, &quot;@&quot;, ?url)) }\">
+                <input class=\"form-control\" disabled=\"{= IF(?authEnabled, ?none, &quot;disabled&quot;) }\" id=\"cmisPassword{= ?passwdid }\" name=\"cmisPassword{= ?passwdid }\" onfocus=\"this.value='';\" required=\"required\" type=\"password\" value=\"{= ?obfuscatedPassword }\"/>
+            </ui:if>
+            <ui:else>
+                <input class=\"form-control\" disabled=\"{= IF(?authEnabled, ?none, &quot;disabled&quot;) }\" id=\"cmisPassword{= ?passwdid }\" name=\"cmisPassword{= ?passwdid }\" required=\"required\" type=\"password\"/>
+            </ui:else>
+        </div>
+    </div>
+    <div class=\"form-group\">
+        <label class=\"col-sm-2 control-label\" for=\"cmisBindingType\">Binding type</label>
+        <div class=\"col-sm-10\">
+            <div class=\"row\">
+                <div class=\"col-xs-3\">
+                    <select class=\"form-control\" id=\"cmisBindingType\" name=\"cmisBindingType\" required=\"required\">
+                        <ui:forEach ui:resultSet=\"{#
+                                SELECT *
+                                WHERE {
+                                    GRAPH &lt;http://topbraid.org/corpus&gt; {
+                                        ?bindingType a corpus:CmisBindingType .
+                                        ?bindingType rdfs:label ?bindingTypeLabel .
+                                    } .
+                                } }\">
+                            <option selected=\"{= IF((?binding = ?bindingType), &quot;selected&quot;, ?none) }\" value=\"{= ?bindingType }\">{= ?bindingTypeLabel }</option>
+                        </ui:forEach>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=\"form-group\">
+        <label class=\"col-sm-2 control-label\" for=\"cmisRepositoryId\">Repository</label>
+        <div class=\"col-sm-10\">
+            <div class=\"row\">
+                <div class=\"col-xs-4\">
+                    <select class=\"form-control\" id=\"cmisRepositoryId\" name=\"cmisRepositoryId\" required=\"required\">
+                        <ui:if ui:condition=\"{= (bound(?url) &amp;&amp; bound(?binding)) &amp;&amp; bound(?authEnabled) }\">
+                            <ui:try>
+                                <ui:group let:repositoryName=\"{#
+                                        SELECT ?repositoryName
+                                        WHERE {
+                                            ( ?url ?binding ?authEnabled ?userName ) corpus:getCmisRepositoryInformation ( ?repositoryId ?repositoryName ) .
+                                        } }\">
+                                    <option selected=\"selected\" value=\"{= ?repositoryId }\">{= ?repositoryName }</option>
+                                </ui:group>
+                            </ui:try>
+                            <ui:catch/>
+                        </ui:if>
+                    </select>
+                </div>
+                <div class=\"col-xs-4\">
+                    <a class=\"btn btn-default\" onclick=\"{= ui:functionCall(&quot;teamwork.getCmisRepositoryIds&quot;, ?passwdid, ?obfuscatedPassword) }\">Refresh repository list</a>
+                </div>
+            </div>
+            <div class=\"help-block\">Select a repository from the specified CMIS site.</div>
+        </div>
+    </div>
+    <script>teamwork.initCmisPasswordField(\"{= ?passwdid }\", \"{= ?obfuscatedPassword }\")</script>
+</div>
+"""^^ui:Literal ;
+  rdfs:label "CMIS config form" ;
+  rdfs:subClassOf corpusprojects:ConnectorConfigForm ;
+.
+corpusprojects:CmisConfigHandler
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group let:authEnabled=\"{= COALESCE(ui:param(&quot;cmisAuth&quot;, xsd:boolean), false) }\">
+    <ui:setPropertyValue arg:property=\"{= corpus:cmisAuthEnabled }\" arg:value=\"{= ?authEnabled }\"/>
+    <ui:if ui:condition=\"{= ?authEnabled }\">
+        <ui:setPropertyValue arg:property=\"{= corpus:cmisUsername }\" arg:value=\"{= ui:param(&quot;cmisUsername&quot;) }\"/>
+    </ui:if>
+    <ui:setPropertyValue arg:property=\"{= corpus:cmisBindingType }\" arg:value=\"{= ui:param(&quot;cmisBindingType&quot;, rdfs:Resource) }\"/>
+    <ui:setPropertyValue arg:property=\"{= corpus:cmisRepositoryId }\" arg:value=\"{= ui:param(&quot;cmisRepositoryId&quot;) }\"/>
+    <ui:setPropertyValue arg:property=\"{= corpus:cmisRepositoryUrl }\" arg:value=\"{= ui:param(&quot;cmisRepositoryUrl&quot;, rdfs:Resource) }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "CMIS config handler" ;
+  rdfs:subClassOf corpusprojects:ConnectorConfigHandler ;
+.
+corpusprojects:CmisRootFolderPlugin
+  a teamwork:ManagePlugin ;
+  teamwork:pluginIndex -15 ;
+  ui:prototype """
+<ui:if ui:condition=\"{#
+        ASK 
+        WHERE {
+            GRAPH ?projectGraph {
+                ?projectGraph a corpus:CmisCorpus .
+            } .
+        } }\">
+    <ui:setContext let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\" ui:queryGraph=\"{= ?projectGraph }\" ui:silentTransactions=\"{= true }\">
+        <teamwork:ActionLink arg:comment=\"Only import the contents of this folder within the CMIS repository. If left empty, the entire repository will be imported.&lt;br /&gt; Example: &lt;tt&gt;/Documents/Meetings/&lt;/tt&gt;\" arg:faIcon=\"fa-folder-open\" arg:title=\"Folder to import\">
+            <form class=\"form-inline\">
+                <div class=\"form-group\" let:authEnabled=\"{= spl:object(?projectGraph, corpus:cmisAuthEnabled) }\" let:cmisBindingType=\"{= spl:object(?projectGraph, corpus:cmisBindingType) }\" let:cmisRepositoryUrl=\"{= spl:object(?projectGraph, corpus:cmisRepositoryUrl) }\" let:cmisUsername=\"{= spl:object(?projectGraph, corpus:cmisUsername) }\" let:repositoryId=\"{= spl:object(?projectGraph, corpus:cmisRepositoryId) }\">
+                    <input class=\"form-control input-sm\" id=\"cmisRootFolder\" type=\"text\" value=\"{= spl:object(?projectGraph, corpus:cmisRootFolder) }\">
+                        <ui:handle arg:value=\"$(this).val() &amp;&amp; $(this).val() != '' ?  '&quot;' + $(this).val() + '&quot;' : '&quot;&quot;'\" ui:event=\"onchange\">
+                            <ui:try>
+                                <ui:group letrs:directory=\"{#
+                                        SELECT ?directoryId
+                                        WHERE {
+                                            ( ?cmisRepositoryUrl ?cmisBindingType ?repositoryId ?value ?authEnabled ?cmisUsername ?cmisPassword ) corpus:getCmisDirectoryId ( ?directoryId ) .
+                                        } }\">
+                                    <ui:if ui:condition=\"{= spr:rowCount(?directory) = 1 }\">
+                                        <ui:setPropertyValue arg:property=\"{= corpus:cmisRootFolder }\" arg:value=\"{= IF((?value != &quot;&quot;), ?value, ?none) }\" ui:this=\"{= ?projectGraph }\"/>
+                                        <ui:try>
+                                            <ui:if ui:condition=\"{= !corpus:getConfigurationError(?projectGraph) }\">
+                                                <corpus:ReloadConfiguration arg:corpus=\"{= ?projectGraph }\"/>
+                                                <corpus:ReparseStoredDocuments arg:corpus=\"{= ?projectGraph }\"/>
+                                            </ui:if>
+                                        </ui:try>
+                                    </ui:if>
+                                    <ui:else>
+                                        <script>//
+			    swa.populateModalDialog(\"Specified folder not found\", \"CMIS error\", null);</script>
+                                    </ui:else>
+                                </ui:group>
+                            </ui:try>
+                            <ui:catch>
+                                <script>//
+			    swa.populateModalDialog(\"Specified folder not found\", \"CMIS error\", null);</script>
+                            </ui:catch>
+                        </ui:handle>
+                    </input>
+                </div>
+            </form>
+        </teamwork:ActionLink>
+    </ui:setContext>
+</ui:if>
+"""^^ui:Literal ;
+  rdfs:label "CMIS root folder plugin" ;
+  rdfs:subClassOf teamwork:ManagePlugins ;
+.
+corpusprojects:ConfigureConnectorPage
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:setContext let:connectorType=\"{= corpus:getConnectorType(?projectGraph) }\" ui:queryGraph=\"{= ui:graph }\">
+    <ui:group let:configFormClass=\"{= spl:object(?connectorType, corpus:configurationFormClass) }\" let:connectorLabel=\"{= ui:label(?connectorType) }\">
+        <teamwork:Chrome arg:pageType=\"project-page\" arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= teamwork:ManageProjectTab }\">
+            <h1>Configure {= ?connectorLabel } connector</h1>
+            <br/>
+            <form action=\"swp\" id=\"theForm\" method=\"post\">
+                <input name=\"_viewClass\" type=\"hidden\" value=\"corpusprojects:ConfigureConnectorService\"/>
+                <input name=\"projectGraph\" type=\"hidden\" value=\"{= ?projectGraph }\"/>
+                <ui:if ui:condition=\"{= bound(?configFormClass) }\">
+                    <ui:setContext ui:queryGraph=\"{= ?projectGraph }\">
+                        <ui:dynamicView arg:projectGraph=\"{= ?projectGraph }\" ui:class=\"{= ?configFormClass }\"/>
+                    </ui:setContext>
+                </ui:if>
+                <div class=\"form-group\">
+                    <input class=\"btn btn-primary\" type=\"submit\" value=\"Done\"/>
+                </div>
+            </form>
+        </teamwork:Chrome>
+    </ui:group>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:label "Configure connector page" ;
+  rdfs:subClassOf teamwork:MustHaveAccessToProjectPage ;
+.
+corpusprojects:ConfigureConnectorService
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:setContext let:configHandlerClass=\"{= spl:objectInGraph(corpus:getConnectorType(?projectGraph), corpus:configurationHandlerClass, ui:graph) }\" ui:queryGraph=\"{= ?projectGraph }\">
+    <ui:transaction>
+        <ui:if ui:condition=\"{= bound(?configHandlerClass) }\">
+            <ui:dynamicView ui:class=\"{= ?configHandlerClass }\" ui:this=\"{= ?projectGraph }\"/>
+        </ui:if>
+        <teamwork:RedirectToProject arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= teamwork:ManageProjectTab }\"/>
+    </ui:transaction>
+    <ui:try>
+        <ui:if ui:condition=\"{= !corpus:getConfigurationError(?projectGraph) }\">
+            <corpus:ReloadConfiguration arg:corpus=\"{= ?projectGraph }\"/>
+            <corpus:ReparseStoredDocuments arg:corpus=\"{= ?projectGraph }\"/>
+        </ui:if>
+    </ui:try>
+</ui:setContext>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Configure connector service" ;
+  rdfs:subClassOf teamwork:ProjectElements ;
+.
+corpusprojects:ConnectorConfigContentCssSelectorPlugin
+  a teamwork:GeneralPlugin ;
+  teamwork:pluginIndex 105 ;
+  ui:prototype """
+<ui:if ui:condition=\"{#
+        ASK 
+        WHERE {
+            GRAPH ?projectGraph {
+                ?projectGraph a ?type .
+                FILTER (?type IN (corpus:SitemapCorpus, corpus:UrlListCorpus)) .
+            } .
+        } }\">
+    <ui:setContext let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\" ui:queryGraph=\"{= ?projectGraph }\" ui:silentTransactions=\"{= true }\">
+        <teamwork:ActionLink arg:comment=\"Only HTML elements matching the CSS selector will be imported as content.\" arg:faIcon=\"fa-plus-square\" arg:title=\"Content CSS selector\">
+            <div>
+                <span>Content CSS selector:&nbsp;</span>
+                <input class=\"form-control\" type=\"text\" value=\"{= spl:object(?projectGraph, corpus:cssKeepSelector) }\">
+                    <ui:handle arg:value=\"$(this).val() &amp;&amp; $(this).val() != '' ?  '&quot;' + $(this).val() + '&quot;' : '&quot;&quot;'\" ui:event=\"onchange\">
+                        <ui:setPropertyValue arg:property=\"{= corpus:cssKeepSelector }\" arg:value=\"{= IF((?value != &quot;&quot;), ?value, ?none) }\" ui:this=\"{= ?projectGraph }\"/>
+                        <ui:try>
+                            <ui:if ui:condition=\"{= !corpus:getConfigurationError(?projectGraph) }\">
+                                <corpus:ReloadConfiguration arg:corpus=\"{= ?projectGraph }\"/>
+                                <corpus:ReparseStoredDocuments arg:corpus=\"{= ?projectGraph }\"/>
+                            </ui:if>
+                        </ui:try>
+                    </ui:handle>
+                </input>
+            </div>
+        </teamwork:ActionLink>
+    </ui:setContext>
+</ui:if>
+"""^^ui:Literal ;
+  rdfs:label "Content CSS selector plugin" ;
+  rdfs:subClassOf teamwork:GeneralPlugins ;
+.
+corpusprojects:ConnectorConfigForm
+  a ui:NodeClass ;
+  ui:abstract true ;
+  rdfs:comment "Abstract superclass of configuration forms for specific connector types. Concrete subclasses are associated with connector types by the corpus:configurationFormClass property. Subclasses should render the form elements that are needed to configure the connector. The query graph can be assumed to contain the current configuration." ;
+  rdfs:label "connector config form" ;
+  rdfs:subClassOf teamwork:ProjectElements ;
+.
+corpusprojects:ConnectorConfigHandler
+  a ui:NodeClass ;
+  ui:abstract true ;
+  rdfs:comment "Abstract superclass of configuration handlers for specific connector types. Concrete subclasses are associated with connector types by the corpus:configurationHandlerClass property. Subclasses should process submitted configuration form fields, and update the appropriate properties in the query graph. The connector/project is bound to ui:this. This assumes that the connector configuration is available as HTTP request arguments, as they would be in a teamwork:CreateProjectService called from the appropriate form." ;
+  rdfs:label "connector config handler" ;
+  rdfs:subClassOf ui:Methods ;
+.
+corpusprojects:ConnectorConfigNonContentCssSelectorPlugin
+  a teamwork:GeneralPlugin ;
+  teamwork:pluginIndex 106 ;
+  ui:prototype """
+<ui:if ui:condition=\"{#
+        ASK 
+        WHERE {
+            GRAPH ?projectGraph {
+                ?projectGraph a ?type .
+                FILTER (?type IN (corpus:SitemapCorpus, corpus:UrlListCorpus)) .
+            } .
+        } }\">
+    <ui:setContext let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\" ui:queryGraph=\"{= ?projectGraph }\" ui:silentTransactions=\"{= true }\">
+        <teamwork:ActionLink arg:comment=\"HTML elements matching the CSS selector will be removed from content.\" arg:faIcon=\"fa-minus-square\" arg:title=\"Non-content CSS selector\">
+            <div>
+                <span>Non-content CSS selector:&nbsp;</span>
+                <input class=\"form-control\" type=\"text\" value=\"{= spl:object(?projectGraph, corpus:cssRemoveSelector) }\">
+                    <ui:handle arg:value=\"$(this).val() &amp;&amp; $(this).val() != '' ?  '&quot;' + $(this).val() + '&quot;' : '&quot;&quot;'\" ui:event=\"onchange\">
+                        <ui:setPropertyValue arg:property=\"{= corpus:cssRemoveSelector }\" arg:value=\"{= IF((?value != &quot;&quot;), ?value, ?none) }\" ui:this=\"{= ?projectGraph }\"/>
+                        <ui:try>
+                            <ui:if ui:condition=\"{= !corpus:getConfigurationError(?projectGraph) }\">
+                                <corpus:ReloadConfiguration arg:corpus=\"{= ?projectGraph }\"/>
+                                <corpus:ReparseStoredDocuments arg:corpus=\"{= ?projectGraph }\"/>
+                            </ui:if>
+                        </ui:try>
+                    </ui:handle>
+                </input>
+            </div>
+        </teamwork:ActionLink>
+    </ui:setContext>
+</ui:if>
+"""^^ui:Literal ;
+  rdfs:label "Non Content CSS selector plugin" ;
+  rdfs:subClassOf teamwork:GeneralPlugins ;
+.
+corpusprojects:ConnectorConfigPageUrlRegexPlugin
+  a teamwork:GeneralPlugin ;
+  teamwork:pluginIndex 104 ;
+  ui:prototype """
+<ui:if ui:condition=\"{#
+        ASK 
+        WHERE {
+            GRAPH ?projectGraph {
+                ?projectGraph a corpus:SitemapCorpus .
+            } .
+        } }\">
+    <ui:setContext let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\" ui:queryGraph=\"{= ?projectGraph }\" ui:silentTransactions=\"{= true }\">
+        <teamwork:ActionLink arg:comment=\"Only pages whose URL matches the regular expression will be imported. Example: /article/[0-9]{4}/.\" arg:faIcon=\"fa-globe\" arg:title=\"Page URL regex\">
+            <div>
+                <span>Page URL regex:&nbsp;</span>
+                <input class=\"form-control\" type=\"text\" value=\"{= spl:object(?projectGraph, corpus:siteUrlRegex) }\">
+                    <ui:handle arg:value=\"$(this).val() &amp;&amp; $(this).val() != '' ?  '&quot;' + $(this).val() + '&quot;' : '&quot;&quot;'\" ui:event=\"onchange\">
+                        <ui:setPropertyValue arg:property=\"{= corpus:siteUrlRegex }\" arg:value=\"{= IF((?value != &quot;&quot;), ?value, ?none) }\" ui:this=\"{= ?projectGraph }\"/>
+                        <ui:try>
+                            <ui:if ui:condition=\"{= !corpus:getConfigurationError(?projectGraph) }\">
+                                <corpus:ReloadConfiguration arg:corpus=\"{= ?projectGraph }\"/>
+                                <corpus:ReparseStoredDocuments arg:corpus=\"{= ?projectGraph }\"/>
+                            </ui:if>
+                        </ui:try>
+                    </ui:handle>
+                </input>
+            </div>
+        </teamwork:ActionLink>
+    </ui:setContext>
+</ui:if>
+"""^^ui:Literal ;
+  rdfs:label "Page URL Regex" ;
+  rdfs:subClassOf teamwork:GeneralPlugins ;
+.
+corpusprojects:ConnectorSettingsPlugin
+  a teamwork:ManagePlugin ;
+  teamwork:pluginIndex -19 ;
+  ui:prototype """
+<ui:if ui:condition=\"{= smf:isBound(spl:objectInGraph(corpus:getConnectorType(?projectGraph), corpus:configurationFormClass, ui:graph)) }\">
+    <ui:createLink arg:projectGraph=\"{= ?projectGraph }\" ui:viewClass=\"{= corpusprojects:ConfigureConnectorPage }\">
+        <teamwork:ActionLink arg:comment=\"Allows to make changes to the connector configuration.\" arg:faIcon=\"fa-plug\" arg:link=\"{= ?link }\" arg:title=\"{= smf:titleCase(corpus:getConnectorTypeLabel(?projectGraph)) } Configuration\"/>
+    </ui:createLink>
+</ui:if>
+"""^^ui:Literal ;
+  rdfs:label "Connector settings plugin" ;
+  rdfs:subClassOf teamwork:ManagePlugins ;
+.
+corpusprojects:ConnectorTypeSelection
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:setContext ui:queryGraph=\"{= ui:graph }\">
+    <swa:LabeledElement arg:label=\"Data source\">
+        <div class=\"form-group\">
+            <ui:forEach ui:indexVar=\"pos\" ui:resultSet=\"{#
+                    SELECT *
+                    WHERE {
+                        ?corpus rdfs:subClassOf corpus:Corpus .
+                        ?corpus rdfs:label ?label .
+                        OPTIONAL {
+                            ?corpus sh:order ?order .
+                        } .
+                        OPTIONAL {
+                            ?corpus corpus:configurationFormClass ?configFormClass .
+                        } .
+                        OPTIONAL {
+                            ?corpus rdfs:comment ?comment .
+                        } .
+                        MINUS {
+                            ?corpus corpus:disabled true .
+                        } .
+                    }
+                    ORDER BY (?order) }\">
+                <div class=\"radio form-check\">
+                    <label>
+                        <input checked=\"{= IF((?pos = 0), &quot;checked&quot;, ?not) }\" data-requires-config=\"{= bound(?configFormClass) }\" id=\"connectorType{= ?pos + 1 }\" name=\"connectorType\" type=\"radio\" value=\"{= ?corpus }\"/>
+                        <strong>{= ?label }</strong>
+                    </label>
+                    <div class=\"help-block\">{= ?comment }<br/>
+                        <br/>
+                    </div>
+                </div>
+            </ui:forEach>
+        </div>
+    </swa:LabeledElement>
+    <br/>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:comment "Renders a form element for selecting Corpus connector types. Any subclasses of corpus:Corpus present in the ui:graph will be listed." ;
+  rdfs:label "Connector type selection" ;
+  rdfs:subClassOf teamwork:Elements ;
+.
+corpusprojects:ContentsPage
+  a ui:NodeClass ;
+  ui:prototype """
+<teamwork:Chrome arg:pageType=\"project-page\" arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= teamwork:ReportsProjectTab }\" arg:tag=\"{= ?tag }\">
+    <h1>External Content in <em>{= teamwork:projectLabel(?projectGraph) }</em>
+    </h1>
+    <ui:setContext ui:queryGraph=\"{= ?projectGraph }\">
+        <ui:group let:fetchLive=\"{= spl:object(?projectGraph, corpus:fetchContentLive) }\">
+            <p>{= corpus:getDocumentCount(?projectGraph) } documents</p>
+            <table class=\"table table-bordered table-striped table-condensed\" style=\"table-layout: fixed; word-wrap: break-word;\">
+                <thead>
+                    <tr>
+                        <th class=\"col-xs-6\">Document</th>
+                        <th class=\"col-xs-3\">Content type</th>
+                        <th class=\"col-xs-2\">Last update</th>
+                        <th class=\"col-xs-1\"/>
+                    </tr>
+                </thead>
+                <ui:forEach ui:resultSet=\"{#
+                        SELECT ?document ?contentType ?lastUpdate
+                        WHERE {
+                            ?projectGraph corpus:document ( ?document ?contentType ?lastUpdate ) .
+                        } }\">
+                    <tr>
+                        <td>{= ?document }</td>
+                        <td>{= ?contentType }</td>
+                        <td>{= ?lastUpdate }</td>
+                        <td>
+                            <ui:if ui:condition=\"{= swa:falseOrUnbound(?fetchLive) }\">
+                                <ui:createLink arg:document=\"{= ?document }\" arg:projectGraph=\"{= ?projectGraph }\" ui:servlet=\"RawCorpusDocument\">
+                                    <a href=\"{= ?link }\">
+                                        <i class=\"far fa-file\" title=\"View cached copy\"/>
+                                    </a>
+                                </ui:createLink>
+                            </ui:if>
+                            <swa:Space/>
+                            <ui:createLink arg:document=\"{= ?document }\" arg:projectGraph=\"{= ?projectGraph }\" ui:viewClass=\"{= corpusprojects:DocumentContentExtractionService }\">
+                                <a href=\"{= ?link }\">
+                                    <i class=\"fas fa-align-left\" title=\"View extracted contents\"/>
+                                </a>
+                            </ui:createLink>
+                        </td>
+                    </tr>
+                </ui:forEach>
+            </table>
+        </ui:group>
+    </ui:setContext>
+</teamwork:Chrome>
+"""^^ui:Literal ;
+  rdfs:label "Contents page" ;
+  rdfs:subClassOf teamwork:MustHaveAccessToTagPage ;
+.
+corpusprojects:CorpusContentsReportPlugin
+  a teamwork:ReportPlugin ;
+  teamwork:validForTags true ;
+  ui:prototype """
+<ui:if ui:condition=\"{= NOT EXISTS {
+    GRAPH ?projectGraph {
+        ?projectGraph a corpus:DefaultCorpus .
+    } .
+} }\">
+    <ui:createLink arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\" ui:queryGraph=\"{= ui:graphWithImports(teamwork:projectOrTagGraph(?projectGraph, ?tag)) }\" ui:viewClass=\"{= corpusprojects:ContentsPage }\">
+        <teamwork:ActionLink arg:comment=\"Lists the documents contained in the corpus.\" arg:icon=\"lib/teamwork/build/images/teamwork/script.svg\" arg:link=\"{= ?link }\" arg:title=\"Corpus contents\"/>
+    </ui:createLink>
+</ui:if>
+"""^^ui:Literal ;
+  rdfs:label "Corpus contents report plugin" ;
+  rdfs:subClassOf teamwork:ReportPlugins ;
+.
+corpusprojects:CorpusProject
+  a rdfs:Class ;
+  rdfs:label "Corpus" ;
+  rdfs:subClassOf teamwork:Vocabulary ;
+.
+corpusprojects:CreateCorpusProjectPage
+  a teamwork:CreateProjectPage ;
+  ui:prototype """
+<teamwork:DefaultCreateProjectPage arg:additionalFormFields=\"{= corpusprojects:ConnectorTypeSelection }\" arg:initFunction=\"teamwork.initCreateCorpusForm\" ui:args=\"*\"/>
+"""^^ui:Literal ;
+  rdfs:label "Create corpus project page" ;
+  rdfs:subClassOf teamwork:CreateProjectPages ;
+.
+corpusprojects:CreateCorpusProjectPage2
+  a teamwork:CreateProjectPage ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:comment ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The description of the project." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:dataPlatform ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "Data Platform flag." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:defaultNamespace ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The default namespace" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:id ;
+      spl:valueType xsd:string ;
+      rdfs:comment "An optional ID that would be used as graph ID if present. Otherwise, an ID will be derived from the name." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:owlImports ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:spinImports ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:connectorType ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "type of connector to use" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:name ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The name of the new project. Also used to produce a graph ID - unless arg:id is also present." ;
+    ] ;
+  ui:prototype """
+<ui:setContext ui:queryGraph=\"{= ui:graph }\">
+    <ui:group let:configFormClass=\"{= spl:object(?connectorType, corpus:configurationFormClass) }\" let:connectorLabel=\"{= ui:label(?connectorType) }\" let:projectTypeLabel=\"{= teamwork:singularProjectTypeLabel(?projectType) }\">
+        <teamwork:Chrome arg:pageType=\"create-project-page\" arg:projectType=\"{= ?projectType }\">
+            <h1>Create New {= ?projectTypeLabel }</h1>
+            <p>This creates a new {= ?projectTypeLabel } with yourself as the manager.</p>
+            <br/>
+            <form action=\"swp\" id=\"theForm\" method=\"post\">
+                <input name=\"_viewClass\" type=\"hidden\" value=\"teamwork:CreateProjectService\"/>
+                <input name=\"projectType\" type=\"hidden\" value=\"{= ?projectType }\"/>
+                <input name=\"connectorType\" type=\"hidden\" value=\"{= ?connectorType }\"/>
+                <input name=\"name\" type=\"hidden\" value=\"{= ?name }\"/>
+                <input name=\"comment\" type=\"hidden\" value=\"{= ?comment }\"/>
+                <ui:if ui:condition=\"{= bound(?subjectArea) &amp;&amp; isIRI(?subjectArea) }\">
+                    <input name=\"subjectArea\" type=\"hidden\" value=\"&lt;{= ?subjectArea }&gt;\"/>
+                </ui:if>
+                <input name=\"owlImports\" type=\"hidden\" value=\"{= ?owlImports }\"/>
+                <input name=\"spinImports\" type=\"hidden\" value=\"{= ?spinImports }\"/>
+                <input name=\"dataPlatform\" type=\"hidden\" value=\"{= ?dataPlatform }\"/>
+                <input name=\"defaultNamespace\" type=\"hidden\" value=\"{= ?defaultNamespace }\"/>
+                <input name=\"redirectToTab\" type=\"hidden\" value=\"{= teamwork:ManageProjectTab }\"/>
+                <ui:if ui:condition=\"{= bound(?configFormClass) }\">
+                    <ui:setContext ui:queryGraph=\"{= ui:tempGraph }\">
+                        <ui:dynamicView ui:class=\"{= ?configFormClass }\"/>
+                    </ui:setContext>
+                </ui:if>
+                <ui:if ui:condition=\"{= spl:objectInGraph(?connectorType, corpus:supportsLiveContentFetching, ui:graph) }\">
+                    <div class=\"checkbox\">
+                        <label>
+                            <input checked=\"checked\" name=\"storeContent\" type=\"checkbox\" value=\"true\"/>
+                            <strong>Store copy of all documents in EDG</strong>
+                        </label>
+                        <p class=\"help-block\">This improves performance and is required for AutoClassifier training corpora.</p>
+                    </div>
+                </ui:if>
+                <button class=\"btn btn-primary\" type=\"submit\">Create {= ?projectTypeLabel }</button>
+            </form>
+            <script>teamwork.initConnectorConfigForm()</script>
+        </teamwork:Chrome>
+    </ui:group>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:label "Create corpus project page (step 2)" ;
+  rdfs:subClassOf teamwork:CreateProjectPages ;
+.
+corpusprojects:CreatePlugin
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:if ui:condition=\"{= teamwork:getProjectType(?projectGraph) = corpusprojects:ProjectType }\">
+    <ui:group let:connectorType=\"{= ui:param(&quot;connectorType&quot;, rdfs:Resource) }\">
+        <ui:if ui:condition=\"{= bound(?connectorType) }\">
+            <corpusprojects:InitConnector arg:connectorType=\"{= ?connectorType }\" ui:this=\"{= ?projectGraph }\"/>
+        </ui:if>
+    </ui:group>
+</ui:if>
+"""^^ui:Literal ;
+  rdfs:comment """A plugin that does all required extra work when a Corpus project is created with a connector. The connector type is determined from the \"connectorType\" HTTP request parameter.
+
+This assumes that the connector configuration is available as HTTP request arguments, as they would be in a teamwork:CreateProjectService called from the appropriate form.""" ;
+  rdfs:label "Create corpus plugin" ;
+  rdfs:subClassOf teamwork:CreateProjectPlugins ;
+.
+corpusprojects:DeletePlugin
+  a teamwork:DeletePlugin ;
+  ui:prototype """
+<corpus:DeleteCrawlStore arg:corpus=\"{= ?projectGraph }\"/>
+"""^^ui:Literal ;
+  rdfs:comment "Deletes the associated store, if any. This is typically a workspace directory in the Corpora workspace project." ;
+  rdfs:label "Delete plugin" ;
+  rdfs:subClassOf teamwork:DeletePlugins ;
+.
+corpusprojects:DocumentContentExtractionService
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:document ;
+      spl:valueType corpus:Document ;
+      rdfs:comment "The document whose content to extract." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType corpus:Corpus ;
+      rdfs:comment "The corpus to extract content from." ;
+    ] ;
+  ui:errorPrototype """
+<ui:group>
+    <ui:if ui:condition=\"{= (!bound(?projectGraph)) || (!teamwork:hasTeamGraph(?projectGraph)) }\">
+        <ui:setResponseHeader ui:statusCode=\"{= 404 }\"/>
+        <ui:group>Asset collection {= ?projectGraph } does not exist</ui:group>
+    </ui:if>
+    <ui:else let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+        <ui:if ui:condition=\"{= !teamwork:currentUserHasPrivilegeOnMasterGraph(teamwork:viewer, ?teamGraph) }\">
+            <ui:setResponseHeader ui:statusCode=\"{= 403 }\"/>
+            <ui:group>You do not have access to this {= teamwork:singularProjectTypeLabel(teamwork:getProjectType(?projectGraph)) }</ui:group>
+        </ui:if>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  ui:prototype """
+<ui:group>{= corpus:fetchDocumentContent(?projectGraph, ?document) }</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:TEXT ;
+  rdfs:comment "A web service that extracts the content of a document in a Corpus. The document must be either stored in the corpus, or accessible through a connector that has been configured for the corpus." ;
+  rdfs:label "Document content extraction service" ;
+  rdfs:subClassOf ui:Service ;
+.
+corpusprojects:InitConnector
+  a ui:Method ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:connectorType ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "A connector type (corpus:Corpus subclass)" ;
+    ] ;
+  ui:prototype """
+<ui:setContext let:configHandlerClass=\"{= spl:objectInGraph(?connectorType, corpus:configurationHandlerClass, ui:graph) }\" ui:queryGraph=\"{= ?this }\" ui:silentTransactions=\"{= true }\">
+    <ui:transaction>
+        <ui:update ui:updateQuery=\"{!
+                INSERT {
+                    ?this owl:imports ?importURI .
+                }
+                WHERE {
+                    GRAPH ui:graph {
+                        ?connectorType corpus:customImports ?importList .
+                        ?import spif:split ( ?importList &quot; &quot; ) .
+                        BIND (IRI(?import) AS ?importURI) .
+                    } .
+                } }\"/>
+        <ui:addPropertyValue arg:property=\"{= rdf:type }\" arg:value=\"{= ?connectorType }\"/>
+        <ui:if ui:condition=\"{= spl:objectInGraph(?connectorType, corpus:supportsLiveContentFetching, ui:graph) &amp;&amp; (!COALESCE(ui:param(&quot;storeContent&quot;, xsd:boolean), false)) }\">
+            <ui:addPropertyValue arg:property=\"{= corpus:fetchContentLive }\" arg:value=\"{= true }\" ui:this=\"{= ?projectGraph }\"/>
+        </ui:if>
+        <ui:if ui:condition=\"{= bound(?configHandlerClass) }\">
+            <ui:dynamicView ui:class=\"{= ?configHandlerClass }\"/>
+        </ui:if>
+        <ui:try>
+            <ui:if ui:condition=\"{= !corpus:getConfigurationError(?this) }\">
+                <corpus:ReloadConfiguration arg:corpus=\"{= ?this }\"/>
+            </ui:if>
+        </ui:try>
+    </ui:transaction>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:comment """Sets up a connector of a specific type (?connectorType) for a Corpus project (?this).
+
+- Adds the rdf:type statement that marks the corpus as using the connector
+- Adds connector-specific additional imports
+- Invokes the handler that reads the connector's configuration from request arguments and stores them in the project graph
+- Reloads the Java-side connector object
+
+This assumes that the connector configuration is available as HTTP request arguments, as they would be in a teamwork:CreateProjectService called from the appropriate form.""" ;
+  rdfs:label "Init connector" ;
+  rdfs:subClassOf ui:Methods ;
+.
+corpusprojects:ProjectType
+  a teamwork:ProjectType ;
+  edg:permittedProjectType ontologyprojects:ProjectType ;
+  edg:permittedProjectType corpusprojects:ProjectType ;
+  edg.v:icon "tq-corpus-icon" ;
+  teamwork:clearPlugin corpusprojects:ClearPlugin ;
+  teamwork:createProjectPageClass corpusprojects:CreateCorpusProjectPage ;
+  teamwork:dashboardGadget teamwork:TagStatusDashboardGadget ;
+  teamwork:deletePlugin corpusprojects:DeletePlugin ;
+  teamwork:deletePlugin teamwork:RemoveFromLuceneIndexDeletePlugin ;
+  teamwork:editorProjectTabLabel "Documents" ;
+  teamwork:mainClass corpus:Document ;
+  teamwork:newEditorDisabled true ;
+  teamwork:owlImports "http://topbraid.org/corpus" ;
+  teamwork:pluralLabel "Corpora" ;
+  teamwork:projectEditableContentsFunction corpus:isDefaultCorpus ;
+  teamwork:projectEditorClass edg:TabularModelsEditor ;
+  teamwork:projectPlugin tika-importer:TikaImportPlugin ;
+  teamwork:projectPlugin crosswalkprojects:CrosswalksGeneralPlugin ;
+  teamwork:projectPlugin savedQueries:ExportSavedSPARQLQueriesPlugin ;
+  teamwork:projectPlugin savedQueries:SPARQLEndpointPlugin ;
+  teamwork:projectPlugin corpusprojects:CheckForUpdatesPlugin ;
+  teamwork:projectPlugin corpusprojects:CmisRootFolderPlugin ;
+  teamwork:projectPlugin corpusprojects:ConnectorConfigContentCssSelectorPlugin ;
+  teamwork:projectPlugin corpusprojects:ConnectorConfigNonContentCssSelectorPlugin ;
+  teamwork:projectPlugin corpusprojects:ConnectorConfigPageUrlRegexPlugin ;
+  teamwork:projectPlugin corpusprojects:ConnectorSettingsPlugin ;
+  teamwork:projectPlugin corpusprojects:CorpusContentsReportPlugin ;
+  teamwork:projectPlugin corpusprojects:RefreshAllPlugin ;
+  teamwork:projectPlugin corpusprojects:RootClassPlugin ;
+  teamwork:projectPlugin teamwork:ComparisonReportPlugin ;
+  teamwork:projectPlugin teamwork:ExportSavedSearchPlugin ;
+  teamwork:projectPlugin teamwork:GraphURIPlugin ;
+  teamwork:projectPlugin teamwork:ImportedByGeneralPlugin ;
+  teamwork:projectPlugin teamwork:ImportsGeneralPlugin ;
+  teamwork:projectPlugin teamwork:NotificationsManagePlugin ;
+  teamwork:projectPlugin teamwork:ProblemsAndSuggestionsReportPlugin ;
+  teamwork:projectPlugin teamwork:RDFFileImporterPlugin ;
+  teamwork:projectPlugin teamwork:ScriptBasedImportPlugin ;
+  teamwork:projectPlugin teamwork:StatisticsReportPlugin ;
+  teamwork:projectTypeWeight 8 ;
+  teamwork:singularLabel "Corpus" ;
+  teamwork:supportedNotification teamwork:FileImportedNotification ;
+  teamwork:supportedNotification teamwork:TagCreatedNotification ;
+  teamwork:supportedNotification teamwork:TagStatusChangedNotification ;
+  teamwork:supportedNotification teamwork:VocabularyClearedNotification ;
+  teamwork:supportedNotification teamwork:VocabularyStatusChangedNotification ;
+  teamwork:vocabularyType corpusprojects:CorpusProject ;
+  rdfs:comment "Corpora are collections of text content with associated metadata. Corpora are usually imported from external sources, such as content management systems or web sites. They provide the foundation for manual or automated tagging and annotation with Content Tag Sets." ;
+  rdfs:label "Corpus" ;
+.
+corpusprojects:RefreshAllPlugin
+  a teamwork:ManagePlugin ;
+  teamwork:pluginIndex -21 ;
+  ui:prototype """
+<ui:setContext ui:queryGraph=\"{= ?projectGraph }\">
+    <ui:if ui:condition=\"{= corpus:hasRemoteConnector() }\">
+        <teamwork:ActionLinkContainer arg:comment=\"Refreshes all content from the remote connection ({= corpus:getConnectorTypeLabel(?projectGraph) }).\" arg:faIcon=\"fa-sync\">
+            <a href=\"javascript:void(0);\">Refresh All Documents<ui:handle ui:event=\"onclick\" ui:script=\"swa.populateModalDialog('Corpus contents will be updated in the background.');\">
+                    <corpus:RefreshAll arg:corpus=\"{= ?projectGraph }\"/>
+                </ui:handle>
+            </a>
+        </teamwork:ActionLinkContainer>
+    </ui:if>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:label "Refresh all plugin" ;
+  rdfs:subClassOf teamwork:ManagePlugins ;
+.
+corpusprojects:RootClassPlugin
+  a teamwork:GeneralPlugin ;
+  ui:prototype """
+<ui:group let:projectType=\"{= teamwork:getProjectType(?projectGraph) }\" let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <teamwork:ActionLink arg:comment=\"Assets of this class (and its subclasses) are treated as documents in this {= teamwork:singularProjectTypeLabel(?projectType) }.\" arg:icon=\"{= ui:lib() }/teamwork/build/images/teamwork/root-class-icon.svg\" arg:title=\"Document Class\">
+        <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?projectGraph) }\" ui:silentTransactions=\"{= true }\">
+            <ui:if ui:condition=\"{= teamwork:currentUserHasPrivilegeOnMasterGraph(?teamGraph, teamwork:editor) }\">
+                <ui:loadable ui:loadId=\"setMainClass\">
+                    <ui:if ui:condition=\"{= bound(?mainClass) }\">
+                        <ui:removePropertyValues arg:property=\"{= teamwork:mainClass }\" ui:this=\"{= ?projectGraph }\"/>
+                        <ui:if ui:condition=\"{= ?mainClass != tagger:getMainClass(?projectGraph) }\">
+                            <ui:addPropertyValue arg:property=\"{= teamwork:mainClass }\" arg:value=\"{= ?mainClass }\" ui:this=\"{= ?projectGraph }\"/>
+                        </ui:if>
+                    </ui:if>
+                    <swa:AutoComplete arg:id=\"{= ui:uniqueId() }\" arg:initialValue=\"{= tagger:getMainClass(?projectGraph) }\" arg:onSelect=\"swa.loadWithResource('setMainClass', 'mainClass', resource)\" arg:type=\"{= rdfs:Class }\"/>
+                </ui:loadable>
+            </ui:if>
+            <ui:else>
+                <div class=\"swa-inline-editor-text-parent\">{= ui:label(tagger:getMainClass(?projectGraph)) }</div>
+            </ui:else>
+        </ui:setContext>
+    </teamwork:ActionLink>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:subClassOf teamwork:GeneralPlugins ;
+.
+corpusprojects:S3ConfigForm
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group>
+    <div id=\"s3BucketConfigs\">
+        <ui:forEach ui:indexVar=\"index\" ui:resultSet=\"{#
+                SELECT ?bucketConfig
+                WHERE {
+                    ?this corpus:s3BucketConfiguration ?list .
+                    ?list (rdf:rest)*/rdf:first ?bucketConfig .
+                } }\">
+            <ui:group let:auth=\"{= COALESCE(spl:object(?bucketConfig, corpus:s3AuthType), corpus:s3env) }\" let:authId=\"{= spl:object(?bucketConfig, corpus:s3AuthId) }\" let:bucket=\"{= spl:object(?bucketConfig, corpus:s3Bucket) }\" let:folder=\"{= spl:object(?bucketConfig, corpus:s3Folder) }\" let:proxyConfiguration=\"{= spl:object(?bucketConfig, corpus:s3ProxyConfiguration) }\" let:region=\"{= spl:object(?bucketConfig, corpus:s3Region) }\">
+                <corpusprojects:S3ConfigFormItem arg:auth=\"{= ?auth }\" arg:authId=\"{= ?authId }\" arg:bucket=\"{= ?bucket }\" arg:folder=\"{= ?folder }\" arg:proxyConfiguration=\"{= ?proxyConfiguration }\" arg:region=\"{= ?region }\" arg:suppressRemove=\"{= IF((?index = 0), true, false) }\"/>
+            </ui:group>
+        </ui:forEach>
+    </div>
+    <div class=\"form-group \">
+        <div class=\"row\">
+            <div class=\"col-xs-4\">
+                <button class=\"btn btn-info\" onclick=\"teamwork.addS3BucketConfig('{= ui:currentQueryGraph }','s3BucketConfigs','corpusprojects:S3ConfigFormItem')\" type=\"button\">Add Another Bucket</button>
+            </div>
+        </div>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "S3Config form" ;
+  rdfs:subClassOf corpusprojects:ConnectorConfigForm ;
+.
+corpusprojects:S3ConfigFormItem
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:authId ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:auth ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:bucket ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:folder ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:proxyConfiguration ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:region ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:suppressRemove ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  ui:prototype """
+<ui:group let:confId=\"{= ui:uniqueId() }\" let:obfuscatedField=\"*******\">
+    <div class=\"panel panel-default\" id=\"s3ConfigPanel{= ?confId }\" let:auth=\"{= COALESCE(?auth, corpus:s3env) }\">
+        <div class=\"panel-body\">
+            <div class=\"form-horizontal\">
+                <ui:if ui:condition=\"{= swa:falseOrUnbound(?suppressRemove) }\">
+                    <div class=\"row\">
+                        <div class=\" col-xs-4\">
+                            <div class=\"form-group\">
+                                <div class=\"col-xs-6\">
+                                    <button class=\"btn btn-danger\" onclick=\"teamwork.removeS3BucketConfig('{= ?confId }')\" type=\"button\">Remove Bucket Config</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ui:if>
+                <div class=\"row\">
+                    <div class=\"col-xs-4 \">
+                        <div class=\"form-group \">
+                            <label class=\" col-sm-3 control-label\" for=\"s3Bucket{= ?confId }\">Bucket</label>
+                            <div class=\"col-sm-5\">
+                                <input id=\"formIdentifier{= ?confId }\" name=\"formIdentifier{= ?confId }\" type=\"hidden\" value=\"{= ?confId }\"/>
+                                <input class=\"form-control\" id=\"s3Bucket{= ?confId }\" name=\"s3Bucket{= ?confId }\" required=\"required\" type=\"text\" value=\"{= ?bucket }\"/>
+                                <span class=\"help-block\">Required</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=\"col-xs-3 \">
+                        <div class=\"form-group\">
+                            <label class=\"col-sm-3 control-label\" for=\"s3Region{= ?confId }\">Region</label>
+                            <div class=\"col-sm-9\">
+                                <div class=\"row\">
+                                    <div class=\"col-xs-3\">
+                                        <select class=\"form-control\" id=\"s3Region{= ?confId }\" name=\"s3Region{= ?confId }\" required=\"required\">
+                                            <option disabled=\"disabled\" selected=\"{= IF((!bound(?region)), &quot;selected&quot;, ?none) }\">Select a Region</option>
+                                            <ui:forEach ui:resultSet=\"{#
+                                                    SELECT ?s3Region
+                                                    WHERE {
+                                                        {
+                                                            ?any corpus:getS3Regions ?s3Region .
+                                                        } .
+                                                    } }\">
+                                                <option selected=\"{= IF((?s3Region = ?region), &quot;selected&quot;, ?none) }\" value=\"{= ?s3Region }\">{= ?s3Region }</option>
+                                            </ui:forEach>
+                                        </select>
+                                        <span class=\"help-block\">Required</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=\"col-xs-4 \">
+                        <div class=\"form-group \">
+                            <label class=\"col-sm-3 control-label\" for=\"s3Folder{= ?confId }\">Folder</label>
+                            <div class=\"col-sm-9\">
+                                <textarea class=\"form-control\" id=\"s3Folder{= ?confId }\" name=\"s3Folder{= ?confId }\" rows=\"3\" type=\"text\" wrap=\"off\">{= ?folder }</textarea>
+                                <span class=\"help-block\">Optional. Separate Folders by spaces, or one Folder per line.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class=\"row\">
+                    <div class=\"col-xs-4\">
+                        <div class=\"form-group \">
+                            <label class=\"col-sm-3 control-label\" for=\"s3AuthType{= ?confId }\">Authentication type</label>
+                            <div class=\"col-sm-9\">
+                                <div class=\"row\">
+                                    <div class=\"col-xs-3\">
+                                        <select class=\"form-control\" id=\"s3AuthType{= ?confId }\" name=\"s3AuthType{= ?confId }\" required=\"required\">
+                                            <ui:forEach ui:resultSet=\"{#
+                                                    SELECT ?authType ?authTypeLabel
+                                                    WHERE {
+                                                        GRAPH &lt;http://topbraid.org/corpus&gt; {
+                                                            ?authType a corpus:S3AuthType .
+                                                            ?authType rdfs:label ?authTypeLabel .
+                                                        } .
+                                                    } }\">
+                                                <option selected=\"{= IF((?auth = ?authType), &quot;selected&quot;, ?none) }\" value=\"{= ?authType }\">{= ?authTypeLabel }</option>
+                                            </ui:forEach>
+                                        </select>
+                                        <span class=\"help-block\">Required</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=\"panel panel-default {= IF((?auth = corpus:s3env), &quot;hidden&quot;, &quot;&quot;) }\" id=\"s3AuthConfig{= ?confId }\">
+                            <div class=\"panel-heading\">
+                                <strong>S3 Credentials</strong>
+                            </div>
+                            <div class=\"panel-body\">
+                                <div class=\"form-group\">
+                                    <label class=\"col-sm-3 control-label\" for=\"s3AuthId{= ?confId }\">Id</label>
+                                    <div class=\"col-sm-5\">
+                                        <input class=\"form-control\" id=\"s3AuthId{= ?confId }\" name=\"s3AuthId{= ?confId }\" required=\"{= IF((?auth = corpus:s3credential), &quot;required&quot;, ?none) }\" type=\"text\" value=\"{= ?authId }\"/>
+                                        <span class=\"help-block\">Required</span>
+                                    </div>
+                                </div>
+                                <div class=\"form-group\">
+                                    <label class=\"col-sm-3 control-label\" for=\"s3AuthKey\">Key</label>
+                                    <div class=\"col-sm-3\">
+                                        <ui:if ui:condition=\"{= smf:hasPassword(fn:concat(?authId, &quot;-key@&quot;, ?bucket)) }\">
+                                            <input class=\"form-control\" id=\"s3AuthKey{= ?confId }\" name=\"s3AuthKey{= ?confId }\" onfocus=\"this.value='';\" required=\"required\" type=\"password\" value=\"{= ?obfuscatedField }\"/>
+                                        </ui:if>
+                                        <ui:else>
+                                            <input class=\"form-control\" id=\"s3AuthKey{= ?confId }\" name=\"s3AuthKey{= ?confId }\" required=\"{= IF((?auth = corpus:s3credential), &quot;required&quot;, ?none) }\"/>
+                                        </ui:else>
+                                        <span class=\"help-block\">Required</span>
+                                    </div>
+                                </div>
+                                <div class=\"form-group\">
+                                    <label class=\"col-sm-3 control-label\" for=\"s3AuthToken{= ?confId }\">Token</label>
+                                    <div class=\"col-sm-3\">
+                                        <ui:if ui:condition=\"{= smf:hasPassword(fn:concat(?authId, &quot;-token@&quot;, ?bucket)) }\">
+                                            <input class=\"form-control\" id=\"s3AuthToken{= ?confId }\" name=\"s3AuthToken{= ?confId }\" onfocus=\"this.value='';\" required=\"required\" type=\"password\" value=\"{= ?obfuscatedField }\"/>
+                                        </ui:if>
+                                        <ui:else>
+                                            <input class=\"form-control\" id=\"s3AuthToken{= ?confId }\" name=\"s3AuthToken{= ?confId }\"/>
+                                        </ui:else>
+                                        <span class=\"help-block\">Optional</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <script>teamwork.initS3AuthChange(\"{= ?confId }\")</script>
+                    </div>
+                    <div class=\"col-xs-4\">
+                        <div class=\"form-group \">
+                            <label class=\"col-sm-3 control-label\" for=\"s3UseProxy{= ?confId }\">Use Proxy </label>
+                            <div class=\"col-sm-9\">
+                                <div class=\"row\">
+                                    <div class=\"col-xs-3\">
+                                        <select class=\"form-control\" id=\"s3UseProxy{= ?confId }\" name=\"s3UseProxy{= ?confId }\">
+                                            <option selected=\"{= IF(bound(?proxyConfiguration), &quot;selected&quot;, ?none) }\" value=\"true\">true</option>
+                                            <option selected=\"{= IF((!bound(?proxyConfiguration)), &quot;selected&quot;, ?none) }\" value=\"false\">false</option>
+                                        </select>
+                                        <span class=\"help-block\">Optional</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=\"panel panel-default {= IF(bound(?proxyConfiguration), &quot;&quot;, &quot;hidden&quot;) }\" id=\"s3ProxyConfig{= ?confId }\" let:s3ProxyHost=\"{= spl:object(?proxyConfiguration, corpus:s3ProxyHostname) }\" let:s3ProxyUsername=\"{= spl:object(?proxyConfiguration, corpus:s3ProxyUsername) }\">
+                            <div class=\"panel-heading\">
+                                <strong>Proxy Configuration</strong>
+                            </div>
+                            <div class=\"panel-body\">
+                                <div class=\"form-group\">
+                                    <label class=\"col-sm-3 control-label\" for=\"s3ProxyHost{= ?confId }\">Host</label>
+                                    <div class=\"col-sm-5\">
+                                        <input class=\"form-control\" id=\"s3ProxyHost{= ?confId }\" name=\"s3ProxyHost{= ?confId }\" type=\"text\" value=\"{= ?s3ProxyHost }\"/>
+                                        <span class=\"help-block\">Required</span>
+                                    </div>
+                                </div>
+                                <div class=\"form-group\">
+                                    <label class=\"col-sm-3 control-label\" for=\"s3ProxyPort{= ?confId }\">Port</label>
+                                    <div class=\"col-sm-5\">
+                                        <input class=\"form-control\" id=\"s3ProxyPort{= ?confId }\" name=\"s3ProxyPort{= ?confId }\" type=\"number\" value=\"{= spl:object(?proxyConfiguration, corpus:s3ProxyPort) }\"/>
+                                        <span class=\"help-block\">Required</span>
+                                    </div>
+                                </div>
+                                <div class=\"form-group\">
+                                    <label class=\"col-sm-3 control-label\" for=\"s3ProxyUsername{= ?confId }\">Username</label>
+                                    <div class=\"col-sm-5\">
+                                        <input class=\"form-control\" id=\"s3ProxyUsername{= ?confId }\" name=\"s3ProxyUsername{= ?confId }\" type=\"text\" value=\"{= ?s3ProxyUsername }\"/>
+                                        <span class=\"help-block\">Optional</span>
+                                    </div>
+                                </div>
+                                <div class=\"form-group\">
+                                    <label class=\"col-sm-3 control-label\" for=\"s3ProxyPassword{= ?confId }\">Password</label>
+                                    <div class=\"col-sm-3\">
+                                        <ui:if ui:condition=\"{= smf:hasPassword(fn:concat(?s3ProxyUsername, &quot;@&quot;, ?s3ProxyHost)) }\">
+                                            <input class=\"form-control\" id=\"s3ProxyPassword{= ?confId }\" name=\"s3ProxyPassword{= ?confId }\" onfocus=\"this.value='';\" type=\"password\" value=\"{= ?obfuscatedField }\"/>
+                                        </ui:if>
+                                        <ui:else>
+                                            <input class=\"form-control\" id=\"s3ProxyPassword{= ?confId }\" name=\"s3ProxyPassword{= ?confId }\" type=\"password\"/>
+                                        </ui:else>
+                                        <span class=\"help-block\">Optional</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <script>teamwork.initS3ProxyMonitors(\"{= ?confId }\")</script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>teamwork.initS3KeyTokenFields(\"{= ?confId }\", \"{= ?obfuscatedField }\")</script>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "S3Config form item" ;
+  rdfs:subClassOf corpusprojects:ConnectorConfigForm ;
+.
+corpusprojects:S3ConfigHandler
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group letrs:identifiers='{#
+        SELECT ?key ?identifier
+        WHERE {
+            rdf:nil ui:params ?key .
+            BIND (ui:param(?key) AS ?identifier) .
+            FILTER STRSTARTS(?key, \"formIdentifier\") .
+        } }'>
+    <ui:group>
+        <ui:forEach ui:resultSet=\"{#
+                SELECT ?bucketConfig
+                WHERE {
+                    ?this corpus:s3BucketConfiguration ?bucketConfig .
+                } }\">
+            <swa:ResourceDestructor arg:resource=\"{= ?bucketConfig }\"/>
+        </ui:forEach>
+        <ui:update ui:updateQuery=\"{!
+                DELETE {
+                    ?s ?p ?o .
+                }
+                WHERE {
+                    GRAPH ui:tempGraph {
+                        ?s ?p ?o .
+                    } .
+                    FILTER (?s != swa:DestructorMetadata) .
+                } }\"/>
+    </ui:group>
+    <ui:removePropertyValues arg:property=\"{= corpus:s3BucketConfiguration }\"/>
+    <ui:forEach ui:indexVar=\"index\" ui:resultSet=\"{= ?identifiers }\">
+        <ui:group let:authType=\"{= ui:param(CONCAT(&quot;s3AuthType&quot;, ?identifier), rdfs:Resource) }\" let:bucket=\"{= ui:param(CONCAT(&quot;s3Bucket&quot;, ?identifier)) }\" let:config1=\"{= BNODE() }\" let:pfolder=\"{= ui:param(CONCAT(&quot;s3Folder&quot;, ?identifier)) }\" let:region=\"{= ui:param(CONCAT(&quot;s3Region&quot;, ?identifier)) }\" let:useProxy=\"{= ui:param(CONCAT(&quot;s3UseProxy&quot;, ?identifier), xsd:boolean) }\">
+            <ui:group let:folder=\"{= IF((bound(?pfolder) &amp;&amp; (?pfolder != &quot;&quot;)), ?pfolder, ?none) }\">
+                <ui:group let:authId=\"{= IF((?authType = corpus:s3credential), ui:param(CONCAT(&quot;s3AuthId&quot;, ?identifier)), ?none) }\">
+                    <ui:if ui:condition=\"{= ?index = 0 }\">
+                        <ui:update ui:updateQuery=\"{!
+                                INSERT {
+                                    GRAPH ui:tempGraph32 {
+                                        ?this corpus:s3BucketConfiguration _:b0 .
+                                        _:b0 rdf:first ?config1 .
+                                        _:b0 rdf:rest rdf:nil .
+                                        ?config1 corpus:s3Bucket ?bucket .
+                                        ?config1 corpus:s3Folder ?folder .
+                                        ?config1 corpus:s3Region ?region .
+                                        ?config1 corpus:s3AuthType ?authType .
+                                        ?config1 corpus:s3AuthId ?authId .
+                                        ?config1 a corpus:S3BucketConfiguration .
+                                    } .
+                                }
+                                WHERE {
+                                } }\"/>
+                    </ui:if>
+                    <ui:else>
+                        <ui:update ui:updateQuery=\"{!
+                                DELETE {
+                                    GRAPH ui:tempGraph32 {
+                                        ?this corpus:s3BucketConfiguration ?list .
+                                    } .
+                                }
+                                INSERT {
+                                    GRAPH ui:tempGraph32 {
+                                        ?this corpus:s3BucketConfiguration _:b0 .
+                                        _:b0 rdf:first ?config1 .
+                                        _:b0 rdf:rest ?list .
+                                        ?config1 corpus:s3Bucket ?bucket .
+                                        ?config1 corpus:s3Folder ?folder .
+                                        ?config1 corpus:s3Region ?region .
+                                        ?config1 corpus:s3AuthType ?authType .
+                                        ?config1 corpus:s3AuthId ?authId .
+                                        ?config1 a corpus:S3BucketConfiguration .
+                                    } .
+                                }
+                                WHERE {
+                                    GRAPH ui:tempGraph32 {
+                                        ?this corpus:s3BucketConfiguration ?list .
+                                    } .
+                                } }\"/>
+                    </ui:else>
+                </ui:group>
+            </ui:group>
+            <ui:if ui:condition=\"{= ?useProxy }\">
+                <ui:group let:proxyHost=\"{= ui:param(CONCAT(&quot;s3ProxyHost&quot;, ?identifier)) }\" let:proxyPort=\"{= ui:param(CONCAT(&quot;s3ProxyPort&quot;, ?identifier)) }\" let:proxyUsername=\"{= ui:param(CONCAT(&quot;s3ProxyUsername&quot;, ?identifier)) }\">
+                    <ui:group let:proxyUsername=\"{= IF((?proxyUsername = &quot;&quot;), ?none, ?proxyUsername) }\">
+                        <ui:log ui:info=\"uname {= ?proxyUsername }  {= ?proxyUsername = &quot;&quot; }\"/>
+                        <ui:update ui:updateQuery=\"{!
+                                INSERT {
+                                    GRAPH ui:tempGraph32 {
+                                        ?config1 corpus:s3ProxyConfiguration _:b0 .
+                                        _:b0 a corpus:S3ProxyConfiguration .
+                                        _:b0 corpus:s3ProxyHostname ?proxyHost .
+                                        _:b0 corpus:s3ProxyPort ?proxyPort .
+                                        _:b0 corpus:s3ProxyUsername ?proxyUsername .
+                                    } .
+                                }
+                                WHERE {
+                                } }\"/>
+                    </ui:group>
+                </ui:group>
+            </ui:if>
+        </ui:group>
+    </ui:forEach>
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                ?s ?p ?o .
+            }
+            WHERE {
+                GRAPH ui:tempGraph32 {
+                    ?s ?p ?o .
+                } .
+            } }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "S3Config handler" ;
+  rdfs:subClassOf corpusprojects:ConnectorConfigHandler ;
+.
+corpusprojects:SitemapConfigForm
+  a ui:NodeClass ;
+  ui:prototype """
+<div class=\"form-group\">
+    <label class=\"control-label\" for=\"siteHome\">Site URL</label>
+    <div class=\"row\">
+        <div class=\"col-xs-6\">
+            <input class=\"form-control\" id=\"siteHome\" name=\"siteHome\" placeholder=\"http://example.com/\" required=\"required\" type=\"text\" value=\"{= spl:object(?projectGraph, corpus:siteHome) }\"/>
+        </div>
+    </div>
+</div>
+"""^^ui:Literal ;
+  rdfs:label "Sitemap config form" ;
+  rdfs:subClassOf corpusprojects:ConnectorConfigForm ;
+.
+corpusprojects:SitemapConfigHandler
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:setPropertyValue arg:property=\"{= corpus:siteHome }\" arg:value=\"{= ui:param(&quot;siteHome&quot;, rdfs:Resource) }\"/>
+"""^^ui:Literal ;
+  rdfs:label "Sitemap config handler" ;
+  rdfs:subClassOf corpusprojects:ConnectorConfigHandler ;
+.
+corpusprojects:UrlListConfigForm
+  a ui:NodeClass ;
+  ui:prototype """
+<div class=\"form-group\">
+    <label class=\"control-label\" for=\"urlList\">URLs</label>
+    <div>
+        <textarea class=\"form-control\" cols=\"100\" id=\"urlList\" name=\"urlList\" required=\"required\" rows=\"10\" type=\"text\" wrap=\"off\">{= spl:object(?projectGraph, corpus:urlList) }</textarea>
+        <span class=\"help-block\">Required. Separate URLs by spaces, or one URL per line.</span>
+    </div>
+</div>
+"""^^ui:Literal ;
+  rdfs:label "URL list config form" ;
+  rdfs:subClassOf corpusprojects:ConnectorConfigForm ;
+.
+corpusprojects:UrlListConfigHandler
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:setPropertyValue arg:property=\"{= corpus:urlList }\" arg:value=\"{= ui:param(&quot;urlList&quot;) }\"/>
+"""^^ui:Literal ;
+  rdfs:label "URL list config handler" ;
+  rdfs:subClassOf corpusprojects:ConnectorConfigHandler ;
+.

@@ -1,0 +1,407 @@
+# baseURI: http://edg.topbraid.solutions/1.0/spin/jsfunctions
+# imports: http://spinrdf.org/spinx
+# imports: http://www.linkedmodel.org/schema/vaem
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix eeh-lib: <http://www.environmenthub.no/spin/1.0/eeh-lib#> .
+@prefix eeh-reportlib: <http://www.environmenthub.no/spin/1.0/eeh-reportlib#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/spin/jsfunctions>
+  rdf:type owl:Ontology ;
+  vaem:hasGraphRole vaem:FunctionsGraph ;
+  vaem:lastUpdated "2014-03-02T13:31:00"^^xsd:dateTime ;
+  vaem:owner "Ralph Hodgson" ;
+  vaem:revision "ID:3c359782-2a7f-11b2-80dd-f0c2beaa8e06" ;
+  owl:imports <http://spinrdf.org/spinx> ;
+  owl:imports <http://www.linkedmodel.org/schema/vaem> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+edg:Functions
+  rdf:type spin:Function ;
+  rdfs:subClassOf spin:Functions ;
+.
+edg:MatchStrings
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:if ;
+                sp:arg1 [
+                    rdf:type sp:eq ;
+                    sp:arg1 [
+                        rdf:type fn:lower-case ;
+                        sp:arg1 [
+                            rdf:type xsd:string ;
+                            sp:arg1 spin:_arg1 ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        rdf:type fn:lower-case ;
+                        sp:arg1 [
+                            rdf:type xsd:string ;
+                            sp:arg1 spin:_arg2 ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 "true"^^xsd:boolean ;
+                sp:arg3 "false"^^xsd:boolean ;
+              ] ;
+            sp:variable [
+                sp:varName "result" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:cleanupHTMLforJS
+  rdf:type spin:Function ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:query [
+      rdf:type sp:Select ;
+      sp:where () ;
+      rdfs:comment "Test with:" ;
+    ] ;
+  spin:returnType xsd:string ;
+  spinx:javaScriptCode """// -------------------
+// cleanupHTMLforJS
+// -------------------
+//
+
+function cleanupHTMLforJS(txt) {
+  var  r1=txt.replace(/(\\r?\\n|\\r)/g, function(a, l) { return ''; }),
+         r2=r1.replace(/(&lt;[A-Z])/g, function(a, l) { return l.toLowerCase(); }),
+         r3=r2.replace(/(&lt;\\/[A-Z])/g, function(a, l) { return l.toLowerCase(); }),
+         r4=r3.replace(/(\\s+)&lt;/g, function(a, l) { return '&lt;'; }),
+         r5=r4.replace(/(\\s+)</g, function(a, l) { return '<'; });
+
+     return r5
+
+    } ;
+
+ return cleanupHTMLforJS(arg1) """ ;
+  rdfs:label "cleanup HTML for JS" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:indexOfListElement
+  rdf:type spin:Function ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:defaultValue "," ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate sp:arg3 ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "template as text representation of a SPARQL code block" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:query [
+      rdf:type sp:Select ;
+      sp:where (
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type edg:indexOfListElement ;
+                sp:arg1 "apple,pear,orange" ;
+                sp:arg2 "pear" ;
+              ] ;
+            sp:variable [
+                sp:varName "x1" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type edg:indexOfListElement ;
+                sp:arg1 "apple,pear,orange" ;
+                sp:arg2 "orange" ;
+                sp:arg3 "," ;
+              ] ;
+            sp:variable [
+                sp:varName "x2" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type edg:indexOfListElement ;
+                sp:arg1 "apple;pear;orange;melon" ;
+                sp:arg2 "melon" ;
+                sp:arg3 ";" ;
+              ] ;
+            sp:variable [
+                sp:varName "x3" ;
+              ] ;
+          ]
+        ) ;
+      rdfs:comment "Test with the following query" ;
+    ] ;
+  spin:returnType xsd:integer ;
+  spinx:javaScriptCode """// ----------------
+// indexOfListElement
+// ----------------
+//  gets the index of a list element from a separated list.
+//  counting from 1 and returning 0 if not found
+//
+// indexOfListElement(list,element, separator)
+//
+// @list {string} :           seperator-based list
+// @element(string):     element
+// @separator(string):   character(s) used to separate elements
+
+
+if (!String.prototype.trim) {
+  String.prototype.trim = function () {
+    return this.replace(/^\\s+|\\s+$/g, '');
+  };
+}
+
+ function indexOfListElement(list,element,separator) {
+  var  ar = list.split(separator) ,   // build an array of elements
+        len = ar.length ,
+        ix = 0 ,
+        pos = 0 ;
+
+      while ((pos == 0) && (ix < len)) {
+         if (ar[ix].trim() == element) { pos = ix +1 };
+         ix++
+       };
+
+     return pos
+    } ; 
+
+    var sep = typeof arg3 != \"undefined\" ? arg3 : ',';
+
+    return indexOfListElement(arg1,arg2,sep) 
+""" ;
+  rdfs:label "get index of a list element" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:mergeStringList
+  rdf:type spin:Function ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:query [
+      rdf:type sp:Select ;
+      sp:where (
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type edg:mergeStringList ;
+                sp:arg1 "edg.swe.tbb:F00,  edg.swe.tbb:G04" ;
+                sp:arg2 "edg.swe.tbb:F00, edg.swe.tbb:E00 , edg.swe.tbb:C04,edg.swe.tbb:B04,edg.swe.tbb:A04,edg.swe.tbb:E00" ;
+              ] ;
+            sp:variable [
+                sp:varName "x" ;
+              ] ;
+          ]
+        ) ;
+      rdfs:comment "Test with:" ;
+    ] ;
+  spin:returnType xsd:string ;
+  spinx:javaScriptCode """// --------------
+// mergeStringList
+// --------------
+//  constructs a comma-separated list by merging 2 lists
+//
+
+if (!String.prototype.trim) {
+  String.prototype.trim = function () {
+    return this.replace(/^\\s+|\\s+$/g, '');
+  };
+}
+
+// mergeStringList(list1, list2)
+//
+// @list1(String) :     comma-separated string of elements
+// @list2(String):      comma-separeted string of elements
+//
+
+function mergeStringList(list1, list2) {
+  var map = Array.prototype.map;
+
+  if ( list1 === null ) {
+	list1 = \"\";
+  }
+
+  if ( list2 === null ) {
+	list2 = \"\";
+  }
+
+  var  gList1 = map.call( list1.split(','), function(s){ return s;}).join(','),
+         gList2 = map.call( list2.split(','), function(s){ return s;}).join(','),
+         oList   = (gList1 != '') ? gList1.concat(',').concat(gList2) : gList2,
+         nList   = oList.split(',').filter(function(item,i,allItems){ return i==allItems.indexOf(item);}).join(',');
+
+     return nList
+
+    } ;
+
+ return mergeStringList(arg1, arg2) """ ;
+  rdfs:comment "adds elements to a list avoiding duplicates" ;
+  rdfs:label "merge string list" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:sortStringList
+  rdf:type spin:Function ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:query [
+      rdf:type sp:Select ;
+      sp:where (
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type edg:sortStringList ;
+                sp:arg1 "edg.swe.tbb:F00,edg.swe.tbb:E00,edg.swe.tbb:C04,edg.swe.tbb:B04,edg.swe.tbb:A04,swe.tbb:D00,edg.swe.tbb:D08,edg.swe.tbb:D07,edg.swe.tbb:A08" ;
+              ] ;
+            sp:variable [
+                sp:varName "x" ;
+              ] ;
+          ]
+        ) ;
+      rdfs:comment "Test with:" ;
+    ] ;
+  spin:returnType xsd:string ;
+  spinx:javaScriptCode """// --------------
+// sortStringList
+// --------------
+//  sort a comma-separated list 
+//
+
+if (!String.prototype.trim) {
+  String.prototype.trim = function () {
+    return this.replace(/^\\s+|\\s+$/g, '');
+  };
+}
+
+// sortStringList(list)
+//
+// @list(String) :     comma-separated string of elements
+//
+
+function sortStringList(list) {
+  if ( list === null ) {
+    return \"\";
+  }
+
+  var splitted = list.split(',');
+
+  var uniqueElements = splitted.filter(function(item, pos) {
+      return splitted.indexOf(item) == pos; 
+    });
+
+  var vList = uniqueElements.join(',');
+
+  return vList
+
+} ;
+
+ return sortStringList(arg1) 
+""" ;
+  rdfs:comment "sorts elements of a comma-separated list of strings" ;
+  rdfs:label "sort string list" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:sortStringListRemovingDuplicates
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type edg:sortStringList ;
+                sp:arg1 spin:_arg1 ;
+              ] ;
+            sp:variable [
+                sp:varName "result" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:query [
+      rdf:type sp:Select ;
+      sp:where (
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type edg:sortStringListRemovingDuplicates ;
+                sp:arg1 "edg.swe.tbb:F00,edg.swe.tbb:F00,edg.swe.tbb:E00,edg.swe.tbb:C04,edg.swe.tbb:B04,edg.swe.tbb:A04,swe.tbb:D00,edg.swe.tbb:D08,edg.swe.tbb:D07,edg.swe.tbb:C04" ;
+              ] ;
+            sp:variable [
+                sp:varName "x" ;
+              ] ;
+          ]
+        ) ;
+      rdfs:comment "Test with:" ;
+    ] ;
+  spin:returnType xsd:double ;
+  rdfs:subClassOf edg:Functions ;
+.

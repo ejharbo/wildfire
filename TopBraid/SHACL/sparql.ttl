@@ -1,0 +1,900 @@
+# baseURI: http://datashapes.org/sparql
+# imports: http://www.w3.org/ns/shacl#
+# prefix: sparql
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sparql: <http://datashapes.org/sparql#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://datashapes.org/sparql>
+  a owl:Ontology ;
+  rdfs:comment "Defines SHACL functions (with URIs) representing the built-in SPARQL 1.1 functions and operators such as isIRI and / (divide). Each of these is represented by an instance of sh:Function with a URI such as sparql:divide. The declared parameters indicate the number of arguments but no other constraints have been added." ;
+  rdfs:label "SPARQL Vocabulary for SHACL" ;
+  owl:imports sh: ;
+  sh:declare sparql:PrefixDeclaration ;
+.
+sparql:PrefixDeclaration
+  a sh:PrefixDeclaration ;
+  sh:namespace "http://datashapes.org/sparql#"^^xsd:anyURI ;
+  sh:prefix "sparql" ;
+.
+sparql:abs
+  a sh:Function ;
+  sparql:symbol "abs" ;
+  rdfs:comment "Returns the absolute value of arg. An error is raised if arg is not a numeric value." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The input value." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+.
+sparql:add
+  a sh:Function ;
+  sparql:symbol "+" ;
+  rdfs:comment "Returns the arithmetic sum of its operands." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "the first number" ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg2 ;
+      sh:description "the second number" ;
+      sh:order "1"^^xsd:decimal ;
+    ] ;
+.
+sparql:and
+  a sh:Function ;
+  sparql:symbol "&&" ;
+  rdfs:comment "Return the logical AND between two (boolean) operands." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:datatype xsd:boolean ;
+      sh:description "the first operand of the intersection" ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg2 ;
+      sh:datatype xsd:boolean ;
+      sh:description "the second operand of the intersection" ;
+      sh:order "1"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:boolean ;
+.
+sparql:bnode
+  a sh:Function ;
+  sparql:symbol "BNODE" ;
+  rdfs:comment "Constructs a blank node that is distinct from all blank nodes in the dataset being queried and distinct from all blank nodes created by calls to this constructor for other query solutions. If the no argument form is used, every call results in a distinct blank node. If the form with a simple literal is used, every call results in distinct blank nodes for different simple literals, and the same blank node for calls with the same simple literal within expressions for one solution mapping. This functionality is compatible with the treatment of blank nodes in SPARQL CONSTRUCT templates." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "A literal input node." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+.
+sparql:bound
+  a sh:Function ;
+  sparql:symbol "bound" ;
+  rdfs:comment "Returns true if ?arg1 is bound to a value. Returns false otherwise. Variables with the value NaN or INF are considered bound." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "the variable or expression that is checked" ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+.
+sparql:ceil
+  a sh:Function ;
+  sparql:symbol "ceil" ;
+  rdfs:comment "Returns the smallest (closest to negative infinity) number with no fractional part that is not less than the value of arg. An error is raised if ?arg1 is not a numeric value." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The number to get the ceiling of." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+.
+sparql:coalesce
+  a sh:Function ;
+  sparql:symbol "COALESCE" ;
+  sparql:unlimitedParameters true ;
+  rdfs:comment "Takes any number of arguments, and returns the first bound argument, starting at the left." ;
+.
+sparql:concat
+  a sh:Function ;
+  sparql:symbol "CONCAT" ;
+  sparql:unlimitedParameters true ;
+  rdfs:comment "The CONCAT built-in function. Creates a single string by concatenating all arguments from left to right. Note that if any one of the arguments is unbound (null) then the whole result string will be unbound." ;
+.
+sparql:contains
+  a sh:Function ;
+  sparql:symbol "CONTAINS" ;
+  rdfs:comment "Returns an xsd:boolean indicating whether or not the value of ?arg1 contains (at the beginning, at the end, or anywhere within) at least one sequence of collation units that provides a minimal match to the collation units in the value of ?arg2, according to the collation that is used." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The input string." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg2 ;
+      sh:description "The sub-string to search for in the input string." ;
+      sh:order "1"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:boolean ;
+.
+sparql:datatype
+  a sh:Function ;
+  sparql:symbol "datatype" ;
+  rdfs:comment "Returns the datatype IRI of argument ?arg1; returns xsd:string if the parameter is a simple literal." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "the literal to get the datatype of" ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+.
+sparql:day
+  a sh:Function ;
+  sparql:symbol "day" ;
+  rdfs:comment "Extracts the day from a date/time literal." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The date or dateTime argument." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:integer ;
+.
+sparql:divide
+  a sh:Function ;
+  sparql:symbol "/" ;
+  rdfs:comment "Returns the arithmetic quotient of its operands." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "the first operand" ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg2 ;
+      sh:description "the second operand" ;
+      sh:order "1"^^xsd:decimal ;
+    ] ;
+.
+sparql:encode_for_uri
+  a sh:Function ;
+  sparql:symbol "ENCODE_FOR_URI" ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The string to convert." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:string ;
+.
+sparql:eq
+  a sh:Function ;
+  sparql:symbol "=" ;
+  rdfs:comment "Returns true if both arguments are equal." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "the first value to compare" ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg2 ;
+      sh:description "the second value to compare" ;
+      sh:order "1"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:boolean ;
+.
+sparql:floor
+  a sh:Function ;
+  sparql:symbol "floor" ;
+  rdfs:comment "Returns the largest (closest to positive infinity) number with no fractional part that is not greater than the value of ?arg1. An error is raised if ?arg1 is not a numeric value." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The value to get the floor of." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+.
+sparql:ge
+  a sh:Function ;
+  sparql:symbol ">=" ;
+  rdfs:comment "Returns true if ?arg1 >= ?arg2." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "the first operand" ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg2 ;
+      sh:description "the second operand" ;
+      sh:order "1"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:boolean ;
+.
+sparql:gt
+  a sh:Function ;
+  sparql:symbol ">" ;
+  rdfs:comment "Returns true if ?arg1 > arg2." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "the first operand" ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg2 ;
+      sh:description "the second operand" ;
+      sh:order "1"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:boolean ;
+.
+sparql:hours
+  a sh:Function ;
+  sparql:symbol "hours" ;
+  rdfs:comment "Extracts the hours from a date/time literal." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The dateTime or time argument." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:integer ;
+.
+sparql:if
+  a sh:Function ;
+  sparql:symbol "IF" ;
+  rdfs:comment "The SPARQL 1.1 built-in function IF." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:datatype xsd:boolean ;
+      sh:description "A condition to evaluate - if true then the ?arg2 will be returned, otherwise ?arg3." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg2 ;
+      sh:description "The function result if ?arg1 is true." ;
+      sh:order "1"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg3 ;
+      sh:description "The function result if ?arg1 is false." ;
+      sh:order "2"^^xsd:decimal ;
+    ] ;
+.
+sparql:in
+  a sh:Function ;
+  sparql:symbol "IN" ;
+  sparql:unlimitedParameters true ;
+  rdfs:comment "Checks whether the value on the left (?arg1) is one of the values on the right (?arg2, ?arg3 ...)." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The value to find." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+.
+sparql:iri
+  a sh:Function ;
+  sparql:symbol "IRI" ;
+  rdfs:comment "Creates a IRI resource (node) from a given IRI string (?arg1)." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The IRI string to convert to a resource." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+.
+sparql:isBlank
+  a sh:Function ;
+  sparql:symbol "isBlank" ;
+  rdfs:comment "Checks whether a given node is a blank node." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "the node being checked" ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:boolean ;
+.
+sparql:isIRI
+  a sh:Function ;
+  sparql:symbol "isIRI" ;
+  rdfs:comment "Checks whether a given node is a IRI node." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "the node being tested" ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:boolean ;
+.
+sparql:isLiteral
+  a sh:Function ;
+  sparql:symbol "isLiteral" ;
+  rdfs:comment "Checks whether a given node is a literal." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "the node being tested" ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:boolean ;
+.
+sparql:isNumeric
+  a sh:Function ;
+  sparql:symbol "isNumeric" ;
+  rdfs:comment "Returns true if arg1 is a numeric value. Returns false otherwise. term is numeric if it has an appropriate datatype (see the section Operand Data Types) and has a valid lexical form, making it a valid argument to functions and operators taking numeric arguments." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description """The node to check whether it's numeric.
+""" ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+.
+sparql:isURI
+  a sh:Function ;
+  sparql:symbol "isURI" ;
+  rdfs:comment "Checks whether a node is a URI." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "the node to check" ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:boolean ;
+.
+sparql:lang
+  a sh:Function ;
+  sparql:symbol "lang" ;
+  rdfs:comment "Returns the language tag of ?arg1, if it has one. It returns \"\" if the literal has no language tag. Node that the RDF data model does not include literals with an empty language tag." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "the literal to get the language of" ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:string ;
+.
+sparql:langMatches
+  a sh:Function ;
+  sparql:symbol "langMatches" ;
+  rdfs:comment "Returns true if language-tag (first argument) matches language-range (second argument) per the basic filtering scheme defined in [RFC4647] section 3.3.1." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:datatype xsd:string ;
+      sh:description "the first language tag" ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg2 ;
+      sh:datatype xsd:string ;
+      sh:description "the second language tag" ;
+      sh:order "1"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:boolean ;
+.
+sparql:lcase
+  a sh:Function ;
+  sparql:symbol "LCASE" ;
+  rdfs:comment "Converts a string to lower case characters." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The input string." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+.
+sparql:le
+  a sh:Function ;
+  sparql:symbol "<=" ;
+  rdfs:comment "Returns true if ?arg1 <= ?arg2." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "the first operand" ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg2 ;
+      sh:description "the second operand" ;
+      sh:order "1"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:boolean ;
+.
+sparql:lt
+  a sh:Function ;
+  sparql:symbol "<" ;
+  rdfs:comment "Returns true if ?arg1 < ?arg2." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "the first operand" ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg2 ;
+      sh:description "the second operand" ;
+      sh:order "1"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:boolean ;
+.
+sparql:md5
+  a sh:Function ;
+  sparql:symbol "MD5" ;
+  rdfs:comment "Returns the MD5 checksum, as a hex digit string, calculated on the UTF-8 representation of the simple literal or lexical form of the xsd:string. Hex digits SHOULD be in lower case." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The input literal." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:string ;
+.
+sparql:minutes
+  a sh:Function ;
+  sparql:symbol "minutes" ;
+  rdfs:comment "Extracts the minutes from a date/time literal." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The dateTime or time argument." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:integer ;
+.
+sparql:month
+  a sh:Function ;
+  sparql:symbol "month" ;
+  rdfs:comment "Extracts the month from a date/time literal." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The date or dateTime argument." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:integer ;
+.
+sparql:multiply
+  a sh:Function ;
+  sparql:symbol "*" ;
+  rdfs:comment "Returns the arithmetic product of its operands." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "the first operand" ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg2 ;
+      sh:description "the second operand" ;
+      sh:order "1"^^xsd:decimal ;
+    ] ;
+.
+sparql:ne
+  a sh:Function ;
+  sparql:symbol "!=" ;
+  rdfs:comment "Returns true if ?arg1 != ?arg2." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "the first operand" ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg2 ;
+      sh:description "the second operand" ;
+      sh:order "1"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:boolean ;
+.
+sparql:not
+  a sh:Function ;
+  sparql:symbol "!" ;
+  rdfs:comment "Returns the boolean negation of the argument." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:datatype xsd:boolean ;
+      sh:description "the operand to negate" ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:boolean ;
+.
+sparql:notin
+  a sh:Function ;
+  sparql:symbol "NOT IN" ;
+  sparql:unlimitedParameters true ;
+  rdfs:comment "Checks whether the value on the left (?arg1) is none of the values on the right (?arg2, ?arg3 ...)." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The value to find." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+.
+sparql:now
+  a sh:Function ;
+  sparql:symbol "now" ;
+  rdfs:comment "Gets the current date and time as an xsd:dateTime literal." ;
+  sh:returnType xsd:dateTime ;
+.
+sparql:or
+  a sh:Function ;
+  sparql:symbol "||" ;
+  rdfs:comment "Returns the logical OR between two (boolean) operands." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:datatype xsd:boolean ;
+      sh:description "the first operand" ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg2 ;
+      sh:datatype xsd:boolean ;
+      sh:description "the second operand" ;
+      sh:order "1"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:boolean ;
+.
+sparql:rand
+  a sh:Function ;
+  sparql:symbol "RAND" ;
+  rdfs:comment "Returns a number between 0 (inclusive) and 1.0e0 (exclusive). Different numbers can be produced every time this function is invoked. Numbers should be produced with approximately equal probability." ;
+  sh:returnType xsd:double ;
+.
+sparql:regex
+  a sh:Function ;
+  sparql:symbol "regex" ;
+  rdfs:comment "Returns true if a string (?arg1) matches the regular expression supplied as a pattern (?arg2) as influenced by the value of flags (?arg3), otherwise returns false." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "the input string" ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg2 ;
+      sh:datatype xsd:string ;
+      sh:description "the match pattern" ;
+      sh:order "1"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg3 ;
+      sh:datatype xsd:string ;
+      sh:description "the flags" ;
+      sh:optional true ;
+      sh:order "2"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:boolean ;
+.
+sparql:replace
+  a sh:Function ;
+  sparql:symbol "REPLACE" ;
+  rdfs:comment "Replaces each non-overlapping occurrence of a regular expression pattern with a replacement string. Regular expession matching may involve modifier flags." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The input string." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg2 ;
+      sh:datatype xsd:string ;
+      sh:description "The pattern to replace." ;
+      sh:order "1"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg3 ;
+      sh:datatype xsd:string ;
+      sh:description "The replacement string." ;
+      sh:order "2"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg4 ;
+      sh:datatype xsd:string ;
+      sh:description "Additional flags for the replacement." ;
+      sh:order "3"^^xsd:decimal ;
+    ] ;
+.
+sparql:round
+  a sh:Function ;
+  sparql:symbol "round" ;
+  rdfs:comment "Returns the number with no fractional part that is closest to the argument. If there are two such numbers, then the one that is closest to positive infinity is returned. An error is raised if ?arg1 is not a numeric value." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The number to round." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+.
+sparql:sameTerm
+  a sh:Function ;
+  sparql:symbol "sameTerm" ;
+  rdfs:comment "Returns TRUE if ?arg1 and ?arg2 are the same RDF term as defined in Resource Description Framework (RDF): Concepts and Abstract Syntax; returns FALSE otherwise." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "the first argument" ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg2 ;
+      sh:description "the second argument" ;
+      sh:order "1"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:boolean ;
+.
+sparql:seconds
+  a sh:Function ;
+  sparql:symbol "seconds" ;
+  rdfs:comment "Extracts the seconds from a date/time literal." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The dateTime or time argument." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:integer ;
+.
+sparql:sha1
+  a sh:Function ;
+  sparql:symbol "SHA1" ;
+  rdfs:comment "Returns the SHA1 checksum, as a hex digit string, calculated on the UTF-8 representation of the simple literal or lexical form of the xsd:string. Hex digits SHOULD be in lower case." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The input literal." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:string ;
+.
+sparql:sha256
+  a sh:Function ;
+  sparql:symbol "SHA256" ;
+  rdfs:comment "Returns the SHA256 checksum, as a hex digit string, calculated on the UTF-8 representation of the simple literal or lexical form of the xsd:string. Hex digits SHOULD be in lower case." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The input literal." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:string ;
+.
+sparql:sha384
+  a sh:Function ;
+  sparql:symbol "SHA384" ;
+  rdfs:comment "Returns the SHA384 checksum, as a hex digit string, calculated on the UTF-8 representation of the simple literal or lexical form of the xsd:string. Hex digits SHOULD be in lower case." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The input literal." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:string ;
+.
+sparql:sha512
+  a sh:Function ;
+  sparql:symbol "SHA512" ;
+  rdfs:comment "Returns the SHA512 checksum, as a hex digit string, calculated on the UTF-8 representation of the simple literal or lexical form of the xsd:string. Hex digits SHOULD be in lower case." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The input literal." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:string ;
+.
+sparql:str
+  a sh:Function ;
+  sparql:symbol "str" ;
+  rdfs:comment "Returns the lexical form of ?arg1 (a literal); returns the codepoint representation of ?arg1 (an IRI). This is useful for examining parts of an IRI, for instance, the host-name." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "the node to convert to string" ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:string ;
+.
+sparql:strafter
+  a sh:Function ;
+  sparql:symbol "STRAFTER" ;
+  rdfs:comment "Returns a literal of the same kind (simple literal, plain literal same language tag, xsd:string) as the first argument arg1. The lexical form of the result is the substring of the value of arg1 that proceeds in arg1 the first occurrence of the lexical form of arg2; otherwise the lexical form of the result is the empty string. If the lexical form of arg2 is the empty string, the lexical form of the result is the emprty string." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The input string." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg2 ;
+      sh:description "The pattern to find within the input string." ;
+      sh:order "1"^^xsd:decimal ;
+    ] ;
+.
+sparql:strbefore
+  a sh:Function ;
+  sparql:symbol "STRBEFORE" ;
+  rdfs:comment "Returns a literal of the same kind (simple literal, plain literal same language tag, xsd:string) as the first argument arg1. The lexical form of the result is the substring of the value of arg1 that precedes in arg1 the first occurrence of the lexical form of arg2; otherwise the lexical form of the result is the empty string. If the lexical form of arg2 is the empty string, the lexical form of the result is the emprty string." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The input string." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg2 ;
+      sh:description "The pattern to find within the input string." ;
+      sh:order "1"^^xsd:decimal ;
+    ] ;
+.
+sparql:strdt
+  a sh:Function ;
+  sparql:symbol "STRDT" ;
+  rdfs:comment "Constructs a literal with lexical form and type as specified by the arguments." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The lexical form of the new literal." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg2 ;
+      sh:description "The datatype of the new literal." ;
+      sh:order "1"^^xsd:decimal ;
+    ] ;
+.
+sparql:strends
+  a sh:Function ;
+  sparql:symbol "STRENDS" ;
+  rdfs:comment "Returns true if the lexical form of ?arg1 ends with the lexical form of ?arg2, otherwise it returns false." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The input string." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg2 ;
+      sh:description "The sub-string that the input string is supposed to end with." ;
+      sh:order "1"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:boolean ;
+.
+sparql:strlang
+  a sh:Function ;
+  sparql:symbol "STRLANG" ;
+  rdfs:comment "Takes a string (?arg1) and a language (?arg2) and constructs a literal with a corresponding language tag." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:datatype xsd:string ;
+      sh:description "The string value." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg2 ;
+      sh:datatype xsd:string ;
+      sh:description "The language tag, e.g. \"en-AU\"." ;
+      sh:order "1"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:string ;
+.
+sparql:strlen
+  a sh:Function ;
+  sparql:symbol "STRLEN" ;
+  rdfs:comment "Computes the length of a given input string." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The input string." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:integer ;
+.
+sparql:strstarts
+  a sh:Function ;
+  sparql:symbol "STRSTARTS" ;
+  rdfs:comment "Returns true if the lexical form of ?arg1 begins with the lexical form of ?arg2, otherwise it returns false." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The input string." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg2 ;
+      sh:description "The sub-string that the input string is supposed to begin with." ;
+      sh:order "1"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:boolean ;
+.
+sparql:struuid
+  a sh:Function ;
+  sparql:symbol "STRUUID" ;
+  rdfs:comment "Returns a string that is the scheme specific part of UUID. That is, as a simple literal, the result of generating a UUID, converting to a simple literal and removing the initial urn:uuid:." ;
+  sh:returnType xsd:string ;
+.
+sparql:substr
+  a sh:Function ;
+  sparql:symbol "SUBSTR" ;
+  rdfs:comment "Gets the sub-string of a given string. The index of the first character is 1." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The input string." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg2 ;
+      sh:datatype xsd:integer ;
+      sh:description "The start index." ;
+      sh:order "1"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg3 ;
+      sh:datatype xsd:integer ;
+      sh:description "The end index." ;
+      sh:optional true ;
+      sh:order "2"^^xsd:decimal ;
+    ] ;
+.
+sparql:subtract
+  a sh:Function ;
+  sparql:symbol "-" ;
+  rdfs:comment "Returns the arithmetic difference of its operands." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "the first operand" ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:parameter [
+      sh:path sparql:arg2 ;
+      sh:description "the second operand" ;
+      sh:order "1"^^xsd:decimal ;
+    ] ;
+.
+sparql:symbol
+  a rdf:Property ;
+  rdfs:comment "The SPARQL symbol, such as \"/\" for sparql:divide." ;
+  rdfs:label "symbol" ;
+  rdfs:range xsd:string ;
+.
+sparql:timezone
+  a sh:Function ;
+  sparql:symbol "TIMEZONE" ;
+  rdfs:comment "Returns the timezone part of ?arg1 as an xsd:dayTimeDuration. Raises an error if there is no timezone." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The input time." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+.
+sparql:tz
+  a sh:Function ;
+  sparql:symbol "TZ" ;
+  rdfs:comment "Returns the timezone part of ?arg1 as a simple literal. Returns the empty string if there is no timezone." ;
+.
+sparql:ucase
+  a sh:Function ;
+  sparql:symbol "UCASE" ;
+  rdfs:comment "Converts a string to upper case characters." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The input string." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+.
+sparql:unaryminus
+  a sh:Function ;
+  sparql:symbol "-" ;
+  rdfs:comment "Returns the operand ?arg1 with the sign reversed. If ?arg1 is positive, its negative is returned; if it is negative, its positive is returned." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "the operand" ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+.
+sparql:unaryplus
+  a sh:Function ;
+  sparql:symbol "+" ;
+  rdfs:comment "Returns the operand ?arg1 with the sign unchanged." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "the operand" ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+.
+sparql:unlimitedParameters
+  a rdf:Property ;
+  rdfs:label "unlimited parameters" ;
+  rdfs:range xsd:boolean ;
+.
+sparql:uri
+  a sh:Function ;
+  sparql:symbol "URI" ;
+  rdfs:comment "Equivalent to IRI." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The IRI string to convert to a resource." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+.
+sparql:uuid
+  a sh:Function ;
+  sparql:symbol "UUID" ;
+  rdfs:comment "Returns a fresh IRI from the UUID URN scheme. Each call of UUID() returns a different UUID. It must not be the \"nil\" UUID (all zeroes). The variant and version of the UUID is implementation dependent." ;
+.
+sparql:year
+  a sh:Function ;
+  sparql:symbol "year" ;
+  rdfs:comment "Extracts the year from a date/time literal." ;
+  sh:parameter [
+      sh:path sparql:arg1 ;
+      sh:description "The date or dateTime argument." ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  sh:returnType xsd:integer ;
+.

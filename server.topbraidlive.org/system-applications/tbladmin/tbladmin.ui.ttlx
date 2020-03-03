@@ -1,0 +1,1343 @@
+# baseURI: http://server.topbraidlive.org/system-applications/tbladmin
+# imports: http://server.topbraidlive.org/dynamic/permissiongroups
+# imports: http://server.topbraidlive.org/system-applications/scheduler
+# imports: http://server.topbraidlive.org/tblui
+# imports: http://server.topbraidlive.org/web/2009/config
+# imports: http://topbraid.org/sparqlmotionlib-swp
+# imports: http://topbraid.org/statistics
+# imports: http://topbraid.org/swa
+# imports: http://topbraid.org/textindex
+# prefix: tbladmin
+
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix default: <http://uispin.org/default#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix scheduler: <http://topbraid.org/scheduler#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix server: <http://server.topbraidlive.org/server.ui#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix stats: <http://topbraid.org/statistics#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix tblui: <http://server.topbraidlive.org/tblui#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix textindex: <http://topbraid.org/textindex#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://server.topbraidlive.org/system-applications/tbladmin>
+  a owl:Ontology ;
+  rdfs:comment "A collection of APIs for performing various administrative tasks such as refreshing indexes, deleting asset collections and exporting data" ;
+  rdfs:label "TBL Admin" ;
+  owl:imports <http://server.topbraidlive.org/dynamic/permissiongroups> ;
+  owl:imports <http://server.topbraidlive.org/system-applications/scheduler> ;
+  owl:imports <http://server.topbraidlive.org/tblui> ;
+  owl:imports <http://server.topbraidlive.org/web/2009/config> ;
+  owl:imports <http://topbraid.org/sparqlmotionlib-swp> ;
+  owl:imports <http://topbraid.org/statistics> ;
+  owl:imports <http://topbraid.org/swa> ;
+  owl:imports <http://topbraid.org/textindex> ;
+.
+tbladmin:AdminElements
+  a ui:NodeClass ;
+  ui:abstract true ;
+  rdfs:comment "Abstract superclass for elements of the TBL Admin app." ;
+  rdfs:label "Admin elements" ;
+  rdfs:subClassOf swa:Elements ;
+.
+tbladmin:AdminPages
+  a ui:ViewElement ;
+  ui:abstract true ;
+  ui:errorPrototype """
+<ui:if ui:condition=\"{= !uix:isAdmin() }\">You need to be an admin to see this page.</ui:if>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:comment "Abstract superclass of pages that require admin permission to view." ;
+  rdfs:label "Admin pages" ;
+  rdfs:subClassOf tbladmin:AdminElements ;
+  rdfs:subClassOf tblui:Elements ;
+.
+tbladmin:AdminServices
+  a ui:Service ;
+  ui:abstract true ;
+  ui:errorPrototype """
+<ui:if ui:condition=\"{= !uix:isAdmin() }\">
+    <ui:setResponseHeader ui:statusCode=\"{= 403 }\"/>
+    <ui:group>Service requires admin authentication</ui:group>
+</ui:if>
+"""^^ui:Literal ;
+  rdfs:comment "Abstract superclass of services that are part of the TBL Admin app." ;
+  rdfs:label "Admin services" ;
+  rdfs:subClassOf ui:Services ;
+.
+tbladmin:AutoCompletePage
+  a ui:NodeClass ;
+  ui:headIncludes """
+<title>TopBraid Live - Auto-Complete Management</title>
+"""^^ui:Literal ;
+  ui:prototype """
+<tblui:PageContainer arg:title=\"Auto-Complete Management\">
+    <tblui:Section arg:label=\"Graphs with Auto-Complete Indices\">
+        <p>Auto-complete indices speed up lookups in auto-complete fields. They are created automatically on first lookup, updated continuously, and reset on certain major operations, or manually on this page.</p>
+        <ui:loadable ui:loadId=\"graph-table-loadable\">
+            <table class=\"table table-compact table-nonfluid\">
+                <thead>
+                    <th>Graph</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </thead>
+                <tbody>
+                    <ui:forEach ui:indexVar=\"index\" ui:resultSet='{#
+                            SELECT ?graph
+                            WHERE {
+                                ?file tops:files ( \"\" true true ) .
+                                BIND (smf:baseURI(?file) AS ?graph) .
+                                FILTER (bound(?graph) &amp;&amp; uix:hasAutoCompleteIndex(?graph)) .
+                            }
+                            ORDER BY (?graph) }'>
+                        <tr>
+                            <td>{= ?graph }</td>
+                            <td>{= uix:autoCompleteStatus(?graph) }</td>
+                            <td>
+                                <button class=\"btn btn-default btn-xs\">
+                                    <span>Rebuild</span>
+                                    <ui:handle ui:event=\"onclick\" ui:thenLoadId=\"graph-table-loadable\">
+                                        <uix:resetAutoCompleteIndex arg:graph=\"{= ?graph }\"/>
+                                    </ui:handle>
+                                </button>
+                            </td>
+                        </tr>
+                    </ui:forEach>
+                </tbody>
+            </table>
+        </ui:loadable>
+    </tblui:Section>
+</tblui:PageContainer>
+"""^^ui:Literal ;
+  rdfs:subClassOf tbladmin:AdminPages ;
+.
+tbladmin:CachedGraphsPage
+  a ui:NodeClass ;
+  ui:headIncludes """
+<title>TopBraid Live - Cached Graphs</title>
+"""^^ui:Literal ;
+  ui:prototype """
+<tblui:PageContainer arg:title=\"Cached Graphs\">
+    <tblui:Section arg:label=\"Cacheable (Database) Graphs\">
+        <ui:loadable ui:loadId=\"table\">
+            <table class=\"table table-compact table-nonfluid\">
+                <ui:forEach ui:resultSet='{#
+                        SELECT ?graph
+                        WHERE {
+                            ?file tops:files ( \"\" true true ) .
+                            BIND (smf:baseURI(?file) AS ?graph) .
+                            FILTER (bound(?graph) &amp;&amp; tbladmin:isCacheable(?graph)) .
+                        }
+                        ORDER BY (?graph) }'>
+                    <tr let:id=\"{= ui:uniqueId() }\">
+                        <td>{= ?graph }</td>
+                        <td>
+                            <ui:if ui:condition=\"{= smf:isCachedGraph(?graph) }\">
+                                <button class=\"btn btn-default btn-xs\" id=\"{= ?id }\" onclick=\"{= ui:functionCall(&quot;tbladmin.resetCachedGraph&quot;, ?graph, ?id) }\">Clear Cache</button>
+                            </ui:if>
+                            <ui:else>
+                                <span class=\"text-muted\">not loaded</span>
+                            </ui:else>
+                        </td>
+                        <ui:if ui:condition=\"{= !tbladmin:isCacheAll() }\">
+                            <td let:id=\"{= ui:uniqueId() }\">
+                                <input checked=\"{= IF(tbladmin:isGraphCachedAtStartup(?graph), &quot;checked&quot;, ?none) }\" id=\"{= ?id }\" type=\"checkbox\">
+                                    <ui:handle arg:checked=\"$('#{= ?id }').is(':checked')\" ui:event=\"onclick\">
+                                        <tbladmin:setCacheGraphAtStartup arg:graph=\"{= ?graph }\" arg:value=\"{= ?checked }\"/>
+                                    </ui:handle>
+                                </input>
+                                <span class=\"small\">
+                                    <swa:Space/>Cache at startup</span>
+                            </td>
+                        </ui:if>
+                    </tr>
+                </ui:forEach>
+            </table>
+        </ui:loadable>
+        <p>
+		    TopBraid is caching certain database graphs in memory to improve
+performance.  However if the underlying database has been modified
+outside of this TopBraid installation then its cache may get out of synch.
+The reset button will reset the cache (and possibly re-run caching of all
+triples) so that the latest data from the database becomes visible.  Note
+that clicking the reset button may block the system for other users.
+		    </p>
+        <p>
+			If \"Cache all graphs\" is unselected, the column \"Cache at startup\" can be
+used to select individual graphs that shall be cached completely when the
+system starts.  Not caching graphs is a good option for very large
+databases or hot failover scenarios.
+	    	</p>
+        <div class=\"checkbox\">
+            <label>
+                <input checked=\"{= IF(tbladmin:isCacheAll(), &quot;checked&quot;, ?none) }\" id=\"cacheAllCheckBox\" type=\"checkbox\">
+                    <ui:handle arg:checked=\"$('#cacheAllCheckBox').is(':checked')\" ui:event=\"onclick\" ui:thenLoadId=\"table\">
+                        <ui:setContext ui:queryGraph=\"{= &lt;http://server.topbraidlive.org/dynamic/config&gt; }\">
+                            <ui:setPropertyValue arg:property=\"{= cfg:cacheAll }\" arg:value=\"{= ?checked }\" ui:this=\"{= config:configuration }\"/>
+                        </ui:setContext>
+                    </ui:handle>
+                </input>
+                <span>Cache all graphs</span>
+            </label>
+        </div>
+    </tblui:Section>
+    <tblui:Section arg:label=\"SDB Database Maintenance\">
+        <p>
+If the underlying database has been modified outside of this
+TopBraid installation then some triples that may have been deleted may leave
+behind nodes that are no longer associated with any graph.  These orphaned
+nodes can be removed with SDB Vacuum.
+</p>
+        <div>
+            <swa:Button arg:class=\"btn btn-default btn-sm\" arg:label=\"RDBMS Vacuum\" arg:onClick=\"tbladmin.rdbmsVacuum();\"/>
+        </div>
+    </tblui:Section>
+</tblui:PageContainer>
+"""^^ui:Literal ;
+  rdfs:label "Cached graphs page" ;
+  rdfs:subClassOf tbladmin:AdminPages ;
+.
+tbladmin:ConfigEditor
+  a ui:NodeClass ;
+  ui:headIncludes """
+<title>TopBraid Live - Server Configuration Parameters</title>
+"""^^ui:Literal ;
+  ui:prototype """
+<tblui:PageContainer arg:title=\"Server Configuration Parameters\">
+    <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(&lt;http://server.topbraidlive.org/dynamic/config&gt;) }\">
+        <tblui:FormSection arg:label=\"Server Configuration\">
+            <swa:SwitchableForm arg:editable=\"{= true }\" arg:hideVisualizationsButton=\"{= true }\" arg:resource=\"{= config:configuration }\" arg:showURI=\"{= false }\" arg:suppressHeader=\"{= true }\" arg:suppressInlineEditing=\"{= true }\"/>
+        </tblui:FormSection>
+    </ui:setContext>
+    <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(swa:configGraph()) }\">
+        <tblui:FormSection arg:label=\"User Interface Configuration\">
+            <swa:SwitchableForm arg:editable=\"{= true }\" arg:hideVisualizationsButton=\"{= true }\" arg:resource=\"{= swa:LangSelector }\" arg:showURI=\"{= false }\" arg:suppressHeader=\"{= true }\"/>
+        </tblui:FormSection>
+    </ui:setContext>
+    <tblui:Section arg:label=\"Download Configuration Files\">
+        <ui:createLink arg:graph=\"{= &lt;http://server.topbraidlive.org/dynamic/config&gt; }\" ui:viewClass=\"{= tbladmin:Graph2TurtleService }\">
+            <p>
+                <a href=\"{= ?link }\">Download general config Graph</a>
+            </p>
+        </ui:createLink>
+        <ui:createLink arg:graph=\"{= swa:configGraph() }\" ui:viewClass=\"{= tbladmin:Graph2TurtleService }\">
+            <p>
+                <a href=\"{= ?link }\">Download uiconfig Graph</a>
+            </p>
+        </ui:createLink>
+    </tblui:Section>
+</tblui:PageContainer>
+"""^^ui:Literal ;
+  rdfs:comment "Simple application to edit the TBL system configuration." ;
+  rdfs:label "Config editor" ;
+  rdfs:subClassOf tbladmin:AdminPages ;
+.
+tbladmin:ConfigForm
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:config ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The config instance." ;
+    ] ;
+  ui:prototype """
+<ui:group default:labelWidth=\"250px\" default:subject=\"{= ?config }\" default:tabular=\"{= true }\">
+    <swa:ObjectsEnum arg:label=\"Server Parameters\">
+        <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= cfg:serverURL }\"/>
+        <swa:Object arg:predicate=\"{= cfg:showHiddenFiles }\"/>
+    </swa:ObjectsEnum>
+    <swa:ObjectsEnum arg:label=\"General Database Parameters\">
+        <swa:Object arg:predicate=\"{= cfg:sdbMaxConnections }\"/>
+    </swa:ObjectsEnum>
+    <swa:ObjectsEnum arg:label=\"GraphQL Features\">
+        <swa:Object arg:predicate=\"{= cfg:graphqlAggregationFields }\"/>
+        <swa:Object arg:predicate=\"{= cfg:graphqlDeriveFields }\"/>
+    </swa:ObjectsEnum>
+    <swa:ObjectsEnum arg:label=\"SWP Parameters\">
+        <swa:Object arg:predicate=\"{= cfg:uiSPINConstraintViolationsErrorBlockEditing }\"/>
+        <ui:if ui:condition=\"{= uix:isTBC() }\">
+            <swa:Object arg:predicate=\"{= cfg:uiStrictArgumentChecking }\"/>
+        </ui:if>
+        <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= cfg:uiLabelFunctionURI }\"/>
+        <swa:Object arg:predicate=\"{= cfg:uiLibConstant }\"/>
+        <swa:Object arg:predicate=\"{= cfg:uiMaxTableRows }\"/>
+        <swa:Object arg:predicate=\"{= cfg:enableOptionForSWAForms }\"/>
+        <swa:Object arg:predicate=\"{= cfg:uiEnableDebugMode }\"/>
+        <swa:Object arg:predicate=\"{= cfg:uiGenerateComments }\"/>
+        <swa:Object arg:predicate=\"{= cfg:uiGenerateSourceAttributes }\"/>
+        <swa:Object arg:predicate=\"{= cfg:uiTraceDynamicViews }\"/>
+    </swa:ObjectsEnum>
+    <tbladmin:LdapConfigForm arg:config=\"{= ?config }\"/>
+    <swa:ObjectsEnum arg:label=\"SMTP Server Parameters\">
+        <swa:Object arg:predicate=\"{= cfg:needsAuthentication }\"/>
+        <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= cfg:smtpServer }\"/>
+        <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= cfg:smtpServerFrom }\"/>
+        <swa:Object arg:predicate=\"{= cfg:smtpServerPort }\"/>
+        <swa:Object arg:predicate=\"{= cfg:isSSL }\"/>
+        <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= cfg:mailControllerUser }\"/>
+        <tbladmin:PasswordSection arg:config=\"{= ?config }\" arg:name=\"SMTP password\" arg:urlProperty=\"{= cfg:smtpServer }\" arg:userNameProperty=\"{= cfg:mailControllerUser }\"/>
+    </swa:ObjectsEnum>
+    <swa:ObjectsEnum arg:label=\"Advanced Parameters\">
+        <swa:Object arg:predicate=\"{= cfg:allowAnonymous }\"/>
+        <swa:Object arg:predicate=\"{= cfg:enableSPARQLUpdates }\"/>
+        <swa:Object arg:predicate=\"{= cfg:endpointTimeout }\"/>
+        <swa:Object arg:predicate=\"{= cfg:enableFairLocks }\"/>
+        <swa:Object arg:predicate=\"{= cfg:createExceptionsWithLocks }\"/>
+        <swa:Object arg:predicate=\"{= cfg:contractViolationsAreErrors }\"/>
+        <swa:Object arg:predicate=\"{= cfg:disableAutoCompleteIndex }\"/>
+        <swa:Object arg:predicate=\"{= cfg:disableLuceneIndexing }\"/>
+        <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= cfg:owl2shaclGraphURI }\"/>
+        <swa:Object arg:predicate=\"{= cfg:queryManagement }\"/>
+        <swa:Object arg:editWidget=\"{= swa:DatatypeEnumDropDownEditor }\" arg:predicate=\"{= cfg:secureStorageEncryption }\"/>
+        <ui:if ui:condition=\"{= swa:isEditMode() }\">
+            <p class=\"small text-muted\">
+                <b>Note: </b>
+                <span>you must create a new secure storage file for changes to take effect.</span>
+            </p>
+        </ui:if>
+        <swa:Object arg:predicate=\"{= cfg:suppressVariousWarnings }\"/>
+        <swa:Object arg:predicate=\"{= cfg:tempGraphMinimumLife }\"/>
+        <swa:Object arg:predicate=\"{= cfg:useSaxon }\"/>
+        <swa:Object arg:predicate=\"{= cfg:verboseLogging }\"/>
+        <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= cfg:googleMapsAPIKey }\"/>
+    </swa:ObjectsEnum>
+    <swa:ObjectsEnum arg:label=\"URI Mappings\">
+        <swa:Objects arg:label=\"Short graph names\" arg:predicate=\"{= cfg:graphName }\"/>
+    </swa:ObjectsEnum>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Config form" ;
+  rdfs:subClassOf tbladmin:AdminElements ;
+.
+tbladmin:CountTriplesPage
+  a ui:NodeClass ;
+  ui:headIncludes """
+<title>TopBraid Live - Count Triples</title>
+"""^^ui:Literal ;
+  ui:prototype """
+<tblui:PageContainer arg:title=\"Count Triples\">
+    <tblui:Section>
+        <ui:loadable ui:loadId=\"all\">
+            <ui:group let:mostRecent=\"{= tbladmin:mostRecentTripleCount() }\">
+                <ui:if ui:condition=\"{= bound(?mostRecent) }\">
+                    <ui:group letrs:jobs=\"{#
+                            SELECT *
+                            WHERE {
+                                ?mostRecent tbladmin:tripleCountTotals ( ?status ?when ?totalFiles ?totalTriples ?sysFiles ?sysTriples ) .
+                            } }\">
+                        <ui:forEach ui:resultSet=\"{= ?jobs }\">The last completed triple count was started on {= spif:dateFormat(?when, \"yyyy-MM-dd HH:mm:ss\") }<table class=\"table\">
+                                <tr>
+                                    <td/>
+                                    <td>Files</td>
+                                    <td>Triples</td>
+                                </tr>
+                                <tr>
+                                    <td>Total</td>
+                                    <td>{= ?totalFiles }</td>
+                                    <td>{= ?totalTriples }</td>
+                                </tr>
+                                <tr>
+                                    <td>(System)</td>
+                                    <td>({= ?sysFiles })</td>
+                                    <td>({= ?sysTriples })</td>
+                                </tr>
+                                <tr>
+                                    <td>Non-System</td>
+                                    <td>{= ?totalFiles - ?sysFiles }</td>
+                                    <td>{= ?totalTriples - ?sysTriples }</td>
+                                </tr>
+                            </table>
+                        </ui:forEach>
+                    </ui:group>
+                    <ui:createLink ui:servlet=\"admin/baseURIMgmt\">
+  You can view the triples for each file on the <a href=\"{= ?link }\">Base URI Management</a> page.
+</ui:createLink>
+                    <br/>
+                </ui:if>
+                <ui:else>The job has not been run<br/>
+                </ui:else>
+            </ui:group>
+            <br/>
+            <ui:group let:execId=\"{= tbladmin:currentTripleCountExecution() }\">
+                <ui:if ui:condition=\"{= ?execId != &quot;none&quot; }\">
+                    <ui:createLink ui:viewClass=\"{= scheduler:ScheduledJobsPage }\">
+                        <h2 class=\"text-danger\">The Triple Counter is currently running.</h2>
+                        <p>You can view its progress on the <a href=\"{= ?link }\"> Scheduled jobs page</a> or refresh this page to track progress.</p>
+                    </ui:createLink>
+                    <br/>
+  
+Click Cancel to stop the job.
+</ui:if>
+                <ui:else>Click Start to execute the background job</ui:else>
+                <hr/>
+                <ui:if ui:condition=\"{= ?execId = &quot;none&quot; }\">
+                    <button class=\"btn btn-primary\">Start<ui:handle ui:event=\"onclick\" ui:thenLoadId=\"all\">
+                            <tbladmin:startTripleCount/>
+                        </ui:handle>
+                    </button>
+                </ui:if>
+                <swa:Spaces/>
+                <button class=\"btn btn-default\">Cancel<ui:handle ui:event=\"onclick\" ui:thenLoadId=\"all\">
+                        <tbladmin:stopTripleCount/>
+                    </ui:handle>
+                </button>
+            </ui:group>
+        </ui:loadable>
+    </tblui:Section>
+</tblui:PageContainer>
+"""^^ui:Literal ;
+  rdfs:comment "An admin page that manages a background job to count all triples in the system" ;
+  rdfs:label "Count triples page" ;
+  rdfs:subClassOf tbladmin:AdminPages ;
+.
+tbladmin:DeleteFileService
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:filePath ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The path of the file to delete, using the format of sml:DeleteFile." ;
+    ] ;
+  ui:prototype """
+<sml:DeleteFile sml:filePath=\"{= ?filePath }\"/>
+"""^^ui:Literal ;
+  ui:responseType ui:TEXT ;
+  rdfs:comment "A service for admin users to delete a given file in the workspace" ;
+  rdfs:label "Delete file service" ;
+  rdfs:subClassOf tbladmin:AdminServices ;
+.
+tbladmin:DropGraphService
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:filePath ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The path of the file to delete, using the format of sml:DeleteFile." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graphURI ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<sml:DropGraph sml:filePath=\"{= ?filePath }\"/>
+"""^^ui:Literal ;
+  ui:responseType ui:TEXT ;
+  rdfs:comment "A service for admin users to drop a graph in the workspace" ;
+  rdfs:label "Drop graph service" ;
+  rdfs:subClassOf tbladmin:AdminServices ;
+.
+tbladmin:ExecutionCounts
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "uri" ;
+          ]
+          [
+            sp:varName "count" ;
+          ]
+          [
+            sp:varName "timestamp" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "tc" ;
+              ] ;
+            sp:predicate stats:tripleCount ;
+            sp:subject [
+                sp:varName "execution" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "uri" ;
+              ] ;
+            sp:predicate stats:baseUri ;
+            sp:subject [
+                sp:varName "tc" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "count" ;
+              ] ;
+            sp:predicate stats:triples ;
+            sp:subject [
+                sp:varName "tc" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "timestamp" ;
+              ] ;
+            sp:predicate stats:timestamp ;
+            sp:subject [
+                sp:varName "tc" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:execution ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "Retrieves a list of all counts for a given execution" ;
+  rdfs:label "Execution Counts" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+tbladmin:ExpandableProjectsList
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:forEach ui:resultSet='{#
+        SELECT ?project
+        WHERE {
+            ?file tops:files ( \"/\" true true ) .
+            FILTER fn:ends-with(?file, \"/.project\") .
+            BIND (fn:substring(?file, 2, (STRLEN(?file) - 10)) AS ?project) .
+        }
+        ORDER BY (?project) }'>
+    <div class=\"checkbox\" let:id=\"{= ui:uniqueId() }\">
+        <input name=\"project-{= ?project }\" onclick=\"tbladmin.updateFileCheckBoxes('{= ?id }', this.checked)\" type=\"checkbox\" value=\"true\"/>
+        <a class=\"closed\" id=\"button{= ?id }\" onclick=\"swa.toggleOpenableObject('body{= ?id }', 'button{= ?id }')\">
+            <i class=\"if-closed fa fa-fw fa-caret-right\"/>
+            <i class=\"if-open fa fa-fw fa-caret-down\"/>
+        </a>
+        <span>{= ?project }</span>
+        <div class=\"ui-helper-hidden-accessible\" id=\"body{= ?id }\">
+            <ui:forEach ui:resultSet=\"{#
+                    SELECT ?file
+                    WHERE {
+                        ?file tops:files ( ?project true ) .
+                        BIND (smf:baseURI(?file) AS ?baseURI) .
+                        FILTER bound(?baseURI) .
+                    }
+                    ORDER BY (?file) }\">
+                <div class=\"checkbox\" let:hid=\"{= ui:uniqueId() }\">
+                    <input class=\"checkboxclass-{= ?id }\" name=\"file-{= ?file }\" type=\"checkbox\" value=\"true\"/>
+                    <span>{= fn:substring(?file, (STRLEN(?project) + 3)) }</span>
+                </div>
+            </ui:forEach>
+        </div>
+    </div>
+</ui:forEach>
+"""^^ui:Literal ;
+  rdfs:label "Expandable projects list" ;
+  rdfs:subClassOf tbladmin:AdminElements ;
+.
+tbladmin:Graph2TurtleService
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The URI of the graph to export." ;
+    ] ;
+  ui:prototype """
+<ui:setContext ui:queryGraph=\"{= ?graph }\">
+    <ui:return/>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:comment "A service available to admin users to download any given graph from the workspace as a Turtle file. This is used by the baseURIMgmt page." ;
+  rdfs:label "Graph 2 turtle service" ;
+  rdfs:subClassOf ui:TurtleServices ;
+.
+tbladmin:LdapConfigForm
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:config ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The config instance." ;
+    ] ;
+  ui:prototype """
+<ui:group default:labelWidth=\"250px\" default:subject=\"{= ?config }\" default:tabular=\"{= true }\">
+    <swa:ObjectsEnum arg:label=\"LDAP Servers\">
+        <swa:Objects arg:label=\"Configuration parameters\" arg:predicate=\"{= cfg:jndiConfiguration }\"/>
+    </swa:ObjectsEnum>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Config form" ;
+  rdfs:subClassOf tbladmin:AdminElements ;
+.
+tbladmin:PasswordSection
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:divId ;
+      spl:valueType xsd:string ;
+      rdfs:comment "An optional HTML element ID for the div containing the field and its label." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:config ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The config resource." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:name ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The name such as \"database\"." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:urlProperty ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The config property holding the URL." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:userNameProperty ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The config property holding the user name." ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:if ui:condition=\"{= swa:isViewMode() }\">
+        <div id=\"{= IF(bound(?divId), ?divId, &quot;&quot;) }\" let:url=\"{= spl:object(?config, ?urlProperty) }\" let:userName=\"{= spl:object(?config, ?userNameProperty) }\">
+            <ui:if ui:condition=\"{= bound(?url) &amp;&amp; bound(?userName) }\">
+                <swa:LabeledElement arg:class=\"swa-labeled-element-width-twofifty\" arg:label=\"{= ?name }:\" let:id=\"{= ui:uniqueId() }\" let:obfuscatedPassword=\"****\">
+                    <ui:if ui:condition=\"{= smf:hasPassword(CONCAT(?userName, &quot;@&quot;, ?url)) }\">
+                        <input id=\"{= ?id }\" onfocus=\"this.value='';\" onkeydown=\"tbladmin.checkKey(event,{= ?id },'{= ?name }', '{= ?userName }', '{= ?url }')\" type=\"password\" value=\"{= ?obfuscatedPassword }\"/>
+                    </ui:if>
+                    <ui:else>
+                        <input id=\"{= ?id }\" onkeydown=\"tbladmin.checkKey(event,{= ?id },'{= ?name }', '{= ?userName }', '{= ?url }')\" type=\"password\"/>
+                    </ui:else>
+                    <swa:Space/>
+                    <input onclick=\"tbladmin.submitPassword({= ?id },'{= ?name }', '{= ?userName }', '{= ?url }')\" type=\"button\" value=\"Save\"/>
+                </swa:LabeledElement>
+            </ui:if>
+        </div>
+    </ui:if>
+    <ui:else>
+        <p class=\"small text-muted\" id=\"{= IF(bound(?divId), ?divId, &quot;&quot;) }\">
+            <b>Note: </b>
+            <span>you can enter the {= ?name } after you save your changes.</span>
+        </p>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Password section" ;
+  rdfs:subClassOf tbladmin:AdminElements ;
+.
+tbladmin:RDBMSVacuumService
+  a ui:Service ;
+  ui:prototype """
+<ui:group let:result=\"{= smf:sdbVacuum() }\">{= ?result }</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:TEXT ;
+  rdfs:comment "Callback for when the user clicks on the RDBMS Vacuum button." ;
+  rdfs:label "RDBMS vacuum" ;
+  rdfs:subClassOf tbladmin:AdminServices ;
+.
+tbladmin:ResetCachedGraphService
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph to reset." ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <sml:RequestLock/>
+    <ui:group let:result=\"{= smf:resetCachedGraph(?graph) }\">{= ?result }</ui:group>
+    <sml:ReleaseLock/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:TEXT ;
+  rdfs:comment "Callback for when the user clicks on reset for a given named graph." ;
+  rdfs:label "Reset cached graph service" ;
+  rdfs:subClassOf tbladmin:AdminServices ;
+.
+tbladmin:SendProjectsPage
+  a ui:NodeClass ;
+  ui:headIncludes """
+<title>TopBraid Live - Send Projects to Another Server</title>
+"""^^ui:Literal ;
+  ui:prototype """
+<tblui:PageContainer arg:title=\"Send Projects to Another Server\">
+    <tblui:Section>
+        <form id=\"form\" let:progressId=\"progress-{= spif:random() }\" method=\"post\">
+            <h3>Target Server</h3>
+            <p class=\"text-info\">To send a project to another server, enter the destination server's URL and an Administrator&rsquo;s credentials.</p>
+            <swa:LabeledElement arg:label=\"Server URL\">
+                <input class=\"form-control\" name=\"serverURL\" size=\"60\" type=\"text\"/>
+            </swa:LabeledElement>
+            <swa:LabeledElement arg:label=\"User name\">
+                <input class=\"form-control\" name=\"userName\" type=\"text\"/>
+            </swa:LabeledElement>
+            <swa:LabeledElement arg:label=\"Password\">
+                <input class=\"form-control\" name=\"password\" type=\"password\"/>
+            </swa:LabeledElement>
+            <input name=\"progressId\" type=\"hidden\" value=\"{= ?progressId }\"/>
+            <h3>Projects to Send</h3>
+            <p class=\"text-info\">Select the projects or files to be copied over. If the same file exists on the destination server it will be overwritten. Keep in mind that the database type of the source files will remain the same and not be converted, regardless of the destination servers&rsquo; configured database.</p>
+            <tbladmin:ExpandableProjectsList/>
+            <h3>Options</h3>
+            <div class=\"checkbox\">
+                <input checked=\"checked\" name=\"sendTriples\" onchange=\"tbladmin.showClearTarget(this.checked);\" type=\"checkbox\"/>
+                <span>
+                    <strong>Also send database triples</strong>
+                </span>
+                <p class=\"text-info\">This option must be checked if you are sending EDG collections and not just .ttl files. This will send all data associated with the files being sent. If the destination already contains a file with the same base uri they will be merged. If this is not the desired behavior, please also select \"Clear the target project of triples before sending triples\" as well.</p>
+                <hr/>
+            </div>
+            <div class=\"checkbox\" id=\"clearTarget\">
+                <input id=\"clearGraph\" name=\"clearGraph\" type=\"checkbox\"/>
+                <span>
+                    <strong>Clear the target project of triples before sending triples</strong>
+                </span>
+                <p class=\"text-info\">This option will replace the destination files/data with the source files/data.</p>
+                <hr/>
+            </div>
+            <div class=\"checkbox\">
+                <input checked=\"checked\" name=\"sendUIConfig\" type=\"checkbox\"/>
+                <span>
+                    <strong>Also send UI configurations</strong> (including forms) from <tt>{= swa:configGraph() }</tt>
+                </span>
+                <hr/>
+            </div>
+            <br/>
+            <button class=\"btn btn-primary\" onclick=\"tbladmin.sendProjects('{= ?progressId }')\" type=\"button\">Submit</button>
+        </form>
+    </tblui:Section>
+</tblui:PageContainer>
+"""^^ui:Literal ;
+  rdfs:comment "An admin page that allows the user to select one or more projects and upload them to another TBL server. The actual act of uploading the project uses the usual project zip file mechanism, with the mode to update existing projects." ;
+  rdfs:label "Send projects page" ;
+  rdfs:subClassOf tbladmin:AdminPages ;
+.
+tbladmin:ServerRestartWarning
+  a ui:NodeClass ;
+  ui:prototype """
+<div class=\"text-danger\">Changes to this section require a server restart.</div>
+"""^^ui:Literal ;
+  rdfs:label "Server restart warning" ;
+  rdfs:subClassOf tbladmin:AdminElements ;
+.
+tbladmin:TextIndicesPage
+  a ui:NodeClass ;
+  ui:headIncludes """
+<title>TopBraid Live - Text Indices</title>
+"""^^ui:Literal ;
+  ui:prototype """
+<tblui:PageContainer arg:title=\"Text Indices\">
+    <tblui:Section arg:label=\"Current Text Indices\">
+        <p>
+			The following list shows all Lucene Text Indices that are currently managed by TopBraid.
+			Each item includes the URIs of the graphs that are tracked by the index.
+		</p>
+        <p>
+			Text indexing is currently <b>{= IF(textindex:isEnabled(), \"enabled\", \"disabled\") }</b>.
+		</p>
+        <ui:loadable ui:loadId=\"all\">
+            <ui:forEach ui:resultSet=\"{#
+                    SELECT *
+                    WHERE {
+                        rdf:nil textindex:index ?index .
+                    }
+                    ORDER BY (?index) }\">
+                <hr/>
+                <section let:loadId=\"{= ui:uniqueId() }\">
+                    <h2>Index \"{= ?index }\"</h2>
+                    <ui:loadable ui:loadId=\"{= ?loadId }\">
+                        <ui:group let:building=\"{= textindex:isBuilding(?index) }\">
+                            <ui:if ui:condition=\"{= ?building }\">
+                                <p class=\"text-danger\">This index is currently building. Refresh page to track progress.&nbsp;</p>
+                            </ui:if>
+                            <p>
+                                <span>{= textindex:updateQueueSize(?index) } quads in update queue.</span>
+                            </p>
+                            <ui:if ui:condition=\"{= !?building }\">
+                                <button>Rebuild<ui:handle ui:event=\"onclick\" ui:thenLoadId=\"{= ?loadId }\">
+                                        <textindex:rebuild arg:id=\"{= ?index }\"/>
+                                    </ui:handle>
+                                </button>
+                                <swa:Spaces/>
+                                <button>Delete this Index (!)<ui:handle ui:event=\"onclick\" ui:thenLoadId=\"all\">
+                                        <textindex:delete arg:id=\"{= ?index }\"/>
+                                    </ui:handle>
+                                </button>
+                            </ui:if>
+                        </ui:group>
+                    </ui:loadable>
+                    <h3>Graphs tracked by this index</h3>
+                    <ol>
+                        <ui:forEach ui:resultSet=\"{#
+                                SELECT *
+                                WHERE {
+                                    ?index textindex:trackedGraph ?graph .
+                                }
+                                ORDER BY (?graph) }\">
+                            <li>{= ?graph }</li>
+                        </ui:forEach>
+                    </ol>
+                </section>
+            </ui:forEach>
+        </ui:loadable>
+    </tblui:Section>
+</tblui:PageContainer>
+"""^^ui:Literal ;
+  rdfs:label "Text indices page" ;
+  rdfs:subClassOf tbladmin:AdminPages ;
+.
+tbladmin:TripleCountExecutionList
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            a sp:Desc ;
+            sp:expression [
+                sp:varName "time" ;
+              ] ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "exec" ;
+          ]
+          [
+            sp:varName "time" ;
+          ]
+          [
+            sp:varName "status" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a tbladmin:metricsDataGraph ;
+              ] ;
+            sp:variable [
+                sp:varName "mg" ;
+              ] ;
+          ]
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object stats:TripleCountExecution ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "exec" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "time" ;
+                    ] ;
+                  sp:predicate stats:startTime ;
+                  sp:subject [
+                      sp:varName "exec" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "status" ;
+                    ] ;
+                  sp:predicate stats:executionState ;
+                  sp:subject [
+                      sp:varName "exec" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "mg" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "Retrieves a list of all stats:TripleCountExecution instances." ;
+  rdfs:label "Triple Count Execution LIst" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+tbladmin:currentTripleCountExecution
+  a spin:Function ;
+  spin:private true ;
+  spin:returnType rdfs:Resource ;
+  rdfs:label "current Triple Count Execution" ;
+  rdfs:subClassOf spin:Functions ;
+.
+tbladmin:isCacheAll
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:Filter ;
+            sp:expression [
+                a spl:objectInGraph ;
+                sp:arg1 config:configuration ;
+                sp:arg2 cfg:cacheAll ;
+                sp:arg3 <http://server.topbraidlive.org/dynamic/config> ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:label "is cache all" ;
+  rdfs:subClassOf spin:Functions ;
+.
+tbladmin:isCacheable
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          (
+            [
+              a sp:Bind ;
+              sp:expression [
+                  a smf:file ;
+                  sp:arg1 [
+                      sp:varName "graph" ;
+                    ] ;
+                ] ;
+              sp:variable [
+                  sp:varName "file" ;
+                ] ;
+            ]
+            [
+              a sp:Filter ;
+              sp:expression [
+                  a sp:bound ;
+                  sp:arg1 [
+                      sp:varName "file" ;
+                    ] ;
+                ] ;
+            ]
+          )
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:or ;
+                sp:arg1 [
+                    a sp:or ;
+                    sp:arg1 [
+                        a sp:strends ;
+                        sp:arg1 [
+                            sp:varName "file" ;
+                          ] ;
+                        sp:arg2 ".sdb" ;
+                      ] ;
+                    sp:arg2 [
+                        a sp:strends ;
+                        sp:arg1 [
+                            sp:varName "file" ;
+                          ] ;
+                        sp:arg2 ".oracle" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a sp:strends ;
+                    sp:arg1 [
+                        sp:varName "file" ;
+                      ] ;
+                    sp:arg2 ".marklogic" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The URI of the graph to test." ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks whether a given graph (that is represented by a file in the workspace) is wrapped by a caching graph when TopBraid opens it. This includes all graphs backed by files ending with .sdb or .oracle." ;
+  rdfs:label "is cacheable" ;
+  rdfs:subClassOf spin:Functions ;
+.
+tbladmin:isGraphCachedAtStartup
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph to check." ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "A low-level admin function that checks whether a given graph has been set to be cached at startup. This function has a native Java implementation." ;
+  rdfs:label "is graph cached at startup" ;
+  rdfs:subClassOf spin:Functions ;
+.
+tbladmin:metricsDataGraph
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression <urn:x-evn-metrics-data> ;
+            sp:variable [
+                sp:varName "result" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "metrics data graph" ;
+  rdfs:subClassOf spin:Functions ;
+.
+tbladmin:mostRecentTripleCount
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:limit "1"^^xsd:long ;
+      sp:orderBy (
+          [
+            a sp:Desc ;
+            sp:expression [
+                sp:varName "time" ;
+              ] ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "exec" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a tbladmin:metricsDataGraph ;
+              ] ;
+            sp:variable [
+                sp:varName "mg" ;
+              ] ;
+          ]
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object stats:TripleCountExecution ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "exec" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "time" ;
+                    ] ;
+                  sp:predicate stats:startTime ;
+                  sp:subject [
+                      sp:varName "exec" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "status" ;
+                    ] ;
+                  sp:predicate stats:executionState ;
+                  sp:subject [
+                      sp:varName "exec" ;
+                    ] ;
+                ]
+                [
+                  a sp:Filter ;
+                  sp:expression [
+                      a sp:eq ;
+                      sp:arg1 [
+                          sp:varName "status" ;
+                        ] ;
+                      sp:arg2 stats:executionFinished ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "mg" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  spin:returnType rdfs:Resource ;
+  rdfs:label "most recent triple count execution" ;
+  rdfs:subClassOf spin:Functions ;
+.
+tbladmin:setCacheGraphAtStartup
+  a ui:Method ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph to change the setting of." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:value ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "The new value: true or false." ;
+    ] ;
+  ui:private true ;
+  rdfs:label "set cache at startup for graph" ;
+  rdfs:subClassOf ui:Methods ;
+.
+tbladmin:startTripleCount
+  a ui:NodeClass ;
+  rdfs:comment "Starts the background job to count triples" ;
+  rdfs:label "start triple count" ;
+  rdfs:subClassOf ui:ControlElement ;
+.
+tbladmin:stopTripleCount
+  a ui:NodeClass ;
+  rdfs:comment "Stops  the background job to count triples" ;
+  rdfs:label "stop triple count" ;
+  rdfs:subClassOf ui:ControlElement ;
+.
+tbladmin:tripleCountTotals
+  a spin:MagicProperty ;
+  spin:private true ;
+  rdfs:comment """A magic property for querying the results of triple count jobs.
+
+    ?execution tbladmin:tripleCountTotals (?schedule ?nextFireTime ?currentExecutionId ?currentExecutionDuration)
+
+If the subject is an unbound variable, then all executions will be listed with their status and totals if available. If the subject is a bound variable or URI, then the status for that execution will be returned. The object must be a list containing variables.
+
+?status - cron expression
+?execTime - xsd:dateTime of when the execution started
+?totalFiles - xsd:integer for the total number of files counted
+?totalTriples - xsd:integer for the number of triples contained in all totalFiles
+?sysFiles - xsd:integer for the number of files included in totalFiles that are classified as system files
+?sysTriples - xsd:integer for the number of triples contained in  sysFiles""" ;
+  rdfs:label "triple count totals" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+cfg:GraphName
+  ui:instanceView """
+<div default:subject=\"{= ?this }\" ui:id=\"form\">
+    <swa:Object arg:editWidget=\"{= swa:URIResourceTextFieldEditor }\" arg:predicate=\"{= cfg:graph }\"/>
+    <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= cfg:name }\"/>
+</div>
+"""^^ui:Literal ;
+.
+cfg:JNDIConfiguration
+  ui:instanceView """
+<div default:subject=\"{= ?this }\" ui:id=\"form\">
+    <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= cfg:jndiurl }\"/>
+    <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= cfg:jndiusername }\"/>
+    <tbladmin:PasswordSection arg:config=\"{= ?this }\" arg:name=\"Password for server connection\" arg:urlProperty=\"{= cfg:jndiurl }\" arg:userNameProperty=\"{= cfg:jndiusername }\"/>
+    <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= cfg:jndiuserpattern }\"/>
+    <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= cfg:jndirolebase }\"/>
+    <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= cfg:jndirolename }\"/>
+    <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= cfg:jndirolesearch }\"/>
+    <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= cfg:jndimembershipsearch }\"/>
+</div>
+"""^^ui:Literal ;
+.
+cfg:ServerConfiguration
+  ui:instanceView """
+<tbladmin:ConfigForm arg:config=\"{= ?this }\" ui:id=\"form\"/>
+"""^^ui:Literal ;
+.
+cfg:graphName
+  swa:blankNodeProperty true ;
+.
+cfg:jndiConfiguration
+  swa:blankNodeProperty true ;
+.
+arg:checked
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:config
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:filePath
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:isHome
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:message
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:messageClass
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:messageStackTrace
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:urlProperty
+  a rdf:Property ;
+  rdfs:range xsd:string ;
+.
+arg:userNameProperty
+  a rdf:Property ;
+  rdfs:range xsd:string ;
+.
+swa:LangSelector
+  ui:view """
+<ui:group ui:id=\"form\">
+    <div>The custom languages setting must contain a space-separated list of ISO country
+		codes such as \"de en fr\", overloading the default languages: \"{= spl:object(?this, swa:defaultLanguages) }\".</div>
+    <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= swa:customLanguages }\" arg:subject=\"{= ?this }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+uix:resetAutoCompleteIndex
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph to reset the index of." ;
+    ] ;
+  rdfs:label "reset auto complete index" ;
+  rdfs:subClassOf ui:ControlElement ;
+.

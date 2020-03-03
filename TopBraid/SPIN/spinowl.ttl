@@ -1,0 +1,1159 @@
+# baseURI: http://topbraid.org/spin/spinowl
+# imports: http://spinrdf.org/spl
+# prefix: spinowl
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spinowl: <http://topbraid.org/spin/spinowl#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://topbraid.org/spin/spinowl>
+  a owl:Ontology ;
+  rdfs:comment "Contains constraint checking axioms for a subset of OWL, using closed-world semantics. This includes checking for user-defined OWL 2 datatype facets." ;
+  rdfs:label "SPIN constraints on OWL axioms with CWA" ;
+  owl:imports <http://spinrdf.org/spl> ;
+  owl:versionInfo "0.3.0" ;
+.
+spinowl:AllValuesFromConstraint
+  a spin:Template ;
+  spin:body [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object spin:ConstraintViolation ;
+            sp:predicate rdf:type ;
+            sp:subject _:b53828 ;
+          ]
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate rdfs:label ;
+            sp:subject _:b53828 ;
+          ]
+          [
+            sp:object spin:_this ;
+            sp:predicate spin:violationRoot ;
+            sp:subject _:b53828 ;
+          ]
+          [
+            sp:object [
+                sp:varName "property" ;
+              ] ;
+            sp:predicate spin:violationPath ;
+            sp:subject _:b53828 ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:isURI ;
+                sp:arg1 spin:_this ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject spin:_this ;
+          ]
+          [
+            a sp:TriplePath ;
+            sp:object [
+                sp:varName "restriction" ;
+              ] ;
+            sp:path [
+                a sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "type" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "range" ;
+              ] ;
+            sp:predicate owl:allValuesFrom ;
+            sp:subject [
+                sp:varName "restriction" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:isIRI ;
+                sp:arg1 [
+                    sp:varName "range" ;
+                  ] ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "property" ;
+              ] ;
+            sp:predicate owl:onProperty ;
+            sp:subject [
+                sp:varName "restriction" ;
+              ] ;
+          ]
+          [
+            sp:object owl:Restriction ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "restriction" ;
+              ] ;
+          ]
+          [
+            a sp:TriplePath ;
+            sp:object [
+                sp:varName "property" ;
+              ] ;
+            sp:path [
+                a sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subPropertyOf ;
+              ] ;
+            sp:subject [
+                sp:varName "p" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "value" ;
+              ] ;
+            sp:predicate [
+                sp:varName "p" ;
+              ] ;
+            sp:subject spin:_this ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:isURI ;
+                sp:arg1 [
+                    sp:varName "value" ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:not ;
+                sp:arg1 [
+                    a spl:instanceOf ;
+                    sp:arg1 [
+                        sp:varName "value" ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "range" ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a smf:buildString ;
+                sp:arg1 "All values from {?property} must be {?range} violated by {?value}" ;
+              ] ;
+            sp:variable [
+                sp:varName "label" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:labelTemplate "AllValuesFrom constraint" ;
+  rdfs:comment "Checks for any owl:allValuesFrom restrictions and makes sure that all values of that property (or its sub-properties) at ?this have matching range." ;
+  rdfs:label "All values from constraint" ;
+  rdfs:subClassOf spin:Templates ;
+.
+spinowl:FacetConstraint
+  a spin:Template ;
+  spin:body [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object spin:ConstraintViolation ;
+            sp:predicate rdf:type ;
+            sp:subject _:b93899 ;
+          ]
+          [
+            sp:object spin:_this ;
+            sp:predicate spin:violationRoot ;
+            sp:subject _:b93899 ;
+          ]
+          [
+            sp:object [
+                sp:varName "predicate" ;
+              ] ;
+            sp:predicate spin:violationPath ;
+            sp:subject _:b93899 ;
+          ]
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate rdfs:label ;
+            sp:subject _:b93899 ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject spin:_this ;
+          ]
+          [
+            sp:object [
+                sp:varName "object" ;
+              ] ;
+            sp:predicate [
+                sp:varName "predicate" ;
+              ] ;
+            sp:subject spin:_this ;
+          ]
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "predicate" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?2" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object spin:_arg1 ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?2" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?2" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "facetValue" ;
+              ] ;
+            sp:predicate spinowl:getFacetValues ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:not ;
+                sp:arg1 [
+                    a smf:invoke ;
+                    sp:arg1 spin:_arg2 ;
+                    sp:arg2 [
+                        sp:varName "object" ;
+                      ] ;
+                    sp:arg3 [
+                        sp:varName "facetValue" ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a smf:buildString ;
+                sp:arg1 "Values of property {?predicate} must be {?arg3} {?facetValue} but found {?object} " ;
+              ] ;
+            sp:variable [
+                sp:varName "label" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The XSD facet (e.g. xsd:minExclusive)" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType spin:Function ;
+      rdfs:comment "The SPARQL system function using SP identifiers from the SPL ontology (e.g. sp:gt)." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg3 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The symbol to display in the violation message, e.g. \">\"." ;
+    ] ;
+  spin:labelTemplate "Facet constraint \"{?arg3}\" (using {?arg1}, {?arg2})" ;
+  rdfs:comment "Checks any property value of ?this against violations of user-defined datatype facets." ;
+  rdfs:label "Facet constraint" ;
+  rdfs:subClassOf spin:Templates ;
+.
+spinowl:HasValueConstraint
+  a spin:Template ;
+  spin:body [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object spin:ConstraintViolation ;
+            sp:predicate rdf:type ;
+            sp:subject _:b92361 ;
+          ]
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate rdfs:label ;
+            sp:subject _:b92361 ;
+          ]
+          [
+            sp:object spin:_this ;
+            sp:predicate spin:violationRoot ;
+            sp:subject _:b92361 ;
+          ]
+          [
+            sp:object [
+                sp:varName "property" ;
+              ] ;
+            sp:predicate spin:violationPath ;
+            sp:subject _:b92361 ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:isURI ;
+                sp:arg1 spin:_this ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject spin:_this ;
+          ]
+          [
+            a sp:TriplePath ;
+            sp:object [
+                sp:varName "restriction" ;
+              ] ;
+            sp:path [
+                a sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "type" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "hasValue" ;
+              ] ;
+            sp:predicate owl:hasValue ;
+            sp:subject [
+                sp:varName "restriction" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "property" ;
+              ] ;
+            sp:predicate owl:onProperty ;
+            sp:subject [
+                sp:varName "restriction" ;
+              ] ;
+          ]
+          [
+            sp:object owl:Restriction ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "restriction" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:not ;
+                sp:arg1 [
+                    a spl:hasValue ;
+                    sp:arg1 spin:_this ;
+                    sp:arg2 [
+                        sp:varName "property" ;
+                      ] ;
+                    sp:arg3 [
+                        sp:varName "hasValue" ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a smf:buildString ;
+                sp:arg1 "Instances of {?type} must have {?hasValue} for {?property}" ;
+              ] ;
+            sp:variable [
+                sp:varName "label" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:labelTemplate "HasValue constraint" ;
+  rdfs:comment "Verifies that the values specified by owl:hasValue are present." ;
+  rdfs:label "Has value constraint" ;
+  rdfs:subClassOf spin:Templates ;
+.
+spinowl:MaxCardinalityConstraint
+  a spin:Template ;
+  spin:body [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object spin:ConstraintViolation ;
+            sp:predicate rdf:type ;
+            sp:subject _:b40323 ;
+          ]
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate rdfs:label ;
+            sp:subject _:b40323 ;
+          ]
+          [
+            sp:object spin:_this ;
+            sp:predicate spin:violationRoot ;
+            sp:subject _:b40323 ;
+          ]
+          [
+            sp:object [
+                sp:varName "property" ;
+              ] ;
+            sp:predicate spin:violationPath ;
+            sp:subject _:b40323 ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject spin:_this ;
+          ]
+          [
+            a sp:TriplePath ;
+            sp:object [
+                sp:varName "class" ;
+              ] ;
+            sp:path [
+                a sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "type" ;
+              ] ;
+          ]
+          [
+            sp:object owl:Restriction ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "class" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "max" ;
+              ] ;
+            sp:predicate spin:_arg1 ;
+            sp:subject [
+                sp:varName "class" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "property" ;
+              ] ;
+            sp:predicate owl:onProperty ;
+            sp:subject [
+                sp:varName "class" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:objectCount ;
+                sp:arg1 spin:_this ;
+                sp:arg2 [
+                    sp:varName "property" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "cardinality" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:gt ;
+                sp:arg1 [
+                    sp:varName "cardinality" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "max" ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a smf:buildString ;
+                sp:arg1 "Maximum cardinality of {?max} expected for {?property}" ;
+              ] ;
+            sp:variable [
+                sp:varName "label" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "the system property (owl:maxCardinality or owl:cardinality)" ;
+    ] ;
+  spin:labelTemplate "MaxCardinality constraint (using {?arg1})" ;
+  rdfs:comment "Checks for any owl:maxCardinality/owl:cardinality restrictions defined in one of the superclasses of the types of ?this and applies them using closed-world semantics." ;
+  rdfs:label "Max cardinality constraint" ;
+  rdfs:subClassOf spin:Templates ;
+.
+spinowl:MinCardinalityConstraint
+  a spin:Template ;
+  spin:body [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object spin:ConstraintViolation ;
+            sp:predicate rdf:type ;
+            sp:subject _:b67434 ;
+          ]
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate rdfs:label ;
+            sp:subject _:b67434 ;
+          ]
+          [
+            sp:object spin:_this ;
+            sp:predicate spin:violationRoot ;
+            sp:subject _:b67434 ;
+          ]
+          [
+            sp:object [
+                sp:varName "property" ;
+              ] ;
+            sp:predicate spin:violationPath ;
+            sp:subject _:b67434 ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject spin:_this ;
+          ]
+          [
+            a sp:TriplePath ;
+            sp:object [
+                sp:varName "class" ;
+              ] ;
+            sp:path [
+                a sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "type" ;
+              ] ;
+          ]
+          [
+            sp:object owl:Restriction ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "class" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "min" ;
+              ] ;
+            sp:predicate spin:_arg1 ;
+            sp:subject [
+                sp:varName "class" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "property" ;
+              ] ;
+            sp:predicate owl:onProperty ;
+            sp:subject [
+                sp:varName "class" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:objectCount ;
+                sp:arg1 spin:_this ;
+                sp:arg2 [
+                    sp:varName "property" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "cardinality" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:lt ;
+                sp:arg1 [
+                    sp:varName "cardinality" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "min" ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a smf:buildString ;
+                sp:arg1 "Minimum cardinality of {?min} expected for {?property}" ;
+              ] ;
+            sp:variable [
+                sp:varName "label" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "the system property (owl:minCardinality or owl:cardinality)" ;
+    ] ;
+  spin:labelTemplate "MinCardinality constraint (using {?arg1})" ;
+  rdfs:comment "Checks for any owl:minCardinality restrictions defined in one of the superclasses of the types of ?this and applies them using closed-world semantics." ;
+  rdfs:label "Min cardinality constraint" ;
+  rdfs:subClassOf spin:Templates ;
+.
+spinowl:SomeValuesFromConstraint
+  a spin:Template ;
+  spin:body [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object spin:ConstraintViolation ;
+            sp:predicate rdf:type ;
+            sp:subject _:b10172 ;
+          ]
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate rdfs:label ;
+            sp:subject _:b10172 ;
+          ]
+          [
+            sp:object spin:_this ;
+            sp:predicate spin:violationRoot ;
+            sp:subject _:b10172 ;
+          ]
+          [
+            sp:object [
+                sp:varName "property" ;
+              ] ;
+            sp:predicate spin:violationPath ;
+            sp:subject _:b10172 ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:isURI ;
+                sp:arg1 spin:_this ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject spin:_this ;
+          ]
+          [
+            a sp:TriplePath ;
+            sp:object [
+                sp:varName "restriction" ;
+              ] ;
+            sp:path [
+                a sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "type" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "someValuesFrom" ;
+              ] ;
+            sp:predicate owl:someValuesFrom ;
+            sp:subject [
+                sp:varName "restriction" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:isIRI ;
+                sp:arg1 [
+                    sp:varName "someValuesFrom" ;
+                  ] ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "property" ;
+              ] ;
+            sp:predicate owl:onProperty ;
+            sp:subject [
+                sp:varName "restriction" ;
+              ] ;
+          ]
+          [
+            sp:object owl:Restriction ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "restriction" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:not ;
+                sp:arg1 [
+                    a spl:hasValueOfType ;
+                    sp:arg1 spin:_this ;
+                    sp:arg2 [
+                        sp:varName "property" ;
+                      ] ;
+                    sp:arg3 [
+                        sp:varName "someValuesFrom" ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a smf:buildString ;
+                sp:arg1 "Instances of {?type} must have at least one value of type {?someValuesFrom} for {?property}" ;
+              ] ;
+            sp:variable [
+                sp:varName "label" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:labelTemplate "SomeValuesFrom constraint" ;
+  rdfs:comment "Checks whether the value types mentioned in owl:someValuesFrom restrictions are present." ;
+  rdfs:label "Some values from constraint" ;
+  rdfs:subClassOf spin:Templates ;
+.
+spinowl:getFacetValues
+  a spin:MagicProperty ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "value" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object spin:_arg1 ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object spin:_arg2 ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "range" ;
+              ] ;
+            sp:predicate spinowl:getRanges ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "facet" ;
+              ] ;
+            sp:predicate spinowl:getFacets ;
+            sp:subject [
+                sp:varName "range" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "value" ;
+              ] ;
+            sp:predicate spin:_arg3 ;
+            sp:subject [
+                sp:varName "facet" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The class to get the facet values of." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property to get the restrictions on." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg3 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The facet to get the values of (e.g. xsd:minInclusive)." ;
+    ] ;
+  spin:returnType rdfs:Literal ;
+  rdfs:comment "Gets any facet value of a facet property (?arg3) defined for a given class (?arg1) and property (?arg2)." ;
+  rdfs:label "get facet values" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+spinowl:getFacets
+  a spin:MagicProperty ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "member" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "list" ;
+              ] ;
+            sp:predicate owl:withRestrictions ;
+            sp:subject spin:_arg1 ;
+          ]
+          [
+            sp:object [
+                sp:varName "member" ;
+              ] ;
+            sp:predicate <http://jena.hpl.hp.com/ARQ/list#member> ;
+            sp:subject [
+                sp:varName "list" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Datatype ;
+      rdfs:comment "The user-defined datatype (that has owl:withRestrictions)." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "Iterates over all facets of a user-defined datatype (?arg1). The results are the blank nodes holding the facet properties." ;
+  rdfs:label "get facets" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+spinowl:getRanges
+  a spin:MagicProperty ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "r" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Union ;
+            sp:elements (
+                (
+                  [
+                    sp:object [
+                        sp:varName "r" ;
+                      ] ;
+                    sp:predicate rdfs:range ;
+                    sp:subject spin:_arg2 ;
+                  ]
+                )
+                (
+                  [
+                    sp:object spin:_arg1 ;
+                    sp:predicate rdf:first ;
+                    sp:subject [
+                        sp:varName "?0" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "?1" ;
+                      ] ;
+                    sp:predicate rdf:rest ;
+                    sp:subject [
+                        sp:varName "?0" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object spin:_arg2 ;
+                    sp:predicate rdf:first ;
+                    sp:subject [
+                        sp:varName "?1" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object () ;
+                    sp:predicate rdf:rest ;
+                    sp:subject [
+                        sp:varName "?1" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "restriction" ;
+                      ] ;
+                    sp:predicate spinowl:getRestrictions ;
+                    sp:subject [
+                        sp:varName "?0" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "r" ;
+                      ] ;
+                    sp:predicate owl:allValuesFrom ;
+                    sp:subject [
+                        sp:varName "restriction" ;
+                      ] ;
+                  ]
+                )
+              ) ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The class to get the ranges at." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property to get the ranges of." ;
+    ] ;
+  spin:returnType rdfs:Class ;
+  rdfs:comment "Gets any rdfs:ranges or local owl:allValuesFrom restrictions defined for a given property (?arg2) at a given class (?arg1)." ;
+  rdfs:label "get ranges" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+spinowl:getRestrictions
+  a spin:MagicProperty ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "restriction" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:TriplePath ;
+            sp:object [
+                sp:varName "restriction" ;
+              ] ;
+            sp:path [
+                a sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject spin:_arg1 ;
+          ]
+          [
+            sp:object spin:_arg2 ;
+            sp:predicate owl:onProperty ;
+            sp:subject [
+                sp:varName "restriction" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The (optional) property to get the restrictions on. If left blank, all restrictions will be returned." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The class to get all restrictions of." ;
+    ] ;
+  spin:returnType owl:Restriction ;
+  rdfs:comment "Gets all restrictions that are relevant for a given class (?arg1). This will walk up the transitive class hierarchy of rdfs:subClassOfs. Future versions may also look into intersections etc, but this is not implemented yet." ;
+  rdfs:label "get restrictions" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+owl:Thing
+  spin:constraint [
+      a spinowl:AllValuesFromConstraint ;
+    ] ;
+  spin:constraint [
+      a spinowl:FacetConstraint ;
+      sp:arg1 xsd:maxExclusive ;
+      sp:arg2 sp:lt ;
+      sp:arg3 "<" ;
+    ] ;
+  spin:constraint [
+      a spinowl:FacetConstraint ;
+      sp:arg1 xsd:maxInclusive ;
+      sp:arg2 sp:le ;
+      sp:arg3 "<=" ;
+    ] ;
+  spin:constraint [
+      a spinowl:FacetConstraint ;
+      sp:arg1 xsd:minExclusive ;
+      sp:arg2 sp:gt ;
+      sp:arg3 ">" ;
+    ] ;
+  spin:constraint [
+      a spinowl:FacetConstraint ;
+      sp:arg1 xsd:minInclusive ;
+      sp:arg2 sp:ge ;
+      sp:arg3 ">=" ;
+    ] ;
+  spin:constraint [
+      a spinowl:HasValueConstraint ;
+    ] ;
+  spin:constraint [
+      a spinowl:MaxCardinalityConstraint ;
+      sp:arg1 owl:cardinality ;
+    ] ;
+  spin:constraint [
+      a spinowl:MaxCardinalityConstraint ;
+      sp:arg1 owl:maxCardinality ;
+    ] ;
+  spin:constraint [
+      a spinowl:MinCardinalityConstraint ;
+      sp:arg1 owl:cardinality ;
+    ] ;
+  spin:constraint [
+      a spinowl:MinCardinalityConstraint ;
+      sp:arg1 owl:minCardinality ;
+    ] ;
+  spin:constraint [
+      a spinowl:SomeValuesFromConstraint ;
+    ] ;
+.

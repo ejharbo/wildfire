@@ -1,0 +1,853 @@
+# baseURI: http://teamwork.topbraidlive.org/ui/teamworkgraphql
+# imports: http://topbraid.org/swa
+# imports: http://topbraid.org/teamwork.ui
+
+@prefix acjob: <http://evn.topbraidlive.org/tagger/acjob#> .
+@prefix acpp: <http://topbraid.org/nlp/autoclassifier-preproc#> .
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix autotagger: <http://evn.topbraidlive.org/autotagger#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix conceptmatch: <http://topbraid.org/conceptmatch#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix config-importers: <http://edg.topbraidlive.org/config/importers#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix core-soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix corpus: <http://topbraid.org/corpus#> .
+@prefix corpusprojects: <http://topbraid.org/corpus-projects#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkapp: <http://topbraid.org/swa/crosswalkapp#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dashboard: <http://example.org/dashboard#> .
+@prefix datagraph: <http://teamwork.topbraidlive.org/datagraph/datagraphprojects#> .
+@prefix dataset: <http://teamwork.topbraidlive.org/dataset#> .
+@prefix datasetapp: <http://topbraid.org/swa/datasetapp#> .
+@prefix datasetviewer: <http://topbraid.org/swa/datasetviewer#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ddl: <http://edg.topbraidlive.org/1.0/importers/ddl#> .
+@prefix default: <http://uispin.org/default#> .
+@prefix defaultapp: <http://topbraid.org/swa/defaultapp#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix document: <http://topbraid.org/document#> .
+@prefix documents: <http://edg.topbraid.solutions/1.0/shapes/documents#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg-config: <http://edg.ext.topbraidlive.org/schema/config/importers#> .
+@prefix edg-importer: <http://edg.topbraidlive.org/importer/> .
+@prefix edg-qa: <http://edg.topbraidlive.org/utility/qa/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.global: <urn:x-evn-global:> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix edgproduct: <http://edg.topbraidlive.org/edgproduct#> .
+@prefix eeh-lib: <http://www.environmenthub.no/spin/1.0/eeh-lib#> .
+@prefix eeh-reportlib: <http://www.environmenthub.no/spin/1.0/eeh-reportlib#> .
+@prefix elements: <http://purl.org/dc/elements/1.1/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evn: <http://topbraid.org/evn/evn#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evnimport: <http://evn.topbraidlive.org/uispin/evnimport#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix ex: <http://example.org/> .
+@prefix extjs: <http://uispin.com/extjs#> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix forms: <http://www.topbraid.org/2007/01/forms.owl#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix governance: <http://topbraid.org/teamworkgovernance.ui#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix graphql.search: <http://teamwork.topbraidlive.org/graphql.search#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix inference: <http://www.topbraid.org/2007/06/inference.owl#> .
+@prefix jdbc: <http://edg.topbraidlive.org/1.0/importers/jdbc#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix kennedys: <http://topbraid.org/examples/kennedys#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix lib-importer: <http://edg.topbraid.solutions/importer/lib#> .
+@prefix lineage-transform: <http://edg.topbraid.solutions/transform/importer/lineage#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix ontologyviewer: <http://topbraid.org/swa/ontologyviewer#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix proxy-lineage: <http://edg.topbraid.solutions/proxy/importer/lineage#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmapp: <http://rdm.topbraidlive.org/rdmapp#> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix rdmviewer: <http://rdm.topbraidlive.org/rdmviewer#> .
+@prefix saf: <http://topbraid.org/saf/> .
+@prefix safconfig: <http://topbraid.org/safconfig/> .
+@prefix safindex: <http://topbraid.org/safindex#> .
+@prefix safm: <http://saf.topbraidlive.org/metaschema/> .
+@prefix savedQueries: <http://teamwork.topbraidlive.org/ui/savedQueries#> .
+@prefix scheduler: <http://topbraid.org/scheduler#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix server: <http://server.topbraidlive.org/server.ui#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix shapesgraph: <http://teamwork.topbraidlive.org/shapesgraph/shapesgraphprojects#> .
+@prefix sharepoint: <http://topbraid.org/sharepoint#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skosshapes: <http://topbraid.org/skos.shapes#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spin.ui: <http://spinrdf.org/spin.ui#> .
+@prefix spinmap: <http://spinrdf.org/spinmap#> .
+@prefix spinmapl: <http://topbraid.org/spin/spinmapl#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix ss: <http://www.topbraidcomposer.org/owl/2006/08/spreadsheets.owl#> .
+@prefix stats: <http://topbraid.org/statistics#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swadoc: <http://topbraid.org/swadoc#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tablesmap: <http://topbraid.org/spin/tablesmap#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix taggerspin: <http://evn.topbraidlive.org/taggerspin#> .
+@prefix taggerui: <http://evn.topbraidlive.org/taggerui#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix tblui: <http://server.topbraidlive.org/tblui#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkAdmin: <http://teamwork.topbraidlive.org/doc/teamworkAdmin#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworkconstraints: <http://topbraid.org/teamworkconstraints#> .
+@prefix teamworkdashboard: <http://topbraid.org/teamworkdashboard#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix teamworkupdate: <http://teamworkAPI.topbraid.com/teamworkUpdate#> .
+@prefix textindex: <http://topbraid.org/textindex#> .
+@prefix tika-importer: <http://teamwork.topbraidlive.org/corpus/tika-importer#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix tracker: <http://teamwork.topbraidlive.org/ui/tracker#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uitest: <http://uispin.org/test#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix userdat: <http://teamwork.topbraidlive.org/ui/userdata> .
+@prefix userdata: <http://teamwork.topbraidlive.org/ui/userdata#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix victory: <http://edg.topbraid.solutions/victory/> .
+@prefix visual: <http://topbraid.org/visual#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xhtml: <http://topbraid.org/xhtml#> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://teamwork.topbraidlive.org/ui/teamworkgraphql>
+  a owl:Ontology ;
+  owl:imports <http://topbraid.org/swa> ;
+  owl:imports <http://topbraid.org/teamwork.ui> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+teamwork:GraphQLPagePlugin
+  a teamwork:ExportPlugin ;
+  teamwork:pluginMayNotScale true ;
+  teamwork:pluginValidExpression true ;
+  teamwork:validForTags true ;
+  ui:prototype """
+<ui:group let:hasDefault=\"{= !teamwork:isOntology(?projectGraph) }\" let:link=\"{= teamwork:graphQLPageLink(?projectGraph, ?tag) }\">
+    <teamwork:ActionLink arg:comment=\"Write and execute GraphQL queries using an interactive query builder.{= IF(?hasDefault, &quot; Use the link above to query the default GraphQL schema for this asset collection.&quot;, ?none) }\" arg:icon=\"lib/teamwork/build/images/teamwork/icon-graphql.svg\" arg:link=\"{= IF(?hasDefault, ?link, ?none) }\" arg:title=\"GraphQL Queries\">
+        <div>
+            <div>You can query for instances of a selected class based on shape definitions:</div>
+            <ui:setContext let:loadId=\"{= ui:uniqueId() }\" ui:queryGraph=\"{= ui:graphWithImports(?projectGraph) }\">
+                <swa:LabeledElement arg:label=\"Shape/Class:\">
+                    <swa:AutoComplete arg:allowURIs=\"{= true }\" arg:onSelect=\"swa.loadWithResource('{= ?loadId }', 'shape', resource)\" arg:type=\"{= sh:NodeShape }\"/>
+                </swa:LabeledElement>
+                <ui:loadable ui:loadId=\"{= ?loadId }\" ui:loadOnDemand=\"{= true }\">
+                    <ui:group let:link=\"{= teamwork:graphQLPageLinkForShape(?projectGraph, ?shape, ?tag) }\">
+                        <script>window.location.href = '{= ?link }'</script>
+                    </ui:group>
+                </ui:loadable>
+            </ui:setContext>
+            <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?projectGraph) }\">
+                <ui:call ui:template=\"{= teamwork:GraphQLSchemas }\">
+                    <div>
+                        <span>Alternative GraphQL Schemas:</span>
+                        <ul>
+                            <ui:forEach ui:resultSet=\"{= ?rs }\">
+                                <ui:if ui:condition=\"{= NOT EXISTS {
+                                    ?projectGraph a ?schema .
+                                } }\">
+                                    <li>
+                                        <a href=\"{= ?link }/{= ?schemaName }\">as {= ?schemaLabel }</a>
+                                    </li>
+                                </ui:if>
+                            </ui:forEach>
+                        </ul>
+                    </div>
+                </ui:call>
+            </ui:setContext>
+            <div>
+                <ui:createLink arg:projectGraph=\"{= ?projectGraph }\" ui:viewClass=\"{= teamwork:GraphQLTutorialPage }\">
+                    <span>See also: </span>
+                    <a href=\"{= ?link }\">GraphQL in TopBraid Tutorial</a>
+                </ui:createLink>
+            </div>
+        </div>
+    </teamwork:ActionLink>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "GraphQL queries plugin" ;
+  rdfs:subClassOf teamwork:ExportPlugins ;
+.
+teamwork:GraphQLTutorialPage
+  a ui:NodeClass ;
+  ui:prototype """
+<teamwork:Chrome arg:pageType=\"project-page\" arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= teamwork:ExportProjectTab }\">
+    <h1>GraphQL Tutorial for {= teamwork:getProductAbbreviation() }</h1>
+    <p>This interactive tutorial walks you through the main features of GraphQL as supported by TopBraid.</p>
+    <p>For general information on GraphQL there are various <a href=\"http://graphql.org\" target=\"_blank\">external web sites</a>, but in this tutorial we only expect some familiarity with JSON.</p>
+    <teamwork:GraphQLTutorialSectionIntroduction ui:args=\"*\"/>
+    <teamwork:GraphQLTutorialSectionQueries ui:args=\"*\"/>
+    <teamwork:GraphQLTutorialSectionFiltering ui:args=\"*\"/>
+    <teamwork:GraphQLTutorialSectionOrdering ui:args=\"*\"/>
+    <teamwork:GraphQLTutorialSectionPaging ui:args=\"*\"/>
+    <teamwork:GraphQLTutorialSectionAggregations ui:args=\"*\"/>
+    <teamwork:GraphQLTutorialSectionDeriving ui:args=\"*\"/>
+</teamwork:Chrome>
+"""^^ui:Literal ;
+  rdfs:label "GraphQL tutorial page" ;
+  rdfs:subClassOf teamwork:MustHaveAccessToProjectPage ;
+.
+teamwork:GraphQLTutorialQuery
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "A GraphQL query that will be inserted into the GraphQL tutorial if the user is in a suitable project." ;
+  rdfs:label "GraphQL tutorial query" ;
+  rdfs:subClassOf graphql:Query ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path teamwork:projectType ;
+      sh:class teamwork:ProjectType ;
+      sh:description "The project type(s) that the query is suitable for." ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path teamwork:sectionId ;
+      sh:datatype xsd:string ;
+      sh:description "The ids of tutorial sections where this query should appear. These are defined by corresponding teamwork:GraphQLTutorialQueryPlaceholders." ;
+      sh:minCount 1 ;
+      sh:name "section id" ;
+    ] ;
+.
+teamwork:GraphQLTutorialQueryEmpty
+  a teamwork:GraphQLTutorialQuery ;
+  graphql:queryString """{
+    
+}""" ;
+  teamwork:sectionId "query-empty" ;
+  rdfs:comment "To explore what kinds of top-level objects are available, move the cursor between the curly braces and press <code>Ctrl-Space</code>:" ;
+  rdfs:label "GraphQL tutorial query empty" ;
+.
+teamwork:GraphQLTutorialQueryPlaceholder
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:onDemand ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to have the examples load on demand only (to save load time)." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:sectionId ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The id of this section, used to identify which queries can show up." ;
+    ] ;
+  ui:headIncludes """
+<style>pre { tab-size: 2; -moz-tab-size: 2; -o-tab-size: 2; }</style>
+"""^^ui:Literal ;
+  ui:prototype """
+<ui:group letrs:otherQueries=\"{#
+        SELECT ?queryProjectType (COUNT(?query) AS ?count)
+        WHERE {
+            GRAPH ui:graph {
+                BIND (teamwork:getProjectType(?projectGraph) AS ?projectType) .
+                ?query a teamwork:GraphQLTutorialQuery .
+                ?query teamwork:sectionId ?sectionId .
+                ?query teamwork:projectType ?queryProjectType .
+                FILTER (?projectType != ?queryProjectType) .
+            } .
+        }
+        GROUP BY ?queryProjectType
+        ORDER BY (?queryProjectType) }\" letrs:queries='{#
+        SELECT ?query ?src ?comment ?string
+        WHERE {
+            GRAPH ui:graph {
+                BIND (teamwork:getProjectType(?projectGraph) AS ?projectType) .
+                ?query a teamwork:GraphQLTutorialQuery .
+                ?query teamwork:sectionId ?sectionId .
+                FILTER (NOT EXISTS {
+                    ?query teamwork:projectType ?any .
+                } || EXISTS {
+                    ?query teamwork:projectType ?projectType .
+                }) .
+                ?query graphql:queryString ?string .
+                BIND (spl:object(?query, graphql:variables) AS ?variables) .
+                BIND (spl:object(?query, rdfs:comment) AS ?comment) .
+                BIND (teamwork:graphQLPageLink(?projectGraph) AS ?baseLink) .
+                BIND (CONCAT(?baseLink, \"?query=\", ENCODE_FOR_URI(?string), IF(bound(?variables), CONCAT(\"&amp;amp;variables=\", ENCODE_FOR_URI(?variables)), \"\")) AS ?src) .
+            } .
+        }
+        ORDER BY (?query) }'>
+    <ui:if ui:condition=\"{= spr:isEmpty(?queries) }\">
+        <ui:if ui:condition=\"{= (!spr:isEmpty(?otherQueries)) &amp;&amp; smf:isBound(spr:cell(?otherQueries, 0, 0)) }\">
+            <p class=\"text-danger\">
+                <span>There are no suitable examples for this section that work with the current {= teamwork:singularProjectTypeLabel(teamwork:getProjectType(?projectGraph)) }.</span>
+                <swa:Space/>
+                <span>However, we have </span>
+                <ui:forEach ui:resultSet=\"{= ?otherQueries }\" ui:separator=\", \">
+                    <span>{= ?count } example{= IF((?count &gt; 1), \"s\", ?none) } for {= teamwork:pluralProjectTypeLabel(?queryProjectType) }</span>
+                </ui:forEach>
+                <span>.</span>
+            </p>
+        </ui:if>
+    </ui:if>
+    <ui:else>
+        <ui:forEach ui:resultSet=\"{= ?queries }\">
+            <ui:if ui:condition=\"{= bound(?comment) }\">
+                <p>
+                    <ui:parse ui:str=\"{= ?comment }\"/>
+                </p>
+            </ui:if>
+            <ui:else>
+                <p>Example using {= teamwork:projectLabel(?projectGraph) }:</p>
+            </ui:else>
+            <ui:if ui:condition=\"{= ?onDemand }\">
+                <ui:group let:id=\"{= ui:uniqueId() }\">
+                    <ui:loadable ui:loadId=\"{= ?id }\">
+                        <ui:if ui:condition=\"{= ?show }\">
+                            <div style=\"border:1px solid #808080; margin-bottom: 10px\">
+                                <iframe frameborder=\"0\" height=\"370\" src=\"{= ?src }\" width=\"100%\"/>
+                            </div>
+                        </ui:if>
+                        <ui:else>
+                            <pre>{= ?string }</pre>
+                            <p>
+                                <b>
+                                    <a href=\"javascript:void(0)\" onclick=\"swa.load('{= ?id }', { show: true })\">Try and modify this example</a>
+                                </b>
+                                <swa:Space/>
+                                <span>(Give it a few seconds to fully load)</span>
+                            </p>
+                        </ui:else>
+                    </ui:loadable>
+                </ui:group>
+            </ui:if>
+            <ui:else>
+                <div style=\"border:1px solid #808080; margin-bottom: 10px\">
+                    <iframe frameborder=\"0\" height=\"370\" src=\"{= ?src }\" width=\"100%\"/>
+                </div>
+            </ui:else>
+        </ui:forEach>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "GraphQL Tutorial query placeholder" ;
+  rdfs:subClassOf teamwork:ProjectElements ;
+.
+teamwork:GraphQLTutorialSection
+  a ui:NodeClass ;
+  ui:abstract true ;
+  rdfs:label "Graph QLTutorial section" ;
+  rdfs:subClassOf teamwork:ProjectElements ;
+.
+teamwork:GraphQLTutorialSectionAggregations
+  a ui:NodeClass ;
+  ui:prototype """
+<section>
+    <h2>Aggregations</h2>
+    <p class=\"text-danger\">
+		This section assumes that <b>Enable aggregation fields</b> has been switched on in the server configuration parameters.
+		The features are switched off by default because they can cause schema bloat in large data models.
+		You are encouraged to use
+		<a href=\"https://www.topquadrant.com/graphql/values.html\">SHACL Property Value Rules</a> to define the kinds of aggregations
+		that users may ask via dedicated derived fields.
+	</p>
+    <p>
+		TopBraid's GraphQL implementation comes with support for common scenarios
+		where multiple values need to be aggregated into a single value.
+	</p>
+    <section>
+        <h3>Counting</h3>
+        <p>
+			All multi-valued GraphQL object fields are accompanied with a <code>_COUNT</code>
+			field that produces an integer value representing the number of (matching) values.
+			For example, for a field <code>column</code> there is a corresponding
+			<code>column_COUNT</code> field available.
+		</p>
+        <p>
+			The count fields (and the other aggregation types) can use any number of filters
+			as described above, for example to only count those columns that have a specific datatype.
+		</p>
+        <teamwork:GraphQLTutorialQueryPlaceholder arg:onDemand=\"{= true }\" arg:sectionId=\"counting\" ui:args=\"*\"/>
+    </section>
+    <section>
+        <h3>Concatenating Strings</h3>
+        <p>
+			All multi-valued GraphQL object fields are accompanied with a <code>_CONCAT</code>
+			field that produces a string value built by concatenating strings for each value.
+			This takes an optional parameter <code>separator</code> if the string should use
+			something else than the default comma in between sub-strings.
+			Furthermore, there is an optional argument <code>labelExpr</code> that transforms
+			values on-the-fly using SPARQL expressions.
+			For example, use <code>labelExpr:\"LCASE($value)\"</code> to produce a concatenation
+			of lower-case strings.
+		</p>
+        <teamwork:GraphQLTutorialQueryPlaceholder arg:onDemand=\"{= true }\" arg:sectionId=\"concatenating\" ui:args=\"*\"/>
+    </section>
+</section>
+"""^^ui:Literal ;
+  rdfs:subClassOf teamwork:GraphQLTutorialSection ;
+.
+teamwork:GraphQLTutorialSectionDeriving
+  a ui:NodeClass ;
+  ui:prototype """
+<section>
+    <h2>Derived Fields</h2>
+    <p class=\"text-danger\">
+		This section assumes that <b>Enable derive fields</b> has been switched on in the server configuration parameters.
+		The feature is switched off by default because it may give users too much expressive power that may lead to poor performance.
+		You are encouraged to use
+		<a href=\"https://www.topquadrant.com/graphql/values.html\">SHACL Property Value Rules</a> to define the kinds of derivations
+		that users may ask.
+	</p>
+    <p>
+		In some cases, JSON fields should be computed on the fly.
+		TopBraid's GraphQL implementation supports \"magic\" fields that are derived
+		using SPARQL expressions.
+		There is one such field for the built-in datatypes: <code>deriveBoolean</code>,
+		<code>deriveFloat</code>, <code>deriveInt</code> and <code>deriveString</code>.
+		It is common to use GraphQL aliases so that the names in the generated JSON will not
+		start with <code>derive</code>.
+	</p>
+    <p>
+		The values of these fields must be valid SPARQL expressions, and these
+		fields can access the values of other property values similar to how SPARQL-based
+		<code>filter</code> expressions work.
+	</p>
+    <p/>
+    <teamwork:GraphQLTutorialQueryPlaceholder arg:onDemand=\"{= true }\" arg:sectionId=\"deriving\" ui:args=\"*\"/>
+</section>
+"""^^ui:Literal ;
+  rdfs:subClassOf teamwork:GraphQLTutorialSection ;
+.
+teamwork:GraphQLTutorialSectionFiltering
+  a ui:NodeClass ;
+  ui:prototype """
+<section>
+    <h2>Filtering</h2>
+    <p>
+		Any GraphQL object field, such as those on the top-level of a query,
+		can take parameters - name-value pairs enclosed in round braces behind the field name.
+		So for example if your query is about database tables, use <code>DatabaseTables (...)</code>
+		to specify which database tables you want to have returned.
+	</p>
+    <section>
+        <h4>Filtering by Property Values</h4>
+        <p>
+		The simplest type of filter is by matching specific property values.
+		For each field that the object can take, you can specify a name-value pair
+		where the name is the field's name.
+		So if your object has a field called <code>acronym</code> then you can write
+		<code>databaseTables (acronym:\"PPL\") { ... }</code> to return only those instances
+		where the acronym has exactly the given value.
+		This is typically a very fast operation, as it can exploit existing database indices.
+		Alternatively, use <code>(acronym:null)</code> to filter those instances that do
+		not have any value for the given field (which is quite a bit slower).
+	</p>
+        <teamwork:GraphQLTutorialQueryPlaceholder arg:onDemand=\"{= true }\" arg:sectionId=\"filtering-hasValue\" ui:args=\"*\"/>
+        <p>
+		In addition to the fields specific to the current object type, you can match values
+		of <code>uri</code> to select exactly the one instance that has this URI, if it exists.
+		It is however not possible to match by <code>label</code>.
+		To match by display label, use something like <code>filter:\"regex($label, 'text', 'i')\"</code>.
+	</p>
+        <p>
+		A note to the RDF geeks: GraphQL uses just a handful of datatypes such as <code>String</code>
+		and <code>Float</code>. TopBraid's GraphQL mapping converts between these and the RDF/XSD datatypes
+		on the fly. While the mapping is hopefully obvious in most cases, keep in mind that
+		we use <code>String</code> to represent non-numeric types including <code>xsd:date</code> and <code>xsd:dateTime</code>.
+		URIs are mapped to the GraphQL type <code>ID</code> which is essentially the same as <code>String</code>.
+	</p>
+    </section>
+    <section>
+        <h4>Filtering by Constraints</h4>
+        <p>
+			This type of filtering uses built-in constraint types (based on a subset of SHACL)
+			that provide a declarative language to express common kinds of conditions.
+			These constraints are used in values of the <code>where</code> parameter, which must
+			be an input object that may have name-value pairs for any of the fields of the surrounding
+			object type. Each of these values must be another object that uses the names from the
+			table below to specify the actual constraints.
+			This is best explained with an example.
+		</p>
+        <teamwork:GraphQLTutorialQueryPlaceholder arg:onDemand=\"{= true }\" arg:sectionId=\"filtering-where\" ui:args=\"*\"/>
+        <p>
+			The currently supported constraint parameters are:
+		</p>
+        <table class=\"table\">
+            <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Condition</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>
+                    <code>hasValue</code>
+                </td>
+                <td>Same as field</td>
+                <td>Object must have exactly the given value (plus maybe others)</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>minCount</code>
+                </td>
+                <td>
+                    <code>Int</code>
+                </td>
+                <td>Object must have at least <code>minCount</code> values</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>maxCount</code>
+                </td>
+                <td>
+                    <code>Int</code>
+                </td>
+                <td>Object must have at most <code>maxCount</code> values</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>minExclusive</code>
+                </td>
+                <td>Same as field</td>
+                <td>Object must have a value so that <code>value &gt; minExclusive</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>minInclusive</code>
+                </td>
+                <td>Same as field</td>
+                <td>Object must have a value so that <code>value &gt;= minInclusive</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>maxInclusive</code>
+                </td>
+                <td>Same as field</td>
+                <td>Object must have a value so that <code>value &lt;= maxInclusive</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>maxExclusive</code>
+                </td>
+                <td>Same as field</td>
+                <td>Object must have a value so that <code>value &lt; maxExclusive</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>pattern</code>
+                </td>
+                <td>
+                    <code>String</code>
+                </td>
+                <td>Object must have a value that matches the given regular expression</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>flags</code>
+                </td>
+                <td>
+                    <code>String</code>
+                </td>
+                <td>Optional flags for the <code>pattern</code> regex engine, such as \"i\" to ignore case</td>
+            </tr>
+            <tr>
+                <td>
+                    <code>exists</code>
+                </td>
+                <td>Nested object</td>
+                <td>One of the values must conform to all nested constraints</td>
+            </tr>
+        </table>
+        <p>
+			From those, the <code>exists</code> constraint can be used to formulate
+			conditions that walk into adjacent objects, such as to find Persons where
+			the Address has a City with at least 1 million inhabitants.
+		</p>
+    </section>
+    <section>
+        <h4>Filtering by Text</h4>
+        <p>
+			Each object type supports the parameter <code>queryText</code> that can take any search
+			string as value, implementing a general free-text search.
+			If present, the system will return all objects where any literal (scalar) value matches
+			the given string.
+		</p>
+        <p>
+			In TopBraid this is currently a potentially very slow operation because it performs an
+			iteration over all field values and then does a regular expression matching.
+			Future versions may use Lucene index and other kinds of fuzzy matching instead of regex matching.
+		</p>
+        <teamwork:GraphQLTutorialQueryPlaceholder arg:onDemand=\"{= true }\" arg:sectionId=\"filtering-queryText\" ui:args=\"*\"/>
+    </section>
+    <section>
+        <h4>Filtering by SPARQL Expressions</h4>
+        <p>
+		If the simple filters from the previous sections are not sufficient, you can fall back to SPARQL.
+		Even if you are not familiar with SPARQL, this is worth exploring as the syntax for many scenarios is
+		quite intuitive.
+	</p>
+        <p>
+		The parameter to use for arbitrary SPARQL expressions is <code>filter</code>.
+		The values of <code>filter</code> must be strings that can be parsed into valid SPARQL
+		expressions, in the syntax that is typically used in FILTER or BIND statements in SPARQL.
+		SPARQL includes a large number of built-in functions and operators, including functions
+		that are specific to the TopBraid platform.
+	</p>
+        <p>
+		In those SPARQL filter expressions certain variables have pre-defined values.
+		For example, if your filter expression is <code>$variance &gt; 0.5</code> and you are
+		inside of a database column object, the variable <code>$variance</code> will hold the
+		value of the corresponding property (<code>edg:variance</code>) from that object.
+		Note that these values are not available for multi-valued properties.
+		In those cases, use <code>EXISTS</code> or <code>NOT EXISTS</code> in SPARQL expressions.
+		The special variable <code>$this</code> points at the current object itself.
+		The variables <code>$uri</code> and <code>$label</code> have the corresponding fields as their string values.
+	</p>
+        <teamwork:GraphQLTutorialQueryPlaceholder arg:onDemand=\"{= true }\" arg:sectionId=\"filtering-filter\" ui:args=\"*\"/>
+        <p>
+		For advanced users, the <code>filter</code> parameter offers basically the full expressivity
+		of SPARQL, including <code>EXISTS</code> and <code>NOT EXISTS</code> clauses that check
+		against arbitrary RDF graph patterns.
+		Take care with variable names in such complex scenarios, as they may overlap with the pre-bound variables.
+		Using these advanced features does require knowledge of the underlying RDF data model and
+		the available namespaces, so we do not cover those scenarios in this tutorial.
+		See some SPARQL tutorials or the <a href=\"https://www.w3.org/TR/sparql11-query/#expressions\" target=\"_blank\">spec</a>
+		for more information.
+	</p>
+    </section>
+</section>
+"""^^ui:Literal ;
+  rdfs:subClassOf teamwork:GraphQLTutorialSection ;
+.
+teamwork:GraphQLTutorialSectionIntroduction
+  a ui:NodeClass ;
+  ui:prototype """
+<section>
+    <h2>Getting Started</h2>
+    <p>
+		A good way to learn GraphQL is through examples.
+		We have prepared various examples for data asset collections and glossaries,
+		and recommend to walk through this tutorial with an asset collection of these types open.
+	</p>
+    <teamwork:GraphQLTutorialQueryPlaceholder arg:sectionId=\"introduction\" ui:args=\"*\"/>
+    <p>GraphQL is a query language producing JSON objects.
+		In a nutshell, GraphQL users define a query string that has a similar form
+		to the desired JSON output.
+		These query strings, possibly together with additonal input variables, do not only
+		specify which fields shall be returned but may also include parameters to filter,
+		sort or page through the underlying data.
+	</p>
+    <p>TopBraid's GraphQL service supports all standard features of GraphQL, providing
+		access to data stored in {= teamwork:getProductAbbreviation() } asset collections.
+		The&nbsp;<a href=\"{= teamwork:graphQLPageLink(?projectGraph) }\">interactive query builder</a>
+		based on the <a href=\"https://github.com/graphql/graphiql\" target=\"_blank\">GraphiQL</a> tool used in this tutorial provides a playground to experiment
+		with the features of GraphQL.
+		Note that the editor supports auto-complete of possible fields and parameters,
+		by pressing <code>Ctrl-Space</code>.
+		The <em>Docs</em> button can be used to explore all available fields together with
+		some documentation.
+	</p>
+    <p>For any given asset collection (RDF graph) TopBraid's GraphQL service automatically
+		generates a GraphQL schema that defines the types of objects and their fields that
+		can be used in a query.
+		Technically, this schema is based on the SHACL shapes that form the data model of
+		most {= teamwork:getProductAbbreviation() } asset collections.
+		These shapes define which \"views\" on the underlying data gets exposed into what kinds
+		of JSON objects.
+		For example, one of the shapes used by EDG asset collections defines a property<code>edg:name</code> with value type string and a maximum cardinality of 1.
+		This gets mapped into a single-valued GraphQL field called <code>name</code>of type string.
+		Some users of {= teamwork:getProductAbbreviation() } may want to use the Ontology editor to define
+		additional shapes in case some views are not covered.
+		Average users of GraphQL in TopBraid do not need to know about these technical details
+		of the RDF-to-GraphQL mapping.</p>
+</section>
+"""^^ui:Literal ;
+  rdfs:subClassOf teamwork:GraphQLTutorialSection ;
+.
+teamwork:GraphQLTutorialSectionOrdering
+  a ui:NodeClass ;
+  ui:prototype """
+<section>
+    <h2>Ordering</h2>
+    <p>
+		For multi-valued object fields, use the <code>orderBy</code> parameter if you want
+		the results sorted.
+		This is slower and RDF data is inherently unordered, so use this only where needed.
+		The values of <code>orderBy</code> come from an enumeration of the available fields
+		including <code>uri</code> and <code>label</code>.
+	</p>
+    <p>
+		The optional field <code>orderByDesc</code> can be set to <code>true</code>
+		for descending order.
+	</p>
+    <p>
+		The optional field <code>orderByExpr</code> can be used to specify a SPARQL expression as a String.
+		This expression is evaluated prior to sorting, with each value of the <code>orderBy</code> field
+		assigned to the variable <code>$value</code>.
+		For example use <code>orderByExpr: \"LCASE($value)\"</code> to implement ignore-case ordering.
+	</p>
+    <teamwork:GraphQLTutorialQueryPlaceholder arg:onDemand=\"{= true }\" arg:sectionId=\"ordering\" ui:args=\"*\"/>
+</section>
+"""^^ui:Literal ;
+  rdfs:subClassOf teamwork:GraphQLTutorialSection ;
+.
+teamwork:GraphQLTutorialSectionPaging
+  a ui:NodeClass ;
+  ui:prototype """
+<section>
+    <h2>Paging</h2>
+    <p>
+		Like many other GraphQL implementations, top-level query objects in TopBraid
+		support the parameters <code>first</code> and <code>skip</code> to return partial results:
+	</p>
+    <ul>
+        <li>
+            <code>first</code> is the maximum number of objects to return in a transaction</li>
+        <li>
+            <code>skip</code> is the offset, starting with 0 by default</li>
+    </ul>
+    <teamwork:GraphQLTutorialQueryPlaceholder arg:onDemand=\"{= true }\" arg:sectionId=\"paging\" ui:args=\"*\"/>
+</section>
+"""^^ui:Literal ;
+  rdfs:subClassOf teamwork:GraphQLTutorialSection ;
+.
+teamwork:GraphQLTutorialSectionQueries
+  a ui:NodeClass ;
+  ui:prototype """
+<section>
+    <h2>GraphQL Queries</h2>
+    <p>
+		The entry point into GraphQL is the top-level query object, in between the curly braces.
+		In TopBraid you have to select the type (shape) of top-level object that you want to retrieve.
+		For example, for a data assets collection, you may want to fetch data base tables.
+		The internal name for these in TopBraid is <code>edg:DatabaseTable</code> and their name
+		in GraphQL is a lower-cased plural form of that name, i.e. <code>databaseTables</code>.
+	</p>
+    <teamwork:GraphQLTutorialQueryPlaceholder arg:onDemand=\"{= true }\" arg:sectionId=\"query-empty\" ui:args=\"*\"/>
+    <p>
+		Like every GraphQL object, each top-level query object must have at least one field,
+		again enclosed by curly braces.
+		There are two built-in fields that are always available:
+	</p>
+    <ul>
+        <li>
+            <code>label</code> returns a human-readable label, using the preferred language
+		of the HTTP request if available</li>
+        <li>
+            <code>uri</code> returns the resource identifier (URI) of the object as a string</li>
+    </ul>
+    <teamwork:GraphQLTutorialQueryPlaceholder arg:onDemand=\"{= true }\" arg:sectionId=\"query-simple\" ui:args=\"*\"/>
+</section>
+"""^^ui:Literal ;
+  rdfs:subClassOf teamwork:GraphQLTutorialSection ;
+.

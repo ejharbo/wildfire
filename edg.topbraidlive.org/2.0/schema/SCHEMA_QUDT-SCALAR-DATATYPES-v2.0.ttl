@@ -1,0 +1,1330 @@
+# baseURI: http://qudt.org/2.0/schema/scalar-datatypes
+# imports: http://datashapes.org/dash
+# imports: http://qudt.org/2.0/schema/datatype
+# imports: http://qudt.org/2.0/schema/qudt
+# imports: http://www.linkedmodel.org/schema/dtype
+# imports: http://www.linkedmodel.org/schema/vaem
+# imports: http://www.w3.org/2004/02/skos/core
+# imports: http://www.w3.org/ns/shacl#
+
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix voag: <http://voag.linkedmodel.org/schema/voag#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+dcterms:contributor
+  a owl:AnnotationProperty ;
+  vaem:isMetadataFor <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "contributor" ;
+.
+dcterms:creator
+  a owl:AnnotationProperty ;
+  vaem:isMetadataFor <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "creator" ;
+.
+dcterms:description
+  a owl:AnnotationProperty ;
+  vaem:isMetadataFor <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "description" ;
+.
+dcterms:rights
+  a owl:AnnotationProperty ;
+  vaem:isMetadataFor <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "rights" ;
+.
+dcterms:subject
+  a owl:AnnotationProperty ;
+  vaem:isMetadataFor <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "subject" ;
+.
+dcterms:title
+  a owl:AnnotationProperty ;
+  vaem:isMetadataFor <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "title" ;
+.
+<http://qudt.org/2.0/schema/scalar-datatypes>
+  a owl:Ontology ;
+  dcterms:contributor "Chip Masters" ;
+  dcterms:contributor "Daniel Mekonnen" ;
+  dcterms:creator "Ralph Hodgson" ;
+  dcterms:description "The QUDT 'Datatype' ontology extends VAEM 'DTYPE' with further classes and properties for the specification of data types." ;
+  dcterms:subject "Datatypes" ;
+  dcterms:title "The QUDT Datatype Ontology" ;
+  vaem:hasCatalogEntry voag:QUDT-SchemaCatalogEntry ;
+  vaem:hasGraphMetadata <http://qudt.org/schema/scalar-datatype/GMD_datatype> ;
+  vaem:hasGraphRole vaem:SchemaGraph ;
+  vaem:hasLicenseType voag:CC-SHAREALIKE_3PT0-US ;
+  vaem:intent "This ontology is to be used by other ontologies that need to reference type definitions." ;
+  vaem:namespace "http://qudt.org/schema/dtype/" ;
+  vaem:namespacePrefix "qudt.type" ;
+  vaem:specificity 1 ;
+  vaem:url "http://qudt.org/2.0/schema/dtype"^^xsd:anyURI ;
+  rdfs:label "QUDT SCHEMA - Datatypes" ;
+  owl:imports <http://datashapes.org/dash> ;
+  owl:imports <http://qudt.org/2.0/schema/datatype> ;
+  owl:imports <http://qudt.org/2.0/schema/qudt> ;
+  owl:imports <http://www.linkedmodel.org/schema/dtype> ;
+  owl:imports <http://www.linkedmodel.org/schema/vaem> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+  owl:imports sh: ;
+.
+qudt:BigIntegerType
+  a owl:Class ;
+  a sh:NodeShape ;
+  dcterms:description "A Big Integer is an integer that can be represented in eight octets (64 bits) of machine memory. Big integers may be signed or unsigned." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Big Integer Type" ;
+  rdfs:subClassOf qudt:IntegerDatatype ;
+  sh:property qudt:BigIntegerType-octets ;
+.
+qudt:BigIntegerType-octets
+  a sh:PropertyShape ;
+  sh:path qudt:octets ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:datatype xsd:integer ;
+  sh:hasValue 8 ;
+  sh:minInclusive 0 ;
+.
+qudt:BitFieldType
+  a owl:Class ;
+  a sh:NodeShape ;
+  dcterms:description "A bit field is a common idiom used in computer programming to store a set of Boolean datatype flags compactly, as a series of bits. The bit field is stored in an integral type of known, fixed bit-width. Each Boolean flag is stored in a separate bit. Usually the source code will define a set of constants, each a power of two, that semantically associate each individual bit with its respective Boolean flag. The bitwise operators and, or, and not are used in combination to set, reset and test the flags." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Bit Field Type" ;
+  rdfs:subClassOf qudt:ScalarDatatype ;
+  sh:property qudt:BitFieldType-encodedValue ;
+.
+qudt:BooleanType
+  a owl:Class ;
+  a sh:NodeShape ;
+  dcterms:description "A boolean data type can take on only two values." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Boolean Type" ;
+  rdfs:subClassOf qudt:OrdinalType ;
+  sh:property qudt:BooleanType-encoding ;
+.
+qudt:BooleanType-encoding
+  a sh:PropertyShape ;
+  sh:path qudt:encoding ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:class qudt:BooleanEncodingType ;
+.
+qudt:ByteEncodingType
+  a owl:Class ;
+  dcterms:description "This class contains the various ways that information may be encoded into bytes." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Byte Encoding" ;
+  rdfs:subClassOf qudt:Encoding ;
+.
+qudt:CharEncoding
+  a qudt:BooleanEncodingType ;
+  a qudt:CharEncodingType ;
+  dc:description "7 bits of 1 octet" ;
+  qudt:bytes 1 ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Char Encoding" ;
+.
+qudt:CharEncodingType
+  a owl:Class ;
+  dcterms:description "The class of all character encoding schemes, each of which defines a rule or algorithm for encoding character data as a sequence of bits or bytes." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Char Encoding Type" ;
+  rdfs:subClassOf qudt:Encoding ;
+.
+qudt:CharacterType
+  a owl:Class ;
+  dcterms:description "A Character Type is a data type that defines the type and encoding of single characters." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Character Type" ;
+  rdfs:subClassOf qudt:OrdinalType ;
+.
+qudt:DateStringType
+  a owl:Class ;
+  dcterms:description "Date String Types are scalar data types that define the properties of strings that represent calendar dates." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Date String Type" ;
+  rdfs:subClassOf qudt:DateTimeStringType ;
+.
+qudt:DateTimeStringEncodingType
+  a owl:Class ;
+  a sh:NodeShape ;
+  dcterms:description "Date Time encodings are logical encodings for expressing date/time quantities as strings by applying unambiguous formatting and parsing rules." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Date Time String Encoding Type" ;
+  rdfs:subClassOf qudt:StringEncodingType ;
+  sh:property qudt:DateTimeStringEncodingType-allowedPattern ;
+  sh:property [
+      sh:path qudt:allowedPattern ;
+      sh:qualifiedMinCount 1 ;
+      sh:qualifiedValueShape [
+          sh:datatype xsd:string ;
+        ] ;
+    ] ;
+.
+qudt:DateTimeStringEncodingType-allowedPattern
+  a sh:PropertyShape ;
+  sh:path qudt:allowedPattern ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:datatype xsd:string ;
+.
+qudt:DateTimeStringType
+  a owl:Class ;
+  a sh:NodeShape ;
+  dcterms:description "A class of data types for structures that represent temporal quantities. I.e. calendar dates, times, duration of time since a given epoch, etc." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Temporal Type" ;
+  rdfs:subClassOf qudt:StringType ;
+  sh:property qudt:DateTimeStringType-encoding ;
+.
+qudt:DateTimeStringType-encoding
+  a sh:PropertyShape ;
+  sh:path qudt:encoding ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:class qudt:DateTimeStringEncodingType ;
+  sh:maxCount 1 ;
+.
+qudt:DoublePrecisionEncoding
+  a qudt:FloatingPointEncodingType ;
+  qudt:bytes 64 ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Single Precision Real Encoding" ;
+.
+qudt:DoublePrecisionType
+  a owl:Class ;
+  dcterms:description "A double precision data type specifies how a numeric value, such as an integer or real number, is stored in memory that occupies two words in computer memory, where the byte length of a word depends on machine address size of the computer processor. For example, on 32-bit machine architectures, a word is four bytes, and so double precision data value on a 32-bit machine architecture occupies eight bytes of memory." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Double Precision Type" ;
+  rdfs:subClassOf qudt:NumericType ;
+  owl:disjointWith qudt:SinglePrecisionType ;
+.
+qudt:Encoding
+  a owl:Class ;
+  a sh:NodeShape ;
+  dcterms:description "An encoding is a rule or algorithm that is used to convert data from a native, or unspecified form into a specific form that satisfies the encoding rules. Examples of encodings include character encodings, such as UTF-8." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Encoding" ;
+  rdfs:subClassOf skos:Concept ;
+  sh:property qudt:Encoding-bits ;
+  sh:property qudt:Encoding-bytes ;
+.
+qudt:Encoding-bits
+  a sh:PropertyShape ;
+  sh:path qudt:bits ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:datatype xsd:integer ;
+  sh:maxCount 1 ;
+.
+qudt:Encoding-bytes
+  a sh:PropertyShape ;
+  sh:path qudt:bytes ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:datatype xsd:integer ;
+  sh:maxCount 1 ;
+.
+qudt:EndianType
+  a owl:Class ;
+  dcterms:description """In computing, endianness is the ordering used to represent some kind of data as a sequence of smaller units. Typical cases are the order in which integer values are stored as bytes in computer memory (relative to a given memory addressing scheme) and the transmission order over a network or other medium. When specifically talking about bytes, endianness is also referred to simply as byte order. 
+
+Most computer processors simply store integers as sequences of bytes, so that, conceptually, the encoded value can be obtained by simple concatenation. For an $n-byte$ integer value this allows $n!$ (n factorial) possible representations (one for each byte permutation). The two most common of them are: increasing numeric significance with increasing memory addresses, known as little-endian, and its opposite, called big-endian.""" ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Endian Type" ;
+  rdfs:subClassOf qudt:EnumeratedValue ;
+  owl:oneOf (
+      qudt:LittleEndian
+      qudt:BigEndian
+    ) ;
+  prov:wasInfluencedBy <http://en.wikipedia.org/wiki/Endianness> ;
+.
+qudt:FloatingPointEncodingType
+  a owl:Class ;
+  dcterms:description "A \"Encoding\" with the following instance(s): \"Double Precision Encoding\", \"Single Precision Real Encoding\"." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Floating Point Encoding" ;
+  rdfs:subClassOf qudt:Encoding ;
+.
+qudt:HexBinaryType
+  a owl:Class ;
+  a sh:NodeShape ;
+  dcterms:description "A string composed of hex characters." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Hexidecimal Binary Type" ;
+  rdfs:subClassOf qudt:TextStringType ;
+  sh:property qudt:HexBinaryType-length ;
+  sh:property qudt:HexBinaryType-maxLength ;
+  sh:property qudt:HexBinaryType-minLength ;
+  sh:property qudt:HexBinaryType-pattern ;
+.
+qudt:HexBinaryType-length
+  a sh:PropertyShape ;
+  sh:path qudt:length ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:maxCount 1 ;
+.
+qudt:HexBinaryType-maxLength
+  a sh:PropertyShape ;
+  sh:path qudt:maxLength ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:maxCount 1 ;
+.
+qudt:HexBinaryType-minLength
+  a sh:PropertyShape ;
+  sh:path qudt:minLength ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:maxCount 1 ;
+.
+qudt:HexBinaryType-pattern
+  a sh:PropertyShape ;
+  sh:path qudt:pattern ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:maxCount 1 ;
+.
+qudt:IEEE754_1985RealEncoding
+  a qudt:FloatingPointEncodingType ;
+  qudt:bytes 32 ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "IEEE 754 1985 Real Encoding" ;
+.
+qudt:IERS-TN-32-2004
+  a qudt.type:Citation ;
+  qudt:description "IERS Conventions (2003), D. D. McCarthy and Gérard Petit (eds.), IERS Technical Note No. 32, 2004; http://www.iers.org/iers/publications/tn/tn32."^^rdf:HTML ;
+  qudt.type:url "http://www.iers.org/iers/publications/tn/tn32."^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "IERS-TN-32-2004" ;
+  skos:prefLabel "IERS-TN-32-2004" ;
+.
+qudt:ISO8601-UTCDateTime-BasicFormat
+  a qudt:DateTimeStringEncodingType ;
+  qudt:allowedPattern "[0-9]{4}[0-9]{2}[0-9]{2}T[0-9]{2}[0-9]{2}[0-9]{2}.[0-9]+Z" ;
+  qudt:allowedPattern "[0-9]{4}[0-9]{2}[0-9]{2}T[0-9]{2}[0-9]{2}[0-9]{2}Z" ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "ISO 8601 UTC Date Time - Basic Format" ;
+.
+qudt:IntegerDatatype
+  a owl:Class ;
+  dcterms:description "An Integer Type is a data type that specifies how integer numbers are represented and stored in machine memory." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Integer Datatype" ;
+  rdfs:subClassOf qudt:NumericType ;
+  rdfs:subClassOf qudt:OrdinalType ;
+.
+qudt:IntegerEncodingType
+  a owl:Class ;
+  dcterms:description "The encoding scheme for integer types" ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Integer Encoding" ;
+  rdfs:subClassOf qudt:Encoding ;
+.
+qudt:LittleEndian
+  a qudt:EndianType ;
+  qudt:description "A little-endian machine stores the least significant byte first."^^rdf:HTML ;
+  dtype:literal "little" ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Little Endian" ;
+.
+qudt:LongIntegerType
+  a owl:Class ;
+  a sh:NodeShape ;
+  dcterms:description "A Long Integer is an integer that can be represented in four octets (32 bits) of machine memory. Long integers may be signed or unsigned." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Long Integer Type" ;
+  rdfs:subClassOf qudt:IntegerDatatype ;
+  sh:property qudt:LongIntegerType-octets ;
+.
+qudt:LongIntegerType-octets
+  a sh:PropertyShape ;
+  sh:path qudt:octets ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:datatype xsd:integer ;
+  sh:hasValue 4 ;
+  sh:minInclusive 0 ;
+.
+qudt:LongUnsignedIntegerEncoding
+  a qudt:IntegerEncodingType ;
+  qudt:bytes 8 ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Long Unsigned Integer Encoding" ;
+.
+qudt:MultiDimensionalDataFormat
+  a owl:Class ;
+  rdfs:label "Multi dimensional data format" ;
+  rdfs:subClassOf owl:Thing ;
+.
+qudt:MultiDimensionalDataFormat-descriptor
+  a sh:PropertyShape ;
+  sh:path qudt.type:descriptor ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+.
+qudt:NumericType
+  a owl:Class ;
+  a sh:NodeShape ;
+  dcterms:description "Numeric data types are data types whose values denote quantities as defined by a mathematical number system." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Numeric Type" ;
+  rdfs:subClassOf qudt:ScalarDatatype ;
+  sh:property qudt:NumericType-accuracy ;
+  sh:property qudt:NumericType-signedness ;
+.
+qudt:NumericType-accuracy
+  a sh:PropertyShape ;
+  sh:path qudt:accuracy ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:maxCount 1 ;
+.
+qudt:NumericType-signedness
+  a sh:PropertyShape ;
+  sh:path qudt:signedness ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:class qudt:SignednessType ;
+  sh:maxCount 1 ;
+.
+qudt:NumericUnionList
+  a rdf:List ;
+  rdf:first [
+      sh:datatype xsd:string ;
+    ] ;
+  rdf:rest (
+      [
+        sh:datatype xsd:nonNegativeInteger ;
+      ]
+      [
+        sh:datatype xsd:positiveInteger ;
+      ]
+      [
+        sh:datatype xsd:integer ;
+      ]
+      [
+        sh:datatype xsd:int ;
+      ]
+      [
+        sh:datatype xsd:float ;
+      ]
+      [
+        sh:datatype xsd:double ;
+      ]
+      [
+        sh:datatype xsd:decimal ;
+      ]
+    ) ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Numeric union list" ;
+.
+qudt:OctetEncoding
+  a qudt:BooleanEncodingType ;
+  a qudt:ByteEncodingType ;
+  qudt:bytes 1 ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "OCTET Encoding" ;
+.
+qudt:OctetType
+  a owl:Class ;
+  dcterms:description "An 8 bit unsigned integer" ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Octet Type" ;
+  rdfs:subClassOf qudt:UnsignedIntegerType ;
+.
+qudt:OrdinalType
+  a owl:Class ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Ordinal Type" ;
+  rdfs:subClassOf qudt:ScalarDatatype ;
+.
+qudt:Percentage
+  a owl:Class ;
+  dcterms:description "A Scalar Datatype for expressing a dimensionless ratio." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Percentage Type" ;
+  rdfs:subClassOf qudt:NumericType ;
+.
+qudt:PositiveIntegerType
+  a owl:Class ;
+  dcterms:description "Positive Integers are integers that are either non-zero and non-negative." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Positive Integer Type" ;
+  rdfs:subClassOf qudt:IntegerDatatype ;
+  rdfs:subClassOf qudt:UnsignedType ;
+  owl:disjointWith qudt:SignedIntegerType ;
+  owl:equivalentClass [
+      a owl:Class ;
+      owl:intersectionOf (
+          qudt:IntegerDatatype
+          qudt:UnsignedType
+        ) ;
+    ] ;
+.
+qudt:RealDatatype
+  a owl:Class ;
+  a sh:NodeShape ;
+  dcterms:description "A real number is represented as a factor, called the mantissa, multiplied by a power (the exponent) of a base. Different bases yield different approximations to real numbers, and conversion between them is limited in accuracy.  Four floating-point types are defined in 'IEEE-754 Standard for Binary Floating-Point'. These types are 'single', 'extended single', 'double', and 'extended double'." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Real Datatype" ;
+  rdfs:subClassOf qudt:NumericType ;
+  sh:property qudt:RealDatatype-base ;
+  sh:property qudt:RealDatatype-maxExponent ;
+  sh:property qudt:RealDatatype-precision ;
+.
+qudt:RealDatatype-base
+  a sh:PropertyShape ;
+  sh:path qudt:base ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:datatype xsd:integer ;
+  sh:maxCount 1 ;
+.
+qudt:RealDatatype-maxExponent
+  a sh:PropertyShape ;
+  sh:path qudt:maxExponent ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:datatype xsd:integer ;
+  sh:maxCount 1 ;
+.
+qudt:RealDatatype-precision
+  a sh:PropertyShape ;
+  sh:path qudt:precision ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:class xsd:integer ;
+  sh:maxCount 1 ;
+.
+qudt:RealDoublePrecisionType
+  a owl:Class ;
+  dcterms:description """A real double precision data type specifies how a real number, or an approximation of a real number is stored in memory that occupies two words in computer memory, where the byte length of a word depends on machine address size of the computer processor. For example, on 32-bit machine architectures, a word is four bytes.
+
+An example of a real double precision data type specification is the IEEE 754 standard for encoding binary or decimal floating point numbers in 8 bytes for storage on 32-bit machine architectures.""" ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Real Double Precision Type" ;
+  rdfs:subClassOf qudt:DoublePrecisionType ;
+  rdfs:subClassOf qudt:RealDatatype ;
+  owl:equivalentClass [
+      a owl:Class ;
+      owl:intersectionOf (
+          qudt:RealDatatype
+          qudt:DoublePrecisionType
+        ) ;
+    ] ;
+.
+qudt:RealNumber
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "A floating point number." ;
+  rdfs:comment "This is the class of data values that approximate real numbers in finite precision. Often, such values are expressed in \"mantissa, base, exponent\" form. Any rational number can be expressed in the form x=m*b^e, where m (the mantissa), b (the base), and e (the exponent) are integers. Typically, b is chosen to be either 2 or 10, and then the values of m and e are determined given the choice of base." ;
+  rdfs:label "Real number" ;
+  rdfs:subClassOf qudt.type:Number ;
+  sh:property qudt:RealNumber-base ;
+  sh:property qudt:RealNumber-exponent ;
+  sh:property qudt:RealNumber-mantissa ;
+  sh:property qudt:RealNumber-type ;
+.
+qudt:RealNumber-base
+  a sh:PropertyShape ;
+  sh:path qudt:base ;
+  sh:datatype xsd:integer ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+.
+qudt:RealNumber-exponent
+  a sh:PropertyShape ;
+  sh:path qudt:exponent ;
+  sh:class xsd:integer ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+.
+qudt:RealNumber-mantissa
+  a sh:PropertyShape ;
+  sh:path qudt:mantissa ;
+  sh:datatype xsd:integer ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+.
+qudt:RealNumber-type
+  a sh:PropertyShape ;
+  sh:path qudt:type ;
+  sh:class qudt:RealDatatype ;
+.
+qudt:RealSinglePrecisionType
+  a owl:Class ;
+  dcterms:description """A real single precision data type specifies how a real number, or an approximation of a real number is stored in memory that occupies one word in computer memory, where the byte length of a word depends on machine address size of the computer processor. For example, on 32-bit machine architectures, a word is four bytes.
+
+An example of a real single precisoin data type specification is the IEEE 754 standard for encoding binary or decimal floating point numbers in 4 bytes for storage on 32-bit machine architectures.""" ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Real Single Precision Type" ;
+  rdfs:subClassOf qudt:RealDatatype ;
+  rdfs:subClassOf qudt:SinglePrecisionType ;
+  owl:equivalentClass [
+      a owl:Class ;
+      owl:intersectionOf (
+          qudt:RealDatatype
+          qudt:SinglePrecisionType
+        ) ;
+    ] ;
+.
+qudt:SIGNED
+  a qudt:SignednessType ;
+  dtype:literal "signed" ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Signed" ;
+.
+qudt:ScalarDatatype
+  a owl:Class ;
+  a sh:NodeShape ;
+  dcterms:description "Scalar data types are those that have a single value. The permissible values are defined over a domain that may be integers, float, character or boolean. Often a scalar data type is referred to as a primitive data type." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Scalar Datatype" ;
+  rdfs:subClassOf qudt:Datatype ;
+  sh:property qudt:ScalarDatatype-bitOrder ;
+  sh:property qudt:ScalarDatatype-bits ;
+  sh:property qudt:ScalarDatatype-byteOrder ;
+  sh:property qudt:ScalarDatatype-bytes ;
+  sh:property qudt:ScalarDatatype-encoding ;
+  sh:property qudt:ScalarDatatype-length ;
+  sh:property qudt:ScalarDatatype-maxExclusive ;
+  sh:property qudt:ScalarDatatype-maxInclusive ;
+  sh:property qudt:ScalarDatatype-minExclusive ;
+  sh:property qudt:ScalarDatatype-minInclusive ;
+  sh:property qudt:ScalarDatatype-rdfsDatatype ;
+.
+qudt:ScalarDatatype-bitOrder
+  a sh:PropertyShape ;
+  sh:path qudt:bitOrder ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:class qudt:EndianType ;
+  sh:maxCount 1 ;
+.
+qudt:ScalarDatatype-bits
+  a sh:PropertyShape ;
+  sh:path qudt:bits ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:datatype xsd:integer ;
+  sh:maxCount 1 ;
+  sh:minInclusive 0 ;
+.
+qudt:ScalarDatatype-byteOrder
+  a sh:PropertyShape ;
+  sh:path qudt:byteOrder ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:class qudt:EndianType ;
+  sh:maxCount 1 ;
+.
+qudt:ScalarDatatype-bytes
+  a sh:PropertyShape ;
+  sh:path qudt:bytes ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:datatype xsd:integer ;
+  sh:maxCount 1 ;
+  sh:minInclusive 0 ;
+.
+qudt:ScalarDatatype-encoding
+  a sh:PropertyShape ;
+  sh:path qudt:encoding ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:class qudt:Encoding ;
+  sh:maxCount 1 ;
+.
+qudt:ScalarDatatype-length
+  a sh:PropertyShape ;
+  sh:path qudt:length ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:maxCount 1 ;
+.
+qudt:ScalarDatatype-maxExclusive
+  a sh:PropertyShape ;
+  sh:path qudt:maxExclusive ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/qudt> ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:maxCount 1 ;
+  sh:or qudt:NumericUnionList ;
+.
+qudt:ScalarDatatype-maxInclusive
+  a sh:PropertyShape ;
+  sh:path qudt:maxInclusive ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/qudt> ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:maxCount 1 ;
+  sh:or qudt:NumericUnionList ;
+.
+qudt:ScalarDatatype-minExclusive
+  a sh:PropertyShape ;
+  sh:path qudt:minExclusive ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:maxCount 1 ;
+  sh:or qudt:NumericUnionList ;
+.
+qudt:ScalarDatatype-minInclusive
+  a sh:PropertyShape ;
+  sh:path qudt:minInclusive ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:maxCount 1 ;
+  sh:or qudt:NumericUnionList ;
+.
+qudt:ScalarDatatype-rdfsDatatype
+  a sh:PropertyShape ;
+  sh:path qudt:rdfsDatatype ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:class rdfs:Datatype ;
+  sh:maxCount 1 ;
+.
+qudt:ShortIntegerType
+  a owl:Class ;
+  dcterms:description "A Short Integer is an integer that can be represented in two octets (16 bits) of machine memory. Short integers may be signed or unsigned." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Short Integer Type" ;
+  rdfs:subClassOf qudt:IntegerDatatype ;
+.
+qudt:ShortSignedIntegerEncoding
+  a qudt:IntegerEncodingType ;
+  qudt:bytes 2 ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Short Signed Integer Encoding" ;
+.
+qudt:ShortUnsignedIntegerEncoding
+  a qudt:BooleanEncodingType ;
+  a qudt:IntegerEncodingType ;
+  qudt:bytes 2 ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Short Unsigned Integer Encoding" ;
+.
+qudt:SignedBigIntegerType
+  a owl:Class ;
+  a sh:NodeShape ;
+  dcterms:description "A Signed Big Integer is a signed integer that can be represented in eight octets (64 bits) of machine memory." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Signed Big Integer Type" ;
+  rdfs:subClassOf qudt:BigIntegerType ;
+  rdfs:subClassOf qudt:SignedIntegerType ;
+  sh:property qudt:SignedBigIntegerType-literal ;
+  sh:property qudt:SignedBigIntegerType-maxInclusive ;
+  sh:property qudt:SignedBigIntegerType-minInclusive ;
+.
+qudt:SignedBigIntegerType-literal
+  a sh:PropertyShape ;
+  sh:path dtype:literal ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:hasValue "SI64" ;
+.
+qudt:SignedBigIntegerType-maxInclusive
+  a sh:PropertyShape ;
+  sh:path qudt:maxInclusive ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:hasValue "2^{63}-1" ;
+  sh:or qudt:NumericUnionList ;
+.
+qudt:SignedBigIntegerType-minInclusive
+  a sh:PropertyShape ;
+  sh:path qudt:minInclusive ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:hasValue "-2^{63}" ;
+  sh:or (
+      [
+        sh:datatype xsd:string ;
+      ]
+      [
+        sh:datatype xsd:integer ;
+      ]
+      [
+        sh:datatype xsd:float ;
+      ]
+      [
+        sh:datatype xsd:decimal ;
+      ]
+    ) ;
+.
+qudt:SignedIntegerEncoding
+  a qudt:IntegerEncodingType ;
+  qudt:bytes 4 ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Signed Integer Encoding" ;
+.
+qudt:SignedIntegerType
+  a owl:Class ;
+  dcterms:description "Signed Integers are integers can take on both positive and negative values." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Signed Integer Type" ;
+  rdfs:subClassOf qudt:IntegerDatatype ;
+  rdfs:subClassOf qudt:SignedType ;
+  owl:equivalentClass [
+      a owl:Class ;
+      owl:intersectionOf (
+          qudt:IntegerDatatype
+          qudt:SignedType
+        ) ;
+    ] ;
+.
+qudt:SignedLongIntegerType
+  a owl:Class ;
+  a sh:NodeShape ;
+  dcterms:description "A Signed Long Integer is a signed integer that can be represented in four octets (32 bits) of machine memory." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Signed Long Integer Type" ;
+  rdfs:subClassOf qudt:LongIntegerType ;
+  rdfs:subClassOf qudt:SignedIntegerType ;
+  sh:property qudt:SignedLongIntegerType-abbreviation ;
+  sh:property qudt:SignedLongIntegerType-maxInclusive ;
+  sh:property qudt:SignedLongIntegerType-minInclusive ;
+.
+qudt:SignedLongIntegerType-abbreviation
+  a sh:PropertyShape ;
+  sh:path qudt:abbreviation ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:datatype xsd:string ;
+  sh:hasValue "SI32" ;
+.
+qudt:SignedLongIntegerType-maxInclusive
+  a sh:PropertyShape ;
+  sh:path qudt:maxInclusive ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:hasValue "2^{31}-1" ;
+  sh:or qudt:NumericUnionList ;
+.
+qudt:SignedLongIntegerType-minInclusive
+  a sh:PropertyShape ;
+  sh:path qudt:minInclusive ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:hasValue "-2^{31}" ;
+  sh:or (
+      [
+        sh:datatype xsd:string ;
+      ]
+      [
+        sh:datatype xsd:integer ;
+      ]
+      [
+        sh:datatype xsd:float ;
+      ]
+      [
+        sh:datatype xsd:decimal ;
+      ]
+    ) ;
+.
+qudt:SignedMediumIntegerType
+  a owl:Class ;
+  a sh:NodeShape ;
+  dcterms:description "A \"Signed Medium Integers\" is an integer of 24 bits that can take on both positive and negative values." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Signed Integer Type" ;
+  rdfs:subClassOf qudt:SignedIntegerType ;
+  owl:equivalentClass [
+      a owl:Class ;
+      owl:intersectionOf (
+          qudt:IntegerDatatype
+          qudt:SignedType
+          [
+            a owl:Restriction ;
+            owl:hasValue 3 ;
+            owl:onProperty qudt:bytes ;
+          ]
+        ) ;
+    ] ;
+.
+qudt:SignedShortIntegerType
+  a owl:Class ;
+  a sh:NodeShape ;
+  dcterms:description "A Signed Short Integer is a signed integer that can be represented in four octets (32 bits) of machine memory." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Signed Short Integer Type" ;
+  rdfs:subClassOf qudt:ShortIntegerType ;
+  rdfs:subClassOf qudt:SignedIntegerType ;
+  sh:property qudt:SignedShortIntegerType-abbreviation ;
+.
+qudt:SignedShortIntegerType-abbreviation
+  a sh:PropertyShape ;
+  sh:path qudt:abbreviation ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:hasValue "SI8" ;
+.
+qudt:SignedType
+  a owl:Class ;
+  a sh:NodeShape ;
+  dcterms:description "A signed type is a numeric type that distinguishes between positive and negative numbers using an encoding scheme, such as sign and magnitude, one's compliment, and two's compliment to represent negative numbers." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Signed Type" ;
+  rdfs:subClassOf qudt:NumericType ;
+  owl:disjointWith qudt:UnsignedType ;
+  owl:equivalentClass [
+      a owl:Class ;
+      owl:intersectionOf (
+          qudt:NumericType
+          [
+            a owl:Restriction ;
+            owl:hasValue qudt.type:Signed ;
+            owl:onProperty qudt:signedness ;
+          ]
+        ) ;
+    ] ;
+  sh:property qudt:SignedType-signedness ;
+.
+qudt:SignedType-signedness
+  a sh:PropertyShape ;
+  sh:path qudt:signedness ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:hasValue qudt:SIGNED ;
+.
+qudt:SignedVariableLengthIntegerType
+  a owl:Class ;
+  dcterms:description "A Signed Variable Length Integer data type defines a data structure for representing signed integers that uses a variable number of bits depending on the magnitude of the integer. Typically, variable length integer data types are between one and 64 bits in length." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Signed Variable Length Integer Type" ;
+  rdfs:subClassOf qudt:SignedIntegerType ;
+  rdfs:subClassOf qudt:VariableLengthIntegerType ;
+.
+qudt:SignednessType
+  a owl:Class ;
+  a sh:NodeShape ;
+  dcterms:description "Specifics whether a value should be signed or unsigned." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Signedness type" ;
+  rdfs:subClassOf qudt:EnumeratedValue ;
+  sh:class qudt:SignednessType ;
+  sh:in (
+      qudt:SIGNED
+      qudt:UNSIGNED
+    ) ;
+.
+qudt:SinglePrecisionRealEncoding
+  a qudt:FloatingPointEncodingType ;
+  qudt:bytes 32 ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Single Precision Real Encoding" ;
+.
+qudt:SinglePrecisionType
+  a owl:Class ;
+  dcterms:description "A single precision data type specifies how a numeric value, such as an integer or real number, is stored in memory that occupies one word in computer memory, where the byte length of a word depends on machine address size of the computer processor. For example, on 32-bit machine architectures, a word is four bytes, and so a single precision data value on a 32-bit machine architecture occupies four bytes of memory." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Single Precision Type" ;
+  rdfs:subClassOf qudt:NumericType ;
+.
+qudt:StringEncodingType
+  a owl:Class ;
+  dcterms:description "A \"Encoding\" with the following instance(s): \"UTF-16 String\", \"UTF-8 Encoding\"." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "String Encoding Type" ;
+  rdfs:subClassOf qudt:Encoding ;
+.
+qudt:StringType
+  a owl:Class ;
+  a sh:NodeShape ;
+  dcterms:description "A String Type is a data type that specifies the properties of data structures that hold strings. " ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "String Type" ;
+  rdfs:subClassOf qudt:ScalarDatatype ;
+  sh:property qudt:StringType-dimensionality ;
+  sh:property qudt:StringType-elementType ;
+  sh:property qudt:StringType-isByteString ;
+  sh:property qudt:StringType-maxLength ;
+  sh:property qudt:StringType-typeMatrix ;
+.
+qudt:StringType-dimensionality
+  a sh:PropertyShape ;
+  sh:path qudt:dimensionality ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:datatype xsd:integer ;
+  sh:hasValue 1 ;
+.
+qudt:StringType-elementType
+  a sh:PropertyShape ;
+  sh:path qudt:elementType ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:class qudt:CharacterType ;
+.
+qudt:StringType-isByteString
+  a sh:PropertyShape ;
+  sh:path qudt:isByteString ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:maxCount 1 ;
+.
+qudt:StringType-maxLength
+  a sh:PropertyShape ;
+  sh:path qudt:maxLength ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:datatype xsd:integer ;
+  sh:maxCount 1 ;
+.
+qudt:StringType-typeMatrix
+  a sh:PropertyShape ;
+  sh:path qudt.type:typeMatrix ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:maxCount 0 ;
+  sh:minCount 0 ;
+.
+qudt:StringUTF16
+  a owl:Class ;
+  a sh:NodeShape ;
+  dcterms:description "String UTF-16 Type is a string data type that specifies the properties of string data structures which encode strings using the UTF-16 encoding. UTF-16 is the native internal representation of text in the Microsoft Windows NT/Windows 2000/Windows XP/Windows CE, Qualcomm BREW, and Symbian operating systems; the Java and .NET byte code environments; Mac OS X's Cocoa and Core Foundation frameworks; and the Qt cross-platform graphical widget toolkit." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "String UTF16 Type" ;
+  rdfs:subClassOf qudt:TextStringType ;
+  sh:property qudt:StringUTF16-elementType ;
+.
+qudt:StringUTF16-elementType
+  a sh:PropertyShape ;
+  sh:path qudt:elementType ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:class qudt:CharacterType ;
+  sh:hasValue qudt:UTF16-CHAR ;
+.
+qudt:StringUTF8
+  a owl:Class ;
+  a sh:NodeShape ;
+  dcterms:description "String UTF-8 Type is a string data type that specifies the properties of string data structures which encode strings using the UTF-8 encoding. UTF-8 includes ASCII, otherwise referred to as IA-5 (International Alphabet 5, as standardized by International Organization for Standardization [ISO]) as the first 128 values. The Internet Engineering Task Force (IETF) requires all Internet protocols to identify the encoding used for character data with UTF-8 as at least one supported encoding. The Internet Mail Consortium (IMC) recommends that all e-mail programs must be able to display and create mail using UTF-8." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "String UTF8 Type" ;
+  rdfs:subClassOf qudt:TextStringType ;
+  sh:property qudt:StringUTF8-elementType ;
+.
+qudt:StringUTF8-elementType
+  a sh:PropertyShape ;
+  sh:path qudt:elementType ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:class qudt:CharacterType ;
+  sh:hasValue qudt:UTF8-CHAR ;
+.
+qudt:TextStringType
+  a owl:Class ;
+  dcterms:description "A text string. Encodings can be specified as subclass or in connection to character arrays in Structured Datatypes." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Text String Type" ;
+  rdfs:subClassOf qudt:StringType ;
+.
+qudt:Time
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "The class of data values that denote a point in time. Time values may be encoded in a 12-hour clock or a 24-hour clock, such as 1:35 AM, or 13:35." ;
+  rdfs:label "Time" ;
+  rdfs:subClassOf qudt.type:Scalar ;
+  sh:property qudt:Time-type ;
+.
+qudt:Time-type
+  a sh:PropertyShape ;
+  sh:path qudt:type ;
+  sh:class qudt:TimeStringType ;
+.
+qudt:TimeDataType
+  a owl:Class ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Time data type" ;
+  rdfs:subClassOf qudt:ScalarDatatype ;
+.
+qudt:TimeInterval
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "A relative interval that is an increment in time. For example, this is used in time series arrays to express the time point of a vector of values." ;
+  rdfs:label "Time interval" ;
+  rdfs:subClassOf qudt.type:Parameter ;
+  sh:property qudt:TimeInterval-type ;
+.
+qudt:TimeInterval-type
+  a sh:PropertyShape ;
+  sh:path qudt:type ;
+  sh:class qudt:TimeStringType ;
+.
+qudt:TimeStringType
+  a owl:Class ;
+  dcterms:description "Time takes a number of forms, depending on the units used (e.g., year, day, minute, millisecond, or combinations thereof) and the origin (i.e., time zero) to which the time value is related." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Time Type" ;
+  rdfs:subClassOf qudt:TextStringType ;
+.
+qudt:UNSIGNED
+  a qudt:SignednessType ;
+  dtype:literal "unsigned" ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Unsigned" ;
+.
+qudt:UTC-DayTime
+  a rdfs:Datatype ;
+  dcterms:description "YYYY-DDDThh:mm:ss.ddZ, where each character is an ASCII character using one octet with the following meanings: YYYY = Year in four-character subfield with values 0001-9999, DDD = Day of year in three-character subfield with values 001-365 or -366, T =  Calendar-Time separator, hh = Hour in two-character subfield with values 00-23,  mm = Minute in two-character subfield with values 00-59, ss = Second in two-character subfield with values 00-59 (-58 or -60 during leap seconds), dd = Decimal fraction of second in one- to n-character subfield, each d has values 0-9, and Z = time code terminator (optional)" ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "UTC Day time" ;
+  rdfs:subClassOf xsd:string ;
+  owl:equivalentClass [
+      a rdfs:Datatype ;
+      owl:onDatatype xsd:string ;
+      owl:withRestrictions (
+          [
+            xsd:length 22 ;
+          ]
+          [
+            xsd:pattern "[0-9]{4}\\\\-[0-9]{3}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\\\.[0-9]{2}Z?" ;
+          ]
+        ) ;
+    ] ;
+.
+qudt:UTF16-StringEncoding
+  a qudt:StringEncodingType ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "UTF-16 String" ;
+.
+qudt:UTF8-StringEncoding
+  a qudt:StringEncodingType ;
+  qudt:bytes 8 ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "UTF-8 Encoding" ;
+.
+qudt:UnsignedBigIntegerType
+  a owl:Class ;
+  a sh:NodeShape ;
+  dcterms:description "An Unsgned Big Integer is an unsigned integer that can be represented in eight octets (64 bits) of machine memory." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Unsigned Big Integer Type" ;
+  rdfs:subClassOf qudt:BigIntegerType ;
+  rdfs:subClassOf qudt:UnsignedIntegerType ;
+  sh:property qudt:UnsignedBigIntegerType-abbreviation ;
+  sh:property qudt:UnsignedBigIntegerType-maxInclusive ;
+  sh:property qudt:UnsignedBigIntegerType-minInclusive ;
+.
+qudt:UnsignedBigIntegerType-abbreviation
+  a sh:PropertyShape ;
+  sh:path qudt:abbreviation ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:hasValue "UI64" ;
+.
+qudt:UnsignedBigIntegerType-maxInclusive
+  a sh:PropertyShape ;
+  sh:path qudt:maxInclusive ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:hasValue "2^{64}-1" ;
+  sh:or qudt:NumericUnionList ;
+.
+qudt:UnsignedBigIntegerType-minInclusive
+  a sh:PropertyShape ;
+  sh:path qudt:minInclusive ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:hasValue "0" ;
+  sh:or (
+      [
+        sh:datatype xsd:string ;
+      ]
+      [
+        sh:datatype xsd:integer ;
+      ]
+      [
+        sh:datatype xsd:float ;
+      ]
+      [
+        sh:datatype xsd:decimal ;
+      ]
+    ) ;
+.
+qudt:UnsignedIntegerEncoding
+  a qudt:IntegerEncodingType ;
+  qudt:bytes 4 ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Unsigned Integer Encoding" ;
+.
+qudt:UnsignedIntegerType
+  a owl:Class ;
+  dcterms:description "Unsgned Integers are integers that are either strictly non-negative or non-positive." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Unsigned Integer Type" ;
+  rdfs:subClassOf qudt:IntegerDatatype ;
+  rdfs:subClassOf qudt:UnsignedType ;
+  owl:disjointWith qudt:SignedIntegerType ;
+  owl:equivalentClass [
+      a owl:Class ;
+      owl:intersectionOf (
+          qudt:IntegerDatatype
+          qudt:UnsignedType
+        ) ;
+    ] ;
+.
+qudt:UnsignedLongIntegerType
+  a owl:Class ;
+  a sh:NodeShape ;
+  dcterms:description "An Unsigned Long Integer is an unsigned integer that can be represented in four octets (32 bits) of machine memory." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Unsigned Long Integer Type" ;
+  rdfs:subClassOf qudt:LongIntegerType ;
+  rdfs:subClassOf qudt:UnsignedIntegerType ;
+  sh:property qudt:UnsignedLongIntegerType-literal ;
+  sh:property qudt:UnsignedLongIntegerType-maxInclusive ;
+  sh:property qudt:UnsignedLongIntegerType-minInclusive ;
+.
+qudt:UnsignedLongIntegerType-literal
+  a sh:PropertyShape ;
+  sh:path dtype:literal ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:hasValue "UI32" ;
+.
+qudt:UnsignedLongIntegerType-maxInclusive
+  a sh:PropertyShape ;
+  sh:path qudt:maxInclusive ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:hasValue "2^{32}-1" ;
+  sh:or qudt:NumericUnionList ;
+.
+qudt:UnsignedLongIntegerType-minInclusive
+  a sh:PropertyShape ;
+  sh:path qudt:minInclusive ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:hasValue "0" ;
+  sh:or (
+      [
+        sh:datatype xsd:string ;
+      ]
+      [
+        sh:datatype xsd:integer ;
+      ]
+      [
+        sh:datatype xsd:float ;
+      ]
+      [
+        sh:datatype xsd:decimal ;
+      ]
+    ) ;
+.
+qudt:UnsignedMediumIntegerType
+  a owl:Class ;
+  a sh:NodeShape ;
+  dcterms:description "An \"Unsigned Medium Integers\" is an integer of 24 bits that only takes on both positive values." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Signed Integer Type" ;
+  rdfs:subClassOf qudt:UnsignedIntegerType ;
+  owl:equivalentClass [
+      a owl:Class ;
+      owl:intersectionOf (
+          qudt:IntegerDatatype
+          qudt:SignedType
+        ) ;
+    ] ;
+.
+qudt:UnsignedShortIntegerType
+  a owl:Class ;
+  a sh:NodeShape ;
+  dcterms:description "An Unsigned Short Integer is an unsigned integer that can be represented in four octets (32 bits) of machine memory." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Unsigned Short Integer Type" ;
+  rdfs:subClassOf qudt:ShortIntegerType ;
+  rdfs:subClassOf qudt:UnsignedIntegerType ;
+  sh:property qudt:UnsignedShortIntegerType-abbreviation ;
+  sh:property qudt:UnsignedShortIntegerType-maxInclusive ;
+  sh:property qudt:UnsignedShortIntegerType-minInclusive ;
+.
+qudt:UnsignedShortIntegerType-abbreviation
+  a sh:PropertyShape ;
+  sh:path qudt:abbreviation ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:hasValue "UI16" ;
+.
+qudt:UnsignedShortIntegerType-maxInclusive
+  a sh:PropertyShape ;
+  sh:path qudt:maxInclusive ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:hasValue "2^{16}-1" ;
+.
+qudt:UnsignedShortIntegerType-minInclusive
+  a sh:PropertyShape ;
+  sh:path qudt:minInclusive ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:hasValue "0" ;
+.
+qudt:UnsignedType
+  a owl:Class ;
+  a sh:NodeShape ;
+  dcterms:description "An unsigned data type is a numeric type that does not distinguish between positive and negative values." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Unsigned Type" ;
+  rdfs:subClassOf qudt:NumericType ;
+  sh:property qudt:UnsignedType-signedness ;
+.
+qudt:UnsignedType-signedness
+  a sh:PropertyShape ;
+  sh:path qudt:signedness ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:class qudt:SignednessType ;
+  sh:hasValue qudt:UNSIGNED ;
+  sh:in (
+      qudt:UNSIGNED
+    ) ;
+.
+qudt:UnsignedVariableLengthIntegerType
+  a owl:Class ;
+  dcterms:description "An Unsigned Variable Length Integer data type defines a data structure for representing unsigned integers that uses a variable number of bits depending on the magnitude of the integer. Typically, variable length integer data types are between one and 64 bits in length." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Unsigned Variable Length Integer Type" ;
+  rdfs:subClassOf qudt:UnsignedIntegerType ;
+  rdfs:subClassOf qudt:VariableLengthIntegerType ;
+.
+qudt:VariableLengthIntegerType
+  a owl:Class ;
+  a sh:NodeShape ;
+  dcterms:description "A Variable Length Integer data type defines a data structure for representing integers that uses a variable number of bits depending on the magnitude of the integer. Typically, variable length integer data types are between one and 64 bits in length." ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Variable Length Integer Type" ;
+  rdfs:subClassOf qudt:IntegerDatatype ;
+  sh:property qudt:VariableLengthIntegerType-maxBits ;
+  sh:property qudt:VariableLengthIntegerType-minBits ;
+.
+qudt:VariableLengthIntegerType-maxBits
+  a sh:PropertyShape ;
+  sh:path qudt:maxBits ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:datatype xsd:integer ;
+  sh:hasValue 64 ;
+.
+qudt:VariableLengthIntegerType-minBits
+  a sh:PropertyShape ;
+  sh:path qudt:minBits ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  sh:datatype xsd:integer ;
+  sh:hasValue 1 ;
+.
+qudt:WordAligned
+  a qudt:AlignmentType ;
+  qudt:description "Alignment of a field at a word boundary, that is 2 bytes."^^rdf:HTML ;
+  dtype:literal "word" ;
+  rdfs:isDefinedBy <http://qudt.org/2.0/schema/datatype> ;
+  rdfs:label "Word Aligned" ;
+.
+<http://qudt.org/schema/schema/GMD_scalar-datatypes>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:SchemaGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://qudt.org/2.0/schema/scalar-datatypes> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+qudt.type:PadWithAny
+  qudt:description "Pad with either a one or a zero. In other words, this is the \"don't care\" situation."^^rdf:HTML ;
+.
+qudt.type:PadWithOnes
+  qudt:description "Pad unused bits of a field with a one."^^rdf:HTML ;
+.
+qudt.type:PadWithZeros
+  qudt:description "Pad unused bits of a field with a zero."^^rdf:HTML ;
+.
+xsd:dateTime
+  dcterms:description "YYYY-MM-DDThh:mm:ss[.dd] or YYYY-DDDThh:mm:ss[.dd], where 'YYYY' is the year, 'MM' is the two-digit month, 'DD' is the two-digit day, 'DDD' is the three digit day of year, 'T' is constant, 'hh:mm:ss[.dd]' is the UTC time in hours, minutes, seconds, and optional fractional seconds. As many 'd' characters to the right of the period as required may be used to obtain the required precision. All fields require leading zeros." ;
+.

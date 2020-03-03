@@ -1,0 +1,102 @@
+# baseURI: http://evn.topbraidlive.org/tagger/acjob
+
+@prefix acjob: <http://evn.topbraidlive.org/tagger/acjob#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://evn.topbraidlive.org/tagger/acjob>
+  rdf:type owl:Ontology ;
+  rdfs:comment "A system namespace used to represent status information and summary data on AutoClassifier jobs."^^xsd:string ;
+  owl:versionInfo "0.1.0"^^xsd:string ;
+.
+acjob:AutoClassifierJob
+  rdf:type rdfs:Class ;
+  rdfs:comment "A batch job for the AutoClassifier, possibly in progress, completed or cancelled."^^xsd:string ;
+  rdfs:label "AutoClassifier job"^^xsd:string ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+acjob:JobScope
+  rdf:type rdfs:Class ;
+  rdfs:comment "The scope of an AutoClassifier job, that is, a characterization of the content resources covered by the job."^^xsd:string ;
+  rdfs:label "Job scope"^^xsd:string ;
+.
+acjob:JobStatus
+  rdf:type rdfs:Class ;
+  rdfs:comment "An enumeration of status values for AutoClassifier jobs."^^xsd:string ;
+  rdfs:label "Job status"^^xsd:string ;
+.
+acjob:all
+  rdf:type acjob:JobScope ;
+  rdfs:comment "Indicates a scope covering all content resources in a corpus."^^xsd:string ;
+  rdfs:label "All"^^xsd:string ;
+.
+acjob:completed
+  rdf:type acjob:JobStatus ;
+  rdfs:label "Completed"^^xsd:string ;
+.
+acjob:finished
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The date and time when a completed AutoClassifier job was finished."^^xsd:string ;
+  rdfs:domain acjob:AutoClassifierJob ;
+  rdfs:label "finished"^^xsd:string ;
+  rdfs:range xsd:dateTime ;
+.
+acjob:job
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Connects an AutoClassifier job to the content tag set that provides the taxonomy and documents to be tagged."^^xsd:string ;
+  rdfs:domain taggerprojects:ContentTagSet ;
+  rdfs:label "job"^^xsd:string ;
+  rdfs:range acjob:AutoClassifierJob ;
+.
+acjob:merged
+  rdf:type acjob:JobStatus ;
+  rdfs:label "Merged"^^xsd:string ;
+.
+acjob:resources
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The number of content resources to be tagged in an AutoClassifier job."^^xsd:string ;
+  rdfs:domain acjob:AutoClassifierJob ;
+  rdfs:label "resources"^^xsd:string ;
+  rdfs:range xsd:integer ;
+.
+acjob:results
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Connects a completed AutoClassifier job to a working copy containing its results."^^xsd:string ;
+  rdfs:domain acjob:AutoClassifierJob ;
+  rdfs:label "results"^^xsd:string ;
+  rdfs:range teamwork:Tag ;
+.
+acjob:running
+  rdf:type acjob:JobStatus ;
+  rdfs:label "Running"^^xsd:string ;
+.
+acjob:scope
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Connects an AutoClassifier job to its scope, that is, a characterization of the content resources covered by the job."^^xsd:string ;
+  rdfs:domain acjob:AutoClassifierJob ;
+  rdfs:label "scope"^^xsd:string ;
+  rdfs:range acjob:JobScope ;
+.
+acjob:search
+  rdf:type acjob:JobScope ;
+  rdfs:comment "Indicates a scope covering the results of a (not specified in detail) search."^^xsd:string ;
+  rdfs:label "Search"^^xsd:string ;
+.
+acjob:started
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The date and time when an AutoClassifier job was started."^^xsd:string ;
+  rdfs:domain acjob:AutoClassifierJob ;
+  rdfs:label "started"^^xsd:string ;
+  rdfs:range xsd:dateTime ;
+.
+acjob:status
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Connects an AutoClassifier job to its job status."^^xsd:string ;
+  rdfs:domain acjob:AutoClassifierJob ;
+  rdfs:label "status"^^xsd:string ;
+  rdfs:range acjob:JobStatus ;
+.

@@ -1,0 +1,49 @@
+# baseURI: http://server.topbraidlive.org/dynamic/users
+# imports: http://rdfs.org/sioc/ns
+# prefix: users
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix users: <http://server.topbraidlive.org/dynamic/users#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://server.topbraidlive.org/dynamic/users>
+  rdf:type owl:Ontology ;
+  owl:imports <http://rdfs.org/sioc/ns> ;
+.
+users:companyName
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "The name of the company that a given user is associated with." ;
+  rdfs:domain sioc:UserAccount ;
+  rdfs:range xsd:string ;
+.
+<urn:x-tb-role:TBAdmin>
+  rdf:type sioc:Role ;
+  rdfs:label "TBAdmin" ;
+.
+<urn:x-tb-role:UpdateAllowRole>
+  rdf:type sioc:Role ;
+  rdfs:label "UpdateAllowRole" ;
+.
+<urn:x-tb-role:UpdateDenyRole>
+  rdf:type sioc:Role ;
+  rdfs:label "UpdateDenyRole" ;
+.
+<urn:x-tb-users:Administrator>
+  rdf:type sioc:UserAccount ;
+  sioc:has_function <urn:x-tb-role:TBAdmin> ;
+  rdfs:label "Administrator" ;
+.
+<urn:x-tb-users:SPARQLUpdateAllowedUser>
+  rdf:type sioc:UserAccount ;
+  sioc:has_function <urn:x-tb-role:UpdateAllowRole> ;
+  rdfs:label "SPARQLUpdateAllowedUser" ;
+.
+<urn:x-tb-users:SPARQLUpdateBlockedUser>
+  rdf:type sioc:UserAccount ;
+  sioc:has_function <urn:x-tb-role:UpdateDenyRole> ;
+  rdfs:label "SPARQLUpdateBlockedUser" ;
+.

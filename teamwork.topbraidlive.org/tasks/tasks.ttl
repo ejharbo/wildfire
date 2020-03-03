@@ -1,0 +1,97 @@
+# baseURI: http://topbraid.org/tasks
+# imports: http://rdfex.org/dcterms/created,creator,modified,publisher,source
+# imports: http://rdfex.org/sioc/Container,Item,Post,Role,UserAccount,Usergroup,about,avatar,content,email,has_creator,has_member,reply_of
+# imports: http://spinrdf.org/spin
+# prefix: tasks
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://topbraid.org/tasks>
+  rdf:type owl:Ontology ;
+  rdfs:comment "Can be used to manage tasks (pertaining to RDF graphs) assigned to team members." ;
+  owl:imports <http://rdfex.org/dcterms/created,creator,modified,publisher,source> ;
+  owl:imports <http://rdfex.org/sioc/Container,Item,Post,Role,UserAccount,Usergroup,about,avatar,content,email,has_creator,has_member,reply_of> ;
+  owl:imports <http://spinrdf.org/spin> ;
+  owl:versionInfo "0.9.0" ;
+.
+tasks:Task
+  rdf:type rdfs:Class ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+tasks:TaskStatus
+  rdf:type owl:Class ;
+  rdfs:comment "The possible values of tasks:taskStatus." ;
+  rdfs:label "Task status" ;
+  rdfs:subClassOf owl:Thing ;
+.
+tasks:TaskStatusDeclined
+  rdf:type tasks:TaskStatus ;
+  rdfs:label "declined" ;
+.
+tasks:TaskStatusOpen
+  rdf:type tasks:TaskStatus ;
+  rdfs:label "open" ;
+.
+tasks:TaskStatusResolved
+  rdf:type tasks:TaskStatus ;
+  rdfs:label "resolved" ;
+.
+tasks:assignedTo
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "This is the UserAccount assigned to this task."@en ;
+  rdfs:domain tasks:Task ;
+  rdfs:label "assigned to"@en ;
+  rdfs:range <http://rdfs.org/sioc/ns#UserAccount> ;
+.
+tasks:changeTo
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "This is the task to which a change applies."@en ;
+  rdfs:domain wf:Change ;
+  rdfs:label "change to"@en ;
+  rdfs:range tasks:Task ;
+.
+tasks:resource
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Specifies that this Task is for a particular resource, e.g. a change that needs to be made to a class describing a book, hotel, etc."@en ;
+  rdfs:domain tasks:Task ;
+  rdfs:label "resource"@en ;
+  rdfs:range rdfs:Resource ;
+.
+tasks:resourceGraph
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Specifies the base URI for the graph containing this Task's resource."@en ;
+  rdfs:domain tasks:Task ;
+  rdfs:label "resource graph"@en ;
+  rdfs:range rdfs:Resource ;
+.
+tasks:taskStatus
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "Indicates the status of a task."@en ;
+  rdfs:domain tasks:Task ;
+  rdfs:label "task status"@en ;
+  rdfs:range tasks:TaskStatus ;
+.
+tasks:taskTag
+  rdf:type rdf:Property ;
+  rdfs:comment "If the Task was created within a working copy, then this property points at the teamwork:Tag (URI)." ;
+  rdfs:domain tasks:Task ;
+  rdfs:label "task tag" ;
+  rdfs:range rdfs:Resource ;
+.
+wf:Change
+  rdf:type rdfs:Class ;
+  rdfs:label "change" ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+wf:dateDue
+  rdf:type rdf:Property ;
+  rdfs:comment "The date this task is due." ;
+  rdfs:domain tasks:Task ;
+  rdfs:label "due"@en ;
+  rdfs:range xsd:date ;
+.

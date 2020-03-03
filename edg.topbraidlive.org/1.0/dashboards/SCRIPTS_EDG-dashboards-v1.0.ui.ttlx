@@ -1,0 +1,2408 @@
+# baseURI: http://edg.topbraid.solutions/1.0/dashboards/scripts
+# imports: http://edg.topbraid.solutions/1.0/schema/dashboards
+# imports: http://edg.topbraid.solutions/1.0/spin/governance
+# imports: http://edg.topbraid.solutions/1.0/spin/jsfunctions
+# imports: http://edg.topbraid.solutions/1.0/spin/library
+# imports: http://topbraid.org/swa
+# imports: http://topbraid.org/teamworkdashboard
+# imports: http://uispin.org/html
+# imports: http://uispin.org/svg
+# imports: http://uispin.org/ui.ui
+
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix autotagger: <http://evn.topbraidlive.org/autotagger#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix conceptmatch: <http://topbraid.org/conceptmatch#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix core-soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkapp: <http://topbraid.org/swa/crosswalkapp#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dashboard: <http://example.org/dashboard#> .
+@prefix dataset: <http://teamwork.topbraidlive.org/dataset#> .
+@prefix datasetapp: <http://topbraid.org/swa/datasetapp#> .
+@prefix datasetviewer: <http://topbraid.org/swa/datasetviewer#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix default: <http://uispin.org/default#> .
+@prefix defaultapp: <http://topbraid.org/swa/defaultapp#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix eeh-lib: <http://www.environmenthub.no/spin/1.0/eeh-lib#> .
+@prefix eeh-reportlib: <http://www.environmenthub.no/spin/1.0/eeh-reportlib#> .
+@prefix elements: <http://purl.org/dc/elements/1.1/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evn: <http://topbraid.org/evn/evn#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evnimport: <http://evn.topbraidlive.org/uispin/evnimport#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix ex: <http://example.org/> .
+@prefix extjs: <http://uispin.com/extjs#> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix governance: <http://topbraid.org/teamworkgovernance.ui#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix graphql.search: <http://teamwork.topbraidlive.org/graphql.search#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix kennedys: <http://topbraid.org/examples/kennedys#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix ontologyviewer: <http://topbraid.org/swa/ontologyviewer#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmapp: <http://rdm.topbraidlive.org/rdmapp#> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix rdmviewer: <http://rdm.topbraidlive.org/rdmviewer#> .
+@prefix saf: <http://topbraid.org/saf/> .
+@prefix safconfig: <http://topbraid.org/safconfig/> .
+@prefix safm: <http://saf.topbraidlive.org/metaschema/> .
+@prefix savedQueries: <http://teamwork.topbraidlive.org/ui/savedQueries#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix server: <http://server.topbraidlive.org/server.ui#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sharepoint: <http://topbraid.org/sharepoint#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spin.ui: <http://spinrdf.org/spin.ui#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swadoc: <http://topbraid.org/swadoc#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix tblui: <http://server.topbraidlive.org/tblui#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkAdmin: <http://teamwork.topbraidlive.org/doc/teamworkAdmin#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworkconstraints: <http://topbraid.org/teamworkconstraints#> .
+@prefix teamworkdashboard: <http://topbraid.org/teamworkdashboard#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix teamworkupdate: <http://teamworkAPI.topbraid.com/teamworkUpdate#> .
+@prefix textindex: <http://topbraid.org/textindex#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix tracker: <http://teamwork.topbraidlive.org/ui/tracker#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uitest: <http://uispin.org/test#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix userdat: <http://teamwork.topbraidlive.org/ui/userdata> .
+@prefix userdata: <http://teamwork.topbraidlive.org/ui/userdata#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix victory: <http://edg.topbraid.solutions/victory/> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xhtml: <http://topbraid.org/xhtml#> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/dashboards/scripts>
+  a owl:Ontology ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/dashboards> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/spin/governance> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/spin/jsfunctions> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/spin/library> ;
+  owl:imports <http://topbraid.org/swa> ;
+  owl:imports <http://topbraid.org/teamworkdashboard> ;
+  owl:imports <http://uispin.org/html> ;
+  owl:imports <http://uispin.org/svg> ;
+  owl:imports <http://uispin.org/ui.ui> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+edg:AllWorkflowsForCurrentUserDataService
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:private true ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:subjectArea=\"{= IRI(?subjectArea) }\">
+    <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+        <ui:call ui:template=\"{= edg:getWorkflowCountsForCurrentUser }\" ui:varName=\"workflows\">
+            <!--ui:debug>
+<ui:dumpResultSet ui:message=\"edg:WorkflowsForCurrentUserDataService\" ui:resultSet=\"{= ?workflows }\"/>
+<ui:dumpScope ui:message=\"edg:WorkflowsForCurrentUserDataService\"/>
+</ui:debug-->
+            <ui:if ui:condition=\"{= spr:rowCount(?workflows) &gt; 0 }\">
+                <ui:group let:total=\"{= spif:cast(spr:aggregateCol(spr:Sum, ?workflows, 0), xsd:integer) }\">
+                    <!--ui:debug>
+<ui:dumpResultSet ui:message=\"edg:AllWorkflowsForCurrentUserDataService\"
+  ui:resultSet=\"{= ?workflows }\"/>
+<ui:dumpScope ui:message=\"edg:AllWorkflowsForCurrentUserDataService\"/>
+</ui:debug-->
+                    <swon:Object>
+                        <swon:Value arg:name=\"total\" arg:value=\"{= ?total }\"/>
+                        <swon:Value arg:name=\"slices\">
+                            <swon:Array>
+                                <ui:forEach ui:indexVar=\"index\" ui:resultSet=\"{= ?workflows }\">
+                                    <swon:Object>
+                                        <swon:Value arg:name=\"x\" arg:value=\"{= ?label }\"/>
+                                        <swon:Value arg:name=\"y\" arg:value=\"{= ?value }\"/>
+                                        <swon:Value arg:name=\"label\" arg:value=\"{= CONCAT(str(?value), &quot; in state '&quot;, ?label, &quot;'&quot;) }\"/>
+                                    </swon:Object>
+                                </ui:forEach>
+                            </swon:Array>
+                        </swon:Value>
+                        <swon:Value arg:name=\"legend\">
+                            <swon:Array>
+                                <ui:forEach ui:indexVar=\"index\" ui:limit=\"{= 6 }\" ui:resultSet=\"{= ?workflows }\">
+                                    <swon:Object>
+                                        <swon:Value arg:name=\"name\" arg:value=\"{= ?label } [{= ?value }]\"/>
+                                    </swon:Object>
+                                </ui:forEach>
+                            </swon:Array>
+                        </swon:Value>
+                    </swon:Object>
+                </ui:group>
+            </ui:if>
+            <ui:else>
+                <swon:Object>
+                    <swon:Value arg:name=\"message\" arg:value=\"No Workflows\"/>
+                </swon:Object>
+            </ui:else>
+        </ui:call>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "All workflows for current user data service" ;
+  rdfs:subClassOf edg:JSONServices ;
+.
+edg:AssetCollectionsForCurrentUserGadget
+  a teamwork:DashboardGadget ;
+  teamwork:dashboardSection teamwork:CompletenessAndValidityDashboardSection ;
+  ui:prototype """
+<ui:group>
+    <ui:call ui:template=\"{= edg:getWorkflowCountsForCurrentUser }\" ui:varName=\"workflows\">
+        <ui:group let:rowCount=\"{= spr:rowCount(?workflows) }\">
+            <!--ui:debug>
+<ui:dumpScope ui:message=\"edg:NumberOfWorkflowsGadget\"/>
+<ui:dumpResultSet ui:message=\"edg:NumberOfActiveWorkflowsGadget\" ui:resultSet=\"{= ?workflows }\"/>
+</ui:debug-->
+            <ui:if ui:condition=\"{= ?rowCount &gt; 0 }\">
+                <ui:group let:totalWorkflows=\"{= spif:cast(spr:aggregateCol(spr:Sum, ?workflows, 0), xsd:integer) }\">
+                    <ui:if ui:condition=\"{= ?totalWorkflows = 0 }\">
+                        <p>No Active Workflows</p>
+                    </ui:if>
+                    <ui:else>
+                        <ui:group let:iconClass=\"{= spl:objectInGraph(?workflowsPageTab, edg.v:icon, ui:unionGraph) }\" let:title=\"{= CONCAT(str(?totalWorkflows), &quot; Workflows by State&quot;) }\" let:toolTip=\"Go to workflows page\">
+                            <div class=\"row\">
+                                <div class=\"col-xs-12 col-md-6 col-lg-6\">
+                                    <h3>
+                                        <ui:createLink ui:viewClass=\"{= teamwork:WorkflowsHomePageTab }\">
+                                            <a data-icon=\"menu-icon tq-workflow-icon\" href=\"{= ?link }\" tabindex=\"0\" title=\"{= ?toolTip }\">All Workflows</a>
+                                        </ui:createLink>
+                                    </h3>
+                                    <edg:DonutChart arg:dataEndpoint=\"{= edg:AllWorkflowsForCurrentUserDataService }\" arg:subjectArea=\"{= rdf:nil }\" arg:title=\"{= ?title }\"/>
+                                </div>
+                            </div>
+                        </ui:group>
+                    </ui:else>
+                </ui:group>
+            </ui:if>
+        </ui:group>
+    </ui:call>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "For the current user creates a stack chart gadget for the counts of asset collections in different subject areas." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Asset collections for current user gadget" ;
+  rdfs:subClassOf teamwork:DashboardGadgets ;
+.
+edg:CreateInlineButton
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:link ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:text ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:toolTip ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:prototype """
+<ui:group ui:id=\"{= ui:uniqueId() }\">
+    <a class=\"nounderline\" data-icon=\"fa-tags fa\" href=\"{= ?link }\" tabindex=\"0\" title=\"{= ?toolTip }\">
+        <button class=\"btn btn-default btn-xs\" id=\"button_{= ?id }\">
+            <span>{= ?text }</span>
+        </button>
+    </a>.
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Create inline button" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:CriticalDataElementsForSubjectAreaDataService
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:private true ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:subjectAreaAsURI=\"{= IRI(?subjectArea) }\">
+    <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+        <ui:call arg:subjectArea=\"{= ?subjectAreaAsURI }\" ui:template=\"{= edg:getCriticalDataElementCountsForGivenSubjectAreaForCurrentUser }\" ui:varName=\"donutDataTable\">
+            <!--ui:dumpResultSet ui:message=\"AAA1: edg:CriticalDataElementsForSubjectAreaDataService\"
+                  ui:resultSet=\"{= ?donutDataTable }\"/-->
+            <!--ui:dumpScope ui:message=\"edg:CriticalDataElementsForSubjectAreaDataService\"/-->
+            <ui:if ui:condition=\"{= !spr:isEmpty(?donutDataTable) }\">
+                <ui:group let:total=\"{= spif:cast(spr:aggregateCol(spr:Sum, ?donutDataTable, 0), xsd:integer) }\">
+                    <ui:if ui:condition=\"{= spr:cell(?donutDataTable, 0, 0) &gt; 0 }\">
+                        <swon:Object>
+                            <swon:Value arg:name=\"total\" arg:value=\"{= ?total }\"/>
+                            <swon:Value arg:name=\"slices\">
+                                <swon:Array>
+                                    <ui:forEach ui:indexVar=\"index\" ui:resultSet=\"{= ?donutDataTable }\">
+                                        <swon:Object>
+                                            <swon:Value arg:name=\"x\" arg:value=\"{= ?label } [{= str(?value) }]\"/>
+                                            <swon:Value arg:name=\"y\" arg:value=\"{= ?value }\"/>
+                                            <swon:Value arg:name=\"label\" arg:value=\"{= CONCAT(str(?value), &quot; &quot;, ?label) }\"/>
+                                        </swon:Object>
+                                    </ui:forEach>
+                                </swon:Array>
+                            </swon:Value>
+                            <swon:Value arg:name=\"legend\">
+                                <swon:Array>
+                                    <ui:forEach ui:indexVar=\"index\" ui:limit=\"{= 6 }\" ui:resultSet=\"{= ?donutDataTable }\">
+                                        <swon:Object>
+                                            <swon:Value arg:name=\"name\" arg:value=\"{= ?label } [{= str(?value) }]\"/>
+                                        </swon:Object>
+                                    </ui:forEach>
+                                </swon:Array>
+                            </swon:Value>
+                        </swon:Object>
+                    </ui:if>
+                    <ui:else>
+                        <swon:Object>
+                            <swon:Value arg:name=\"message\" arg:value=\"No Critical Data Elements\"/>
+                        </swon:Object>
+                    </ui:else>
+                </ui:group>
+            </ui:if>
+            <ui:else>
+                <swon:Object>
+                    <swon:Value arg:name=\"message\" arg:value=\"No Critical Data Elements\"/>
+                </swon:Object>
+            </ui:else>
+        </ui:call>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Critical data elements for subject area data service" ;
+  rdfs:subClassOf edg:JSONServices ;
+.
+edg:CriticalDataElementsNotMappedToGlossaryTermsGadget
+  a teamwork:DashboardGadget ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  teamwork:dashboardSection teamwork:CompletenessAndValidityDashboardSection ;
+  ui:prototype """
+<ui:group let:title=\"Critical Data Elements not mapped to a Glossary Terms\">
+    <div class=\"col-xs-12 col-md-6 col-lg-6\">
+        <h5 class=\"text-info\">Critical Data Elements not mapped to Glossary Terms</h5>
+        <edg:DonutChart arg:dataEndpoint=\"{= edg:CriticalDataElementsNotMappedToGlossaryTermsSubjectAreaDataService }\" arg:subjectArea=\"{= ?subjectArea }\" arg:title=\"{= ?title }\"/>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "For the current user creates a donut gadget for the counts of  critical data elements for a given subject area that are not mapped to a glossary term." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Critical data elements mapped to glossary terms gadget" ;
+  rdfs:subClassOf teamwork:DashboardGadgets ;
+.
+edg:CriticalDataElementsNotMappedToGlossaryTermsSubjectAreaDataService
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:private true ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:subjectAreaAsURI=\"{= IRI(?subjectArea) }\">
+    <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+        <ui:call arg:subjectArea=\"{= ?subjectAreaAsURI }\" ui:template=\"{= edg:getCountsOfCriticalDataElementsNotMappedToGlossaryTermsForGivenSubjectArea }\" ui:varName=\"donutDataTable\">
+            <!--ui:dumpResultSet ui:message=\"AAA1: edg:CriticalDataElementsNotMappedToGlossaryTermsSubjectAreaDataService - {= ?subjectArea }\"
+                  ui:resultSet=\"{= ?donutDataTable }\"/-->
+            <!--ui:dumpScope ui:message=\"AAA2: edg:CriticalDataElementsNotMappedToGlossaryTermsSubjectAreaDataService\"/-->
+            <ui:if ui:condition=\"{= !spr:isEmpty(?donutDataTable) }\">
+                <ui:group let:total=\"{= spif:cast(spr:aggregateCol(spr:Sum, ?donutDataTable, 0), xsd:integer) }\">
+                    <ui:if ui:condition=\"{= spr:cell(?donutDataTable, 0, 0) &gt; 0 }\">
+                        <swon:Object>
+                            <swon:Value arg:name=\"total\" arg:value=\"{= ?total }\"/>
+                            <swon:Value arg:name=\"slices\">
+                                <swon:Array>
+                                    <ui:forEach ui:indexVar=\"index\" ui:resultSet=\"{= ?donutDataTable }\">
+                                        <swon:Object>
+                                            <swon:Value arg:name=\"x\" arg:value=\"{= ?label } [{= str(?value) }]\"/>
+                                            <swon:Value arg:name=\"y\" arg:value=\"{= ?value }\"/>
+                                            <swon:Value arg:name=\"label\" arg:value=\"{= CONCAT(str(?value), &quot; of &quot;, str(?elements), &quot; in &quot;, ?label) }\"/>
+                                        </swon:Object>
+                                    </ui:forEach>
+                                </swon:Array>
+                            </swon:Value>
+                            <swon:Value arg:name=\"legend\">
+                                <swon:Array>
+                                    <ui:forEach ui:indexVar=\"index\" ui:limit=\"{= 6 }\" ui:resultSet=\"{= ?donutDataTable }\">
+                                        <swon:Object>
+                                            <swon:Value arg:name=\"name\" arg:value=\"{= ?label } [{= str(?value) }]\"/>
+                                        </swon:Object>
+                                    </ui:forEach>
+                                </swon:Array>
+                            </swon:Value>
+                        </swon:Object>
+                    </ui:if>
+                    <ui:else>
+                        <swon:Object>
+                            <swon:Value arg:name=\"message\" arg:value=\"No critical Data Elements without a mapping to a glossary term\"/>
+                        </swon:Object>
+                    </ui:else>
+                </ui:group>
+            </ui:if>
+            <ui:else>
+                <swon:Object>
+                    <swon:Value arg:name=\"message\" arg:value=\"No critical Data Elements without a mapping to a glossary term\"/>
+                </swon:Object>
+            </ui:else>
+        </ui:call>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Critical data elements not mapped to glossary terms subject area data service" ;
+  rdfs:subClassOf edg:JSONServices ;
+.
+edg:CriticalDataElementsPerSubjectAreaGadget
+  a teamwork:DashboardGadget ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  teamwork:dashboardSection teamwork:CompletenessAndValidityDashboardSection ;
+  ui:prototype """
+<ui:group let:title=\"Critical Data Elements\">
+    <div class=\"col-xs-12 col-md-6 col-lg-6\">
+        <h5 class=\"text-info\">Critical Data Elements</h5>
+        <edg:DonutChart arg:dataEndpoint=\"{= edg:CriticalDataElementsForSubjectAreaDataService }\" arg:subjectArea=\"{= ?subjectArea }\" arg:title=\"{= ?title }\"/>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "For the current user creates a donut gadget for the counts of critical data elements for a given subject area according to their graphs." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Critical Data Elements per subject area gadget" ;
+  rdfs:subClassOf teamwork:DashboardGadgets ;
+.
+edg:DTSC_About
+  a edg:DashboardTabScriptContainer ;
+  edg:script edg:DashboardTabAboutScript ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Dashboard Tab Script Container for the About Tab" ;
+.
+edg:DTSC_DataElements
+  a edg:DashboardTabScriptContainer ;
+  edg:script edg:DashboardTabDataElementsPerSubjectAreaScript ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Dashboard Tab Script Container for Data elements" ;
+.
+edg:DTSC_GovernanceProcess
+  a edg:DashboardTabScriptContainer ;
+  edg:script edg:DashboardTabGovernanceProcessScript ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Dashboard Tab Script Container for Governance Process" ;
+.
+edg:DTSC_Workflows
+  a edg:DashboardTabScriptContainer ;
+  edg:script edg:DashboardTabWorkflowsScript ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Dashboard Tab Script Container for Workflows" ;
+.
+edg:DashboardTabAboutScript
+  a edg:DashboardScriptClass ;
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group let:userName=\"{= IF(smf:hasCurrentUser(), smf:currentUserName(), &quot;Anonymous&quot;) }\">
+    <ui:group let:user=\"{= IRI(CONCAT(&quot;urn:x-tb-users:&quot;, ?userName)) }\">
+        <div let:governanceGraph=\"{= teamwork:platformGovernanceGraph() }\" let:projectType=\"{= teamwork:getProjectType(?projectGraph) }\" let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+            <ui:try>
+                <ui:setContext ui:queryGraph=\"{= ui:unionOfGraphs(ui:graphWithImports(?governanceGraph, ui:graph)) }\">
+                    <section>
+                        <div>
+                            <p>
+                                <em>Metrics Dashboard</em> provides overviews of the metrics associated with subject areas, asset collections, and workflows in which you participate. In the current release, Workflows and Governance Area tabs have been predefined on the default dashboard. Additional tabs and metrics will be enabled in future releases. <br/>
+                                <br/>Dashboards are customizable. For dashboard customization please see the TopBraid documentation website in the EDG User Guide Overview.</p>
+                        </div>
+                        <ui:if ui:condition=\"{= uix:isAdmin() }\">
+                            <p>To configure dashboard tabs go to:<edg:CreateInlineButton arg:link=\"platform_governance_singleton.editor?resourceType=edg:Dashboard&amp;viewPointClass=edg:DashboardModelsViewpoint\" arg:text=\"Dashboards Page\" arg:toolTip=\"Takes you to the 'Dashboards Editor\"/>
+                            </p>
+                            <p>Some dashboards may be dependent on the definition of <em>Subject Areas</em> and <em>Governance Roles</em>. To manage these go to:<edg:CreateInlineButton arg:link=\"swp?_viewClass=governance%3ASubjectAreasPage\" arg:text=\"Governance Areas Page\" arg:toolTip=\"Takes you to the 'Governance Areas Page\"/>
+                            </p>
+                        </ui:if>
+                        <ui:else>
+                            <p>Please work with your <em>EDG administrator</em> to configure governance roles.</p>
+                        </ui:else>
+                    </section>
+                </ui:setContext>
+            </ui:try>
+            <ui:catch>
+                <span class=\"text-danger\">{= ?exception }<br/>
+                </span>
+            </ui:catch>
+        </div>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Dashboard Tab About Script" ;
+  rdfs:subClassOf edg:DashboardTabScript ;
+.
+edg:DashboardTabDataElementsPerSubjectAreaScript
+  a edg:DashboardScriptClass ;
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group let:governanceGraph=\"{= teamwork:platformGovernanceGraph() }\" let:user=\"{= edg:currentUser() }\">
+    <ui:setContext ui:queryGraph=\"{= ui:graph }\">
+        <ui:call ui:template=\"{= edg:getSubjectAreasForCurrentUser }\" ui:varName=\"mySubjectAreas\">
+            <!--ui:dumpResultSet ui:message=\"AAA1: edg:DashboardTabDataElementsPerSubjectAreaScript\"
+                  ui:resultSet=\"{= ?mySubjectAreas }\"/-->
+            <!--ui:dumpScope ui:message=\"AAA2: edg:DashboardTabDataElementsPerSubjectAreaScript\"/-->
+            <ui:if ui:condition=\"{= !spr:isEmpty(?mySubjectAreas) }\">
+                <ui:forEach ui:resultSet=\"{= ?mySubjectAreas }\">
+                    <h2 class=\"text-info\">
+                        <governance:AssetViewerInline arg:resource=\"{= ?subjectArea }\"/>
+                        <span>&nbsp; Subject Area</span>
+                    </h2>
+                    <div class=\"row chart-row\">
+                        <edg:DataElementsPerSubjectAreaGadget arg:subjectArea=\"{= ?subjectArea }\"/>
+                        <edg:DataElementsMappedToGlossaryTermsGadget arg:subjectArea=\"{= ?subjectArea }\"/>
+                    </div>
+                    <div class=\"row chart-row\">
+                        <edg:CriticalDataElementsPerSubjectAreaGadget arg:subjectArea=\"{= ?subjectArea }\"/>
+                        <edg:CriticalDataElementsNotMappedToGlossaryTermsGadget arg:subjectArea=\"{= ?subjectArea }\"/>
+                    </div>
+                    <div class=\"row chart-row\">
+                        <edg:DataElementsMappedToPIIglossaryTermsGadget arg:subjectArea=\"{= ?subjectArea }\"/>
+                    </div>
+                    <hr class=\"gray-line-5px\"/>
+                </ui:forEach>
+            </ui:if>
+            <ui:else>
+                <edg:NoAssetCollectionsAssignedToSubjectAreasOrAccesibleByCurrentUser/>
+            </ui:else>
+        </ui:call>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "DashboardTab data elements per subject area" ;
+  rdfs:subClassOf edg:DashboardTabScript ;
+.
+edg:DashboardTabForAbout
+  a edg:PreconfiguredDashboardGadgetTab ;
+  edg:belongsTo edg:DefaultDashboard ;
+  edg:scriptContainer edg:DTSC_About ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "About" ;
+  sh:order 1 ;
+.
+edg:DashboardTabForDataElements
+  a edg:PreconfiguredDashboardGadgetTab ;
+  edg:belongsTo edg:DefaultDashboard ;
+  edg:scriptContainer edg:DTSC_DataElements ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Data Elements" ;
+  sh:order 40 ;
+.
+edg:DashboardTabForGovernanceRoles
+  a edg:PreconfiguredDashboardGadgetTab ;
+  edg:belongsTo edg:DefaultDashboard ;
+  edg:scriptContainer edg:DTSC_GovernanceProcess ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Governance Roles" ;
+  sh:order 30 ;
+.
+edg:DashboardTabForWorkFlows
+  a edg:PreconfiguredDashboardGadgetTab ;
+  edg:belongsTo edg:DefaultDashboard ;
+  edg:scriptContainer edg:DTSC_Workflows ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Workflows" ;
+  sh:order 20 ;
+.
+edg:DashboardTabGovernanceProcessScript
+  a edg:DashboardScriptClass ;
+  a ui:NodeClass ;
+  ui:prototype """
+<div let:projectType=\"{= teamwork:getProjectType(?projectGraph) }\" let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <ui:try>
+        <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+            <h2 class=\"text-info\">Governance Role Assignments by Subject Area</h2>
+            <div class=\"row\">
+                <div class=\"col-xs-12\">
+                    <edg:RoleAssignmentsPerSubjectAreaGadget/>
+                </div>
+            </div>
+        </ui:setContext>
+    </ui:try>
+    <ui:catch>
+        <span class=\"text-danger\">{= ?exception }<br/>
+        </span>
+    </ui:catch>
+</div>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Dashboard Tab Governance Process Script" ;
+  rdfs:subClassOf edg:DashboardTabScript ;
+.
+edg:DashboardTabPIIdataElementsScript
+  a edg:DashboardScriptClass ;
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group>
+    <ui:try>
+        <div let:projectType=\"{= teamwork:getProjectType(?projectGraph) }\" let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+            <ui:setContext ui:queryGraph=\"{= ui:graph }\">
+                <ui:call arg:user=\"{= edg:currentUser() }\" ui:template=\"{= edg:getSubjectAreasForCurrentUser }\" ui:varName=\"mySubjectAreas\">
+                    <!--ui:debug>
+<ui:dumpResultSet ui:message=\"edg:DashboardTabPIIdataElementsScript\"
+  ui:resultSet=\"{= ?mySubjectAreas }\"/>
+<ui:dumpScope ui:message=\"edg:DashboardTabPIIdataElementsScript\"/>
+</ui:debug-->
+                    <section>
+                        <edg:PIIdataElementsForSubjectAreaGadget arg:resultSet=\"{= ?mySubjectAreas }\"/>
+                    </section>
+                </ui:call>
+            </ui:setContext>
+        </div>
+    </ui:try>
+    <ui:catch>
+        <span class=\"text-danger\">{= ?exception }<br/>
+        </span>
+    </ui:catch>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Dashboard tab PII Data Elements Script" ;
+  rdfs:subClassOf edg:DashboardTabScript ;
+.
+edg:DashboardTabWorkflowsScript
+  a edg:DashboardScriptClass ;
+  a ui:NodeClass ;
+  ui:prototype """
+<div let:projectType=\"{= teamwork:getProjectType(?projectGraph) }\" let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <ui:try>
+        <ui:setContext ui:queryGraph=\"{= ui:graph }\">
+            <ui:call arg:user=\"{= edg:currentUser() }\" ui:template=\"{= edg:getSubjectAreasForCurrentUser }\" ui:varName=\"mySubjectAreas\">
+                <!--ui:dumpResultSet ui:message=\"AAA1: edg:DashboardTabWorkflowsScript - my subject areas and roles\"
+                          ui:resultSet=\"{= ?mySubjectAreas }\"/-->
+                <!--ui:dumpScope ui:message=\"AAA2: edg:DashboardTabWorkflowsScript\"/-->
+                <section>
+                    <ui:if ui:condition=\"{= !spr:isEmpty(?mySubjectAreas) }\">
+                        <ui:call ui:template=\"{= edg:getMyGraphsAcrossSubjectAreas }\" ui:varName=\"myGraphs\">
+                            <ui:if ui:condition=\"{= !spr:isEmpty(?myGraphs) }\">
+                                <ui:group let:aggregatedGraphs=\"{= edg:sortStringListRemovingDuplicates(edg:aggregateCol(edg:CommaSeparatedList, ?myGraphs, 0)) }\">
+                                    <h3 class=\"text-info\">Workflows across my Asset Collections</h3>
+                                </ui:group>
+                            </ui:if>
+                            <ui:else>
+                                <edg:NoAssetCollectionsAssignedToSubjectAreasOrAccesibleByCurrentUser/>
+                            </ui:else>
+                        </ui:call>
+                        <edg:WorkflowsForCurrentUserGadget/>
+                        <hr class=\"gray-line-5px\"/>
+                        <h3 class=\"text-info\">Workflows per Subject Area</h3>
+                        <div class=\"row chart-row\">
+                            <ui:forEach ui:resultSet=\"{= ?mySubjectAreas }\">
+                                <edg:WorkflowsPerSubjectAreaGadget arg:subjectArea=\"{= ?subjectArea }\"/>
+                            </ui:forEach>
+                        </div>
+                    </ui:if>
+                    <ui:else>
+                        <ui:call ui:template=\"{= edg:getSubjectAreas }\" ui:varName=\"allSubjectAreas\">
+                            <!--ui:dumpResultSet ui:message=\"AAA3: edg:DashboardTabWorkflowsScript - my subject areas and roles\"
+                                  ui:resultSet=\"{= ?allSubjectAreas }\"/-->
+                            <ui:if ui:condition=\"{= spr:isEmpty(?allSubjectAreas) }\">
+                                <edg:HowToCreatetSubjectAreas/>
+                            </ui:if>
+                            <ui:else>
+                                <edg:NoAssetCollectionsAccessibleByCurrentUser arg:resultSet=\"{= ?allSubjectAreas }\"/>
+                            </ui:else>
+                        </ui:call>
+                    </ui:else>
+                </section>
+            </ui:call>
+        </ui:setContext>
+    </ui:try>
+    <ui:catch>
+        <span class=\"text-danger\">{= ?exception }<br/>
+        </span>
+    </ui:catch>
+</div>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Dashboard Tab Workflows Script" ;
+  rdfs:subClassOf edg:DashboardTabScript ;
+.
+edg:DataElementsDataService
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:private true ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:maxDataElementClasses=\"20\" let:maxProjectGraphs=\"42\" let:subjectAreaAsURI=\"{= IRI(?subjectArea) }\">
+    <!--ui:dumpScope ui:message=\"AAA0: edg:DataElementsDataService - {= ?subjectArea }\"/-->
+    <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+        <ui:call arg:subjectArea=\"{= ?subjectAreaAsURI }\" ui:template=\"{= edg:getlDataElementsPerSubjectArea }\" ui:varName=\"gadgetDataTable\">
+            <ui:group let:rowCount=\"{= spr:rowCount(?gadgetDataTable) }\">
+                <!--ui:dumpScope ui:message=\"AAA1: edg:DataElementsDataService - {= ?subjectArea }\"/-->
+                <!--ui:dumpResultSet ui:message=\"AAA2: edg:DataElementsDataService - {= ?subjectArea }\"
+                  ui:resultSet=\"{= ?gadgetDataTable }\"/-->
+                <ui:if ui:condition=\"{= !spr:isEmpty(?gadgetDataTable) }\">
+                    <ui:if ui:condition=\"{= spr:cell(?gadgetDataTable, 0, 0) &gt; 0 }\">
+                        <ui:group let:total=\"{= spif:cast(spr:aggregateCol(spr:Sum, ?gadgetDataTable, 0), xsd:integer) }\">
+                            <ui:call arg:column=\"{= 2 }\" arg:resultSet=\"{= ?gadgetDataTable }\" ui:template=\"{= edg:getDistinctValuesFromResultSetColumn }\" ui:varName=\"dataElementClasses\">
+                                <ui:group let:categories=\"{= spr:rowCount(?dataElementClasses) }\">
+                                    <!--ui:dumpScope ui:message=\"AAA3: edg:DataElementsDataService - {= ?subjectArea }\"/-->
+                                    <!--ui:dumpResultSet ui:message=\"AAA4: edg:DataElementsDataService - {= ?subjectArea }\"
+                                          ui:resultSet=\"{= ?dataElementClasses }\"/-->
+                                    <swon:Object>
+                                        <swon:Value arg:name=\"axis\">
+                                            <ui:call arg:column=\"{= 1 }\" arg:resultSet=\"{= ?gadgetDataTable }\" ui:template=\"{= edg:getDistinctValuesFromResultSetColumn }\" ui:varName=\"projectGraphs\">
+                                                <swon:Object>
+                                                    <swon:Value arg:name=\"values\">
+                                                        <swon:Array>
+                                                            <ui:forEach ui:indexVar=\"index\" ui:limit=\"{= ?maxProjectGraphs }\" ui:resultSet=\"{= ?projectGraphs }\">
+                                                                <swon:Literal arg:value=\"{= ?index + 1 }\"/>
+                                                            </ui:forEach>
+                                                        </swon:Array>
+                                                    </swon:Value>
+                                                    <swon:Value arg:name=\"format\">
+                                                        <swon:Array>
+                                                            <ui:forEach ui:indexVar=\"index\" ui:limit=\"{= ?maxProjectGraphs }\" ui:resultSet=\"{= ?projectGraphs }\">
+                                                                <swon:Literal arg:value=\"{= swa:labelInGraph(?cell, ?cell) }\"/>
+                                                            </ui:forEach>
+                                                        </swon:Array>
+                                                    </swon:Value>
+                                                </swon:Object>
+                                            </ui:call>
+                                        </swon:Value>
+                                        <swon:Value arg:name=\"legend\">
+                                            <swon:Array>
+                                                <ui:forEach ui:limit=\"{= ?maxDataElementClasses }\" ui:resultSet=\"{= ?dataElementClasses }\">
+                                                    <swon:Object>
+                                                        <swon:Value arg:name=\"name\" arg:value=\"{= ui:label(?cell) }\"/>
+                                                    </swon:Object>
+                                                </ui:forEach>
+                                            </swon:Array>
+                                        </swon:Value>
+                                        <swon:Value arg:name=\"bars\">
+                                            <swon:Object>
+                                                <ui:forEach ui:indexVar=\"index1\" ui:limit=\"{= ?maxDataElementClasses }\" ui:resultSet=\"{= ?dataElementClasses }\">
+                                                    <ui:group let:dataElementClass=\"{= ?cell }\" let:legendEntry=\"{= ui:label(?cell) }\">
+                                                        <swon:Value arg:name=\"{= ?legendEntry }\">
+                                                            <swon:Array>
+                                                                <ui:call arg:column=\"{= 1 }\" arg:resultSet=\"{= ?gadgetDataTable }\" ui:template=\"{= edg:getDistinctValuesFromResultSetColumn }\" ui:varName=\"projectGraphs2\">
+                                                                    <ui:forEach ui:indexVar=\"index2\" ui:limit=\"{= ?maxProjectGraphs }\" ui:resultSet=\"{= ?projectGraphs2 }\">
+                                                                        <ui:group let:aProjectGraph=\"{= ?cell }\">
+                                                                            <swon:Object let:instanceCount=\"{= edg:getCountOfInstancesOfClass(?dataElementClass, ?aProjectGraph) }\">
+                                                                                <swon:Value arg:name=\"status\" arg:value=\"{= ?index2 + 1 }\"/>
+                                                                                <swon:Value arg:name=\"count\" arg:value=\"{= ?instanceCount }\"/>
+                                                                                <swon:Value arg:name=\"label\" arg:value=\"{= ?legendEntry } [{= ?instanceCount }]\"/>
+                                                                            </swon:Object>
+                                                                        </ui:group>
+                                                                    </ui:forEach>
+                                                                </ui:call>
+                                                            </swon:Array>
+                                                        </swon:Value>
+                                                    </ui:group>
+                                                </ui:forEach>
+                                            </swon:Object>
+                                        </swon:Value>
+                                    </swon:Object>
+                                </ui:group>
+                            </ui:call>
+                        </ui:group>
+                    </ui:if>
+                    <ui:else>
+                        <swon:Object>
+                            <swon:Value arg:name=\"message\" arg:value=\"No Data Elements\"/>
+                        </swon:Object>
+                    </ui:else>
+                </ui:if>
+                <ui:else>
+                    <swon:Object>
+                        <swon:Value arg:name=\"message\" arg:value=\"No Data Elements\"/>
+                    </swon:Object>
+                </ui:else>
+            </ui:group>
+        </ui:call>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment "Note that project graphs are limited to 42 and data element classes to 20." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Data elements data service" ;
+  rdfs:subClassOf edg:JSONServices ;
+.
+edg:DataElementsMappedToGlossaryTermsGadget
+  a teamwork:DashboardGadget ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  teamwork:dashboardSection teamwork:CompletenessAndValidityDashboardSection ;
+  ui:prototype """
+<ui:group let:title=\"Data Elements associated with Glossary Terms\">
+    <div class=\"col-xs-12 col-md-6 col-lg-6\">
+        <h5 class=\"text-info\">Data Elements mapped to Glossary Terms</h5>
+        <edg:DonutChart arg:dataEndpoint=\"{= edg:DataElementsMappedToGlossaryTermsSubjectAreaDataService }\" arg:subjectArea=\"{= ?subjectArea }\" arg:title=\"{= ?title }\"/>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "For the current user creates a donut gadget for the counts of  data elements for a given subject area that have glossary term connections." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Data elements mapped to glossary terms gadget" ;
+  rdfs:subClassOf teamwork:DashboardGadgets ;
+.
+edg:DataElementsMappedToGlossaryTermsSubjectAreaDataService
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:private true ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:subjectAreaAsURI=\"{= IRI(?subjectArea) }\">
+    <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+        <ui:call arg:subjectArea=\"{= ?subjectAreaAsURI }\" ui:template=\"{= edg:getCountsOfDataElementsMappedToGlossaryTermsForGivenSubjectArea }\" ui:varName=\"donutDataTable\">
+            <!--ui:dumpResultSet ui:message=\"AAA1: edg:DataElementsConnectedToGlossaryTermsSubjectAreaDataService\"
+                  ui:resultSet=\"{= ?donutDataTable }\"/-->
+            <!--ui:dumpScope ui:message=\"AAA2: edg:DataElementsConnectedToGlossaryTermsSubjectAreaDataService\"/-->
+            <ui:if ui:condition=\"{= !spr:isEmpty(?donutDataTable) }\">
+                <ui:group let:total=\"{= spif:cast(spr:aggregateCol(spr:Sum, ?donutDataTable, 0), xsd:integer) }\">
+                    <ui:if ui:condition=\"{= spr:cell(?donutDataTable, 0, 0) &gt; 0 }\">
+                        <swon:Object>
+                            <swon:Value arg:name=\"total\" arg:value=\"{= ?total }\"/>
+                            <swon:Value arg:name=\"slices\">
+                                <swon:Array>
+                                    <ui:forEach ui:indexVar=\"index\" ui:resultSet=\"{= ?donutDataTable }\">
+                                        <swon:Object>
+                                            <swon:Value arg:name=\"x\" arg:value=\"{= ?label } [{= str(?value) }]\"/>
+                                            <swon:Value arg:name=\"y\" arg:value=\"{= ?value }\"/>
+                                            <swon:Value arg:name=\"label\" arg:value=\"{= CONCAT(str(?value), &quot; &quot;, ?label) }\"/>
+                                        </swon:Object>
+                                    </ui:forEach>
+                                </swon:Array>
+                            </swon:Value>
+                            <swon:Value arg:name=\"legend\">
+                                <swon:Array>
+                                    <ui:forEach ui:indexVar=\"index\" ui:limit=\"{= 6 }\" ui:resultSet=\"{= ?donutDataTable }\">
+                                        <swon:Object>
+                                            <swon:Value arg:name=\"name\" arg:value=\"{= ?label } [{= str(?value) }]\"/>
+                                        </swon:Object>
+                                    </ui:forEach>
+                                </swon:Array>
+                            </swon:Value>
+                        </swon:Object>
+                    </ui:if>
+                    <ui:else>
+                        <swon:Object>
+                            <swon:Value arg:name=\"message\" arg:value=\"No Mappings of Data Elements to Glossary Terms\"/>
+                        </swon:Object>
+                    </ui:else>
+                </ui:group>
+            </ui:if>
+            <ui:else>
+                <swon:Object>
+                    <swon:Value arg:name=\"message\" arg:value=\"No Mappings of Data Elements to Glossary Terms\"/>
+                </swon:Object>
+            </ui:else>
+        </ui:call>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Data elements mapped to glossary terms subject area data service" ;
+  rdfs:subClassOf edg:JSONServices ;
+.
+edg:DataElementsMappedToPIIglossaryTermsGadget
+  a teamwork:DashboardGadget ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  teamwork:dashboardSection teamwork:CompletenessAndValidityDashboardSection ;
+  ui:prototype """
+<ui:group let:title=\"Data Elements mapped to PII Glossary Terms\">
+    <div class=\"col-xs-12 col-md-6 col-lg-6\">
+        <h5 class=\"text-info\">Data Elements mapped to PII Glossary Terms</h5>
+        <edg:DonutChart arg:dataEndpoint=\"{= edg:DataElementsMappedToPIIglossaryTermsSubjectAreaDataService }\" arg:subjectArea=\"{= ?subjectArea }\" arg:title=\"{= ?title }\"/>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "For the current user creates a donut gadget for the counts of  data elements for a given subject area that have PII glossary term mappings." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Data elements mapped to PII glossary terms gadget" ;
+  rdfs:subClassOf teamwork:DashboardGadgets ;
+.
+edg:DataElementsMappedToPIIglossaryTermsSubjectAreaDataService
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:private true ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:subjectAreaAsURI=\"{= IRI(?subjectArea) }\">
+    <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+        <ui:call arg:subjectArea=\"{= ?subjectAreaAsURI }\" ui:template=\"{= edg:getCountsOfDataElementsAssociatedWithPIIglossaryTermsForGivenSubjectArea }\" ui:varName=\"donutDataTable\">
+            <!--ui:dumpResultSet ui:message=\"AAA1: edg:DataElementsConnectedToGlossaryTermsSubjectAreaDataService\"
+                  ui:resultSet=\"{= ?donutDataTable }\"/-->
+            <!--ui:dumpScope ui:message=\"AAA2: edg:DataElementsConnectedToGlossaryTermsSubjectAreaDataService\"/-->
+            <ui:if ui:condition=\"{= !spr:isEmpty(?donutDataTable) }\">
+                <ui:group let:total=\"{= spif:cast(spr:aggregateCol(spr:Sum, ?donutDataTable, 0), xsd:integer) }\">
+                    <ui:if ui:condition=\"{= spr:cell(?donutDataTable, 0, 0) &gt; 0 }\">
+                        <swon:Object>
+                            <swon:Value arg:name=\"total\" arg:value=\"{= ?total }\"/>
+                            <swon:Value arg:name=\"slices\">
+                                <swon:Array>
+                                    <ui:forEach ui:indexVar=\"index\" ui:resultSet=\"{= ?donutDataTable }\">
+                                        <swon:Object>
+                                            <swon:Value arg:name=\"x\" arg:value=\"{= ?label } [{= str(?value) }]\"/>
+                                            <swon:Value arg:name=\"y\" arg:value=\"{= ?value }\"/>
+                                            <swon:Value arg:name=\"label\" arg:value=\"{= CONCAT(str(?value), &quot; &quot;, ?label) }\"/>
+                                        </swon:Object>
+                                    </ui:forEach>
+                                </swon:Array>
+                            </swon:Value>
+                            <swon:Value arg:name=\"legend\">
+                                <swon:Array>
+                                    <ui:forEach ui:indexVar=\"index\" ui:limit=\"{= 6 }\" ui:resultSet=\"{= ?donutDataTable }\">
+                                        <swon:Object>
+                                            <swon:Value arg:name=\"name\" arg:value=\"{= ?label } [{= str(?value) }]\"/>
+                                        </swon:Object>
+                                    </ui:forEach>
+                                </swon:Array>
+                            </swon:Value>
+                        </swon:Object>
+                    </ui:if>
+                    <ui:else>
+                        <swon:Object>
+                            <swon:Value arg:name=\"message\" arg:value=\"No Mappings of Data Elements to PII Glossary Terms\"/>
+                        </swon:Object>
+                    </ui:else>
+                </ui:group>
+            </ui:if>
+            <ui:else>
+                <swon:Object>
+                    <swon:Value arg:name=\"message\" arg:value=\"No Mappings of Data Elements to PII Glossary Terms\"/>
+                </swon:Object>
+            </ui:else>
+        </ui:call>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Data elements mapped to PII glossary terms subject area data service" ;
+  rdfs:subClassOf edg:JSONServices ;
+.
+edg:DataElementsPerSubjectAreaGadget
+  a teamwork:DashboardGadget ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType edg:SubjectArea ;
+    ] ;
+  teamwork:dashboardSection teamwork:CompletenessAndValidityDashboardSection ;
+  ui:prototype """
+<ui:group>
+    <!--ui:dumpScope ui:message=\"AAA1: edg:DataElementsPerSubjectAreaGadget - {= ?subjectArea }\"/-->
+    <!--ui:dumpResultSet ui:message=\"AAA2: edg:DataElementsPerSubjectAreaGadget\" ui:resultSet=\"{= ?gadgetDataTable }\"/-->
+    <ui:group let:title=\"{= CONCAT(str(?totals), &quot; Data Elements&quot;) }\">
+        <div class=\"col-xs-12 col-md-6 col-lg-6\">
+            <h5 class=\"text-info\">All Data Elements</h5>
+            <swa:VictoryStackChart arg:data_endpoint=\"{= edg:DataElementsDataService }\" arg:subjectArea=\"{= ?subjectArea }\"/>
+        </div>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "For the current user creates a donut gadget for the counts of data elements  for a given subject area according to their graphs" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Data Elements per subject area gadget" ;
+  rdfs:subClassOf teamwork:DashboardGadgets ;
+.
+edg:DefaultDashboard
+  a edg:Dashboard ;
+  edg:scriptContainer edg:DTSC_About ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Default Dashboard" ;
+  sh:order 1 ;
+.
+edg:HowToCreatetSubjectAreas
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group ui:id=\"{= ui:uniqueId() }\">
+    <p class=\"text-info\">No subject areas are defined.</p>
+    <p>To define subject areas go to: <edg:CreateInlineButton arg:link=\"swp?_viewClass=governance%3ASubjectAreasPage\" arg:text=\"Governance Areas\" arg:toolTip=\"This takes you to the 'Governance Areas Page\"/>
+    </p>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "How to create subject areas" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:HowToCreatetSubjectAreasAndAssociateAssetCollections
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group>
+    <p class=\"text-info\">No asset collections have been assigned to a subject area.</p>
+    <p>To associate an existing asset collection with a subject area, go to the asset collection and select <em>Settings</em>.</p>
+    <p>To create a new asset collection in a subject area, go to:<edg:CreateInlineButton arg:link=\"swp?_viewClass=governance%3ASubjectAreasPage\" arg:text=\"Governance Areas\" arg:toolTip=\"This takes you to the 'Governance Areas Page\"/>
+    </p>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "How to create subject areas and associate asset collections" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:JSONServices
+  a ui:Service ;
+  rdfs:subClassOf ui:Services ;
+.
+edg:MyDashboardsHelpPage
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group let:userName=\"{= IF(smf:hasCurrentUser(), smf:currentUserName(), &quot;Anonymous&quot;) }\">
+    <ui:group let:user=\"{= IRI(CONCAT(&quot;urn:x-tb-users:&quot;, ?userName)) }\">
+        <div>
+            <p>Note that, as <em>{= ?userName }</em>, the coverage that you are granted in seeing metrics and other data in dashboards is governed by the roles that you have in asset collections associated with subject areas</p>
+            <p>You can see a table of your assigned roles by going to the <span>
+                    <a data-icon=\"fa-tags fa\" href=\"swp?_viewClass=governance:UserPage&amp;user={= ?user }\" tabindex=\"0\" title=\"Takes you to your 'User Roles Page\">User Roles Page</a>
+                </span>
+            </p>
+        </div>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/governance> ;
+  rdfs:label "My dashboards help page" ;
+  rdfs:subClassOf edg:HelpPage ;
+.
+edg:NoAssetCollectionsAccessibleByCurrentUser
+  ui:responseType ui:JSON ;
+.
+edg:NoAssetCollectionsAssignedToSubjectAreasOrAccesibleByCurrentUser
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group ui:id=\"{= ui:uniqueId() }\">
+    <ui:call ui:template=\"{= edg:getSubjectAreas }\" ui:varName=\"subjectAreas\">
+        <ui:if ui:condition=\"{= spr:isEmpty(?subjectAreas) }\">
+            <edg:HowToCreatetSubjectAreas/>
+        </ui:if>
+        <ui:else>
+            <edg:NoAssetCollectionsAccessibleByCurrentUser arg:resultSet=\"{= ?subjectAreas }\"/>
+        </ui:else>
+    </ui:call>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "No asset collections have been assigned to subject areas or accessible by current user" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:NoSubjectAreaGraphsAccessibleByCurrentUser
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group>
+    <p class=\"text-info\">You are not permitted access to any of the asset collections in the subject area(s).</p>
+    <p>Request access from your Administrator</p>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "No subject area graphs accessible by current user" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:PIIdataElementsForSubjectAreaDataService
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:private true ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:subjectAreaURI=\"{= IRI(?subjectArea) }\">
+    <ui:setContext ui:queryGraph=\"{= ui:graph }\">
+        <ui:call arg:subjectArea=\"{= ?subjectAreaURI }\" ui:template=\"{= edg:getPIIdataElementsForGivenSubjectAreaForCurrentUser }\" ui:varName=\"piiDataElementsResultSet\">
+            <ui:if ui:condition=\"{= spr:rowCount(?piiDataElementsResultSet) &gt; 0 }\">
+                <ui:group let:totalPIIelements=\"{= spif:cast(spr:aggregateCol(spr:Sum, ?piiDataElementsResultSet, 0), xsd:integer) }\">
+                    <swon:Object>
+                        <swon:Value arg:name=\"message\" arg:value=\"There are {= ?totalPIIelements } PII Data Element(s)\"/>
+                    </swon:Object>
+                </ui:group>
+            </ui:if>
+            <ui:else>
+                <swon:Object>
+                    <swon:Value arg:name=\"message\" arg:value=\"No PII Data Elements\"/>
+                </swon:Object>
+            </ui:else>
+        </ui:call>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "PII Data Elements for subject area data service" ;
+  rdfs:subClassOf edg:JSONServices ;
+.
+edg:RoleAssignmentCountsAxes
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:axesResultSet ;
+      spl:valueType spr:Table ;
+    ] ;
+  spin:private true ;
+  ui:private true ;
+  ui:prototype """
+<swon:Value arg:name=\"axis\">
+    <swon:Object>
+        <swon:Value arg:name=\"values\">
+            <swon:Array>
+                <ui:forEach ui:indexVar=\"index\" ui:limit=\"{= 12 }\" ui:resultSet=\"{= ?axesResultSet }\">
+                    <swon:Literal arg:value=\"{= ?index + 1 }\"/>
+                </ui:forEach>
+            </swon:Array>
+        </swon:Value>
+        <swon:Value arg:name=\"format\">
+            <swon:Array>
+                <ui:forEach ui:indexVar=\"index\" ui:limit=\"{= 12 }\" ui:resultSet=\"{= ?axesResultSet }\">
+                    <ui:group let:cell=\"{= IRI(spr:cell(?axesResultSet, ?index, 0)) }\">
+                        <swon:Literal arg:value=\"{= spl:objectInGraph(?cell, rdfs:label, teamwork:platformGovernanceGraph()) } \"/>
+                    </ui:group>
+                </ui:forEach>
+            </swon:Array>
+        </swon:Value>
+    </swon:Object>
+</swon:Value>
+"""^^ui:Literal ;
+  rdfs:label "Role assignment counts axes" ;
+  rdfs:subClassOf edg:JSONsubServices ;
+.
+edg:RoleAssignmentCountsBars
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:axesResultSet ;
+      spl:valueType spr:Table ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:legendsResultSet ;
+      spl:valueType spr:Table ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resultSet ;
+      spl:valueType spr:Table ;
+    ] ;
+  spin:private true ;
+  ui:private true ;
+  ui:prototype """
+<swon:Value arg:name=\"bars\">
+    <swon:Object>
+        <ui:forEach ui:indexVar=\"index1\" ui:limit=\"{= 20 }\" ui:resultSet=\"{= ?legendsResultSet }\">
+            <ui:group let:roleLabel=\"{= spr:cell(?legendsResultSet, ?index1, 0) }\">
+                <swon:Value arg:name=\"{= ?roleLabel }\">
+                    <swon:Array>
+                        <ui:forEach ui:indexVar=\"index2\" ui:limit=\"{= 12 }\" ui:resultSet=\"{= ?axesResultSet }\">
+                            <ui:group let:subjectArea=\"{= IRI(spr:cell(?axesResultSet, ?index2, 0)) }\">
+                                <ui:group let:axis=\"{= spl:objectInGraph(?subjectArea, rdfs:label, teamwork:platformGovernanceGraph()) }\" let:count=\"{= COALESCE(edg:getUserAssignedRoleCountForSubjectArea(?roleLabel, ?subjectArea), 0) }\">
+                                    <swon:Object>
+                                        <swon:Value arg:name=\"status\" arg:value=\"{= ?index2 + 1 }\"/>
+                                        <swon:Value arg:name=\"count\" arg:value=\"{= ?count }\"/>
+                                        <swon:Value arg:name=\"label\" arg:value=\"{= ?roleLabel }\"/>
+                                    </swon:Object>
+                                </ui:group>
+                            </ui:group>
+                        </ui:forEach>
+                    </swon:Array>
+                </swon:Value>
+            </ui:group>
+        </ui:forEach>
+    </swon:Object>
+</swon:Value>
+"""^^ui:Literal ;
+  rdfs:label "Role assignment counts bars" ;
+  rdfs:subClassOf edg:JSONsubServices ;
+.
+edg:RoleAssignmentCountsDataService
+  a ui:Service ;
+  spin:private true ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+        <ui:call ui:template=\"{= edg:getSubjectAreaGovernanceRolesAssignments }\" ui:varName=\"subjectAreaGovernanceRolesAssignments\">
+            <ui:if ui:condition=\"{= !spr:isEmpty(?subjectAreaGovernanceRolesAssignments) }\">
+                <ui:if ui:condition=\"{= spr:cell(?subjectAreaGovernanceRolesAssignments, 0, 2) &gt; 0 }\">
+                    <ui:group let:total=\"{= spif:cast(spr:aggregateCol(spr:Sum, ?subjectAreaGovernanceRolesAssignments, 2), xsd:integer) }\">
+                        <ui:call arg:column=\"{= 0 }\" arg:resultSet=\"{= ?subjectAreaGovernanceRolesAssignments }\" ui:template=\"{= edg:getDistinctValuesFromResultSetColumn }\" ui:varName=\"subjectAreas\">
+                            <ui:call arg:column=\"{= 1 }\" arg:resultSet=\"{= ?subjectAreaGovernanceRolesAssignments }\" ui:template=\"{= edg:getMembersFromAggregatedList }\" ui:varName=\"roles\">
+                                <!--ui:debug>
+<ui:dumpResultSet ui:message=\"subjectAreaGovernanceRolesAssignments\"
+  ui:resultSet=\"{= ?subject areas, governance roles and assignments }\"/>
+<ui:dumpResultSet ui:message=\"subject areasa\" ui:resultSet=\"{= ?subjectAreas }\"/>
+<ui:dumpResultSet ui:message=\"roles\" ui:resultSet=\"{= ?roles }\"/>
+</ui:debug-->
+                                <ui:group let:categories=\"{= spr:rowCount(?subjectAreas) }\">
+                                    <swon:Object>
+                                        <edg:RoleAssignmentCountsAxes arg:axesResultSet=\"{= ?subjectAreaGovernanceRolesAssignments }\"/>
+                                        <edg:RoleAssignmentCountsLegends arg:legendsResultSet=\"{= ?roles }\"/>
+                                        <edg:RoleAssignmentCountsBars arg:axesResultSet=\"{= ?subjectAreaGovernanceRolesAssignments }\" arg:legendsResultSet=\"{= ?roles }\" arg:resultSet=\"{= ?subjectAreaGovernanceRolesAssignments }\"/>
+                                    </swon:Object>
+                                </ui:group>
+                            </ui:call>
+                        </ui:call>
+                    </ui:group>
+                </ui:if>
+                <ui:else>
+                    <swon:Object>
+                        <swon:Value arg:name=\"message\" arg:value=\"No role assignments or no asset collections associated with subject area(s).\"/>
+                    </swon:Object>
+                </ui:else>
+            </ui:if>
+            <ui:else>
+                <swon:Object>
+                    <swon:Value arg:name=\"message\" arg:value=\"No role assignments or no asset collections associated with subject area(s).\"/>
+                </swon:Object>
+            </ui:else>
+        </ui:call>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Role assignment counts data service" ;
+  rdfs:subClassOf edg:JSONServices ;
+.
+edg:RoleAssignmentCountsLegends
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:legendsResultSet ;
+      spl:valueType spr:Table ;
+    ] ;
+  spin:private true ;
+  ui:private true ;
+  ui:prototype """
+<swon:Value arg:name=\"legend\">
+    <swon:Array>
+        <ui:forEach ui:limit=\"{= 12 }\" ui:resultSet=\"{= ?legendsResultSet }\">
+            <swon:Object>
+                <swon:Value arg:name=\"name\" arg:value=\"{= ui:label(?member) }\"/>
+            </swon:Object>
+        </ui:forEach>
+    </swon:Array>
+</swon:Value>
+"""^^ui:Literal ;
+  rdfs:label "Role assignment counts legends" ;
+  rdfs:subClassOf edg:JSONsubServices ;
+.
+edg:RoleAssignmentsPerSubjectAreaGadget
+  a teamwork:DashboardGadget ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType edg:SubjectArea ;
+    ] ;
+  teamwork:dashboardSection teamwork:CompletenessAndValidityDashboardSection ;
+  ui:prototype """
+<ui:group>
+    <ui:group let:title=\"Role assignment counts\">
+        <h5 class=\"text-info\">Role Assignments across Subject Area</h5>
+        <swa:VictoryStackChart arg:data_endpoint=\"{= edg:RoleAssignmentCountsDataService }\" arg:height=\"{= 500 }\" arg:width=\"{= 900 }\"/>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "For the current user creates a donut gadget for the counts of data elements  for a given subject area according to their graphs" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Data Elements per subject area gadget" ;
+  rdfs:subClassOf teamwork:DashboardGadgets ;
+.
+edg:ScriptViewer
+  a swa:ObjectViewerClass ;
+  swa:objectWidgetWeight [
+      a swa:WeightedExpression ;
+      swa:expression [
+          a sp:and ;
+          sp:arg1 [
+              a sp:eq ;
+              sp:arg1 [
+                  sp:varName "kind" ;
+                ] ;
+              sp:arg2 "blank" ;
+            ] ;
+          sp:arg2 [
+              a sp:eq ;
+              sp:arg1 [
+                  sp:varName "predicate" ;
+                ] ;
+              sp:arg2 ui:prototype ;
+            ] ;
+        ] ;
+      swa:weight 20 ;
+    ] ;
+  ui:prototype """
+<div class=\"swa-shifted-label\">
+    <div class=\"swa-font-sans-serif\" let:prototype=\"{= spl:object(?this, ui:prototype) }\">
+        <div>{= spl:object(?this, rdfs:comment) }</div>
+        <spin.ui:ArgumentsList arg:module=\"{= ?this }\"/>
+        <ui:if ui:condition=\"{= bound(?prototype) }\">
+            <pre class=\"query\">{= ui:label(?prototype) }</pre>
+        </ui:if>
+    </div>
+</div>
+"""^^ui:Literal ;
+  rdfs:comment "A resource viewer for scripts implemented in SWP." ;
+  rdfs:label "Governance asset viewer" ;
+  rdfs:subClassOf swa:ObjectViewer ;
+.
+edg:WorkflowsForCurrentUserGadget
+  a teamwork:DashboardGadget ;
+  teamwork:dashboardSection teamwork:CompletenessAndValidityDashboardSection ;
+  ui:prototype """
+<ui:group let:title=\"Workflows by State\">
+    <div class=\"row\">
+        <div class=\"col-xs-12 col-md-12 col-lg-12\">
+            <edg:DonutChart arg:dataEndpoint=\"{= edg:AllWorkflowsForCurrentUserDataService }\" arg:subjectArea=\"{= rdf:nil }\" arg:title=\"{= ?title }\"/>
+        </div>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "For the current user creates a donut gadget for the counts of workflows in different states." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Workflows for current user gadget" ;
+  rdfs:subClassOf teamwork:DashboardGadgets ;
+.
+edg:WorkflowsForSubjectAreaDataService
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:private true ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:subjectAreaURI=\"{= IRI(?subjectArea) }\">
+    <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+        <ui:call arg:subjectArea=\"{= ?subjectAreaURI }\" ui:template=\"{= edg:getWorkflowCountsForGivenSubjectAreaForCurrentUser }\" ui:varName=\"workflows\">
+            <!--ui:debug>
+<ui:dumpResultSet ui:message=\"edg:WorkflowsForSubjectAreaDataService\" ui:resultSet=\"{= ?workflows }\"/>
+<ui:dumpScope ui:message=\"edg:WorkflowsForSubjectAreaDataService: {= ?subjectAreaURI }\"/>
+</ui:debug-->
+            <ui:if ui:condition=\"{= spr:rowCount(?workflows) &gt; 0 }\">
+                <ui:group let:total=\"{= spif:cast(spr:aggregateCol(spr:Sum, ?workflows, 0), xsd:integer) }\">
+                    <swon:Object>
+                        <swon:Value arg:name=\"total\" arg:value=\"{= ?total }\"/>
+                        <swon:Value arg:name=\"slices\">
+                            <swon:Array>
+                                <ui:forEach ui:indexVar=\"index\" ui:resultSet=\"{= ?workflows }\">
+                                    <swon:Object>
+                                        <swon:Value arg:name=\"x\" arg:value=\"{= ?label }\"/>
+                                        <swon:Value arg:name=\"y\" arg:value=\"{= ?value }\"/>
+                                        <swon:Value arg:name=\"label\" arg:value=\"{= CONCAT(str(?value), &quot; in state '&quot;, ?label, &quot;'&quot;) }\"/>
+                                    </swon:Object>
+                                </ui:forEach>
+                            </swon:Array>
+                        </swon:Value>
+                        <swon:Value arg:name=\"legend\">
+                            <swon:Array>
+                                <ui:forEach ui:indexVar=\"index\" ui:resultSet=\"{= ?workflows }\">
+                                    <swon:Object>
+                                        <swon:Value arg:name=\"name\" arg:value=\"{= ?label } [{= ?value }]\"/>
+                                    </swon:Object>
+                                </ui:forEach>
+                            </swon:Array>
+                        </swon:Value>
+                    </swon:Object>
+                </ui:group>
+            </ui:if>
+            <ui:else>
+                <swon:Object>
+                    <swon:Value arg:name=\"message\" arg:value=\"There are no workflows in which you have a governance role.\"/>
+                </swon:Object>
+            </ui:else>
+        </ui:call>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "workflows for subject area data service" ;
+  rdfs:subClassOf edg:JSONServices ;
+.
+edg:WorkflowsPerSubjectAreaGadget
+  a teamwork:DashboardGadget ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType xsd:string ;
+    ] ;
+  teamwork:dashboardSection teamwork:CompletenessAndValidityDashboardSection ;
+  ui:prototype """
+<ui:group let:title=\"Workflows by State\">
+    <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+        <ui:call arg:subjectArea=\"{= IRI(?subjectArea) }\" ui:template=\"{= edg:getWorkflowCountsForGivenSubjectAreaForCurrentUser }\" ui:varName=\"workflows\">
+            <ui:group let:aggregatedRoles=\"{= edg:sortStringListRemovingDuplicates(edg:aggregateCol(edg:CommaSeparatedList, ?workflows, 3)) }\">
+                <ui:if ui:condition=\"{= ?aggregatedRoles != &quot;&quot; }\">
+                    <div class=\"col-xs-12 col-md-6 col-lg-6\">
+                        <h3 class=\"text-info\">
+                            <edg:AssetViewerInline arg:compact=\"{= false }\" arg:resource=\"{= ?subjectArea }\"/>
+                        </h3>
+                        <ui:call arg:subjectArea=\"{= ?subjectArea }\" ui:template=\"{= edg:getMyGraphsInGivenSubjectArea }\" ui:varName=\"myGraphs\">
+                            <ui:group let:aggregatedGraphs=\"{= edg:sortStringListRemovingDuplicates(edg:aggregateCol(edg:CommaSeparatedList, ?myGraphs, 0)) }\">
+                                <div>My Asset Collections: <ui:forEach ui:resultSet='{#
+                                            SELECT ?projectGraph
+                                            WHERE {
+                                                ?graphAsString spif:split ( ?aggregatedGraphs \",\" ) .
+                                                BIND (IRI(?graphAsString) AS ?projectGraph) .
+                                            } }' ui:separator=\", \">
+                                        <governance:AssetViewerInline arg:resource=\"{= ?projectGraph }\"/>
+                                    </ui:forEach>
+                                </div>
+                            </ui:group>
+                        </ui:call>
+                        <div>My roles: <ui:forEach ui:resultSet='{#
+                                    SELECT ?resourceQName
+                                    WHERE {
+                                        ?resourceQName spif:split ( ?aggregatedRoles \",\" ) .
+                                    } }' ui:separator=\", \">{= spif:titleCase(ui:label(ui:decodeNode(?resourceQName))) }</ui:forEach>
+                        </div>
+                        <edg:DonutChart arg:dataEndpoint=\"{= edg:WorkflowsForSubjectAreaDataService }\" arg:subjectArea=\"{= ?subjectArea }\" arg:title=\"{= ?title }\"/>
+                    </div>
+                </ui:if>
+            </ui:group>
+        </ui:call>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "For the current user creates a donut gadget for the counts of workflows for a given subject area in different states." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Workflows per subject area gadget" ;
+  rdfs:subClassOf teamwork:DashboardGadgets ;
+.
+edg:getCountsOfCriticalDataElementsNotMappedToGlossaryTermsForGivenSubjectArea
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:groupBy (
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:orderBy (
+          [
+            sp:varName "value" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:Sum ;
+                sp:expression [
+                    sp:varName "notMapped" ;
+                  ] ;
+              ] ;
+            sp:varName "value" ;
+          ]
+          [
+            sp:varName "label" ;
+          ]
+          [
+            sp:expression [
+                a sp:Count ;
+                sp:expression [
+                    sp:varName "dataElement" ;
+                  ] ;
+              ] ;
+            sp:varName "elements" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              sp:object [
+                  sp:varName "?0" ;
+                ] ;
+              sp:predicate teamwork:readableGraphsUnderTeamControl ;
+              sp:subject () ;
+            ]
+            [
+              sp:object [
+                  sp:varName "projectGraph" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?1" ;
+                ] ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "teamGraph" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              sp:object () ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              a sp:Filter ;
+              sp:expression [
+                  a sp:exists ;
+                  sp:elements (
+                      [
+                        a sp:NamedGraph ;
+                        sp:elements (
+                            [
+                              sp:object [
+                                  sp:varName "subjectArea" ;
+                                ] ;
+                              sp:predicate edg:subjectArea ;
+                              sp:subject [
+                                  sp:varName "projectGraph" ;
+                                ] ;
+                            ]
+                          ) ;
+                        sp:graphNameNode [
+                            sp:varName "projectGraph" ;
+                          ] ;
+                      ]
+                    ) ;
+                ] ;
+            ]
+            [
+              a sp:TriplePath ;
+              sp:object edg:DataElement ;
+              sp:path [
+                  a sp:ModPath ;
+                  sp:modMax -2 ;
+                  sp:modMin 1 ;
+                  sp:subPath rdfs:subClassOf ;
+                ] ;
+              sp:subject [
+                  sp:varName "myClass" ;
+                ] ;
+            ]
+            [
+              a sp:NamedGraph ;
+              sp:elements (
+                  [
+                    sp:object [
+                        sp:varName "myClass" ;
+                      ] ;
+                    sp:predicate rdf:type ;
+                    sp:subject [
+                        sp:varName "dataElement" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object true ;
+                    sp:predicate edg:isCritical ;
+                    sp:subject [
+                        sp:varName "dataElement" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a sp:if ;
+                        sp:arg1 [
+                            a sp:exists ;
+                            sp:elements (
+                                [
+                                  sp:object [
+                                      sp:varName "someTerm" ;
+                                    ] ;
+                                  sp:predicate edg:mapsToTerm ;
+                                  sp:subject [
+                                      sp:varName "dataElement" ;
+                                    ] ;
+                                ]
+                              ) ;
+                          ] ;
+                        sp:arg2 0 ;
+                        sp:arg3 1 ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "notMapped" ;
+                      ] ;
+                  ]
+                ) ;
+              sp:graphNameNode [
+                  sp:varName "projectGraph" ;
+                ] ;
+            ]
+          )
+          [
+            a sp:Bind ;
+            sp:expression [
+                a swa:labelInGraph ;
+                arg:resource [
+                    sp:varName "projectGraph" ;
+                  ] ;
+                arg:resourceGraph [
+                    sp:varName "projectGraph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "label" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "get counts of critical data element not mapped to glossary terms for given subject area" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:getCountsOfDataElementsAssociatedWithPIIglossaryTermsForGivenSubjectArea
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:groupBy (
+          [
+            sp:varName "label" ;
+          ]
+          [
+            sp:varName "resource" ;
+          ]
+        ) ;
+      sp:orderBy (
+          [
+            sp:varName "value" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:Count ;
+                sp:expression [
+                    sp:varName "dataElement" ;
+                  ] ;
+              ] ;
+            sp:varName "value" ;
+          ]
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              sp:object [
+                  sp:varName "?0" ;
+                ] ;
+              sp:predicate teamwork:readableGraphsUnderTeamControl ;
+              sp:subject () ;
+            ]
+            [
+              sp:object [
+                  sp:varName "projectGraph" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?1" ;
+                ] ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "teamGraph" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              sp:object () ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              a sp:Filter ;
+              sp:expression [
+                  a sp:exists ;
+                  sp:elements (
+                      [
+                        a sp:NamedGraph ;
+                        sp:elements (
+                            [
+                              sp:object [
+                                  sp:varName "subjectArea" ;
+                                ] ;
+                              sp:predicate edg:subjectArea ;
+                              sp:subject [
+                                  sp:varName "projectGraph" ;
+                                ] ;
+                            ]
+                          ) ;
+                        sp:graphNameNode [
+                            sp:varName "projectGraph" ;
+                          ] ;
+                      ]
+                    ) ;
+                ] ;
+            ]
+            [
+              a sp:TriplePath ;
+              sp:object edg:DataElement ;
+              sp:path [
+                  a sp:ModPath ;
+                  sp:modMax -2 ;
+                  sp:modMin 1 ;
+                  sp:subPath rdfs:subClassOf ;
+                ] ;
+              sp:subject [
+                  sp:varName "myClass" ;
+                ] ;
+            ]
+            [
+              a sp:NamedGraph ;
+              sp:elements (
+                  [
+                    sp:object [
+                        sp:varName "myClass" ;
+                      ] ;
+                    sp:predicate rdf:type ;
+                    sp:subject [
+                        sp:varName "dataElement" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "aPIIterm" ;
+                      ] ;
+                    sp:predicate edg:mapsToTerm ;
+                    sp:subject [
+                        sp:varName "dataElement" ;
+                      ] ;
+                  ]
+                ) ;
+              sp:graphNameNode [
+                  sp:varName "projectGraph" ;
+                ] ;
+            ]
+            [
+              a sp:Bind ;
+              sp:expression [
+                  a ui:graphWithImports ;
+                  sp:arg1 [
+                      sp:varName "projectGraph" ;
+                    ] ;
+                ] ;
+              sp:variable [
+                  sp:varName "contextClosureGraph" ;
+                ] ;
+            ]
+            [
+              a sp:NamedGraph ;
+              sp:elements (
+                  [
+                    sp:object edg:PIIterm ;
+                    sp:predicate rdf:type ;
+                    sp:subject [
+                        sp:varName "aPIIterm" ;
+                      ] ;
+                  ]
+                ) ;
+              sp:graphNameNode [
+                  sp:varName "contextClosureGraph" ;
+                ] ;
+            ]
+          )
+          [
+            a sp:Bind ;
+            sp:expression [
+                a swa:labelInGraph ;
+                arg:resource [
+                    sp:varName "projectGraph" ;
+                  ] ;
+                arg:resourceGraph [
+                    sp:varName "projectGraph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "label" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "get counts of data element associated with PII glossary terms for given subject area" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:getCountsOfDataElementsMappedToGlossaryTermsForGivenSubjectArea
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:groupBy (
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:orderBy (
+          [
+            sp:varName "value" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:Count ;
+                sp:expression [
+                    sp:varName "dataElement" ;
+                  ] ;
+              ] ;
+            sp:varName "value" ;
+          ]
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              sp:object [
+                  sp:varName "?0" ;
+                ] ;
+              sp:predicate teamwork:readableGraphsUnderTeamControl ;
+              sp:subject () ;
+            ]
+            [
+              sp:object [
+                  sp:varName "projectGraph" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?1" ;
+                ] ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "teamGraph" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              sp:object () ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              a sp:Filter ;
+              sp:expression [
+                  a sp:exists ;
+                  sp:elements (
+                      [
+                        a sp:NamedGraph ;
+                        sp:elements (
+                            [
+                              sp:object [
+                                  sp:varName "subjectArea" ;
+                                ] ;
+                              sp:predicate edg:subjectArea ;
+                              sp:subject [
+                                  sp:varName "projectGraph" ;
+                                ] ;
+                            ]
+                          ) ;
+                        sp:graphNameNode [
+                            sp:varName "projectGraph" ;
+                          ] ;
+                      ]
+                    ) ;
+                ] ;
+            ]
+            [
+              a sp:TriplePath ;
+              sp:object edg:DataElement ;
+              sp:path [
+                  a sp:ModPath ;
+                  sp:modMax -2 ;
+                  sp:modMin 1 ;
+                  sp:subPath rdfs:subClassOf ;
+                ] ;
+              sp:subject [
+                  sp:varName "myClass" ;
+                ] ;
+            ]
+            [
+              a sp:NamedGraph ;
+              sp:elements (
+                  [
+                    sp:object [
+                        sp:varName "myClass" ;
+                      ] ;
+                    sp:predicate rdf:type ;
+                    sp:subject [
+                        sp:varName "dataElement" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "someTerm" ;
+                      ] ;
+                    sp:predicate edg:mapsToTerm ;
+                    sp:subject [
+                        sp:varName "dataElement" ;
+                      ] ;
+                  ]
+                ) ;
+              sp:graphNameNode [
+                  sp:varName "projectGraph" ;
+                ] ;
+            ]
+          )
+          [
+            a sp:Bind ;
+            sp:expression [
+                a swa:labelInGraph ;
+                arg:resource [
+                    sp:varName "projectGraph" ;
+                  ] ;
+                arg:resourceGraph [
+                    sp:varName "projectGraph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "label" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression () ;
+            sp:variable [
+                sp:varName "resource" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "get counts of data element mapped to glossary terms for given subject area" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:getDataElementsInMyAssetCollections
+  a spin:SelectTemplate ;
+  ui:prototype """
+<ui:group let:governanceGraph=\"{= teamwork:platformGovernanceGraph() }\" let:user=\"{= edg:currentUser() }\">
+    <ui:setContext ui:queryGraph=\"{= ui:graph }\">
+        <ui:call ui:template=\"{= edg:getSubjectAreasForCurrentUser }\" ui:varName=\"mySubjectAreas\">
+            <!--ui:debug>
+<ui:dumpResultSet ui:message=\"edg:getDataElementsInMyAssetCollections\"
+  ui:resultSet=\"{= ?mySubjectAreas }\"/>
+<ui:dumpScope ui:message=\"edg:getDataElementsInMyAssetCollections\"/>
+</ui:debug-->
+            <ui:forEach ui:resultSet=\"{= ?mySubjectAreas }\">
+                <h3>Subject Area: {= ui:label(?subjectArea) }</h3>
+                <div class=\"row\">
+                    <edg:CriticalDataElementsPerSubjectAreaGadget arg:subjectArea=\"{= ?subjectArea }\"/>
+                </div>
+            </ui:forEach>
+        </ui:call>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "get data elements in my asset collections" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:getDistinctValuesFromResultSetColumn
+  a spin:Template ;
+  spin:body [
+      a sp:Select ;
+      sp:distinct true ;
+      sp:orderBy (
+          [
+            sp:varName "cell" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "cell" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "rowIndex" ;
+              ] ;
+            sp:predicate spr:rowIndices ;
+            sp:subject [
+                sp:varName "resultSet" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spr:cell ;
+                sp:arg1 [
+                    sp:varName "resultSet" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "rowIndex" ;
+                  ] ;
+                sp:arg3 [
+                    sp:varName "column" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "cell" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:column ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resultSet ;
+      spl:valueType spr:Table ;
+    ] ;
+  spin:private true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "get distinct values from resultset column" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:getMembersFromAggregatedList
+  a spin:Template ;
+  spin:body [
+      a sp:Select ;
+      sp:distinct true ;
+      sp:orderBy (
+          [
+            sp:varName "member" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "member" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "rowIndex" ;
+              ] ;
+            sp:predicate spr:rowIndices ;
+            sp:subject [
+                sp:varName "resultSet" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spr:cell ;
+                sp:arg1 [
+                    sp:varName "resultSet" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "rowIndex" ;
+                  ] ;
+                sp:arg3 [
+                    sp:varName "column" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "list" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?0" ;
+              ] ;
+            sp:predicate tops:split ;
+            sp:subject [
+                sp:varName "member" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "list" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object "," ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:column ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resultSet ;
+      spl:valueType spr:Table ;
+    ] ;
+  spin:private true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "get members from aggregated list" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:getUserAssignedRoleCountForSubjectArea
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            a sp:Count ;
+            sp:distinct true ;
+            sp:expression [
+                sp:varName "U" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:platformGovernanceGraph ;
+              ] ;
+            sp:variable [
+                sp:varName "governanceGraph" ;
+              ] ;
+          ]
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "roleU" ;
+                    ] ;
+                  sp:predicate edg:requiredGovernanceRole ;
+                  sp:subject [
+                      sp:varName "subjectArea" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "U" ;
+                    ] ;
+                  sp:predicate [
+                      sp:varName "roleU" ;
+                    ] ;
+                  sp:subject [
+                      sp:varName "subjectArea" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "governanceGraph" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "myRoleLabel" ;
+              ] ;
+            sp:predicate rdfs:label ;
+            sp:subject [
+                sp:varName "roleU" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:titleCase ;
+                sp:arg1 [
+                    sp:varName "myRoleLabel" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "labelMatchTest" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:eq ;
+                sp:arg1 [
+                    sp:varName "labelMatchTest" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "role" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:role ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType edg:SubjectArea ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:integer ;
+  rdfs:comment "is assigned role for subject area" ;
+  rdfs:subClassOf edg:Functions ;
+.
+arg:axesResultSet
+  a rdf:Property ;
+  rdfs:label "axes result set" ;
+  rdfs:subPropertyOf sp:arg ;
+  rdfs:subPropertyOf ui:resultSet ;
+.
+arg:key1
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:key2
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:keyColumn1
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:keyColumn2
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:legendsResultSet
+  a rdf:Property ;
+  rdfs:label "legends result set" ;
+  rdfs:subPropertyOf sp:arg ;
+  rdfs:subPropertyOf ui:resultSet ;
+.

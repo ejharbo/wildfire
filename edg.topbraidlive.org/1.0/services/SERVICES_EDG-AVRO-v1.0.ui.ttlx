@@ -1,0 +1,1126 @@
+# baseURI: http://edg.topbraidlive.org/1.0/services/avro
+# imports: http://edg.topbraid.solutions/1.0/collection/datatypes
+# imports: http://edg.topbraid.solutions/1.0/datatypes/avro
+# imports: http://edg.topbraid.solutions/1.0/schema/datamodels
+# imports: http://edg.topbraid.solutions/1.0/schema/datatypes
+# imports: http://edg.topbraid.solutions/1.0/shapes/datatypes
+# imports: http://edg.topbraid.solutions/1.0/spin/library
+# imports: http://spinrdf.org/spl
+# imports: http://topbraid.org/swa
+# imports: http://topbraid.org/teamwork.ui
+# imports: http://topbraid.org/teamworkimporters.ui
+# imports: http://uispin.org/swon
+
+@prefix acjob: <http://evn.topbraidlive.org/tagger/acjob#> .
+@prefix acpp: <http://topbraid.org/nlp/autoclassifier-preproc#> .
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix autotagger: <http://evn.topbraidlive.org/autotagger#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix conceptmatch: <http://topbraid.org/conceptmatch#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix config-importers: <http://edg.topbraidlive.org/config/importers#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix core-soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix corpus: <http://topbraid.org/corpus#> .
+@prefix corpusprojects: <http://topbraid.org/corpus-projects#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkapp: <http://topbraid.org/swa/crosswalkapp#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dashboard: <http://example.org/dashboard#> .
+@prefix datagraph: <http://teamwork.topbraidlive.org/datagraph/datagraphprojects#> .
+@prefix dataset: <http://teamwork.topbraidlive.org/dataset#> .
+@prefix datasetapp: <http://topbraid.org/swa/datasetapp#> .
+@prefix datasetviewer: <http://topbraid.org/swa/datasetviewer#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ddl: <http://edg.topbraidlive.org/1.0/importers/ddl#> .
+@prefix default: <http://uispin.org/default#> .
+@prefix defaultapp: <http://topbraid.org/swa/defaultapp#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix document: <http://topbraid.org/document#> .
+@prefix documents: <http://edg.topbraid.solutions/1.0/shapes/documents#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg-config: <http://edg.ext.topbraidlive.org/schema/config/importers#> .
+@prefix edg-importer: <http://edg.topbraidlive.org/importer/> .
+@prefix edg-qa: <http://edg.topbraidlive.org/utility/qa/> .
+@prefix edg.avro: <http://edg.topbraidlive.org/avro/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.global: <urn:x-evn-global:> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix edgproduct: <http://edg.topbraidlive.org/edgproduct#> .
+@prefix eeh-lib: <http://www.environmenthub.no/spin/1.0/eeh-lib#> .
+@prefix eeh-reportlib: <http://www.environmenthub.no/spin/1.0/eeh-reportlib#> .
+@prefix elements: <http://purl.org/dc/elements/1.1/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evn: <http://topbraid.org/evn/evn#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evnimport: <http://evn.topbraidlive.org/uispin/evnimport#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix ex: <http://example.org/> .
+@prefix extjs: <http://uispin.com/extjs#> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix forms: <http://www.topbraid.org/2007/01/forms.owl#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix governance: <http://topbraid.org/teamworkgovernance.ui#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix graphql.search: <http://teamwork.topbraidlive.org/graphql.search#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix inference: <http://www.topbraid.org/2007/06/inference.owl#> .
+@prefix jdbc: <http://edg.topbraidlive.org/1.0/importers/jdbc#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix kennedys: <http://topbraid.org/examples/kennedys#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix lib-importer: <http://edg.topbraid.solutions/importer/lib#> .
+@prefix lineage-transform: <http://edg.topbraid.solutions/transform/importer/lineage#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix ontologyviewer: <http://topbraid.org/swa/ontologyviewer#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix proxy-lineage: <http://edg.topbraid.solutions/proxy/importer/lineage#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix rdmapp: <http://rdm.topbraidlive.org/rdmapp#> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix rdmviewer: <http://rdm.topbraidlive.org/rdmviewer#> .
+@prefix saf: <http://topbraid.org/saf/> .
+@prefix safconfig: <http://topbraid.org/safconfig/> .
+@prefix safindex: <http://topbraid.org/safindex#> .
+@prefix safm: <http://saf.topbraidlive.org/metaschema/> .
+@prefix savedQueries: <http://teamwork.topbraidlive.org/ui/savedQueries#> .
+@prefix scheduler: <http://topbraid.org/scheduler#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix server: <http://server.topbraidlive.org/server.ui#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sharepoint: <http://topbraid.org/sharepoint#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skosshapes: <http://topbraid.org/skos.shapes#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spin.ui: <http://spinrdf.org/spin.ui#> .
+@prefix spinmap: <http://spinrdf.org/spinmap#> .
+@prefix spinmapl: <http://topbraid.org/spin/spinmapl#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix ss: <http://www.topbraidcomposer.org/owl/2006/08/spreadsheets.owl#> .
+@prefix stats: <http://topbraid.org/statistics#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swadoc: <http://topbraid.org/swadoc#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tablesmap: <http://topbraid.org/spin/tablesmap#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix taggerspin: <http://evn.topbraidlive.org/taggerspin#> .
+@prefix taggerui: <http://evn.topbraidlive.org/taggerui#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix tblui: <http://server.topbraidlive.org/tblui#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkAdmin: <http://teamwork.topbraidlive.org/doc/teamworkAdmin#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworkconstraints: <http://topbraid.org/teamworkconstraints#> .
+@prefix teamworkdashboard: <http://topbraid.org/teamworkdashboard#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix teamworkupdate: <http://teamworkAPI.topbraid.com/teamworkUpdate#> .
+@prefix textindex: <http://topbraid.org/textindex#> .
+@prefix tika-importer: <http://teamwork.topbraidlive.org/corpus/tika-importer#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix tracker: <http://teamwork.topbraidlive.org/ui/tracker#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uitest: <http://uispin.org/test#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix userdat: <http://teamwork.topbraidlive.org/ui/userdata> .
+@prefix userdata: <http://teamwork.topbraidlive.org/ui/userdata#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix victory: <http://edg.topbraid.solutions/victory/> .
+@prefix visual: <http://topbraid.org/visual#> .
+@prefix voag: <http://voag.linkedmodel.org/schema/voag#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xhtml: <http://topbraid.org/xhtml#> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+edg:AvroBytesDatatype
+  ui:instanceView """
+<ui:group ui:id=\"avro\" ui:priority=\"{= 1 }\">
+    <edg:JSONforAVRObytesField edg:datatype=\"{= ?this }\" edg:field=\"{= ?field }\" edg:logicalModelName=\"{= ?logicalModelName }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:AvroDatatype
+  ui:instanceView """
+<ui:group ui:id=\"avro\" ui:priority=\"{= 1 }\">
+    <edg:JSONforAVROerror edg:field=\"{= ?this }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:AvroDecimalDatatype
+  ui:instanceView """
+<ui:group ui:id=\"avro\" ui:priority=\"{= 1 }\">
+    <edg:JSONforAVROdecimalField edg:datatype=\"{= ?this }\" edg:field=\"{= ?field }\" edg:logicalModelName=\"{= ?logicalModelName }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:AvroLongDatatype
+  ui:instanceView """
+<ui:group ui:id=\"avro\" ui:priority=\"{= 1 }\">
+    <edg:JSONforAVROlongField edg:datatype=\"{= ?this }\" edg:field=\"{= ?field }\" edg:logicalModelName=\"{= ?logicalModelName }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:AvroStringDatatype
+  ui:instanceView """
+<ui:group ui:id=\"avro\" ui:priority=\"{= 1 }\">
+    <edg:JSONforAVROstringField edg:datatype=\"{= ?this }\" edg:field=\"{= ?field }\" edg:logicalModelName=\"{= ?logicalModelName }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:DefaultNullJSON
+  a ui:Service ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <swon:Value arg:name=\"default\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Construct a JSON string for \"default\":null" ;
+  rdfs:label "Default null JSON" ;
+  rdfs:subClassOf edg:JSONServices ;
+.
+edg:GenerateAvroSchema
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:logicalModelName ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:table ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:ce=\"*/\" let:cl=\"//\" let:cs=\"/*\" let:myTable=\"{= IRI(?table) }\" let:nl=\"\">
+    <ui:setContext ui:queryGraph=\"{= ui:unionOfGraphs(ui:graphWithImports(IRI(?graph)), ui:graph) }\">
+        <!--ui:dumpScope ui:message=\"AAA1: edg:GenerateAvroSchema\"/-->
+        <swon:Object>
+            <swon:Value arg:name=\"type\" arg:value=\"record\"/>
+            <swon:Value arg:name=\"name\" arg:value=\"{= fn:lower-case(spl:object(?myTable, edg:name)) }\"/>
+            <swon:Values arg:name=\"fields\">
+                <ui:call arg:property=\"{= edg:columnOf }\" arg:resource=\"{= ?myTable }\" ui:template=\"{= edg:getSubjectsWithPropertyAndObject }\" ui:varName=\"fields\">
+                    <!--ui:dumpResultSet ui:message=\"AAA1: edg:GenerateAvroSchema\" ui:resultSet=\"{= ?fields }\"/-->
+                    <ui:forEach ui:resultSet=\"{= ?fields }\">
+                        <ui:group let:dt=\"{= spl:object(?subject, edg:physicalDatatype) }\">
+                            <ui:debug>{= ?nl }
+{= ?cs } ----------------------
+{= ?nl }Column: {= ui:label(?subject) }
+{= ?nl }Datatype is {= smf:qname(?dt) }{= ?nl }
+{= ?nl }<edg:JSONcomment arg:predicate=\"{= rdf:type }\" arg:resource=\"{= ?subject }\" arg:text=\"\"/>
+                                <edg:JSONcomment arg:predicate=\"{= edg:isNullable }\" arg:resource=\"{= ?subject }\" arg:text=\"\"/>
+                                <edg:JSONcomment arg:predicate=\"{= edg:precision }\" arg:resource=\"{= ?subject }\" arg:text=\"\"/>
+                                <edg:JSONcomment arg:predicate=\"{= edg:scale }\" arg:resource=\"{= ?subject }\" arg:text=\"\"/>{= ?ce }</ui:debug>
+                            <swon:Object>
+                                <ui:resourceView edg:field=\"{= ?subject }\" edg:logicalModelName=\"{= ?logicalModelName }\" ui:matchIds=\"avro\" ui:resource=\"{= ?dt }\"/>
+                            </swon:Object>
+                        </ui:group>
+                    </ui:forEach>
+                </ui:call>
+            </swon:Values>
+        </swon:Object>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment """Test with:
+
+http://localhost:8083/tbl/swp?_viewClass=edg:GenerateAvroSchema&table=http://edg.topbraid.solutions/model/TABLE_01&graph=http://edg.topbraidlive.org/1.0/services/avro&logicalModelName=\"PDM XYZ\"
+
+Or, with debug:
+
+http://localhost:8083/tbl/swp?_viewClass=edg:GenerateAvroSchema&table=http://edg.topbraid.solutions/model/TABLE_01&graph=http://edg.topbraidlive.org/1.0/services/avro&logicalModelName=\"PDM XYZ\"&_contextdebug=true
+""" ;
+  rdfs:label "Generate avro schema" ;
+  rdfs:subClassOf edg:JSONServices ;
+.
+edg:GenerateAvroSchemaForAllTables
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:logicalModelName ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <ui:setContext ui:queryGraph=\"{= IRI(?graph) }\">
+        <ui:forEach ui:resultSet=\"{#
+                SELECT ?table
+                WHERE {
+                    ?table a edg:DatabaseTable .
+                } }\">
+            <swon:Object>
+                <swon:Value arg:name=\"type\" arg:value=\"record\"/>
+                <swon:Value arg:name=\"name\" arg:value=\"{= spl:object(?table, edg:name) } }\"/>
+                <swon:Values arg:name=\"fields\">
+                    <ui:call arg:property=\"{= edg:columnOf }\" arg:resource=\"{= ?myTable }\" ui:template=\"{= edg:getSubjectsWithPropertyAndObject }\" ui:varName=\"fields\">
+                        <ui:forEach ui:resultSet=\"{= ?fields }\">
+                            <swon:Object>
+                                <ui:resourceView edg:field=\"{= ?dbc }\" edg:logicalModelName=\"{= ?logicalModelName }\" ui:matchIds=\"avro\" ui:resource=\"{= ?dt }\"/>
+                            </swon:Object>
+                        </ui:forEach>
+                    </ui:call>
+                </swon:Values>
+            </swon:Object>
+        </ui:forEach>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment """Invoke with:
+
+http://localhost:8083/tbl/swp?_viewClass=edg:GenerateAvroSchemaForAllTables&graph=http://ia.jpmc.com/dg/1.0/da/pdm/FRW&logicalModelName=\"LDM Model\"""" ;
+  rdfs:label "Generate avro schema for all tables" ;
+  rdfs:subClassOf edg:JSONServices ;
+.
+edg:GenerateAvroSchemaTest
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:logicalModelName ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:table ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:setContext let:myTable=\"{= IRI(?table) }\" ui:queryGraph=\"{= ui:graph }\">
+    <swon:Object>
+        <swon:Value arg:name=\"type\" arg:value=\"record\"/>
+        <swon:Value arg:name=\"name\" arg:value=\"{= ?table }\"/>
+        <swon:Values arg:name=\"fields\">
+            <ui:call arg:property=\"{= edg:columnOf }\" arg:resource=\"{= ?myTable }\" ui:template=\"{= edg:getSubjectsWithPropertyAndObject }\" ui:varName=\"fields\">
+                <ui:forEach ui:resultSet=\"{= ?fields }\">
+                    <swon:Object>
+                        <ui:resourceView edg:field=\"{= ?dbc }\" edg:logicalModelName=\"{= ?logicalModelName }\" ui:matchIds=\"avro\" ui:resource=\"{= ?dt }\"/>
+                    </swon:Object>
+                </ui:forEach>
+            </ui:call>
+        </swon:Values>
+    </swon:Object>
+</ui:setContext>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment """Invoke with:
+
+http://localhost:8083/tbl/swp?_viewClass=edg:GenerateAvroSchemaTest&table=edg:TABLE_01&logicalModelName=%22LDM%20Model%22
+
+Should produce:
+
+{\"type\":\"record\",\"name\":\"my_table\",\"fields\":[{\"name\":\"column 02\",\"type\":\"string\",\"default\":\"null\",\"doc\":\"test\"},{\"name\":\"column 03\",\"type\":\"string\",\"default\":\"null\",\"doc\":\"test\"},{\"name\":\"column 04\",\"type\":\"long\",\"default\":\"null\",\"doc\":\"test\"},{\"name\":\"column 06\",\"type\":[\"null\",{\"type\":\"bytes\",\"scale\":9,\"logicalType\":\"decimal\",\"precision\":38}],\"default\":\"null\",\"doc\":\"test\"},{\"name\":\"column 07\",\"type\":[\"null\",\"long\"],\"default\":\"null\",\"doc\":\"test\"},{\"name\":\"column 1\",\"type\":\"string\",\"default\":\"null\",\"doc\":\"test\"},{\"name\":\"column_05\",\"type\":[\"null\",{\"type\":\"bytes\",\"scale\":9,\"logicalType\":\"decimal\",\"precision\":38}],\"default\":\"null\",\"doc\":\"test\"}]}""" ;
+  rdfs:label "Generate avro schema" ;
+  rdfs:subClassOf edg:JSONServices ;
+.
+edg:JDBCnumericDatatype
+  ui:instanceView """
+<ui:group let:scale=\"{= COALESCE(spl:object(?this, edg:scale), 0) }\" ui:id=\"avro\" ui:priority=\"{= 1 }\">
+    <ui:if ui:condition=\"{= ?scale = 0 }\">
+        <edg:JSONforAVROlongField edg:datatype=\"{= ?this }\" edg:field=\"{= ?field }\" edg:logicalModelName=\"{= ?logicalModelName }\"/>
+    </ui:if>
+    <ui:else>
+        <edg:JSONforAVROdecimalFieldCase2 edg:datatype=\"{= ?this }\" edg:field=\"{= ?field }\" edg:logicalModelName=\"{= ?logicalModelName }\"/>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:JDBCstringDatatype
+  ui:instanceView """
+<ui:group ui:id=\"avro\" ui:priority=\"{= 1 }\">
+    <edg:JSONforAVROstringField edg:datatype=\"{= ?this }\" edg:field=\"{= ?field }\" edg:logicalModelName=\"{= ?logicalModelName }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment """JDBC String to AVRO
+{
+            \"name\": \"abundance_ctn_ind\",
+            \"type\": [\"null\",\"string\"],
+            \"default\": null,
+            \"doc\": \"LDM Model\"
+        }""" ;
+.
+edg:JDBCtimeDatatype
+  ui:instanceView """
+<ui:group ui:id=\"avro\" ui:priority=\"{= 1 }\">
+    <edg:JSONforAVROstringField edg:datatype=\"{= ?this }\" edg:field=\"{= ?field }\" edg:logicalModelName=\"{= ?logicalModelName }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:JSONServices
+  a ui:Service ;
+  ui:abstract true ;
+  rdfs:label "JSONServices" ;
+  rdfs:subClassOf ui:JSONServices ;
+.
+edg:JSONcomment
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:predicate ;
+      spl:valueType rdf:Property ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:text ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:prototype """
+<ui:group let:ce=\"*/\" let:cl=\"//\" let:cs=\"/*\" let:nl=\"\" let:value=\"{= spl:object(?resource, ?predicate) }\">{= ?nl }<ui:group let:formattedValue=\"{= IF(isIRI(?value), smf:qname(?value), str(?value)) }\">
+        <ui:if ui:condition=\"{= bound(?value) }\">{= CONCAT(smf:qname(?predicate), \" is \", ?formattedValue) }
+{= ?nl }</ui:if>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:TEXT ;
+  rdfs:label "JSONcomment" ;
+  rdfs:subClassOf ui:Element ;
+.
+edg:JSONforAVRObytesField
+  a ui:Service ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <ui:debug>
+// edg:JSONforAVRObytesField
+</ui:debug>
+    <swon:Value arg:name=\"name\" arg:value=\"{= spl:object(?field, edg:name) }\"/>
+    <swon:Value arg:name=\"type\">
+        <edg:JSONforAVROunionOfNullAndDatatype edg:datatype=\"bytes\" edg:precision=\"{= spl:object(?datatype, edg:precision) }\" edg:scale=\"{= spl:object(?datatype, edg:scale) }\"/>
+        <swon:Comma/>
+        <edg:DefaultNullJSON/>
+        <swon:Value arg:name=\"doc\" arg:value=\"{= ?logicalModelName }\"/>
+    </swon:Value>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "{\"name\" : \"unuse_natv_crcy_amt\", \"type\" : [ \"null\", {\"type\": \"bytes\", \"scale\": 9, \"logicalType\": \"decimal\", \"precision\" : 38}]}, \"default\" : \"null}" ;
+  rdfs:label "JSON for AVRO bytes field" ;
+  rdfs:subClassOf edg:JSONforAVROschemaField ;
+.
+edg:JSONforAVROdecimalField
+  a ui:Service ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <ui:debug>
+// edg:JSONforAVROdecimalField
+</ui:debug>
+    <swon:Value arg:name=\"name\" arg:value=\"{= spl:object(?field, edg:name) }\"/>
+    <ui:if ui:condition=\"{= spl:object(?field, edg:isNullable) }\">
+        <swon:Value arg:name=\"type\">
+            <edg:JSONforAVROunionOfNullAndDatatype edg:datatype=\"decimal\" edg:precision=\"{= spl:object(?datatype, edg:precision) }\" edg:scale=\"{= spl:object(?datatype, edg:scale) }\"/>
+        </swon:Value>
+    </ui:if>
+    <ui:else>
+        <swon:Value arg:name=\"type\">
+            <swon:Object>
+                <swon:Value arg:name=\"type\" arg:value=\"bytes\"/>
+                <swon:Value arg:name=\"scale\" arg:value=\"{= spl:object(?datatype, edg:scale) }\"/>
+                <swon:Value arg:name=\"precision\" arg:value=\"{= spl:object(?datatype, edg:precision) }\"/>
+                <swon:Value arg:name=\"logicalType\" arg:value=\"decimal\"/>
+            </swon:Object>
+        </swon:Value>
+    </ui:else>
+    <swon:Comma/>
+    <edg:DefaultNullJSON/>
+    <swon:Value arg:name=\"doc\" arg:value=\"{= ?logicalModelName }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment """Number with Precision:
+{
+ \"name\" : \"xxx\",
+ \"type\" : {
+   \"type\" : \"bytes\", \"scale\" : s, \"precision\" : p,
+   \"logicalType\" : \"decimal\" }
+}
+
+Number without Precision:
+   If nullable:
+      {\"name\" : \"xxx\", \"type\" : [ \"long\", \"null\" ]} 
+   else
+   {\"name\" : \"xxx\", \"type\" : \"long\"}
+
+For any Decimal columns the defined schemas are like mentioned below.
+ 
+{\"name\":\"use_usde_amt\",\"type\":{\"type\":\"bytes\",\"scale\":9,\"precision\":38,\"logicalType\":\"decimal\"},\"default\":null,\"doc\":\"Model\"}
+ 
+But it needs to be corrected as union datatype.
+ 
+{\"name\":\"use_usde_amt\",\"type\":[ \"null\", {\"type\":\"bytes\",\"scale\":9,\"precision\":38,\"logicalType\":\"decimal\"}],\"default\":null,\"doc\":\"Model\"}
+
+In case of decimal data type then it should be
+        {
+            \"name\": \"bnchmrk_prc_4_rt_pct\",
+            \"type\": [\"null\" , {
+                \"type\": \"bytes\",
+                \"scale\": 9,
+                \"precision\": 38,
+                \"logicalType\": \"decimal\"
+            } ],
+            \"default\": null,
+            \"doc\": \"LDM Model\"
+        }""" ;
+  rdfs:label "JSON for AVRO decimal field" ;
+  rdfs:subClassOf edg:JSONforAVROschemaField ;
+.
+edg:JSONforAVROdecimalFieldCase2
+  a ui:Service ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:precisionValue=\"{= COALESCE(spl:object(?datatype, edg:precision), &quot;35&quot;) }\" let:scaleValue=\"{= COALESCE(spl:object(?datatype, edg:scale), &quot;9&quot;) }\">
+    <ui:debug>
+// edg:JSONforAVROdecimalFieldCase2
+</ui:debug>
+    <swon:Value arg:name=\"name\" arg:value=\"{= spl:object(?field, edg:name) }\"/>
+    <swon:Value arg:name=\"type\">
+        <swon:Array>
+            <swon:Quote/>null<swon:Quote/>
+            <swon:Comma/>
+            <swon:Object>
+                <swon:Value arg:name=\"type\" arg:value=\"bytes\"/>
+                <swon:Value arg:name=\"scale\" arg:value=\"{= xsd:integer(?scaleValue) }\"/>
+                <swon:Value arg:name=\"precision\" arg:value=\"{= xsd:integer(?precisionValue) }\"/>
+                <swon:Value arg:name=\"logicalType\" arg:value=\"decimal\"/>
+            </swon:Object>
+        </swon:Array>
+    </swon:Value>
+    <swon:Comma/>
+    <edg:DefaultNullJSON/>
+    <swon:Value arg:name=\"doc\" arg:value=\"{= ?logicalModelName }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment """In case of decimal data type then it should be
+        {
+            \"name\": \"bnchmrk_prc_4_rt_pct\",
+            \"type\": [\"null\" , {
+                \"type\": \"bytes\",
+                \"scale\": 9,
+                \"precision\": 38,
+                \"logicalType\": \"decimal\"
+            } ],
+            \"default\": null,
+            \"doc\": \"LDM Model\"
+        }""" ;
+  rdfs:label "JSON for AVRO decimal field" ;
+  rdfs:subClassOf edg:JSONforAVROschemaField ;
+.
+edg:JSONforAVROerror
+  a ui:Service ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <swon:Value arg:name=\"error\" arg:value=\"No support exists for {= ui:label(?field) }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "JSON for AVRO error" ;
+  rdfs:subClassOf edg:JSONforAVROschemaField ;
+.
+edg:JSONforAVROlongField
+  a ui:Service ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <ui:debug>
+// edg:JSONforAVROlongField
+</ui:debug>
+    <swon:Value arg:name=\"name\" arg:value=\"{= spl:object(?field, edg:name) }\"/>
+    <swon:Value arg:name=\"type\">
+        <swon:Array>
+            <swon:Quote/>null<swon:Quote/>
+            <swon:Comma/>
+            <swon:Quote/>long<swon:Quote/>
+        </swon:Array>
+        <swon:Comma/>
+        <edg:DefaultNullJSON/>
+        <swon:Value arg:name=\"doc\" arg:value=\"{= ?logicalModelName }\"/>
+    </swon:Value>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "{\"name\" : \"logic_rcrd_id\", \"type\" : [ \"long\", \"null\" ], \"default\" : \"null\", \"doc\" : \"ICD Model\"}," ;
+  rdfs:label "JSON for AVRO long field" ;
+  rdfs:subClassOf edg:JSONforAVROschemaField ;
+.
+edg:JSONforAVROnumberField
+  a ui:Service ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:precisionValue=\"{= COALESCE(spl:object(?datatype, edg:precision), &quot;35&quot;) }\" let:scaleValue=\"{= COALESCE(spl:object(?datatype, edg:scale), &quot;9&quot;) }\">
+    <ui:debug>
+// edg:JSONforAVROnumberField
+</ui:debug>
+    <swon:Value arg:name=\"name\" arg:value=\"{= spl:object(?field, edg:name) }\"/>
+    <ui:if ui:condition=\"{= spl:object(?field, edg:isNullable) }\">
+        <swon:Value arg:name=\"type\">
+            <edg:JSONforAVROunionOfNullAndDatatype edg:datatype=\"decimal\" edg:precision=\"{= spl:object(?datatype, edg:precision) }\" edg:scale=\"{= spl:object(?datatype, edg:scale) }\"/>
+        </swon:Value>
+    </ui:if>
+    <ui:else>
+        <swon:Value arg:name=\"type\">
+            <swon:Object>
+                <swon:Value arg:name=\"type\" arg:value=\"bytes\"/>
+                <swon:Value arg:name=\"scale\" arg:value=\"{= xsd:integer(?scaleValue) }\"/>
+                <swon:Value arg:name=\"precision\" arg:value=\"{= xsd:integer(?precisionValue) }\"/>
+                <swon:Value arg:name=\"logicalType\" arg:value=\"decimal\"/>
+            </swon:Object>
+        </swon:Value>
+    </ui:else>
+    <swon:Comma/>
+    <edg:DefaultNullJSON/>
+    <swon:Value arg:name=\"doc\" arg:value=\"{= ?logicalModelName }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment """Precision is the total number of digits, and scale is the number of digits to the right of the decimal point.
+
+Number with Precision:
+{
+ \"name\" : \"xxx\",
+ \"type\" : {
+   \"type\" : \"bytes\", \"scale\" : s, \"precision\" : p,
+   \"logicalType\" : \"decimal\" }
+}
+
+Number without Precision:
+   If nullable:
+      {\"name\" : \"xxx\", \"type\" : [ \"long\", \"null\" ]} 
+   else
+   {\"name\" : \"xxx\", \"type\" : \"long\"}
+
+For any Decimal columns the defined schemas are like mentioned below.
+ 
+{\"name\":\"use_usde_amt\",\"type\":{\"type\":\"bytes\",\"scale\":9,\"precision\":38,\"logicalType\":\"decimal\"},\"default\":null,\"doc\":\"Model\"}
+ 
+But it needs to be corrected as union datatype.
+ 
+{\"name\":\"use_usde_amt\",\"type\":[ \"null\", {\"type\":\"bytes\",\"scale\":9,\"precision\":38,\"logicalType\":\"decimal\"}],\"default\":null,\"doc\":\"Model\"}""" ;
+  rdfs:label "JSON for AVRO number field" ;
+  rdfs:subClassOf edg:JSONforAVROschemaField ;
+.
+edg:JSONforAVROschemaField
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:datatype ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:field ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:logicalModelName ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:abstract true ;
+  ui:private true ;
+  rdfs:label "JSON for AVRO schema field" ;
+  rdfs:subClassOf edg:JSONServices ;
+.
+edg:JSONforAVROstringField
+  a ui:Service ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <ui:debug>
+// edg:JSONforAVROstringField
+</ui:debug>
+    <swon:Value arg:name=\"name\" arg:value=\"{= spl:object(?field, edg:name) }\"/>
+    <swon:Value arg:name=\"type\" arg:value=\"string\"/>
+    <!--swon:Value arg:name=\"type\"-->
+    <!--swon:Array>
+<swon:Quote/>null<swon:Quote/>
+<swon:Comma/>
+<swon:Quote/>string<swon:Quote/>
+</swon:Array-->
+    <swon:Comma/>
+    <edg:DefaultNullJSON/>
+    <swon:Value arg:name=\"doc\" arg:value=\"{= ?logicalModelName }\"/>
+    <!--/swon:Value-->
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment """<ui:group>
+    <swon:Value arg:name=\"name\" arg:value=\"{= spl:object(?field, edg:name) }\"/>
+    <ui:if ui:condition=\"{= spl:object(?field, edg:isNullable) }\">
+        <swon:Value arg:name=\"type\">
+            <swon:Array>
+                <swon:Quote/>null<swon:Quote/>
+                <swon:Comma/>
+                <swon:Quote/>string<swon:Quote/>
+            </swon:Array>
+        </swon:Value>
+    </ui:if>
+    <ui:else>
+        <swon:Value arg:name=\"type\" arg:value=\"string\"/>
+    </ui:else>
+    <swon:Comma/>
+    <edg:DefaultNullJSON/>
+    <swon:Value arg:name=\"doc\" arg:value=\"{= ?logicalModelName }\"/>
+</ui:group>""" ;
+  rdfs:label "JSON for AVRO string field" ;
+  rdfs:subClassOf edg:JSONforAVROschemaField ;
+.
+edg:JSONforAVROunionDatatype
+  a ui:Service ;
+  ui:abstract true ;
+  ui:private true ;
+  rdfs:label "AVRO union datatype" ;
+  rdfs:subClassOf edg:JSONServices ;
+.
+edg:JSONforAVROunionOfNullAndDatatype
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:datatype ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:precision ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:scale ;
+      spl:valueType xsd:integer ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:myDataType=\"{= IF(((!bound(?scale)) || (xsd:string(?scale) = 0)), &quot;long&quot;, ?datatype) }\" let:nl=\"\" let:precisionValue=\"{= COALESCE(?precision, &quot;none&quot;) }\">
+    <ui:debug>{= ?nl }
+// edg:JSONforAVROunionOfNullAndDatatype
+// Datatype is {= ?myDataType }
+{= ?nl }</ui:debug>
+    <ui:if ui:condition=\"{= ?precisionValue != &quot;none&quot; }\">
+        <swon:Array>
+            <swon:Quote/>null<swon:Quote/>
+            <swon:Comma/>
+            <swon:Object>
+                <swon:Value arg:name=\"type\" arg:value=\"bytes\"/>
+                <swon:Value arg:name=\"scale\" arg:value=\"{= xsd:integer(?scale) }\"/>
+                <swon:Value arg:name=\"logicalType\" arg:value=\"{= ?myDatatype }\"/>
+                <swon:Value arg:name=\"precision\" arg:value=\"{= xsd:integer(?precisionValue) }\"/>
+            </swon:Object>
+        </swon:Array>
+    </ui:if>
+    <ui:else>
+        <swon:Array>
+            <swon:Quote/>null<swon:Quote/>
+            <swon:Comma/>
+            <swon:Quote/>{= ?myDataType }<swon:Quote/>
+        </swon:Array>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Construct a JSON string for a union type of null and some datatype" ;
+  rdfs:label "Union of null and a datatype" ;
+  rdfs:subClassOf edg:JSONforAVROunionDatatype ;
+.
+edg:JSONforAVROunionOfNullAndDatatypeWithPrecisionAndScale
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:datatype ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:precision ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:scale ;
+      spl:valueType xsd:integer ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:myDataType=\"{= IF((?scale = 0), &quot;long&quot;, ?datatype) }\" let:precisionValue=\"{= COALESCE(?precision, &quot;none&quot;) }\">
+    <ui:debug>
+// edg:JSONforAVROunionOfNullAndDatatypeWithPrecisionAndScale
+</ui:debug>
+    <ui:if ui:condition=\"{= ?myDataType = &quot;long&quot; }\">
+        <swon:Array>
+            <swon:Quote/>null<swon:Quote/>
+            <swon:Comma/>
+            <swon:Quote/>long<swon:Quote/>
+        </swon:Array>
+    </ui:if>
+    <ui:else>
+        <ui:if ui:condition=\"{= ?precisionValue != &quot;none&quot; }\">
+            <swon:Array>
+                <swon:Quote/>null<swon:Quote/>
+                <swon:Comma/>
+                <swon:Object>
+                    <swon:Value arg:name=\"type\" arg:value=\"bytes\"/>
+                    <swon:Value arg:name=\"scale\" arg:value=\"{= ?scale }\"/>
+                    <swon:Value arg:name=\"logicalType\" arg:value=\"{= ?myDatatype }\"/>
+                    <swon:Value arg:name=\"precision\" arg:value=\"{= ?precisionValue }\"/>
+                </swon:Object>
+            </swon:Array>
+        </ui:if>
+        <ui:else>
+            <swon:Array>
+                <swon:Quote/>null<swon:Quote/>
+                <swon:Comma/>
+                <swon:Value arg:name=\"type\" arg:value=\"{= ?datatype }\"/>
+            </swon:Array>
+        </ui:else>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Construct a JSON string for a union type of null and some datatype with precision and scale" ;
+  rdfs:label "Union of null and a datatype" ;
+  rdfs:subClassOf edg:JSONforAVROunionDatatype ;
+.
+edg:ORACLE_BYTES-38
+  a edg:OracleStringDatatype ;
+  edg:description "<p><strong>bytes</strong> is a sequence of 8-bit unsigned bytes</p>"^^rdf:HTML ;
+  edg:name "string" ;
+  edg:precision 38 ;
+  rdfs:label "ORACLE BYTES (38)" ;
+.
+edg:ORACLE_BYTES-38-9
+  a edg:OracleStringDatatype ;
+  edg:description "<p><strong>bytes</strong> is a sequence of 8-bit unsigned bytes</p>"^^rdf:HTML ;
+  edg:name "string" ;
+  edg:precision 38 ;
+  edg:scale 9 ;
+  rdfs:label "ORACLE BYTES (38,9)" ;
+.
+edg:ORACLE_DECIMAL-42
+  a edg:OracleDecimalDatatype ;
+  edg:name "ORACLE Decimal (42)" ;
+  edg:precision 42 ;
+  rdfs:label "ORACLE Decimal (42)" ;
+.
+edg:ORACLE_DECIMAL-42-7
+  a edg:OracleDecimalDatatype ;
+  edg:name "ORACLE Decimal (42,7)" ;
+  edg:precision 42 ;
+  edg:scale 7 ;
+  rdfs:label "ORACLE DECIMAL 42-7" ;
+.
+edg:ORACLE_NUMBER
+  qudt:significantDigits "38"^^xsd:positiveInteger ;
+.
+edg:ORACLE_NUMBER-42
+  a edg:OracleNumericDatatype ;
+  edg:name "NUMBER(42)" ;
+  edg:precision 42 ;
+  rdfs:label "ORACLE Number (42)" ;
+.
+edg:ORACLE_NUMBER-42-7
+  a edg:OracleNumericDatatype ;
+  edg:name "NUMBER (42,7)" ;
+  edg:precision 42 ;
+  edg:scale 7 ;
+  rdfs:label "ORACLE Number (42,7)" ;
+.
+edg:ORACLE_NUMBER-42-NULLABLE
+  a edg:OracleNumericDatatype ;
+  edg:isNullable true ;
+  edg:name "NUMBER(42)" ;
+  edg:precision 42 ;
+  rdfs:label "ORACLE Number (42) - NULLABLE" ;
+.
+edg:ORACLE_STRING_20-5
+  a edg:OracleStringDatatype ;
+  edg:name "string" ;
+  edg:precision 20 ;
+  edg:scale 5 ;
+  rdfs:label "ORACLE STRING (20,5)" ;
+.
+edg:ORACLE_STRING_42
+  a edg:OracleStringDatatype ;
+  edg:name "string" ;
+  edg:precision 42 ;
+  rdfs:label "ORACLE STRING (42)" ;
+.
+edg:OracleDatatype
+  ui:instanceView """
+<ui:group ui:id=\"avro\" ui:priority=\"{= 1 }\">
+    <edg:JSONforAVROerror edg:field=\"{= ?this }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:OracleDateTimeDatatype
+  ui:instanceView """
+<ui:group ui:id=\"avro\" ui:priority=\"{= 1 }\">
+    <edg:JSONforAVROstringField edg:datatype=\"{= ?this }\" edg:field=\"{= ?field }\" edg:logicalModelName=\"{= ?logicalModelName }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:OracleDecimalDatatype
+  ui:instanceView """
+<ui:group let:scale=\"{= COALESCE(spl:object(?this, edg:scale), 0) }\" ui:id=\"avro\" ui:priority=\"{= 1 }\">
+    <ui:if ui:condition=\"{= ?scale = 0 }\">
+        <edg:JSONforAVROlongField edg:datatype=\"{= ?this }\" edg:field=\"{= ?field }\" edg:logicalModelName=\"{= ?logicalModelName }\"/>
+    </ui:if>
+    <ui:else>
+        <edg:JSONforAVROdecimalFieldCase2 edg:datatype=\"{= ?this }\" edg:field=\"{= ?field }\" edg:logicalModelName=\"{= ?logicalModelName }\"/>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:OracleIntegerDatatypeVariant
+  ui:instanceView """
+<ui:group let:scale=\"{= COALESCE(spl:object(?this, edg:scale), 0) }\" ui:id=\"avro\" ui:priority=\"{= 1 }\">
+    <ui:if ui:condition=\"{= ?scale = 0 }\">
+        <edg:JSONforAVROlongField edg:datatype=\"{= ?this }\" edg:field=\"{= ?field }\" edg:logicalModelName=\"{= ?logicalModelName }\"/>
+    </ui:if>
+    <ui:else>
+        <edg:JSONforAVROdecimalFieldCase2 edg:datatype=\"{= ?this }\" edg:field=\"{= ?field }\" edg:logicalModelName=\"{= ?logicalModelName }\"/>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:OracleLongDatatype
+  ui:instanceView """
+<ui:group ui:id=\"avro\" ui:priority=\"{= 1 }\">
+    <edg:JSONforAVROlongField edg:datatype=\"{= ?this }\" edg:field=\"{= ?field }\" edg:logicalModelName=\"{= ?logicalModelName }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:OracleNumericDatatype
+  ui:instanceView """
+<ui:group let:scale=\"{= COALESCE(spl:object(?this, edg:scale), 0) }\" ui:id=\"avro\" ui:priority=\"{= 1 }\">
+    <ui:if ui:condition=\"{= ?scale = 0 }\">
+        <edg:JSONforAVROlongField edg:datatype=\"{= ?this }\" edg:field=\"{= ?field }\" edg:logicalModelName=\"{= ?logicalModelName }\"/>
+    </ui:if>
+    <ui:else>
+        <edg:JSONforAVROdecimalFieldCase2 edg:datatype=\"{= ?this }\" edg:field=\"{= ?field }\" edg:logicalModelName=\"{= ?logicalModelName }\"/>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:OracleStringDatatype
+  ui:instanceView """
+<ui:group ui:id=\"avro\" ui:priority=\"{= 1 }\">
+    <edg:JSONforAVROstringField edg:datatype=\"{= ?this }\" edg:field=\"{= ?field }\" edg:logicalModelName=\"{= ?logicalModelName }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment """ORACLE String to AVRO
+{
+            \"name\": \"abundance_ctn_ind\",
+            \"type\": [\"null\",\"string\"],
+            \"default\": null,
+            \"doc\": \"LDM Model\"
+        }""" ;
+.
+edg:OracleVarchar2
+  ui:instanceView """
+<ui:group ui:id=\"avro\" ui:priority=\"{= 1 }\">
+    <edg:JSONforAVROstringField edg:datatype=\"{= ?this }\" edg:field=\"{= ?field }\" edg:logicalModelName=\"{= ?logicalModelName }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:SelectTemplates
+  a spin:SelectTemplate ;
+  rdfs:label "Select templates" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+edg:field
+  a owl:ObjectProperty ;
+  rdfs:label "field" ;
+.
+<http://edg.topbraidlive.org/1.0/services/avro>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraidlive.org/services/avro/GMD_avro> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/collection/datatypes> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/datatypes/avro> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/datatypes> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/shapes/datatypes> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/spin/library> ;
+  owl:imports <http://spinrdf.org/spl> ;
+  owl:imports <http://topbraid.org/swa> ;
+  owl:imports <http://topbraid.org/teamwork.ui> ;
+  owl:imports <http://topbraid.org/teamworkimporters.ui> ;
+  owl:imports <http://uispin.org/swon> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+<http://edg.topbraidlive.org/services/avro/GMD_avro>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:ServicesGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraidlive.org/1.0/services/avro> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+[
+  sp:varName "logicalModelName" ;
+].
+[
+  sp:varName "logicalModelName" ;
+].
+[
+  sp:varName "logicalModelName" ;
+].
+[
+  sp:varName "logicalModelName" ;
+].
+[
+  sp:varName "logicalModelName" ;
+].
+[
+  sp:varName "logicalModelName" ;
+].
+[
+  sp:varName "logicalModelName" ;
+].
+[
+  sp:varName "logicalModelName" ;
+].
+[
+  sp:varName "logicalModelName" ;
+].
+[
+  sp:varName "logicalModelName" ;
+].
+[
+  sp:varName "logicalModelName" ;
+].
+[
+  sp:varName "logicalModelName" ;
+].
+[
+  sp:varName "logicalModelName" ;
+].
+[
+  sp:varName "myTable" ;
+].
+[
+  sp:varName "table" ;
+].

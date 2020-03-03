@@ -1,0 +1,157 @@
+# baseURI: http://topbraid.org/corpus-spin
+# imports: http://spinrdf.org/spl
+# imports: http://topbraid.org/corpus
+# imports: http://topbraid.org/teamwork.spin
+
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix corpus: <http://topbraid.org/corpus#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+corpus:document
+  a spin:MagicProperty ;
+  spin:private true ;
+  rdfs:comment """A magic property that enumerates the documents in a corpus.
+
+    ?projectGraph corpus:document (?document ?contentType ?updateDate) .
+
+The left-hand side, ?projectGraph, must be bound to a Teamwork project graph with an attached corpus.
+
+The right-hand side is a list of arguments. ?document may be bound (in which case it is a query for metadata of this particular document), or unbound (in which case the magic property will enumerate all documents in the corpus and along with their metadata). The remaining arguments must be unbound variables.
+
+?document is the URL of a document in the corpus. ?contentType is the content type of the document, as a string, and may remain unbound if unknown. ?updateDate is the date when the document was last fetched from the remote repository, and may remain unbound if the corpus does not maintain fetch dates.""" ;
+  rdfs:label "document" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+corpus:fetchDocumentContent
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional false ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType corpus:Corpus ;
+      rdfs:comment "A Teamwork project graph." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:sourceDocument ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The document whose content to fetch; must be a URI resource" ;
+    ] ;
+  spin:private true ;
+  spin:returnType rdfs:Literal ;
+  rdfs:comment "Fetches a specific document from the remote repository attached to a corpus, and extracts its contents. If the corpus is configured to cache content locally, then the cache will be used. Returns a plain literal or rdf:HTML literal." ;
+  rdfs:label "fetch document content" ;
+  rdfs:subClassOf spin:Functions ;
+.
+corpus:fetchesContentLive
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object true ;
+                  sp:predicate corpus:fetchContentLive ;
+                  sp:subject [
+                      sp:varName "projectGraph" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "projectGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType corpus:Corpus ;
+      rdfs:comment "The Corpus (or other graph) to check" ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Returns true if the argument is a Corpus asset collection configured to fetch content live from a remote repository connector. This implies that the content is not stored in the Corpus in the document:content property, but needs to be retrieved with corpus:fetchDocumentContent(?corpus, ?document) when needed." ;
+  rdfs:label "fetches content live" ;
+  rdfs:subClassOf spin:Functions ;
+.
+corpus:getCmisDirectoryId
+  a spin:MagicProperty ;
+  spin:private true ;
+  rdfs:comment """The property function corpus:getCmisDirectoryId. A magic property that retrieves the information of a directory from a CMIS connection based on its path.
+
+     ( ?cmisRepositoryUrl ?cmisBindingType ?objectPath ?cmisUsername ?cmisPassword ) corpus:getCmisDirectoryId ?objectId .
+     
+The left-hand side is a list of the necessary connection arguments. All arguments must be bound except the password, which can be read from secure storage.  
+?cmisRepositoryUrl is the url to connect to, ?cmisUsername and ?cmisPassword correspond to the user and password, respectively.  
+?cmisBindingType is the type of binding to use for the connection (must be an instance of corpus:CmisBindingType).
+?objectPath is the full path of the directory to retrieve.
+ 
+The right-hand side returns the id of the directory if it exists.""" ;
+  rdfs:label "get directory id" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+corpus:getCmisRepositoryInformation
+  a spin:MagicProperty ;
+  spin:private true ;
+  rdfs:comment """A magic property that retrieves the repositories from a CMIS connection.
+
+          ( ?cmisRepositoryUrl ?cmisUsername ?cmisPassword ?cmisBindingType ) corpus:getCmisRepositoryInformation ( ?repositoryId ?repositoryName ) .
+
+The left-hand side is a list of the necessary connection arguments, which must all be bound. ?cmisRepositoryUrl is the url to connect to, ?cmisUsername and ?cmisPassword correspond to the user and password, respectively.  ?cmisBindingType is the type of binding to use for the connection (must be an instance of corpus:CmisBindingType).
+
+The right-hand side enumerates the repository ids known in the repository.""" ;
+  rdfs:label "get repository ids" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+corpus:getConfigurationError
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional false ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType corpus:Corpus ;
+      rdfs:comment "A Teamwork project graph." ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Returns false if the specified project graph has a correctly configured corpus attached, or otherwise a string that describes the nature of the misconfiguration." ;
+  rdfs:label "get configuration error" ;
+  rdfs:subClassOf spin:Functions ;
+.
+corpus:getDocumentCount
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional false ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType corpus:Corpus ;
+      rdfs:comment "A Teamwork project graph." ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:integer ;
+  rdfs:comment "Returns a count of the documents in this corpus. Only documents already fetched are considered; if the corpus is connected to a remote repository, then the repository may contain more unfetched documents." ;
+  rdfs:label "get document count" ;
+  rdfs:subClassOf spin:Functions ;
+.
+corpus:getS3Regions
+  a spin:MagicProperty ;
+  spin:private true ;
+  rdfs:comment " Returns a list of the available S3 Regions as defined by AWS SDK." ;
+  rdfs:label "get s3 regions" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+<http://topbraid.org/corpus-spin>
+  a owl:Ontology ;
+  owl:imports <http://spinrdf.org/spl> ;
+  owl:imports <http://topbraid.org/corpus> ;
+  owl:imports <http://topbraid.org/teamwork.spin> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.

@@ -1,0 +1,39 @@
+# baseURI: http://topbraid.org/tables
+# prefix: tables
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://topbraid.org/tables>
+  a owl:Ontology ;
+  rdfs:comment "A simple ontology that can be used to annotate other ontologies so that they can be mapped to tabular formats such as spreadsheets. This ontology is used, for example, by the Excel back-end of TopBraid." ;
+  owl:versionInfo "1.1.0" ;
+.
+tables:columnIndex
+  a owl:AnnotationProperty ;
+  rdfs:comment "This property can be used to annotate properties to instruct the engine that this property shall be written to a column at a given index." ;
+  rdfs:label "column index" ;
+  rdfs:range xsd:int ;
+.
+tables:imports
+  a owl:AnnotationProperty ;
+  rdfs:comment "Points to one or more graphs that shall be imported when an associated spreadsheet is imported. In TopBraid, this property should only be used in .stables files. The graphs pointed at by this property should contain an tables:sheetIndex at the main table class, and use tables:columnIndex and rdfs:domain to mark those properties that represent the columns." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "imports" ;
+  rdfs:range rdfs:Resource ;
+.
+tables:rowIndex
+  a owl:AnnotationProperty ;
+  rdfs:comment "This property can be used to annotate instances to instruct the engine that this instance shall be written to a row at a given index." ;
+  rdfs:label "row index" ;
+  rdfs:range xsd:int ;
+.
+tables:sheetIndex
+  a owl:AnnotationProperty ;
+  rdfs:comment "This property can be used to annotate classes to instruct the engine that this class shall be written to a sheet with a given index." ;
+  rdfs:label "sheet index" ;
+  rdfs:range xsd:int ;
+.

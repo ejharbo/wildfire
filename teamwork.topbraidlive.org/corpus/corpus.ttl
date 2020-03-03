@@ -1,0 +1,433 @@
+# baseURI: http://topbraid.org/corpus
+# imports: http://datashapes.org/dash
+# imports: http://purl.org/dc/terms/
+# prefix: corpus
+
+@prefix corpus: <http://topbraid.org/corpus#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://topbraid.org/corpus>
+  a owl:Ontology ;
+  rdfs:label "TopBraid Simple Corpus and Document Schema" ;
+  owl:imports <http://datashapes.org/dash> ;
+  owl:imports <http://purl.org/dc/terms/> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+corpus:CmisBindingType
+  a rdfs:Class ;
+.
+corpus:CmisCorpus
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  corpus:supportsLiveContentFetching true ;
+  rdfs:comment "Creates a new Corpus, and imports documents from a CMIS-enabled content repository." ;
+  rdfs:label "CMIS" ;
+  rdfs:subClassOf corpus:Corpus ;
+  sh:order "4"^^xsd:decimal ;
+  sh:property [
+      sh:path corpus:cmisBindingType ;
+      sh:class corpus:CmisBindingType ;
+    ] ;
+  sh:property [
+      sh:path corpus:cmisPassword ;
+      sh:datatype xsd:string ;
+    ] ;
+  sh:property [
+      sh:path corpus:cmisRepositoryId ;
+      sh:datatype xsd:string ;
+    ] ;
+  sh:property [
+      sh:path corpus:cmisRepositoryUrl ;
+      sh:class rdfs:Resource ;
+    ] ;
+  sh:property [
+      sh:path corpus:cmisRootFolder ;
+      sh:datatype xsd:string ;
+    ] ;
+  sh:property [
+      sh:path corpus:cmisUsername ;
+      sh:datatype xsd:string ;
+    ] ;
+  sh:property [
+      sh:path corpus:docUrlRegex ;
+      sh:datatype xsd:string ;
+    ] ;
+.
+corpus:Corpus
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "A collection of documents." ;
+  rdfs:label "corpus" ;
+  sh:property [
+      sh:path corpus:cssKeepSelector ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+    ] ;
+  sh:property [
+      sh:path corpus:cssRemoveSelector ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+    ] ;
+  sh:property [
+      sh:path corpus:disabled ;
+      sh:datatype xsd:boolean ;
+      sh:description "Determines if the corpus is disabled. Is assumed to be false if absent." ;
+    ] ;
+.
+corpus:DefaultCorpus
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "Creates a new, empty Corpus. Documents can be added manually, or by importing an RDF file, or by using the platform's various APIs." ;
+  rdfs:label "No connector" ;
+  rdfs:subClassOf corpus:Corpus ;
+  sh:order "1"^^xsd:decimal ;
+.
+corpus:Document
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Document" ;
+  rdfs:subClassOf owl:Thing ;
+  sh:property [
+      sh:path corpus:content ;
+      sh:minCount 1 ;
+      sh:or (
+          [
+            sh:datatype rdf:HTML ;
+          ]
+          [
+            sh:datatype xsd:string ;
+          ]
+        ) ;
+    ] ;
+  sh:property [
+      sh:path corpus:contentType ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+    ] ;
+  sh:property [
+      sh:path corpus:encoding ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+    ] ;
+  sh:property [
+      sh:path corpus:fileName ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+    ] ;
+  sh:property [
+      sh:path corpus:title ;
+      sh:datatype xsd:string ;
+    ] ;
+  sh:property [
+      sh:path corpus:topic ;
+      sh:class <http://www.w3.org/2004/02/skos/core#Concept> ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+.
+corpus:LocalDirectoryCorpus
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  corpus:disabled true ;
+  rdfs:comment "A corpus defined by a directory of files in the local filesystem. The corpus consists of all files in that directory and its subdirectories." ;
+  rdfs:label "local directory corpus" ;
+  rdfs:subClassOf corpus:Corpus ;
+  sh:property [
+      sh:path corpus:directory ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+.
+corpus:S3AuthType
+  a rdfs:Class ;
+.
+corpus:S3BucketConfiguration
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:label "S3Bucket configuration" ;
+  sh:property [
+      sh:path corpus:s3AuthId ;
+      sh:datatype xsd:string ;
+    ] ;
+  sh:property [
+      sh:path corpus:s3AuthKey ;
+      sh:datatype xsd:string ;
+    ] ;
+  sh:property [
+      sh:path corpus:s3AuthToken ;
+      sh:datatype xsd:string ;
+    ] ;
+  sh:property [
+      sh:path corpus:s3AuthType ;
+      sh:class corpus:S3AuthType ;
+    ] ;
+  sh:property [
+      sh:path corpus:s3Bucket ;
+      sh:datatype xsd:string ;
+    ] ;
+  sh:property [
+      sh:path corpus:s3Folder ;
+      sh:datatype xsd:string ;
+    ] ;
+  sh:property [
+      sh:path corpus:s3ProxyConfiguration ;
+      sh:class corpus:S3ProxyConfiguration ;
+    ] ;
+  sh:property [
+      sh:path corpus:s3Region ;
+      sh:datatype xsd:string ;
+    ] ;
+.
+corpus:S3Corpus
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  corpus:supportsLiveContentFetching true ;
+  rdfs:comment "Creates a new Corpus and imports documents form a(n) S3 bucket(s)." ;
+  rdfs:label "S3 corpus" ;
+  rdfs:subClassOf corpus:Corpus ;
+  sh:order "5"^^xsd:decimal ;
+  sh:property [
+      sh:path corpus:s3BucketConfiguration ;
+      sh:class corpus:S3BucketConfiguration ;
+    ] ;
+.
+corpus:S3ProxyConfiguration
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:label "S3Proxy configuration" ;
+  sh:property [
+      sh:path corpus:s3ProxyHostname ;
+      sh:datatype xsd:string ;
+    ] ;
+  sh:property [
+      sh:path corpus:s3ProxyPassword ;
+      sh:datatype xsd:string ;
+    ] ;
+  sh:property [
+      sh:path corpus:s3ProxyPort ;
+      sh:datatype xsd:integer ;
+    ] ;
+  sh:property [
+      sh:path corpus:s3ProxyUsername ;
+      sh:datatype xsd:string ;
+    ] ;
+.
+corpus:SitemapCorpus
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "Creates a new Corpus from a sitemap.xml file published on some website. The documents listed in the sitemap will be imported into the Corpus." ;
+  rdfs:label "sitemap.xml" ;
+  rdfs:subClassOf corpus:Corpus ;
+  sh:order "2"^^xsd:decimal ;
+  sh:property [
+      sh:path corpus:siteHome ;
+      sh:class rdfs:Resource ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+  sh:property [
+      sh:path corpus:siteUrlRegex ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+    ] ;
+.
+corpus:UrlListCorpus
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  corpus:supportsLiveContentFetching true ;
+  rdfs:comment "Creates a new Corpus, and imports web pages from a list of URLs." ;
+  rdfs:label "URL list" ;
+  rdfs:subClassOf corpus:Corpus ;
+  sh:order "3"^^xsd:decimal ;
+  sh:property [
+      sh:path corpus:urlList ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+.
+corpus:atompub
+  a corpus:CmisBindingType ;
+  rdfs:label "AtomPub (CMIS 1.0 and 1.1)" ;
+.
+corpus:browser
+  a corpus:CmisBindingType ;
+  rdfs:label "Browser (CMIS 1.1)" ;
+.
+corpus:cmisAuthEnabled
+  a rdf:Property ;
+  rdfs:comment "determines if the cmis connection should send the authentication credentials" ;
+  rdfs:label "cmis authentication enabled" ;
+  rdfs:range xsd:boolean ;
+.
+corpus:cmisBindingType
+  a rdf:Property ;
+  rdfs:comment "The type of binding to use to connect to the repository" ;
+  rdfs:label "cmis bindingType" ;
+.
+corpus:cmisPassword
+  a rdf:Property ;
+  rdfs:comment "The password of the CMIS connection. This needs to change to be stored in the secure storage." ;
+  rdfs:label "cmis password" ;
+.
+corpus:cmisRepositoryId
+  a rdf:Property ;
+  rdfs:comment "The id of the repository to connect to. " ;
+  rdfs:label "cmis repository id" ;
+.
+corpus:cmisRepositoryUrl
+  a rdf:Property ;
+  rdfs:comment "The location of a CMIS repository. Use the url of the specified binding type" ;
+  rdfs:label "cmis repository url" ;
+.
+corpus:cmisRootFolder
+  a rdf:Property ;
+  rdfs:comment "Specified base directory to be used for retreiving documents" ;
+  rdfs:domain corpus:CmisCorpus ;
+  rdfs:label "cmis root folder" ;
+  rdfs:range xsd:string ;
+.
+corpus:cmisUsername
+  a rdf:Property ;
+  rdfs:comment "The username of the CMIS connection" ;
+  rdfs:label "cmis username" ;
+.
+corpus:content
+  a rdf:Property ;
+  rdfs:label "content" ;
+.
+corpus:contentType
+  a rdf:Property ;
+  rdfs:label "content type" ;
+.
+corpus:cssKeepSelector
+  a rdf:Property ;
+  rdfs:comment "For any HTML documents in the corpus, only the elements matching this CSS selector (and their children) will be kept as content. Non-matching documents will be removed from the DOM tree." ;
+  rdfs:label "CSS keep selector" ;
+.
+corpus:cssRemoveSelector
+  a rdf:Property ;
+  rdfs:comment "For any HTML documents in the corpus, any elements matching this CSS selector (and their children) will be removed from the content." ;
+  rdfs:label "CSS remove selector" ;
+.
+corpus:customImports
+  a rdf:Property ;
+  rdfs:comment "The imports (space separated graph URIs) to be added to the corpus when this connector is activated." ;
+  rdfs:domain rdfs:Class ;
+  rdfs:label "custom imports" ;
+  rdfs:range xsd:string ;
+.
+corpus:directory
+  a rdf:Property ;
+  rdfs:comment "Path of a directory, relative to the system's workspace root, that contains the documents that make up this corpus." ;
+  rdfs:label "directory" ;
+.
+corpus:disabled
+  a rdf:Property ;
+  rdfs:comment "Determines if the resource is disabled. Assumed to be false if absent." ;
+  rdfs:label "disabled" ;
+.
+corpus:docUrlRegex
+  a rdf:Property ;
+  rdfs:comment "Only documents whose URLs match this regular expression are considered part of the corpus. The expression may match anywhere in the URL; it does not need to match the entire URL." ;
+  rdfs:label "document URL regex" ;
+.
+corpus:encoding
+  a rdf:Property ;
+  rdfs:label "encoding" ;
+.
+corpus:fetchContentLive
+  a rdf:Property ;
+  rdfs:comment "Indicates that the content of documents in this corpus is not stored in the corpus:content property, but needs to be retrieved via the corpus:fetchContent() function. Can only be true if the corpus is of a type that has corpus:supportsLiveContentFetching." ;
+  rdfs:domain corpus:Corpus ;
+  rdfs:label "fetch content live" ;
+  rdfs:range xsd:boolean ;
+.
+corpus:fileName
+  a rdf:Property ;
+  rdfs:label "file name" ;
+.
+corpus:s3AuthId
+  a rdf:Property ;
+  rdfs:label "s3Auth id" ;
+  rdfs:range xsd:string ;
+.
+corpus:s3AuthKey
+  a rdf:Property ;
+  rdfs:label "s3Auth key" ;
+  rdfs:range xsd:string ;
+.
+corpus:s3AuthToken
+  a rdf:Property ;
+  rdfs:label "s3Auth token" ;
+  rdfs:range xsd:string ;
+.
+corpus:s3Bucket
+  a rdf:Property ;
+  rdfs:label "s3Bucket" ;
+  rdfs:range xsd:string ;
+.
+corpus:s3Folder
+  a rdf:Property ;
+  rdfs:label "s3Folder" ;
+  rdfs:range xsd:string ;
+.
+corpus:s3Region
+  a rdf:Property ;
+  rdfs:label "s3Region" ;
+  rdfs:range xsd:string ;
+.
+corpus:s3credential
+  a corpus:S3AuthType ;
+  rdfs:comment "User provides AWS credentials (Id, Key, Token) for authentication." ;
+  rdfs:label "Credentials" ;
+.
+corpus:s3env
+  a corpus:S3AuthType ;
+  rdfs:comment """Uses Authentication Id/Key from environemnt variables
+
+AWS_ACCESS_KEY_ID (or AWS_ACCESS_KEY)
+AWS_SECRET_KEY (or AWS_SECRET_ACCESS_KEY)""" ;
+  rdfs:label "Environment" ;
+.
+corpus:siteHome
+  a rdf:Property ;
+  rdfs:comment "The homepage URL of a website. It is assumed that a sitemap.xml file can be discovered by checking the site's robots.txt." ;
+  rdfs:label "site home" ;
+.
+corpus:siteUrlRegex
+  a rdf:Property ;
+  rdfs:comment "Only documents whose URLs match this regular expression are considered part of the corpus. The expression may match anywhere in the URL; it does not need to match the entire URL." ;
+  rdfs:label "site URL regex" ;
+.
+corpus:supportsLiveContentFetching
+  a rdf:Property ;
+  rdfs:comment "Applicable to subclasses of corpus:Corpus. True indicates that the subclass represents a corpus with connector, and the connector supports fetching of document content at the time the document is accessed in EDG." ;
+  rdfs:domain rdfs:Class ;
+  rdfs:label "supports live content fetching" ;
+  rdfs:range xsd:boolean ;
+.
+corpus:title
+  a rdf:Property ;
+  rdfs:label "title" ;
+  rdfs:subPropertyOf rdfs:label ;
+.
+corpus:topic
+  a rdf:Property ;
+  rdfs:domain corpus:Document ;
+  rdfs:label "topic" ;
+  rdfs:range <http://www.w3.org/2004/02/skos/core#Concept> ;
+.
+corpus:urlList
+  a rdf:Property ;
+  rdfs:comment "Whitespace-separated list of URLs that make up this corpus." ;
+  rdfs:label "URL list" ;
+.

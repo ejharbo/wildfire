@@ -1,0 +1,151 @@
+# baseURI: http://edg.topbraid.solutions/1.0/schema/config/importers
+
+@prefix config-importers: <http://edg.topbraidlive.org/config/importers#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/schema/config/importers>
+  rdf:type owl:Ontology ;
+  <http://www.linkedmodel.org/schema/vaem#hasGraphMetadata> <http://edg.topbraid.solutions/schema/config/importers/GMD_importers> ;
+  rdfs:label "importers" ;
+.
+<http://edg.topbraid.solutions/schema/config/importers/GMD_importers>
+  rdf:type <http://www.linkedmodel.org/schema/vaem#GraphMetaData> ;
+  <http://purl.org/dc/terms/modified> "2016-12-18"^^xsd:date ;
+  <http://purl.org/dc/terms/rights> "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  <http://www.linkedmodel.org/schema/vaem#hasGraphRole> <http://www.linkedmodel.org/schema/vaem#SchemaGraph> ;
+  <http://www.linkedmodel.org/schema/vaem#hasLicenseType> <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  <http://www.linkedmodel.org/schema/vaem#hasOwner> <http://www.linkedmodel.org/schema/vaem#TopQuadrant> ;
+  <http://www.linkedmodel.org/schema/vaem#hasSteward> <http://www.linkedmodel.org/schema/vaem#TopQuadrant> ;
+  <http://www.linkedmodel.org/schema/vaem#isMetadataFor> <http://edg.topbraid.solutions/1.0/schema/config/importers> ;
+  <http://www.linkedmodel.org/schema/vaem#name> "EDG" ;
+  <http://www.linkedmodel.org/schema/vaem#namespace> "http://edg.topbraid.solutions/model/" ;
+  <http://www.linkedmodel.org/schema/vaem#namespacePrefix> "edg" ;
+  <http://www.linkedmodel.org/schema/vaem#owner> "TopQuadrant, Inc." ;
+  <http://www.linkedmodel.org/schema/vaem#releaseDate> "2016-12-18"^^xsd:date ;
+  <http://www.linkedmodel.org/schema/vaem#revision> "1.0" ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://purl.org/dc/terms/abstract> ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://purl.org/dc/terms/author> ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://purl.org/dc/terms/created> ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://purl.org/dc/terms/modified> ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://purl.org/dc/terms/rights> ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://purl.org/dc/terms/title> ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  <http://www.linkedmodel.org/schema/vaem#withAttributionTo> "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+config-importers:DataGraph
+  rdf:type owl:Class ;
+  rdf:type <http://www.w3.org/ns/shacl#NodeShape> ;
+  rdfs:label "Data graph" ;
+  rdfs:subClassOf config-importers:Graph ;
+.
+config-importers:DefaultLineageConfiguration
+  rdf:type owl:Class ;
+  rdfs:label "Default lineage configuration" ;
+  rdfs:subClassOf config-importers:ImportersConfiguration ;
+.
+config-importers:Graph
+  rdf:type owl:Class ;
+  rdf:type <http://www.w3.org/ns/shacl#NodeShape> ;
+  rdfs:label "Graph" ;
+  rdfs:subClassOf owl:Thing ;
+.
+config-importers:ImportersConfiguration
+  rdf:type owl:Class ;
+  rdfs:label "importers configuration" ;
+  rdfs:subClassOf owl:Thing ;
+.
+config-importers:ServerSchemaMapping
+  rdf:type owl:Class ;
+  rdfs:comment "This is a helper class to map the scheme of a database in a server with a physical model. If the physical model do not exist, then a dummy NSM should be used instead" ;
+  rdfs:label "ServerSchemaMapping" ;
+  rdfs:subClassOf owl:Thing ;
+.
+config-importers:TransformGraph
+  rdf:type owl:Class ;
+  rdf:type <http://www.w3.org/ns/shacl#NodeShape> ;
+  rdfs:label "Transform graph" ;
+  rdfs:subClassOf config-importers:Graph ;
+.
+config-importers:availableSpinTransform
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain [
+      rdf:type owl:Class ;
+      owl:unionOf (
+          config-importers:DataGraph
+          config-importers:ImportersConfiguration
+        ) ;
+    ] ;
+  rdfs:label "available Script" ;
+  rdfs:range config-importers:TransformGraph ;
+.
+config-importers:baseUri
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain config-importers:Graph ;
+  rdfs:label "base uri" ;
+  rdfs:range rdfs:Resource ;
+.
+config-importers:dataAssetNamespace
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain config-importers:ImportersConfiguration ;
+  rdfs:label "data asset namespace" ;
+  rdfs:range xsd:string ;
+.
+config-importers:enterpriseAssetNamespace
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain config-importers:ImportersConfiguration ;
+  rdfs:label "enterprise asset namespace" ;
+  rdfs:range xsd:string ;
+.
+config-importers:lineageModelNamespace
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain config-importers:ImportersConfiguration ;
+  rdfs:label "data asset namespace" ;
+  rdfs:range xsd:string ;
+.
+config-importers:mapsToModel
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "Combination of a server and a schema. This class is needed to create the mapping of the schema of a database on a server with the actual physical model. If the physical model do not exist in a Data Asset, then a default NSM model will actually declare that the physical model is absent from EDG" ;
+  rdfs:domain config-importers:ServerSchemaMapping ;
+  rdfs:label "maps to model" ;
+  rdfs:range xsd:string ;
+.
+config-importers:proxyBasicClass
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain config-importers:TransformGraph ;
+  rdfs:label "proxyBasicClass" ;
+  rdfs:range rdfs:Resource ;
+.
+config-importers:proxyNamespace
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain config-importers:TransformGraph ;
+  rdfs:label "proxy Ontology Namespace" ;
+  rdfs:range xsd:string ;
+.
+config-importers:schemaName
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain config-importers:ServerSchemaMapping ;
+  rdfs:label "Schemer name" ;
+  rdfs:range xsd:string ;
+.
+config-importers:serverName
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain config-importers:ServerSchemaMapping ;
+  rdfs:label "Server name" ;
+  rdfs:range xsd:string ;
+.
+config-importers:shapesBaseUri
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain config-importers:ImportersConfiguration ;
+  rdfs:label "shapes Base uri" ;
+  rdfs:range xsd:string ;
+.
+config-importers:technicalAssetNamespace
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain config-importers:ImportersConfiguration ;
+  rdfs:label "technical asset namespace" ;
+  rdfs:range xsd:string ;
+.

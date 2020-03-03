@@ -1,0 +1,174 @@
+# baseURI: http://evn-xl.topbraidlive.org/static/scripts/ImportMTFile
+# imports: http://evn.topbraidlive.org/evnprojects
+# imports: http://server.topbraidlive.org/system-applications/teamworkconfig
+# imports: http://topbraid.org/sparqlmotionfunctions
+# imports: http://topbraid.org/sparqlmotionlib-tb
+# imports: http://topbraid.org/teamwork.ui
+# imports: http://www.w3.org/2004/02/skos/core
+
+@prefix : <http://evn-xl.topbraidlive.org/static/scripts/ImportMTFile#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://evn-xl.topbraidlive.org/static/scripts/ImportMTFile>
+  a owl:Ontology ;
+  owl:imports <http://evn.topbraidlive.org/evnprojects> ;
+  owl:imports <http://server.topbraidlive.org/system-applications/teamworkconfig> ;
+  owl:imports <http://topbraid.org/sparqlmotionfunctions> ;
+  owl:imports <http://topbraid.org/sparqlmotionlib-tb> ;
+  owl:imports <http://topbraid.org/teamwork.ui> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+:ConvertURIToString
+  a sml:BindBySelect ;
+  sm:next :ConvertXMLByXSLT_1 ;
+  sml:selectQuery [
+      a sp:Select ;
+      sp:resultVariables (
+          _:b31243
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a xsd:string ;
+                sp:arg1 [
+                    sp:varName "projectGraph" ;
+                  ] ;
+              ] ;
+            sp:variable _:b31243 ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Convert URITo string" ;
+.
+:ConvertXMLByXSLT_1
+  a sml:ConvertXMLByXSLT ;
+  arg:baseURI "{?uri}" ;
+  sm:next :ParseXML ;
+  sm:outputVariable "text" ;
+  sml:xml [
+      sp:varName "file" ;
+    ] ;
+  rdfs:label "Convert XMLBy XSLT 1" ;
+.
+:ImportMTFile
+  a sm:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:file ;
+      spl:valueType xsd:string ;
+      sm:next :ConvertXMLByXSLT_1 ;
+      rdfs:comment "The source code of the input file." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+      sm:next :ConvertURIToString ;
+      rdfs:comment "The target graph" ;
+    ] ;
+  spin:private true ;
+  sm:returnModule :ImportMTFile_Return ;
+  rdfs:comment "Imports a MultiTes file as SKOS Concepts into a given vocabulary." ;
+  rdfs:subClassOf sm:Functions ;
+.
+:ImportMTFile_Return
+  a sml:ReturnSWPDocument ;
+  sml:view [
+      a teamwork:MessagePage ;
+      arg:message "Your MultiTes file has been imported successfully." ;
+      arg:projectGraph [
+          sp:varName "projectGraph" ;
+        ] ;
+    ] ;
+.
+:ImportStylesheet
+  a sml:ImportXMLFile ;
+  sm:next :ConvertXMLByXSLT_1 ;
+  sm:outputVariable "template" ;
+  sml:sourceFilePath "../xsl/mt2skos.xsl" ;
+  rdfs:label "Import stylesheet" ;
+.
+:InsertTriplesViaSWP
+  a sml:CreateSWPDocument ;
+  sm:next :ImportMTFile_Return ;
+  sm:outputVariable "doc" ;
+  sml:snippet true ;
+  sml:view [
+      a ui:transaction ;
+      ui:child [
+          a ui:update ;
+          ui:childIndex 0 ;
+          ui:updateQuery [
+              a sp:Modify ;
+              sp:insertPattern (
+                  [
+                    a sp:NamedGraph ;
+                    sp:elements (
+                        [
+                          sp:object [
+                              sp:varName "o" ;
+                            ] ;
+                          sp:predicate [
+                              sp:varName "p" ;
+                            ] ;
+                          sp:subject [
+                              sp:varName "s" ;
+                            ] ;
+                        ]
+                      ) ;
+                    sp:graphNameNode [
+                        sp:varName "projectGraph" ;
+                      ] ;
+                  ]
+                ) ;
+              sp:where (
+                  [
+                    sp:object [
+                        sp:varName "o" ;
+                      ] ;
+                    sp:predicate [
+                        sp:varName "p" ;
+                      ] ;
+                    sp:subject [
+                        sp:varName "s" ;
+                      ] ;
+                  ]
+                ) ;
+            ] ;
+        ] ;
+      ui:logMessage "Imported from MultiTes file" ;
+    ] ;
+  rdfs:label "Insert triples via SWP" ;
+.
+:ParseXML
+  a sml:ConvertTextToRDF ;
+  sm:next :InsertTriplesViaSWP ;
+  sml:serialization sml:RDFXML ;
+  rdfs:label "Parse XML" ;
+.
+arg:file
+  a rdf:Property ;
+  rdfs:label "file" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:projectGraph
+  a rdf:Property ;
+  rdfs:label "project graph" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+_:b31243
+  sp:varName "uri" ;
+.

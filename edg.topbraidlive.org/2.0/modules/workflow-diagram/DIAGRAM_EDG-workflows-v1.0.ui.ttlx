@@ -1,0 +1,3187 @@
+# baseURI: http://edg.topbraid.solutions/1.0/swp/diagrams/workflows
+# imports: http://edg.graph.link/swp/1.0/datareactivegram
+# imports: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://edg.topbraid.solutions/1.0/swp/diagrams/models
+# imports: http://edg.topbraid.solutions/1.0/swp/library
+# imports: http://edg.topbraidlive.org/1.0/config/diagrams
+# imports: http://spinrdf.org/spinx
+# imports: http://topbraid.org/swa
+# imports: http://topbraid.org/teamwork
+# imports: http://topbraid.org/teamworkflows
+# imports: http://uispin.org/svg
+# imports: http://www.w3.org/ns/shacl#
+
+@prefix acjob: <http://evn.topbraidlive.org/tagger/acjob#> .
+@prefix acpp: <http://topbraid.org/nlp/autoclassifier-preproc#> .
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix autotagger: <http://evn.topbraidlive.org/autotagger#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix conceptmatch: <http://topbraid.org/conceptmatch#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix config-importers: <http://edg.topbraidlive.org/config/importers#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix core-soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix corpus: <http://topbraid.org/corpus#> .
+@prefix corpusprojects: <http://topbraid.org/corpus-projects#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkapp: <http://topbraid.org/swa/crosswalkapp#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dashboard: <http://example.org/dashboard#> .
+@prefix datagraph: <http://teamwork.topbraidlive.org/datagraph/datagraphprojects#> .
+@prefix dataset: <http://teamwork.topbraidlive.org/dataset#> .
+@prefix datasetapp: <http://topbraid.org/swa/datasetapp#> .
+@prefix datasetviewer: <http://topbraid.org/swa/datasetviewer#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ddl: <http://edg.topbraidlive.org/1.0/importers/ddl#> .
+@prefix default: <http://uispin.org/default#> .
+@prefix defaultapp: <http://topbraid.org/swa/defaultapp#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix document: <http://topbraid.org/document#> .
+@prefix documents: <http://edg.topbraid.solutions/1.0/shapes/documents#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg-config: <http://edg.ext.topbraidlive.org/schema/config/importers#> .
+@prefix edg-importer: <http://edg.topbraidlive.org/importer/> .
+@prefix edg-qa: <http://edg.topbraidlive.org/utility/qa/> .
+@prefix edg.avro: <http://edg.topbraidlive.org/avro/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.global: <urn:x-evn-global:> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.reactivegram: <http://edg.topbraid.solutions/diagram/reactivegram/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix edg.xform.html: <http://edg.topbraid.solutions/transfrom/html/> .
+@prefix edgproduct: <http://edg.topbraidlive.org/edgproduct#> .
+@prefix eeh-lib: <http://www.environmenthub.no/spin/1.0/eeh-lib#> .
+@prefix eeh-reportlib: <http://www.environmenthub.no/spin/1.0/eeh-reportlib#> .
+@prefix egl-align: <https://edg.graph.link/shapes/alignment#> .
+@prefix egl-lib: <https://edg.graph.link/1.0/lib/functions#> .
+@prefix elements: <http://purl.org/dc/elements/1.1/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evn: <http://topbraid.org/evn/evn#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evnimport: <http://evn.topbraidlive.org/uispin/evnimport#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix ex: <http://example.org/> .
+@prefix extjs: <http://uispin.com/extjs#> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix forms: <http://www.topbraid.org/2007/01/forms.owl#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix governance: <http://topbraid.org/teamworkgovernance.ui#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix graphql.search: <http://teamwork.topbraidlive.org/graphql.search#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix inference: <http://www.topbraid.org/2007/06/inference.owl#> .
+@prefix jdbc: <http://edg.topbraidlive.org/1.0/importers/jdbc#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix kennedys: <http://topbraid.org/examples/kennedys#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix lib-importer: <http://edg.topbraid.solutions/importer/lib#> .
+@prefix lineage-transform: <http://edg.topbraid.solutions/transform/importer/lineage#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix o2o: <http://lib.topquadrant.com/owl/srg/o2o#> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix ontologyviewer: <http://topbraid.org/swa/ontologyviewer#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix proxy-lineage: <http://edg.topbraid.solutions/proxy/importer/lineage#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmapp: <http://rdm.topbraidlive.org/rdmapp#> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix rdmviewer: <http://rdm.topbraidlive.org/rdmviewer#> .
+@prefix reif: <https://edg.graph.link/1.0/shapes/reification#> .
+@prefix saf: <http://topbraid.org/saf/> .
+@prefix safconfig: <http://topbraid.org/safconfig/> .
+@prefix safindex: <http://topbraid.org/safindex#> .
+@prefix safm: <http://saf.topbraidlive.org/metaschema/> .
+@prefix savedQueries: <http://teamwork.topbraidlive.org/ui/savedQueries#> .
+@prefix scheduler: <http://topbraid.org/scheduler#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix server: <http://server.topbraidlive.org/server.ui#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix shapesgraph: <http://teamwork.topbraidlive.org/shapesgraph/shapesgraphprojects#> .
+@prefix sharepoint: <http://topbraid.org/sharepoint#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skosshapes: <http://topbraid.org/skos.shapes#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spin.ui: <http://spinrdf.org/spin.ui#> .
+@prefix spinmap: <http://spinrdf.org/spinmap#> .
+@prefix spinmapl: <http://topbraid.org/spin/spinmapl#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix ss: <http://www.topbraidcomposer.org/owl/2006/08/spreadsheets.owl#> .
+@prefix stats: <http://topbraid.org/statistics#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swadoc: <http://topbraid.org/swadoc#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tablesmap: <http://topbraid.org/spin/tablesmap#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix taggerspin: <http://evn.topbraidlive.org/taggerspin#> .
+@prefix taggerui: <http://evn.topbraidlive.org/taggerui#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix tblui: <http://server.topbraidlive.org/tblui#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkAdmin: <http://teamwork.topbraidlive.org/doc/teamworkAdmin#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworkconstraints: <http://topbraid.org/teamworkconstraints#> .
+@prefix teamworkdashboard: <http://topbraid.org/teamworkdashboard#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix teamworkupdate: <http://teamworkAPI.topbraid.com/teamworkUpdate#> .
+@prefix textindex: <http://topbraid.org/textindex#> .
+@prefix tika-importer: <http://teamwork.topbraidlive.org/corpus/tika-importer#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix tr-org: <http://permid.org/ontology/organization/> .
+@prefix tracker: <http://teamwork.topbraidlive.org/ui/tracker#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uitest: <http://uispin.org/test#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix userdat: <http://teamwork.topbraidlive.org/ui/userdata> .
+@prefix userdata: <http://teamwork.topbraidlive.org/ui/userdata#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix victory: <http://edg.topbraid.solutions/victory/> .
+@prefix visual: <http://topbraid.org/visual#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xhtml: <http://topbraid.org/xhtml#> .
+@prefix xhtml1: <http://www.w3.org/1999/xhtml#> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/swp/diagrams/workflows>
+  a owl:Ontology ;
+  rdfs:label "EDG SWP Library - workflows" ;
+  owl:imports <http://edg.graph.link/swp/1.0/datareactivegram> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/swp/diagrams/models> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/swp/library> ;
+  owl:imports <http://edg.topbraidlive.org/1.0/config/diagrams> ;
+  owl:imports <http://spinrdf.org/spinx> ;
+  owl:imports <http://topbraid.org/swa> ;
+  owl:imports <http://topbraid.org/teamwork> ;
+  owl:imports <http://topbraid.org/teamworkflows> ;
+  owl:imports <http://uispin.org/svg> ;
+  owl:imports sh: ;
+.
+edg:BuildStateTransitionLink
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:fromState ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The start of the association" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:toState ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The end of the association." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:transition ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The (forward) predicate." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <ui:group>
+        <polyline about=\"{= ?fromState }--{= ?transition }--{= ?transition }_FROM\" class=\"swauml-logical-relation-edge-line\" marker-end=\"url(#arrowhead)\" stroke-width=\"2\"/>
+        <polyline about=\"{= ?transition }--{= ?toState }--{= ?transition }_TO\" class=\"swauml-logical-relation-edge-line\" marker-end=\"url(#arrowhead)\" stroke-width=\"2\"/>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Builds an SVG polyline for a state transition link. A relation is binary and can only have one source and one target." ;
+  rdfs:label "Build state transition link" ;
+  rdfs:seeAlso edg:BuildWorkflowLink ;
+  rdfs:seeAlso swauml:BuildLogicalRelationEdge ;
+  rdfs:subClassOf swa:GraphElements ;
+.
+edg:BuildWorkflowLink
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:stroke ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:strokeDashArray ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:strokeWidth ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:fromState ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The start of the association" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:toState ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The end of the association." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:transition ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The (forward) predicate." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <ui:group>
+        <polyline about=\"{= ?fromState }--{= ?toState }--{= ?transition }\" class=\"swauml-edge-line\" marker-end=\"url(#arrowhead)\" stroke=\"{= IF(bound(?stroke), ?stroke, &quot;&quot;) }\" stroke-dasharray=\"{= IF(bound(?strokeDashArray), ?strokeDashArray, &quot;&quot;) }\" stroke-width=\"{= COALESCE(?strokeWidth, 2) }\"/>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Builds an SVG polyline for a workflow link. A relation is binary and can only have one source and one target." ;
+  rdfs:label "Build workflow  link" ;
+  rdfs:seeAlso edg:BuildStateTransitionLink ;
+  rdfs:subClassOf swa:GraphElements ;
+.
+edg:ExampleFilterFunction
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:Filter ;
+            sp:expression false ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Example filter function" ;
+  rdfs:subClassOf swa:AttributesFilterFunctions ;
+.
+edg:Functions
+  a spin:Function ;
+  rdfs:label "Functions" ;
+  rdfs:subClassOf spin:Functions ;
+.
+edg:GetNodeAttributesForWorkflowDiagram
+  a spin:SelectTemplate ;
+  a spin:Template ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "property" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "property" ;
+              ] ;
+            sp:predicate swauml:property ;
+            sp:subject [
+                sp:varName "class" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:or ;
+                sp:arg1 [
+                    a sp:not ;
+                    sp:arg1 [
+                        a sp:bound ;
+                        sp:arg1 [
+                            sp:varName "attributesFilterFunction" ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a spif:invoke ;
+                    sp:arg1 [
+                        sp:varName "attributesFilterFunction" ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "property" ;
+                      ] ;
+                    sp:arg3 [
+                        sp:varName "class" ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:attributesFilterFunction ;
+      spl:valueType spin:Function ;
+      rdfs:comment "An optional function(?property, ?class) returning true to include a given property at a given class node." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:class ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The class to render." ;
+    ] ;
+  spin:private true ;
+  rdfs:label "Get class attributes for class diagram" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:GraphElements
+  a ui:NodeClass ;
+  rdfs:label "Graph elements" ;
+  rdfs:subClassOf swa:GraphElements ;
+.
+edg:LinkLabel
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:fromState ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The start of the transition" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:label ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:toState ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:transition ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The (forward) predicate." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <div about=\"label--{= ?fromState }--{= ?toState }--{= ?transition }\" class=\"swauml-link-label\">
+        <div class=\"swa-shifted-label\">{= ?label }</div>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Link Label" ;
+  rdfs:seeAlso edg:StateTransitionLabel ;
+  rdfs:subClassOf swa:GraphElements ;
+.
+edg:LogicalEntityDiagram
+  ui:responseType ui:HTML ;
+.
+edg:MakeTransitionEntry
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:association ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ui:tempGraphLDM {
+                    ?association edg:isKnown true .
+                } .
+            }
+            WHERE {
+                ?association a edg:LogicalRelation .
+            } }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Make transition entry" ;
+  rdfs:subClassOf edg:Services ;
+.
+edg:ProjectTab
+  a rdfs:Class ;
+  rdfs:label "EDG Project Tab" ;
+  rdfs:subClassOf ui:NodeClass ;
+.
+edg:SelectTemplates
+  a spin:Template ;
+  rdfs:label "Select templates" ;
+  rdfs:subClassOf edg:Templates ;
+.
+edg:Services
+  a ui:Service ;
+  rdfs:label "Services" ;
+  rdfs:subClassOf ui:Services ;
+.
+edg:ShowWorkflowDiagram
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflow ;
+      spl:valueType teamwork:Tag ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflowTemplate ;
+      spl:valueType teamwork:WorkflowTemplate ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflowTemplatesGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:headIncludes """
+<ui:group>
+    <meta content=\"IE=Edge,chrome=1\" http-equiv=\"X-UA-Compatible\"/>
+    <meta charset=\"utf-8\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:prototype """
+<ui:group let:currentState=\"{= IF(spl:hasValue(?workflow, teamwork:status), spl:object(?workflow, teamwork:status), teamwork:Uncommitted) }\" let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <ui:setContext ui:queryGraph=\"{= ?workflowTemplatesGraph }\">
+        <ui:group let:initialState=\"{= spl:object(?workflowTemplate, teamwork:initialStatus) }\">
+            <!--ui:dumpScope ui:message=\"AAA1: edg:ShowWorkflowDiagram\"/-->
+            <ui:call arg:initialState=\"{= ?initialState }\" arg:workflow=\"{= ?workflowTemplate }\" ui:template=\"{= edg:getWorkflowStates }\" ui:varName=\"workflowStates\">
+                <!--ui:dumpResultSet ui:message=\"AAA1: edg:ShowWorkflowDiagram\" ui:resultSet=\"{= ?workflowStates }\"/-->
+                <ui:call arg:currentState=\"{= ?currentState }\" arg:initialState=\"{= ?initialState }\" arg:teamGraph=\"{= ?teamGraph }\" arg:workflow=\"{= ?workflow }\" arg:workflowTemplate=\"{= ?workflowTemplate }\" arg:workflowTemplatesGraph=\"{= ?workflowTemplatesGraph }\" ui:template=\"{= edg:getWorkflowTransitions }\" ui:varName=\"workflowTransitions\">
+                    <!--ui:dumpResultSet ui:message=\"AAA2: edg:ShowWorkflowDiagram\"
+  ui:resultSet=\"{= ?workflowTransitions }\"/-->
+                    <edg:WorkflowDiagram arg:currentState=\"{= ?currentState }\" arg:initialState=\"{= ?initialState }\" arg:projectGraph=\"{= ?projectGraph }\" arg:statesSet=\"{= ?workflowStates }\" arg:transitionsSet=\"{= ?workflowTransitions }\" arg:workflow=\"{= ?workflow }\" arg:workflowTemplate=\"{= ?workflowTemplate }\" arg:workflowTemplatesGraph=\"{= ?workflowTemplatesGraph }\" ui:args=\"*\"/>
+                </ui:call>
+            </ui:call>
+        </ui:group>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:comment "Show workflow diagram using DAGRE." ;
+  rdfs:label "Show Workflow diagram" ;
+  rdfs:subClassOf edg:GraphElements ;
+.
+edg:SingleNodeDiagram
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:focusClass ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The focus class of interest." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:associationEdges ;
+      spl:valueType sp:Select ;
+      rdfs:comment "The list of classes to draw - first column of the result set called ?class must be the classes." ;
+    ] ;
+  ui:prototype """
+<ui:setContext let:id=\"{= ui:uniqueId() }\" ui:varName=\"swaSystemLabels\" ui:varValue=\"{= ?systemLabels }\">
+    <ui:if ui:condition=\"{= bound(?focusClass) }\">
+        <div class=\"swauml-diagram\" id=\"{= ?id }\">
+            <svg height=\"100%\" width=\"100%\">
+                <defs>
+                    <marker id=\"associationMarker\" markerHeight=\"10\" markerWidth=\"10\" orient=\"auto\" refX=\"10\" refY=\"5\">
+                        <path class=\"swauml-association-edge-marker\" d=\"M10,5 L0,10 L0,0 Z\"/>
+                    </marker>
+                    <marker id=\"subClassMarker\" markerHeight=\"20\" markerWidth=\"20\" orient=\"auto\" refX=\"0\" refY=\"10\">
+                        <polygon class=\"swauml-subclass-edge-marker\" points=\"0,10 10,6 10,14\"/>
+                    </marker>
+                </defs>
+                <ui:forEach ui:resultSet=\"{= ?associationEdges }\">
+                    <swauml:AssociationEdge arg:predicate=\"{= ?predicate }\" arg:sourceClass=\"{= ?sourceClass }\" arg:targetClass=\"{= ?targetClass }\"/>
+                </ui:forEach>
+            </svg>
+            <swauml:ClassNode arg:attributesFilterFunction=\"{= ?attributesFilterFunction }\" arg:class=\"{= ?focusClass }\" arg:focused=\"{= true }\"/>
+            <ui:forEach ui:resultSet=\"{= ?associationEdges }\">
+                <swauml:AssociationEdgeLabel arg:predicate=\"{= ?predicate }\" arg:sourceClass=\"{= ?sourceClass }\" arg:targetClass=\"{= ?targetClass }\"/>
+            </ui:forEach>
+        </div>
+        <script>swa.initClassDiagram(\"{= ?id }\",<swon:Array/>
+            <swon:Comma/>
+            <swon:Array>
+                <ui:forEach ui:resultSet=\"{= ?associationEdges }\" ui:separator=\",\">
+                    <swon:Object>
+                        <swon:Value arg:name=\"sourceClass\" arg:value=\"{= ?sourceClass }\"/>
+                        <swon:Value arg:name=\"targetClass\" arg:value=\"{= ?targetClass }\"/>
+                        <swon:Value arg:name=\"predicate\" arg:value=\"{= ?predicate }\"/>
+                    </swon:Object>
+                </ui:forEach>
+            </swon:Array>)</script>
+    </ui:if>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:label "Single Class diagram" ;
+  rdfs:subClassOf swa:AbstractClassDiagram ;
+.
+edg:StateTransitionLabel
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:fromState ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The start of the transition" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:label ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:toState ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:transition ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The (forward) predicate." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:systemLabels=\"{= ui:contextValue(&quot;swaSystemLabels&quot;) }\">
+    <div about=\"label--{= ?fromState }--{= ?transition }--{= ?transition }_FROM\" class=\"swauml-logical-relation-edge-label\">
+        <div class=\"swa-shifted-label\">{= ?label }</div>
+    </div>
+    <div about=\"label--{= ?transition }--{= ?toState }--{= ?transition }_TO\" class=\"swauml-logical-relation-edge-label\">
+        <div class=\"swa-shifted-label\"/>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "State Transition Label" ;
+  rdfs:seeAlso edg:LinkLabel ;
+  rdfs:subClassOf swa:GraphElements ;
+.
+edg:Templates
+  a spin:Template ;
+  rdfs:label "Templates" ;
+  rdfs:subClassOf spin:Templates ;
+.
+edg:WorkflowDiagram
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:statesSet ;
+      spl:valueType spr:Table ;
+      rdfs:comment "workflow states" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:currentState ;
+      spl:valueType teamwork:TagStatus ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:initialState ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The focus class of interest." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:transitionsSet ;
+      spl:valueType spr:Table ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflow ;
+      spl:valueType teamwork:Tag ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflowTemplate ;
+      spl:valueType teamwork:WorkflowTemplate ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflowTemplatesGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <!--ui:dumpScope ui:message=\"AAA1: edg:WorkflowDiagram\"/-->
+    <script src=\"{= ui:lib() }/edg/build/edg.bundle.js\"/>
+    <script src=\"{= ui:lib() }/edg/js/edg-diagrams.js\"/>
+    <ui:group let:id=\"{= ui:uniqueId() }\">
+        <div class=\"swauml-workflow-diagram\" id=\"{= ?id }\" let:startNodeId=\"START_NODE\" let:startTransitionId=\"TRANSITION_START\">
+            <edg:WorkflowNode arg:callback=\"{= edg:WorkflowNodeTooltipData }\" arg:headerStyle=\"swauml-trigger-header\" arg:icon=\"fas fa-circle\" arg:nodeStyle=\"swauml-start-node\" arg:projectGraph=\"{= ?projectGraph }\" arg:resource=\"{= ?startNodeId }\" arg:title=\"Starting point\" arg:workflow=\"{= ?workflow }\" arg:workflowTemplate=\"{= ?workflowTemplate }\" arg:workflowTemplatesGraph=\"{= ?workflowTemplatesGraph }\"/>
+            <edg:WorkflowStateNode arg:active=\"{= IF((?initialState = ?currentState), true, false) }\" arg:focused=\"{= false }\" arg:initialState=\"{= ?initialState }\" arg:label=\"State\" arg:nodeStyle=\"swauml-state-node\" arg:projectGraph=\"{= ?projectGraph }\" arg:resource=\"{= ?initialState }\" arg:suppressAttributes=\"{= true }\" arg:workflow=\"{= ?workflow }\" arg:workflowTemplate=\"{= ?workflowTemplate }\" arg:workflowTemplatesGraph=\"{= ?workflowTemplatesGraph }\"/>
+            <ui:forEach ui:resultSet=\"{= ?statesSet }\">
+                <edg:WorkflowStateNode arg:active=\"{= IF((?state = ?currentState), true, false) }\" arg:focused=\"{= false }\" arg:initialState=\"{= ?initialState }\" arg:label=\"State\" arg:nodeStyle=\"swauml-state-node\" arg:projectGraph=\"{= ?projectGraph }\" arg:resource=\"{= ?state }\" arg:suppressAttributes=\"{= true }\" arg:workflow=\"{= ?workflow }\" arg:workflowTemplate=\"{= ?workflowTemplate }\" arg:workflowTemplatesGraph=\"{= ?workflowTemplatesGraph }\"/>
+            </ui:forEach>
+            <ui:forEach ui:resultSet=\"{= ?transitionsSet }\">
+                <edg:WorkflowTransitionNode arg:active=\"{= IF((?fromState = ?currentState), true, false) }\" arg:callback=\"{= edg:WorkflowNodeTooltipData }\" arg:focused=\"{= false }\" arg:isAllowableTransition=\"{= ?isAllowableTransition }\" arg:label=\"Transition\" arg:nodeStyle=\"swauml-transition-node\" arg:projectGraph=\"{= ?projectGraph }\" arg:resource=\"{= ?transition }\" arg:suppressAttributes=\"{= true }\" arg:title=\"{= IF(?isAllowableTransition, &quot;Active&quot;, &quot;Inactive&quot;) } Transition\" arg:toState=\"{= ?toState }\" arg:workflow=\"{= ?workflow }\" arg:workflowTemplate=\"{= ?workflowTemplate }\" arg:workflowTemplatesGraph=\"{= ?workflowTemplatesGraph }\" teamwork:transitionLabel=\"{= ?transitionLabel }\"/>
+                <ui:if ui:condition=\"{= ?isAllowableTransition }\">
+                    <edg:WorkflowNode arg:callback=\"{= edg:WorkflowTriggerNodeTooltipData }\" arg:headerStyle=\"swauml-trigger-header\" arg:icon=\"fas fa-user-check\" arg:nodeStyle=\"swauml-trigger-node\" arg:projectGraph=\"{= ?projectGraph }\" arg:resource=\"{= CONCAT(?transitionId, &quot;_ROLE&quot;) }\" arg:title=\"You have the authorization to trigger this transition\" arg:workflow=\"{= ?workflow }\" arg:workflowTemplate=\"{= ?workflowTemplate }\" arg:workflowTemplatesGraph=\"{= ?workflowTemplatesGraph }\"/>
+                </ui:if>
+            </ui:forEach>
+            <ui:forEach ui:resultSet=\"{= ?transitionsSet }\">
+                <edg:StateTransitionLabel arg:fromState=\"{= ?fromState }\" arg:label=\"{= ?transitionLabel }\" arg:toState=\"{= ?toState }\" arg:transition=\"{= ?transitionId }\"/>
+                <ui:if ui:condition=\"{= ?isAllowableTransition }\">
+                    <edg:LinkLabel arg:fromState=\"{= ?transitionId }_ROLE\" arg:toState=\"{= ?transitionId }\" arg:transition=\"{= ?transitionId }_ROLE-LINK\"/>
+                </ui:if>
+            </ui:forEach>
+            <edg:LinkLabel arg:fromState=\"{= ?startNodeId }\" arg:label=\"start\" arg:toState=\"{= ?initialState }\" arg:transition=\"{= ?startTransitionId }\"/>
+            <script>edgdiagram.initWorkflowDiagram(\"{= ?id }\",<swon:Array/>
+                <swon:Comma/>
+                <swon:Array>
+                    <ui:forEach ui:resultSet=\"{= ?transitionsSet }\">
+                        <swon:Object>
+                            <swon:Value arg:name=\"fromState\" arg:value=\"{= ?fromState }\"/>
+                            <swon:Value arg:name=\"toState\" arg:value=\"{= ?toState }\"/>
+                            <swon:Value arg:name=\"transition\" arg:value=\"{= ?transitionId }\"/>
+                            <swon:Value arg:name=\"linkType\" arg:value=\"TRANSITION\"/>
+                        </swon:Object>
+                        <ui:if ui:condition=\"{= ?isAllowableTransition }\">
+                            <swon:Object>
+                                <swon:Value arg:name=\"fromState\" arg:value=\"{= ?transitionId }_ROLE\"/>
+                                <swon:Value arg:name=\"toState\" arg:value=\"{= ?transitionId }\"/>
+                                <swon:Value arg:name=\"transition\" arg:value=\"{= ?transitionId }_ROLE-LINK\"/>
+                                <swon:Value arg:name=\"linkType\" arg:value=\"NORMAL\"/>
+                            </swon:Object>
+                        </ui:if>
+                    </ui:forEach>
+                    <swon:Object>
+                        <swon:Value arg:name=\"fromState\" arg:value=\"{= ?startNodeId }\"/>
+                        <swon:Value arg:name=\"toState\" arg:value=\"{= ?initialState }\"/>
+                        <swon:Value arg:name=\"transition\" arg:value=\"{= ?startTransitionId }\"/>
+                        <swon:Value arg:name=\"linkType\" arg:value=\"NORMAL\"/>
+                    </swon:Object>
+                </swon:Array>)</script>
+            <svg height=\"100%\" width=\"100%\">
+                <defs>
+                    <edg:WorkflowDiagramTransitionEndpointDefinitions/>
+                </defs>
+                <ui:forEach ui:resultSet=\"{= ?transitionsSet }\">
+                    <edg:BuildStateTransitionLink arg:fromState=\"{= ?fromState }\" arg:toState=\"{= ?toState }\" arg:transition=\"{= ?transitionId }\"/>
+                    <ui:if ui:condition=\"{= ?isAllowableTransition }\">
+                        <edg:BuildWorkflowLink arg:fromState=\"{= ?transitionId }_ROLE\" arg:stroke=\"darkgreen\" arg:strokeDashArray=\"8 4\" arg:strokeWidth=\"1\" arg:toState=\"{= ?transitionId }\" arg:transition=\"{= ?transitionId }_ROLE-LINK\"/>
+                    </ui:if>
+                </ui:forEach>
+                <edg:BuildWorkflowLink arg:fromState=\"{= ?startNodeId }\" arg:stroke=\"darkblue\" arg:strokeWidth=\"2\" arg:toState=\"{= ?initialState }\" arg:transition=\"{= ?startTransitionId }\"/>
+            </svg>
+        </div>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:comment "Builds a workflow diagram using dagre." ;
+  rdfs:label "Workflow diagram showing all states" ;
+  rdfs:subClassOf swa:AbstractClassDiagram ;
+.
+edg:WorkflowDiagramTransitionEndpointDefinitions
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group>
+    <marker id=\"arrowhead\" markerHeight=\"40\" markerWidth=\"40\" orient=\"auto\" refX=\"10\" refY=\"10\">
+        <polygon class=\"swauml-subclass-edge-marker\" points=\"10,10 0,6 0,14\" style=\"fill: black; stroke: black; stroke-width: 1px\"/>
+    </marker>
+    <marker id=\"none\" markerHeight=\"10\" markerUnits=\"strokeWidth\" markerWidth=\"12\" orient=\"auto\" refX=\"0\" refY=\"0\" style=\"fill: white; stroke: black; stroke-width: 1px\" viewbox=\"-11 -5 12 10\">
+        <path class=\"logical-relation-edge-marker\" d=\"M -5 0 L -5 -5 L -5, 5 \"/>
+    </marker>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Workflow Diagram Link Endpoint Defintions" ;
+  rdfs:subClassOf edg:GraphElements ;
+.
+edg:WorkflowNode
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:headerStyle ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:nodeStyle ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:callback ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:icon ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The string representation of ther resource to render." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:title ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflow ;
+      spl:valueType teamwork:Tag ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflowTemplate ;
+      spl:valueType teamwork:WorkflowTemplate ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflowTemplatesGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:loadId=\"{= ui:uniqueId() }\" let:myHeaderStyle=\"{= COALESCE(?headerStyle, &quot;swauml-instance-header&quot;) }\" let:myNodeStyle=\"{= COALESCE(?nodeStyle, &quot;swauml-trigger-node&quot;) }\">
+    <!--ui:dumpScope ui:message=\"AAA1: edg:WorkflowNode -  {= ?title }\"/-->
+    <div about=\"{= ?resource }\" class=\"{= ?myNodeStyle }\" style=\"{= IF(?active, &quot;background-color: greenyellow;&quot;, &quot;&quot;) }\">
+        <div class=\"{= ?myHeaderStyle }\" let:modalParameters=\"{= edg:buildJSONforWorkflowParameters(?title, ?workflow, ?workflowTemplate, ?workflowTemplatesGraph) }\" style=\"{= IF(?active, &quot;background-color: greenyellow; font-weight: bold&quot;, ?none) }\">
+            <!--ui:dumpScope ui:message=\"AAA2: edg:WorkflowNode -  {= ?title }\"/-->
+            <div data-callback=\"{= ?callback }\" data-options=\"{= ?modalParameters }\" data-suppress-uri=\"{= true }\" id=\"resource-tool-tip-data-{= ?loadId }\">
+                <a href=\"javascript:void(0)\" id=\"resource-tool-tip-{= ?loadId }\" onclick=\"reactivegram.populateModalDialogWithCallbackForBody('edg:WorkflowNodeModal', '{= ?label }', null, '{= str(?projectGraph) }',{= rdf:nil }, {= ?modalParameters } )\" title=\"Show details\">
+                    <ui:if ui:condition=\"{= bound(?icon) }\">
+                        <i aria-hidden=\"true\" class=\"fa {= ?icon }\"/>
+                    </ui:if>
+                </a>
+                <script>gadgets.Hub.publish('org.topbraid.swa.resourceTooltip', 'resource-tool-tip-{= ?loadId }');</script>
+            </div>
+        </div>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Used to depict nodes such as start node and end node." ;
+  rdfs:label "Workflow node" ;
+  rdfs:seeAlso swauml:AssetNode ;
+  rdfs:subClassOf swa:GraphElements ;
+.
+edg:WorkflowNodeModal
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflow ;
+      spl:valueType teamwork:Tag ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflowTemplate ;
+      spl:valueType teamwork:WorkflowTemplate ;
+    ] ;
+  ui:prototype """
+<ui:group let:graphId=\"{= teamwork:graphIdFromGraph(?projectGraph) }\" let:myState=\"{= COALESCE(IRI(?resource), ?none) }\" let:myWorkflowTemplate=\"{= IRI(?workflowTemplate) }\" let:tagId=\"{= teamwork:tagIdFromTagGraph(?projectGraph) }\" let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\" let:userName=\"{= IF(smf:hasCurrentUser(), smf:currentUserName(), &quot;Anonymous&quot;) }\" let:workflowTemplatesGraph=\"{= teamwork:workflowsGraph() }\">
+    <ui:if ui:condition=\"{= bound(?workflowTemplatesGraph) }\">
+        <ui:setContext ui:queryGraph=\"{= ?workflowTemplatesGraph }\">
+            <ui:group let:readOnly=\"{= !teamwork:currentUserHasPrivilege(?workflow, teamwork:manager, ?teamGraph) }\" let:user=\"{= IRI(CONCAT(&quot;urn:x-tb-users:&quot;, ?userName)) }\">
+                <ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+                    <ui:group let:creationDate=\"{= spl:object(?workflow, dcterms:created) }\" let:creator=\"{= spl:object(?workflow, sioc:has_creator) }\" let:currentState=\"{= spl:object(?workflow, teamwork:status) }\" let:definingTemplate=\"{= spl:object(?workflow, teamwork:workflowTemplate) }\">
+                        <!--ui:dumpScope ui:message=\"AAA1: edg:WorkflowNodeModal\"/-->
+                        <p>
+                            <span>For the workflow,&nbsp;</span>
+                            <span class=\"edg-boxed-text\">
+                                <i>{= ui:label(?workflow) }</i>
+                            </span>
+                            <span>, defined by the template&nbsp;</span>
+                            <span class=\"edg-boxed-text\">
+                                <i>{= swa:labelInGraph(?definingTemplate, ?workflowTemplatesGraph) }</i>
+                            </span>
+                            <span>, </span>
+                        </p>
+                        <p class=\"text-info\" style=\"font-size:10px;\">
+                            <i>{= ui:label(?workflow) }</i> was created on <i>{= spif:dateFormat(?creationDate, \"yyyy-MM-dd HH:mm:ss\") }</i>, by <i>{= ?creator }</i>.</p>
+                    </ui:group>
+                </ui:setContext>
+            </ui:group>
+        </ui:setContext>
+    </ui:if>
+    <ui:else>
+        <div class=\"text-warn\">Missing a graph for workflow templates</div>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/workflows> ;
+  rdfs:label "Workflow node modal" ;
+  rdfs:subClassOf edg:HelpPage ;
+.
+edg:WorkflowNodeTooltipData
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:options ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:title ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <section>
+        <ui:json ui:str=\"{= ?options }\" ui:varName=\"optionsObject\">
+            <ui:group let:title=\"{= ui:jsonString(ui:jsonValue(?optionsObject, &quot;title&quot;)) }\" let:workflow=\"{= IRI(ui:jsonString(ui:jsonValue(?optionsObject, &quot;workflow&quot;))) }\" let:workflowTemplate=\"{= IRI(ui:jsonString(ui:jsonValue(?optionsObject, &quot;workflowTemplate&quot;))) }\" let:workflowTemplatesGraph=\"{= IRI(ui:jsonString(ui:jsonValue(?optionsObject, &quot;workflowTemplatesGraph&quot;))) }\">
+                <!--ui:dumpScope ui:message=\"AAA1: edg:WorkflowNodeTooltipData\"/-->
+                <h3>{= ?title }</h3>
+                <ui:if ui:condition=\"{= bound(?description) }\">
+                    <ui:if ui:condition=\"{= datatype(?description) = rdf:HTML }\">
+                        <ui:parse ui:str=\"{= swa:redirectHRefs(?description) }\"/>
+                    </ui:if>
+                    <ui:else>
+                        <p>{= swa:abbreviatedText(?description, 300) }</p>
+                    </ui:else>
+                </ui:if>
+            </ui:group>
+        </ui:json>
+    </section>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:subClassOf swa:Elements ;
+.
+edg:WorkflowResourceViewer
+  a swa:ObjectViewerClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:callback ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:options ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:suppressURI ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  swa:objectWidgetWeight [
+      a swa:WeightedExpression ;
+      swa:expression [
+          a sp:eq ;
+          sp:arg1 [
+              sp:varName "kind" ;
+            ] ;
+          sp:arg2 "uri" ;
+        ] ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:loadId=\"{= ui:uniqueId() }\">
+    <div class=\"swa-shifted-label\" data-callback=\"{= ?callback }\" data-options=\"{= ?options }\" data-suppress-uri=\"{= ?suppressURI }\" data-uri=\"{= ?object }\" id=\"resource-tool-tip-data-{= ?loadId }\">
+        <!--ui:dumpScope ui:message=\"AAA1: edg:WorkflowResourceViewer -  {= ?object }\"/-->
+        <ui:group let:id=\"resource-tool-tip-{= ?loadId }\">
+            <ui:group let:uid=\"{= COALESCE(?id, ui:uniqueId()) }\">
+                <ui:group let:link=\"{= swa:createLink(?object, ?uid) }\">
+                    <ui:if ui:condition=\"{= bound(?link) }\">
+                        <a class=\"swa-link\" href=\"javascript:void(0)\" id=\"{= ?uid }\">
+                            <ui:if ui:condition=\"{= bound(?labelOverride) }\">{= ?labelOverride }</ui:if>
+                            <ui:else>
+                                <span class=\"swauml-state-label\">{= ui:label(?object) }</span>
+                            </ui:else>
+                        </a>
+                    </ui:if>
+                    <ui:else>
+                        <ui:if ui:condition=\"{= bound(?labelOverride) }\">{= ?labelOverride }</ui:if>
+                        <ui:else>
+                            <span class=\"swauml-state-label\">{= ui:label(?object) }</span>
+                        </ui:else>
+                    </ui:else>
+                </ui:group>
+            </ui:group>
+        </ui:group>
+        <!--swa:Link arg:id=\"resource-tool-tip-{= ?loadId }\" arg:resource=\"{= ?object }\"/-->
+        <script>gadgets.Hub.publish('org.topbraid.swa.resourceTooltip', '{= ?loadId }');</script>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "The viewer for workflow nodes and transitions." ;
+  rdfs:label "workflow resource viewer" ;
+  rdfs:seeAlso swa:URIResourceViewer ;
+  rdfs:subClassOf swa:ObjectViewer ;
+.
+edg:WorkflowStateModal
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflow ;
+      spl:valueType teamwork:Tag ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflowTemplate ;
+      spl:valueType teamwork:WorkflowTemplate ;
+    ] ;
+  ui:prototype """
+<ui:group let:graphId=\"{= teamwork:graphIdFromGraph(?projectGraph) }\" let:myState=\"{= COALESCE(IRI(?resource), ?none) }\" let:myWorkflowTemplate=\"{= IRI(?workflowTemplate) }\" let:tagId=\"{= teamwork:tagIdFromTagGraph(?projectGraph) }\" let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\" let:userName=\"{= IF(smf:hasCurrentUser(), smf:currentUserName(), &quot;Anonymous&quot;) }\" let:workflowTemplatesGraph=\"{= teamwork:workflowsGraph() }\">
+    <ui:if ui:condition=\"{= bound(?workflowTemplatesGraph) }\">
+        <ui:setContext ui:queryGraph=\"{= ?workflowTemplatesGraph }\">
+            <ui:if ui:condition=\"{= bound(?resource) }\">
+                <ui:group let:description=\"{= spl:object(?resource, rdfs:comment) }\" let:readOnly=\"{= !teamwork:currentUserHasPrivilege(?workflow, teamwork:manager, ?teamGraph) }\" let:user=\"{= IRI(CONCAT(&quot;urn:x-tb-users:&quot;, ?userName)) }\">
+                    <ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+                        <ui:group let:creationDate=\"{= spl:object(?workflow, dcterms:created) }\" let:creator=\"{= spl:object(?workflow, sioc:has_creator) }\" let:currentState=\"{= spl:object(?workflow, teamwork:status) }\" let:definingTemplate=\"{= spl:object(?workflow, teamwork:workflowTemplate) }\">
+                            <!--ui:dumpScope ui:message=\"AAA1: edg:WorkflowStateModal - {= ?resource }\"/-->
+                            <p class=\"pb5px\">
+                                <span>For the workflow,&nbsp;</span>
+                                <span class=\"edg-boxed-text\">
+                                    <i>{= ui:label(?workflow) }</i>
+                                </span>
+                                <span>, defined by the template&nbsp;</span>
+                                <span class=\"edg-boxed-text\">
+                                    <i>{= swa:labelInGraph(?definingTemplate, ?workflowTemplatesGraph) }</i>
+                                </span>
+                                <span>, </span>
+                                <ui:if ui:condition=\"{= bound(?description) }\">
+                                    <ui:if ui:condition=\"{= datatype(?description) = rdf:HTML }\">
+                                        <ui:parse ui:str=\"{= swa:redirectHRefs(?description) }\"/>
+                                    </ui:if>
+                                    <ui:else>
+                                        <span>{= swa:abbreviatedText(?description, 1000) }</span>
+                                    </ui:else>
+                                </ui:if>
+                            </p>
+                            <p class=\"text-info\" style=\"font-size:10px;\">
+                                <i>{= ui:label(?workflow) }</i> was created on <i>{= spif:dateFormat(?creationDate, \"yyyy-MM-dd HH:mm:ss\") }</i>, by <i>{= ?creator }</i>.</p>
+                        </ui:group>
+                    </ui:setContext>
+                </ui:group>
+            </ui:if>
+            <ui:else>
+                <p class=\"text-warn\">No workflow state to show</p>
+            </ui:else>
+        </ui:setContext>
+    </ui:if>
+    <ui:else>
+        <div class=\"text-warn\">Missing a graph for workflow templates</div>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:comment """project = asset collection
+tag = working copy
+this is for permission roles
+governance roles are either per collection or per resource (asset)""" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/workflows> ;
+  rdfs:label "Workflow state modal" ;
+  rdfs:subClassOf edg:HelpPage ;
+.
+edg:WorkflowStateNode
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:attributesFilterFunction ;
+      spl:valueType spin:Function ;
+      rdfs:comment "An optional function(?property, ?class) returning true to include a given property at a given class node." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:focused ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to have this focused." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:headerStyle ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:nodeStyle ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:suppressAttributes ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:active ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:initialState ;
+      spl:valueType teamwork:TagStatus ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:label ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The class to render." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflow ;
+      spl:valueType teamwork:Tag ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflowTemplate ;
+      spl:valueType teamwork:WorkflowTemplate ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflowTemplatesGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:faIcon=\"{= spl:objectInGraph(?resource, teamwork:faIcon, ?workflowTemplatesGraph) }\" let:myHeaderStyle=\"{= COALESCE(?headerStyle, &quot;swauml-instance-header&quot;) }\" let:myNodeStyle=\"{= COALESCE(?nodeStyle, &quot;swauml-state-node&quot;) }\">
+    <!--ui:dumpScope ui:message=\"AAA1: edg:WorkflowStateNode -  {= ?label }\"/-->
+    <div about=\"{= ?resource }\" class=\"{= ?myNodeStyle }\" let:resourceLabel=\"{= spl:object(?resource, rdfs:label) }\" style=\"{= IF(?active, &quot;background-color: greenyellow;&quot;, &quot;&quot;) }\">
+        <div class=\"{= ?myHeaderStyle }\" let:loadId=\"{= ui:uniqueId() }\" let:modalParameters=\"{= edg:buildJSONforWorkflowParameters(?none, ?workflow, ?workflowTemplate, ?workflowTemplatesGraph) }\" style=\"{= IF(?active, &quot;background-color: greenyellow; font-weight: bold&quot;, ?none) }\">
+            <ui:if ui:condition=\"{= isIRI(?resource) }\">
+                <div class=\"row\">
+                    <div class=\"col-sm-1\">
+                        <a href=\"javascript:void(0)\" onclick=\"reactivegram.populateModalDialogWithCallbackForBody('edg:WorkflowStateModal','State: ' + '{= ?resourceLabel }', null, '{= str(?projectGraph) }','{= str(?resource) }', {= ?modalParameters } )\" title=\"Show workflow details\">
+                            <ui:if ui:condition=\"{= bound(?faIcon) }\">
+                                <i aria-hidden=\"true\" class=\"fa {= ?faIcon }\"/>
+                            </ui:if>
+                        </a>
+                    </div>
+                    <div class=\"col-sm-9\">
+                        <edg:WorkflowResourceViewer arg:callback=\"{= edg:WorkflowStateTooltipData }\" arg:object=\"{= ?resource }\" arg:options=\"{= ?modalParameters }\" arg:suppressURI=\"{= true }\"/>
+                    </div>
+                </div>
+            </ui:if>
+            <ui:else>
+                <div>{= ?resource }</div>
+            </ui:else>
+        </div>
+        <ui:group let:startedDatetime=\"{= edg:getMostRecentStartedDatetimeForWorkflowTransition(?projectGraph, ?resource, ?workflow) }\">
+            <ui:if ui:condition=\"{= ?resource = ?initialState }\">
+                <div class=\"swauml-instance-attributes\">
+                    <ui:group let:creationDate=\"{= edg:getWorkflowCreationDate(?projectGraph, ?workflow) }\">
+                        <p class=\"text-info\">Created: {= spif:dateFormat(?creationDate, \"yyyy-MM-dd HH:mm:ss\") }</p>
+                    </ui:group>
+                </div>
+            </ui:if>
+            <ui:elseif ui:condition=\"{= bound(?startedDatetime) }\">
+                <div class=\"swauml-instance-attributes\">
+                    <p class=\"text-info\">Started: {= spif:dateFormat(?startedDatetime, \"yyyy-MM-dd HH:mm:ss\") }</p>
+                </div>
+            </ui:elseif>
+            <ui:if ui:condition=\"{= ?active }\"/>
+        </ui:group>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Workflow state node" ;
+  rdfs:seeAlso swauml:AssetNode ;
+  rdfs:subClassOf swa:GraphElements ;
+.
+edg:WorkflowStateTooltipData
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:options ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource to get tooltip data for" ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <!--ui:dumpScope ui:message=\"AAA1: edg:WorkflowStateTooltipData\"/-->
+    <section>
+        <ui:json ui:str=\"{= ?options }\" ui:varName=\"optionsObject\">
+            <ui:group let:workflow=\"{= IRI(ui:jsonString(ui:jsonValue(?optionsObject, &quot;workflow&quot;))) }\" let:workflowTemplate=\"{= IRI(ui:jsonString(ui:jsonValue(?optionsObject, &quot;workflowTemplate&quot;))) }\" let:workflowTemplatesGraph=\"{= IRI(ui:jsonString(ui:jsonValue(?optionsObject, &quot;workflowTemplatesGraph&quot;))) }\">
+                <ui:group let:description=\"{= spl:objectInGraph(?resource, rdfs:comment, ?workflowTemplatesGraph) }\" let:label=\"{= spl:objectInGraph(?resource, rdfs:label, ?workflowTemplatesGraph) }\">
+                    <!--ui:dumpScope ui:message=\"AAA2: edg:WorkflowStateTooltipData\"/-->
+                    <ui:if ui:condition=\"{= bound(?description) }\">
+                        <h3>{= ?label }</h3>
+                        <ui:if ui:condition=\"{= datatype(?description) = rdf:HTML }\">
+                            <ui:parse ui:str=\"{= swa:redirectHRefs(?description) }\"/>
+                        </ui:if>
+                        <ui:else>
+                            <p>{= swa:abbreviatedText(?description, 300) }</p>
+                        </ui:else>
+                    </ui:if>
+                    <ui:else>
+                        <p class=\"text-info\">No description available</p>
+                    </ui:else>
+                </ui:group>
+            </ui:group>
+        </ui:json>
+    </section>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:subClassOf swa:Elements ;
+.
+edg:WorkflowStateValue
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:property ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The attribute property." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The class to display the attribute in." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:value ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:isForeignKey=\"{= COALESCE(spl:object(?value, edg:isForeignKey), false) }\" let:isPrimaryKey=\"{= COALESCE(spl:object(?value, edg:isPrimaryKey), false) }\" let:type=\"{= spl:object(?value, edg:logicalDatatype) }\">
+    <ui:group let:typeString=\"{= IF(bound(?type), ui:label(?type), &quot;missing type&quot;) }\">
+        <ui:setContext ui:varName=\"swaNodeClass\" ui:varValue=\"{= ?resource }\">
+            <!--ui:dumpScope ui:message=\"AAA1: edg:WorkflowStateValue - {= ?resource }\"/-->
+            <div class=\"swauml-instance-attribute\" let:prefix=\"{= IF(?isPrimaryKey, &quot;P&quot;, IF(?isForeignKey, &quot;F&quot;, &quot;&nbsp;&quot;)) }\" let:systemLabels=\"{= ui:contextValue(&quot;swaSystemLabels&quot;) }\">
+                <div class=\"swauml-instance-attribute-name\" let:loadId=\"{= ui:uniqueId() }\">
+                    <div class=\"float-left\" style=\"width:16px; color:red\">{= ?prefix }</div>
+                    <div class=\"float-left\" data-callback=\"{= ?callback }\" data-options=\"{= ?options }\" data-suppress-uri=\"{= ?suppressURI }\" data-uri=\"{= ?value }\" id=\"resource-tool-tip-data-{= ?loadId }\" let:op=\"{= ui:contextValue(&quot;swaOnOpenResource&quot;) }\">
+                        <swa:Link arg:id=\"resource-tool-tip-{= ?loadId }\" arg:resource=\"{= ?value }\"/>
+                        <ui:if ui:condition=\"{= bound(?op) }\">
+                            <a class=\"swa-uri-resource-viewer-menu swa-icon ui-icon ui-icon-arrow-1-e\" href=\"javascript:void(0)\" id=\"resource-tool-tip-{= ?loadId }\" onclick=\"var resource='{= ui:encodeNode(?value, true, true) }';{= ?op };\" title=\"Open in a new Window\"/>
+                        </ui:if>
+                        <script>gadgets.Hub.publish('org.topbraid.swa.resourceTooltip', '{= ?loadId }');</script>
+                    </div>
+                    <div class=\"float-left\">{= CONCAT(\" :: \", ?typeString) }</div>
+                    <div class=\"clear-both\"/>
+                </div>
+            </div>
+        </ui:setContext>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/workflows> ;
+  rdfs:label "Resource Value" ;
+  rdfs:subClassOf swa:GraphElements ;
+.
+edg:WorkflowStateViewer
+  a swa:ObjectViewerClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:callback ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:options ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:state ;
+      spl:valueType teamwork:TagStatus ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:suppressURI ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  swa:objectWidgetWeight [
+      a swa:WeightedExpression ;
+      swa:expression [
+          a sp:eq ;
+          sp:arg1 [
+              sp:varName "kind" ;
+            ] ;
+          sp:arg2 "uri" ;
+        ] ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:loadId=\"{= ui:uniqueId() }\">
+    <div class=\"swa-shifted-label\" data-callback=\"{= ?callback }\" data-options=\"{= ?options }\" data-suppress-uri=\"{= ?suppressURI }\" id=\"resource-tool-tip-data-{= ?loadId }\">
+        <!--ui:dumpScope ui:message=\"AAA1: edg:WorkflowResourceViewer -  {= ?state }\"/-->
+        <a href=\"javascript:void(0)\" id=\"resource-tool-tip-{= ?loadId }\">
+            <ui:if ui:condition=\"{= bound(?labelOverride) }\">{= ?labelOverride }</ui:if>
+            <ui:else>
+                <span class=\"swauml-state-label\">{= ui:label(?state) }</span>
+            </ui:else>
+        </a>
+        <script>gadgets.Hub.publish('org.topbraid.swa.resourceTooltip', '{= ?loadId }');</script>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "The viewer for workflow nodes" ;
+  rdfs:label "workflow state viewer" ;
+  rdfs:seeAlso swa:URIResourceViewer ;
+  rdfs:subClassOf swa:GraphElements ;
+.
+edg:WorkflowStatusDetails
+  a edg:ProjectTab ;
+  teamwork:invalidForMaster true ;
+  teamwork:pluginIndex -90 ;
+  teamwork:pluginValidExpression true ;
+  teamwork:validForACResults true ;
+  teamwork:validForTags true ;
+  ui:prototype """
+<div let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\" let:workflowTemplatesGraph=\"{= teamwork:workflowsGraph() }\">
+    <ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+        <ui:group let:workflowTemplate=\"{= teamwork:getTagWorkflowTemplate(?tag) }\" letrs:allowableTransitions=\"{#
+                SELECT ?transition
+                WHERE {
+                    ?tag teamwork:possibleTagTransitionOrdered ?transition .
+                } }\">
+            <!--ui:dumpScope ui:message=\"AAA1: edg:WorkflowStatusTab\"/-->
+            <!--ui:dumpResultSet ui:message=\"AAA2: edg:WorkflowStatusTab\" ui:resultSet=\"{= ?allowableTransitions }\"/-->
+            <table class=\"swa-width-one-hundred-percent\">
+                <tr>
+                    <td>
+                        <ui:createLink arg:workflowTemplate=\"{= ?workflowTemplate }\" ui:viewClass=\"{= teamwork:WorkflowTemplateViewPage }\">
+                            <p>
+                                <span>This workflow is governed by the workflow template</span>
+                                <swa:Space/>
+                                <em>
+                                    <a href=\"{= ?link }\">{= swa:labelInGraph(?workflowTemplate, ?workflowTemplatesGraph) }</a>
+                                </em>.
+</p>
+                        </ui:createLink>
+                        <ui:createLink arg:tag=\"{= ?tag }\" ui:sendQueryGraph=\"{= true }\" ui:viewClass=\"{= teamwork:SetTagCommentUpdateService }\">
+                            <div>
+                                <span style=\"vertical-align: 8px\">Description:</span>
+                                <swa:Space/>
+                                <div class=\"inline-block\">
+                                    <swa:TextAreaInlineEditor arg:placeholder=\"Click to enter a description of this workflow\" arg:readOnly=\"{= !teamwork:currentUserHasPrivilege(?tag, teamwork:manager, ?teamGraph) }\" arg:updateLink=\"{= ?link }\" arg:value=\"{= spl:object(?tag, rdfs:comment) }\"/>
+                                </div>
+                            </div>
+                        </ui:createLink>
+                    </td>
+                    <td class=\"swa-text-align-right\" let:selectId=\"{= ui:uniqueId() }\">
+                        <span>Priority: </span>
+                        <select class=\"form-control\" id=\"{= ?selectId }\">
+                            <ui:handle arg:newValue=\"$('#{= ?selectId }').val()\" ui:event=\"onchange\">
+                                <ui:if ui:condition=\"{= isIRI(?newValue) }\">
+                                    <ui:setPropertyValue arg:property=\"{= teamwork:priority }\" arg:value=\"{= ?newValue }\" ui:this=\"{= ?tag }\"/>
+                                </ui:if>
+                                <ui:else>
+                                    <ui:setPropertyValue arg:property=\"{= teamwork:priority }\" ui:this=\"{= ?tag }\"/>
+                                </ui:else>
+                            </ui:handle>
+                            <option value=\"0\"/>
+                            <ui:forEach ui:resultSet=\"{#
+                                    SELECT ?priority
+                                    WHERE {
+                                        GRAPH ?workflowTemplatesGraph {
+                                            ?priority a teamwork:Priority .
+                                            BIND (spl:object(?priority, sh:order) AS ?order) .
+                                        } .
+                                    }
+                                    ORDER BY (?order) }\">
+                                <option selected=\"{= IF(EXISTS {
+                                    ?tag teamwork:priority ?priority .
+                                }, &quot;selected&quot;, ?none) }\" value=\"&lt;{= ?priority }&gt;\">{= swa:labelInGraph(?priority, ?workflowTemplatesGraph) }</option>
+                            </ui:forEach>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <ui:if ui:condition=\"{= teamwork:workflowHasDimensions(?workflowTemplate) }\">
+                <div id=\"workflowDiagram\">
+                    <edg:ShowWorkflowDiagram arg:projectGraph=\"{= ?projectGraph }\" arg:workflow=\"{= ?tag }\" arg:workflowTemplate=\"{= ?workflowTemplate }\" arg:workflowTemplatesGraph=\"{= ?workflowTemplatesGraph }\"/>
+                </div>
+            </ui:if>
+            <ui:group let:status=\"{= IF(spl:hasValue(?tag, teamwork:status), spl:object(?tag, teamwork:status), teamwork:Uncommitted) }\">
+                <teamwork:ActionLink arg:comment=\"This Working Copy is {= swa:labelInGraph(?status, ?workflowTemplatesGraph) }, which means that {= spl:objectInGraph(?status, rdfs:comment, ?workflowTemplatesGraph) }\" arg:faIcon=\"{= spl:objectInGraph(?status, teamwork:faIcon, ?workflowTemplatesGraph) }\" arg:title=\"Status: {= swa:labelInGraph(?status, ?workflowTemplatesGraph) }\">
+                    <br/>
+                    <ui:if ui:condition=\"{= !spr:isEmpty(?allowableTransitions) }\">
+                        <ui:forEach ui:resultSet=\"{= ?allowableTransitions }\">
+                            <teamwork:SetTagStatusButton arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\" arg:transition=\"{= ?transition }\"/>
+                        </ui:forEach>
+                    </ui:if>
+                    <ui:else>
+                        <p class=\"text-info\">You don't have the required role to make any transitions</p>
+                    </ui:else>
+                </teamwork:ActionLink>
+                <ui:if ui:condition=\"{= teamwork:currentUserHasPrivilegeOnMasterGraph(teamwork:manager, ?teamGraph) || teamwork:currentUserHasPrivilege(?tag, teamwork:manager, ?teamGraph) }\">
+                    <teamwork:DeleteTagButton arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\"/>
+                </ui:if>
+                <teamwork:RefreshTagLink ui:args=\"*\"/>
+                <teamwork:ActionLink arg:comment=\"This leaves the workflow and switches back to the production copy.\" arg:faIcon=\"fa-times-circle\" arg:onClick=\"$('a.teamwork-leave-workflow-link')[0].click()\" arg:title=\"Return to production copy\"/>
+            </ui:group>
+        </ui:group>
+    </ui:setContext>
+</div>
+"""^^ui:Literal ;
+  rdfs:comment "Displays the status of a given working copy, together with options to change it based on the workflow associated with the working copy." ;
+  rdfs:label "Workflow Status and Transitions" ;
+  rdfs:seeAlso teamwork:StatusTagTab ;
+  rdfs:subClassOf teamwork:TagStatusElements ;
+.
+edg:WorkflowTransitionModal
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType teamwork:TagStatusTransition ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflow ;
+      spl:valueType teamwork:Tag ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflowTemplate ;
+      spl:valueType teamwork:WorkflowTemplate ;
+    ] ;
+  ui:errorPrototype """
+<ui:group let:workflowTemplatesGraph=\"{= teamwork:workflowsGraph() }\">
+    <ui:if ui:condition=\"{= !bound(?workflowTemplatesGraph) }\">
+        <p class=\"text-warn\">No workflow tranisition to show</p>
+    </ui:if>
+    <ui:else>
+        <ui:setContext ui:queryGraph=\"{= ?workflowTemplatesGraph }\">
+            <ui:if ui:condition=\"{= !bound(?resource) }\">
+                <div class=\"text-warn\">Missing a graph for workflow templates</div>
+            </ui:if>
+        </ui:setContext>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  ui:prototype """
+<ui:group let:graphId=\"{= teamwork:graphIdFromGraph(?projectGraph) }\" let:myTransition=\"{= COALESCE(?resource, ?none) }\" let:myWorkflowTemplate=\"{= ?workflowTemplate }\" let:tagId=\"{= teamwork:tagIdFromTagGraph(?projectGraph) }\" let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\" let:userName=\"{= IF(smf:hasCurrentUser(), smf:currentUserName(), &quot;Anonymous&quot;) }\" let:workflowTemplatesGraph=\"{= teamwork:workflowsGraph() }\">
+    <ui:setContext ui:queryGraph=\"{= ?workflowTemplatesGraph }\">
+        <ui:group let:creationDate=\"{= spl:objectInGraph(?workflow, dcterms:created, ?teamGraph) }\" let:creator=\"{= spl:objectInGraph(?workflow, sioc:has_creator, ?teamGraph) }\" let:fromState=\"{= spl:object(?resource, teamwork:fromStatus) }\" let:readOnly=\"{= !teamwork:currentUserHasPrivilege(?workflow, teamwork:manager, ?teamGraph) }\" let:toState=\"{= spl:object(?resource, teamwork:toStatus) }\" let:user=\"{= IRI(CONCAT(&quot;urn:x-tb-users:&quot;, ?userName)) }\">
+            <!--ui:dumpScope ui:message=\"AAA1: edg:WorkflowTransitionModal - {= ?resource }\"/-->
+            <ui:group letrs:permissionRoles=\"{#
+                    SELECT ?role ?roleLabel ?property ?propertyLabel
+                    WHERE {
+                        VALUES ?property {
+                            teamwork:requiredTagPermissionRole
+                            teamwork:requiredGovernanceRole
+                            teamwork:votingUserGovernanceRole
+                            teamwork:requiredProjectPermissionRole
+                            teamwork:requiredGovernanceRoleForResource
+                        } .
+                        ?resource ?property ?role .
+                        BIND (ui:label(?role) AS ?roleLabel) .
+                        BIND (ui:label(?property) AS ?propertyLabel) .
+                    } }\">
+                <ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+                    <ui:group let:currentState=\"{= spl:object(?workflow, teamwork:status) }\" let:definingTemplate=\"{= spl:object(?workflow, teamwork:workflowTemplate) }\">
+                        <p class=\"pb5px\">
+                            <span>This Working Copy is \"{= swa:labelInGraph(?currentState, ?workflowTemplatesGraph) }\",</span>
+                            <span>&nbsp;which means that {= spl:objectInGraph(?currentState, rdfs:comment, ?workflowTemplatesGraph) }</span>
+                        </p>
+                        <p class=\"pb5px\">
+                            <span>The transition from&nbsp;</span>
+                            <span class=\"edg-boxed-text\">{= swa:labelInGraph(?fromState, ?workflowTemplatesGraph) }</span>
+                            <span>&nbsp;to&nbsp;</span>
+                            <span class=\"edg-boxed-text\">{= swa:labelInGraph(?toState, ?workflowTemplatesGraph) }</span>
+                            <span>&nbsp;can be actioned by the following roles:</span>
+                        </p>
+                        <ol>
+                            <ui:forEach ui:resultSet=\"{= ?permissionRoles }\">
+                                <li class=\"pb10px\">
+                                    <span>User with&nbsp;</span>
+                                    <span class=\"edg-boxed-text\">{= ?roleLabel }</span>
+                                    <span>&nbsp;-&nbsp;<i>{= ?propertyLabel }</i>
+                                    </span>
+                                </li>
+                            </ui:forEach>
+                        </ol>
+                    </ui:group>
+                </ui:setContext>
+                <ui:group let:isVotingTransition=\"{= EXISTS {
+                    ?resource teamwork:votingUserGovernanceRole ?someRole .
+                } }\">
+                    <ui:if ui:condition=\"{= ?isVotingTransition }\">
+                        <ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+                            <ui:group let:myVote=\"{= teamwork:currentUsersTagTransitionVote(?projectGraph, ?workflow, ?resource) }\">
+                                <p class=\"pb5px\">The transition is a voting transition.
+<ui:if ui:condition=\"{= bound(?myVote) }\">
+                                        <span>&nbsp;My vote was&nbsp;</span>
+                                        <span class=\"edg-boxed-text\">{= swa:labelInGraph(?myVote, ui:unionGraph) }.</span>
+                                    </ui:if>
+                                </p>
+                                <p class=\"pb5px\">So far there have been the following votes:</p>
+                                <ui:forEach ui:resultSet=\"{#
+                                        SELECT ?vote ?label ?voteCount
+                                        WHERE {
+                                            GRAPH ?workflowTemplatesGraph {
+                                                ?vote a teamwork:Vote .
+                                                BIND (COALESCE(spl:object(?vote, teamwork:voteValue), 0) AS ?value) .
+                                                BIND (ui:label(?vote) AS ?label) .
+                                                BIND (edg:getWorkflowTransitionVoteCount(?teamGraph, ?resource, ?vote, ?workflow) AS ?voteCount) .
+                                            } .
+                                        }
+                                        ORDER BY DESC (?value) }\">
+                                    <dd>{= ?label } : {= ?voteCount }</dd>
+                                </ui:forEach>
+                                <swa:Space/>
+                                <div class=\"pb10px\">Votes needed for the transition: {= spl:objectInGraph(?resource, teamwork:minVoteCount, ?workflowTemplatesGraph) }</div>
+                            </ui:group>
+                        </ui:setContext>
+                    </ui:if>
+                </ui:group>
+            </ui:group>
+        </ui:group>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  vaem:todo "Remove need to pass over 'isVotingTransition'. This will need a change also to the \"getTransitions\" select template." ;
+  rdfs:comment """project = asset collection
+tag = working copy
+this is for permission roles
+governance roles are either per collection or per resource (asset)""" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/swp/diagrams/workflows> ;
+  rdfs:label "Workflow tranistion modal" ;
+  rdfs:subClassOf edg:HelpPage ;
+.
+edg:WorkflowTransitionNode
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:attributesFilterFunction ;
+      spl:valueType spin:Function ;
+      rdfs:comment "An optional function(?property, ?class) returning true to include a given property at a given class node." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:focused ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to have this focused." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:headerStyle ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:nodeStyle ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:suppressAttributes ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:active ;
+      spl:valueType teamwork:TagStatus ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:callback ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:isAllowableTransition ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:label ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The class to render." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:title ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:toState ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflow ;
+      spl:valueType teamwork:Tag ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflowTemplate ;
+      spl:valueType teamwork:WorkflowTemplate ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflowTemplatesGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate teamwork:transitionLabel ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:faIcon=\"{= spl:objectInGraph(?toState, teamwork:faIcon, ?workflowTemplatesGraph) }\" let:myHeaderStyle=\"{= COALESCE(?headerStyle, &quot;swauml-transition-header&quot;) }\" let:myNodeStyle=\"{= COALESCE(?nodeStyle, &quot;swauml-transition-node&quot;) }\" let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <ui:setContext let:isVotingTransition=\"{= EXISTS {
+        GRAPH ?workflowTemplatesGraph {
+            ?resource teamwork:votingUserGovernanceRole ?someRole .
+        } .
+    } }\" ui:queryGraph=\"{= ?teamGraph }\">
+        <ui:group let:isUnchangedWorkflow=\"{= edg:isUnchangedWorkflow(?projectGraph, ?workflow) }\">
+            <!--ui:dumpScope ui:message=\"AAA1: edg:WorkflowTransitionNode - {= ?transitionLabel }\"/-->
+            <div about=\"{= edg:buildWorkflowTransitionNodeName(?resource) }\" class=\"{= ?myNodeStyle }\" style=\"{= IF(?active, &quot;background-color: greenyellow; border: 4px solid green;&quot;, &quot;&quot;) }\">
+                <div class=\"{= ?myHeaderStyle }\" style=\"{= IF(?active, &quot;background-color: greenyellow; font-weight: bold&quot;, ?none) }\">
+                    <ui:group let:loadId=\"{= ui:uniqueId() }\" let:modalParameters=\"{= edg:buildJSONforWorkflowParameters(?title, ?workflow, ?workflowTemplate, ?workflowTemplatesGraph) }\">
+                        <div class=\"swauml-transition-label\" data-callback=\"{= ?callback }\" data-options=\"{= ?modalParameters }\" data-suppress-uri=\"{= true }\" id=\"resource-tool-tip-data-{= ?loadId }\">
+                            <a href=\"javascript:void(0)\" id=\"resource-tool-tip-{= ?loadId }\" onclick=\"reactivegram.populateModalDialogWithCallbackForBody('edg:WorkflowTransitionModal','Transition: ' + '{= ?transitionLabel }', null, '{= str(?projectGraph) }','{= ui:encodeNode(?resource, true) }', {= ?modalParameters } )\" title=\"Show transition details\">
+                                <i aria-hidden=\"true\" class=\"teamwork-icon fas fa-info-circle\"/>
+                            </a>
+                            <script>gadgets.Hub.publish('org.topbraid.swa.resourceTooltip', 'resource-tool-tip-{= ?loadId }');</script>
+                            <ui:if ui:condition=\"{= ?isAllowableTransition }\">
+                                <ui:if ui:condition=\"{= true }\">
+                                    <!--ui:if ui:condition=\"{= !?isUnchangedWorkflow }\"-->
+                                    <button onclick=\"{= ui:functionCall(&quot;teamwork.changeTagStatus&quot;, ?projectGraph, ?workflow, ?toState) }\" style=\"background-color: greenyellow; width: 40px\" type=\"button\">
+                                        <ui:if ui:condition=\"{= bound(?faIcon) }\">
+                                            <i aria-hidden=\"true\" class=\"fa {= ?faIcon }\"/>
+                                        </ui:if>
+                                        <ui:else>
+                                            <i aria-hidden=\"true\" class=\"teamwork-icon fas fa-circle\"/>
+                                        </ui:else>
+                                    </button>
+                                </ui:if>
+                                <ui:else>
+                                    <span style=\"font-style: italic; color: mediumvioletred;\">No changes</span>
+                                </ui:else>
+                            </ui:if>
+                        </div>
+                    </ui:group>
+                </div>
+                <ui:if ui:condition=\"{= ?isVotingTransition }\">
+                    <div class=\"swauml-transition-attributes\" let:approvalVotes=\"{= edg:getWorkflowTransitionVoteCount(?teamGraph, ?resource, teamwork:ApprovalVote, ?workflow) }\" let:votesNeeded=\"{= spl:objectInGraph(?resource, teamwork:minVoteCount, ?workflowTemplatesGraph) }\">
+                        <span>Votes: {= ?approvalVotes } of {= ?votesNeeded }</span>
+                    </div>
+                </ui:if>
+            </div>
+        </ui:group>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Workflow transition node" ;
+  rdfs:seeAlso swauml:AssetNode ;
+  rdfs:subClassOf swa:GraphElements ;
+.
+edg:WorkflowTriggerNodeTooltipData
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:options ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:title ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <section>
+        <ui:json ui:str=\"{= ?options }\" ui:varName=\"optionsObject\">
+            <ui:group let:title=\"{= ui:jsonString(ui:jsonValue(?optionsObject, &quot;title&quot;)) }\" let:workflow=\"{= IRI(ui:jsonString(ui:jsonValue(?optionsObject, &quot;workflow&quot;))) }\" let:workflowTemplate=\"{= IRI(ui:jsonString(ui:jsonValue(?optionsObject, &quot;workflowTemplate&quot;))) }\" let:workflowTemplatesGraph=\"{= IRI(ui:jsonString(ui:jsonValue(?optionsObject, &quot;workflowTemplatesGraph&quot;))) }\">
+                <!--ui:dumpScope ui:message=\"AAA1: edg:WorkflowTriggerNodeTooltipData\"/-->
+                <h3>{= ?title }</h3>
+                <ui:if ui:condition=\"{= bound(?description) }\">
+                    <ui:if ui:condition=\"{= datatype(?description) = rdf:HTML }\">
+                        <ui:parse ui:str=\"{= swa:redirectHRefs(?description) }\"/>
+                    </ui:if>
+                    <ui:else>
+                        <p>{= swa:abbreviatedText(?description, 300) }</p>
+                    </ui:else>
+                </ui:if>
+            </ui:group>
+        </ui:json>
+    </section>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:subClassOf swa:Elements ;
+.
+edg:buildJSONforWorkflowParameters
+  a ui:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:title ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflow ;
+      spl:valueType teamwork:Tag ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflowTemplate ;
+      spl:valueType teamwork:WorkflowTemplate ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflowTemplatesGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:returnType xsd:string ;
+  ui:prototype """
+<ui:group>
+    <ui:bind>
+        <ui:stringify ui:varName=\"json\">
+            <swon:Object>
+                <ui:if ui:condition=\"{= bound(?title) }\">
+                    <swon:Value arg:name=\"title\" arg:value=\"{= ?title }\"/>
+                </ui:if>
+                <swon:Value arg:name=\"workflow\" arg:value=\"{= str(?workflow) }\"/>
+                <swon:Value arg:name=\"workflowTemplate\" arg:value=\"{= str(?workflowTemplate) }\"/>
+                <swon:Value arg:name=\"workflowTemplatesGraph\" arg:value=\"{= str(?workflowTemplatesGraph) }\"/>
+            </swon:Object>
+        </ui:stringify>
+        <ui:return ui:result=\"{= ?json }\"/>
+    </ui:bind>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Constructs a parameters object for passing to the modal" ;
+  rdfs:label "build JSON for workflow parameters" ;
+  rdfs:subClassOf edg:UIfunctions ;
+.
+edg:buildWorkflowTransitionNodeName
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "name" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a ui:encodeNode ;
+                sp:arg1 [
+                    sp:varName "transition" ;
+                  ] ;
+                sp:arg2 true ;
+              ] ;
+            sp:variable [
+                sp:varName "transitionId1" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:regex ;
+                sp:arg1 [
+                    sp:varName "transitionId1" ;
+                  ] ;
+                sp:arg2 "<" ;
+                sp:arg3 "TRANSITION_" ;
+              ] ;
+            sp:variable [
+                sp:varName "transitionId2" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:regex ;
+                sp:arg1 [
+                    sp:varName "transitionId2" ;
+                  ] ;
+                sp:arg2 ">" ;
+                sp:arg3 "" ;
+              ] ;
+            sp:variable [
+                sp:varName "name" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:transition ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:label "Build workflow transition node name" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:getAssociatedStatesForGivenState
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:distinct true ;
+      sp:resultVariables (
+          [
+            sp:varName "class" ;
+          ]
+          [
+            sp:varName "predicate" ;
+          ]
+          [
+            sp:varName "initialClass" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Union ;
+            sp:elements (
+                (
+                  [
+                    sp:object [
+                        sp:varName "rowIndex" ;
+                      ] ;
+                    sp:predicate spr:rowIndices ;
+                    sp:subject [
+                        sp:varName "resultSet" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a spr:cell ;
+                        sp:arg1 [
+                            sp:varName "resultSet" ;
+                          ] ;
+                        sp:arg2 [
+                            sp:varName "rowIndex" ;
+                          ] ;
+                        sp:arg3 0 ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "class" ;
+                      ] ;
+                  ]
+                )
+                (
+                  (
+                    [
+                      a sp:Filter ;
+                      sp:expression [
+                          sp:varName "continue" ;
+                        ] ;
+                    ]
+                  )
+                  [
+                    sp:object [
+                        sp:varName "rowIndex" ;
+                      ] ;
+                    sp:predicate spr:rowIndices ;
+                    sp:subject [
+                        sp:varName "resultSet" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a spr:cell ;
+                        sp:arg1 [
+                            sp:varName "resultSet" ;
+                          ] ;
+                        sp:arg2 [
+                            sp:varName "rowIndex" ;
+                          ] ;
+                        sp:arg3 0 ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "initialClass" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "predicate" ;
+                      ] ;
+                    sp:predicate swauml:property ;
+                    sp:subject [
+                        sp:varName "initialClass" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a swauml:valueType ;
+                        sp:arg1 [
+                            sp:varName "predicate" ;
+                          ] ;
+                        sp:arg2 [
+                            sp:varName "initialClass" ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "class" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Filter ;
+                    sp:expression [
+                        a sp:or ;
+                        sp:arg1 [
+                            a sp:not ;
+                            sp:arg1 [
+                                a sp:bound ;
+                                sp:arg1 [
+                                    sp:varName "associationsFilterFunction" ;
+                                  ] ;
+                              ] ;
+                          ] ;
+                        sp:arg2 [
+                            a spif:invoke ;
+                            sp:arg1 [
+                                sp:varName "associationsFilterFunction" ;
+                              ] ;
+                            sp:arg2 [
+                                sp:varName "predicate" ;
+                              ] ;
+                            sp:arg3 [
+                                sp:varName "class" ;
+                              ] ;
+                          ] ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Filter ;
+                    sp:expression [
+                        a sp:and ;
+                        sp:arg1 [
+                            a sp:and ;
+                            sp:arg1 [
+                                a sp:bound ;
+                                sp:arg1 [
+                                    sp:varName "class" ;
+                                  ] ;
+                              ] ;
+                            sp:arg2 [
+                                a sp:isIRI ;
+                                sp:arg1 [
+                                    sp:varName "class" ;
+                                  ] ;
+                              ] ;
+                          ] ;
+                        sp:arg2 [
+                            a sp:not ;
+                            sp:arg1 [
+                                a swa:isDatatypeRange ;
+                                arg:range [
+                                    sp:varName "class" ;
+                                  ] ;
+                              ] ;
+                          ] ;
+                      ] ;
+                  ]
+                )
+              ) ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:defaultValue "false" ;
+      spl:optional true ;
+      spl:predicate arg:continue ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "number of levels of association to generate (currently only supports 1 or 2)" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:associationsFilterFunction ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "An optional filter function that can be used to suppress showing certain relationships. The functions should be subclass of swa:AssociationsFilterFunctions." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:resultSet ;
+      spl:valueType sp:Select ;
+      rdfs:comment "The focus class of interest." ;
+    ] ;
+  spin:private true ;
+  rdfs:label "get associated states for given state" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:getAssociationsForGivenStates
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "sourceClass" ;
+          ]
+          [
+            sp:varName "targetClass" ;
+          ]
+          [
+            sp:varName "predicate" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              sp:object [
+                  sp:varName "rowIndex" ;
+                ] ;
+              sp:predicate spr:rowIndices ;
+              sp:subject [
+                  sp:varName "classes" ;
+                ] ;
+            ]
+            [
+              a sp:Bind ;
+              sp:expression [
+                  a spr:cell ;
+                  sp:arg1 [
+                      sp:varName "classes" ;
+                    ] ;
+                  sp:arg2 [
+                      sp:varName "rowIndex" ;
+                    ] ;
+                  sp:arg3 0 ;
+                ] ;
+              sp:variable [
+                  sp:varName "sourceClass" ;
+                ] ;
+            ]
+          )
+          [
+            sp:object [
+                sp:varName "predicate" ;
+              ] ;
+            sp:predicate swauml:property ;
+            sp:subject [
+                sp:varName "sourceClass" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a swauml:valueType ;
+                sp:arg1 [
+                    sp:varName "predicate" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "sourceClass" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "targetClass" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:and ;
+                sp:arg1 [
+                    a sp:bound ;
+                    sp:arg1 [
+                        sp:varName "targetClass" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a swauml:contains ;
+                    sp:arg1 [
+                        sp:varName "classes" ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "targetClass" ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:or ;
+                sp:arg1 [
+                    a sp:not ;
+                    sp:arg1 [
+                        a sp:bound ;
+                        sp:arg1 [
+                            sp:varName "associationsFilterFunction" ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a spif:invoke ;
+                    sp:arg1 [
+                        sp:varName "associationsFilterFunction" ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "predicate" ;
+                      ] ;
+                    sp:arg3 [
+                        sp:varName "sourceClass" ;
+                      ] ;
+                    sp:arg4 [
+                        sp:varName "targetClass" ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:associationsFilterFunction ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "An optional filter function that can be used to suppress showing certain relationships. The functions should be subclass of swa:AssociationsFilterFunctions." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:classes ;
+      spl:valueType sp:Select ;
+    ] ;
+  spin:private true ;
+  rdfs:label "get associations for given classes" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:getMostRecentStartedDatetimeForWorkflowTransition
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:limit "1"^^xsd:long ;
+      sp:orderBy (
+          [
+            a sp:Desc ;
+            sp:expression [
+                sp:varName "datetime" ;
+              ] ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "datetime" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:teamGraph ;
+                sp:arg1 [
+                    sp:varName "projectGraph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "teamGraph" ;
+              ] ;
+          ]
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "statusChange" ;
+                    ] ;
+                  sp:predicate teamwork:statusChange ;
+                  sp:subject [
+                      sp:varName "workflow" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "toState" ;
+                    ] ;
+                  sp:predicate teamwork:newStatus ;
+                  sp:subject [
+                      sp:varName "statusChange" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "datetime" ;
+                    ] ;
+                  sp:predicate dcterms:created ;
+                  sp:subject [
+                      sp:varName "statusChange" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "teamGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:toState ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflow ;
+      spl:valueType teamwork:Tag ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:label "get most recent started datetime for workflow transition" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:getWorkflowCreationDate
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "datetime" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:teamGraph ;
+                sp:arg1 [
+                    sp:varName "projectGraph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "teamGraph" ;
+              ] ;
+          ]
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "datetime" ;
+                    ] ;
+                  sp:predicate dcterms:created ;
+                  sp:subject [
+                      sp:varName "workflow" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "teamGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflow ;
+      spl:valueType teamwork:Tag ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:label "get workflow creation date" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:getWorkflowStates
+  a spin:SelectTemplate ;
+  a spin:Template ;
+  spin:body [
+      a sp:Select ;
+      sp:distinct true ;
+      sp:orderBy (
+          [
+            sp:varName "stateLabel" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "state" ;
+          ]
+          [
+            sp:varName "stateLabel" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "transition" ;
+              ] ;
+            sp:predicate teamwork:transition ;
+            sp:subject [
+                sp:varName "workflow" ;
+              ] ;
+          ]
+          [
+            a sp:TriplePath ;
+            sp:object [
+                sp:varName "state" ;
+              ] ;
+            sp:path [
+                a sp:AltPath ;
+                sp:path1 teamwork:fromStatus ;
+                sp:path2 teamwork:toStatus ;
+              ] ;
+            sp:subject [
+                sp:varName "transition" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:ne ;
+                sp:arg1 [
+                    sp:varName "state" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "initialState" ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a ui:label ;
+                sp:arg1 [
+                    sp:varName "state" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "stateLabel" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:initialState ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflow ;
+      spl:valueType teamwork:WorkflowTemplate ;
+      rdfs:comment "The teamwork:Workflow to render." ;
+    ] ;
+  spin:private true ;
+  rdfs:label "get workflow states" ;
+  rdfs:subClassOf edg:Templates ;
+.
+edg:getWorkflowTransitionVoteCount
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "voteCount" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a teamwork:currentVoteCount ;
+                      arg:tag [
+                          sp:varName "workflow" ;
+                        ] ;
+                      arg:transition [
+                          sp:varName "transition" ;
+                        ] ;
+                      arg:vote [
+                          sp:varName "vote" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "voteCount" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "teamGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:teamGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:transition ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:vote ;
+      spl:valueType teamwork:Vote ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflow ;
+      spl:valueType teamwork:Tag ;
+    ] ;
+  spin:returnType xsd:integer ;
+  rdfs:label "get workflow transition vote count" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:getWorkflowTransitions
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:distinct true ;
+      sp:resultVariables (
+          [
+            sp:varName "transition" ;
+          ]
+          [
+            sp:varName "transitionId" ;
+          ]
+          [
+            sp:varName "transitionLabel" ;
+          ]
+          [
+            sp:varName "fromState" ;
+          ]
+          [
+            sp:varName "toState" ;
+          ]
+          [
+            sp:varName "isPossibleWorkflowTransition" ;
+          ]
+          [
+            sp:varName "isAllowableTransition" ;
+          ]
+          [
+            sp:varName "isVotingTransition" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "transition" ;
+              ] ;
+            sp:predicate teamwork:transition ;
+            sp:subject [
+                sp:varName "workflowTemplate" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "fromState" ;
+              ] ;
+            sp:predicate teamwork:fromStatus ;
+            sp:subject [
+                sp:varName "transition" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "toState" ;
+              ] ;
+            sp:predicate teamwork:toStatus ;
+            sp:subject [
+                sp:varName "transition" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a edg:buildWorkflowTransitionNodeName ;
+                arg:transition [
+                    sp:varName "transition" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "transitionId" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:coalesce ;
+                sp:arg1 [
+                    a spl:object ;
+                    sp:arg1 [
+                        sp:varName "transition" ;
+                      ] ;
+                    sp:arg2 teamwork:transitionLabel ;
+                  ] ;
+                sp:arg2 [
+                    a ui:label ;
+                    sp:arg1 [
+                        sp:varName "transition" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "transitionLabel" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    a sp:and ;
+                    sp:arg1 [
+                        a sp:eq ;
+                        sp:arg1 [
+                            sp:varName "fromState" ;
+                          ] ;
+                        sp:arg2 [
+                            sp:varName "initialState" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        a sp:eq ;
+                        sp:arg1 [
+                            sp:varName "currentState" ;
+                          ] ;
+                        sp:arg2 [
+                            sp:varName "initialState" ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 true ;
+                sp:arg3 [
+                    a edg:isAllowedWorkflowTransition ;
+                    arg:teamGraph [
+                        sp:varName "teamGraph" ;
+                      ] ;
+                    arg:transition [
+                        sp:varName "transition" ;
+                      ] ;
+                    arg:workflow [
+                        sp:varName "workflow" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "isAllowableTransition" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a edg:isVotingTransition ;
+                arg:transition [
+                    sp:varName "transition" ;
+                  ] ;
+                arg:workflowTemplatesGraph [
+                    sp:varName "workflowTemplatesGraph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "isVotingTransition" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:isPossibleTagTransition ;
+                arg:transition [
+                    sp:varName "transition" ;
+                  ] ;
+                arg:workingCopy [
+                    sp:varName "workflow" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "isPossibleWorkflowTransition" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:currentState ;
+      spl:valueType teamwork:TagStatus ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:initialState ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:teamGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflow ;
+      spl:valueType teamwork:Workflow ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflowTemplate ;
+      spl:valueType teamwork:WorkflowTemplate ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflowTemplatesGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:private true ;
+  rdfs:label "get workflow transitions" ;
+  rdfs:subClassOf edg:Templates ;
+.
+edg:isAllowedWorkflowTransition
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "maybeAllowedTransition" ;
+                    ] ;
+                  sp:predicate teamwork:possibleTagTransitionOrdered ;
+                  sp:subject [
+                      sp:varName "workflow" ;
+                    ] ;
+                ]
+                [
+                  a sp:Filter ;
+                  sp:expression [
+                      a sp:eq ;
+                      sp:arg1 [
+                          sp:varName "transition" ;
+                        ] ;
+                      sp:arg2 [
+                          sp:varName "maybeAllowedTransition" ;
+                        ] ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "teamGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:teamGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:transition ;
+      spl:valueType teamwork:Transition ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflow ;
+      spl:valueType teamwork:Tag ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:label "is allowed workflow transition" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:isDiagram
+  a rdf:Property ;
+.
+edg:isDiagramGadget
+  a rdf:Property ;
+  rdfs:subPropertyOf edg:isGadget ;
+.
+edg:isGadget
+  a rdf:Property ;
+.
+edg:isKnown
+  a owl:DatatypeProperty ;
+  rdfs:label "is known" ;
+  rdfs:range xsd:boolean ;
+.
+edg:isUnchangedWorkflow
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:notExists ;
+                sp:elements (
+                    [
+                      a sp:Bind ;
+                      sp:expression [
+                          a teamwork:teamGraph ;
+                          sp:arg1 [
+                              sp:varName "projectGraph" ;
+                            ] ;
+                        ] ;
+                      sp:variable [
+                          sp:varName "teamGraph" ;
+                        ] ;
+                    ]
+                    [
+                      a sp:NamedGraph ;
+                      sp:elements (
+                          [
+                            sp:object [
+                                sp:varName "tag" ;
+                              ] ;
+                            sp:predicate teamwork:tag ;
+                            sp:subject [
+                                sp:varName "change" ;
+                              ] ;
+                          ]
+                          [
+                            sp:object teamwork:Change ;
+                            sp:predicate rdf:type ;
+                            sp:subject [
+                                sp:varName "change" ;
+                              ] ;
+                          ]
+                        ) ;
+                      sp:graphNameNode [
+                          sp:varName "teamGraph" ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:tag ;
+      spl:valueType teamwork:Tag ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:label "is unchanged workflow" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:isVotingTransition
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  a sp:Filter ;
+                  sp:expression [
+                      a sp:exists ;
+                      sp:elements (
+                          [
+                            sp:object [
+                                sp:varName "someRole" ;
+                              ] ;
+                            sp:predicate teamwork:votingUserGovernanceRole ;
+                            sp:subject [
+                                sp:varName "transition" ;
+                              ] ;
+                          ]
+                        ) ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "workflowTemplatesGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:transition ;
+      spl:valueType teamwork:Transition ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflowTemplatesGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:label "is voting transition" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:makeResultSetForSingleClass
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "class" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                sp:varName "focusClass" ;
+              ] ;
+            sp:variable [
+                sp:varName "class" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:focusClass ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The focus class of interest." ;
+    ] ;
+  spin:private true ;
+  rdfs:label "make result set for single class" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+arg:continue
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:currentState
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:degreeOfSeparation
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:fromState
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:headerStyle
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:inheritanceEdges
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:initialState
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:isAllowableTransition
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:isVotingTransition
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:nodeStyle
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:options
+  a rdf:Property ;
+  rdfs:label "options" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:showClassInheritance
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:sourceEntity
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:statesSet
+  a rdf:Property ;
+  rdfs:label "states set" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:stroke
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:strokeDashArray
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:strokeWidth
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:suppressAttributes
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:suppressURI
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:targetEntity
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:toState
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:transition
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:transitionsSet
+  a rdf:Property ;
+  rdfs:label "transitions set" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:workflowTemplatesGraph
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+swa:relationshipTreeProperty
+  a spin:Function ;
+  rdfs:label "relationship tree property" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+swauml:AssetNode2
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:attributesFilterFunction ;
+      spl:valueType spin:Function ;
+      rdfs:comment "An optional function(?property, ?class) returning true to include a given property at a given class node." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:focused ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to have this focused." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:headerStyle ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:nodeStyle ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:suppressAttributes ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The class to render." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:myHeaderStyle=\"{= COALESCE(?headerStyle, &quot;swauml-instance-header&quot;) }\" let:myNodeStyle=\"{= COALESCE(?nodeStyle, &quot;swauml-instance-node&quot;) }\">
+    <!--ui:dumpScope ui:message=\"AAA1: swauml:AssetNode\"/-->
+    <div about=\"{= ?resource }\" class=\"{= ?myNodeStyle }\" let:systemLabels=\"{= COALESCE(ui:contextValue(&quot;swaSystemLabels&quot;), false) }\">
+        <div class=\"{= ?myHeaderStyle }\" letrs:metaClasses=\"{#
+                SELECT ?metaClass
+                WHERE {
+                    ?resource a ?metaClass .
+                    FILTER (?metaClass NOT IN (rdfs:Class, owl:Class, sh:NodeShape)) .
+                } }\" style=\"{= IF(?focused, &quot;font-weight: bold&quot;, ?none) }\">
+            <ui:if ui:condition=\"{= !spr:isEmpty(?metaClasses) }\">
+                <div class=\"swauml-instance-header-metaclass\">
+                    <ui:forEach ui:resultSet=\"{= ?metaClasses }\" ui:separator=\"&nbsp;\">
+                        <swa:Link arg:labelOverride=\"&lt;&lt;{= IF(?systemLabels, smf:qname(?metaClass), ui:label(?metaClass)) }&gt;&gt;\" arg:resource=\"{= ?metaClass }\"/>
+                    </ui:forEach>
+                </div>
+            </ui:if>
+            <swa:URIResourceViewer arg:object=\"{= ?resource }\"/>
+        </div>
+        <ui:if ui:condition=\"{= (!bound(?suppressAttributes)) || (?suppressAttributes = false) }\">
+            <div class=\"swauml-instance-attributes\">
+                <ui:forEach ui:resultSet=\"{#
+                        SELECT ?value
+                        WHERE {
+                            ?value edg:attributeOf ?resource .
+                            FILTER (!isLiteral(?value)) .
+                            FILTER ((!bound(?attributesFilterFunction)) || spif:invoke(?attributesFilterFunction, ?property, ?resource)) .
+                        }
+                        ORDER BY (ui:label(?value)) }\">
+                    <edg:WorkflowStateValue arg:property=\"{= edg:attributeOf }\" arg:resource=\"{= ?resource }\" arg:value=\"{= ?value }\"/>
+                </ui:forEach>
+            </div>
+        </ui:if>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Asset node" ;
+  rdfs:subClassOf swa:GraphElements ;
+.
+teamwork:WorkflowStatusDetails
+  teamwork:disabledProjectPlugin true ;
+.
+html:Circle
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate html:cx ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate html:cy ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate html:r ;
+      spl:valueType xsd:string ;
+    ] ;
+.
+html:Marker
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate html:viewbox ;
+      spl:valueType xsd:string ;
+    ] ;
+.
+html:Polyline
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate html:marker-end ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate html:marker-start ;
+      spl:valueType xsd:string ;
+    ] ;
+.
+html:cx
+  a html:Attribute ;
+  rdfs:label "cx" ;
+  rdfs:subPropertyOf html:attributes ;
+.
+html:cy
+  a html:Attribute ;
+  rdfs:label "cy" ;
+  rdfs:subPropertyOf html:attributes ;
+.
+html:marker-end
+  a html:Attribute ;
+  rdfs:label "marker-end" ;
+  rdfs:subPropertyOf html:attributes ;
+.
+html:marker-start
+  a html:Attribute ;
+  rdfs:label "marker-start" ;
+  rdfs:subPropertyOf html:attributes ;
+.
+html:r
+  a html:Attribute ;
+  rdfs:label "r" ;
+  rdfs:subPropertyOf html:attributes ;
+.
+html:stroke
+  a html:Attribute ;
+  rdfs:label "stroke-width" ;
+  rdfs:subPropertyOf html:attributes ;
+.
+html:stroke-dasharray
+  a html:Attribute ;
+  rdfs:label "stroke-width" ;
+  rdfs:subPropertyOf html:attributes ;
+.
+html:stroke-width
+  a html:Attribute ;
+  rdfs:label "stroke-width" ;
+  rdfs:subPropertyOf html:attributes ;
+.
+html:viewbox
+  a html:Attribute ;
+  rdfs:label "viewbox" ;
+  rdfs:subPropertyOf html:attributes ;
+.
+rdfs:Resource
+  ui:instanceView """
+<ui:group ui:id=\"workflow-details\" ui:priority=\"{= 9 }\">
+    <edg:WorkflowStatusDetails arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?this }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.

@@ -1,0 +1,4426 @@
+# baseURI: http://debug.topbraidlive.org/1.0/swa
+# imports: http://topbraid.org/swa
+# imports: http://uispin.org/html
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix debug-swa: <http://debug.topbraidlive.org/1.0/swa/> .
+@prefix default: <http://uispin.org/default#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix o2o: <http://lib.topquadrant.com/owl/srg/o2o#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://debug.topbraidlive.org/1.0/swa>
+  rdf:type owl:Ontology ;
+  owl:imports <http://topbraid.org/swa> ;
+  owl:imports <http://uispin.org/html> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+debug-swa:Controllers
+  rdf:type ui:NodeClass ;
+  rdfs:subClassOf debug-swa:Elements ;
+.
+debug-swa:ConvertXMI2RDF
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:defaultValue "/fsgim.job/input/FSGIM.job.xml" ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate debug-swa:sourceBaseURITemplate ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:defaultValue "/fsgim.job/owl/submodels/" ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate debug-swa:targetPathTemplate ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:defaultValue "Package 1, Enumerations" ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:rootPackageNames ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:defaultValue "http://uml.linkedmodels.org/sg/schema/job/" ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate debug-swa:targetBaseURITemplate ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:defaultValue "r9999" ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate debug-swa:jobName ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:prototype [
+      rdf:type ui:group ;
+      let:nl "" ;
+      ui:child [
+          rdf:type ui:group ;
+          let:myJobName [
+              rdf:type sp:coalesce ;
+              sp:arg1 [
+                  sp:varName "jobName" ;
+                ] ;
+              sp:arg2 "r9999" ;
+            ] ;
+          let:rootPackages [
+              rdf:type sp:coalesce ;
+              sp:arg1 [
+                  sp:varName "rootPackageNames" ;
+                ] ;
+              sp:arg2 "Package 1, Enumerations" ;
+            ] ;
+          ui:child [
+              rdf:type ui:group ;
+              let:sourceBaseURI [
+                  rdf:type spif:replaceAll ;
+                  sp:arg1 [
+                      rdf:type sp:coalesce ;
+                      sp:arg1 [
+                          sp:varName "sourceBaseURITemplate" ;
+                        ] ;
+                      sp:arg2 "/fsgim.job/input/FSGIM.job.xml" ;
+                    ] ;
+                  sp:arg2 "job" ;
+                  sp:arg3 [
+                      sp:varName "myJobName" ;
+                    ] ;
+                ] ;
+              ui:child [
+                  rdf:type ui:group ;
+                  let:targetBaseURI [
+                      rdf:type spif:replaceAll ;
+                      sp:arg1 [
+                          rdf:type sp:coalesce ;
+                          sp:arg1 [
+                              sp:varName "targetBaseURITemplate" ;
+                            ] ;
+                          sp:arg2 "http://uml.linkedmodels.org/sg/schema/job/" ;
+                        ] ;
+                      sp:arg2 "job" ;
+                      sp:arg3 [
+                          sp:varName "myJobName" ;
+                        ] ;
+                    ] ;
+                  ui:child [
+                      rdf:type ui:group ;
+                      let:targetPath [
+                          rdf:type spif:replaceAll ;
+                          sp:arg1 [
+                              rdf:type sp:coalesce ;
+                              sp:arg1 [
+                                  sp:varName "targetPathTemplate" ;
+                                ] ;
+                              sp:arg2 "/fsgim.job/owl/submodels/" ;
+                            ] ;
+                          sp:arg2 "job" ;
+                          sp:arg3 [
+                              sp:varName "myJobName" ;
+                            ] ;
+                        ] ;
+                      ui:child [
+                          rdf:type ui:group ;
+                          let:xmiRulesGraph <http://uml.topquadrant.com/owl/xmi/1.0.0/srg/uml2owl> ;
+                          ui:child [
+                              rdf:type ui:group ;
+                              let:cmofSchemaGraphURI <http://uml.topquadrant.com/owl/cmof/1.0.0/osg/cmof> ;
+                              ui:child [
+                                  rdf:type ui:setContext ;
+                                  ui:child [
+                                      rdf:type debug-swa:ShowParameters ;
+                                      sp:arg1 [
+                                          sp:varName "sourceBaseURI" ;
+                                        ] ;
+                                      sp:arg2 [
+                                          sp:varName "targetPath" ;
+                                        ] ;
+                                      sp:arg3 [
+                                          sp:varName "targetBaseURI" ;
+                                        ] ;
+                                      sp:arg4 [
+                                          sp:varName "myJobName" ;
+                                        ] ;
+                                      sp:arg5 [
+                                          sp:varName "rootPackages" ;
+                                        ] ;
+                                      ui:childIndex 1 ;
+                                    ] ;
+                                  ui:child [
+                                      rdf:type sml:ImportXMLFile ;
+                                      sm:outputVariable "xmiData" ;
+                                      sml:sourceFilePath [
+                                          sp:varName "sourceBaseURI" ;
+                                        ] ;
+                                      ui:child [
+                                          rdf:type sml:ConvertXMLToRDF ;
+                                          sml:baseURI "http://topbraid.org/temp" ;
+                                          sml:xml [
+                                              sp:varName "xmiData" ;
+                                            ] ;
+                                          ui:child [
+                                              rdf:type sml:ApplyTopSPIN ;
+                                              sml:predicate spin:rule ;
+                                              sml:replace "false"^^xsd:boolean ;
+                                              sml:singlePass "true"^^xsd:boolean ;
+                                              ui:child [
+                                                  rdf:type debug-swa:DumpSelectiveTriples ;
+                                                  arg:baseURI "http://example.org/basePath/package_1---class_model#" ;
+                                                  ui:childIndex 2 ;
+                                                  ui:limit 2 ;
+                                                ] ;
+                                              ui:child [
+                                                  rdf:type debug-swa:GenerateAllOWLPackages ;
+                                                  ui:childIndex 4 ;
+                                                ] ;
+                                              ui:child [
+                                                  rdf:type debug-swa:ShowCounts ;
+                                                  ui:childIndex 0 ;
+                                                ] ;
+                                              ui:child [
+                                                  rdf:type debug-swa:ShowPackages ;
+                                                  ui:childIndex 3 ;
+                                                ] ;
+                                              ui:child [
+                                                  rdf:type ui:CommentNode ;
+                                                  ui:childIndex 1 ;
+                                                  rdfs:comment "debug-swa:DumpTriplesForProperty arg:resource=\"ocmof:hasCMOFbasis\" ui:limit=\"20\"/" ;
+                                                ] ;
+                                              ui:childIndex 5 ;
+                                            ] ;
+                                          ui:child [
+                                              rdf:type html:H2 ;
+                                              ui:child [
+                                                  rdf:type ui:TextNode ;
+                                                  ui:childIndex 0 ;
+                                                  ui:text "Convert XMI to CMOF" ;
+                                                ] ;
+                                              ui:childIndex 3 ;
+                                            ] ;
+                                          ui:child [
+                                              rdf:type ui:CommentNode ;
+                                              ui:childIndex 0 ;
+                                              rdfs:comment " debug-swa:DumpTriplesForProperty arg:resource=\"composite:child\" ui:limit=\"3\"/" ;
+                                            ] ;
+                                          ui:child [
+                                              rdf:type ui:CommentNode ;
+                                              ui:childIndex 1 ;
+                                              rdfs:comment "debug-swa:DumpSelectiveTriples arg:baseURI=\"http://topbraid.org/temp#\" ui:limit=\"10\"/" ;
+                                            ] ;
+                                          ui:child [
+                                              rdf:type ui:CommentNode ;
+                                              ui:childIndex 2 ;
+                                              rdfs:comment " debug-swa:ShowCMOFTriples/" ;
+                                            ] ;
+                                          ui:child [
+                                              rdf:type ui:update ;
+                                              ui:childIndex 4 ;
+                                              ui:updateQuery [
+                                                  rdf:type sp:Modify ;
+                                                  sp:insertPattern (
+                                                      [
+                                                        sp:object [
+                                                            sp:varName "targetBaseURI" ;
+                                                          ] ;
+                                                        sp:predicate <http://uml.topquadrant.com/owl/cmof/osg/cmof#basePath> ;
+                                                        sp:subject _:b60139 ;
+                                                      ]
+                                                      [
+                                                        sp:object [
+                                                            sp:varName "rootPackages" ;
+                                                          ] ;
+                                                        sp:predicate <http://uml.topquadrant.com/owl/cmof/osg/cmof#rootPackageNameList> ;
+                                                        sp:subject _:b60139 ;
+                                                      ]
+                                                    ) ;
+                                                  sp:where () ;
+                                                ] ;
+                                            ] ;
+                                          ui:childIndex 1 ;
+                                        ] ;
+                                      ui:child [
+                                          rdf:type ui:CommentNode ;
+                                          ui:childIndex 0 ;
+                                          rdfs:comment "p>{= ?xmiData }</p" ;
+                                        ] ;
+                                      ui:childIndex 2 ;
+                                    ] ;
+                                  ui:child [
+                                      rdf:type html:H1 ;
+                                      ui:child [
+                                          rdf:type ui:TextNode ;
+                                          ui:childIndex 0 ;
+                                          ui:text "UML to OWL Convertor (v2)" ;
+                                        ] ;
+                                      ui:childIndex 0 ;
+                                    ] ;
+                                  ui:childIndex 0 ;
+                                  ui:queryGraph [
+                                      rdf:type ui:unionOfGraphs ;
+                                      sp:arg1 [
+                                          rdf:type ui:graphWithImports ;
+                                          sp:arg1 [
+                                              sp:varName "cmofSchemaGraphURI" ;
+                                            ] ;
+                                        ] ;
+                                      sp:arg2 [
+                                          rdf:type ui:graphWithImports ;
+                                          sp:arg1 [
+                                              sp:varName "xmiRulesGraph" ;
+                                            ] ;
+                                        ] ;
+                                    ] ;
+                                  ui:varName "targetPath" ;
+                                  ui:varValue [
+                                      sp:varName "targetPath" ;
+                                    ] ;
+                                ] ;
+                              ui:childIndex 0 ;
+                            ] ;
+                          ui:childIndex 0 ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:childIndex 0 ;
+            ] ;
+          ui:childIndex 0 ;
+        ] ;
+    ] ;
+  ui:responseType ui:HTML ;
+  rdfs:comment "Invoke with:" ;
+  rdfs:subClassOf debug-swa:Controllers ;
+.
+debug-swa:CountOfCompositeChildStatements
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            rdf:type sp:Count ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "c" ;
+              ] ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#child> ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:returnType xsd:integer ;
+  rdfs:subClassOf debug-swa:Functions ;
+.
+debug-swa:CountOfPackagedElementStatements
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            rdf:type sp:Count ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "e" ;
+              ] ;
+            sp:predicate <http://uml.topquadrant.com/owl/cmof/osg/cmof#hasPackagedElement> ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:returnType xsd:integer ;
+  rdfs:subClassOf debug-swa:Functions ;
+.
+debug-swa:CountOfResourceType
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            rdf:type sp:Count ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "resource" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:returnType xsd:integer ;
+  rdfs:subClassOf debug-swa:Functions ;
+.
+debug-swa:CountOfRestrictions
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            rdf:type sp:Count ;
+            sp:distinct "true"^^xsd:boolean ;
+            sp:expression [
+                sp:varName "r" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object owl:Restriction ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "r" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "basis" ;
+              ] ;
+            sp:predicate <http://uml.topquadrant.com/owl/cmof/osg/cmof#hasCMOFbasis> ;
+            sp:subject [
+                sp:varName "r" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "basis" ;
+              ] ;
+            sp:predicate <http://uml.topquadrant.com/owl/cmof/osg/cmof#hasOwnedAttribute> ;
+            sp:subject [
+                sp:varName "x" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "x" ;
+              ] ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath <http://www.topbraid.org/2007/05/composite.owl#child> ;
+              ] ;
+            sp:subject [
+                sp:varName "p" ;
+              ] ;
+          ]
+          [
+            sp:object <http://uml.topquadrant.com/owl/cmof/osg/cmof#PackagedPackage> ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "p" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:returnType xsd:integer ;
+  rdfs:subClassOf debug-swa:Functions ;
+.
+debug-swa:DumpNamedGraphTriples
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate ui:limit ;
+      spl:valueType xsd:integer ;
+    ] ;
+  ui:prototype [
+      rdf:type ui:group ;
+      ui:child [
+          rdf:type html:H3 ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 0 ;
+              ui:text "Graph Triples for " ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 1 ;
+              ui:text [
+                  sp:varName "graph" ;
+                ] ;
+            ] ;
+          ui:childIndex 0 ;
+        ] ;
+      ui:child [
+          rdf:type html:Table ;
+          ui:child [
+              rdf:type html:Thead ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "O" ;
+                        ] ;
+                      ui:childIndex 2 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "P" ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "S" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:childIndex 0 ;
+            ] ;
+          ui:child [
+              rdf:type ui:forEach ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              sp:varName "o" ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 2 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              sp:varName "p" ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              sp:varName "s" ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:childIndex 1 ;
+              ui:limit [
+                  sp:varName "limit" ;
+                ] ;
+              ui:resultSet [
+                  rdf:type sp:Select ;
+                  sp:orderBy (
+                      [
+                        sp:varName "s" ;
+                      ]
+                    ) ;
+                  sp:resultVariables (
+                      [
+                        sp:varName "s" ;
+                      ]
+                      [
+                        sp:varName "p" ;
+                      ]
+                      [
+                        sp:varName "o" ;
+                      ]
+                    ) ;
+                  sp:where (
+                      [
+                        rdf:type sp:NamedGraph ;
+                        sp:elements (
+                            [
+                              sp:object [
+                                  sp:varName "o" ;
+                                ] ;
+                              sp:predicate [
+                                  sp:varName "p" ;
+                                ] ;
+                              sp:subject [
+                                  sp:varName "s" ;
+                                ] ;
+                            ]
+                          ) ;
+                        sp:graphNameNode [
+                            sp:varName "graph" ;
+                          ] ;
+                      ]
+                    ) ;
+                ] ;
+            ] ;
+          ui:childIndex 1 ;
+        ] ;
+    ] ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Dump named graph triples" ;
+  rdfs:subClassOf debug-swa:Parts ;
+.
+debug-swa:DumpNamedGraphTriplesForProperty
+  rdf:type ui:NodeClass ;
+  rdf:type ui:Service ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:property ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate ui:limit ;
+      spl:valueType xsd:integer ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype [
+      rdf:type ui:group ;
+      ui:child [
+          rdf:type html:H3 ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 0 ;
+              ui:text "Dump Triples for graph " ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 1 ;
+              ui:text [
+                  sp:varName "graph" ;
+                ] ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 2 ;
+              ui:text " and property " ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 3 ;
+              ui:text [
+                  rdf:type ui:label ;
+                  sp:arg1 [
+                      sp:varName "property" ;
+                    ] ;
+                ] ;
+            ] ;
+          ui:childIndex 0 ;
+        ] ;
+      ui:child [
+          rdf:type html:Table ;
+          ui:child [
+              rdf:type html:Thead ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "O" ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "S" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:childIndex 0 ;
+            ] ;
+          ui:child [
+              rdf:type ui:forEach ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              sp:varName "o" ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              sp:varName "s" ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:childIndex 1 ;
+              ui:limit [
+                  sp:varName "limit" ;
+                ] ;
+              ui:resultSet [
+                  rdf:type sp:Select ;
+                  sp:resultVariables (
+                      [
+                        sp:varName "s" ;
+                      ]
+                      [
+                        sp:varName "o" ;
+                      ]
+                    ) ;
+                  sp:where (
+                      [
+                        rdf:type sp:NamedGraph ;
+                        sp:elements (
+                            [
+                              sp:object [
+                                  sp:varName "o" ;
+                                ] ;
+                              sp:predicate [
+                                  sp:varName "property" ;
+                                ] ;
+                              sp:subject [
+                                  sp:varName "s" ;
+                                ] ;
+                            ]
+                          ) ;
+                        sp:graphNameNode [
+                            sp:varName "graph" ;
+                          ] ;
+                      ]
+                    ) ;
+                ] ;
+            ] ;
+          ui:childIndex 1 ;
+        ] ;
+    ] ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Dump named graph triples for specific property" ;
+  rdfs:subClassOf debug-swa:Parts ;
+.
+debug-swa:DumpNamedGraphTriplesForResourceAsObject
+  rdf:type ui:NodeClass ;
+  rdf:type ui:Service ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate ui:limit ;
+      spl:valueType xsd:integer ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype [
+      rdf:type ui:group ;
+      ui:child [
+          rdf:type html:H3 ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 0 ;
+              ui:text "Dump Triples for " ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 1 ;
+              ui:text [
+                  rdf:type xsd:string ;
+                  sp:arg1 [
+                      sp:varName "resource" ;
+                    ] ;
+                ] ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 2 ;
+              ui:text " [" ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 3 ;
+              ui:text [
+                  rdf:type ui:label ;
+                  sp:arg1 [
+                      sp:varName "resource" ;
+                    ] ;
+                ] ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 4 ;
+              ui:text "] as subject in graph " ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 5 ;
+              ui:text [
+                  sp:varName "graph" ;
+                ] ;
+            ] ;
+          ui:childIndex 0 ;
+        ] ;
+      ui:child [
+          rdf:type html:Table ;
+          ui:child [
+              rdf:type html:Thead ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "O" ;
+                        ] ;
+                      ui:childIndex 2 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "P" ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "S" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:childIndex 0 ;
+            ] ;
+          ui:child [
+              rdf:type ui:forEach ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              rdf:type ui:label ;
+                              sp:arg1 [
+                                  sp:varName "s" ;
+                                ] ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              sp:varName "p" ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              sp:varName "resource" ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 2 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:childIndex 1 ;
+              ui:limit [
+                  sp:varName "limit" ;
+                ] ;
+              ui:resultSet [
+                  rdf:type sp:Select ;
+                  sp:resultVariables (
+                      [
+                        sp:varName "s" ;
+                      ]
+                      [
+                        sp:varName "p" ;
+                      ]
+                    ) ;
+                  sp:where (
+                      [
+                        rdf:type sp:NamedGraph ;
+                        sp:elements (
+                            [
+                              sp:object [
+                                  sp:varName "resource" ;
+                                ] ;
+                              sp:predicate [
+                                  sp:varName "p" ;
+                                ] ;
+                              sp:subject [
+                                  sp:varName "s" ;
+                                ] ;
+                            ]
+                          ) ;
+                        sp:graphNameNode [
+                            sp:varName "graph" ;
+                          ] ;
+                      ]
+                    ) ;
+                ] ;
+            ] ;
+          ui:childIndex 1 ;
+        ] ;
+    ] ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Dump named graph triples for resource as object" ;
+  rdfs:subClassOf debug-swa:Parts ;
+.
+debug-swa:DumpNamedGraphTriplesForResourceAsSubject
+  rdf:type ui:NodeClass ;
+  rdf:type ui:Service ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate ui:limit ;
+      spl:valueType xsd:integer ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype [
+      rdf:type ui:group ;
+      ui:child [
+          rdf:type html:H3 ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 0 ;
+              ui:text "Dump Triples for " ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 1 ;
+              ui:text [
+                  rdf:type xsd:string ;
+                  sp:arg1 [
+                      sp:varName "resource" ;
+                    ] ;
+                ] ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 2 ;
+              ui:text " [" ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 3 ;
+              ui:text [
+                  rdf:type ui:label ;
+                  sp:arg1 [
+                      sp:varName "resource" ;
+                    ] ;
+                ] ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 4 ;
+              ui:text "] as subject in graph " ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 5 ;
+              ui:text [
+                  sp:varName "graph" ;
+                ] ;
+            ] ;
+          ui:childIndex 0 ;
+        ] ;
+      ui:child [
+          rdf:type html:Table ;
+          ui:child [
+              rdf:type html:Thead ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "O" ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "P" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:childIndex 0 ;
+            ] ;
+          ui:child [
+              rdf:type ui:forEach ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              rdf:type ui:label ;
+                              sp:arg1 [
+                                  sp:varName "p" ;
+                                ] ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              sp:varName "o" ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:childIndex 1 ;
+              ui:limit [
+                  sp:varName "limit" ;
+                ] ;
+              ui:resultSet [
+                  rdf:type sp:Select ;
+                  sp:resultVariables (
+                      [
+                        sp:varName "s" ;
+                      ]
+                      [
+                        sp:varName "p" ;
+                      ]
+                      [
+                        sp:varName "o" ;
+                      ]
+                    ) ;
+                  sp:where (
+                      [
+                        rdf:type sp:NamedGraph ;
+                        sp:elements (
+                            [
+                              sp:object [
+                                  sp:varName "o" ;
+                                ] ;
+                              sp:predicate [
+                                  sp:varName "p" ;
+                                ] ;
+                              sp:subject [
+                                  sp:varName "resource" ;
+                                ] ;
+                            ]
+                          ) ;
+                        sp:graphNameNode [
+                            sp:varName "graph" ;
+                          ] ;
+                      ]
+                    ) ;
+                ] ;
+            ] ;
+          ui:childIndex 1 ;
+        ] ;
+    ] ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Dump named graph triples for resource as subject" ;
+  rdfs:subClassOf debug-swa:Parts ;
+.
+debug-swa:DumpSelectiveTriples
+  rdf:type ui:NodeClass ;
+  rdf:type ui:Service ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:baseURI ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate ui:limit ;
+      spl:valueType xsd:integer ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype [
+      rdf:type ui:group ;
+      ui:child [
+          rdf:type html:H3 ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 0 ;
+              ui:text "Dump Selective Triples" ;
+            ] ;
+          ui:childIndex 0 ;
+        ] ;
+      ui:child [
+          rdf:type html:P ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 0 ;
+              ui:text "Base URI constrained to " ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 1 ;
+              ui:text [
+                  rdf:type ui:label ;
+                  sp:arg1 [
+                      sp:varName "baseURI" ;
+                    ] ;
+                ] ;
+            ] ;
+          ui:childIndex 1 ;
+        ] ;
+      ui:child [
+          rdf:type html:Table ;
+          ui:child [
+              rdf:type html:Thead ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "O" ;
+                        ] ;
+                      ui:childIndex 2 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "P" ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "S" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:childIndex 0 ;
+            ] ;
+          ui:child [
+              rdf:type ui:forEach ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              sp:varName "o" ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 2 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              sp:varName "p" ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              sp:varName "s" ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:childIndex 1 ;
+              ui:limit [
+                  sp:varName "limit" ;
+                ] ;
+              ui:resultSet [
+                  rdf:type sp:Select ;
+                  sp:resultVariables (
+                      [
+                        sp:varName "s" ;
+                      ]
+                      [
+                        sp:varName "p" ;
+                      ]
+                      [
+                        sp:varName "o" ;
+                      ]
+                    ) ;
+                  sp:where (
+                      [
+                        sp:object [
+                            sp:varName "o" ;
+                          ] ;
+                        sp:predicate [
+                            sp:varName "p" ;
+                          ] ;
+                        sp:subject [
+                            sp:varName "s" ;
+                          ] ;
+                      ]
+                      [
+                        rdf:type sp:Bind ;
+                        sp:expression [
+                            rdf:type afn:namespace ;
+                            sp:arg1 [
+                                sp:varName "s" ;
+                              ] ;
+                          ] ;
+                        sp:variable [
+                            sp:varName "ns" ;
+                          ] ;
+                      ]
+                      [
+                        rdf:type sp:Filter ;
+                        sp:expression [
+                            rdf:type fn:starts-with ;
+                            sp:arg1 [
+                                sp:varName "ns" ;
+                              ] ;
+                            sp:arg2 [
+                                sp:varName "baseURI" ;
+                              ] ;
+                          ] ;
+                      ]
+                    ) ;
+                ] ;
+            ] ;
+          ui:childIndex 2 ;
+        ] ;
+    ] ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Dump selective triples" ;
+  rdfs:subClassOf debug-swa:Parts ;
+.
+debug-swa:DumpTriples
+  rdf:type ui:NodeClass ;
+  rdf:type ui:Service ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate ui:limit ;
+      spl:valueType xsd:integer ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype [
+      rdf:type ui:group ;
+      ui:child [
+          rdf:type html:H3 ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 0 ;
+              ui:text "Dump Triples" ;
+            ] ;
+          ui:childIndex 0 ;
+        ] ;
+      ui:child [
+          rdf:type html:Table ;
+          ui:child [
+              rdf:type html:Thead ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "O" ;
+                        ] ;
+                      ui:childIndex 2 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "P" ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "S" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:childIndex 0 ;
+            ] ;
+          ui:child [
+              rdf:type ui:forEach ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              sp:varName "o" ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 2 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              sp:varName "p" ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              sp:varName "s" ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:childIndex 1 ;
+              ui:limit [
+                  sp:varName "limit" ;
+                ] ;
+              ui:resultSet [
+                  rdf:type sp:Select ;
+                  sp:resultVariables (
+                      [
+                        sp:varName "s" ;
+                      ]
+                      [
+                        sp:varName "p" ;
+                      ]
+                      [
+                        sp:varName "o" ;
+                      ]
+                    ) ;
+                  sp:where (
+                      [
+                        sp:object [
+                            sp:varName "o" ;
+                          ] ;
+                        sp:predicate [
+                            sp:varName "p" ;
+                          ] ;
+                        sp:subject [
+                            sp:varName "s" ;
+                          ] ;
+                      ]
+                    ) ;
+                ] ;
+            ] ;
+          ui:childIndex 1 ;
+        ] ;
+    ] ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Dump triples" ;
+  rdfs:subClassOf debug-swa:Parts ;
+.
+debug-swa:DumpTriplesForNamespace
+  rdf:type ui:NodeClass ;
+  rdf:type ui:Service ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate ui:limit ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate ui:namespace ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype [
+      rdf:type ui:group ;
+      ui:child [
+          rdf:type html:H3 ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 0 ;
+              ui:text "Dump " ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 1 ;
+              ui:text [
+                  sp:varName "limit" ;
+                ] ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 2 ;
+              ui:text " Triples for namespace " ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 3 ;
+              ui:text [
+                  sp:varName "namespace" ;
+                ] ;
+            ] ;
+          ui:childIndex 0 ;
+        ] ;
+      ui:child [
+          rdf:type html:Table ;
+          ui:child [
+              rdf:type html:Thead ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "#" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "O" ;
+                        ] ;
+                      ui:childIndex 3 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "P" ;
+                        ] ;
+                      ui:childIndex 2 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "S" ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:childIndex 0 ;
+            ] ;
+          ui:child [
+              rdf:type ui:forEach ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              rdf:type sp:add ;
+                              sp:arg1 [
+                                  sp:varName "index" ;
+                                ] ;
+                              sp:arg2 1 ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              sp:varName "o" ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 3 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              sp:varName "p" ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 2 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              sp:varName "s" ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:childIndex 1 ;
+              ui:indexVar "index" ;
+              ui:limit [
+                  sp:varName "limit" ;
+                ] ;
+              ui:resultSet [
+                  rdf:type sp:Select ;
+                  sp:resultVariables (
+                      [
+                        sp:varName "s" ;
+                      ]
+                      [
+                        sp:varName "p" ;
+                      ]
+                      [
+                        sp:varName "o" ;
+                      ]
+                    ) ;
+                  sp:where (
+                      [
+                        sp:object [
+                            sp:varName "o" ;
+                          ] ;
+                        sp:predicate [
+                            sp:varName "p" ;
+                          ] ;
+                        sp:subject [
+                            sp:varName "s" ;
+                          ] ;
+                      ]
+                      [
+                        rdf:type sp:Bind ;
+                        sp:expression [
+                            rdf:type sp:str ;
+                            sp:arg1 [
+                                rdf:type afn:namespace ;
+                                sp:arg1 [
+                                    sp:varName "s" ;
+                                  ] ;
+                              ] ;
+                          ] ;
+                        sp:variable [
+                            sp:varName "ns" ;
+                          ] ;
+                      ]
+                      [
+                        rdf:type sp:Filter ;
+                        sp:expression [
+                            rdf:type sp:eq ;
+                            sp:arg1 [
+                                sp:varName "ns" ;
+                              ] ;
+                            sp:arg2 [
+                                sp:varName "namespace" ;
+                              ] ;
+                          ] ;
+                      ]
+                    ) ;
+                ] ;
+            ] ;
+          ui:childIndex 1 ;
+        ] ;
+    ] ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Dump triples for namespace" ;
+  rdfs:subClassOf ui:ViewElements ;
+.
+debug-swa:DumpTriplesForProperty
+  rdf:type ui:NodeClass ;
+  rdf:type ui:Service ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate ui:limit ;
+      spl:valueType xsd:integer ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype [
+      rdf:type ui:group ;
+      ui:child [
+          rdf:type html:H3 ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 0 ;
+              ui:text "Dump Triples for property " ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 1 ;
+              ui:text [
+                  rdf:type ui:label ;
+                  sp:arg1 [
+                      sp:varName "resource" ;
+                    ] ;
+                ] ;
+            ] ;
+          ui:childIndex 0 ;
+        ] ;
+      ui:child [
+          rdf:type html:Table ;
+          ui:child [
+              rdf:type html:Thead ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "O" ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "S" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:childIndex 0 ;
+            ] ;
+          ui:child [
+              rdf:type ui:forEach ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              sp:varName "o" ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              sp:varName "s" ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:childIndex 1 ;
+              ui:limit [
+                  sp:varName "limit" ;
+                ] ;
+              ui:resultSet [
+                  rdf:type sp:Select ;
+                  sp:resultVariables (
+                      [
+                        sp:varName "s" ;
+                      ]
+                      [
+                        sp:varName "o" ;
+                      ]
+                    ) ;
+                  sp:where (
+                      [
+                        sp:object [
+                            sp:varName "o" ;
+                          ] ;
+                        sp:predicate [
+                            sp:varName "resource" ;
+                          ] ;
+                        sp:subject [
+                            sp:varName "s" ;
+                          ] ;
+                      ]
+                    ) ;
+                ] ;
+            ] ;
+          ui:childIndex 1 ;
+        ] ;
+    ] ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Dump triples for specific property" ;
+  rdfs:subClassOf debug-swa:Parts ;
+.
+debug-swa:DumpTriplesForResourceAsObject
+  rdf:type ui:NodeClass ;
+  rdf:type ui:Service ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate ui:limit ;
+      spl:valueType xsd:integer ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype [
+      rdf:type ui:group ;
+      ui:child [
+          rdf:type html:H3 ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 0 ;
+              ui:text "Dump Triples for " ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 1 ;
+              ui:text [
+                  rdf:type xsd:string ;
+                  sp:arg1 [
+                      sp:varName "resource" ;
+                    ] ;
+                ] ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 2 ;
+              ui:text " [" ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 3 ;
+              ui:text [
+                  rdf:type ui:label ;
+                  sp:arg1 [
+                      sp:varName "resource" ;
+                    ] ;
+                ] ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 4 ;
+              ui:text "] as object" ;
+            ] ;
+          ui:childIndex 0 ;
+        ] ;
+      ui:child [
+          rdf:type html:Table ;
+          ui:child [
+              rdf:type html:Thead ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "P" ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "S" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:childIndex 0 ;
+            ] ;
+          ui:child [
+              rdf:type ui:forEach ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              rdf:type ui:label ;
+                              sp:arg1 [
+                                  sp:varName "p" ;
+                                ] ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              sp:varName "s" ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:childIndex 1 ;
+              ui:limit [
+                  sp:varName "limit" ;
+                ] ;
+              ui:resultSet [
+                  rdf:type sp:Select ;
+                  sp:resultVariables (
+                      [
+                        sp:varName "s" ;
+                      ]
+                      [
+                        sp:varName "p" ;
+                      ]
+                      [
+                        sp:varName "o" ;
+                      ]
+                    ) ;
+                  sp:where (
+                      [
+                        sp:object [
+                            sp:varName "resource" ;
+                          ] ;
+                        sp:predicate [
+                            sp:varName "p" ;
+                          ] ;
+                        sp:subject [
+                            sp:varName "s" ;
+                          ] ;
+                      ]
+                    ) ;
+                ] ;
+            ] ;
+          ui:childIndex 1 ;
+        ] ;
+    ] ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Dump triples for resource as object" ;
+  rdfs:subClassOf debug-swa:Parts ;
+.
+debug-swa:DumpTriplesForResourceAsSubject
+  rdf:type ui:NodeClass ;
+  rdf:type ui:Service ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate ui:limit ;
+      spl:valueType xsd:integer ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype [
+      rdf:type ui:group ;
+      ui:child [
+          rdf:type html:H3 ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 0 ;
+              ui:text "Dump Triples for " ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 1 ;
+              ui:text [
+                  rdf:type xsd:string ;
+                  sp:arg1 [
+                      sp:varName "resource" ;
+                    ] ;
+                ] ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 2 ;
+              ui:text " [" ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 3 ;
+              ui:text [
+                  rdf:type ui:label ;
+                  sp:arg1 [
+                      sp:varName "resource" ;
+                    ] ;
+                ] ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 4 ;
+              ui:text "] as subject" ;
+            ] ;
+          ui:childIndex 0 ;
+        ] ;
+      ui:child [
+          rdf:type html:Table ;
+          ui:child [
+              rdf:type html:Thead ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "O" ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "P" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:childIndex 0 ;
+            ] ;
+          ui:child [
+              rdf:type ui:forEach ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              rdf:type ui:label ;
+                              sp:arg1 [
+                                  sp:varName "p" ;
+                                ] ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              sp:varName "o" ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:childIndex 1 ;
+              ui:limit [
+                  sp:varName "limit" ;
+                ] ;
+              ui:resultSet [
+                  rdf:type sp:Select ;
+                  sp:resultVariables (
+                      [
+                        sp:varName "s" ;
+                      ]
+                      [
+                        sp:varName "p" ;
+                      ]
+                      [
+                        sp:varName "o" ;
+                      ]
+                    ) ;
+                  sp:where (
+                      [
+                        sp:object [
+                            sp:varName "o" ;
+                          ] ;
+                        sp:predicate [
+                            sp:varName "p" ;
+                          ] ;
+                        sp:subject [
+                            sp:varName "resource" ;
+                          ] ;
+                      ]
+                    ) ;
+                ] ;
+            ] ;
+          ui:childIndex 1 ;
+        ] ;
+    ] ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Dump triples for resource as subject" ;
+  rdfs:subClassOf debug-swa:Parts ;
+.
+debug-swa:Elements
+  rdf:type ui:NodeClass ;
+  ui:headIncludes [
+      rdf:type html:Style ;
+      ui:child [
+          rdf:type ui:TextNode ;
+          ui:childIndex 0 ;
+          ui:text """table, td, th
+{
+border:1px solid green;
+padding: 10px;
+}
+th
+{
+background-color:green;
+color:white;
+}""" ;
+        ] ;
+    ] ;
+  rdfs:subClassOf ui:Element ;
+.
+debug-swa:ExportOWLModel
+  rdf:type ui:NodeClass ;
+  ui:prototype [
+      rdf:type ui:group ;
+      ui:child [
+          rdf:type html:P ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 0 ;
+              ui:text "Exporting ontology for " ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 1 ;
+              ui:text [
+                  rdf:type ui:label ;
+                  sp:arg1 [
+                      sp:varName "packageObject" ;
+                    ] ;
+                ] ;
+            ] ;
+          ui:childIndex 0 ;
+        ] ;
+      ui:child [
+          rdf:type ui:group ;
+          let:fileName [
+              rdf:type debug-swa:MakeFileName ;
+              debug-swa:packageObject [
+                  sp:varName "packageObject" ;
+                ] ;
+            ] ;
+          let:targetPath [
+              rdf:type ui:contextValue ;
+              sp:arg1 "targetPath" ;
+            ] ;
+          ui:child [
+              rdf:type ui:group ;
+              let:filePath [
+                  rdf:type fn:concat ;
+                  sp:arg1 [
+                      sp:varName "targetPath" ;
+                    ] ;
+                  sp:arg2 [
+                      sp:varName "fileName" ;
+                    ] ;
+                  sp:arg3 ".ttl" ;
+                ] ;
+              ui:child [
+                  rdf:type ui:group ;
+                  let:baseURI [
+                      rdf:type spl:object ;
+                      sp:arg1 [
+                          sp:varName "packageObject" ;
+                        ] ;
+                      sp:arg2 <http://uml.topquadrant.com/owl/cmof/osg/cmof#baseURI> ;
+                    ] ;
+                  let:myTempGraph [
+                      rdf:type sp:iri ;
+                      sp:arg1 "http://uml.topquadrant.com/1.0/data/temp" ;
+                    ] ;
+                  ui:child [
+                      rdf:type debug-swa:DumpNamedGraphTriples ;
+                      arg:graph [
+                          sp:varName "myTempGraph" ;
+                        ] ;
+                      ui:childIndex 8 ;
+                      ui:limit 3000 ;
+                    ] ;
+                  ui:child [
+                      rdf:type debug-swa:DumpTriplesForResourceAsObject ;
+                      arg:resource [
+                          sp:varName "packageObject" ;
+                        ] ;
+                      ui:childIndex 3 ;
+                      ui:limit 100 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:H3 ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Explore how things belong to packages" ;
+                        ] ;
+                      ui:childIndex 2 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:P ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "File Path = " ;
+                        ] ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 1 ;
+                          ui:text [
+                              sp:varName "filePath" ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:child [
+                      rdf:type ui:CommentNode ;
+                      ui:childIndex 1 ;
+                      rdfs:comment "sml:ModifyPrefixes sml:addedPrefix=\"hello http://hello.com/\"/" ;
+                    ] ;
+                  ui:child [
+                      rdf:type ui:setContext ;
+                      ui:child [
+                          rdf:type sml:ExportToRDFFile ;
+                          sml:baseURI [
+                              sp:varName "baseURI" ;
+                            ] ;
+                          sml:targetFilePath [
+                              sp:varName "filePath" ;
+                            ] ;
+                          ui:childIndex 0 ;
+                        ] ;
+                      ui:childIndex 9 ;
+                      ui:queryGraph [
+                          sp:varName "myTempGraph" ;
+                        ] ;
+                    ] ;
+                  ui:child [
+                      rdf:type ui:update ;
+                      ui:childIndex 4 ;
+                      ui:updateQuery [
+                          rdf:type sp:Modify ;
+                          sp:deletePattern (
+                              [
+                                rdf:type sp:NamedGraph ;
+                                sp:elements (
+                                    [
+                                      sp:object [
+                                          sp:varName "o" ;
+                                        ] ;
+                                      sp:predicate [
+                                          sp:varName "p" ;
+                                        ] ;
+                                      sp:subject [
+                                          sp:varName "s" ;
+                                        ] ;
+                                    ]
+                                  ) ;
+                                sp:graphNameNode <http://uml.topquadrant.com/1.0/data/temp> ;
+                              ]
+                            ) ;
+                          sp:where (
+                              [
+                                rdf:type sp:NamedGraph ;
+                                sp:elements (
+                                    [
+                                      sp:object [
+                                          sp:varName "o" ;
+                                        ] ;
+                                      sp:predicate [
+                                          sp:varName "p" ;
+                                        ] ;
+                                      sp:subject [
+                                          sp:varName "s" ;
+                                        ] ;
+                                    ]
+                                  ) ;
+                                sp:graphNameNode [
+                                    sp:varName "myTempGraph" ;
+                                  ] ;
+                              ]
+                            ) ;
+                        ] ;
+                    ] ;
+                  ui:child [
+                      rdf:type ui:update ;
+                      ui:childIndex 5 ;
+                      ui:updateQuery [
+                          rdf:type sp:Modify ;
+                          sp:insertPattern (
+                              [
+                                rdf:type sp:NamedGraph ;
+                                sp:elements (
+                                    [
+                                      sp:object [
+                                          sp:varName "o" ;
+                                        ] ;
+                                      sp:predicate [
+                                          sp:varName "p" ;
+                                        ] ;
+                                      sp:subject [
+                                          sp:varName "s" ;
+                                        ] ;
+                                    ]
+                                  ) ;
+                                sp:graphNameNode [
+                                    sp:varName "myTempGraph" ;
+                                  ] ;
+                              ]
+                            ) ;
+                          sp:where (
+                              [
+                                sp:object [
+                                    sp:varName "packageObject" ;
+                                  ] ;
+                                sp:predicate debug-swa:belongsToGeneratedPackage ;
+                                sp:subject [
+                                    sp:varName "s" ;
+                                  ] ;
+                              ]
+                              [
+                                sp:object [
+                                    sp:varName "o" ;
+                                  ] ;
+                                sp:predicate [
+                                    sp:varName "p" ;
+                                  ] ;
+                                sp:subject [
+                                    sp:varName "s" ;
+                                  ] ;
+                              ]
+                              [
+                                rdf:type sp:NotExists ;
+                                sp:elements (
+                                    [
+                                      sp:object owl:Restriction ;
+                                      sp:predicate rdf:type ;
+                                      sp:subject [
+                                          sp:varName "s" ;
+                                        ] ;
+                                    ]
+                                  ) ;
+                              ]
+                              [
+                                rdf:type sp:NotExists ;
+                                sp:elements (
+                                    [
+                                      sp:object owl:Restriction ;
+                                      sp:predicate rdf:type ;
+                                      sp:subject [
+                                          sp:varName "o" ;
+                                        ] ;
+                                    ]
+                                  ) ;
+                              ]
+                              [
+                                rdf:type sp:Filter ;
+                                sp:expression [
+                                    rdf:type sp:and ;
+                                    sp:arg1 [
+                                        rdf:type sp:ne ;
+                                        sp:arg1 [
+                                            sp:varName "p" ;
+                                          ] ;
+                                        sp:arg2 <http://uml.topquadrant.com/owl/cmof/osg/cmof#hasCMOFbasis> ;
+                                      ] ;
+                                    sp:arg2 [
+                                        rdf:type sp:ne ;
+                                        sp:arg1 [
+                                            sp:varName "p" ;
+                                          ] ;
+                                        sp:arg2 <http://uml.topquadrant.com/owl/cmof/osg/cmof#hasSpecification> ;
+                                      ] ;
+                                  ] ;
+                              ]
+                              [
+                                rdf:type sp:Filter ;
+                                sp:expression [
+                                    rdf:type sp:and ;
+                                    sp:arg1 [
+                                        rdf:type sp:ne ;
+                                        sp:arg1 [
+                                            sp:varName "p" ;
+                                          ] ;
+                                        sp:arg2 <http://schema.omg.org/spec/XMI/2.1#id> ;
+                                      ] ;
+                                    sp:arg2 [
+                                        rdf:type sp:ne ;
+                                        sp:arg1 [
+                                            sp:varName "p" ;
+                                          ] ;
+                                        sp:arg2 debug-swa:belongsToGeneratedPackage ;
+                                      ] ;
+                                  ] ;
+                              ]
+                              [
+                                rdf:type sp:Bind ;
+                                sp:expression [
+                                    rdf:type smf:trace ;
+                                    sp:arg1 "Found Element in debug-swa:ExportOWLModel with subject{?1} of type {?2}" ;
+                                    sp:arg2 [
+                                        sp:varName "s" ;
+                                      ] ;
+                                    sp:arg3 [
+                                        rdf:type spl:object ;
+                                        sp:arg1 [
+                                            sp:varName "s" ;
+                                          ] ;
+                                        sp:arg2 rdf:type ;
+                                      ] ;
+                                  ] ;
+                                sp:variable [
+                                    sp:varName "t1" ;
+                                  ] ;
+                              ]
+                            ) ;
+                        ] ;
+                    ] ;
+                  ui:child [
+                      rdf:type ui:update ;
+                      ui:childIndex 6 ;
+                      ui:updateQuery [
+                          rdf:type sp:Modify ;
+                          sp:insertPattern (
+                              [
+                                rdf:type sp:NamedGraph ;
+                                sp:elements (
+                                    [
+                                      sp:object owl:Restriction ;
+                                      sp:predicate rdf:type ;
+                                      sp:subject _:b40508 ;
+                                    ]
+                                    [
+                                      sp:object [
+                                          sp:varName "property" ;
+                                        ] ;
+                                      sp:predicate owl:onProperty ;
+                                      sp:subject _:b40508 ;
+                                    ]
+                                    [
+                                      sp:object [
+                                          sp:varName "value" ;
+                                        ] ;
+                                      sp:predicate [
+                                          sp:varName "myCardinalityConstraint" ;
+                                        ] ;
+                                      sp:subject _:b40508 ;
+                                    ]
+                                    [
+                                      sp:object _:b40508 ;
+                                      sp:predicate rdfs:subClassOf ;
+                                      sp:subject [
+                                          sp:varName "class" ;
+                                        ] ;
+                                    ]
+                                  ) ;
+                                sp:graphNameNode [
+                                    sp:varName "myTempGraph" ;
+                                  ] ;
+                              ]
+                            ) ;
+                          sp:where (
+                              [
+                                sp:object [
+                                    sp:varName "packageObject" ;
+                                  ] ;
+                                sp:predicate debug-swa:belongsToGeneratedPackage ;
+                                sp:subject [
+                                    sp:varName "s" ;
+                                  ] ;
+                              ]
+                              [
+                                sp:object owl:Restriction ;
+                                sp:predicate rdf:type ;
+                                sp:subject [
+                                    sp:varName "s" ;
+                                  ] ;
+                              ]
+                              [
+                                sp:object [
+                                    sp:varName "property" ;
+                                  ] ;
+                                sp:predicate owl:onProperty ;
+                                sp:subject [
+                                    sp:varName "s" ;
+                                  ] ;
+                              ]
+                              [
+                                rdf:type sp:Union ;
+                                sp:elements (
+                                    (
+                                      [
+                                        sp:object [
+                                            sp:varName "value" ;
+                                          ] ;
+                                        sp:predicate owl:maxCardinality ;
+                                        sp:subject [
+                                            sp:varName "s" ;
+                                          ] ;
+                                      ]
+                                      [
+                                        rdf:type sp:Bind ;
+                                        sp:expression owl:maxCardinality ;
+                                        sp:variable [
+                                            sp:varName "myCardinalityConstraint" ;
+                                          ] ;
+                                      ]
+                                    )
+                                    (
+                                      [
+                                        sp:object [
+                                            sp:varName "value" ;
+                                          ] ;
+                                        sp:predicate owl:minCardinality ;
+                                        sp:subject [
+                                            sp:varName "s" ;
+                                          ] ;
+                                      ]
+                                      [
+                                        rdf:type sp:Bind ;
+                                        sp:expression owl:minCardinality ;
+                                        sp:variable [
+                                            sp:varName "myCardinalityConstraint" ;
+                                          ] ;
+                                      ]
+                                    )
+                                    (
+                                      [
+                                        sp:object [
+                                            sp:varName "value" ;
+                                          ] ;
+                                        sp:predicate owl:cardinality ;
+                                        sp:subject [
+                                            sp:varName "s" ;
+                                          ] ;
+                                      ]
+                                      [
+                                        rdf:type sp:Bind ;
+                                        sp:expression owl:cardinality ;
+                                        sp:variable [
+                                            sp:varName "myCardinalityConstraint" ;
+                                          ] ;
+                                      ]
+                                    )
+                                  ) ;
+                              ]
+                              [
+                                rdf:type sp:Optional ;
+                                sp:elements (
+                                    [
+                                      sp:object [
+                                          sp:varName "s" ;
+                                        ] ;
+                                      sp:predicate rdfs:subClassOf ;
+                                      sp:subject [
+                                          sp:varName "class" ;
+                                        ] ;
+                                    ]
+                                  ) ;
+                              ]
+                              [
+                                rdf:type sp:Bind ;
+                                sp:expression [
+                                    rdf:type smf:trace ;
+                                    sp:arg1 "Found Cardinality Restriction in debug-swa:ExportOWLModel with subject{?1}, with cardinality {?3}" ;
+                                    sp:arg2 [
+                                        sp:varName "s" ;
+                                      ] ;
+                                    sp:arg3 [
+                                        sp:varName "value" ;
+                                      ] ;
+                                  ] ;
+                                sp:variable [
+                                    sp:varName "t1" ;
+                                  ] ;
+                              ]
+                            ) ;
+                        ] ;
+                    ] ;
+                  ui:child [
+                      rdf:type ui:update ;
+                      ui:childIndex 7 ;
+                      ui:updateQuery [
+                          rdf:type sp:Modify ;
+                          sp:insertPattern (
+                              [
+                                rdf:type sp:NamedGraph ;
+                                sp:elements (
+                                    [
+                                      sp:object owl:Restriction ;
+                                      sp:predicate rdf:type ;
+                                      sp:subject _:b3844 ;
+                                    ]
+                                    [
+                                      sp:object [
+                                          sp:varName "property" ;
+                                        ] ;
+                                      sp:predicate owl:onProperty ;
+                                      sp:subject _:b3844 ;
+                                    ]
+                                    [
+                                      sp:object [
+                                          sp:varName "range" ;
+                                        ] ;
+                                      sp:predicate owl:allValuesFrom ;
+                                      sp:subject _:b3844 ;
+                                    ]
+                                    [
+                                      sp:object _:b3844 ;
+                                      sp:predicate rdfs:subClassOf ;
+                                      sp:subject [
+                                          sp:varName "class" ;
+                                        ] ;
+                                    ]
+                                  ) ;
+                                sp:graphNameNode [
+                                    sp:varName "myTempGraph" ;
+                                  ] ;
+                              ]
+                            ) ;
+                          sp:where (
+                              [
+                                sp:object [
+                                    sp:varName "packageObject" ;
+                                  ] ;
+                                sp:predicate debug-swa:belongsToGeneratedPackage ;
+                                sp:subject [
+                                    sp:varName "s" ;
+                                  ] ;
+                              ]
+                              [
+                                sp:object owl:Restriction ;
+                                sp:predicate rdf:type ;
+                                sp:subject [
+                                    sp:varName "s" ;
+                                  ] ;
+                              ]
+                              [
+                                sp:object [
+                                    sp:varName "property" ;
+                                  ] ;
+                                sp:predicate owl:onProperty ;
+                                sp:subject [
+                                    sp:varName "s" ;
+                                  ] ;
+                              ]
+                              [
+                                sp:object [
+                                    sp:varName "range" ;
+                                  ] ;
+                                sp:predicate owl:allValuesFrom ;
+                                sp:subject [
+                                    sp:varName "s" ;
+                                  ] ;
+                              ]
+                              [
+                                rdf:type sp:Optional ;
+                                sp:elements (
+                                    [
+                                      sp:object [
+                                          sp:varName "s" ;
+                                        ] ;
+                                      sp:predicate rdfs:subClassOf ;
+                                      sp:subject [
+                                          sp:varName "class" ;
+                                        ] ;
+                                    ]
+                                  ) ;
+                              ]
+                              [
+                                rdf:type sp:Bind ;
+                                sp:expression [
+                                    rdf:type smf:trace ;
+                                    sp:arg1 "Found Range Restriction in debug-swa:ExportOWLModel with subject{?1}, and range {?2}" ;
+                                    sp:arg2 [
+                                        sp:varName "s" ;
+                                      ] ;
+                                    sp:arg3 [
+                                        sp:varName "range" ;
+                                      ] ;
+                                  ] ;
+                                sp:variable [
+                                    sp:varName "t1" ;
+                                  ] ;
+                              ]
+                            ) ;
+                        ] ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:childIndex 0 ;
+            ] ;
+          ui:childIndex 1 ;
+        ] ;
+    ] ;
+  rdfs:comment """?s debug-swa:belongsToGeneratedPackage ?packageObject .
+                            ?s ?p ?o .
+                            FILTER ((((?p != ocmof:hasSpecification) &amp;&amp; (?p != xmi:id)) &amp;&amp; (?p != debug-swa:belongsToGeneratedPackage)) &amp;&amp; (?p != ocmof:hasCMOFbasis)) .""" ;
+  rdfs:subClassOf debug-swa:Exporters ;
+.
+debug-swa:Exporters
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate debug-swa:packageObject ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  rdfs:subClassOf debug-swa:Generators ;
+.
+debug-swa:Functions
+  rdf:type spin:Function ;
+  rdfs:subClassOf spin:Functions ;
+.
+debug-swa:GenerateAllOWLPackages
+  rdf:type ui:NodeClass ;
+  ui:prototype [
+      rdf:type ui:group ;
+      ui:child [
+          rdf:type html:H2 ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 0 ;
+              ui:text "Generate All Packages" ;
+            ] ;
+          ui:childIndex 0 ;
+        ] ;
+      ui:child [
+          rdf:type ui:CommentNode ;
+          ui:childIndex 1 ;
+          rdfs:comment " debug-swa:DumpTriplesForProperty arg:resource=\"composite:child\" ui:limit=\"20\"/" ;
+        ] ;
+      ui:child [
+          rdf:type ui:call ;
+          ui:child [
+              rdf:type ui:forEach ;
+              ui:child [
+                  rdf:type debug-swa:GenerateOneOWLPackage ;
+                  debug-swa:packageObject [
+                      sp:varName "package" ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:childIndex 2 ;
+              ui:resultSet [
+                  sp:varName "packages" ;
+                ] ;
+            ] ;
+          ui:child [
+              rdf:type ui:update ;
+              ui:childIndex 0 ;
+              ui:updateQuery [
+                  rdf:type sp:Modify ;
+                  sp:insertPattern (
+                      [
+                        sp:object [
+                            sp:varName "package" ;
+                          ] ;
+                        sp:predicate debug-swa:belongsToGeneratedPackage ;
+                        sp:subject [
+                            sp:varName "owlElement" ;
+                          ] ;
+                      ]
+                    ) ;
+                  sp:where (
+                      [
+                        sp:object [
+                            sp:varName "element" ;
+                          ] ;
+                        sp:predicate <http://uml.topquadrant.com/owl/cmof/osg/cmof#hasPackagedElement> ;
+                        sp:subject [
+                            sp:varName "package" ;
+                          ] ;
+                      ]
+                      [
+                        rdf:type sp:TriplePath ;
+                        sp:object [
+                            sp:varName "xmiElement" ;
+                          ] ;
+                        sp:path [
+                            rdf:type sp:ModPath ;
+                            sp:modMax -2 ;
+                            sp:modMin 0 ;
+                            sp:subPath <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                          ] ;
+                        sp:subject [
+                            sp:varName "element" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "xmiElement" ;
+                          ] ;
+                        sp:predicate <http://uml.topquadrant.com/owl/cmof/osg/cmof#hasCMOFbasis> ;
+                        sp:subject [
+                            sp:varName "owlElement" ;
+                          ] ;
+                      ]
+                      [
+                        rdf:type sp:Bind ;
+                        sp:expression [
+                            rdf:type smf:trace ;
+                            sp:arg1 "Element {?1} belongs to package {?2} related to {?3}" ;
+                            sp:arg2 [
+                                sp:varName "owlElement" ;
+                              ] ;
+                            sp:arg3 [
+                                sp:varName "package" ;
+                              ] ;
+                            sp:arg4 [
+                                sp:varName "xmiElement" ;
+                              ] ;
+                          ] ;
+                        sp:variable [
+                            sp:varName "t1" ;
+                          ] ;
+                      ]
+                    ) ;
+                ] ;
+            ] ;
+          ui:child [
+              rdf:type ui:update ;
+              ui:childIndex 1 ;
+              ui:updateQuery [
+                  rdf:type sp:Modify ;
+                  sp:insertPattern (
+                      [
+                        sp:object [
+                            sp:varName "package" ;
+                          ] ;
+                        sp:predicate debug-swa:belongsToGeneratedPackage ;
+                        sp:subject [
+                            sp:varName "r" ;
+                          ] ;
+                      ]
+                    ) ;
+                  sp:where (
+                      [
+                        sp:object owl:Restriction ;
+                        sp:predicate rdf:type ;
+                        sp:subject [
+                            sp:varName "r" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "basis" ;
+                          ] ;
+                        sp:predicate <http://uml.topquadrant.com/owl/cmof/osg/cmof#hasCMOFbasis> ;
+                        sp:subject [
+                            sp:varName "r" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "basis" ;
+                          ] ;
+                        sp:predicate <http://uml.topquadrant.com/owl/cmof/osg/cmof#hasOwnedAttribute> ;
+                        sp:subject [
+                            sp:varName "x" ;
+                          ] ;
+                      ]
+                      [
+                        rdf:type sp:TriplePath ;
+                        sp:object [
+                            sp:varName "x" ;
+                          ] ;
+                        sp:path [
+                            rdf:type sp:ModPath ;
+                            sp:modMax -2 ;
+                            sp:modMin 0 ;
+                            sp:subPath <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                          ] ;
+                        sp:subject [
+                            sp:varName "p" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object <http://uml.topquadrant.com/owl/cmof/osg/cmof#PackagedPackage> ;
+                        sp:predicate rdf:type ;
+                        sp:subject [
+                            sp:varName "p" ;
+                          ] ;
+                      ]
+                      [
+                        rdf:type sp:Bind ;
+                        sp:expression [
+                            rdf:type smf:trace ;
+                            sp:arg1 "Restriction {?1} belongs to package {?2} related to {?3}" ;
+                            sp:arg2 [
+                                sp:varName "r" ;
+                              ] ;
+                            sp:arg3 [
+                                sp:varName "p" ;
+                              ] ;
+                            sp:arg4 [
+                                sp:varName "basis" ;
+                              ] ;
+                          ] ;
+                        sp:variable [
+                            sp:varName "t1" ;
+                          ] ;
+                      ]
+                    ) ;
+                ] ;
+            ] ;
+          ui:childIndex 2 ;
+          ui:template debug-swa:GetPackages ;
+          ui:varName "packages" ;
+        ] ;
+    ] ;
+  rdfs:subClassOf debug-swa:Generators ;
+.
+debug-swa:GenerateImportsForExternalObjects
+  rdf:type ui:NodeClass ;
+  ui:prototype [
+      rdf:type ui:group ;
+      ui:child [
+          rdf:type html:P ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 0 ;
+              ui:text "External Objects: For everything that belongs to " ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 1 ;
+              ui:text [
+                  rdf:type ui:label ;
+                  sp:arg1 [
+                      sp:varName "packageObject" ;
+                    ] ;
+                ] ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 2 ;
+              ui:text """ package, and that appears as the subject in any triple, 
+and where the object does NOT belong to that package, make the subject's ontology import the object's ontology.""" ;
+            ] ;
+          ui:childIndex 0 ;
+        ] ;
+      ui:child [
+          rdf:type ui:CommentNode ;
+          ui:childIndex 1 ;
+          rdfs:comment "debug-swa:DumpTriplesForResourceAsSubject arg:resource=\"{= ?packageObject }\" ui:limit=\"100\"/" ;
+        ] ;
+      ui:child [
+          rdf:type ui:CommentNode ;
+          ui:childIndex 2 ;
+          rdfs:comment "debug-swa:DumpTriplesForResourceAsObject arg:resource=\"{= ?packageObject }\" ui:limit=\"100\"/" ;
+        ] ;
+      ui:child [
+          rdf:type ui:call ;
+          debug-swa:packageObject [
+              sp:varName "packageObject" ;
+            ] ;
+          ui:child [
+              rdf:type ui:forEach ;
+              ui:child [
+                  rdf:type debug-swa:DumpTriplesForResourceAsSubject ;
+                  arg:resource [
+                      sp:varName "o" ;
+                    ] ;
+                  ui:childIndex 0 ;
+                  ui:limit 100 ;
+                ] ;
+              ui:childIndex 0 ;
+              ui:resultSet [
+                  sp:varName "objects" ;
+                ] ;
+            ] ;
+          ui:childIndex 3 ;
+          ui:template debug-swa:GetPackageObjects ;
+          ui:varName "objects" ;
+        ] ;
+    ] ;
+  rdfs:subClassOf debug-swa:PackageGenerator ;
+.
+debug-swa:GenerateImportsForExternalSubjects
+  rdf:type ui:NodeClass ;
+  ui:prototype [
+      rdf:type ui:group ;
+      ui:child [
+          rdf:type html:P ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 0 ;
+              ui:text "For everything that belongs to " ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 1 ;
+              ui:text [
+                  rdf:type ui:label ;
+                  sp:arg1 [
+                      sp:varName "packageObject" ;
+                    ] ;
+                ] ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 2 ;
+              ui:text """ package, and that appears as the object in any triple, and where the subject does NOT belong to that package:
+
+	make the subject's ontology import the package ontology""" ;
+            ] ;
+          ui:childIndex 0 ;
+        ] ;
+    ] ;
+  rdfs:subClassOf debug-swa:PackageGenerator ;
+.
+debug-swa:GenerateOneOWLPackage
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate debug-swa:packageObject ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype [
+      rdf:type ui:group ;
+      ui:child [
+          rdf:type debug-swa:DumpTriplesForProperty ;
+          arg:resource debug-swa:belongsToGeneratedPackage ;
+          ui:childIndex 3 ;
+          ui:limit 200 ;
+        ] ;
+      ui:child [
+          rdf:type html:H3 ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 0 ;
+              ui:text "Generate Package: " ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 1 ;
+              ui:text [
+                  rdf:type ui:label ;
+                  sp:arg1 [
+                      sp:varName "packageObject" ;
+                    ] ;
+                ] ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 2 ;
+              ui:text " [" ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 3 ;
+              ui:text [
+                  rdf:type spl:object ;
+                  sp:arg1 [
+                      sp:varName "packageObject" ;
+                    ] ;
+                  sp:arg2 <http://uml.topquadrant.com/owl/cmof/osg/cmof#name> ;
+                ] ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 4 ;
+              ui:text "]" ;
+            ] ;
+          ui:childIndex 0 ;
+        ] ;
+      ui:child [
+          rdf:type html:Hr ;
+          ui:childIndex 5 ;
+        ] ;
+      ui:child [
+          rdf:type ui:CommentNode ;
+          ui:childIndex 1 ;
+          rdfs:comment "debug-swa:DumpTriplesForResourceAsSubject arg:resource=\"{= ?packageObject }\" ui:limit=\"100\"/" ;
+        ] ;
+      ui:child [
+          rdf:type ui:CommentNode ;
+          ui:childIndex 2 ;
+          rdfs:comment "debug-swa:DumpTriplesForResourceAsObject arg:resource=\"{= ?packageObject }\" ui:limit=\"100\"/" ;
+        ] ;
+      ui:child [
+          rdf:type ui:call ;
+          debug-swa:packageObject [
+              sp:varName "packageObject" ;
+            ] ;
+          ui:child [
+              rdf:type debug-swa:ExportOWLModel ;
+              debug-swa:packageObject [
+                  sp:varName "packageObject" ;
+                ] ;
+              ui:childIndex 1 ;
+            ] ;
+          ui:child [
+              rdf:type ui:forEach ;
+              ui:child [
+                  rdf:type debug-swa:DumpTriplesForResourceAsSubject ;
+                  arg:resource [
+                      sp:varName "o" ;
+                    ] ;
+                  ui:childIndex 0 ;
+                  ui:limit 10 ;
+                ] ;
+              ui:childIndex 0 ;
+              ui:resultSet [
+                  sp:varName "objects" ;
+                ] ;
+            ] ;
+          ui:childIndex 4 ;
+          ui:template debug-swa:GetPackageObjects ;
+          ui:varName "objects" ;
+        ] ;
+    ] ;
+  rdfs:comment """<debug-swa:GenerateImportsForExternalSubjects debug-swa:packageObject=\"{= ?packageObject }\"/>
+    <debug-swa:GenerateImportsForExternalObjects debug-swa:packageObject=\"{= ?packageObject }\"/>
+    <debug-swa:GenerateStatementsForMyPackage debug-swa:packageObject=\"{= ?packageObject }\"/>
+    <debug-swa:GenerateOntologyComments debug-swa:packageObject=\"{= ?packageObject }\"/>
+    <debug-swa:GeneratePackageHierarchy debug-swa:packageObject=\"{= ?packageObject }\"/>""" ;
+  rdfs:subClassOf debug-swa:PackageGenerator ;
+.
+debug-swa:GenerateOntologyComments
+  rdf:type ui:NodeClass ;
+  ui:prototype [
+      rdf:type ui:group ;
+      ui:child [
+          rdf:type html:P ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 0 ;
+              ui:text "Construct ontology comment for " ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 1 ;
+              ui:text [
+                  rdf:type ui:label ;
+                  sp:arg1 [
+                      sp:varName "packageObject" ;
+                    ] ;
+                ] ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 2 ;
+              ui:text """
+
+ Any rdfs:comment, add it to a note on the ontology object (Seems backwards!)""" ;
+            ] ;
+          ui:childIndex 0 ;
+        ] ;
+    ] ;
+  rdfs:subClassOf debug-swa:PackageGenerator ;
+.
+debug-swa:GeneratePackageHierarchy
+  rdf:type ui:NodeClass ;
+  ui:prototype [
+      rdf:type ui:group ;
+      ui:child [
+          rdf:type html:P ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 0 ;
+              ui:text "Construct package hierarchy for " ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 1 ;
+              ui:text [
+                  rdf:type ui:label ;
+                  sp:arg1 [
+                      sp:varName "packageObject" ;
+                    ] ;
+                ] ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 2 ;
+              ui:text """
+
+  Reasserts everything where a package is the subject, or where package is the object, plus declare it as a ouml:Package (Used 2 rules to do it)""" ;
+            ] ;
+          ui:childIndex 0 ;
+        ] ;
+    ] ;
+  rdfs:subClassOf debug-swa:PackageGenerator ;
+.
+debug-swa:GenerateStatementsForMyPackage
+  rdf:type ui:NodeClass ;
+  ui:prototype [
+      rdf:type ui:group ;
+      ui:child [
+          rdf:type html:P ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 0 ;
+              ui:text "Get statements for current ontology - package " ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 1 ;
+              ui:text [
+                  rdf:type ui:label ;
+                  sp:arg1 [
+                      sp:varName "packageObject" ;
+                    ] ;
+                ] ;
+            ] ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 2 ;
+              ui:text """
+
+Reassert all triples where something that belongs to a generated package is the subject (without some of the ocmof statements)""" ;
+            ] ;
+          ui:childIndex 0 ;
+        ] ;
+    ] ;
+  rdfs:subClassOf debug-swa:PackageGenerator ;
+.
+debug-swa:Generators
+  rdf:type ui:NodeClass ;
+  rdfs:subClassOf debug-swa:Elements ;
+.
+debug-swa:GetObjectsBelongingToPackage
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "o" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "o" ;
+              ] ;
+            sp:predicate <http://uml.topquadrant.com/owl/cmof/osg/cmof#hasPackagedElement> ;
+            sp:subject [
+                sp:varName "packageObject" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate debug-swa:packageObject ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  rdfs:subClassOf debug-swa:SelectTemplates ;
+.
+debug-swa:GetPackageObjects
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "owlElement" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              sp:object [
+                  sp:varName "element" ;
+                ] ;
+              sp:predicate <http://uml.topquadrant.com/owl/cmof/osg/cmof#hasPackagedElement> ;
+              sp:subject [
+                  sp:varName "packageObject" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "elementType" ;
+                ] ;
+              sp:predicate rdf:type ;
+              sp:subject [
+                  sp:varName "element" ;
+                ] ;
+            ]
+            [
+              rdf:type sp:Filter ;
+              sp:expression [
+                  rdf:type sp:and ;
+                  sp:arg1 [
+                      rdf:type sp:ne ;
+                      sp:arg1 [
+                          sp:varName "elementType" ;
+                        ] ;
+                      sp:arg2 <http://uml.topquadrant.com/owl/cmof/osg/cmof#PackagedPackage> ;
+                    ] ;
+                  sp:arg2 [
+                      rdf:type sp:ne ;
+                      sp:arg1 [
+                          sp:varName "elementType" ;
+                        ] ;
+                      sp:arg2 <http://uml.topquadrant.com/owl/cmof/osg/cmof#packagedElement> ;
+                    ] ;
+                ] ;
+            ]
+          )
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type smf:trace ;
+                sp:arg1 "In debug-swa:GetPackageObjects examining {?1}  of type {?2}" ;
+                sp:arg2 [
+                    sp:varName "element" ;
+                  ] ;
+                sp:arg3 [
+                    sp:varName "elementType" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "t1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "xmiElement" ;
+              ] ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#child> ;
+            sp:subject [
+                sp:varName "element" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "xmiElement" ;
+              ] ;
+            sp:predicate <http://uml.topquadrant.com/owl/cmof/osg/cmof#hasCMOFbasis> ;
+            sp:subject [
+                sp:varName "owlElement" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate debug-swa:packageObject ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  rdfs:subClassOf debug-swa:SelectTemplates ;
+.
+debug-swa:GetPackages
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:distinct "true"^^xsd:boolean ;
+      sp:resultVariables (
+          [
+            sp:varName "package" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object <http://uml.topquadrant.com/owl/cmof/osg/cmof#PackagedPackage> ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "package" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  rdfs:subClassOf debug-swa:SelectTemplates ;
+.
+debug-swa:MakeFileName
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "fileName" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object <http://uml.topquadrant.com/owl/cmof/osg/cmof#PackagedPackage> ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "packageObject" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "packageName" ;
+              ] ;
+            sp:predicate <http://uml.topquadrant.com/owl/cmof/osg/cmof#packageName> ;
+            sp:subject [
+                sp:varName "packageObject" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type fn:lower-case ;
+                sp:arg1 [
+                    rdf:type o2o:normalizeString ;
+                    sp:arg1 [
+                        sp:varName "packageName" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "fileName" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate debug-swa:packageObject ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:subClassOf debug-swa:Functions ;
+.
+debug-swa:PackageGenerator
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate debug-swa:packageObject ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  rdfs:subClassOf debug-swa:Generators ;
+.
+debug-swa:Parts
+  rdf:type ui:NodeClass ;
+  rdfs:subClassOf debug-swa:Elements ;
+.
+debug-swa:SelectTemplates
+  rdf:type spin:SelectTemplate ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+debug-swa:ShowCounts
+  rdf:type ui:NodeClass ;
+  ui:prototype [
+      rdf:type ui:group ;
+      ui:child [
+          rdf:type html:H3 ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 0 ;
+              ui:text "Counts" ;
+            ] ;
+          ui:childIndex 0 ;
+        ] ;
+      ui:child [
+          rdf:type html:Table ;
+          ui:child [
+              rdf:type html:Tbody ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Composite Child Statements" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              rdf:type debug-swa:CountOfCompositeChildStatements ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Owned Associations" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              rdf:type debug-swa:CountOfResourceType ;
+                              arg:resource <http://uml.topquadrant.com/owl/cmof/osg/cmof#OwnedAssociation> ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:childIndex 16 ;
+                ] ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Owned Attributes" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              rdf:type debug-swa:CountOfResourceType ;
+                              arg:resource <http://uml.topquadrant.com/owl/cmof/osg/cmof#OwnedAttribute> ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:childIndex 13 ;
+                ] ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Owned Datatypes" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              rdf:type debug-swa:CountOfResourceType ;
+                              arg:resource <http://uml.topquadrant.com/owl/cmof/osg/cmof#OwnedDatatype> ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:childIndex 14 ;
+                ] ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Owned Objects" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              rdf:type debug-swa:CountOfResourceType ;
+                              arg:resource <http://uml.topquadrant.com/owl/cmof/osg/cmof#OwnedObject> ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:childIndex 15 ;
+                ] ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Packaged Association Classes" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              rdf:type debug-swa:CountOfResourceType ;
+                              arg:resource <http://uml.topquadrant.com/owl/cmof/osg/cmof#PackagedAssociationClass> ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:childIndex 5 ;
+                ] ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Packaged Associations" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              rdf:type debug-swa:CountOfResourceType ;
+                              arg:resource <http://uml.topquadrant.com/owl/cmof/osg/cmof#PackagedAssociation> ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:childIndex 3 ;
+                ] ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Packaged Classes" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              rdf:type debug-swa:CountOfResourceType ;
+                              arg:resource <http://uml.topquadrant.com/owl/cmof/osg/cmof#PackagedClass> ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:childIndex 6 ;
+                ] ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Packaged Dependencies" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              rdf:type debug-swa:CountOfResourceType ;
+                              arg:resource <http://uml.topquadrant.com/owl/cmof/osg/cmof#PackagedDependency> ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:childIndex 7 ;
+                ] ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Packaged Element Statements" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              rdf:type debug-swa:CountOfPackagedElementStatements ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:childIndex 1 ;
+                ] ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Packaged Elements" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              rdf:type debug-swa:CountOfResourceType ;
+                              arg:resource <http://uml.topquadrant.com/owl/cmof/osg/cmof#packagedElement> ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:childIndex 2 ;
+                ] ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Packaged Enumerations" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              rdf:type debug-swa:CountOfResourceType ;
+                              arg:resource <http://uml.topquadrant.com/owl/cmof/osg/cmof#PackagedEnumeration> ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:childIndex 8 ;
+                ] ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Packaged Extension" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              rdf:type debug-swa:CountOfResourceType ;
+                              arg:resource <http://uml.topquadrant.com/owl/cmof/osg/cmof#PackagedExtension> ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:childIndex 9 ;
+                ] ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Packaged Issues" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              rdf:type debug-swa:CountOfResourceType ;
+                              arg:resource <http://uml.topquadrant.com/owl/cmof/osg/cmof#PackagedIssue> ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:childIndex 10 ;
+                ] ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Packaged Packages" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              rdf:type debug-swa:CountOfResourceType ;
+                              arg:resource <http://uml.topquadrant.com/owl/cmof/osg/cmof#PackagedPackage> ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:childIndex 11 ;
+                ] ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Packaged Primitive Types" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              rdf:type debug-swa:CountOfResourceType ;
+                              arg:resource <http://uml.topquadrant.com/owl/cmof/osg/cmof#PackagedPrimitiveType> ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:childIndex 12 ;
+                ] ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Restrictions" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              rdf:type debug-swa:CountOfRestrictions ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:childIndex 4 ;
+                ] ;
+              ui:childIndex 1 ;
+            ] ;
+          ui:child [
+              rdf:type html:Thead ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Count" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Value" ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:childIndex 0 ;
+            ] ;
+          ui:childIndex 1 ;
+        ] ;
+    ] ;
+  rdfs:subClassOf debug-swa:Parts ;
+.
+debug-swa:ShowPackageTriples
+  rdf:type ui:NodeClass ;
+  ui:prototype [
+      rdf:type ui:group ;
+      ui:child [
+          rdf:type html:Table ;
+          ui:child [
+              rdf:type ui:forEach ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type html:Table ;
+                          ui:child [
+                              rdf:type ui:forEach ;
+                              ui:child [
+                                  rdf:type html:Tr ;
+                                  ui:child [
+                                      rdf:type html:Td ;
+                                      ui:child [
+                                          rdf:type ui:TextNode ;
+                                          ui:childIndex 0 ;
+                                          ui:text [
+                                              rdf:type ui:label ;
+                                              sp:arg1 [
+                                                  sp:varName "e" ;
+                                                ] ;
+                                            ] ;
+                                        ] ;
+                                      ui:childIndex 0 ;
+                                    ] ;
+                                  ui:child [
+                                      rdf:type html:Td ;
+                                      ui:child [
+                                          rdf:type ui:TextNode ;
+                                          ui:childIndex 0 ;
+                                          ui:text [
+                                              rdf:type ui:label ;
+                                              sp:arg1 [
+                                                  sp:varName "o" ;
+                                                ] ;
+                                            ] ;
+                                        ] ;
+                                      ui:childIndex 2 ;
+                                    ] ;
+                                  ui:child [
+                                      rdf:type html:Td ;
+                                      ui:child [
+                                          rdf:type ui:TextNode ;
+                                          ui:childIndex 0 ;
+                                          ui:text [
+                                              rdf:type ui:label ;
+                                              sp:arg1 [
+                                                  sp:varName "p" ;
+                                                ] ;
+                                            ] ;
+                                        ] ;
+                                      ui:childIndex 1 ;
+                                    ] ;
+                                  ui:childIndex 0 ;
+                                ] ;
+                              ui:childIndex 0 ;
+                              ui:resultSet [
+                                  rdf:type sp:Select ;
+                                  sp:resultVariables (
+                                      [
+                                        sp:varName "e" ;
+                                      ]
+                                      [
+                                        sp:varName "p" ;
+                                      ]
+                                      [
+                                        sp:varName "o" ;
+                                      ]
+                                    ) ;
+                                  sp:where (
+                                      [
+                                        sp:object [
+                                            sp:varName "e" ;
+                                          ] ;
+                                        sp:predicate <http://uml.topquadrant.com/owl/cmof/osg/cmof#hasPackagedElement> ;
+                                        sp:subject [
+                                            sp:varName "package" ;
+                                          ] ;
+                                      ]
+                                      [
+                                        sp:object [
+                                            sp:varName "o" ;
+                                          ] ;
+                                        sp:predicate [
+                                            sp:varName "p" ;
+                                          ] ;
+                                        sp:subject [
+                                            sp:varName "e" ;
+                                          ] ;
+                                      ]
+                                    ) ;
+                                ] ;
+                            ] ;
+                          ui:childIndex 0 ;
+                        ] ;
+                      ui:childIndex 2 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              rdf:type ui:label ;
+                              sp:arg1 [
+                                  sp:varName "n" ;
+                                ] ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text [
+                              rdf:type ui:label ;
+                              sp:arg1 [
+                                  sp:varName "package" ;
+                                ] ;
+                            ] ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:childIndex 0 ;
+              ui:resultSet [
+                  rdf:type sp:Select ;
+                  sp:resultVariables (
+                      [
+                        sp:varName "package" ;
+                      ]
+                      [
+                        sp:varName "n" ;
+                      ]
+                    ) ;
+                  sp:where (
+                      [
+                        sp:object <http://uml.topquadrant.com/owl/cmof/osg/cmof#PackagedPackage> ;
+                        sp:predicate rdf:type ;
+                        sp:subject [
+                            sp:varName "package" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "n" ;
+                          ] ;
+                        sp:predicate <http://uml.topquadrant.com/owl/cmof/osg/cmof#packageName> ;
+                        sp:subject [
+                            sp:varName "package" ;
+                          ] ;
+                      ]
+                    ) ;
+                ] ;
+            ] ;
+          ui:childIndex 0 ;
+        ] ;
+    ] ;
+  rdfs:subClassOf debug-swa:Parts ;
+.
+debug-swa:ShowPackages
+  rdf:type ui:NodeClass ;
+  ui:prototype [
+      rdf:type ui:group ;
+      ui:child [
+          rdf:type html:H2 ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 0 ;
+              ui:text "Packages" ;
+            ] ;
+          ui:childIndex 0 ;
+        ] ;
+      ui:child [
+          rdf:type html:Table ;
+          ui:child [
+              rdf:type html:Tbody ;
+              ui:child [
+                  rdf:type ui:forEach ;
+                  ui:child [
+                      rdf:type html:Tr ;
+                      ui:child [
+                          rdf:type html:Td ;
+                          ui:child [
+                              rdf:type ui:TextNode ;
+                              ui:childIndex 0 ;
+                              ui:text [
+                                  sp:varName "n" ;
+                                ] ;
+                            ] ;
+                          ui:childIndex 0 ;
+                        ] ;
+                      ui:child [
+                          rdf:type html:Td ;
+                          ui:child [
+                              rdf:type ui:TextNode ;
+                              ui:childIndex 0 ;
+                              ui:text [
+                                  sp:varName "package" ;
+                                ] ;
+                            ] ;
+                          ui:childIndex 1 ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                  ui:resultSet [
+                      rdf:type sp:Select ;
+                      sp:resultVariables (
+                          [
+                            sp:varName "package" ;
+                          ]
+                          [
+                            sp:varName "n" ;
+                          ]
+                        ) ;
+                      sp:where (
+                          [
+                            sp:object <http://uml.topquadrant.com/owl/cmof/osg/cmof#PackagedPackage> ;
+                            sp:predicate rdf:type ;
+                            sp:subject [
+                                sp:varName "package" ;
+                              ] ;
+                          ]
+                          [
+                            sp:object [
+                                sp:varName "n" ;
+                              ] ;
+                            sp:predicate <http://uml.topquadrant.com/owl/cmof/osg/cmof#packageName> ;
+                            sp:subject [
+                                sp:varName "package" ;
+                              ] ;
+                          ]
+                        ) ;
+                    ] ;
+                ] ;
+              ui:childIndex 1 ;
+            ] ;
+          ui:child [
+              rdf:type html:Thead ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Name" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "URI" ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:childIndex 0 ;
+            ] ;
+          ui:childIndex 1 ;
+        ] ;
+      ui:child [
+          rdf:type ui:CommentNode ;
+          ui:childIndex 2 ;
+          rdfs:comment "debug-swa:ShowPackageTriples/" ;
+        ] ;
+    ] ;
+  rdfs:subClassOf debug-swa:Parts ;
+.
+debug-swa:ShowParameters
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:defaultValue "/fsgim.job/input/FSGIM.job.xml" ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg3 ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg4 ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg5 ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:prototype [
+      rdf:type ui:group ;
+      ui:child [
+          rdf:type html:H2 ;
+          ui:child [
+              rdf:type ui:TextNode ;
+              ui:childIndex 0 ;
+              ui:text "Parameters" ;
+            ] ;
+          ui:childIndex 0 ;
+        ] ;
+      ui:child [
+          rdf:type html:Table ;
+          ui:child [
+              rdf:type html:Tbody ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text spin:_arg1 ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Source Base URI Template" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text spin:_arg2 ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Target Path Template" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:childIndex 1 ;
+                ] ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text spin:_arg3 ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Target Base URI Template" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:childIndex 2 ;
+                ] ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text spin:_arg4 ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Job Name" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:childIndex 3 ;
+                ] ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text spin:_arg5 ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Td ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Root Package List" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:childIndex 4 ;
+                ] ;
+              ui:childIndex 1 ;
+            ] ;
+          ui:child [
+              rdf:type html:Thead ;
+              ui:child [
+                  rdf:type html:Tr ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Parameter" ;
+                        ] ;
+                      ui:childIndex 0 ;
+                    ] ;
+                  ui:child [
+                      rdf:type html:Th ;
+                      ui:child [
+                          rdf:type ui:TextNode ;
+                          ui:childIndex 0 ;
+                          ui:text "Value" ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:childIndex 0 ;
+            ] ;
+          ui:childIndex 1 ;
+        ] ;
+    ] ;
+  rdfs:subClassOf debug-swa:Parts ;
+.
+debug-swa:belongsToGeneratedPackage
+  rdf:type rdf:Property ;
+.
+debug-swa:jobName
+  rdf:type owl:DatatypeProperty ;
+  rdfs:range xsd:string ;
+.
+debug-swa:packageObject
+  rdf:type owl:ObjectProperty ;
+.
+debug-swa:sourceBaseURI
+  rdf:type owl:DatatypeProperty ;
+  rdfs:range xsd:string ;
+.
+debug-swa:sourceBaseURITemplate
+  rdf:type owl:DatatypeProperty ;
+  rdfs:range xsd:string ;
+.
+debug-swa:targetBaseURI
+  rdf:type owl:DatatypeProperty ;
+  rdfs:range xsd:string ;
+.
+debug-swa:targetBaseURITemplate
+  rdf:type owl:DatatypeProperty ;
+  rdfs:range xsd:string ;
+.
+debug-swa:targetPath
+  rdf:type owl:DatatypeProperty ;
+  rdfs:range xsd:string ;
+.
+debug-swa:targetPathTemplate
+  rdf:type owl:DatatypeProperty ;
+  rdfs:range xsd:string ;
+.
+debug-swa:xmlFilePathTemplate
+  rdf:type owl:DatatypeProperty ;
+  rdfs:range xsd:string ;
+.
+arg:baseURI
+  rdf:type owl:DatatypeProperty ;
+  rdfs:range xsd:string ;
+.
+arg:rootPackageNames
+  rdf:type owl:DatatypeProperty ;
+  rdfs:range xsd:string ;
+.
+sml:ModifyPrefixes
+  rdfs:subClassOf sml:Elements ;
+.

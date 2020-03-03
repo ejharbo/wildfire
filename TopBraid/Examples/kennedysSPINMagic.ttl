@@ -1,0 +1,415 @@
+# baseURI: http://topbraid.org/examples/kennedysSPINMagic
+# imports: http://spinrdf.org/spin
+# imports: http://topbraid.org/examples/kennedys
+# prefix: ksmagic
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix kennedys: <http://topbraid.org/examples/kennedys#> .
+@prefix ksmagic: <http://topbraid.org/examples/kennedysSPINMagic#> .
+@prefix kspin: <http://topbraid.org/examples/kennedysSPIN#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+kennedys:Person
+  spin:constraint [
+      a sp:Ask ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "age" ;
+              ] ;
+            sp:predicate kspin:age ;
+            sp:subject spin:_this ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:or ;
+                sp:arg1 [
+                    a sp:lt ;
+                    sp:arg1 [
+                        sp:varName "age" ;
+                      ] ;
+                    sp:arg2 0 ;
+                  ] ;
+                sp:arg2 [
+                    a sp:gt ;
+                    sp:arg1 [
+                        sp:varName "age" ;
+                      ] ;
+                    sp:arg2 120 ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+      rdfs:comment "age must be within a realistic range" ;
+    ] ;
+  spin:constraint [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object spin:ConstraintViolation ;
+            sp:predicate rdf:type ;
+            sp:subject _:b36523 ;
+          ]
+          [
+            sp:object spin:_this ;
+            sp:predicate spin:violationRoot ;
+            sp:subject _:b36523 ;
+          ]
+          [
+            sp:object kennedys:spouse ;
+            sp:predicate spin:violationPath ;
+            sp:subject _:b36523 ;
+          ]
+          [
+            sp:object "Same-sex marriage not permitted (in this model)" ;
+            sp:predicate rdfs:label ;
+            sp:subject _:b36523 ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "spouse" ;
+              ] ;
+            sp:predicate kennedys:spouse ;
+            sp:subject spin:_this ;
+          ]
+          [
+            sp:object [
+                sp:varName "gender" ;
+              ] ;
+            sp:predicate kennedys:gender ;
+            sp:subject spin:_this ;
+          ]
+          [
+            sp:object [
+                sp:varName "spouseGender" ;
+              ] ;
+            sp:predicate kennedys:gender ;
+            sp:subject [
+                sp:varName "spouse" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:eq ;
+                sp:arg1 [
+                    sp:varName "gender" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "spouseGender" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:rule [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "age" ;
+              ] ;
+            sp:predicate kspin:age ;
+            sp:subject spin:_this ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "birthYear" ;
+              ] ;
+            sp:predicate kennedys:birthYear ;
+            sp:subject spin:_this ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a kspin:getCurrentYear ;
+              ] ;
+            sp:variable [
+                sp:varName "currentYear" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:sub ;
+                sp:arg1 [
+                    sp:varName "currentYear" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "birthYear" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "age" ;
+              ] ;
+          ]
+        ) ;
+      rdfs:comment "Infer age from currentYear - birthYear" ;
+    ] ;
+.
+kspin:age
+  a spin:MagicProperty ;
+  a owl:DatatypeProperty ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "age" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "birthYear" ;
+              ] ;
+            sp:predicate kennedys:birthYear ;
+            sp:subject spin:_arg1 ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a kspin:getCurrentYear ;
+              ] ;
+            sp:variable [
+                sp:varName "currentYear" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:sub ;
+                sp:arg1 [
+                    sp:varName "currentYear" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "birthYear" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "age" ;
+              ] ;
+          ]
+        ) ;
+      rdfs:comment "Infer age from currentYear - birthYear" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType kennedys:Person ;
+      rdfs:comment "The person to get the age of." ;
+    ] ;
+  rdfs:domain kennedys:Person ;
+  rdfs:label "age" ;
+  rdfs:range xsd:integer ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+kspin:getCurrentYear
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "year" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a xsd:string ;
+                sp:arg1 [
+                    a sp:now ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "str" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a fn:substring ;
+                sp:arg1 [
+                    sp:varName "str" ;
+                  ] ;
+                sp:arg2 1 ;
+                sp:arg3 4 ;
+              ] ;
+            sp:variable [
+                sp:varName "sub" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a xsd:integer ;
+                sp:arg1 [
+                    sp:varName "sub" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "year" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:returnType xsd:integer ;
+  rdfs:comment "Gets the current year as an xsd:integer." ;
+  rdfs:label "get current year" ;
+  rdfs:subClassOf spin:Functions ;
+.
+kspin:getFather
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "father" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "father" ;
+              ] ;
+            sp:predicate kennedys:parent ;
+            sp:subject spin:_arg1 ;
+          ]
+          [
+            sp:object kennedys:male ;
+            sp:predicate kennedys:gender ;
+            sp:subject [
+                sp:varName "father" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType kennedys:Person ;
+      rdfs:comment "the person to get the father of" ;
+    ] ;
+  rdfs:comment "Gets the male parent of a given person (?arg1)" ;
+  rdfs:label "get father" ;
+  rdfs:subClassOf spin:Functions ;
+.
+kspin:grandFather
+  a spin:MagicProperty ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "grandParent" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object spin:_arg1 ;
+            sp:predicate kennedys:child ;
+            sp:subject [
+                sp:varName "parent" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "parent" ;
+              ] ;
+            sp:predicate kennedys:child ;
+            sp:subject [
+                sp:varName "grandParent" ;
+              ] ;
+          ]
+          [
+            sp:object kennedys:male ;
+            sp:predicate kennedys:gender ;
+            sp:subject [
+                sp:varName "grandParent" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType kennedys:Person ;
+      rdfs:comment "The person to get the grand father of." ;
+    ] ;
+  spin:returnType kennedys:Person ;
+  rdfs:label "grand father" ;
+  rdfs:subClassOf spin:MagicProperties ;
+  rdfs:subPropertyOf kspin:grandParent ;
+.
+kspin:grandMother
+  a spin:MagicProperty ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "grandParent" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object spin:_arg1 ;
+            sp:predicate kennedys:child ;
+            sp:subject [
+                sp:varName "parent" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "parent" ;
+              ] ;
+            sp:predicate kennedys:child ;
+            sp:subject [
+                sp:varName "grandParent" ;
+              ] ;
+          ]
+          [
+            sp:object kennedys:female ;
+            sp:predicate kennedys:gender ;
+            sp:subject [
+                sp:varName "grandParent" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType kennedys:Person ;
+      rdfs:comment "The person to get the grand mother of." ;
+    ] ;
+  spin:returnType kennedys:Person ;
+  rdfs:label "grand mother" ;
+  rdfs:subClassOf spin:MagicProperties ;
+  rdfs:subPropertyOf kspin:grandParent ;
+.
+kspin:grandParent
+  a owl:ObjectProperty ;
+  rdfs:label "grand parent" ;
+.
+kspin:predicate
+  a rdf:Property ;
+  rdfs:label "predicate" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://topbraid.org/examples/kennedysSPINMagic>
+  a owl:Ontology ;
+  rdfs:comment "A variation of the infamous Kennedys ontology that uses Magic SPIN Properties instead of rules to compute age and grand parent relationships." ;
+  owl:imports <http://spinrdf.org/spin> ;
+  owl:imports <http://topbraid.org/examples/kennedys> ;
+.

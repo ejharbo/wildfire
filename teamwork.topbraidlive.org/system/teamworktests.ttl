@@ -1,0 +1,39 @@
+# baseURI: http://topbraid.org/teamworktests
+# imports: http://datashapes.org/dash
+# imports: http://topbraid.org/teamwork.spin
+# prefix: teamworktests
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix teamworktests: <http://topbraid.org/teamworktests#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://topbraid.org/teamwork#TestEnvironment>
+  rdf:type rdfs:Class ;
+  rdf:type sh:Shape ;
+  rdfs:comment "The class of teamwork-related test environments. These are based on TriG files containing the master and TCH graphs as well as the users graph." ;
+  rdfs:label "Teamwork test environment" ;
+  rdfs:subClassOf <http://datashapes.org/dash#TestEnvironment> ;
+.
+<http://topbraid.org/teamwork#declarePrefix>
+  rdf:type rdf:Property ;
+  rdfs:comment "Used to remember prefix declarations local to a graph within that graph." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "declare prefix" ;
+  rdfs:range sh:PrefixDeclaration ;
+.
+<http://topbraid.org/teamwork#testEnvironmentPath>
+  rdf:type rdf:Property ;
+  rdfs:comment "The path of an environment's TriG file, relative to the workspace root." ;
+  rdfs:domain <http://topbraid.org/teamwork#TestEnvironment> ;
+  rdfs:label "test environment path" ;
+  rdfs:range xsd:string ;
+.
+<http://topbraid.org/teamworktests>
+  rdf:type owl:Ontology ;
+  owl:imports <http://datashapes.org/dash> ;
+  owl:imports <http://topbraid.org/teamwork.spin> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.

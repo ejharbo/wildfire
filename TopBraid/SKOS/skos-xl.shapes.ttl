@@ -1,0 +1,72 @@
+# baseURI: http://topbraid.org/skos-xl.shapes
+# imports: http://topbraid.org/skos.shapes
+# imports: http://www.w3.org/2008/05/skos-xl
+
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://evn.topbraidlive.org/evnprojects#Taxonomy>
+  graphql:publicClass skosxl:Label ;
+.
+<http://topbraid.org/skos-xl.shapes>
+  a owl:Ontology ;
+  rdfs:label "SKOS-XL SHACL shapes" ;
+  owl:imports <http://topbraid.org/skos.shapes> ;
+  owl:imports <http://www.w3.org/2008/05/skos-xl> ;
+  sh:declare [
+      a sh:PrefixDeclaration ;
+      sh:namespace "http://www.w3.org/2008/05/skos-xl#"^^xsd:anyURI ;
+      sh:prefix "skosxl" ;
+    ] ;
+.
+skos:Concept
+  a sh:NodeShape ;
+  sh:property skos:Concept-altLabelXL ;
+  sh:property skos:Concept-hiddenLabelXL ;
+.
+skos:Concept-altLabelXL
+  a sh:PropertyShape ;
+  sh:path skosxl:altLabel ;
+  sh:class skosxl:Label ;
+  sh:description "Associates an skosxl:Label with a skos:Concept. The property is analogous to skos:altLabel."@en ;
+  sh:group skosxl:LabelObjectsPropertyGroup ;
+  sh:order 1 ;
+.
+skos:Concept-hiddenLabelXL
+  a sh:PropertyShape ;
+  sh:path skosxl:hiddenLabel ;
+  sh:class skosxl:Label ;
+  sh:description "Associates an skosxl:Label with a skos:Concept. The property is analogous to skos:hiddenLabel."@en ;
+  sh:group skosxl:LabelObjectsPropertyGroup ;
+  sh:order 2 ;
+.
+skosxl:Label
+  a sh:NodeShape ;
+  sh:property skosxl:Label-literalForm ;
+.
+skosxl:Label-literalForm
+  a sh:PropertyShape ;
+  sh:path skosxl:literalForm ;
+  sh:minCount 1 ;
+  sh:name "literal form" ;
+  sh:or (
+      [
+        sh:datatype xsd:string ;
+      ]
+      [
+        sh:datatype rdf:langString ;
+      ]
+    ) ;
+.
+skosxl:LabelObjectsPropertyGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Label Objects (SKOS-XL)" ;
+  sh:order "1"^^xsd:decimal ;
+.

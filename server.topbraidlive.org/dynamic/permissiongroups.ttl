@@ -1,0 +1,371 @@
+# baseURI: http://server.topbraidlive.org/dynamic/permissiongroups
+# imports: http://server.topbraidlive.org/web/2013/permissiongroups
+
+@prefix :      <http://server.topbraidlive.org/dynamic/permissiongroups#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix pg:    <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+:ExplorerGroup  a   pg:PermissionGroup ;
+        rdfs:label  "ExplorerGroup" .
+
+:AdministratorGroup  a            pg:PermissionGroup ;
+        rdfs:label                "AdministratorGroup" ;
+        pg:allowedRole            :ANY_ROLE ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :ANY ;
+                                                        pg:assetID      :ANY_RESOURCE
+                                                      ] ;
+                                    pg:hasPermission  pg:Update , pg:Read , pg:Execute , pg:Delete , pg:Create
+                                  ] .
+
+:ANY_RESOURCE  a    pg:Asset ;
+        rdfs:label  "ANY_RESOURCE" .
+
+<http://server.topbraidlive.org/dynamic/permissiongroups>
+        a                owl:Ontology ;
+        owl:imports      <http://server.topbraidlive.org/web/2013/permissiongroups> ;
+        owl:versionInfo  "Created with TopBraid Composer" .
+
+:UpdateAllowRole  a  pg:Role ;
+        rdfs:label  "UpdateAllowRole" .
+
+:ANY_PROJECT_RESOURCE
+        a           pg:Asset ;
+        rdfs:label  "ANY_PROJECT_RESOURCE" .
+
+:SPARQLUpdateAllowGrp
+        a                         pg:PermissionGroup ;
+        rdfs:label                "SPARQLUpdateAllowGrp" ;
+        pg:allowedRole            :UpdateAllowRole ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      :ANY_GRAPH_RESOURCE
+                                                      ] ;
+                                    pg:hasPermission  pg:Update , pg:Read
+                                  ] .
+
+:SPARQLUpdateDenyGrp  a           pg:PermissionGroup ;
+        rdfs:label                "SPARQLUpdateDenyGrp" ;
+        pg:allowedRole            :UpdateDenyRole ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      :ANY_GRAPH_RESOURCE
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] .
+
+:UpdateDenyRole  a  pg:Role ;
+        rdfs:label  "UpdateDenyRole" .
+
+:ANY_ROLE  a        pg:Role ;
+        rdfs:label  "ANY_ROLE" .
+
+:readAnyGraphGrp  a               pg:PermissionGroup ;
+        rdfs:label                "readAnyGraphGrp" ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      :ANY_GRAPH_RESOURCE
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] .
+
+:TBCommonImportsGroup
+        a                         pg:PermissionGroup ;
+        rdfs:label                "TBCommonImportsGroup" ;
+        pg:allowedRole            :ANY_ROLE ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://spinrdf.org/spin>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://rdfs.org/sioc/ns>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://uispin.org/ui#addedGraph>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://topbraid.org/sparqlmotion/sm2wsdl.sms>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://example.org/taggerProps>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://www.w3.org/2008/05/skos-xl>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://server.topbraidlive.org/dynamic/config>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://spinrdf.org/sp>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://topbraid.org/spin/skostemplates>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://uispin.org/ui#deletedGraph>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://topbraid.org/teamworkconstraints>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://rdfex.org/dcterms/created,creator,publisher,source>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://topbraid.org/teamwork.sms>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read , pg:Execute
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://spinrdf.org/spl>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://topbraid.org/raci>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://topbraid.org/search>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://topbraid.org/defaultlayouts>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://topbraid.org/spin/skosspin>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://topbraid.org/rdmfact>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://topbraid.org/spin/evnconstraints>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <urn:x-tb-authgraph>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://www.w3.org/2004/02/skos/core>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://www.w3.org/2005/01/wf/flow>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://rdfex.org/sioc/Container,Item,Post,Role,UserAccount,Usergroup,about,avatar,content,email,has_creator,has_member,reply_of>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://evn-xl.topbraidlive.org/static/scripts/ImportMTFile>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] .
+
+:readWriteAnythingGrp
+        a                         pg:PermissionGroup ;
+        rdfs:label                "readWriteAnythingGrp" ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :ANY ;
+                                                        pg:assetID      :ANY_RESOURCE
+                                                      ] ;
+                                    pg:hasPermission  pg:Update , pg:Read
+                                  ] .
+
+:ANY_SDB_RESOURCE  a  pg:Asset ;
+        rdfs:label  "ANY_SDB_RESOURCE" .
+
+:ANY_GRAPH_RESOURCE  a  pg:Asset ;
+        rdfs:label  "ANY_GRAPH_RESOURCE" .
+
+:ANY_FOLDER_RESOURCE  a  pg:Asset ;
+        rdfs:label  "ANY_FOLDER_RESOURCE" .
+
+:ANY_FILE_RESOURCE  a  pg:Asset ;
+        rdfs:label  "ANY_FILE_RESOURCE" .
+
+:PublicGraphsGroup  a             pg:PermissionGroup ;
+        rdfs:label                "PublicGraphsGroup" ;
+        pg:allowedRole            :ANY_ROLE ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://spinrdf.org/spin>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://topbraid.org/teamwork>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://spinrdf.org/spl>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://topbraid.org/status>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://topbraid.org/compliance>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://server.topbraidlive.org/dynamic/users>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://rdfex.org/dc/description>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://rdfex.org/sioc/UserAccount,Usergroup>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://uispin.org/ui#graph>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://spinrdf.org/sp>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :GRAPH ;
+                                                        pg:assetID      <http://topbraid.org/metadata>
+                                                      ] ;
+                                    pg:hasPermission  pg:Read
+                                  ] .
+
+:ManagerGroup  a                  pg:PermissionGroup ;
+        rdfs:label                "ManagerGroup" ;
+        pg:hasPermissionForAsset  [ a                 pg:GroupAssetPermission ;
+                                    pg:forAsset       [ a               pg:Asset ;
+                                                        pg:assetFamily  :PROJECT ;
+                                                        pg:assetID      :ANY_PROJECT_RESOURCE
+                                                      ] ;
+                                    pg:hasPermission  pg:Update , pg:Read , pg:Delete , pg:Create
+                                  ] .

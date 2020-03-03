@@ -1,0 +1,650 @@
+# baseURI: http://edg.topbraid.solutions/1.0/datatypes/oracle
+# imports: http://edg.topbraid.solutions/1.0/codelist/datatypes
+# imports: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://edg.topbraid.solutions/1.0/schema/datatypes
+# imports: http://qudt.org/2.0/refdata/scalar-datatypes
+# imports: http://qudt.org/2.0/schema/datatype
+# imports: http://www.w3.org/2004/02/skos/core
+
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/datatypes/oracle>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/datatypes/oracle/GMD_oracle> ;
+  vaem:releaseDate "2016-09-29"^^xsd:date ;
+  rdfs:label "EDG Datatypes - ORACLE" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/codelist/datatypes> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/datatypes> ;
+  owl:imports <http://qudt.org/2.0/refdata/scalar-datatypes> ;
+  owl:imports <http://qudt.org/2.0/schema/datatype> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+<http://edg.topbraid.solutions/datatypes/oracle/GMD_oracle>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:DatatypesGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+edg:ORACLE_BFILE
+  a edg:OracleBFILEtype ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description """<p>The BFILE datatype stores unstructured binary data in operating-system files outside the database. A BFILE column or attribute stores a file locator that points to an external file containing the data. The amount of BFILE data that can be stored is limited by the operating system.</p>
+
+<p>BFILEs are read only; you cannot modify them. They support only random (not sequential) reads, and they do not participate in transactions. The underlying operating system must maintain the file integrity, security, and durability for BFILEs. The database administrator must ensure that the file exists and that Oracle Database processes have operating-system read permissions on the file.</p>"""^^rdf:HTML ;
+  edg:name "BFILE" ;
+  edg:referenceLink "https://docs.oracle.com/cd/B28359_01/server.111/b28318/datatype.htm#i3270"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "BFILE (ORACLE)" ;
+.
+edg:ORACLE_BINARY-DOUBLE
+  a edg:OracleNumericDatatype ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description """<p>Oracle Database provides two numeric datatypes exclusively for floating-point numbers: BINARY_FLOAT and BINARY_DOUBLE. They support all of the basic functionality provided by the NUMBER datatype. However, while NUMBER uses decimal precision, BINARY_FLOAT and BINARY_DOUBLE use binary precision. This enables faster arithmetic calculations and usually reduces storage requirements.</p>
+<p>BINARY_FLOAT and BINARY_DOUBLE are approximate numeric datatypes. They store approximate representations of decimal values, rather than exact representations. For example, the value 0.1 cannot be exactly represented by either BINARY_DOUBLE or BINARY_FLOAT. They are frequently used for scientific computations. Their behavior is similar to the datatypes FLOAT and DOUBLE in Java and XMLSchema.</p>
+<p>BINARY_DOUBLE is a 64-bit, double-precision floating-point number datatype. Each BINARY_DOUBLE value requires 9 bytes, including a length byte.</p>"""^^rdf:HTML ;
+  edg:name "BINARY DOUBLE" ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/03_types.htm"^^xsd:anyURI ;
+  edg:referenceLink "https://docs.oracle.com/cd/B28359_01/server.111/b28318/datatype.htm#CDEEEHFJ"^^xsd:anyURI ;
+  qudt:bits 64 ;
+  qudt:bytes 9 ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "BINARY_DOUBLE (ORACLE)" ;
+  rdfs:seeAlso edg:ORACLE_BINARY-FLOAT ;
+.
+edg:ORACLE_BINARY-FLOAT
+  a edg:OracleNumericDatatype ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description """<p>Oracle Database provides two numeric datatypes exclusively for floating-point numbers: BINARY_FLOAT and BINARY_DOUBLE. They support all of the basic functionality provided by the NUMBER datatype. However, while NUMBER uses decimal precision, BINARY_FLOAT and BINARY_DOUBLE use binary precision. This enables faster arithmetic calculations and usually reduces storage requirements.</p>
+<p>BINARY_FLOAT and BINARY_DOUBLE are approximate numeric datatypes. They store approximate representations of decimal values, rather than exact representations. For example, the value 0.1 cannot be exactly represented by either BINARY_DOUBLE or BINARY_FLOAT. They are frequently used for scientific computations. Their behavior is similar to the datatypes FLOAT and DOUBLE in Java and XMLSchema.</p>
+<p>BINARY_FLOAT is a 32-bit, single-precision floating-point number datatype. Each BINARY_FLOAT value requires 5 bytes, including a length byte.</p>"""^^rdf:HTML ;
+  edg:name "BINARY_FLOAT" ;
+  edg:referenceLink "https://docs.oracle.com/cd/B28359_01/server.111/b28318/datatype.htm#CDEEEHFJ"^^xsd:anyURI ;
+  qudt:bits 32 ;
+  qudt:bytes 5 ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "BINARY_FLOAT (ORACLE)" ;
+  rdfs:seeAlso edg:ORACLE_BINARY-DOUBLE ;
+.
+edg:ORACLE_BINARY-INTEGER
+  a edg:OracleNumericDatatype ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description "<p>You use the <em>BINARY_INTEGER</em> datatype to store signed integers. Its magnitude range is -2<sup>31</sup> .. 2<sup>31</sup>. Like <em>PLS_INTEGER</em> values, <em>BINARY_INTEGER</em> values require less storage than <em>NUMBER</em> values. However, most <em>BINARY_INTEGER</em> operations are slower than <em>PLS_INTEGER</em> operations.</p>"^^rdf:HTML ;
+  edg:name "BINARY INTEGER" ;
+  edg:realizes qudt:SIGNED-INTEGER ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/03_types.htm"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "BINARY INTEGER (ORACLE)" ;
+.
+edg:ORACLE_BLOB
+  a edg:OracleLOBtype ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description """<p>The LOB datatypes BLOB, CLOB, NCLOB, and BFILE enable you to store and manipulate large blocks of unstructured data (such as text, graphic images, video clips, and sound waveforms) in binary or character format. They provide efficient, random, piece-wise access to the data. Oracle recommends that you always use LOB datatypes over LONG datatypes. You can perform parallel queries (but not parallel DML or DDL) on LOB columns.</p>
+<p>You use the BLOB datatype to store large binary objects in the database, in-line or out-of-line. Every BLOB variable stores a locator, which points to a large binary object. The size of a BLOB cannot exceed four gigabytes. BLOBs participate fully in transactions, are recoverable, and can be replicated. Changes made by package DBMS_LOB can be committed or rolled back. BLOB locators can span transactions (for reads only), but they cannot span sessions.</p>"""^^rdf:HTML ;
+  edg:name "BLOB" ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/03_types.htm"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "BLOB (ORACLE)" ;
+.
+edg:ORACLE_BOOLEAN
+  a edg:OracleBooleanType ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description "You use the BOOLEAN datatype to store the logical values TRUE, FALSE, and NULL (which stands for a missing, unknown, or inapplicable value). Only logic operations are allowed on BOOLEAN variables. The BOOLEAN datatype takes no parameters. Only the values TRUE, FALSE, and NULL can be assigned to a BOOLEAN variable. You cannot insert the values TRUE and FALSE into a database column. Also, you cannot select or fetch column values into a BOOLEAN variable." ;
+  edg:name "BOOLEAN" ;
+  edg:realizes qudt:BOOLEAN ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/03_types.htm"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "BOOLEAN (ORACLE)" ;
+.
+edg:ORACLE_CHAR
+  a edg:OracleCharacterType ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description """<p>You use the <em>CHAR </em> datatype to store fixed-length character data. How the data is represented internally depends on the database character set. The CHAR datatype takes an optional parameter that lets you specify a maximum size up to 32767 bytes. You can specify the size in terms of bytes or characters, where each character contains one or more bytes, depending on the character set encoding. The syntax follows:</p>
+
+<p>CHAR[(maximum_size [CHAR | BYTE] )]</p>
+
+<p>You cannot use a symbolic constant or variable to specify the maximum size; you must use an integer literal in the range 1 .. 32767.</p>
+
+<p>If you do not specify a maximum size, it defaults to 1. If you specify the maximum size in bytes rather than characters, a CHAR(n) variable might be too small to hold n multibyte characters. To avoid this possibility, use the notation CHAR(n CHAR)so that the variable can hold n characters in the database character set, even if some of those characters contain multiple bytes. When you specify the length in characters, the upper limit is still 32767 bytes. So for double-byte and multibyte character sets, you can only specify 1/2 or 1/3 as many characters as with a single-byte character set.</p>
+
+<p>Although PL/SQL character variables can be relatively long, the maximum width of a CHAR database column is 2000 bytes. So, you cannot insert CHAR values longer than 2000 bytes into a CHAR database column.</p>
+
+<p>You can insert any CHAR(n) value into a LONG database column because the maximum width of a LONG column is 2<sup>31</sup> bytes or two gigabytes. However, you cannot retrieve a value longer than 32767 bytes from a LONG column into a CHAR(n) variable.</p>
+
+<p>When you do not use the CHAR or BYTE qualifiers, the default is determined by the setting of the NLS_LENGTH_SEMANTICS initialization parameter. When a PL/SQL procedure is compiled, the setting of this parameter is recorded, so that the same setting is used when the procedure is recompiled after being invalidated.</p>"""^^rdf:HTML ;
+  edg:name "CHAR" ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/03_types.htm"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "CHAR (ORACLE)" ;
+.
+edg:ORACLE_CHARACTER
+  a edg:OracleCharacterType ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description "The CHAR subtype CHARACTER has the same range of values as its base type. That is, CHARACTER is just another name for CHAR. You can use this subtype for compatibility with ANSI/ISO and IBM types or when you want an identifier more descriptive than CHAR." ;
+  edg:name "CHARACTER" ;
+  edg:realizes qudt:CHAR ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/03_types.htm"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "CHARACTER (ORACLE)" ;
+.
+edg:ORACLE_CLOB
+  a edg:OracleLOBtype ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description "You use the CLOB datatype to store large blocks of character data in the database, in-line or out-of-line. Both fixed-width and variable-width character sets are supported. Every CLOB variable stores a locator, which points to a large block of character data. The size of a CLOB cannot exceed four gigabytes.nCLOBs participate fully in transactions, are recoverable, and can be replicated. Changes made by package DBMS_LOB can be committed or rolled back. CLOB locators can span transactions (for reads only), but they cannot span sessions." ;
+  edg:name "CLOB" ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/03_types.htm"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "CLOB (ORACLE)" ;
+.
+edg:ORACLE_DATE
+  a edg:OracleDateTimeDatatype ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description """<p>The DATE datatype stores point-in-time values (dates and times) in a table. The DATE datatype stores the year (including the century), the month, the day, the hours, the minutes, and the seconds (after midnight).</p>
+
+<p>Oracle Database can store dates in the Julian era, ranging from January 1, 4712 BCE through December 31, 9999 CE (Common Era, or 'AD'). Unless BCE ('BC' in the format mask) is specifically used, CE date entries are the default.</p>
+
+<p>Oracle Database uses its own internal format to store dates. Date data is stored in fixed-length fields of seven bytes each, corresponding to century, year, month, day, hour, minute, and second.</p>
+
+<p>For input and output of dates, the standard Oracle date format is DD-MON-YY, as follows:  '13-NOV-92'</p>"""^^rdf:HTML ;
+  edg:name "DATE" ;
+  edg:realizes qudt:DATE ;
+  edg:referenceLink "https://docs.oracle.com/cd/B28359_01/server.111/b28318/datatype.htm#i1847"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "DATE (ORACLE)" ;
+.
+edg:ORACLE_DEC
+  a edg:OracleDecimalDatatype ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description "DEC is a NUMBER subtype for compatibility with ANSI/ISO and IBM types or when you want a more descriptive name. Use DEC to declare fixed-point numbers with a maximum precision of 38 decimal digits." ;
+  edg:name "DEC" ;
+  edg:realizes qudt:DECIMAL ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/03_types.htm"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "DEC (ORACLE)" ;
+.
+edg:ORACLE_DECIMAL
+  a edg:OracleDecimalDatatype ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description "DECIMAL is a NUMBER subtype for compatibility with ANSI/ISO and IBM types or when you want a more descriptive name. Use DECIMAL to declare fixed-point numbers with a maximum precision of 38 decimal digits." ;
+  edg:name "DECIMAL" ;
+  edg:realizes qudt:DECIMAL ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/03_types.htm"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "DECIMAL (ORACLE)" ;
+.
+edg:ORACLE_INT
+  a edg:OracleNumericDatatype ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description "Use the subtypes INTEGER, INT, and SMALLINT to declare integers with a maximum precision of 38 decimal digits" ;
+  edg:name "INT" ;
+  edg:realizes qudt:SIGNED-INTEGER ;
+  edg:referenceLink "https://docs.oracle.com/cd/B28359_01/server.111/b28318/datatype.htm"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "INT (ORACLE)" ;
+.
+edg:ORACLE_INTEGER
+  a edg:OracleNumericDatatype ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description "Deprecated by Oracle, but still processed and stored internally as NUMBER(38)" ;
+  edg:name "INTEGER" ;
+  edg:realizes qudt:SIGNED-INTEGER ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/03_types.htm"^^xsd:anyURI ;
+  edg:referenceLink "http://docs.oracle.com/cd/B19306_01/olap.102/b14346/dml_datatypes002.htm#CJACDECG"^^xsd:anyURI ;
+  edg:referenceLink "http://docs.oracle.com/javadb/10.10.1.2/ref/rrefsqlj10696.html"^^xsd:anyURI ;
+  edg:referenceLink "http://myorastuff.blogspot.com.ar/2009/04/integer-versus-number-data-type.html"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "INTEGER (ORACLE)" ;
+.
+edg:ORACLE_LONG
+  a edg:OracleLongDatatype ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description """<p>Columns defined as LONG can store variable-length character data containing up to 2 gigabytes of information. LONG data is text data that is to be appropriately converted when moving among different systems. LONG datatype columns are used in the data dictionary to store the text of view definitions. You can use LONG columns in SELECT lists, SET clauses of UPDATE statements, and VALUES clauses of INSERT statements.</p>
+<p><b>NOTE</b>: Do not create tables with LONG columns. Use LOB columns (CLOB, NCLOB) instead. LONG columns are supported only for backward compatibility.
+Oracle also recommends that you convert existing LONG columns to LOB columns. LOB columns are subject to far fewer restrictions than LONG columns. Further, LOB functionality is enhanced in every release, whereas LONG functionality has been static for several releases.</p>"""^^rdf:HTML ;
+  edg:name "LONG" ;
+  edg:realizes qudt:SIGNED-LONG-INTEGER ;
+  edg:referenceLink "https://docs.oracle.com/cd/B28359_01/server.111/b28318/datatype.htm#i3056"^^xsd:anyURI ;
+  qudt:dimensionality 1 ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "LONG (ORACLE)" ;
+.
+edg:ORACLE_NATURAL
+  a edg:OracleNumericDatatype ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description "For convenience, PL/SQL predefines the BINARY_INTEGER subtype 'NATURAL'. The subtypes NATURAL (and POSITIVE) let you restrict an integer variable to non-negative or positive values, respectively. NATURALN and POSITIVEN prevent the assigning of nulls to an integer variable. SIGNTYPE lets you restrict an integer variable to the values -1, 0, and 1, which is useful in programming tri-state logic." ;
+  edg:name "NATURAL" ;
+  edg:realizes qudt:UNSIGNED-INTEGER ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/03_types.htm"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "NATURAL (ORACLE)" ;
+.
+edg:ORACLE_NATURALN
+  a edg:OracleNumericDatatype ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description "For convenience, PL/SQL predefines the BINARY_INTEGER subtype 'NATURALN'.  NATURALN (and POSITIVEN) prevent the assigning of nulls to an integer variable." ;
+  edg:name "NATURALN" ;
+  edg:realizes qudt:UNSIGNED-INTEGER ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/03_types.htm"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "NATURALN (ORACLE)" ;
+.
+edg:ORACLE_NCHAR
+  a edg:OracleStringDatatype ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description """<p>You use the NCHAR datatype to store fixed-length (blank-padded if necessary) national character data. How the data is represented internally depends on the national character set specified when the database was created, which might use a variable-width encoding (UTF8) or a fixed-width encoding (AL16UTF16). Because this type can always accommodate multibyte characters, you can use it to hold any Unicode character data.</p>
+
+<p>The NCHAR datatype takes an optional parameter that lets you specify a maximum size in characters. The syntax follows:</p>
+
+<pre>NCHAR[(maximum_size)]</pre>
+
+<p>Because the physical limit is 32767 bytes, the maximum value you can specify for the length is 32767/2 in the AL16UTF16 encoding, and 32767/3 in the UTF8 encoding.</p>
+<p>You cannot use a symbolic constant or variable to specify the maximum size; you must use an integer literal.</p>
+<p>If you do not specify a maximum size, it defaults to 1. The value always represents the number of characters, unlike CHAR which can be specified in either characters or bytes.</p>
+<pre>my_string NCHAR(100);  -- maximum size is 100 characters</pre>
+
+<p>The maximum width of an NCHAR database column is 2000 bytes. So, you cannot insert NCHAR values longer than 2000 bytes into an NCHAR column.</p>
+<p>If the NCHAR value is shorter than the defined width of the NCHAR column, Oracle blank-pads the value to the defined width.</p>
+<p>You can interchange CHAR and NCHAR values in statements and expressions. It is always safe to turn a CHAR value into an NCHAR value, but turning an NCHAR value into a CHAR value might cause data loss if the character set for the CHAR value cannot represent all the characters in the NCHAR value. Such data loss can result in characters that usually look like question marks (?).</p>"""^^rdf:HTML ;
+  edg:name "NCHAR" ;
+  edg:realizes qudt:STRING ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/03_types.htm"^^xsd:anyURI ;
+  qudt:dimensionality 1 ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "NCHAR (ORACLE)" ;
+.
+edg:ORACLE_NCLOB
+  a edg:OracleLOBtype ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description "You use the NCLOB datatype to store large blocks of NCHAR data in the database, in-line or out-of-line. Both fixed-width and variable-width character sets are supported. Every NCLOB variable stores a locator, which points to a large block of NCHAR data. The size of an NCLOB cannot exceed four gigabytes. NCLOBs participate fully in transactions, are recoverable, and can be replicated. Changes made by package DBMS_LOB can be committed or rolled back. NCLOB locators can span transactions (for reads only), but they cannot span sessions." ;
+  edg:name "NCLOB" ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/03_types.htm"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "NCLOB (ORACLE)" ;
+.
+edg:ORACLE_NUMBER
+  a edg:OracleNumericDatatype ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:compatibleWith qudt:NUMERIC ;
+  edg:description """<p>The <em>NUMBER</em> datatype is used to store fixed-point or floating-point numbers. Its magnitude range is 1E-130 .. 10E125. If the value of an expression falls outside this range, you get a numeric overflow or underflow error. You can specify precision, which is the total number of digits, and scale, which is the number of digits to the right of the decimal point. </p>
+<p>The syntax is: <em>NUMBER[(precision,scale)]</em>. To declare fixed-point numbers, for which you must specify scale, use the following form: </p>
+<pre>NUMBER(precision,scale).</pre>
+<p>You cannot use constants or variables to specify precision and scale; you must use integer literals. The maximum precision of a NUMBER value is 38 decimal digits. If you do not specify precision, it defaults to 38 or the maximum supported by your system, whichever is less.</p>
+<p>Scale, which can range from -84 to 127, determines where rounding occurs. For instance, a scale of 2 rounds to the nearest hundredth (3.456 becomes 3.46). A negative scale rounds to the left of the decimal point. For example, a scale of -3 rounds to the nearest thousand (3456 becomes 3000). A scale of 0 rounds to the nearest whole number. If you do not specify scale, it defaults to 0.</p>"""^^rdf:HTML ;
+  edg:name "NUMBER" ;
+  edg:realizes qudt:FLOAT-SP ;
+  edg:referenceLink "https://docs.oracle.com/cd/B28359_01/server.111/b28318/datatype.htm#i22289"^^xsd:anyURI ;
+  qudt:maxExclusive "\\(10{126}\\)" ;
+  qudt:minInclusive "\\(10{-130}\\)" ;
+  qudt:oracleSQLName "NUMBER" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "NUMBER (ORACLE)" ;
+.
+edg:ORACLE_NVARCHAR
+  a edg:OracleVarchar ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:name "NVARCHAR" ;
+  edg:realizes qudt:STRING ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/03_types.htm"^^xsd:anyURI ;
+  qudt:dimensionality 1 ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "NVARCHAR (ORACLE)" ;
+.
+edg:ORACLE_NVARCHAR2
+  a edg:OracleVarchar2 ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:compatibleWith qudt:UTF16-STRING ;
+  edg:compatibleWith qudt:UTF8-STRING ;
+  edg:description """<p>You use the <em>NVARCHAR2</em> datatype to store variable-length Unicode character data. How the data is represented internally depends on the national character set specified when the database was created, which might use a variable-width encoding (UTF8) or a fixed-width encoding (AL16UTF16). Because this type can always accommodate multibyte characters, you can use it to hold any Unicode character data.</p>
+
+<p>The <em>NVARCHAR2</em> datatype takes a required parameter that specifies a maximum size in characters. The syntax follows:</p>
+
+<pre>NVARCHAR2(maximum_size)</pre>
+
+<p>Because the physical limit is 32767 bytes, the maximum value you can specify for the length is 32767/2 in the AL16UTF16 encoding, and 32767/3 in the UTF8 encoding.</p>
+
+<p>You cannot use a symbolic constant or variable to specify the maximum size; you must use an integer literal.
+The maximum size always represents the number of characters, unlike VARCHAR2 which can be specified in either characters or bytes.</p>
+
+<pre>my_string <em>NVARCHAR2</em>(200);  -- maximum size is 200 characters</pre>
+
+<p>The maximum width of a <em>NVARCHAR2</em> database column is 4000 bytes. Therefore, you cannot insert <em>NVARCHAR2</em> values longer than 4000 bytes into a <em>NVARCHAR2</em> column.</p>
+
+<p>You can interchange <em>VARCHAR2</em> and <em>NVARCHAR2</em> values in statements and expressions. It is always safe to turn a VARCHAR2 value into an <em>NVARCHAR2</em> value, but turning an <em>NVARCHAR2</em> value into a VARCHAR2 value might cause data loss if the character set for the VARCHAR2 value cannot represent all the characters in the <em>NVARCHAR2</em> value. Such data loss can result in characters that usually look like question marks (?).</p>"""^^rdf:HTML ;
+  edg:name "NVARCHAR2" ;
+  edg:realizes qudt:STRING ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/03_types.htm"^^xsd:anyURI ;
+  qudt:dimensionality 1 ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "NVARCHAR2 (ORACLE)" ;
+.
+edg:ORACLE_PLS_INTEGER
+  a edg:OracleNumericDatatype ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description """You use the PLS_INTEGER datatype to store signed integers. Its magnitude range is -2**31 .. 2**31. PLS_INTEGER values require less storage than NUMBER values. Also, PLS_INTEGER operations use machine arithmetic, so they are faster than NUMBER and BINARY_INTEGER operations, which use library arithmetic. For efficiency, use PLS_INTEGER for all calculations that fall within its magnitude range.
+
+Although PLS_INTEGER and BINARY_INTEGER have the same magnitude range, they are not fully compatible. When a PLS_INTEGER calculation overflows, an exception is raised. However, when a BINARY_INTEGER calculation overflows, no exception is raised if the result is assigned to a NUMBER variable.
+
+Because of this small semantic difference, you might want to continue using BINARY_INTEGER in old applications for compatibility. In new applications, always use PLS_INTEGER for better performance.""" ;
+  edg:name "PLS_INTEGER" ;
+  edg:realizes qudt:SIGNED-INTEGER ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/03_types.htm"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "PLS_INTEGER (ORACLE)" ;
+.
+edg:ORACLE_POSITIVE
+  a edg:OracleNumericDatatype ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description "For convenience, PL/SQL predefines the BINARY_INTEGER subtype 'POSITIVE'. " ;
+  edg:name "POSITIVE" ;
+  edg:realizes qudt:POSITIVE-INTEGER ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/03_types.htm"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "POSITIVE (ORACLE)" ;
+.
+edg:ORACLE_POSITIVEN
+  a edg:OracleNumericDatatype ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description "For convenience, PL/SQL predefines the BINARY_INTEGER subtype 'POSITIVEN'.  POSITIVEN prevents the assigning of nulls to an integer variable." ;
+  edg:name "POSITIVEN" ;
+  edg:realizes qudt:POSITIVE-INTEGER ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/03_types.htm"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "POSITIVEN (ORACLE)" ;
+.
+edg:ORACLE_SIGNTYPE
+  a edg:OracleNumericDatatype ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description "For convenience, PL/SQL predefines the BINARY_INTEGER subtype 'SIGNTYPE'. SIGNTYPE lets you restrict an integer variable to the values -1, 0, and 1, which is useful in programming tri-state logic." ;
+  edg:name "SIGNTYPE" ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/03_types.htm"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "SIGNTYPE (ORACLE)" ;
+.
+edg:ORACLE_SMALLINT
+  a edg:OracleNumericDatatype ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description "Use the subtypes INTEGER, INT, and SMALLINT to declare integers with a maximum precision of 38 decimal digits" ;
+  edg:name "SMALLINT" ;
+  edg:realizes qudt:SIGNED-INTEGER ;
+  edg:referenceLink "https://docs.oracle.com/javadb/10.8.3.0/ref/rrefsqlj16221.html"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "SMALLINT (ORACLE)" ;
+.
+edg:ORACLE_STRING
+  a edg:OracleStringDatatype ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description "The VARCHAR2 subtype STRING has the same range of values as their base type. You can use this for compatibility with ANSI/ISO and IBM types." ;
+  edg:name "STRING" ;
+  edg:realizes qudt:STRING ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/b_char.htm#2126"^^xsd:anyURI ;
+  qudt:dimensionality 1 ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "STRING (ORACLE)" ;
+.
+edg:ORACLE_TIMESTAMP
+  a edg:OracleDateTimeDatatype ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description """<p>The datatype <strong>TIMESTAMP</strong>, which extends the datatype DATE, stores the year, month, day, hour, minute, and second. The syntax is:</p>
+
+<pre>TIMESTAMP[(precision)]</pre>
+
+<p>where the optional parameter precision specifies the number of digits in the fractional part of the seconds field. You cannot use a symbolic constant or variable to specify the precision; you must use an integer literal in the range 0 .. 9. The default is 6.</p>"""^^rdf:HTML ;
+  edg:name "TIMESTAMP" ;
+  edg:realizes qudt:DATETIME ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/03_types.htm"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "TIMESTAMP (ORACLE)" ;
+.
+edg:ORACLE_TIMESTAMP-WITH-LOCAL-TIME-ZONE
+  a edg:OracleDateTimeDatatype ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description """<p>The datatype TIMESTAMP WITH LOCAL TIME ZONE, which extends the datatype TIMESTAMP, includes a time-zone displacement. The time-zone displacement is the difference (in hours and minutes) between local time and Coordinated Universal Time (UTC)--formerly Greenwich Mean Time. You can also use named time zones, as with TIMESTAMP WITH TIME ZONE.</p>
+
+<p>The syntax is:</p>
+
+<pre>TIMESTAMP[(precision)] WITH LOCAL TIME ZONE</pre>
+
+<p>where the optional parameter precision specifies the number of digits in the fractional part of the seconds field. You cannot use a symbolic constant or variable to specify the precision; you must use an integer literal in the range 0 .. 9. The default is 6.</p>
+
+<p>This datatype differs from TIMESTAMP WITH TIME ZONE in that when you insert a value into a database column, the value is normalized to the database time zone, and the time-zone displacement is not stored in the column. When you retrieve the value, Oracle returns it in your local session time zone.</p>"""^^rdf:HTML ;
+  edg:name "TIMESTAMP WITH TIME ZONE" ;
+  edg:realizes qudt:DATETIME ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/03_types.htm"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "TIMESTAMP WITH  LOCAL TIME ZONE (ORACLE)" ;
+.
+edg:ORACLE_TIMESTAMP-WITH-TIME-ZONE
+  a edg:OracleDateTimeDatatype ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description """<p>The datatype TIMESTAMP WITH TIME ZONE, which extends the datatype TIMESTAMP, includes a time-zone displacement. The time-zone displacement is the difference (in hours and minutes) between local time and Coordinated Universal Time (UTC)--formerly Greenwich Mean Time. The syntax is:</p>
+
+<pre>TIMESTAMP[(precision)] WITH TIME ZONE</pre>
+
+<p>where the optional parameter precision specifies the number of digits in the fractional part of the seconds field. You cannot use a symbolic constant or variable to specify the precision; you must use an integer literal in the range 0 .. 9. The default is 6.</p>
+
+<p>The default timestamp with time zone format is set by the Oracle initialization parameter NLS_TIMESTAMP_TZ_FORMAT.</p>"""^^rdf:HTML ;
+  edg:name "TIMESTAMP WITH TIME ZONE" ;
+  edg:realizes qudt:DATETIME ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/03_types.htm"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "TIMESTAMP WITH TIME ZONE (ORACLE)" ;
+.
+edg:ORACLE_VARCHAR
+  a edg:OracleVarchar ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:description """<p>The VARCHAR2 subtype VARCHAR has the same range of values as their base type. You can use this for compatibility with ANSI/ISO and IBM types.</p>
+
+<p><strong>Note:</strong> Currently, VARCHAR is synonymous with VARCHAR2. However, in future releases of PL/SQL, to accommodate emerging SQL standards, VARCHAR might become a separate datatype with different comparison semantics. So, it is a good idea to use VARCHAR2 rather than VARCHAR.</p>"""^^rdf:HTML ;
+  edg:name "VARCHAR" ;
+  edg:realizes qudt:STRING ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/03_types.htm"^^xsd:anyURI ;
+  qudt:dataOrder qudt:ByColumn ;
+  qudt:dimensionality 1 ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "VARCHAR (ORACLE)" ;
+.
+edg:ORACLE_VARCHAR2
+  a edg:OracleVarchar2 ;
+  edg:belongsTo edg:DTFT_ORACLE ;
+  edg:compatibleWith qudt:UTF16-STRING ;
+  edg:compatibleWith qudt:UTF8-STRING ;
+  edg:description """<p>You use the VARCHAR2 datatype to store variable-length character data. How the data is represented internally depends on the database character set. The VARCHAR2 datatype takes a required parameter that specifies a maximum size up to 32767 bytes. The syntax follows:</p>
+<ol>
+<li>VARCHAR2(maximum_size [CHAR | BYTE])</li>
+<li>You cannot use a symbolic constant or variable to specify the maximum size; you must use an integer literal in the range 1 .. 32767.</li>
+<li>Small VARCHAR2 variables are optimized for performance, and larger ones are optimized for efficient memory use. The cutoff point is 2000 bytes. For a VARCHAR2 that is 2000 bytes or longer, PL/SQL dynamically allocates only enough memory to hold the actual value. For a VARCHAR2 variable that is shorter than 2000 bytes, PL/SQL preallocates the full declared length of the variable. For example, if you assign the same 500-byte value to a VARCHAR2(2000 BYTE) variable and to a VARCHAR2(1999 BYTE) variable, the former takes up 500 bytes and the latter takes up 1999 bytes.</li>
+<li>If you specify the maximum size in bytes rather than characters, a VARCHAR2(n) variable might be too small to hold n multibyte characters. To avoid this possibility, use the notation VARCHAR2(n CHAR)so that the variable can hold n characters in the database character set, even if some of those characters contain multiple bytes. When you specify the length in characters, the upper limit is still 32767 bytes. So for double-byte and multibyte character sets, you can only specify 1/2 or 1/3 as many characters as with a single-byte character set.</li>
+<li>Although PL/SQL character variables can be relatively long, the maximum width of a VARCHAR2 database column is 4000 bytes. So, you cannot insert VARCHAR2 values longer than 4000 bytes into a VARCHAR2 database column.</li>
+<li>You can insert any VARCHAR2(n) value into a LONG database column because the maximum width of a LONG column is 2**31 bytes. However, you cannot retrieve a value longer than 32767 bytes from a LONG column into a VARCHAR2(n) variable.</li>
+<li>When you do not use the CHAR or BYTE qualifiers, the default is determined by the setting of the NLS_LENGTH_SEMANTICS initialization parameter. When a PL/SQL procedure is compiled, the setting of this parameter is recorded, so that the same setting is used when the procedure is recompiled after being invalidated.</li>
+<li>When you assign a character value to a VARCHAR2 variable, if the value is shorter than the declared length of the variable, PL/SQL neither blank-pads the value nor strips trailing blanks. Character values are assigned intact, so no information is lost. If the character value is longer than the declared length of the VARCHAR2 variable, PL/SQL aborts the assignment and raises VALUE_ERROR. PL/SQL neither truncates the value nor tries to trim trailing blanks.</li>
+</ol>"""^^rdf:HTML ;
+  edg:name "VARCHAR2" ;
+  edg:realizes qudt:STRING ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/03_types.htm"^^xsd:anyURI ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/b_char.htm#2126"^^xsd:anyURI ;
+  qudt:dimensionality 1 ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "VARCHAR2 (ORACLE)" ;
+.
+edg:OracleBFILEtype
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  edg:description "<p>The <b>BFILE</b> datatype is ...</p>"^^rdf:HTML ;
+  edg:referenceLink "https://docs.oracle.com/cd/B28359_01/server.111/b28318/datatype.htm#i3266"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "Oracle BFILE Type" ;
+  rdfs:subClassOf edg:OracleDatatype ;
+.
+edg:OracleBooleanType
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "Oracle Boolean Type" ;
+  rdfs:subClassOf edg:OracleDatatype ;
+.
+edg:OracleCharacterType
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "Oracle Character Type" ;
+  rdfs:subClassOf edg:OracleDatatype ;
+.
+edg:OracleDatatype
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  edg:referenceLink "https://docs.oracle.com/cd/B28359_01/server.111/b28318/datatype.htm"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "Oracle Datatype" ;
+  rdfs:subClassOf edg:PhysicalDatatype ;
+.
+edg:OracleDateTimeDatatype
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "Oracle Data/Time Datatype" ;
+  rdfs:subClassOf edg:OracleDatatype ;
+.
+edg:OracleDecimalDatatype
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "Oracle decimal datatype" ;
+  rdfs:subClassOf edg:OracleNumericDatatype ;
+  skos:prefLabel "Oracle Decimal Datatype" ;
+.
+edg:OracleIntegerDatatypeVariant
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "Oracle Integer Datatype Variant" ;
+  rdfs:subClassOf edg:OracleNumericDatatype ;
+  skos:prefLabel "Oracle Integer Datatype Variant" ;
+.
+edg:OracleLOBtype
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  edg:description "The LOB datatypes BLOB, CLOB, NCLOB, and BFILE enable you to store and manipulate large blocks of unstructured data (such as text, graphic images, video clips, and sound waveforms) in binary or character format. They provide efficient, random, piece-wise access to the data. Oracle recommends that you always use LOB datatypes over LONG datatypes. You can perform parallel queries (but not parallel DML or DDL) on LOB columns."^^rdf:HTML ;
+  edg:referenceLink "https://docs.oracle.com/cd/B28359_01/server.111/b28318/datatype.htm"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "Oracle LOB Type" ;
+  rdfs:subClassOf edg:OracleDatatype ;
+.
+edg:OracleLongDatatype
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  edg:description "<p></p>"^^rdf:HTML ;
+  edg:referenceLink "https://docs.oracle.com/cd/B28359_01/server.111/b28318/datatype.htm#i3056"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "Oracle Long Datatype" ;
+  rdfs:subClassOf edg:OracleStringDatatype ;
+.
+edg:OracleNumericDatatype
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  rdfs:label "Oracle numeric datatype" ;
+  rdfs:subClassOf edg:OracleDatatype ;
+  skos:prefLabel "Oracle Numeric Datatype" ;
+.
+edg:OracleOLAP-DMLnumericDatatype
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  edg:referenceLink "http://docs.oracle.com/cd/B19306_01/olap.102/b14346/dml_datatypes002.htm#CJACDECG"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "ORACLE OLAP DML Numeric Datatype" ;
+  rdfs:subClassOf edg:OracleDatatype ;
+.
+edg:OracleStringDatatype
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "Oracle String Datatype" ;
+  rdfs:subClassOf edg:OracleDatatype ;
+.
+edg:OracleVarchar
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  edg:description """<p>The VARCHAR2 subtype VARCHAR has the same range of values as their base type. You can use this for compatibility with ANSI/ISO and IBM types.</p>
+
+<p>Note: Currently, VARCHAR is synonymous with VARCHAR2. However, in future releases of PL/SQL, to accommodate emerging SQL standards, VARCHAR might become a separate datatype with different comparison semantics. So, it is a good idea to use VARCHAR2 rather than VARCHAR.</p>"""^^rdf:HTML ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/03_types.htm"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "Oracle Varchar" ;
+  rdfs:subClassOf edg:OracleVarchar2 ;
+.
+edg:OracleVarchar2
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  edg:description """<p>Use the VARCHAR2 datatype to store variable-length character data. How the data is represented internally depends on the database character set. The VARCHAR2 datatype takes a required parameter that specifies a maximum size up to 32767 bytes. The syntax follows:</p>
+
+<p>VARCHAR2(maximum_size [CHAR | BYTE])</p>
+
+<p>You cannot use a symbolic constant or variable to specify the maximum size; you must use an integer literal in the range 1 .. 32767.</p>
+
+<p>Small VARCHAR2 variables are optimized for performance, and larger ones are optimized for efficient memory use. The cutoff point is 2000 bytes. For a VARCHAR2 that is 2000 bytes or longer, PL/SQL dynamically allocates only enough memory to hold the actual value. For a VARCHAR2 variable that is shorter than 2000 bytes, PL/SQL preallocates the full declared length of the variable. For example, if you assign the same 500-byte value to a VARCHAR2(2000 BYTE) variable and to a VARCHAR2(1999 BYTE) variable, the former takes up 500 bytes and the latter takes up 1999 bytes.</p>
+
+<p>If you specify the maximum size in bytes rather than characters, a VARCHAR2(n) variable might be too small to hold n multibyte characters. To avoid this possibility, use the notation VARCHAR2(n CHAR)so that the variable can hold n characters in the database character set, even if some of those characters contain multiple bytes. When you specify the length in characters, the upper limit is still 32767 bytes. So for double-byte and multibyte character sets, you can only specify 1/2 or 1/3 as many characters as with a single-byte character set.</p>
+
+<p>Although PL/SQL character variables can be relatively long, the maximum width of a VARCHAR2 database column is 4000 bytes. So, you cannot insert VARCHAR2 values longer than 4000 bytes into a VARCHAR2 database column.</p>
+
+<p>You can insert any VARCHAR2(n) value into a LONG database column because the maximum width of a LONG column is 2**31 bytes. However, you cannot retrieve a value longer than 32767 bytes from a LONG column into a VARCHAR2(n) variable.</p>
+
+<p>When you do not use the CHAR or BYTE qualifiers, the default is determined by the setting of the NLS_LENGTH_SEMANTICS initialization parameter. When a PL/SQL procedure is compiled, the setting of this parameter is recorded, so that the same setting is used when the procedure is recompiled after being invalidated.</p>
+
+<p>When you assign a character value to a VARCHAR2 variable, if the value is shorter than the declared length of the variable, PL/SQL neither blank-pads the value nor strips trailing blanks. Character values are assigned intact, so no information is lost. If the character value is longer than the declared length of the VARCHAR2 variable, PL/SQL aborts the assignment and raises VALUE_ERROR. PL/SQL neither truncates the value nor tries to trim trailing blanks.</p>"""^^rdf:HTML ;
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/b_char.htm#2126"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  rdfs:label "Oracle Varchar2" ;
+  rdfs:subClassOf edg:OracleStringDatatype ;
+.
+edg:StructuredDatatype
+  edg:referenceLink "http://docs.oracle.com/cd/B10500_01/appdev.920/a96624/03_types.htm"^^xsd:anyURI ;
+.
+edg:USgovClassifiedInformationSystem
+  edg:referenceLink "http://electrospaces.blogspot.com/2013/09/the-us-classification-system.html"^^xsd:anyURI ;
+  edg:referenceLink "https://en.wikipedia.org/wiki/Classified_information_in_the_United_States"^^xsd:anyURI ;
+.
+dcterms:description
+  a rdf:Property ;
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "description" ;
+.
+dcterms:source
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "source" ;
+  rdfs:range xsd:anyURI ;
+.

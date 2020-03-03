@@ -1,0 +1,516 @@
+# baseURI: http://topbraid.org/spin/skosspin
+# imports: http://spinrdf.org/spin
+# imports: http://www.w3.org/2004/02/skos/core
+# prefix: skosspin
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosspin: <http://topbraid.org/spin/skosspin#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+arg:predicate
+  a rdf:Property ;
+  rdfs:label "predicate" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:predicate1
+  a rdf:Property ;
+  rdfs:label "predicate1" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:predicate2
+  a rdf:Property ;
+  rdfs:label "predicate2" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://topbraid.org/spin/skosspin>
+  a owl:Ontology ;
+  rdfs:comment """A collection of SKOS constraints expressed in SPARQL using the SPIN framework.
+
+SKOS constraint S36 is defined for class skos:OrderedCollection and the others are defined for class skos:Concept.""" ;
+  rdfs:label "SKOS Constraints" ;
+  owl:imports <http://spinrdf.org/spin> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+  owl:versionInfo "1.2.0" ;
+.
+skosspin:ConstraintS13
+  a spin:ConstructTemplate ;
+  spin:body [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object spin:ConstraintViolation ;
+            sp:predicate rdf:type ;
+            sp:subject _:b36523 ;
+          ]
+          [
+            sp:object [
+                sp:varName "message" ;
+              ] ;
+            sp:predicate rdfs:label ;
+            sp:subject _:b36523 ;
+          ]
+          [
+            sp:object spin:_this ;
+            sp:predicate spin:violationRoot ;
+            sp:subject _:b36523 ;
+          ]
+          [
+            sp:object [
+                sp:varName "predicate1" ;
+              ] ;
+            sp:predicate spin:violationPath ;
+            sp:subject _:b36523 ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate [
+                sp:varName "predicate1" ;
+              ] ;
+            sp:subject spin:_this ;
+          ]
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate [
+                sp:varName "predicate2" ;
+              ] ;
+            sp:subject spin:_this ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:concat ;
+                sp:arg1 "Constraint S13: A concept can't have the same value in the same language in both " ;
+                sp:arg2 [
+                    a afn:localname ;
+                    sp:arg1 [
+                        sp:varName "predicate1" ;
+                      ] ;
+                  ] ;
+                sp:arg3 " and " ;
+                sp:arg4 [
+                    a afn:localname ;
+                    sp:arg1 [
+                        sp:varName "predicate2" ;
+                      ] ;
+                  ] ;
+                sp:arg5 " - duplicate value: " ;
+                sp:arg6 [
+                    sp:varName "label" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "message" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:predicate1 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The first property to compare (e.g. skos:prefLabel)." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:predicate2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The second predicate to compare (e.g. skos:altLabel)." ;
+    ] ;
+  spin:labelTemplate "S13: Values of {?predicate1} and {?predicate2} must be pairwise disjoint." ;
+  rdfs:comment "Generalization of Constraint S13: skos:prefLabel, skos:altLabel and skos:hiddenLabel are pairwise disjoint properties." ;
+  rdfs:label "Constraint S13" ;
+  rdfs:subClassOf spin:ConstructTemplates ;
+.
+skosspin:checkMembers
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "member" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject spin:_arg2 ;
+          ]
+          [
+            sp:object [
+                sp:varName "member" ;
+              ] ;
+            sp:predicate skos:member ;
+            sp:subject spin:_arg1 ;
+          ]
+          [
+            sp:object [
+                sp:varName "rest" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject spin:_arg2 ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:or ;
+                sp:arg1 [
+                    a sp:eq ;
+                    sp:arg1 [
+                        sp:varName "rest" ;
+                      ] ;
+                    sp:arg2 () ;
+                  ] ;
+                sp:arg2 [
+                    a skosspin:checkMembers ;
+                    sp:arg1 spin:_arg1 ;
+                    sp:arg2 [
+                        sp:varName "rest" ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType skos:OrderedCollection ;
+      rdfs:comment "The collection to check." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:List ;
+      rdfs:comment "The current rdf:List node in the traversal." ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "A helper function for constraint 36 on skos:OrderedCollection. For a given collection (?arg1) and a specific list node (?arg2), this checks whether the rdf:first of that list node is also a value of the collection's skos:member property. If successful, then it moves to the next list item (rdf:rest) and calls itself recursively until the rdf:nil is reached." ;
+  rdfs:label "check members" ;
+  rdfs:subClassOf spin:Functions ;
+.
+skos:Concept
+  spin:constraint [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object spin:ConstraintViolation ;
+            sp:predicate rdf:type ;
+            sp:subject _:b26807 ;
+          ]
+          [
+            sp:object "Constraint S46a: skos:exactMatch is disjoint with each of the properties skos:broadMatch and skos:relatedMatch." ;
+            sp:predicate rdfs:comment ;
+            sp:subject _:b26807 ;
+          ]
+          [
+            sp:object "A concept can't have the same value in both a broader match property and an exact match property." ;
+            sp:predicate rdfs:label ;
+            sp:subject _:b26807 ;
+          ]
+          [
+            sp:object spin:_this ;
+            sp:predicate spin:violationRoot ;
+            sp:subject _:b26807 ;
+          ]
+          [
+            sp:object skos:broadMatch ;
+            sp:predicate spin:violationPath ;
+            sp:subject _:b26807 ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "exactMatch" ;
+              ] ;
+            sp:predicate skos:exactMatch ;
+            sp:subject spin:_this ;
+          ]
+          [
+            sp:object [
+                sp:varName "exactMatch" ;
+              ] ;
+            sp:predicate skos:broadMatch ;
+            sp:subject spin:_this ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object spin:ConstraintViolation ;
+            sp:predicate rdf:type ;
+            sp:subject _:b41446 ;
+          ]
+          [
+            sp:object "Constraint S27: skos:related is disjoint with the property skos:broaderTransitive." ;
+            sp:predicate rdfs:comment ;
+            sp:subject _:b41446 ;
+          ]
+          [
+            sp:object "A concept can't have the same value in both a related property and a broader transitive property." ;
+            sp:predicate rdfs:label ;
+            sp:subject _:b41446 ;
+          ]
+          [
+            sp:object spin:_this ;
+            sp:predicate spin:violationRoot ;
+            sp:subject _:b41446 ;
+          ]
+          [
+            sp:object skos:related ;
+            sp:predicate spin:violationPath ;
+            sp:subject _:b41446 ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "object1" ;
+              ] ;
+            sp:predicate skos:related ;
+            sp:subject spin:_this ;
+          ]
+          [
+            sp:object [
+                sp:varName "object1" ;
+              ] ;
+            sp:predicate skos:broaderTransitive ;
+            sp:subject spin:_this ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object spin:ConstraintViolation ;
+            sp:predicate rdf:type ;
+            sp:subject _:b57745 ;
+          ]
+          [
+            sp:object [
+                sp:varName "message" ;
+              ] ;
+            sp:predicate rdfs:label ;
+            sp:subject _:b57745 ;
+          ]
+          [
+            sp:object spin:_this ;
+            sp:predicate spin:violationRoot ;
+            sp:subject _:b57745 ;
+          ]
+          [
+            sp:object skos:prefLabel ;
+            sp:predicate spin:violationPath ;
+            sp:subject _:b57745 ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "label1" ;
+              ] ;
+            sp:predicate skos:prefLabel ;
+            sp:subject spin:_this ;
+          ]
+          [
+            sp:object [
+                sp:varName "label2" ;
+              ] ;
+            sp:predicate skos:prefLabel ;
+            sp:subject spin:_this ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:and ;
+                sp:arg1 [
+                    a sp:eq ;
+                    sp:arg1 [
+                        a sp:lang ;
+                        sp:arg1 [
+                            sp:varName "label1" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        a sp:lang ;
+                        sp:arg1 [
+                            sp:varName "label2" ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a sp:ne ;
+                    sp:arg1 [
+                        sp:varName "label1" ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "label2" ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:concat ;
+                sp:arg1 "Constraint S14: a resource has no more than one value of skos:prefLabel per language tag (@" ;
+                sp:arg2 [
+                    a sp:lang ;
+                    sp:arg1 [
+                        sp:varName "label1" ;
+                      ] ;
+                  ] ;
+                sp:arg3 ")." ;
+              ] ;
+            sp:variable [
+                sp:varName "message" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object spin:ConstraintViolation ;
+            sp:predicate rdf:type ;
+            sp:subject _:b79611 ;
+          ]
+          [
+            sp:object "Constraint S46b: skos:exactMatch is disjoint with each of the properties skos:broadMatch and skos:relatedMatch." ;
+            sp:predicate rdfs:comment ;
+            sp:subject _:b79611 ;
+          ]
+          [
+            sp:object "A concept can't have the same value in both a related match property and an exact match property." ;
+            sp:predicate rdfs:label ;
+            sp:subject _:b79611 ;
+          ]
+          [
+            sp:object spin:_this ;
+            sp:predicate spin:violationRoot ;
+            sp:subject _:b79611 ;
+          ]
+          [
+            sp:object skos:relatedMatch ;
+            sp:predicate spin:violationPath ;
+            sp:subject _:b79611 ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "exactMatch" ;
+              ] ;
+            sp:predicate skos:exactMatch ;
+            sp:subject spin:_this ;
+          ]
+          [
+            sp:object [
+                sp:varName "exactMatch" ;
+              ] ;
+            sp:predicate skos:relatedMatch ;
+            sp:subject spin:_this ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a skosspin:ConstraintS13 ;
+      arg:predicate1 skos:altLabel ;
+      arg:predicate2 skos:hiddenLabel ;
+    ] ;
+  spin:constraint [
+      a skosspin:ConstraintS13 ;
+      arg:predicate1 skos:altLabel ;
+      arg:predicate2 skos:prefLabel ;
+    ] ;
+  spin:constraint [
+      a skosspin:ConstraintS13 ;
+      arg:predicate1 skos:hiddenLabel ;
+      arg:predicate2 skos:prefLabel ;
+    ] ;
+  rdfs:comment """Each CONSTRUCT constraint uses language from the SKOS spec in its rdfs:comment and more user-friendly language in the rdfs:label. 
+
+S13 based on  http://www.proxml.be/users/paul/weblog/55d41/Integrity_constraints_in_SKOS_part_2.html.
+
+S14 originally based on http://www.proxml.be/users/paul/weblog/aaad2/Integrity_constraints_in_SKOS_part_1_.html but revised since then.
+
+S27 based on http://www.proxml.be/users/paul/weblog/bfa21/Integrity_Constraints_in_SKOS_part_3.html.
+
+S12 (which was supported in earlier versions) has been removed because it is redundant with RDF 1.1's treatment of untyped literals.""" ;
+.
+skos:OrderedCollection
+  spin:constraint [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object spin:ConstraintViolation ;
+            sp:predicate rdf:type ;
+            sp:subject _:b1914 ;
+          ]
+          [
+            sp:object "S36 For any resource, every item in the list given as the value of the skos:memberList property is also a value of the skos:member property." ;
+            sp:predicate rdfs:label ;
+            sp:subject _:b1914 ;
+          ]
+          [
+            sp:object spin:_this ;
+            sp:predicate spin:violationRoot ;
+            sp:subject _:b1914 ;
+          ]
+          [
+            sp:object skos:memberList ;
+            sp:predicate spin:violationPath ;
+            sp:subject _:b1914 ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "list" ;
+              ] ;
+            sp:predicate skos:memberList ;
+            sp:subject spin:_this ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:and ;
+                sp:arg1 [
+                    a sp:ne ;
+                    sp:arg1 [
+                        sp:varName "list" ;
+                      ] ;
+                    sp:arg2 () ;
+                  ] ;
+                sp:arg2 [
+                    a sp:not ;
+                    sp:arg1 [
+                        a skosspin:checkMembers ;
+                        sp:arg1 spin:_this ;
+                        sp:arg2 [
+                            sp:varName "list" ;
+                          ] ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+.

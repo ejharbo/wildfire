@@ -1,0 +1,2864 @@
+# baseURI: http://edg.topbraid.solutions/1.0/transform/html-lib
+# imports: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://spinrdf.org/spl
+# imports: http://topbraid.org/xhtml
+# imports: http://uispin.org/ui
+# imports: http://www.linkedmodel.org/schema/vaem
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg.xform.html: <http://edg.topbraid.solutions/transfrom/html/> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix xhtml: <http://topbraid.org/xhtml#> .
+@prefix xhtml1: <http://www.w3.org/1999/xhtml#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/transform/html-lib>
+  rdf:type owl:Ontology ;
+  <http://www.linkedmodel.org/schema/vaem#hasGraphMetadata> <http://edg.topbraid.solutions/transform/html-lib/GMD_html-lib> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/core> ;
+  owl:imports <http://spinrdf.org/spl> ;
+  owl:imports <http://topbraid.org/xhtml> ;
+  owl:imports <http://uispin.org/ui> ;
+  owl:imports <http://www.linkedmodel.org/schema/vaem> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+edg:ResearchPaper
+  rdf:type edg:AssetClass ;
+  rdfs:label "Research paper" ;
+  rdfs:subClassOf edg:Report ;
+.
+<http://edg.topbraid.solutions/transform/html-lib/GMD_html-lib>
+  rdf:type <http://www.linkedmodel.org/schema/vaem#GraphMetaData> ;
+  <http://purl.org/dc/terms/modified> "2016-12-18"^^xsd:date ;
+  <http://purl.org/dc/terms/rights> "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  <http://www.linkedmodel.org/schema/vaem#hasGraphRole> <http://www.linkedmodel.org/schema/vaem#TransformsGraph> ;
+  <http://www.linkedmodel.org/schema/vaem#hasLicenseType> <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  <http://www.linkedmodel.org/schema/vaem#hasOwner> <http://www.linkedmodel.org/schema/vaem#TopQuadrant> ;
+  <http://www.linkedmodel.org/schema/vaem#hasSteward> <http://www.linkedmodel.org/schema/vaem#TopQuadrant> ;
+  <http://www.linkedmodel.org/schema/vaem#isMetadataFor> <http://edg.topbraid.solutions/1.0/transform/html-lib> ;
+  <http://www.linkedmodel.org/schema/vaem#name> "EDG" ;
+  <http://www.linkedmodel.org/schema/vaem#namespace> "http://edg.topbraid.solutions/model/" ;
+  <http://www.linkedmodel.org/schema/vaem#namespacePrefix> "edg" ;
+  <http://www.linkedmodel.org/schema/vaem#owner> "TopQuadrant, Inc." ;
+  <http://www.linkedmodel.org/schema/vaem#releaseDate> "2016-12-18"^^xsd:date ;
+  <http://www.linkedmodel.org/schema/vaem#revision> "1.0" ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://purl.org/dc/terms/abstract> ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://purl.org/dc/terms/author> ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://purl.org/dc/terms/created> ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://purl.org/dc/terms/modified> ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://purl.org/dc/terms/rights> ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://purl.org/dc/terms/title> ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  <http://www.linkedmodel.org/schema/vaem#withAttributionTo> "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+edg.xform.html:Functions
+  rdf:type spin:Function ;
+  rdfs:label "Functions" ;
+  rdfs:subClassOf spin:Functions ;
+.
+edg.xform.html:MagicProperties
+  rdf:type spin:MagicProperty ;
+  rdfs:label "Magic properties" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+edg.xform.html:assembleText
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "childIndex" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                rdf:type spif:trim ;
+                sp:arg1 [
+                    rdf:type sp:GroupConcat ;
+                    sp:expression [
+                        sp:varName "myText" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:SubQuery ;
+            sp:query [
+                rdf:type sp:Select ;
+                sp:orderBy (
+                    [
+                      sp:varName "childIndex" ;
+                    ]
+                  ) ;
+                sp:resultVariables (
+                    [
+                      sp:varName "child" ;
+                    ]
+                    [
+                      sp:varName "type" ;
+                    ]
+                    [
+                      sp:varName "childIndex" ;
+                    ]
+                  ) ;
+                sp:where (
+                    [
+                      sp:object [
+                          sp:varName "child" ;
+                        ] ;
+                      sp:predicate <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                      sp:subject [
+                          sp:varName "resource" ;
+                        ] ;
+                    ]
+                    [
+                      sp:object [
+                          sp:varName "type" ;
+                        ] ;
+                      sp:predicate rdf:type ;
+                      sp:subject [
+                          sp:varName "child" ;
+                        ] ;
+                    ]
+                    [
+                      sp:object [
+                          sp:varName "childIndex" ;
+                        ] ;
+                      sp:predicate <http://www.topbraid.org/2007/05/composite.owl#index> ;
+                      sp:subject [
+                          sp:varName "child" ;
+                        ] ;
+                    ]
+                    [
+                      rdf:type sp:Filter ;
+                      sp:expression [
+                          rdf:type sp:notIn ;
+                          sp:arg1 [
+                              sp:varName "childIndex" ;
+                            ] ;
+                          sp:arg2 [
+                              sp:varName "excludedIndexList" ;
+                            ] ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type edg.xform.html:assembleTextFragment ;
+                arg:resource [
+                    sp:varName "child" ;
+                  ] ;
+                arg:retainTags [
+                    sp:varName "retainTags" ;
+                  ] ;
+                arg:urlFunction [
+                    sp:varName "urlFunction" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "myText" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:defaultValue "edg.xform.html:defaultHREFurl" ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:urlFunction ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:excludedIndexList ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:retainTags ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "BIND (smf:trace(\"Child {?1}, type {?2}\", ?child, ?type) AS ?t1) ." ;
+  rdfs:label "assemble text" ;
+  rdfs:subClassOf edg.xform.html:Functions ;
+.
+edg.xform.html:assembleTextFragment
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "childIndex" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "myText" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:Union ;
+            sp:elements (
+                (
+                  [
+                    sp:object <http://topbraid.org/sxml#TextNode> ;
+                    sp:predicate rdf:type ;
+                    sp:subject [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "myText" ;
+                      ] ;
+                    sp:predicate <http://topbraid.org/sxml#text> ;
+                    sp:subject [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    sp:object xhtml:A ;
+                    sp:predicate rdf:type ;
+                    sp:subject [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "href" ;
+                      ] ;
+                    sp:predicate xhtml:href ;
+                    sp:subject [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "child" ;
+                      ] ;
+                    sp:predicate <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                    sp:subject [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    rdf:type sp:Bind ;
+                    sp:expression [
+                        rdf:type edg.xform.html:assembleTextFragment ;
+                        arg:resource [
+                            sp:varName "child" ;
+                          ] ;
+                        arg:retainTags [
+                            sp:varName "retainTags" ;
+                          ] ;
+                        arg:urlFunction [
+                            sp:varName "urlFunction" ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "txt" ;
+                      ] ;
+                  ]
+                  [
+                    rdf:type sp:Bind ;
+                    sp:expression [
+                        rdf:type sp:if ;
+                        sp:arg1 [
+                            sp:varName "retainTags" ;
+                          ] ;
+                        sp:arg2 [
+                            rdf:type sp:concat ;
+                            sp:arg1 "<a href='" ;
+                            sp:arg2 [
+                                rdf:type xsd:string ;
+                                sp:arg1 [
+                                    rdf:type spif:invoke ;
+                                    sp:arg1 [
+                                        sp:varName "urlFunction" ;
+                                      ] ;
+                                    sp:arg2 [
+                                        sp:varName "href" ;
+                                      ] ;
+                                  ] ;
+                              ] ;
+                            sp:arg3 "'>" ;
+                            sp:arg4 [
+                                sp:varName "txt" ;
+                              ] ;
+                            sp:arg5 "</a>" ;
+                          ] ;
+                        sp:arg3 [
+                            sp:varName "txt" ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "myText" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    sp:object xhtml:I ;
+                    sp:predicate rdf:type ;
+                    sp:subject [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    rdf:type sp:TriplePath ;
+                    sp:object [
+                        sp:varName "txt" ;
+                      ] ;
+                    sp:path [
+                        rdf:type sp:SeqPath ;
+                        sp:path1 <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                        sp:path2 <http://topbraid.org/sxml#text> ;
+                      ] ;
+                    sp:subject [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    rdf:type sp:Bind ;
+                    sp:expression [
+                        rdf:type sp:if ;
+                        sp:arg1 [
+                            sp:varName "retainTags" ;
+                          ] ;
+                        sp:arg2 [
+                            rdf:type sp:concat ;
+                            sp:arg1 "<em>" ;
+                            sp:arg2 [
+                                sp:varName "txt" ;
+                              ] ;
+                            sp:arg3 "</em>" ;
+                          ] ;
+                        sp:arg3 [
+                            sp:varName "txt" ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "myText" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    sp:object xhtml:Em ;
+                    sp:predicate rdf:type ;
+                    sp:subject [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    rdf:type sp:TriplePath ;
+                    sp:object [
+                        sp:varName "txt" ;
+                      ] ;
+                    sp:path [
+                        rdf:type sp:SeqPath ;
+                        sp:path1 <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                        sp:path2 <http://topbraid.org/sxml#text> ;
+                      ] ;
+                    sp:subject [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    rdf:type sp:Bind ;
+                    sp:expression [
+                        rdf:type sp:if ;
+                        sp:arg1 [
+                            sp:varName "retainTags" ;
+                          ] ;
+                        sp:arg2 [
+                            rdf:type sp:concat ;
+                            sp:arg1 "<em>" ;
+                            sp:arg2 [
+                                sp:varName "txt" ;
+                              ] ;
+                            sp:arg3 "</em>" ;
+                          ] ;
+                        sp:arg3 [
+                            sp:varName "txt" ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "myText" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    sp:object xhtml:B ;
+                    sp:predicate rdf:type ;
+                    sp:subject [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "child" ;
+                      ] ;
+                    sp:predicate <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                    sp:subject [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    rdf:type sp:Bind ;
+                    sp:expression [
+                        rdf:type edg.xform.html:assembleTextFragment ;
+                        arg:resource [
+                            sp:varName "child" ;
+                          ] ;
+                        arg:retainTags [
+                            sp:varName "retainTags" ;
+                          ] ;
+                        arg:urlFunction [
+                            sp:varName "urlFunction" ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "txt" ;
+                      ] ;
+                  ]
+                  [
+                    rdf:type sp:Bind ;
+                    sp:expression [
+                        rdf:type sp:if ;
+                        sp:arg1 [
+                            sp:varName "retainTags" ;
+                          ] ;
+                        sp:arg2 [
+                            rdf:type sp:concat ;
+                            sp:arg1 "<STRONG>" ;
+                            sp:arg2 [
+                                sp:varName "txt" ;
+                              ] ;
+                            sp:arg3 "</STRONG>" ;
+                          ] ;
+                        sp:arg3 [
+                            sp:varName "txt" ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "myText" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    sp:object xhtml:Strong ;
+                    sp:predicate rdf:type ;
+                    sp:subject [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    rdf:type sp:TriplePath ;
+                    sp:object [
+                        sp:varName "txt" ;
+                      ] ;
+                    sp:path [
+                        rdf:type sp:SeqPath ;
+                        sp:path1 <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                        sp:path2 <http://topbraid.org/sxml#text> ;
+                      ] ;
+                    sp:subject [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    rdf:type sp:Bind ;
+                    sp:expression [
+                        rdf:type sp:if ;
+                        sp:arg1 [
+                            sp:varName "retainTags" ;
+                          ] ;
+                        sp:arg2 [
+                            rdf:type sp:concat ;
+                            sp:arg1 "<strong>" ;
+                            sp:arg2 [
+                                sp:varName "txt" ;
+                              ] ;
+                            sp:arg3 "</strong>" ;
+                          ] ;
+                        sp:arg3 [
+                            sp:varName "txt" ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "myText" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    sp:object xhtml:Br ;
+                    sp:predicate rdf:type ;
+                    sp:subject [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    rdf:type sp:Bind ;
+                    sp:expression [
+                        rdf:type sp:concat ;
+                        sp:arg1 "" ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "myText" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    sp:object xhtml:Span ;
+                    sp:predicate rdf:type ;
+                    sp:subject [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "child" ;
+                      ] ;
+                    sp:predicate <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                    sp:subject [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    rdf:type sp:Bind ;
+                    sp:expression [
+                        rdf:type edg.xform.html:assembleTextFragment ;
+                        arg:resource [
+                            sp:varName "child" ;
+                          ] ;
+                        arg:retainTags [
+                            sp:varName "retainTags" ;
+                          ] ;
+                        arg:urlFunction [
+                            sp:varName "urlFunction" ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "myText" ;
+                      ] ;
+                  ]
+                )
+                (
+                  (
+                    [
+                      sp:object [
+                          sp:varName "type" ;
+                        ] ;
+                      sp:predicate rdf:type ;
+                      sp:subject [
+                          sp:varName "resource" ;
+                        ] ;
+                    ]
+                    [
+                      rdf:type sp:Filter ;
+                      sp:expression [
+                          rdf:type sp:notIn ;
+                          sp:arg1 [
+                              sp:varName "type" ;
+                            ] ;
+                          sp:arg2 <http://topbraid.org/sxml#TextNode> ;
+                          sp:arg3 xhtml:A ;
+                          sp:arg4 xhtml:Br ;
+                          sp:arg5 xhtml:Em ;
+                          sp:arg6 xhtml:B ;
+                          sp:arg7 xhtml:I ;
+                          sp:arg8 xhtml:Span ;
+                          sp:arg9 xhtml:Strong ;
+                        ] ;
+                    ]
+                  )
+                  [
+                    rdf:type sp:Optional ;
+                    sp:elements (
+                        [
+                          rdf:type sp:TriplePath ;
+                          sp:object [
+                              sp:varName "maybeTxt" ;
+                            ] ;
+                          sp:path [
+                              rdf:type sp:SeqPath ;
+                              sp:path1 <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                              sp:path2 <http://topbraid.org/sxml#text> ;
+                            ] ;
+                          sp:subject [
+                              sp:varName "resource" ;
+                            ] ;
+                        ]
+                      ) ;
+                  ]
+                  [
+                    rdf:type sp:Bind ;
+                    sp:expression [
+                        rdf:type sp:coalesce ;
+                        sp:arg1 [
+                            sp:varName "maybeTxt" ;
+                          ] ;
+                        sp:arg2 "???" ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "txt" ;
+                      ] ;
+                  ]
+                  [
+                    rdf:type sp:Bind ;
+                    sp:expression [
+                        rdf:type sp:concat ;
+                        sp:arg1 "<MISSED-" ;
+                        sp:arg2 [
+                            rdf:type afn:localname ;
+                            sp:arg1 [
+                                sp:varName "type" ;
+                              ] ;
+                          ] ;
+                        sp:arg3 ">" ;
+                        sp:arg4 [
+                            sp:varName "txt" ;
+                          ] ;
+                        sp:arg5 "</MISSED-" ;
+                        sp:arg6 [
+                            rdf:type afn:localname ;
+                            sp:arg1 [
+                                sp:varName "type" ;
+                              ] ;
+                          ] ;
+                        sp:arg7 ">" ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "myText" ;
+                      ] ;
+                  ]
+                )
+              ) ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:defaultValue "edg.xform.html:defaultHREFurl" ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:urlFunction ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:retainTags ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "BIND (smf:trace(\"Child {?1}, type {?2}\", ?child, ?type) AS ?t1) ." ;
+  rdfs:label "assemble textfragment" ;
+  rdfs:subClassOf edg.xform.html:Functions ;
+.
+edg.xform.html:constructTextFromElements
+  rdf:type ui:Function ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:excludedIndexList ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:returnType rdf:HTML ;
+  ui:prototype [
+      rdf:type ui:group ;
+      <http://uispin.org/letrs#childElements> [
+          rdf:type sp:Select ;
+          sp:orderBy (
+              [
+                sp:varName "childIndex" ;
+              ]
+            ) ;
+          sp:resultVariables (
+              [
+                sp:varName "child" ;
+              ]
+              [
+                sp:varName "childIndex" ;
+              ]
+              [
+                sp:varName "type" ;
+              ]
+              [
+                sp:varName "myText" ;
+              ]
+            ) ;
+          sp:where (
+              [
+                rdf:type sp:SubQuery ;
+                sp:query [
+                    rdf:type sp:Select ;
+                    sp:resultVariables (
+                        [
+                          sp:varName "child" ;
+                        ]
+                        [
+                          sp:varName "type" ;
+                        ]
+                        [
+                          sp:varName "childIndex" ;
+                        ]
+                      ) ;
+                    sp:where (
+                        [
+                          sp:object [
+                              sp:varName "child" ;
+                            ] ;
+                          sp:predicate <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                          sp:subject [
+                              sp:varName "resource" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "type" ;
+                            ] ;
+                          sp:predicate rdf:type ;
+                          sp:subject [
+                              sp:varName "child" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object [
+                              sp:varName "childIndex" ;
+                            ] ;
+                          sp:predicate <http://www.topbraid.org/2007/05/composite.owl#index> ;
+                          sp:subject [
+                              sp:varName "child" ;
+                            ] ;
+                        ]
+                        [
+                          rdf:type sp:Filter ;
+                          sp:expression [
+                              rdf:type sp:notIn ;
+                              sp:arg1 [
+                                  sp:varName "childIndex" ;
+                                ] ;
+                              sp:arg2 [
+                                  sp:varName "excludedIndexList" ;
+                                ] ;
+                            ] ;
+                        ]
+                      ) ;
+                  ] ;
+              ]
+              [
+                rdf:type sp:Union ;
+                sp:elements (
+                    (
+                      [
+                        sp:object <http://topbraid.org/sxml#TextNode> ;
+                        sp:predicate rdf:type ;
+                        sp:subject [
+                            sp:varName "child" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "myText" ;
+                          ] ;
+                        sp:predicate <http://topbraid.org/sxml#text> ;
+                        sp:subject [
+                            sp:varName "child" ;
+                          ] ;
+                      ]
+                    )
+                    (
+                      [
+                        sp:object xhtml:Em ;
+                        sp:predicate rdf:type ;
+                        sp:subject [
+                            sp:varName "child" ;
+                          ] ;
+                      ]
+                      [
+                        rdf:type sp:TriplePath ;
+                        sp:object [
+                            sp:varName "txt" ;
+                          ] ;
+                        sp:path [
+                            rdf:type sp:SeqPath ;
+                            sp:path1 <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                            sp:path2 <http://topbraid.org/sxml#text> ;
+                          ] ;
+                        sp:subject [
+                            sp:varName "child" ;
+                          ] ;
+                      ]
+                      [
+                        rdf:type sp:Bind ;
+                        sp:expression [
+                            rdf:type sp:concat ;
+                            sp:arg1 "<em>" ;
+                            sp:arg2 [
+                                sp:varName "txt" ;
+                              ] ;
+                            sp:arg3 "</em>" ;
+                          ] ;
+                        sp:variable [
+                            sp:varName "myText" ;
+                          ] ;
+                      ]
+                    )
+                    (
+                      [
+                        sp:object xhtml:Strong ;
+                        sp:predicate rdf:type ;
+                        sp:subject [
+                            sp:varName "child" ;
+                          ] ;
+                      ]
+                      [
+                        rdf:type sp:TriplePath ;
+                        sp:object [
+                            sp:varName "txt" ;
+                          ] ;
+                        sp:path [
+                            rdf:type sp:SeqPath ;
+                            sp:path1 <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                            sp:path2 <http://topbraid.org/sxml#text> ;
+                          ] ;
+                        sp:subject [
+                            sp:varName "child" ;
+                          ] ;
+                      ]
+                      [
+                        rdf:type sp:Bind ;
+                        sp:expression [
+                            rdf:type sp:concat ;
+                            sp:arg1 "<strong>" ;
+                            sp:arg2 [
+                                sp:varName "txt" ;
+                              ] ;
+                            sp:arg3 "</strong>" ;
+                          ] ;
+                        sp:variable [
+                            sp:varName "myText" ;
+                          ] ;
+                      ]
+                    )
+                    (
+                      [
+                        sp:object xhtml:Br ;
+                        sp:predicate rdf:type ;
+                        sp:subject [
+                            sp:varName "child" ;
+                          ] ;
+                      ]
+                      [
+                        rdf:type sp:Bind ;
+                        sp:expression [
+                            rdf:type sp:concat ;
+                            sp:arg1 "" ;
+                          ] ;
+                        sp:variable [
+                            sp:varName "myText" ;
+                          ] ;
+                      ]
+                    )
+                    (
+                      [
+                        sp:object xhtml:Span ;
+                        sp:predicate rdf:type ;
+                        sp:subject [
+                            sp:varName "child" ;
+                          ] ;
+                      ]
+                      [
+                        rdf:type sp:TriplePath ;
+                        sp:object [
+                            sp:varName "myText" ;
+                          ] ;
+                        sp:path [
+                            rdf:type sp:SeqPath ;
+                            sp:path1 <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                            sp:path2 <http://topbraid.org/sxml#text> ;
+                          ] ;
+                        sp:subject [
+                            sp:varName "child" ;
+                          ] ;
+                      ]
+                    )
+                    (
+                      (
+                        [
+                          sp:object [
+                              sp:varName "type" ;
+                            ] ;
+                          sp:predicate rdf:type ;
+                          sp:subject [
+                              sp:varName "child" ;
+                            ] ;
+                        ]
+                        [
+                          rdf:type sp:Filter ;
+                          sp:expression [
+                              rdf:type sp:notIn ;
+                              sp:arg1 [
+                                  sp:varName "type" ;
+                                ] ;
+                              sp:arg2 <http://topbraid.org/sxml#TextNode> ;
+                              sp:arg3 xhtml:Br ;
+                              sp:arg4 xhtml:Em ;
+                              sp:arg5 xhtml:Span ;
+                              sp:arg6 xhtml:Strong ;
+                            ] ;
+                        ]
+                      )
+                      [
+                        rdf:type sp:Optional ;
+                        sp:elements (
+                            [
+                              rdf:type sp:TriplePath ;
+                              sp:object [
+                                  sp:varName "maybeTxt" ;
+                                ] ;
+                              sp:path [
+                                  rdf:type sp:SeqPath ;
+                                  sp:path1 <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                                  sp:path2 <http://topbraid.org/sxml#text> ;
+                                ] ;
+                              sp:subject [
+                                  sp:varName "child" ;
+                                ] ;
+                            ]
+                          ) ;
+                      ]
+                      [
+                        rdf:type sp:Bind ;
+                        sp:expression [
+                            rdf:type smf:trace ;
+                            sp:arg1 "Child {?1}, type {?2}" ;
+                            sp:arg2 [
+                                sp:varName "child" ;
+                              ] ;
+                            sp:arg3 [
+                                sp:varName "type" ;
+                              ] ;
+                          ] ;
+                        sp:variable [
+                            sp:varName "t1" ;
+                          ] ;
+                      ]
+                      [
+                        rdf:type sp:Bind ;
+                        sp:expression [
+                            rdf:type sp:coalesce ;
+                            sp:arg1 [
+                                sp:varName "maybeTxt" ;
+                              ] ;
+                            sp:arg2 "???" ;
+                          ] ;
+                        sp:variable [
+                            sp:varName "txt" ;
+                          ] ;
+                      ]
+                      [
+                        rdf:type sp:Bind ;
+                        sp:expression [
+                            rdf:type sp:concat ;
+                            sp:arg1 "<IGNORED>" ;
+                            sp:arg2 [
+                                sp:varName "txt" ;
+                              ] ;
+                            sp:arg3 "</IGNORED>" ;
+                          ] ;
+                        sp:variable [
+                            sp:varName "myText" ;
+                          ] ;
+                      ]
+                    )
+                  ) ;
+              ]
+            ) ;
+        ] ;
+      ui:child [
+          rdf:type ui:forEach ;
+          ui:child [
+              rdf:type ui:CommentNode ;
+              ui:childIndex 0 ;
+              rdfs:comment "ui:group let:t1=\"{= smf:trace(&quot;Element is {?1}, text is {?2}&quot;, ?type,?myText) }\"/" ;
+            ] ;
+          ui:child [
+              rdf:type ui:update ;
+              ui:childIndex 1 ;
+              ui:updateQuery [
+                  rdf:type sp:Modify ;
+                  sp:deletePattern (
+                      [
+                        rdf:type sp:NamedGraph ;
+                        sp:elements (
+                            [
+                              sp:object [
+                                  sp:varName "v" ;
+                                ] ;
+                              sp:predicate rdf:value ;
+                              sp:subject [
+                                  sp:varName "text" ;
+                                ] ;
+                            ]
+                          ) ;
+                        sp:graphNameNode ui:tempGraph ;
+                      ]
+                    ) ;
+                  sp:insertPattern (
+                      [
+                        rdf:type sp:NamedGraph ;
+                        sp:elements (
+                            [
+                              sp:object [
+                                  sp:varName "newV" ;
+                                ] ;
+                              sp:predicate rdf:value ;
+                              sp:subject [
+                                  sp:varName "text" ;
+                                ] ;
+                            ]
+                          ) ;
+                        sp:graphNameNode ui:tempGraph ;
+                      ]
+                    ) ;
+                  sp:where (
+                      [
+                        rdf:type sp:NamedGraph ;
+                        sp:elements (
+                            [
+                              sp:object owl:Thing ;
+                              sp:predicate rdf:type ;
+                              sp:subject [
+                                  sp:varName "text" ;
+                                ] ;
+                            ]
+                            [
+                              sp:object [
+                                  sp:varName "v" ;
+                                ] ;
+                              sp:predicate rdf:value ;
+                              sp:subject [
+                                  sp:varName "text" ;
+                                ] ;
+                            ]
+                            [
+                              rdf:type sp:Bind ;
+                              sp:expression [
+                                  rdf:type sp:coalesce ;
+                                  sp:arg1 [
+                                      rdf:type spif:trim ;
+                                      sp:arg1 [
+                                          sp:varName "myText" ;
+                                        ] ;
+                                    ] ;
+                                  sp:arg2 "" ;
+                                ] ;
+                              sp:variable [
+                                  sp:varName "newText" ;
+                                ] ;
+                            ]
+                            [
+                              rdf:type sp:Bind ;
+                              sp:expression [
+                                  rdf:type sp:concat ;
+                                  sp:arg1 [
+                                      sp:varName "v" ;
+                                    ] ;
+                                  sp:arg2 [
+                                      sp:varName "newText" ;
+                                    ] ;
+                                ] ;
+                              sp:variable [
+                                  sp:varName "newV" ;
+                                ] ;
+                            ]
+                          ) ;
+                        sp:graphNameNode ui:tempGraph ;
+                      ]
+                    ) ;
+                ] ;
+            ] ;
+          ui:childIndex 1 ;
+          ui:resultSet [
+              sp:varName "childElements" ;
+            ] ;
+        ] ;
+      ui:child [
+          rdf:type ui:return ;
+          ui:childIndex 2 ;
+          ui:result [
+              rdf:type spl:objectInGraph ;
+              sp:arg1 [
+                  rdf:type sp:iri ;
+                  sp:arg1 <http://temp/text> ;
+                ] ;
+              sp:arg2 rdf:value ;
+              sp:arg3 ui:tempGraph ;
+            ] ;
+        ] ;
+      ui:child [
+          rdf:type ui:update ;
+          ui:childIndex 0 ;
+          ui:updateQuery [
+              rdf:type sp:Modify ;
+              sp:insertPattern (
+                  [
+                    rdf:type sp:NamedGraph ;
+                    sp:elements (
+                        [
+                          sp:object owl:Thing ;
+                          sp:predicate rdf:type ;
+                          sp:subject [
+                              sp:varName "text" ;
+                            ] ;
+                        ]
+                        [
+                          sp:object "" ;
+                          sp:predicate rdf:value ;
+                          sp:subject [
+                              sp:varName "text" ;
+                            ] ;
+                        ]
+                      ) ;
+                    sp:graphNameNode ui:tempGraph ;
+                  ]
+                ) ;
+              sp:where (
+                  [
+                    rdf:type sp:Bind ;
+                    sp:expression [
+                        rdf:type sp:iri ;
+                        sp:arg1 "http://temp/text" ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "text" ;
+                      ] ;
+                  ]
+                ) ;
+            ] ;
+        ] ;
+    ] ;
+  rdfs:comment """SELECT ?pi ?x
+WHERE {{
+  ?s a xhtml:Div .
+  ?s xhtml:class ?class .
+  FILTER(STR(?class) = \"faq_answer\") .
+}
+?s ^composite:child/^composite:child  ?p .
+  ?p composite:index ?pi .
+  ?s composite:child ?c1 .
+  ?c1 composite:index 0 .
+  BIND(frb.edi:constructTextFromElements((0),?c1) AS ?x) . 
+} ORDER BY ?pi""" ;
+  rdfs:label "construct text from elements" ;
+  rdfs:subClassOf ui:Functions ;
+.
+edg.xform.html:defaultHREFurl
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "url" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type xsd:string ;
+                sp:arg1 spin:_arg1 ;
+              ] ;
+            sp:variable [
+                sp:varName "url" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+    ] ;
+  rdfs:label "default HREFurl" ;
+  rdfs:subClassOf edg.xform.html:Functions ;
+.
+edg.xform.html:getChildren
+  rdf:type spin:MagicProperty ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "childIndex" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "child" ;
+          ]
+          [
+            sp:varName "childIndex" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "child" ;
+              ] ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#child> ;
+            sp:subject spin:_arg1 ;
+          ]
+          [
+            sp:object [
+                sp:varName "childIndex" ;
+              ] ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#index> ;
+            sp:subject [
+                sp:varName "child" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:ge ;
+                sp:arg1 [
+                    sp:varName "childIndex" ;
+                  ] ;
+                sp:arg2 spin:_arg2 ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:integer ;
+    ] ;
+  rdfs:label "get child by index" ;
+  rdfs:subClassOf edg.xform.html:MagicProperties ;
+.
+edg.xform.html:getHeaderAndContentFromTwoRowTable
+  rdf:type spin:MagicProperty ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "header" ;
+          ]
+          [
+            sp:varName "content" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "tr1" ;
+              ] ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#child> ;
+            sp:subject spin:_arg1 ;
+          ]
+          [
+            sp:object [
+                sp:varName "td1" ;
+              ] ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#child> ;
+            sp:subject [
+                sp:varName "tr1" ;
+              ] ;
+          ]
+          [
+            sp:object spin:_arg2 ;
+            sp:predicate xhtml:width ;
+            sp:subject [
+                sp:varName "td1" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type edg.xform.html:assembleText ;
+                arg:excludedIndexList () ;
+                arg:resource [
+                    sp:varName "td1" ;
+                  ] ;
+                arg:retainTags spin:_arg4 ;
+                arg:urlFunction [
+                    sp:varName "arg6" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "header" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "td2" ;
+              ] ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#child> ;
+            sp:subject [
+                sp:varName "tr1" ;
+              ] ;
+          ]
+          [
+            sp:object spin:_arg3 ;
+            sp:predicate xhtml:width ;
+            sp:subject [
+                sp:varName "td2" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type edg.xform.html:assembleText ;
+                arg:excludedIndexList () ;
+                arg:resource [
+                    sp:varName "td2" ;
+                  ] ;
+                arg:retainTags spin:_arg5 ;
+                arg:urlFunction [
+                    sp:varName "arg6" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "content" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "A table that contains two rows with specific widths" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "width of header" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg3 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "width of content" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg4 ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "set true to keep tags in header" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg5 ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "set true to keep tags in content" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg6 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "href function" ;
+    ] ;
+  rdfs:comment """Example of use:
+
+SELECT  ?t  ?header ?content
+WHERE {
+    ?t a xhtml:Table .
+    (?t \"20%\" \"80%\" false false) edg.xform.html:getHeaderAndContentFromTwoRowTable (?header ?content) .
+} """ ;
+  rdfs:label "get header and content from two row table" ;
+  rdfs:subClassOf edg.xform.html:MagicProperties ;
+.
+arg:excludedIndexList
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:index
+  rdf:type rdf:Property ;
+  rdfs:range xsd:integer ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:resource
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:retainTags
+  rdf:type rdf:Property ;
+  rdfs:range xsd:boolean ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:textSoFar
+  rdf:type rdf:Property ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:urlFunction
+  rdf:type rdf:Property ;
+  rdfs:label "url function" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+xhtml:Div
+  spin:rule [
+      rdf:type sp:Construct ;
+      sp:templates (
+          [
+            sp:object edg:ResearchPaper ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "docU" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate rdfs:label ;
+            sp:subject [
+                sp:varName "docU" ;
+              ] ;
+          ]
+          [
+            sp:object spin:_this ;
+            sp:predicate <http://purl.org/dc/terms/source> ;
+            sp:subject [
+                sp:varName "docU" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "frbLink" ;
+              ] ;
+            sp:predicate edg:url ;
+            sp:subject [
+                sp:varName "docU" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "title" ;
+              ] ;
+            sp:predicate <http://purl.org/dc/terms/title> ;
+            sp:subject [
+                sp:varName "docU" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "author" ;
+              ] ;
+            sp:predicate <http://purl.org/dc/terms/author> ;
+            sp:subject [
+                sp:varName "docU" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              sp:object [
+                  sp:varName "class" ;
+                ] ;
+              sp:predicate xhtml:class ;
+              sp:subject spin:_this ;
+            ]
+            [
+              rdf:type sp:Filter ;
+              sp:expression [
+                  rdf:type sp:eq ;
+                  sp:arg1 [
+                      rdf:type sp:str ;
+                      sp:arg1 [
+                          sp:varName "class" ;
+                        ] ;
+                    ] ;
+                  sp:arg2 "faq" ;
+                ] ;
+            ]
+          )
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "c1" ;
+              ] ;
+            sp:path [
+                rdf:type sp:SeqPath ;
+                sp:path1 <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                sp:path2 <http://www.topbraid.org/2007/05/composite.owl#child> ;
+              ] ;
+            sp:subject spin:_this ;
+          ]
+          [
+            sp:object xhtml:H3 ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "c1" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "title" ;
+              ] ;
+            sp:path [
+                rdf:type sp:SeqPath ;
+                sp:path1 [
+                    rdf:type sp:SeqPath ;
+                    sp:path1 <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                    sp:path2 <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                  ] ;
+                sp:path2 <http://topbraid.org/sxml#text> ;
+              ] ;
+            sp:subject [
+                sp:varName "c1" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "link" ;
+              ] ;
+            sp:path [
+                rdf:type sp:SeqPath ;
+                sp:path1 <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                sp:path2 xhtml:href ;
+              ] ;
+            sp:subject [
+                sp:varName "c1" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type xsd:anyURI ;
+                sp:arg1 [
+                    rdf:type sp:concat ;
+                    sp:arg1 "http://www.federalreserve.gov/" ;
+                    sp:arg2 [
+                        rdf:type spif:trim ;
+                        sp:arg1 [
+                            rdf:type sp:str ;
+                            sp:arg1 [
+                                sp:varName "link" ;
+                              ] ;
+                          ] ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "frbLink" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "id" ;
+              ] ;
+            sp:path [
+                rdf:type sp:SeqPath ;
+                sp:path1 <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                sp:path2 xhtml:name ;
+              ] ;
+            sp:subject [
+                sp:varName "c1" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:concat ;
+                sp:arg1 "Report " ;
+                sp:arg2 [
+                    rdf:type sp:str ;
+                    sp:arg1 [
+                        sp:varName "id" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "label" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:iri ;
+                sp:arg1 [
+                    rdf:type sp:concat ;
+                    sp:arg1 "http://edg.federalreserveboard.gov/doc/RP_" ;
+                    sp:arg2 [
+                        rdf:type sp:str ;
+                        sp:arg1 [
+                            sp:varName "id" ;
+                          ] ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "docU" ;
+              ] ;
+          ]
+        ) ;
+      rdfs:comment "STEP 100: Construct Documents" ;
+    ] ;
+  spin:rule [
+      rdf:type sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "abstract" ;
+              ] ;
+            sp:predicate edg:description ;
+            sp:subject [
+                sp:varName "docU" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              sp:object [
+                  sp:varName "class" ;
+                ] ;
+              sp:predicate xhtml:class ;
+              sp:subject spin:_this ;
+            ]
+            [
+              rdf:type sp:Filter ;
+              sp:expression [
+                  rdf:type sp:eq ;
+                  sp:arg1 [
+                      rdf:type sp:str ;
+                      sp:arg1 [
+                          sp:varName "class" ;
+                        ] ;
+                    ] ;
+                  sp:arg2 "faq_answer" ;
+                ] ;
+            ]
+          )
+          [
+            sp:object [
+                sp:varName "c1" ;
+              ] ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#child> ;
+            sp:subject spin:_this ;
+          ]
+          [
+            sp:object 0 ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#index> ;
+            sp:subject [
+                sp:varName "c1" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type edg.xform.html:assembleText ;
+                arg:excludedIndexList 0 ;
+                arg:resource [
+                    sp:varName "c1" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "abstract" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "parent" ;
+              ] ;
+            sp:path [
+                rdf:type sp:SeqPath ;
+                sp:path1 [
+                    rdf:type sp:ReversePath ;
+                    sp:subPath <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                  ] ;
+                sp:path2 [
+                    rdf:type sp:ReversePath ;
+                    sp:subPath <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                  ] ;
+              ] ;
+            sp:subject spin:_this ;
+          ]
+          [
+            sp:object [
+                sp:varName "parent" ;
+              ] ;
+            sp:predicate <http://purl.org/dc/terms/source> ;
+            sp:subject [
+                sp:varName "docU" ;
+              ] ;
+          ]
+        ) ;
+      rdfs:comment "STEP 102: Reconstruct Abstract" ;
+    ] ;
+  spin:rule [
+      rdf:type sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "author" ;
+              ] ;
+            sp:predicate <http://purl.org/dc/terms/author> ;
+            sp:subject [
+                sp:varName "docU" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              sp:object [
+                  sp:varName "class" ;
+                ] ;
+              sp:predicate xhtml:class ;
+              sp:subject spin:_this ;
+            ]
+            [
+              rdf:type sp:Filter ;
+              sp:expression [
+                  rdf:type sp:eq ;
+                  sp:arg1 [
+                      rdf:type sp:str ;
+                      sp:arg1 [
+                          sp:varName "class" ;
+                        ] ;
+                    ] ;
+                  sp:arg2 "faq" ;
+                ] ;
+            ]
+          )
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "c1" ;
+              ] ;
+            sp:path [
+                rdf:type sp:SeqPath ;
+                sp:path1 <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                sp:path2 <http://www.topbraid.org/2007/05/composite.owl#child> ;
+              ] ;
+            sp:subject spin:_this ;
+          ]
+          [
+            sp:object xhtml:H5 ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "c1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "c2" ;
+              ] ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#child> ;
+            sp:subject [
+                sp:varName "c1" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Union ;
+            sp:elements (
+                (
+                  [
+                    sp:object <http://topbraid.org/sxml#TextNode> ;
+                    sp:predicate rdf:type ;
+                    sp:subject [
+                        sp:varName "c2" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "maybeAuthorList" ;
+                      ] ;
+                    sp:predicate <http://topbraid.org/sxml#text> ;
+                    sp:subject [
+                        sp:varName "c2" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "?0" ;
+                      ] ;
+                    sp:predicate <http://www.topbraid.org/tops#split> ;
+                    sp:subject [
+                        sp:varName "maybeAuthorRaw1" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "maybeAuthorList" ;
+                      ] ;
+                    sp:predicate rdf:first ;
+                    sp:subject [
+                        sp:varName "?0" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "?1" ;
+                      ] ;
+                    sp:predicate rdf:rest ;
+                    sp:subject [
+                        sp:varName "?0" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object "," ;
+                    sp:predicate rdf:first ;
+                    sp:subject [
+                        sp:varName "?1" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object () ;
+                    sp:predicate rdf:rest ;
+                    sp:subject [
+                        sp:varName "?1" ;
+                      ] ;
+                  ]
+                  [
+                    rdf:type sp:Bind ;
+                    sp:expression [
+                        rdf:type spif:trim ;
+                        sp:arg1 [
+                            sp:varName "maybeAuthorRaw1" ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "maybeAuthorRaw2" ;
+                      ] ;
+                  ]
+                  [
+                    rdf:type sp:Bind ;
+                    sp:expression [
+                        rdf:type spif:regex ;
+                        sp:arg1 [
+                            sp:varName "maybeAuthorRaw2" ;
+                          ] ;
+                        sp:arg2 "^(.*)\\sand\\s*$" ;
+                        sp:arg3 "$1" ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "maybeAuthor" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    sp:object xhtml:A ;
+                    sp:predicate rdf:type ;
+                    sp:subject [
+                        sp:varName "c2" ;
+                      ] ;
+                  ]
+                  [
+                    rdf:type sp:TriplePath ;
+                    sp:object [
+                        sp:varName "maybeAuthor" ;
+                      ] ;
+                    sp:path [
+                        rdf:type sp:SeqPath ;
+                        sp:path1 <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                        sp:path2 <http://topbraid.org/sxml#text> ;
+                      ] ;
+                    sp:subject [
+                        sp:varName "c2" ;
+                      ] ;
+                  ]
+                )
+              ) ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type spif:regex ;
+                sp:arg1 [
+                    sp:varName "maybeAuthor" ;
+                  ] ;
+                sp:arg2 "^(,)?(\\s*and\\s+)?([\\w'-\\.][\\w'-\\.\\s]+)(, )?(\\s)*$" ;
+                sp:arg3 "$3" ;
+              ] ;
+            sp:variable [
+                sp:varName "author" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:and ;
+                sp:arg1 [
+                    rdf:type sp:ne ;
+                    sp:arg1 [
+                        sp:varName "maybeAuthor" ;
+                      ] ;
+                    sp:arg2 "" ;
+                  ] ;
+                sp:arg2 [
+                    rdf:type sp:ne ;
+                    sp:arg1 [
+                        sp:varName "maybeAuthor" ;
+                      ] ;
+                    sp:arg2 "and" ;
+                  ] ;
+              ] ;
+          ]
+          [
+            sp:object spin:_this ;
+            sp:predicate <http://purl.org/dc/terms/source> ;
+            sp:subject [
+                sp:varName "docU" ;
+              ] ;
+          ]
+        ) ;
+      rdfs:comment "STEP 104: Construct Authors" ;
+    ] ;
+  spin:rule [
+      rdf:type sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "otherLink" ;
+              ] ;
+            sp:predicate edg:url ;
+            sp:subject [
+                sp:varName "docU" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              sp:object [
+                  sp:varName "class" ;
+                ] ;
+              sp:predicate xhtml:class ;
+              sp:subject spin:_this ;
+            ]
+            [
+              rdf:type sp:Filter ;
+              sp:expression [
+                  rdf:type sp:eq ;
+                  sp:arg1 [
+                      rdf:type sp:str ;
+                      sp:arg1 [
+                          sp:varName "class" ;
+                        ] ;
+                    ] ;
+                  sp:arg2 "faq_answer" ;
+                ] ;
+            ]
+          )
+          [
+            sp:object [
+                sp:varName "c3" ;
+              ] ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#child> ;
+            sp:subject spin:_this ;
+          ]
+          [
+            sp:object 2 ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#index> ;
+            sp:subject [
+                sp:varName "c3" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "link" ;
+              ] ;
+            sp:path [
+                rdf:type sp:SeqPath ;
+                sp:path1 <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                sp:path2 <http://topbraid.org/sxml#text> ;
+              ] ;
+            sp:subject [
+                sp:varName "c3" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type xsd:anyURI ;
+                sp:arg1 [
+                    rdf:type spif:trim ;
+                    sp:arg1 [
+                        sp:varName "link" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "otherLink" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "parent" ;
+              ] ;
+            sp:path [
+                rdf:type sp:SeqPath ;
+                sp:path1 [
+                    rdf:type sp:ReversePath ;
+                    sp:subPath <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                  ] ;
+                sp:path2 [
+                    rdf:type sp:ReversePath ;
+                    sp:subPath <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                  ] ;
+              ] ;
+            sp:subject spin:_this ;
+          ]
+          [
+            sp:object [
+                sp:varName "parent" ;
+              ] ;
+            sp:predicate <http://purl.org/dc/terms/source> ;
+            sp:subject [
+                sp:varName "docU" ;
+              ] ;
+          ]
+        ) ;
+      rdfs:comment "STEP 101: build link" ;
+    ] ;
+  spin:rule [
+      rdf:type sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "tag" ;
+              ] ;
+            sp:predicate edg:tag ;
+            sp:subject [
+                sp:varName "docU" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              sp:object [
+                  sp:varName "class" ;
+                ] ;
+              sp:predicate xhtml:class ;
+              sp:subject spin:_this ;
+            ]
+            [
+              rdf:type sp:Filter ;
+              sp:expression [
+                  rdf:type sp:eq ;
+                  sp:arg1 [
+                      rdf:type sp:str ;
+                      sp:arg1 [
+                          sp:varName "class" ;
+                        ] ;
+                    ] ;
+                  sp:arg2 "faq_answer" ;
+                ] ;
+            ]
+          )
+          [
+            sp:object [
+                sp:varName "c1" ;
+              ] ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#child> ;
+            sp:subject spin:_this ;
+          ]
+          [
+            sp:object [
+                sp:varName "c2" ;
+              ] ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#child> ;
+            sp:subject [
+                sp:varName "c1" ;
+              ] ;
+          ]
+          [
+            sp:object 0 ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#index> ;
+            sp:subject [
+                sp:varName "c2" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:TriplePath ;
+            sp:object "Keywords:" ;
+            sp:path [
+                rdf:type sp:SeqPath ;
+                sp:path1 <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                sp:path2 <http://topbraid.org/sxml#text> ;
+              ] ;
+            sp:subject [
+                sp:varName "c2" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "c3" ;
+              ] ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#child> ;
+            sp:subject [
+                sp:varName "c1" ;
+              ] ;
+          ]
+          [
+            sp:object 2 ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#index> ;
+            sp:subject [
+                sp:varName "c3" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "keywords" ;
+              ] ;
+            sp:predicate <http://topbraid.org/sxml#text> ;
+            sp:subject [
+                sp:varName "c3" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?0" ;
+              ] ;
+            sp:predicate <http://www.topbraid.org/tops#split> ;
+            sp:subject [
+                sp:varName "term" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "keywords" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object "[,|;] " ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type spif:trim ;
+                sp:arg1 [
+                    sp:varName "term" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "tag" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "parent" ;
+              ] ;
+            sp:path [
+                rdf:type sp:SeqPath ;
+                sp:path1 [
+                    rdf:type sp:ReversePath ;
+                    sp:subPath <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                  ] ;
+                sp:path2 [
+                    rdf:type sp:ReversePath ;
+                    sp:subPath <http://www.topbraid.org/2007/05/composite.owl#child> ;
+                  ] ;
+              ] ;
+            sp:subject spin:_this ;
+          ]
+          [
+            sp:object [
+                sp:varName "parent" ;
+              ] ;
+            sp:predicate <http://purl.org/dc/terms/source> ;
+            sp:subject [
+                sp:varName "docU" ;
+              ] ;
+          ]
+        ) ;
+      rdfs:comment "STEP 103: build keywords" ;
+    ] ;
+  rdfs:comment """<div class=\"faq\">
+         <div class=\"faq_boxTopBorder\">
+            <div class=\"faq_boxIcon\">
+            	<span style=\"font-weight:bold; font-size:1.125em; line-height:1.25em;\">&nbsp;feds&nbsp;</span>
+                <span style=\"font-weight:normal; font-size:.875em; line-height:1em;\">2016-021</span>
+            </div>
+            <h6>March 2016</h6>
+            <h3><a href=\"/econresdata/feds/2016/files/2016021pap.pdf\" name=\"2016021\" id=\"2016021\">What are the Perceived Barriers to Homeownership for Young Adults? (PDF)</a></h3>
+            <h5><a href=\"/econresdata/jeff-larrimore.htm\">Jeff Larrimore</a>, <a href=\"/econresdata/jenny-schuetz.htm\">Jenny Schuetz</a>, and Samuel Dodini</h5>
+         </div>
+         <div class=\"faq_question\"><a href=\"#1\">Read Abstract</a></div>
+         <div style=\"height: 0px;\" class=\"faq_answer_container\">
+            <div class=\"faq_answer\">
+              <p><strong>Abstract:</strong> As the U.S. emerges from the Great Recession, there is concern about slowing rates of new household formation and declining interest in homeownership, especially among younger households. Potential reasons that have been posited include tight mortgage credit and housing supply, changing preferences over tenure in the wake of the foreclosure crisis, and weak labor markets for young workers. In this paper, we examine how individual housing choices, and the stated motivations for these choices, reflect local housing affordability and individual financial circumstances, focusing particularly on young households. The analysis makes use of new individual-level data from the Survey of Household Economics and Decisionmaking (SHED). We find that housing affordability is correlated with county-level tenure rates and individual-level probability of homeownership for households with heads under age 40. However, it appears that young households' perceived barriers to homeownership are more closely related to individual financial circumstances than local housing market conditions.</p>
+              
+              <p><strong>Keywords:</strong> Housing demand, consumer preferences, household formation, tenure choice</p>
+              
+              <p><strong>DOI:</strong> http://dx.doi.org/10.17016/FEDS.2016.021</p> 
+        </div>
+     </div> 
+ </div>""" ;
+.
+xhtml:P
+  spin:query [
+      rdf:type sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "x" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object xhtml:P ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "para" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:notExists ;
+                sp:elements (
+                    [
+                      sp:object [
+                          sp:varName "someClass" ;
+                        ] ;
+                      sp:predicate xhtml:class ;
+                      sp:subject [
+                          sp:varName "para" ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type edg.xform.html:assembleText ;
+                arg:excludedIndexList 3 ;
+                arg:resource [
+                    sp:varName "para" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "x" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:rule [
+      rdf:type sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "definitionText" ;
+              ] ;
+            sp:predicate skos:definition ;
+            sp:subject [
+                sp:varName "termURI" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:notExists ;
+                sp:elements (
+                    [
+                      sp:object [
+                          sp:varName "someClass" ;
+                        ] ;
+                      sp:predicate xhtml:class ;
+                      sp:subject spin:_this ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type edg.xform.html:assembleText ;
+                arg:excludedIndexList 0 ;
+                arg:resource spin:_this ;
+              ] ;
+            sp:variable [
+                sp:varName "defn" ;
+              ] ;
+          ]
+          [
+            sp:object spin:_this ;
+            sp:predicate edg:derivedFrom ;
+            sp:subject [
+                sp:varName "termURI" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate rdfs:label ;
+            sp:subject [
+                sp:varName "termURI" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:concat ;
+                sp:arg1 "<STRONG>" ;
+                sp:arg2 [
+                    rdf:type smf:titleCase ;
+                    sp:arg1 [
+                        sp:varName "label" ;
+                      ] ;
+                  ] ;
+                sp:arg3 "</STRONG> - " ;
+                sp:arg4 [
+                    sp:varName "defn" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "definitionText" ;
+              ] ;
+          ]
+        ) ;
+      rdfs:comment "STEP 202: get Definition" ;
+    ] ;
+.
+xhtml:Tr
+  spin:rule [
+      rdf:type sp:Construct ;
+      sp:templates () ;
+      sp:where (
+          [
+            sp:object xhtml:Tr ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "i" ;
+              ] ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#index> ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "c" ;
+              ] ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#child> ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+          [
+            sp:object xhtml:Td ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "c" ;
+              ] ;
+          ]
+          [
+            sp:object "row" ;
+            sp:predicate xhtml:scope ;
+            sp:subject [
+                sp:varName "c" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "textNode" ;
+              ] ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 1 ;
+                sp:subPath <http://www.topbraid.org/2007/05/composite.owl#child> ;
+              ] ;
+            sp:subject [
+                sp:varName "c" ;
+              ] ;
+          ]
+          [
+            sp:object <http://topbraid.org/sxml#TextNode> ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "textNode" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "item" ;
+              ] ;
+            sp:predicate <http://topbraid.org/sxml#text> ;
+            sp:subject [
+                sp:varName "textNode" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "hrefNode" ;
+              ] ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 1 ;
+                sp:subPath <http://www.topbraid.org/2007/05/composite.owl#child> ;
+              ] ;
+            sp:subject [
+                sp:varName "c" ;
+              ] ;
+          ]
+          [
+            sp:object xhtml:A ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "hrefNode" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "href" ;
+              ] ;
+            sp:predicate xhtml:href ;
+            sp:subject [
+                sp:varName "hrefNode" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "startDateNode" ;
+              ] ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#child> ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+          [
+            sp:object xhtml:Td ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "startDateNode" ;
+              ] ;
+          ]
+          [
+            sp:object 1 ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#index> ;
+            sp:subject [
+                sp:varName "startDateNode" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "startDateTextNode" ;
+              ] ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 1 ;
+                sp:subPath <http://www.topbraid.org/2007/05/composite.owl#child> ;
+              ] ;
+            sp:subject [
+                sp:varName "startDateNode" ;
+              ] ;
+          ]
+          [
+            sp:object <http://topbraid.org/sxml#TextNode> ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "startDateTextNode" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "startDateAsText" ;
+              ] ;
+            sp:predicate <http://topbraid.org/sxml#text> ;
+            sp:subject [
+                sp:varName "startDateTextNode" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type smf:cast ;
+                sp:arg1 [
+                    sp:varName "startDateAsText" ;
+                  ] ;
+                sp:arg2 xsd:date ;
+              ] ;
+            sp:variable [
+                sp:varName "startDate" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "endDateNode" ;
+              ] ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#child> ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+          [
+            sp:object xhtml:Td ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "endDateNode" ;
+              ] ;
+          ]
+          [
+            sp:object 2 ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#index> ;
+            sp:subject [
+                sp:varName "endDateNode" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "endDateTextNode" ;
+              ] ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 1 ;
+                sp:subPath <http://www.topbraid.org/2007/05/composite.owl#child> ;
+              ] ;
+            sp:subject [
+                sp:varName "endDateNode" ;
+              ] ;
+          ]
+          [
+            sp:object <http://topbraid.org/sxml#TextNode> ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "endDateTextNode" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "endDateAsText" ;
+              ] ;
+            sp:predicate <http://topbraid.org/sxml#text> ;
+            sp:subject [
+                sp:varName "endDateTextNode" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type smf:cast ;
+                sp:arg1 [
+                    sp:varName "endDateAsText" ;
+                  ] ;
+                sp:arg2 xsd:date ;
+              ] ;
+            sp:variable [
+                sp:varName "endDate" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "titleNode" ;
+              ] ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#child> ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+          [
+            sp:object xhtml:Td ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "titleNode" ;
+              ] ;
+          ]
+          [
+            sp:object 3 ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#index> ;
+            sp:subject [
+                sp:varName "titleNode" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "titleNodeTextNode" ;
+              ] ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 1 ;
+                sp:subPath <http://www.topbraid.org/2007/05/composite.owl#child> ;
+              ] ;
+            sp:subject [
+                sp:varName "titleNode" ;
+              ] ;
+          ]
+          [
+            sp:object <http://topbraid.org/sxml#TextNode> ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "titleNodeTextNode" ;
+              ] ;
+          ]
+          (
+            [
+              sp:object [
+                  sp:varName "title" ;
+                ] ;
+              sp:predicate <http://topbraid.org/sxml#text> ;
+              sp:subject [
+                  sp:varName "titleNodeTextNode" ;
+                ] ;
+            ]
+            [
+              rdf:type sp:Union ;
+              sp:elements (
+                  (
+                    [
+                      rdf:type sp:Filter ;
+                      sp:expression [
+                          rdf:type fn:starts-with ;
+                          sp:arg1 [
+                              sp:varName "title" ;
+                            ] ;
+                          sp:arg2 "Short Caption:" ;
+                        ] ;
+                    ]
+                    [
+                      rdf:type sp:Bind ;
+                      sp:expression [
+                          rdf:type spif:regex ;
+                          sp:arg1 [
+                              sp:varName "title" ;
+                            ] ;
+                          sp:arg2 "^Short Caption:(.*)$" ;
+                          sp:arg3 "$1" ;
+                        ] ;
+                      sp:variable [
+                          sp:varName "shortCaption" ;
+                        ] ;
+                    ]
+                  )
+                  (
+                    [
+                      sp:object [
+                          sp:varName "title" ;
+                        ] ;
+                      sp:predicate <http://topbraid.org/sxml#text> ;
+                      sp:subject [
+                          sp:varName "titleNodeTextNode" ;
+                        ] ;
+                    ]
+                    [
+                      rdf:type sp:Filter ;
+                      sp:expression [
+                          rdf:type sp:not ;
+                          sp:arg1 [
+                              rdf:type fn:starts-with ;
+                              sp:arg1 [
+                                  sp:varName "title" ;
+                                ] ;
+                              sp:arg2 "Short Caption:" ;
+                            ] ;
+                        ] ;
+                    ]
+                  )
+                ) ;
+            ]
+          )
+          [
+            sp:object [
+                sp:varName "itemKindNode" ;
+              ] ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#child> ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+          [
+            sp:object xhtml:Td ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "itemKindNode" ;
+              ] ;
+          ]
+          [
+            sp:object 4 ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#index> ;
+            sp:subject [
+                sp:varName "itemKindNode" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "itemKindTextNode" ;
+              ] ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 1 ;
+                sp:subPath <http://www.topbraid.org/2007/05/composite.owl#child> ;
+              ] ;
+            sp:subject [
+                sp:varName "itemKindNode" ;
+              ] ;
+          ]
+          [
+            sp:object <http://topbraid.org/sxml#TextNode> ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "itemKindTextNode" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "itemKind" ;
+              ] ;
+            sp:predicate <http://topbraid.org/sxml#text> ;
+            sp:subject [
+                sp:varName "itemKindTextNode" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "reportFormNode" ;
+              ] ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#child> ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+          [
+            sp:object xhtml:Td ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "reportFormNode" ;
+              ] ;
+          ]
+          [
+            sp:object 5 ;
+            sp:predicate <http://www.topbraid.org/2007/05/composite.owl#index> ;
+            sp:subject [
+                sp:varName "reportFormNode" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "reportFormTextNode" ;
+              ] ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 1 ;
+                sp:subPath <http://www.topbraid.org/2007/05/composite.owl#child> ;
+              ] ;
+            sp:subject [
+                sp:varName "reportFormNode" ;
+              ] ;
+          ]
+          [
+            sp:object <http://topbraid.org/sxml#TextNode> ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "reportFormTextNode" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "reportForm" ;
+              ] ;
+            sp:predicate <http://topbraid.org/sxml#text> ;
+            sp:subject [
+                sp:varName "reportFormTextNode" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+.

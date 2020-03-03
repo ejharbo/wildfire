@@ -1,0 +1,3559 @@
+# baseURI: http://edg.topbraid.solutions/1.0/project/common
+# imports: http://edg.topbraid.solutions/1.0/editor/core
+# imports: http://edg.topbraid.solutions/1.0/schema/controllers
+# imports: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://edg.topbraid.solutions/1.0/spin/library
+# imports: http://spinrdf.org/spin
+# imports: http://topbraid.org/metadata
+# imports: http://topbraid.org/swa
+# imports: http://topbraid.org/teamwork
+# imports: http://topbraid.org/teamwork.ui
+# imports: http://uispin.org/ui
+
+@prefix acjob: <http://evn.topbraidlive.org/tagger/acjob#> .
+@prefix acpp: <http://topbraid.org/nlp/autoclassifier-preproc#> .
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix autotagger: <http://evn.topbraidlive.org/autotagger#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix conceptmatch: <http://topbraid.org/conceptmatch#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix config-importers: <http://edg.topbraidlive.org/config/importers#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix core-soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix corpus: <http://topbraid.org/corpus#> .
+@prefix corpusprojects: <http://topbraid.org/corpus-projects#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkapp: <http://topbraid.org/swa/crosswalkapp#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dashboard: <http://example.org/dashboard#> .
+@prefix datagraph: <http://teamwork.topbraidlive.org/datagraph/datagraphprojects#> .
+@prefix dataset: <http://teamwork.topbraidlive.org/dataset#> .
+@prefix datasetapp: <http://topbraid.org/swa/datasetapp#> .
+@prefix datasetviewer: <http://topbraid.org/swa/datasetviewer#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ddl: <http://edg.topbraidlive.org/1.0/importers/ddl#> .
+@prefix default: <http://uispin.org/default#> .
+@prefix defaultapp: <http://topbraid.org/swa/defaultapp#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix document: <http://topbraid.org/document#> .
+@prefix documents: <http://edg.topbraid.solutions/1.0/shapes/documents#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg-config: <http://edg.ext.topbraidlive.org/schema/config/importers#> .
+@prefix edg-importer: <http://edg.topbraidlive.org/importer/> .
+@prefix edg-qa: <http://edg.topbraidlive.org/utility/qa/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.global: <urn:x-evn-global:> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix edgproduct: <http://edg.topbraidlive.org/edgproduct#> .
+@prefix eeh-lib: <http://www.environmenthub.no/spin/1.0/eeh-lib#> .
+@prefix eeh-reportlib: <http://www.environmenthub.no/spin/1.0/eeh-reportlib#> .
+@prefix elements: <http://purl.org/dc/elements/1.1/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evn: <http://topbraid.org/evn/evn#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evnimport: <http://evn.topbraidlive.org/uispin/evnimport#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix ex: <http://example.org/> .
+@prefix extjs: <http://uispin.com/extjs#> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix forms: <http://www.topbraid.org/2007/01/forms.owl#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix governance: <http://topbraid.org/teamworkgovernance.ui#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix graphql.search: <http://teamwork.topbraidlive.org/graphql.search#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix inference: <http://www.topbraid.org/2007/06/inference.owl#> .
+@prefix jdbc: <http://edg.topbraidlive.org/1.0/importers/jdbc#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix kennedys: <http://topbraid.org/examples/kennedys#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix lib-importer: <http://edg.topbraid.solutions/importer/lib#> .
+@prefix lineage-transform: <http://edg.topbraid.solutions/transform/importer/lineage#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix ontologyviewer: <http://topbraid.org/swa/ontologyviewer#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix proxy-lineage: <http://edg.topbraid.solutions/proxy/importer/lineage#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmapp: <http://rdm.topbraidlive.org/rdmapp#> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix rdmviewer: <http://rdm.topbraidlive.org/rdmviewer#> .
+@prefix saf: <http://topbraid.org/saf/> .
+@prefix safconfig: <http://topbraid.org/safconfig/> .
+@prefix safindex: <http://topbraid.org/safindex#> .
+@prefix safm: <http://saf.topbraidlive.org/metaschema/> .
+@prefix savedQueries: <http://teamwork.topbraidlive.org/ui/savedQueries#> .
+@prefix scheduler: <http://topbraid.org/scheduler#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix server: <http://server.topbraidlive.org/server.ui#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix shapesgraph: <http://teamwork.topbraidlive.org/shapesgraph/shapesgraphprojects#> .
+@prefix sharepoint: <http://topbraid.org/sharepoint#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skosshapes: <http://topbraid.org/skos.shapes#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparql: <http://datashapes.org/sparql#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spin.ui: <http://spinrdf.org/spin.ui#> .
+@prefix spinmap: <http://spinrdf.org/spinmap#> .
+@prefix spinmapl: <http://topbraid.org/spin/spinmapl#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix ss: <http://www.topbraidcomposer.org/owl/2006/08/spreadsheets.owl#> .
+@prefix stats: <http://topbraid.org/statistics#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swadoc: <http://topbraid.org/swadoc#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tablesmap: <http://topbraid.org/spin/tablesmap#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix taggerspin: <http://evn.topbraidlive.org/taggerspin#> .
+@prefix taggerui: <http://evn.topbraidlive.org/taggerui#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix tblui: <http://server.topbraidlive.org/tblui#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkAdmin: <http://teamwork.topbraidlive.org/doc/teamworkAdmin#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworkconstraints: <http://topbraid.org/teamworkconstraints#> .
+@prefix teamworkdashboard: <http://topbraid.org/teamworkdashboard#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix teamworkupdate: <http://teamworkAPI.topbraid.com/teamworkUpdate#> .
+@prefix textindex: <http://topbraid.org/textindex#> .
+@prefix tika-importer: <http://teamwork.topbraidlive.org/corpus/tika-importer#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix tracker: <http://teamwork.topbraidlive.org/ui/tracker#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uitest: <http://uispin.org/test#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix userdat: <http://teamwork.topbraidlive.org/ui/userdata> .
+@prefix userdata: <http://teamwork.topbraidlive.org/ui/userdata#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix victory: <http://edg.topbraid.solutions/victory/> .
+@prefix visual: <http://topbraid.org/visual#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xhtml: <http://topbraid.org/xhtml#> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/project/common>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/project/common/GMD_common> ;
+  rdfs:label "common" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/editor/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/controllers> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/spin/library> ;
+  owl:imports <http://spinrdf.org/spin> ;
+  owl:imports <http://topbraid.org/metadata> ;
+  owl:imports <http://topbraid.org/swa> ;
+  owl:imports <http://topbraid.org/teamwork> ;
+  owl:imports <http://topbraid.org/teamwork.ui> ;
+  owl:imports <http://uispin.org/ui> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+edg:AspectClass
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group>
+    <!-- Metaclass-driven invocation of aspect snippets -->
+    <!-- Example use from edg:Dataflow: -->
+    <!--ui:dynamicView arg:matchIds=\"show-aspect-summary\" -->
+    <!-- ui:class=\"edg:AspectClass\"-->
+    <!-- edg:aspectClass=\"edg:Protectable\"/-->
+    <!--ui:dumpScope ui:message=\"AAA: edg:AspectClass\"/-->
+    <ui:classView arg:subject=\"{= ?this }\" ui:class=\"{= ?aspectClass }\" ui:matchIds=\"{= ?matchIds }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:Asset
+  ui:instanceView """
+<ui:group ui:id=\"asset-details\" ui:priority=\"{= 9 }\">
+    <ui:call arg:object=\"{= ?this }\" ui:template=\"{= swa:UsedSubjectPredicates }\" ui:varName=\"predicates\">
+        <ui:forEach ui:resultSet=\"{= ?predicates }\">
+            <h3>{= COALESCE(spl:object(?predicate, edg:inverseLabel), ui:label(?predicate)) }</h3>
+            <ui:call arg:object=\"{= ?this }\" arg:predicate=\"{= ?predicate }\" ui:template=\"{= edg:SubjectsForGivenPropertyObject }\" ui:varName=\"subjects\">
+                <ui:forEach ui:resultSet=\"{= ?subjects }\">
+                    <swa:Button arg:class=\"btn btn-default btn-sm\" arg:label=\"{= ui:label(?subject) }\" arg:onClick=\"edg.inspectResource({= ?subject })\"/>
+                </ui:forEach>
+            </ui:call>
+        </ui:forEach>
+    </ui:call>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"impact-analyzer\" ui:priority=\"{= -1 }\">
+    <!--ui:dumpScope ui:message=\"AAA1: edg:Asset\"/-->
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:AutoComplete
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:allowURIs ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "If set to true, users are allowed to enter arbitrary (external) URIs as long as they start with http and are well-formed URIs. Note that this bypasses any testing for type-conformance and should therefore be used with care." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:categoryFunction ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment """An optional SPARQL function that takes a resource and returns the name of a category. These categories are then sent to the autocomplete widget which will render the results grouped with sub-titles.
+
+Examples of this include swa:categoryByNamespace.
+
+If no value is present, it will also look for one specified using the context variable \"swaCategoryFunction\".""" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:class ;
+      spl:valueType xsd:string ;
+      rdfs:comment "An optional CSS class that is used for the resulting text field." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:dataAttributeProperty ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:extraLabelFunction ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "An optional function that takes a resource and produces the part in parantheses." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:filterFunction ;
+      spl:valueType spin:Function ;
+      rdfs:comment "An optional SPARQL function that takes one resource as its argument and returns true if the resource shall be included." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:filterFunctionArgument ;
+      rdfs:comment "An optional second argument to the filter function." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:filterFunctionArgument2 ;
+      rdfs:comment "An optional second argument to the filter function. This is only used if arg:filterFunctionArgument also has a value." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:hiddenInputClass ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The class to assign to the hidden input field that actually holds the value." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:initialValue ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The initial resource to place into the text field." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:menuFilterNode ;
+      rdfs:comment "An optional argument that will be forwarded into the context menu, to filter some conditions." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:onSelect ;
+      spl:valueType xsd:string ;
+      rdfs:comment "A JavaScript snippet that shall be executed when the user selects a resource. The variable 'resource' will contain the URI of the selected value." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:placeholder ;
+      spl:valueType xsd:string ;
+      rdfs:comment "An optional placeholder text to appear in empty fields until the user enters something, e.g. \"Enter first name\"." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:withSelectMenu ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to show a drop down menu at the right hand side, allowing users to open selection dialogs as an alternative way of populating the auto-complete." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:id ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The id of the HTML input element." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:type ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The rdf:type of the matching resources. Will also include subclasses of that type." ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <!--ui:dumpScope ui:message=\"AAA: edg:AutoComplete\"/-->
+    <ui:createLink arg:allowURIs=\"{= ?allowURIs }\" arg:categoryFunction=\"{= COALESCE(?categoryFunction, ui:contextValue(&quot;swaCategoryFunction&quot;)) }\" arg:extraLabelFunction=\"{= ?extraLabelFunction }\" arg:filterFunction=\"{= ?filterFunction }\" arg:filterFunctionArgument=\"{= ?filterFunctionArgument }\" arg:filterFunctionArgument2=\"{= ?filterFunctionArgument2 }\" arg:type=\"{= ?type }\" ui:sendQueryGraph=\"{= true }\" ui:snippet=\"true\" ui:viewClass=\"{= swa:AutoCompleteCallback }\">
+        <input class=\"{= ?hiddenInputClass }\" data-property=\"{= ?dataAttributeProperty }\" id=\"{= ?id }\" name=\"{= ?id }\" type=\"hidden\" value=\"{= ui:encodeNode(?initialValue, true, true) }\"/>
+        <!-- A further extension code be done with the following -->
+        <!--ui:classView arg:hiddenInputClass=\"{= ?hiddenInputClass }\"
+  arg:id=\"{= ?id }\"
+  arg:name=\"{= ?id }\"
+  arg:value=\"{= ui:encodeNode(?initialValue, true, true) }\"
+  ui:class=\"{= ?type }\"
+  ui:matchIds=\"edg-autocomplete-input-element\"/-->
+        <ui:group let:appName=\"{= swa:appName() }\" let:displayId=\"{= ?id }-field\">
+            <input class=\"form-control swa-auto-complete {= ?class }\" id=\"{= ?displayId }\" placeholder=\"{= COALESCE(?placeholder, &quot;Start typing&quot;) }\" type=\"text\" value=\"{= ui:label(?initialValue) }\"/>
+            <!-- <img alt=\"Dropdown Icon\" class=\"swa-auto-complete-drop-down-img\" id=\"{= ?displayId }-drop-down\" src=\"{= ui:lib() }/swa/css/images/ContextMenu.gif\"/> -->
+            <ui:if ui:condition=\"{= ?withSelectMenu &amp;&amp; bound(?appName) }\">
+                <a class=\"swa-auto-complete-select-menu swa-icon\" href=\"javascript:void(0)\" id=\"{= ?id }-menu\" onclick=\"{= ui:functionCall(&quot;swa.openAutoCompleteSelectMenu&quot;, ?id, ?type, ?appName, ?menuFilterNode) }\"/>
+            </ui:if>
+            <swa:WidgetInitializer arg:script=\"swa.initAutoComplete('{= ?displayId }', '{= ?id }', '{= ?link }', &quot;{= ui:escapeJSON(?onSelect) }&quot;)\"/>
+        </ui:group>
+    </ui:createLink>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Inserts a text field that automatically suggests matching resources as the user starts typing. Matching resources must be instances of the provided type class. Extends swa:AutoComplete with a data-property value for passing more parameters back to the JS callback that will be the handler for any updates." ;
+  rdfs:label "Auto complete (EDG)" ;
+  rdfs:seeAlso swa:AutoComplete ;
+  rdfs:subClassOf swa:AutoCompleteElements ;
+.
+edg:BigDataAssetsProjectType
+  a edg:ProjectType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+.
+edg:Bundle
+  a ui:Script ;
+  ui:dependsOn teamwork:LibraryBundle ;
+  ui:prototype """
+<ui:group>
+    <meta content=\"edg:Bundles\" name=\"edg-manifest-start\"/>
+    <script src=\"{= ui:lib() }/edg/build/edg.bundle.js\"/>
+    <meta content=\"edg:Bundles\" name=\"edg-manifest-end\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Bundle" ;
+  rdfs:subClassOf ui:Scripts ;
+.
+edg:CreateResourceDialogUsingLabel
+  a swa:CreateResourceDialogPlugin ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate edg:resourceURIconstructorFunction ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  swa:createResourceDialogPluginWeight [
+      a swa:WeightedExpression ;
+      swa:expression false ;
+      swa:weight 70 ;
+    ] ;
+  ui:prototype """
+<ui:group let:resourceSpecificConstructor=\"{= edg:getClassPropertyValue(?resourceType, edg:resourceURIconstructorFunction) }\">
+    <ui:loadable let:resourceURIconstructor=\"{= COALESCE(?resourceURIconstructorFunction, ?resourceSpecificConstructor, edg:newResourceUsingLabel) }\" ui:loadId=\"create-resource-dialog-body\">
+        <!--ui:dumpScope ui:message=\"AAA: edg:CreateResourceDialogUsingLabel\"/-->
+        <swa:CreateResourceDialogTypeSelectionPanel arg:resourceType=\"{= ?resourceType }\" arg:suppressTypeSelection=\"{= ?suppressTypeSelection }\"/>
+        <swa:LabeledElement arg:label=\"Label:\">
+            <input autocomplete=\"off\" class=\"form-control swa-create-resource-label-input\" id=\"label-input\" type=\"text\"/>
+            <swa:LangSelector arg:uid=\"label\"/>
+        </swa:LabeledElement>
+        <edg:URIField arg:resourceType=\"{= ?resourceType }\"/>
+        <input data-property=\"contextResource\" type=\"hidden\" value=\"{= ?contextResource }\"/>
+        <script>edg.initCreateResourceLabelField('label-input', 'uri-input','{= edg:newResource(?resourceType) }',true)</script>
+    </ui:loadable>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A create dialog for resources that use the label string for the URI." ;
+  rdfs:label "Create resource dialog using label" ;
+  rdfs:subClassOf edg:DialogElements ;
+  rdfs:subClassOf swa:CreateResourceDialogPlugins ;
+.
+edg:DataAsset
+  ui:instanceView """
+<ui:group ui:id=\"impact-analyzer\" ui:priority=\"{= 10 }\">
+    <!--ui:dumpScope ui:message=\"AAA1: edg:DataAsset\"/-->
+    <edg:DependencyAnalyzer arg:columnService=\"{= edg:ResourceDataTableImpactColumns }\" arg:dataEndpoint=\"{= edg:DataTableResultsCallbackForImpact }\" arg:dependencyTemplate=\"{= edg:GetDataDependents }\" arg:resource=\"{= ?this }\" arg:resourceType=\"{= edg:DataAsset }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:DataAssetsProjectType
+  a edg:ProjectType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+.
+edg:DataElement
+  ui:instanceView """
+<ui:group ui:id=\"impact-analyzer\" ui:priority=\"{= 10 }\">
+    <!--ui:dumpScope ui:message=\"AAA1: edg:DataElement\"/-->
+    <edg:DependencyAnalyzer arg:columnService=\"{= edg:ResourceDataTableImpactColumns }\" arg:dataEndpoint=\"{= edg:DataTableResultsCallbackForImpact }\" arg:dependencyTemplate=\"{= edg:GetDataDependents }\" arg:resource=\"{= ?this }\" arg:resourceType=\"{= edg:DataElement }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:DataTableColumns
+  a ui:Service ;
+  rdfs:label "Data table columns" ;
+  rdfs:subClassOf edg:JSONServices ;
+.
+edg:DataTableResults
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  rdfs:label "Data table results" ;
+  rdfs:subClassOf edg:JSONServices ;
+.
+edg:DataTableResultsCallbackForClass
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:rows ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The number of rows to deliver." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:class=\"{= IRI(ui:getSessionAttribute(&quot;persistresource&quot;)) }\">
+    <ui:classView ui:class=\"{= ?class }\" ui:matchIds=\"datatable-data\" ui:resource=\"{= ?class }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment "Needed for metaclass callbacks" ;
+  rdfs:label "Data table results callback for class" ;
+  rdfs:subClassOf edg:DataTableResults ;
+.
+edg:DataTableResultsCallbackForImpact
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:rows ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The number of rows to deliver." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:dependencyTemplate=\"{= edg:GetDataDependents }\" let:instance=\"{= IRI(ui:getSessionAttribute(&quot;persistresource&quot;)) }\">
+    <ui:group let:dataGraph=\"{= swa:dataGraph() }\" let:masterGraph=\"{= teamwork:currentMasterGraph() }\">
+        <ui:group let:graphId=\"{= teamwork:graphIdFromGraph(?masterGraph) }\">
+            <!--ui:dumpScope ui:message=\"AAA1: edg:DataTableResultsCallbackForDataElementImpact - {= ?instance }\"/-->
+            <ui:if ui:condition=\"{= bound(?instance) }\">
+                <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+                    <swon:Object>
+                        <swon:Value arg:name=\"data\">
+                            <swon:Array>
+                                <ui:call arg:resource=\"{= ?instance }\" ui:template=\"{= ?dependencyTemplate }\" ui:varName=\"dependencies\">
+                                    <!--ui:dumpResultSet ui:message=\"AAA2: edg:DataTableResultsCallbackForImpact -  {= ?instance }\"
+  ui:resultSet=\"{= ?dependencies }\"/-->
+                                    <ui:forEach ui:resultSet=\"{= ?dependencies }\">
+                                        <ui:if ui:condition=\"{= bound(?dependent) }\">
+                                            <swon:Object>
+                                                <swon:Value arg:name=\"uri\" arg:value=\"{= ?dependent }\"/>
+                                                <swon:Value arg:name=\"assetType\" arg:value=\"{= ui:label(?dependentType) }\"/>
+                                                <swon:Value arg:name=\"dependent\">
+                                                    <swon:Object>
+                                                        <swon:Value arg:name=\"label\" arg:value=\"{= ui:label(?dependent) }\"/>
+                                                        <swon:Value arg:name=\"uri\" arg:value=\"{= str(?dependent) }\"/>
+                                                        <swon:Value arg:name=\"graphId\" arg:value=\"{= ?graphId }\"/>
+                                                    </swon:Object>
+                                                </swon:Value>
+                                                <ui:if ui:condition=\"{= bound(?parent) &amp;&amp; (?parent != ?dependent) }\">
+                                                    <swon:Value arg:name=\"partOf\">
+                                                        <swon:Object>
+                                                            <swon:Value arg:name=\"label\" arg:value=\"{= ui:label(?parent) }\"/>
+                                                            <swon:Value arg:name=\"uri\" arg:value=\"{= str(?parent) }\"/>
+                                                            <swon:Value arg:name=\"graphId\" arg:value=\"{= ?graphId }\"/>
+                                                        </swon:Object>
+                                                    </swon:Value>
+                                                </ui:if>
+                                                <ui:else>
+                                                    <swon:Value arg:name=\"partOf\">
+                                                        <swon:Object>
+                                                            <swon:Value arg:name=\"label\" arg:value=\"&lt;div class='text-info'&gt;-&lt;/div&gt;\"/>
+                                                        </swon:Object>
+                                                    </swon:Value>
+                                                </ui:else>
+                                            </swon:Object>
+                                        </ui:if>
+                                    </ui:forEach>
+                                </ui:call>
+                            </swon:Array>
+                        </swon:Value>
+                    </swon:Object>
+                </ui:setContext>
+            </ui:if>
+        </ui:group>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:label "Data table results callback for impact" ;
+  rdfs:seeAlso edg:ResourceDataTableImpactColumns ;
+  rdfs:subClassOf edg:DataTableResults ;
+.
+edg:DataTableResultsCallbackForInstance
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:rows ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The number of rows to deliver." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:instance=\"{= IRI(ui:getSessionAttribute(&quot;persistresource&quot;)) }\">
+    <!--ui:dumpScope ui:message=\"AAA:edg:DataTableResultsCallbackForInstance\"/-->
+    <ui:resourceView ui:matchIds=\"datatable-data\" ui:resource=\"{= ?instance }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment "Needed for data table callbacks" ;
+  rdfs:label "Data table results callback for instance" ;
+  rdfs:subClassOf edg:DataTableResults ;
+.
+edg:DatatypesProjectType
+  a edg:ProjectType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+.
+edg:DefaultCreateResourceDialogPlugin
+  a swa:CreateResourceDialogPlugin ;
+  ui:prototype """
+<ui:group>
+    <ui:loadable let:useConstructMethod=\"{= swa:getURIConstructMethod() }\" ui:loadId=\"create-resource-dialog-body\">
+        <!--ui:dumpScope ui:message=\"AAA1: edg:DefaultCreateResourceDialogPlugin\"/-->
+        <ui:if ui:condition=\"{= bound(?primaryKeyClass) || swa:hasPrimaryKey(?resourceType) }\">
+            <swa:CreateResourceWithPrimaryKeyDialogPlugin arg:resourceType=\"{= ?primaryKeyClass }\" ui:args=\"*\"/>
+        </ui:if>
+        <ui:else>
+            <!--ui:dumpScope ui:message=\"AAA2: edg:DefaultCreateResourceDialogPlugin\"/-->
+            <edg:CreateResourceDialogTypeSelectionPanel arg:resourceType=\"{= ?resourceType }\" arg:suppressTypeSelection=\"{= ?suppressTypeSelection }\"/>
+            <ui:if ui:condition=\"{= ?useConstructMethod = &quot;label&quot; }\">
+                <edg:CreateResourceDialogUsingLabel arg:resourceType=\"{= ?resourceType }\"/>
+            </ui:if>
+            <ui:else>
+                <!--ui:dumpScope ui:message=\"AAA3: edg:DefaultCreateResourceDialogPlugin\"/-->
+                <swa:LabeledElement arg:label=\"Label:\">
+                    <input autocomplete=\"off\" class=\"form-control swa-create-resource-label-input\" id=\"label-input\" type=\"text\"/>
+                    <swa:LangSelector arg:uid=\"label\"/>
+                </swa:LabeledElement>
+                <edg:URIField arg:resourceType=\"{= ?resourceType }\"/>
+                <!--/div-->
+                <script>let useLabel = {= ?useConstructMethod } === 'label' ? true : false;
+edg.initCreateResourceLabelField('label-input', 'uri-input','{= edg:newResource(?resourceType) }',useLabel )</script>
+            </ui:else>
+        </ui:else>
+    </ui:loadable>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:comment "The default edg:CreateResourceDialogPlugin consisting of input fields for label and resource URI, where the URI gets updated if the label changes." ;
+  rdfs:label "Default create resource dialog plugin (EDG)" ;
+  rdfs:subClassOf swa:CreateResourceDialogPlugins ;
+.
+edg:DefiningGraphForResource
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:definingGraph=\"{= smf:definedIn(?resource) }\">
+    <swon:Object>
+        <swon:Values arg:name=\"data\">
+            <swon:Object>
+                <swon:Value arg:name=\"definingGraph\" arg:value=\"{= ?definingGraph }\"/>
+                <swon:Value arg:name=\"editorLink\" arg:value=\"{= teamwork:editorLink(ui:graphWithoutImports(IRI(?definingGraph)), ?none, ?none) }\"/>
+            </swon:Object>
+        </swon:Values>
+    </swon:Object>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "Defining graph for resource" ;
+  rdfs:subClassOf edg:JSONServices ;
+.
+edg:DependencyAnalyzer
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:columnService ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:dataEndpoint ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:dependencyTemplate ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <!--ui:dumpScope ui:message=\"AAA1: edg:DependencyAnalyzer -  {= ?resource }\"/-->
+    <ui:call arg:resource=\"{= ?resource }\" ui:template=\"{= ?dependencyTemplate }\" ui:varName=\"dependents\">
+        <!-- ui:dumpResultSet ui:message=\"AAA1: edg:DependencyAnalyzer\" ui:resultSet=\"{= ?dependents }\"/-->
+        <ui:if ui:condition=\"{= spr:isEmpty(?dependents) }\">
+            <p class=\"text-info\">No impact inferences</p>
+        </ui:if>
+        <ui:else>
+            <edg:ResourceInstancesDataTable arg:columnService=\"{= ?columnService }\" arg:dataEndpoint=\"{= ?dataEndpoint }\" arg:resource=\"{= ?resource }\" arg:resourceType=\"{= ?resourceType }\"/>
+        </ui:else>
+    </ui:call>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Determines dependencies of the impact or lineage kind" ;
+  rdfs:label "dependency Analyzer" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:EDGenumerationsProjectType
+  a edg:ProjectType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+.
+edg:EditableImports
+  a teamwork:EditableImportsTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:distinct true ;
+      sp:resultVariables (
+          [
+            sp:varName "graph" ;
+          ]
+          [
+            sp:varName "label" ;
+          ]
+          [
+            sp:varName "teamGraph" ;
+          ]
+          [
+            sp:varName "case" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Union ;
+            sp:elements (
+                (
+                  (
+                    (
+                      [
+                        sp:object [
+                            sp:varName "?0" ;
+                          ] ;
+                        sp:predicate tops:files ;
+                        sp:subject [
+                            sp:varName "file" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object "/" ;
+                        sp:predicate rdf:first ;
+                        sp:subject [
+                            sp:varName "?0" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "?1" ;
+                          ] ;
+                        sp:predicate rdf:rest ;
+                        sp:subject [
+                            sp:varName "?0" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object true ;
+                        sp:predicate rdf:first ;
+                        sp:subject [
+                            sp:varName "?1" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "?2" ;
+                          ] ;
+                        sp:predicate rdf:rest ;
+                        sp:subject [
+                            sp:varName "?1" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object true ;
+                        sp:predicate rdf:first ;
+                        sp:subject [
+                            sp:varName "?2" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object () ;
+                        sp:predicate rdf:rest ;
+                        sp:subject [
+                            sp:varName "?2" ;
+                          ] ;
+                      ]
+                    )
+                    [
+                      a sp:Bind ;
+                      sp:expression [
+                          a smf:baseURI ;
+                          sp:arg1 [
+                              sp:varName "file" ;
+                            ] ;
+                        ] ;
+                      sp:variable [
+                          sp:varName "graph" ;
+                        ] ;
+                    ]
+                    [
+                      a sp:Bind ;
+                      sp:expression "e1" ;
+                      sp:variable [
+                          sp:varName "case" ;
+                        ] ;
+                    ]
+                  )
+                  [
+                    a sp:Filter ;
+                    sp:expression [
+                        a sp:and ;
+                        sp:arg1 [
+                            a sp:ne ;
+                            sp:arg1 [
+                                sp:varName "graph" ;
+                              ] ;
+                            sp:arg2 [
+                                sp:varName "projectGraph" ;
+                              ] ;
+                          ] ;
+                        sp:arg2 [
+                            a teamwork:isImportableGraph ;
+                            arg:file [
+                                sp:varName "file" ;
+                              ] ;
+                            arg:graph [
+                                sp:varName "graph" ;
+                              ] ;
+                          ] ;
+                      ] ;
+                  ]
+                )
+                (
+                  (
+                    [
+                      sp:object [
+                          sp:varName "?3" ;
+                        ] ;
+                      sp:predicate teamwork:readableGraphsUnderTeamControl ;
+                      sp:subject () ;
+                    ]
+                    [
+                      sp:object [
+                          sp:varName "graph" ;
+                        ] ;
+                      sp:predicate rdf:first ;
+                      sp:subject [
+                          sp:varName "?3" ;
+                        ] ;
+                    ]
+                    [
+                      sp:object [
+                          sp:varName "?4" ;
+                        ] ;
+                      sp:predicate rdf:rest ;
+                      sp:subject [
+                          sp:varName "?3" ;
+                        ] ;
+                    ]
+                    [
+                      sp:object [
+                          sp:varName "teamGraph" ;
+                        ] ;
+                      sp:predicate rdf:first ;
+                      sp:subject [
+                          sp:varName "?4" ;
+                        ] ;
+                    ]
+                    [
+                      sp:object () ;
+                      sp:predicate rdf:rest ;
+                      sp:subject [
+                          sp:varName "?4" ;
+                        ] ;
+                    ]
+                    [
+                      a sp:Filter ;
+                      sp:expression [
+                          a sp:ne ;
+                          sp:arg1 [
+                              sp:varName "graph" ;
+                            ] ;
+                          sp:arg2 [
+                              sp:varName "projectGraph" ;
+                            ] ;
+                        ] ;
+                    ]
+                  )
+                  [
+                    a sp:Bind ;
+                    sp:expression "e2" ;
+                    sp:variable [
+                        sp:varName "case" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    a sp:Bind ;
+                    sp:expression <http://spinrdf.org/spl> ;
+                    sp:variable [
+                        sp:varName "graph" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression "e3" ;
+                    sp:variable [
+                        sp:varName "case" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    a sp:NamedGraph ;
+                    sp:elements (
+                        [
+                          sp:object [
+                              sp:varName "graph" ;
+                            ] ;
+                          sp:predicate teamwork:importableSystemGraph ;
+                          sp:subject [
+                              sp:varName "any" ;
+                            ] ;
+                        ]
+                      ) ;
+                    sp:graphNameNode ui:graph ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression "e4" ;
+                    sp:variable [
+                        sp:varName "case" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    sp:object [
+                        sp:varName "graph" ;
+                      ] ;
+                    sp:predicate owl:imports ;
+                    sp:subject [
+                        sp:varName "projectGraph" ;
+                      ] ;
+                  ]
+                )
+              ) ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:notExists ;
+                sp:elements (
+                    [
+                      a sp:NamedGraph ;
+                      sp:elements (
+                          [
+                            sp:object [
+                                sp:varName "graph" ;
+                              ] ;
+                            sp:predicate vaem:isMetadataFor ;
+                            sp:subject [
+                                sp:varName "gmd" ;
+                              ] ;
+                          ]
+                        ) ;
+                      sp:graphNameNode [
+                          sp:varName "graph" ;
+                        ] ;
+                    ]
+                    [
+                      a sp:Filter ;
+                      sp:expression [
+                          a sp:notExists ;
+                          sp:elements (
+                              [
+                                sp:object datagraph:ProjectType ;
+                                sp:predicate rdf:type ;
+                                sp:subject [
+                                    sp:varName "projectType" ;
+                                  ] ;
+                              ]
+                              [
+                                sp:object edg:DataGraphSchema ;
+                                sp:predicate vaem:hasGraphRole ;
+                                sp:subject [
+                                    sp:varName "graphMetadata" ;
+                                  ] ;
+                              ]
+                            ) ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:coalesce ;
+                sp:arg1 [
+                    a teamwork:projectLabel ;
+                    arg:projectGraph [
+                        sp:varName "graph" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a spl:objectInGraph ;
+                    sp:arg1 [
+                        sp:varName "graph" ;
+                      ] ;
+                    sp:arg2 rdfs:label ;
+                    sp:arg3 [
+                        sp:varName "graph" ;
+                      ] ;
+                  ] ;
+                sp:arg3 [
+                    a sp:str ;
+                    sp:arg1 [
+                        sp:varName "graph" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "label" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  vaem:todo """            BIND (teamwork:getProjectType(?projectGraph) AS ?projectType) .
+
+FILTER EXISTS {
+            GRAPH ui:graph {
+                ?projectType edg:permittedProjectType|edg:requiredProjectType ?possibleProjectType .
+                ?possibleProjectType teamwork:vocabularyType ?possibleVocabularyType .
+            } .
+            GRAPH ?graph {
+                ?graph a ?possibleVocabularyType .
+            } .
+        } .
+
+This filters out depending on permitted and required project types. We are taking this out for 6.2 for edit includes dialog. """ ;
+  rdfs:comment "Uses 'edg:permittedProjectType' and 'edg:requiredProjectType' to list all possible graphs for import Also included the 'owl:imports' of the current project graph so they can be unchecked." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "Editable imports (EDG)" ;
+  rdfs:subClassOf teamwork:EditableImportsTemplates ;
+.
+edg:Elements
+  ui:includeScript edg:Bundle ;
+  rdfs:subClassOf swa:Elements ;
+.
+edg:EnterpriseModelsProjectType
+  a edg:ProjectType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+.
+edg:EnumerationsProjectType
+  a edg:ProjectType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+.
+edg:GenerateJSONforDatatableCellObjects
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:limit ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:arrayName ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:class ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graphId ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:name ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:property ;
+      spl:valueType rdf:Property ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:myLimit=\"{= COALESCE(?limit, 20) }\">
+    <!--ui:dumpScope ui:message=\"AAA1: edg:GenerateJSONforDatatableCellObjects -  {= ?resource }\"/-->
+    <ui:call arg:class=\"{= ?class }\" arg:property=\"{= ?property }\" arg:resource=\"{= ?resource }\" ui:template=\"{= edg:getPropertyValuesForResource }\" ui:varName=\"values\">
+        <!--ui:dumpResultSet ui:message=\"AAA2: edg:GenerateJSONforDatatableCellObjects -  {= ?resource }\"
+  ui:resultSet=\"{= ?values }\"/-->
+        <ui:if ui:condition=\"{= !spr:isEmpty(?values) }\">
+            <swon:Value arg:name=\"{= ?arrayName }\" let:rowCount=\"{= spr:rowCount(?values) }\">
+                <!--ui:dumpScope ui:message=\"AAA2: edg:GenerateJSONforDatatableCellObjects -  {= ?resource }\"/-->
+                <swon:Array>
+                    <ui:forEach ui:limit=\"{= ?myLimit }\" ui:resultSet=\"{= ?values }\">
+                        <swon:Object>
+                            <swon:Value arg:name=\"label\" arg:value=\"{= ?label }\"/>
+                            <swon:Value arg:name=\"uri\" arg:value=\"{= str(?value) }\"/>
+                            <swon:Value arg:name=\"graphId\" arg:value=\"{= ?graphId }\"/>
+                        </swon:Object>
+                    </ui:forEach>
+                    <ui:if ui:condition=\"{= ?rowCount &gt; ?myLimit }\">
+                        <swon:Object>
+                            <swon:Value arg:name=\"label\" arg:value=\" ... &lt;i&gt;{= str((?rowCount - ?myLimit)) } more ...&lt;/i&gt;\"/>
+                            <swon:Value arg:name=\"glyph\" arg:value=\"glyphicon glyphicon-new-window\"/>
+                            <swon:Value arg:name=\"isEDGresource\" arg:value=\"{= false }\"/>
+                        </swon:Object>
+                    </ui:if>
+                </swon:Array>
+            </swon:Value>
+        </ui:if>
+    </ui:call>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment "Generates JSON for multiple values for a cell in a data table. The JS code that does the rendering is in 'data-table-custom-renders.js'." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "Generate JSON for datatable cell objects" ;
+  rdfs:subClassOf edg:JSONServices ;
+.
+edg:GenerateNewResourceURI
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:aResourceType=\"{= IRI(?resourceType) }\">
+    <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+        <swon:Object>
+            <swon:Value arg:name=\"newResourceURI\" arg:value=\"{= edg:newResource(?aResourceType) }\"/>
+        </swon:Object>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "Generate new resource URI" ;
+  rdfs:subClassOf edg:JSONServices ;
+.
+edg:GlossaryProjectType
+  a edg:ProjectType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+.
+edg:IdentifierConstructionRulesHelp
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:projectGraph ;
+    ] ;
+  ui:prototype """
+<ui:setContext ui:queryGraph=\"{= IRI(?projectGraph) }\">
+    <ui:group let:useClassPrefix=\"{= swa:getURIClassPrefix() }\" let:useConstructMethod=\"{= swa:getURIConstructMethod() }\" let:userCannotModifyURI=\"{= swa:getUserCannotModifyURI() }\">
+        <div>
+            <p class=\"text-info\">Identifer construction rules are determined by configuration parameters.</p>
+            <ui:if ui:condition=\"{= uix:isAdmin() }\">
+                <p class=\"text-info\">
+                    <span>You can change these settings for this graph on the Manage tab, or on the whole server by going to </span>
+                    <a data-icon=\"fa-tags fa\" href=\"swp?_viewClass=teamworkconfig:ConfigEditor\" title=\"Takes you to the TopBraid EDG Configuration Page\">this page</a>
+                </p>
+            </ui:if>
+            <ui:else>
+                <p>Ask your <em>EDG administrator</em> about configuring Identifier Construction Rules.</p>
+            </ui:else>
+        </div>
+        <div>
+            <p class=\"text-info\">Identifier will be built from <em>{= ?useConstructMethod }</em>
+            </p>
+            <ui:if ui:condition=\"{= (?useClassPrefix = &quot;name&quot;) || (?useClassPrefix = &quot;acronym&quot;) }\">
+                <p class=\"text-info\">Identifier prefix will use <em>class name</em>
+                    <ui:if ui:condition=\"{= ?useClassPrefix = &quot;acronym&quot; }\">
+                        <span>&nbsp;or, if it exists, the <em>class acronym</em>
+                        </span>
+                    </ui:if>
+                </p>
+            </ui:if>
+            <ui:if ui:condition=\"{= ?userCannotModifyURI }\">
+                <p class=\"text-info\">Identifier can not be modified by the user</p>
+            </ui:if>
+        </div>
+    </ui:group>
+</ui:setContext>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/governance> ;
+  rdfs:label "Identifier construction rules help page" ;
+  rdfs:subClassOf edg:HelpPage ;
+.
+edg:ImpactGadget
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:columnService ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:dataEndpoint ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:dependencyTemplate ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group let:result=\"{= ui:setSessionAttribute(&quot;resourceinstance&quot;, str(?focusNode)) }\">
+    <ui:loadable class=\"swa-labeled-objects\" let:gid=\"{= ui:uniqueId() }\" ui:loadId=\"{= ui:uniqueId() }\">
+        <!--ui:dumpScope ui:message=\"AAA1: edg:ImpactGadget -  {= ?focusNode }\"/-->
+        <ui:resourceView ui:matchIds=\"impact-analyzer\" ui:resource=\"{= ?focusNode }\"/>
+    </ui:loadable>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "Impact gadget" ;
+  rdfs:subClassOf edg:PathElements ;
+.
+edg:JSONServices
+  a ui:Service ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "JSONServices" ;
+  rdfs:subClassOf ui:JSONServices ;
+.
+edg:LabeledElement
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:class ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:toolTip ;
+      spl:valueType xsd:string ;
+      rdfs:comment "An optional tool tip text to appear over the label." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:label ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The label text." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:title ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:prototype """
+<ui:group let:popoverText=\"{= COALESCE(?toolTip, spl:object(?label, rdfs:comment), &quot;&quot;) }\">
+    <table class=\"swa-labeled-objects-table\" let:id=\"{= ui:uniqueId() }\">
+        <tr>
+            <td class=\"swa-labeled-objects-label-td swa-labeled-objects-tabular-label {= IF(bound(?class), ?class, ?none) }\">
+                <div class=\"swa-shifted-label\">
+                    <label for=\"{= ?id }\" title=\"{= ?toolTip }\">
+                        <ui:if ui:condition=\"{= bound(?toolTip) }\">
+                            <span class=\"topbraid-popover\" data-content=\"{= ?toolTip }\" data-toggle=\"popover\" title=\"{= ?title }\">{= ?label }</span>
+                        </ui:if>
+                        <ui:else>{= ?label }</ui:else>
+                    </label>
+                </div>
+            </td>
+            <td class=\"swa-labeled-objects-icons-td\">
+                <span class=\"swa-icon\"/>
+            </td>
+            <td id=\"{= ?id }\">
+                <ui:insertionPoint ui:pointId=\"body\"/>
+            </td>
+        </tr>
+    </table>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A container element with one child, that places a label to the left and the child element to the right, in the same layout as the tabular forms." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "Labeled element" ;
+  rdfs:subClassOf swa:LayoutElements ;
+.
+edg:LineageGadget
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:dependencyTemplate ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:loadable class=\"swa-labeled-objects\" let:gid=\"{= ui:uniqueId() }\" ui:loadId=\"{= ui:uniqueId() }\">
+        <!--ui:dumpScope ui:message=\"AAA1: edg:LineageGadget -  {= ?focusNode }\"/-->
+        <edg:DependencyAnalyzer arg:columnService=\"{= ?columnService }\" arg:dataEndpoint=\"{= ?dataEndpoint }\" arg:resource=\"{= ?focusNode }\"/>
+    </ui:loadable>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "Lineage gadget" ;
+  rdfs:subClassOf edg:PathElements ;
+.
+edg:MainClassOverrideManagePlugin
+  a teamwork:ManagePlugin ;
+  ui:prototype """
+<ui:setContext let:projectType=\"{= teamwork:getProjectType(?projectGraph) }\" let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\" ui:queryGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <teamwork:ActionLink arg:icon=\"{= ui:lib() }/teamwork/build/images/teamwork/root-class-icon.svg\" arg:title=\"Root Class\">
+        <span>Resets which class will be the root of its Class Hierarchy whenever someone edits the {= teamwork:singularProjectTypeLabel(?projectType) } (for example, if the {= teamwork:singularProjectTypeLabel(?projectType) } specializes a standard class, perhaps its custom class's ancestors should not show).</span>
+        <br/>
+        <br/>
+        <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?projectGraph) }\" ui:silentTransactions=\"{= true }\">
+            <select class=\"form-control\">
+                <swa:ClassTreeNavigationNode arg:class=\"{= edg:projectTypeRootClass(?projectType) }\" arg:indentation=\"\" arg:selected=\"{= edg:getRootClass(?projectGraph) }\" arg:visitedGraph=\"{= ui:tempGraphClassTreeNavigationElement }\"/>
+                <ui:handle arg:selected=\"$(this).val()\" ui:event=\"onchange\">
+                    <ui:if ui:condition=\"{= edg:projectTypeRootClass(?projectType) = ?selected }\">
+                        <ui:removePropertyValues arg:property=\"{= teamwork:mainClass }\" ui:this=\"{= ?projectGraph }\"/>
+                    </ui:if>
+                    <ui:else>
+                        <ui:setPropertyValue arg:property=\"{= teamwork:mainClass }\" arg:value=\"{= ?selected }\" ui:this=\"{= ?projectGraph }\"/>
+                    </ui:else>
+                </ui:handle>
+            </select>
+        </ui:setContext>
+    </teamwork:ActionLink>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "Root class plugin" ;
+  rdfs:subClassOf teamwork:ManagePlugins ;
+.
+edg:PathElements
+  a ui:NodeClass ;
+  rdfs:label "Path elements" ;
+  rdfs:subClassOf swa:PathElements ;
+.
+edg:ProjectType
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:subClassOf teamwork:ProjectType ;
+  sh:class teamwork:ProjectType ;
+  sh:property edg:ProjectType-permittedProjectType ;
+  sh:property edg:ProjectType-requiredProjectType ;
+  sh:property edg:ProjectType-selectedResourceType ;
+.
+edg:ProjectType-permittedProjectType
+  a sh:PropertyShape ;
+  sh:path edg:permittedProjectType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  sh:class teamwork:ProjectType ;
+  sh:name "permits inclusion of teamwork project type" ;
+.
+edg:ProjectType-requiredProjectType
+  a sh:PropertyShape ;
+  sh:path edg:requiredProjectType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  sh:class teamwork:ProjectType ;
+  sh:name "requires inclusion of teamwork project type" ;
+.
+edg:ProjectType-selectedResourceType
+  a sh:PropertyShape ;
+  sh:path edg:selectResourceType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  sh:class rdfs:Resource ;
+.
+edg:ReificationInstanceFormBody
+  a ui:ResourceViewClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:label=\"{= ui:label(?resourceType) }\">
+    <ui:call arg:subject=\"{= ?resource }\" ui:template=\"{= swa:modeProperty(swa:formObjectPredicateSelectionTemplate) }\">
+        <swa:ObjectsGroup arg:filterFunction=\"{= swa:isAnnotationProperty }\" arg:label=\"{= ?label } Annotations\" arg:predicates=\"{= ?rs }\" arg:subject=\"{= ?resource }\"/>
+        <swa:ObjectsGroup arg:filterFunction=\"{= swa:isNonAnnotationProperty }\" arg:label=\"{= ?label } Properties\" arg:predicates=\"{= ?rs }\" arg:subject=\"{= ?resource }\"/>
+    </ui:call>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "The reification instance view for rdfs:Resource, with widget groups for Annotation Properties and Other Properties." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "Reification instance form body" ;
+  rdfs:subClassOf swa:FormBody ;
+.
+edg:ReificationObjectsGroup
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:filterFunction ;
+      spl:valueType spin:Function ;
+      rdfs:comment "An optional filter function that takes a predicate and a subject as arguments and returns true for all predicates that should be displayed." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:predicates ;
+      spl:valueType sp:Select ;
+      rdfs:comment "A result set (e.g., SPARQL SELECT query) that delivers the predicates in this group." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subject ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource to display." ;
+    ] ;
+  ui:prototype """
+<ui:group letrs:rs=\"{#
+        SELECT ?predicate
+        WHERE {
+            ( ?predicates 0 ) spr:colCells ?predicate .
+            FILTER ((!bound(?filterFunction)) || spif:invoke(?filterFunction, ?predicate, ?subject)) .
+            FILTER (!swa:isHiddenPropertyAtSubject(?predicate, ?subject)) .
+        } }\">
+    <ui:if ui:condition=\"{= spr:rowCount(?rs) &gt; 0 }\">
+        <div class=\"swa-objects-group\">
+            <ui:if ui:condition=\"{= bound(?label) }\">
+                <div class=\"swa-sub-title\">{= ?label }</div>
+            </ui:if>
+            <ui:forEach ui:resultSet=\"{= ?rs }\">
+                <swa:Objects arg:predicate=\"{= ?predicate }\" arg:subject=\"{= ?subject }\"/>
+            </ui:forEach>
+        </div>
+    </ui:if>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A group of swa:Objects elements where the predicates are computed by taking a result set (e.g. of all relevant properties) and applying a filter on top of it, e.g. to only show the annotation properties among those that are relevant." ;
+  rdfs:label "Reification Objects group" ;
+  rdfs:subClassOf swa:ObjectGroupElements ;
+.
+edg:ReifiedResourceViewer
+  a swa:ObjectViewerClass ;
+  ui:private true ;
+  ui:prototype """
+<div class=\"swa-shifted-label\" let:op=\"{= ui:contextValue(&quot;swaOnOpenResource&quot;) }\" title=\"{= ?object }\">
+    <swa:Link arg:resource=\"{= ?object }\"/>
+    <!--ui:dumpScope ui:message=\"AAA1: edg:ReifiedResourceViewer\"/-->
+    <ui:if ui:condition=\"{= bound(?op) }\">
+        <a class=\"swa-uri-resource-viewer-menu swa-icon ui-icon ui-icon-arrow-1-e\" href=\"javascript:void(0)\" onclick=\"var resource='{= ui:encodeNode(?object, true, true) }';{= ?op };\" title=\"Open in a new Window\"/>
+    </ui:if>
+    <ui:call arg:object=\"{= ?object }\" arg:predicate=\"{= ?predicate }\" arg:subject=\"{= ?subject }\" ui:template=\"{= edg:reificationInstanceForGivenStatement }\" ui:varName=\"reifications\">
+        <!--ui:dumpResultSet ui:message=\"AAA2: edg:ReifiedResourceViewer\" ui:resultSet=\"{= ?reifications }\"/-->
+        <ui:if ui:condition=\"{= !spr:isEmpty(?reifications) }\">
+            <ui:forEach ui:resultSet=\"{= ?reifications }\">
+                <div style=\"padding-left: 40px;\">
+                    <ui:call arg:subject=\"{= ?instance }\" ui:template=\"{= edg:UsedObjectPredicates }\">
+                        <!--ui:dumpResultSet ui:message=\"AAA3: edg:ReifiedResourceViewer\" ui:resultSet=\"{= ?rs }\"/-->
+                        <edg:ReificationObjectsGroup arg:filterFunction=\"{= swa:isNonAnnotationProperty }\" arg:label=\"\" arg:predicates=\"{= ?rs }\" arg:subject=\"{= ?instance }\"/>
+                    </ui:call>
+                </div>
+            </ui:forEach>
+        </ui:if>
+        <ui:else>
+            <p class=\"text-info\">No metadata on this statement</p>
+        </ui:else>
+    </ui:call>
+</div>
+"""^^ui:Literal ;
+  rdfs:comment """The viewer for reified URI resources, displaying a hyperlink to that resource.
+
+It is possible to also show a small arrow button behind the resource, to implement a special operation that shall be executed when the user clicks on the arrow. It will appear when the context variable 'swaOnOpenResource' is set. The value of that variable must be a JavaScript snippet that uses the variable 'resource' to query the current resource. In a typical scenario (as implemented in the SWA default application), this opens a new desktop window for that resource, but in principle any other operation would be possible too.""" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "Reified resource viewer" ;
+  rdfs:subClassOf swa:ObjectViewer ;
+.
+edg:ReifiedStatementEditor
+  a swa:ObjectEditorClass ;
+  ui:prototype """
+<ui:group let:reificationClass=\"{= edg:getReificationClass(?predicate, ?subject) }\">
+    <!--ui:dumpScope ui:message=\"AAA1: edg:ReifiedStatementEditor\"/-->
+    <ui:group let:newInstance=\"instance-{= ?uid }\">
+        <ui:if ui:condition=\"{= bound(?object) }\">
+            <input name=\"{= ?newInstance }\" type=\"hidden\" value=\"{= ui:encodeNode(?object, true, true) }\"/>
+            <swa:URIResourceEditor ui:args=\"*\"/>
+            <div class=\"swa-nested-form swa-nested-object-editor\" style=\"margin-left:150px\">
+                <ui:call arg:object=\"{= ?object }\" arg:predicate=\"{= ?predicate }\" arg:subject=\"{= ?subject }\" ui:template=\"{= edg:reificationInstanceForGivenStatement }\" ui:varName=\"reifications\">
+                    <ui:if ui:condition=\"{= spr:rowCount(?reifications) &gt; 0 }\">
+                        <ui:forEach ui:resultSet=\"{= ?reifications }\">
+                            <div style=\"padding-left: 40px;\">
+                                <ui:call arg:subject=\"{= ?instance }\" ui:template=\"{= edg:UsedObjectPredicates }\">
+                                    <edg:ReificationObjectsGroup arg:filterFunction=\"{= swa:isNonAnnotationProperty }\" arg:label=\"\" arg:predicates=\"{= ?rs }\" arg:subject=\"{= ?instance }\"/>
+                                </ui:call>
+                            </div>
+                        </ui:forEach>
+                    </ui:if>
+                    <ui:else let:reification=\"reification-{= ?uid }\">
+                        <swa:URIResourceEditor arg:subject=\"{= ?reification }\" ui:args=\"*\"/>
+                    </ui:else>
+                </ui:call>
+            </div>
+        </ui:if>
+        <ui:else>
+            <ui:group let:range=\"{= swa:localRange(?predicate, ?subject) }\">
+                <div class=\"swa-nested-form swa-nested-object-editor\" style=\"margin-left:150px\">
+                    <ui:setContext ui:varName=\"mode\" ui:varValue=\"edit\">
+                        <ui:setContext ui:varName=\"resourceType\" ui:varValue=\"{= ?range }\">
+                            <edg:URIreifiedResourceStatementEditor arg:predicate=\"{= ?predicate }\" arg:range=\"{= ?range }\" arg:subject=\"{= ?subject }\" ui:args=\"*\"/>
+                        </ui:setContext>
+                    </ui:setContext>
+                </div>
+            </ui:group>
+        </ui:else>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A nested form, suitable for editing \"reified\" blank nodes." ;
+  rdfs:comment "let:object=\"{= IRI(CONCAT(&quot;urn:x-new-bnode:&quot;, ui:uniqueId())) }\"" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "Reified Statement Editor" ;
+  rdfs:subClassOf swa:ObjectEditor ;
+.
+edg:RequirementsModelProjectType
+  a edg:ProjectType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+.
+edg:ResourceDataTableColumns
+  a ui:NodeClass ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <!--ui:dumpScope ui:message=\"AAA: edg:ResourceDataTableColumns\"/-->
+    <ui:resourceView ui:matchIds=\"datatable-columns\" ui:resource=\"{= ?this }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment "JSON representation of the columns needed for a resource in a DataTable. This is used in cases where a search form is not involved." ;
+  rdfs:label "Resource data table columns" ;
+  rdfs:subClassOf edg:DataTableColumns ;
+.
+edg:ResourceDataTableImpactColumns
+  a ui:NodeClass ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <!--ui:dumpScope ui:message=\"AAA: edg:ResourceDataTableImpactColumns\"/-->
+    <swon:Array>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"uri\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"uri\"/>
+            <swon:Value arg:name=\"searchable\" arg:value=\"{= false }\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= false }\"/>
+            <swon:Value arg:name=\"orderable\" arg:value=\"{= false }\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Dependent Asset\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"dependent\"/>
+            <swon:Value arg:name=\"searchable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+            <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"render\" arg:value=\"detailsLink\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Asset Type\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"assetType\"/>
+            <swon:Value arg:name=\"searchable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+            <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"type\" arg:value=\"string\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Asset is part of\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"partOf\"/>
+            <swon:Value arg:name=\"searchable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+            <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"render\" arg:value=\"detailsLink\"/>
+        </swon:Object>
+    </swon:Array>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment "JSON representation of the columns needed for a resource in an upstream interoperable DataTable. " ;
+  rdfs:seeAlso edg:DataTableResultsCallbackForImpact ;
+  rdfs:subClassOf edg:DataTableColumns ;
+.
+edg:ResourceInstancesDataTable
+  a ui:ResourceViewClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:canEdit ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:columnService ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:createResourceHandler ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:createService ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:dataEndpoint ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:hasViewableDetails ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:multiSelect ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:noneText ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group default:subject=\"{= ?resource }\" let:frozen=\"{= teamwork:isExplorerUser(smf:userWithName(smf:currentUserName())) || teamwork:isCurrentGraphFrozen() }\" let:makeResourcePersistent=\"{= ui:setSessionAttribute(&quot;persistresource&quot;, str(?resource)) }\" let:myCanEdit=\"{= COALESCE(?canEdit, false) }\" let:myColumnService=\"{= COALESCE(?columnService, edg:ResourceDataTableColumns) }\" let:myCreateService=\"{= COALESCE(?createService, swa:CreateResourceDialogJSON) }\" let:myDataEndpoint=\"{= COALESCE(?dataEndpoint, edg:DataTableResultsCallbackForInstance) }\" let:myHasViewableDetails=\"{= COALESCE(?hasViewableDetails, false) }\" let:myMultiSelect=\"{= COALESCE(?multiSelect, false) }\" let:myNoneText=\"{= COALESCE(?noneText, &quot;None&quot;) }\" let:rowSelectedEvent=\"org.datasetapp.instanceSelected\">
+    <ui:group let:loadId=\"{= ui:uniqueId() }\" let:tableId=\"{= COALESCE(?id, ui:uniqueId()) }\">
+        <!--ui:dumpScope ui:message=\"AAA1: edg:ResourceInstancesDataTable -  {= ?resource }\"/-->
+        <swa:LoadableFormSection arg:loadId=\"{= ?loadId }\">
+            <ui:loadable class=\"swa-loadable-form-section-body\" ui:loadId=\"{= ?loadId }\" ui:loadOnDemand=\"{= false }\">
+                <teamwork:DataTable arg:additionalClasses=\"my-custom-table\" arg:createResourceHandler=\"{= COALESCE(?createResourceHandler, swa:CreateResourceHandler) }\" arg:createService=\"{= ?myCreateService }\" arg:dataColumnsEndpoint=\"{= ?myColumnService }\" arg:dataEndpoint=\"{= ?myDataEndpoint }\" arg:editable=\"{= ?myCanEdit }\" arg:exports=\"{= true }\" arg:hasViewableDetails=\"{= ?myHasViewableDetails }\" arg:id=\"{= ?tableId }\" arg:multiSelect=\"{= ?myMultiSelect }\" arg:postProcessType=\"swp\" arg:resourceSelectedEvent=\"{= ?rowSelectedEvent }\" arg:resourceType=\"{= ?resourceType }\" arg:selectAll=\"{= true }\"/>
+                <div class=\"ui-helper-hidden-accessible\">{= ?myNoneText }</div>
+                <script>gadgets.Hub.publish('org.topbraid.swa.rebuildTable', '{= ?tableId }');</script>
+            </ui:loadable>
+        </swa:LoadableFormSection>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "Resource Instances Data Table" ;
+  rdfs:subClassOf swa:GridElements ;
+.
+edg:ResourceInstancesInlineEditingDataTable
+  a ui:ResourceViewClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:columnService ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:createResourceHandler ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:createService ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:dataEndpoint ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:noneText ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group default:subject=\"{= ?resource }\" let:frozen=\"{= teamwork:isExplorerUser(smf:userWithName(smf:currentUserName())) || teamwork:isCurrentGraphFrozen() }\" let:makeResourcePersistent=\"{= ui:setSessionAttribute(&quot;persistresource&quot;, str(?resource)) }\" let:myColumnService=\"{= COALESCE(?columnService, edg:ResourceDataTableColumns) }\" let:myCreateService=\"{= COALESCE(?createService, swa:CreateResourceDialog) }\" let:myDataEndpoint=\"{= COALESCE(?dataEndpoint, edg:DataTableResultsCallbackForInstance) }\" let:myNoneText=\"{= COALESCE(?noneText, &quot;None&quot;) }\" let:rowSelectedEvent=\"org.datasetapp.instanceSelected\">
+    <ui:group let:loadId=\"{= ui:uniqueId() }\" let:tableId=\"{= COALESCE(?id, ui:uniqueId()) }\">
+        <!--ui:dumpScope ui:message=\"AAA1: edg:ResourceInstancesDataTable -  {= ?resource }\"/-->
+        <swa:LoadableFormSection arg:loadId=\"{= ?loadId }\">
+            <ui:loadable class=\"swa-loadable-form-section-body\" ui:loadId=\"{= ?loadId }\" ui:loadOnDemand=\"{= false }\">
+                <swa:SimpleDataTableResults arg:createResourceHandler=\"{= COALESCE(?createResourceHandler, swa:CreateResourceHandler) }\" arg:id=\"{= ?tableId }\" arg:resourceSelectedEvent=\"{= ?rowSelectedEvent }\" ui:args=\"*\"/>
+                <div class=\"ui-helper-hidden-accessible\">{= ?myNoneText }</div>
+                <script>gadgets.Hub.publish('org.topbraid.swa.rebuildTable', '{= ?tableId }');</script>
+            </ui:loadable>
+        </swa:LoadableFormSection>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  vaem:todo """arg:columnsService=\"{= ?myColumnService }\"
+arg:dataEndpoint=\"{= ?myDataEndpoint }\"""" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "Resource Instances Inline Editing Data Table" ;
+  rdfs:subClassOf swa:GridElements ;
+.
+edg:ResourceLink
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:id ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:labelOverride ;
+      spl:valueType xsd:string ;
+      rdfs:comment "An optional override to the label." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:title ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The URI resource to link to." ;
+    ] ;
+  ui:prototype """
+<ui:group let:inNewEditor=\"{= edg:isUsingNewEditor() }\" let:myTitle=\"{= COALESCE(?title, CONCAT(spl:object(?resource, rdfs:label), &quot;&nbsp;&nbsp;[&nbsp;&quot;, str(?resource), &quot;&nbsp;]&quot;)) }\" let:projectGraph=\"{= teamwork:currentMasterGraph() }\" let:teamGraph=\"{= COALESCE(IF(bound(?resource), teamwork:teamGraph(IRI(smf:definedIn(?resource))), ?none), teamwork:currentTeamGraph()) }\">
+    <ui:group let:graphId=\"{= teamwork:graphIdFromGraph(?projectGraph) }\" let:hrefBuilder=\"{= IF(?inNewEditor, edg:createNewEditorFormHRef, edg:createOldEditorFormHRef) }\" let:myInstance=\"{= COALESCE(?resource, ?none) }\" let:tagId=\"{= teamwork:tagIdFromTagGraph(?projectGraph) }\">
+        <ui:group let:href=\"{= spif:invoke(?hrefBuilder, ?graphId, ?resource, ?tagId) }\">
+            <!--ui:dumpScope ui:message=\"AAA1: edg:ResourceLink - {= ?resource }\"/-->
+            <ui:if ui:condition=\"{= bound(?href) }\">
+                <a class=\"swa-link\" href=\"{= ?href }\" id=\"{= ?id }\" title=\"{= ?myTitle }\">
+                    <ui:if ui:condition=\"{= bound(?labelOverride) }\">{= ?labelOverride }</ui:if>
+                    <ui:else>
+                        <swa:Label arg:node=\"{= ?resource }\"/>
+                    </ui:else>
+                </a>
+            </ui:if>
+            <ui:else>
+                <ui:group let:uid=\"{= COALESCE(?id, ui:uniqueId()) }\">
+                    <ui:group let:link=\"{= swa:createLink(?resource, ?uid) }\">
+                        <ui:if ui:condition=\"{= bound(?link) }\">
+                            <a class=\"swa-link\" href=\"javascript:void(0)\" id=\"{= ?uid }\" onclick=\"{= ?link }\" title=\"{= ?myTitle }\">
+                                <ui:if ui:condition=\"{= bound(?labelOverride) }\">{= ?labelOverride }</ui:if>
+                                <ui:else>
+                                    <swa:Label arg:node=\"{= ?resource }\"/>
+                                </ui:else>
+                            </a>
+                        </ui:if>
+                        <ui:else>
+                            <ui:if ui:condition=\"{= bound(?labelOverride) }\">{= ?labelOverride }</ui:if>
+                            <ui:else>
+                                <swa:Label arg:node=\"{= ?resource }\"/>
+                            </ui:else>
+                        </ui:else>
+                    </ui:group>
+                </ui:group>
+            </ui:else>
+        </ui:group>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Creates a hyperlink to switch the current view to a given resource. This element should be used to create all hyperlinks in SWA applications, because this single place provides greater flexibility to make adjustments to the links. In particular, the semantics of what should happen if the user clicks on a link may be different for each application or even within different parts of a single application: in some cases the application may want to replace a form on the screen, while in other cases the selected resource should be opened in a modal dialog. The SPIN functions swa:createHRef and swa:createLink are used to define the link. If these functions return nothing, then no link is displayed, but rather an swa:Label." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "Link" ;
+  rdfs:subClassOf swa:Elements ;
+.
+edg:ResponsiveObjectsBody
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:offset ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The offset for the \"next 50\" recursive calls." ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:if ui:condition=\"{= bound(?subject) }\">
+        <ui:call arg:currentLang=\"{= ui:lang() }\" arg:languages=\"{= swa:getLanguagesList() }\" arg:predicate=\"{= ?predicate }\" arg:subject=\"{= ?subject }\" let:special=\"{= swa:specialAddButtonFunction(?predicate, ?subject) }\" ui:template=\"{= swa:SortedObjectsByLanguage }\">
+            <ui:if ui:condition=\"{= ((spr:isEmpty(?rs) &amp;&amp; (!edg:isViewMode())) &amp;&amp; (!bound(?special))) &amp;&amp; (!swa:isBlankNodeProperty(?predicate)) }\">
+                <ui:if ui:condition=\"{= swa:isAutoAddRowProperty(?predicate) }\">
+                    <div class=\"swa-object-row\">
+                        <swa:ObjectWidgetRow arg:predicate=\"{= ?predicate }\" arg:subject=\"{= ?subject }\"/>
+                    </div>
+                </ui:if>
+            </ui:if>
+            <ui:else>
+                <ui:group let:limit=\"{= 50 }\" let:offset=\"{= COALESCE(?offset, 0) }\">
+                    <div class=\"container-fluid\">
+                        <div class=\"swa-object-row\">
+                            <div class=\"edg-heading size12px\">
+                                <span>{= ?text }</span>
+                            </div>
+                            <ui:group let:rowCount=\"{= spr:rowCount(?rs) }\" let:singleColumn=\"{= edg:isSingleColumnViewRow(?predicate, ?subject) }\">
+                                <ui:if ui:condition=\"{= ?rowCount &gt; 0 }\">
+                                    <div class=\"col-xs-12 col-sm-6 col-md-6 col-lg-4\">
+                                        <ui:group let:myLabel=\"{= COALESCE(?label, swa:propertyLabelAtNode(?predicate, ?subject)) }\" let:title=\"{= COALESCE(ui:convertHTMLToText(?comment), IF(bound(?predicate), spl:object(?predicate, rdfs:comment), ?none)) }\">
+                                            <span class=\"size12px\" id=\"property-label-{= ?predicate }\" title=\"{= ?title }\">{= ?myLabel }:</span>
+                                            <span>
+                                                <ui:if ui:condition=\"{= (bound(?subject) &amp;&amp; swa:isMandatory(?predicate, ?subject)) &amp;&amp; (!swa:isSearchMode()) }\">
+                                                    <span class=\"form-required\">&nbsp;*</span>
+                                                </ui:if>
+                                            </span>
+                                        </ui:group>
+                                    </div>
+                                    <ui:forEach ui:limit=\"{= ?limit }\" ui:offset=\"{= ?offset }\" ui:resultSet=\"{= ?rs }\">
+                                        <ui:if ui:condition=\"{= ?fullWidth }\">
+                                            <swa:ObjectWidgetRow arg:object=\"{= ?object }\" arg:predicate=\"{= ?predicate }\" arg:subject=\"{= ?subject }\"/>
+                                        </ui:if>
+                                        <ui:else>
+                                            <div class=\"col-xs-12 col-sm-6 col-md-6 col-lg-8\">
+                                                <swa:ObjectViewerRow arg:object=\"{= ?object }\" arg:predicate=\"{= ?predicate }\" arg:subject=\"{= ?subject }\"/>
+                                            </div>
+                                        </ui:else>
+                                    </ui:forEach>
+                                </ui:if>
+                            </ui:group>
+                        </div>
+                    </div>
+                    <ui:group let:id=\"{= ui:uniqueId() }\" let:rowCount=\"{= spr:rowCount(?rs) }\">
+                        <ui:loadable ui:loadId=\"{= ?id }\">
+                            <ui:if ui:condition=\"{= ?rowCount &gt; (?offset + ?limit) }\">
+                                <ui:if ui:condition=\"{= bound(?newOffset) }\">
+                                    <swa:DefaultObjectsBody arg:offset=\"{= ?newOffset }\" ui:args=\"*\"/>
+                                </ui:if>
+                                <ui:else>
+                                    <div class=\"swa-objects-show-more\">
+                                        <a href=\"javascript:void(0)\" onclick=\"swa.load('{= ?id }', { newOffset: {= ?offset + ?limit } })\">Show entries {= (?offset + ?limit) + 1 } to {= spl:min(?rowCount, ((?offset + ?limit) + ?limit)) } of {= ?rowCount }</a>
+                                    </div>
+                                </ui:else>
+                            </ui:if>
+                        </ui:loadable>
+                    </ui:group>
+                </ui:group>
+            </ui:else>
+        </ui:call>
+    </ui:if>
+    <ui:else>
+        <div class=\"swa-object-row\">
+            <swa:ObjectWidgetRow arg:predicate=\"{= ?predicate }\"/>
+        </div>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "An implementation of swa:ObjectsBody that uses a responsive design approach for listing more than one object per row" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "Responsive objects body" ;
+  rdfs:subClassOf swa:ObjectsBody ;
+.
+edg:ResponsiveObjectsViewer
+  a swa:ObjectEditorClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:noneText ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:style ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:class ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:matchIds ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:property ;
+      spl:valueType rdf:Property ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:tag ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:text ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:call arg:class=\"{= ?class }\" arg:property=\"{= ?property }\" arg:resource=\"{= ?resource }\" ui:template=\"{= edg:getPropertyValuesForResource }\" ui:varName=\"subjects\">
+        <div class=\"container-fluid\">
+            <ui:if ui:condition=\"{= !spr:isEmpty(?subjects) }\">
+                <div class=\"size12px\">
+                    <span>{= ?text }</span>
+                </div>
+                <ui:forEach ui:resultSet=\"{= ?subjects }\">
+                    <div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12 size12px\">
+                        <ui:resourceView arg:style=\"{= ?style }\" ui:matchIds=\"{= ?matchIds }\" ui:resource=\"{= ?value }\"/>
+                    </div>
+                </ui:forEach>
+            </ui:if>
+            <ui:else>
+                <ui:if ui:condition=\"{= bound(?noneText) }\">
+                    <div class=\"size12px\">
+                        <span>{= ?noneText }</span>
+                    </div>
+                </ui:if>
+            </ui:else>
+        </div>
+    </ui:call>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Shows obects for a goven resource and property in a responsive bootstrap box" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "Responsive Objects Viewer" ;
+  rdfs:subClassOf swa:ObjectElements ;
+.
+edg:ResponsiveSubjectsViewer
+  a swa:ObjectEditorClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:noneText ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:style ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:class ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:matchIds ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:property ;
+      spl:valueType rdf:Property ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:text ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <!--ui:dumpScope ui:message=\"AAA1: edg:ResponsiveSubjectsViewer -  {= ?resource }\"/-->
+    <ui:call arg:class=\"{= ?class }\" arg:property=\"{= ?property }\" arg:resource=\"{= ?resource }\" ui:template=\"{= edg:getSubjectsForGivenPropertyAndObject }\" ui:varName=\"subjects\">
+        <div class=\"container-fluid\">
+            <ui:if ui:condition=\"{= !spr:isEmpty(?subjects) }\">
+                <div class=\"size12px\">
+                    <span>{= ?text }</span>
+                </div>
+                <ui:forEach ui:resultSet=\"{= ?subjects }\">
+                    <div class=\"row\">
+                        <div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12 size12px\">
+                            <ui:resourceView arg:style=\"{= ?style }\" ui:matchIds=\"{= ?matchIds }\" ui:resource=\"{= ?value }\"/>
+                        </div>
+                    </div>
+                </ui:forEach>
+            </ui:if>
+            <ui:else>
+                <ui:if ui:condition=\"{= bound(?noneText) }\">
+                    <div class=\"size12px\">
+                        <span>{= ?noneText }</span>
+                    </div>
+                </ui:if>
+            </ui:else>
+        </div>
+    </ui:call>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Shows subjects for a goven resource and property in a responsive bootstrap box" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "Responsive Subjects Viewer" ;
+  rdfs:subClassOf swa:ObjectElements ;
+.
+edg:ResponsiveSwitchableFormGadget
+  a swa:Gadget ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:allowHistoryMode ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to have a \"Show history\" check box show up in view mode. This mode is currently only supported by the teamwork framework, not general SWA." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:allowLogMessage ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to provide an option to enter a log message when saving changes." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:allowProvenanceMode ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to have a \"Show provenance\" check box show up in view mode. This mode is currently only supported by the Insight product, not general SWA." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:detailsButtonHandler ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The JS to handle the \"details\" button." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:detailsButtonToolTip ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The tool tip of the details button, if available." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:editing ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to start in editing mode." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:footerPlugin ;
+      spl:valueType swa:SwitchableFormFooterPlugin ;
+      rdfs:comment "An optional component to show up in the lower right corner." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:matchIds ;
+      spl:valueType xsd:string ;
+      rdfs:comment "An optional list of matchIds that shall be tried first when selecting the actual view. This allows users to define multiple forms for the same class, while specific gadgets can pick which one of them they would like to use. If specified, then there should not be any commas at the end, but are allowed between the values." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:pagination ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "If set to true will add the client side pagination widget." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:readOnly ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to disallow switching to edit mode." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:refreshFilterFunction ;
+      spl:valueType xsd:string ;
+      rdfs:comment "An optional JavaScript function that is injected into the filter code that ignores reloading on a refresh event." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:reportStorageKey ;
+      spl:valueType xsd:string ;
+      rdfs:comment "A local storage key to set and activate the reports feature of this form." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource to display." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:showResourceActions ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to also display a button to run ResourceActions." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:showType ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to show the type of the resource behind its label." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:showURI ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to include the URI of the resource in the header." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:suppressInlineEditing ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "If set to true then this deactivates inline editing by setting the context variable \"swa-no-edit-button\"." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resourceSelectedEvent ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The name of the event to subscribe to so that the window can be reloaded if the resource changes. The event will also be re-published whenever the user follows a hyperlink on the form. The data payload of the event needs to be the URI of a resource." ;
+    ] ;
+  ui:prototype """
+<ui:setContext ui:varName=\"createLinkFunction\" ui:varValue=\"{= swa:createEventOrNewTabLink }\">
+    <ui:setContext let:formId=\"{= ui:uniqueId() }\" ui:varName=\"createEventLinkEvent\" ui:varValue=\"{= ?resourceSelectedEvent }\">
+        <ui:if ui:condition=\"{= bound(?resource) }\">
+            <swa:WindowTitleSetter arg:title=\"{= IF(isIRI(?resource), ui:label(?resource), &quot;Selected Resource&quot;) }{= IF(?showType, swa:typeLabelList(?resource), ?none) }\"/>
+            <swa:SwitchableForm arg:allowHistoryMode=\"{= ?allowHistoryMode }\" arg:allowLogMessage=\"{= ?allowLogMessage }\" arg:allowProvenanceMode=\"{= ?allowProvenanceMode }\" arg:detailsButtonHandler=\"{= ?detailsButtonHandler }\" arg:detailsButtonToolTip=\"{= ?detailsButtonToolTip }\" arg:editable=\"{= (!bound(?readOnly)) || (!?readOnly) }\" arg:editing=\"{= ?editing }\" arg:formId=\"{= ?formId }\" arg:matchIds=\"{= ?matchIds }\" arg:pagination=\"{= COALESCE(?pagination, false) }\" arg:reportStorageKey=\"{= ?reportStorageKey }\" arg:resource=\"{= ?resource }\" arg:resourceSelectedEvent=\"{= ?resourceSelectedEvent }\" arg:showFooter=\"{= true }\" arg:showResourceActions=\"{= ?showResourceActions }\" arg:showURI=\"{= ?showURI }\" arg:suppressHeader=\"{= true }\" arg:suppressInlineEditing=\"{= ?suppressInlineEditing }\" arg:viewModeName=\"responsive-view\">
+                <ui:insert ui:into=\"bottomBar\">
+                    <ui:if ui:condition=\"{= bound(?footerPlugin) }\">
+                        <swa:Space/>
+                        <ui:dynamicView arg:resource=\"{= ?resource }\" ui:class=\"{= ?footerPlugin }\"/>
+                    </ui:if>
+                </ui:insert>
+            </swa:SwitchableForm>
+        </ui:if>
+        <swa:Subscribe arg:code=\"swa.handleChangeForSwitchableFormGadget(data, '{= ?formId }', '{= swa:currentWindowId() }')\" arg:event=\"org.topbraid.swa.change\"/>
+        <swa:SubscribeArgument arg:argumentName=\"resource\" arg:event=\"{= ?resourceSelectedEvent }\" arg:filter=\"swa.getFormResourceURI('{= ?formId }') != data {= IF(bound(?refreshFilterFunction), CONCAT(&quot; &amp;&amp; &quot;, ?refreshFilterFunction, &quot;(data)&quot;), ?none) }\"/>
+    </ui:setContext>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:comment "A gadget consisting of a view form that can be switched to edit mode by the user." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "Responsive switchable form gadget" ;
+  rdfs:subClassOf swa:Gadgets ;
+.
+edg:ResponsiveViewMode
+  a swa:Mode ;
+  swa:formClass swa:SwitchableForm ;
+  swa:formObjectPredicateSelectionTemplate swa:UsedObjectPredicates ;
+  swa:formSubjectPredicateSelectionTemplate swa:UsedSubjectPredicates ;
+  swa:isSingleConstant false ;
+  swa:modeName "responsive-view" ;
+  swa:objectWidgetClass swa:ObjectViewer ;
+  swa:objectWidgetMiddleColumnClass swa:ViewWidgetMiddleColumn ;
+  swa:objectWidgetRowClass swa:ObjectViewerRow ;
+  swa:objectsBodyClass edg:ResponsiveObjectsBody ;
+  swa:subjectWidgetRowClass swa:SubjectViewerRow ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "Responsive view mode" ;
+.
+edg:SetupEDGassetCollectionSingletonsPlugin
+  a ui:NodeClass ;
+  ui:prototype """
+<tblui:Section arg:label=\"EDG Asset Collection Singletons\" let:projectType=\"{= edg:EDGenumerationsProjectType }\">
+    <ui:group let:link=\"{= teamwork:editorLink(teamwork:masterGraph(spl:objectInGraph(?projectType, teamwork:singletonId, ui:graph))) }\">
+        <a class=\"btn btn-primary\" href=\"{= ?link }\">Set up EDG Enumerations</a>
+    </ui:group>
+</tblui:Section>
+"""^^ui:Literal ;
+  rdfs:comment "Enable a user with administrator rights to setsup any singletons of asset collections. The current need is only for EDG Enumerations." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "Setup EDG asset collection singletons plugin" ;
+  rdfs:subClassOf teamworkconfig:ConfigSectionPlugins ;
+.
+edg:SoftwareExecutable-input
+  tosh:viewWidget edg:ReifiedResourceViewer ;
+.
+edg:TechnicalAssetsProjectType
+  a edg:ProjectType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+.
+edg:URIField
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The type of the (new) resource. This is only used if resourceURI is blank, to generate a suitable URI." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:resourceURI ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The URI of the resource, as initial value for the input field. Can be left blank in which case the value will be derived from the resourceType." ;
+    ] ;
+  ui:prototype """
+<ui:group let:readOnly=\"{= swa:getUserCannotModifyURI() }\">
+    <swa:LabeledElement arg:label=\"Identifier:\">
+        <input class=\"form-control swa-uri-field swa-create-resource-with-primary-key-dialog-plugin-identifier\" id=\"uri-input\" readonly=\"{= ?readOnly }\" type=\"text\" value=\"{= COALESCE(?resourceURI, edg:newResource(?resourceType)) }\"/>
+        <swa:Space/>
+        <swa:Space/>
+        <a data-icon=\"fa-question-circle\" onclick=\"swa.populateModalDialogAskingForBody('edg:IdentifierConstructionRulesHelp', 'Identifier Construction Rules', null)\">
+            <i class=\"fa fa-info-circle\" style=\"color: #15428B; cursor: pointer\"/>
+        </a>
+    </swa:LabeledElement>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "An input field used on CreateForms to enter the URI of the new resource." ;
+  rdfs:label "URI field (EDG)" ;
+  rdfs:subClassOf swa:FormElements ;
+.
+edg:URIResourceViewer
+  a swa:ObjectViewerClass ;
+  swa:objectWidgetWeight [
+      a swa:WeightedExpression ;
+      swa:expression [
+          a sp:eq ;
+          sp:arg1 [
+              sp:varName "kind" ;
+            ] ;
+          sp:arg2 "uri" ;
+        ] ;
+      swa:weight 20 ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:loadId=\"{= ui:uniqueId() }\">
+    <div class=\"swa-shifted-label\" data-uri=\"{= ?object }\" id=\"resource-tool-tip-data-{= ?loadId }\" let:op=\"{= ui:contextValue(&quot;swaOnOpenResource&quot;) }\">
+        <edg:ResourceLink arg:id=\"resource-tool-tip-{= ?loadId }\" arg:resource=\"{= ?object }\"/>
+        <ui:if ui:condition=\"{= bound(?op) }\">
+            <a class=\"swa-uri-resource-viewer-menu swa-icon ui-icon ui-icon-arrow-1-e\" href=\"javascript:void(0)\" onclick=\"var resource='{= ui:encodeNode(?object, true, true) }';{= ?op };\" title=\"Open in a new Window\"/>
+        </ui:if>
+        <script>gadgets.Hub.publish('org.topbraid.swa.resourceTooltip', 'resource-tool-tip-{= ?loadId }');</script>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment """The EDG viewer for URI resources, displaying a hyperlink to that resource.
+
+It is possible to also show a small arrow button behind the resource, to implement a special operation that shall be executed when the user clicks on the arrow. It will appear when the context variable 'swaOnOpenResource' is set. The value of that variable must be a JavaScript snippet that uses the variable 'resource' to query the current resource. In a typical scenario (as implemented in the SWA default application), this opens a new desktop window for that resource, but in principle any other operation would be possible too.""" ;
+  rdfs:label "URI resource viewer" ;
+  rdfs:subClassOf swa:ObjectViewer ;
+.
+edg:URIconstructionRulesFormPlugin
+  a ui:NodeClass ;
+  ui:prototype """
+<swa:ObjectsEnum arg:alwaysDisplay=\"{= true }\" arg:label=\"URI Construction Rules\" default:labelWidth=\"250px\" default:subject=\"{= ?subject }\">
+    <swa:Object arg:editWidget=\"{= swa:DatatypeEnumDropDownEditor }\" arg:predicate=\"{= cfg:edgURIConstructMethod }\"/>
+    <swa:Object arg:editWidget=\"{= swa:DatatypeEnumDropDownEditor }\" arg:predicate=\"{= cfg:edgURIClassPrefix }\"/>
+    <swa:Object arg:predicate=\"{= cfg:edgUserCannotModifyURI }\"/>
+</swa:ObjectsEnum>
+"""^^ui:Literal ;
+  rdfs:subClassOf teamworkconfig:ConfigFormPlugins ;
+.
+edg:URIreifiedResourceStatementEditor
+  a swa:ObjectEditorClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:suppressMenu ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to not have a context menu." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:setContext let:range=\"{= COALESCE(?range, swa:localRange(?predicate, ?subject)) }\" ui:queryGraph=\"{= swa:dataGraph() }\">
+    <swa:AutoComplete arg:allowURIs=\"{= true }\" arg:class=\"swa-text-field {= swa:testClass(?predicate) }\" arg:filterFunction=\"{= swa:isValidObjectForPredicateAtSubject }\" arg:filterFunctionArgument=\"{= ui:encodeNode(?predicate, true, true) }\" arg:filterFunctionArgument2=\"{= ui:encodeNode(?subject, true, true) }\" arg:id=\"new-{= ?uid }\" arg:initialValue=\"{= ?object }\" arg:menuFilterNode=\"{= ?predicate }\" arg:onSelect=\"{= ui:functionCall(&quot;swa.publishEditWidgetChangeEvent&quot;, ?uid, ?subject, ?predicate) }\" arg:placeholder=\"{= IF(bound(?range), CONCAT(&quot;Select &quot;, ui:label(?range)), ?none) }\" arg:type=\"{= ?range }\" arg:withSelectMenu=\"{= swa:falseOrUnbound(?suppressMenu) }\"/>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:comment """The default Editor for reified resource statements, consisting of a combo-box with auto-complete.
+
+The auto-complete can apply a model-driven filter to the resources. If the subject has SHACL property constraints for the given predicate, then it will filter out all nodes where one of the shapes specified via sh:not is not fulfilled. Among others, this makes it possible to filter out system namespaces (via tosh:SystemNamespaceShape) or any number of complex conditions.""" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "URI reified resource statment editor" ;
+  rdfs:subClassOf swa:ObjectEditor ;
+.
+edg:constructPreambleForURI
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "preamble" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a swa:getNewInstancesUseClassNamePrefix ;
+              ] ;
+            sp:variable [
+                sp:varName "useClassNameAsPrefix" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a swa:getNewInstancesUseClassAcronymPrefix ;
+              ] ;
+            sp:variable [
+                sp:varName "useClassAcronymAsPrefix" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:object ;
+                sp:arg1 [
+                    sp:varName "resourceType" ;
+                  ] ;
+                sp:arg2 edg:acronym ;
+              ] ;
+            sp:variable [
+                sp:varName "maybeAcronym" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a fn:upper-case ;
+                sp:arg1 [
+                    a afn:localname ;
+                    sp:arg1 [
+                        sp:varName "resourceType" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "className" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    a sp:not ;
+                    sp:arg1 [
+                        sp:varName "useClassNameAsPrefix" ;
+                      ] ;
+                  ] ;
+                sp:arg2 "" ;
+                sp:arg3 [
+                    a sp:concat ;
+                    sp:arg1 [
+                        a sp:if ;
+                        sp:arg1 [
+                            a sp:not ;
+                            sp:arg1 [
+                                sp:varName "useClassAcronymAsPrefix" ;
+                              ] ;
+                          ] ;
+                        sp:arg2 [
+                            sp:varName "className" ;
+                          ] ;
+                        sp:arg3 [
+                            a sp:coalesce ;
+                            sp:arg1 [
+                                sp:varName "maybeAcronym" ;
+                              ] ;
+                            sp:arg2 [
+                                sp:varName "className" ;
+                              ] ;
+                          ] ;
+                      ] ;
+                    sp:arg2 "-" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "preamble" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The type of the new resource." ;
+    ] ;
+  spin:private true ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "Produces a preamble that will be used as the start of the local name of a new resource." ;
+  rdfs:label "construct preamble for URI" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:createNewEditorFormHRef
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:isIRI ;
+                sp:arg1 [
+                    sp:varName "resource" ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:coalesce ;
+                sp:arg1 [
+                    sp:varName "graphId" ;
+                  ] ;
+                sp:arg2 "" ;
+              ] ;
+            sp:variable [
+                sp:varName "theGraphId" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:coalesce ;
+                sp:arg1 [
+                    sp:varName "tagId" ;
+                  ] ;
+                sp:arg2 "" ;
+              ] ;
+            sp:variable [
+                sp:varName "theTagId" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:concat ;
+                sp:arg1 [
+                    sp:varName "theGraphId" ;
+                  ] ;
+                sp:arg2 [
+                    a sp:if ;
+                    sp:arg1 [
+                        a sp:bound ;
+                        sp:arg1 [
+                            sp:varName "tagId" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        a sp:concat ;
+                        sp:arg1 "." ;
+                        sp:arg2 [
+                            sp:varName "theTagId" ;
+                          ] ;
+                      ] ;
+                    sp:arg3 "" ;
+                  ] ;
+                sp:arg3 ".editor" ;
+              ] ;
+            sp:variable [
+                sp:varName "graphEditor" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:concat ;
+                sp:arg1 [
+                    sp:varName "graphEditor" ;
+                  ] ;
+                sp:arg2 "?_editorClass=teamwork:TBApplication#" ;
+                sp:arg3 [
+                    a sp:encode_for_uri ;
+                    sp:arg1 [
+                        a sp:str ;
+                        sp:arg1 [
+                            sp:varName "resource" ;
+                          ] ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "result" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graphId ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:tagId ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:private true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "create new editor form HREF" ;
+  rdfs:subClassOf swa:CreateHRefFunctions ;
+.
+edg:createOldEditorFormHRef
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:isIRI ;
+                sp:arg1 [
+                    sp:varName "resource" ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    sp:varName "tbIsUsingNewEditor" ;
+                  ] ;
+                sp:arg2 teamwork:SimpleFormEditorApplication ;
+                sp:arg3 teamwork:SimpleFormEditorApplication ;
+              ] ;
+            sp:variable [
+                sp:varName "myEditor" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:coalesce ;
+                sp:arg1 [
+                    sp:varName "graphId" ;
+                  ] ;
+                sp:arg2 "" ;
+              ] ;
+            sp:variable [
+                sp:varName "theGraphId" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:coalesce ;
+                sp:arg1 [
+                    sp:varName "tagId" ;
+                  ] ;
+                sp:arg2 "" ;
+              ] ;
+            sp:variable [
+                sp:varName "theTagId" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:concat ;
+                sp:arg1 [
+                    sp:varName "theGraphId" ;
+                  ] ;
+                sp:arg2 [
+                    a sp:if ;
+                    sp:arg1 [
+                        a sp:bound ;
+                        sp:arg1 [
+                            sp:varName "tagId" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        a sp:concat ;
+                        sp:arg1 "." ;
+                        sp:arg2 [
+                            sp:varName "theTagId" ;
+                          ] ;
+                      ] ;
+                    sp:arg3 "" ;
+                  ] ;
+                sp:arg3 ".editor" ;
+              ] ;
+            sp:variable [
+                sp:varName "graphEditor" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:concat ;
+                sp:arg1 [
+                    sp:varName "graphEditor" ;
+                  ] ;
+                sp:arg2 "?_editorClass=" ;
+                sp:arg3 [
+                    a ui:encodeNode ;
+                    sp:arg1 [
+                        sp:varName "myEditor" ;
+                      ] ;
+                  ] ;
+                sp:arg4 "&resource=" ;
+                sp:arg5 [
+                    a sp:encode_for_uri ;
+                    sp:arg1 [
+                        a sp:str ;
+                        sp:arg1 [
+                            sp:varName "resource" ;
+                          ] ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "result" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graphId ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:tagId ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:private true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "create old editor form  HREF" ;
+  rdfs:subClassOf swa:CreateHRefFunctions ;
+.
+edg:getReificationClass
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "reificationClass" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "resourceType" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "subject" ;
+              ] ;
+          ]
+          [
+            a sp:TriplePath ;
+            sp:object [
+                sp:varName "parentClass" ;
+              ] ;
+            sp:path [
+                a sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "resourceType" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "propertyConstraint" ;
+              ] ;
+            sp:predicate sh:property ;
+            sp:subject [
+                sp:varName "parentClass" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "predicate" ;
+              ] ;
+            sp:predicate sh:path ;
+            sp:subject [
+                sp:varName "propertyConstraint" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "reificationClass" ;
+              ] ;
+            sp:predicate dash:reifiableBy ;
+            sp:subject [
+                sp:varName "propertyConstraint" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:predicate ;
+      spl:valueType rdf:Property ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subject ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "get reification class" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:isCompatibleProjectType
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            sp:object spin:_arg2 ;
+            sp:predicate edg:compatibleWith ;
+            sp:subject spin:_arg1 ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType edg.c:ProjectTypeController ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType edg.c:ProjectTypeController ;
+    ] ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "is compatible project type" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:isReadOnlyType
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:or ;
+                sp:arg1 [
+                    a sp:and ;
+                    sp:arg1 [
+                        a sp:exists ;
+                        sp:elements (
+                            [
+                              a sp:TriplePath ;
+                              sp:object rdfs:Class ;
+                              sp:path [
+                                  a sp:ModPath ;
+                                  sp:modMax -2 ;
+                                  sp:modMin 0 ;
+                                  sp:subPath rdfs:subClassOf ;
+                                ] ;
+                              sp:subject [
+                                  sp:varName "resourceType" ;
+                                ] ;
+                            ]
+                          ) ;
+                      ] ;
+                    sp:arg2 [
+                        a sp:notExists ;
+                        sp:elements (
+                            [
+                              a sp:TriplePath ;
+                              sp:object edg:CustomEnumerationClass ;
+                              sp:path [
+                                  a sp:ModPath ;
+                                  sp:modMax -2 ;
+                                  sp:modMin 0 ;
+                                  sp:subPath rdfs:subClassOf ;
+                                ] ;
+                              sp:subject [
+                                  sp:varName "resourceType" ;
+                                ] ;
+                            ]
+                          ) ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a sp:exists ;
+                    sp:elements (
+                        [
+                          a sp:TriplePath ;
+                          sp:object rdf:Property ;
+                          sp:path [
+                              a sp:ModPath ;
+                              sp:modMax -2 ;
+                              sp:modMin 0 ;
+                              sp:subPath rdfs:subClassOf ;
+                            ] ;
+                          sp:subject [
+                              sp:varName "resourceType" ;
+                            ] ;
+                        ]
+                      ) ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "is read only type" ;
+  rdfs:subClassOf teamwork:isReadOnlyTypeFunctions ;
+.
+edg:isUsingNewEditor
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a ui:contextValue ;
+                sp:arg1 "inNewEditor" ;
+              ] ;
+            sp:variable [
+                sp:varName "maybeInNewEditor" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:bound ;
+                sp:arg1 [
+                    sp:varName "maybeInNewEditor" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "is using new editor" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:newResource
+  a ui:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The type of the new resource." ;
+    ] ;
+  spin:private true ;
+  spin:returnType rdfs:Resource ;
+  ui:prototype """
+<ui:group let:useConstructMethod=\"{= swa:getURIConstructMethod() }\">
+    <!--ui:dumpScope ui:message=\"AAA1: edg:newResource\"/-->
+    <ui:if ui:condition=\"{= ?useConstructMethod = &quot;uuid&quot; }\">
+        <ui:return ui:result=\"{= edg:newResourceByUUID(?resourceType) }\"/>
+    </ui:if>
+    <ui:elseif ui:condition=\"{= ?useConstructMethod = &quot;label&quot; }\">
+        <ui:group let:uri=\"{= edg:newResourceUsingLabel(?resourceType) }\">
+            <ui:return ui:result=\"{= ?uri }\"/>
+        </ui:group>
+    </ui:elseif>
+    <ui:else>
+        <ui:return ui:result=\"{= COALESCE(edg:newResourceByIndex(?resourceType), edg:newResourceByUUID(?resourceType)) }\"/>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Produces a suggestion for a URI for a new resource. This first tries to produce a unique URI by appending a number behind a base URI. If that fails, it uses a UUID." ;
+  rdfs:label "new resource (EDG)" ;
+  rdfs:subClassOf ui:Functions ;
+.
+edg:newResourceByIndex
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a swa:getDefaultNamespace ;
+              ] ;
+            sp:variable [
+                sp:varName "base" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a edg:constructPreambleForURI ;
+                arg:resourceType [
+                    sp:varName "resourceType" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "preamble" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?0" ;
+              ] ;
+            sp:predicate spif:for ;
+            sp:subject [
+                sp:varName "index" ;
+              ] ;
+          ]
+          [
+            sp:object 1 ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object 9999 ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:iri ;
+                sp:arg1 [
+                    a sp:concat ;
+                    sp:arg1 [
+                        a xsd:string ;
+                        sp:arg1 [
+                            sp:varName "base" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "preamble" ;
+                      ] ;
+                    sp:arg3 [
+                        a sp:str ;
+                        sp:arg1 [
+                            sp:varName "index" ;
+                          ] ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "result" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:notExists ;
+                sp:elements (
+                    [
+                      sp:object [
+                          sp:varName "anyType" ;
+                        ] ;
+                      sp:predicate rdf:type ;
+                      sp:subject [
+                          sp:varName "result" ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The type of the new resource." ;
+    ] ;
+  spin:private true ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "Produces a suggestion for a URI for a new resource. This uses the declared default namespace as base, and then adds the type local name and then a running number. The function makes sure that the URI is not used in the current model yet." ;
+  rdfs:label "new resource by index (EDG)" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:newResourceByUUID
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a swa:getDefaultNamespace ;
+              ] ;
+            sp:variable [
+                sp:varName "base" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a edg:constructPreambleForURI ;
+                arg:resourceType [
+                    sp:varName "resourceType" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "preamble" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:iri ;
+                sp:arg1 [
+                    a sp:concat ;
+                    sp:arg1 [
+                        a sp:str ;
+                        sp:arg1 [
+                            sp:varName "base" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "preamble" ;
+                      ] ;
+                    sp:arg3 [
+                        a spif:generateUUID ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "result" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The type of the new resource." ;
+    ] ;
+  spin:private true ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "Produces a suggestion for a URI for a new resource. This uses the URI of the main owl:Ontology as base, and then adds the type local name and then a UUID." ;
+  rdfs:label "new resource by UUID (EDG)" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:newResourceNamespaceAndPreamble
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a swa:getDefaultNamespace ;
+              ] ;
+            sp:variable [
+                sp:varName "base" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a edg:constructPreambleForURI ;
+                arg:resourceType [
+                    sp:varName "resourceType" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "preamble" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:concat ;
+                sp:arg1 [
+                    a sp:str ;
+                    sp:arg1 [
+                        sp:varName "base" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "preamble" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "result" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The type of the new resource." ;
+    ] ;
+  spin:private true ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "Constructs the start of a resource URI from the graph base and an optional preamble." ;
+  rdfs:label "new resource namespace and preamble" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:newResourceUsingLabel
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a swa:getDefaultNamespace ;
+              ] ;
+            sp:variable [
+                sp:varName "base" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a edg:constructPreambleForURI ;
+                arg:resourceType spin:_arg1 ;
+              ] ;
+            sp:variable [
+                sp:varName "preamble" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:iri ;
+                sp:arg1 [
+                    a sp:concat ;
+                    sp:arg1 [
+                        a sp:str ;
+                        sp:arg1 [
+                            sp:varName "base" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "preamble" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "result" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The type of the new resource." ;
+    ] ;
+  spin:private true ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "Uses the label field for the URI" ;
+  rdfs:label "new resource with UUID (EDG)" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:permitsImportOf
+  a rdf:Property ;
+  rdfs:comment "Emumerates the graphs that may be owl:imported into this project type" ;
+  rdfs:domain teamwork:ProjectType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "permits import of" ;
+  rdfs:range rdfs:Class ;
+.
+edg:permittedProjectType
+  a rdf:Property ;
+  rdfs:comment "Refers to a project type whose instance graphs can be owl:imported by a project type. Used to drive the import dialog for several project types." ;
+  rdfs:domain teamwork:ProjectType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:range teamwork:ProjectType ;
+.
+edg:projectTypeRootClass
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "rootClass" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a sp:coalesce ;
+                      sp:arg1 [
+                          a spl:object ;
+                          sp:arg1 [
+                              sp:varName "projectType" ;
+                            ] ;
+                          sp:arg2 teamwork:mainClass ;
+                        ] ;
+                      sp:arg2 edg:Construct ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "rootClass" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode ui:graph ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectType ;
+      spl:valueType teamwork:ProjectType ;
+      rdfs:comment "The project type." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Gets the root class of a project type, falling back to edg:Construct by default." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:label "project type root class" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:requiredProjectType
+  a rdf:Property ;
+  rdfs:comment "Refers to a project type on of whose instance graphs is required to be owl:imported by a project type. May in the future be used for constraint checking and other helpful guidance." ;
+  rdfs:domain teamwork:ProjectType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/common> ;
+  rdfs:range rdfs:Class ;
+.
+<http://edg.topbraid.solutions/project/common/GMD_common>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:ProjectGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/project/common> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2018-07-26"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+edg.v:UXelement
+  rdfs:subClassOf edg.v:View ;
+.
+taxonomies:ProjectType
+  a teamwork:ProjectType ;
+.
+rdmprojects:ProjectType
+  edg.v:icon "tq-referencedata-icon" ;
+.
+arg:additionalFormFields
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:arrayName
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:columnService
+  a rdf:Property ;
+  rdfs:label "column service" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:dataAttributeProperty
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:hasViewDetails
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:noneText
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:pageStyle
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+swa:URIField
+  edg:replacedBy edg:URIField ;
+.
+swa:newResource
+  edg:replacedBy edg:newResource ;
+.
+swa:newResourceByIndex
+  edg:replacedBy swa:newResourceByIndex ;
+.
+swa:newResourceByUUID
+  edg:replacedBy edg:newResourceByUUID ;
+.
+teamwork:InitBundle
+  ui:dependsOn edg:Bundle ;
+.
+teamwork:TBApplication
+  ui:includeScript edg:Bundle ;
+.
+teamwork:WorkflowTemplatesHomePageTab
+  edg.v:icon "fa-cog" ;
+.
+teamwork:createProject
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+.
+html:aria-label
+  a rdf:Property ;
+  rdfs:range xsd:string ;
+  skos:prefLabel "aria-label" ;
+.
+html:data-content
+  a rdf:Property ;
+  rdfs:range xsd:string ;
+  skos:prefLabel "data-content" ;
+.
+html:data-info
+  a rdf:Property ;
+  rdfs:range xsd:string ;
+  skos:prefLabel "data-info" ;
+.
+html:data-menu
+  a rdf:Property ;
+  rdfs:range xsd:string ;
+  skos:prefLabel "data-menu" ;
+.
+html:data-submenu
+  a rdf:Property ;
+  rdfs:range xsd:string ;
+  skos:prefLabel "data-submenu" ;
+.
+html:graphId
+  a rdf:Property ;
+  rdfs:label "graph id" ;
+  rdfs:subPropertyOf html:attributes ;
+.
+html:graphTagId
+  a rdf:Property ;
+  rdfs:label "graph tag id" ;
+  rdfs:subPropertyOf html:attributes ;
+.
+rdf:Statement
+  ui:instanceView """
+<ui:group ui:id=\"reification\" ui:priority=\"{= 1 }\">
+    <ui:group let:reificationInstance=\"{#
+            SELECT ?instance
+            WHERE {
+                ?instance a ?resourceType .
+                ?instance rdf:subject ?this .
+                ?instance rdf:predicate ?property .
+                ?instance rdf:object ?object .
+            }
+            LIMIT 1 }\">
+        <ui:if ui:condition=\"{= bound(?reificationInstance) }\">
+            <div class=\"swa-nested-form swa-nested-object-editor\">
+                <input name=\"new-{= ?uid }\" type=\"hidden\" value=\"{= ui:encodeNode(?object, true, true) }\"/>
+                <ui:resourceView ui:matchIds=\"edit,form\" ui:resource=\"{= ?reificationInstance }\"/>
+            </div>
+        </ui:if>
+        <ui:else>
+            <div let:newReificationInstanceUID=\"{= ui:uniqueId() }\">
+                <p>create a reification using new hidden fields</p>
+                <ui:group let:newReificationInstance=\"{= IRI(CONCAT(&quot;urn:x-new-bnode:&quot;, ?newReificationInstanceUID)) }\" let:range=\"{= ?resourceType }\">
+                    <input name=\"create-reification-{= ?newReificationInstanceUID }\" type=\"hidden\" value=\"{= ui:encodeNode(?newReificationInstance, true, true) }\"/>
+                    <input name=\"reification-resourcetype-{= ?newReificationInstanceUID }\" type=\"hidden\" value=\"{= ui:encodeNode(?resourceType, true, true) }\"/>
+                    <input name=\"reification-subject-{= ?newReificationInstanceUID }\" type=\"hidden\" value=\"{= ui:encodeNode(?this, true, true) }\"/>
+                    <input name=\"reification-predicate-{= ?newReificationInstanceUID }\" type=\"hidden\" value=\"{= ui:encodeNode(?property, true, true) }\"/>
+                    <input name=\"reification-object-{= ?newReificationInstanceUID }\" type=\"hidden\" value=\"{= ui:encodeNode(?object, true, true) }\"/>
+                    <ui:group let:id=\"{= ui:uniqueId() }\">
+                        <input name=\"resource-{= ?id }\" type=\"hidden\" value=\"{= ui:encodeNode(?newReificationInstance, true, true) }\"/>
+                        <input name=\"path-{= ?id }\" type=\"hidden\" value=\"{= ui:encodeNode(rdf:type) }\"/>
+                        <input name=\"new-{= ?id }\" type=\"hidden\" value=\"{= ui:encodeNode(?range, true, true) }\"/>
+                    </ui:group>
+                    <div class=\"swa-nested-form swa-nested-object-editor\" style=\"margin-left:160px;\">
+                        <ui:setContext ui:varName=\"mode\" ui:varValue=\"edit\">
+                            <ui:setContext ui:varName=\"resourceType\" ui:varValue=\"{= ?range }\">
+                                <div style=\"padding-left:40px;\">
+                                    <ui:resourceView arg:resourceType=\"{= ?resourceType }\" ui:class=\"{= ?range }\" ui:matchIds=\"new-reification-instance\" ui:resource=\"{= ?newReificationInstance }\"/>
+                                </div>
+                            </ui:setContext>
+                        </ui:setContext>
+                    </div>
+                </ui:group>
+            </div>
+        </ui:else>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+.
+rdf:object
+  swa:hiddenProperty true ;
+.
+rdf:predicate
+  swa:hiddenProperty true ;
+.
+rdf:subject
+  swa:hiddenProperty true ;
+.
+rdfs:Class
+  ui:instanceView """
+<ui:group ui:id=\"edg-autocomplete-input-element\" ui:priority=\"{= -1 }\">
+    <!--ui:dumpScope ui:message=\"AAA3: rdfs:Class\"/-->
+    <input class=\"{= ?hiddenInputClass }\" id=\"{= ?id }\" name=\"{= ?name }\" type=\"hidden\" value=\"{= ?value }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+rdfs:Resource
+  ui:instanceView """
+<ui:group ui:id=\"edg-autocomplete-input-element\" ui:priority=\"{= -1 }\">
+    <!--ui:dumpScope ui:message=\"AAA3: rdfs:Resource\"/-->
+    <input class=\"{= ?hiddenInputClass }\" id=\"{= ?id }\" name=\"{= ?name }\" type=\"hidden\" value=\"{= ?value }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"new-reification-instance\" ui:priority=\"{= -9 }\">
+    <edg:ReificationInstanceFormBody arg:resource=\"{= ?this }\" arg:resourceType=\"{= ?resourceType }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"resource-description\">
+    <ui:if ui:condition=\"{= spl:hasValue(?this, edg:description) }\">
+        <ui:group let:description=\"{= spl:object(?this, edg:description) }\">
+            <ui:parse ui:str=\"{= ?description }\"/>
+        </ui:group>
+    </ui:if>
+    <ui:else>
+        <ui:parse ui:str=\"{= swa:getDescription(?this) }\"/>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"resource-summary\" ui:priority=\"{= 10 }\">
+    <edg:ResourceLink arg:resource=\"{= ?this }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.

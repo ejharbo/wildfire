@@ -1,0 +1,1903 @@
+# baseURI: http://topbraid.org/teamworkreports
+# imports: http://topbraid.org/conceptmatch
+# imports: http://topbraid.org/swa
+# imports: http://topbraid.org/teamwork.ui
+
+@prefix acjob: <http://evn.topbraidlive.org/tagger/acjob#> .
+@prefix acpp: <http://topbraid.org/nlp/autoclassifier-preproc#> .
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix autotagger: <http://evn.topbraidlive.org/autotagger#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix conceptmatch: <http://topbraid.org/conceptmatch#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix config-importers: <http://edg.topbraidlive.org/config/importers#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix core-soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix corpus: <http://topbraid.org/corpus#> .
+@prefix corpusprojects: <http://topbraid.org/corpus-projects#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkapp: <http://topbraid.org/swa/crosswalkapp#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dashboard: <http://example.org/dashboard#> .
+@prefix datagraph: <http://teamwork.topbraidlive.org/datagraph/datagraphprojects#> .
+@prefix dataset: <http://teamwork.topbraidlive.org/dataset#> .
+@prefix datasetapp: <http://topbraid.org/swa/datasetapp#> .
+@prefix datasetviewer: <http://topbraid.org/swa/datasetviewer#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ddl: <http://edg.topbraidlive.org/1.0/importers/ddl#> .
+@prefix default: <http://uispin.org/default#> .
+@prefix defaultapp: <http://topbraid.org/swa/defaultapp#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix document: <http://topbraid.org/document#> .
+@prefix documents: <http://edg.topbraid.solutions/1.0/shapes/documents#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg-config: <http://edg.ext.topbraidlive.org/schema/config/importers#> .
+@prefix edg-importer: <http://edg.topbraidlive.org/importer/> .
+@prefix edg-qa: <http://edg.topbraidlive.org/utility/qa/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.global: <urn:x-evn-global:> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix edgproduct: <http://edg.topbraidlive.org/edgproduct#> .
+@prefix eeh-lib: <http://www.environmenthub.no/spin/1.0/eeh-lib#> .
+@prefix eeh-reportlib: <http://www.environmenthub.no/spin/1.0/eeh-reportlib#> .
+@prefix elements: <http://purl.org/dc/elements/1.1/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evn: <http://topbraid.org/evn/evn#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evnimport: <http://evn.topbraidlive.org/uispin/evnimport#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix ex: <http://example.org/> .
+@prefix extjs: <http://uispin.com/extjs#> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix forms: <http://www.topbraid.org/2007/01/forms.owl#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix governance: <http://topbraid.org/teamworkgovernance.ui#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix graphql.search: <http://teamwork.topbraidlive.org/graphql.search#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix inference: <http://www.topbraid.org/2007/06/inference.owl#> .
+@prefix jdbc: <http://edg.topbraidlive.org/1.0/importers/jdbc#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix kennedys: <http://topbraid.org/examples/kennedys#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix lib-importer: <http://edg.topbraid.solutions/importer/lib#> .
+@prefix lineage-transform: <http://edg.topbraid.solutions/transform/importer/lineage#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix ontologyviewer: <http://topbraid.org/swa/ontologyviewer#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix proxy-lineage: <http://edg.topbraid.solutions/proxy/importer/lineage#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmapp: <http://rdm.topbraidlive.org/rdmapp#> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix rdmviewer: <http://rdm.topbraidlive.org/rdmviewer#> .
+@prefix saf: <http://topbraid.org/saf/> .
+@prefix safconfig: <http://topbraid.org/safconfig/> .
+@prefix safindex: <http://topbraid.org/safindex#> .
+@prefix safm: <http://saf.topbraidlive.org/metaschema/> .
+@prefix savedQueries: <http://teamwork.topbraidlive.org/ui/savedQueries#> .
+@prefix scheduler: <http://topbraid.org/scheduler#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix server: <http://server.topbraidlive.org/server.ui#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix shapesgraph: <http://teamwork.topbraidlive.org/shapesgraph/shapesgraphprojects#> .
+@prefix sharepoint: <http://topbraid.org/sharepoint#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skosshapes: <http://topbraid.org/skos.shapes#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spin.ui: <http://spinrdf.org/spin.ui#> .
+@prefix spinmap: <http://spinrdf.org/spinmap#> .
+@prefix spinmapl: <http://topbraid.org/spin/spinmapl#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix ss: <http://www.topbraidcomposer.org/owl/2006/08/spreadsheets.owl#> .
+@prefix stats: <http://topbraid.org/statistics#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swadoc: <http://topbraid.org/swadoc#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tablesmap: <http://topbraid.org/spin/tablesmap#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix taggerspin: <http://evn.topbraidlive.org/taggerspin#> .
+@prefix taggerui: <http://evn.topbraidlive.org/taggerui#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix tblui: <http://server.topbraidlive.org/tblui#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkAdmin: <http://teamwork.topbraidlive.org/doc/teamworkAdmin#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworkconstraints: <http://topbraid.org/teamworkconstraints#> .
+@prefix teamworkdashboard: <http://topbraid.org/teamworkdashboard#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix teamworkupdate: <http://teamworkAPI.topbraid.com/teamworkUpdate#> .
+@prefix textindex: <http://topbraid.org/textindex#> .
+@prefix tika-importer: <http://teamwork.topbraidlive.org/corpus/tika-importer#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix tracker: <http://teamwork.topbraidlive.org/ui/tracker#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uitest: <http://uispin.org/test#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix userdat: <http://teamwork.topbraidlive.org/ui/userdata> .
+@prefix userdata: <http://teamwork.topbraidlive.org/ui/userdata#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix victory: <http://edg.topbraid.solutions/victory/> .
+@prefix visual: <http://topbraid.org/visual#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xhtml: <http://topbraid.org/xhtml#> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+arg:otherGraph
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+teamwork:BuildComparisonReport
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The currently active graph." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph2 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The other graph." ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ui:tempGraph1 {
+                    ?s ?p ?o .
+                } .
+            }
+            WHERE {
+                GRAPH ?graph1 {
+                    ?s ?p ?o .
+                    FILTER isIRI(?s) .
+                } .
+                MINUS {
+                    GRAPH ?graph2 {
+                        ?s ?p ?o .
+                    } .
+                } .
+                FILTER ((?s != ?graph1) &amp;&amp; (?s != ?graph2)) .
+            } }\"/>
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ui:tempGraph2 {
+                    ?s ?p ?o .
+                } .
+            }
+            WHERE {
+                GRAPH ?graph2 {
+                    ?s ?p ?o .
+                    FILTER isIRI(?s) .
+                } .
+                MINUS {
+                    GRAPH ?graph1 {
+                        ?s ?p ?o .
+                    } .
+                } .
+                FILTER ((?s != ?graph1) &amp;&amp; (?s != ?graph2)) .
+            } }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Takes two vocabularies and builds a comparison report - all triples that graph1 has but graph2 does not have are in ui:tempGraph1, and the inverse goes into ui:tempGraph2." ;
+  rdfs:label "Build comparison report" ;
+  rdfs:subClassOf ui:Operations ;
+.
+teamwork:ComparisonReportPlugin
+  a teamwork:ReportPlugin ;
+  teamwork:invalidForMaster true ;
+  teamwork:pluginIndex 4 ;
+  teamwork:pluginMayNotScale true ;
+  teamwork:validForACResults false ;
+  teamwork:validForTags true ;
+  ui:prototype """
+<ui:createLink arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\" ui:viewClass=\"{= teamwork:TagComparisonReportPage }\">
+    <teamwork:ActionLink arg:comment=\"Compares this working copy with the production copy.\" arg:icon=\"lib/teamwork/build/images/teamwork/Comparison-48x48.svg\" arg:link=\"{= ?link }\" arg:title=\"Comparison Report\"/>
+</ui:createLink>
+"""^^ui:Literal ;
+  rdfs:label "Working copy comparison report plugin" ;
+  rdfs:subClassOf teamwork:ReportPlugins ;
+.
+teamwork:GraphReportService
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:focusNode ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "An optional focus node to get the report for, only." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:generatorIds ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The type of instances to report on - leave empty for all instances. Only used if focusNode is unbound." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<swa:FocusNodeReportService arg:focusNode=\"{= ?focusNode }\" arg:generatorIds=\"{= ?generatorIds }\" arg:resourceType=\"{= ?resourceType }\" arg:validationPlugin=\"{= IF(((!bound(?focusNode)) &amp;&amp; (!bound(?generatorIds))), teamwork:RecordValidationReport, ?none) }\"/>
+"""^^ui:Literal ;
+  rdfs:label "Graph report service" ;
+  rdfs:subClassOf ui:JSONServices ;
+.
+teamwork:LinkToProblemsAndSuggestionsReport
+  a ui:NodeClass ;
+  ui:prototype """
+<p class=\"text-muted\">
+    <ui:group>To validate the imported data, visit the </ui:group>
+    <ui:createLink arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\" ui:viewClass=\"{= teamwork:ProblemsAndSuggestionsPage }\">
+        <a href=\"{= ?link }\">Problems and Suggestions report</a>
+    </ui:createLink>
+    <ui:group>&nbsp;of this {= teamwork:singularProjectTypeLabel(teamwork:getProjectType(?projectGraph)) }.</ui:group>
+</p>
+"""^^ui:Literal ;
+  rdfs:label "Link to problems and suggestions report" ;
+  rdfs:subClassOf teamwork:TagReportElements ;
+.
+teamwork:ProblemsAndSuggestionsBody
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:autoAccept100 ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:generatorIds ;
+      spl:valueType xsd:string ;
+      rdfs:comment "A comma-separated list of IDs of generators that shall be used (only)." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The type of instances to report on - leave empty for all instances." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:title ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The display title, defaulting to \"Problems and Suggestions\"." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:frozen ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resourceSelectedEvent ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <script>swa.queryGraphURI = '{= ui:currentQueryGraph() }';</script>
+    <swa:Window arg:id=\"reportWindow\" arg:layoutPanel=\"center\" arg:title=\"Problems and Suggestions\">
+        <div class=\"ui-layout-content\">
+            <div class=\"teamwork-report-div\" id=\"report\"/>
+        </div>
+        <script>{= ui:functionCall(\"teamworkreports.loadReport\", \"reportWindow\", \"report\", \"formWindow\", ?frozen, ?autoAccept100, ?title, ?generatorIds, ?resourceType) }</script>
+    </swa:Window>
+    <swa:Window arg:id=\"formWindow\" arg:layoutPanel=\"east\" arg:title=\"Selected Resource\">
+        <swa:ViewFormGadget arg:resourceSelectedEvent=\"{= ?resourceSelectedEvent }\" arg:showType=\"{= true }\" arg:showURI=\"{= true }\" arg:showURIEditorLink=\"{= true }\" ui:args=\"*\"/>
+    </swa:Window>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Problems and suggestions body" ;
+  rdfs:subClassOf teamwork:MustHaveAccessToTagPage ;
+.
+teamwork:ProblemsAndSuggestionsModal
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:autoAccept100 ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  ui:prototype """
+<ui:setContext ui:queryGraph=\"{= ui:graphWithImports(IF(bound(?tag), teamwork:projectOrTagGraph(?projectGraph, ?tag), teamwork:masterGraphForCurrentUser(?projectGraph))) }\">
+    <ui:setContext let:frozen=\"{= teamwork:isExplorerUser(smf:userWithName(smf:currentUserName())) || teamwork:isCurrentGraphFrozen() }\" let:resourceSelectedEvent=\"org.topbraidlive.report.resourceSelected\" ui:varName=\"swaAppName\" ui:varValue=\"Report\">
+        <ui:setContext ui:varName=\"swaOnOpenResource\" ui:varValue=\"{= teamwork:onOpenResource(?resourceSelectedEvent) }\">
+            <ui:setContext ui:varName=\"projectTab\" ui:varValue=\"{= teamwork:ReportsProjectTab }\">
+                <swa:BorderLayout arg:class=\"probs-mappings-modal\" arg:deepLinkingEvent=\"{= ?resourceSelectedEvent }\" arg:layoutPanel=\"north\" arg:storageKey=\"org.topbraidlive.report\" arg:westSize=\"{= 400 }\">
+                    <teamwork:ProblemsAndSuggestionsBody ui:args=\"*\"/>
+                </swa:BorderLayout>
+            </ui:setContext>
+        </ui:setContext>
+    </ui:setContext>
+</ui:setContext>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Problems and suggestions modal" ;
+  rdfs:subClassOf teamwork:MustHaveAccessToTagPage ;
+.
+teamwork:ProblemsAndSuggestionsPage
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:generatorIds ;
+      spl:valueType xsd:string ;
+      rdfs:comment "A comma-separated list of IDs of generators that shall be used (only)." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The type of instances to report on - leave empty for all instances." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:title ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The display title, defaulting to \"Problems and Suggestions\"." ;
+    ] ;
+  ui:prototype """
+<ui:setContext ui:queryGraph=\"{= ui:graphWithImports(IF(bound(?tag), teamwork:projectOrTagGraph(?projectGraph, ?tag), teamwork:masterGraphForCurrentUser(?projectGraph))) }\">
+    <ui:setContext let:autoAccept100=\"{= spl:object(?projectGraph, crosswalk:autoAcceptMatches) }\" let:frozen=\"{= teamwork:isExplorerUser(smf:userWithName(smf:currentUserName())) || teamwork:isCurrentGraphFrozen() }\" let:resourceSelectedEvent=\"org.topbraidlive.report.resourceSelected\" ui:varName=\"swaAppName\" ui:varValue=\"Report\">
+        <ui:setContext ui:varName=\"swaOnOpenResource\" ui:varValue=\"{= teamwork:onOpenResource(?resourceSelectedEvent) }\">
+            <ui:setContext ui:varName=\"projectTab\" ui:varValue=\"{= teamwork:ReportsProjectTab }\">
+                <teamwork:EditorChrome arg:projectType=\"{= teamwork:getProjectType(?projectGraph) }\">
+                    <ui:insert ui:into=\"header\">
+                        <teamwork:EditorHeader arg:frozen=\"{= ?frozen }\" arg:navigationTitle=\"{= COALESCE(?title, &quot;Problems and Suggestions&quot;) }\"/>
+                    </ui:insert>
+                    <ui:insert ui:into=\"main\">
+                        <teamwork:ChromeBorderLayout arg:deepLinkingEvent=\"{= ?resourceSelectedEvent }\" arg:eastSize=\"{= 500 }\" arg:northFixed=\"{= true }\" arg:storageKey=\"org.topbraidlive.report\">
+                            <teamwork:ProblemsAndSuggestionsBody ui:args=\"*\"/>
+                        </teamwork:ChromeBorderLayout>
+                    </ui:insert>
+                </teamwork:EditorChrome>
+            </ui:setContext>
+        </ui:setContext>
+    </ui:setContext>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:label "Problems and suggestions page" ;
+  rdfs:subClassOf teamwork:MustHaveAccessToTagPage ;
+.
+teamwork:ProblemsAndSuggestionsReportPlugin
+  a teamwork:ReportPlugin ;
+  teamwork:pluginMayNotScale true ;
+  teamwork:validForTags true ;
+  ui:prototype """
+<ui:createLink arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\" ui:viewClass=\"{= teamwork:ProblemsAndSuggestionsPage }\">
+    <teamwork:ActionLink arg:comment=\"Displays an interactive report of detected problems and suggestions for possible changes.\" arg:faIcon=\"far fa-check-square\" arg:title=\"Problems and Suggestions\">
+        <div>
+            <div>
+                <b>
+                    <a href=\"{= ?link }\">For all Assets</a>
+                </b>
+                <swa:Spaces/>
+                <b>
+                    <a href=\"javascript:void(0)\" onclick=\"location.href = '{= ?link }' + '&amp;resourceType=' + encodeURIComponent($('#reportResourceType').val())\">For instances of</a>
+                </b>
+                <swa:Space/>
+                <ui:setContext ui:queryGraph=\"{= teamwork:getQueryGraph(?projectGraph, ?tag) }\">
+                    <swa:AutoComplete arg:id=\"reportResourceType\" arg:type=\"{= rdfs:Class }\"/>
+                </ui:setContext>
+            </div>
+            <ui:if ui:condition=\"{= teamwork:isOntology(?projectGraph) }\">
+                <div>
+                    <span>View Shapes and Constraints:</span>
+                    <swa:Spaces/>
+                    <ui:createLink arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\" ui:viewClass=\"{= teamwork:ShapesPage }\">
+                        <a href=\"{= ?link }\">All shapes (with includes)</a>
+                    </ui:createLink>
+                    <swa:Spaces/>
+                    <ui:createLink arg:local=\"{= true }\" arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\" ui:viewClass=\"{= teamwork:ShapesPage }\">
+                        <a href=\"{= ?link }\">Locally defined shapes only</a>
+                    </ui:createLink>
+                </div>
+            </ui:if>
+        </div>
+    </teamwork:ActionLink>
+</ui:createLink>
+"""^^ui:Literal ;
+  rdfs:label "Problems and suggestions plugin" ;
+  rdfs:subClassOf teamwork:ReportPlugins ;
+.
+teamwork:ProductionComparisonReportPage
+  a ui:NodeClass ;
+  ui:prototype """
+<teamwork:Chrome arg:pageType=\"project-page\" arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= teamwork:ReportsProjectTab }\" arg:tag=\"{= ?tag }\" let:projectType=\"{= teamwork:getProjectType(?projectGraph) }\" let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <h1>Comparison Report</h1>
+    <teamwork:ReportSubtitle arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\"/>
+    <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?teamGraph) }\">
+        <ui:group letrs:vocabs=\"{#
+                SELECT ?label ?otherProjectGraph
+                WHERE {
+                    rdf:nil teamwork:readableGraphsUnderTeamControl ( ?otherProjectGraph ?otherTeamGraph ) .
+                    BIND (teamwork:getProjectType(?otherProjectGraph) AS ?type) .
+                    FILTER (?type = ?projectType) .
+                    FILTER (?otherProjectGraph != ?projectGraph) .
+                    FILTER smf:canRead(?otherProjectGraph) .
+                    BIND (teamwork:projectLabel(?otherProjectGraph) AS ?label) .
+                }
+                ORDER BY (?label) }\">
+            <ui:if ui:condition=\"{= spr:isEmpty(?vocabs) }\">
+                <div>You do not have access to any other {= teamwork:singularProjectTypeLabel(?projectType) }.</div>
+            </ui:if>
+            <ui:else>
+                <div>
+                    <span>{= teamwork:singularProjectTypeLabel(?projectType) } to compare against:</span>
+                    <swa:Space/>
+                    <select class=\"form-control\" id=\"vocabSelect\">
+                        <option/>
+                        <ui:forEach ui:resultSet=\"{= ?vocabs }\">
+                            <option value=\"{= ?otherProjectGraph }\">{= ?label }</option>
+                        </ui:forEach>
+                    </select>
+                    <script>$(\"#vocabSelect\").change(function() { var vocab = $(this).val();if(vocab) { swa.loadWithResource('reportLoadable', 'other', vocab) } });</script>
+                </div>
+            </ui:else>
+        </ui:group>
+        <ui:loadable ui:loadId=\"reportLoadable\" ui:loadOnDemand=\"{= true }\">
+            <br/>
+            <teamwork:BuildComparisonReport arg:graph1=\"{= ?projectGraph }\" arg:graph2=\"{= ?other }\"/>
+            <ui:if ui:condition=\"{= EXISTS {
+                GRAPH ui:tempGraph1 {
+                    ?a ?b ?c .
+                } .
+            } || EXISTS {
+                GRAPH ui:tempGraph2 {
+                    ?d ?e ?f .
+                } .
+            } }\">
+                <div>Items that are different are shown below.</div>
+            </ui:if>
+            <ui:else>
+                <div>No differences found.</div>
+            </ui:else>
+            <ui:forEach ui:resultSet=\"{#
+                    SELECT DISTINCT ?subject
+                    WHERE {
+                        {
+                            GRAPH ui:tempGraph1 {
+                                ?subject ?p ?o .
+                            } .
+                        }
+                        UNION
+                        {
+                            GRAPH ui:tempGraph2 {
+                                ?subject ?p ?o .
+                            } .
+                        } .
+                    }
+                    ORDER BY (?subject) }\">
+                <teamwork:ProductionComparisonReportSubjectView arg:otherGraph=\"{= ?other }\" arg:projectGraph=\"{= ?projectGraph }\" arg:subject=\"{= ?subject }\"/>
+            </ui:forEach>
+        </ui:loadable>
+    </ui:setContext>
+</teamwork:Chrome>
+"""^^ui:Literal ;
+  rdfs:comment "A report displaying the differences between two production copies of two different projects. The changes are grouped per resource." ;
+  rdfs:label "Production comparison report page" ;
+  rdfs:subClassOf teamwork:MustHaveAccessToTagPage ;
+.
+teamwork:ProductionComparisonReportPlugin
+  a teamwork:ReportPlugin ;
+  teamwork:pluginIndex 4 ;
+  teamwork:pluginMayNotScale true ;
+  teamwork:pluginValidExpression true ;
+  teamwork:validForACResults false ;
+  teamwork:validForTags false ;
+  ui:prototype """
+<ui:createLink arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\" ui:viewClass=\"{= teamwork:ProductionComparisonReportPage }\">
+    <teamwork:ActionLink arg:comment=\"Compares this production copy with the production copy of a different {= teamwork:singularProjectTypeLabel(teamwork:getProjectType(?projectGraph)) }.\" arg:icon=\"lib/teamwork/build/images/teamwork/Comparison-48x48.svg\" arg:link=\"{= ?link }\" arg:title=\"Comparison Report\"/>
+</ui:createLink>
+"""^^ui:Literal ;
+  rdfs:label "Production copy comparison report plugin" ;
+  rdfs:subClassOf teamwork:ReportPlugins ;
+.
+teamwork:ProductionComparisonReportSubjectView
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:otherGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subject ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The subject to display." ;
+    ] ;
+  ui:prototype """
+<div class=\"production-comparison-group\" id=\"{= ui:encodeNode(?subject, true, true) }\" letrs:predicates=\"{#
+        SELECT DISTINCT ?predicate ?predicateLabel
+        WHERE {
+            {
+                GRAPH ui:tempGraph1 {
+                    ?subject ?predicate ?any .
+                } .
+            }
+            UNION
+            {
+                GRAPH ui:tempGraph2 {
+                    ?subject ?predicate ?any .
+                } .
+            } .
+            BIND (ui:label(?predicate) AS ?predicateLabel) .
+        }
+        ORDER BY (?predicateLabel) }\">
+    <h2 class=\"teamwork-production-comparison-report-subject-view-h2\">{= ui:label(?subject) }<span class=\"teamwork-production-comparison-report-subject-view-span\">&nbsp;({= xsd:string(?subject) })</span>
+    </h2>
+    <ui:if ui:condition=\"{= spr:rowCount(?predicates) &gt; 0 }\">
+        <table class=\"teamwork-production-comparison-report-subject-view-table\">
+            <tr>
+                <th class=\"teamwork-production-comparison-report-subject-view-th-property\">
+                    <b>Property</b>
+                </th>
+                <th class=\"teamwork-production-comparison-report-subject-view-th-label\">
+                    <b>{= teamwork:graphLabel(?projectGraph) }</b>
+                </th>
+                <th class=\"teamwork-production-comparison-report-subject-view-th-label\">
+                    <b>{= teamwork:graphLabel(?otherGraph) }</b>
+                </th>
+            </tr>
+            <ui:if ui:condition=\"{= NOT EXISTS {
+                GRAPH ?projectGraph {
+                    ?subject ?anyPred ?anyObj .
+                } .
+            } }\">
+                <tr>
+                    <td/>
+                    <td>Item does not exist</td>
+                </tr>
+            </ui:if>
+            <ui:elseif ui:condition=\"{= NOT EXISTS {
+                GRAPH ?otherGraph {
+                    ?subject ?anyPred ?anyObj .
+                } .
+            } }\">
+                <tr>
+                    <td/>
+                    <td/>
+                    <td>Item does not exist</td>
+                </tr>
+            </ui:elseif>
+            <ui:forEach ui:resultSet=\"{= ?predicates }\">
+                <tr letrs:adds=\"{#
+                        SELECT ?object ?objectLabel
+                        WHERE {
+                            GRAPH ui:tempGraph1 {
+                                ?subject ?predicate ?object .
+                            } .
+                            BIND (ui:label(?object) AS ?objectLabel) .
+                        }
+                        ORDER BY (?objectLabel) }\" letrs:deletes=\"{#
+                        SELECT ?object ?objectLabel
+                        WHERE {
+                            GRAPH ui:tempGraph2 {
+                                ?subject ?predicate ?object .
+                            } .
+                            BIND (ui:label(?object) AS ?objectLabel) .
+                        }
+                        ORDER BY (?objectLabel) }\">
+                    <td>{= ?predicateLabel }</td>
+                    <td class=\"teamwork-production-comparison-report-subject-view-td-left-pad {= IF(spr:isEmpty(?adds), ?none, &quot;teamwork-production-comparison-report-subject-view-td-background-add&quot;) }\">
+                        <div>
+                            <ui:forEach ui:resultSet=\"{= ?adds }\">
+                                <ui:if ui:condition=\"{= isLiteral(?object) }\">
+                                    <ui:parse ui:str=\"{= ?objectLabel }\"/>
+                                </ui:if>
+                                <ui:else>{= ?objectLabel }</ui:else>
+                            </ui:forEach>
+                        </div>
+                    </td>
+                    <td class=\"teamwork-production-comparison-report-subject-view-td-left-pad {= IF(spr:isEmpty(?deletes), ?none, &quot;teamwork-production-comparison-report-subject-view-td-background-delete&quot;) }\">
+                        <ui:forEach ui:resultSet=\"{= ?deletes }\">
+                            <div>
+                                <ui:if ui:condition=\"{= isLiteral(?object) }\">
+                                    <ui:parse ui:str=\"{= ?objectLabel }\"/>
+                                </ui:if>
+                                <ui:else>{= ?objectLabel }</ui:else>
+                            </div>
+                        </ui:forEach>
+                    </td>
+                </tr>
+            </ui:forEach>
+        </table>
+    </ui:if>
+    <ui:else>
+        <span>No differences found </span>
+    </ui:else>
+</div>
+"""^^ui:Literal ;
+  rdfs:comment "Displays a single table comparing the changes on a given subject from one production copy to another." ;
+  rdfs:label "Production comparison report subject view" ;
+  rdfs:subClassOf teamwork:ProjectElements ;
+.
+teamwork:PropertyValueRulesPage
+  a ui:NodeClass ;
+  ui:prototype """
+<teamwork:Chrome arg:pageType=\"project-page\" arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= teamwork:ReportsProjectTab }\" arg:tag=\"{= ?tag }\">
+    <h1>Property Value Rules of <em>{= teamwork:projectLabel(?projectGraph) }</em>
+    </h1>
+    <p>
+	The diagrams on this page illustrate how the values of some properties are inferred from others.
+	The corresponding <em>SHACL property value rules</em> can be edited using the Ontology editor.
+</p>
+    <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(teamwork:projectOrTagGraph(?projectGraph, ?tag)) }\">
+        <ui:group letrs:nodeShapes=\"{#
+                SELECT DISTINCT ?nodeShape ?nodeShapeLabel
+                WHERE {
+                    ?nodeShape sh:property ?ps .
+                    ?ps sh:values ?values .
+                    BIND (ui:label(?nodeShape) AS ?nodeShapeLabel) .
+                }
+                ORDER BY (?nodeShapeLabel) }\">
+            <ui:if ui:condition=\"{= spr:isEmpty(?nodeShapes) }\">
+                <p class=\"text-danger\">No SHACL property value rules found.</p>
+            </ui:if>
+            <ui:else>
+                <p>Click on a diagram to see its Turtle source code.</p>
+                <p>&nbsp;</p>
+                <ui:forEach ui:resultSet=\"{= ?nodeShapes }\">
+                    <h2 title=\"URI: {= ?nodeShape }\">at {= ?nodeShapeLabel }</h2>
+                    <p>
+                        <ui:forEach ui:resultSet=\"{#
+                                SELECT ?path ?ps ?description
+                                WHERE {
+                                    ?nodeShape sh:property ?ps .
+                                    FILTER EXISTS {
+                                        ?ps sh:values ?values .
+                                    } .
+                                    ?ps sh:path ?path .
+                                    BIND (spl:object(?ps, sh:name) AS ?name) .
+                                    BIND (COALESCE(spl:object(?ps, sh:description), spl:object(?ps, rdfs:comment)) AS ?description) .
+                                }
+                                ORDER BY (?path) }\">
+                            <p>&nbsp;</p>
+                            <p>
+                                <b>{= COALESCE(?name, IF(isIRI(?path), swa:propertyLabelAtClassOrShape(?path, ?nodeShape), ?none)) }</b>
+                                <ui:if ui:condition=\"{= bound(?description) }\">: {= ?description }</ui:if>
+                            </p>
+                            <ui:forEach ui:resultSet=\"{#
+                                    SELECT ?values
+                                    WHERE {
+                                        ?ps sh:values ?values .
+                                    } }\">
+                                <div style=\"margin-left: 4em\">
+                                    <tosh.ui:ValuesExpressionDiagramViewer arg:object=\"{= ?values }\" arg:predicate=\"{= sh:values }\" arg:subject=\"{= ?ps }\"/>
+                                </div>
+                                <p>&nbsp;</p>
+                            </ui:forEach>
+                        </ui:forEach>
+                    </p>
+                </ui:forEach>
+            </ui:else>
+        </ui:group>
+    </ui:setContext>
+</teamwork:Chrome>
+"""^^ui:Literal ;
+  rdfs:subClassOf teamwork:MustHaveAccessToTagPage ;
+.
+teamwork:PropertyValueRulesPlugins
+  a teamwork:ReportPlugin ;
+  teamwork:pluginIndex 5 ;
+  teamwork:pluginValidExpression true ;
+  teamwork:validForACResults false ;
+  teamwork:validForTags true ;
+  ui:prototype """
+<ui:createLink arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\" ui:queryGraph=\"{= ui:graphWithImports(teamwork:projectOrTagGraph(?projectGraph, ?tag)) }\" ui:viewClass=\"{= teamwork:PropertyValueRulesPage }\">
+    <teamwork:ActionLink arg:comment=\"Displays an overview of rules used to infer values of certain properties.\" arg:icon=\"lib/teamwork/build/images/teamwork/SHACL.svg\" arg:link=\"{= ?link }\" arg:title=\"Property Value Rules\"/>
+</ui:createLink>
+"""^^ui:Literal ;
+  rdfs:label "Property value rules plugins" ;
+  rdfs:subClassOf teamwork:ReportPlugins ;
+.
+teamwork:RecordValidationReport
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:dataGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The data graph that the report was created for." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:projectGraph=\"{= teamwork:masterGraph(teamwork:graphIdFromGraph(ui:graphWithoutImports(?dataGraph))) }\" let:tagId=\"{= teamwork:tagIdFromTagGraph(ui:graphWithoutImports(?dataGraph)) }\">
+    <ui:if ui:condition=\"{= !bound(?tagId) }\">
+        <ui:group let:errorCount=\"{#
+                SELECT (COUNT(?result) AS ?errorCount)
+                WHERE {
+                    ?result a sh:ValidationResult .
+                    BIND (spl:object(?result, sh:resultSeverity) AS ?severity) .
+                    FILTER ((!bound(?severity)) || (?severity = sh:Violation)) .
+                } }\" let:incompleteCount=\"{#
+                SELECT (COUNT(DISTINCT ?focusNode) AS ?count)
+                WHERE {
+                    ?result sh:sourceConstraintComponent sh:MinCountConstraintComponent .
+                    ?result sh:focusNode ?focusNode .
+                } }\" let:incompleteTotal=\"{#
+                SELECT (COUNT(DISTINCT ?focusNode) AS ?count)
+                WHERE {
+                    GRAPH ?dataGraph {
+                        {
+                            ?propertyShape sh:minCount ?minCount .
+                            FILTER (?minCount &gt; 0) .
+                            ?nodeShape sh:property ?propertyShape .
+                            ?type (rdfs:subClassOf)* ?nodeShape .
+                            ?focusNode a ?type .
+                        }
+                        UNION
+                        {
+                            ( teamworkconstraints:AllLocalSubjects ?dataGraph ) tosh:targetContains ?focusNode .
+                        } .
+                    } .
+                } }\" let:warningCount=\"{#
+                SELECT (COUNT(?result) AS ?warningCount)
+                WHERE {
+                    ?result sh:resultSeverity sh:Warning .
+                } }\">
+            <ui:setContext ui:queryGraph=\"{= teamwork:teamGraph(?projectGraph) }\" ui:silentTransactions=\"{= true }\">
+                <ui:transaction>
+                    <ui:update ui:updateQuery=\"{!
+                            INSERT {
+                                ?r a teamwork:ValidationReport .
+                                ?r teamwork:errorCount ?errorCount .
+                                ?r teamwork:warningCount ?warningCount .
+                                ?r teamwork:timeStamp ?now .
+                                ?r teamwork:incompleteCount ?incompleteCount .
+                                ?r teamwork:incompleteTotal ?incompleteTotal .
+                            }
+                            WHERE {
+                                BIND (UUID() AS ?r) .
+                                BIND (now() AS ?now) .
+                            } }\"/>
+                </ui:transaction>
+            </ui:setContext>
+        </ui:group>
+    </ui:if>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Record validation report" ;
+  rdfs:subClassOf ui:Operations ;
+.
+teamwork:RefreshDetailsOfAllNodesPlugin
+  a teamwork:TransformPlugin ;
+  teamwork:pluginIndex 11 ;
+  teamwork:pluginMayNotScale true ;
+  teamwork:pluginValidExpression [
+      a sp:exists ;
+      sp:elements (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a ui:graphWithImports ;
+                sp:arg1 [
+                    sp:varName "projectGraph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "graph" ;
+              ] ;
+          ]
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "anyEndpoint" ;
+                    ] ;
+                  sp:predicate dash:detailsEndpoint ;
+                  sp:subject [
+                      sp:varName "anyPS" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "graph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  ui:prototype """
+<ui:setContext ui:queryGraph=\"{= ui:graphWithImports(teamwork:getQueryGraph(?projectGraph, ?tag)) }\">
+    <teamwork:ActionLink arg:comment=\"For any value of a property that is backed by a SPARQL endpoint and that has a suitable node shape, this fetches the latest values from the endpoint and copies them into the current graph.\" arg:faIcon=\"fa-cloud-download-alt\" arg:onClick=\"teamworkreports.refreshDetailsOfAllResources('{= ui:currentQueryGraph() }')\" arg:title=\"Refresh details of all remote values\">
+        <p>
+            <div>The following shapes/classes have mappings to SPARQL endpoints set up:</div>
+            <ul>
+                <ui:forEach ui:resultSet=\"{#
+                        SELECT ?shape ?property ?endpoint
+                        WHERE {
+                            ?ps dash:detailsEndpoint ?endpoint .
+                            ?ps sh:path ?property .
+                            ?shape sh:property ?ps .
+                            FILTER isIRI(?property) .
+                        } }\">
+                    <li>{= ui:label(?shape) } ({= swa:propertyLabelAtClassOrShape(?property, ?shape) }) from {= ?endpoint }</li>
+                </ui:forEach>
+            </ul>
+            <div>
+                <span>To remove any previously fetched remote values:</span>
+                <swa:Space/>
+                <a href=\"javascript:void(0)\" onclick=\"teamworkreports.clearDetailsOfAllResources('{= ui:currentQueryGraph() }')\">Clear all</a>
+            </div>
+        </p>
+    </teamwork:ActionLink>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:label "Refresh details of all nodes plugin" ;
+  rdfs:subClassOf teamwork:TransformPlugins ;
+.
+teamwork:RefreshDetailsResourceAction
+  a swa:ResourceAction ;
+  arg:appName "Editor" ;
+  arg:condition [
+      a sp:if ;
+      sp:arg1 [
+          a sp:exists ;
+          sp:elements (
+              [
+                sp:object [
+                    sp:varName "endpoint" ;
+                  ] ;
+                sp:predicate dash:detailsEndpoint ;
+                sp:subject [
+                    sp:varName "any" ;
+                  ] ;
+              ]
+            ) ;
+        ] ;
+      sp:arg2 [
+          a sp:exists ;
+          sp:elements (
+              [
+                a sp:TriplePath ;
+                sp:object [
+                    sp:varName "type" ;
+                  ] ;
+                sp:path [
+                    a sp:SeqPath ;
+                    sp:path1 rdf:type ;
+                    sp:path2 [
+                        a sp:ModPath ;
+                        sp:modMax -2 ;
+                        sp:modMin 0 ;
+                        sp:subPath rdfs:subClassOf ;
+                      ] ;
+                  ] ;
+                sp:subject [
+                    sp:varName "resource" ;
+                  ] ;
+              ]
+              [
+                a sp:TriplePath ;
+                sp:object [
+                    sp:varName "type" ;
+                  ] ;
+                sp:path [
+                    a sp:ModPath ;
+                    sp:modMax -2 ;
+                    sp:modMin 0 ;
+                    sp:subPath sh:targetClass ;
+                  ] ;
+                sp:subject [
+                    sp:varName "nodeShape" ;
+                  ] ;
+              ]
+              [
+                sp:object [
+                    sp:varName "ps" ;
+                  ] ;
+                sp:predicate sh:property ;
+                sp:subject [
+                    sp:varName "nodeShape" ;
+                  ] ;
+              ]
+              [
+                sp:object [
+                    sp:varName "endpoint" ;
+                  ] ;
+                sp:predicate dash:detailsEndpoint ;
+                sp:subject [
+                    sp:varName "ps" ;
+                  ] ;
+              ]
+              [
+                sp:object [
+                    sp:varName "path" ;
+                  ] ;
+                sp:predicate sh:path ;
+                sp:subject [
+                    sp:varName "ps" ;
+                  ] ;
+              ]
+              [
+                a sp:Filter ;
+                sp:expression [
+                    a sp:exists ;
+                    sp:elements (
+                        [
+                          sp:object [
+                              sp:varName "anyValue" ;
+                            ] ;
+                          sp:predicate [
+                              sp:varName "path" ;
+                            ] ;
+                          sp:subject [
+                              sp:varName "resource" ;
+                            ] ;
+                        ]
+                        [
+                          a sp:Filter ;
+                          sp:expression [
+                              a sp:not ;
+                              sp:arg1 [
+                                  a spif:isReadOnlyTriple ;
+                                  sp:arg1 [
+                                      sp:varName "resource" ;
+                                    ] ;
+                                  sp:arg2 [
+                                      sp:varName "path" ;
+                                    ] ;
+                                  sp:arg3 [
+                                      sp:varName "anyValue" ;
+                                    ] ;
+                                ] ;
+                            ] ;
+                        ]
+                      ) ;
+                  ] ;
+              ]
+            ) ;
+        ] ;
+      sp:arg3 [
+          sp:varName "none" ;
+        ] ;
+    ] ;
+  arg:onSelect "teamworkreports.refreshDetailsOfResource(resourceURI)" ;
+  rdfs:label "Refresh details of remote values" ;
+.
+teamwork:SPINConstraintsReportPlugins
+  a teamwork:ReportPlugin ;
+  teamwork:pluginIndex 0 ;
+  teamwork:validForACResults true ;
+  teamwork:validForTags true ;
+  ui:prototype """
+<ui:group>
+    <teamwork:ProblemsAndSuggestionsReportPlugin ui:args=\"*\"/>
+    <p class=\"text-danger\">Plugin deprecated - please update definition of this teamwork:ProjectType to use <code>teamwork:ProblemsAndSuggestionsReportPlugin</code> instead.</p>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "DEPRECATED: Use teamwork:ProblemsAndSuggestionsReportPlugin instead." ;
+  rdfs:subClassOf teamwork:ReportPlugins ;
+  owl:deprecated true ;
+.
+teamwork:ShapesPage
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:local ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to only show the locally defined shapes." ;
+    ] ;
+  ui:prototype """
+<teamwork:Chrome arg:pageType=\"project-page\" arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= teamwork:ReportsProjectTab }\" arg:tag=\"{= ?tag }\" let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <ui:group let:canEdit=\"{= teamwork:isOntology(?projectGraph) &amp;&amp; teamwork:currentUserHasPrivilege(COALESCE(?tag, ?teamGraph), teamwork:editor, ?teamGraph) }\" let:dataGraph=\"{= ui:currentQueryGraph() }\" let:withImports=\"{= ui:graphWithImports(teamwork:projectOrTagGraph(?projectGraph, ?tag)) }\">
+        <h1>Shapes and Constraints of <em>{= teamwork:projectLabel(?projectGraph) }</em>
+        </h1>
+        <ui:setContext ui:queryGraph=\"{= IF(swa:falseOrUnbound(?local), ?withImports, teamwork:projectOrTagGraph(?projectGraph, ?tag)) }\">
+            <ui:group letrs:shapes='{#
+                    SELECT ?shape
+                    WHERE {
+                        {
+                            ?type (rdfs:subClassOf)* sh:NodeShape .
+                            ?shape a ?type .
+                            FILTER isIRI(?shape) .
+                        } .
+                        BIND (afn:namespace(?shape) AS ?ns) .
+                        FILTER (?ns NOT IN (\"http://www.w3.org/ns/shacl#\", \"http://datashapes.org/dash#\", \"http://datashapes.org/graphql#\", \"http://topbraid.org/tosh#\")) .
+                        BIND (ui:label(?shape) AS ?label) .
+                    }
+                    ORDER BY (?label) }'>
+                <div>Checkboxes indicate whether a shape or constraint is enabled.</div>
+                <br/>
+                <table>
+                    <ui:setContext ui:queryGraph=\"{= ?withImports }\">
+                        <ui:forEach ui:resultSet=\"{= ?shapes }\">
+                            <teamwork:ShapesPageShapeRow arg:canEdit=\"{= ?canEdit }\" arg:shape=\"{= ?shape }\"/>
+                        </ui:forEach>
+                    </ui:setContext>
+                </table>
+            </ui:group>
+        </ui:setContext>
+    </ui:group>
+</teamwork:Chrome>
+"""^^ui:Literal ;
+  rdfs:subClassOf teamwork:MustHaveAccessToTagPage ;
+.
+teamwork:ShapesPageShapeRow
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:canEdit ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True if user has editing privilege." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:shape ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The shape being rendered." ;
+    ] ;
+  ui:prototype """
+<tr let:baseGraph=\"{= ui:graphWithoutImports(ui:currentQueryGraph()) }\" let:id=\"{= ui:uniqueId() }\">
+    <td class=\"teamwork-shapes-page-shape-row-td\">
+        <div class=\"checkbox\" style=\"margin-top: 0px !important\">
+            <input checked=\"{= IF(EXISTS {
+                ?shape sh:deactivated true .
+            }, ?none, &quot;checked&quot;) }\" disabled=\"{= IF(((?canEdit &amp;&amp; (isIRI(?shape) || EXISTS {
+                GRAPH ?baseGraph {
+                    ?shape ?anyP ?anyO .
+                } .
+            })) &amp;&amp; (NOT EXISTS {
+                ?shape sh:deactivated ?any .
+            } || EXISTS {
+                GRAPH ?baseGraph {
+                    ?shape sh:deactivated ?any .
+                } .
+            })), ?none, &quot;disabled&quot;) }\" title=\"Enabled\" type=\"checkbox\">
+                <ui:handle arg:checked=\"this.checked\" ui:event=\"onclick\">
+                    <ui:if ui:condition=\"{= ?checked }\">
+                        <ui:removePropertyValues arg:property=\"{= sh:deactivated }\" ui:this=\"{= ?shape }\"/>
+                    </ui:if>
+                    <ui:else>
+                        <ui:setPropertyValue arg:property=\"{= sh:deactivated }\" arg:value=\"{= true }\" ui:this=\"{= ?shape }\"/>
+                    </ui:else>
+                </ui:handle>
+            </input>
+        </div>
+    </td>
+    <td>
+        <div let:message=\"{= spl:object(?shape, sh:message) }\" let:path=\"{= spl:object(?shape, sh:path) }\">
+            <b title=\"{= ?shape }\">{= IF(isIRI(?shape), ui:label(?shape), IF(bound(?path), \"Anonymous property shape\", IF(EXISTS {
+                ?any sh:js ?shape .
+            }, \"Anonymous JavaScript constraint\", IF(EXISTS {
+                ?any sh:sparql ?shape .
+            }, \"Anonymous SPARQL constraint\", \"Anonymous node shape\")))) }</b>
+            <ui:if ui:condition=\"{= bound(?path) }\">
+                <swa:Space/>
+                <span>(on {= IF(isIRI(?path), ui:label(?path), \" a property path\") })</span>
+            </ui:if>
+            <ui:if ui:condition=\"{= bound(?message) }\">
+                <swa:Space/>
+                <span>\"{= ?message }\"</span>
+            </ui:if>
+        </div>
+        <div>
+            <ul>
+                <ui:forEach ui:resultSet=\"{#
+                        SELECT ?param ?value
+                        WHERE {
+                            ?shape ?param ?value .
+                            FILTER (?param NOT IN (sh:property, sh:sparql, sh:js)) .
+                            FILTER EXISTS {
+                                ?p sh:path ?param .
+                                ?cc sh:parameter ?p .
+                            } .
+                        }
+                        ORDER BY (?param) (?value) }\">
+                    <li>{= ui:label(?param) }: {= ui:label(?value) }</li>
+                </ui:forEach>
+            </ul>
+            <ui:forEach ui:resultSet=\"{#
+                    SELECT ?property
+                    WHERE {
+                        ?shape sh:property ?property .
+                    }
+                    ORDER BY (?property) }\">
+                <table>
+                    <teamwork:ShapesPageShapeRow arg:canEdit=\"{= ?canEdit }\" arg:shape=\"{= ?property }\"/>
+                </table>
+            </ui:forEach>
+            <ui:forEach ui:resultSet=\"{#
+                    SELECT ?constraint
+                    WHERE {
+                        ?shape sh:sparql|sh:js ?constraint .
+                    }
+                    ORDER BY (?constraint) }\">
+                <table>
+                    <teamwork:ShapesPageShapeRow arg:canEdit=\"{= ?canEdit }\" arg:shape=\"{= ?constraint }\"/>
+                </table>
+            </ui:forEach>
+        </div>
+    </td>
+</tr>
+"""^^ui:Literal ;
+  rdfs:subClassOf teamwork:Elements ;
+.
+teamwork:SpellCheckingPage
+  a ui:NodeClass ;
+  ui:prototype """
+<teamwork:Chrome arg:pageType=\"project-page\" arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= teamwork:ReportsProjectTab }\" arg:tag=\"{= ?tag }\">
+    <h1>Spell Checking Report</h1>
+    <ui:loadable let:queryGraph=\"{= ui:currentQueryGraph() }\" ui:loadLater=\"{= true }\">
+        <sml:CheckSpelling sml:selectQuery='{#
+                SELECT ?label ?rlabel ?note ?comment ?texttype ?action
+                WHERE {
+                    {
+                        ?p (rdfs:subPropertyOf)* skos:note .
+                        ?s ?p ?note .
+                        OPTIONAL {
+                            ?s rdfs:comment ?comment .
+                        } .
+                        BIND (sml:HTMLText AS ?texttype) .
+                        BIND (spell:checkWord AS ?action) .
+                        FILTER (afn:namespace(?s) != \"http://www.w3.org/2004/02/skos/core#\") .
+                    }
+                    UNION
+                    {
+                        ?p (rdfs:subPropertyOf)+ rdfs:label .
+                        ?s ?p ?label .
+                        OPTIONAL {
+                            ?s rdfs:label ?rlabel .
+                        } .
+                        FILTER (afn:namespace(?s) != \"http://www.w3.org/2004/02/skos/core#\") .
+                    } .
+                } }'>
+            <ui:forEach ui:resultSet=\"{#
+                    SELECT *
+                    WHERE {
+                        ?result a spell:SpellResult .
+                        ?result spell:foundError ?error .
+                        ?result spell:inputString ?inputString .
+                    }
+                    ORDER BY (?inputString) }\">
+                <table border=\"1\" cellpadding=\"10px\" class=\"teamwork-spell-checking-page-table\">
+                    <tr>
+                        <td width=\"250\">Misspelled word: {= spl:object(?error, spell:mispelledWord) }</td>
+                        <td width=\"550\">Context: <b>{= ?inputString }</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ui:setContext ui:queryGraph=\"{= ?queryGraph }\">
+                                <ui:forEach ui:resultSet=\"{#
+                                        SELECT ?s ?p
+                                        WHERE {
+                                            ?s ?p ?inputString .
+                                        } }\">
+                                    <div>In property: {= ui:label(?p) }<br/>Of resource: <a href=\"{= teamwork:openEditorLink(?s, ?projectGraph, ?tag) }\" target=\"_blank\">{= ui:label(?s) }</a>
+                                    </div>
+                                </ui:forEach>
+                            </ui:setContext>
+                        </td>
+                        <td>
+                            <span>Suggestions: </span>
+                            <ui:forEach ui:resultSet=\"{#
+                                    SELECT ?suggestion
+                                    WHERE {
+                                        ?error spell:suggestions ?s .
+                                        ?s ?p ?suggestion .
+                                        FILTER (?p != rdf:type) .
+                                    }
+                                    ORDER BY (?p) }\" ui:separator=\", \">{= ?suggestion }</ui:forEach>
+                        </td>
+                    </tr>
+                </table>
+            </ui:forEach>
+        </sml:CheckSpelling>
+    </ui:loadable>
+</teamwork:Chrome>
+"""^^ui:Literal ;
+  rdfs:comment "An SWP page displaying all spell checking errors over all string literals in the query model." ;
+  rdfs:label "Spell checking page" ;
+  rdfs:subClassOf teamwork:MustHaveAccessToTagPage ;
+.
+teamwork:SpellCheckingReportPlugin
+  a teamwork:ReportPlugin ;
+  teamwork:validForTags true ;
+  ui:prototype """
+<ui:createLink arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\" ui:queryGraph=\"{= ui:graphWithImports(teamwork:projectOrTagGraph(?projectGraph, ?tag)) }\" ui:viewClass=\"{= teamwork:SpellCheckingPage }\">
+    <teamwork:ActionLink arg:comment=\"Performs spell checking across all string literals.\" arg:icon=\"lib/teamwork/build/images/teamwork/spell-check.svg\" arg:link=\"{= ?link }\" arg:title=\"Spell Check\"/>
+</ui:createLink>
+"""^^ui:Literal ;
+  rdfs:label "Spell check plugin" ;
+  rdfs:subClassOf teamwork:ReportPlugins ;
+.
+teamwork:StatisticsPage
+  a ui:NodeClass ;
+  ui:prototype """
+<teamwork:Chrome arg:pageType=\"project-page\" arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= teamwork:ReportsProjectTab }\" arg:tag=\"{= ?tag }\" let:graph=\"{= ui:currentQueryGraph() }\" let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <h1>Statistics</h1>
+    <ui:setContext ui:queryGraph=\"{= ui:graphWithoutImports(?graph) }\">
+        <h2>Overall Counts</h2>
+        <table class=\"swa-relevant-properties\">
+            <thead class=\"swa-relevant-properties\">
+                <tr class=\"swa-relevant-properties\">
+                    <th class=\"swa-relevant-properties\"/>
+                    <th class=\"swa-relevant-properties\">Count</th>
+                </tr>
+            </thead>
+            <tbody class=\"swa-relevant-properties\">
+                <tr class=\"swa-relevant-properties\">
+                    <td class=\"swa-relevant-properties\">Triples</td>
+                    <td class=\"swa-relevant-properties\">{= spif:graphSize() }</td>
+                </tr>
+                <tr class=\"swa-relevant-properties\">
+                    <td class=\"swa-relevant-properties\">Instances</td>
+                    <td class=\"swa-relevant-properties\">{= spif:countMatches(?s, rdf:type, ?type) }</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2>Instances by Class</h2>
+        <table class=\"swa-relevant-properties\">
+            <thead class=\"swa-relevant-properties\">
+                <tr class=\"swa-relevant-properties\">
+                    <th class=\"swa-relevant-properties\">Class</th>
+                    <th class=\"swa-relevant-properties\">Instances</th>
+                </tr>
+            </thead>
+            <tbody class=\"swa-relevant-properties\">
+                <ui:forEach ui:resultSet=\"{#
+                        SELECT *
+                        WHERE {
+                            {
+                                SELECT DISTINCT ?class
+                                WHERE {
+                                    ?s a ?class .
+                                }
+                            } .
+                            BIND (swa:labelInGraph(?class, ?graph) AS ?label) .
+                        }
+                        ORDER BY (?label) }\">
+                    <tr class=\"swa-relevant-properties\">
+                        <td class=\"swa-relevant-properties\" title=\"{= ?class }\">{= ?label }</td>
+                        <td class=\"swa-relevant-properties\">{= spif:countMatches(?s, rdf:type, ?class) }</td>
+                    </tr>
+                </ui:forEach>
+            </tbody>
+        </table>
+    </ui:setContext>
+</teamwork:Chrome>
+"""^^ui:Literal ;
+  rdfs:subClassOf teamwork:MustHaveAccessToTagPage ;
+.
+teamwork:StatisticsReportPlugin
+  a teamwork:ReportPlugin ;
+  teamwork:pluginMayNotScale true ;
+  teamwork:validForTags true ;
+  ui:prototype """
+<ui:createLink arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\" ui:queryGraph=\"{= ui:graphWithImports(teamwork:projectOrTagGraph(?projectGraph, ?tag)) }\" ui:viewClass=\"{= teamwork:StatisticsPage }\">
+    <teamwork:ActionLink arg:comment=\"Shows the number of triples, classes and instances.\" arg:icon=\"lib/teamwork/build/images/teamwork/statistics.svg\" arg:link=\"{= ?link }\" arg:title=\"Statistics\"/>
+</ui:createLink>
+"""^^ui:Literal ;
+  rdfs:label "Statistics plugin" ;
+  rdfs:subClassOf teamwork:ReportPlugins ;
+.
+teamwork:TagComparisonReportPage
+  a ui:NodeClass ;
+  ui:prototype """
+<teamwork:Chrome arg:pageType=\"project-page\" arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= teamwork:ReportsProjectTab }\" arg:tag=\"{= ?tag }\" let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?teamGraph) }\">
+        <h1>Comparison Report</h1>
+        <teamwork:ReportSubtitle arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\"/>
+        <div letrs:subjects=\"{#
+                SELECT DISTINCT ?subject
+                WHERE {
+                    ?change teamwork:tag ?tag .
+                    {
+                        ?change teamwork:added ?triple .
+                    }
+                    UNION
+                    {
+                        ?change teamwork:deleted ?triple .
+                    } .
+                    ?triple teamwork:subject ?subject .
+                    BIND (ui:label(?subject) AS ?subjectLabel) .
+                }
+                ORDER BY (?subjectLabel) }\">
+            <ui:if ui:condition=\"{= spr:rowCount(?subjects) &gt; 0 }\">
+                <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(teamwork:projectOrTagGraph(?projectGraph, ?tag)) }\">
+                    <ui:forEach ui:resultSet=\"{= ?subjects }\">
+                        <teamwork:TagComparisonReportSubjectView arg:projectGraph=\"{= ?projectGraph }\" arg:subject=\"{= ?subject }\" arg:tag=\"{= ?tag }\"/>
+                    </ui:forEach>
+                </ui:setContext>
+            </ui:if>
+            <ui:else>
+                <p class=\"dataLightCell\">No changes found.</p>
+            </ui:else>
+        </div>
+    </ui:setContext>
+</teamwork:Chrome>
+"""^^ui:Literal ;
+  rdfs:comment "A report displaying the changes in a given tag compared to the published version. The changes are grouped per resource." ;
+  rdfs:label "Tag comparison report page" ;
+  rdfs:subClassOf teamwork:MustHaveAccessToTagPage ;
+.
+teamwork:TagComparisonReportSubjectView
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subject ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The subject to display." ;
+    ] ;
+  ui:prototype """
+<ui:group let:loadId=\"{= ui:uniqueId() }\">
+    <ui:loadable ui:loadId=\"{= ?loadId }\">
+        <div let:teamGraph=\"{= teamwork:currentTeamGraph() }\" letrs:rs=\"{#
+                SELECT ?predicate ?predicateLabel ?oldLabel ?newLabel ?oldValue ?newValue
+                WHERE {
+                    ?subject teamwork:diff ( ?predicate ?oldValue ?newValue ) .
+                    BIND (IF(bound(?predicate), ui:label(?predicate), ?none) AS ?predicateLabel) .
+                    BIND (IF(bound(?oldValue), ui:label(?oldValue), ?none) AS ?oldLabel) .
+                    BIND (IF(bound(?newValue), ui:label(?newValue), ?none) AS ?newLabel) .
+                }
+                ORDER BY (?predicateLabel) (?newLabel) (?oldLabel) }\">
+            <ui:if ui:condition=\"{= spr:rowCount(?rs) &gt; 0 }\">
+                <h2 class=\"teamwork-production-comparison-report-subject-view-h2\">
+                    <a href=\"{= teamwork:editorLink(?projectGraph, ?subject, ?tag) }\" target=\"_blank\">{= ui:label(?subject) }</a>
+                    <span class=\"teamwork-production-comparison-report-subject-view-span\">&nbsp;({= xsd:string(?subject) })</span>
+                </h2>
+                <div class=\"teamwork-production-comparison-report-subject-view-types\" letrs:subjectTypes=\"{#
+                        SELECT ?type
+                        WHERE {
+                            ?subject a ?type .
+                        } }\">
+                    <label> Type: &nbsp;</label>
+                    <ui:forEach ui:resultSet=\"{= ?subjectTypes }\" ui:separator=\",\">
+                        <span>&nbsp;{= ui:label(?type) }</span>
+                    </ui:forEach>
+                </div>
+                <table class=\"teamwork-production-comparison-report-subject-view-table\" let:canCommit=\"{= teamwork:currentUserHasPrivilege(?teamGraph, teamwork:editor, ?teamGraph) }\">
+                    <tr>
+                        <th class=\"teamwork-production-comparison-report-subject-view-th-property\">
+                            <b>Property</b>
+                        </th>
+                        <th class=\"teamwork-production-comparison-report-subject-view-th-label \">
+                            <b>Production</b>
+                        </th>
+                        <th class=\"teamwork-production-comparison-report-subject-view-th-label\">
+                            <b>Working Copy</b>
+                        </th>
+                        <th class=\"teamwork-production-comparison-report-subject-view-th-actions\">
+                            <b>Actions</b>
+                        </th>
+                    </tr>
+                    <ui:forEach ui:resultSet=\"{= ?rs }\">
+                        <ui:group let:dialogId=\"{= ui:uniqueId() }\">
+                            <tr>
+                                <td>{= ?predicateLabel }</td>
+                                <td class=\"teamwork-production-comparison-report-subject-view-td-left-pad {= IF((!bound(?newLabel)), &quot;teamwork-production-comparison-report-subject-view-td-background-delete&quot;, &quot;teamwork-production-comparison-report-subject-view-td-background-new-label&quot;) }\">
+                                    <ui:if ui:condition=\"{= isLiteral(?oldValue) }\">
+                                        <ui:parse ui:str=\"{= ?oldLabel }\"/>
+                                    </ui:if>
+                                    <ui:else>{= ?oldLabel }</ui:else>
+                                </td>
+                                <td class=\"teamwork-production-comparison-report-subject-view-td-left-pad {= IF((!bound(?oldLabel)), &quot;teamwork-production-comparison-report-subject-view-td-background-add&quot;, &quot;teamwork-production-comparison-report-subject-view-td-background-new-label&quot;) }\">
+                                    <ui:if ui:condition=\"{= isLiteral(?newValue) }\">
+                                        <ui:parse ui:str=\"{= ?newLabel }\"/>
+                                    </ui:if>
+                                    <ui:else>{= ?newLabel }</ui:else>
+                                </td>
+                                <td class=\"teamwork-tag-comparison-report-subject-view-change\">
+                                    <a href=\"javascript:void(0)\" onclick=\"swa.load('{= ?dialogId }')\">View&nbsp;Change</a>
+                                    <ui:loadable ui:loadId=\"{= ?dialogId }\" ui:loadOnDemand=\"{= true }\">
+                                        <ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+                                            <div id=\"{= ?dialogId }-dialog\" let:change=\"{= teamwork:findChangeForTriple(?subject, ?predicate, COALESCE(?newValue, ?oldValue), IF(bound(?newValue), teamwork:added, teamwork:deleted), ?tag) }\">
+                                                <ui:if ui:condition=\"{= bound(?change) }\">
+                                                    <teamwork:ChangeView arg:change=\"{= ?change }\" arg:projectGraph=\"{= ?projectGraph }\"/>
+                                                </ui:if>
+                                                <ui:else>
+                                                    <div>No matching change object found.</div>
+                                                </ui:else>
+                                            </div>
+                                        </ui:setContext>
+                                        <script>$('#{= ?dialogId }-dialog').dialog({modal: true, title: 'Details of Change', width: 1000, height: 400, close: function() {$(this).remove();swa.load('{= ?loadId }');}});</script>
+                                    </ui:loadable>
+                                </td>
+                            </tr>
+                        </ui:group>
+                    </ui:forEach>
+                </table>
+            </ui:if>
+        </div>
+    </ui:loadable>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Displays a single table comparing the changes on a given subject." ;
+  rdfs:label "Tag comparison report subject view" ;
+  rdfs:subClassOf teamwork:TagReportElements ;
+.
+teamwork:TagGraphURIPlugin
+  a teamwork:GeneralPlugin ;
+  teamwork:invalidForMaster true ;
+  teamwork:pluginIndex 5 ;
+  teamwork:pluginValidExpression true ;
+  teamwork:validForACResults true ;
+  teamwork:validForTags true ;
+  ui:prototype """
+<teamwork:ActionLink arg:comment=\"The graph URI is an internal identifier for any data asset managed by this system. It is set at creation of a new working copy.\" arg:icon=\"lib/teamwork/build/images/teamwork/default-namespace-icon.svg\" arg:title=\"Graph URI\">
+    <div class=\"swa-inline-editor-text-parent\">{= ui:graphWithoutImports(teamwork:queryGraph(true, teamwork:graphIdFromMasterGraph(?projectGraph), teamwork:tagId(?tag), smf:currentUserName())) }</div>
+</teamwork:ActionLink>
+"""^^ui:Literal ;
+  rdfs:comment "Displays the current working copy's graph URI." ;
+  rdfs:label "Tag graph URI plugin" ;
+  rdfs:subClassOf teamwork:GeneralPlugins ;
+.
+teamwork:WikidataApplySuggestion
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:logMessage ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:object ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:predicate ;
+      spl:valueType rdf:Property ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subject ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:transaction ui:logMessage=\"{= ?logMessage }\">
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                ?subject ?predicate ?object .
+            }
+            WHERE {
+            } }\"/>
+</ui:transaction>
+"""^^ui:Literal ;
+  rdfs:label "Wikidata apply suggestion" ;
+  rdfs:subClassOf ui:JSONServices ;
+.
+teamwork:WikidataSuggestionsPlugin
+  a teamwork:TransformPlugin ;
+  teamwork:pluginIndex 10 ;
+  teamwork:pluginMayNotScale true ;
+  teamwork:pluginValidExpression [
+      a sp:exists ;
+      sp:elements (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a ui:graphWithImports ;
+                sp:arg1 [
+                    sp:varName "projectGraph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "graph" ;
+              ] ;
+          ]
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object "https://query.wikidata.org/sparql" ;
+                  sp:predicate dash:detailsEndpoint ;
+                  sp:subject [
+                      sp:varName "any" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "graph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  teamwork:validForTags true ;
+  ui:prototype """
+<ui:createLink arg:generatorIds=\"teamwork:WikidataResultsGenerator\" arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\" arg:title=\"Wikidata Mapping Suggestions\" ui:viewClass=\"{= teamwork:ProblemsAndSuggestionsPage }\">
+    <teamwork:ActionLink arg:comment=\"Attempts to find matching entities from Wikidata for yet unmapped terms. Note this may take more than a second per term.\" arg:icon=\"https://upload.wikimedia.org/wikipedia/commons/6/66/Wikidata-logo-en.svg\" arg:title=\"Suggest Mappings to Wikidata\">
+        <ui:setContext ui:queryGraph=\"{= teamwork:getQueryGraph(?projectGraph, ?tag) }\">
+            <div>
+                <p>
+                    <b>
+                        <a href=\"{= ?link }\">For all Assets</a>
+                    </b>
+                    <swa:Spaces/>
+                    <b>
+                        <a href=\"javascript:void(0)\" onclick=\"location.href = '{= ?link }' + '&amp;resourceType=' + encodeURIComponent($('#reportResourceType').val())\">For instances of</a>
+                    </b>
+                    <swa:Space/>
+                    <swa:AutoComplete arg:filterFunction=\"{= teamwork:isClassWithWikidataMapping }\" arg:id=\"reportResourceType\" arg:type=\"{= rdfs:Class }\"/>
+                </p>
+                <p>
+                    <div>The following shapes/classes have mappings set up:</div>
+                    <ul>
+                        <ui:forEach ui:resultSet='{#
+                                SELECT ?shape ?property
+                                WHERE {
+                                    ?ps dash:detailsEndpoint \"https://query.wikidata.org/sparql\" .
+                                    ?ps sh:path ?property .
+                                    ?shape sh:property ?ps .
+                                    FILTER isIRI(?property) .
+                                } }'>
+                            <li>{= ui:label(?shape) } ({= swa:propertyLabelAtClassOrShape(?property, ?shape) })</li>
+                        </ui:forEach>
+                    </ul>
+                </p>
+            </div>
+        </ui:setContext>
+    </teamwork:ActionLink>
+</ui:createLink>
+"""^^ui:Literal ;
+  rdfs:label "Wikidata suggestions plugin" ;
+  rdfs:subClassOf teamwork:TransformPlugins ;
+.
+teamwork:WikidataSuggestionsResourceAction
+  a swa:ResourceAction ;
+  arg:appName "Editor" ;
+  arg:condition [
+      a sp:if ;
+      sp:arg1 [
+          a sp:exists ;
+          sp:elements (
+              [
+                sp:object "https://query.wikidata.org/sparql" ;
+                sp:predicate dash:detailsEndpoint ;
+                sp:subject [
+                    sp:varName "any" ;
+                  ] ;
+              ]
+            ) ;
+        ] ;
+      sp:arg2 [
+          a sp:exists ;
+          sp:elements (
+              [
+                a sp:TriplePath ;
+                sp:object [
+                    sp:varName "type" ;
+                  ] ;
+                sp:path [
+                    a sp:SeqPath ;
+                    sp:path1 rdf:type ;
+                    sp:path2 [
+                        a sp:ModPath ;
+                        sp:modMax -2 ;
+                        sp:modMin 0 ;
+                        sp:subPath rdfs:subClassOf ;
+                      ] ;
+                  ] ;
+                sp:subject [
+                    sp:varName "resource" ;
+                  ] ;
+              ]
+              [
+                a sp:TriplePath ;
+                sp:object [
+                    sp:varName "type" ;
+                  ] ;
+                sp:path [
+                    a sp:ModPath ;
+                    sp:modMax -2 ;
+                    sp:modMin 0 ;
+                    sp:subPath sh:targetClass ;
+                  ] ;
+                sp:subject [
+                    sp:varName "nodeShape" ;
+                  ] ;
+              ]
+              [
+                sp:object [
+                    sp:varName "ps" ;
+                  ] ;
+                sp:predicate sh:property ;
+                sp:subject [
+                    sp:varName "nodeShape" ;
+                  ] ;
+              ]
+              [
+                sp:object "https://query.wikidata.org/sparql" ;
+                sp:predicate dash:detailsEndpoint ;
+                sp:subject [
+                    sp:varName "ps" ;
+                  ] ;
+              ]
+              [
+                sp:object [
+                    sp:varName "path" ;
+                  ] ;
+                sp:predicate sh:path ;
+                sp:subject [
+                    sp:varName "ps" ;
+                  ] ;
+              ]
+              [
+                a sp:Filter ;
+                sp:expression [
+                    a sp:notExists ;
+                    sp:elements (
+                        [
+                          sp:object [
+                              sp:varName "any" ;
+                            ] ;
+                          sp:predicate [
+                              sp:varName "path" ;
+                            ] ;
+                          sp:subject [
+                              sp:varName "resource" ;
+                            ] ;
+                        ]
+                      ) ;
+                  ] ;
+              ]
+            ) ;
+        ] ;
+      sp:arg3 [
+          sp:varName "none" ;
+        ] ;
+    ] ;
+  arg:onSelect "teamworkreports.showWikidataSuggestions(resourceURI)" ;
+  rdfs:label "Suggest matching Wikidata entities..." ;
+.
+teamwork:createEditorLink
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "link" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              a sp:Bind ;
+              sp:expression [
+                  a teamwork:currentMasterGraph ;
+                ] ;
+              sp:variable [
+                  sp:varName "projectGraph" ;
+                ] ;
+            ]
+            [
+              a sp:Filter ;
+              sp:expression [
+                  a sp:bound ;
+                  sp:arg1 [
+                      sp:varName "projectGraph" ;
+                    ] ;
+                ] ;
+            ]
+          )
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:currentTag ;
+              ] ;
+            sp:variable [
+                sp:varName "tag" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:editorLink ;
+                arg:projectGraph [
+                    sp:varName "projectGraph" ;
+                  ] ;
+                arg:resource [
+                    sp:varName "resource" ;
+                  ] ;
+                arg:tag [
+                    sp:varName "tag" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "link" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource to link to." ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Creates a deep link to edit a given resource using information from the current context graph. Only works if the current graph is a teamwork master graph." ;
+  rdfs:label "create editor link" ;
+  rdfs:subClassOf spin:Functions ;
+.
+teamwork:isClassWithWikidataMapping
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            sp:object "https://query.wikidata.org/sparql" ;
+            sp:predicate dash:detailsEndpoint ;
+            sp:subject [
+                sp:varName "ps" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "property" ;
+              ] ;
+            sp:predicate sh:path ;
+            sp:subject [
+                sp:varName "ps" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "ps" ;
+              ] ;
+            sp:predicate sh:property ;
+            sp:subject [
+                sp:varName "shape" ;
+              ] ;
+          ]
+          [
+            a sp:TriplePath ;
+            sp:object [
+                sp:varName "shape" ;
+              ] ;
+            sp:path [
+                a sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "class" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:isIRI ;
+                sp:arg1 [
+                    sp:varName "property" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:class ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The class to test." ;
+    ] ;
+  spin:private true ;
+  rdfs:label "is class with wikidata mapping" ;
+  rdfs:subClassOf spin:Functions ;
+.
+<http://topbraid.org/teamworkreports>
+  a owl:Ontology ;
+  owl:imports <http://topbraid.org/conceptmatch> ;
+  owl:imports <http://topbraid.org/swa> ;
+  owl:imports <http://topbraid.org/teamwork.ui> ;
+.

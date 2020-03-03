@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+<!-- https://bl.ocks.org/Coola85/51a4bf6b231370cb56a6b7b8da2ff7a7 -->
+
+body {
+  font: 10px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #555;
+}
+
+.border {
+  fill: none;
+  shape-rendering: crispEdges;
+  stroke: #aaa;
+}
+
+.node {
+  stroke: #333;
+  }
+
+</style>
+<body>
+<script src="../d3.min.js"></script>
+<script>
+
+var jsonData = {
+"name" : "Father",
+  "children": [
+    { "name" : "Son",
+      "children": [
+        {"name" : "Grandson"},
+        {"name" : "Granddaughter"}
+      ]
+    }
+  ]
+};
+
+var margin = {top: 100, right: 10, bottom: 240, left: 10},
+    width = 340 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
+
+var orientations = {
+  "top-to-bottom": {
+    size: [width, height],
+    x: function(d) { return d.x; },
+    y: function(d) { return d.y; }
+  },
+//     "right-to-left": {
+//         size: [height, width],
+//         x: function(d) { return width - d.y; },
+//         y: function(d) { return d.x; }
+//     },
+//         "bottom-to-top": {
+//         size: [width, height],
+//         x: function(d) { return d.x; },
+//         y: function(d) { return height - d.y; }
+//     },
+//         "left-to-right": {
+//          size: [height, width],
+//         x: function(d) { return d.y; },
+//         y: function(d) { return d.x; }
+//   }
+};
+
+var svg = d3.select("body").selectAll("svg")
+    .data(d3.entries(orientations))
+    .enter().append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  
+// d3.json("d3tree-example1.json").then(function(data) {
+// "https://bl.ocks.org/Coola85/raw/51a4bf6b231370cb56a6b7b8da2ff7a7/46b8d81638ffe11cc5c9e81d4d35c3a30933caf0/graph.json" 
+  
+//   var dataFile="https://bl.ocks.org/Coola85/raw/51a4bf6b231370cb56a6b7b8da2ff7a7/46b8d81638ffe11cc5c9e81d4d35c3a30933caf0/graph.json";
+
+//   d3.json(dataFile).then(function(data) {
+
+  svg.each(function(orientation) {
+    var svg = d3.select(this),
+        o = orientation.value;
+
+    // Compute the layout.
+    
+    var treemap = d3.tree().size(o.size);     
+    var nodes = d3.hierarchy(jsonData);
+    nodes = treemap(nodes);
+    var links = nodes.descendants().slice(1);
+
+//     var tree = d3.layout.tree().size(o.size),
+//         nodes = tree.nodes(root),
+//         links = tree.links(nodes);
+       
+
+
+    // Create the link lines.
+    svg.selectAll(".link")
+        .data(links)
+        .enter().append("path")
+        .attr("class", "link")
+        .attr("d", function(d) {
+        	return "M" + d.x + "," + o.y(d)
+         	+ "C" + d.x + "," + (o.y(d) + o.y(d.parent)) / 2
+         	+ " " + d.parent.x + "," +  (o.y(d) + o.y(d.parent)) / 2
+         	+ " " + d.parent.x + "," + o.y(d.parent);
+       	});
+    
+     // Create the node circles.
+    var node = svg.selectAll(".node")
+        .data(nodes.descendants())
+        .enter()
+    	.append("g")
+    node.append("circle")
+        .attr("class", "node")
+        .attr("r", 6.5)
+        .attr("cx", o.x)
+        .attr("cy", o.y);   
+    
+    node.append("text")
+        .text(function (d) {return d.data.name;})
+        .attr("x", o.x)
+        .attr("dx", 5)
+        .attr("y", o.y);
+
+  });
+// });
+
+</script>

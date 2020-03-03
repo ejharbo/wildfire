@@ -1,0 +1,396 @@
+# baseURI: http://topbraid.org/teamwork.sms
+# imports: http://topbraid.org/sparqlmotionfunctions
+# imports: http://topbraid.org/sparqlmotionlib
+# imports: http://topbraid.org/teamwork
+# imports: http://topbraid.org/teamwork.ui
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+arg:comment
+  a rdf:Property ;
+  rdfs:label "comment" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:file
+  a rdf:Property ;
+  rdfs:label "file" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:name
+  a rdf:Property ;
+  rdfs:label "name" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:serialization
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+teamwork:CheckPrivileges
+  a sml:AssertTrue ;
+  sm:next css:RememberExternalGraphURI ;
+  sml:askQuery [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:teamGraph ;
+                sp:arg1 [
+                    sp:varName "projectGraph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "teamGraph" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:coalesce ;
+                sp:arg1 [
+                    sp:varName "tag" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "teamGraph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "resource" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a teamwork:currentUserHasPrivilege ;
+                arg:governedResource [
+                    sp:varName "resource" ;
+                  ] ;
+                arg:role teamwork:viewer ;
+                arg:teamGraph [
+                    sp:varName "teamGraph" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Check privileges" ;
+.
+teamwork:CleanUpSKOS
+  a sm:Module ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The target graph to write to." ;
+    ] ;
+  rdfs:comment "An (internal) SM module that cleans up the input graph to the SKOS best practices defined in the http://topbraid.org/skoscleaner SPIN file (see system ontologies)." ;
+  rdfs:label "Clean up SKOS" ;
+  rdfs:subClassOf sml:RDFProcessingModules ;
+.
+teamwork:ExportToRDF
+  a sm:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:sorted ;
+      spl:valueType xsd:boolean ;
+      sm:next teamwork:ReturnExportToRDF ;
+      sm:nodeX 1715 ;
+      sm:nodeY 215 ;
+      rdfs:comment "True to produce sorted output (only for Turtle at the moment)." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:tag ;
+      spl:valueType teamwork:Tag ;
+      sm:next teamwork:CheckPrivileges ;
+      rdfs:comment "The tag to display." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType owl:Ontology ;
+      sm:next teamwork:CheckPrivileges ;
+      rdfs:comment "The project." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:serialization ;
+      spl:valueType sm:ValueType ;
+      sm:next css:RememberExternalGraphURI ;
+      rdfs:comment "The (SML) serialization to use." ;
+    ] ;
+  spin:private true ;
+  sm:returnModule teamwork:ReturnExportToRDF ;
+  rdfs:comment "A simple script that serializes the current context graph (_base etc) into an RDF stream." ;
+  rdfs:label "Export to RDF" ;
+  rdfs:subClassOf sm:Functions ;
+.
+teamwork:ReturnExportToRDF
+  a sml:ReturnRDF ;
+  sml:baseURI [
+      a sp:str ;
+      sp:arg1 [
+          a sp:coalesce ;
+          sp:arg1 [
+              sp:varName "ext" ;
+            ] ;
+          sp:arg2 [
+              sp:varName "projectGraph" ;
+            ] ;
+        ] ;
+    ] ;
+  sml:serialization [
+      sp:varName "serialization" ;
+    ] ;
+  sml:sorted [
+      sp:varName "sorted" ;
+    ] ;
+  rdfs:label "Return export to RDF" ;
+.
+teamwork:changeFunction
+  a rdf:Property ;
+  rdfs:label "change function" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+teamwork:resourceName
+  a rdf:Property ;
+  rdfs:label "resource name" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://topbraid.org/teamwork.sms>
+  a owl:Ontology ;
+  rdfs:comment "SPARQLMotion services needed by the teamwork framework." ;
+  owl:imports <http://topbraid.org/sparqlmotionfunctions> ;
+  owl:imports <http://topbraid.org/sparqlmotionlib> ;
+  owl:imports <http://topbraid.org/teamwork> ;
+  owl:imports <http://topbraid.org/teamwork.ui> ;
+  owl:versionInfo "1.0.0" ;
+.
+css:DeleteExternalGraphURITriples
+  a sml:FilterByConstruct ;
+  sm:next teamwork:ReturnExportToRDF ;
+  sml:constructQuery [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "ext" ;
+              ] ;
+            sp:predicate teamwork:externalGraphURI ;
+            sp:subject [
+                sp:varName "any" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "ext" ;
+              ] ;
+            sp:predicate teamwork:externalGraphURI ;
+            sp:subject [
+                sp:varName "any" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Delete external graph URITriples" ;
+.
+css:DeleteOntologyTriples
+  a sml:FilterByConstruct ;
+  sm:next css:RenameResources_1 ;
+  sml:constructQuery [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object <http://topbraid.org/teamworkconstraints> ;
+            sp:predicate owl:imports ;
+            sp:subject [
+                sp:varName "projectGraph" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "projectGraph" ;
+              ] ;
+          ]
+          [
+            sp:object teamwork:Vocabulary ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "projectGraph" ;
+              ] ;
+          ]
+          [
+            sp:object teamwork:Vocabulary ;
+            sp:predicate rdfs:subClassOf ;
+            sp:subject [
+                sp:varName "type" ;
+              ] ;
+          ]
+          [
+            sp:object owl:Ontology ;
+            sp:predicate rdfs:subClassOf ;
+            sp:subject teamwork:Vocabulary ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "type" ;
+                    ] ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "projectGraph" ;
+                    ] ;
+                ]
+                [
+                  sp:object teamwork:Vocabulary ;
+                  sp:predicate rdfs:subClassOf ;
+                  sp:subject [
+                      sp:varName "type" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Delete ontology triples" ;
+.
+css:RememberExternalGraphURI
+  a sml:BindBySelect ;
+  sm:next css:DeleteOntologyTriples ;
+  sml:selectQuery [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "ext" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "ext" ;
+              ] ;
+            sp:predicate teamwork:externalGraphURI ;
+            sp:subject [
+                sp:varName "projectGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Remember external graph URI" ;
+.
+css:RenameResources_1
+  a sml:RenameResources ;
+  sm:next css:DeleteExternalGraphURITriples ;
+  sml:selectQuery [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "new" ;
+          ]
+          [
+            sp:varName "old" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "?0" ;
+              ] ;
+            sp:predicate teamwork:readableGraphsUnderTeamControl ;
+            sp:subject () ;
+          ]
+          [
+            sp:object [
+                sp:varName "old" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "tch" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:objectInGraph ;
+                sp:arg1 [
+                    sp:varName "old" ;
+                  ] ;
+                sp:arg2 teamwork:externalGraphURI ;
+                sp:arg3 [
+                    sp:varName "old" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "new" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:bound ;
+                sp:arg1 [
+                    sp:varName "new" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Replace internal with external graph URIs" ;
+.

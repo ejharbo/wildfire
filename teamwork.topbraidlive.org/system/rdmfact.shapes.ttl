@@ -1,0 +1,37 @@
+# baseURI: http://topbraid.org/rdmfact
+# imports: http://datashapes.org/dash
+# prefix: rdmfact
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://topbraid.org/rdmfact>
+  a owl:Ontology ;
+  rdfs:label "Reference Data Fact properties" ;
+  owl:imports <http://datashapes.org/dash> ;
+.
+rdmfact:FactsGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Reference Data Facts" ;
+  sh:order "110"^^xsd:decimal ;
+.
+rdmfact:FactsShape
+  a sh:NodeShape ;
+  rdfs:label "Facts Shape" ;
+  sh:property rdmfact:FactsShape_fact ;
+.
+rdmfact:FactsShape_fact
+  a sh:PropertyShape ;
+  sh:path rdmfact:fact ;
+  sh:group rdmfact:FactsGroup ;
+.
+rdmfact:fact
+  a owl:DatatypeProperty ;
+  rdfs:comment "Used to capture notes (facts) about reference datasets and reference data elements." ;
+  rdfs:label "fact" ;
+  rdfs:range rdf:HTML ;
+.

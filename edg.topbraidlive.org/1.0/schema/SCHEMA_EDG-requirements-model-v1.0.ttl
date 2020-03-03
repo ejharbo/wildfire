@@ -1,0 +1,498 @@
+# baseURI: http://edg.topbraid.solutions/1.0/schema/requirements-model
+# imports: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://edg.topbraid.solutions/1.0/schema/glossary
+# imports: http://edg.topbraid.solutions/1.0/schema/governance
+
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/schema/requirements-model>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/schema/requirements-model/GMD_requirements-model> ;
+  rdfs:label "EDG Schema - Requirements Model" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+edg:CompetencyQuesion
+  a edg:AssetClass ;
+  edg:acronym "CG" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "Competency Question" ;
+  rdfs:subClassOf edg:Asset ;
+  rdfs:subClassOf edg:Identifiable ;
+  rdfs:subClassOf edg:Narratable ;
+  rdfs:subClassOf edg:RequirementsViewpoint ;
+  rdfs:subClassOf edg:StatusAspect ;
+  rdfs:subClassOf edg:Traceable ;
+  sh:property edg:CompetencyQuestion-party ;
+  sh:property edg:CompetencyQuestion-subjectArea ;
+  sh:property edg:UseCase-derivedFrom ;
+  sh:property edg:UseCase-relatedUseCase ;
+.
+edg:CompetencyQuestion-party
+  a sh:PropertyShape ;
+  sh:path edg:primaryActor ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  sh:class edg:Party ;
+  sh:group edg:UseCaseModelGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:CompetencyQuestion-subjectArea
+  a sh:PropertyShape ;
+  sh:path edg:subjectArea ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  sh:class edg:UseCase ;
+  sh:group edg:CompetencyQuestionModelGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:CompetencyQuestionModelGroup
+  a sh:PropertyGroup ;
+  tosh:openable true ;
+  rdfs:label "Competency Question Properties" ;
+  sh:order "9"^^xsd:decimal ;
+.
+edg:DataRequirement
+  a edg:AssetClass ;
+  edg:acronym "DATAREQ" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "Data Requirement" ;
+  rdfs:subClassOf edg:Requirement ;
+  sh:property edg:DataRequirement-quantityKind ;
+  sh:property edg:DataRequirement-subItem ;
+.
+edg:DataRequirement-quantityKind
+  a sh:PropertyShape ;
+  sh:path edg:quantityKind ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  sh:class edg:QuantityKind ;
+  sh:maxCount 1 ;
+.
+edg:DataRequirement-subItem
+  a sh:PropertyShape ;
+  sh:path edg:subItem ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  sh:class edg:DataRequirement ;
+.
+edg:FunctionalRequirement
+  a edg:AssetClass ;
+  edg:acronym "FNREQ" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "Functional Requirement" ;
+  rdfs:subClassOf edg:Requirement ;
+.
+edg:GlossaryTerm-requirement
+  sh:group edg:GlossaryTermPropertiesGroup ;
+  sh:order "95"^^xsd:decimal ;
+.
+edg:Issue
+  rdfs:subClassOf edg:RequirementsViewpoint ;
+.
+edg:NonFunctionalRequirement
+  a edg:AssetClass ;
+  edg:acronym "NFNREQ" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "Non-Functional Requirement" ;
+  rdfs:subClassOf edg:Requirement ;
+.
+edg:Party
+  rdfs:subClassOf <http://topbraid.org/metadata#Actor> ;
+.
+edg:Priority
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "Priority" ;
+  rdfs:subClassOf owl:Thing ;
+.
+edg:Requirement
+  a edg:AssetClass ;
+  edg:acronym "REQ" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "Requirement" ;
+  rdfs:subClassOf edg:Asset ;
+  rdfs:subClassOf edg:Identifiable ;
+  rdfs:subClassOf edg:Narratable ;
+  rdfs:subClassOf edg:RequirementsViewpoint ;
+  rdfs:subClassOf edg:StatusAspect ;
+  sh:property edg:Requirement-degreeOfSatisfaction ;
+  sh:property edg:Requirement-gapAnalysisNotes ;
+  sh:property edg:Requirement-priority ;
+  sh:property edg:Requirement-rationale ;
+  sh:property edg:Requirement-relatedRequirement ;
+  sh:property edg:Requirement-requirementStatement ;
+  sh:property edg:Requirement-requirementStatus ;
+  sh:property edg:Requirement-satisfiedBy ;
+  sh:property edg:Requirement-subRequirement ;
+  sh:property edg:Requirement-subjectArea ;
+  sh:property edg:Requirement-useCase ;
+.
+edg:Requirement-degreeOfSatisfaction
+  a sh:PropertyShape ;
+  sh:path edg:degreeOfSatisfaction ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  sh:class edg:FiveLevelRatingScale ;
+  sh:group edg:RequirementPropertiesGroup ;
+  sh:order "120"^^xsd:decimal ;
+.
+edg:Requirement-gapAnalysisNotes
+  a sh:PropertyShape ;
+  sh:path edg:gapAnalysisNotes ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:RequirementPropertiesGroup ;
+  sh:order "130"^^xsd:decimal ;
+.
+edg:Requirement-priority
+  a sh:PropertyShape ;
+  sh:path edg:priority ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  sh:class edg:Priority ;
+  sh:group edg:RequirementPropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:Requirement-rationale
+  a sh:PropertyShape ;
+  sh:path edg:rationale ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:RequirementPropertiesGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:Requirement-relatedRequirement
+  a sh:PropertyShape ;
+  sh:path edg:relatedRequirement ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  sh:class edg:Requirement ;
+  sh:group edg:RequirementPropertiesGroup ;
+  sh:order "140"^^xsd:decimal ;
+.
+edg:Requirement-requirementStatement
+  a sh:PropertyShape ;
+  sh:path edg:requirementStatement ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:RequirementPropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:Requirement-requirementStatus
+  a sh:PropertyShape ;
+  sh:path edg:requirementStatus ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  sh:class edg:RequirementStatus ;
+  sh:group edg:RequirementPropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Requirement-satisfiedBy
+  a sh:PropertyShape ;
+  sh:path edg:satisfiedBy ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  sh:class edg:Capability ;
+  sh:group edg:RequirementPropertiesGroup ;
+  sh:order "110"^^xsd:decimal ;
+.
+edg:Requirement-subRequirement
+  a sh:PropertyShape ;
+  sh:path edg:subRequirement ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  sh:class edg:Requirement ;
+  sh:group edg:RequirementPropertiesGroup ;
+  sh:order "70"^^xsd:decimal ;
+.
+edg:Requirement-subjectArea
+  a sh:PropertyShape ;
+  sh:path edg:subjectArea ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  sh:class edg:SubjectArea ;
+  sh:group edg:RequirementPropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:Requirement-useCase
+  a sh:PropertyShape ;
+  sh:path edg:useCase ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  sh:Class edg:UseCase ;
+  sh:class edg:UseCase ;
+  sh:group edg:RequirementPropertiesGroup ;
+  sh:order "60"^^xsd:decimal ;
+.
+edg:RequirementPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:openable true ;
+  rdfs:label "Requirement Properties" ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:RequirementStatus
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "Requirement Status" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:RequirementsModelProject
+  graphql:name "requirements" ;
+  graphql:publicClass edg:RequirementsViewpoint ;
+.
+edg:RequirementsViewpoint
+  a edg:ViewpointClass ;
+  dash:abstract true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "Requirements Viewpoint" ;
+  rdfs:subClassOf edg:Viewpoint ;
+.
+edg:SubjectArea
+  rdfs:subClassOf edg:RequirementsViewpoint ;
+.
+edg:UseCase
+  a edg:AssetClass ;
+  edg:acronym "UC" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "Use Case" ;
+  rdfs:subClassOf edg:Asset ;
+  rdfs:subClassOf edg:Identifiable ;
+  rdfs:subClassOf edg:Narratable ;
+  rdfs:subClassOf edg:RequirementsViewpoint ;
+  rdfs:subClassOf edg:StatusAspect ;
+  rdfs:subClassOf edg:Traceable ;
+  sh:property edg:UseCase-derivedFrom ;
+  sh:property edg:UseCase-forBusinessApplication ;
+  sh:property edg:UseCase-name ;
+  sh:property edg:UseCase-primaryActor ;
+  sh:property edg:UseCase-relatedUseCase ;
+  sh:property edg:UseCase-secondaryActor ;
+  sh:property edg:UseCase-subjectArea ;
+.
+edg:UseCase-derivedFrom
+  a sh:PropertyShape ;
+  sh:path edg:derivedFrom ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  sh:class edg:UseCase ;
+  sh:group edg:TraceableGroup ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:UseCase-forBusinessApplication
+  a sh:PropertyShape ;
+  sh:path edg:useCaseForBusinessApplication ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  sh:class edg:BusinessApplication ;
+  sh:group edg:UseCaseModelGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:UseCase-name
+  a sh:PropertyShape ;
+  sh:path edg:name ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  sh:group edg:IdentifiersGroup ;
+  sh:or (
+      [
+        sh:datatype xsd:string ;
+      ]
+      [
+        sh:datatype rdf:langString ;
+      ]
+    ) ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:UseCase-primaryActor
+  a sh:PropertyShape ;
+  sh:path edg:primaryActor ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  sh:class <http://topbraid.org/metadata#Actor> ;
+  sh:group edg:UseCaseModelGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:UseCase-relatedUseCase
+  a sh:PropertyShape ;
+  sh:path edg:relatedUseCase ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  sh:class edg:UseCase ;
+  sh:group edg:UseCaseModelGroup ;
+  sh:order "90"^^xsd:decimal ;
+.
+edg:UseCase-secondaryActor
+  a sh:PropertyShape ;
+  sh:path edg:secondaryActor ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  sh:class <http://topbraid.org/metadata#Actor> ;
+  sh:group edg:UseCaseModelGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:UseCase-subjectArea
+  a sh:PropertyShape ;
+  sh:path edg:subjectArea ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  sh:class edg:SubjectArea ;
+  sh:group edg:UseCaseModelGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:UseCaseModelGroup
+  a sh:PropertyGroup ;
+  tosh:openable true ;
+  rdfs:label "Use Case Properties" ;
+  sh:order "9"^^xsd:decimal ;
+.
+edg:dataRequirement
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "data requirement" ;
+.
+edg:degreeOfSatisfaction
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "degree of satisfaction" ;
+.
+edg:gapAnalysisNotes
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "gap analysis notes" ;
+.
+edg:primaryActor
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "primary actor" ;
+.
+edg:priority
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "priority" ;
+  rdfs:range edg:DataRequirement ;
+.
+edg:relatedRequirement
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "related requirement" ;
+.
+edg:relatedUseCase
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "related use case" ;
+.
+edg:requirement
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "requirement" ;
+.
+edg:requirementStatement
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "requirement statement" ;
+  rdfs:range rdf:HTML ;
+.
+edg:requirementStatus
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "requirement status" ;
+.
+edg:satisfiedBy
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "satisfied by" ;
+.
+edg:satisfies
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "satisfies" ;
+  owl:inverseOf edg:satisfiedBy ;
+.
+edg:secondaryActor
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "secondary actor" ;
+.
+edg:specifies
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "specifies" ;
+  owl:inverseOf edg:satisfiedBy ;
+.
+edg:specifiesNeedFor
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "specifies need for" ;
+  rdfs:subPropertyOf edg:specifies ;
+  owl:inverseOf edg:satisfiedBy ;
+.
+edg:specifiesWorkOn
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "specifies work on" ;
+  rdfs:subPropertyOf edg:specifies ;
+  owl:inverseOf edg:satisfiedBy ;
+.
+edg:subItem
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "subitem" ;
+.
+edg:subRequirement
+  a owl:ObjectProperty ;
+  rdfs:domain edg:Requirement ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "sub-requirement" ;
+  rdfs:range edg:Requirement ;
+.
+edg:subjectArea
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "subject area" ;
+.
+edg:useCase
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "use case" ;
+.
+edg:useCaseForBusinessApplication
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+.
+edg:useCaseForSystem
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  rdfs:label "use case for system" ;
+.
+<http://edg.topbraid.solutions/schema/requirements-model/GMD_requirements-model>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:SchemaGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+.
+<http://topbraid.org/metadata#SoftwareSystem>
+  a sh:NodeShape ;
+.

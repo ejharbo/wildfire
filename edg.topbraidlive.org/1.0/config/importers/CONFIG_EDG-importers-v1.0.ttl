@@ -1,0 +1,100 @@
+# baseURI: http://edg.topbraidlive.org/1.0/config/importers
+# imports: http://edg.topbraid.solutions/1.0/schema/config/importers
+
+@prefix config-importers: <http://edg.topbraidlive.org/config/importers#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraidlive.org/1.0/config/importers>
+  rdf:type owl:Ontology ;
+  <http://www.linkedmodel.org/schema/vaem#hasGraphMetadata> <http://edg.topbraidlive.org/config/importers/GMD_importers> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/config/importers> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+config-importers:DefaultComplianceConfiguration
+  rdf:type owl:Class ;
+  rdfs:label "Default compliance configuration" ;
+  rdfs:subClassOf config-importers:LineageConfiguration ;
+.
+config-importers:DefaultComplianceConfigurationExecutableTemplate
+  rdf:type config-importers:DefaultComplianceConfiguration ;
+  config-importers:availableSpinTransform config-importers:TransformComplianceExecutablesTemplate ;
+  config-importers:dataAssetNamespace "http://edg.tq.topbraid.solutions/data-assets-model/" ;
+  config-importers:enterpriseAssetNamespace "http://yourNamespace/ea/" ;
+  config-importers:technicalAssetNamespace "http://edg.tbb.topbraid.solutions/tam/" ;
+  rdfs:label "Transform Compliance Executable template" ;
+.
+config-importers:DefaultLineageConfigurationTemplate
+  rdf:type config-importers:DefaultLineageConfiguration ;
+  config-importers:availableSpinTransform config-importers:TransformLineageTemplate ;
+  config-importers:shapesBaseUri "http://edg.topbraidlive.org/1.0/shapes/LineageImporter" ;
+  rdfs:label "Transform lineage template" ;
+.
+config-importers:LineageConfiguration
+  rdfs:comment "This configuration is used whenever we want to import Lineage data though a service. It is also used to import Compliance data" ;
+.
+config-importers:ServerSchemaMapping_1
+  rdf:type config-importers:ServerSchemaMapping ;
+  config-importers:mapsToModel "PhysicalModelName" ;
+  config-importers:schemaName "sourceSchemaName" ;
+  config-importers:serverName "sourceServerName" ;
+.
+config-importers:ServerSchemaMapping_2
+  rdf:type config-importers:ServerSchemaMapping ;
+  config-importers:mapsToModel "PhysicalModelName" ;
+  config-importers:schemaName "targetSchemaName" ;
+  config-importers:serverName "targetServerName" ;
+.
+config-importers:ServerSchemaMapping_Report
+  rdf:type config-importers:ServerSchemaMapping ;
+  config-importers:mapsToModel "ReportName" ;
+  config-importers:schemaName "targetSchemaName" ;
+  config-importers:serverName "targetServerName" ;
+.
+config-importers:TransformComplianceExecutablesTemplate
+  rdf:type config-importers:TransformGraph ;
+  config-importers:baseUri <http://edg.topbraid.solutions/1.0/transform/importer/complianceExecutables> ;
+  config-importers:proxyBasicClass <http://edg.topbraid.solutions/1.0/templates/compliance/ExecutableTemplate#InputData> ;
+  config-importers:proxyNamespace "http://edg.topbraid.solutions/1.0/templates/compliance/ExecutableTemplate#" ;
+  rdfs:label "Transform compliance executables template" ;
+.
+config-importers:TransformLineageTemplate
+  rdf:type config-importers:TransformGraph ;
+  config-importers:baseUri <http://edg.topbraid.solutions/1.0/transform/importer/lineage> ;
+  config-importers:proxyBasicClass <http://edg.topbraid.solutions/proxy/importer/lineage#LineageTemplate> ;
+  config-importers:proxyNamespace "http://edg.topbraid.solutions/proxy/importer/lineage#" ;
+  rdfs:label "Transform lineage template" ;
+.
+config-importers:serverName_schemaName
+  rdf:type config-importers:ServerSchemeMapping ;
+  config-importers:mapsToModel "physicalModelName" ;
+  config-importers:schemaName "schemaName" ;
+  config-importers:serverName "serverName" ;
+  rdfs:label "serverName schemaName" ;
+.
+<http://edg.topbraidlive.org/config/importers/GMD_importers>
+  rdf:type <http://www.linkedmodel.org/schema/vaem#GraphMetaData> ;
+  <http://purl.org/dc/terms/modified> "2016-12-18"^^xsd:date ;
+  <http://purl.org/dc/terms/rights> "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  <http://www.linkedmodel.org/schema/vaem#hasGraphRole> <http://www.linkedmodel.org/schema/vaem#ImporterGraph> ;
+  <http://www.linkedmodel.org/schema/vaem#hasLicenseType> <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  <http://www.linkedmodel.org/schema/vaem#hasOwner> <http://www.linkedmodel.org/schema/vaem#TopQuadrant> ;
+  <http://www.linkedmodel.org/schema/vaem#hasSteward> <http://www.linkedmodel.org/schema/vaem#TopQuadrant> ;
+  <http://www.linkedmodel.org/schema/vaem#isMetadataFor> <http://edg.topbraidlive.org/1.0/config/importers> ;
+  <http://www.linkedmodel.org/schema/vaem#name> "EDG" ;
+  <http://www.linkedmodel.org/schema/vaem#namespace> "http://edg.topbraid.solutions/model/" ;
+  <http://www.linkedmodel.org/schema/vaem#namespacePrefix> "edg" ;
+  <http://www.linkedmodel.org/schema/vaem#owner> "TopQuadrant, Inc." ;
+  <http://www.linkedmodel.org/schema/vaem#releaseDate> "2016-12-18"^^xsd:date ;
+  <http://www.linkedmodel.org/schema/vaem#revision> "1.0" ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://purl.org/dc/terms/abstract> ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://purl.org/dc/terms/author> ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://purl.org/dc/terms/created> ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://purl.org/dc/terms/modified> ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://purl.org/dc/terms/rights> ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://purl.org/dc/terms/title> ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  <http://www.linkedmodel.org/schema/vaem#withAttributionTo> "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.

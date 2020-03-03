@@ -1,0 +1,381 @@
+# baseURI: http://topbraid.org/swaowl
+# imports: http://topbraid.org/swa
+# prefix: swaowl
+
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix default: <http://uispin.org/default#> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+arg:keyword
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:list
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:suppressProperty
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:text
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+swa:ManchesterSyntaxCallback
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:text ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The text to check." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<swon:Object let:error=\"{= smf:parseManchesterSyntax(?text) }\">
+    <ui:if ui:condition=\"{= bound(?error) }\">
+        <swon:Value arg:name=\"error\" arg:value=\"{= ?error }\"/>
+    </ui:if>
+</swon:Object>
+"""^^ui:Literal ;
+  rdfs:subClassOf ui:JSONServices ;
+.
+swa:ManchesterSyntaxEditor
+  a swa:ObjectEditorClass ;
+  swa:objectWidgetWeight [
+      a swa:WeightedExpression ;
+      swa:expression [
+          a sp:and ;
+          sp:arg1 [
+              a sp:isBlank ;
+              sp:arg1 [
+                  sp:varName "object" ;
+                ] ;
+            ] ;
+          sp:arg2 [
+              a sp:in ;
+              sp:arg1 [
+                  sp:varName "resourceType" ;
+                ] ;
+              sp:arg2 owl:Class ;
+              sp:arg3 owl:Restriction ;
+            ] ;
+        ] ;
+      swa:weight -5 ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <input class=\"swa-text-field form-control\" id=\"new-{= ?uid }\" name=\"new-{= ?uid }\" spellcheck=\"false\" type=\"text\" value=\"{= IF(isIRI(?object), CONCAT(&quot;`&quot;, ui:label(?object), &quot;`&quot;), ui:label(?object)) }\"/>
+    <input name=\"owl-{= ?uid }\" type=\"hidden\" value=\"true\"/>
+    <script>$(\"#new-{= ?uid }\").on(\"input\", function() { swa.updateSourceCodeEditor('{= ?uid }', 'swa:ManchesterSyntaxCallback') })</script>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Textual editor of OWL 2 Manchester Syntax." ;
+  rdfs:label "Manchester Syntax editor" ;
+  rdfs:subClassOf swa:ObjectEditor ;
+.
+swa:OWLClassLabel
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource to display." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <ui:if ui:condition=\"{= isIRI(?resource) }\">
+        <ui:if ui:condition=\"{= ui:contextValue(&quot;inOWLLabel&quot;) }\">
+`<swa:OWLClassLink arg:resource=\"{= ?resource }\"/>`
+</ui:if>
+        <ui:else>{= ui:label(?resource) }</ui:else>
+    </ui:if>
+    <ui:else let:oneOf=\"{= spl:object(?resource, owl:oneOf) }\">
+        <ui:setContext ui:varName=\"inOWLLabel\" ui:varValue=\"{= true }\">
+            <ui:if ui:condition=\"{= bound(?oneOf) }\">{<swa:RDFListLabels arg:list=\"{= ?oneOf }\"/>}</ui:if>
+            <ui:else let:compl=\"{= spl:object(?resource, owl:complementOf) }\" let:inter=\"{= spl:object(?resource, owl:intersectionOf) }\" let:union=\"{= spl:object(?resource, owl:unionOf) }\" let:xunion=\"{= spl:object(?resource, owl:disjointUnionOf) }\">(<ui:if ui:condition=\"{= bound(?compl) }\">
+                    <span class=\"swa-keyword\">not&nbsp;</span>
+                    <swa:Label arg:node=\"{= ?compl }\"/>
+                </ui:if>
+                <ui:if ui:condition=\"{= bound(?inter) }\">
+                    <swa:OWLOperandsList arg:keyword=\"and\" arg:list=\"{= ?inter }\"/>
+                </ui:if>
+                <ui:if ui:condition=\"{= bound(?union) }\">
+                    <swa:OWLOperandsList arg:keyword=\"or\" arg:list=\"{= ?union }\"/>
+                </ui:if>
+                <ui:if ui:condition=\"{= bound(?xunion) }\">
+                    <swa:OWLOperandsList arg:keyword=\"xor\" arg:list=\"{= ?xunion }\"/>
+                </ui:if>
+                <ui:if ui:condition=\"{= spl:hasValue(?resource, owl:onProperty) }\">
+                    <swa:OWLRestrictionLabel arg:resource=\"{= ?resource }\"/>
+                </ui:if>)</ui:else>
+        </ui:setContext>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "OWL class label" ;
+  rdfs:subClassOf swa:OWLElements ;
+.
+swa:OWLClassLink
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The class to display the link to." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:uid=\"{= ui:uniqueId() }\">
+    <ui:group let:link=\"{= swa:createLink(?resource, ?uid) }\">
+        <ui:if ui:condition=\"{= bound(?link) }\">
+            <a class=\"swa-link\" href=\"javascript:void(0)\" id=\"{= ?uid }\" onclick=\"{= ?link }\">{= ui:label(?resource) }</a>
+        </ui:if>
+        <ui:else>{= ui:label(?resource) }</ui:else>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Different from swa:Link to avoid infinite recursion." ;
+  rdfs:label "OWL class link" ;
+  rdfs:subClassOf swa:OWLElements ;
+.
+swa:OWLElements
+  a ui:NodeClass ;
+  ui:abstract true ;
+  rdfs:comment "Abstract base class for SWP elements to handle OWL constructs." ;
+  rdfs:label "OWLElements" ;
+  rdfs:subClassOf swa:Elements ;
+.
+swa:OWLOperandsList
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:keyword ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The keyword between the operands, e.g. \"or\"." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:list ;
+      spl:valueType rdf:List ;
+      rdfs:comment "The rdf:List of operands." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:rest=\"{= spl:object(?list, rdf:rest) }\">
+    <swa:OWLClassLabel arg:resource=\"{= spl:object(?list, rdf:first) }\"/>
+    <br/>&nbsp;&nbsp;<span class=\"swa-keyword\">&nbsp;{= ?keyword }&nbsp;</span>
+    <ui:if ui:condition=\"{= spl:hasValue(?rest, rdf:rest, rdf:nil) }\">
+        <swa:OWLClassLabel arg:resource=\"{= spl:object(?rest, rdf:first) }\"/>
+    </ui:if>
+    <ui:else>
+        <swa:OWLOperandsList arg:keyword=\"{= ?keyword }\" arg:list=\"{= ?rest }\"/>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "OWLOperands list" ;
+  rdfs:subClassOf swa:OWLElements ;
+.
+swa:OWLPropertyLabel
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property to display." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>`{= ui:label(?resource) }`</ui:group>
+"""^^ui:Literal ;
+  rdfs:subClassOf swa:OWLElements ;
+.
+swa:OWLRestrictionLabel
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:suppressProperty ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to not include the property itself into the output." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType owl:Restriction ;
+      rdfs:comment "The restriction to display." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:setContext let:allValuesFrom=\"{= spl:object(?resource, owl:allValuesFrom) }\" let:exactly=\"{= spl:object(?resource, owl:cardinality) }\" let:hasValue=\"{= spl:object(?resource, owl:hasValue) }\" let:max=\"{= spl:object(?resource, owl:maxCardinality) }\" let:maxQ=\"{= spl:object(?resource, owl:maxQualifiedCardinality) }\" let:min=\"{= spl:object(?resource, owl:minCardinality) }\" let:minQ=\"{= spl:object(?resource, owl:minQualifiedCardinality) }\" let:q=\"{= spl:object(?resource, owl:qualifiedCardinality) }\" let:someValuesFrom=\"{= spl:object(?resource, owl:someValuesFrom) }\" let:space=\"{= IF(swa:falseOrUnbound(?suppressProperty), &quot;&nbsp;&quot;, ?none) }\" ui:varName=\"inOWLLabel\" ui:varValue=\"{= true }\">
+    <ui:if ui:condition=\"{= swa:falseOrUnbound(?suppressProperty) }\">
+        <swa:OWLPropertyLabel arg:resource=\"{= spl:object(?resource, owl:onProperty) }\"/>
+    </ui:if>
+    <ui:if ui:condition=\"{= bound(?allValuesFrom) }\">
+        <span class=\"swa-keyword\">{= ?space }only&nbsp;</span>
+        <swa:OWLClassLabel arg:resource=\"{= ?allValuesFrom }\"/>
+    </ui:if>
+    <ui:if ui:condition=\"{= bound(?someValuesFrom) }\">
+        <span class=\"swa-keyword\">{= ?space }some&nbsp;</span>
+        <swa:OWLClassLabel arg:resource=\"{= ?someValuesFrom }\"/>
+    </ui:if>
+    <ui:if ui:condition=\"{= bound(?hasValue) }\">
+        <span class=\"swa-keyword\">{= ?space }value&nbsp;</span>
+        <swa:Label arg:node=\"{= ?hasValue }\"/>
+    </ui:if>
+    <ui:if ui:condition=\"{= bound(?max) }\">
+        <span class=\"swa-keyword\">{= ?space }max&nbsp;</span>
+        <swa:Label arg:node=\"{= ?max }\"/>
+    </ui:if>
+    <ui:if ui:condition=\"{= bound(?min) }\">
+        <span class=\"swa-keyword\">{= ?space }min&nbsp;</span>
+        <swa:Label arg:node=\"{= ?min }\"/>
+    </ui:if>
+    <ui:if ui:condition=\"{= bound(?exactly) }\">
+        <span class=\"swa-keyword\">{= ?space }exactly&nbsp;</span>
+        <swa:Label arg:node=\"{= ?exactly }\"/>
+    </ui:if>
+    <ui:if ui:condition=\"{= bound(?maxQ) }\">
+        <span class=\"swa-keyword\">{= ?space }max&nbsp;</span>
+        <swa:Label arg:node=\"{= ?maxQ }\"/>&nbsp;<swa:OWLClassLabel arg:resource=\"{= COALESCE(spl:object(?resource, owl:onClass), spl:object(?resource, owl:onDataRange)) }\"/>
+    </ui:if>
+    <ui:if ui:condition=\"{= bound(?minQ) }\">
+        <span class=\"swa-keyword\">{= ?space }min&nbsp;</span>
+        <swa:Label arg:node=\"{= ?minQ }\"/>&nbsp;<swa:OWLClassLabel arg:resource=\"{= COALESCE(spl:object(?resource, owl:onClass), spl:object(?resource, owl:onDataRange)) }\"/>
+    </ui:if>
+    <ui:if ui:condition=\"{= bound(?q) }\">
+        <span class=\"swa-keyword\">{= ?space }exactly&nbsp;</span>
+        <swa:Label arg:node=\"{= ?q }\"/>&nbsp;<swa:OWLClassLabel arg:resource=\"{= COALESCE(spl:object(?resource, owl:onClass), spl:object(?resource, owl:onDataRange)) }\"/>
+    </ui:if>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:label "OWL restriction label" ;
+  rdfs:subClassOf swa:OWLElements ;
+.
+swa:RDFListLabels
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:list ;
+      spl:valueType rdf:List ;
+      rdfs:comment "The rdf:List to render" ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:rest=\"{= spl:object(?list, rdf:rest) }\">
+    <swa:Label arg:node=\"{= spl:object(?list, rdf:first) }\"/>
+    <ui:if ui:condition=\"{= spl:hasValue(?rest, rdf:rest) }\">,&nbsp;<swa:RDFListLabels arg:list=\"{= ?rest }\"/>
+    </ui:if>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "RDFList labels" ;
+  rdfs:subClassOf swa:OWLElements ;
+.
+swa:SwitchToManchesterSyntaxAutoCompleteSelectAction
+  a swa:AutoCompleteSelectAction ;
+  arg:condition [
+      a sp:if ;
+      sp:arg1 [
+          a sp:in ;
+          sp:arg1 [
+              sp:varName "filterNode" ;
+            ] ;
+          sp:arg2 rdfs:subClassOf ;
+          sp:arg3 owl:equivalentClass ;
+        ] ;
+      sp:arg2 true ;
+      sp:arg3 [
+          sp:varName "none" ;
+        ] ;
+    ] ;
+  arg:onSelect "swa.switchToManchesterSyntaxEditor" ;
+  rdfs:label "Edit OWL class axioms" ;
+.
+<http://topbraid.org/swaowl>
+  a owl:Ontology ;
+  rdfs:comment "Support for rendering OWL constructs such as class expressions using SWP and SWA in particular." ;
+  owl:imports <http://topbraid.org/swa> ;
+.
+owl:Class
+  ui:instanceView """
+<swa:OWLClassLabel arg:resource=\"{= ?this }\" ui:id=\"label\" ui:priority=\"{= -9 }\"/>
+"""^^ui:Literal ;
+.
+owl:Restriction
+  ui:instanceView """
+<swa:OWLRestrictionLabel arg:resource=\"{= ?this }\" ui:id=\"label\"/>
+"""^^ui:Literal ;
+.

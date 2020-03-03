@@ -1,0 +1,2806 @@
+# baseURI: http://topbraid.org/schemaconverter
+# imports: http://datashapes.org/dash
+# imports: http://topbraid.org/sparqlmotionlib-swp
+# prefix: schemaconverter
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix default: <http://uispin.org/default#> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix schemaconverter: <http://topbraid.org/schemaconverter#> .
+@prefix schemax: <http://topbraid.org/schemax/> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+schema:Boolean
+  owl:sameAs xsd:boolean ;
+.
+schema:Date
+  owl:sameAs xsd:date ;
+.
+schema:DateTime
+  owl:sameAs xsd:dateTime ;
+.
+schema:Distance
+  owl:sameAs xsd:string ;
+.
+schema:Duration
+  owl:sameAs xsd:duration ;
+.
+schema:Energy
+  owl:sameAs xsd:string ;
+.
+schema:Float
+  owl:sameAs xsd:float ;
+.
+schema:Integer
+  owl:sameAs xsd:integer ;
+.
+schema:Mass
+  owl:sameAs xsd:string ;
+.
+schema:Number
+  owl:sameAs xsd:float ;
+.
+schema:Text
+  owl:sameAs xsd:string ;
+.
+schema:Time
+  owl:sameAs xsd:time ;
+.
+arg:new
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:old
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:predicate
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:subject
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://topbraid.org/schemaconverter>
+  a owl:Ontology ;
+  rdfs:comment """A collection of SPIN update templates that can be used to convert the original OWL version of schema.org into a more suitable OWL representation. There is also an SWP service that puts them all together for batch processing. To download the latest version, call the following URL in a browser
+
+    http://localhost:8083/tbl/swp?_viewClass=schemaconverter:RDFaFileConverter""" ;
+  owl:imports <http://datashapes.org/dash> ;
+  owl:imports <http://topbraid.org/sparqlmotionlib-swp> ;
+  owl:versionInfo "0.2.0" ;
+.
+schemaconverter:ConvertObjectToDatatypeProperties
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            sp:object owl:ObjectProperty ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+        ) ;
+      sp:insertPattern (
+          [
+            sp:object owl:DatatypeProperty ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+        ) ;
+      sp:text """DELETE {
+  ?property <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+}
+INSERT {
+  ?property <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+}
+WHERE
+  { ?property <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+    ?property <http://www.w3.org/2000/01/rdf-schema#range> ?range
+    FILTER ( ?range IN (<http://www.w3.org/2001/XMLSchema#boolean>, <http://www.w3.org/2001/XMLSchema#date>, <http://www.w3.org/2001/XMLSchema#string>, <http://www.w3.org/2001/XMLSchema#integer>, <http://www.w3.org/2001/XMLSchema#float>) )
+  }
+""" ;
+      sp:where (
+          [
+            sp:object owl:ObjectProperty ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "range" ;
+              ] ;
+            sp:predicate rdfs:range ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:in ;
+                sp:arg1 [
+                    sp:varName "range" ;
+                  ] ;
+                sp:arg2 xsd:boolean ;
+                sp:arg3 xsd:date ;
+                sp:arg4 xsd:string ;
+                sp:arg5 xsd:integer ;
+                sp:arg6 xsd:float ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "Some properties such as schema:representativeOfPage are declared as owl:ObjectProperties and their range is schema:Boolean. Those properties need to be converted to owl:DatatypeProperties." ;
+  rdfs:label "Convert to datatype properties" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:ConvertRDFSToOWLClasses
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            sp:object rdfs:Class ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "class" ;
+              ] ;
+          ]
+        ) ;
+      sp:insertPattern (
+          [
+            sp:object owl:Class ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "class" ;
+              ] ;
+          ]
+        ) ;
+      sp:text """DELETE {
+  ?class <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+}
+INSERT {
+  ?class <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+}
+WHERE
+  { ?class <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> }
+""" ;
+      sp:where (
+          [
+            sp:object rdfs:Class ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "class" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Convert RDFS to OWL classes" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:ConvertRDFSToShapeClasses
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            sp:object [
+                sp:varName "comment" ;
+              ] ;
+            sp:predicate rdfs:comment ;
+            sp:subject [
+                sp:varName "class" ;
+              ] ;
+          ]
+        ) ;
+      sp:insertPattern (
+          [
+            sp:object sh:NodeShape ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "class" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "htmlComment" ;
+              ] ;
+            sp:predicate rdfs:comment ;
+            sp:subject [
+                sp:varName "class" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object rdfs:Class ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "class" ;
+              ] ;
+          ]
+          [
+            a sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "comment" ;
+                    ] ;
+                  sp:predicate rdfs:comment ;
+                  sp:subject [
+                      sp:varName "class" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a smf:cast ;
+                      arg:datatype rdf:HTML ;
+                      sp:arg1 [
+                          sp:varName "comment" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "htmlComment" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Convert RDFS to Shape classes" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:ConvertRDFToOWLProperties
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            sp:object rdf:Property ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+        ) ;
+      sp:insertPattern (
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object rdf:Property ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:not ;
+                sp:arg1 [
+                    a schemaconverter:hasMixedRange ;
+                    arg:property [
+                        sp:varName "property" ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "range" ;
+              ] ;
+            sp:predicate rdfs:range ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    a sp:eq ;
+                    sp:arg1 [
+                        a afn:namespace ;
+                        sp:arg1 [
+                            sp:varName "range" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 "http://schema.org/" ;
+                  ] ;
+                sp:arg2 owl:ObjectProperty ;
+                sp:arg3 owl:DatatypeProperty ;
+              ] ;
+            sp:variable [
+                sp:varName "type" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "Converts rdf:Properties to either owl:DatatypeProperties or owl:ObjectProperties, depending on their range. Don't convert mixed properties that have both types." ;
+  rdfs:label "Convert RDF to OWL properties" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:CopyPredicateValues
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:insertPattern (
+          [
+            sp:object [
+                sp:varName "o" ;
+              ] ;
+            sp:predicate [
+                sp:varName "new" ;
+              ] ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "o" ;
+              ] ;
+            sp:predicate [
+                sp:varName "old" ;
+              ] ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:new ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The new property." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:old ;
+      spl:valueType rdf:Property ;
+    ] ;
+  rdfs:label "Copy predicate values" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:CreateOntology
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:insertPattern (
+          [
+            sp:object owl:Ontology ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "ontology" ;
+              ] ;
+          ]
+          [
+            sp:object "Schema.org (converted to OWL by TopQuadrant)" ;
+            sp:predicate rdfs:label ;
+            sp:subject [
+                sp:varName "ontology" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "date" ;
+              ] ;
+            sp:predicate owl:versionInfo ;
+            sp:subject [
+                sp:varName "ontology" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression <http://topbraid.org/schema/> ;
+            sp:variable [
+                sp:varName "ontology" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:now ;
+              ] ;
+            sp:variable [
+                sp:varName "date" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Create ontology" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:CreateRangeAndDomainIncludes
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:insertPattern (
+          [
+            sp:object rdf:Property ;
+            sp:predicate rdf:type ;
+            sp:subject schema:domainIncludes ;
+          ]
+          [
+            sp:object "domain includes" ;
+            sp:predicate rdfs:label ;
+            sp:subject schema:domainIncludes ;
+          ]
+          [
+            sp:object rdf:Property ;
+            sp:predicate rdfs:domain ;
+            sp:subject schema:domainIncludes ;
+          ]
+          [
+            sp:object rdfs:Class ;
+            sp:predicate rdfs:range ;
+            sp:subject schema:domainIncludes ;
+          ]
+          [
+            sp:object rdf:Property ;
+            sp:predicate rdf:type ;
+            sp:subject schema:rangeIncludes ;
+          ]
+          [
+            sp:object "range includes" ;
+            sp:predicate rdfs:label ;
+            sp:subject schema:rangeIncludes ;
+          ]
+          [
+            sp:object rdf:Property ;
+            sp:predicate rdfs:domain ;
+            sp:subject schema:rangeIncludes ;
+          ]
+          [
+            sp:object rdfs:Class ;
+            sp:predicate rdfs:range ;
+            sp:subject schema:rangeIncludes ;
+          ]
+        ) ;
+      sp:where () ;
+    ] ;
+  rdfs:label "Create rangeIncludes and domainIncludes" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:CreateSHOntology
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:insertPattern (
+          [
+            sp:object owl:Ontology ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "ontology" ;
+              ] ;
+          ]
+          [
+            sp:object "Schema.org SHACL shapes" ;
+            sp:predicate rdfs:label ;
+            sp:subject [
+                sp:varName "ontology" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "date" ;
+              ] ;
+            sp:predicate owl:versionInfo ;
+            sp:subject [
+                sp:varName "ontology" ;
+              ] ;
+          ]
+          [
+            sp:object <http://datashapes.org/dash> ;
+            sp:predicate owl:imports ;
+            sp:subject [
+                sp:varName "ontology" ;
+              ] ;
+          ]
+          [
+            sp:object "<p>This is an RDF/SHACL version of schema.org, generated based on the official Turtle file http://schema.org/version/latest/all-layers.ttl. Alignments with common RDF practices have been made, e.g. using rdfs:Class instead of schema:Class.</p><p>Contact: <a href=\"mailto:holger@topquadrant.com\">Holger Knublauch</a></p>"^^rdf:HTML ;
+            sp:predicate rdfs:comment ;
+            sp:subject [
+                sp:varName "ontology" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression <http://datashapes.org/schema> ;
+            sp:variable [
+                sp:varName "ontology" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:now ;
+              ] ;
+            sp:variable [
+                sp:varName "date" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:CreateSHProperties
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:insertPattern (
+          [
+            sp:object [
+                sp:varName "shProperty" ;
+              ] ;
+            sp:predicate sh:property ;
+            sp:subject [
+                sp:varName "class" ;
+              ] ;
+          ]
+          [
+            sp:object sh:PropertyShape ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "shProperty" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "property" ;
+              ] ;
+            sp:predicate sh:path ;
+            sp:subject [
+                sp:varName "shProperty" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate sh:name ;
+            sp:subject [
+                sp:varName "shProperty" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "htmlComment" ;
+              ] ;
+            sp:predicate sh:description ;
+            sp:subject [
+                sp:varName "shProperty" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "class" ;
+              ] ;
+            sp:predicate schema:domainIncludes ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:notIn ;
+                sp:arg1 [
+                    sp:varName "class" ;
+                  ] ;
+                sp:arg2 schema:Property ;
+                sp:arg3 schema:Class ;
+              ] ;
+          ]
+          [
+            a sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "label" ;
+                    ] ;
+                  sp:predicate rdfs:label ;
+                  sp:subject [
+                      sp:varName "property" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+          [
+            a sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "comment" ;
+                    ] ;
+                  sp:predicate rdfs:comment ;
+                  sp:subject [
+                      sp:varName "property" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a smf:cast ;
+                      arg:datatype rdf:HTML ;
+                      sp:arg1 [
+                          sp:varName "comment" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "htmlComment" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a swa:createPropertyShapeURI ;
+                sp:arg1 false ;
+                sp:arg2 [
+                    sp:varName "property" ;
+                  ] ;
+                sp:arg3 [
+                    sp:varName "class" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "shProperty" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Create sh:properties" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:CreateSHPropertyValueTypesMultipleStep1
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:insertPattern (
+          [
+            sp:object [
+                sp:varName "list" ;
+              ] ;
+            sp:predicate sh:or ;
+            sp:subject [
+                sp:varName "shProperty" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "element" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "subList" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "rest" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "subList" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              sp:object [
+                  sp:varName "property" ;
+                ] ;
+              sp:predicate sh:path ;
+              sp:subject [
+                  sp:varName "shProperty" ;
+                ] ;
+            ]
+            [
+              a sp:Bind ;
+              sp:expression [
+                  a spl:objectCount ;
+                  sp:arg1 [
+                      sp:varName "property" ;
+                    ] ;
+                  sp:arg2 schema:rangeIncludes ;
+                ] ;
+              sp:variable [
+                  sp:varName "count" ;
+                ] ;
+            ]
+          )
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:gt ;
+                sp:arg1 [
+                    sp:varName "count" ;
+                  ] ;
+                sp:arg2 1 ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "list" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "subList" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?2" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "element" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?2" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?3" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?2" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "rest" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?3" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?3" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?4" ;
+              ] ;
+            sp:predicate <http://www.topbraid.org/tops#constructRDFList> ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "property" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?4" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?5" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?4" ;
+              ] ;
+          ]
+          [
+            sp:object schema:rangeIncludes ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?5" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?6" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?5" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "r" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?6" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?6" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:CreateSHPropertyValueTypesMultipleStep2
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            sp:object [
+                sp:varName "valueType" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "item" ;
+              ] ;
+          ]
+        ) ;
+      sp:insertPattern (
+          [
+            sp:object [
+                sp:varName "constraint" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "item" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "valueType" ;
+              ] ;
+            sp:predicate [
+                sp:varName "pred" ;
+              ] ;
+            sp:subject [
+                sp:varName "constraint" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "property" ;
+              ] ;
+            sp:predicate sh:path ;
+            sp:subject [
+                sp:varName "shProperty" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "or" ;
+              ] ;
+            sp:predicate sh:or ;
+            sp:subject [
+                sp:varName "shProperty" ;
+              ] ;
+          ]
+          [
+            a sp:TriplePath ;
+            sp:object [
+                sp:varName "valueType" ;
+              ] ;
+            sp:path [
+                a sp:SeqPath ;
+                sp:path1 [
+                    a sp:ModPath ;
+                    sp:modMax -2 ;
+                    sp:modMin 0 ;
+                    sp:subPath rdf:rest ;
+                  ] ;
+                sp:path2 rdf:first ;
+              ] ;
+            sp:subject [
+                sp:varName "or" ;
+              ] ;
+          ]
+          [
+            a sp:TriplePath ;
+            sp:object [
+                sp:varName "item" ;
+              ] ;
+            sp:path [
+                a sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdf:rest ;
+              ] ;
+            sp:subject [
+                sp:varName "or" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "valueType" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "item" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:bnode ;
+              ] ;
+            sp:variable [
+                sp:varName "constraint" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    a sp:exists ;
+                    sp:elements (
+                        [
+                          sp:object rdfs:Class ;
+                          sp:predicate rdf:type ;
+                          sp:subject [
+                              sp:varName "valueType" ;
+                            ] ;
+                        ]
+                      ) ;
+                  ] ;
+                sp:arg2 sh:class ;
+                sp:arg3 sh:datatype ;
+              ] ;
+            sp:variable [
+                sp:varName "pred" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:CreateSHPropertyValueTypesSingle
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:insertPattern (
+          [
+            sp:object [
+                sp:varName "range" ;
+              ] ;
+            sp:predicate [
+                sp:varName "pred" ;
+              ] ;
+            sp:subject [
+                sp:varName "shProperty" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              sp:object [
+                  sp:varName "property" ;
+                ] ;
+              sp:predicate sh:path ;
+              sp:subject [
+                  sp:varName "shProperty" ;
+                ] ;
+            ]
+            [
+              a sp:Bind ;
+              sp:expression [
+                  a spl:objectCount ;
+                  sp:arg1 [
+                      sp:varName "property" ;
+                    ] ;
+                  sp:arg2 schema:rangeIncludes ;
+                ] ;
+              sp:variable [
+                  sp:varName "count" ;
+                ] ;
+            ]
+          )
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:eq ;
+                sp:arg1 [
+                    sp:varName "count" ;
+                  ] ;
+                sp:arg2 1 ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "range" ;
+              ] ;
+            sp:predicate schema:rangeIncludes ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    a sp:exists ;
+                    sp:elements (
+                        [
+                          sp:object rdfs:Class ;
+                          sp:predicate rdf:type ;
+                          sp:subject [
+                              sp:varName "range" ;
+                            ] ;
+                        ]
+                      ) ;
+                  ] ;
+                sp:arg2 sh:class ;
+                sp:arg3 sh:datatype ;
+              ] ;
+            sp:variable [
+                sp:varName "pred" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:CreateUnion
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            sp:object [
+                sp:varName "old" ;
+              ] ;
+            sp:predicate [
+                sp:varName "predicate" ;
+              ] ;
+            sp:subject [
+                sp:varName "subject" ;
+              ] ;
+          ]
+        ) ;
+      sp:insertPattern (
+          [
+            sp:object [
+                sp:varName "union" ;
+              ] ;
+            sp:predicate [
+                sp:varName "predicate" ;
+              ] ;
+            sp:subject [
+                sp:varName "subject" ;
+              ] ;
+          ]
+          [
+            sp:object owl:Class ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "union" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "list" ;
+              ] ;
+            sp:predicate owl:unionOf ;
+            sp:subject [
+                sp:varName "union" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "element" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "subList" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "rest" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "subList" ;
+              ] ;
+          ]
+        ) ;
+      sp:text """DELETE {
+  ?subject ?predicate ?old .
+}
+INSERT {
+  ?subject ?predicate ?union .
+  ?union <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+  ?union <http://www.w3.org/2002/07/owl#unionOf> ?list .
+  ?subList <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> ?element .
+  ?subList <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> ?rest .
+}
+WHERE
+  { { BIND(bnode() AS ?union)
+      ??0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> ?list .
+      ??0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> ??1 .
+      ??1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> ?subList .
+      ??1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> ??2 .
+      ??2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> ?element .
+      ??2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> ??3 .
+      ??3 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> ?rest .
+      ??3 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+      ??0 <http://www.topbraid.org/tops#constructRDFList> ??4 .
+      ??4 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> ?subject .
+      ??4 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> ??5 .
+      ??5 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> ?predicate .
+      ??5 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> ??6 .
+      ??6 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> ?o .
+      ??6 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil>
+    }
+    ?subject ?predicate ?old
+  }
+""" ;
+      sp:where (
+          (
+            [
+              a sp:Bind ;
+              sp:expression [
+                  a sp:bnode ;
+                ] ;
+              sp:variable [
+                  sp:varName "union" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "list" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?1" ;
+                ] ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "subList" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?2" ;
+                ] ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "element" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?2" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?3" ;
+                ] ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?2" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "rest" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?3" ;
+                ] ;
+            ]
+            [
+              sp:object () ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?3" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?4" ;
+                ] ;
+              sp:predicate <http://www.topbraid.org/tops#constructRDFList> ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "subject" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?4" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?5" ;
+                ] ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?4" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "predicate" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?5" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?6" ;
+                ] ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?5" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "o" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?6" ;
+                ] ;
+            ]
+            [
+              sp:object () ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?6" ;
+                ] ;
+            ]
+          )
+          [
+            sp:object [
+                sp:varName "old" ;
+              ] ;
+            sp:predicate [
+                sp:varName "predicate" ;
+              ] ;
+            sp:subject [
+                sp:varName "subject" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:predicate ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property (either rdfs:domain or rdfs:range)" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subject ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  rdfs:label "Create union" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:CreateUnionRangeClasses
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            sp:object [
+                sp:varName "range" ;
+              ] ;
+            sp:predicate rdfs:range ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+        ) ;
+      sp:insertPattern (
+          [
+            sp:object [
+                sp:varName "union" ;
+              ] ;
+            sp:predicate rdfs:range ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            sp:object owl:Class ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "union" ;
+              ] ;
+          ]
+          [
+            sp:object schemax:UnionClasses ;
+            sp:predicate rdfs:subClassOf ;
+            sp:subject [
+                sp:varName "union" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "union" ;
+              ] ;
+            sp:predicate rdfs:subClassOf ;
+            sp:subject [
+                sp:varName "range" ;
+              ] ;
+          ]
+          [
+            sp:object owl:Class ;
+            sp:predicate rdf:type ;
+            sp:subject schemax:UnionClasses ;
+          ]
+          [
+            sp:object owl:Thing ;
+            sp:predicate rdfs:subClassOf ;
+            sp:subject schemax:UnionClasses ;
+          ]
+          [
+            sp:object "Union classes" ;
+            sp:predicate rdfs:label ;
+            sp:subject schemax:UnionClasses ;
+          ]
+          [
+            sp:object "An artificial superclass to organize various union classes (needed for ranges) under a single root in tree displays." ;
+            sp:predicate rdfs:comment ;
+            sp:subject schemax:UnionClasses ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:SubQuery ;
+            sp:query [
+                a sp:Select ;
+                sp:distinct true ;
+                sp:resultVariables (
+                    [
+                      sp:varName "property" ;
+                    ]
+                  ) ;
+                sp:where (
+                    [
+                      sp:object [
+                          sp:varName "range1" ;
+                        ] ;
+                      sp:predicate rdfs:range ;
+                      sp:subject [
+                          sp:varName "property" ;
+                        ] ;
+                    ]
+                    [
+                      sp:object [
+                          sp:varName "range2" ;
+                        ] ;
+                      sp:predicate rdfs:range ;
+                      sp:subject [
+                          sp:varName "property" ;
+                        ] ;
+                    ]
+                    [
+                      a sp:Filter ;
+                      sp:expression [
+                          a sp:ne ;
+                          sp:arg1 [
+                              sp:varName "range1" ;
+                            ] ;
+                          sp:arg2 [
+                              sp:varName "range2" ;
+                            ] ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "range" ;
+              ] ;
+            sp:predicate rdfs:range ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a schemaconverter:unionClassName ;
+                arg:property [
+                    sp:varName "property" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "unionName" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:iri ;
+                sp:arg1 [
+                    a sp:concat ;
+                    sp:arg1 "http://topbraid.org/schemax/" ;
+                    sp:arg2 [
+                        sp:varName "unionName" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "union" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "Introduces artificial \"union\" classes that represent multiple ranges. For example if the range of X is Alpha or Beta then a new class is created AlphaOrBeta and the range assigned to that only." ;
+  rdfs:label "Create union range classes" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:DeleteDeclaration
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:DeleteWhere ;
+      sp:text """DELETE WHERE 
+{
+  ?subject ?p ?o .
+}
+""" ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "o" ;
+              ] ;
+            sp:predicate [
+                sp:varName "p" ;
+              ] ;
+            sp:subject [
+                sp:varName "subject" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subject ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The subject to delete." ;
+    ] ;
+  rdfs:comment "Deletes the declaration of a given resource." ;
+  rdfs:label "Delete declaration" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:DeleteProperties
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:DeleteWhere ;
+      sp:where (
+          [
+            sp:object rdf:Property ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "o" ;
+              ] ;
+            sp:predicate [
+                sp:varName "p" ;
+              ] ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "Deletes all rdf:Properties - these are converted to sh:property already." ;
+  rdfs:label "Delete properties" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:DeleteRedundantUnions
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            sp:object [
+                sp:varName "domain" ;
+              ] ;
+            sp:predicate [
+                sp:varName "rel" ;
+              ] ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "union" ;
+              ] ;
+            sp:predicate owl:unionOf ;
+            sp:subject [
+                sp:varName "domain" ;
+              ] ;
+          ]
+          [
+            sp:object owl:Class ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "domain" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "anyO" ;
+              ] ;
+            sp:predicate [
+                sp:varName "anyP" ;
+              ] ;
+            sp:subject [
+                sp:varName "union" ;
+              ] ;
+          ]
+        ) ;
+      sp:insertPattern (
+          [
+            sp:object [
+                sp:varName "class" ;
+              ] ;
+            sp:predicate [
+                sp:varName "rel" ;
+              ] ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+        ) ;
+      sp:text """DELETE {
+  ?property ?rel ?domain .
+  ?domain <http://www.w3.org/2002/07/owl#unionOf> ?union .
+  ?domain <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+  ?union ?anyP ?anyO .
+}
+INSERT {
+  ?property ?rel ?class .
+}
+WHERE
+  { ?domain <http://www.w3.org/2002/07/owl#unionOf> ?union .
+    ?property ?rel ?domain .
+    ?union <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> ?class .
+    ?union <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+    ?union ?anyP ?anyO
+  }
+""" ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "union" ;
+              ] ;
+            sp:predicate owl:unionOf ;
+            sp:subject [
+                sp:varName "domain" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "domain" ;
+              ] ;
+            sp:predicate [
+                sp:varName "rel" ;
+              ] ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "class" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "union" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "union" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "anyO" ;
+              ] ;
+            sp:predicate [
+                sp:varName "anyP" ;
+              ] ;
+            sp:subject [
+                sp:varName "union" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Delete redundant unions" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:DeleteTriplesWithPredicate
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:DeleteWhere ;
+      sp:text """DELETE WHERE 
+{
+  ?s ?predicate ?o .
+}
+""" ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "o" ;
+              ] ;
+            sp:predicate [
+                sp:varName "predicate" ;
+              ] ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:predicate ;
+      spl:valueType rdf:Property ;
+    ] ;
+  rdfs:label "Delete triples with predicate" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:DeleteUnionNumberRanges
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            sp:object [
+                sp:varName "range" ;
+              ] ;
+            sp:predicate rdfs:range ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            sp:object owl:Class ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "range" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "union" ;
+              ] ;
+            sp:predicate owl:unionOf ;
+            sp:subject [
+                sp:varName "range" ;
+              ] ;
+          ]
+          [
+            sp:object schema:Number ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "union" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "rest" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "union" ;
+              ] ;
+          ]
+          [
+            sp:object schema:Text ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "rest" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "rest" ;
+              ] ;
+          ]
+        ) ;
+      sp:insertPattern (
+          [
+            sp:object xsd:float ;
+            sp:predicate rdfs:range ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+        ) ;
+      sp:text """DELETE {
+  ?property <http://www.w3.org/2000/01/rdf-schema#range> ?range .
+  ?range <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+  ?range <http://www.w3.org/2002/07/owl#unionOf> ?union .
+  ?union <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://schema.org/Number> .
+  ?union <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> ?rest .
+  ?rest <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://schema.org/Text> .
+  ?rest <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+}
+INSERT {
+  ?property <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#float> .
+}
+WHERE
+  { ?property <http://www.w3.org/2000/01/rdf-schema#range> ?range .
+    ?range <http://www.w3.org/2002/07/owl#unionOf> ?union .
+    ?union <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://schema.org/Number> .
+    ?union <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> ?rest .
+    ?rest <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://schema.org/Text> .
+    ?rest <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil>
+  }
+""" ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "range" ;
+              ] ;
+            sp:predicate rdfs:range ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "union" ;
+              ] ;
+            sp:predicate owl:unionOf ;
+            sp:subject [
+                sp:varName "range" ;
+              ] ;
+          ]
+          [
+            sp:object schema:Number ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "union" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "rest" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "union" ;
+              ] ;
+          ]
+          [
+            sp:object schema:Text ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "rest" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "rest" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment """Replaces
+
+      rdfs:range
+              [ a       owl:Class ;
+                owl:unionOf (schema:Number schema:Text)
+              ] .
+
+with
+
+	rdfs:range xsd:float .""" ;
+  rdfs:label "Delete union number ranges" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:DeleteXSDStringForObjectProperties
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            sp:object xsd:string ;
+            sp:predicate rdfs:range ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object xsd:string ;
+            sp:predicate rdfs:range ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "other" ;
+              ] ;
+            sp:predicate rdfs:range ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            sp:object owl:Class ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "other" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Delete xsd:string for object properties" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:DeleteXSDStringForRangeIncludes
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            sp:object xsd:string ;
+            sp:predicate schema:rangeIncludes ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object xsd:string ;
+            sp:predicate schema:rangeIncludes ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "other" ;
+              ] ;
+            sp:predicate schema:rangeIncludes ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            sp:object rdfs:Class ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "other" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:EnsureAtLeastOneSuperclass
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:insertPattern (
+          [
+            sp:object owl:Thing ;
+            sp:predicate rdfs:subClassOf ;
+            sp:subject [
+                sp:varName "class" ;
+              ] ;
+          ]
+        ) ;
+      sp:text """INSERT {
+  ?class <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/2002/07/owl#Thing> .
+}
+WHERE
+  { ?class <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class>
+    FILTER NOT EXISTS {?class <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?any }
+  }
+""" ;
+      sp:where (
+          [
+            sp:object owl:Class ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "class" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:notExists ;
+                sp:elements (
+                    [
+                      sp:object [
+                          sp:varName "any" ;
+                        ] ;
+                      sp:predicate rdfs:subClassOf ;
+                      sp:subject [
+                          sp:varName "class" ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Ensure at least one superclass" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:OWLFileConverter
+  a ui:Service ;
+  ui:private true ;
+  ui:prototype """
+<sml:ImportRDFFromURL sml:url=\"http://schema.org/docs/schemaorg.owl\">
+    <ui:call ui:template=\"{= schemaconverter:DeleteRedundantUnions }\"/>
+    <ui:call ui:template=\"{= schemaconverter:DeleteUnionNumberRanges }\"/>
+    <ui:call ui:template=\"{= schemaconverter:ReplaceDatatypes }\"/>
+    <ui:call ui:template=\"{= schemaconverter:ConvertObjectToDatatypeProperties }\"/>
+    <ui:call ui:template=\"{= schemaconverter:RedirectLinksToOWLThing }\"/>
+    <ui:call arg:subject=\"{= schema:Thing }\" ui:template=\"{= schemaconverter:DeleteDeclaration }\"/>
+    <ui:call arg:subject=\"{= schema:description }\" ui:template=\"{= schemaconverter:DeleteDeclaration }\"/>
+    <ui:call arg:subject=\"{= schema:name }\" ui:template=\"{= schemaconverter:DeleteDeclaration }\"/>
+    <ui:call arg:subject=\"{= schema:url }\" ui:template=\"{= schemaconverter:DeleteDeclaration }\"/>
+    <ui:return/>
+</sml:ImportRDFFromURL>
+"""^^ui:Literal ;
+  rdfs:comment """Downloads the official schema.org OWL file and applies some updates to it to align it better with existing semantic web best practices. See the descriptions of the various templates for details. In addition, note that the following replacements are being assumed:
+- schema:Thing -> owl:Thing
+- schema:name -> rdfs:label
+- schema:description -> rdfs:comment
+- schema:url -> [the URI of the resource itself]""" ;
+  rdfs:label "OWL file converter" ;
+  rdfs:subClassOf ui:TurtleServices ;
+.
+schemaconverter:PreferXSDAnyURI
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            sp:object [
+                sp:varName "other" ;
+              ] ;
+            sp:predicate rdfs:range ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+        ) ;
+      sp:text """DELETE {
+  ?property <http://www.w3.org/2000/01/rdf-schema#range> ?other .
+}
+WHERE
+  { ?property <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#anyURI> .
+    ?property <http://www.w3.org/2000/01/rdf-schema#range> ?other
+    FILTER ( ?other != <http://www.w3.org/2001/XMLSchema#anyURI> )
+  }
+""" ;
+      sp:where (
+          [
+            sp:object xsd:anyURI ;
+            sp:predicate rdfs:range ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "other" ;
+              ] ;
+            sp:predicate rdfs:range ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:ne ;
+                sp:arg1 [
+                    sp:varName "other" ;
+                  ] ;
+                sp:arg2 xsd:anyURI ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "If a property has multiple ranges, and one of them is xsd:anyURI, then delete the others." ;
+  rdfs:label "Prefer xsd:float" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:PreferXSDFloat
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            sp:object [
+                sp:varName "other" ;
+              ] ;
+            sp:predicate rdfs:range ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+        ) ;
+      sp:text """DELETE {
+  ?property <http://www.w3.org/2000/01/rdf-schema#range> ?other .
+}
+WHERE
+  { ?property <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#float> .
+    ?property <http://www.w3.org/2000/01/rdf-schema#range> ?other
+    FILTER ( ?other != <http://www.w3.org/2001/XMLSchema#float> )
+  }
+""" ;
+      sp:where (
+          [
+            sp:object xsd:float ;
+            sp:predicate rdfs:range ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "other" ;
+              ] ;
+            sp:predicate rdfs:range ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:ne ;
+                sp:arg1 [
+                    sp:varName "other" ;
+                  ] ;
+                sp:arg2 xsd:float ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "If a property has multiple ranges, and one of them is xsd:float, then delete the others." ;
+  rdfs:label "Prefer xsd:float" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:RDFaFileConverter
+  a ui:Service ;
+  ui:private true ;
+  ui:prototype """
+<sml:ImportRDFFromURL sml:url=\"http://schema.org/version/latest/all-layers.ttl\">
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ui:tempGraph {
+                    ?s ?p ?o .
+                } .
+            }
+            WHERE {
+                ?s ?p ?o .
+            } }\"/>
+    <ui:setContext ui:queryGraph=\"{= ui:tempGraph }\">
+        <schemaconverter:deleteLegacyProperties/>
+        <ui:call arg:new=\"{= rdfs:range }\" arg:old=\"{= schema:rangeIncludes }\" ui:template=\"{= schemaconverter:CopyPredicateValues }\"/>
+        <ui:call arg:new=\"{= rdfs:domain }\" arg:old=\"{= schema:domainIncludes }\" ui:template=\"{= schemaconverter:CopyPredicateValues }\"/>
+        <ui:call ui:template=\"{= schemaconverter:ConvertRDFSToOWLClasses }\"/>
+        <ui:call ui:template=\"{= schemaconverter:ReplaceDatatypes }\"/>
+        <ui:call ui:template=\"{= schemaconverter:PreferXSDFloat }\"/>
+        <ui:call ui:template=\"{= schemaconverter:PreferXSDAnyURI }\"/>
+        <ui:call ui:template=\"{= schemaconverter:ConvertRDFToOWLProperties }\"/>
+        <ui:call ui:template=\"{= schemaconverter:RedirectLinksToOWLThing }\"/>
+        <schemaconverter:createUnions arg:predicate=\"{= rdfs:domain }\"/>
+        <schemaconverter:createUnions arg:predicate=\"{= rdfs:range }\"/>
+        <ui:call arg:subject=\"{= schema:Class }\" ui:template=\"{= schemaconverter:DeleteDeclaration }\"/>
+        <ui:call arg:subject=\"{= schema:Property }\" ui:template=\"{= schemaconverter:DeleteDeclaration }\"/>
+        <ui:call arg:subject=\"{= schema:Thing }\" ui:template=\"{= schemaconverter:DeleteDeclaration }\"/>
+        <ui:call arg:subject=\"{= schema:description }\" ui:template=\"{= schemaconverter:DeleteDeclaration }\"/>
+        <ui:call arg:subject=\"{= schema:name }\" ui:template=\"{= schemaconverter:DeleteDeclaration }\"/>
+        <ui:call arg:subject=\"{= schema:url }\" ui:template=\"{= schemaconverter:DeleteDeclaration }\"/>
+        <ui:call arg:subject=\"{= schema:additionalType }\" ui:template=\"{= schemaconverter:DeleteDeclaration }\"/>
+        <ui:call arg:predicate=\"{= dcterms:source }\" ui:template=\"{= schemaconverter:DeleteTriplesWithPredicate }\"/>
+        <ui:call arg:predicate=\"{= schema:domainIncludes }\" ui:template=\"{= schemaconverter:DeleteTriplesWithPredicate }\"/>
+        <ui:call arg:predicate=\"{= schema:rangeIncludes }\" ui:template=\"{= schemaconverter:DeleteTriplesWithPredicate }\"/>
+        <ui:call ui:template=\"{= schemaconverter:UnCamelCaseLabels }\"/>
+        <ui:call ui:template=\"{= schemaconverter:CreateOntology }\"/>
+        <ui:return/>
+    </ui:setContext>
+</sml:ImportRDFFromURL>
+"""^^ui:Literal ;
+  rdfs:comment """Downloads and converts the Turtle representation from the official schema.org site and transforms it. See the descriptions of the various templates for details. In addition, note that the following replacements are being assumed:
+- schema:Thing -> owl:Thing
+- schema:name -> rdfs:label
+- schema:description -> rdfs:comment
+- schema:url -> [the URI of the resource itself]
+
+To execute this, call http://localhost:8083/tbl/swp?_viewClass=schemaconverter:RDFaFileConverter""" ;
+  rdfs:label "RDFa file converter" ;
+  rdfs:subClassOf ui:TurtleServices ;
+.
+schemaconverter:RDFaFileConverterSHACL
+  a ui:Service ;
+  ui:private true ;
+  ui:prototype """
+<sml:ImportRDFFromURL sml:url=\"http://schema.org/version/latest/all-layers.ttl\">
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ui:tempGraph {
+                    ?s ?p ?o .
+                } .
+            }
+            WHERE {
+                ?s ?p ?o .
+            } }\"/>
+    <ui:setContext ui:queryGraph=\"{= ui:tempGraph }\">
+        <ui:setPrefix ui:namespace=\"http://www.w3.org/ns/shacl#\" ui:prefix=\"sh\"/>
+        <ui:setPrefix ui:namespace=\"http://schema.org/\" ui:prefix=\"schema\"/>
+        <schemaconverter:deleteLegacyProperties/>
+        <ui:call ui:template=\"{= schemaconverter:CreateSHProperties }\"/>
+        <ui:call ui:template=\"{= schemaconverter:ConvertRDFSToShapeClasses }\"/>
+        <ui:call ui:template=\"{= schemaconverter:ReplaceDatatypes }\"/>
+        <ui:call ui:template=\"{= schemaconverter:PreferXSDFloat }\"/>
+        <ui:call ui:template=\"{= schemaconverter:PreferXSDAnyURI }\"/>
+        <ui:call ui:template=\"{= schemaconverter:CreateSHPropertyValueTypesSingle }\"/>
+        <ui:call ui:template=\"{= schemaconverter:CreateSHPropertyValueTypesMultipleStep1 }\"/>
+        <ui:call ui:template=\"{= schemaconverter:CreateSHPropertyValueTypesMultipleStep2 }\"/>
+        <ui:call arg:subject=\"{= schema:Class }\" ui:template=\"{= schemaconverter:DeleteDeclaration }\"/>
+        <ui:call arg:subject=\"{= schema:Property }\" ui:template=\"{= schemaconverter:DeleteDeclaration }\"/>
+        <ui:call arg:subject=\"{= schema:description }\" ui:template=\"{= schemaconverter:DeleteDeclaration }\"/>
+        <ui:call arg:subject=\"{= schema:name }\" ui:template=\"{= schemaconverter:DeleteDeclaration }\"/>
+        <ui:call arg:subject=\"{= schema:url }\" ui:template=\"{= schemaconverter:DeleteDeclaration }\"/>
+        <ui:call arg:subject=\"{= schema:additionalType }\" ui:template=\"{= schemaconverter:DeleteDeclaration }\"/>
+        <ui:call arg:predicate=\"{= dcterms:source }\" ui:template=\"{= schemaconverter:DeleteTriplesWithPredicate }\"/>
+        <ui:call ui:template=\"{= schemaconverter:DeleteProperties }\"/>
+        <ui:call ui:template=\"{= schemaconverter:ReplaceURLWithNodeKind }\"/>
+        <ui:call ui:template=\"{= schemaconverter:RedirectLinksToRDFProperty }\"/>
+        <ui:call ui:template=\"{= schemaconverter:RedirectLinksToRDFSClass }\"/>
+        <ui:call ui:template=\"{= schemaconverter:UnCamelCaseLabels }\"/>
+        <ui:call ui:template=\"{= schemaconverter:CreateSHOntology }\"/>
+        <ui:addPropertyValue arg:property=\"{= rdfs:subClassOf }\" arg:value=\"{= rdfs:Resource }\" ui:this=\"{= schema:Thing }\"/>
+        <ui:return/>
+    </ui:setContext>
+</sml:ImportRDFFromURL>
+"""^^ui:Literal ;
+  rdfs:comment """Downloads and converts the Turtle representation from the official schema.org site and transforms it into SHACL. See the descriptions of the various templates for details. In addition, note that the following replacements are being assumed:
+- schema:name -> rdfs:label
+- schema:description -> rdfs:comment
+- schema:url -> [the URI of the resource itself]
+
+To execute this, call http://localhost:8083/tbl/swp?_viewClass=schemaconverter:RDFaFileConverterSHACL""" ;
+  rdfs:label "RDFa file converter SHACL" ;
+  rdfs:subClassOf ui:TurtleServices ;
+.
+schemaconverter:RDFaFileConverterSingleRange
+  a ui:Service ;
+  ui:private true ;
+  ui:prototype """
+<sml:ImportRDFFromURL sml:url=\"http://schema.org/version/latest/all-layers.ttl\">
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ui:tempGraph {
+                    ?s ?p ?o .
+                } .
+            }
+            WHERE {
+                ?s ?p ?o .
+            } }\"/>
+    <ui:setContext ui:queryGraph=\"{= ui:tempGraph }\">
+        <schemaconverter:deleteLegacyProperties/>
+        <ui:call arg:new=\"{= rdfs:range }\" arg:old=\"{= schema:rangeIncludes }\" ui:template=\"{= schemaconverter:CopyPredicateValues }\"/>
+        <ui:call arg:new=\"{= rdfs:domain }\" arg:old=\"{= schema:domainIncludes }\" ui:template=\"{= schemaconverter:CopyPredicateValues }\"/>
+        <ui:call ui:template=\"{= schemaconverter:ConvertRDFSToOWLClasses }\"/>
+        <ui:call ui:template=\"{= schemaconverter:ReplaceDatatypes }\"/>
+        <ui:call ui:template=\"{= schemaconverter:DeleteXSDStringForObjectProperties }\"/>
+        <ui:call ui:template=\"{= schemaconverter:PreferXSDFloat }\"/>
+        <ui:call ui:template=\"{= schemaconverter:PreferXSDAnyURI }\"/>
+        <ui:call ui:template=\"{= schemaconverter:ConvertRDFToOWLProperties }\"/>
+        <ui:call ui:template=\"{= schemaconverter:RedirectLinksToOWLThing }\"/>
+        <schemaconverter:createUnions arg:predicate=\"{= rdfs:domain }\"/>
+        <ui:call ui:template=\"{= schemaconverter:CreateUnionRangeClasses }\"/>
+        <ui:call arg:subject=\"{= schema:Class }\" ui:template=\"{= schemaconverter:DeleteDeclaration }\"/>
+        <ui:call arg:subject=\"{= schema:Property }\" ui:template=\"{= schemaconverter:DeleteDeclaration }\"/>
+        <ui:call arg:subject=\"{= schema:Thing }\" ui:template=\"{= schemaconverter:DeleteDeclaration }\"/>
+        <ui:call arg:subject=\"{= schema:description }\" ui:template=\"{= schemaconverter:DeleteDeclaration }\"/>
+        <ui:call arg:subject=\"{= schema:name }\" ui:template=\"{= schemaconverter:DeleteDeclaration }\"/>
+        <ui:call arg:subject=\"{= schema:url }\" ui:template=\"{= schemaconverter:DeleteDeclaration }\"/>
+        <ui:call arg:subject=\"{= schema:additionalType }\" ui:template=\"{= schemaconverter:DeleteDeclaration }\"/>
+        <ui:call arg:predicate=\"{= dcterms:source }\" ui:template=\"{= schemaconverter:DeleteTriplesWithPredicate }\"/>
+        <ui:call ui:template=\"{= schemaconverter:UnCamelCaseLabels }\"/>
+        <ui:call ui:template=\"{= schemaconverter:CreateOntology }\"/>
+        <ui:call ui:template=\"{= schemaconverter:CreateRangeAndDomainIncludes }\"/>
+        <ui:return/>
+    </ui:setContext>
+</sml:ImportRDFFromURL>
+"""^^ui:Literal ;
+  rdfs:comment "To execute, call http://localhost:8083/tbl/swp?_viewClass=schemaconverter:RDFaFileConverterSingleRange" ;
+  rdfs:label "RDFa file converter single range" ;
+  rdfs:subClassOf ui:TurtleServices ;
+.
+schemaconverter:RedirectLinksToOWLThing
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            sp:object schema:Thing ;
+            sp:predicate [
+                sp:varName "p" ;
+              ] ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+      sp:insertPattern (
+          [
+            sp:object owl:Thing ;
+            sp:predicate [
+                sp:varName "p" ;
+              ] ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+      sp:text """DELETE {
+  ?s ?p <http://schema.org/Thing> .
+}
+INSERT {
+  ?s ?p <http://www.w3.org/2002/07/owl#Thing> .
+}
+WHERE
+  { ?s ?p <http://schema.org/Thing> }
+""" ;
+      sp:where (
+          [
+            sp:object schema:Thing ;
+            sp:predicate [
+                sp:varName "p" ;
+              ] ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "Replaces schema:Thing with owl:Thing." ;
+  rdfs:label "Redirect links to owl:Thing" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:RedirectLinksToRDFProperty
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            sp:object schema:Property ;
+            sp:predicate [
+                sp:varName "p" ;
+              ] ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+      sp:insertPattern (
+          [
+            sp:object rdf:Property ;
+            sp:predicate [
+                sp:varName "p" ;
+              ] ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object schema:Property ;
+            sp:predicate [
+                sp:varName "p" ;
+              ] ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "Replaces schema:Property with rdf:Property." ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:RedirectLinksToRDFSClass
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            sp:object schema:Class ;
+            sp:predicate [
+                sp:varName "p" ;
+              ] ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+      sp:insertPattern (
+          [
+            sp:object rdfs:Class ;
+            sp:predicate [
+                sp:varName "p" ;
+              ] ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object schema:Class ;
+            sp:predicate [
+                sp:varName "p" ;
+              ] ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "Replaces schema:Class with rdfs:Class." ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:ReplaceDatatypes
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            sp:object [
+                sp:varName "old" ;
+              ] ;
+            sp:predicate [
+                sp:varName "p" ;
+              ] ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+      sp:insertPattern (
+          [
+            sp:object [
+                sp:varName "new" ;
+              ] ;
+            sp:predicate [
+                sp:varName "p" ;
+              ] ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "new" ;
+                    ] ;
+                  sp:predicate owl:sameAs ;
+                  sp:subject [
+                      sp:varName "old" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode <http://topbraid.org/schemaconverter> ;
+          ]
+          [
+            sp:object [
+                sp:varName "old" ;
+              ] ;
+            sp:predicate [
+                sp:varName "p" ;
+              ] ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Replace datatypes" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:ReplaceURLWithNodeKind
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            sp:object schema:URL ;
+            sp:predicate sh:class ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+      sp:insertPattern (
+          [
+            sp:object sh:IRI ;
+            sp:predicate sh:nodeKind ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object schema:URL ;
+            sp:predicate sh:class ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Replace sh:class schema:URL with sh:nodeKind sh:IRI" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:UnCamelCaseLabels
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            sp:object [
+                sp:varName "old" ;
+              ] ;
+            sp:predicate rdfs:label ;
+            sp:subject [
+                sp:varName "subject" ;
+              ] ;
+          ]
+        ) ;
+      sp:insertPattern (
+          [
+            sp:object [
+                sp:varName "new" ;
+              ] ;
+            sp:predicate rdfs:label ;
+            sp:subject [
+                sp:varName "subject" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "old" ;
+              ] ;
+            sp:predicate rdfs:label ;
+            sp:subject [
+                sp:varName "subject" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:unCamelCase ;
+                sp:arg1 [
+                    sp:varName "old" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "new" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Un-camel case labels" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+schemaconverter:createUnions
+  a ui:Method ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:predicate ;
+      spl:valueType rdf:Property ;
+    ] ;
+  ui:prototype """
+<ui:forEach ui:resultSet=\"{#
+        SELECT DISTINCT ?subject
+        WHERE {
+            ?subject a ?type .
+            FILTER (((?type = owl:ObjectProperty) || (?type = owl:DatatypeProperty)) || (?type = rdf:Property)) .
+            FILTER (spl:objectCount(?subject, ?predicate) &gt; 1) .
+        } }\">
+    <ui:call arg:predicate=\"{= ?predicate }\" arg:subject=\"{= ?subject }\" ui:template=\"{= schemaconverter:CreateUnion }\"/>
+</ui:forEach>
+"""^^ui:Literal ;
+  rdfs:label "create unions" ;
+  rdfs:subClassOf ui:Methods ;
+.
+schemaconverter:deleteLegacyProperties
+  a ui:Method ;
+  ui:prototype """
+<ui:forEach ui:resultSet='{#
+        SELECT ?property
+        WHERE {
+            ?property rdfs:comment ?comment .
+            FILTER regex(?comment, \"legacy\") .
+            FILTER fn:ends-with(afn:localname(?property), \"s\") .
+        } }'>
+    <ui:call arg:subject=\"{= ?property }\" ui:template=\"{= schemaconverter:DeleteDeclaration }\"/>
+</ui:forEach>
+"""^^ui:Literal ;
+  rdfs:label "delete legacy properties" ;
+  rdfs:subClassOf ui:Methods ;
+.
+schemaconverter:hasMixedRange
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "datatype" ;
+              ] ;
+            sp:predicate rdfs:range ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:eq ;
+                sp:arg1 [
+                    a afn:namespace ;
+                    sp:arg1 [
+                        sp:varName "datatype" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a afn:namespace ;
+                    sp:arg1 xsd:string ;
+                  ] ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "object" ;
+              ] ;
+            sp:predicate rdfs:range ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:eq ;
+                sp:arg1 [
+                    a afn:namespace ;
+                    sp:arg1 [
+                        sp:varName "object" ;
+                      ] ;
+                  ] ;
+                sp:arg2 "http://schema.org/" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:property ;
+      spl:valueType rdf:Property ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:label "has mixed range" ;
+  rdfs:subClassOf spin:Functions ;
+.
+schemaconverter:unionClassName
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "name" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:GroupConcat ;
+                sp:expression [
+                    sp:varName "name" ;
+                  ] ;
+                sp:separator "Or" ;
+              ] ;
+            sp:varName "unionURI" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "range" ;
+              ] ;
+            sp:predicate rdfs:range ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a xsd:string ;
+                sp:arg1 [
+                    a afn:localname ;
+                    sp:arg1 [
+                        sp:varName "range" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "name" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:property ;
+      spl:valueType rdf:Property ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:label "union class name" ;
+  rdfs:subClassOf spin:Functions ;
+.
+rdfs:Literal
+  owl:sameAs xsd:string ;
+.
+owl:Thing
+  rdfs:isDefinedBy rdf:Statement ;
+.

@@ -1,0 +1,145 @@
+# baseURI: http://datashapes.org/graphql.ui
+# imports: http://datashapes.org/graphql
+# imports: http://topbraid.org/swa
+# prefix: graphql.ui
+
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix default: <http://uispin.org/default#> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix graphql.ui: <http://datashapes.org/graphql.ui#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://datashapes.org/graphql.ui>
+  a owl:Ontology ;
+  owl:imports <http://datashapes.org/graphql> ;
+  owl:imports <http://topbraid.org/swa> ;
+.
+graphql.ui:GraphiQLPage
+  a ui:ViewElement ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:serviceURL ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The URL of the GraphQL service." ;
+    ] ;
+  ui:headIncludes """
+<ui:group>
+    <script src=\"../{= ui:lib() }/assets/lib/jquery/jquery.js\"/>
+    <script src=\"../{= ui:lib() }/assets/lib/jquery-ui/jquery-ui.js\"/>
+    <script src=\"../{= ui:lib() }/assets/lib/chosen/chosen.jquery.min.js\"/>
+    <script src=\"../{= ui:lib() }/assets/lib/openajax/OpenAjax.js\"/>
+    <script src=\"../{= ui:lib() }/assets/build/runtime.bundle.js\"/>
+    <script src=\"../{= ui:lib() }/assets/build/vendors.bundle.js\"/>
+    <script src=\"../{= ui:lib() }/assets/build/topbraid.bundle.js\"/>
+    <title>TopBraid GraphiQL</title>
+</ui:group>
+"""^^ui:Literal ;
+  ui:prototype """
+<ui:group>
+    <div data-url=\"{= ?serviceURL }\" id=\"graphiql\">Loading...</div>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "GraphiQL Page" ;
+  rdfs:subClassOf ui:ViewElements ;
+.
+graphql.ui:ServiceGraphiQLPage
+  a ui:ViewElement ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:serviceURL ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The URL of the GraphQL service." ;
+    ] ;
+  ui:headIncludes """
+<ui:group>
+    <script src=\"../../{= ui:lib() }/assets/lib/jquery/jquery.js\"/>
+    <script src=\"../../{= ui:lib() }/assets/lib/jquery-ui/jquery-ui.js\"/>
+    <script src=\"../../{= ui:lib() }/assets/lib/chosen/chosen.jquery.min.js\"/>
+    <script src=\"../../{= ui:lib() }/assets/lib/openajax/OpenAjax.js\"/>
+    <script src=\"../../{= ui:lib() }/assets/build/runtime.bundle.js\"/>
+    <script src=\"../../{= ui:lib() }/assets/build/vendors.bundle.js\"/>
+    <script src=\"../../{= ui:lib() }/assets/build/topbraid.bundle.js\"/>
+    <title>TopBraid GraphiQL</title>
+</ui:group>
+"""^^ui:Literal ;
+  ui:prototype """
+<ui:group>
+    <div data-url=\"{= ?serviceURL }\" id=\"graphiql\">Loading...</div>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "GraphiQL Page (for a specific service)" ;
+  rdfs:subClassOf ui:ViewElements ;
+.

@@ -1,0 +1,901 @@
+# baseURI: http://teamwork.topbraidlive.org/ontologyprojects
+# imports: http://server.topbraidlive.org/system-applications/teamworkconfig
+# imports: http://teamwork.topbraidlive.org/crosswalkprojects
+# imports: http://topbraid.org/swa
+# imports: http://topbraid.org/tasks.ui
+# imports: http://topbraid.org/teamwork.ui
+# prefix: ontologyprojects
+
+@prefix acjob: <http://evn.topbraidlive.org/tagger/acjob#> .
+@prefix acpp: <http://topbraid.org/nlp/autoclassifier-preproc#> .
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix autotagger: <http://evn.topbraidlive.org/autotagger#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix conceptmatch: <http://topbraid.org/conceptmatch#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix config-importers: <http://edg.topbraidlive.org/config/importers#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix core-soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix corpus: <http://topbraid.org/corpus#> .
+@prefix corpusprojects: <http://topbraid.org/corpus-projects#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkapp: <http://topbraid.org/swa/crosswalkapp#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dashboard: <http://example.org/dashboard#> .
+@prefix datagraph: <http://teamwork.topbraidlive.org/datagraph/datagraphprojects#> .
+@prefix dataset: <http://teamwork.topbraidlive.org/dataset#> .
+@prefix datasetapp: <http://topbraid.org/swa/datasetapp#> .
+@prefix datasetviewer: <http://topbraid.org/swa/datasetviewer#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ddl: <http://edg.topbraidlive.org/1.0/importers/ddl#> .
+@prefix default: <http://uispin.org/default#> .
+@prefix defaultapp: <http://topbraid.org/swa/defaultapp#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix document: <http://topbraid.org/document#> .
+@prefix documents: <http://edg.topbraid.solutions/1.0/shapes/documents#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg-config: <http://edg.ext.topbraidlive.org/schema/config/importers#> .
+@prefix edg-importer: <http://edg.topbraidlive.org/importer/> .
+@prefix edg-qa: <http://edg.topbraidlive.org/utility/qa/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.global: <urn:x-evn-global:> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix edgproduct: <http://edg.topbraidlive.org/edgproduct#> .
+@prefix eeh-lib: <http://www.environmenthub.no/spin/1.0/eeh-lib#> .
+@prefix eeh-reportlib: <http://www.environmenthub.no/spin/1.0/eeh-reportlib#> .
+@prefix elements: <http://purl.org/dc/elements/1.1/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evn: <http://topbraid.org/evn/evn#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evnimport: <http://evn.topbraidlive.org/uispin/evnimport#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix ex: <http://example.org/> .
+@prefix extjs: <http://uispin.com/extjs#> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix forms: <http://www.topbraid.org/2007/01/forms.owl#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix governance: <http://topbraid.org/teamworkgovernance.ui#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix graphql.search: <http://teamwork.topbraidlive.org/graphql.search#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix inference: <http://www.topbraid.org/2007/06/inference.owl#> .
+@prefix jdbc: <http://edg.topbraidlive.org/1.0/importers/jdbc#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix kennedys: <http://topbraid.org/examples/kennedys#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix lib-importer: <http://edg.topbraid.solutions/importer/lib#> .
+@prefix lineage-transform: <http://edg.topbraid.solutions/transform/importer/lineage#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix ontologyviewer: <http://topbraid.org/swa/ontologyviewer#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix proxy-lineage: <http://edg.topbraid.solutions/proxy/importer/lineage#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmapp: <http://rdm.topbraidlive.org/rdmapp#> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix rdmviewer: <http://rdm.topbraidlive.org/rdmviewer#> .
+@prefix saf: <http://topbraid.org/saf/> .
+@prefix safconfig: <http://topbraid.org/safconfig/> .
+@prefix safindex: <http://topbraid.org/safindex#> .
+@prefix safm: <http://saf.topbraidlive.org/metaschema/> .
+@prefix savedQueries: <http://teamwork.topbraidlive.org/ui/savedQueries#> .
+@prefix scheduler: <http://topbraid.org/scheduler#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix server: <http://server.topbraidlive.org/server.ui#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix shapesgraph: <http://teamwork.topbraidlive.org/shapesgraph/shapesgraphprojects#> .
+@prefix sharepoint: <http://topbraid.org/sharepoint#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skosshapes: <http://topbraid.org/skos.shapes#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spin.ui: <http://spinrdf.org/spin.ui#> .
+@prefix spinmap: <http://spinrdf.org/spinmap#> .
+@prefix spinmapl: <http://topbraid.org/spin/spinmapl#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix ss: <http://www.topbraidcomposer.org/owl/2006/08/spreadsheets.owl#> .
+@prefix stats: <http://topbraid.org/statistics#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swadoc: <http://topbraid.org/swadoc#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tablesmap: <http://topbraid.org/spin/tablesmap#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix taggerspin: <http://evn.topbraidlive.org/taggerspin#> .
+@prefix taggerui: <http://evn.topbraidlive.org/taggerui#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix tblui: <http://server.topbraidlive.org/tblui#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkAdmin: <http://teamwork.topbraidlive.org/doc/teamworkAdmin#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworkconstraints: <http://topbraid.org/teamworkconstraints#> .
+@prefix teamworkdashboard: <http://topbraid.org/teamworkdashboard#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix teamworkupdate: <http://teamworkAPI.topbraid.com/teamworkUpdate#> .
+@prefix textindex: <http://topbraid.org/textindex#> .
+@prefix tika-importer: <http://teamwork.topbraidlive.org/corpus/tika-importer#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix tracker: <http://teamwork.topbraidlive.org/ui/tracker#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uitest: <http://uispin.org/test#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix userdat: <http://teamwork.topbraidlive.org/ui/userdata> .
+@prefix userdata: <http://teamwork.topbraidlive.org/ui/userdata#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix victory: <http://edg.topbraid.solutions/victory/> .
+@prefix visual: <http://topbraid.org/visual#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xhtml: <http://topbraid.org/xhtml#> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://teamwork.topbraidlive.org/ontologyprojects>
+  a owl:Ontology ;
+  owl:imports <http://server.topbraidlive.org/system-applications/teamworkconfig> ;
+  owl:imports <http://teamwork.topbraidlive.org/crosswalkprojects> ;
+  owl:imports <http://topbraid.org/swa> ;
+  owl:imports <http://topbraid.org/tasks.ui> ;
+  owl:imports <http://topbraid.org/teamwork.ui> ;
+  owl:versionInfo "0.1.0" ;
+.
+ontologyprojects:EditableImports
+  a teamwork:EditableImportsTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:distinct true ;
+      sp:orderBy (
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "graph" ;
+          ]
+          [
+            sp:varName "label" ;
+          ]
+          [
+            sp:varName "case" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Union ;
+            sp:elements (
+                (
+                  (
+                    (
+                      [
+                        sp:object [
+                            sp:varName "?0" ;
+                          ] ;
+                        sp:predicate tops:files ;
+                        sp:subject [
+                            sp:varName "file" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object "/" ;
+                        sp:predicate rdf:first ;
+                        sp:subject [
+                            sp:varName "?0" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "?1" ;
+                          ] ;
+                        sp:predicate rdf:rest ;
+                        sp:subject [
+                            sp:varName "?0" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object true ;
+                        sp:predicate rdf:first ;
+                        sp:subject [
+                            sp:varName "?1" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "?2" ;
+                          ] ;
+                        sp:predicate rdf:rest ;
+                        sp:subject [
+                            sp:varName "?1" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object true ;
+                        sp:predicate rdf:first ;
+                        sp:subject [
+                            sp:varName "?2" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object () ;
+                        sp:predicate rdf:rest ;
+                        sp:subject [
+                            sp:varName "?2" ;
+                          ] ;
+                      ]
+                    )
+                    [
+                      a sp:Bind ;
+                      sp:expression [
+                          a smf:baseURI ;
+                          sp:arg1 [
+                              sp:varName "file" ;
+                            ] ;
+                        ] ;
+                      sp:variable [
+                          sp:varName "graph" ;
+                        ] ;
+                    ]
+                    [
+                      a sp:Bind ;
+                      sp:expression "o1" ;
+                      sp:variable [
+                          sp:varName "case" ;
+                        ] ;
+                    ]
+                  )
+                  [
+                    a sp:Filter ;
+                    sp:expression [
+                        a sp:and ;
+                        sp:arg1 [
+                            a sp:ne ;
+                            sp:arg1 [
+                                sp:varName "graph" ;
+                              ] ;
+                            sp:arg2 [
+                                sp:varName "projectGraph" ;
+                              ] ;
+                          ] ;
+                        sp:arg2 [
+                            a teamwork:isImportableGraph ;
+                            arg:file [
+                                sp:varName "file" ;
+                              ] ;
+                            arg:graph [
+                                sp:varName "graph" ;
+                              ] ;
+                          ] ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    sp:object [
+                        sp:varName "?3" ;
+                      ] ;
+                    sp:predicate teamwork:readableGraphsUnderTeamControl ;
+                    sp:subject () ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "graph" ;
+                      ] ;
+                    sp:predicate rdf:first ;
+                    sp:subject [
+                        sp:varName "?3" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "?4" ;
+                      ] ;
+                    sp:predicate rdf:rest ;
+                    sp:subject [
+                        sp:varName "?3" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "graphTCH" ;
+                      ] ;
+                    sp:predicate rdf:first ;
+                    sp:subject [
+                        sp:varName "?4" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object () ;
+                    sp:predicate rdf:rest ;
+                    sp:subject [
+                        sp:varName "?4" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Filter ;
+                    sp:expression [
+                        a sp:ne ;
+                        sp:arg1 [
+                            sp:varName "graph" ;
+                          ] ;
+                        sp:arg2 [
+                            sp:varName "projectGraph" ;
+                          ] ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression "o2" ;
+                    sp:variable [
+                        sp:varName "case" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    a sp:NamedGraph ;
+                    sp:elements (
+                        [
+                          sp:object [
+                              sp:varName "graph" ;
+                            ] ;
+                          sp:predicate teamwork:importableSystemShapesGraph ;
+                          sp:subject [
+                              sp:varName "any" ;
+                            ] ;
+                        ]
+                      ) ;
+                    sp:graphNameNode ui:graph ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression "o3" ;
+                    sp:variable [
+                        sp:varName "case" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    a sp:NamedGraph ;
+                    sp:elements (
+                        [
+                          sp:object [
+                              sp:varName "graph" ;
+                            ] ;
+                          sp:predicate teamwork:importableSystemGraph ;
+                          sp:subject [
+                              sp:varName "any" ;
+                            ] ;
+                        ]
+                      ) ;
+                    sp:graphNameNode ui:graph ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression "o4" ;
+                    sp:variable [
+                        sp:varName "case" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    sp:object [
+                        sp:varName "graph" ;
+                      ] ;
+                    sp:predicate owl:imports ;
+                    sp:subject [
+                        sp:varName "projectGraph" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression "o5" ;
+                    sp:variable [
+                        sp:varName "case" ;
+                      ] ;
+                  ]
+                )
+              ) ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:coalesce ;
+                sp:arg1 [
+                    a teamwork:projectLabel ;
+                    arg:projectGraph [
+                        sp:varName "graph" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a spl:objectInGraph ;
+                    sp:arg1 [
+                        sp:varName "graph" ;
+                      ] ;
+                    sp:arg2 rdfs:label ;
+                    sp:arg3 [
+                        sp:varName "graph" ;
+                      ] ;
+                  ] ;
+                sp:arg3 [
+                    a xsd:string ;
+                    sp:arg1 [
+                        sp:varName "graph" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "label" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "Editable imports" ;
+  rdfs:subClassOf teamwork:EditableImportsTemplates ;
+.
+ontologyprojects:NoInstancesManagePlugin
+  a teamwork:ManagePlugin ;
+  ui:prototype """
+<ui:setContext let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\" ui:queryGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <teamwork:ActionLink arg:icon=\"{= ui:lib() }/teamwork/build/images/teamwork/no-instances-mode-icon.svg\" arg:title=\"No-Instances Mode\">
+        <div class=\"checkbox\">
+            <input checked=\"{= IF(spl:object(?teamGraph, ontologyprojects:noInstancesMode), &quot;checked&quot;, ?none) }\" type=\"checkbox\">
+                <ui:handle arg:checked=\"this.checked\" ui:event=\"onclick\">
+                    <ui:setPropertyValue arg:property=\"{= ontologyprojects:noInstancesMode }\" arg:value=\"{= ?checked }\" ui:this=\"{= ?teamGraph }\"/>
+                </ui:handle>
+            </input>
+            <span>Editors can neither add or modify instances (only classes, properties and shapes).</span>
+        </div>
+    </teamwork:ActionLink>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:label "No-instances mode plugin" ;
+  rdfs:subClassOf teamwork:ManagePlugins ;
+.
+ontologyprojects:OWL2SHACLPage
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graphs ;
+      spl:valueType xsd:string ;
+      rdfs:comment "A space-separated list of graphs to include." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:replace ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  ui:prototype """
+<teamwork:Chrome arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= teamwork:TransformProjectTab }\" arg:tag=\"{= ?tag }\" let:tagId=\"{= teamwork:tagId(?tag) }\">
+    <h1>Conversion of OWL Axioms to SHACL Constraints</h1>
+    <ui:setContext ui:queryGraph=\"{= teamwork:queryGraph(true, teamwork:graphIdFromMasterGraph(?projectGraph), ?tagId, smf:currentUserName()) }\">
+        <p>
+            <teamwork:convertOWL2SHACL arg:graphs=\"{= ?graphs }\" arg:replace=\"{= ?replace }\"/>
+        </p>
+    </ui:setContext>
+</teamwork:Chrome>
+"""^^ui:Literal ;
+  rdfs:subClassOf teamwork:MustHaveAccessToTagPage ;
+.
+ontologyprojects:OWL2SHACLPlugin
+  a teamwork:TransformPlugin ;
+  teamwork:pluginRequiresRole teamwork:editor ;
+  teamwork:validForTags true ;
+  ui:prototype """
+<ui:setContext>
+    <ui:createLink arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\" ui:viewClass=\"{= ontologyprojects:OWL2SHACLPage }\">
+        <teamwork:ActionLink arg:comment=\"Converts OWL restrictions and RDFS domain/range axioms to corresponding SHACL property constraints. Best used on a working copy to explore and fine tune the outcome. The replace option only works on statements stored in the local ontology graph, not on included statements.\" arg:icon=\"lib/teamwork/build/images/teamwork/SHACL.svg\" arg:title=\"Convert OWL Axioms to SHACL Constraints\">
+            <div letrs:graphs='{#
+                    SELECT ?graph ?label
+                    WHERE {
+                        GRAPH ?projectGraph {
+                            ?projectGraph (owl:imports)+ ?graph .
+                        } .
+                        BIND (teamwork:graphLabel(?graph) AS ?label) .
+                        FILTER (!STRSTARTS(str(?graph), \"http://topbraid.org\")) .
+                        FILTER (!STRSTARTS(str(?graph), \"http://datashapes.org\")) .
+                        FILTER (?graph != ?projectGraph) .
+                    }
+                    ORDER BY (?label) }'>
+                <script>var grs = ''</script>
+                <script>function updateGRS() {
+	grs = '';
+	$('.shacl-graph-selector').each(function(index, element) {
+		var e = $(element);
+		if(e.is(':checked')) {
+			grs += e.val() + ' ';
+		}
+	});
+}</script>
+                <ui:if ui:condition=\"{= !spr:isEmpty(?graphs) }\">
+                    <div>
+                        <b>Include axioms from graphs:</b>
+                        <swa:Spaces/>
+                        <a href=\"javascript:void(0)\" onclick=\"$('.shacl-graph-selector').prop('checked', true);updateGRS()\">All</a>
+                        <swa:Spaces/>
+                        <a href=\"javascript:void(0)\" onclick=\"$('.shacl-graph-selector').prop('checked', false);updateGRS()\">None</a>
+                    </div>
+                    <div>
+                        <ui:forEach ui:resultSet=\"{= ?graphs }\">
+                            <div class=\"checkbox\">
+                                <input class=\"shacl-graph-selector\" onchange=\"updateGRS()\" type=\"checkbox\" value=\"{= ?graph }\"/>
+                                <span title=\"{= ?graph }\">{= ?label }</span>
+                            </div>
+                        </ui:forEach>
+                    </div>
+                </ui:if>
+                <div>
+                    <swa:Button arg:label=\"Convert, keeping OWL axioms\" arg:onClick=\"window.location.href='{= ?link }&amp;replace=false&amp;graphs=' + encodeURIComponent(grs)\"/>
+                    <swa:Spaces/>
+                    <swa:Button arg:label=\"Convert, replacing OWL axioms\" arg:onClick=\"window.location.href='{= ?link }&amp;replace=true&amp;graphs=' + encodeURIComponent(grs)\"/>
+                </div>
+            </div>
+        </teamwork:ActionLink>
+    </ui:createLink>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:label "Convert OWL axioms to SHACL constraints plugin" ;
+  rdfs:subClassOf teamwork:TransformPlugins ;
+.
+ontologyprojects:Ontology
+  a rdfs:Class ;
+  rdfs:subClassOf teamwork:Vocabulary ;
+.
+ontologyprojects:ProjectType
+  a teamwork:ProjectType ;
+  edg.v:icon "tq-ontology-icon" ;
+  teamwork:dashboardGadget tasks:TaskStatusDashboardGadget ;
+  teamwork:dashboardGadget teamwork:TagStatusDashboardGadget ;
+  teamwork:dashboardGadget teamwork:ValidationDashboardGadget ;
+  teamwork:defaultLayout "ShapesGraph" ;
+  teamwork:deletePlugin teamwork:RemoveFromLuceneIndexDeletePlugin ;
+  teamwork:editableImportsTemplate ontologyprojects:EditableImports ;
+  teamwork:editorProjectTabLabel "Ontology" ;
+  teamwork:isOntologyProjectType true ;
+  teamwork:isReadOnlyTypeFunction ontologyprojects:isReadOnlyType ;
+  teamwork:owlImports "http://datashapes.org/graphql" ;
+  teamwork:owlImports "http://topbraid.org/teamworkconstraints" ;
+  teamwork:pluralLabel "Ontologies" ;
+  teamwork:projectEditorClass <http://topbraid.org/swa/ontologyapp#Application> ;
+  teamwork:projectPlugin crosswalkprojects:CrosswalksGeneralPlugin ;
+  teamwork:projectPlugin ontologyprojects:NoInstancesManagePlugin ;
+  teamwork:projectPlugin ontologyprojects:OWL2SHACLPlugin ;
+  teamwork:projectPlugin ontologyprojects:RootClassManagePlugin ;
+  teamwork:projectPlugin ontologyprojects:SHACLPreferredManagePlugin ;
+  teamwork:projectPlugin savedQueries:ExportSavedSPARQLQueriesPlugin ;
+  teamwork:projectPlugin savedQueries:SPARQLEndpointPlugin ;
+  teamwork:projectPlugin teamwork:ComparisonReportPlugin ;
+  teamwork:projectPlugin teamwork:DefaultNamespacePlugin ;
+  teamwork:projectPlugin teamwork:ExportSavedSearchPlugin ;
+  teamwork:projectPlugin teamwork:GeneralPlugins ;
+  teamwork:projectPlugin teamwork:GraphURIPlugin ;
+  teamwork:projectPlugin teamwork:ImportedByGeneralPlugin ;
+  teamwork:projectPlugin teamwork:ImportsGeneralPlugin ;
+  teamwork:projectPlugin teamwork:LocalSearchManagePlugin ;
+  teamwork:projectPlugin teamwork:NotificationsManagePlugin ;
+  teamwork:projectPlugin teamwork:ProblemsAndSuggestionsReportPlugin ;
+  teamwork:projectPlugin teamwork:PublishExportPlugin ;
+  teamwork:projectPlugin teamwork:RDFFileImporterPlugin ;
+  teamwork:projectPlugin teamwork:SchemaFromSpreadsheetImportPlugin ;
+  teamwork:projectPlugin teamwork:ScriptBasedImportPlugin ;
+  teamwork:projectPlugin teamwork:SpreadsheetImportPlugin ;
+  teamwork:projectPlugin teamwork:SpreadsheetUsingTemplateImportPlugin ;
+  teamwork:projectPlugin teamwork:StatisticsReportPlugin ;
+  teamwork:projectPlugin teamwork:URIConstructionRulesManagePlugin ;
+  teamwork:projectTypeSupportsUsageTab true ;
+  teamwork:projectTypeWeight 7 ;
+  teamwork:singularLabel "Ontology" ;
+  teamwork:supportedNotification tasks:TaskCreatedNotification ;
+  teamwork:supportedNotification tasks:TaskStatusChangedNotification ;
+  teamwork:supportedNotification teamwork:FileImportedNotification ;
+  teamwork:supportedNotification teamwork:SpreadsheetImportedNotification ;
+  teamwork:supportedNotification teamwork:TagCreatedNotification ;
+  teamwork:supportedNotification teamwork:TagStatusChangedNotification ;
+  teamwork:supportedNotification teamwork:VocabularyClearedNotification ;
+  teamwork:supportedNotification teamwork:VocabularyStatusChangedNotification ;
+  teamwork:templateQuery teamwork:ResourceWithURI ;
+  teamwork:templateQuery teamwork:ResourcesByURIPart ;
+  teamwork:templateQuery teamwork:ResourcesByURIRegex ;
+  teamwork:vocabularyType ontologyprojects:Ontology ;
+  rdfs:comment "Ontologies are knowledge models that define classes (entities) and properties (attributes and relationships) in a domain of interest. RDFS, OWL and SHACL are supported as ontology modeling languages. Ontologies can also include instances of classes or, alternatively, you can switch an ontology into a \"no instances\" mode." ;
+  rdfs:label "Ontology project type" ;
+.
+ontologyprojects:RootClassManagePlugin
+  a teamwork:ManagePlugin ;
+  ui:prototype """
+<ui:setContext let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\" ui:queryGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <teamwork:ActionLink arg:icon=\"{= ui:lib() }/teamwork/build/images/teamwork/root-class-icon.svg\" arg:title=\"Root Class of Hierarchy\">
+        <span>The root class of a hierarchy can for example be set if you don't want to show the ancestor classes of your main custom class. Replace the default class name \"Thing\" with the name of the preferred root class.</span>
+        <br/>
+        <br/>
+        <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?projectGraph) }\" ui:silentTransactions=\"{= true }\">
+            <ui:loadable ui:loadId=\"setRootClass\">
+                <ui:if ui:condition=\"{= bound(?rootClass) }\">
+                    <ui:setPropertyValue arg:property=\"{= teamwork:rootClass }\" arg:value=\"{= ?rootClass }\" ui:this=\"{= ?projectGraph }\"/>
+                </ui:if>
+                <swa:AutoComplete arg:id=\"{= ui:uniqueId() }\" arg:initialValue=\"{= COALESCE(spl:object(?projectGraph, teamwork:rootClass), owl:Thing) }\" arg:onSelect=\"swa.loadWithResource('setRootClass', 'rootClass', resource)\" arg:type=\"{= rdfs:Class }\"/>
+            </ui:loadable>
+        </ui:setContext>
+    </teamwork:ActionLink>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:label "Root class of hierarchy plugin" ;
+  rdfs:subClassOf teamwork:ManagePlugins ;
+.
+ontologyprojects:SHACLPreferredManagePlugin
+  a teamwork:ManagePlugin ;
+  ui:prototype """
+<ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?projectGraph) }\">
+    <ui:if ui:condition=\"{= tosh:shaclExists() }\">
+        <ui:setContext let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\" ui:queryGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+            <teamwork:ActionLink arg:icon=\"{= ui:lib() }/teamwork/build/images/teamwork/SHACL.svg\" arg:title=\"Prefer SHACL over OWL/RDFS\">
+                <div class=\"checkbox\">
+                    <input checked=\"{= IF(spl:object(?teamGraph, teamwork:shaclPreferred), &quot;checked&quot;, ?none) }\" type=\"checkbox\">
+                        <ui:handle arg:checked=\"this.checked\" ui:event=\"onclick\">
+                            <ui:setPropertyValue arg:property=\"{= teamwork:shaclPreferred }\" arg:value=\"{= ?checked }\" ui:this=\"{= ?teamGraph }\"/>
+                        </ui:handle>
+                    </input>
+                    <span>SHACL design patterns (such as sh:minCount) will be preferred over OWL axioms (such as owl:minCardinality) or RDFS axioms (such as rdfs:range). The global axioms section will be hidden on property forms.</span>
+                </div>
+            </teamwork:ActionLink>
+        </ui:setContext>
+    </ui:if>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:label "Prefer SHACL over OWL/RDFS plugin" ;
+  rdfs:subClassOf teamwork:ManagePlugins ;
+.
+ontologyprojects:isNoInstancesMode
+  a spin:Function ;
+  spin:private true ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks if the current Ontology project is in no-instances mode." ;
+  rdfs:label "is no instances mode" ;
+  rdfs:subClassOf spin:Functions ;
+.
+ontologyprojects:isReadOnlyType
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:Filter ;
+            sp:expression false ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  rdfs:subClassOf teamwork:isReadOnlyTypeFunctions ;
+.
+ontologyprojects:noInstancesMode
+  a rdf:Property ;
+  rdfs:comment "A flag that can be stored in the owl:Ontology of the TCH graph to indicate that the ontology editor shall not provide features to edit instances." ;
+  rdfs:label "no instances mode" ;
+  rdfs:range xsd:boolean ;
+.
+teamwork:ClonePropertyShapesFrom
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:paths ;
+      spl:valueType xsd:string ;
+      rdfs:comment "A space-separated string of predicates, possibly starting with ^ to indicate inverse." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:sourceShape ;
+      spl:valueType sh:NodeShape ;
+      rdfs:comment "The source shape declaring the original properties." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:targetShape ;
+      spl:valueType sh:NodeShape ;
+      rdfs:comment "The target shape to add the new property shapes to," ;
+    ] ;
+  ui:mutationFieldName "clonePropertyShapesFrom" ;
+  ui:prototype """
+<ui:forEach letrs:props=\"{#
+        SELECT ?prop
+        WHERE {
+            VALUES ?prop {
+                sh:group
+                sh:order
+                sh:datatype
+                sh:class
+                sh:node
+                sh:nodeKind
+                sh:minCount
+                sh:maxCount
+                graphql:name
+                sh:name
+                sh:description
+            } .
+        } }\" ui:resultSet='{#
+        SELECT ?str ?propertyShape
+        WHERE {
+            ?str spif:split ( ?paths \" \" ) .
+            BIND (BNODE() AS ?propertyShape) .
+        } }'>
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                ?targetShape sh:property ?propertyShape .
+                ?propertyShape a sh:PropertyShape .
+            }
+            WHERE {
+            } }\"/>
+    <ui:if ui:condition=\"{= STRSTARTS(?str, &quot;^&quot;) }\">
+        <ui:group let:predicate=\"{= IRI(SUBSTR(?str, 2)) }\">
+            <ui:update ui:updateQuery=\"{!
+                    INSERT {
+                        ?propertyShape sh:path ?path .
+                        ?path sh:inversePath ?predicate .
+                    }
+                    WHERE {
+                        BIND (BNODE() AS ?path) .
+                    } }\"/>
+            <ui:forEach ui:resultSet=\"{= ?props }\">
+                <ui:update ui:updateQuery=\"{!
+                        INSERT {
+                            ?propertyShape ?prop ?value .
+                        }
+                        WHERE {
+                            BIND (swa:propertyShapePropertyAtClassInversePath(?predicate, ?prop, ?sourceShape) AS ?value) .
+                        } }\"/>
+            </ui:forEach>
+        </ui:group>
+    </ui:if>
+    <ui:else>
+        <ui:group let:predicate=\"{= IRI(?str) }\">
+            <ui:update ui:updateQuery=\"{!
+                    INSERT {
+                        ?propertyShape sh:path ?predicate .
+                    }
+                    WHERE {
+                    } }\"/>
+            <ui:forEach ui:resultSet=\"{= ?props }\">
+                <ui:update ui:updateQuery=\"{!
+                        INSERT {
+                            ?propertyShape ?prop ?value .
+                        }
+                        WHERE {
+                            BIND (swa:propertyShapePropertyAtClass(?predicate, ?prop, ?sourceShape) AS ?value) .
+                        } }\"/>
+            </ui:forEach>
+            <ui:group let:or=\"{= swa:propertyShapePropertyAtClass(?predicate, sh:or, ?sourceShape) }\">
+                <ui:if ui:condition=\"{= isBlank(?or) }\">
+                    <teamwork:cloneBlankNode arg:oldObject=\"{= ?or }\" arg:predicate=\"{= sh:or }\" arg:subject=\"{= ?propertyShape }\"/>
+                </ui:if>
+                <ui:elseif ui:condition=\"{= isIRI(?or) }\">
+                    <ui:addPropertyValue arg:property=\"{= sh:or }\" arg:value=\"{= ?or }\" ui:this=\"{= ?propertyShape }\"/>
+                </ui:elseif>
+            </ui:group>
+        </ui:group>
+    </ui:else>
+</ui:forEach>
+"""^^ui:Literal ;
+  rdfs:comment "Clones one or more property shape declarations from a source shape (or its superclasses) into a target shape." ;
+  rdfs:label "Clone property shapes from" ;
+  rdfs:subClassOf ui:Operations ;
+.
+teamwork:convertOWL2SHACL
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:replace ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to delete the OWL/RDFS triples (if possible)." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graphs ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The project graph." ;
+    ] ;
+  rdfs:label "convert OWL2SHACL" ;
+  rdfs:subClassOf ui:ControlElement ;
+.

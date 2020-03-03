@@ -1,0 +1,443 @@
+# baseURI: http://topbraid.org/spin/skoscleaner
+# imports: http://spinrdf.org/spin
+# imports: http://www.w3.org/2004/02/skos/core
+# prefix: skoscleaner
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skoscleaner: <http://topbraid.org/spin/skoscleaner#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://topbraid.org/spin/skoscleaner>
+  a owl:Ontology ;
+  rdfs:comment "A collection of SPIN Update rules that \"clean up\" a SKOS model according to some best practices, such as using skos:broader instead of skos:narrower." ;
+  owl:imports <http://spinrdf.org/spin> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+.
+skoscleaner:rule
+  a spin:RuleProperty ;
+  spin:rulePropertyMaxIterationCount 1 ;
+  rdfs:comment "Groups together all SKOS Cleaner rules so that they can be executed in a more targeted way, e.g. from SPARQLMotion. Also makes sure that the rules are only executed once." ;
+  rdfs:label "rule" ;
+  rdfs:subPropertyOf spin:rule ;
+.
+owl:Class
+  skoscleaner:rule [
+      a sp:Modify ;
+      sp:insertPattern (
+          [
+            sp:object owl:Thing ;
+            sp:predicate rdfs:subClassOf ;
+            sp:subject spin:_this ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:and ;
+                sp:arg1 [
+                    a sp:isIRI ;
+                    sp:arg1 spin:_this ;
+                  ] ;
+                sp:arg2 [
+                    a sp:ne ;
+                    sp:arg1 [
+                        a afn:namespace ;
+                        sp:arg1 spin:_this ;
+                      ] ;
+                    sp:arg2 [
+                        a afn:namespace ;
+                        sp:arg1 owl:Thing ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:notExists ;
+                sp:elements (
+                    [
+                      sp:object [
+                          sp:varName "class" ;
+                        ] ;
+                      sp:predicate rdfs:subClassOf ;
+                      sp:subject spin:_this ;
+                    ]
+                    [
+                      a sp:Filter ;
+                      sp:expression [
+                          a sp:isIRI ;
+                          sp:arg1 [
+                              sp:varName "class" ;
+                            ] ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+        ) ;
+      rdfs:comment "Ensure that each named class has at least one named superclass (owl:Thing as fallback)" ;
+    ] ;
+.
+owl:Thing
+  skoscleaner:rule [
+      a sp:DeleteWhere ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "any" ;
+              ] ;
+            sp:predicate <http://www.w3.org/2004/02/skos/core#broaderTransitive> ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+      rdfs:comment "Delete any skos:broaderTransitive" ;
+    ] ;
+  skoscleaner:rule [
+      a sp:DeleteWhere ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "any" ;
+              ] ;
+            sp:predicate <http://www.w3.org/2004/02/skos/core#narrowerTransitive> ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+      rdfs:comment "Delete any skos:narrowerTransitive" ;
+    ] ;
+  skoscleaner:rule [
+      a sp:DeleteWhere ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "any" ;
+              ] ;
+            sp:predicate <http://www.w3.org/2004/02/skos/core#semanticRelation> ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+      rdfs:comment "Delete any skos:semanticRelation" ;
+    ] ;
+  skoscleaner:rule [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate rdfs:label ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate rdfs:label ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+      rdfs:comment "Delete rdfs:labels where an identical skos:prefLabel exists" ;
+    ] ;
+  skoscleaner:rule [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            sp:object [
+                sp:varName "narrower" ;
+              ] ;
+            sp:predicate <http://www.w3.org/2004/02/skos/core#narrower> ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+      sp:insertPattern (
+          [
+            sp:object [
+                sp:varName "s" ;
+              ] ;
+            sp:predicate <http://www.w3.org/2004/02/skos/core#broader> ;
+            sp:subject [
+                sp:varName "narrower" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "narrower" ;
+              ] ;
+            sp:predicate <http://www.w3.org/2004/02/skos/core#narrower> ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+      rdfs:comment "Replace skos:narrower with skos:broader" ;
+    ] ;
+  skoscleaner:rule [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            sp:object [
+                sp:varName "old" ;
+              ] ;
+            sp:predicate [
+                sp:varName "p" ;
+              ] ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+      sp:insertPattern (
+          [
+            sp:object [
+                sp:varName "new" ;
+              ] ;
+            sp:predicate [
+                sp:varName "p" ;
+              ] ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          (
+            (
+              [
+                sp:object [
+                    sp:varName "old" ;
+                  ] ;
+                sp:predicate [
+                    sp:varName "p" ;
+                  ] ;
+                sp:subject [
+                    sp:varName "s" ;
+                  ] ;
+              ]
+              [
+                a sp:Filter ;
+                sp:expression [
+                    a sp:and ;
+                    sp:arg1 [
+                        a sp:isLiteral ;
+                        sp:arg1 [
+                            sp:varName "old" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        a sp:eq ;
+                        sp:arg1 [
+                            a sp:datatype ;
+                            sp:arg1 [
+                                sp:varName "old" ;
+                              ] ;
+                          ] ;
+                        sp:arg2 xsd:string ;
+                      ] ;
+                  ] ;
+              ]
+              [
+                a sp:Filter ;
+                sp:expression [
+                    a sp:gt ;
+                    sp:arg1 [
+                        a spif:indexOf ;
+                        sp:arg1 [
+                            sp:varName "old" ;
+                          ] ;
+                        sp:arg2 """""" ;
+                      ] ;
+                    sp:arg2 0 ;
+                  ] ;
+              ]
+            )
+            [
+              a sp:Bind ;
+              sp:expression [
+                  a spif:replaceAll ;
+                  sp:arg1 [
+                      sp:varName "old" ;
+                    ] ;
+                  sp:arg2 """""" ;
+                  sp:arg3 "" ;
+                ] ;
+              sp:variable [
+                  sp:varName "lex" ;
+                ] ;
+            ]
+          )
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:lang ;
+                sp:arg1 [
+                    sp:varName "old" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "lang" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    a sp:eq ;
+                    sp:arg1 [
+                        sp:varName "lang" ;
+                      ] ;
+                    sp:arg2 "" ;
+                  ] ;
+                sp:arg2 [
+                    a xsd:string ;
+                    sp:arg1 [
+                        sp:varName "lex" ;
+                      ] ;
+                  ] ;
+                sp:arg3 [
+                    a sp:strlang ;
+                    sp:arg1 [
+                        sp:varName "lex" ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "lang" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "new" ;
+              ] ;
+          ]
+        ) ;
+      rdfs:comment "Unify line breaks" ;
+    ] ;
+  skoscleaner:rule [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            sp:object [
+                sp:varName "scheme" ;
+              ] ;
+            sp:predicate <http://www.w3.org/2004/02/skos/core#topConceptOf> ;
+            sp:subject [
+                sp:varName "concept" ;
+              ] ;
+          ]
+        ) ;
+      sp:insertPattern (
+          [
+            sp:object [
+                sp:varName "concept" ;
+              ] ;
+            sp:predicate <http://www.w3.org/2004/02/skos/core#hasTopConcept> ;
+            sp:subject [
+                sp:varName "scheme" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "scheme" ;
+              ] ;
+            sp:predicate <http://www.w3.org/2004/02/skos/core#topConceptOf> ;
+            sp:subject [
+                sp:varName "concept" ;
+              ] ;
+          ]
+        ) ;
+      rdfs:comment "Replace skos:topConceptOf with skos:hasTopConcept" ;
+    ] ;
+.
+<http://www.w3.org/2004/02/skos/core#Concept>
+  skoscleaner:rule [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            sp:object [
+                sp:varName "superType" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject spin:_this ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "superType" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject spin:_this ;
+          ]
+          [
+            sp:object [
+                sp:varName "subType" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject spin:_this ;
+          ]
+          [
+            a sp:TriplePath ;
+            sp:object [
+                sp:varName "superType" ;
+              ] ;
+            sp:path [
+                a sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 1 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "subType" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:ne ;
+                sp:arg1 [
+                    sp:varName "superType" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "subType" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+      rdfs:comment "Remove redundant rdf:types - leave most specific one" ;
+    ] ;
+.

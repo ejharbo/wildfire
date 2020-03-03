@@ -1,0 +1,1478 @@
+# baseURI: http://datashapes.org/metash
+# imports: http://datashapes.org/graphql
+# imports: http://datashapes.org/sparql
+# prefix: metash
+
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix metash: <http://datashapes.org/metash#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sparql: <http://datashapes.org/sparql#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://datashapes.org/metash>
+  a owl:Ontology ;
+  rdfs:comment """A collection of shapes about shapes. The shapes here are primarily designed to support querying node shapes, classes and property shapes, as well as property groups via GraphQL, to provide a stable and convenient API for applications such as schema editors. While the shapes could potentially also be used for validation purposes, they rather represent best-practices than \"hard\" constraints. For example, sh:datatype has a sh:maxCount of 1 even though the official spec does not prescribe that.
+
+Some of the sh:values rules in this graph use functions that are outside of the SPARQL standard. Implementers outside of the TopBraid platform would need to replicate their implementations.
+
+This is a \"hard-coded\" system graph of the TopBraid platform, but you can substitute it by creating a new graph http://datashapes.org/metashx and uploading it into your workspace. In typical use cases, this new graph would owl:import the base graph and then add sh:property constraints to it.""" ;
+  rdfs:label "Metashapes for SHACL" ;
+  owl:imports <http://datashapes.org/graphql> ;
+  owl:imports <http://datashapes.org/sparql> ;
+.
+metash:CardinalityConstraintsPropertyGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Number of Values" ;
+  sh:order "20"^^xsd:decimal ;
+.
+metash:Class
+  a sh:NodeShape ;
+  dash:applicableToClass rdfs:Class ;
+  dash:applicableToClass sh:NodeShape ;
+  rdfs:comment "A shape describing the structure of classes that are also node shapes." ;
+  rdfs:label "Class" ;
+  sh:node metash:NodeShape ;
+  sh:property metash:Class-abstract ;
+  sh:property metash:Class-hasSubClass ;
+  sh:property metash:Class-hasVisibleSubClass ;
+  sh:property metash:Class-isAbstract ;
+  sh:property metash:Class-isHiddenClass ;
+  sh:property metash:Class-newURIBase ;
+  sh:property metash:Class-pathToRootClass ;
+  sh:property metash:Class-publicClass-inverse ;
+  sh:property metash:Class-subClassCount ;
+  sh:property metash:Class-subClassOf ;
+  sh:property metash:Class-subClassOf-inverse ;
+  sh:property metash:NodeShape-isHidden ;
+.
+metash:Class-abstract
+  a sh:PropertyShape ;
+  sh:path dash:abstract ;
+  sh:datatype xsd:boolean ;
+  sh:description "States whether this class is abstract, i.e. cannot have direct instances. Abstract classes are typically used to defined shared properties of its subclasses." ;
+  sh:group metash:DefinitionPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "abstract" ;
+  sh:order "30"^^xsd:decimal ;
+.
+metash:Class-hasSubClass
+  a sh:PropertyShape ;
+  sh:path metash:hasSubClass ;
+  sh:datatype xsd:boolean ;
+  sh:description "Returns true if there is at least one class that has declared this to be its superclass using rdfs:subClassOf." ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:name "has subclass" ;
+  sh:values [
+      sh:exists [
+          sh:path [
+              sh:inversePath rdfs:subClassOf ;
+            ] ;
+        ] ;
+    ] ;
+.
+metash:Class-hasVisibleSubClass
+  a sh:PropertyShape ;
+  sh:path metash:hasVisibleSubClass ;
+  sh:datatype xsd:boolean ;
+  sh:description "Returns true if there is at least one class that has declared this to be its superclass using rdfs:subClassOf and that is not hidden." ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:name "has visible subclass" ;
+  sh:values [
+      sh:ask "ASK { ?subClass rdfs:subClassOf $this . FILTER (!isBlank(?subClass) && !tosh:isHiddenClass(?subClass)) }" ;
+      sh:prefixes <http://datashapes.org/metash> ;
+    ] ;
+.
+metash:Class-isAbstract
+  a sh:PropertyShape ;
+  sh:path metash:isAbstract ;
+  sh:datatype xsd:boolean ;
+  sh:description "True if the class is abstract." ;
+  sh:maxCount 1 ;
+  sh:name "is abstract" ;
+  sh:values [
+      sh:path dash:abstract ;
+    ] ;
+.
+metash:Class-isHiddenClass
+  a sh:PropertyShape ;
+  sh:path metash:isHiddenClass ;
+  sh:datatype xsd:boolean ;
+  sh:description "Returns true for any blank node and where tosh:isHiddenClass returns true." ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:name "is hidden class" ;
+  sh:values [
+      sparql:or (
+          [
+            sparql:isBlank (
+                sh:this
+              ) ;
+          ]
+          [
+            tosh:isHiddenClass (
+                sh:this
+              ) ;
+          ]
+        ) ;
+    ] ;
+.
+metash:Class-newURIBase
+  a sh:PropertyShape ;
+  sh:path metash:newURIBase ;
+  sh:datatype xsd:string ;
+  sh:description """Returns a base string that can be used to create the URI of a new instances of the class. Used in conjunction with other metadata by the create resource dialogs.
+
+This is an internal field that may change in the future, so use with care.""" ;
+  sh:maxCount 1 ;
+  sh:name "new URI base" ;
+  sh:values [
+      swa:newResourceForAssetCollection (
+          sh:this
+        ) ;
+    ] ;
+.
+metash:Class-pathToRootClass
+  a sh:PropertyShape ;
+  sh:path metash:pathToRootClass ;
+  sh:datatype xsd:string ;
+  sh:description "Tries to find the shortest path to a root class (that has no further parents)." ;
+  sh:maxCount 1 ;
+  sh:name "path to root class" ;
+  sh:values [
+      <http://spinrdf.org/spif#shortestObjectsPath> (
+          sh:this
+          rdfs:subClassOf
+          [
+            <http://topbraid.org/teamwork#getRootClass> (
+                [
+                  <http://topbraid.org/teamwork#currentMasterGraph> () ;
+                ]
+              ) ;
+          ]
+        ) ;
+    ] ;
+.
+metash:Class-publicClass-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath graphql:publicClass ;
+    ] ;
+  graphql:name "publicClassOf" ;
+  sh:description "Links a class to the GraphQL schemas that the class has been declared to be published by." ;
+  sh:name "public class of" ;
+  sh:node metash:GraphQLSchema ;
+  sh:nodeKind sh:IRI ;
+.
+metash:Class-subClassCount
+  a sh:PropertyShape ;
+  sh:path metash:subClassCount ;
+  sh:datatype xsd:integer ;
+  sh:description "Returns the number of classes that have declared this to be their superclass using rdfs:subClassOf." ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:name "subclass count" ;
+  sh:values [
+      sh:count [
+          sh:path [
+              sh:inversePath rdfs:subClassOf ;
+            ] ;
+        ] ;
+    ] ;
+.
+metash:Class-subClassOf
+  a sh:PropertyShape ;
+  sh:path rdfs:subClassOf ;
+  sh:description "The superclass(es) of this class. (for querying)." ;
+  sh:name "superclasses" ;
+  sh:node metash:Class ;
+  sh:nodeKind sh:BlankNodeOrIRI ;
+.
+metash:Class-subClassOf-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath rdfs:subClassOf ;
+    ] ;
+  graphql:name "superClassOf" ;
+  sh:description "The subclass(es) of this class." ;
+  sh:name "subclasses" ;
+  sh:node metash:Class ;
+  sh:nodeKind sh:IRI ;
+.
+metash:Class-superClass
+  a sh:PropertyShape ;
+  sh:path rdfs:subClassOf ;
+  sh:class rdfs:Class ;
+  sh:description "The superclass(es) of this class (for editing)." ;
+  sh:group metash:DefinitionPropertyGroup ;
+  sh:name "superclasses" ;
+  sh:nodeKind sh:BlankNodeOrIRI ;
+  sh:order "20"^^xsd:decimal ;
+.
+metash:ClassView
+  a sh:NodeShape ;
+  dash:applicableToClass rdfs:Class ;
+  rdfs:comment "A shape that can be used to visually represent classes." ;
+  rdfs:label "Class view" ;
+  sh:property metash:Class-abstract ;
+  sh:property metash:Class-superClass ;
+  sh:property metash:NodeShape-inheritedProperty ;
+  sh:property metash:NodeShape-property ;
+  sh:property metash:Resource-comment ;
+  sh:property metash:Resource-label ;
+  sh:property metash:Resource-type ;
+.
+metash:DatatypePropertyShapeView
+  a sh:NodeShape ;
+  dash:applicableToClass sh:PropertyShape ;
+  rdfs:comment "The default view shape for property shapes on datatype values." ;
+  rdfs:label "Datatype property shape view" ;
+  sh:node metash:PropertyShapeView ;
+  sh:property metash:PropertyShape-datatypes ;
+  sh:property metash:PropertyShape-flags ;
+  sh:property metash:PropertyShape-maxExclusive ;
+  sh:property metash:PropertyShape-maxInclusive ;
+  sh:property metash:PropertyShape-maxLength ;
+  sh:property metash:PropertyShape-minExclusive ;
+  sh:property metash:PropertyShape-minInclusive ;
+  sh:property metash:PropertyShape-minLength ;
+  sh:property metash:PropertyShape-pattern ;
+  sh:property metash:PropertyShape-singleLine ;
+  sh:property metash:PropertyShape-uniqueLang ;
+  sh:property metash:PropertyShape-uriStart ;
+.
+metash:DefinitionPropertyGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Definition" ;
+  sh:order "0"^^xsd:decimal ;
+.
+metash:DisplayPropertyGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Display" ;
+  sh:order "10"^^xsd:decimal ;
+.
+metash:GraphQLSchema
+  a sh:NodeShape ;
+  dash:applicableToClass graphql:Schema ;
+  rdfs:comment "A shape describing the structure of GraphQL schemas as supported by TopBraid's GraphQL support." ;
+  rdfs:label "GraphQL schema" ;
+  sh:property metash:GraphQLSchema-privateShape ;
+  sh:property metash:GraphQLSchema-protectedShape ;
+  sh:property metash:GraphQLSchema-publicClass ;
+  sh:property metash:GraphQLSchema-publicShape ;
+  sh:property metash:Resource-comment ;
+  sh:property metash:Resource-isImported ;
+  sh:property metash:Resource-label ;
+.
+metash:GraphQLSchema-privateShape
+  a sh:PropertyShape ;
+  sh:path graphql:privateShape ;
+  sh:description "The private shapes of this schema. Private shapes cannot be queried using GraphQL." ;
+  sh:name "private shape" ;
+  sh:node metash:NodeShape ;
+  sh:nodeKind sh:IRI ;
+.
+metash:GraphQLSchema-protectedShape
+  a sh:PropertyShape ;
+  sh:path graphql:protectedShape ;
+  sh:description "The protected shapes of this schema. Protected shapes can be reached from public (top-level) query objects, but not directly." ;
+  sh:name "protected shape" ;
+  sh:node metash:NodeShape ;
+  sh:nodeKind sh:IRI ;
+.
+metash:GraphQLSchema-publicClass
+  a sh:PropertyShape ;
+  sh:path graphql:publicClass ;
+  sh:description "The public classes of this schema. Public classes and their subclasses can be queried as top-level elements in GraphQL queries." ;
+  sh:name "public class" ;
+  sh:node metash:Class ;
+  sh:nodeKind sh:IRI ;
+.
+metash:GraphQLSchema-publicShape
+  a sh:PropertyShape ;
+  sh:path graphql:publicShape ;
+  sh:description "The public shapes of this schema. Public shapes can be queried as top-level elements in GraphQL." ;
+  sh:name "public shape" ;
+  sh:node metash:NodeShape ;
+  sh:nodeKind sh:IRI ;
+.
+metash:InferencesPropertyGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Inferences" ;
+  sh:order "100"^^xsd:decimal ;
+.
+metash:NodeShape
+  a sh:NodeShape ;
+  dash:applicableToClass sh:NodeShape ;
+  rdfs:comment "A shape describing the structure of node shapes." ;
+  rdfs:label "Node shape" ;
+  sh:node metash:Resource ;
+  sh:property metash:NodeShape-allSuperShapes ;
+  sh:property metash:NodeShape-applicableToClass ;
+  sh:property metash:NodeShape-closed ;
+  sh:property metash:NodeShape-defaultViewForRole ;
+  sh:property metash:NodeShape-hasSubShape ;
+  sh:property metash:NodeShape-inheritedProperty ;
+  sh:property metash:NodeShape-isClass ;
+  sh:property metash:NodeShape-isHidden ;
+  sh:property metash:NodeShape-node ;
+  sh:property metash:NodeShape-pathToRootShape ;
+  sh:property metash:NodeShape-privateShape-inverse ;
+  sh:property metash:NodeShape-property ;
+  sh:property metash:NodeShape-protectedShape-inverse ;
+  sh:property metash:NodeShape-publicShape-inverse ;
+  sh:property metash:NodeShape-subShapeCount ;
+  sh:property metash:NodeShape-systemLabel ;
+  sh:property metash:NodeShape-targetClass ;
+  sh:property metash:NodeShape-targetObjectsOf ;
+  sh:property metash:NodeShape-targetSubjectsOf ;
+.
+metash:NodeShape-allSuperShapes
+  a sh:PropertyShape ;
+  sh:path metash:allSuperShapes ;
+  sh:description "Returns all node shapes and classes that have been declared as \"super-shapes\" (via sh:node) or \"superclasses\" (via rdfs:subClassOf), including the indirect supers, recursively. Among others, this can be used to find all inherited property shapes. The node shape itself is never returned, even if reached again through some cyclic dependency." ;
+  sh:name "all super shapes" ;
+  sh:node metash:NodeShape ;
+  sh:nodeKind sh:BlankNodeOrIRI ;
+  sh:values [
+      sh:minus sh:this ;
+      sh:nodes [
+          sh:distinct [
+              sh:path [
+                  sh:oneOrMorePath [
+                      sh:alternativePath (
+                          rdfs:subClassOf
+                          sh:node
+                        ) ;
+                    ] ;
+                ] ;
+            ] ;
+        ] ;
+    ] ;
+.
+metash:NodeShape-applicableToClass
+  a sh:PropertyShape ;
+  sh:path dash:applicableToClass ;
+  sh:class rdfs:Class ;
+  sh:description "Links a node shape with the classes that it can be applied to." ;
+  sh:group metash:TargetsPropertyGroup ;
+  sh:nodeKind sh:IRI ;
+  sh:order 10 ;
+.
+metash:NodeShape-closed
+  a sh:PropertyShape ;
+  sh:path sh:closed ;
+  sh:datatype xsd:boolean ;
+  sh:description "If true then each target node can only have values for those properties that have been explicitly enumerated via the property shapes specified for the shape via sh:property." ;
+  sh:maxCount 1 ;
+  sh:name "closed" ;
+.
+metash:NodeShape-defaultViewForRole
+  a sh:PropertyShape ;
+  sh:path dash:defaultViewForRole ;
+  dash:editor swa:GovernanceRoleSelectEditor ;
+  dash:viewer swa:GovernanceRoleViewer ;
+  sh:description "The user roles that this shape shall be used as default view for." ;
+  sh:group metash:TargetsPropertyGroup ;
+  sh:nodeKind sh:IRI ;
+  sh:order "20"^^xsd:decimal ;
+.
+metash:NodeShape-hasSubShape
+  a sh:PropertyShape ;
+  sh:path metash:hasSubShape ;
+  sh:datatype xsd:boolean ;
+  sh:description "Checks if there is at least one shapes that has declared this to be its super-shape using sh:node." ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:name "has sub shape" ;
+  sh:values [
+      sh:ask "ASK { ?nodeShape sh:node $this . ?nodeShape a ?type . ?type rdfs:subClassOf* sh:NodeShape }" ;
+      sh:prefixes <http://datashapes.org/metash> ;
+    ] ;
+.
+metash:NodeShape-inheritedProperty
+  a sh:PropertyShape ;
+  sh:path metash:inheritedProperty ;
+  dash:viewer dash:PropertyTableViewer ;
+  sh:description "Returns all property shapes that have been declared at \"super-shapes\" (via sh:node) or \"superclasses\" (via rdfs:subClassOf), including the indirect supers, recursively." ;
+  sh:group metash:PropertiesPropertyGroup ;
+  sh:name "inherited properties" ;
+  sh:node metash:PropertyShape ;
+  sh:nodeKind sh:BlankNodeOrIRI ;
+  sh:order "1"^^xsd:decimal ;
+  sh:values [
+      sh:path sh:property ;
+      sh:nodes [
+          sh:minus sh:this ;
+          sh:nodes [
+              sh:distinct [
+                  sh:path [
+                      sh:oneOrMorePath [
+                          sh:alternativePath (
+                              rdfs:subClassOf
+                              sh:node
+                            ) ;
+                        ] ;
+                    ] ;
+                ] ;
+            ] ;
+        ] ;
+    ] ;
+.
+metash:NodeShape-isClass
+  a sh:PropertyShape ;
+  sh:path metash:isClass ;
+  sh:datatype xsd:boolean ;
+  sh:description "Checks if this node shape is also declared to be a class." ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:values [
+      <http://spinrdf.org/spl#instanceOf> (
+          sh:this
+          rdfs:Class
+        ) ;
+    ] ;
+.
+metash:NodeShape-isHidden
+  a sh:PropertyShape ;
+  sh:path metash:isHidden ;
+  sh:datatype xsd:boolean ;
+  sh:description "Returns true for any node shape from system graphs such as OWL or DASH." ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:name "is hidden" ;
+  sh:values [
+      sparql:or (
+          [
+            sparql:isBlank (
+                sh:this
+              ) ;
+          ]
+          [
+            tosh:isSystemResource (
+                sh:this
+              ) ;
+          ]
+        ) ;
+    ] ;
+.
+metash:NodeShape-node
+  a sh:PropertyShape ;
+  sh:path sh:node ;
+  sh:description "The node shapes that conforming nodes need to also conform to. Can be used to form hierarchies between node shapes, similar to sub-class-of for classes." ;
+  sh:name "node" ;
+  sh:node metash:NodeShape ;
+  sh:nodeKind sh:BlankNodeOrIRI ;
+.
+metash:NodeShape-pathToRootShape
+  a sh:PropertyShape ;
+  sh:path metash:pathToRootShape ;
+  sh:datatype xsd:string ;
+  sh:description "Tries to find the shortest path to a root shape (that has no further parents)." ;
+  sh:maxCount 1 ;
+  sh:name "path to root shape" ;
+  sh:values [
+      <http://spinrdf.org/spif#shortestObjectsPath> (
+          sh:this
+          sh:node
+        ) ;
+    ] ;
+.
+metash:NodeShape-privateShape-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath graphql:privateShape ;
+    ] ;
+  graphql:name "privateShapeOf" ;
+  sh:description "Links a node shape to the GraphQL schemas that the shape has been declared to be private." ;
+  sh:name "private shape of" ;
+  sh:node metash:GraphQLSchema ;
+  sh:nodeKind sh:IRI ;
+.
+metash:NodeShape-property
+  a sh:PropertyShape ;
+  sh:path sh:property ;
+  dash:viewer dash:PropertyTableViewer ;
+  sh:description "The properties declared for this, using SHACL property shapes." ;
+  sh:group metash:PropertiesPropertyGroup ;
+  sh:name "declared properties" ;
+  sh:node metash:PropertyShape ;
+  sh:nodeKind sh:BlankNodeOrIRI ;
+.
+metash:NodeShape-protectedShape-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath graphql:protectedShape ;
+    ] ;
+  graphql:name "protectedShapeOf" ;
+  sh:description "Links a node shape to the GraphQL schemas that the shape has been declared to be protected." ;
+  sh:name "protected shape of" ;
+  sh:node metash:GraphQLSchema ;
+  sh:nodeKind sh:IRI ;
+.
+metash:NodeShape-publicShape-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath graphql:publicShape ;
+    ] ;
+  graphql:name "publicShapeOf" ;
+  sh:description "Links a node shape to the GraphQL schemas that the shape has been declared to be a public shape of." ;
+  sh:name "public shape of" ;
+  sh:node metash:GraphQLSchema ;
+  sh:nodeKind sh:IRI ;
+.
+metash:NodeShape-subShapeCount
+  a sh:PropertyShape ;
+  sh:path metash:subShapeCount ;
+  sh:datatype xsd:integer ;
+  sh:description "Returns the number of shapes that have declared this to be their super-shape using sh:node." ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:name "sub shape count" ;
+  sh:values [
+      sh:count [
+          sh:path [
+              sh:inversePath sh:node ;
+            ] ;
+        ] ;
+    ] ;
+.
+metash:NodeShape-systemLabel
+  a sh:PropertyShape ;
+  sh:path metash:systemLabel ;
+  sh:datatype xsd:string ;
+  sh:description "A label based on the URI, typically abbreviated into a qname." ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:name "system label" ;
+  sh:values [
+      <http://topbraid.org/sparqlmotionfunctions#qname> (
+          sh:this
+        ) ;
+    ] ;
+.
+metash:NodeShape-targetClass
+  a sh:PropertyShape ;
+  sh:path sh:targetClass ;
+  sh:description "The class(es) that this shape applies to. All instances of these classes are expected to conform to the constraints of this shape." ;
+  sh:group metash:TargetsPropertyGroup ;
+  sh:name "target classes" ;
+  sh:node metash:Class ;
+  sh:nodeKind sh:IRI ;
+.
+metash:NodeShape-targetObjectsOf
+  a sh:PropertyShape ;
+  sh:path sh:targetObjectsOf ;
+  sh:description "The shape applies to the objects of all statements with the given predicate." ;
+  sh:group metash:TargetsPropertyGroup ;
+  sh:name "target objects of" ;
+  sh:node metash:Property ;
+  sh:nodeKind sh:IRI ;
+.
+metash:NodeShape-targetSubjectsOf
+  a sh:PropertyShape ;
+  sh:path sh:targetSubjectsOf ;
+  sh:description "The shape applies to the subjects of all statements with the given predicate." ;
+  sh:group metash:TargetsPropertyGroup ;
+  sh:name "target subjects of" ;
+  sh:node metash:Property ;
+  sh:nodeKind sh:IRI ;
+.
+metash:NodeShapeView
+  a sh:NodeShape ;
+  dash:applicableToClass sh:NodeShape ;
+  rdfs:comment "A shape that can be used to visually represent node shapes." ;
+  rdfs:label "Node shape view" ;
+  sh:property metash:NodeShape-applicableToClass ;
+  sh:property metash:NodeShape-defaultViewForRole ;
+  sh:property metash:NodeShape-inheritedProperty ;
+  sh:property metash:NodeShape-property ;
+  sh:property metash:NodeShapeView-node ;
+  sh:property metash:NodeShapeView-targetClass ;
+  sh:property metash:NodeShapeView-targetObjectsOf ;
+  sh:property metash:NodeShapeView-targetSubjectsOf ;
+  sh:property metash:Resource-comment ;
+  sh:property metash:Resource-label ;
+  sh:property metash:Resource-type ;
+  sh:property metash:Shape-severity ;
+.
+metash:NodeShapeView-node
+  a sh:PropertyShape ;
+  sh:path sh:node ;
+  sh:class sh:NodeShape ;
+  sh:description "The node shapes that conforming nodes need to also conform to. Can be used to form hierarchies between node shapes, similar to sub-class-of for classes." ;
+  sh:group metash:DefinitionPropertyGroup ;
+  sh:name "node (super shapes)" ;
+  sh:nodeKind sh:BlankNodeOrIRI ;
+  sh:order "20"^^xsd:decimal ;
+.
+metash:NodeShapeView-targetClass
+  a sh:PropertyShape ;
+  sh:path sh:targetClass ;
+  sh:class rdfs:Class ;
+  sh:description "The class(es) that this shape applies to. All instances of these classes are expected to conform to the constraints of this shape." ;
+  sh:group metash:TargetsPropertyGroup ;
+  sh:name "target classes" ;
+  sh:nodeKind sh:IRI ;
+.
+metash:NodeShapeView-targetObjectsOf
+  a sh:PropertyShape ;
+  sh:path sh:targetObjectsOf ;
+  sh:class rdf:Property ;
+  sh:description "The shape applies to the objects of all statements with the given predicate." ;
+  sh:group metash:TargetsPropertyGroup ;
+  sh:name "target objects of" ;
+  sh:nodeKind sh:IRI ;
+.
+metash:NodeShapeView-targetSubjectsOf
+  a sh:PropertyShape ;
+  sh:path sh:targetSubjectsOf ;
+  sh:class rdf:Property ;
+  sh:description "The shape applies to the subjects of all statements with the given predicate." ;
+  sh:group metash:TargetsPropertyGroup ;
+  sh:name "target subjects of" ;
+  sh:nodeKind sh:IRI ;
+.
+metash:OWLAxiomsPropertyGroup
+  a sh:PropertyGroup ;
+  rdfs:label "OWL Axioms" ;
+  sh:order "20"^^xsd:decimal ;
+.
+metash:OWLClassView
+  a sh:NodeShape ;
+  dash:applicableToClass owl:Class ;
+  rdfs:comment "A shape that can be used to visually represent OWL classes." ;
+  rdfs:label "OWL class view" ;
+  sh:property metash:Class-abstract ;
+  sh:property metash:Class-superClass ;
+  sh:property metash:NodeShape-inheritedProperty ;
+  sh:property metash:NodeShape-property ;
+  sh:property metash:OWLClassView-disjointWith ;
+  sh:property metash:OWLClassView-equivalentClass ;
+  sh:property metash:Resource-comment ;
+  sh:property metash:Resource-label ;
+  sh:property metash:Resource-type ;
+.
+metash:OWLClassView-disjointWith
+  a sh:PropertyShape ;
+  sh:path owl:disjointWith ;
+  sh:class owl:Class ;
+  sh:group metash:OWLAxiomsPropertyGroup ;
+  sh:name "disjoint with" ;
+  sh:order "2"^^xsd:decimal ;
+.
+metash:OWLClassView-equivalentClass
+  a sh:PropertyShape ;
+  sh:path owl:equivalentClass ;
+  sh:class owl:Class ;
+  sh:group metash:OWLAxiomsPropertyGroup ;
+  sh:name "equivalent classes" ;
+  sh:order "1"^^xsd:decimal ;
+.
+metash:ObjectPropertyShapeView
+  a sh:NodeShape ;
+  dash:applicableToClass sh:PropertyShape ;
+  rdfs:comment "The default view shape for property shapes on datatype values." ;
+  rdfs:label "Datatype property shape view" ;
+  sh:node metash:PropertyShapeView ;
+  sh:property metash:PropertyShape-class ;
+  sh:property metash:PropertyShape-node ;
+  sh:property metash:PropertyShape-nodeKind ;
+  sh:property metash:PropertyShape-symmetric ;
+.
+metash:PropertiesPropertyGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Properties" ;
+  sh:order "10"^^xsd:decimal ;
+.
+metash:Property
+  a sh:NodeShape ;
+  dash:applicableToClass rdf:Property ;
+  rdfs:comment "A globally declared RDF property. Provides query access to global property characteristics including comment and label. SHACL does not require such global properties, but some RDF or OWL-based systems prefer or even require them." ;
+  rdfs:label "Property" ;
+  sh:property metash:Resource-comment ;
+  sh:property metash:Resource-isImported ;
+  sh:property metash:Resource-label ;
+.
+metash:PropertyAxiomsPropertyGroup
+  a sh:PropertyGroup ;
+  rdfs:comment "This group contains global characteristics of properties, typically interpreted according to RDF Schema and OWL semantics." ;
+  rdfs:label "Property Axioms" ;
+  sh:order "10"^^xsd:decimal ;
+.
+metash:PropertyGroup
+  a sh:NodeShape ;
+  dash:applicableToClass sh:PropertyGroup ;
+  rdfs:comment "Describes the shape of SHACL property groups. Property groups are typically used to organize the layout of properties on user interfaces such as forms, grouping similar properties together." ;
+  rdfs:label "Property group" ;
+  sh:node metash:Resource ;
+  sh:property metash:PropertyGroup-group-inverse ;
+  sh:property metash:PropertyGroup-order ;
+  sh:property metash:Resource-comment ;
+  sh:property metash:Resource-isImported ;
+  sh:property metash:Resource-label ;
+.
+metash:PropertyGroup-group-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath sh:group ;
+    ] ;
+  dash:readOnly true ;
+  graphql:name "groupOf" ;
+  sh:description "The property shapes that are linked to this property group." ;
+  sh:group metash:ReferencesPropertyGroup ;
+  sh:name "group of" ;
+  sh:node metash:PropertyShape ;
+.
+metash:PropertyGroup-order
+  a sh:PropertyShape ;
+  sh:path sh:order ;
+  sh:datatype xsd:decimal ;
+  sh:description "The order of this property group compared to other groups for the same focus node." ;
+  sh:group metash:DisplayPropertyGroup ;
+  sh:maxCount 1 ;
+.
+metash:PropertyGroupView
+  a sh:NodeShape ;
+  dash:applicableToClass sh:PropertyGroup ;
+  rdfs:comment "Describes the shape of SHACL property groups. Property groups are typically used to organize the layout of properties on user interfaces such as forms, grouping similar properties together." ;
+  rdfs:label "Property group" ;
+  sh:property metash:PropertyGroup-group-inverse ;
+  sh:property metash:PropertyGroup-order ;
+  sh:property metash:Resource-comment ;
+  sh:property metash:Resource-label ;
+.
+metash:PropertyShape
+  a sh:NodeShape ;
+  dash:applicableToClass sh:PropertyShape ;
+  rdfs:comment "A shape describing the structure of property shapes. This makes some assumptions that are not necessarily covered by the spec, e.g. that sh:datatype can only take one value." ;
+  rdfs:label "Property shape" ;
+  sh:property metash:PropertyShape-class ;
+  sh:property metash:PropertyShape-datatype ;
+  sh:property metash:PropertyShape-datatypes ;
+  sh:property metash:PropertyShape-deactivated ;
+  sh:property metash:PropertyShape-description ;
+  sh:property metash:PropertyShape-editor ;
+  sh:property metash:PropertyShape-flags ;
+  sh:property metash:PropertyShape-graphql-name ;
+  sh:property metash:PropertyShape-group ;
+  sh:property metash:PropertyShape-hidden ;
+  sh:property metash:PropertyShape-isInferred ;
+  sh:property metash:PropertyShape-isInverse ;
+  sh:property metash:PropertyShape-isObjectProperty ;
+  sh:property metash:PropertyShape-languageIn ;
+  sh:property metash:PropertyShape-maxCount ;
+  sh:property metash:PropertyShape-maxExclusive ;
+  sh:property metash:PropertyShape-maxInclusive ;
+  sh:property metash:PropertyShape-maxLength ;
+  sh:property metash:PropertyShape-minCount ;
+  sh:property metash:PropertyShape-minExclusive ;
+  sh:property metash:PropertyShape-minInclusive ;
+  sh:property metash:PropertyShape-minLength ;
+  sh:property metash:PropertyShape-name ;
+  sh:property metash:PropertyShape-node ;
+  sh:property metash:PropertyShape-nodeKind ;
+  sh:property metash:PropertyShape-or ;
+  sh:property metash:PropertyShape-order ;
+  sh:property metash:PropertyShape-pathLabel ;
+  sh:property metash:PropertyShape-pathSystemLabel ;
+  sh:property metash:PropertyShape-pattern ;
+  sh:property metash:PropertyShape-predicate ;
+  sh:property metash:PropertyShape-property-inverse ;
+  sh:property metash:PropertyShape-readOnly ;
+  sh:property metash:PropertyShape-singleLine ;
+  sh:property metash:PropertyShape-symmetric ;
+  sh:property metash:PropertyShape-uniqueLang ;
+  sh:property metash:PropertyShape-uriStart ;
+  sh:property metash:PropertyShape-values ;
+  sh:property metash:PropertyShape-viewer ;
+  sh:property metash:Resource-isImported ;
+.
+metash:PropertyShape-class
+  a sh:PropertyShape ;
+  sh:path sh:class ;
+  sh:class rdfs:Class ;
+  sh:description "The type(s) that all values of the property must have." ;
+  sh:group metash:ValueTypePropertyGroup ;
+  sh:name "class" ;
+  sh:node metash:ClassShape ;
+.
+metash:PropertyShape-datatype
+  a sh:PropertyShape ;
+  sh:path sh:datatype ;
+  dash:editor dash:InstancesSelectEditor ;
+  sh:class rdfs:Datatype ;
+  sh:description "The datatype of the property." ;
+  sh:group metash:ValueTypePropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "datatype" ;
+  sh:nodeKind sh:IRI ;
+.
+metash:PropertyShape-datatypes
+  a sh:PropertyShape ;
+  sh:path metash:datatypes ;
+  dash:viewer dash:DatatypesViewer ;
+  sh:description "Zero of more datatypes that values of this property can take. In SHACL, the typical pattern is to either use a single sh:datatype or a sh:or of multiple sh:datatype constraints. This inferred property here provides a unified way to access these two design patterns." ;
+  sh:group metash:ValueTypePropertyGroup ;
+  sh:name "datatypes" ;
+  sh:nodeKind sh:IRI ;
+  sh:values [
+      sh:union (
+          [
+            sh:path sh:datatype ;
+          ]
+          [
+            sh:path (
+                sh:or
+                [
+                  sh:zeroOrMorePath rdf:rest ;
+                ]
+                rdf:first
+                sh:datatype
+              ) ;
+          ]
+        ) ;
+    ] ;
+.
+metash:PropertyShape-deactivated
+  a sh:PropertyShape ;
+  sh:path sh:deactivated ;
+  sh:datatype xsd:boolean ;
+  sh:description "True if this property shape has been marked as deactivated. Deactivated shapes are generally ignored and neither impact validation nor user interface generation." ;
+  sh:group metash:DefinitionPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "deactivated" ;
+  sh:order "20"^^xsd:decimal ;
+.
+metash:PropertyShape-description
+  a sh:PropertyShape ;
+  sh:path sh:description ;
+  dash:singleLine false ;
+  sh:description "Human-readable descriptions of the role of the property, possibly in various languages." ;
+  sh:group metash:DefinitionPropertyGroup ;
+  sh:name "description" ;
+  sh:or dash:StringOrLangString ;
+  sh:order "1"^^xsd:decimal ;
+  sh:uniqueLang true ;
+.
+metash:PropertyShape-editor
+  a sh:PropertyShape ;
+  sh:path dash:editor ;
+  dash:editor dash:InstancesSelectEditor ;
+  sh:class dash:Editor ;
+  sh:description "The Editor that shall be used to edit values of this property." ;
+  sh:group metash:DisplayPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:nodeKind sh:IRI ;
+  sh:order "11"^^xsd:decimal ;
+.
+metash:PropertyShape-flags
+  a sh:PropertyShape ;
+  sh:path sh:flags ;
+  dash:singleLine true ;
+  sh:datatype xsd:string ;
+  sh:description "The flags used by regular expression matching (see pattern). The most frequently used value is \"i\" for ignore-case matching." ;
+  sh:group metash:StringConstraintsPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "regex flags" ;
+  sh:order "21"^^xsd:decimal ;
+.
+metash:PropertyShape-graphql-name
+  a sh:PropertyShape ;
+  sh:path graphql:name ;
+  graphql:name "graphqlName" ;
+  sh:datatype xsd:string ;
+  sh:description "The name of the GraphQL field. This is a required value whenever the property shall be queryable using GraphQL yet no valid field name can be automatically derived. Frequently used for property shapes where the path is not just a single property but a complex path expression." ;
+  sh:group metash:DefinitionPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "GraphQL field name" ;
+  sh:order "10"^^xsd:decimal ;
+.
+metash:PropertyShape-group
+  a sh:PropertyShape ;
+  sh:path sh:group ;
+  sh:maxCount 1 ;
+  sh:node metash:PropertyGroup ;
+  sh:nodeKind sh:IRI ;
+.
+metash:PropertyShape-hidden
+  a sh:PropertyShape ;
+  sh:path dash:hidden ;
+  dash:editor dash:BooleanSelectEditor ;
+  sh:datatype xsd:boolean ;
+  sh:description "If set to true then the this property will be hidden from the user interface yet remain available for other uses such as validation and GraphQL." ;
+  sh:group metash:DisplayPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:order "13"^^xsd:decimal ;
+.
+metash:PropertyShape-isInferred
+  a sh:PropertyShape ;
+  sh:path metash:isInferred ;
+  sh:datatype xsd:boolean ;
+  sh:description "True if this property has a property values rule (using sh:values). Such properties are typically called 'inferred' and computed on the fly where needed." ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:name "is inferred" ;
+  sh:values [
+      sh:exists [
+          sh:path sh:values ;
+        ] ;
+    ] ;
+.
+metash:PropertyShape-isInverse
+  a sh:PropertyShape ;
+  sh:path metash:isInverse ;
+  sh:datatype xsd:boolean ;
+  sh:description "Returns true exactly if the path is an inverse path of an IRI." ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:name "is inverse" ;
+  sh:values [
+      sh:exists [
+          sh:path sh:inversePath ;
+          sh:nodes [
+              sh:path sh:path ;
+            ] ;
+        ] ;
+    ] ;
+.
+metash:PropertyShape-isObjectProperty
+  a sh:PropertyShape ;
+  sh:path metash:isObjectProperty ;
+  sh:datatype xsd:boolean ;
+  sh:description "True if this is an object property, i.e. it either has sh:class or sh:node and no sh:datatype." ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:name "is object property" ;
+  sh:values [
+      tosh:isObjectPropertyShape (
+          sh:this
+        ) ;
+    ] ;
+.
+metash:PropertyShape-languageIn
+  a sh:PropertyShape ;
+  sh:path sh:languageIn ;
+  sh:description "A list of language (strings) that are permitted for the values." ;
+  sh:group metash:StringConstraintsPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "language in" ;
+  sh:node dash:ListShape ;
+  sh:order "31"^^xsd:decimal ;
+  sh:property [
+      sh:path (
+          [
+            sh:zeroOrMorePath rdf:rest ;
+          ]
+          rdf:first
+        ) ;
+      sh:datatype xsd:string ;
+    ] ;
+.
+metash:PropertyShape-maxCount
+  a sh:PropertyShape ;
+  sh:path sh:maxCount ;
+  sh:datatype xsd:integer ;
+  sh:description "The maximum cardinality of the property." ;
+  sh:group metash:CardinalityConstraintsPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:minInclusive 0 ;
+  sh:name "max count" ;
+  sh:order 1 ;
+.
+metash:PropertyShape-maxExclusive
+  a sh:PropertyShape ;
+  sh:path sh:maxExclusive ;
+  dash:editor swa:SHMinMaxEditor ;
+  sh:description "The maximum exclusive value - all value nodes must be < than this." ;
+  sh:group metash:ValueRangePropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "max exclusive" ;
+  sh:nodeKind sh:Literal ;
+  sh:order "3"^^xsd:decimal ;
+.
+metash:PropertyShape-maxInclusive
+  a sh:PropertyShape ;
+  sh:path sh:maxInclusive ;
+  dash:editor swa:SHMinMaxEditor ;
+  sh:description "The maximum inclusive value - all value nodes must be <= than this." ;
+  sh:group metash:ValueRangePropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "max inclusive" ;
+  sh:nodeKind sh:Literal ;
+  sh:order "2"^^xsd:decimal ;
+.
+metash:PropertyShape-maxLength
+  a sh:PropertyShape ;
+  sh:path sh:maxLength ;
+  sh:datatype xsd:integer ;
+  sh:description "The maximum (string) length of the values." ;
+  sh:group metash:StringConstraintsPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:minInclusive 0 ;
+  sh:name "max length" ;
+  sh:order 11 ;
+.
+metash:PropertyShape-minCount
+  a sh:PropertyShape ;
+  sh:path sh:minCount ;
+  sh:datatype xsd:integer ;
+  sh:description "The minimum cardinality of the property." ;
+  sh:group metash:CardinalityConstraintsPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:minInclusive 0 ;
+  sh:name "min count" ;
+  sh:order 0 ;
+.
+metash:PropertyShape-minExclusive
+  a sh:PropertyShape ;
+  sh:path sh:minExclusive ;
+  dash:editor swa:SHMinMaxEditor ;
+  sh:description "The minimum exclusive value - all value nodes must be > than this." ;
+  sh:group metash:ValueRangePropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "min exclusive" ;
+  sh:nodeKind sh:Literal ;
+  sh:order "0"^^xsd:decimal ;
+.
+metash:PropertyShape-minInclusive
+  a sh:PropertyShape ;
+  sh:path sh:minInclusive ;
+  dash:editor swa:SHMinMaxEditor ;
+  sh:description "The minimum inclusive value - all value nodes must be >= than this." ;
+  sh:group metash:ValueRangePropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "min inclusive" ;
+  sh:nodeKind sh:Literal ;
+  sh:order "1"^^xsd:decimal ;
+.
+metash:PropertyShape-minLength
+  a sh:PropertyShape ;
+  sh:path sh:minLength ;
+  sh:datatype xsd:integer ;
+  sh:description "The minimum (string) length of the values." ;
+  sh:group metash:StringConstraintsPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:minInclusive 0 ;
+  sh:name "min length" ;
+  sh:order 10 ;
+.
+metash:PropertyShape-name
+  a sh:PropertyShape ;
+  sh:path sh:name ;
+  sh:description "Display names of the property, possibly in various languages." ;
+  sh:group metash:DefinitionPropertyGroup ;
+  sh:name "name" ;
+  sh:or dash:StringOrLangString ;
+  sh:order "0"^^xsd:decimal ;
+  sh:uniqueLang true ;
+.
+metash:PropertyShape-node
+  a sh:PropertyShape ;
+  sh:path sh:node ;
+  sh:class sh:NodeShape ;
+  sh:description "The node shape(s) that all values of the property must conform to." ;
+  sh:group metash:ValueConstraintsPropertyGroup ;
+  sh:name "node" ;
+  sh:node metash:NodeShape ;
+.
+metash:PropertyShape-nodeKind
+  a sh:PropertyShape ;
+  sh:path sh:nodeKind ;
+  sh:class sh:NodeKind ;
+  sh:group metash:ValueTypePropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "node kind" ;
+  sh:nodeKind sh:IRI ;
+.
+metash:PropertyShape-or
+  a sh:PropertyShape ;
+  sh:path sh:or ;
+  rdfs:comment "Needed for dash:StringOrLangString etc." ;
+  sh:description "Provides access to any values declares as sh:or of the property shape. The values here are usually too complex to be analyzed further, but it might useful to query, add or remove the known constants such as dash:StringOrLangString." ;
+  sh:name "or" ;
+  sh:nodeKind sh:BlankNodeOrIRI ;
+.
+metash:PropertyShape-order
+  a sh:PropertyShape ;
+  sh:path sh:order ;
+  sh:datatype xsd:decimal ;
+  sh:description "The relative position of the property among its peers, e.g. a property with order 5 shows up before one with order 6." ;
+  sh:group metash:DisplayPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "order" ;
+  sh:order "1"^^xsd:decimal ;
+.
+metash:PropertyShape-path
+  a sh:PropertyShape ;
+  sh:path sh:path ;
+  sh:description "The property or path expression that this property shape is about." ;
+  sh:group metash:DefinitionPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "property path" ;
+  sh:nodeKind sh:BlankNodeOrIRI ;
+  sh:order 2 ;
+.
+metash:PropertyShape-pathLabel
+  a sh:PropertyShape ;
+  sh:path metash:pathLabel ;
+  sh:datatype xsd:string ;
+  sh:description "A human-readable display label for the path. Use this field whenever a property (shape) is displayed in the user interface, unless the user prefers to see the pathSystemLabel." ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:name "path label" ;
+  sh:values [
+      swa:propertyLabelAtClassOrShape (
+          [
+            sh:path sh:path ;
+          ]
+          [
+            sh:path [
+                sh:inversePath [
+                    sh:alternativePath (
+                        sh:property
+                        sh:parameter
+                      ) ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+.
+metash:PropertyShape-pathSystemLabel
+  a sh:PropertyShape ;
+  sh:path metash:pathSystemLabel ;
+  dash:viewer dash:PathStringViewer ;
+  sh:datatype xsd:string ;
+  sh:description "A display label of the sh:path based on qnames." ;
+  sh:group metash:DefinitionPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:name "property path" ;
+  sh:order "2"^^xsd:decimal ;
+  sh:values [
+      sh:else [
+          <http://uispin.org/ui#label> (
+              [
+                sh:path sh:path ;
+              ]
+            ) ;
+        ] ;
+      sh:if [
+          sparql:isIRI (
+              [
+                sh:path sh:path ;
+              ]
+            ) ;
+        ] ;
+      sh:then [
+          <http://topbraid.org/sparqlmotionfunctions#qname> (
+              [
+                sh:path sh:path ;
+              ]
+            ) ;
+        ] ;
+    ] ;
+.
+metash:PropertyShape-pattern
+  a sh:PropertyShape ;
+  sh:path sh:pattern ;
+  sh:datatype xsd:string ;
+  sh:description "A regular expression that all values of the property must match." ;
+  sh:group metash:StringConstraintsPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "regex pattern" ;
+  sh:order "20"^^xsd:decimal ;
+.
+metash:PropertyShape-predicate
+  a sh:PropertyShape ;
+  sh:path metash:predicate ;
+  sh:description "The predicate in this property shape. This only has a value if the path is an IRI node or an inverse path of an IRI." ;
+  sh:maxCount 1 ;
+  sh:name "predicate" ;
+  sh:node metash:Property ;
+  sh:nodeKind sh:IRI ;
+  sh:values [
+      sh:prefixes <http://datashapes.org/metash> ;
+      sh:select "SELECT ?predicate { { $this sh:path ?predicate . FILTER isIRI(?predicate) } UNION { $this sh:path/sh:inversePath ?predicate . FILTER isIRI(?predicate) } }" ;
+    ] ;
+.
+metash:PropertyShape-property-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath sh:property ;
+    ] ;
+  graphql:name "propertyOf" ;
+  sh:description "The node shape(s) that this property definition is part of." ;
+  sh:name "property of" ;
+  sh:node metash:NodeShape ;
+  sh:nodeKind sh:BlankNodeOrIRI ;
+.
+metash:PropertyShape-readOnly
+  a sh:PropertyShape ;
+  sh:path dash:readOnly ;
+  dash:editor dash:BooleanSelectEditor ;
+  dash:viewer tosh:NodeExpressionViewer ;
+  sh:description """If set to true then the values of this property should not be editable in the user interface. Note that low-level access such as source code editors may still allow editing, but form-based editors would not.
+
+More generally, the values of this property are SHACL node expressions, e.g. function calls, in which case the property counts as read-only if the expression evaluates to true. Until TopBraid has a node expression editor, please use the source code panel to enter such node expressions, e.g. dash:readOnly [
+      sh:ask \"ASK { FILTER <http://topbraid.org/teamwork#currentGraphIsMasterGraph>() }\" ;
+    ]. or dash:readOnly [ teamwork:currentGraphIsMasterGraph () ] in the future.""" ;
+  sh:group metash:DisplayPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:order "12"^^xsd:decimal ;
+.
+metash:PropertyShape-reifiableBy
+  a sh:PropertyShape ;
+  sh:path dash:reifiableBy ;
+  sh:class sh:NodeShape ;
+  sh:description "A node shape that defines which properties shall be available on reified value of the property. This can only be used for simple property paths." ;
+  sh:group metash:ReificationPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:nodeKind sh:IRI ;
+  sh:order "0"^^xsd:decimal ;
+.
+metash:PropertyShape-singleLine
+  a sh:PropertyShape ;
+  sh:path dash:singleLine ;
+  sh:datatype xsd:boolean ;
+  sh:description "True to allow only a single line of text." ;
+  sh:group metash:StringConstraintsPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "single line" ;
+  sh:order 50 ;
+.
+metash:PropertyShape-symmetric
+  a sh:PropertyShape ;
+  sh:path dash:symmetric ;
+  sh:datatype xsd:boolean ;
+  sh:description "True if this property has been marked to be a symmetric property. For example, a \"friend\" relationship should be symmetric, with friendship being a mutual relationship." ;
+  sh:group metash:ValueConstraintsPropertyGroup ;
+  sh:maxCount 1 ;
+.
+metash:PropertyShape-uniqueLang
+  a sh:PropertyShape ;
+  sh:path sh:uniqueLang ;
+  sh:datatype xsd:boolean ;
+  sh:description "True if all values of the property must have a different language tag." ;
+  sh:group metash:StringConstraintsPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "unique lang" ;
+  sh:order "30"^^xsd:decimal ;
+.
+metash:PropertyShape-uriStart
+  a sh:PropertyShape ;
+  sh:path dash:uriStart ;
+  sh:datatype xsd:string ;
+  sh:description "Mark this property as the primary key. URIs are generated using the given string plus the primary key value." ;
+  sh:group metash:StringConstraintsPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "URI start" ;
+  sh:order "60"^^xsd:decimal ;
+.
+metash:PropertyShape-values
+  a sh:PropertyShape ;
+  sh:path sh:values ;
+  dash:viewer tosh:NodeExpressionViewer ;
+  sh:group metash:InferencesPropertyGroup ;
+  sh:name "values" ;
+  sh:nodeKind sh:BlankNodeOrIRI ;
+.
+metash:PropertyShape-viewer
+  a sh:PropertyShape ;
+  sh:path dash:viewer ;
+  dash:editor dash:InstancesSelectEditor ;
+  sh:class dash:Viewer ;
+  sh:description "The Viewer that shall be used to render values of this property." ;
+  sh:group metash:DisplayPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:nodeKind sh:IRI ;
+  sh:order "10"^^xsd:decimal ;
+.
+metash:PropertyShapeView
+  a sh:NodeShape ;
+  dash:applicableToClass sh:PropertyShape ;
+  rdfs:comment "Base view shape for either datatype or object property shapes." ;
+  rdfs:label "Property shape view" ;
+  sh:property metash:PropertyShape-deactivated ;
+  sh:property metash:PropertyShape-description ;
+  sh:property metash:PropertyShape-editor ;
+  sh:property metash:PropertyShape-graphql-name ;
+  sh:property metash:PropertyShape-hidden ;
+  sh:property metash:PropertyShape-maxCount ;
+  sh:property metash:PropertyShape-minCount ;
+  sh:property metash:PropertyShape-name ;
+  sh:property metash:PropertyShape-order ;
+  sh:property metash:PropertyShape-pathSystemLabel ;
+  sh:property metash:PropertyShape-readOnly ;
+  sh:property metash:PropertyShape-reifiableBy ;
+  sh:property metash:PropertyShape-values ;
+  sh:property metash:PropertyShape-viewer ;
+  sh:property metash:PropertyShapeView-group ;
+  sh:property metash:Shape-severity ;
+.
+metash:PropertyShapeView-group
+  a sh:PropertyShape ;
+  sh:path sh:group ;
+  sh:description "The property group that this property belongs to." ;
+  sh:group metash:DisplayPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "group" ;
+  sh:node sh:PropertyGroup ;
+  sh:nodeKind sh:IRI ;
+  sh:order "0"^^xsd:decimal ;
+.
+metash:PropertyView
+  a sh:NodeShape ;
+  dash:applicableToClass rdf:Property ;
+  rdfs:comment "A view shape for globally declared RDF properties." ;
+  rdfs:label "Property View" ;
+  sh:property metash:PropertyView-domain ;
+  sh:property metash:PropertyView-range ;
+  sh:property metash:PropertyView-subPropertyOf ;
+  sh:property metash:Resource-comment ;
+  sh:property metash:Resource-label ;
+.
+metash:PropertyView-domain
+  a sh:PropertyShape ;
+  sh:path rdfs:domain ;
+  sh:class rdfs:Class ;
+  sh:description "The domain of a property defines an inference that all assets that have a value for this property have the given type(s)." ;
+  sh:group metash:PropertyAxiomsPropertyGroup ;
+  sh:order "0"^^xsd:decimal ;
+.
+metash:PropertyView-range
+  a sh:PropertyShape ;
+  sh:path rdfs:range ;
+  sh:class rdfs:Class ;
+  sh:description "The range of a property defines an inference that all value of this property have the given type(s)." ;
+  sh:group metash:PropertyAxiomsPropertyGroup ;
+  sh:order "1"^^xsd:decimal ;
+.
+metash:PropertyView-subPropertyOf
+  a sh:PropertyShape ;
+  sh:path rdfs:subPropertyOf ;
+  sh:class rdf:Property ;
+  sh:description "A subPropertyOf statement defines an inference that all values of a subproperty are also values of their superproperty." ;
+  sh:group metash:PropertyAxiomsPropertyGroup ;
+  sh:name "super-properties" ;
+  sh:order "2"^^xsd:decimal ;
+.
+metash:ReferencesPropertyGroup
+  a sh:PropertyGroup ;
+  rdfs:label "References" ;
+  sh:order "100"^^xsd:decimal ;
+.
+metash:ReificationPropertyGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Reification (Statements about Statements)" ;
+  sh:order "110"^^xsd:decimal ;
+.
+metash:Resource
+  a sh:NodeShape ;
+  dash:applicableToClass rdfs:Resource ;
+  rdfs:label "Resource" ;
+  sh:property metash:Resource-comment ;
+  sh:property metash:Resource-isImported ;
+  sh:property metash:Resource-label ;
+  sh:property metash:Resource-type ;
+.
+metash:Resource-comment
+  a sh:PropertyShape ;
+  sh:path rdfs:comment ;
+  dash:singleLine false ;
+  sh:description "The human-readable description(s) of this." ;
+  sh:group metash:DefinitionPropertyGroup ;
+  sh:name "comments" ;
+  sh:or dash:HTMLOrStringOrLangString ;
+  sh:order "1"^^xsd:decimal ;
+.
+metash:Resource-isImported
+  a sh:PropertyShape ;
+  sh:path metash:isImported ;
+  sh:datatype xsd:boolean ;
+  sh:description "True if this is not from the base graph." ;
+  sh:maxCount 1 ;
+  sh:name "is imported" ;
+  sh:values [
+      swa:isImportedResource (
+          sh:this
+        ) ;
+    ] ;
+.
+metash:Resource-label
+  a sh:PropertyShape ;
+  sh:path rdfs:label ;
+  graphql:name "rdfs_label" ;
+  sh:description "The human-readable display name(s) of this." ;
+  sh:group metash:DefinitionPropertyGroup ;
+  sh:name "labels" ;
+  sh:or dash:StringOrLangString ;
+  sh:order "0"^^xsd:decimal ;
+.
+metash:Resource-type
+  a sh:PropertyShape ;
+  sh:path rdf:type ;
+  graphql:name "rdf_type" ;
+  sh:class rdfs:Class ;
+  sh:description "The type(s) of this." ;
+  sh:group metash:DefinitionPropertyGroup ;
+  sh:name "types" ;
+  sh:nodeKind sh:IRI ;
+  sh:order "10"^^xsd:decimal ;
+.
+metash:Schema
+  a graphql:Schema ;
+  graphql:publicShape metash:Class ;
+  graphql:publicShape metash:ClassView ;
+  graphql:publicShape metash:GraphQLSchema ;
+  graphql:publicShape metash:NodeShape ;
+  graphql:publicShape metash:Property ;
+  graphql:publicShape metash:PropertyGroup ;
+  graphql:publicShape metash:PropertyShape ;
+  rdfs:comment "The GraphQL schema for working with metashapes." ;
+  rdfs:label "Metashapes Schema" ;
+.
+metash:Shape-severity
+  a sh:PropertyShape ;
+  sh:path sh:severity ;
+  dash:editor dash:InstancesSelectEditor ;
+  sh:class sh:Severity ;
+  sh:description "The severity to be used for validation results produced by the constraints." ;
+  sh:group metash:DefinitionPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "severity" ;
+  sh:order "40"^^xsd:decimal ;
+.
+metash:StringConstraintsPropertyGroup
+  a sh:PropertyGroup ;
+  rdfs:label "String Constraints" ;
+  sh:order "50"^^xsd:decimal ;
+.
+metash:TargetsPropertyGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Targets" ;
+  sh:order "5"^^xsd:decimal ;
+.
+metash:ValueConstraintsPropertyGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Value Constraints" ;
+  sh:order "45"^^xsd:decimal ;
+.
+metash:ValueRangePropertyGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Value Range" ;
+  sh:order "40"^^xsd:decimal ;
+.
+metash:ValueTypePropertyGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Type of Values" ;
+  sh:order "30"^^xsd:decimal ;
+.

@@ -1,0 +1,662 @@
+# baseURI: http://edg.topbraid.solutions/1.0/view/common
+# imports: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://edg.topbraid.solutions/1.0/spin/library
+# imports: http://spinrdf.org/spin
+# imports: http://topbraid.org/metadata
+# imports: http://topbraid.org/teamwork
+# imports: http://topbraid.org/teamwork.ui
+# imports: http://uispin.org/ui
+
+@prefix acjob: <http://evn.topbraidlive.org/tagger/acjob#> .
+@prefix acpp: <http://topbraid.org/nlp/autoclassifier-preproc#> .
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix autotagger: <http://evn.topbraidlive.org/autotagger#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix conceptmatch: <http://topbraid.org/conceptmatch#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix config-importers: <http://edg.topbraidlive.org/config/importers#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix core-soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix corpus: <http://topbraid.org/corpus#> .
+@prefix corpusprojects: <http://topbraid.org/corpus-projects#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkapp: <http://topbraid.org/swa/crosswalkapp#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dashboard: <http://example.org/dashboard#> .
+@prefix datagraph: <http://teamwork.topbraidlive.org/datagraph/datagraphprojects#> .
+@prefix dataset: <http://teamwork.topbraidlive.org/dataset#> .
+@prefix datasetapp: <http://topbraid.org/swa/datasetapp#> .
+@prefix datasetviewer: <http://topbraid.org/swa/datasetviewer#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ddl: <http://edg.topbraidlive.org/1.0/importers/ddl#> .
+@prefix default: <http://uispin.org/default#> .
+@prefix defaultapp: <http://topbraid.org/swa/defaultapp#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix document: <http://topbraid.org/document#> .
+@prefix documents: <http://edg.topbraid.solutions/1.0/shapes/documents#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg-config: <http://edg.ext.topbraidlive.org/schema/config/importers#> .
+@prefix edg-importer: <http://edg.topbraidlive.org/importer/> .
+@prefix edg-qa: <http://edg.topbraidlive.org/utility/qa/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.global: <urn:x-evn-global:> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix edgproduct: <http://edg.topbraidlive.org/edgproduct#> .
+@prefix eeh-lib: <http://www.environmenthub.no/spin/1.0/eeh-lib#> .
+@prefix eeh-reportlib: <http://www.environmenthub.no/spin/1.0/eeh-reportlib#> .
+@prefix elements: <http://purl.org/dc/elements/1.1/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evn: <http://topbraid.org/evn/evn#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evnimport: <http://evn.topbraidlive.org/uispin/evnimport#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix ex: <http://example.org/> .
+@prefix extjs: <http://uispin.com/extjs#> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix forms: <http://www.topbraid.org/2007/01/forms.owl#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix governance: <http://topbraid.org/teamworkgovernance.ui#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix graphql.search: <http://teamwork.topbraidlive.org/graphql.search#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix inference: <http://www.topbraid.org/2007/06/inference.owl#> .
+@prefix jdbc: <http://edg.topbraidlive.org/1.0/importers/jdbc#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix kennedys: <http://topbraid.org/examples/kennedys#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix lib-importer: <http://edg.topbraid.solutions/importer/lib#> .
+@prefix lineage-transform: <http://edg.topbraid.solutions/transform/importer/lineage#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix ontologyviewer: <http://topbraid.org/swa/ontologyviewer#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix proxy-lineage: <http://edg.topbraid.solutions/proxy/importer/lineage#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmapp: <http://rdm.topbraidlive.org/rdmapp#> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix rdmviewer: <http://rdm.topbraidlive.org/rdmviewer#> .
+@prefix saf: <http://topbraid.org/saf/> .
+@prefix safconfig: <http://topbraid.org/safconfig/> .
+@prefix safindex: <http://topbraid.org/safindex#> .
+@prefix safm: <http://saf.topbraidlive.org/metaschema/> .
+@prefix savedQueries: <http://teamwork.topbraidlive.org/ui/savedQueries#> .
+@prefix scheduler: <http://topbraid.org/scheduler#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix server: <http://server.topbraidlive.org/server.ui#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sharepoint: <http://topbraid.org/sharepoint#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skosshapes: <http://topbraid.org/skos.shapes#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spin.ui: <http://spinrdf.org/spin.ui#> .
+@prefix spinmap: <http://spinrdf.org/spinmap#> .
+@prefix spinmapl: <http://topbraid.org/spin/spinmapl#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix ss: <http://www.topbraidcomposer.org/owl/2006/08/spreadsheets.owl#> .
+@prefix stats: <http://topbraid.org/statistics#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swadoc: <http://topbraid.org/swadoc#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tablesmap: <http://topbraid.org/spin/tablesmap#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix taggerspin: <http://evn.topbraidlive.org/taggerspin#> .
+@prefix taggerui: <http://evn.topbraidlive.org/taggerui#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix tblui: <http://server.topbraidlive.org/tblui#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkAdmin: <http://teamwork.topbraidlive.org/doc/teamworkAdmin#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworkconstraints: <http://topbraid.org/teamworkconstraints#> .
+@prefix teamworkdashboard: <http://topbraid.org/teamworkdashboard#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix teamworkupdate: <http://teamworkAPI.topbraid.com/teamworkUpdate#> .
+@prefix textindex: <http://topbraid.org/textindex#> .
+@prefix tika-importer: <http://teamwork.topbraidlive.org/corpus/tika-importer#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix tracker: <http://teamwork.topbraidlive.org/ui/tracker#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uitest: <http://uispin.org/test#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix userdat: <http://teamwork.topbraidlive.org/ui/userdata> .
+@prefix userdata: <http://teamwork.topbraidlive.org/ui/userdata#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix victory: <http://edg.topbraid.solutions/victory/> .
+@prefix visual: <http://topbraid.org/visual#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xhtml: <http://topbraid.org/xhtml#> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/view/common>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/view/common/GMD_common> ;
+  rdfs:label "EDG Views - Main" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/spin/library> ;
+  owl:imports <http://spinrdf.org/spin> ;
+  owl:imports <http://topbraid.org/metadata> ;
+  owl:imports <http://topbraid.org/teamwork> ;
+  owl:imports <http://topbraid.org/teamwork.ui> ;
+  owl:imports <http://uispin.org/ui> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+edg:Aspect
+  ui:instanceView """
+<ui:group ui:id=\"form\" ui:priority=\"{= -1 }\">
+    <!--ui:dumpScope ui:message=\"AAA: edg:Aspect\"/-->
+    <edg:AspectFormBody arg:resource=\"{= ?this }\" ui:id=\"form\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:AspectFormBody
+  a ui:ResourceViewClass ;
+  ui:prototype """
+<teamwork:SimpleResourceFormBody arg:resource=\"{= ?resource }\">
+    <ui:if ui:condition=\"{= swa:isViewMode() }\">
+        <ui:insert ui:into=\"bottom\" ui:optional=\"{= true }\">
+            <edg:UsagesLoadableFormSection arg:resource=\"{= ?resource }\"/>
+        </ui:insert>
+    </ui:if>
+</teamwork:SimpleResourceFormBody>
+"""^^ui:Literal ;
+  rdfs:label "Aspect form body" ;
+  rdfs:subClassOf swa:FormBody ;
+.
+edg:ExternalReferences
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "subjectLabel" ;
+          ]
+          [
+            sp:varName "predicateLabel" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "subject" ;
+          ]
+          [
+            sp:varName "predicate" ;
+          ]
+          [
+            sp:varName "subjectLabel" ;
+          ]
+          [
+            sp:varName "predicateLabel" ;
+          ]
+          [
+            sp:varName "graph" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "?0" ;
+              ] ;
+            sp:predicate teamwork:readableGraphsUnderTeamControl ;
+            sp:subject () ;
+          ]
+          [
+            sp:object [
+                sp:varName "graph" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "tch" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          (
+            [
+              a sp:NamedGraph ;
+              sp:elements (
+                  [
+                    sp:object [
+                        sp:varName "resource" ;
+                      ] ;
+                    sp:predicate [
+                        sp:varName "predicate" ;
+                      ] ;
+                    sp:subject [
+                        sp:varName "subject" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Filter ;
+                    sp:expression [
+                        a sp:isIRI ;
+                        sp:arg1 [
+                            sp:varName "subject" ;
+                          ] ;
+                      ] ;
+                  ]
+                ) ;
+              sp:graphNameNode [
+                  sp:varName "graph" ;
+                ] ;
+            ]
+            [
+              a sp:Filter ;
+              sp:expression [
+                  a sp:notExists ;
+                  sp:elements (
+                      [
+                        sp:object [
+                            sp:varName "resource" ;
+                          ] ;
+                        sp:predicate [
+                            sp:varName "predicate" ;
+                          ] ;
+                        sp:subject [
+                            sp:varName "subject" ;
+                          ] ;
+                      ]
+                    ) ;
+                ] ;
+            ]
+          )
+          [
+            a sp:Bind ;
+            sp:expression [
+                a swa:labelInGraph ;
+                arg:resource [
+                    sp:varName "subject" ;
+                  ] ;
+                arg:resourceGraph [
+                    a ui:graphWithImports ;
+                    sp:arg1 [
+                        sp:varName "graph" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "subjectLabel" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a swa:labelInGraph ;
+                arg:resource [
+                    sp:varName "predicate" ;
+                  ] ;
+                arg:resourceGraph [
+                    a ui:graphWithImports ;
+                    sp:arg1 [
+                        sp:varName "graph" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "predicateLabel" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource to get the references to." ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "Finds all incoming references to a given resource from files that are outside of the imports closure of the current graph." ;
+  rdfs:label "External references" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+edg:Header
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:level1Link ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The hyperlink for the first level item." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:level1Text ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The text of the first level link." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:level2Link ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The link of the second level." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:level2Text ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The text of the second level link." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:level3Text ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The last level text" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:logo ;
+      spl:valueType xsd:string ;
+      rdfs:comment "An optional logo image, overloading the default logo." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:suppressHome ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to suppress the default \"Home\" navigation bar entry." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectType ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<div id=\"header\">
+    <div data-info=\"{= edg:Header }\"/>
+    <div class=\"teamwork-page-header\">
+        <table>
+            <tr>
+                <td>
+                    <div id=\"swa-dialog-parent\"/>
+                    <ui:if ui:condition=\"{= bound(?logo) }\">
+                        <div>
+                            <img alt=\"Logo\" src=\"{= ?logo }\"/>
+                        </div>
+                    </ui:if>
+                    <ui:else>
+                        <a href=\"{= IF((uix:isRDM() &amp;&amp; uix:isRDMBrandingOverride()), &quot;../rdm&quot;, &quot;evn&quot;) }\">
+                            <ui:if ui:condition=\"{= !tbl:hasValidLicense() }\">
+                                <div class=\"edg-logo\"/>
+                            </ui:if>
+                            <ui:elseif ui:condition=\"{= uix:isRDM() &amp;&amp; uix:isRDMBrandingOverride() }\">
+                                <div class=\"edg-logo\"/>
+                            </ui:elseif>
+                            <ui:elseif ui:condition=\"{= bound(?projectType) &amp;&amp; (teamwork:singularProjectTypeLabel(?projectType) = &quot;Content Tag Set&quot;) }\">
+                                <div class=\"teamwork-logo teamwork-logo-tagger\"/>
+                            </ui:elseif>
+                            <ui:else>
+                                <div class=\"edg-logo\"/>
+                            </ui:else>
+                        </a>
+                    </ui:else>
+                </td>
+                <td class=\"edg-dynamic-slot\" id=\"edg-mast-position-1\">
+                    <ui:insertionPoint ui:pointId=\"1\"/>
+                </td>
+                <td class=\"edg-dynamic-slot\" id=\"edg-mast-position-2\">
+                    <ui:insertionPoint ui:pointId=\"2\"/>
+                </td>
+                <td class=\"edg-dynamic-slot\" id=\"edg-mast-position-3\"/>
+                <td class=\"edg-dynamic-slot\" id=\"edg-mast-position-4\"/>
+                <td class=\"swa-width-one-hundred-percent\">
+                    <div class=\"teamwork-navigation-bar\">
+                        <ui:if ui:condition=\"{= bound(?level1Text) }\">
+                            <a href=\"evn\">Home</a>
+                            <ui:if ui:condition=\"{= bound(?level1Link) }\">
+                                <a href=\"{= ?level1Link }\">{= ?level1Text }</a>
+                            </ui:if>
+                            <ui:else>{= ?level1Text }</ui:else>
+                        </ui:if>
+                        <ui:elseif ui:condition=\"{= (!bound(?suppressHome)) || (!?suppressHome) }\">Home</ui:elseif>
+                        <ui:if ui:condition=\"{= bound(?level2Text) }\">&nbsp;&gt;&nbsp;<ui:if ui:condition=\"{= bound(?level2Link) }\">
+                                <a href=\"{= ?level2Link }\">{= ?level2Text }</a>
+                            </ui:if>
+                            <ui:else>{= ?level2Text }</ui:else>
+                        </ui:if>
+                        <ui:if ui:condition=\"{= bound(?level3Text) }\">&nbsp;&gt;&nbsp;{= ?level3Text }</ui:if>
+                    </div>
+                </td>
+                <td class=\"edg-header-admin-block\">
+                    <teamwork:UserAndLogOutLinks/>
+                    <div class=\"teamwork-version\">
+                        <span>Version {= uix:getTBVersion() }</span>
+                        <ui:if ui:condition=\"{= uix:isAdmin() }\">
+                            <a href=\"admin\">Server Administration</a>
+                        </ui:if>
+                        <ui:if ui:condition=\"{= (uix:isRDM() &amp;&amp; uix:isRDMBrandingOverride()) &amp;&amp; ((!bound(?logo)) || (?logo != &quot;lib/teamwork/build/images/teamwork/ExplorerLogo.png&quot;)) }\">
+                            <a class=\"swa-bold-font\" href=\"lib/evndoc/1802798.html\">Help</a>
+                        </ui:if>
+                        <ui:else>
+                            <a class=\"swa-bold-font\" href=\"lib/evndoc/1802557.html\">Help</a>
+                        </ui:else>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+"""^^ui:Literal ;
+  rdfs:comment "DEPRECATED. Use teamwork:Header instead (possibly with teamwork:Breadcrumbs as child)." ;
+  rdfs:label "Header (deprecated)" ;
+  rdfs:subClassOf teamwork:Header ;
+.
+edg.v:ShowUsage
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:predicate ;
+      spl:valueType rdf:Property ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:call arg:object=\"{= ?resource }\" arg:predicate=\"{= ?predicate }\" ui:template=\"{= edg:SubjectsForGivenPropertyObject }\" ui:varName=\"usages\">
+        <ui:if ui:condition=\"{= spr:rowCount(?usages) &gt; 0 }\">
+            <table class=\"edg-grid-table\">
+                <thead>
+                    <tr class=\"edg-grid-labels\">
+                        <th class=\"edg-grid-cell\">{= ui:label(?resourceType) }</th>
+                        <th class=\"edg-grid-cell\">Type</th>
+                        <th class=\"edg-grid-cell\">Comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ui:forEach ui:resultSet=\"{= ?usages }\">
+                        <tr class=\"edg-grid-row\">
+                            <td class=\"edg-grid-cell\">
+                                <swa:Link arg:resource=\"{= ?subject }\"/>
+                            </td>
+                            <td class=\"edg-grid-cell\">{= ui:label(spl:object(?subject, rdf:type)) }</td>
+                            <td class=\"edg-grid-cell\"/>
+                        </tr>
+                    </ui:forEach>
+                </tbody>
+            </table>
+        </ui:if>
+    </ui:call>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:subClassOf edg.v:View ;
+  skos:prefLabel "Show usage" ;
+.
+edg.v:UXelement
+  rdfs:subClassOf edg.v:View ;
+.
+edg.v:View
+  a owl:Class ;
+  rdfs:label "View" ;
+  rdfs:subClassOf owl:Thing ;
+.
+<http://edg.topbraid.solutions/view/common/GMD_common>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:ViewGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/view/common> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+dcterms:description
+  a rdf:Property ;
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "description" ;
+  rdfs:range xsd:string ;
+.
+dcterms:source
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "source" ;
+  rdfs:range xsd:anyURI ;
+.

@@ -1,0 +1,1059 @@
+# baseURI: http://topbraid.org/crosswalk.spin
+# imports: http://spinrdf.org/spl
+# imports: http://topbraid.org/crosswalk
+# imports: http://www.w3.org/2004/02/skos/core
+# prefix: crosswalk.spin
+
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+arg:code
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:crosswalkGraph
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:resource
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:vocabularyURI
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+crosswalk:AllRows
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "source" ;
+          ]
+          [
+            sp:varName "target" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "source" ;
+          ]
+          [
+            sp:varName "sourceLabel" ;
+          ]
+          [
+            sp:varName "target" ;
+          ]
+          [
+            sp:varName "targetLabel" ;
+          ]
+          [
+            sp:varName "comment" ;
+          ]
+          [
+            sp:varName "sourceKey" ;
+          ]
+          [
+            sp:varName "targetKey" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "target" ;
+              ] ;
+            sp:predicate crosswalk:closeMatch ;
+            sp:subject [
+                sp:varName "source" ;
+              ] ;
+          ]
+          [
+            a sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "source" ;
+                    ] ;
+                  sp:predicate rdf:subject ;
+                  sp:subject [
+                      sp:varName "s" ;
+                    ] ;
+                ]
+                [
+                  sp:object crosswalk:closeMatch ;
+                  sp:predicate rdf:predicate ;
+                  sp:subject [
+                      sp:varName "s" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "target" ;
+                    ] ;
+                  sp:predicate rdf:object ;
+                  sp:subject [
+                      sp:varName "s" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "comment" ;
+                    ] ;
+                  sp:predicate rdfs:comment ;
+                  sp:subject [
+                      sp:varName "s" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a ui:label ;
+                sp:arg1 [
+                    sp:varName "source" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "sourceLabel" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a ui:label ;
+                sp:arg1 [
+                    sp:varName "target" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "targetLabel" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a crosswalk.spin:primaryKey ;
+                arg:resource [
+                    sp:varName "source" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "sourceKey" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a crosswalk.spin:primaryKey ;
+                arg:resource [
+                    sp:varName "target" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "targetKey" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "Produces a tabular representation of all rows in the current crosswalk." ;
+  rdfs:label "All rows" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+crosswalk:CloseMatchesAndLabels
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "sourceType" ;
+          ]
+          [
+            sp:varName "targetType" ;
+          ]
+          [
+            sp:expression [
+                a ui:label ;
+                sp:arg1 [
+                    sp:varName "targetType" ;
+                  ] ;
+              ] ;
+            sp:varName "targetLabel" ;
+          ]
+          [
+            sp:varName "editable" ;
+          ]
+          [
+            sp:varName "comment" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "target" ;
+              ] ;
+            sp:predicate [
+                sp:varName "matchPredicate" ;
+              ] ;
+            sp:subject [
+                sp:varName "source" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    sp:varName "inverse" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "target" ;
+                  ] ;
+                sp:arg3 [
+                    sp:varName "source" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "sourceType" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    sp:varName "inverse" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "source" ;
+                  ] ;
+                sp:arg3 [
+                    sp:varName "target" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "targetType" ;
+              ] ;
+          ]
+          [
+            a sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "source" ;
+                    ] ;
+                  sp:predicate rdf:subject ;
+                  sp:subject [
+                      sp:varName "s" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "matchPredicate" ;
+                    ] ;
+                  sp:predicate rdf:predicate ;
+                  sp:subject [
+                      sp:varName "s" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "target" ;
+                    ] ;
+                  sp:predicate rdf:object ;
+                  sp:subject [
+                      sp:varName "s" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "comment" ;
+                    ] ;
+                  sp:predicate rdfs:comment ;
+                  sp:subject [
+                      sp:varName "s" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression true ;
+            sp:variable [
+                sp:varName "editable" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:inverse ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:matchPredicate ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+crosswalk:FindCloseMatchWithinCrosswalk
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "val" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a ui:graphWithImports ;
+                sp:arg1 [
+                    sp:varName "crosswalkGraph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "graph" ;
+              ] ;
+          ]
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a sp:replace ;
+                      sp:arg1 [
+                          sp:varName "code" ;
+                        ] ;
+                      sp:arg2 " " ;
+                      sp:arg3 "_" ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "term" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a xsd:string ;
+                      sp:arg1 [
+                          sp:varName "code" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "cd" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a spl:object ;
+                      sp:arg1 [
+                          sp:varName "crosswalkGraph" ;
+                        ] ;
+                      sp:arg2 crosswalk:type1 ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "type1" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a spl:object ;
+                      sp:arg1 [
+                          sp:varName "crosswalkGraph" ;
+                        ] ;
+                      sp:arg2 crosswalk:graph1 ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "graph1" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a spl:object ;
+                      sp:arg1 [
+                          sp:varName "crosswalkGraph" ;
+                        ] ;
+                      sp:arg2 crosswalk:type2 ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "type2" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a spl:object ;
+                      sp:arg1 [
+                          sp:varName "crosswalkGraph" ;
+                        ] ;
+                      sp:arg2 crosswalk:graph2 ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "graph2" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a sp:if ;
+                      sp:arg1 [
+                          a sp:eq ;
+                          sp:arg1 [
+                              sp:varName "graph1" ;
+                            ] ;
+                          sp:arg2 [
+                              sp:varName "vocabularyURI" ;
+                            ] ;
+                        ] ;
+                      sp:arg2 [
+                          sp:varName "type1" ;
+                        ] ;
+                      sp:arg3 [
+                          sp:varName "type2" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "type" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a swa:primaryKeyProperty ;
+                      arg:class [
+                          sp:varName "type" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "property" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a swa:primaryKeyURIStart ;
+                      arg:class [
+                          sp:varName "type" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "uriStart" ;
+                    ] ;
+                ]
+                [
+                  a sp:Optional ;
+                  sp:elements (
+                      [
+                        sp:object [
+                            sp:varName "label" ;
+                          ] ;
+                        sp:predicate <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+                        sp:subject [
+                            sp:varName "prefLabelURI" ;
+                          ] ;
+                      ]
+                      [
+                        a sp:Filter ;
+                        sp:expression [
+                            a sp:eq ;
+                            sp:arg1 [
+                                a sp:str ;
+                                sp:arg1 [
+                                    sp:varName "label" ;
+                                  ] ;
+                              ] ;
+                            sp:arg2 [
+                                sp:varName "cd" ;
+                              ] ;
+                          ] ;
+                      ]
+                    ) ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a sp:if ;
+                      sp:arg1 [
+                          a sp:bound ;
+                          sp:arg1 [
+                              sp:varName "uriStart" ;
+                            ] ;
+                        ] ;
+                      sp:arg2 [
+                          sp:varName "uriStart" ;
+                        ] ;
+                      sp:arg3 [
+                          sp:varName "none" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "namespace" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a sp:iri ;
+                      sp:arg1 [
+                          a sp:concat ;
+                          sp:arg1 [
+                              sp:varName "namespace" ;
+                            ] ;
+                          sp:arg2 [
+                              sp:varName "term" ;
+                            ] ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "uriPKey" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a sp:if ;
+                      sp:arg1 [
+                          a sp:bound ;
+                          sp:arg1 [
+                              sp:varName "uriPKey" ;
+                            ] ;
+                        ] ;
+                      sp:arg2 [
+                          sp:varName "uriPKey" ;
+                        ] ;
+                      sp:arg3 [
+                          sp:varName "prefLabelURI" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "uriOrig" ;
+                    ] ;
+                ]
+                [
+                  a sp:TriplePath ;
+                  sp:object [
+                      sp:varName "closeMatchResource" ;
+                    ] ;
+                  sp:path [
+                      a sp:AltPath ;
+                      sp:path1 crosswalk:closeMatch ;
+                      sp:path2 [
+                          a sp:ReversePath ;
+                          sp:subPath crosswalk:closeMatch ;
+                        ] ;
+                    ] ;
+                  sp:subject [
+                      sp:varName "uri" ;
+                    ] ;
+                ]
+                [
+                  a sp:Filter ;
+                  sp:expression [
+                      a sp:eq ;
+                      sp:arg1 [
+                          sp:varName "uriOrig" ;
+                        ] ;
+                      sp:arg2 [
+                          sp:varName "uri" ;
+                        ] ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "typeFinal" ;
+                    ] ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "closeMatchResource" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a swa:primaryKeyProperty ;
+                      arg:class [
+                          sp:varName "typeFinal" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "propertyF" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a sp:coalesce ;
+                      sp:arg1 [
+                          sp:varName "propertyF" ;
+                        ] ;
+                      sp:arg2 <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "propertyFinal" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "val" ;
+                    ] ;
+                  sp:predicate [
+                      sp:varName "propertyFinal" ;
+                    ] ;
+                  sp:subject [
+                      sp:varName "closeMatchResource" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "graph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:code ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The value of the arg:code need to come from defined arg:vocabularyURI" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:crosswalkGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:vocabularyURI ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The value of the arg:code need to come from this arg:vocabularyURI" ;
+    ] ;
+  spin:labelTemplate "The closeMatch for a {?code} from a given vocabulary URI {?vocabularyURI} in a given graph {?crosswalkGraph}" ;
+  rdfs:comment """It works on both: ontologies that have primary keys defined and the ones that doesn't have them defined. In the case where the primary key for a class is not defined we return prefLabel of the resource. In case that there is more than once class defined for a dataset, the URI of the term will be created for all namespaces.
+
+Note that once you provide the arg:code not being part of arg:vocabularyURI you won't get any results
+
+Invocation method from TBCME:
+http://localhost:8083/tbl/template/crosswalk/FindCloseMatchWithinCrosswalk?_base=...&code=...&crosswalkGraph=...&vocabularyURI=...""" ;
+  rdfs:label "Find close match within a crosswalk dataset" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+crosswalk:ResourceMappings
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:distinct true ;
+      sp:orderBy (
+          [
+            sp:varName "otherLabel" ;
+          ]
+          [
+            sp:varName "graphLabel" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "graph" ;
+          ]
+          [
+            sp:varName "graphLabel" ;
+          ]
+          [
+            sp:varName "other" ;
+          ]
+          [
+            sp:varName "otherLabel" ;
+          ]
+          [
+            sp:varName "inverse" ;
+          ]
+          [
+            sp:varName "link" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              sp:object [
+                  sp:varName "?0" ;
+                ] ;
+              sp:predicate teamwork:readableGraphsUnderTeamControl ;
+              sp:subject () ;
+            ]
+            [
+              sp:object [
+                  sp:varName "graph" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?1" ;
+                ] ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "tg" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              sp:object () ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              a sp:Filter ;
+              sp:expression [
+                  a sp:eq ;
+                  sp:arg1 [
+                      a teamwork:getProjectType ;
+                      sp:arg1 [
+                          sp:varName "graph" ;
+                        ] ;
+                    ] ;
+                  sp:arg2 <http://teamwork.topbraidlive.org/crosswalkprojects#ProjectType> ;
+                ] ;
+            ]
+          )
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  a sp:Union ;
+                  sp:elements (
+                      (
+                        [
+                          sp:object [
+                              sp:varName "resource" ;
+                            ] ;
+                          sp:predicate crosswalk:closeMatch ;
+                          sp:subject [
+                              sp:varName "other" ;
+                            ] ;
+                        ]
+                        [
+                          a sp:Bind ;
+                          sp:expression true ;
+                          sp:variable [
+                              sp:varName "inverse" ;
+                            ] ;
+                        ]
+                      )
+                      (
+                        [
+                          sp:object [
+                              sp:varName "other" ;
+                            ] ;
+                          sp:predicate crosswalk:closeMatch ;
+                          sp:subject [
+                              sp:varName "resource" ;
+                            ] ;
+                        ]
+                        [
+                          a sp:Bind ;
+                          sp:expression false ;
+                          sp:variable [
+                              sp:varName "inverse" ;
+                            ] ;
+                        ]
+                      )
+                    ) ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a swa:labelInGraph ;
+                      sp:arg1 [
+                          sp:varName "other" ;
+                        ] ;
+                      sp:arg2 [
+                          a ui:graphWithImports ;
+                          sp:arg1 [
+                              sp:varName "graph" ;
+                            ] ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "otherLabel" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "graph" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:projectLabel ;
+                sp:arg1 [
+                    sp:varName "graph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "graphLabel" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:editorLink ;
+                sp:arg1 [
+                    sp:varName "graph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "link" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource to find the mappings of." ;
+    ] ;
+  rdfs:comment "Finds all mappings involving a given resource across all accessible vocabularies." ;
+  rdfs:label "Resource mappings" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+<http://topbraid.org/crosswalk.spin>
+  a owl:Ontology ;
+  rdfs:comment "APIs, implemented as SPIN query templates, that encapsulate frequently needed queries against Crosswalks." ;
+  rdfs:label "Crosswalk Modules" ;
+  owl:imports <http://spinrdf.org/spl> ;
+  owl:imports <http://topbraid.org/crosswalk> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+.
+crosswalk.spin:primaryKey
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "keyString" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              a sp:Filter ;
+              sp:expression [
+                  a sp:isIRI ;
+                  sp:arg1 [
+                      sp:varName "resource" ;
+                    ] ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "type" ;
+                ] ;
+              sp:predicate rdf:type ;
+              sp:subject [
+                  sp:varName "resource" ;
+                ] ;
+            ]
+            [
+              a sp:Bind ;
+              sp:expression [
+                  a swa:primaryKeyURIStart ;
+                  sp:arg1 [
+                      sp:varName "type" ;
+                    ] ;
+                ] ;
+              sp:variable [
+                  sp:varName "uriStart" ;
+                ] ;
+            ]
+            [
+              a sp:Filter ;
+              sp:expression [
+                  a sp:bound ;
+                  sp:arg1 [
+                      sp:varName "uriStart" ;
+                    ] ;
+                ] ;
+            ]
+          )
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:substr ;
+                sp:arg1 [
+                    a sp:str ;
+                    sp:arg1 [
+                        sp:varName "resource" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a sp:add ;
+                    sp:arg1 [
+                        a sp:strlen ;
+                        sp:arg1 [
+                            sp:varName "uriStart" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 1 ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "key" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:decodeURL ;
+                sp:arg1 [
+                    sp:varName "key" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "keyString" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "keyString" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              a sp:Filter ;
+              sp:expression [
+                  a sp:isIRI ;
+                  sp:arg1 [
+                      sp:varName "resource" ;
+                    ] ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "type" ;
+                ] ;
+              sp:predicate rdf:type ;
+              sp:subject [
+                  sp:varName "resource" ;
+                ] ;
+            ]
+            [
+              a sp:Bind ;
+              sp:expression [
+                  a swa:primaryKeyURIStart ;
+                  sp:arg1 [
+                      sp:varName "type" ;
+                    ] ;
+                ] ;
+              sp:variable [
+                  sp:varName "uriStart" ;
+                ] ;
+            ]
+            [
+              a sp:Filter ;
+              sp:expression [
+                  a sp:bound ;
+                  sp:arg1 [
+                      sp:varName "uriStart" ;
+                    ] ;
+                ] ;
+            ]
+          )
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:substr ;
+                sp:arg1 [
+                    a sp:str ;
+                    sp:arg1 [
+                        sp:varName "resource" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a sp:add ;
+                    sp:arg1 [
+                        a sp:strlen ;
+                        sp:arg1 [
+                            sp:varName "uriStart" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 1 ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "key" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:decodeURL ;
+                sp:arg1 [
+                    sp:varName "key" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "keyString" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource to get the primary key of." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource to get the primary key of." ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:string ;
+  rdfs:label "primary key" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.

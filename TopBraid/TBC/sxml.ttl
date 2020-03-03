@@ -1,0 +1,108 @@
+# baseURI: http://topbraid.org/sxml
+# imports: http://www.topbraid.org/2007/05/composite.owl
+# prefix: sxml
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://topbraid.org/sxml>
+  a owl:Ontology ;
+  rdfs:comment """An ontology describing XML documents (elements and their hierarchy).
+XML Documents have a root element. Attributes are represented as values of datatype properties that have a value for sxml:attribute. Future versions may also support object properties to resolve IDREF attributes. Elements are represented as instances of classes that have an sxml:element annotation.""" ;
+  owl:imports <http://www.topbraid.org/2007/05/composite.owl> ;
+  owl:versionInfo "1.2.0" ;
+.
+sxml:CDATA
+  a owl:Class ;
+  rdfs:label "CDATA" ;
+  rdfs:subClassOf sxml:Node ;
+.
+sxml:Comment
+  a owl:Class ;
+  rdfs:label "Comment" ;
+  rdfs:subClassOf sxml:Node ;
+.
+sxml:Document
+  a owl:Class ;
+  rdfs:label "Document" ;
+  rdfs:subClassOf sxml:Node ;
+.
+sxml:Element
+  a owl:Class ;
+  rdfs:label "Element" ;
+  rdfs:subClassOf sxml:Node ;
+.
+sxml:Node
+  a owl:Class ;
+  rdfs:label "Node" ;
+  rdfs:subClassOf owl:Thing ;
+.
+sxml:TextNode
+  a owl:Class ;
+  rdfs:label "Text Node" ;
+  rdfs:subClassOf sxml:Node ;
+.
+sxml:XSDValidationError
+  a rdfs:Class ;
+  rdfs:comment "Can be used to represent XML Schema validation errors. The rdfs:label contains details." ;
+  rdfs:label "XSD validation error" ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+sxml:XSDValidationWarning
+  a rdfs:Class ;
+  rdfs:comment "Can be used to represent XML Schema validation warnings. The rdfs:label contains details." ;
+  rdfs:label "XSD validation warning" ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+sxml:attribute
+  a owl:AnnotationProperty ;
+  rdfs:comment "The XML tag used to render an RDF property into an XML attribute. This must be a valid XML attribute name." ;
+  rdfs:domain rdf:Property ;
+  rdfs:label "attribute" ;
+.
+sxml:element
+  a owl:AnnotationProperty ;
+  rdfs:comment "The XML tag used to render an element. The values of this property must be valid XML tag strings or URI resources that can be abbreviated by an existing namespace prefix. For example, a tag <process> would be mapped into a class with sxml:element=\"process\"^^xsd:string. A tag <my:process> would be mapped into a class with sxml:element=my:process (which is often identical to the URI of the class itself)." ;
+  rdfs:domain rdfs:Class ;
+  rdfs:label "element" ;
+.
+sxml:isAttribute
+  a owl:AnnotationProperty ;
+  rdfs:comment "The XML tag used to mark if an OWL restriction should be generated as an XML attribute or simple content." ;
+  rdfs:domain owl:Restriction ;
+  rdfs:label "is attribute" ;
+  rdfs:range xsd:boolean ;
+.
+sxml:order
+  a owl:AnnotationProperty ;
+  rdfs:comment "The XML tag used for ordering. This is an annotation property that can be used to annotate both instance and non-instance resources." ;
+  rdfs:domain rdfs:Resource ;
+  rdfs:label "order" ;
+  rdfs:range xsd:int ;
+.
+sxml:prefix
+  a owl:DatatypeProperty ;
+  rdfs:comment "Stores the name of the prefixes that will be written back to the XML file when saved. This is mainly for round-tripping XML files that have xmlns... attributes in the root element." ;
+  rdfs:label "prefix" ;
+  rdfs:range xsd:string ;
+.
+sxml:root
+  a owl:ObjectProperty ;
+  rdfs:comment "The root element of an XML document." ;
+  rdfs:domain sxml:Document ;
+  rdfs:subPropertyOf <http://www.topbraid.org/2007/05/composite.owl#child> ;
+.
+sxml:tag
+  a owl:AnnotationProperty ;
+  rdfs:comment "The tag of an XML object." ;
+.
+sxml:text
+  a owl:DatatypeProperty ;
+  rdfs:comment "The body of an XML TextNode." ;
+  rdfs:domain sxml:TextNode ;
+  rdfs:label "text" ;
+  rdfs:range xsd:string ;
+.

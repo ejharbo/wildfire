@@ -1,0 +1,3500 @@
+# baseURI: http://edg.topbraid.solutions/1.0/dashboards/governance
+# imports: http://edg.topbraid.solutions/1.0/dashboards/scripts
+# imports: http://edg.topbraid.solutions/1.0/metrics/governance
+# imports: http://edg.topbraid.solutions/1.0/schema/dashboards
+# imports: http://edg.topbraid.solutions/1.0/spin/jsfunctions
+# imports: http://edg.topbraid.solutions/1.0/spin/library
+# imports: http://topbraid.org/swa
+# imports: http://topbraid.org/teamworkdashboard
+# imports: http://topbraid.org/teamworkgovernance.ui
+# imports: http://uispin.org/html
+# imports: http://uispin.org/svg
+
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix autotagger: <http://evn.topbraidlive.org/autotagger#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix conceptmatch: <http://topbraid.org/conceptmatch#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix core-soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkapp: <http://topbraid.org/swa/crosswalkapp#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dashboard: <http://example.org/dashboard#> .
+@prefix dataset: <http://teamwork.topbraidlive.org/dataset#> .
+@prefix datasetapp: <http://topbraid.org/swa/datasetapp#> .
+@prefix datasetviewer: <http://topbraid.org/swa/datasetviewer#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix default: <http://uispin.org/default#> .
+@prefix defaultapp: <http://topbraid.org/swa/defaultapp#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix eeh-lib: <http://www.environmenthub.no/spin/1.0/eeh-lib#> .
+@prefix eeh-reportlib: <http://www.environmenthub.no/spin/1.0/eeh-reportlib#> .
+@prefix elements: <http://purl.org/dc/elements/1.1/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evn: <http://topbraid.org/evn/evn#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evnimport: <http://evn.topbraidlive.org/uispin/evnimport#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix ex: <http://example.org/> .
+@prefix extjs: <http://uispin.com/extjs#> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix governance: <http://topbraid.org/teamworkgovernance.ui#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix graphql.search: <http://teamwork.topbraidlive.org/graphql.search#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix kennedys: <http://topbraid.org/examples/kennedys#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix ontologyviewer: <http://topbraid.org/swa/ontologyviewer#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmapp: <http://rdm.topbraidlive.org/rdmapp#> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix rdmviewer: <http://rdm.topbraidlive.org/rdmviewer#> .
+@prefix saf: <http://topbraid.org/saf/> .
+@prefix safconfig: <http://topbraid.org/safconfig/> .
+@prefix safindex: <http://topbraid.org/safindex#> .
+@prefix safm: <http://saf.topbraidlive.org/metaschema/> .
+@prefix savedQueries: <http://teamwork.topbraidlive.org/ui/savedQueries#> .
+@prefix scheduler: <http://topbraid.org/scheduler#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix server: <http://server.topbraidlive.org/server.ui#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sharepoint: <http://topbraid.org/sharepoint#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spin.ui: <http://spinrdf.org/spin.ui#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix stats: <http://topbraid.org/statistics#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swadoc: <http://topbraid.org/swadoc#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix tblui: <http://server.topbraidlive.org/tblui#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkAdmin: <http://teamwork.topbraidlive.org/doc/teamworkAdmin#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworkconstraints: <http://topbraid.org/teamworkconstraints#> .
+@prefix teamworkdashboard: <http://topbraid.org/teamworkdashboard#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix teamworkupdate: <http://teamworkAPI.topbraid.com/teamworkUpdate#> .
+@prefix textindex: <http://topbraid.org/textindex#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix tracker: <http://teamwork.topbraidlive.org/ui/tracker#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uitest: <http://uispin.org/test#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix userdat: <http://teamwork.topbraidlive.org/ui/userdata> .
+@prefix userdata: <http://teamwork.topbraidlive.org/ui/userdata#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix victory: <http://edg.topbraid.solutions/victory/> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xhtml: <http://topbraid.org/xhtml#> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/dashboards/governance>
+  a owl:Ontology ;
+  owl:imports <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/metrics/governance> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/dashboards> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/spin/jsfunctions> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/spin/library> ;
+  owl:imports <http://topbraid.org/swa> ;
+  owl:imports <http://topbraid.org/teamworkdashboard> ;
+  owl:imports <http://topbraid.org/teamworkgovernance.ui> ;
+  owl:imports <http://uispin.org/html> ;
+  owl:imports <http://uispin.org/svg> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+edg:AssetViewerInline
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:defaultValue false ;
+      spl:optional true ;
+      spl:predicate arg:compact ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "More compact display, e.g., omit name after job titles" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional false ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource to display" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:tag ;
+      spl:valueType teamwork:Tag ;
+      rdfs:comment "If specified, link to the governance asset in a working copy instead of the production copy of the governance singleton." ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:if ui:condition=\"{= !bound(?resource) }\">
+        <governance:Icon/>
+        <swa:Space/>
+        <em class=\"text-muted\">(unbound)</em>
+    </ui:if>
+    <ui:elseif ui:condition=\"{= regex(str(?resource), &quot;^urn:x-evn-master:[^:/#]+$&quot;) }\">
+        <ui:group let:teamGraph=\"{= teamwork:teamGraph(?resource) }\" let:type=\"{= teamwork:getProjectType(?resource) }\" let:typeLabel=\"{= teamwork:singularProjectTypeLabel(teamwork:getProjectType(?resource)) }\">
+            <ui:if ui:condition=\"{= teamwork:currentUserHasPrivilege(?teamGraph, teamwork:viewer, ?teamGraph) &amp;&amp; smf:canRead(ui:graphWithImports(?resource)) }\">
+                <governance:Icon arg:toolTip=\"{= ?typeLabel }\" arg:type=\"{= ?type }\"/>
+                <swa:Space/>
+                <a href=\"{= teamwork:editorLink(?resource) }\">{= teamwork:projectLabel(?resource) }</a>
+            </ui:if>
+            <ui:else>
+                <governance:Icon arg:faIcon=\"fa-lock\" arg:muted=\"{= true }\" arg:toolTip=\"Insufficient privileges for access\"/>
+                <swa:Space/>
+                <em class=\"text-muted\">(asset collection)</em>
+            </ui:else>
+        </ui:group>
+    </ui:elseif>
+    <ui:elseif ui:condition=\"{= bound(?resource) &amp;&amp; smf:isUserAccount(?resource) }\">
+        <governance:Icon arg:toolTip=\"User account\" arg:type=\"{= sioc:UserAccount }\"/>
+        <swa:Space/>
+        <teamwork:UserLink arg:user=\"{= ?resource }\"/>
+    </ui:elseif>
+    <ui:elseif ui:condition=\"{= smf:isRole(?resource) }\">
+        <governance:Icon arg:toolTip=\"Security role\" arg:type=\"{= sioc:Role }\"/>
+        <swa:Space/>{= smf:roleName(?resource) }</ui:elseif>
+    <ui:else>
+        <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(teamwork:platformGovernanceGraph()) }\">
+            <ui:if ui:condition=\"{= spl:instanceOf(?resource, edg:JobTitle) }\">
+                <ui:group let:count=\"{= governance:countUserAccountsAssignedToJobTitle(?resource) }\">
+                    <governance:Icon arg:muted=\"{= ?count = 0 }\" arg:toolTip=\"Job Title\" arg:type=\"{= edg:JobTitle }\"/>
+                    <swa:Space/>
+                    <ui:createLink arg:resource=\"{= ?resource }\" arg:tag=\"{= ?tag }\" ui:viewClass=\"{= governance:OrgStructurePage }\">
+                        <a href=\"{= ?link }\">{= ui:label(?resource) }</a>
+                    </ui:createLink>
+                    <ui:if ui:condition=\"{= (!bound(?compact)) || (!?compact) }\">
+                        <swa:Space/>
+                        <ui:if ui:condition=\"{= ?count = 0 }\">
+                            <span class=\"text-muted\">(<i class=\"fa fa-user\"/> unassigned)</span>
+                        </ui:if>
+                        <ui:elseif ui:condition=\"{= ?count = 1 }\">
+                            <span let:user=\"{= spl:subject(edg:assignedJobTitle, ?resource) }\">(<i class=\"fa fa-user\"/>
+                                <swa:Space/>
+                                <teamwork:UserLink arg:user=\"{= ?user }\"/>)
+</span>
+                        </ui:elseif>
+                        <ui:else>
+                            <span>(<i class=\"fa fa-user\"/>
+                                <swa:Space/>{= str(?count) })</span>
+                        </ui:else>
+                    </ui:if>
+                </ui:group>
+            </ui:if>
+            <ui:else>
+                <ui:group let:label=\"{= ui:label(?resource) }\" let:type=\"{= spl:object(?resource, rdf:type) }\" let:typeLabel=\"{= ui:label(spl:object(?resource, rdf:type)) }\" let:viewClass=\"{= IF(spl:instanceOf(?resource, edg:SubjectArea), governance:SubjectAreasPage, IF(spl:instanceOf(?resource, edg:Organization), governance:OrgStructurePage, ?none)) }\">
+                    <governance:Icon arg:toolTip=\"{= ?typeLabel }\" arg:type=\"{= ?type }\"/>
+                    <swa:Space/>
+                    <ui:if ui:condition=\"{= bound(?viewClass) }\">
+                        <ui:createLink arg:resource=\"{= ?resource }\" arg:tag=\"{= ?tag }\" ui:viewClass=\"{= ?viewClass }\">
+                            <a href=\"{= ?link }\">{= ?label }</a>
+                        </ui:createLink>
+                        <ui:if ui:condition=\"{= spl:instanceOf(?resource, edg:JobTitle) }\"/>
+                    </ui:if>
+                    <ui:elseif ui:condition=\"{= bound(?type) }\">{= ?label } ({= ?type })</ui:elseif>
+                    <ui:elseif ui:condition=\"{= ?label = str(?resource) }\">
+                        <span class=\"text-muted\">{= ?label }</span>
+                    </ui:elseif>
+                    <ui:else>{= ?label }</ui:else>
+                </ui:group>
+            </ui:else>
+        </ui:setContext>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Renders various kinds of governance assets as an inline HTML fragment: subject areas, organizations, job titles, users, security roles, asset collections. Where possible, resources are displayed with icon and link. Sets the query graph itself as required." ;
+  rdfs:label "Governance asset viewer" ;
+  rdfs:subClassOf governance:Elements ;
+.
+edg:BuildDashboardsTabsFolder
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:activeDashboard ;
+      spl:valueType edg:Dashboard ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:user ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:governanceGraph=\"{= teamwork:platformGovernanceGraph() }\">
+    <!--ui:dumpScope ui:message=\"AAA1: edg:BuildDashboardsTabsFolder\"/-->
+    <ui:setContext ui:queryGraph=\"{= ui:unionOfGraphs(ui:unionGraph, ui:graphWithImports(?governanceGraph)) }\">
+        <ui:if ui:condition=\"{= bound(?activeDashboard) }\">
+            <div class=\"swa-tabs\" id=\"tabs\" letrs:tabs=\"{#
+                    SELECT ?tab ?tabLabel ?script ?desc
+                    WHERE {
+                        {
+                            ?tab a edg:PreconfiguredDashboardGadgetTab .
+                            ?tab edg:belongsTo ?activeDashboard .
+                            ?tab edg:activated true .
+                            FILTER NOT EXISTS {
+                                ?tab ui:abstract true .
+                            } .
+                            ?tab rdfs:label ?tabLabel .
+                            OPTIONAL {
+                                ?tab edg:description ?desc .
+                            } .
+                            OPTIONAL {
+                                ?tab edg:scriptContainer/edg:script ?script .
+                            } .
+                            BIND (COALESCE(spl:object(?tab, sh:order), 900) AS ?index) .
+                        }
+                        UNION
+                        {
+                            ?tab a edg:DashboardGadgetTab .
+                            ?tab edg:belongsTo ?activeDashboard .
+                            ?tab edg:activated true .
+                            ?tab rdfs:label ?tabLabel .
+                            OPTIONAL {
+                                ?tab edg:description ?desc .
+                            } .
+                            OPTIONAL {
+                                ?tab edg:scriptContainer ?scriptContainer .
+                                BIND (spl:objectInGraph(?scriptContainer, edg:script, ui:unionGraph) AS ?script) .
+                            } .
+                            BIND (COALESCE(spl:object(?tab, sh:order), 1000) AS ?index) .
+                        } .
+                    }
+                    ORDER BY (?index) }\">
+                <ui:if ui:condition=\"{= !spr:isEmpty(?tabs) }\">
+                    <ul>
+                        <ui:forEach ui:resultSet=\"{= ?tabs }\">
+                            <li>
+                                <a href=\"#tabs-{= afn:localname(?tab) }\" title=\"{= ?desc }\">{= ?tabLabel }</a>
+                            </li>
+                        </ui:forEach>
+                    </ul>
+                    <ui:group let:id=\"galleryTab_{= ui:uniqueId() }\">
+                        <ui:forEach ui:resultSet=\"{= ?tabs }\">
+                            <ui:loadable id=\"tabs-{= afn:localname(?tab) }\" ui:loadOnDemand=\"{= true }\">
+                                <section id=\"{= ?id }\">
+                                    <ui:if ui:condition=\"{= bound(?script) }\">
+                                        <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?governanceGraph) }\">
+                                            <ui:dynamicView arg:user=\"{= ?user }\" ui:class=\"{= ?script }\"/>
+                                        </ui:setContext>
+                                    </ui:if>
+                                    <ui:else>
+                                        <p>Please configure a script for this tab</p>
+                                    </ui:else>
+                                </section>
+                            </ui:loadable>
+                        </ui:forEach>
+                    </ui:group>
+                    <swa:TabsActivationScript/>
+                </ui:if>
+                <ui:else>
+                    <edg:NoActivateDashboards/>
+                </ui:else>
+            </div>
+        </ui:if>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Biulds a dashboard and its tabs. Currently this finds the first dashboard that is activated and not replaced by another dashboard. In this release there is only a common dashboard for all uesrs." ;
+  rdfs:label "Build dashboards tabs folder" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:BuildTableOfRolesSubjectAreasAndWorkflows
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group let:tableId=\"workflow-user-roles-{= ui:uniqueId() }\">
+    <p class=\"tbd\">For active and completed workflows you have the following governance roles for asset collections in the listed subject areas. Their associated workflows and states are also shown.</p>
+    <div id=\"workflow-user-roles\">
+        <teamwork:DataTable arg:dataColumnsEndpoint=\"edg:ColumnLabelsForCurrentUserGovernanceRoles\" arg:dataEndpoint=\"edg:DataForCurrentUserGovernanceRoles\" arg:dtType=\"workflowDataTable\" arg:editable=\"{= false }\" arg:hasWorkflowHome=\"{= true }\" arg:hideIfEmpty=\"{= true }\" arg:id=\"{= ?tableId }\"/>
+        <div class=\"ui-helper-hidden-accessible\">None</div>
+    </div>
+    <script>gadgets.Hub.publish('org.topbraid.swa.rebuildTable', '{= ?tableId }');</script>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Build table of roles subject areas and workflows" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:ColumnLabelsForCurrentUserGovernanceRoles
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:private true ;
+  ui:prototype """
+<ui:group>
+    <swon:Array>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"uri\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"uri\"/>
+            <swon:Value arg:name=\"searchable\" arg:value=\"{= false }\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= false }\"/>
+            <swon:Value arg:name=\"orderable\" arg:value=\"{= false }\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Governance Role\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"role\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Subject Area\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"subject-area\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Asset Collection\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"asset-collection\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Workflow\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"working-copy\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"State\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"state\"/>
+        </swon:Object>
+    </swon:Array>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:label "column labels for current user governance roles" ;
+  rdfs:subClassOf teamwork:Elements ;
+.
+edg:ConditionalDashboardsTab
+  a rdfs:Class ;
+  rdfs:comment "DEPRECATED" ;
+  rdfs:comment "Metaclass for the tabs showing up on the dashboards page. Can contain metadata about when and where they show up." ;
+  rdfs:label "Conditional Dashboards tab" ;
+  rdfs:subClassOf edg:Elements ;
+  rdfs:subClassOf swa:Tab ;
+.
+edg:DashboardGadgetTab-belongsTo
+  sh:minCount 1 ;
+.
+edg:DashboardTabAboutScript
+  a edg:DashboardScriptClass ;
+  a ui:NodeClass ;
+  ui:responseType ui:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "Dashboard Tab About Script" ;
+  rdfs:subClassOf edg:DashboardTabScript ;
+.
+edg:DashboardTabForAbout
+  edg:activated true ;
+.
+edg:DashboardsHomePageTab
+  a teamwork:HomePageTab ;
+  edg.v:icon "far fa-chart-bar" ;
+  arg:visibility [
+      a sp:coalesce ;
+      sp:arg1 [
+          a smf:configParam ;
+          arg:param "metricsDashboardsActivated" ;
+        ] ;
+      sp:arg2 [
+          a uix:isTBC ;
+        ] ;
+    ] ;
+  swa:tabIndex -205 ;
+  ui:prototype """
+<ui:group let:userName=\"{= IF(smf:hasCurrentUser(), smf:currentUserName(), &quot;Anonymous&quot;) }\">
+    <teamwork:Chrome arg:parentPage=\"{= edg:DashboardsHomePageTab }\" let:governanceGraph=\"{= teamwork:platformGovernanceGraph() }\" let:user=\"{= IRI(CONCAT(&quot;urn:x-tb-users:&quot;, ?userName)) }\">
+        <ui:try>
+            <ui:setContext ui:queryGraph=\"{= ui:unionOfGraphs(ui:unionGraph, ui:graphWithImports(?governanceGraph)) }\">
+                <ui:group let:activeDashboard=\"{= edg:getActiveDashboard() }\">
+                    <ui:call ui:template=\"{= edg:mySubjectAreas }\" ui:varName=\"mySubjectAreaGraphs\">
+                        <!--ui:debug>
+<ui:dumpResultSet ui:message=\"edg:DashboardsHomePageTab - Subject Area Graphs\"
+  ui:resultSet=\"{= ?mySubjectAreaGraphs }\"/>
+<ui:dumpScope ui:message=\"edg:DashboardsHomePageTab\"/>
+</ui:debug-->
+                        <ui:if ui:condition=\"{= !bound(?activeDashboard) }\">
+                            <edg:NoActivateDashboards/>
+                        </ui:if>
+                        <ui:else>
+                            <h1>
+                                <span>{= ui:label(?activeDashboard) } for {= ?userName } &nbsp;&nbsp;</span>
+                                <a data-icon=\"fa-question-circle\" onclick=\"javascript:swa.populateModalDialogAskingForBody('edg:MyDashboardsHelpPage','My Dashboards',null)\">
+                                    <i class=\"fa-question-circle fa\"/>
+                                </a>
+                            </h1>
+                            <section let:key=\"{= ui:uniqueId() }\">
+                                <script>swa.queryGraphURI = '{= ui:currentQueryGraph() }';</script>
+                                <ui:loadable class=\"feature-type-container\" id=\"container-{= ?key }\">
+                                    <edg:BuildDashboardsTabsFolder arg:activeDashboard=\"{= ?activeDashboard }\" ui:args=\"*\"/>
+                                </ui:loadable>
+                                <ui:if ui:condition=\"{= bound(?dialogMessage) }\">
+                                    <script>  {= ui:functionCall(\"swa.populateModalDialog\", ?dialogMessage) } </script>
+                                </ui:if>
+                            </section>
+                        </ui:else>
+                    </ui:call>
+                </ui:group>
+            </ui:setContext>
+        </ui:try>
+        <ui:catch>
+            <div class=\"edg-exception\">{= ?exception }</div>
+        </ui:catch>
+    </teamwork:Chrome>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/governance> ;
+  rdfs:label "Metrics Dashboard" ;
+  rdfs:subClassOf teamwork:HomePageTabs ;
+.
+edg:DashboardsOverviewTab
+  a edg:ConditionalDashboardsTab ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:user ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  swa:tabIndex 50 ;
+  ui:prototype """
+<div let:governanceGraph=\"{= teamwork:platformGovernanceGraph() }\" let:projectType=\"{= teamwork:getProjectType(?projectGraph) }\" let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <ui:try>
+        <ui:setContext ui:queryGraph=\"{= ui:unionOfGraphs(ui:graphWithImports(?governanceGraph, ui:graph)) }\">
+            <!--ui:debug>
+<ui:dumpResultSet ui:message=\"edg:DashboardsOverviewTab - Subject Area Graphs\"
+  ui:resultSet=\"{= ?mySubjectAreaGraphs }\"/>
+<ui:dumpScope ui:message=\"edg:DashboardsOverviewTab\"/>
+</ui:debug-->
+            <section>
+                <script>swa.queryGraphURI = '{= ui:currentQueryGraph() }';</script>
+                <p class=\"mb-2\">Tabs are configured in the governance model and can be accessed in the main vertical menu or by clicking on the link below.</p>
+                <p>
+                    <a data-icon=\"fas fa-gem\" href=\"platform_governance_singleton.editor?resourceType=edg:DashboardGadgetTab\" tabindex=\"0\">
+                        <i class=\"menu-icon fas fa-gem fa\"/>
+                        <span>Dashboard Tabs</span>
+                    </a>
+                </p>
+                <p class=\"mt-2\">In the current release dashboard tab behavior is driven using customizable scripts.</p>
+            </section>
+        </ui:setContext>
+    </ui:try>
+    <ui:catch>
+        <span class=\"text-danger\">{= ?exception }<br/>
+        </span>
+    </ui:catch>
+</div>
+"""^^ui:Literal ;
+  rdfs:comment "DEPRECATED" ;
+  rdfs:label "About" ;
+  rdfs:subClassOf edg:Tabs ;
+.
+edg:DashboardsTab
+  a rdfs:Class ;
+  rdfs:comment "DEPRECATED" ;
+  rdfs:comment "Metaclass for the tabs showing up on the dashboards page. Can contain metadata about when and where they show up." ;
+  rdfs:label "Dashboards tab" ;
+  rdfs:subClassOf edg:Elements ;
+  rdfs:subClassOf swa:Tab ;
+.
+edg:DataForCurrentUserGovernanceRoles
+  a ui:NodeClass ;
+  spin:private true ;
+  ui:prototype """
+<ui:group let:governanceGraph=\"{= IRI(&quot;urn:x-evn-master:platform_governance_singleton&quot;) }\" let:userName=\"{= IF(smf:hasCurrentUser(), smf:currentUserName(), &quot;Anonymous&quot;) }\">
+    <ui:group let:user=\"{= IRI(CONCAT(&quot;urn:x-tb-users:&quot;, ?userName)) }\">
+        <ui:call arg:user=\"{= ?user }\" ui:template=\"{= edg:GovernanceRolesSubjectAreasAndWorkflowsForCurrentUser }\">
+            <swon:Object>
+                <swon:Value arg:name=\"data\">
+                    <swon:Array>
+                        <ui:forEach ui:resultSet=\"{= ?rs }\">
+                            <swon:Object>
+                                <swon:Value arg:name=\"uri\" arg:value=\"{= ?location }\"/>
+                                <swon:Value arg:name=\"role\" arg:value=\"{= ui:label(?role) }\"/>
+                                <swon:Value arg:name=\"asset-collection\" arg:value=\"{= ?projectLabel }\"/>
+                                <swon:Value arg:name=\"state\" arg:value=\"{= ?statusLabel }\"/>
+                                <swon:Value arg:name=\"working-copy\" arg:value=\"{= ?tagLabel }\"/>
+                                <swon:Value arg:name=\"graph\" arg:value=\"{= ?projectGraph }\"/>
+                                <swon:Value arg:name=\"subject-area\" arg:value=\"{= swa:labelInGraph(?subjectArea, ?governanceGraph) }\"/>
+                            </swon:Object>
+                        </ui:forEach>
+                    </swon:Array>
+                </swon:Value>
+            </swon:Object>
+        </ui:call>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:subClassOf teamwork:Elements ;
+.
+edg:DefaultDashboard
+  edg:activated true ;
+.
+edg:DonutChart
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:dataEndpoint ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType edg:SubjectArea ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:title ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <!--h3 class=\"text-center\">{= ?title }</h3-->
+    <swa:VictoryDonutChart arg:data_endpoint=\"{= ?dataEndpoint }\" arg:subjectArea=\"{= ?subjectArea }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Donut chart" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:GadgetGalleryTab
+  a edg:ConditionalDashboardsTab ;
+  swa:tabIndex 900 ;
+  ui:prototype """
+<div>
+    <ui:try let:id=\"galleryTab_{= ui:uniqueId() }\">
+        <section id=\"{= ?id }\">
+            <edg:ShowExampleGadgets/>
+        </section>
+    </ui:try>
+    <ui:catch>
+        <span class=\"text-danger\">{= ?exception }<br/>
+        </span>
+    </ui:catch>
+</div>
+"""^^ui:Literal ;
+  rdfs:label "Gallery" ;
+  rdfs:subClassOf edg:Tabs ;
+.
+edg:GadgetViewer
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:gadget ;
+      spl:valueType ui:NodeClass ;
+      rdfs:comment "The example to view." ;
+    ] ;
+  ui:prototype """
+<div class=\"teamwork-dashboard-project-tab-td-width\" let:height=\"{= spl:object(?gadget, arg:height) }\">
+    <ui:dynamicView ui:args=\"*\" ui:class=\"{= ?gadget }\"/>
+</div>
+"""^^ui:Literal ;
+  rdfs:comment """<div class=\"swadoc-example\">
+    <div class=\"swadoc-example-view\" let:height=\"{= spl:object(?example, arg:height) }\">
+        <ui:createLink ui:sendQueryGraph=\"true\" ui:viewClass=\"{= ?example }\">
+            <iframe class=\"swadoc-example-iframe\"
+                    src=\"{= ?link }\"
+                    style=\"height: {= COALESCE(?height, &quot;200px&quot;) }\"/>
+        </ui:createLink>
+    </div>
+</div>""" ;
+  rdfs:label "Gadget Viewer" ;
+  rdfs:subClassOf swa:Elements ;
+.
+edg:GovernanceRolesSubjectAreasAndWorkflowsForCurrentUser
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "role" ;
+          ]
+          [
+            sp:varName "subjectArea" ;
+          ]
+          [
+            sp:varName "workflowLabel" ;
+          ]
+          [
+            sp:varName "priorityLabel" ;
+          ]
+          [
+            sp:varName "actions" ;
+          ]
+          [
+            sp:varName "projectLabel" ;
+          ]
+          [
+            sp:varName "statusLabel" ;
+          ]
+          [
+            sp:varName "date" ;
+          ]
+          [
+            sp:varName "tagLabel" ;
+          ]
+          [
+            sp:varName "resourceLabel" ;
+          ]
+          [
+            sp:varName "projectGraph" ;
+          ]
+          [
+            sp:varName "tag" ;
+          ]
+          [
+            sp:varName "location" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              sp:object [
+                  sp:varName "?0" ;
+                ] ;
+              sp:predicate teamwork:readableGraphsUnderTeamControl ;
+              sp:subject () ;
+            ]
+            [
+              sp:object [
+                  sp:varName "projectGraph" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?1" ;
+                ] ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "teamGraph" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              sp:object () ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              a sp:NamedGraph ;
+              sp:elements (
+                  [
+                    sp:object teamwork:Tag ;
+                    sp:predicate rdf:type ;
+                    sp:subject [
+                        sp:varName "tag" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "status" ;
+                      ] ;
+                    sp:predicate teamwork:status ;
+                    sp:subject [
+                        sp:varName "tag" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "dateTime" ;
+                      ] ;
+                    sp:predicate dcterms:created ;
+                    sp:subject [
+                        sp:varName "tag" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a xsd:date ;
+                        sp:arg1 [
+                            sp:varName "dateTime" ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "date" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a ui:label ;
+                        sp:arg1 [
+                            sp:varName "tag" ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "tagLabel" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a spl:object ;
+                        sp:arg1 [
+                            sp:varName "tag" ;
+                          ] ;
+                        sp:arg2 teamwork:priority ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "priority" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a spl:object ;
+                        sp:arg1 [
+                            sp:varName "tag" ;
+                          ] ;
+                        sp:arg2 teamwork:editedResource ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a spl:object ;
+                        sp:arg1 [
+                            sp:varName "tag" ;
+                          ] ;
+                        sp:arg2 teamwork:workflowTemplate ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "wt" ;
+                      ] ;
+                  ]
+                ) ;
+              sp:graphNameNode [
+                  sp:varName "teamGraph" ;
+                ] ;
+            ]
+          )
+          [
+            sp:object [
+                sp:varName "user" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?2" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?3" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?2" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "projectGraph" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?3" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?3" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?4" ;
+              ] ;
+            sp:predicate edg:rolesForGivenPartyInGivenProjectGraph ;
+            sp:subject [
+                sp:varName "?2" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "role" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?4" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?4" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:objectInGraph ;
+                sp:arg1 [
+                    sp:varName "projectGraph" ;
+                  ] ;
+                sp:arg2 edg:subjectArea ;
+                sp:arg3 [
+                    sp:varName "projectGraph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "subjectArea" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:coalesce ;
+                sp:arg1 [
+                    sp:varName "wt" ;
+                  ] ;
+                sp:arg2 [
+                    a teamwork:getDefaultTagWorkflowTemplate ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "workflowTemplate" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:tagLabelWithWorkflow ;
+                arg:projectGraph [
+                    sp:varName "projectGraph" ;
+                  ] ;
+                arg:tag [
+                    sp:varName "tag" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "workflowLabel" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a swa:labelInGraph ;
+                arg:resource [
+                    sp:varName "status" ;
+                  ] ;
+                arg:resourceGraph [
+                    a teamwork:workflowsGraph ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "statusLabel" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    a sp:bound ;
+                    sp:arg1 [
+                        sp:varName "resource" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a swa:labelInGraph ;
+                    arg:resource [
+                        sp:varName "resource" ;
+                      ] ;
+                    arg:resourceGraph [
+                        a teamwork:queryGraph ;
+                        arg:editable true ;
+                        arg:graphId [
+                            a teamwork:graphIdFromMasterGraph ;
+                            arg:graph [
+                                sp:varName "projectGraph" ;
+                              ] ;
+                          ] ;
+                        arg:tagId [
+                            a teamwork:tagId ;
+                            arg:tag [
+                                sp:varName "tag" ;
+                              ] ;
+                          ] ;
+                        arg:userName [
+                            a smf:currentUserName ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg3 [
+                    sp:varName "none" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "resourceLabel" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:editorLink ;
+                arg:projectGraph [
+                    sp:varName "projectGraph" ;
+                  ] ;
+                arg:resource [
+                    sp:varName "resource" ;
+                  ] ;
+                arg:tag [
+                    sp:varName "tag" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "location" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:projectLabel ;
+                arg:projectGraph [
+                    sp:varName "projectGraph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "projectLabel" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    a sp:bound ;
+                    sp:arg1 [
+                        sp:varName "priority" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a swa:labelInGraph ;
+                    arg:resource [
+                        sp:varName "priority" ;
+                      ] ;
+                    arg:resourceGraph [
+                        a teamwork:workflowsGraph ;
+                      ] ;
+                  ] ;
+                sp:arg3 [
+                    sp:varName "none" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "priorityLabel" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:user ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:private true ;
+  rdfs:label "Governance roles, subject areas and workflows for current user" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+edg:HelpPage
+  a ui:NodeClass ;
+  rdfs:label "Help page" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:JSONsubServices
+  a ui:Service ;
+  rdfs:label "JSON sub-services" ;
+  rdfs:subClassOf ui:JSONServices ;
+.
+edg:NoActivateDashboards
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group let:userName=\"{= IF(smf:hasCurrentUser(), smf:currentUserName(), &quot;Anonymous&quot;) }\">
+    <section>
+        <h1 class=\"text-info\">My Dashboards</h1>
+        <p class=\"text-info\">There are no activate dashboards or dashboard tabs.</p>
+        <ui:if ui:condition=\"{= uix:isAdmin() }\">
+            <p>To activate a dashboard, go to:<edg:CreateInlineButton arg:link=\"{= teamwork:editorLink(teamwork:platformGovernanceGraph()) }?resourceType=edg:DashboardAsset&amp;viewPointClass=edg:DashboardModelsViewpoint\" arg:text=\"Dashboards Editor\" arg:toolTip=\"Takes you to the 'Dashboards Editor'\"/>
+            </p>
+        </ui:if>
+        <ui:else>
+            <p>You may need to ask your <em>EDG administrator</em> to configure the dashboards for your roles.</p>
+        </ui:else>
+    </section>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/governance> ;
+  rdfs:label "No activate dashboards" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:NoAssetCollectionsAccessibleByCurrentUser
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resultSet ;
+      spl:valueType spr:Table ;
+    ] ;
+  ui:prototype """
+<ui:group let:numberOfSubjectAreas=\"{= spr:rowCount(?resultSet) }\" ui:id=\"{= ui:uniqueId() }\">
+    <ui:if ui:condition=\"{= ?numberOfSubjectAreas = 1 }\">
+        <p>There is one subject area:<governance:AssetViewerInline arg:resource=\"{= spr:cell(?resultSet, 0, 1) }\"/>
+        </p>
+    </ui:if>
+    <ui:else>
+        <p>There are {= ?numberOfSubjectAreas } subject areas</p>
+        <ui:forEach ui:resultSet=\"{= ?resultSet }\" ui:separator=\", \">
+            <governance:AssetViewerInline arg:resource=\"{= ?subjectArea }\"/>
+        </ui:forEach>
+    </ui:else>
+    <!-- <edg:NoSubjectAreaGraphsAccessibleByCurrentUser/> -->
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/scripts> ;
+  rdfs:label "No asset collections accessible by current user" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:PIIdataElementsForSubjectAreaGadget
+  a teamwork:DashboardGadget ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resultSet ;
+      spl:valueType sp:Select ;
+    ] ;
+  teamwork:dashboardSection teamwork:CompletenessAndValidityDashboardSection ;
+  ui:prototype """
+<ui:group>
+    <ui:group let:rowCount=\"{= spr:rowCount(?resultSet) }\">
+        <!--ui:debug>
+<ui:dumpScope ui:message=\"edg:PIIdataElementsForSubjectAreaGadget\"/>
+</ui:debug-->
+        <ui:if ui:condition=\"{= ?rowCount &gt; 0 }\">
+            <ui:setContext ui:queryGraph=\"{= ui:graph }\">
+                <h3>Personal Identifiable Information</h3>
+                <div class=\"row\">
+                    <ui:forEach ui:resultSet=\"{= ?resultSet }\">
+                        <div class=\"col-xs-12 col-md-6 col-lg-5\">
+                            <h3>
+                                <edg:AssetViewerInline arg:compact=\"{= false }\" arg:resource=\"{= ?subjectArea }\"/>
+                            </h3>
+                            <swa:VictoryStackChart arg:data_endpoint=\"{= edg:PIIdataElementsForSubjectAreaDataService }\" arg:subjectArea=\"{= ?subjectArea }\"/>
+                        </div>
+                    </ui:forEach>
+                </div>
+            </ui:setContext>
+        </ui:if>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A gadget for the counts of PII elements for a subject area" ;
+  rdfs:label "PII Data Elements for subject area" ;
+  rdfs:subClassOf teamwork:DashboardGadgets ;
+.
+edg:PIIdataElementsJSONaxisForDataService
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resultSet ;
+      spl:valueType sp:Select ;
+    ] ;
+  spin:private true ;
+  ui:private true ;
+  ui:prototype """
+<swon:Value arg:name=\"axis\">
+    <swon:Object>
+        <swon:Value arg:name=\"values\">
+            <swon:Array>
+                <swon:Literal arg:value=\"{= 1 }\"/>
+                <swon:Literal arg:value=\"{= 2 }\"/>
+                <swon:Literal arg:value=\"{= 3 }\"/>
+                <swon:Literal arg:value=\"{= 4 }\"/>
+                <swon:Literal arg:value=\"{= 5 }\"/>
+                <swon:Literal arg:value=\"{= 6 }\"/>
+            </swon:Array>
+        </swon:Value>
+        <swon:Value arg:name=\"format\">
+            <swon:Array>
+                <swon:Literal arg:value=\"Marketing\"/>
+                <swon:Literal arg:value=\"Product Sales\"/>
+                <swon:Literal arg:value=\"Services\"/>
+                <swon:Literal arg:value=\"Partner\"/>
+                <swon:Literal arg:value=\"TSM\"/>
+                <swon:Literal arg:value=\"Other\"/>
+            </swon:Array>
+        </swon:Value>
+    </swon:Object>
+</swon:Value>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:label "PII Data Elements JSON - axis for data service" ;
+  rdfs:subClassOf edg:PIIdataElementsSubDataServices ;
+.
+edg:PIIdataElementsJSONbarsForDataService
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resultSet ;
+      spl:valueType sp:Select ;
+    ] ;
+  spin:private true ;
+  ui:private true ;
+  ui:prototype """
+<swon:Value arg:name=\"bars\">
+    <swon:Object>
+        <swon:Value arg:name=\"uncommitted\">
+            <swon:Array>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 1 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 10000 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"uncommitted\"/>
+                </swon:Object>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 2 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 16500 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"uncommitted\"/>
+                </swon:Object>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 3 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 14250 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"uncommitted\"/>
+                </swon:Object>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 4 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 19000 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"uncommitted\"/>
+                </swon:Object>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 5 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 29000 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"uncommitted\"/>
+                </swon:Object>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 6 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 9900 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"uncommitted\"/>
+                </swon:Object>
+            </swon:Array>
+        </swon:Value>
+        <swon:Value arg:name=\"frozen\">
+            <swon:Array>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 1 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 15000 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"frozen\"/>
+                </swon:Object>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 2 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 12500 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"frozen\"/>
+                </swon:Object>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 3 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 19500 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"frozen\"/>
+                </swon:Object>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 4 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 13000 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"frozen\"/>
+                </swon:Object>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 5 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 13000 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"frozen\"/>
+                </swon:Object>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 6 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 9900 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"frozen\"/>
+                </swon:Object>
+            </swon:Array>
+        </swon:Value>
+        <swon:Value arg:name=\"rejected\">
+            <swon:Array>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 1 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 11500 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"rejected\"/>
+                </swon:Object>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 2 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 13250 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"rejected\"/>
+                </swon:Object>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 3 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 20000 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"rejected\"/>
+                </swon:Object>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 4 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 13000 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"rejected\"/>
+                </swon:Object>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 5 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 15500 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"rejected\"/>
+                </swon:Object>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 6 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 9900 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"rejected\"/>
+                </swon:Object>
+            </swon:Array>
+        </swon:Value>
+        <swon:Value arg:name=\"accepted\">
+            <swon:Array>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 1 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 18000 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"accepted\"/>
+                </swon:Object>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 2 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 13250 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"accepted\"/>
+                </swon:Object>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 3 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 15000 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"accepted\"/>
+                </swon:Object>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 4 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 12000 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"accepted\"/>
+                </swon:Object>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 5 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 13000 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"accepted\"/>
+                </swon:Object>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 6 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 9900 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"accepted\"/>
+                </swon:Object>
+            </swon:Array>
+        </swon:Value>
+        <swon:Value arg:name=\"defferred\">
+            <swon:Array>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 1 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 18000 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"defferred\"/>
+                </swon:Object>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 2 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 13250 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"defferred\"/>
+                </swon:Object>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 3 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 15000 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"defferred\"/>
+                </swon:Object>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 4 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 12000 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"defferred\"/>
+                </swon:Object>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 5 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 13000 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"defferred\"/>
+                </swon:Object>
+                <swon:Object>
+                    <swon:Value arg:name=\"status\" arg:value=\"{= 6 }\"/>
+                    <swon:Value arg:name=\"count\" arg:value=\"{= 9900 }\"/>
+                    <swon:Value arg:name=\"label\" arg:value=\"defferred\"/>
+                </swon:Object>
+            </swon:Array>
+        </swon:Value>
+    </swon:Object>
+</swon:Value>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:label "PII Data Elements JSON - bars for data service" ;
+  rdfs:subClassOf edg:PIIdataElementsSubDataServices ;
+.
+edg:PIIdataElementsJSONforDataService
+  a ui:Service ;
+  spin:private true ;
+  ui:private true ;
+  ui:prototype """
+<swon:Object>
+    <edg:PIIdataElementsJSONaxisForDataService arg:resultSet=\"{= ?resultSet }\"/>
+    <edg:PIIdataElementsJSONlegendForDataService arg:resultSet=\"{= ?resultSet }\"/>
+    <edg:PIIdataElementsJSONbarsForDataService arg:resultSet=\"{= ?resultSet }\"/>
+</swon:Object>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:label "PII Data Elements JSON for data service" ;
+  rdfs:subClassOf edg:PIIdataElementsSubDataServices ;
+.
+edg:PIIdataElementsJSONlegendForDataService
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resultSet ;
+      spl:valueType sp:Select ;
+    ] ;
+  spin:private true ;
+  ui:private true ;
+  ui:prototype """
+<swon:Value arg:name=\"legend\">
+    <swon:Array>
+        <swon:Object>
+            <swon:Value arg:name=\"name\" arg:value=\"uncommitted\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"name\" arg:value=\"frozen\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"name\" arg:value=\"rejected\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"name\" arg:value=\"accepted\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"name\" arg:value=\"deferred\"/>
+        </swon:Object>
+    </swon:Array>
+</swon:Value>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:label "PII Data Elements JSON - legend for data service" ;
+  rdfs:subClassOf edg:PIIdataElementsSubDataServices ;
+.
+edg:PIIdataElementsSubDataServices
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resultSet ;
+      spl:valueType sp:Select ;
+    ] ;
+  rdfs:label "PIIdata elements sub data services" ;
+  rdfs:subClassOf edg:JSONsubServices ;
+.
+edg:PIInumberGadget
+  a teamwork:DashboardGadget ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType xsd:string ;
+    ] ;
+  teamwork:dashboardSection teamwork:CompletenessAndValidityDashboardSection ;
+  ui:prototype """
+<ui:group let:queryGraph=\"{= ui:graphWithImports(?projectGraph) }\">
+    <!--ui:debug>
+<ui:dumpScope ui:message=\"teamwork:PIInumberGadget\"/>
+</ui:debug-->
+    <ui:group letrs:piiDataElements='{#
+            SELECT ?value ?label ?resource
+            WHERE {
+                GRAPH ?queryGraph {
+                    FILTER bound(?label) .
+                    {
+                        SELECT (COUNT(?element) AS ?value) ?label ?resource
+                        WHERE {
+                            ?myClass (rdfs:subClassOf)* edg:DataElement .
+                            ?element a ?myClass .
+                            ?element edg:isPersonallyIdentifiableInformation true .
+                            BIND (spl:object(?element, edg:personalDataCategory) AS ?maybeCategory) .
+                            BIND (COALESCE(?maybeCategory, rdf:nil) AS ?resource) .
+                            BIND (IF(bound(?maybeCategory), ui:label(?maybeCategory), \"uncategorized\") AS ?label) .
+                        }
+                        GROUP BY ?label ?resource
+                    } .
+                } .
+            } }'>
+        <ui:group let:rowCount=\"{= spr:rowCount(?piiDataElements) }\">
+            <ui:if ui:condition=\"{= ?rowCount &gt; 0 }\">
+                <!--ui:debug>
+
+<ui:dumpResultSet ui:message=\"edg:PIInumberGadget\" ui:resultSet=\"{= ?piiDataElements }\"/>
+
+</ui:debug-->
+                <ui:group let:totalNumber=\"{= spif:cast(spr:aggregateCol(spr:Sum, ?piiDataElements, 0), xsd:integer) }\">
+                    <ui:group let:title=\"{= CONCAT(?subjectArea, &quot;: PII Data Elements = &quot;, str(?rowCount), &quot; from &quot;, str(?totalNumber)) }\">
+                        <teamwork:DashboardGadgetContainer arg:label=\"{= ?title }\" ui:args=\"*\">
+                            <ui:insert ui:into=\"body\">
+                                <swa:DonutChart arg:dataLabels=\"value\" arg:height=\"{= 160 }\" arg:onDataClick=\"swa.populateModalDialog('Describe the types counted','PII Element Types')\" arg:resultSet=\"{= ?piiDataElements }\" arg:seriesColors=\"['#6AC20A','#EFB700','#FF6060','#C0C0FF']\" arg:showLegend=\"{= true }\"/>
+                            </ui:insert>
+                        </teamwork:DashboardGadgetContainer>
+                    </ui:group>
+                </ui:group>
+            </ui:if>
+        </ui:group>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "PII element count dashboard gadget" ;
+  rdfs:subClassOf teamwork:DashboardGadgets ;
+.
+edg:ReportReadableTeamworkGraphsForCurrentUser
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group>
+    <h3>Teamwork Graphs For current User</h3>
+    <div class=\"row\">
+        <div class=\"col-lg-4\">
+            <div class=\"teamwork-dashboard-project-tab-td-width\">
+                <ui:call ui:template=\"{= edg:teamworkGraphsForCurrentUser }\" ui:varName=\"readableGraphs\">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Project Graph</th>
+                                <th>Team Graph</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ui:forEach ui:resultSet=\"{= ?readableGraphs }\">
+                                <tr>
+                                    <td>{= ?projectGraph }</td>
+                                    <td>{= ?teamGraph }</td>
+                                </tr>
+                            </ui:forEach>
+                        </tbody>
+                    </table>
+                </ui:call>
+            </div>
+        </div>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Report readable teamwork graphs for current user" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:ShowExampleGadgets
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group>
+    <h3>Example Victory Gadgets</h3>
+    <div class=\"row\">
+        <div class=\"col-xs-12 col-md-6 col-lg-5\">
+            <h3 class=\"text-center\">Example 1</h3>
+            <swa:VictoryDonutChart arg:data_endpoint=\"{= ex:DonutSampleDataService }\"/>
+        </div>
+        <div class=\"col-xs-12 col-md-6 col-lg-5\">
+            <h3 class=\"text-center\">Example 2</h3>
+            <swa:VictoryDonutChart arg:data_endpoint=\"{= ex:DonutSampleDataService_2 }\"/>
+        </div>
+    </div>
+    <div class=\"row\">
+        <div class=\"col-xs-12 col-md-6 col-lg-5\">
+            <h3 class=\"text-center\">Example 3</h3>
+            <swa:VictoryStackChart arg:data_endpoint=\"{= ex:SampleStackChartDataService }\"/>
+        </div>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Show example gadgets" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:ShowGovernanceRoles
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:defaultValue true ;
+      spl:optional true ;
+      spl:predicate arg:compact ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "Shows a compact version of the table. Defaults to true." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:defaultValue true ;
+      spl:optional true ;
+      spl:predicate arg:withJobTitles ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "Display the job title column?" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:tag ;
+      spl:valueType teamwork:Tag ;
+      rdfs:comment "Optionally, the Teamwork Tag for which to display the section." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:party ;
+      spl:valueType edg:Party ;
+      rdfs:comment "The organization or job title whose governance roles to show" ;
+    ] ;
+  ui:errorPrototype """
+<ui:if ui:condition=\"{= !bound(?party) }\">
+    <p class=\"text-danger\">Missing ?party</p>
+</ui:if>
+"""^^ui:Literal ;
+  ui:prototype """
+<ui:group>
+    <ui:call arg:party=\"{= ?party }\" ui:template=\"{= edg:getGovernanceRolesForParty }\" ui:varName=\"roles\">
+        <ui:if ui:condition=\"{= spr:rowCount(?roles) = 0 }\">
+            <p>The selected party currently has no role in governing any subject areas, business areas, or asset collections.
+<ui:createLink arg:tag=\"{= ?tag }\" ui:viewClass=\"{= governance:SubjectAreasPage }\">
+                    <a href=\"{= ?link }\">Manage Governance Areas</a>
+                </ui:createLink>
+            </p>
+        </ui:if>
+        <ui:else>
+            <table class=\"table table-condensed\">
+                <thead>
+                    <tr>
+                        <th title=\"Governance Role\">
+                            <ui:if ui:condition=\"{= (!bound(?compact)) || ?compact }\">
+                                <i aria-hidden=\"true\" class=\"governance-icon icon-governance-role-cropped\"/>
+                            </ui:if>
+                            <ui:else>Governance Role</ui:else>
+                        </th>
+                        <ui:if ui:condition=\"{= (!bound(?withJobTitles)) || ?withJobTitles }\">
+                            <th>Job Title</th>
+                        </ui:if>
+                        <th>Area/Assets</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ui:forEach ui:resultSet=\"{= ?roles }\">
+                        <tr let:roleLabel=\"{= spif:titleCase(ui:label(?governanceRole)) }\">
+                            <td title=\"{= ?roleLabel }\">
+                                <ui:if ui:condition=\"{= (!bound(?compact)) || ?compact }\">{= spl:object(?governanceRole, edg:abbreviation) }</ui:if>
+                                <ui:else>{= ?roleLabel }</ui:else>
+                            </td>
+                            <ui:if ui:condition=\"{= (!bound(?withJobTitles)) || ?withJobTitles }\">
+                                <td>
+                                    <ui:if ui:condition=\"{= ?party != ?partyWithRole }\">
+                                        <governance:AssetViewerInline arg:compact=\"{= true }\" arg:resource=\"{= ?partyWithRole }\"/>
+                                    </ui:if>
+                                </td>
+                            </ui:if>
+                            <td>
+                                <governance:AssetViewerInline arg:resource=\"{= ?projectGraph }\"/>
+                            </td>
+                        </tr>
+                    </ui:forEach>
+                </tbody>
+            </table>
+        </ui:else>
+    </ui:call>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Show governance roles" ;
+  rdfs:subClassOf governance:Elements ;
+.
+edg:Tabs
+  a ui:NodeClass ;
+  rdfs:label "Tabs" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:TestCharts
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group>
+    <edg:GadgetViewer arg:gadget=\"{= edg:PIInumberGadget }\" arg:showLegend=\"true\" arg:width=\"440\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment """<ui:group>
+    <edg:ExampleViewer arg:example=\"edg:PIInumberGadget\"/>
+    <teamwork:DashboardGadgetContainer ui:args=\"*\">
+        <ui:insert ui:into=\"subtitle\">Test 1</ui:insert>
+        <ui:insert ui:into=\"body\">
+            <swa:PieChart arg:dataLabels=\"percent\" arg:height=\"200\" arg:onDataClick=\"alert('Clicked on ' + resource)\" arg:resultSet='{#
+                    SELECT ?value ?label ?resource
+                    WHERE {
+                        VALUES (?value ?label ?resource) {
+                            (10 \"Ten\" edg:Construct)
+                            (20 \"Twenty\" edg:Asset)
+                            (30 \"Thirty\" edg:Aspect)
+                            (60 \"Sixty\" owl:Thing)
+                        } .
+                    } }' arg:showLegend=\"true\" arg:width=\"400\"/>
+        </ui:insert>
+    </teamwork:DashboardGadgetContainer>
+</ui:group>""" ;
+  rdfs:subClassOf swa:Elements ;
+.
+edg:TestWorkflowsBarChart
+  a ui:NodeClass ;
+  spin:returnType rdf:HTML ;
+  ui:prototype """
+<ui:group let:domainPadding=\"{= edg:buildJSONforDomainPadding() }\">
+    <victoryChart domainPadding=\"{{x: [50, 10], y: 15}}\" theme=\"{VictoryTheme.material}\" width=\"{800}\">
+        <victoryAxis tickFormat=\"{[&quot;Marketing&quot;, &quot;Product Sales&quot;, &quot;Services&quot;, &quot;Partnering&quot;,&quot;Support&quot;]}\" tickValues=\"{[1, 2, 3, 4, 5]}\"/>
+        <victoryAxis dependentAxis=\"true\" tickFormat=\"{(x) =&gt; (`${x }`)}\"/>
+    </victoryChart>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:comment """<VictoryChart
+        width={800}
+        domainPadding={{x: [50, 10], y: 15}}
+        theme={VictoryTheme.material}
+        >
+        <VictoryAxis
+          tickValues={[1, 2, 3, 4, 5]}
+          tickFormat={[\"Marketing\", \"Product Sales\", \"Services\", \"Partnering\",\"Support\"]}
+        />
+        <VictoryAxis
+          dependentAxis
+          tickFormat={(x) => (`${x }`)}
+        />
+        <VictoryStack>
+          <VictoryBar
+            labelComponent={<VictoryTooltip/>}
+            data={uncommitted}
+            x=\"status\"
+            y=\"count\"
+          />
+          <VictoryBar
+            labelComponent={<VictoryTooltip/>}
+            data={frozen}
+            x=\"status\"
+            y=\"count\"
+          />
+          <VictoryBar
+            labelComponent={<VictoryTooltip/>}
+            data={rejected}
+            x=\"status\"
+            y=\"count\"
+          />
+          <VictoryBar
+            labelComponent={<VictoryTooltip/>}
+            data={accepted}
+            x=\"status\"
+            y=\"count\"
+          />
+        </VictoryStack>
+  <VictoryLegend x={650} y={10}
+    title=\"States\"
+    centerTitle
+    orientation=\"horizontal\"
+    gutter={20}
+    style={{ border: { stroke: \"black\" }, title: {fontSize: 20 } }}
+    itemsPerRow={1}
+    data={[
+      { name: \"Accepted\",    symbol: { fill: \"green\" } },
+      { name: \"Rejected\",    symbol: { fill: \"orange\" } },
+      { name: \"Frozen\",      symbol: { fill: \"blue\" } },
+      { name: \"Uncommitted\", symbol: { fill: \"red\" } }
+    ]}
+  />
+      </VictoryChart>""" ;
+  rdfs:comment """Test with:
+
+view-source:http://localhost:8083/tbl/swp?_viewClass=edg:TestWorkflowsBarChart&_snippet=true""" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/governance> ;
+  rdfs:label "My dashboards help page" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:TestWorkflowsBarChart2
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group>
+    <swon:Object>
+        <swon:Value arg:name=\"VictoryChart\">
+            <swon:Object>
+                <swon:Value arg:name=\"width\" arg:value=\"{800}\"/>
+                <swon:Value arg:name=\"DomainPadding\">
+                    <swon:Object>
+                        <swon:Value arg:name=\"x\">
+                            <swon:Array>
+                                <swon:Literal arg:value=\"{= 50 }\"/>
+                                <swon:Comma/>
+                                <swon:Literal arg:value=\"{= 10 }\"/>
+                            </swon:Array>
+                        </swon:Value>
+                        <swon:Value arg:name=\"y\">
+                            <swon:Literal arg:value=\"{= 15 }\"/>
+                        </swon:Value>
+                    </swon:Object>
+                    <swon:Value arg:name=\"theme\" arg:value=\"{VictoryTheme.material}\"/>
+                </swon:Value>
+                <swon:Value arg:name=\"VictoryAxes\">
+                    <swon:Array>
+                        <swon:Object>
+                            <swon:Value arg:name=\"tickValues\" arg:value=\"{[1, 2, 3, 4, 5]}\"/>
+                            <swon:Value arg:name=\"tickFormat\" arg:value=\"{[&quot;Marketing&quot;, &quot;Product Sales&quot;, &quot;Services&quot;, &quot;Partnering&quot;,&quot;Support&quot;]}\"/>
+                        </swon:Object>
+                        <swon:Object>
+                            <swon:Value arg:name=\"dependentAxis\"/>
+                            <swon:Value arg:name=\"tickFormat\" arg:value=\"{(x) =&gt; (`${x }`)}\"/>
+                        </swon:Object>
+                    </swon:Array>
+                </swon:Value>
+                <swon:Value arg:name=\"VictoryStack\">
+                    <swon:Object>
+                        <swon:Value arg:name=\"VictoryBars\">
+                            <swon:Array>
+                                <swon:Object>
+                                    <swon:Value arg:name=\"labelComponent\" arg:value=\"VictoryTooltip\"/>
+                                    <swon:Value arg:name=\"data\" arg:value=\"{uncommitted}\"/>
+                                    <swon:Value arg:name=\"x\" arg:value=\"status\"/>
+                                    <swon:Value arg:name=\"y\" arg:value=\"count\"/>
+                                </swon:Object>
+                                <swon:Object>
+                                    <swon:Value arg:name=\"labelComponent\" arg:value=\"VictoryTooltip\"/>
+                                    <swon:Value arg:name=\"data\" arg:value=\"{frozen}\"/>
+                                    <swon:Value arg:name=\"x\" arg:value=\"status\"/>
+                                    <swon:Value arg:name=\"y\" arg:value=\"count\"/>
+                                </swon:Object>
+                                <swon:Object>
+                                    <swon:Value arg:name=\"labelComponent\" arg:value=\"VictoryTooltip\"/>
+                                    <swon:Value arg:name=\"data\" arg:value=\"{rejected}\"/>
+                                    <swon:Value arg:name=\"x\" arg:value=\"status\"/>
+                                    <swon:Value arg:name=\"y\" arg:value=\"count\"/>
+                                </swon:Object>
+                                <swon:Object>
+                                    <swon:Value arg:name=\"labelComponent\" arg:value=\"VictoryTooltip\"/>
+                                    <swon:Value arg:name=\"data\" arg:value=\"{accepted}\"/>
+                                    <swon:Value arg:name=\"x\" arg:value=\"status\"/>
+                                    <swon:Value arg:name=\"y\" arg:value=\"count\"/>
+                                </swon:Object>
+                            </swon:Array>
+                        </swon:Value>
+                    </swon:Object>
+                </swon:Value>
+            </swon:Object>
+        </swon:Value>
+    </swon:Object>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment """<VictoryChart
+        width={800}
+        domainPadding={{x: [50, 10], y: 15}}
+        theme={VictoryTheme.material}
+        >
+        <VictoryAxis
+          tickValues={[1, 2, 3, 4, 5]}
+          tickFormat={[\"Marketing\", \"Product Sales\", \"Services\", \"Partnering\",\"Support\"]}
+        />
+        <VictoryAxis
+          dependentAxis
+          tickFormat={(x) => (`${x }`)}
+        />
+        <VictoryStack>
+          <VictoryBar
+            labelComponent={<VictoryTooltip/>}
+            data={uncommitted}
+            x=\"status\"
+            y=\"count\"
+          />
+          <VictoryBar
+            labelComponent={<VictoryTooltip/>}
+            data={frozen}
+            x=\"status\"
+            y=\"count\"
+          />
+          <VictoryBar
+            labelComponent={<VictoryTooltip/>}
+            data={rejected}
+            x=\"status\"
+            y=\"count\"
+          />
+          <VictoryBar
+            labelComponent={<VictoryTooltip/>}
+            data={accepted}
+            x=\"status\"
+            y=\"count\"
+          />
+        </VictoryStack>
+  <VictoryLegend x={650} y={10}
+    title=\"States\"
+    centerTitle
+    orientation=\"horizontal\"
+    gutter={20}
+    style={{ border: { stroke: \"black\" }, title: {fontSize: 20 } }}
+    itemsPerRow={1}
+    data={[
+      { name: \"Accepted\",    symbol: { fill: \"green\" } },
+      { name: \"Rejected\",    symbol: { fill: \"orange\" } },
+      { name: \"Frozen\",      symbol: { fill: \"blue\" } },
+      { name: \"Uncommitted\", symbol: { fill: \"red\" } }
+    ]}
+  />
+      </VictoryChart>""" ;
+  rdfs:comment """Test with:
+
+view-source:http://localhost:8083/tbl/swp?_viewClass=edg:TestWorkflowsBarChart&_snippet=true""" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/governance> ;
+  rdfs:label "My dashboards help page" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:UIfunctions
+  a ui:Function ;
+  rdfs:label "UIfunctions" ;
+  rdfs:subClassOf ui:Functions ;
+.
+edg:buildJSONforDomainPadding
+  a ui:Function ;
+  spin:returnType xsd:string ;
+  ui:prototype """
+<ui:group>
+    <ui:bind>
+        <ui:stringify ui:varName=\"json\">
+            <swon:Object>
+                <swon:Object>
+                    <swon:Values arg:name=\"x\">
+                        <swon:Literal arg:value=\"{= 50 }\"/>
+                        <swon:Comma/>
+                        <swon:Literal arg:value=\"{= 10 }\"/>
+                    </swon:Values>
+                    <swon:Value arg:name=\"y\">
+                        <swon:Literal arg:value=\"{= 15 }\"/>
+                    </swon:Value>
+                </swon:Object>
+            </swon:Object>
+        </ui:stringify>
+        <ui:return ui:result=\"{= ?json }\"/>
+    </ui:bind>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment """<swon:Values arg:name=\"x\">
+                    <swon:Value arg:name=\"x\" arg:value=\"123\"/>
+                </swon:Values>""" ;
+  rdfs:comment "domainPadding={{x: [50, 10], y: 15}}" ;
+  rdfs:label "build JSONfor domain padding" ;
+  rdfs:subClassOf edg:UIfunctions ;
+.
+edg:getActiveDashboard
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "dashboard" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object edg:Dashboard ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "maybeTheDashboard" ;
+              ] ;
+          ]
+          [
+            a sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "replacementDashBoard" ;
+                    ] ;
+                  sp:predicate edg:replacedBy ;
+                  sp:subject [
+                      sp:varName "maybeTheDashboard" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:coalesce ;
+                sp:arg1 [
+                    sp:varName "replacementDashBoard" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "maybeTheDashboard" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "dashboard" ;
+              ] ;
+          ]
+          [
+            sp:object true ;
+            sp:predicate edg:activated ;
+            sp:subject [
+                sp:varName "dashboard" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "get active dashboard" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:getGovernanceRolesForAnySubjectArea
+  a spin:Template ;
+  spin:body [
+      a sp:Select ;
+      sp:distinct true ;
+      sp:resultVariables (
+          [
+            sp:varName "roleName" ;
+          ]
+          [
+            sp:varName "rolePredicate" ;
+          ]
+          [
+            sp:varName "subjectArea" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:platformGovernanceGraph ;
+              ] ;
+            sp:variable [
+                sp:varName "pg" ;
+              ] ;
+          ]
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "rolePredicate" ;
+                    ] ;
+                  sp:predicate teamwork:workflowParticipantProperties ;
+                  sp:subject () ;
+                ]
+                [
+                  a sp:TriplePath ;
+                  sp:object [
+                      sp:varName "subjectArea" ;
+                    ] ;
+                  sp:path [
+                      a sp:ModPath ;
+                      sp:modMax -2 ;
+                      sp:modMin 0 ;
+                      sp:subPath edg:subArea ;
+                    ] ;
+                  sp:subject [
+                      sp:varName "area" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "user" ;
+                    ] ;
+                  sp:predicate [
+                      sp:varName "rolePredicate" ;
+                    ] ;
+                  sp:subject [
+                      sp:varName "area" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a spl:object ;
+                      sp:arg1 [
+                          sp:varName "rolePredicate" ;
+                        ] ;
+                      sp:arg2 rdfs:label ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "roleName" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "pg" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:user ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "Gets any governance role for any subject area for a given user." ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:getGovernanceRolesForParty
+  a spin:Template ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "resource" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "partyWithRole" ;
+          ]
+          [
+            sp:varName "governanceRole" ;
+          ]
+          [
+            sp:varName "projectGraph" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Union ;
+            sp:elements (
+                (
+                  [
+                    a sp:TriplePath ;
+                    sp:object [
+                        sp:varName "partyWithRole" ;
+                      ] ;
+                    sp:path [
+                        a sp:SeqPath ;
+                        sp:path1 [
+                            a sp:ModPath ;
+                            sp:modMax -2 ;
+                            sp:modMin 0 ;
+                            sp:subPath edg:subOrganization ;
+                          ] ;
+                        sp:path2 [
+                            a sp:ModPath ;
+                            sp:modMax -1 ;
+                            sp:modMin 0 ;
+                            sp:subPath edg:jobTitle ;
+                          ] ;
+                      ] ;
+                    sp:subject [
+                        sp:varName "party" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    sp:object [
+                        sp:varName "partyWithRole" ;
+                      ] ;
+                    sp:predicate edg:assignedJobTitle ;
+                    sp:subject [
+                        sp:varName "party" ;
+                      ] ;
+                  ]
+                )
+              ) ;
+          ]
+          (
+            [
+              sp:object [
+                  sp:varName "?0" ;
+                ] ;
+              sp:predicate teamwork:readableGraphsUnderTeamControl ;
+              sp:subject () ;
+            ]
+            [
+              sp:object [
+                  sp:varName "projectGraph" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?1" ;
+                ] ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "teamGraph" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              sp:object () ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              a sp:NamedGraph ;
+              sp:elements (
+                  [
+                    sp:object [
+                        sp:varName "partyWithRole" ;
+                      ] ;
+                    sp:predicate [
+                        sp:varName "governanceRole" ;
+                      ] ;
+                    sp:subject [
+                        sp:varName "projectGraph" ;
+                      ] ;
+                  ]
+                ) ;
+              sp:graphNameNode [
+                  sp:varName "projectGraph" ;
+                ] ;
+            ]
+          )
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:party ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:private true ;
+  rdfs:label "Get governance roles for party" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:getJobTitles
+  a spin:Template ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "organization" ;
+          ]
+          [
+            sp:varName "jobTitle" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "jobTitle" ;
+          ]
+          [
+            sp:varName "organization" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "jobTitle" ;
+              ] ;
+            sp:predicate edg:assignedJobTitle ;
+            sp:subject [
+                sp:varName "user" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "jobTitle" ;
+              ] ;
+            sp:predicate edg:jobTitle ;
+            sp:subject [
+                sp:varName "organization" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:user ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:private true ;
+  rdfs:label "get job titles" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:getPIIdataElementsForGivenSubjectAreaForCurrentUser
+  a spin:Template ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "piiCount" ;
+          ]
+          [
+            sp:varName "projectGraph" ;
+          ]
+          [
+            sp:varName "category" ;
+          ]
+          [
+            sp:varName "dataElementClass" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:ne ;
+                sp:arg1 [
+                    sp:varName "piiCount" ;
+                  ] ;
+                sp:arg2 0 ;
+              ] ;
+          ]
+          [
+            a sp:SubQuery ;
+            sp:query [
+                a sp:Select ;
+                sp:groupBy (
+                    [
+                      sp:varName "projectGraph" ;
+                    ]
+                    [
+                      sp:varName "category" ;
+                    ]
+                    [
+                      sp:varName "dataElementClass" ;
+                    ]
+                  ) ;
+                sp:resultVariables (
+                    [
+                      sp:expression [
+                          a sp:Count ;
+                          sp:expression [
+                              sp:varName "element" ;
+                            ] ;
+                        ] ;
+                      sp:varName "piiCount" ;
+                    ]
+                    [
+                      sp:varName "projectGraph" ;
+                    ]
+                    [
+                      sp:varName "category" ;
+                    ]
+                    [
+                      sp:varName "dataElementClass" ;
+                    ]
+                  ) ;
+                sp:where (
+                    (
+                      [
+                        a sp:Bind ;
+                        sp:expression [
+                            a edg:currentUser ;
+                          ] ;
+                        sp:variable [
+                            sp:varName "user" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "subjectArea" ;
+                          ] ;
+                        sp:predicate rdf:first ;
+                        sp:subject [
+                            sp:varName "?0" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "?1" ;
+                          ] ;
+                        sp:predicate rdf:rest ;
+                        sp:subject [
+                            sp:varName "?0" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "user" ;
+                          ] ;
+                        sp:predicate rdf:first ;
+                        sp:subject [
+                            sp:varName "?1" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object () ;
+                        sp:predicate rdf:rest ;
+                        sp:subject [
+                            sp:varName "?1" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "?2" ;
+                          ] ;
+                        sp:predicate edg:graphsAndRolesForGivenSubjectAreaAndUser ;
+                        sp:subject [
+                            sp:varName "?0" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "projectGraph" ;
+                          ] ;
+                        sp:predicate rdf:first ;
+                        sp:subject [
+                            sp:varName "?2" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "?3" ;
+                          ] ;
+                        sp:predicate rdf:rest ;
+                        sp:subject [
+                            sp:varName "?2" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "teamGraph" ;
+                          ] ;
+                        sp:predicate rdf:first ;
+                        sp:subject [
+                            sp:varName "?3" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "?4" ;
+                          ] ;
+                        sp:predicate rdf:rest ;
+                        sp:subject [
+                            sp:varName "?3" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "roles" ;
+                          ] ;
+                        sp:predicate rdf:first ;
+                        sp:subject [
+                            sp:varName "?4" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object () ;
+                        sp:predicate rdf:rest ;
+                        sp:subject [
+                            sp:varName "?4" ;
+                          ] ;
+                      ]
+                      [
+                        a sp:Filter ;
+                        sp:expression [
+                            a sp:bound ;
+                            sp:arg1 [
+                                sp:varName "projectGraph" ;
+                              ] ;
+                          ] ;
+                      ]
+                    )
+                    [
+                      a sp:NamedGraph ;
+                      sp:elements (
+                          (
+                            [
+                              sp:object [
+                                  sp:varName "yes" ;
+                                ] ;
+                              sp:predicate edg:isPersonallyIdentifiableInformation ;
+                              sp:subject [
+                                  sp:varName "element" ;
+                                ] ;
+                            ]
+                            [
+                              a sp:Filter ;
+                              sp:expression [
+                                  a sp:in ;
+                                  sp:arg1 [
+                                      sp:varName "yes" ;
+                                    ] ;
+                                  sp:arg2 "Y" ;
+                                  sp:arg3 "YES" ;
+                                  sp:arg4 true ;
+                                ] ;
+                            ]
+                          )
+                          [
+                            sp:object [
+                                sp:varName "dataElementClass" ;
+                              ] ;
+                            sp:predicate rdf:type ;
+                            sp:subject [
+                                sp:varName "element" ;
+                              ] ;
+                          ]
+                          [
+                            a sp:Bind ;
+                            sp:expression [
+                                a spl:object ;
+                                sp:arg1 [
+                                    sp:varName "element" ;
+                                  ] ;
+                                sp:arg2 edg:personalDataCategory ;
+                              ] ;
+                            sp:variable [
+                                sp:varName "maybeCategory" ;
+                              ] ;
+                          ]
+                          [
+                            a sp:Bind ;
+                            sp:expression [
+                                a sp:coalesce ;
+                                sp:arg1 [
+                                    sp:varName "maybeCategory" ;
+                                  ] ;
+                                sp:arg2 () ;
+                              ] ;
+                            sp:variable [
+                                sp:varName "category" ;
+                              ] ;
+                          ]
+                        ) ;
+                      sp:graphNameNode [
+                          sp:varName "projectGraph" ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType edg:SubjectArea ;
+    ] ;
+  spin:private true ;
+  rdfs:label "get PII Data Elements for given Subject Area for current user" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:getScriptsGraphFromPlatformGovernance
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "scriptsGraph" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:platformGovernanceGraph ;
+              ] ;
+            sp:variable [
+                sp:varName "platformGovernanceGraph" ;
+              ] ;
+          ]
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "scriptsGraph" ;
+                    ] ;
+                  sp:predicate owl:imports ;
+                  sp:subject [
+                      sp:varName "platformGovernanceGraph" ;
+                    ] ;
+                ]
+                [
+                  sp:object edg:DashboardScriptGraph ;
+                  sp:predicate vaem:hasGraphRole ;
+                  sp:subject [
+                      sp:varName "scriptsGraph" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "platformGovernanceGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:label "get scripts graph from platform governance" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:getSubjectAreaGovernanceRolesAssignments
+  a spin:Template ;
+  rdfs:subClassOf edg:Templates ;
+.
+edg:getWorkflowCountsForCurrentUser
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "value" ;
+          ]
+          [
+            sp:varName "label" ;
+          ]
+          [
+            sp:varName "resource" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:bound ;
+                sp:arg1 [
+                    sp:varName "label" ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:SubQuery ;
+            sp:query [
+                a sp:Select ;
+                sp:groupBy (
+                    [
+                      sp:varName "label" ;
+                    ]
+                    [
+                      sp:varName "resource" ;
+                    ]
+                  ) ;
+                sp:orderBy (
+                    [
+                      sp:varName "label" ;
+                    ]
+                  ) ;
+                sp:resultVariables (
+                    [
+                      sp:expression [
+                          a sp:Count ;
+                          sp:expression [
+                              sp:varName "workflow" ;
+                            ] ;
+                        ] ;
+                      sp:varName "value" ;
+                    ]
+                    [
+                      sp:varName "label" ;
+                    ]
+                    [
+                      sp:varName "resource" ;
+                    ]
+                  ) ;
+                sp:where (
+                    (
+                      [
+                        sp:object [
+                            sp:varName "?0" ;
+                          ] ;
+                        sp:predicate teamwork:readableGraphsUnderTeamControl ;
+                        sp:subject () ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "projectGraph" ;
+                          ] ;
+                        sp:predicate rdf:first ;
+                        sp:subject [
+                            sp:varName "?0" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "?1" ;
+                          ] ;
+                        sp:predicate rdf:rest ;
+                        sp:subject [
+                            sp:varName "?0" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "teamGraph" ;
+                          ] ;
+                        sp:predicate rdf:first ;
+                        sp:subject [
+                            sp:varName "?1" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object () ;
+                        sp:predicate rdf:rest ;
+                        sp:subject [
+                            sp:varName "?1" ;
+                          ] ;
+                      ]
+                      [
+                        a sp:Filter ;
+                        sp:expression [
+                            a sp:bound ;
+                            sp:arg1 [
+                                sp:varName "teamGraph" ;
+                              ] ;
+                          ] ;
+                      ]
+                    )
+                    [
+                      a sp:NamedGraph ;
+                      sp:elements (
+                          (
+                            [
+                              sp:object teamwork:Tag ;
+                              sp:predicate rdf:type ;
+                              sp:subject [
+                                  sp:varName "tag" ;
+                                ] ;
+                            ]
+                            [
+                              sp:object [
+                                  sp:varName "status" ;
+                                ] ;
+                              sp:predicate teamwork:status ;
+                              sp:subject [
+                                  sp:varName "tag" ;
+                                ] ;
+                            ]
+                            [
+                              sp:object [
+                                  sp:varName "dateTime" ;
+                                ] ;
+                              sp:predicate dcterms:created ;
+                              sp:subject [
+                                  sp:varName "tag" ;
+                                ] ;
+                            ]
+                            [
+                              a sp:Bind ;
+                              sp:expression [
+                                  a xsd:date ;
+                                  sp:arg1 [
+                                      sp:varName "dateTime" ;
+                                    ] ;
+                                ] ;
+                              sp:variable [
+                                  sp:varName "date" ;
+                                ] ;
+                            ]
+                            [
+                              a sp:Bind ;
+                              sp:expression [
+                                  a ui:label ;
+                                  sp:arg1 [
+                                      sp:varName "tag" ;
+                                    ] ;
+                                ] ;
+                              sp:variable [
+                                  sp:varName "tagLabel" ;
+                                ] ;
+                            ]
+                            [
+                              a sp:Bind ;
+                              sp:expression [
+                                  a spl:object ;
+                                  sp:arg1 [
+                                      sp:varName "tag" ;
+                                    ] ;
+                                  sp:arg2 teamwork:priority ;
+                                ] ;
+                              sp:variable [
+                                  sp:varName "priority" ;
+                                ] ;
+                            ]
+                            [
+                              a sp:Bind ;
+                              sp:expression [
+                                  a spl:object ;
+                                  sp:arg1 [
+                                      sp:varName "tag" ;
+                                    ] ;
+                                  sp:arg2 teamwork:workflowTemplate ;
+                                ] ;
+                              sp:variable [
+                                  sp:varName "template" ;
+                                ] ;
+                            ]
+                            [
+                              a sp:Filter ;
+                              sp:expression [
+                                  a sp:bound ;
+                                  sp:arg1 [
+                                      sp:varName "template" ;
+                                    ] ;
+                                ] ;
+                            ]
+                          )
+                          [
+                            a sp:Bind ;
+                            sp:expression [
+                                a swa:labelInGraph ;
+                                arg:resource [
+                                    sp:varName "status" ;
+                                  ] ;
+                                arg:resourceGraph [
+                                    a teamwork:workflowsGraph ;
+                                  ] ;
+                              ] ;
+                            sp:variable [
+                                sp:varName "statusLabel" ;
+                              ] ;
+                          ]
+                          [
+                            a sp:Bind ;
+                            sp:expression [
+                                a swa:labelInGraph ;
+                                arg:resource [
+                                    sp:varName "template" ;
+                                  ] ;
+                                arg:resourceGraph [
+                                    a teamwork:workflowsGraph ;
+                                  ] ;
+                              ] ;
+                            sp:variable [
+                                sp:varName "workflow" ;
+                              ] ;
+                          ]
+                          [
+                            a sp:Bind ;
+                            sp:expression [
+                                a sp:concat ;
+                                sp:arg1 [
+                                    sp:varName "workflow" ;
+                                  ] ;
+                                sp:arg2 "-" ;
+                                sp:arg3 [
+                                    sp:varName "statusLabel" ;
+                                  ] ;
+                              ] ;
+                            sp:variable [
+                                sp:varName "element" ;
+                              ] ;
+                          ]
+                          [
+                            a sp:Bind ;
+                            sp:expression [
+                                a sp:concat ;
+                                sp:arg1 [
+                                    sp:varName "workflow" ;
+                                  ] ;
+                                sp:arg2 ": " ;
+                                sp:arg3 [
+                                    sp:varName "statusLabel" ;
+                                  ] ;
+                              ] ;
+                            sp:variable [
+                                sp:varName "label" ;
+                              ] ;
+                          ]
+                          [
+                            a sp:Bind ;
+                            sp:expression () ;
+                            sp:variable [
+                                sp:varName "resource" ;
+                              ] ;
+                          ]
+                        ) ;
+                      sp:graphNameNode [
+                          sp:varName "teamGraph" ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "Workflow counts for current user" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:teamworkGraphsForCurrentUser
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "projectGraph" ;
+          ]
+          [
+            sp:varName "teamGraph" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              sp:object [
+                  sp:varName "?0" ;
+                ] ;
+              sp:predicate teamwork:readableGraphsUnderTeamControl ;
+              sp:subject () ;
+            ]
+            [
+              sp:object [
+                  sp:varName "projectGraph" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?1" ;
+                ] ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "teamGraph" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              sp:object () ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+          )
+        ) ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "teamwork graphs for current user" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+victory:Elements
+  a ui:NodeClass ;
+  rdfs:label "Victory Elements" ;
+  rdfs:subClassOf ui:Element ;
+.
+ex:DonutSampleDataService
+  a ui:Service ;
+  spin:private true ;
+  ui:private true ;
+  ui:prototype """
+<swon:Object>
+    <swon:Value arg:name=\"slices\">
+        <swon:Array>
+            <swon:Object>
+                <swon:Value arg:name=\"x\" arg:value=\"One\"/>
+                <swon:Value arg:name=\"y\" arg:value=\"{= 1 }\"/>
+                <swon:Value arg:name=\"label\" arg:value=\"{= 1 }\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"x\" arg:value=\"Two\"/>
+                <swon:Value arg:name=\"y\" arg:value=\"{= 2 }\"/>
+                <swon:Value arg:name=\"label\" arg:value=\"{= 2 }\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"x\" arg:value=\"Three\"/>
+                <swon:Value arg:name=\"y\" arg:value=\"{= 3 }\"/>
+                <swon:Value arg:name=\"label\" arg:value=\"{= 3 }\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"x\" arg:value=\"Four\"/>
+                <swon:Value arg:name=\"y\" arg:value=\"{= 4 }\"/>
+                <swon:Value arg:name=\"label\" arg:value=\"{= 4 }\"/>
+            </swon:Object>
+        </swon:Array>
+    </swon:Value>
+    <swon:Value arg:name=\"legend\">
+        <swon:Array>
+            <swon:Object>
+                <swon:Value arg:name=\"name\" arg:value=\"One\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"name\" arg:value=\"Two\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"name\" arg:value=\"Three\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"name\" arg:value=\"Four\"/>
+            </swon:Object>
+        </swon:Array>
+    </swon:Value>
+</swon:Object>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:label "Sample data service" ;
+  rdfs:subClassOf ui:JSONServices ;
+.
+ex:DonutSampleDataService_2
+  a ui:Service ;
+  spin:private true ;
+  ui:private true ;
+  ui:prototype """
+<swon:Object>
+    <swon:Value arg:name=\"slices\">
+        <swon:Array>
+            <swon:Object>
+                <swon:Value arg:name=\"x\" arg:value=\"Running\"/>
+                <swon:Value arg:name=\"y\" arg:value=\"{= 10 }\"/>
+                <swon:Value arg:name=\"label\" arg:value=\"{= 10 }\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"x\" arg:value=\"Complete\"/>
+                <swon:Value arg:name=\"y\" arg:value=\"{= 569 }\"/>
+                <swon:Value arg:name=\"label\" arg:value=\"{= 569 }\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"x\" arg:value=\"Stopped\"/>
+                <swon:Value arg:name=\"y\" arg:value=\"{= 217 }\"/>
+                <swon:Value arg:name=\"label\" arg:value=\"{= 217 }\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"x\" arg:value=\"Erred\"/>
+                <swon:Value arg:name=\"y\" arg:value=\"{= 1 }\"/>
+                <swon:Value arg:name=\"label\" arg:value=\"{= 1 }\"/>
+            </swon:Object>
+        </swon:Array>
+    </swon:Value>
+    <swon:Value arg:name=\"legend\">
+        <swon:Array>
+            <swon:Object>
+                <swon:Value arg:name=\"name\" arg:value=\"Running\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"name\" arg:value=\"Complete\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"name\" arg:value=\"Stopped\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"name\" arg:value=\"Erred\"/>
+            </swon:Object>
+        </swon:Array>
+    </swon:Value>
+</swon:Object>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:label "Sample data service" ;
+  rdfs:subClassOf ui:JSONServices ;
+.
+ex:SampleStackChartDataService
+  a ui:Service ;
+  spin:private true ;
+  ui:private true ;
+  ui:prototype """
+<swon:Object>
+    <swon:Value arg:name=\"axis\">
+        <swon:Object>
+            <swon:Value arg:name=\"values\">
+                <swon:Array>
+                    <swon:Literal arg:value=\"{= 1 }\"/>
+                    <swon:Literal arg:value=\"{= 2 }\"/>
+                    <swon:Literal arg:value=\"{= 3 }\"/>
+                    <swon:Literal arg:value=\"{= 4 }\"/>
+                    <swon:Literal arg:value=\"{= 5 }\"/>
+                    <swon:Literal arg:value=\"{= 6 }\"/>
+                </swon:Array>
+            </swon:Value>
+            <swon:Value arg:name=\"format\">
+                <swon:Array>
+                    <swon:Literal arg:value=\"Marketing\"/>
+                    <swon:Literal arg:value=\"Product Sales\"/>
+                    <swon:Literal arg:value=\"Services\"/>
+                    <swon:Literal arg:value=\"Partner\"/>
+                    <swon:Literal arg:value=\"TSM\"/>
+                    <swon:Literal arg:value=\"Other\"/>
+                </swon:Array>
+            </swon:Value>
+        </swon:Object>
+    </swon:Value>
+    <swon:Value arg:name=\"legend\">
+        <swon:Array>
+            <swon:Object>
+                <swon:Value arg:name=\"name\" arg:value=\"uncommitted\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"name\" arg:value=\"frozen\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"name\" arg:value=\"rejected\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"name\" arg:value=\"accepted\"/>
+            </swon:Object>
+            <swon:Object>
+                <swon:Value arg:name=\"name\" arg:value=\"deferred\"/>
+            </swon:Object>
+        </swon:Array>
+    </swon:Value>
+    <swon:Value arg:name=\"bars\">
+        <swon:Object>
+            <swon:Value arg:name=\"uncommitted\">
+                <swon:Array>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 1 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 10000 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"uncommitted\"/>
+                    </swon:Object>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 2 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 16500 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"uncommitted\"/>
+                    </swon:Object>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 3 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 14250 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"uncommitted\"/>
+                    </swon:Object>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 4 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 19000 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"uncommitted\"/>
+                    </swon:Object>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 5 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 29000 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"uncommitted\"/>
+                    </swon:Object>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 6 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 9900 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"uncommitted\"/>
+                    </swon:Object>
+                </swon:Array>
+            </swon:Value>
+            <swon:Value arg:name=\"frozen\">
+                <swon:Array>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 1 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 15000 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"frozen\"/>
+                    </swon:Object>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 2 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 12500 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"frozen\"/>
+                    </swon:Object>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 3 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 19500 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"frozen\"/>
+                    </swon:Object>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 4 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 13000 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"frozen\"/>
+                    </swon:Object>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 5 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 13000 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"frozen\"/>
+                    </swon:Object>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 6 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 9900 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"frozen\"/>
+                    </swon:Object>
+                </swon:Array>
+            </swon:Value>
+            <swon:Value arg:name=\"rejected\">
+                <swon:Array>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 1 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 11500 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"rejected\"/>
+                    </swon:Object>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 2 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 13250 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"rejected\"/>
+                    </swon:Object>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 3 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 20000 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"rejected\"/>
+                    </swon:Object>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 4 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 13000 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"rejected\"/>
+                    </swon:Object>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 5 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 15500 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"rejected\"/>
+                    </swon:Object>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 6 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 9900 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"rejected\"/>
+                    </swon:Object>
+                </swon:Array>
+            </swon:Value>
+            <swon:Value arg:name=\"accepted\">
+                <swon:Array>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 1 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 18000 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"accepted\"/>
+                    </swon:Object>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 2 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 13250 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"accepted\"/>
+                    </swon:Object>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 3 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 15000 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"accepted\"/>
+                    </swon:Object>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 4 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 12000 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"accepted\"/>
+                    </swon:Object>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 5 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 13000 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"accepted\"/>
+                    </swon:Object>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 6 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 9900 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"accepted\"/>
+                    </swon:Object>
+                </swon:Array>
+            </swon:Value>
+            <swon:Value arg:name=\"defferred\">
+                <swon:Array>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 1 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 18000 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"defferred\"/>
+                    </swon:Object>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 2 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 13250 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"defferred\"/>
+                    </swon:Object>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 3 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 15000 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"defferred\"/>
+                    </swon:Object>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 4 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 12000 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"defferred\"/>
+                    </swon:Object>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 5 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 13000 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"defferred\"/>
+                    </swon:Object>
+                    <swon:Object>
+                        <swon:Value arg:name=\"status\" arg:value=\"{= 6 }\"/>
+                        <swon:Value arg:name=\"count\" arg:value=\"{= 9900 }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"defferred\"/>
+                    </swon:Object>
+                </swon:Array>
+            </swon:Value>
+        </swon:Object>
+    </swon:Value>
+</swon:Object>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:label "Sample stack chart data service" ;
+  rdfs:subClassOf ui:JSONServices ;
+.
+arg:activeDashboard
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:data_endpoint
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:gadget
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:governanceGraph
+  a rdf:Property ;
+  rdfs:label "data graph" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+teamwork:DataElementsNumberGadget
+  a teamwork:DashboardGadget ;
+  teamwork:dashboardSection teamwork:CompletenessAndValidityDashboardSection ;
+  ui:prototype """
+<ui:group let:queryGraph1=\"{= ui:graphWithImports(?projectGraph) }\">
+    <ui:group letrs:data=\"{#
+            SELECT (COUNT(?instance) AS ?value) (swa:labelInGraph(?class, ?queryGraph1) AS ?label)
+            WHERE {
+                GRAPH ?queryGraph1 {
+                    ?class (rdfs:subClassOf)* edg:DataElement .
+                    ?instance a ?class .
+                } .
+            }
+            GROUP BY ?class ?queryGraph1 }\">
+        <ui:group let:label=\"Number of data elements\">
+            <ui:if ui:condition=\"{= spr:isEmpty(?data) }\">
+                <teamwork:DashboardGadgetContainer arg:iconName=\"Unknown\" ui:args=\"*\">
+                    <ui:insert ui:into=\"subtitle\">
+                        <div>No Data elements</div>
+                    </ui:insert>
+                </teamwork:DashboardGadgetContainer>
+            </ui:if>
+            <ui:else>
+                <ui:group>
+                    <teamwork:DashboardGadgetContainer ui:args=\"*\">
+                        <ui:insert ui:into=\"subtitle\">
+                            <div>
+                                <span>{= spr:rowCount(?data) } Kinds of Data Elements shown.</span>
+                            </div>
+                        </ui:insert>
+                        <ui:insert ui:into=\"body\">
+                            <swa:PieChart arg:dataLabels=\"value\" arg:height=\"{= 200 }\" arg:resultSet=\"{= ?data }\" arg:seriesColors=\"['#6AC20A','#EFB700','#FF6060','#C0C0FF']\" arg:showLegend=\"{= true }\"/>
+                        </ui:insert>
+                    </teamwork:DashboardGadgetContainer>
+                </ui:group>
+            </ui:else>
+        </ui:group>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Validation dashboard gadget" ;
+  rdfs:subClassOf teamwork:DashboardGadgets ;
+.
+teamwork:IntegratedDataSourcesGadget
+  a teamwork:DashboardGadget ;
+  teamwork:dashboardSection teamwork:CompletenessAndValidityDashboardSection ;
+  ui:prototype """
+<ui:group let:queryGraph1=\"{= ui:graphWithImports(?projectGraph) }\">
+    <ui:group letrs:data=\"{#
+            SELECT (COUNT(DISTINCT ?element) AS ?value) ?label
+            WHERE {
+                GRAPH ?queryGraph1 {
+                    ?subclass (rdfs:subClassOf)* edg:Database .
+                    BIND (ui:label(?subclass) AS ?label) .
+                    OPTIONAL {
+                        ?element a ?subclass .
+                    } .
+                } .
+            }
+            GROUP BY ?subclass ?element ?label }\">
+        <ui:group let:label=\"Integrated Sources\">
+            <ui:if ui:condition=\"{= spr:isEmpty(?data) }\">
+                <teamwork:DashboardGadgetContainer arg:iconName=\"Unknown\" ui:args=\"*\">
+                    <ui:insert ui:into=\"subtitle\">
+                        <div>No databases integrated yet.</div>
+                    </ui:insert>
+                </teamwork:DashboardGadgetContainer>
+            </ui:if>
+            <ui:else>
+                <ui:group>
+                    <teamwork:DashboardGadgetContainer ui:args=\"*\">
+                        <ui:insert ui:into=\"body\">
+                            <swa:BarChart arg:height=\"{= 120 }\" arg:minValue=\"{= 0 }\" arg:resultSet=\"{= ?data }\" arg:width=\"{= 360 }\" arg:xaxisLabel=\"Source Kind\" arg:yaxisLabel=\"Number\"/>
+                        </ui:insert>
+                    </teamwork:DashboardGadgetContainer>
+                </ui:group>
+            </ui:else>
+        </ui:group>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Validation dashboard gadget" ;
+  rdfs:subClassOf teamwork:DashboardGadgets ;
+.
+teamwork:RolesForAssetCollectionGadget
+  a teamwork:DashboardGadget ;
+  teamwork:dashboardSection teamwork:CompletenessAndValidityDashboardSection ;
+  ui:prototype """
+<ui:group let:queryGraph1=\"{= ui:graphWithImports(?projectGraph) }\">
+    <ui:group letrs:data=\"{#
+            SELECT (COUNT(DISTINCT ?x) AS ?value) ?label
+            WHERE {
+                GRAPH ?queryGraph1 {
+                    ?role a edg:WorkflowParticipantProperty .
+                    ?graph ?role ?x .
+                    BIND (ui:label(?role) AS ?label) .
+                } .
+            }
+            GROUP BY ?x ?label }\">
+        <ui:group let:label=\"Roles Assigned for current Asset Collection\">
+            <ui:if ui:condition=\"{= spr:isEmpty(?data) }\">
+                <teamwork:DashboardGadgetContainer arg:iconName=\"Unknown\" ui:args=\"*\">
+                    <ui:insert ui:into=\"subtitle\">
+                        <div>No constraint violations have been recorded.</div>
+                        <div>Run <b>Constraint Violations Report</b> on the <b>Reports</b> tab.</div>
+                    </ui:insert>
+                </teamwork:DashboardGadgetContainer>
+            </ui:if>
+            <ui:else>
+                <ui:group>
+                    <teamwork:DashboardGadgetContainer ui:args=\"*\">
+                        <ui:insert ui:into=\"subtitle\">
+                            <div>
+                                <span>{= spr:rowCount(?data) } Roles Assigned for current Asset Collection.</span>
+                            </div>
+                        </ui:insert>
+                        <ui:insert ui:into=\"body\">
+                            <!--    <swa:PieChart arg:dataLabels=\"percent\"
+  arg:height=\"120\"
+  arg:resultSet=\"{= ?data }\"
+  arg:seriesColors=\"['#6AC20A','#EFB700','#FF6060','#C0C0FF']\"
+  arg:showLegend=\"true\"/> -->
+                            <swa:BarChart arg:height=\"{= 120 }\" arg:minValue=\"{= 0 }\" arg:resultSet=\"{= ?data }\" arg:width=\"{= 360 }\" arg:xaxisLabel=\"Roles Assigned\" arg:yaxisLabel=\"Number\"/>
+                        </ui:insert>
+                    </teamwork:DashboardGadgetContainer>
+                </ui:group>
+            </ui:else>
+        </ui:group>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Validation dashboard gadget" ;
+  rdfs:subClassOf teamwork:DashboardGadgets ;
+.
+html:VictoryAxis
+  a ui:NodeClass ;
+  rdfs:label "VictoryAxis" ;
+  rdfs:subClassOf victory:Elements ;
+.
+html:VictoryChart
+  a ui:NodeClass ;
+  rdfs:label "VictoryChart" ;
+  rdfs:subClassOf victory:Elements ;
+.
+html:dependentAxis
+  a html:Attribute ;
+  rdfs:label "dependentAxis" ;
+.
+html:domainPadding
+  a html:Attribute ;
+  rdfs:label "domainPadding" ;
+.
+html:theme
+  a html:Attribute ;
+  rdfs:label "theme" ;
+.
+html:tickFormat
+  a html:Attribute ;
+  rdfs:label "tickFormat" ;
+.
+html:tickValues
+  a html:Attribute ;
+  rdfs:label "tickValues" ;
+.

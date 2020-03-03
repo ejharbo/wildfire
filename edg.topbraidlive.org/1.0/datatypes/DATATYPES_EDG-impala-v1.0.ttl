@@ -1,0 +1,143 @@
+# baseURI: http://edg.topbraid.solutions/1.0/datatypes/impala
+# imports: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://edg.topbraid.solutions/1.0/schema/datatypes
+# imports: http://qudt.org/2.0/schema/datatype
+
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/datatypes/impala>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/datatypes/impala/GMD_impala> ;
+  rdfs:label "EDG Datatypes - Impala" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/datatypes> ;
+  owl:imports <http://qudt.org/2.0/schema/datatype> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+<http://edg.topbraid.solutions/datatypes/impala/GMD_impala>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:DatatypesGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/datatypes/impala> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+edg:IMPALA_BIGINT
+  a edg:ImpalaDatatype ;
+  a qudt:NumericType ;
+  edg:description """<p>BIGINT is a convenient type to use for column declarations because you can use any kind of integer values in INSERT statements and they are promoted to BIGINT where necessary. However, BIGINT also requires the most bytes of any integer type on disk and in memory, meaning your queries are not as efficient and scalable as possible if you overuse this type. Therefore, prefer to use the smallest integer type with sufficient range to hold all input values, and CAST() when necessary to the appropriate type.</p>
+
+<p>For a convenient and automated way to check the bounds of the BIGINT type, call the functions MIN_BIGINT() and MAX_BIGINT().</p>
+
+<p>If an integer value is too large to be represented as a BIGINT, use a DECIMAL instead with sufficient digits of precision.</p>
+
+<p>NULL considerations: Casting any non-numeric value to this type produces a NULL value.</p>
+
+<p>Conversions: Impala automatically converts to a floating-point type (FLOAT or DOUBLE) automatically. Use CAST() to convert to TINYINT, SMALLINT, INT, STRING, or TIMESTAMP. Casting an integer value N to TIMESTAMP produces a value that is N seconds past the start of the epoch date (January 1, 1970).</p>
+
+<p>There is no UNSIGNED subtype.</p>"""^^rdf:HTML ;
+  edg:name "BIGINT" ;
+  dcterms:source "http://www.cloudera.com/content/www/en-us/documentation/archive/impala/2-x/2-1-x/topics/impala_bigint.html"^^xsd:anyURI ;
+  rdfs:label "BIGINT (IMPALA)" ;
+  skos:definition "An 8-byte integer data type used in CREATE TABLE and ALTER TABLE statements." ;
+  sh:maxInclusive 9223372036854775807 ;
+  sh:minInclusive -9223372036854775808 ;
+.
+edg:IMPALA_INT
+  a edg:ImpalaDatatype ;
+  a qudt:NumericType ;
+  edg:description """<p>Conversions: Impala automatically converts to a larger integer type (BIGINT) or a floating-point type (FLOAT or DOUBLE) automatically. Use CAST() to convert to TINYINT, SMALLINT, STRING, or TIMESTAMP. Casting an integer value N to TIMESTAMP produces a value that is N seconds past the start of the epoch date (January 1, 1970).</p>
+
+<p>Usage notes:</p>
+
+<p>The data type INTEGER is an alias for INT.</p>
+
+<p>For a convenient and automated way to check the bounds of the INT type, call the functions MIN_INT() and MAX_INT().</p>
+
+<p>If an integer value is too large to be represented as a INT, use a BIGINT instead.</p>
+
+<p>NULL considerations: Casting any non-numeric value to this type produces a NULL value.</p>
+
+<p>There is no UNSIGNED subtype.</p>"""^^rdf:HTML ;
+  edg:name "INT" ;
+  dcterms:source "http://www.cloudera.com/content/www/en-us/documentation/archive/impala/2-x/2-1-x/topics/impala_int.html"^^xsd:anyURI ;
+  rdfs:label "INT (IMPALA)" ;
+  skos:definition "A 4-byte integer data type used in CREATE TABLE and ALTER TABLE statements." ;
+  sh:maxInclusive 2147483647 ;
+  sh:minInclusive -2147483648 ;
+.
+edg:IMPALA_TINYINT
+  a edg:ImpalaDatatype ;
+  a qudt:NumericType ;
+  edg:description """Impala automatically converts to a larger integer type (SMALLINT, INT, or BIGINT) or a floating-point type (FLOAT or DOUBLE) automatically. Use CAST() to convert to STRING or TIMESTAMP. Casting an integer value N to TIMESTAMP produces a value that is N seconds past the start of the epoch date (January 1, 1970).
+
+Usage notes:
+
+For a convenient and automated way to check the bounds of the TINYINT type, call the functions MIN_TINYINT() and MAX_TINYINT().
+
+If an integer value is too large to be represented as a TINYINT, use a SMALLINT instead.
+
+NULL considerations: Casting any non-numeric value to this type produces a NULL value.
+
+Examples:
+
+CREATE TABLE t1 (x TINYINT);
+SELECT CAST(100 AS TINYINT);
+Parquet considerations:
+
+Physically, Parquet files represent TINYINT and SMALLINT values as 32-bit integers. Although Impala rejects attempts to insert out-of-range values into such columns, if you create a new table with the CREATE TABLE ... LIKE PARQUET syntax, any TINYINT or SMALLINT columns in the original table turn into INT columns in the new table."""^^rdf:HTML ;
+  edg:name "TINYINT" ;
+  dcterms:source "http://www.cloudera.com/content/www/en-us/documentation/archive/impala/2-x/2-1-x/topics/impala_tinyint.html?scroll=tinyint"^^xsd:anyURI ;
+  rdfs:label "TINYINT (IMPALA)" ;
+  skos:definition "A 1-byte integer data type used in CREATE TABLE and ALTER TABLE statements." ;
+  sh:maxInclusive 127 ;
+  sh:minInclusive -128 ;
+.
+edg:ImpalaDatatype
+  a owl:Class ;
+  rdfs:label "Impala data type" ;
+  rdfs:subClassOf edg:PhysicalDatatype ;
+  skos:prefLabel "Impala data type" ;
+.
+dcterms:description
+  a rdf:Property ;
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "description" ;
+  rdfs:range xsd:string ;
+.
+dcterms:source
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "source" ;
+  rdfs:range xsd:anyURI ;
+.

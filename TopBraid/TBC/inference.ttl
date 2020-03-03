@@ -1,0 +1,64 @@
+# baseURI: http://www.topbraid.org/2007/06/inference.owl
+# imports: http://www.topbraid.org/2007/05/composite.owl
+# prefix: inference
+
+@prefix inference: <http://www.topbraid.org/2007/06/inference.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://www.topbraid.org/2007/06/inference.owl>
+  a owl:Ontology ;
+  rdfs:comment "An ontology to represent an inferencing configuration in TopBraid." ;
+  owl:imports <http://www.topbraid.org/2007/05/composite.owl> ;
+  owl:versionInfo "1.0.0" ;
+.
+inference:Configuration
+  a owl:Class ;
+  rdfs:comment "A configuration of inference engines." ;
+  rdfs:subClassOf owl:Thing ;
+.
+inference:Engine
+  a owl:Class ;
+  rdfs:label "Engine" ;
+  rdfs:subClassOf owl:Thing ;
+.
+inference:RuleEngine
+  a owl:Class ;
+  rdfs:label "Rule engine" ;
+  rdfs:subClassOf inference:Engine ;
+.
+inference:SPARQLEngine
+  a owl:Class ;
+  rdfs:label "SPARQL Engine" ;
+  rdfs:subClassOf inference:Engine ;
+.
+inference:completeMode
+  a owl:DatatypeProperty ;
+  a owl:FunctionalProperty ;
+  rdfs:domain inference:Configuration ;
+  rdfs:label "complete mode" ;
+  rdfs:range xsd:boolean ;
+.
+inference:inferredMode
+  a owl:DatatypeProperty ;
+  a owl:FunctionalProperty ;
+  rdfs:domain inference:Configuration ;
+  rdfs:label "inferred mode" ;
+  rdfs:range xsd:boolean ;
+.
+inference:iterativeMode
+  a owl:DatatypeProperty ;
+  a owl:FunctionalProperty ;
+  rdfs:domain inference:Configuration ;
+  rdfs:label "iterative mode" ;
+  rdfs:range xsd:boolean ;
+.
+inference:systemMode
+  a owl:DatatypeProperty ;
+  a owl:FunctionalProperty ;
+  rdfs:domain inference:Configuration ;
+  rdfs:label "system mode" ;
+  rdfs:range xsd:boolean ;
+.

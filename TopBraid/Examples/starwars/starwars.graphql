@@ -1,0 +1,134 @@
+# GraphQL schema for the infamous Star Wars example used by GraphQL tutorials.
+# Import this file into any RDF graph to see it converted into SHACL shapes.
+
+# The file was produced from TopBraid Composer's Import > GraphQL Schema from URL
+# feature against a server cloned from https://github.com/apollographql/starwars-server
+
+# The only lines that have been manually modified for use in TopBraid were the
+# @ directives of the schema and the @uri templates at each class.
+# Furthermore, the FriendConnection stuff was removed as it's more about GraphQL
+# infrastructure than about a domain model.
+
+schema  @classes
+		@prefixes(starwars: "http://topbraid.org/examples/starwars/ (default)")
+		@graph        (uri: "http://topbraid.org/examples/starwars/") {
+  query: Query
+  mutation: Mutation
+}
+
+#A character from the Star Wars universe
+interface Character @uri(template: "starwars:Character-{$id}") {
+  #The movies this character appears in
+  appearsIn: [Episode]!
+  #The friends of the character, or an empty list if they have none
+  friends: [Character]
+  #The ID of the character
+  id: ID!
+  #The name of the character
+  name: String!
+}
+
+union SearchResult = Droid | Human | Starship
+
+#An autonomous mechanical character in the Star Wars universe
+type Droid implements Character {
+  #The movies this droid appears in
+  appearsIn: [Episode]!
+  #This droid's friends, or an empty list if they have none
+  friends: [Character]
+  #The ID of the droid
+  id: ID!
+  #What others call this droid
+  name: String!
+  #This droid's primary function
+  primaryFunction: String
+}
+
+#A humanoid creature from the Star Wars universe
+type Human implements Character {
+  #The movies this human appears in
+  appearsIn: [Episode]!
+  #This human's friends, or an empty list if they have none
+  friends: [Character]
+  #Height in the preferred unit, default is meters
+  height(unit: LengthUnit = METER): Float
+  #The home planet of the human, or null if unknown
+  homePlanet: String
+  #The ID of the human
+  id: ID!
+  #Mass in kilograms, or null if unknown
+  mass: Float
+  #What this human calls themselves
+  name: String!
+  #A list of starships this person has piloted, or an empty list if none
+  starships: [Starship]
+}
+
+#The mutation type, represents all updates we can make to our data
+type Mutation {
+  createReview(episode: Episode, review: ReviewInput!): Review
+}
+
+#The query type, represents all of the entry points into our object graph
+type Query {
+  character(id: ID!): Character
+  droid(id: ID!): Droid
+  hero(episode: Episode): Character
+  human(id: ID!): Human
+  reviews(episode: Episode!): [Review]
+  search(text: String): [SearchResult]
+  starship(id: ID!): Starship
+}
+
+#Represents a review for a movie
+type Review {
+  #Comment about the movie
+  commentary: String
+  #The number of stars this review gave, 1-5
+  stars: Int!
+}
+
+type Starship @uri(template: "starwars:Starship-{$id}") {
+  coordinates: [[Float!]!]
+  #The ID of the starship
+  id: ID!
+  #Length of the starship, along the longest axis
+  length(unit: LengthUnit = METER): Float
+  #The name of the starship
+  name: String!
+}
+
+#The episodes in the Star Wars trilogy
+enum Episode {
+  #Star Wars Episode V: The Empire Strikes Back, released in 1980.
+  EMPIRE
+  #Star Wars Episode VI: Return of the Jedi, released in 1983.
+  JEDI
+  #Star Wars Episode IV: A New Hope, released in 1977.
+  NEWHOPE
+}
+
+#Units of height
+enum LengthUnit {
+  #Primarily used in the United States
+  FOOT
+  #The standard unit around the world
+  METER
+}
+
+#The input object sent when passing in a color
+input ColorInput {
+  blue: Int!
+  green: Int!
+  red: Int!
+}
+
+#The input object sent when someone is creating a new review
+input ReviewInput {
+  #Comment about the movie, optional
+  commentary: String
+  #Favorite color, optional
+  favorite_color: ColorInput
+  #0-5 stars
+  stars: Int!
+}

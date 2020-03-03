@@ -1,0 +1,125 @@
+# baseURI: http://topbraid.org/strkind
+# imports: http://datashapes.org/dash
+# prefix: strkind
+
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix strkind: <http://topbraid.org/strkind#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://topbraid.org/strkind>
+  a owl:Ontology ;
+  rdfs:comment "A SHACL library supported by TopBraid features to represent so-called string kinds. A string kind is a (possibly complex) class of strings such as \"phone numbers\" and \"email addresses\"." ;
+  rdfs:label "String Kind SHACL library" ;
+  owl:imports <http://datashapes.org/dash> ;
+.
+strkind:IsDomainNameConstraintComponent
+  a sh:ConstraintComponent ;
+  dash:localConstraint true ;
+  dash:propertySuggestionGenerator <http://topbraid.org/tosh#DeleteTripleSuggestionGenerator> ;
+  dash:staticConstraint true ;
+  rdfs:comment "Can be used to verify that all value nodes are well-formed domain names." ;
+  rdfs:label "Is domain name constraint component" ;
+  sh:labelTemplate "Is domain name: {$isDomainName}" ;
+  sh:message "Not a valid domain name" ;
+  sh:parameter [
+      sh:path strkind:isDomainName ;
+      sh:datatype xsd:boolean ;
+      sh:description "True to ensure that the values are well-formed domain names." ;
+      sh:group <http://topbraid.org/tosh#StringBasedConstraintPropertyGroup> ;
+      sh:name "is domain name" ;
+    ] ;
+  sh:targetClass sh:Shape ;
+  sh:validator [
+      a sh:SPARQLAskValidator ;
+      sh:ask """ASK {
+    FILTER ($isDomainName != true || smf:isDomainName($value))
+}""" ;
+      sh:prefixes <http://topbraid.org/strkind> ;
+    ] ;
+.
+strkind:IsEmailAddressConstraintComponent
+  a sh:ConstraintComponent ;
+  dash:localConstraint true ;
+  dash:propertySuggestionGenerator <http://topbraid.org/tosh#DeleteTripleSuggestionGenerator> ;
+  dash:staticConstraint true ;
+  rdfs:label "Is email address constraint component" ;
+  sh:labelTemplate "Is email address: {$isEmailAddress}" ;
+  sh:message "Not a valid email address" ;
+  sh:parameter [
+      sh:path strkind:isEmailAddress ;
+      sh:datatype xsd:boolean ;
+      sh:description "True to state that all value nodes must be valid email addresses." ;
+      sh:group <http://topbraid.org/tosh#StringBasedConstraintPropertyGroup> ;
+      sh:name "is email address" ;
+    ] ;
+  sh:targetClass sh:Shape ;
+  sh:validator [
+      a sh:SPARQLAskValidator ;
+      sh:ask """ASK {
+    FILTER ($isEmailAddress != true || smf:isEmailAddress($value))
+}""" ;
+      sh:prefixes <http://topbraid.org/strkind> ;
+    ] ;
+.
+strkind:IsPhoneNumberConstraintComponent
+  a sh:ConstraintComponent ;
+  dash:localConstraint true ;
+  dash:propertySuggestionGenerator <http://topbraid.org/tosh#DeleteTripleSuggestionGenerator> ;
+  dash:staticConstraint true ;
+  rdfs:comment "A constraint component that can be used to check whether all value nodes are valid phone numbers, using an optional country code as a default." ;
+  rdfs:label "Is phone number constraint component" ;
+  sh:labelTemplate "Is phone number ($isPhoneNumber) with default country code {$phoneNumberDefaultCountryCode}" ;
+  sh:message "Not a valid phone number" ;
+  sh:parameter [
+      sh:path strkind:isPhoneNumber ;
+      sh:datatype xsd:boolean ;
+      sh:description "True to activate the constraint that all values must be recognizable as phone numbers." ;
+      sh:group <http://topbraid.org/tosh#StringBasedConstraintPropertyGroup> ;
+      sh:name "is phone number" ;
+    ] ;
+  sh:parameter [
+      sh:path strkind:phoneNumberDefaultCountryCode ;
+      sh:datatype xsd:string ;
+      sh:description "An optional country code (two upper case letters) that shall be used as default to parse phone numbers. For example, \"US\" to default to +1 region code." ;
+      sh:group <http://topbraid.org/tosh#StringBasedConstraintPropertyGroup> ;
+      sh:name "phone number default country code" ;
+      sh:optional true ;
+    ] ;
+  sh:targetClass sh:Shape ;
+  sh:validator [
+      a sh:SPARQLAskValidator ;
+      sh:ask """ASK {
+    FILTER (?isPhoneNumber != true || smf:isPhoneNumber($value, $phoneNumberDefaultCountryCode))
+}""" ;
+      sh:prefixes <http://topbraid.org/strkind> ;
+    ] ;
+.
+strkind:IsURLConstraintComponent
+  a sh:ConstraintComponent ;
+  dash:localConstraint true ;
+  dash:propertySuggestionGenerator <http://topbraid.org/tosh#DeleteTripleSuggestionGenerator> ;
+  dash:staticConstraint true ;
+  rdfs:comment "Can be used to verify that all value nodes are well-formed URLs." ;
+  rdfs:label "Is URL constraint component" ;
+  sh:labelTemplate "Is URL: {$isURL}" ;
+  sh:message "Not a valid URL" ;
+  sh:parameter [
+      sh:path strkind:isURL ;
+      sh:datatype xsd:boolean ;
+      sh:description "True to ensure that the values are well-formed URLs." ;
+      sh:group <http://topbraid.org/tosh#StringBasedConstraintPropertyGroup> ;
+      sh:name "is URL" ;
+    ] ;
+  sh:targetClass sh:Shape ;
+  sh:validator [
+      a sh:SPARQLAskValidator ;
+      sh:ask """ASK {
+    FILTER ($isURL != true || smf:isURL($value))
+}""" ;
+      sh:prefixes <http://topbraid.org/strkind> ;
+    ] ;
+.

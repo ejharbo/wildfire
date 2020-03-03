@@ -1,0 +1,382 @@
+# baseURI: http://edg.topbraid.solutions/1.0/datatypes/avro
+# imports: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://edg.topbraid.solutions/1.0/schema/datatypes
+
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/datatypes/avro>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/datatypes/avro/GMD_avro> ;
+  rdfs:label "EDG Datatypes - Avro" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/datatypes> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+<http://edg.topbraid.solutions/datatypes/avro/GMD_avro>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:DatatypesGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/datatypes/avro> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/avro> ;
+.
+edg:AVRO_BYTES
+  a edg:AvroBytesDatatype ;
+  a qudt:StringType ;
+  edg:description "<p><strong>bytes</strong> is a sequence of 8-bit unsigned bytes</p>"^^rdf:HTML ;
+  edg:name "string" ;
+  qudt:dimensionality 1 ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/avro> ;
+  rdfs:label "STRING (AVRO)" ;
+.
+edg:AVRO_DATE
+  a edg:AvroDatatype ;
+  a qudt:SignedLongIntegerType ;
+  edg:description """<p>The date logical type represents a date within the calendar, with no reference to a particular time zone or time of day.</p>
+
+<p>A date logical type annotates an Avro int, where the int stores the number of days from the unix epoch, 1 January 1970 (ISO calendar).</p>"""^^rdf:HTML ;
+  qudt:abbreviation "SI32" ;
+  qudt:bits 32 ;
+  qudt:maxInclusive "2^{31}-1" ;
+  qudt:minInclusive "-2^{31}" ;
+  qudt:octets 4 ;
+  qudt:signedness qudt:SIGNED ;
+  dtype:literal "SI32" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/avro> ;
+  rdfs:label "DATE (AVRO)" ;
+  rdfs:seeAlso edg:AVRO_INT ;
+.
+edg:AVRO_DECIMAL
+  a edg:AvroDatatype ;
+  a qudt:NumericType ;
+  edg:description """<p>The decimal logical type represents an arbitrary-precision signed decimal number of the form unscaled × 10-scale.</p>
+
+<p>A decimal logical type annotates Avro bytes or fixed types. The byte array must contain the two's-complement representation of the unscaled integer value in big-endian byte order. The scale is fixed, and is specified using an attribute.</p>
+
+<p>The following attributes are supported:</p>
+<ul>
+<li>scale, a JSON integer representing the scale (optional). If not specified the scale is 0.</li>
+<li>precision, a JSON integer representing the (maximum) precision of decimals stored in this type (required).</li>
+</ul>
+<p>For example, the following schema represents decimal numbers with a maximum precision of 4 and a scale of 2:</p>
+
+<pre>
+{
+  \"type\": \"bytes\",
+  \"logicalType\": \"decimal\",
+  \"precision\": 4,
+  \"scale\": 2
+}
+</pre>
+<p>Precision must be a positive integer greater than zero. If the underlying type is a fixed, then the precision is limited by its size. An array of length n can store at most floor(log_10(28 × n - 1 - 1)) base-10 digits of precision.</p>
+
+<p>Scale must be zero or a positive integer less than or equal to the precision.</p>
+
+<p>For the purposes of schema resolution, two schemas that are decimal logical types match if their scales and precisions match.</p>"""^^rdf:HTML ;
+  qudt:ansiSQLName "DECIMAL(p,s)" ;
+  qudt:odbcName "SQL_DECIMAL(p,s)" ;
+  qudt:oracleSQLName "NUMBER(p,s)" ;
+  dtype:literal "numeric" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/avro> ;
+  rdfs:label "DECIMAL (AVRO)" ;
+  owl:sameAs qudt:DECIMAL ;
+.
+edg:AVRO_DOUBLE
+  a edg:AvroDatatype ;
+  a qudt:RealDoublePrecisionType ;
+  edg:description "<p>A <strong>double</strong> is written as 8 bytes. The double is converted into a 64-bit integer using a method equivalent to Java's <a href=\"http://java.sun.com/javase/6/docs/api/java/lang/Double.html#doubleToLongBits%28double%29\">doubleToLongBits</a> and then encoded in little-endian format.</p>"^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/avro> ;
+  rdfs:label "DOUBLE (AVRO)" ;
+  owl:sameAs qudt:FLOAT_IEEE754-BINARY64 ;
+.
+edg:AVRO_FLOAT
+  a edg:AvroDatatype ;
+  a qudt:RealSinglePrecisionType ;
+  edg:description "<p>A <strong>float</strong> is written as 4 bytes. The float is converted into a 32-bit integer using a method equivalent to Java's <a href=\"http://docs.oracle.com/javase/6/docs/api/java/lang/Float.html#floatToIntBits%28float%29\">floatToIntBits</a> and then encoded in little-endian format.</p>"^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/avro> ;
+  rdfs:label "FLOAT (AVRO)" ;
+  owl:sameAs qudt:FLOAT-SP ;
+.
+edg:AVRO_INT
+  a edg:AvroDatatype ;
+  a qudt:SignedLongIntegerType ;
+  edg:description """<p><strong>int</strong> values are written using <a href=\"http://lucene.apache.org/java/3_5_0/fileformats.html#VInt\">variable-length</a> <a href=\"https://developers.google.com/protocol-buffers/docs/encoding?csw=1#types\">zig-zag coding</a>.</p>
+<p>Some examples:</p>
+<table><tr><th>value</th><th>hex</th></tr>
+<tr><td>0</td><td>00</td></tr>
+<tr><td>-1</td><td>01</td></tr>
+<tr><td>1</td><td>02</td></tr>
+<tr><td>-2</td><td>03</td></tr>
+<tr><td>2</td><td>04</td></tr>
+<tr><td>...</td><td>...</td></tr>
+<tr><td>-64</td><td>7f</td></tr>
+<tr><td>64</td><td>80 01</td></tr>
+</table>"""^^rdf:HTML ;
+  edg:name "int" ;
+  qudt:abbreviation "SI32" ;
+  qudt:bits 32 ;
+  qudt:bytes 4 ;
+  qudt:maxInclusive "2^{31}-1" ;
+  qudt:minInclusive "-2^{31}" ;
+  qudt:octets 4 ;
+  qudt:signedness qudt:SIGNED ;
+  dtype:literal "SI32" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/avro> ;
+  rdfs:label "INT (AVRO)" ;
+  owl:sameAs qudt:SIGNED-LONG-INTEGER ;
+.
+edg:AVRO_LONG
+  a edg:AvroLongDatatype ;
+  a qudt:SignedBigIntegerType ;
+  edg:description """<p><strong>long</strong> values are written using <a href=\"http://lucene.apache.org/java/3_5_0/fileformats.html#VInt\">variable-length</a> <a href=\"https://developers.google.com/protocol-buffers/docs/encoding?csw=1#types\">zig-zag coding</a>.</p>
+<p>Some examples:</p>
+<table><tr><th>value</th><th>hex</th></tr>
+<tr><td>0</td><td>00</td></tr>
+<tr><td>-1</td><td>01</td></tr>
+<tr><td>1</td><td>02</td></tr>
+<tr><td>-2</td><td>03</td></tr>
+<tr><td>2</td><td>04</td></tr>
+<tr><td>...</td><td>...</td></tr>
+<tr><td>-64</td><td>7f</td></tr>
+<tr><td>64</td><td>80 01</td></tr>
+</table>"""^^rdf:HTML ;
+  edg:name "long" ;
+  qudt:bits 64 ;
+  qudt:bytes 8 ;
+  qudt:maxInclusive "2^{63}-1" ;
+  qudt:minInclusive "-2^{63}" ;
+  qudt:octets 8 ;
+  qudt:signedness qudt:SIGNED ;
+  dtype:literal "SI64" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/avro> ;
+  rdfs:label "LONG (AVRO)" ;
+  owl:sameAs qudt:SIGNED-BIG-INTEGER ;
+.
+edg:AVRO_NUMBER
+  a edg:AvroLongDatatype ;
+  a qudt:SignedBigIntegerType ;
+  edg:description "<p><strong>number</strong> values ...</p>"^^rdf:HTML ;
+  edg:name "long" ;
+  qudt:bits 64 ;
+  qudt:bytes 8 ;
+  qudt:maxInclusive "2^{63}-1" ;
+  qudt:minInclusive "-2^{63}" ;
+  qudt:octets 8 ;
+  qudt:signedness qudt:SIGNED ;
+  dtype:literal "SI64" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/avro> ;
+  rdfs:label "NUMBER (AVRO)" ;
+  owl:sameAs qudt:SIGNED-BIG-INTEGER ;
+.
+edg:AVRO_RECORD
+  a edg:AvroDatatype ;
+  edg:description """<p>Records use the type name \"record\" and support three attributes:</p>
+<ol>
+<li>name: a JSON string providing the name of the record (required).</li>
+<li>namespace: a JSON string that qualifies the name;</li>
+<li>doc: a JSON string providing documentation to the user of this schema (optional).</li>
+<li>aliases: a JSON array of strings, providing alternate names for this record (optional).</li>
+<li>fields: a JSON array, listing fields (required). Each field is a JSON object with the following attributes:
+<ol>
+<li>name: a JSON string providing the name of the field (required), and</li>
+<li>doc: a JSON string describing this field for users (optional).</li>
+<li>type: A JSON object defining a schema, or a JSON string naming a record definition (required).</li>
+<li>default: A default value for this field, used when reading instances that lack this field (optional). Permitted values depend on the field's schema type, according to the table below. Default values for union fields correspond to the first schema in the union. Default values for bytes and fixed fields are JSON strings, where Unicode code points 0-255 are mapped to unsigned 8-bit byte values 0-255.
+field default values
+avro type	json type	example
+null	null	null
+boolean	boolean	true
+int,long	integer	1
+float,double	number	1.1
+bytes	string	\"\\u00FF\"
+string	string	\"foo\"
+record	object	{\"a\": 1}
+enum	string	\"FOO\"
+array	array	[1]
+map	object	{\"a\": 1}
+fixed	string	\"\\u00ff\"
+order: specifies how this field impacts sort ordering of this record (optional). Valid values are \"ascending\" (the default), \"descending\", or \"ignore\". For more details on how this is used, see the the sort order section below.
+aliases: a JSON array of strings, providing alternate names for this field (optional).
+For example, a linked-list of 64-bit values may be defined with:
+
+{
+  \"type\": \"record\", 
+  \"name\": \"LongList\",
+  \"aliases\": [\"LinkedLongs\"],                      // old name for this
+  \"fields\" : [
+    {\"name\": \"value\", \"type\": \"long\"},             // each element has a long
+    {\"name\": \"next\", \"type\": [\"null\", \"LongList\"]} // optional next element
+  ]
+}
+</li>
+</ol></li></ol>"""^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/avro> ;
+  rdfs:label "RECORD (AVRO)" ;
+.
+edg:AVRO_STRING
+  a edg:AvroStringDatatype ;
+  a qudt:StringType ;
+  edg:description """<p>A <strong>string</strong> is encoded as a long followed by that many bytes of UTF-8 encoded character data.
+For example, the three-character string \"foo\" would be encoded as the long value 3 (encoded as hex 06) followed by the UTF-8 encoding of 'f', 'o', and 'o' (the hex bytes 66 6f 6f):</p>
+<pre>06 66 6f 6f</pre>"""^^rdf:HTML ;
+  edg:name "string" ;
+  qudt:dimensionality 1 ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/avro> ;
+  rdfs:label "STRING (AVRO)" ;
+.
+edg:AVRO_TIME-MICROS
+  a edg:AvroDatatype ;
+  edg:description """Time (microsecond precision)
+The time-micros logical type represents a time of day, with no reference to a particular calendar, time zone or date, with a precision of one microsecond.
+
+A time-micros logical type annotates an Avro long, where the long stores the number of microseconds after midnight, 00:00:00.000000."""^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/avro> ;
+  rdfs:label "TIME - MICROSECONDS (AVRO)" ;
+.
+edg:AVRO_TIME-MILLIS
+  a edg:AvroDatatype ;
+  edg:description """<p>The time-millis logical type represents a time of day, with no reference to a particular calendar, time zone or date, with a precision of one millisecond.</p>
+
+<p>A time-millis logical type annotates an Avro int, where the int stores the number of milliseconds after midnight, 00:00:00.000.</p>"""^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/avro> ;
+  rdfs:label "TIME - MILLISECONDS (AVRO)" ;
+.
+edg:AVRO_TIMESTAMP-MICROS
+  a edg:AvroDatatype ;
+  edg:description """<p>The timestamp-micros logical type represents an instant on the global timeline, independent of a particular time zone or calendar, with a precision of one microsecond.</p>
+
+<p>A timestamp-micros logical type annotates an Avro long, where the long stores the number of microseconds from the unix epoch, 1 January 1970 00:00:00.000000 UTC.</p>"""^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/avro> ;
+  rdfs:label "TIMESTAMP - MICROSECONDS (AVRO)" ;
+.
+edg:AVRO_TIMESTAMP-MILLIS
+  a edg:AvroDatatype ;
+  edg:description """<p>The timestamp-millis logical type represents an instant on the global timeline, independent of a particular time zone or calendar, with a precision of one millisecond.</p>
+
+<p>A timestamp-millis logical type annotates an Avro long, where the long stores the number of milliseconds from the unix epoch, 1 January 1970 00:00:00.000 UTC.</p>"""^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/avro> ;
+  rdfs:label "TIMESTAMP - MILLISECONDS (AVRO)" ;
+.
+edg:AvroBytesDatatype
+  a edg:AssetClass ;
+  a owl:Class ;
+  a sh:NodeShape ;
+  edg:acronym "AVROBYTESDT" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/avro> ;
+  rdfs:label "Avro bytes datatype" ;
+  rdfs:subClassOf edg:AvroDatatype ;
+.
+edg:AvroDatatype
+  a edg:AssetClass ;
+  a owl:Class ;
+  edg:acronym "AVRODT" ;
+  edg:hideSubClasses true ;
+  dcterms:source "http://avro.apache.org/docs/1.8.0/spec.html"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/avro> ;
+  rdfs:label "Avro Datatype" ;
+  rdfs:subClassOf edg:PhysicalDatatype ;
+.
+edg:AvroDecimalDatatype
+  a edg:AssetClass ;
+  a owl:Class ;
+  a sh:NodeShape ;
+  edg:acronym "AVRODECDT" ;
+  rdfs:comment """<p>The decimal logical type represents an arbitrary-precision signed decimal number of the form unscaled × 10-scale.</p>
+
+<p>A decimal logical type annotates Avro bytes or fixed types. The byte array must contain the two's-complement representation of the unscaled integer value in big-endian byte order. The scale is fixed, and is specified using an attribute.</p>
+
+<p>The following attributes are supported:</p>
+
+<ol>
+<li>scale, a JSON integer representing the scale (optional). If not specified the scale is 0.</li>
+<li>precision, a JSON integer representing the (maximum) precision of decimals stored in this type (required).</li>
+<li>For example, the following schema represents decimal numbers with a maximum precision of 4 and a scale of 2:</li>
+</ol>
+<pre>
+
+{
+  \"type\": \"bytes\",
+  \"logicalType\": \"decimal\",
+  \"precision\": 4,
+  \"scale\": 2
+}
+</pre>
+<p>Precision must be a positive integer greater than zero. If the underlying type is a fixed, then the precision is limited by its size. An array of length n can store at most floor(log_10(28 × n - 1 - 1)) base-10 digits of precision.</p>
+
+<p>Scale must be zero or a positive integer less than or equal to the precision.</p>
+
+<p>For the purposes of schema resolution, two schemas that are decimal logical types match if their scales and precisions match.</p>"""^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/avro> ;
+  rdfs:label "Avro decimal datatype" ;
+  rdfs:subClassOf edg:AvroDatatype ;
+.
+edg:AvroLongDatatype
+  a edg:AssetClass ;
+  a owl:Class ;
+  a sh:NodeShape ;
+  edg:acronym "AVROLONGDT" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/avro> ;
+  rdfs:label "Avro long datatype" ;
+  rdfs:subClassOf edg:AvroDatatype ;
+.
+edg:AvroNumberDatatype
+  a edg:AssetClass ;
+  a owl:Class ;
+  a sh:NodeShape ;
+  edg:acronym "AVRONUMDT" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/avro> ;
+  rdfs:label "Avro number datatype" ;
+  rdfs:subClassOf edg:AvroDatatype ;
+.
+edg:AvroStringDatatype
+  a edg:AssetClass ;
+  a owl:Class ;
+  a sh:NodeShape ;
+  edg:acronym "AVROSTRDT" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/avro> ;
+  rdfs:label "Avro string datatype" ;
+  rdfs:subClassOf edg:AvroDatatype ;
+.
+dcterms:description
+  a rdf:Property ;
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "description" ;
+  rdfs:range xsd:string ;
+.
+dcterms:source
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "source" ;
+  rdfs:range xsd:anyURI ;
+.

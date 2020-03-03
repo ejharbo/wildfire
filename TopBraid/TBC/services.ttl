@@ -1,0 +1,95 @@
+# baseURI: http://topbraid.org/services
+# imports: http://topbraid.org/sparqlmotionlib
+# prefix: services
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix services: <http://topbraid.org/services#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://topbraid.org/services>
+  a owl:Ontology ;
+  owl:imports <http://topbraid.org/sparqlmotionlib> ;
+  owl:versionInfo "1.0.0" ;
+.
+services:JndiProperties
+  a rdfs:Class ;
+  rdfs:comment "JNDI Connection Properties" ;
+  rdfs:subClassOf owl:Thing ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty services:destinationUrl ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty services:jmsSMFunction ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty services:jndiDestinationName ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty services:jndiInitialContext ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty services:connectionFactoryName ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty services:connectionUserName ;
+    ] ;
+.
+services:JndiProperties_Example
+  a services:JndiProperties ;
+  services:connectionFactoryName "ConnectionFactory" ;
+  services:destinationUrl "tcp://localhost:61616" ;
+  services:jmsSMFunction "Function_1" ;
+  services:jndiDestinationName "dynamicQueues/com.topquadrant.messaging" ;
+  services:jndiInitialContext "org.apache.activemq.jndi.ActiveMQInitialContextFactory" ;
+  rdfs:comment "Example JMS connection using ActiveMQ and JNDI" ;
+.
+services:connectionFactoryName
+  a rdf:Property ;
+  rdfs:comment "Name of the Connection Factory" ;
+  rdfs:label "connectionFactoryName" ;
+.
+services:connectionUserName
+  a rdf:Property ;
+  rdfs:comment "UserName for the JMS Server" ;
+  rdfs:label "connectionUserName" ;
+.
+services:destinationUrl
+  a rdf:Property ;
+  rdfs:comment "The URL of the JMS Server" ;
+  rdfs:label "destinationUrl" ;
+.
+services:jmsSMFunction
+  a rdf:Property ;
+  rdfs:comment "SM Function Name which receives the Text Message body" ;
+  rdfs:label "jmsSMFunction" ;
+.
+services:jndiDestinationName
+  a rdf:Property ;
+  rdfs:comment "Name of JMS Destination (Queue or Topic)" ;
+  rdfs:label "jndiDestinationName" ;
+.
+services:jndiInitialContext
+  a rdf:Property ;
+  rdfs:comment "Class Name of JNDI Initial Context Factory" ;
+  rdfs:label "jndiInitialContext" ;
+.
+services:messagePayload
+  a rdf:Property ;
+  rdfs:comment "Used by the Message Listener as the insertion point for a Text Message" ;
+  rdfs:label "messagePayload" ;
+  rdfs:range xsd:string ;
+.

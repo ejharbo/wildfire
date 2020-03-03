@@ -1,0 +1,914 @@
+# baseURI: http://evn.topbraidlive.org/tagger/autoclassifier-services
+# imports: http://evn.topbraidlive.org/autotagger
+# imports: http://topbraid.org/swa
+# imports: http://uispin.org/swon
+# prefix: acsrv
+
+@prefix acjob: <http://evn.topbraidlive.org/tagger/acjob#> .
+@prefix acpp: <http://topbraid.org/nlp/autoclassifier-preproc#> .
+@prefix acsrv: <http://evn.topbraidlive.org/tagger/autoclassifier-services#> .
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix autotagger: <http://evn.topbraidlive.org/autotagger#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix default: <http://uispin.org/default#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix elements: <http://purl.org/dc/elements/1.1/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evn: <http://topbraid.org/evn/evn#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evnimport: <http://evn.topbraidlive.org/uispin/evnimport#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix ex: <http://example.org/> .
+@prefix extjs: <http://uispin.com/extjs#> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix ontologyviewer: <http://topbraid.org/swa/ontologyviewer#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix saf: <http://topbraid.org/saf/> .
+@prefix safconfig: <http://topbraid.org/safconfig/> .
+@prefix safm: <http://saf.topbraidlive.org/metaschema/> .
+@prefix savedQueries: <http://teamwork.topbraidlive.org/ui/savedQueries#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sharepoint: <http://topbraid.org/sharepoint#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix taggerspin: <http://evn.topbraidlive.org/taggerspin#> .
+@prefix taggerui: <http://evn.topbraidlive.org/taggerui#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworkconstraints: <http://topbraid.org/teamworkconstraints#> .
+@prefix teamworkdashboard: <http://topbraid.org/teamworkdashboard#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix tracker: <http://teamwork.topbraidlive.org/ui/tracker#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uitest: <http://uispin.org/test#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix userdat: <http://teamwork.topbraidlive.org/ui/userdata> .
+@prefix userdata: <http://teamwork.topbraidlive.org/ui/userdata#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://evn.topbraidlive.org/tagger/autoclassifier-services>
+  rdf:type owl:Ontology ;
+  rdfs:comment "APIs for training AutoClassifier models, starting and monitoring AutoClassifier batch jobs, and getting tag recommendations on individual pieces of content." ;
+  rdfs:label "AutoClassifier Web Services" ;
+  owl:imports <http://evn.topbraidlive.org/autotagger> ;
+  owl:imports <http://topbraid.org/swa> ;
+  owl:imports <http://uispin.org/swon> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+acsrv:AutoClassifierJSONService
+  rdf:type ui:Service ;
+  ui:abstract "true"^^xsd:boolean ;
+  ui:errorPrototype """
+<ui:group>
+    <ui:if ui:condition=\"{= !teamwork:hasAutoClassifierLicense() }\">
+        <acsrv:ErrorJSON arg:error=\"AutoClassifier Web Services are disabled\" arg:statusCode=\"{= 403 }\"/>
+    </ui:if>
+    <ui:elseif ui:condition=\"{= !autotagger:isMauiServerConfigured() }\">
+        <acsrv:ErrorJSON arg:error=\"Auto-tagging must first be enabled by the administrator.\"/>
+    </ui:elseif>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Abstract superclass for the AutoClassifier web services. Handles access control." ;
+  rdfs:label "AutoClassifier web service" ;
+  rdfs:subClassOf ui:JSONServices ;
+.
+acsrv:AutoClassifyContent
+  rdf:type ui:Service ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate arg:text ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The text to auto-classify" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate autotagger:trainingID ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The ID of a training result (see StartTraining servicde) to be employed by the AutoClassifier; if not specified, use the URI of the configuration resource" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate autotagger:vocabularyGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "Named graph of the concept vocabulary; will be used to retrieve labels for recommended concepts. Defaults to tagger:objectGraph of configuration resource." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:configurationGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "Graph containing the configuration resource. If unspecified, assume that the configuration resource itself is a named graph containing its own description." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate autotagger:configuration ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The AutoClassifier configuration resource (often a content tag set resource), a resource in the configuration graph described with tagger:xxx properties" ;
+    ] ;
+  ui:prototype """
+<acsrv:AutoClassifyImpl ui:args=\"*\"/>
+"""^^ui:Literal ;
+  rdfs:comment """A service that runs the AutoClassifier on a snippet of content provided in the service call. Delivers results in JSON. The _base parameter is ignored.
+
+Each recommended concept has the following fields:
+
+- concept: The concept's URI
+- label: The concept's label (literal with the configuration's language settings; only available if a vocabulary graph can be established)
+- probability: The concept's probability (0..1)""" ;
+  rdfs:label "AutoClassifyResource" ;
+  rdfs:subClassOf acsrv:AutoClassifierJSONService ;
+.
+acsrv:AutoClassifyImpl
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate arg:text ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The text to auto-classify" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate autotagger:configuration ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The AutoClassifier configuration resource (often a content tag set resource), a resource in the configuration graph described with tagger:xxx properties" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate autotagger:contentGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "Graph containing the content resources to be tagged. Defaults to tagger:subjectGraph of configuration resource." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate autotagger:trainingID ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The ID of a training result (see StartTraining servicde) to be employed by the AutoClassifier; if not specified, use the URI of the configuration resource" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate autotagger:vocabularyGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "Named graph of the concept vocabulary; will be used to retrieve labels for recommended concepts. Defaults to tagger:objectGraph of configuration resource." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:configurationGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "Graph containing the configuration resource. If unspecified, assume that the configuration resource itself is a named graph containing its own description." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate autotagger:contentResource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "A content resource to be auto-tagged, described in the content graph" ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype """
+<ui:group>
+    <ui:try>
+        <ui:setContext ui:queryGraph=\"{= COALESCE(IRI(?configurationGraph), IRI(?configuration)) }\">
+            <autotagger:RecommendTopics autotagger:configuration=\"{= IRI(?configuration) }\" autotagger:contentGraph=\"{= IRI(?contentGraph) }\" autotagger:contentResource=\"{= IRI(?contentResource) }\" autotagger:contentText=\"{= ?text }\" autotagger:trainingID=\"{= ?trainingID }\">
+                <ui:group let:labelGraph=\"{= COALESCE(IRI(?vocabularyGraph), spl:object(IRI(?configuration), tagger:objectGraph)) }\">
+                    <ui:setContext ui:queryGraph=\"{= IF(bound(?labelGraph), ui:graphWithImports(?labelGraph), ui:tempGraphDummy) }\">
+                        <swon:Object>
+                            <ui:if ui:condition=\"{= bound(?contentResource) }\">
+                                <swon:Value arg:name=\"resource\" arg:value=\"{= ?contentResource }\"/>
+                            </ui:if>
+                            <swon:Value arg:name=\"count\" arg:value=\"{= ?count }\"/>
+                            <swon:Values arg:name=\"topics\">
+                                <ui:forEach ui:resultSet=\"{= ?results }\" ui:separator=\",\">
+                                    <swon:Object>
+                                        <swon:Value arg:name=\"concept\" arg:value=\"{= ?concept }\"/>
+                                        <ui:if ui:condition=\"{= bound(?labelGraph) }\">
+                                            <swon:Value arg:name=\"label\" arg:value=\"{= ui:label(?concept) }\"/>
+                                        </ui:if>
+                                        <swon:Value arg:name=\"probability\" arg:value=\"{= ?probability }\"/>
+                                    </swon:Object>
+                                </ui:forEach>
+                            </swon:Values>
+                        </swon:Object>
+                    </ui:setContext>
+                </ui:group>
+            </autotagger:RecommendTopics>
+        </ui:setContext>
+    </ui:try>
+    <ui:catch>
+        <ui:if ui:condition=\"{= regex(?exception, &quot;java.lang.IllegalArgumentException: Failed to resolve graph &quot;) }\">
+            <acsrv:ErrorJSON arg:error=\"No such graph: {= REPLACE(REPLACE(?exception, &quot;java.lang.IllegalArgumentException: Failed to resolve graph &quot;, &quot;&quot;), &quot; in http://uispin.org/ui#setContext element&quot;, &quot;&quot;) }\"/>
+        </ui:if>
+        <ui:else>
+            <acsrv:ErrorJSON_SWP arg:error=\"{= ?exception }\" arg:stackTrace=\"{= ?stackTrace }\"/>
+        </ui:else>
+    </ui:catch>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "This single implementation works for both of the AutoClassifyXxx services and will behave correctly depending on the present arguments." ;
+  rdfs:label "AutoClassifyImpl" ;
+  rdfs:subClassOf ui:Element ;
+.
+acsrv:AutoClassifyResource
+  rdf:type ui:Service ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate autotagger:configuration ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The AutoClassifier configuration resource (often a content tag set resource), a resource in the configuration graph described with tagger:xxx properties" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate autotagger:contentGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "Graph containing the content resources to be tagged. Defaults to tagger:subjectGraph of configuration resource." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate autotagger:trainingID ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The ID of a training result (see StartTraining servicde) to be employed by the AutoClassifier; if not specified, use the URI of the configuration resource" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate autotagger:vocabularyGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "Named graph of the concept vocabulary; will be used to retrieve labels for recommended concepts. Defaults to tagger:objectGraph of configuration resource." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:configurationGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "Graph containing the configuration resource. If unspecified, assume that the configuration resource itself is a named graph containing its own description." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate autotagger:contentResource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "A content resource to be auto-tagged, described in the content graph" ;
+    ] ;
+  ui:prototype """
+<acsrv:AutoClassifyImpl ui:args=\"*\"/>
+"""^^ui:Literal ;
+  rdfs:comment """A service that runs the AutoClassifier on a single content resource. The content resource must be described in a content graph in the system. Delivers results in JSON. The _base parameter is ignored.
+
+Each recommended concept has the following fields:
+
+- concept: The concept's URI
+- label: The concept's label (literal with the configuration's language settings; only available if a vocabulary graph can be established)
+- probability: The concept's probability (0..1)""" ;
+  rdfs:label "AutoClassifyResource" ;
+  rdfs:subClassOf acsrv:AutoClassifierJSONService ;
+.
+acsrv:ConceptVocabularyExportPlugin
+  rdf:type teamwork:ExportPlugin ;
+  teamwork:pluginIndex 5 ;
+  ui:prototype """
+<ui:createLink arg:contentTagSet=\"{= ?projectGraph }\" arg:id=\"ConceptVocabularyExport\" ui:viewClass=\"{= acsrv:PreviewConceptVocabulary }\">
+    <teamwork:ActionLink arg:comment=\"Generates a normalized version of the concept vocabulary used in this Content Tag Set, as it would be seen by AutoClassifier. Useful for troubleshooting.\" arg:faIcon=\"fa-bug\" arg:link=\"{= ?link }\" arg:title=\"Normalized Concepts (Troubleshooting)\"/>
+</ui:createLink>
+"""^^ui:Literal ;
+  rdfs:label "Concept vocabulary export plugin" ;
+  rdfs:subClassOf teamwork:ExportPlugins ;
+.
+acsrv:ErrorJSON
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:defaultValue 500 ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:statusCode ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The HTTP status code of the response. Default: 500" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:error ;
+      spl:valueType xsd:string ;
+      rdfs:comment "An error message to send as part of the JSON response" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:stackTrace ;
+      spl:valueType xsd:string ;
+      rdfs:comment "A stack trace to send as part of the JSON response" ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype """
+<swon:Object>
+    <ui:if ui:condition=\"{= bound(?statusCode) }\">
+        <ui:setResponseHeader ui:statusCode=\"{= ?statusCode }\"/>
+    </ui:if>
+    <ui:else>
+        <ui:setResponseHeader ui:statusCode=\"{= 500 }\"/>
+    </ui:else>
+    <ui:if ui:condition=\"{= bound(?error) }\">
+        <swon:Value arg:name=\"error\" arg:value=\"{= ?error }\"/>
+    </ui:if>
+    <ui:if ui:condition=\"{= bound(?stackTrace) }\">
+        <swon:Value arg:name=\"stackTrace\" arg:value=\"{= ?stackTrace }\"/>
+    </ui:if>
+</swon:Object>
+"""^^ui:Literal ;
+  rdfs:comment "Generates a JSON object with values “error” and (optionally) “stackTrace”, and sets status code to 500 or arg:statusCode." ;
+  rdfs:label "acsrv:ErrorJSON" ;
+  rdfs:subClassOf ui:Element ;
+.
+acsrv:ErrorJSON_SWP
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:defaultValue 500 ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:statusCode ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The HTTP status code of the response. Default: 500" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:error ;
+      spl:valueType xsd:string ;
+      rdfs:comment "An error message to send as part of the JSON response" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:stackTrace ;
+      spl:valueType xsd:string ;
+      rdfs:comment "A stack trace to send as part of the JSON response" ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype """
+<ui:group>
+    <ui:if ui:condition=\"{= regex(?error, &quot;SWPException&quot;) }\">
+        <acsrv:ErrorJSON arg:error=\"{= REPLACE(?error, &quot;^.*SWPException: &quot;, &quot;&quot;) }\" arg:statusCode=\"{= 400 }\"/>
+    </ui:if>
+    <ui:elseif ui:condition=\"{= regex(?error, &quot;org.topbraid.core.users.GraphPermissionsViolationException: &quot;) }\">
+        <acsrv:ErrorJSON arg:error=\"{= REPLACE(?error, &quot;org.topbraid.core.users.GraphPermissionsViolationException: &quot;, &quot;&quot;) }\" arg:statusCode=\"{= 403 }\"/>
+    </ui:elseif>
+    <ui:else>
+        <acsrv:ErrorJSON arg:error=\"{= ?error }\" arg:stackTrace=\"{= ?stackTrace }\"/>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A version of acsrv:ErrorJSON with special handling for SWPException" ;
+  rdfs:label "acsrv:ErrorJSON_SWP" ;
+  rdfs:subClassOf ui:Element ;
+.
+acsrv:JobJSON
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate autotagger:job ;
+      spl:valueType acjob:AutoClassifierJob ;
+      rdfs:comment "URI of the job" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate autotagger:jobGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "URI of the named graph where job metadata resides; often a team graph" ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype """
+<ui:setContext ui:queryGraph=\"{= ?jobGraph }\">
+    <ui:call autotagger:job=\"{= ?job }\" ui:template=\"{= autotagger:SelectJobMetadata }\" ui:varName=\"jobs\">
+        <swon:Object>
+            <swon:Value arg:name=\"job\" arg:value=\"{= ?job }\"/>
+            <swon:Value arg:name=\"jobGraph\" arg:value=\"{= ?jobGraph }\"/>
+            <ui:if ui:condition=\"{= spr:rowCount(?jobs) &gt; 0 }\">
+                <ui:forEach ui:limit=\"{= 1 }\" ui:resultSet=\"{= ?jobs }\">
+                    <swon:Value arg:name=\"status\" arg:value=\"{= afn:localname(?status) }\"/>
+                    <swon:Value arg:name=\"started\" arg:value=\"{= ?started }\"/>
+                    <ui:if ui:condition=\"{= bound(?finished) }\">
+                        <swon:Value arg:name=\"finished\" arg:value=\"{= ?finished }\"/>
+                    </ui:if>
+                    <ui:if ui:condition=\"{= bound(?scope) }\">
+                        <swon:Value arg:name=\"scope\" arg:value=\"{= afn:localname(?scope) }\"/>
+                    </ui:if>
+                    <ui:if ui:condition=\"{= bound(?resources) }\">
+                        <swon:Value arg:name=\"resources\" arg:value=\"{= ?resources }\"/>
+                    </ui:if>
+                    <ui:if ui:condition=\"{= bound(?results) }\">
+                        <swon:Value arg:name=\"results\" arg:value=\"{= ?results }\"/>
+                    </ui:if>
+                </ui:forEach>
+            </ui:if>
+            <ui:else>
+                <swon:Value arg:name=\"error\" arg:value=\"Job not found: {= ?job }\"/>
+                <ui:setResponseHeader ui:statusCode=\"{= 404 }\"/>
+            </ui:else>
+        </swon:Object>
+    </ui:call>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:comment "Outputs a JSON description of an AutoClassifier job. If the job is not found, return a JSON error object and set HTTP status code to 404." ;
+  rdfs:label "acsrv:JobJSON" ;
+  rdfs:subClassOf ui:Element ;
+.
+acsrv:JobStatus
+  rdf:type ui:Service ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate autotagger:job ;
+      spl:valueType acjob:AutoClassifierJob ;
+      rdfs:comment "URI of the job to be checked" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate autotagger:jobGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "URI of the named graph that contains job metadata; often a team graph" ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:try>
+        <ui:if ui:condition=\"{= !bound(?job) }\">
+            <acsrv:ErrorJSON arg:error=\"Missing required argument: job\" arg:statusCode=\"{= 400 }\"/>
+        </ui:if>
+        <ui:else>
+            <acsrv:JobJSON autotagger:job=\"{= IRI(?job) }\" autotagger:jobGraph=\"{= IRI(?jobGraph) }\"/>
+        </ui:else>
+    </ui:try>
+    <ui:catch>
+        <ui:if ui:condition=\"{= regex(?exception, &quot;java.lang.IllegalArgumentException: Failed to resolve graph &quot;) }\">
+            <acsrv:ErrorJSON arg:error=\"No such job graph: {= REPLACE(REPLACE(?exception, &quot;java.lang.IllegalArgumentException: Failed to resolve graph &quot;, &quot;&quot;), &quot; in http://uispin.org/ui#setContext element&quot;, &quot;&quot;) }\"/>
+        </ui:if>
+        <ui:else>
+            <acsrv:ErrorJSON_SWP arg:error=\"{= ?exception }\" arg:stackTrace=\"{= ?stackTrace }\"/>
+        </ui:else>
+    </ui:catch>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A web service that returns the status of an AutoClassifier job (previously started by the StartJob service) as a JSON object. The _base argument is ignored." ;
+  rdfs:label "JobStatus" ;
+  rdfs:subClassOf acsrv:AutoClassifierJSONService ;
+.
+acsrv:PreviewConceptVocabulary
+  rdf:type ui:Service ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate arg:contentTagSet ;
+      spl:valueType taggerprojects:ContentTagSet ;
+      rdfs:comment "URI of a content tag set whose concept vocabulary is to be previewed" ;
+    ] ;
+  ui:prototype """
+<ui:group let:targetGraph=\"{= ui:tempGraphPrepareContentTagSet }\">
+    <acpp:PreprocessContentTagSetForAutoClassifier arg:projectGraph=\"{= ?contentTagSet }\" arg:targetGraph=\"{= ?targetGraph }\"/>
+    <ui:setContext ui:queryGraph=\"{= ?targetGraph }\">
+        <ui:setPrefix ui:namespace=\"http://www.w3.org/2004/02/skos/core#\" ui:prefix=\"skos\"/>
+        <ui:return/>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment """A service that pre-processes the concept vocabulary (taxonomy or ontology) associated with a content tag set. The result of the pre-processing is a simplified SKOS taxonomy in Turtle syntax. It contains only the data that the AutoClassifier sees, in a normalized form. This can be helpful for troubleshooting.
+
+This service is intended for troubleshooting purposes only, and should not be used in production work.""" ;
+  rdfs:label "PreviewConceptVocabulary" ;
+  rdfs:subClassOf ui:TurtleServices ;
+.
+acsrv:StartJob
+  rdf:type ui:Service ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate autotagger:configuration ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The AutoClassifier configuration resource (often a content tag set resource), a resource in the configuration graph described with tagger:xxx properties" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate autotagger:contentGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "Graph containing the content resources to be tagged. Defaults to tagger:subjectGraph of configuration resource." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate autotagger:job ;
+      spl:valueType acjob:AutoClassifierJob ;
+      rdfs:comment "Allows the client to specify the URI for the job, instead of letting the service choose it." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate autotagger:jobGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "If specified, update metadata about the job in this graph on job start and completion; often a team graph." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate autotagger:resources ;
+      spl:valueType xsd:string ;
+      rdfs:comment "An optional list of whitespace-separated URIs of resources in the content graph to auto-classify. If unspecified, auto-classify all resources." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate autotagger:tagProperty ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "Property to be used in generated tagging triples; if unspecified, use tagger:defaultTagProperty of configuration resource" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate autotagger:targetGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "If specified, write generated tagging triples to this named graph. If unspecified, assume that the configuration is a content tag set, and write results to a new working copy." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate autotagger:trainingID ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The ID of a training result (see StartTraining service) to be used in this job; if not specified, use the URI of the configuration resource" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:configurationGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph that describes the configuration resource. If unspecified, it is assumed that the configuration resource is a named graph containing its own description." ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:if ui:condition=\"{= !autotagger:isMauiServerRunning() }\">
+        <acsrv:ErrorJSON arg:error=\"AutoClassifier is temporarily unavailable. Please contact the administrator.\"/>
+    </ui:if>
+    <ui:elseif ui:condition=\"{= !bound(?configuration) }\">
+        <acsrv:ErrorJSON arg:error=\"Missing required argument: configuration\" arg:statusCode=\"{= 400 }\"/>
+    </ui:elseif>
+    <ui:else>
+        <ui:try>
+            <autotagger:TrainingStatus autotagger:configuration=\"{= IRI(?configuration) }\" autotagger:trainingID=\"{= ?trainingID }\">
+                <ui:if ui:condition=\"{= !?isTrained }\">
+                    <acsrv:ErrorJSON arg:error=\"No training result with trainingID {= COALESCE(?trainingID, ?configuration) }\" arg:statusCode=\"{= 400 }\"/>
+                </ui:if>
+                <ui:else>
+                    <ui:setContext ui:queryGraph=\"{= COALESCE(IRI(?configurationGraph), IRI(?configuration)) }\">
+                        <ui:group let:effectiveContentGraph=\"{= COALESCE(IRI(?contentGraph), spl:object(IRI(?configuration), tagger:subjectGraph)) }\" let:jobGraphMaybeTemp=\"{= COALESCE(IRI(?jobGraph), ui:tempGraphAutoClassifierJobMetadata) }\" let:jobURI=\"{= IF(bound(?job), IRI(?job), autotagger:generateJobURI(IRI(?configuration))) }\">
+                            <ui:if ui:condition=\"{= !bound(?effectiveContentGraph) }\">
+                                <acsrv:ErrorJSON arg:error=\"Content graph must be specified as parameter or in configuration\" arg:statusCode=\"{= 400 }\"/>
+                            </ui:if>
+                            <ui:elseif ui:condition=\"{= !smf:canWrite(?jobGraphMaybeTemp) }\">
+                                <acsrv:ErrorJSON arg:error=\"Current user does not have write privileges for {= ?jobGraphMaybeTemp }\" arg:statusCode=\"{= 403 }\"/>
+                            </ui:elseif>
+                            <ui:elseif ui:condition=\"{= bound(?targetGraph) &amp;&amp; (!smf:canWrite(?targetGraph)) }\">
+                                <acsrv:ErrorJSON arg:error=\"Current user does not have write privileges for {= ?targetGraph }\" arg:statusCode=\"{= 403 }\"/>
+                            </ui:elseif>
+                            <ui:else>
+                                <ui:group let:resourceCount=\"{= IF(bound(?resources), autotagger:countResourcesFromList(?resources), autotagger:countContentResources(IRI(?configuration), ?effectiveContentGraph)) }\" let:scope=\"{= IF(bound(?resources), acjob:search, acjob:all) }\">
+                                    <ui:setContext ui:queryGraph=\"{= ?jobGraphMaybeTemp }\">
+                                        <ui:call arg:resourceCount=\"{= ?resourceCount }\" arg:scope=\"{= ?scope }\" autotagger:configuration=\"{= IRI(?configuration) }\" autotagger:job=\"{= ?jobURI }\" ui:template=\"{= autotagger:InsertJobMetadata }\"/>
+                                    </ui:setContext>
+                                </ui:group>
+                                <autotagger:StartJob autotagger:configuration=\"{= IRI(?configuration) }\" autotagger:contentGraph=\"{= IRI(?contentGraph) }\" autotagger:job=\"{= ?jobURI }\" autotagger:jobGraph=\"{= ?jobGraphMaybeTemp }\" autotagger:resources=\"{= ?resources }\" autotagger:tagProperty=\"{= IRI(?tagProperty) }\" autotagger:targetGraph=\"{= IRI(?targetGraph) }\" autotagger:trainingID=\"{= ?trainingID }\"/>
+                                <acsrv:JobJSON autotagger:job=\"{= ?jobURI }\" autotagger:jobGraph=\"{= ?jobGraphMaybeTemp }\"/>
+                            </ui:else>
+                        </ui:group>
+                    </ui:setContext>
+                </ui:else>
+            </autotagger:TrainingStatus>
+        </ui:try>
+        <ui:catch>
+            <acsrv:ErrorJSON_SWP arg:error=\"{= ?exception }\" arg:stackTrace=\"{= ?stackTrace }\"/>
+        </ui:catch>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A control element that starts an auto-classification job. The _base argument is ignored. Returns a JSON object with metadata for the created job, including the job's unique URI which can be used to cancel the job or check its status with the JobStatus service (if a jobGraph was provided). Once the job is finished, its results will be deposited in a named target graph in the system, or in a new working copy of a content tag set if no target graph is provided." ;
+  rdfs:label "StartJob" ;
+  rdfs:subClassOf acsrv:AutoClassifierJSONService ;
+.
+acsrv:StartTraining
+  rdf:type ui:Service ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate autotagger:configuration ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The AutoClassifier configuration resource (often a content tag set resource), a resource in the configuration graph described with tagger:xxx properties" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate autotagger:contentGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "Graph containing the content resources that are tagged in the training data. Defaults to tagger:subjectGraph of configuration resource." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate autotagger:tagProperty ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "Property of the tagging triples in the training data; if unspecified, assume tagger:defaultTagProperty of configuration resource" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate autotagger:trainingDataGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph containing training taggings, that is, triples that connect content resources in the content graph with concepts in the vocabulary graph, using the tag property. If unspecified, assume the configuration graph." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate autotagger:trainingID ;
+      spl:valueType xsd:string ;
+      rdfs:comment "Identifier for the training result; re-running training with the same trainingID will overwrite the previous training result; if unspecified, use the URI of the configuration resource" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate autotagger:trainingSampleSize ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "Limit the number of documents used for training; if more are available, use an arbitrary subset. 0 or negative number means use all available documents (the default)." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate autotagger:vocabularyGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "the graph containing the concept vocabulary to be used as a source of tags; defaults to tagger:objectGraph of the configuration resource. If this is a TopBraid taxonomy project or ontology project, then the appropriate preprocessing rules will be picked; otherwise, plain SKOS preprocessing will be done." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:configurationGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph that describes the configuration resource. If unspecified, it is assumed that the configuration resource is a named graph containing its own description." ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:if ui:condition=\"{= !autotagger:isMauiServerRunning() }\">
+        <acsrv:ErrorJSON arg:error=\"AutoClassifier is temporarily unavailable. Please contact the administrator.\"/>
+    </ui:if>
+    <ui:elseif ui:condition=\"{= !bound(?configuration) }\">
+        <acsrv:ErrorJSON arg:error=\"Missing required argument: configuration\" arg:statusCode=\"{= 400 }\"/>
+    </ui:elseif>
+    <ui:else>
+        <ui:try>
+            <ui:setContext ui:queryGraph=\"{= COALESCE(IRI(?configurationGraph), IRI(?configuration)) }\">
+                <ui:group let:effectiveVocabularyGraph=\"{= COALESCE(IRI(?vocabularyGraph), spl:object(IRI(?configuration), tagger:objectGraph)) }\" let:targetGraph=\"{= ui:tempGraphAutoClassifierTraining }\">
+                    <ui:if ui:condition=\"{= !bound(?effectiveVocabularyGraph) }\">
+                        <acsrv:ErrorJSON arg:error=\"Vocabulary graph must be specified as parameter or in configuration\" arg:statusCode=\"{= 400 }\"/>
+                    </ui:if>
+                    <ui:else>
+                        <acpp:PreprocessVocabularyForAutoClassifier arg:language=\"{= spl:object(IRI(?configuration), tagger:autoTaggerLanguage) }\" arg:projectGraph=\"{= ?effectiveVocabularyGraph }\" arg:targetGraph=\"{= ?targetGraph }\"/>
+                        <autotagger:StartTraining autotagger:configuration=\"{= IRI(?configuration) }\" autotagger:contentGraph=\"{= IRI(?contentGraph) }\" autotagger:tagProperty=\"{= IRI(?tagProperty) }\" autotagger:trainingDataGraph=\"{= IRI(?trainingDataGraph) }\" autotagger:trainingID=\"{= ?trainingID }\" autotagger:trainingSampleSize=\"{= ?trainingSampleSize }\" autotagger:vocabularyGraph=\"{= ?targetGraph }\"/>
+                        <swon:Object>
+                            <swon:Value arg:name=\"trainingID\" arg:value=\"{= COALESCE(?trainingID, ?configuration) }\"/>
+                            <swon:Value arg:name=\"isTrained\" arg:value=\"{= false }\"/>
+                            <swon:Value arg:name=\"trainerStatus\" arg:value=\"preparing\"/>
+                        </swon:Object>
+                    </ui:else>
+                </ui:group>
+            </ui:setContext>
+        </ui:try>
+        <ui:catch>
+            <ui:if ui:condition=\"{= regex(?exception, &quot;java.lang.IllegalArgumentException: Failed to resolve graph &quot;) }\">
+                <acsrv:ErrorJSON arg:error=\"No such configuration graph: {= REPLACE(REPLACE(?exception, &quot;java.lang.IllegalArgumentException: Failed to resolve graph &quot;, &quot;&quot;), &quot; in http://uispin.org/ui#setContext element&quot;, &quot;&quot;) }\"/>
+            </ui:if>
+            <ui:else>
+                <acsrv:ErrorJSON_SWP arg:error=\"{= ?exception }\" arg:stackTrace=\"{= ?stackTrace }\"/>
+            </ui:else>
+        </ui:catch>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A service that starts training the AutoClassifier. The _base argument is ignored. On success, a JSON object containing the key trainingID and trainerStatus will be returned. The trainingID can be used to subsequently check the status of the training process using the TrainingStatus service." ;
+  rdfs:label "StartTraining" ;
+  rdfs:subClassOf acsrv:AutoClassifierJSONService ;
+.
+acsrv:TrainingStatus
+  rdf:type ui:Service ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate autotagger:configuration ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "AutoClassifier configuration resource (often a content tag set resource) that was given when starting the training job, if no trainingID was provided" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate autotagger:trainingID ;
+      spl:valueType xsd:string ;
+      rdfs:comment "Training result identifier that was given when starting the training job" ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:if ui:condition=\"{= !autotagger:isMauiServerRunning() }\">
+        <acsrv:ErrorJSON arg:error=\"AutoClassifier is temporarily unavailable. Please contact the administrator.\"/>
+    </ui:if>
+    <ui:else>
+        <ui:try let:effectiveTrainingID=\"{= COALESCE(?trainingID, ?configuration) }\">
+            <autotagger:TrainingStatus autotagger:trainingID=\"{= ?effectiveTrainingID }\">
+                <swon:Object>
+                    <swon:Value arg:name=\"trainingID\" arg:value=\"{= ?effectiveTrainingID }\"/>
+                    <swon:Value arg:name=\"isTrained\" arg:value=\"{= ?isTrained }\"/>
+                    <ui:if ui:condition=\"{= bound(?trainerStatus) }\">
+                        <swon:Value arg:name=\"trainerStatus\" arg:value=\"{= ?trainerStatus }\"/>
+                    </ui:if>
+                    <ui:if ui:condition=\"{= bound(?startTime) }\">
+                        <swon:Value arg:name=\"startTime\" arg:value=\"{= ?startTime }\"/>
+                    </ui:if>
+                    <ui:if ui:condition=\"{= bound(?endTime) }\">
+                        <swon:Value arg:name=\"endTime\" arg:value=\"{= ?endTime }\"/>
+                    </ui:if>
+                    <ui:if ui:condition=\"{= bound(?runtime) }\">
+                        <swon:Value arg:name=\"runtime\" arg:value=\"{= ?runtime }\"/>
+                    </ui:if>
+                    <ui:if ui:condition=\"{= bound(?totalDocuments) }\">
+                        <swon:Value arg:name=\"totalDocuments\" arg:value=\"{= ?totalDocuments }\"/>
+                    </ui:if>
+                    <ui:if ui:condition=\"{= bound(?skippedDocuments) }\">
+                        <swon:Value arg:name=\"skippedDocuments\" arg:value=\"{= ?skippedDocuments }\"/>
+                    </ui:if>
+                </swon:Object>
+            </autotagger:TrainingStatus>
+        </ui:try>
+        <ui:catch>
+            <acsrv:ErrorJSON_SWP arg:error=\"{= ?exception }\" arg:stackTrace=\"{= ?stackTrace }\"/>
+        </ui:catch>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment """A service that gets the status of a training process previously started. The training process is identified by the trainingID that was specified when starting the training, or if none was specified, then by the AutoClassifier configuration resource. Note that the _base argument is ignored. Results are returned as a JSON object with the following fields:
+
+- isTrained (boolean, only field guaranteed to be bound)
+- trainerStatus (string)
+- startTime (dateTime)
+- endTime (dateTime)
+- runtime (integer, in milliseconds)
+- totalDocuments (integer)
+- skippedDocuments (integer)""" ;
+  rdfs:label "training status" ;
+  rdfs:subClassOf acsrv:AutoClassifierJSONService ;
+.
+taggerprojects:ProjectType
+  teamwork:projectPlugin acsrv:ConceptVocabularyExportPlugin ;
+.
+arg:configurationGraph
+  rdf:type rdf:Property ;
+.
+arg:contentTagSet
+  rdf:type rdf:Property ;
+  rdfs:comment "" ;
+  rdfs:label "content tag set" ;
+.
+arg:error
+  rdf:type rdf:Property ;
+  rdfs:comment "" ;
+  rdfs:label "error" ;
+.
+arg:stackTrace
+  rdf:type rdf:Property ;
+  rdfs:comment "" ;
+  rdfs:label "stack trace" ;
+.
+arg:statusCode
+  rdf:type rdf:Property ;
+  rdfs:comment "" ;
+  rdfs:label "status code" ;
+.

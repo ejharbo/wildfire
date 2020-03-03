@@ -1,0 +1,1556 @@
+# baseURI: http://topbraid.org/spin/tablesmap
+# imports: http://spinrdf.org/spin
+# imports: http://topbraid.org/spin/spinmapl
+# imports: http://topbraid.org/tables
+# imports: http://www.w3.org/2004/02/skos/core
+# prefix: tablesmap
+
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spinmap: <http://spinrdf.org/spinmap#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tablesmap: <http://topbraid.org/spin/tablesmap#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+arg:class
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:colIndex
+  a rdf:Property ;
+  rdfs:label "col index" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:firstColIndex
+  a rdf:Property ;
+  rdfs:label "first col index" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:firstColPredicate
+  a rdf:Property ;
+  rdfs:label "first col predicate" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:lastColIndex
+  a rdf:Property ;
+  rdfs:label "last col index" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:lastColPredicate
+  a rdf:Property ;
+  rdfs:label "last col predicate" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:name
+  a rdf:Property ;
+  rdfs:label "name" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:pairs
+  a rdf:Property ;
+  rdfs:label "pairs" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:predicate
+  a rdf:Property ;
+  rdfs:label "predicate" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:row
+  a rdf:Property ;
+  rdfs:label "row" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:rowIndex
+  a rdf:Property ;
+  rdfs:label "row index" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:startRowIndex
+  a rdf:Property ;
+  rdfs:label "start row index" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:type
+  a rdf:Property ;
+  rdfs:label "type" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:uriTemplate
+  a rdf:Property ;
+  rdfs:label "uri template" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://topbraid.org/spin/tablesmap>
+  a owl:Ontology ;
+  rdfs:comment "A library of SPIN functions and templates that can be used to post-process spreadsheets that are imported with the Semantic Tables framework." ;
+  owl:imports <http://spinrdf.org/spin> ;
+  owl:imports <http://topbraid.org/spin/spinmapl> ;
+  owl:imports <http://topbraid.org/tables> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+.
+tablesmap:FillEmptyCells
+  a spin:ConstructTemplate ;
+  spin:body [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "value" ;
+              ] ;
+            sp:predicate [
+                sp:varName "predicate" ;
+              ] ;
+            sp:subject [
+                sp:varName "row" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "firstColPredicate" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "lastColPredicate" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?2" ;
+              ] ;
+            sp:predicate tables:freeCellBelow ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "row" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?2" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?3" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?2" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "predicate" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?3" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?4" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?3" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "value" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?4" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?4" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:firstColPredicate ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The first column property." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:lastColPredicate ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The last column property." ;
+    ] ;
+  spin:labelTemplate "Fill empty cells between column {?firstColPredicate} and {?lastColPredicate}" ;
+  rdfs:comment """Fills any empty cells in a given list of column properties, so that they are well-formed tree structures where each row is self-describing. In particular, this will convert
+
+A
+    B
+	C
+
+into
+
+A
+A  B
+A  C
+
+This uses a magic property that is hard-coded in Java as a helper.""" ;
+  rdfs:label "Fill empty cells" ;
+  rdfs:subClassOf spin:ConstructTemplates ;
+.
+tablesmap:MultiColumnTable2SKOS
+  a spin:ConstructTemplate ;
+  spin:body [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object <http://www.w3.org/2004/02/skos/core#Concept> ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "concept" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "name" ;
+              ] ;
+            sp:predicate <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+            sp:subject [
+                sp:varName "concept" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "concept" ;
+              ] ;
+            sp:predicate <http://www.w3.org/2004/02/skos/core#broader> ;
+            sp:subject [
+                sp:varName "child" ;
+              ] ;
+          ]
+          [
+            sp:object <http://www.w3.org/2004/02/skos/core#Concept> ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "child" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "childName" ;
+              ] ;
+            sp:predicate <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+            sp:subject [
+                sp:varName "child" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "rowIndex" ;
+              ] ;
+            sp:predicate tables:rowIndex ;
+            sp:subject spin:_this ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:ge ;
+                sp:arg1 [
+                    sp:varName "rowIndex" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "startRowIndex" ;
+                  ] ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "name" ;
+              ] ;
+            sp:predicate [
+                sp:varName "p" ;
+              ] ;
+            sp:subject spin:_this ;
+          ]
+          [
+            sp:object [
+                sp:varName "colIndex" ;
+              ] ;
+            sp:predicate tables:columnIndex ;
+            sp:subject [
+                sp:varName "p" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:ge ;
+                sp:arg1 [
+                    sp:varName "colIndex" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "startColIndex" ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:buildURI ;
+                sp:arg1 [
+                    sp:varName "uriTemplate" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "name" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "concept" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:add ;
+                sp:arg1 [
+                    sp:varName "colIndex" ;
+                  ] ;
+                sp:arg2 1 ;
+              ] ;
+            sp:variable [
+                sp:varName "childColIndex" ;
+              ] ;
+          ]
+          [
+            a sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "childColIndex" ;
+                    ] ;
+                  sp:predicate tables:columnIndex ;
+                  sp:subject [
+                      sp:varName "childPredicate" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "childName" ;
+                    ] ;
+                  sp:predicate [
+                      sp:varName "childPredicate" ;
+                    ] ;
+                  sp:subject spin:_this ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a spif:buildURI ;
+                      sp:arg1 [
+                          sp:varName "uriTemplate" ;
+                        ] ;
+                      sp:arg2 [
+                          sp:varName "childName" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "child" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:uriTemplate ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The URI template in the smf:buildURI syntax, with {?1} to insert the concept name." ;
+    ] ;
+  spin:labelTemplate "Multi-column tables to SKOS with template {?uriTemplate}" ;
+  rdfs:comment "This template can be associated via spin:rule to a class generated by the Semantic Tables importer. It assumes that certain columns starting from a given column index are used to encode a hiearchy of SKOS concepts, with the root concept(s) at the start column, and children arranged from left to right. The SPIN template will walk through those columns and create corresponding SKOS concepts, based on a URI creation pattern." ;
+  rdfs:label "Multi column table to SKOS" ;
+  rdfs:subClassOf tablesmap:Table2SKOS ;
+.
+tablesmap:Table2SKOS
+  a spin:ConstructTemplate ;
+  spin:abstract true ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:defaultValue "0" ;
+      spl:predicate arg:firstColIndex ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The start column index." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:defaultValue 0 ;
+      spl:predicate arg:startRowIndex ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The start row index (e.g. to ignore a second row of headers in the spreadsheet)." ;
+    ] ;
+  rdfs:comment "Abstract base template for various potential algorithms on tables, that all take an overlapping set of arguments." ;
+  rdfs:label "Table2SKOS" ;
+  rdfs:subClassOf spin:ConstructTemplates ;
+.
+tablesmap:TableFunctions
+  a spin:Function ;
+  spin:abstract true ;
+  rdfs:label "Table functions" ;
+  rdfs:subClassOf spin:Functions ;
+.
+tablesmap:buildPrimaryKeyURIWithColumnPathEnd
+  a spinmap:TargetFunction ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:object ;
+                sp:arg1 [
+                    sp:varName "firstColPredicate" ;
+                  ] ;
+                sp:arg2 tables:columnIndex ;
+              ] ;
+            sp:variable [
+                sp:varName "firstColIndex" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:object ;
+                sp:arg1 [
+                    sp:varName "lastColPredicate" ;
+                  ] ;
+                sp:arg2 tables:columnIndex ;
+              ] ;
+            sp:variable [
+                sp:varName "lastColIndex" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a tablesmap:rowName ;
+                arg:firstColIndex [
+                    sp:varName "firstColIndex" ;
+                  ] ;
+                arg:lastColIndex [
+                    sp:varName "lastColIndex" ;
+                  ] ;
+                arg:pairs [
+                    sp:varName "pairs" ;
+                  ] ;
+                sp:arg1 [
+                    sp:varName "source" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "value" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:iri ;
+                sp:arg1 [
+                    a sp:concat ;
+                    sp:arg1 [
+                        sp:varName "uriStart" ;
+                      ] ;
+                    sp:arg2 [
+                        a sp:encode_for_uri ;
+                        sp:arg1 [
+                            a xsd:string ;
+                            sp:arg1 [
+                                sp:varName "value" ;
+                              ] ;
+                          ] ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "result" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:defaultValue false ;
+      spl:predicate arg:pairs ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "true to group columns into pairs, with the left one holding the ID." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:firstColPredicate ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The first column property." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:lastColPredicate ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The last column property." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:uriStart ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The start of URIs, derived from primary key declaration." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "A target function that builds a new URI using the last non-empty cell value within a given list of column properties as primary key." ;
+  rdfs:label "build primary key URI with column path end" ;
+  rdfs:subClassOf spinmap:TargetFunctions ;
+.
+tablesmap:buildURIWithColumnPathEnd
+  a spinmap:TargetFunction ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:object ;
+                sp:arg1 [
+                    sp:varName "firstColPredicate" ;
+                  ] ;
+                sp:arg2 tables:columnIndex ;
+              ] ;
+            sp:variable [
+                sp:varName "firstColIndex" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:object ;
+                sp:arg1 [
+                    sp:varName "lastColPredicate" ;
+                  ] ;
+                sp:arg2 tables:columnIndex ;
+              ] ;
+            sp:variable [
+                sp:varName "lastColIndex" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a tablesmap:rowName ;
+                arg:firstColIndex [
+                    sp:varName "firstColIndex" ;
+                  ] ;
+                arg:lastColIndex [
+                    sp:varName "lastColIndex" ;
+                  ] ;
+                arg:pairs [
+                    sp:varName "pairs" ;
+                  ] ;
+                sp:arg1 [
+                    sp:varName "source" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "value" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:buildURI ;
+                sp:arg1 [
+                    sp:varName "uriTemplate" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "value" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "result" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:defaultValue false ;
+      spl:predicate arg:pairs ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "true to group columns into pairs, with the left one holding the ID." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:firstColPredicate ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The first column property." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:lastColPredicate ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The last column property." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:uriTemplate ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The URI template, must reference the value to insert using {?1}." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "A target function that builds a new URI using the last non-empty cell value within a given list of column properties. The URI template must reference that value using {?1}." ;
+  rdfs:label "build URI with column path end" ;
+  rdfs:subClassOf spinmap:TargetFunctions ;
+.
+tablesmap:leftParent
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a spinmap:targetResource ;
+                sp:arg1 [
+                    sp:varName "parent" ;
+                  ] ;
+                spinmap:context [
+                    sp:varName "context" ;
+                  ] ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject spin:_arg1 ;
+          ]
+          [
+            sp:object [
+                sp:varName "rowIndex" ;
+              ] ;
+            sp:predicate tables:rowIndex ;
+            sp:subject spin:_arg1 ;
+          ]
+          [
+            sp:object [
+                sp:varName "firstColIndex" ;
+              ] ;
+            sp:predicate tables:columnIndex ;
+            sp:subject [
+                sp:varName "firstColPredicate" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "lastColIndex" ;
+              ] ;
+            sp:predicate tables:columnIndex ;
+            sp:subject [
+                sp:varName "lastColPredicate" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a tablesmap:maxColIndex ;
+                arg:firstColIndex [
+                    sp:varName "firstColIndex" ;
+                  ] ;
+                arg:lastColIndex [
+                    sp:varName "lastColIndex" ;
+                  ] ;
+                arg:pairs [
+                    sp:varName "pairs" ;
+                  ] ;
+                sp:arg1 spin:_arg1 ;
+              ] ;
+            sp:variable [
+                sp:varName "maxColIndex" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "maxColIndex" ;
+              ] ;
+            sp:predicate tables:columnIndex ;
+            sp:subject [
+                sp:varName "maxCol" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdfs:domain ;
+            sp:subject [
+                sp:varName "maxCol" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?0" ;
+              ] ;
+            sp:predicate spif:for ;
+            sp:subject [
+                sp:varName "i" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "rowIndex" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object 0 ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?2" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object -1 ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?2" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?2" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "i" ;
+              ] ;
+            sp:predicate tables:rowIndex ;
+            sp:subject [
+                sp:varName "parent" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "parent" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:notExists ;
+                sp:elements (
+                    [
+                      sp:object [
+                          sp:varName "any" ;
+                        ] ;
+                      sp:predicate [
+                          sp:varName "maxCol" ;
+                        ] ;
+                      sp:subject [
+                          sp:varName "parent" ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:pairs ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "true to group columns into pairs, with the left column holding the ID." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:firstColPredicate ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property of the first column containing the tree structure." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:lastColPredicate ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property of the last column containing the tree structure." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The row instance to get the parent of." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmap:context ;
+      spl:valueType spinmap:Context ;
+      rdfs:comment "The context to get the target resource from." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "Gets the target resource with the name in the cell to the left of this row's name." ;
+  rdfs:label "left parent" ;
+  rdfs:subClassOf tablesmap:TableFunctions ;
+.
+tablesmap:leftParentName
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a tables:cellByColIndex ;
+                arg:colIndex [
+                    a sp:sub ;
+                    sp:arg1 [
+                        sp:varName "nameCol" ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "add" ;
+                      ] ;
+                  ] ;
+                arg:row spin:_arg1 ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "firstColIndex" ;
+              ] ;
+            sp:predicate tables:columnIndex ;
+            sp:subject [
+                sp:varName "firstColPredicate" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "lastColIndex" ;
+              ] ;
+            sp:predicate tables:columnIndex ;
+            sp:subject [
+                sp:varName "lastColPredicate" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a tablesmap:maxColIndex ;
+                arg:firstColIndex [
+                    sp:varName "firstColIndex" ;
+                  ] ;
+                arg:lastColIndex [
+                    sp:varName "lastColIndex" ;
+                  ] ;
+                arg:pairs [
+                    sp:varName "pairs" ;
+                  ] ;
+                sp:arg1 spin:_arg1 ;
+              ] ;
+            sp:variable [
+                sp:varName "nameCol" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    sp:varName "pairs" ;
+                  ] ;
+                sp:arg2 2 ;
+                sp:arg3 1 ;
+              ] ;
+            sp:variable [
+                sp:varName "add" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:and ;
+                sp:arg1 [
+                    a sp:bound ;
+                    sp:arg1 [
+                        sp:varName "nameCol" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a sp:ge ;
+                    sp:arg1 [
+                        sp:varName "nameCol" ;
+                      ] ;
+                    sp:arg2 [
+                        a sp:sub ;
+                        sp:arg1 [
+                            sp:varName "firstColIndex" ;
+                          ] ;
+                        sp:arg2 [
+                            sp:varName "add" ;
+                          ] ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:pairs ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "true to indicate that we are looking at pairs of two columns each." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:firstColPredicate ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The start column property." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:lastColPredicate ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The end column property." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The row instance." ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "Takes a row instance (?arg1), and start and end column indices, and gets the value on the left side of the name column for that instance. For example, if you have column values: A B C then C is the name column, and B will be returned as parent." ;
+  rdfs:label "left parent name" ;
+  rdfs:subClassOf tablesmap:TableFunctions ;
+.
+tablesmap:maxColIndex
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:Max ;
+                sp:expression [
+                    sp:varName "colIndex" ;
+                  ] ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "o" ;
+              ] ;
+            sp:predicate [
+                sp:varName "p" ;
+              ] ;
+            sp:subject spin:_arg1 ;
+          ]
+          [
+            sp:object [
+                sp:varName "colIndex" ;
+              ] ;
+            sp:predicate tables:columnIndex ;
+            sp:subject [
+                sp:varName "p" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:and ;
+                sp:arg1 [
+                    a sp:ge ;
+                    sp:arg1 [
+                        sp:varName "colIndex" ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "firstColIndex" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a sp:le ;
+                    sp:arg1 [
+                        sp:varName "colIndex" ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "lastColIndex" ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:or ;
+                sp:arg1 [
+                    a sp:ne ;
+                    sp:arg1 [
+                        sp:varName "pairs" ;
+                      ] ;
+                    sp:arg2 true ;
+                  ] ;
+                sp:arg2 [
+                    a sp:eq ;
+                    sp:arg1 [
+                        a spif:mod ;
+                        sp:arg1 [
+                            sp:varName "firstColIndex" ;
+                          ] ;
+                        sp:arg2 2 ;
+                      ] ;
+                    sp:arg2 [
+                        a spif:mod ;
+                        sp:arg1 [
+                            sp:varName "colIndex" ;
+                          ] ;
+                        sp:arg2 2 ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:pairs ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "true to indicate that columns come in pairs, with the first column being the ID column." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:firstColIndex ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The start column index." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:lastColIndex ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The end column index." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The row instance." ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:integer ;
+  rdfs:comment "A helper function that takes a row instance (?row), and gets the maximum col index where the row has a value, but between a given max index (?endColIndex) and min index (?startColIndex). As a side effect this can also be used to compute the depth of a tree table structure." ;
+  rdfs:label "max col index" ;
+  rdfs:subClassOf tablesmap:TableFunctions ;
+.
+tablesmap:rightLabel
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a tablesmap:rowName ;
+                arg:firstColIndex [
+                    sp:varName "firstColIndex" ;
+                  ] ;
+                arg:lastColIndex [
+                    sp:varName "lastColIndex" ;
+                  ] ;
+                arg:pairs false ;
+                sp:arg1 spin:_arg1 ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "firstColIndex" ;
+              ] ;
+            sp:predicate tables:columnIndex ;
+            sp:subject [
+                sp:varName "firstColPredicate" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "lastColIndex" ;
+              ] ;
+            sp:predicate tables:columnIndex ;
+            sp:subject [
+                sp:varName "lastColPredicate" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:firstColPredicate ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The first column of the tree-column structure." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:lastColPredicate ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The last column property of the tree structure." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The row instance." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "In a tree structure encoded as multiple columns, this gets the right-most value of the columns specified by first and last column." ;
+  rdfs:label "right label" ;
+  rdfs:subClassOf tablesmap:TableFunctions ;
+.
+tablesmap:rowName
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "value" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "row" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a tablesmap:maxColIndex ;
+                arg:firstColIndex [
+                    sp:varName "firstColIndex" ;
+                  ] ;
+                arg:lastColIndex [
+                    sp:varName "lastColIndex" ;
+                  ] ;
+                arg:pairs [
+                    sp:varName "pairs" ;
+                  ] ;
+                sp:arg1 spin:_arg1 ;
+              ] ;
+            sp:variable [
+                sp:varName "colIndex" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:bound ;
+                sp:arg1 [
+                    sp:varName "colIndex" ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a tables:cellByColIndex ;
+                arg:colIndex [
+                    sp:varName "colIndex" ;
+                  ] ;
+                arg:row spin:_arg1 ;
+              ] ;
+            sp:variable [
+                sp:varName "value" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:pairs ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "true to group columns into pairs, with the left one holding the ID." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:firstColIndex ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The start column index." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:lastColIndex ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The end column index." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The row instance." ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Gets the content of the last column of a given row, between a given first and last columns." ;
+  rdfs:label "row name" ;
+  rdfs:subClassOf tablesmap:TableFunctions ;
+.
+tablesmap:rowWithName
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "row" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "firstColIndex" ;
+              ] ;
+            sp:predicate tables:columnIndex ;
+            sp:subject [
+                sp:varName "firstColPredicate" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "lastColIndex" ;
+              ] ;
+            sp:predicate tables:columnIndex ;
+            sp:subject [
+                sp:varName "lastColPredicate" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "name" ;
+              ] ;
+            sp:predicate [
+                sp:varName "p" ;
+              ] ;
+            sp:subject [
+                sp:varName "row" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "colIndex" ;
+              ] ;
+            sp:predicate tables:columnIndex ;
+            sp:subject [
+                sp:varName "p" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:and ;
+                sp:arg1 [
+                    a sp:ge ;
+                    sp:arg1 [
+                        sp:varName "colIndex" ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "firstColIndex" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a sp:le ;
+                    sp:arg1 [
+                        sp:varName "colIndex" ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "lastColIndex" ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:or ;
+                sp:arg1 [
+                    a sp:ne ;
+                    sp:arg1 [
+                        sp:varName "pairs" ;
+                      ] ;
+                    sp:arg2 true ;
+                  ] ;
+                sp:arg2 [
+                    a sp:eq ;
+                    sp:arg1 [
+                        a spif:mod ;
+                        sp:arg1 [
+                            sp:varName "firstColIndex" ;
+                          ] ;
+                        sp:arg2 2 ;
+                      ] ;
+                    sp:arg2 [
+                        a spif:mod ;
+                        sp:arg1 [
+                            sp:varName "colIndex" ;
+                          ] ;
+                        sp:arg2 2 ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "row" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a tables:cellByColIndex ;
+                arg:colIndex [
+                    a sp:add ;
+                    sp:arg1 [
+                        sp:varName "colIndex" ;
+                      ] ;
+                    sp:arg2 [
+                        a sp:if ;
+                        sp:arg1 [
+                            sp:varName "pairs" ;
+                          ] ;
+                        sp:arg2 2 ;
+                        sp:arg3 1 ;
+                      ] ;
+                  ] ;
+                arg:row [
+                    sp:varName "row" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "rightName" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:or ;
+                sp:arg1 [
+                    a sp:not ;
+                    sp:arg1 [
+                        a sp:bound ;
+                        sp:arg1 [
+                            sp:varName "rightName" ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a sp:eq ;
+                    sp:arg1 [
+                        sp:varName "colIndex" ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "lastColIndex" ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:firstColPredicate ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The first column property of the tree." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:lastColPredicate ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The end column property of the tree." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:name ;
+      rdfs:comment "The name to match." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:pairs ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "true to group columns into pairs, with the left one holding the ID." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:type ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The class to consider instances of." ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "Gets the row instance of a given class (?type) that has a given name (?name) within start and end column properties. This is defined as the instance that has that value as its last column (i.e. the right neighbor cell must be empty or the end column." ;
+  rdfs:label "row with name" ;
+  rdfs:subClassOf tablesmap:TableFunctions ;
+.
+tables:cellByColIndex
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "value" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "row" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdfs:domain ;
+            sp:subject [
+                sp:varName "p" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "colIndex" ;
+              ] ;
+            sp:predicate tables:columnIndex ;
+            sp:subject [
+                sp:varName "p" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "value" ;
+              ] ;
+            sp:predicate [
+                sp:varName "p" ;
+              ] ;
+            sp:subject [
+                sp:varName "row" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:colIndex ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The column index." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:row ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The row instance." ;
+    ] ;
+  rdfs:comment "Gets the value of a given row instance (?row) in a given column (?colIndex)." ;
+  rdfs:label "cell by col index" ;
+  rdfs:subClassOf tablesmap:TableFunctions ;
+.

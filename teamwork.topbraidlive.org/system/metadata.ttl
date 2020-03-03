@@ -1,0 +1,676 @@
+# baseURI: http://topbraid.org/metadata
+# imports: http://datashapes.org/dash
+# prefix: metadata
+
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://purl.org/dc/elements/1.1/description>
+  rdfs:range xsd:string ;
+.
+<http://topbraid.org/metadata>
+  a owl:Ontology ;
+  rdfs:comment "An ontology for metadata about other data models. This is used by EVN to capture vocabulary metadata so that people can search and organize their data models." ;
+  rdfs:label "Metadata vocabulary" ;
+  owl:imports <http://datashapes.org/dash> ;
+  sh:declare [
+      a sh:PrefixDeclaration ;
+      sh:namespace "http://topbraid.org/metadata#"^^xsd:anyURI ;
+      sh:prefix "metadata" ;
+    ] ;
+.
+metadata:Actor
+  a rdfs:Class ;
+  rdfs:comment "Superclass of anything that can be used in Usage records." ;
+  rdfs:label "Actor" ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+metadata:AdHocChangeFrequency
+  a metadata:ChangeFrequency ;
+  rdfs:label "Ad hoc" ;
+.
+metadata:AnnualChangeFrequency
+  a metadata:ChangeFrequency ;
+  rdfs:label "Annual" ;
+.
+metadata:ApprovedStatus
+  a metadata:Status ;
+  rdfs:label "Approved" ;
+.
+metadata:ChangeFrequency
+  a rdfs:Class ;
+  rdfs:comment "A class containing controlled values to be used to identify frequency of changes to reference data." ;
+  rdfs:label "Change Frequency" ;
+  rdfs:subClassOf metadata:Frequency ;
+.
+metadata:DailyChangeFrequency
+  a metadata:ChangeFrequency ;
+  rdfs:label "Daily" ;
+.
+metadata:DescriptionPropertyGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Description" ;
+  sh:order "1"^^xsd:decimal ;
+.
+metadata:FormalManualUpdateProcess
+  a metadata:UpdateProcess ;
+  rdfs:label "Formal Manual Process" ;
+.
+metadata:FormalSemiautomatedUpdateProcess
+  a metadata:UpdateProcess ;
+  rdfs:label "Formal Semi-automated Process" ;
+.
+metadata:FreePaymentType
+  a metadata:PaymentType ;
+  rdfs:label "Free" ;
+.
+metadata:Frequency
+  a rdfs:Class ;
+  rdfs:comment "A class containing controlled values to be used to identify frequency of updates or operations." ;
+  rdfs:label "Frequency" ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+metadata:InUseStatus
+  a metadata:Status ;
+  rdfs:label "In use" ;
+.
+metadata:InfrastructureLevelUpdateProcess
+  a metadata:UpdateProcess ;
+  rdfs:label "Infrastructure Level" ;
+.
+metadata:ManualFileBasedUpdateMethod
+  a metadata:UpdateMethod ;
+  rdfs:label "Manual - File based" ;
+.
+metadata:MetadataShape
+  a sh:NodeShape ;
+  rdfs:comment "Defines metadata properties that are typically stored at the owl:Ontology of a graph (e.g. a Reference Dataset). This shape was designed to support form-based data entry of such metadata." ;
+  rdfs:label "Metadata" ;
+  sh:property metadata:MetadataShape-accessPaymentType ;
+  sh:property metadata:MetadataShape-accessToUpdatePaymentType ;
+  sh:property metadata:MetadataShape-changeFrequency ;
+  sh:property metadata:MetadataShape-changeFrequencyNotes ;
+  sh:property metadata:MetadataShape-comment ;
+  sh:property metadata:MetadataShape-dateGenerated ;
+  sh:property metadata:MetadataShape-description ;
+  sh:property metadata:MetadataShape-effectiveEndDate ;
+  sh:property metadata:MetadataShape-effectiveStartDate ;
+  sh:property metadata:MetadataShape-identifier ;
+  sh:property metadata:MetadataShape-isEnterprise ;
+  sh:property metadata:MetadataShape-isExternalDataset ;
+  sh:property metadata:MetadataShape-maintainedBy ;
+  sh:property metadata:MetadataShape-officialName ;
+  sh:property metadata:MetadataShape-onboardingProcedure ;
+  sh:property metadata:MetadataShape-provisioningProcedure ;
+  sh:property metadata:MetadataShape-purpose ;
+  sh:property metadata:MetadataShape-referenceURL ;
+  sh:property metadata:MetadataShape-sourcedFrom ;
+  sh:property metadata:MetadataShape-standardizedBy ;
+  sh:property metadata:MetadataShape-status ;
+  sh:property metadata:MetadataShape-subjectArea ;
+  sh:property metadata:MetadataShape-subscriptionNote ;
+  sh:property metadata:MetadataShape-updateFileURL ;
+  sh:property metadata:MetadataShape-updateFrequency ;
+  sh:property metadata:MetadataShape-version ;
+  sh:targetClass owl:Ontology ;
+.
+metadata:MetadataShape-accessPaymentType
+  a sh:PropertyShape ;
+  sh:path metadata:accessPaymentType ;
+  dash:editor dash:InstancesSelectEditor ;
+  sh:class metadata:PaymentType ;
+  sh:group metadata:SubscriptionPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "access payment type" ;
+  sh:order "4"^^xsd:decimal ;
+.
+metadata:MetadataShape-accessToUpdatePaymentType
+  a sh:PropertyShape ;
+  sh:path metadata:accessToUpdatePaymentType ;
+  dash:editor dash:InstancesSelectEditor ;
+  sh:class metadata:PaymentType ;
+  sh:group metadata:SubscriptionPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "access to update payment type" ;
+  sh:order "8"^^xsd:decimal ;
+.
+metadata:MetadataShape-changeFrequency
+  a sh:PropertyShape ;
+  sh:path metadata:changeFrequency ;
+  dash:editor dash:InstancesSelectEditor ;
+  sh:class metadata:Frequency ;
+  sh:group metadata:SubscriptionPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "change frequency" ;
+  sh:order "5"^^xsd:decimal ;
+.
+metadata:MetadataShape-changeFrequencyNotes
+  a sh:PropertyShape ;
+  sh:path metadata:changeFrequencyNotes ;
+  sh:group metadata:SubscriptionPropertyGroup ;
+  sh:name "change frequency notes" ;
+  sh:or dash:HTMLOrStringOrLangString ;
+  sh:order "6"^^xsd:decimal ;
+.
+metadata:MetadataShape-comment
+  a sh:PropertyShape ;
+  sh:path rdfs:comment ;
+  sh:group metadata:DescriptionPropertyGroup ;
+  sh:name "short description" ;
+  sh:or dash:HTMLOrStringOrLangString ;
+  sh:order "0"^^xsd:decimal ;
+.
+metadata:MetadataShape-dateGenerated
+  a sh:PropertyShape ;
+  sh:path metadata:dateGenerated ;
+  sh:datatype xsd:dateTime ;
+  sh:group metadata:OverviewPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "date generated" ;
+  sh:nodeKind sh:Literal ;
+  sh:order "4"^^xsd:decimal ;
+.
+metadata:MetadataShape-description
+  a sh:PropertyShape ;
+  sh:path <http://purl.org/dc/elements/1.1/description> ;
+  sh:group metadata:DescriptionPropertyGroup ;
+  sh:name "long description" ;
+  sh:or dash:HTMLOrStringOrLangString ;
+  sh:order "2"^^xsd:decimal ;
+.
+metadata:MetadataShape-effectiveEndDate
+  a sh:PropertyShape ;
+  sh:path metadata:effectiveEndDate ;
+  sh:datatype xsd:date ;
+  sh:group metadata:StatusPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "effective end date" ;
+  sh:order "3"^^xsd:decimal ;
+.
+metadata:MetadataShape-effectiveStartDate
+  a sh:PropertyShape ;
+  sh:path metadata:effectiveStartDate ;
+  sh:datatype xsd:date ;
+  sh:group metadata:StatusPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "effective start date" ;
+  sh:order "2"^^xsd:decimal ;
+.
+metadata:MetadataShape-identifier
+  a sh:PropertyShape ;
+  sh:path metadata:identifier ;
+  dash:singleLine true ;
+  sh:datatype xsd:string ;
+  sh:group metadata:OverviewPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "identifier" ;
+  sh:order "0"^^xsd:decimal ;
+.
+metadata:MetadataShape-isEnterprise
+  a sh:PropertyShape ;
+  sh:path metadata:isEnterprise ;
+  sh:datatype xsd:boolean ;
+  sh:group metadata:StatusPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "is enterprise" ;
+  sh:order "1"^^xsd:decimal ;
+.
+metadata:MetadataShape-isExternalDataset
+  a sh:PropertyShape ;
+  sh:path metadata:isExternalDataset ;
+  sh:datatype xsd:boolean ;
+  sh:group metadata:StatusPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "is external dataset" ;
+  sh:order "4"^^xsd:decimal ;
+.
+metadata:MetadataShape-maintainedBy
+  a sh:PropertyShape ;
+  sh:path metadata:maintainedBy ;
+  dash:editor tosh:InstancesInGraphSelectEditor ;
+  dash:viewer tosh:URIInGraphViewer ;
+  tosh:graph <http://rdfex.org/withImports?uri=urn:x-evn-master:platform_governance_singleton> ;
+  tosh:shapeInGraph [
+      sh:class edg:Organization ;
+    ] ;
+  sh:group metadata:SubscriptionPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "maintained by" ;
+  sh:nodeKind sh:IRI ;
+  sh:order "1"^^xsd:decimal ;
+.
+metadata:MetadataShape-officialName
+  a sh:PropertyShape ;
+  sh:path metadata:officialName ;
+  dash:singleLine true ;
+  sh:datatype xsd:string ;
+  sh:group metadata:OverviewPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "official name" ;
+  sh:order "1"^^xsd:decimal ;
+.
+metadata:MetadataShape-onboardingProcedure
+  a sh:PropertyShape ;
+  sh:path metadata:onboardingProcedure ;
+  sh:group metadata:ProceduresPropertyGroup ;
+  sh:name "onboarding procedure" ;
+  sh:or dash:HTMLOrStringOrLangString ;
+  sh:order "0"^^xsd:decimal ;
+.
+metadata:MetadataShape-provisioningProcedure
+  a sh:PropertyShape ;
+  sh:path metadata:provisioningProcedure ;
+  sh:group metadata:ProceduresPropertyGroup ;
+  sh:name "provisioning procedure" ;
+  sh:or dash:HTMLOrStringOrLangString ;
+  sh:order "1"^^xsd:decimal ;
+.
+metadata:MetadataShape-purpose
+  a sh:PropertyShape ;
+  sh:path metadata:purpose ;
+  sh:group metadata:OverviewPropertyGroup ;
+  sh:name "purpose" ;
+  sh:or dash:HTMLOrStringOrLangString ;
+  sh:order "2"^^xsd:decimal ;
+.
+metadata:MetadataShape-referenceURL
+  a sh:PropertyShape ;
+  sh:path metadata:referenceURL ;
+  sh:datatype xsd:anyURI ;
+  sh:group metadata:ReferencePropertyGroup ;
+  sh:name "reference URL" ;
+  sh:order "0"^^xsd:decimal ;
+.
+metadata:MetadataShape-sourcedFrom
+  a sh:PropertyShape ;
+  sh:path metadata:sourcedFrom ;
+  dash:editor tosh:InstancesInGraphSelectEditor ;
+  dash:viewer tosh:URIInGraphViewer ;
+  tosh:graph <http://rdfex.org/withImports?uri=urn:x-evn-master:platform_governance_singleton> ;
+  tosh:shapeInGraph [
+      sh:class edg:Organization ;
+    ] ;
+  sh:group metadata:SubscriptionPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "sourced from" ;
+  sh:nodeKind sh:IRI ;
+  sh:order "2"^^xsd:decimal ;
+.
+metadata:MetadataShape-standardizedBy
+  a sh:PropertyShape ;
+  sh:path metadata:standardizedBy ;
+  dash:editor tosh:InstancesInGraphSelectEditor ;
+  dash:viewer tosh:URIInGraphViewer ;
+  tosh:graph <http://rdfex.org/withImports?uri=urn:x-evn-master:platform_governance_singleton> ;
+  tosh:shapeInGraph [
+      sh:class edg:Organization ;
+    ] ;
+  sh:group metadata:SubscriptionPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "standardized by" ;
+  sh:nodeKind sh:IRI ;
+  sh:order "0"^^xsd:decimal ;
+.
+metadata:MetadataShape-status
+  a sh:PropertyShape ;
+  sh:path metadata:status ;
+  dash:editor dash:InstancesSelectEditor ;
+  sh:class metadata:Status ;
+  sh:group metadata:StatusPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "status" ;
+  sh:order "0"^^xsd:decimal ;
+.
+metadata:MetadataShape-subjectArea
+  a sh:PropertyShape ;
+  sh:path edg:subjectArea ;
+  dash:editor tosh:InstancesInGraphSelectEditor ;
+  dash:viewer tosh:URIInGraphViewer ;
+  tosh:graph <http://rdfex.org/withImports?uri=urn:x-evn-master:platform_governance_singleton> ;
+  tosh:shapeInGraph [
+      sh:class edg:SubjectArea ;
+    ] ;
+  sh:description "The subject area of this asset collection." ;
+  sh:group metadata:OverviewPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "subject area" ;
+  sh:nodeKind sh:IRI ;
+  sh:order "10"^^xsd:decimal ;
+.
+metadata:MetadataShape-subscriptionNote
+  a sh:PropertyShape ;
+  sh:path metadata:subscriptionNote ;
+  sh:group metadata:SubscriptionPropertyGroup ;
+  sh:name "subscription notes" ;
+  sh:or dash:HTMLOrStringOrLangString ;
+  sh:order "3"^^xsd:decimal ;
+.
+metadata:MetadataShape-updateFileURL
+  a sh:PropertyShape ;
+  sh:path metadata:updateFileURL ;
+  sh:datatype xsd:anyURI ;
+  sh:group metadata:SubscriptionPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "update file URL" ;
+  sh:order "9"^^xsd:decimal ;
+.
+metadata:MetadataShape-updateFrequency
+  a sh:PropertyShape ;
+  sh:path metadata:updateFrequency ;
+  dash:editor dash:InstancesSelectEditor ;
+  sh:class metadata:Frequency ;
+  sh:group metadata:SubscriptionPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "update frequency" ;
+  sh:order "7"^^xsd:decimal ;
+.
+metadata:MetadataShape-version
+  a sh:PropertyShape ;
+  sh:path metadata:version ;
+  sh:datatype xsd:string ;
+  sh:group metadata:OverviewPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:name "version" ;
+  sh:order "3"^^xsd:decimal ;
+.
+metadata:MonthlyChangeFrequency
+  a metadata:ChangeFrequency ;
+  rdfs:label "Monthly" ;
+.
+metadata:NotDocumentedUpdateProcess
+  a metadata:UpdateProcess ;
+  rdfs:label "Not Documented Process" ;
+.
+metadata:OverviewPropertyGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Overview" ;
+  sh:order "0"^^xsd:decimal ;
+.
+metadata:PaymentType
+  a rdfs:Class ;
+  rdfs:comment "Contains enumeration of payment types for access to external reference codes" ;
+  rdfs:label "Payment type" ;
+  rdfs:subClassOf rdfs:Resource ;
+  owl:oneOf (
+      metadata:FreePaymentType
+      metadata:PaywallPaymentType
+    ) ;
+.
+metadata:PaywallPaymentType
+  a metadata:PaymentType ;
+  rdfs:label "Paywall" ;
+.
+metadata:ProceduresPropertyGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Procedures" ;
+  sh:order "3"^^xsd:decimal ;
+.
+metadata:QuarterlyChangeFrequency
+  a metadata:ChangeFrequency ;
+  rdfs:label "Quarterly" ;
+.
+metadata:RealTimeFrequency
+  a metadata:Frequency ;
+  rdfs:label "Real time" ;
+.
+metadata:ReferencePropertyGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Reference" ;
+  sh:order "5"^^xsd:decimal ;
+.
+metadata:Standard
+  a rdfs:Class ;
+  rdfs:comment "A standard that is implemented or used by the reference data such as ISO 3166" ;
+  rdfs:label "Standard" ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+metadata:Status
+  a rdfs:Class ;
+  metadata:defaultStatus metadata:UnderDevelopmentStatus ;
+  rdfs:comment "A class with controlled values enumerating possible statuses of a vocabulary." ;
+  rdfs:label "Status" ;
+  rdfs:subClassOf rdfs:Resource ;
+  owl:oneOf (
+      metadata:ApprovedStatus
+      metadata:UnderDevelopmentStatus
+      metadata:InUseStatus
+    ) ;
+.
+metadata:StatusPropertyGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Status" ;
+  sh:order "2"^^xsd:decimal ;
+.
+metadata:SubscriptionPropertyGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Subscription" ;
+  sh:order "4"^^xsd:decimal ;
+.
+metadata:UnderDevelopmentStatus
+  a metadata:Status ;
+  metadata:statusAllowsEdits true ;
+  rdfs:label "Under development" ;
+.
+metadata:UpdateMethod
+  a rdfs:Class ;
+  rdfs:comment "Controlled vocabulary for describing the automation of interfaces between an enterprise system and the data governance environment." ;
+  rdfs:label "Automation" ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+metadata:UpdateProcess
+  a rdfs:Class ;
+  rdfs:comment "A controlled vocabulary of approaches to synchronization between the enterprise systems and the data governance environment." ;
+  rdfs:label "Update Process" ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+metadata:WebServiceUpdateMethod
+  a metadata:UpdateMethod ;
+  rdfs:label "Web Service" ;
+.
+metadata:accessPaymentType
+  a owl:ObjectProperty ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "access payment type" ;
+  rdfs:range metadata:PaymentType ;
+.
+metadata:accessToUpdatesPaymentType
+  a owl:ObjectProperty ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "access to update payment type" ;
+  rdfs:range metadata:PaymentType ;
+.
+metadata:basedOn
+  a owl:ObjectProperty ;
+  rdfs:comment "used to identifying a standard a reference dataset is based on" ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "based on" ;
+  rdfs:range metadata:Standard ;
+.
+metadata:belongsTo
+  a owl:ObjectProperty ;
+  rdfs:comment "connects roles to business areas" ;
+  rdfs:label "belongs to" ;
+.
+metadata:changeFrequency
+  a owl:ObjectProperty ;
+  rdfs:comment "Identifies the frequency of change for reference data." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "change frequency" ;
+  rdfs:range metadata:ChangeFrequency ;
+.
+metadata:changeFrequencyNotes
+  a owl:DatatypeProperty ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "change frequency notes" ;
+  rdfs:range xsd:string ;
+.
+metadata:dateGenerated
+  a owl:DatatypeProperty ;
+  rdfs:comment "Separate from last edit date, indicates the date when a dataset was generated, by intrnal or external process." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "date generated" ;
+  rdfs:range xsd:dateTime ;
+.
+metadata:defaultStatus
+  a owl:ObjectProperty ;
+  rdfs:label "default status" ;
+  rdfs:range metadata:Status ;
+.
+metadata:effectiveEndDate
+  a owl:DatatypeProperty ;
+  rdfs:comment "The date something became obsolete in some manner. In xsd:date form." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "effective end date" ;
+  rdfs:range xsd:date ;
+.
+metadata:effectiveStartDate
+  a owl:DatatypeProperty ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "effective start date" ;
+  rdfs:range xsd:date ;
+.
+metadata:identifier
+  a owl:DatatypeProperty ;
+  a owl:FunctionalProperty ;
+  rdfs:comment "used to store a specialised identifier if one exists" ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "identifier" ;
+  rdfs:range xsd:string ;
+.
+metadata:isEnterprise
+  a owl:DatatypeProperty ;
+  rdfs:comment "If true, then the dataset is regarded as the \"enterprise\" or \"master\" dataset." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "is enterprise dataset" ;
+  rdfs:range xsd:boolean ;
+.
+metadata:isExternalDataset
+  a owl:DatatypeProperty ;
+  rdfs:comment "If true, then the dataset is from an external source, and Subscription and other information becomes relevant." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "is external dataset" ;
+  rdfs:range xsd:boolean ;
+.
+metadata:keyword
+  a owl:DeprecatedProperty ;
+  rdfs:comment "Depreated with TopBraid 5.4. Formerly used to group similar ontologies that share similar keywords. Left in here to prevent untyped property usage tests to fail." ;
+  rdfs:label "keyword" ;
+  rdfs:range xsd:string ;
+.
+metadata:maintainedBy
+  a owl:FunctionalProperty ;
+  a owl:ObjectProperty ;
+  rdfs:comment "used to identify organization responsible for maintenance of a reference dataset or a standard" ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "maintained by" ;
+  rdfs:range edg:Organization ;
+.
+metadata:officialName
+  a owl:DatatypeProperty ;
+  a owl:FunctionalProperty ;
+  rdfs:comment "The \"official name\" is the name of the external standard." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "official name" ;
+  rdfs:range xsd:string ;
+.
+metadata:onboardingProcedure
+  a owl:DatatypeProperty ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "onboarding procedure" ;
+  rdfs:range rdf:HTML ;
+.
+metadata:provisioningProcedure
+  a owl:DatatypeProperty ;
+  rdfs:comment "Used to capture notes about provisioning a reference dataset for use by a specific system" ;
+  rdfs:label "provisioning procedure" ;
+  rdfs:range xsd:string ;
+.
+metadata:purpose
+  a owl:DatatypeProperty ;
+  rdfs:comment "used to describe the purpose of a vocabulary" ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "purpose" ;
+  rdfs:range xsd:string ;
+.
+metadata:referenceURL
+  a owl:DatatypeProperty ;
+  rdfs:comment "used as an alternative or in addition to the reference document" ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "reference URL" ;
+  rdfs:range xsd:anyURI ;
+.
+metadata:sourcedFrom
+  a owl:FunctionalProperty ;
+  a owl:ObjectProperty ;
+  rdfs:comment "identifies organization reference data is sourced from" ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "sourced from" ;
+  rdfs:range edg:Organization ;
+.
+metadata:standardizedBy
+  a owl:ObjectProperty ;
+  rdfs:comment "used to identify an organization that is reponsible for a standard" ;
+  rdfs:domain metadata:Standard ;
+  rdfs:label "standardized by" ;
+  rdfs:range edg:Organization ;
+.
+metadata:status
+  a owl:ObjectProperty ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "status" ;
+  rdfs:range metadata:Status ;
+.
+metadata:statusAllowsEdits
+  a owl:DatatypeProperty ;
+  rdfs:comment "Indicates whether the terms in a vocabulary that has the given status can still be edited. If true then terms may still be deleted. If false (or unspecified) then terms should only be deprecated, not deleted." ;
+  rdfs:domain metadata:Status ;
+  rdfs:label "status allows edits" ;
+  rdfs:range xsd:boolean ;
+.
+metadata:subscriptionNote
+  a owl:DatatypeProperty ;
+  rdfs:comment "Descriotion about a datset subscription, such as geographical availability, pricing differences, etc." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "subscription notes" ;
+  rdfs:range xsd:string ;
+.
+metadata:transformedUsing
+  a owl:ObjectProperty ;
+  rdfs:comment "used to identify a transformation script for a reference dataset" ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "transformed using" ;
+.
+metadata:updateFileURL
+  a owl:DatatypeProperty ;
+  rdfs:comment "The URL where the sourced file updates come from" ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "update file URL" ;
+  rdfs:range xsd:anyURI ;
+.
+metadata:updateFrequency
+  a owl:FunctionalProperty ;
+  a owl:ObjectProperty ;
+  rdfs:label "update frequency" ;
+  rdfs:range metadata:Frequency ;
+.
+metadata:version
+  a owl:DatatypeProperty ;
+  a owl:FunctionalProperty ;
+  rdfs:comment "A version number such as 1.1." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "version" ;
+  rdfs:range xsd:string ;
+.
+<http://topbraid.org/teamwork#Vocabulary>
+  a rdfs:Class ;
+  rdfs:label "Vocabulary" ;
+  rdfs:subClassOf owl:Ontology ;
+.

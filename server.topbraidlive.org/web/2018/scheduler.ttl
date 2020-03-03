@@ -1,0 +1,297 @@
+# baseURI: http://topbraid.org/scheduler
+# imports: http://datashapes.org/dash
+# imports: http://spinrdf.org/spl
+# imports: http://uispin.org/ui
+# prefix: scheduler
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix default: <http://uispin.org/default#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix scheduler: <http://topbraid.org/scheduler#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+arg:execution
+  a rdf:Property ;
+.
+<http://topbraid.org/scheduler>
+  a owl:Ontology ;
+  owl:imports <http://datashapes.org/dash> ;
+  owl:imports <http://spinrdf.org/spl> ;
+  owl:imports <http://uispin.org/ui> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+scheduler:ScheduledJob
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  spin:constructor [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object scheduler:ScheduledJobs ;
+            sp:predicate rdfs:subClassOf ;
+            sp:subject spin:_this ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:notExists ;
+                sp:elements (
+                    [
+                      sp:object [
+                          sp:varName "any" ;
+                        ] ;
+                      sp:predicate rdfs:subClassOf ;
+                      sp:subject spin:_this ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "A job to be executed by the job scheduler on a recurring schedule. The ui:prototype of this class will be executed according to the schedule expressed in the scheduler:cronSchedule property." ;
+  rdfs:label "Scheduled job" ;
+  rdfs:subClassOf ui:NodeClass ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path scheduler:cronSchedule ;
+      sh:datatype xsd:string ;
+      sh:description "The schedule of the job, specified as a cron expression. See http://www.quartz-scheduler.org/documentation/quartz-2.2.x/tutorials/tutorial-lesson-06.html for full syntax." ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path scheduler:disabled ;
+      sh:datatype xsd:boolean ;
+      sh:description "If set to true, the scheduled job is disabled and will not be executed." ;
+      sh:maxCount 1 ;
+    ] ;
+.
+scheduler:ScheduledJobs
+  a scheduler:ScheduledJob ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:execution ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "A unique identifier for the particular execution of the job. It is also the progress ID for the job's progress monitor." ;
+    ] ;
+  scheduler:cronSchedule "0 * * * * ?" ;
+  scheduler:disabled true ;
+  ui:abstract true ;
+  rdfs:comment "Abstract superclass for all scheduler:ScheduledJob instances." ;
+  rdfs:label "Scheduled jobs" ;
+  rdfs:subClassOf ui:Operations ;
+.
+scheduler:UserScheduledJob
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:label "User Scheduled  job" ;
+  rdfs:subClassOf scheduler:ScheduledJob ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path scheduler:definingGraph ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path scheduler:jobDefinition ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "job definition" ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+.
+scheduler:cronSchedule
+  a owl:AnnotationProperty ;
+  rdfs:comment "A cron expression that specifies a recurring schedule of events. See http://www.quartz-scheduler.org/documentation/quartz-2.2.x/tutorials/tutorial-lesson-06.html for full syntax." ;
+  rdfs:label "cron schedule" ;
+  rdfs:range xsd:string ;
+.
+scheduler:currentJobIsInterrupted
+  a spin:Function ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Returns true if the current SWP script is a scheduler:ScheduledJob that has been marked for interruption by the scheduling engine. Long-running scheduled jobs should call this periodically and terminate if true is returned." ;
+  rdfs:label "current job is interrupted" ;
+  rdfs:subClassOf spin:Functions ;
+.
+scheduler:definingGraph
+  a rdf:Property ;
+  rdfs:comment "The URI of the graph that defines the properties for this job" ;
+  rdfs:label "defining graph" ;
+  rdfs:range xsd:string ;
+.
+scheduler:disabled
+  a rdf:Property ;
+  rdfs:comment "If set to true, disables the subject." ;
+  rdfs:label "disabled" ;
+  rdfs:range xsd:boolean ;
+.
+scheduler:jobDefinition
+  a rdf:Property ;
+  rdfs:comment "The resource that defines the properties for this job." ;
+  rdfs:label "Job definition" ;
+  rdfs:range rdfs:Resource ;
+.
+scheduler:userJobSchedule
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "schedule" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "?0" ;
+              ] ;
+            sp:predicate scheduler:scheduledJobStatus ;
+            sp:subject [
+                sp:varName "job" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "schedule" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "nextExecution" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?2" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "currentExecutionId" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?2" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?3" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?2" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "currentRunTime" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?3" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?4" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?3" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "userURI" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?4" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?4" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:eq ;
+                sp:arg1 [
+                    sp:varName "userURI" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "user" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:job ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The job that is scheduled" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:user ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "user that scheduled the job" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Returns the cron expression for given job and user." ;
+  rdfs:label "User Job Schedule" ;
+  rdfs:subClassOf spin:Functions ;
+.
+scheduler:userScheduledJob
+  a rdf:Property ;
+  rdfs:comment "The resource that defines the properties for this job." ;
+  rdfs:label "user scheduled job" ;
+  rdfs:range rdfs:Resource ;
+.

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dagre graph rendered with SVG.js</title>
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+<!-- 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dagre/0.7.4/dagre.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/2.6.3/svg.js"></script> 
+-->
+  <script src="../../svg/svg.js" charset="utf-8"></script>
+<!--   <script src="../../d3/d3.min.js" charset="utf-8"></script> -->
+  <script src="../../dagre/dist/dagre.js" charset="utf-8"></script>
+  <script src="../dist/dagre-d3.js"></script>
+  <script>
+    const data = {
+      nodes: [
+        { v: '1', value: { label: '1', width: 32, height: 32 } },
+        { v: '2', value: { label: '2', width: 32, height: 32 } },
+        { v: '3', value: { label: '3', width: 32, height: 32 } },
+        { v: '4', value: { label: '4', width: 32, height: 32 } },
+        { v: '5', value: { label: '5', width: 32, height: 32 } },
+        { v: '6', value: { label: '6', width: 32, height: 32 } },
+        { v: '7', value: { label: '7', width: 32, height: 32 } },
+        { v: '8', value: { label: '8', width: 32, height: 32 } },
+        { v: '9', value: { label: '9', width: 32, height: 32 } },
+        { v: '10', value: { label: '10', width: 32, height: 32 } },
+        { v: '11', value: { label: '11', width: 32, height: 32 } },
+        { v: '12', value: { label: '12', width: 32, height: 32 } },
+        { v: '13', value: { label: '13', width: 32, height: 32 } },
+        { v: '14', value: { label: '14', width: 32, height: 32 } }
+      ],
+      edges: [
+        { v: '1', w: '2', value: {} },
+        { v: '2', w: '5', value: {} },
+        { v: '5', w: '9', value: {} },
+        { v: '5', w: '10', value: {} },
+        { v: '2', w: '6', value: {} },
+        { v: '1', w: '3', value: {} },
+        { v: '1', w: '4', value: {} },
+        { v: '4', w: '7', value: {} },
+        { v: '7', w: '11', value: {} },
+        { v: '7', w: '12', value: {} },
+        { v: '4', w: '8', value: {} },
+        { v: '11', w: '13', value: {} },
+//         { v: '13', w: '14', value: {height: 20, width: 200, label: 'test label'} },
+        { v: '9', w: '14', value: {
+                arrowhead: 'arrowhead',
+                label: 'arrowhead'
+        } }
+      ],
+      value: {
+        rankdir: 'TB',
+        nodesep: 32,
+        ranksep: 32
+      }
+    };
+
+    const graph = dagre.graphlib.json.read(data);
+
+    dagre.layout(graph);
+
+    const render = (graph, target, options = {}) => {
+      const defaultStyle = {
+        fill: 'none',
+        stroke: 'red',
+        'stroke-width': 1
+      };
+      
+     const testStyle = {
+        fill: 'none',
+        stroke: 'purple',
+        'stroke-width': 1
+      };
+
+      let {
+        padding = 4,
+        nodeStyle = {},
+        edgeStyle = {}
+      } = options;
+
+      nodeStyle = {
+        ...defaultStyle,
+        ...nodeStyle
+      };
+
+      edgeStyle = {
+        ...defaultStyle,
+        ...edgeStyle
+      };
+
+      const { width, height } = graph.graph();
+
+      const svg = SVG(target).size(width + padding * 2, height + padding * 2);
+
+      graph.nodes().forEach(key => {
+        const { x, y, width, height, label } = graph.node(key);
+        const group = svg.group();
+        group.rect(width, height).center(padding + x, padding + y).attr(nodeStyle);
+        group.text(label).center(padding + x, padding + y);
+      });
+
+      graph.edges().forEach(key => {
+      console.log(key) ;
+        const { points } = graph.edge(key);
+        const group = svg.group();
+//         group.polyline(points.map(({x, y}) => [padding + x, padding + y])).attr(edgeStyle);
+        group.polyline(points.map(({x, y}) => [padding + x, padding + y])).attr(edgeStyle);
+      });
+      
+       graph.setEdge('13', '14',{label: 'abc', height:20, width: 200, labelpos:'c'}) ;
+     
+//      graph.edges("2").attr(testStyle);
+
+//     let edge=graph.edge({v: '13', w: '14'}) ;
+//     
+//      console.log(edge);
+//      const { points } = edge;
+//      const group = svg.group();
+//      group.polyline(points.map(({x, y}) => [padding + x, padding + y])).attr(testStyle);
+//      group.text('foo') ;
+//      graph.node('14').style = "fill: #333333"; 
+     
+
+    };
+    
+    
+    graph.nodes().forEach(function(v) {
+     console.log("Node " + v + ": " + JSON.stringify(graph.node(v)));
+    });
+    graph.edges().forEach(function(e) {
+    console.log("Edge " + e.v + " -> " + e.w + ": " + JSON.stringify(graph.edge(e)));
+   });
+   
+
+   
+    render(graph, 'root', {
+      padding: 10,
+      nodeStyle: {
+        fill: 'lightblue'
+      }
+//       edgeStyle: {
+//         'stroke-width': 2,
+//         stroke: 'gray'
+//       }
+    });
+    
+//     graph.setEdge('13', '14',{label: 'abc', height:20, width: 200, labelpos:'c'}) ;
+//     dagre.layout(graph);
+
+  </script>
+</body>
+</html>

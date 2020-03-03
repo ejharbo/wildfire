@@ -1,0 +1,156 @@
+<!doctype html>
+
+<meta charset="utf-8">
+<title>Dagre D3 Renderer Demo</title>
+
+<!-- 
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="http://cpettitt.github.io/project/dagre-d3/latest/dagre-d3.js"></script>
+ -->
+ 
+<script src="../../d3/d3.min.js" charset="utf-8"></script>
+<script src="../dist/dagre-d3.js"></script>
+
+<!-- 
+<script src="https://d3js.org/d3-color.v1.min.js"></script>
+<script src="https://d3js.org/d3-dispatch.v1.min.js"></script>
+<script src="https://d3js.org/d3-ease.v1.min.js"></script>
+<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+<script src="https://d3js.org/d3-selection.v1.min.js"></script>
+<script src="https://d3js.org/d3-timer.v1.min.js"></script>
+<script src="https://d3js.org/d3-transition.v1.min.js"></script>
+<script src="https://d3js.org/d3-drag.v1.min.js"></script>
+<script src="https://d3js.org/d3-zoom.v1.min.js"></script>
+ -->
+
+
+<style>
+svg {
+ border: 1px solid black;
+ overflow: hidden;
+}
+
+text {
+ font-weight: 300;
+ font-family: "Helvetica Neue", Helvetica, Arial, sans-serf;
+ font-size: 14px;
+}
+
+.node rect {
+ stroke-width: 2px;
+ stroke: #333;
+ fill: #fff;
+}
+
+.edgePath path {
+ stroke: #333;
+ stroke-width: 1.5px;
+ fill: none;
+}
+
+.arrowhead {
+ stroke: blue;
+ fill: blue;
+ stroke-width: 1.5px;
+}
+
+</style>
+
+<body onLoad="draw();">
+
+<svg width=400 height=400>
+ <defs>
+   <marker id=solidArrowHead
+           viewbox="0 0 10 10"
+           refX=8
+           refY=5
+           markerUnits=strokeWidth
+           markerWidth=8
+           markerHeight=5
+           orient=auto
+           style="fill: red;">
+     <path d="M 0 0 L 10 5 L 0 10 z"/>
+   </marker>
+   <marker id=feetArrowHead
+           viewbox="-11 -5 12 10"
+           refX=0
+           refY=0
+           markerUnits=strokeWidth
+           markerWidth=12
+           markerHeight=10
+           orient=auto
+           style="fill: red; stroke: black; stroke-width: 1px">
+     <path d="M 0 0 L -10 0 M 0 4 L -10 0 L 0 -4"/>
+   </marker>
+   <marker id=emptyArrowHead
+           viewbox="0 0 10 10"
+           refX=8
+           refY=5
+           markerUnits=strokeWidth
+           markerWidth=8
+           markerHeight=5
+           orient=auto
+           style="fill: white; stroke: black; stroke-width: 2px">
+     <path d="M 0 0 L 10 5 L 0 10 z"/>
+   </marker>
+ </defs>
+ <g transform="translate(100,100)"/>
+</svg>
+
+<script>
+function draw() {
+  var g = new dagreD3.graphlib.Graph().setGraph({});
+//   var g = new dagreD3.Digraph();
+
+ g.setNode("A", { label: "A Node with\nLine 2 and\nLine 3" });
+ g.setNode("B", { label: "B" });
+ g.setNode("C", { label: "C" });
+ g.setNode("D", { label: "D" });
+ g.setNode("E", { label: "E" });
+ g.setNode("F", { label: "F" });
+// Make the edge from "A" to "B" red, thick, and dashed
+g.setEdge("A", "B", {
+  style: "stroke: indigo; stroke-width: 1px; stroke-dasharray: 3, 3;",
+  arrowheadStyle: "fill: indigo"
+});
+ g.setEdge( "B", "C", { type: "feetArrowHead" });
+ g.setEdge( "A", "D", { 
+ 	label: "feetArrowHead\nclass",
+ 	arrowheadClass: "feetArrowHead" });
+ g.setEdge( "D", "E", {  
+    arrowhead: "vee",
+    arrowtail: "vee" });
+//  g.setEdge("A", "E", {
+//   label: "line interpolation different",
+//   curve: d3.curveBasisOpen }) ;
+  g.setEdge("A", "F", {
+  label: "line interpolation different",
+  curve: d3.curveBasis 
+});
+
+var svg = d3.select("svg"),
+    inner = svg.select("g");
+
+// Set up zoom support
+
+var zoom = d3.zoom().on("zoom", function() {
+    inner.attr("transform", d3.event.transform);
+  });
+svg.call(zoom);
+
+// Create the renderer
+
+var renderer = new dagreD3.render();
+
+// Center the graph
+
+var initialScale = 0.75;
+// svg.call(zoom.transform, d3.zoomIdentity.translate((svg.attr("width") - g.graph().width * initialScale) / 2, 20).scale(initialScale));
+
+// svg.attr('height', g.graph().height * initialScale + 40);
+
+  
+  renderer(inner, g);
+}
+
+</script>

@@ -1,0 +1,337 @@
+# baseURI: http://edg.topbraid.solutions/1.0/schema/enumerations
+# imports: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://www.w3.org/2004/02/skos/core
+# imports: http://www.w3.org/ns/shacl#
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/schema/enumerations>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/schema/base/GMD_enumerations> ;
+  vaem:hasGraphRole vaem:SchemaGraph ;
+  rdfs:label "EDG SCHEMA - ENUMERATIONS" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/core> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+  owl:imports sh: ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+edg:CustomEnumeratedValue
+  a edg:CustomEnumerationClass ;
+  a sh:NodeShape ;
+  dash:abstract true ;
+  graphql:name "CustomEnumeratedValue" ;
+  edg:acronym "ENUMV" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enumerations> ;
+  rdfs:label "Custom Enumerated Value" ;
+  rdfs:subClassOf edg:CustomEnumerationViewpoint ;
+  rdfs:subClassOf edg:EnumeratedValue ;
+.
+edg:CustomEnumerationClass
+  edg:acronym "ENUM" ;
+  rdfs:subClassOf edg:CustomEnumerationViewpoint ;
+  rdfs:subClassOf edg:EnumerationViewpoint ;
+  sh:property edg:CustomEnumerationClass-enumeratedValues ;
+.
+edg:CustomEnumerationClass-enumeratedValues
+  a sh:PropertyShape ;
+  sh:path edg:isGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enumerations> ;
+  sh:datatype xsd:boolean ;
+  sh:group edg:CustomEnumerationClassGadgetGroup ;
+  sh:maxCount 1 ;
+  sh:order "100"^^xsd:decimal ;
+  sh:values true ;
+.
+edg:CustomEnumerationClassGadgetGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  tosh:viewGadget edg:EnumerationGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enumerations> ;
+  rdfs:label "Enumerated Values" ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:CustomEnumerationViewpoint
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enumerations> ;
+  rdfs:subClassOf edg:EnumeratedValueViewpoint ;
+.
+edg:EDGenumeratedValue
+  rdfs:subClassOf edg:EnumeratedValueViewpoint ;
+.
+edg:EDGenumerationClass
+  rdfs:subClassOf edg:Identifiable ;
+  rdfs:subClassOf edg:Narratable ;
+  rdfs:subClassOf edg:StatusAspect ;
+  rdfs:subClassOf edg:Viewpoint ;
+.
+edg:EDGenumerationsProject
+  a sh:NodeShape ;
+  graphql:name "EDGenumerations" ;
+  graphql:publicClass edg:EnumeratedValue ;
+  graphql:publicClass edg:EnumerationViewpoint ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enumerations> ;
+  rdfs:label "Enumerations" ;
+  rdfs:subClassOf teamwork:Vocabulary ;
+.
+edg:EnumeratedValue
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enumerations> ;
+  rdfs:subClassOf edg:Construct ;
+  sh:property edg:EnumeratedValue-code ;
+  sh:property edg:EnumeratedValue-definition ;
+  sh:property edg:EnumeratedValue-label ;
+  sh:property edg:EnumeratedValue-literal ;
+  sh:property edg:EnumeratedValue-order ;
+  sh:property edg:EnumeratedValue-type ;
+.
+edg:EnumeratedValue-code
+  a sh:PropertyShape ;
+  sh:path dtype:code ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enumerations> ;
+  sh:datatype xsd:string ;
+  sh:group edg:EnumeratedValuePropertyGroup ;
+  sh:maxCount 1 ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:EnumeratedValue-definition
+  a sh:PropertyShape ;
+  sh:path skos:definition ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enumerations> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:EnumeratedValuePropertyGroup ;
+  sh:maxCount 1 ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:EnumeratedValue-label
+  a sh:PropertyShape ;
+  sh:path rdfs:label ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enumerations> ;
+  sh:group edg:EnumeratedValuePropertyGroup ;
+  sh:minCount 1 ;
+  sh:or (
+      dash:StringOrLangString
+    ) ;
+  sh:order "7"^^xsd:decimal ;
+.
+edg:EnumeratedValue-literal
+  a sh:PropertyShape ;
+  sh:path dtype:literal ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enumerations> ;
+  sh:datatype xsd:string ;
+  sh:group edg:EnumeratedValuePropertyGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:EnumeratedValue-name
+  sh:group edg:EnumeratedValuePropertyGroup ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:EnumeratedValue-order
+  a sh:PropertyShape ;
+  sh:path dtype:order ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enumerations> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:EnumeratedValuePropertyGroup ;
+  sh:maxCount 1 ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:EnumeratedValue-type
+  a sh:PropertyShape ;
+  sh:path rdf:type ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enumerations> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/enumerations> ;
+  sh:class rdfs:Resource ;
+  sh:deactivated true ;
+  sh:group edg:EnumeratedValuePropertyGroup ;
+  sh:order "5"^^xsd:decimal ;
+.
+edg:EnumeratedValue-value
+  sh:group edg:EnumeratedValuePropertyGroup ;
+  sh:order "110"^^xsd:decimal ;
+.
+edg:EnumeratedValuePropertyGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  tosh:open true ;
+  tosh:openable true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enumerations> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/enumerations> ;
+  rdfs:label "Enumerated Value Properties" ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:EnumeratedValueViewpoint
+  a edg:ViewpointClass ;
+  dash:abstract true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enumerations> ;
+  rdfs:label "Enumerations Viewpoint" ;
+  rdfs:subClassOf edg:Viewpoint ;
+.
+edg:EnumerationClass
+  rdfs:subClassOf edg:Identifiable ;
+  rdfs:subClassOf edg:Narratable ;
+  rdfs:subClassOf edg:Provenance ;
+  rdfs:subClassOf edg:StatusAspect ;
+  rdfs:subClassOf provo:Entity ;
+.
+edg:EnumerationClassPropertyGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enumerations> ;
+  rdfs:label "Enumerated Values" ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:EnumerationSurrogate
+  a edg:ConstructClass ;
+  a sh:NodeShape ;
+  dash:abstract true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enumerations> ;
+  rdfs:label "Enumeration (surrogate)" ;
+  rdfs:subClassOf edg:Construct ;
+  sh:property edg:EnumeratedValue-code ;
+  sh:property edg:EnumeratedValue-label ;
+  sh:property edg:EnumeratedValue-literal ;
+  sh:property edg:EnumeratedValue-order ;
+  sh:property edg:EnumerationSurrogate-enumeration ;
+.
+edg:EnumerationSurrogate-enumeration
+  a sh:PropertyShape ;
+  sh:path edg:enumeration ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enumerations> ;
+  sh:class edg:CustomEnumeration ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+.
+edg:EnumerationTypesOntology
+  a edg:ModelClass ;
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enumerations> ;
+  rdfs:label "Enumeration Types Ontology" ;
+  rdfs:subClassOf edg:AssetCollection ;
+  rdfs:subClassOf ontologyprojects:Ontology ;
+.
+edg:EnumerationViewpoint
+  a sh:NodeShape ;
+  dash:abstract true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enumerations> ;
+.
+edg:EnumerationsProject
+  graphql:name "CustomEnumerations" ;
+  graphql:publicClass edg:CustomEnumeratedValue ;
+  graphql:publicClass edg:CustomEnumerationClass ;
+  graphql:publicClass edg:CustomEnumerationViewpoint ;
+  graphql:publicClass edg:EnumeratedValue ;
+  graphql:publicClass edg:PropertyValueSet ;
+.
+<http://edg.topbraid.solutions/schema/base/GMD_enumerations>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole edg:DataGraphSchema ;
+  vaem:hasGraphRole vaem:SchemaGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/schema/enumerations> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2019-03-04"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource dtype:code ;
+  vaem:usesNonImportedResource dtype:literal ;
+  vaem:usesNonImportedResource dtype:order ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+dcterms:description
+  a rdf:Property ;
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy dcterms: ;
+.
+dcterms:source
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "source" ;
+  rdfs:range xsd:anyURI ;
+.
+dtype:EnumeratedValue
+  a sh:NodeShape ;
+.
+dtype:literal
+  a owl:DatatypeProperty ;
+  rdfs:comment "Enumeration literals represent named values in an enumeration. They represent the discrete values that are enumerated. Software can copy and store enumeration literals and pass them as parameters. For a given enumeration every enumeration literal must have a unique name that conveys what it represents." ;
+  rdfs:isDefinedBy <http://www.linkedmodel.org/1.2/schema/dtype> ;
+  rdfs:isDefinedBy <http://www.linkedmodel.org/schema/dtype> ;
+  rdfs:label "literal" ;
+  rdfs:range xsd:string ;
+.
+dtype:name
+  a rdf:Property ;
+.
+dtype:order
+  a owl:DatatypeProperty ;
+  dcterms:description "The property \"dtype:order\" provides a means to specify a precedence. One use of order is in specifying ordered enumerations such as \"voag:ConfidentialityLevel\".  A similar property, but with an important type difference, is \"vaem:orderIndex\". This is for use on property occurrences in class axioms where it can be placed on a restriction to specify how that property may be transformed into other representations where ordering has some importance, for example, in XML Schema sequences.  Whereas \"vaem:order\" is a datatype property, \"vaem:orderIndex\" is an annotation property." ;
+  rdfs:isDefinedBy <http://www.linkedmodel.org/1.2/schema/dtype> ;
+  rdfs:isDefinedBy <http://www.linkedmodel.org/schema/dtype> ;
+  rdfs:label "order" ;
+  rdfs:range xsd:nonNegativeInteger ;
+  rdfs:seeAlso dtype:orderIndex ;
+.

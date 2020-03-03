@@ -1,0 +1,2148 @@
+# baseURI: http://topbraid.org/tasks.ui
+# imports: http://topbraid.org/swa
+# imports: http://topbraid.org/tasks
+# imports: http://topbraid.org/tasks.spin
+# imports: http://topbraid.org/teamwork.ui
+# imports: http://topbraid.org/teamworknotifications
+
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix autotagger: <http://evn.topbraidlive.org/autotagger#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix conceptmatch: <http://topbraid.org/conceptmatch#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix core-soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dashboard: <http://example.org/dashboard#> .
+@prefix dataset: <http://teamwork.topbraidlive.org/dataset#> .
+@prefix datasetapp: <http://topbraid.org/swa/datasetapp#> .
+@prefix datasetviewer: <http://topbraid.org/swa/datasetviewer#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix default: <http://uispin.org/default#> .
+@prefix defaultapp: <http://topbraid.org/swa/defaultapp#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix eeh-lib: <http://www.environmenthub.no/spin/1.0/eeh-lib#> .
+@prefix eeh-reportlib: <http://www.environmenthub.no/spin/1.0/eeh-reportlib#> .
+@prefix elements: <http://purl.org/dc/elements/1.1/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evn: <http://topbraid.org/evn/evn#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evnimport: <http://evn.topbraidlive.org/uispin/evnimport#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix ex: <http://example.org/> .
+@prefix extjs: <http://uispin.com/extjs#> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix governance: <http://topbraid.org/teamworkgovernance.ui#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix kennedys: <http://topbraid.org/examples/kennedys#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix ontologyviewer: <http://topbraid.org/swa/ontologyviewer#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmapp: <http://rdm.topbraidlive.org/rdmapp#> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix rdmviewer: <http://rdm.topbraidlive.org/rdmviewer#> .
+@prefix saf: <http://topbraid.org/saf/> .
+@prefix safconfig: <http://topbraid.org/safconfig/> .
+@prefix safm: <http://saf.topbraidlive.org/metaschema/> .
+@prefix savedQueries: <http://teamwork.topbraidlive.org/ui/savedQueries#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix server: <http://server.topbraidlive.org/server.ui#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sharepoint: <http://topbraid.org/sharepoint#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spin.ui: <http://spinrdf.org/spin.ui#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swadoc: <http://topbraid.org/swadoc#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkAdmin: <http://teamwork.topbraidlive.org/doc/teamworkAdmin#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworkconstraints: <http://topbraid.org/teamworkconstraints#> .
+@prefix teamworkdashboard: <http://topbraid.org/teamworkdashboard#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix teamworkupdate: <http://teamworkAPI.topbraid.com/teamworkUpdate#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix tracker: <http://teamwork.topbraidlive.org/ui/tracker#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uitest: <http://uispin.org/test#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix userdat: <http://teamwork.topbraidlive.org/ui/userdata> .
+@prefix userdata: <http://teamwork.topbraidlive.org/ui/userdata#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix victory: <http://edg.topbraid.solutions/victory/> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xhtml: <http://topbraid.org/xhtml#> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+arg:assignedUser
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:autoUpdate
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:created
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:dueDate
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:hideEditorLink
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:isEditable
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:modified
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:newDate
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:newDueDate
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:newUser
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:resourceGraphLabel
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:showEditorLink
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:statusFilterId
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:statusSelector
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:statusSelectorId
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:task
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:taskAreaId
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:taskListArea
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:taskListElementId
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:test
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:uniqueId
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:userFilterId
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:userSelector
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:userSelectorId
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+tasks:AddCommentHandler
+  rdf:type swa:EditHandlerClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate arg:comment ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The comment to add." ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype """
+<ui:group let:teamGraph=\"{= teamwork:teamGraph(?resourceGraph) }\">
+    <ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+        <ui:transaction ui:logMessage=\"Added comment\">
+            <ui:update ui:updateQuery=\"{!
+                    INSERT {
+                        ?post a sioc:Post .
+                        ?post sioc:about ?task .
+                        ?post rdfs:comment ?comment .
+                        ?post dcterms:created ?date .
+                        ?post sioc:has_creator ?creator .
+                    }
+                    WHERE {
+                        BIND (IRI(CONCAT(&quot;urn:x-evn-comment:&quot;, spif:generateUUID())) AS ?post) .
+                        BIND (now() AS ?date) .
+                        BIND (smf:userWithName(smf:currentUserName()) AS ?creator) .
+                    } }\"/>
+        </ui:transaction>
+        <ui:bind let:assignedTo=\"{= spl:object(?task, tasks:assignedTo) }\">
+            <ui:stringify ui:varName=\"text\">
+                <h3>Comment Added by {= smf:userDisplayName(smf:userWithName(smf:currentUserName())) }</h3>
+                <div>
+                    <ui:parse ui:str=\"{= html:encodeBRs(?comment) }\"/>
+                </div>
+            </ui:stringify>
+            <tasks:sendEmail arg:title=\"Comment added\" arg:user=\"{= ?assignedTo }\" ui:args=\"*\"/>
+        </ui:bind>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Add comment handler" ;
+  rdfs:subClassOf tasks:TaskEditHandlers ;
+.
+tasks:AutoUpdateSelectors
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource for which the task was created." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:resourceGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph in which the resource is found" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:task ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The task" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:taskListArea ;
+      spl:valueType xsd:string ;
+      rdfs:comment "HTML element ID for a <div> containing the list of tasks" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:autoUpdate ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "Set to true to automatically submit changes via AJaX.  Set to false to use old-school form submission." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:elementId ;
+      spl:valueType xsd:string ;
+      rdfs:comment "HTML element ID" ;
+    ] ;
+  ui:abstract "true"^^xsd:boolean ;
+  ui:private "true"^^xsd:boolean ;
+  rdfs:label "Auto update selectors" ;
+  rdfs:subClassOf tasks:Elements ;
+.
+tasks:ChangeView
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:change ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The change to the task" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:comment ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The sioc:Post to display." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:date ;
+      spl:valueType xsd:dateTime ;
+      rdfs:comment "The date." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:task ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The task" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:user ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The user who has committed the comment." ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype """
+<ui:group>
+    <div class=\"comment-container\">
+        <h6>
+            <teamwork:UserLink arg:user=\"{= ?user }\"/>
+            <swa:Space/>commented on {= ui:label(?date) }</h6>
+        <p class=\"comment\">
+            <ui:parse ui:str=\"{= html:encodeBRs(?comment) }\"/>
+        </p>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Change view" ;
+  rdfs:subClassOf tasks:Elements ;
+.
+tasks:CommentView
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:comment ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The sioc:Post to display." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:date ;
+      spl:valueType xsd:dateTime ;
+      rdfs:comment "The date." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:post ;
+      spl:valueType sioc:Post ;
+      rdfs:comment "The sioc:Post." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:task ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The task" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:user ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The user who has committed the comment." ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype """
+<ui:group>
+    <div class=\"comment-container\">
+        <h6>
+            <teamwork:UserLink arg:user=\"{= ?user }\"/>
+            <swa:Space/>commented on {= ui:label(?date) }</h6>
+        <p class=\"comment\">
+            <ui:parse ui:str=\"{= html:encodeBRs(?comment) }\"/>
+        </p>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Comment view" ;
+  rdfs:subClassOf tasks:Elements ;
+.
+tasks:CreateChangeHandler
+  rdf:type swa:EditHandlerClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:comment ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The comment to add." ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype """
+<ui:group let:teamGraph=\"{= teamwork:teamGraph(?resourceGraph) }\">
+    <ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+        <ui:transaction ui:logMessage=\"Logged change\">
+            <ui:update ui:updateQuery=\"{!
+                    INSERT {
+                        ?change a wf:Change .
+                        ?change tasks:changeTo ?task .
+                        ?change rdfs:comment ?comment .
+                        ?change dcterms:created ?date .
+                        ?change sioc:has_creator ?creator .
+                    }
+                    WHERE {
+                        BIND (IRI(CONCAT(&quot;urn:x-evn-change:&quot;, spif:generateUUID())) AS ?change) .
+                        BIND (now() AS ?date) .
+                        BIND (smf:userWithName(smf:currentUserName()) AS ?creator) .
+                    } }\"/>
+            <ui:setPropertyValue arg:property=\"{= dcterms:modified }\" arg:value=\"{= now() }\" ui:this=\"{= ?task }\"/>
+        </ui:transaction>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Create change handler" ;
+  rdfs:subClassOf tasks:TaskEditHandlers ;
+.
+tasks:CreateTaskDialog
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource to display comments about." ;
+    ] ;
+  ui:prototype """
+<div id=\"div-create-task-dialog\" title=\"Create Task\">
+    <h3 id=\"tasks-create-task-title\">New task for {= ui:label(?resource) }</h3>
+    <tasks:UserSelector arg:autoUpdate=\"{= false }\" arg:elementId=\"new-task-assigned-user\"/>
+    <br/>
+    <br/>
+    <div id=\"tasks-create-task\">
+        <textarea class=\"form-control tasks-create-task-text-area\" id=\"new-task-text\" rows=\"10\"/>
+    </div>
+</div>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Create task dialog" ;
+  rdfs:subClassOf tasks:Elements ;
+.
+tasks:CreateTaskHandler
+  rdf:type swa:EditHandlerClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:tag ;
+      spl:valueType teamwork:Tag ;
+      rdfs:comment "The teamwork:Tag, if any." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:assignedUser ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The user to whom this task is assigned" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:comment ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The comment to add." ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype """
+<ui:group let:resourceGraph=\"{= teamwork:currentMasterGraph() }\" let:teamGraph=\"{= teamwork:currentTeamGraph() }\">
+    <ui:setContext let:creator=\"{= smf:userWithName(smf:currentUserName()) }\" let:task=\"{= IRI(CONCAT(&quot;urn:x-evn-task:&quot;, spif:generateUUID())) }\" ui:queryGraph=\"{= ?teamGraph }\">
+        <ui:transaction ui:logMessage=\"Created task\">
+            <ui:update ui:updateQuery=\"{!
+                    INSERT {
+                        ?task a tasks:Task .
+                        ?task tasks:resource ?resource .
+                        ?task tasks:resourceGraph ?resourceGraph .
+                        ?task rdfs:comment ?comment .
+                        ?task dcterms:created ?date .
+                        ?task dcterms:modified ?date .
+                        ?task sioc:has_creator ?creator .
+                        ?task tasks:assignedTo ?assignedUser .
+                        ?task tasks:taskStatus tasks:TaskStatusOpen .
+                        ?task tasks:taskTag ?tag .
+                    }
+                    WHERE {
+                        BIND (now() AS ?date) .
+                    } }\"/>
+        </ui:transaction>
+        <ui:if ui:condition=\"{= ?creator != ?assignedUser }\">
+            <ui:bind>
+                <ui:stringify ui:varName=\"text\">
+                    <h3>Task created by {= smf:userDisplayName(?creator) }</h3>
+                    <div>
+                        <ui:parse ui:str=\"{= html:encodeBRs(?comment) }\"/>
+                    </div>
+                </ui:stringify>
+                <tasks:sendEmail arg:title=\"New task created\" arg:user=\"{= ?assignedUser }\" ui:args=\"*\"/>
+            </ui:bind>
+        </ui:if>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Create task handler" ;
+  rdfs:subClassOf swa:ResourceEditHandlers ;
+.
+tasks:CreateTaskLink
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource to display comments about." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:tag ;
+      spl:valueType teamwork:Tag ;
+      rdfs:comment "The current working copy, if any." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:resourceGraphLabel ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:taskListArea ;
+      spl:valueType xsd:string ;
+      rdfs:comment "HTML element ID for the div containing the list of tasks" ;
+    ] ;
+  ui:prototype """
+<ui:group let:id=\"{= ui:uniqueId() }\">
+    <div class=\"create-task-container\">
+        <button class=\"btn btn-default btn-xs create-task-button\" onclick=\"tasks.displayNewTaskForm()\">Create new task</button>
+        <div class=\"task new-task\">
+            <h4>New task for {= teamwork:projectLabel(?resourceGraphLabel) }<ui:if ui:condition=\"{= bound(?resource) }\">
+                    <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?resourceGraphLabel) }\">&gt;
+					{= ui:label(?resource) }</ui:setContext>
+                </ui:if>
+            </h4>
+            <ui:if ui:condition=\"{= bound(?tag) }\">
+                <div class=\"task-details\">
+                    <b>(Note that the life cycle of this task will not be tied to the current working copy.)</b>
+                </div>
+            </ui:if>
+            <div class=\"task-details\">
+                <div class=\"task-detail\">
+                    <tasks:UserSelector arg:autoUpdate=\"{= false }\" arg:elementId=\"new-task-assigned-user-{= ?id }\"/>
+                </div>
+            </div>
+            <div class=\"task-summary\">
+                <h5>Summary</h5>
+                <div>
+                    <textarea class=\"form-control new-task-summary-{= ?id }\" id=\"new-task-text\"/>
+                </div>
+            </div>
+            <div class=\"new-task-error empty\">You must provide an assigned user and summary for your new task.</div>
+            <div class=\"new-task-actions\">
+                <button type=\"button\" class=\"btn btn-default btn-xs\" onclick=\"{= ui:functionCall(&quot;tasks.createInlineTask&quot;, ?resource, ?resourceGraphLabel, ?taskListArea, ?id, ?tag) }\">Create Task</button>
+                <button type=\"button\" class=\"btn btn-default btn-xs\" onclick=\"{= ui:functionCall(&quot;tasks.cancelNewTask&quot;, ?id) }\">Cancel</button>
+            </div>
+        </div>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Create task link" ;
+  rdfs:subClassOf tasks:TaskViews ;
+.
+tasks:DisplayLandingPageTasks
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:taskSet ;
+      spl:valueType sp:Select ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:if ui:condition=\"{= spr:rowCount(?taskSet) &gt; 0 }\">
+        <ul>
+            <ui:forEach ui:resultSet=\"{= ?taskSet }\">
+                <ui:group let:graphId=\"{= teamwork:graphIdFromGraph(?resourceGraph) }\">
+                    <ui:if ui:condition=\"{= ?resource = ?resourceGraph }\">
+                        <li class=\"swa-list-padding\">
+                            <ui:createLink arg:projectGraph=\"{= ?resourceGraph }\" arg:projectTab=\"{= tasks:TasksProjectTab }\" ui:viewClass=\"{= teamwork:ProjectPage }\">
+                                <a href=\"{= ?link }\">{= teamwork:singularProjectTypeLabel(teamwork:getProjectType(?resourceGraph)) } &gt; {= teamwork:projectLabel(?resourceGraph) }<p>{= ui:label(?comment) }</p>
+                                </a>
+                            </ui:createLink>
+                        </li>
+                    </ui:if>
+                    <ui:else>
+                        <li class=\"swa-list-padding\">
+                            <a href=\"{= ?graphId }.editor#{= ui:encodeURL(?resource) }\">{= teamwork:singularProjectTypeLabel(teamwork:getProjectType(?resourceGraph)) } &gt; {= teamwork:projectLabel(?resourceGraph) }<p>{= ui:label(?comment) }</p>
+                            </a>
+                        </li>
+                    </ui:else>
+                </ui:group>
+            </ui:forEach>
+        </ul>
+    </ui:if>
+    <ui:else>
+        <tasks:NoTasksToDisplayMessage/>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:subClassOf teamwork:Page ;
+.
+tasks:DueDateEditor
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:dueDate ;
+      spl:valueType xsd:date ;
+      rdfs:comment "The date upon which the task is due." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:elementId ;
+      spl:valueType xsd:string ;
+      rdfs:comment "HTML element ID" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:resourceGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph in which the resource is found" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:task ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The task" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:taskListArea ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:uniqueId ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype """
+<ui:group>
+    <div class=\"task-detail-label\">
+		Due On:
+	</div>
+    <div class=\"task-detail-value\">
+        <swa:DateEditor arg:object=\"{= ?dueDate }\" arg:predicate=\"{= wf:dateDue }\" arg:subject=\"{= ?task }\" arg:uid=\"dueDate-{= ?uniqueId }\"/>
+        <ui:handle arg:newDueDate=\"$('#new-dueDate-{= ?uniqueId }').val() ? '&quot;' + $('#new-dueDate-{= ?uniqueId }').val() + '&quot;^^xsd:date' : '&quot;1970-01-01&quot;^^xsd:date'\" ui:event=\"onfocusout\">
+            <script>tasks.checkDueDate('{= ?dueDate }','{= ?newDueDate }', tasks.taskDetailsOK.bind(null, '{= ?task }', '{= ?resource }', '{= ?resourceGraph }', null, '{= ?taskListArea }', '{= ?uniqueId }'));</script>
+        </ui:handle>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Task due date editor" ;
+  rdfs:subClassOf tasks:Elements ;
+.
+tasks:Elements
+  rdf:type ui:NodeClass ;
+  rdfs:label "Root class for tasks elements" ;
+  rdfs:subClassOf swa:Elements ;
+  rdfs:subClassOf teamwork:Elements ;
+.
+tasks:GetResourceGraph
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:distinct "true"^^xsd:boolean ;
+      sp:resultVariables (
+          [
+            sp:varName "resourceGraph" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "resource" ;
+              ] ;
+            sp:predicate tasks:resource ;
+            sp:subject [
+                sp:varName "task" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "resourceGraph" ;
+              ] ;
+            sp:predicate tasks:resourceGraph ;
+            sp:subject [
+                sp:varName "task" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource  for which to get the tasks." ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  rdfs:comment "Gets a resource graph for a given resource." ;
+  rdfs:label "Resource graph for resource" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+tasks:LandingPageTasks
+  rdf:type ui:NodeClass ;
+  ui:prototype """
+<section class=\"col-xs-12\">
+    <div class=\"widget-content\">
+        <h2>My Tasks</h2>
+        <ui:group letrs:allGraphs=\"{#
+                SELECT ?teamGraph
+                WHERE {
+                    ?any teamwork:readableGraphsUnderTeamControl ( ?projectGraph ?teamGraph ) .
+                } }\">
+            <ui:setContext ui:queryGraph=\"{= ui:unionOfGraphsFromResultSet(?allGraphs) }\">
+                <ui:call arg:matchStatus=\"{= tasks:TaskStatusOpen }\" arg:matchUser=\"{= smf:userWithName(smf:currentUserName()) }\" ui:template=\"{= tasks:AllTasks }\">
+                    <tasks:DisplayLandingPageTasks arg:taskSet=\"{= ?rs }\"/>
+                </ui:call>
+            </ui:setContext>
+        </ui:group>
+    </div>
+</section>
+"""^^ui:Literal ;
+  rdfs:subClassOf teamwork:LandingPageGadgets ;
+.
+tasks:NoTasksToDisplayMessage
+  rdf:type ui:NodeClass ;
+  ui:prototype """
+<b> You have no tasks </b>
+"""^^ui:Literal ;
+  rdfs:subClassOf teamwork:Page ;
+.
+tasks:StatusFilter
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:elementId ;
+      spl:valueType xsd:string ;
+      rdfs:comment "HTML element ID" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:taskAreaId ;
+      spl:valueType xsd:string ;
+      rdfs:comment "HTML element ID for the tasks area" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:userFilterId ;
+      spl:valueType xsd:string ;
+      rdfs:comment "HTML element ID for the user select filter" ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype """
+<ui:group>
+    <label for=\"{= ?elementId }\">Filter by Status</label>
+    <select autocomplete=\"off\" class=\"form-control task-vocab-status\" id=\"{= ?elementId }\" onchange=\"tasks.changeTaskViewFilters('{= ?elementId }', '{= ?taskAreaId }')\">
+        <option value=\"all\">all</option>
+        <ui:call ui:template=\"{= tasks:AvailableTaskStatuses }\">
+            <ui:forEach ui:resultSet=\"{= ?rs }\">
+                <option value=\"{= ?s }\">{= ?label }</option>
+            </ui:forEach>
+        </ui:call>
+    </select>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Task status filter" ;
+  rdfs:subClassOf tasks:Elements ;
+.
+tasks:StatusSelector
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:status ;
+      spl:valueType tasks:TaskStatus ;
+      rdfs:comment "The current status of the task." ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype """
+<ui:group>
+    <div class=\"task-detail-label\">
+        <span>Status:</span>
+    </div>
+    <div class=\"task-detail-value\">
+        <select autocomplete=\"off\" class=\"form-control\" id=\"{= ?elementId }\">
+            <ui:call ui:template=\"{= tasks:AvailableTaskStatuses }\">
+                <ui:forEach ui:resultSet=\"{= ?rs }\">
+                    <option disabled=\"{= IF(((?s != tasks:TaskStatusOpen) &amp;&amp; (!teamwork:currentUserIsProjectManager(?resourceGraph))), &quot;disabled&quot;, ?none) }\" selected=\"{= IF((?s = ?status), &quot;selected&quot;, ?none) }\" value=\"{= ?s }\">{= ?label }</option>
+                </ui:forEach>
+            </ui:call>
+            <ui:handle arg:newStatus=\"$('#{= ?elementId }').val() ? '&lt;' + $('#{= ?elementId }').val() + '&gt;' : null\" ui:event=\"onchange\">
+                <ui:if ui:condition=\"{= ?autoUpdate }\">
+                    <ui:setContext ui:queryGraph=\"{= teamwork:teamGraph(?resourceGraph) }\">
+                        <tasks:UpdateTaskHandler ui:args=\"*\"/>
+                        <script>if('{= ?taskListArea }' == tasks.viewTasksDialogId) {
+						tasks.viewTasks('{= ?resource }');
+						setTimeout(function(){swa.closeDialog(tasks.viewTasksDialogId)}, 500);
+					} else {
+						tasks.changeTaskViewFilters('statusFilterSelect', '{= ?taskListArea }');
+					}</script>
+                    </ui:setContext>
+                </ui:if>
+                <ui:else>
+                    <script>tasks.checkStatus('{= ?elementId }','{= ?status }');</script>
+                </ui:else>
+            </ui:handle>
+        </select>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Task status selector" ;
+  rdfs:subClassOf tasks:AutoUpdateSelectors ;
+.
+tasks:TaskCreatedNotification
+  rdf:type teamwork:TCHEditNotification ;
+  arg:expression [
+      rdf:type sp:exists ;
+      sp:elements (
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object tasks:Task ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "task" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode ui:addedGraph ;
+          ]
+        ) ;
+    ] ;
+  ui:prototype """
+<div>
+    <h3>Task created</h3>
+    <div>
+        <ui:forEach ui:resultSet=\"{#
+                SELECT ?task
+                WHERE {
+                    GRAPH ui:addedGraph {
+                        ?task a tasks:Task .
+                    } .
+                } }\">
+            <ui:createLink arg:projectGraph=\"{= ?projectGraph }\" arg:task=\"{= ?task }\" ui:absolute=\"{= true }\" ui:viewClass=\"{= tasks:TaskPage }\">
+                <strong>
+                    <a href=\"{= ?link }\">View Task</a>
+                </strong>
+            </ui:createLink>
+        </ui:forEach>
+    </div>
+</div>
+"""^^ui:Literal ;
+  rdfs:label "Task created" ;
+  rdfs:subClassOf tasks:TaskNotifications ;
+.
+tasks:TaskDetails
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "comment" ;
+          ]
+          [
+            sp:varName "user" ;
+          ]
+          [
+            sp:varName "created" ;
+          ]
+          [
+            sp:varName "modified" ;
+          ]
+          [
+            sp:varName "dueDate" ;
+          ]
+          [
+            sp:varName "resource" ;
+          ]
+          [
+            sp:varName "resourceGraph" ;
+          ]
+          [
+            sp:varName "status" ;
+          ]
+          [
+            sp:varName "task" ;
+          ]
+          [
+            sp:varName "emailAddress" ;
+          ]
+          [
+            sp:varName "assignedUser" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "resource" ;
+              ] ;
+            sp:predicate tasks:resource ;
+            sp:subject [
+                sp:varName "task" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "resourceGraph" ;
+              ] ;
+            sp:predicate tasks:resourceGraph ;
+            sp:subject [
+                sp:varName "task" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "comment" ;
+              ] ;
+            sp:predicate rdfs:comment ;
+            sp:subject [
+                sp:varName "task" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "created" ;
+              ] ;
+            sp:predicate dcterms:created ;
+            sp:subject [
+                sp:varName "task" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "modified" ;
+              ] ;
+            sp:predicate dcterms:modified ;
+            sp:subject [
+                sp:varName "task" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "dueDate" ;
+                    ] ;
+                  sp:predicate wf:dateDue ;
+                  sp:subject [
+                      sp:varName "task" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:coalesce ;
+                sp:arg1 [
+                    rdf:type spl:object ;
+                    sp:arg1 [
+                        sp:varName "task" ;
+                      ] ;
+                    sp:arg2 tasks:taskStatus ;
+                  ] ;
+                sp:arg2 tasks:TaskStatusOpen ;
+              ] ;
+            sp:variable [
+                sp:varName "status" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:coalesce ;
+                sp:arg1 [
+                    rdf:type spl:object ;
+                    sp:arg1 [
+                        sp:varName "task" ;
+                      ] ;
+                    sp:arg2 sioc:has_creator ;
+                  ] ;
+                sp:arg2 <urn:x-tb-users:anonymous> ;
+              ] ;
+            sp:variable [
+                sp:varName "user" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type spl:object ;
+                sp:arg1 [
+                    sp:varName "task" ;
+                  ] ;
+                sp:arg2 tasks:assignedTo ;
+              ] ;
+            sp:variable [
+                sp:varName "assignedUser" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type spl:object ;
+                sp:arg1 [
+                    sp:varName "task" ;
+                  ] ;
+                sp:arg2 teamwork:emailAddress ;
+              ] ;
+            sp:variable [
+                sp:varName "emailAddress" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:task ;
+      spl:valueType tasks:Task ;
+      rdfs:comment "The task to get the details of." ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  rdfs:comment "Gets the details of a given Task, in the same format as tasks:TasksForGraph." ;
+  rdfs:label "Task details" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+tasks:TaskDetailsDialog
+  rdf:type ui:NodeClass ;
+  ui:prototype """
+<ui:setContext ui:varName=\"isDialog\" ui:varValue=\"{= true }\">
+    <div id=\"div-task-details-dialog\" title=\"Task Details\">
+        <div class=\"tasks-task-summary swa-float-left\">Last modified on {= ui:label(?modified) }</div>
+        <div class=\"swa-clear-both\"/>
+        <hr/>
+        <ui:setContext ui:queryGraph=\"{= teamwork:teamGraph(?resourceGraph) }\">
+            <ui:call arg:task=\"{= ?task }\" ui:template=\"{= tasks:ChangeHistoryForTask }\">
+                <ui:if ui:condition=\"{= spr:rowCount(?rs) &gt; 0 }\">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class=\"ui-icon ui-icon-triangle-1-e tasks-task-details-section-closed\" onclick=\"tasks.toggleDetailsSection(this, 'changeHistory', 'Change History', '{= spr:rowCount(?rs) }')\"/>
+                            </td>
+                            <td>
+                                <h3 id=\"changeHistoryTitle\">Change History ({= spr:rowCount(?rs) })</h3>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class=\"ui-helper-hidden-accessible\" id=\"changeHistoryList\">
+                        <ui:forEach ui:resultSet=\"{= ?rs }\">
+                            <tasks:ChangeView arg:change=\"{= ?change }\" arg:comment=\"{= ?comment }\" arg:date=\"{= ?date }\" arg:user=\"{= ?user }\"/>
+                        </ui:forEach>
+                    </div>
+                </ui:if>
+            </ui:call>
+            <ui:call arg:task=\"{= ?task }\" ui:template=\"{= tasks:CommentsForTask }\">
+                <ui:if ui:condition=\"{= spr:rowCount(?rs) &gt; 0 }\">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class=\"ui-icon ui-icon-triangle-1-e tasks-task-details-section-closed\" onclick=\"tasks.toggleDetailsSection(this, 'taskComments', 'Comments', '{= spr:rowCount(?rs) }')\"/>
+                            </td>
+                            <td>
+                                <h3 id=\"taskCommentsTitle\">Comments ({= spr:rowCount(?rs) })</h3>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class=\"ui-helper-hidden-accessible\" id=\"taskCommentsList\">
+                        <ui:forEach ui:resultSet=\"{= ?rs }\">
+                            <tasks:CommentView arg:comment=\"{= ?comment }\" arg:date=\"{= ?date }\" arg:post=\"{= ?post }\" arg:user=\"{= ?user }\"/>
+                        </ui:forEach>
+                    </div>
+                </ui:if>
+            </ui:call>
+        </ui:setContext>
+        <div>
+            <h3>Add a Comment</h3>
+            <textarea class=\"form-control tasks-comment-add-text-area\" id=\"new-comment\" onblur=\"tasks.checkCommentTextArea(this);\" onkeyup=\"tasks.checkCommentTextArea(this);\" rows=\"4\"/>
+        </div>
+    </div>
+</ui:setContext>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Task details dialog" ;
+  rdfs:subClassOf swa:DialogElements ;
+  rdfs:subClassOf tasks:TaskViews ;
+.
+tasks:TaskEditHandlers
+  rdf:type swa:EditHandlerClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:resourceGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph in which the resource is found" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:task ;
+      spl:valueType tasks:Task ;
+      rdfs:comment "The task to execute the action on." ;
+    ] ;
+  rdfs:label "Task edit handlers" ;
+  rdfs:subClassOf swa:EditHandlers ;
+.
+tasks:TaskNotifications
+  rdf:type teamwork:TCHEditNotification ;
+  ui:abstract "true"^^xsd:boolean ;
+  rdfs:comment "Abstract base class of Task-related Notifications." ;
+  rdfs:label "Task notifications" ;
+  rdfs:subClassOf teamwork:TCHEditNotifications ;
+.
+tasks:TaskPage
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The project graph." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:task ;
+      spl:valueType tasks:Task ;
+      rdfs:comment "The task to display." ;
+    ] ;
+  ui:prototype """
+<teamwork:Chrome arg:pageType=\"project-page\" arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= teamwork:TasksProjectTab }\" let:taskListArea=\"taskView\">
+    <ui:setContext ui:queryGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+        <ui:loadable ui:loadId=\"{= ?taskListArea }\">
+            <h1>Task Details</h1>
+            <ui:call arg:task=\"{= ?task }\" ui:template=\"{= tasks:TaskDetails }\">
+                <ui:forEach ui:resultSet=\"{= ?rs }\">
+                    <tasks:TaskView arg:taskListArea=\"{= ?taskListArea }\" ui:args=\"*\"/>
+                </ui:forEach>
+            </ui:call>
+        </ui:loadable>
+    </ui:setContext>
+</teamwork:Chrome>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:comment "A stand-alone page for a single Task, suitable for deep linking." ;
+  rdfs:label "Task page" ;
+  rdfs:subClassOf tasks:Elements ;
+.
+tasks:TaskStatusChangedNotification
+  rdf:type teamwork:TCHEditNotification ;
+  arg:expression [
+      rdf:type sp:or ;
+      sp:arg1 [
+          rdf:type sp:exists ;
+          sp:elements (
+              [
+                rdf:type sp:NamedGraph ;
+                sp:elements (
+                    [
+                      sp:object [
+                          sp:varName "status" ;
+                        ] ;
+                      sp:predicate tasks:taskStatus ;
+                      sp:subject [
+                          sp:varName "task" ;
+                        ] ;
+                    ]
+                    [
+                      rdf:type sp:Filter ;
+                      sp:expression [
+                          rdf:type sp:notExists ;
+                          sp:elements (
+                              [
+                                sp:object [
+                                    sp:varName "newlyCreated" ;
+                                  ] ;
+                                sp:predicate rdf:type ;
+                                sp:subject [
+                                    sp:varName "task" ;
+                                  ] ;
+                              ]
+                            ) ;
+                        ] ;
+                    ]
+                  ) ;
+                sp:graphNameNode ui:addedGraph ;
+              ]
+            ) ;
+        ] ;
+      sp:arg2 [
+          rdf:type sp:exists ;
+          sp:elements (
+              [
+                rdf:type sp:NamedGraph ;
+                sp:elements (
+                    [
+                      sp:object [
+                          sp:varName "status" ;
+                        ] ;
+                      sp:predicate tasks:taskStatus ;
+                      sp:subject [
+                          sp:varName "any" ;
+                        ] ;
+                    ]
+                  ) ;
+                sp:graphNameNode ui:deletedGraph ;
+              ]
+            ) ;
+        ] ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <h3>Task status changed</h3>
+    <ui:forEach ui:resultSet=\"{#
+            SELECT DISTINCT ?task ?newStatus ?oldStatus
+            WHERE {
+                {
+                    GRAPH ui:addedGraph {
+                        ?task tasks:taskStatus ?anyStatus1 .
+                    } .
+                }
+                UNION
+                {
+                    GRAPH ui:deletedGraph {
+                        ?task tasks:taskStatus ?anyStatus2 .
+                    } .
+                } .
+            } }\">
+        <ul>
+            <li let:oldValue=\"{= spl:objectInGraph(?task, tasks:taskStatus, ui:deletedGraph) }\">
+                <span>Old status: </span>
+                <strong>{= IF(bound(?oldValue), swa:labelInGraph(?oldValue, ui:graph), \"-\") }</strong>
+            </li>
+            <li let:newValue=\"{= spl:objectInGraph(?task, tasks:taskStatus, ui:addedGraph) }\">
+                <span>New status: </span>
+                <strong>{= IF(bound(?newValue), swa:labelInGraph(?newValue, ui:graph), \"-\") }</strong>
+            </li>
+        </ul>
+        <ui:createLink arg:projectGraph=\"{= ?projectGraph }\" arg:task=\"{= ?task }\" ui:absolute=\"{= true }\" ui:viewClass=\"{= tasks:TaskPage }\">
+            <strong>
+                <a href=\"{= ?link }\">View Task</a>
+            </strong>
+        </ui:createLink>
+    </ui:forEach>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Task status changed" ;
+  rdfs:subClassOf tasks:TaskNotifications ;
+.
+tasks:TaskStatusDashboardGadget
+  rdf:type teamwork:DashboardGadget ;
+  teamwork:dashboardGadgetIndex 15 ;
+  teamwork:dashboardSection teamwork:ProcessDashboardSection ;
+  ui:prototype """
+<ui:group let:taskCount=\"{#
+        SELECT (COUNT(?task) AS ?result)
+        WHERE {
+            BIND (teamwork:teamGraph(?projectGraph) AS ?teamGraph) .
+            GRAPH ?teamGraph {
+                ?task a tasks:Task .
+            } .
+        } }\" let:title=\"Task Statuses\">
+    <ui:if ui:condition=\"{= ?taskCount = 0 }\">
+        <teamwork:DashboardGadgetContainer arg:iconName=\"OK\" arg:label=\"{= ?title }\">
+            <ui:insert ui:into=\"subtitle\">
+                <div>No Tasks have been created.</div>
+            </ui:insert>
+        </teamwork:DashboardGadgetContainer>
+    </ui:if>
+    <ui:else>
+        <ui:group let:openCount=\"{= tasks:taskCountWithStatus(?projectGraph, tasks:TaskStatusOpen) }\">
+            <teamwork:DashboardGadgetContainer arg:iconName=\"{= IF((?openCount &gt; 0), &quot;Warning&quot;, &quot;OK&quot;) }\" arg:label=\"{= ?title }: {= round(((?openCount / ?taskCount) * 100)) }% open\">
+                <ui:insert ui:into=\"subtitle\">
+                    <div>{= ?taskCount } Tasks have been created.</div>
+                    <div>{= ?openCount } of them ({= round(((?openCount / ?taskCount) * 100)) }%) are open.</div>
+                </ui:insert>
+                <ui:insert ui:into=\"body\">
+                    <swa:PieChart arg:dataLabels=\"percent\" arg:height=\"{= 160 }\" arg:resultSet='{#
+                            SELECT ?value (?status AS ?resource) ?label
+                            WHERE {
+                                GRAPH &lt;http://topbraid.org/tasks&gt; {
+                                    VALUES ?status {
+                                        tasks:TaskStatusResolved
+                                        tasks:TaskStatusOpen
+                                        tasks:TaskStatusDeclined
+                                    } .
+                                    BIND (ui:label(?status) AS ?baseLabel) .
+                                } .
+                                BIND (tasks:taskCountWithStatus(?projectGraph, ?status) AS ?value) .
+                                BIND (CONCAT(str(?value), \" \", ?baseLabel) AS ?label) .
+                            } }' arg:seriesColors=\"['#6AC20A','#EFB700','#FF6060']\" arg:showLegend=\"{= true }\" arg:width=\"{= 300 }\"/>
+                </ui:insert>
+            </teamwork:DashboardGadgetContainer>
+        </ui:group>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Task status dashboard gadget" ;
+  rdfs:subClassOf teamwork:DashboardGadgets ;
+.
+tasks:TaskSummaryView
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:hideEditorLink ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:statusSelector ;
+      spl:valueType xsd:string ;
+      rdfs:comment "HTML element ID for the status selector" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:tag ;
+      spl:valueType teamwork:Tag ;
+      rdfs:comment "The working copy or unbound for master." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:userSelector ;
+      spl:valueType xsd:string ;
+      rdfs:comment "HTML element ID for the user selector" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:autoUpdate ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "Set to true to automatically submit changes via AJaX.  Set to false to use old-school form submission." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:uniqueId ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype """
+<div class=\"tasks-task-summary\">
+    <ui:if ui:condition=\"{= bound(?resource) }\">
+        <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?resourceGraph) }\">
+            <h5>{= teamwork:projectLabel(?resourceGraph) } &gt;<ui:if ui:condition=\"{= (!bound(?hideEditorLink)) || (!?hideEditorLink) }\">
+                    <a href=\"{= teamwork:editorLink(?resourceGraph, ?resource, ?tag) }\">{= ui:label(?resource) }</a>
+                </ui:if>
+                <ui:else>{= ui:label(?resource) }</ui:else>
+            </h5>
+        </ui:setContext>
+    </ui:if>
+    <ui:else>
+        <h5>{= teamwork:projectLabel(?resourceGraph) }</h5>
+    </ui:else>
+    <div let:statusSelectorId=\"{= COALESCE(?statusSelector, ui:uniqueId()) }\" let:userSelectorId=\"{= COALESCE(?userSelector, (&quot;assignedToUser-&quot; + ?uniqueId)) }\">
+        <div class=\"tasks-task-detail\">
+            <div class=\"tasks-task-detail-label\">Created By:</div>
+            <div class=\"tasks-task-detail-value\">
+                <teamwork:UserLink arg:user=\"{= ?user }\"/>
+            </div>
+        </div>
+        <div class=\"tasks-task-detail\">
+            <div class=\"tasks-task-detail-label\">Created On:</div>
+            <div class=\"tasks-task-detail-value\">{= ui:label(?created) }</div>
+        </div>
+        <ui:if ui:condition=\"{= teamwork:currentUserIsProjectManager(?resourceGraph) || (smf:userWithName(smf:currentUserName()) = ?assignedUser) }\">
+            <div class=\"tasks-task-detail\">
+                <tasks:UserSelector arg:assignedUser=\"{= ?assignedUser }\" arg:autoUpdate=\"{= ?autoUpdate }\" arg:elementId=\"{= ?userSelectorId }\" arg:resource=\"{= ?resource }\" arg:resourceGraph=\"{= ?resourceGraph }\" arg:task=\"{= ?task }\" arg:taskListArea=\"{= ?taskListArea }\"/>
+            </div>
+            <div class=\"tasks-task-detail\">
+                <tasks:StatusSelector arg:autoUpdate=\"{= ?autoUpdate }\" arg:elementId=\"{= ?statusSelectorId }\" arg:resource=\"{= ?resource }\" arg:resourceGraph=\"{= ?resourceGraph }\" arg:status=\"{= ?status }\" arg:task=\"{= ?task }\" arg:taskListArea=\"{= ?taskListArea }\"/>
+            </div>
+        </ui:if>
+        <ui:else>
+            <div class=\"tasks-task-detail\">
+                <div class=\"tasks-task-detail-label\">Assigned To:</div>
+                <div class=\"tasks-task-detail-value\">
+                    <teamwork:UserLink arg:user=\"{= ?assignedUser }\"/>
+                </div>
+            </div>
+            <div class=\"tasks-task-detail\">
+                <div class=\"tasks-task-detail-label\">Status:</div>
+                <div class=\"tasks-task-detail-value\">{= swa:labelInGraph(?status, ui:graph) }</div>
+            </div>
+        </ui:else>
+        <div class=\"tasks-task-detail\">
+            <tasks:DueDateEditor arg:dueDate=\"{= ?dueDate }\" arg:resource=\"{= ?resource }\" arg:resourceGraph=\"{= ?resourceGraph }\" arg:tag=\"{= ?tag }\" arg:task=\"{= ?task }\" arg:taskListArea=\"{= ?taskListArea }\" arg:uniqueId=\"{= ?uniqueId }\" ui:args=\"*\"/>
+        </div>
+    </div>
+</div>
+"""^^ui:Literal ;
+  rdfs:label "Task summary view" ;
+  rdfs:subClassOf tasks:TaskViews ;
+.
+tasks:TaskView
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:hideEditorLink ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:tag ;
+      spl:valueType teamwork:Tag ;
+      rdfs:comment "The working copy or unbound for master." ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype """
+<ui:group let:uniqueId=\"{= ui:uniqueId() }\">
+    <ui:loadable ui:loadId=\"task-{= ?uniqueId }\">
+        <div class=\"task\">
+            <h4>{= teamwork:projectLabel(?resourceGraph) }<ui:if ui:condition=\"{= bound(?resource) }\">
+                    <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?resourceGraph) }\">
+					&gt;
+					<ui:if ui:condition=\"{= (!bound(?hideEditorLink)) || (!?hideEditorLink) }\">
+                            <a href=\"{= teamwork:editorLink(?resourceGraph, ?resource, ?tag) }\">{= ui:label(?resource) }</a>
+                        </ui:if>
+                        <ui:else>{= ui:label(?resource) }</ui:else>
+                    </ui:setContext>
+                </ui:if>
+            </h4>
+            <div class=\"task-details\" let:statusSelectorId=\"{= COALESCE(?statusSelector, ui:uniqueId()) }\" let:taskTag=\"{= spl:object(?task, tasks:taskTag) }\" let:userSelectorId=\"{= COALESCE(?userSelector, (&quot;assignedToUser-&quot; + ?uniqueId)) }\">
+                <div class=\"task-detail\">
+                    <div class=\"task-detail-label\">Created By:</div>
+                    <div class=\"task-detail-value\">
+                        <teamwork:UserLink arg:user=\"{= ?user }\"/>
+                    </div>
+                </div>
+                <div class=\"task-detail\">
+                    <div class=\"task-detail-label\">Created On:</div>
+                    <div class=\"task-detail-value\">
+                        <span>{= ui:label(?created) }</span>
+                        <ui:if ui:condition=\"{= bound(?taskTag) }\">
+                            <swa:Space/>
+                            <span>in working copy {= teamwork:tagLabel(?resourceGraph, ?taskTag) }</span>
+                        </ui:if>
+                    </div>
+                </div>
+                <ui:if ui:condition=\"{= teamwork:currentUserIsProjectManager(?resourceGraph) || (smf:userWithName(smf:currentUserName()) = ?assignedUser) }\">
+                    <div class=\"task-detail\">
+                        <tasks:UserSelector arg:assignedUser=\"{= ?assignedUser }\" arg:autoUpdate=\"{= true }\" arg:elementId=\"{= ?userSelectorId }\" arg:resource=\"{= ?resource }\" arg:resourceGraph=\"{= ?resourceGraph }\" arg:task=\"{= ?task }\" arg:taskListArea=\"{= ?taskListArea }\"/>
+                    </div>
+                    <div class=\"task-detail\">
+                        <tasks:StatusSelector arg:autoUpdate=\"{= true }\" arg:elementId=\"{= ?statusSelectorId }\" arg:resource=\"{= ?resource }\" arg:resourceGraph=\"{= ?resourceGraph }\" arg:status=\"{= ?status }\" arg:task=\"{= ?task }\" arg:taskListArea=\"{= ?taskListArea }\"/>
+                    </div>
+                    <div class=\"task-detail\">
+                        <tasks:DueDateEditor arg:dueDate=\"{= ?dueDate }\" arg:resource=\"{= ?resource }\" arg:resourceGraph=\"{= ?resourceGraph }\" arg:task=\"{= ?task }\" arg:taskListArea=\"view-tasks-dialog\" arg:uniqueId=\"{= ?uniqueId }\" ui:args=\"*\"/>
+                    </div>
+                </ui:if>
+                <ui:else>
+                    <div class=\"task-detail\">
+                        <div class=\"task-detail-label\">Assigned To:</div>
+                        <div class=\"task-detail-value\">
+                            <ui:if ui:condition=\"{= bound(?assignedUser) }\">
+                                <teamwork:UserLink arg:user=\"{= ?assignedUser }\"/>
+                            </ui:if>
+                            <ui:else>
+                                <span class=\"text-muted\">unassigned</span>
+                            </ui:else>
+                        </div>
+                    </div>
+                    <div class=\"task-detail\">
+                        <div class=\"task-detail-label\">Status:</div>
+                        <div class=\"task-detail-value\">{= swa:labelInGraph(?status, ui:graph) }</div>
+                    </div>
+                    <div class=\"task-detail\">
+                        <div class=\"task-detail-label\">Due Date:</div>
+                        <div class=\"task-detail-value\">{= ?dueDate }</div>
+                    </div>
+                </ui:else>
+                <div class=\"task-detail\"/>
+            </div>
+            <div class=\"task-summary\">
+                <h5>Summary</h5>
+                <div>
+                    <ui:parse ui:str=\"{= html:encodeBRs(?comment) }\"/>
+                </div>
+            </div>
+            <div class=\"task-comments\">
+                <ui:loadable ui:loadId=\"task-comments-{= ?uniqueId }\">
+                    <ui:call arg:task=\"{= ?task }\" ui:template=\"{= tasks:CommentsForTask }\">
+                        <teamwork:ExpandableSectionContainer arg:collapsedByDefault=\"{= true }\" arg:headingLabel=\"Comments ({= spr:rowCount(?rs) })\" arg:headingLevel=\"{= 5 }\">
+                            <ui:forEach ui:resultSet=\"{= ?rs }\">
+                                <tasks:CommentView arg:comment=\"{= ?comment }\" arg:date=\"{= ?date }\" arg:post=\"{= ?post }\" arg:user=\"{= ?user }\"/>
+                            </ui:forEach>
+                            <div class=\"new-comment-container\">
+                                <h6>New Comment</h6>
+                                <textarea class=\"form-control new-comment\" id=\"new-comment-{= ?uniqueId }\"/>
+                                <div class=\"new-comment-error empty\">You must provide a comment to save.</div>
+                                <div class=\"new-comment-actions\">
+                                    <button class=\"btn btn-default btn-xs\" onclick=\"tasks.createNewTaskComment('new-comment-{= ?uniqueId }','task-comments-{= ?uniqueId }','{= ?task }','{= ?resource }','{= ?resourceGraph }')\">Save</button>
+                                </div>
+                            </div>
+                        </teamwork:ExpandableSectionContainer>
+                    </ui:call>
+                </ui:loadable>
+            </div>
+            <div class=\"task-history\">
+                <ui:call arg:task=\"{= ?task }\" ui:template=\"{= tasks:ChangeHistoryForTask }\">
+                    <teamwork:ExpandableSectionContainer arg:collapsedByDefault=\"{= true }\" arg:headingLabel=\"Change History ({= spr:rowCount(?rs) })\" arg:headingLevel=\"{= 5 }\">
+                        <ui:forEach ui:resultSet=\"{= ?rs }\">
+                            <tasks:ChangeView arg:change=\"{= ?change }\" arg:comment=\"{= ?comment }\" arg:date=\"{= ?date }\" arg:user=\"{= ?user }\"/>
+                        </ui:forEach>
+                    </teamwork:ExpandableSectionContainer>
+                </ui:call>
+            </div>
+        </div>
+    </ui:loadable>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Task view" ;
+  rdfs:subClassOf tasks:TaskViews ;
+.
+tasks:TaskViewFilters
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:taskAreaId ;
+      spl:valueType xsd:string ;
+      rdfs:comment "HTML element ID for the tasks area" ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype """
+<ui:group let:statusFilterId=\"statusFilterSelect\" let:userFilterId=\"taskFilterUserSelect\">
+    <teamwork:ExpandableSectionContainer arg:collapsedByDefault=\"{= true }\" arg:headingLabel=\"Filters\">
+        <div class=\"task-filters\">
+            <div class=\"task-filter-field\">
+                <tasks:StatusFilter arg:elementId=\"{= ?statusFilterId }\" arg:taskAreaId=\"{= ?taskAreaId }\" arg:userFilterId=\"{= ?userFilterId }\"/>
+            </div>
+            <div class=\"task-filter-field\">
+                <tasks:UserFilter arg:elementId=\"{= ?userFilterId }\" arg:statusFilterId=\"{= ?statusFilterId }\" arg:taskAreaId=\"{= ?taskAreaId }\"/>
+            </div>
+        </div>
+    </teamwork:ExpandableSectionContainer>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Task view filters" ;
+  rdfs:subClassOf tasks:Elements ;
+.
+tasks:TaskViews
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:assignedUser ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The user to whom this task is assigned" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:comment ;
+      spl:valueType xsd:string ;
+      rdfs:comment "Comment" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:created ;
+      spl:valueType xsd:dateTime ;
+      rdfs:comment "The date the task was created." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:dueDate ;
+      spl:valueType xsd:date ;
+      rdfs:comment "The date upon which the task is due." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:modified ;
+      spl:valueType xsd:dateTime ;
+      rdfs:comment "The date the task was last modified." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource for which the task was created." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:resourceGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph in which the resource is found" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:status ;
+      spl:valueType tasks:TaskStatus ;
+      rdfs:comment "The current status of the task." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:task ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The task" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:user ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The user who has committed the comment." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:taskListArea ;
+      spl:valueType xsd:string ;
+      rdfs:comment "HTML element ID for a <div> containing the list of tasks" ;
+    ] ;
+  ui:abstract "true"^^xsd:boolean ;
+  ui:private "true"^^xsd:boolean ;
+  rdfs:comment "Abstract view class for tasks" ;
+  rdfs:label "Task views" ;
+  rdfs:subClassOf tasks:Elements ;
+.
+tasks:TasksHomePageTab
+  rdf:type teamwork:HomePageTab ;
+  edg.v:icon "tq-tasks-icon" ;
+  arg:visibility [
+      rdf:type teamwork:tasksActivated ;
+    ] ;
+  swa:tabIndex -110 ;
+  ui:prototype """
+<teamwork:Chrome arg:parentPage=\"{= tasks:TasksHomePageTab }\">
+    <div let:homePageTaskAreaId=\"tasks-home-page-tab\">
+        <tasks:TaskViewFilters arg:taskAreaId=\"{= ?homePageTaskAreaId }\"/>
+        <div class=\"task-list\">
+            <ui:loadable id=\"{= ?homePageTaskAreaId }\">
+                <ui:group letrs:allGraphs=\"{#
+                        SELECT ?teamGraph
+                        WHERE {
+                            ?any teamwork:readableGraphsUnderTeamControl ( ?projectGraph ?teamGraph ) .
+                        } }\">
+                    <ui:setContext ui:queryGraph=\"{= ui:unionOfGraphsFromResultSet(?allGraphs) }\">
+                        <ui:call arg:matchStatus=\"{= ?matchStatus }\" arg:matchUser=\"{= ?matchUser }\" ui:template=\"{= tasks:AllTasks }\">
+                            <teamwork:ExpandableSectionContainer arg:headingLabel=\"Tasks ({= spr:rowCount(?rs) })\">
+                                <ui:if ui:condition=\"{= spr:rowCount(?rs) &gt; 0 }\">
+                                    <ui:forEach ui:resultSet=\"{= ?rs }\">
+                                        <tasks:TaskView arg:taskListArea=\"{= ?homePageTaskAreaId }\" ui:args=\"*\"/>
+                                    </ui:forEach>
+                                </ui:if>
+                                <ui:else>
+                                    <div>No tasks or nothing for selected filters.</div>
+                                </ui:else>
+                            </teamwork:ExpandableSectionContainer>
+                        </ui:call>
+                    </ui:setContext>
+                </ui:group>
+            </ui:loadable>
+        </div>
+    </div>
+</teamwork:Chrome>
+"""^^ui:Literal ;
+  rdfs:comment "Can be used to search across all tasks that have been created in TopBraid EDG." ;
+  rdfs:label "Find Tasks" ;
+  rdfs:subClassOf teamwork:HomePageTabs ;
+.
+tasks:TasksProjectTab
+  rdf:type teamwork:ProjectTab ;
+  teamwork:pluginIndex 40 ;
+  teamwork:pluginValidExpression [
+      rdf:type teamwork:tasksActivated ;
+    ] ;
+  teamwork:validForACResults "true"^^xsd:boolean ;
+  teamwork:validForTags "false"^^xsd:boolean ;
+  ui:prototype """
+<div let:projectTaskAreaId=\"tasks-project-tab\">
+    <div class=\"task-tab-header\">
+        <img alt=\"Tasks\" src=\"{= ui:lib() }/teamwork/build/images/teamwork/primaryMenu/bk-tasks.svg\"/>
+        <h2>Tasks for {= teamwork:projectLabel(?projectGraph) }</h2>
+    </div>
+    <tasks:TaskViewFilters arg:taskAreaId=\"{= ?projectTaskAreaId }\"/>
+    <div class=\"task-list\">
+        <ui:loadable ui:loadId=\"{= ?projectTaskAreaId }\">
+            <ui:setContext ui:queryGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+                <ui:call arg:matchStatus=\"{= ?matchStatus }\" arg:matchUser=\"{= ?matchUser }\" arg:resourceGraph=\"{= ?projectGraph }\" ui:template=\"{= tasks:TasksForGraph }\">
+                    <teamwork:ExpandableSectionContainer arg:headingLabel=\"Tasks ({= spr:rowCount(?rs) })\">
+                        <tasks:CreateTaskLink arg:resource=\"{= ?projectGraph }\" arg:resourceGraphLabel=\"{= ?projectGraph }\" arg:taskListArea=\"{= ?projectTaskAreaId }\"/>
+                        <ui:if ui:condition=\"{= spr:rowCount(?rs) &gt; 0 }\">
+                            <ui:forEach ui:resultSet=\"{= ?rs }\">
+                                <tasks:TaskView arg:taskListArea=\"{= ?projectTaskAreaId }\" ui:args=\"*\"/>
+                            </ui:forEach>
+                        </ui:if>
+                        <ui:else>
+                            <div>No tasks or nothing for selected filters.</div>
+                        </ui:else>
+                    </teamwork:ExpandableSectionContainer>
+                </ui:call>
+            </ui:setContext>
+        </ui:loadable>
+    </div>
+</div>
+"""^^ui:Literal ;
+  rdfs:label "Tasks" ;
+  rdfs:subClassOf tasks:Elements ;
+  rdfs:subClassOf teamwork:ProjectTabs ;
+.
+tasks:UpdateDueDateHandler
+  rdf:type swa:EditHandlerClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate arg:newDate ;
+      spl:valueType xsd:date ;
+      rdfs:comment "The new due date" ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype """
+<ui:group>
+    <ui:setContext ui:queryGraph=\"{= teamwork:teamGraph(?resourceGraph) }\">
+        <ui:if ui:condition=\"{= ?newDate = &quot;1970-01-01&quot;^^xsd:date }\">
+            <ui:removePropertyValues arg:property=\"{= wf:dateDue }\" ui:this=\"{= ?task }\"/>
+            <tasks:CreateChangeHandler arg:comment=\"Removed due date\" arg:task=\"{= ?task }\"/>
+        </ui:if>
+        <ui:else>
+            <ui:setPropertyValue arg:property=\"{= wf:dateDue }\" arg:value=\"{= ?newDate }\" ui:this=\"{= ?task }\"/>
+            <tasks:CreateChangeHandler arg:comment=\"Due date changed to {= ui:label(?newDate) }\" arg:task=\"{= ?task }\"/>
+        </ui:else>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Update due date handler" ;
+  rdfs:subClassOf tasks:TaskEditHandlers ;
+.
+tasks:UpdateTaskHandler
+  rdf:type swa:EditHandlerClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:comment ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The comment to add." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:newDate ;
+      spl:valueType xsd:date ;
+      rdfs:comment "The new due date" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:newStatus ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The new status for this task" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:newUser ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The new user to whom this task is assigned" ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype """
+<ui:setContext ui:queryGraph=\"{= teamwork:teamGraph(?resourceGraph) }\">
+    <ui:transaction>
+        <ui:if ui:condition=\"{= bound(?comment) }\">
+            <tasks:AddCommentHandler arg:comment=\"{= ?comment }\" arg:task=\"{= ?task }\"/>
+        </ui:if>
+        <ui:if ui:condition=\"{= bound(?newDate) }\">
+            <tasks:UpdateDueDateHandler arg:newDate=\"{= ?newDate }\" arg:task=\"{= ?task }\"/>
+        </ui:if>
+        <ui:if let:oldUser=\"{= spl:object(?task, tasks:assignedTo) }\" ui:condition=\"{= bound(?newUser) }\">
+            <ui:group let:hasNewUser=\"{= tasks:isUser(?newUser) }\" let:hasOldUser=\"{= tasks:isUser(?oldUser) }\">
+                <ui:bind>
+                    <ui:stringify ui:varName=\"text\">
+                        <ui:if ui:condition=\"{= ?hasNewUser }\">
+                            <h3>Task has been reassigned to {= smf:userDisplayName(?newUser) }</h3>
+                        </ui:if>
+                        <ui:else>
+                            <h3>Task has been unassigned</h3>
+                        </ui:else>
+                    </ui:stringify>
+                    <tasks:sendEmail arg:title=\"A task has been reassigned away from you\" arg:user=\"{= ?oldUser }\" ui:args=\"*\"/>
+                </ui:bind>
+                <ui:setPropertyValue arg:property=\"{= tasks:assignedTo }\" arg:value=\"{= ?newUser }\" ui:this=\"{= ?task }\"/>
+                <tasks:CreateChangeHandler arg:comment=\"{= IF(?hasNewUser, CONCAT(&quot;Assigned to &quot;, smf:userDisplayName(?newUser)), &quot;Unassigned&quot;) }\" arg:task=\"{= ?task }\"/>
+                <ui:bind>
+                    <ui:stringify ui:varName=\"text\">
+                        <ui:if ui:condition=\"{= ?hasOldUser }\">
+                            <h3>Task was previously assigned to {= smf:userDisplayName(?oldUser) }</h3>
+                        </ui:if>
+                        <ui:else>
+                            <h3>Task was previously unassigned</h3>
+                        </ui:else>
+                    </ui:stringify>
+                    <tasks:sendEmail arg:title=\"A task has been assigned to you\" arg:user=\"{= ?newUser }\" ui:args=\"*\"/>
+                </ui:bind>
+            </ui:group>
+        </ui:if>
+        <ui:if ui:condition=\"{= bound(?newStatus) }\">
+            <ui:bind>
+                <ui:stringify ui:varName=\"text\">
+                    <h3>Task status has changed</h3>
+                    <ul>
+                        <li let:oldStatus=\"{= spl:object(?task, tasks:taskStatus) }\">
+                            <span>Old status: </span>
+                            <strong>{= IF(bound(?oldStatus), swa:labelInGraph(?oldStatus, ui:graph), \"-\") }</strong>
+                        </li>
+                        <li>
+                            <span>New status: </span>
+                            <strong>{= IF(bound(?newStatus), swa:labelInGraph(?newStatus, ui:graph), \"-\") }</strong>
+                        </li>
+                    </ul>
+                </ui:stringify>
+                <tasks:sendEmail arg:title=\"Task status has been updated\" arg:user=\"{= spl:object(?task, tasks:assignedTo) }\" ui:args=\"*\"/>
+            </ui:bind>
+            <ui:setPropertyValue arg:property=\"{= tasks:taskStatus }\" arg:value=\"{= ?newStatus }\" ui:this=\"{= ?task }\"/>
+            <tasks:CreateChangeHandler arg:comment=\"Status changed to {= swa:labelInGraph(?newStatus, ui:graph) }\" arg:task=\"{= ?task }\"/>
+        </ui:if>
+    </ui:transaction>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:label "Update task handler" ;
+  rdfs:subClassOf tasks:TaskEditHandlers ;
+.
+tasks:UserAssignmentHandler
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:selectedUser ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "A new user to whom to assign the task" ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype """
+<ui:group>
+    <ui:setContext ui:queryGraph=\"{= teamwork:teamGraph(?resourceGraph) }\">
+        <ui:group let:oldUser=\"{= spl:object(?task, tasks:assignedTo) }\">
+            <ui:group let:hasNewUser=\"{= bound(?selectedUser) &amp;&amp; (?selectedUser != false) }\" let:hasOldUser=\"{= (bound(?oldUser) &amp;&amp; isIRI(?oldUser)) &amp;&amp; (STRLEN(str(?oldUser)) &gt; 0) }\">
+                <ui:if ui:condition=\"{= ?hasOldUser }\">
+                    <ui:bind>
+                        <ui:stringify ui:varName=\"text\">
+                            <ui:if ui:condition=\"{= ?hasNewUser }\">
+                                <h3>Task has been reassigned to {= smf:userDisplayName(?selectedUser) }</h3>
+                            </ui:if>
+                            <ui:else>
+                                <h3>Task has been unassigned</h3>
+                            </ui:else>
+                        </ui:stringify>
+                        <tasks:sendEmail arg:title=\"A task has been reassigned away from you\" arg:user=\"{= ?oldUser }\" ui:args=\"*\"/>
+                    </ui:bind>
+                </ui:if>
+                <ui:setPropertyValue arg:property=\"{= tasks:assignedTo }\" arg:value=\"{= ?selectedUser }\" ui:this=\"{= ?task }\"/>
+                <ui:if ui:condition=\"{= ?hasNewUser }\">
+                    <ui:bind>
+                        <ui:stringify ui:varName=\"text\">
+                            <ui:if ui:condition=\"{= ?hasOldUser }\">
+                                <h3>Task was previously assigned to {= smf:userDisplayName(?oldUser) }</h3>
+                            </ui:if>
+                            <ui:else>
+                                <h3>Task was previously unassigned</h3>
+                            </ui:else>
+                        </ui:stringify>
+                        <tasks:sendEmail arg:title=\"A task has been assigned to you\" arg:user=\"{= ?selectedUser }\" ui:args=\"*\"/>
+                    </ui:bind>
+                </ui:if>
+                <ui:setContext ui:silentTransactions=\"{= true }\">
+                    <tasks:CreateChangeHandler arg:comment=\"{= IF(?hasNewUser, CONCAT(&quot;Assigned to &quot;, smf:userDisplayName(?selectedUser)), &quot;Unassigned&quot;) }\" arg:task=\"{= ?task }\"/>
+                </ui:setContext>
+            </ui:group>
+        </ui:group>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Task user assignment handler" ;
+  rdfs:subClassOf tasks:TaskEditHandlers ;
+.
+tasks:UserFilter
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:elementId ;
+      spl:valueType xsd:string ;
+      rdfs:comment "HTML element ID" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:statusFilterId ;
+      spl:valueType xsd:string ;
+      rdfs:comment "HTML element ID for the status filter selector" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:taskAreaId ;
+      spl:valueType xsd:string ;
+      rdfs:comment "HTML element ID for the tasks area" ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype """
+<ui:group>
+    <label for=\"{= ?elementId }\">Filter by Assigned User</label>
+    <div class=\"task-filter-user-select\" data-status-filter-id=\"{= ?statusFilterId }\" data-task-area-id=\"{= ?taskAreaId }\" id=\"{= ?elementId }\"/>
+    <script>gadgets.Hub.publish('org.topbraid.swa.populateTaskFilterUserDropdown', '{= ?elementId }');</script>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Task user filter" ;
+  rdfs:subClassOf tasks:Elements ;
+.
+tasks:UserSelector
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:assignedUser ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The user to whom this task is assigned" ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype """
+<ui:group>
+    <div class=\"task-detail-label\">
+		Assigned To:
+	</div>
+    <div class=\"task-detail-value\">
+        <input id=\"{= ?elementId }-value\" type=\"hidden\" value=\"{= ?assignedUser }\"/>
+        <div class=\"task-assign-user-select\" data-assigned-user=\"{= ?assignedUser }\" data-assigned-user-label=\"{= afn:localname(?assignedUser) }\" data-resource=\"{= ?resource }\" data-resource-graph=\"{= ?resourceGraph }\" data-task=\"{= ?task }\" data-task-list-area=\"{= ?taskListArea }\" id=\"{= ?elementId }\"/>
+        <script>gadgets.Hub.publish('org.topbraid.swa.populateTaskAssignUserDropdown', '{= ?elementId }');</script>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Task user assignment selector" ;
+  rdfs:subClassOf tasks:AutoUpdateSelectors ;
+.
+tasks:ViewTasksDialog
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource to display comments about." ;
+    ] ;
+  ui:prototype """
+<ui:setContext ui:varName=\"isDialog\" ui:varValue=\"{= true }\">
+    <div id=\"div-view-tasks-dialog\" let:dialogTaskAreaId=\"view-tasks-dialog\" let:resourceGraphLabel=\"{= teamwork:currentMasterGraph() }\" title=\"Tasks for {= ui:label(?resource) }\">
+        <ui:loadable ui:loadId=\"{= ?dialogTaskAreaId }\">
+            <ui:setContext let:tag=\"{= teamwork:currentTag() }\" ui:queryGraph=\"{= teamwork:currentTeamGraph() }\">
+                <ui:call arg:resource=\"{= ?resource }\" ui:template=\"{= tasks:TasksForResource }\">
+                    <ui:if ui:condition=\"{= !teamwork:isExplorerUser(smf:userWithName(smf:currentUserName())) }\">
+                        <tasks:CreateTaskLink arg:resource=\"{= ?resource }\" arg:resourceGraphLabel=\"{= ?resourceGraphLabel }\" arg:tag=\"{= ?tag }\" arg:taskListArea=\"{= ?dialogTaskAreaId }\"/>
+                    </ui:if>
+                    <ui:forEach ui:resultSet=\"{= ?rs }\">
+                        <tasks:TaskView arg:assignedUser=\"{= ?assignedUser }\" arg:comment=\"{= ?comment }\" arg:created=\"{= ?created }\" arg:dueDate=\"{= ?dueDate }\" arg:hideEditorLink=\"{= true }\" arg:modified=\"{= ?modified }\" arg:resource=\"{= ?resource }\" arg:resourceGraph=\"{= ?resourceGraphLabel }\" arg:status=\"{= ?status }\" arg:tag=\"{= ?tag }\" arg:task=\"{= ?task }\" arg:taskListArea=\"{= ?dialogTaskAreaId }\" arg:user=\"{= ?user }\"/>
+                    </ui:forEach>
+                </ui:call>
+            </ui:setContext>
+        </ui:loadable>
+    </div>
+</ui:setContext>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "View Tasks dialog" ;
+  rdfs:subClassOf swa:DialogElements ;
+.
+tasks:sendEmail
+  rdf:type ui:Method ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:task ;
+      spl:valueType tasks:Task ;
+      rdfs:comment "The Task to send an email about." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:text ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The body of the text to send." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:title ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The title message for the email" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:user ;
+      spl:valueType sioc:UserAccount ;
+      rdfs:comment "The target user to send an email to (if she has an email)." ;
+    ] ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype """
+<ui:if ui:condition=\"{= ?user != smf:userWithName(smf:currentUserName()) }\">
+    <ui:group let:email=\"{= teamwork:userEmail(?user) }\">
+        <ui:if ui:condition=\"{= bound(?email) &amp;&amp; EXISTS {
+            GRAPH &lt;http://server.topbraidlive.org/dynamic/config&gt; {
+                ?any cfg:teamworkTaskEmails true .
+            } .
+        } }\">
+            <ui:bind let:id=\"{= ui:uniqueId() }\" let:projectGraph=\"{= spl:object(?task, tasks:resourceGraph) }\">
+                <ui:stringify ui:varName=\"header\">
+                    <ui:createLink arg:projectGraph=\"{= ?projectGraph }\" ui:absolute=\"{= true }\" ui:viewName=\"teamProject\">
+                        <h2>
+                            <span>Vocabulary:&nbsp;</span>
+                            <a href=\"{= ?link }\">{= teamwork:projectLabel(?projectGraph) }</a>
+                        </h2>
+                    </ui:createLink>
+                </ui:stringify>
+                <ui:setContext ui:queryGraph=\"{= IRI(CONCAT(str(ui:tempGraph), ?id)) }\">
+                    <ui:update ui:updateQuery=\"{!
+                            INSERT {
+                                ?message a email:Message .
+                                ?message email:subject ?subject .
+                                ?message email:body ?body .
+                                ?message email:from ?from .
+                                ?message email:to ?to .
+                                ?from email:address ?sender .
+                                ?to a email:Address .
+                                ?to email:address ?email .
+                            }
+                            WHERE {
+                                BIND (BNODE() AS ?message) .
+                                BIND (BNODE() AS ?from) .
+                                BIND (BNODE() AS ?to) .
+                                BIND (CONCAT(&quot;[TopBraid Tasks] Update: &quot;, ?title) AS ?subject) .
+                                BIND (CONCAT(?header, ?text) AS ?body) .
+                                BIND (teamwork:getFromAddress() AS ?fromAddress) .
+                                BIND (COALESCE(?fromAddress, &quot;noreply@topquadrant.com&quot;) AS ?sender) .
+                            } }\"/>
+                    <sml:SendEMails/>
+                </ui:setContext>
+            </ui:bind>
+        </ui:if>
+    </ui:group>
+</ui:if>
+"""^^ui:Literal ;
+  rdfs:label "send email" ;
+  rdfs:subClassOf ui:Methods ;
+.
+<http://topbraid.org/tasks.ui>
+  rdf:type owl:Ontology ;
+  owl:imports <http://topbraid.org/swa> ;
+  owl:imports <http://topbraid.org/tasks> ;
+  owl:imports <http://topbraid.org/tasks.spin> ;
+  owl:imports <http://topbraid.org/teamwork.ui> ;
+  owl:imports <http://topbraid.org/teamworknotifications> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.

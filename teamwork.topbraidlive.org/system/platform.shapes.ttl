@@ -1,0 +1,322 @@
+# baseURI: http://topbraid.org/platform
+# imports: http://datashapes.org/dash
+# imports: http://datashapes.org/graphql
+# prefix: platform
+
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix platform: <http://topbraid.org/platform#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://topbraid.org/platform>
+  a owl:Ontology ;
+  graphql:protectedShape platform:WorkflowGraph ;
+  graphql:publicShape platform:Graph ;
+  graphql:publicShape platform:GraphType ;
+  graphql:publicShape platform:MasterGraph ;
+  graphql:publicShape platform:User ;
+  rdfs:comment """A collection of SHACL shapes/classes representing basic concepts of the TopBraid Platform. The shapes are used to produce GraphQL query infrastucture, and serve as views over a Java API that fetches the actual values dynamically, without necessarily having a comparable representation as RDF triples.
+
+Note that the shapes describe the view on the system from the perspective of the currently logged in user. For example, the lists of available graphs only return those that the current user has permissions on. And descriptions and display labels are returned in the currently user's preferred language. To get a complete view of the system, query the shapes logged in as Administrator.""" ;
+  owl:imports <http://datashapes.org/dash> ;
+  owl:imports <http://datashapes.org/graphql> ;
+.
+platform:Graph
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "An (RDF) graph managed by the TopBraid Platform." ;
+  rdfs:label "Graph" ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path platform:creationTimeStamp ;
+      sh:datatype xsd:dateTime ;
+      sh:description "The time stamp that this graph was created (if known)." ;
+      sh:maxCount 1 ;
+      sh:name "creation time stamp" ;
+      sh:values [
+          tosh:javaMethod "getCreationTimeStamp" ;
+        ] ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path platform:creator ;
+      sh:class platform:User ;
+      sh:description "The user who created this graph (if known)." ;
+      sh:maxCount 1 ;
+      sh:name "creator" ;
+      sh:nodeKind sh:IRI ;
+      sh:values [
+          tosh:javaMethod "getCreator" ;
+        ] ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path platform:description ;
+      sh:datatype xsd:string ;
+      sh:description "A human-readable description of the graph (in the user's preferred language)." ;
+      sh:maxCount 1 ;
+      sh:name "description" ;
+      sh:values [
+          tosh:javaMethod "getDescription" ;
+        ] ;
+    ] ;
+.
+platform:GraphType
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "A graph type such as Taxonomy." ;
+  rdfs:label "Graph type" ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path platform:description ;
+      sh:datatype xsd:string ;
+      sh:description "The description for the project type" ;
+      sh:maxCount 1 ;
+      sh:minCount 0 ;
+      sh:name "description" ;
+      sh:values [
+          <http://spinrdf.org/spl#objectInGraph> (
+              sh:this
+              rdfs:comment
+              <http://uispin.org/ui#graph>
+            ) ;
+        ] ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path platform:pluralLabel ;
+      sh:datatype xsd:string ;
+      sh:description "The plural version of the label, e.g. \"Taxonomies\"." ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "plural label" ;
+      sh:values [
+          tosh:javaMethod "getPluralLabel" ;
+        ] ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path platform:projectPageClass ;
+      sh:defaultValue teamwork:DefaultCreateProjectPage ;
+      sh:description "The create project page class" ;
+      sh:maxCount 1 ;
+      sh:minCount 0 ;
+      sh:name "project page" ;
+      sh:nodeKind sh:URI ;
+      sh:values [
+          <http://spinrdf.org/spl#objectInGraph> (
+              sh:this
+              teamwork:createProjectPageClass
+              <http://uispin.org/ui#graph>
+            ) ;
+        ] ;
+    ] ;
+.
+platform:MasterGraph
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "A graph managed by TopBraid together with a change history and permission system." ;
+  rdfs:label "Master graph" ;
+  rdfs:subClassOf platform:Graph ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path platform:graphType ;
+      sh:class platform:GraphType ;
+      sh:description "The type of this (master) graph, e.g. Taxonomy." ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "graph type" ;
+      sh:nodeKind sh:IRI ;
+      sh:values [
+          tosh:javaMethod "getGraphType" ;
+        ] ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path platform:id ;
+      sh:datatype xsd:string ;
+      sh:description "The ID of the master graph, as derived from the URI, e.g. \"geo\"." ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "id" ;
+      sh:values [
+          tosh:javaMethod "getId" ;
+        ] ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path platform:isPublished ;
+      sh:datatype xsd:boolean ;
+      sh:description "True if the asset collection has been published." ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "is published" ;
+      sh:values [
+          teamwork:isPublishedToExplorerUsers (
+              [
+                teamwork:teamGraph (
+                    sh:this
+                  ) ;
+              ]
+            ) ;
+        ] ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path platform:lastChangeTimeStamp ;
+      sh:datatype xsd:dateTime ;
+      sh:description "Gets the time stamp of the most recent known change." ;
+      sh:maxCount 1 ;
+      sh:name "last change time stamp" ;
+      sh:values [
+          teamwork:lastChangeTime (
+              sh:this
+            ) ;
+        ] ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path platform:lastChangeUser ;
+      sh:class platform:User ;
+      sh:description "Returns the user who did the most recent known change." ;
+      sh:maxCount 1 ;
+      sh:name "last change user" ;
+      sh:nodeKind sh:IRI ;
+      sh:values [
+          teamwork:lastChangeUser (
+              sh:this
+            ) ;
+        ] ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path platform:mainClass ;
+      dash:detailsGraph [
+          <http://uispin.org/ui#graphWithImports> (
+              sh:this
+            ) ;
+        ] ;
+      sh:description "The main class, if one has been assigned. This is only supported by some graph types such as reference datasets." ;
+      sh:maxCount 1 ;
+      sh:name "main class" ;
+      sh:nodeKind sh:IRI ;
+      sh:values [
+          tosh:javaMethod "getMainClass" ;
+        ] ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path platform:owlImports ;
+      sh:class platform:Graph ;
+      sh:name "owl imports" ;
+      sh:nodeKind sh:IRI ;
+      sh:values [
+          tosh:javaMethod "owlImports" ;
+        ] ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path platform:permission ;
+      sh:datatype xsd:string ;
+      sh:description "The permission of the current user, with values: \"viewer\", \"editor\" or \"manager\"." ;
+      sh:in (
+          "viewer"
+          "editor"
+          "manager"
+        ) ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "permission" ;
+      sh:values [
+          tosh:javaMethod "getPermission" ;
+        ] ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path platform:subjectArea ;
+      dash:detailsGraph [
+          teamwork:platformGovernanceGraph () ;
+        ] ;
+      sh:description "The subject area of a master graph, if one has been assigned." ;
+      sh:maxCount 1 ;
+      sh:name "subject area" ;
+      sh:nodeKind sh:IRI ;
+      sh:values [
+          tosh:javaMethod "getSubjectArea" ;
+        ] ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path platform:workflowGraph ;
+      sh:class platform:WorkflowGraph ;
+      sh:description "Links a master graph to the workflow graphs that the current user can access." ;
+      sh:name "workflow graph" ;
+      sh:nodeKind sh:IRI ;
+      sh:values [
+          tosh:javaMethod "workflowGraphs" ;
+        ] ;
+    ] ;
+.
+platform:User
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "A TopBraid user (account)." ;
+  rdfs:label "User" ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path platform:email ;
+      sh:datatype xsd:string ;
+      sh:description "The email address associated with a user." ;
+      sh:maxCount 1 ;
+      sh:name "email" ;
+      sh:values [
+          tosh:javaMethod "getEmail" ;
+        ] ;
+    ] ;
+.
+platform:WorkflowGraph
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "A graph managed by a TopBraid workflow and working copy that is based on a master graph but may contain additional changes." ;
+  rdfs:label "Workflow graph" ;
+  rdfs:subClassOf platform:Graph ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path platform:id ;
+      sh:datatype xsd:string ;
+      sh:description "The id of the working copy." ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "id" ;
+      sh:values [
+          tosh:javaMethod "getId" ;
+        ] ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path platform:masterGraph ;
+      sh:class platform:MasterGraph ;
+      sh:description "The master graph that this is based on." ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "master graph" ;
+      sh:nodeKind sh:IRI ;
+      sh:values [
+          tosh:javaMethod "getMasterGraph" ;
+        ] ;
+    ] ;
+.
+tosh:javaMethod
+  a rdf:Property ;
+  rdfs:comment "A SHACL node expression that points at a Java method to deliver the value nodes. The value of tosh:javaMethod must be the name of a public (non-static) method of a class or interface. The Java Object that the method will be called is fetched using internal Java code - see org.topbraid.shaclx.expr.java for the current approach. As this is likely going to evolve, this tosh:javaMethod property is currently not declared in tosh but in the platform.shapes.ttl file." ;
+  rdfs:label "java method"@en ;
+.

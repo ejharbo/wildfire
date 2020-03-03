@@ -1,0 +1,306 @@
+# baseURI: http://edg.topbraid.solutions/1.0/shapes/base
+# imports: http://datashapes.org/dash
+# imports: http://edg.topbraid.solutions/1.0/schema/base
+# imports: http://topbraid.org/tosh
+# imports: http://www.w3.org/2004/02/skos/core
+
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/shapes/base>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/shapes/base/GMD_core> ;
+  rdfs:label "EDG SHAPES - BASE" ;
+  owl:imports <http://datashapes.org/dash> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/base> ;
+  owl:imports <http://topbraid.org/tosh> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+edg:AllAspectsGroup
+  a sh:PropertyGroup ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/core> ;
+  rdfs:label "Type Selector" ;
+  sh:order "1"^^xsd:decimal ;
+.
+edg:AnyClass-label
+  a sh:PropertyShape ;
+  sh:path rdfs:label ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/core> ;
+  sh:deactivated true ;
+  sh:group edg:AnyClassPropertiesDeactivationGroup ;
+.
+edg:AnyClass-type
+  a sh:PropertyShape ;
+  sh:path rdf:type ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/core> ;
+  sh:deactivated true ;
+  sh:group edg:AnyClassPropertiesDeactivationGroup ;
+.
+edg:AnyClassPropertiesDeactivationGroup
+  a sh:PropertyGroup ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/core> ;
+  rdfs:label "Any class properties deactivation group" ;
+  sh:order "2"^^xsd:decimal ;
+.
+edg:Asset
+  sh:property edg:Asset-isDefinedBy ;
+.
+edg:Asset-isDefinedBy
+  a sh:PropertyShape ;
+  sh:path rdfs:isDefinedBy ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/core> ;
+  sh:deactivated true ;
+.
+edg:DataContainerPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:openable true ;
+  rdfs:label "Data Container Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:Database-dataContainerType
+  sh:group edg:DatabasePropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Document-abstract
+  sh:group edg:NarratablePropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Document-title
+  sh:group edg:IdentifiersGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:Identifiable-acronym
+  sh:group edg:IdentifiersGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:Identifiable-altLabel
+  sh:group edg:IdentifiersGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:Identifiable-identifier
+  sh:group edg:IdentifiersGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:Identifiable-label
+  sh:group edg:IdentifiersGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Identifiable-symbolDesignator
+  sh:group edg:IdentifiersGroup ;
+  sh:order "8"^^xsd:decimal ;
+.
+edg:Identifiable-tag
+  sh:group edg:IdentifiersGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:Identifiable-type
+  a sh:PropertyShape ;
+  sh:group edg:IdentifiersGroup ;
+  sh:order "1"^^xsd:decimal ;
+.
+edg:IdentifiersGroup
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/core> ;
+.
+edg:Locatable-location
+  sh:group edg:LocatablePropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Locatable-locationLink
+  sh:group edg:LocatablePropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:Locatable-locationNotes
+  sh:group edg:LocatablePropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:LocatablePropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:openable true ;
+  rdfs:label "Location Metadata" ;
+  sh:order "38"^^xsd:decimal ;
+.
+edg:Location-country
+  sh:group edg:LocationGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Location-region
+  sh:group edg:LocationGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:LocationGroup
+  a sh:PropertyGroup ;
+  tosh:openable true ;
+  rdfs:label "Location Details" ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Narratable-description
+  sh:group edg:NarratablePropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:Narratable-documentLink
+  sh:group edg:NarratablePropertiesGroup ;
+  sh:order "80"^^xsd:decimal ;
+.
+edg:Narratable-guidanceLink
+  sh:group edg:NarratablePropertiesGroup ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:Narratable-notes
+  sh:group edg:NarratablePropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:Narratable-purpose
+  sh:group edg:NarratablePropertiesGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:Narratable-referenceLink
+  sh:group edg:NarratablePropertiesGroup ;
+  sh:order "90"^^xsd:decimal ;
+.
+edg:Narratable-seeAlso
+  sh:group edg:NarratablePropertiesGroup ;
+  sh:order "120"^^xsd:decimal ;
+.
+edg:NarratablePropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:openable true ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:Provenance-originatedBy
+  sh:group edg:ProvenanceGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:Provenance-source
+  sh:group edg:ProvenanceGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Provenance-wasInfluencedBy
+  sh:group edg:ProvenanceGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:ProvenanceGroup
+  a sh:PropertyGroup ;
+  tosh:openable true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "Provenance Metadata" ;
+.
+edg:QualityAssuranceAspect_metricQuery
+  sh:group edg:QualityAssurancePropertiesGroup ;
+  sh:order "25"^^xsd:decimal ;
+.
+edg:QualityAssuranceAspect_qualityQuery
+  sh:group edg:QualityAssurancePropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:QualityAssurancePropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:openable true ;
+  rdfs:label "Quality Assurance Metadata" ;
+  sh:order "80"^^xsd:decimal ;
+.
+edg:StatusAspect
+  sh:description "A shape for common properties for expressing the status of an asset." ;
+  sh:order "15"^^xsd:decimal ;
+.
+edg:StatusAspect-effectiveEndDate
+  sh:group edg:StatusAspectGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:StatusAspect-effectiveStartDate
+  sh:group edg:StatusAspectGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:StatusAspect-status
+  sh:group edg:StatusAspectGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:StatusAspect-supercededBy
+  tosh:editWidget edg:SameTypeURIResourceEditor ;
+  sh:group edg:StatusAspectGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:StatusAspectGroup
+  a sh:PropertyGroup ;
+  tosh:openable true ;
+  rdfs:label "Status Metadata" ;
+  sh:order "12"^^xsd:decimal ;
+.
+edg:hideClass
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/core> ;
+  rdfs:label "hide class" ;
+  rdfs:range xsd:boolean ;
+.
+edg:hideSubClasses
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/core> ;
+  rdfs:label "hide sub-classes" ;
+  rdfs:range xsd:boolean ;
+.
+edg:versionNotes
+  rdfs:label "version notes" ;
+.
+<http://edg.topbraid.solutions/shapes/base/GMD_core>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:ShapesGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/base/core> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+dcterms:description
+  a rdf:Property ;
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "description" ;
+  rdfs:range xsd:string ;
+.
+dcterms:source
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "source" ;
+  rdfs:range xsd:anyURI ;
+.
+rdmfact:FactsShape_fact
+  sh:deactivated true ;
+.

@@ -1,0 +1,223 @@
+# baseURI: http://spinrdf.org/spra
+# imports: http://spinrdf.org/spr
+# prefix: spra
+
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+spr:colCountBase
+  spin:returnType xsd:integer ;
+.
+<http://spinrdf.org/spra>
+  a owl:Ontology ;
+  rdfs:comment "An implementation of the SPR specification that stores table cells in URIs derived from the URI of the table. For example, if the spra:Table object has URI ex:MyTable, then the cells are called ex:MyTable-r1-c2 for column 2 and row 1." ;
+  owl:imports <http://spinrdf.org/spr> ;
+  owl:versionInfo "0.6.0" ;
+.
+spra:Table
+  a spr:TableClass ;
+  spr:cellFunction spra:cellFunction ;
+  spr:colCountFunction spra:colCountFunction ;
+  spr:colNameFunction spra:colNameFunction ;
+  spr:rowCountFunction spra:rowCountFunction ;
+  rdfs:label "Table" ;
+  rdfs:subClassOf spr:Table ;
+.
+spra:cellFunction
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "value" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:concat ;
+                sp:arg1 [
+                    a sp:str ;
+                    sp:arg1 spin:_arg1 ;
+                  ] ;
+                sp:arg2 "-r" ;
+                sp:arg3 [
+                    a sp:str ;
+                    sp:arg1 spin:_arg2 ;
+                  ] ;
+                sp:arg4 "-c" ;
+                sp:arg5 [
+                    a sp:str ;
+                    sp:arg1 spin:_arg3 ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "cellURI" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:iri ;
+                sp:arg1 [
+                    sp:varName "cellURI" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "cell" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:object ;
+                sp:arg1 [
+                    sp:varName "cell" ;
+                  ] ;
+                sp:arg2 spra:value ;
+              ] ;
+            sp:variable [
+                sp:varName "value" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  rdfs:label "cell function" ;
+  rdfs:subClassOf spr:CellFunctions ;
+.
+spra:colCount
+  a rdf:Property ;
+  rdfs:domain spra:Table ;
+  rdfs:label "col count" ;
+  rdfs:range xsd:integer ;
+  rdfs:subPropertyOf spra:systemProperty ;
+.
+spra:colCountFunction
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "colCount" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "colCount" ;
+              ] ;
+            sp:predicate spra:colCount ;
+            sp:subject spin:_arg1 ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  rdfs:label "col count function" ;
+  rdfs:subClassOf spr:ColCountFunctions ;
+.
+spra:colNameFunction
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "colName" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:concat ;
+                sp:arg1 "http://spinrdf.org/spra#colName" ;
+                sp:arg2 [
+                    a sp:str ;
+                    sp:arg1 spin:_arg2 ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "propertyURI" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:iri ;
+                sp:arg1 [
+                    sp:varName "propertyURI" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:object ;
+                sp:arg1 spin:_arg1 ;
+                sp:arg2 [
+                    sp:varName "property" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "colName" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  rdfs:label "col name function" ;
+  rdfs:subClassOf spr:ColNameFunctions ;
+.
+spra:rowCount
+  a rdf:Property ;
+  rdfs:domain spra:Table ;
+  rdfs:label "row count" ;
+  rdfs:range xsd:integer ;
+  rdfs:subPropertyOf spra:systemProperty ;
+.
+spra:rowCountFunction
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "rowCount" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "rowCount" ;
+              ] ;
+            sp:predicate spra:rowCount ;
+            sp:subject spin:_arg1 ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  rdfs:label "row count function" ;
+  rdfs:subClassOf spr:RowCountFunctions ;
+.
+spra:systemProperty
+  a rdf:Property ;
+  rdfs:comment "An \"abstract\" base property that groups together those system properties that the user will hardly ever need to see in property trees. This property may be dropped in future versions of this ontology - right now it's mainly here for convenience." ;
+  rdfs:label "system property" ;
+.
+spra:value
+  a rdf:Property ;
+  rdfs:label "value" ;
+  rdfs:subPropertyOf spra:systemProperty ;
+.

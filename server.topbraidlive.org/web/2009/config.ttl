@@ -1,0 +1,907 @@
+# baseURI: http://server.topbraidlive.org/web/2009/config
+# prefix: cfg
+
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://server.topbraidlive.org/web/2009/config>
+  a owl:Ontology ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+cfg:AdvancedParameters
+  a rdfs:Class ;
+  rdfs:subClassOf owl:DatatypeProperty ;
+.
+cfg:BasicParameters
+  a rdfs:Class ;
+  rdfs:subClassOf owl:DatatypeProperty ;
+.
+cfg:CleanerParameters
+  a rdfs:Class ;
+  rdfs:subClassOf owl:DatatypeProperty ;
+.
+cfg:DataPlatformParameters
+  a rdfs:Class ;
+  rdfs:subClassOf owl:DatatypeProperty ;
+.
+cfg:DatabaseDriver
+  a owl:Class ;
+  rdfs:label "Database driver" ;
+  rdfs:subClassOf owl:Thing ;
+.
+cfg:DatabaseParameters
+  a rdfs:Class ;
+  rdfs:subClassOf owl:DatatypeProperty ;
+.
+cfg:GraphName
+  a owl:Class ;
+  rdfs:label "Graph name" ;
+  rdfs:subClassOf owl:Thing ;
+.
+cfg:JNDIConfiguration
+  a rdfs:Class ;
+  rdfs:label "JNDI/LDAP Configuration" ;
+  rdfs:subClassOf owl:Thing ;
+.
+cfg:LdapServerParameters
+  a rdfs:Class ;
+  rdfs:subClassOf owl:DatatypeProperty ;
+.
+cfg:MarkLogicDatabaseDriver
+  a cfg:DatabaseDriver ;
+  cfg:systemName "MarkLogic" ;
+  rdfs:label "In-memory + MarkLogic persistence" ;
+.
+cfg:SDBDatabaseDriver
+  a cfg:DatabaseDriver ;
+  cfg:systemName "SDB" ;
+  rdfs:label "In-memory + RDBMS persistence" ;
+.
+cfg:ServerConfiguration
+  a owl:Class ;
+  rdfs:subClassOf owl:Thing ;
+.
+cfg:SharedTDBDatabaseDriver
+  a cfg:DatabaseDriver ;
+  cfg:systemName "SharedTDB" ;
+  rdfs:label "TDB (Store graphs in the general shared database)" ;
+.
+cfg:DataPlatformDatabaseDriver
+  a cfg:DatabaseDriver ;
+  cfg:systemName "DataPlatform" ;
+  rdfs:label "Data Platform (requires Data Platform configuration)"
+.
+cfg:SmtpServerParameters
+  a rdfs:Class ;
+  rdfs:subClassOf owl:DatatypeProperty ;
+.
+cfg:TDBDatabaseDriver
+  a cfg:DatabaseDriver ;
+  cfg:systemName "TDB" ;
+  rdfs:label "TDB (Each graph stored in its own, separate database)" ;
+.
+cfg:TeamworkParameters
+  a rdfs:Class ;
+  rdfs:label "Teamwork parameters" ;
+  rdfs:subClassOf owl:DatatypeProperty ;
+.
+cfg:TracingParameters
+  a rdfs:Class ;
+  rdfs:subClassOf owl:DatatypeProperty ;
+.
+cfg:UISPINParameters
+  a rdfs:Class ;
+  rdfs:label "UISPINParameters" ;
+  rdfs:subClassOf owl:DatatypeProperty ;
+.
+cfg:UriConstructionParameters
+  a rdfs:Class ;
+  rdfs:subClassOf owl:DatatypeProperty ;
+.
+cfg:allowAnonymous
+  a cfg:AdvancedParameters ;
+  rdfs:comment "If no authentication scheme is used and this flag is true, anonymous access with READ and EXECUTE permission is allowed to the application. Defaults to false." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Allow Anonymous Access" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:cacheAll
+  a cfg:AdvancedParameters ;
+  rdfs:comment "Enable Cache All Option (after modifying this, a server reset is recommended). Defaults to false." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Cache All Enabled" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:contractViolationsAreErrors
+  a cfg:AdvancedParameters ;
+  rdfs:comment "If set to true, when a possible software design inconsistency is detected, fail with an error. Defaults to false." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Fail With Error on Design Inconsistency" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:createExceptionsWithLocks
+  a cfg:AdvancedParameters ;
+  rdfs:comment "If set to true, create longer stack traces, adding very large overhead. These are very useful for rapid resolution of certain types of problems. Set this parameter only if requested by TopQuadrant Customer Support. Defaults to false." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Longer Stack Traces" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:defaultPrefixMap
+  a cfg:AdvancedParameters ;
+  rdfs:comment "The default prefixes to use for all newly created graphs and the URN reification. Value must be a valid Turtle string with PREFIX declarations." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Default Prefix Map" ;
+  rdfs:range xsd:string ;
+.
+cfg:disableAutoCompleteIndex
+  a cfg:AdvancedParameters ;
+  rdfs:comment "If true, disables the in-memory auto-complete index. Defaults to false. If set to true, startup time will be faster and memory consumption will be less. However, some auto-complete operations (input fields where you start typing and then suggest matching instances) will be slower and may deliver incomplete results because requests will time out after 5 seconds." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Disable Auto-Complete Index" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:disableLuceneIndexing
+  a cfg:AdvancedParameters ;
+  rdfs:comment "If true, disables Lucene indexing. Defaults to false." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Disable Lucene Indexing" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:dpFeature
+  a cfg:DataPlatformParameters ;
+  rdfs:comment "Control for the Data Platform Feature." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Enable Data Platform feature" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:dpServerURL
+  a cfg:DataPlatformParameters ;
+  rdfs:comment "URL of the patch log server" ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Data Platform server URL" ;
+  rdfs:range xsd:string ;
+.
+cfg:dpZone
+  a cfg:DataPlatformParameters ;
+  rdfs:comment "Directory name for the Zone (local files for the data platform). Relative file names are placed in twh workspace but outside of any project." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Data Platform cache area" ;
+  rdfs:range xsd:string ;
+.
+cfg:edgURIClassPrefix
+  a cfg:UriConstructionParameters ;
+  rdfs:comment "Decides whether to append a Class Name or Class Prefix to new instance URIs." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Include class prefix" ;
+  rdfs:range [
+      a rdfs:Datatype ;
+      owl:oneOf (
+          ""
+          "name"
+          "acronym"
+        ) ;
+    ] ;
+.
+cfg:edgURIConstructMethod
+  a cfg:UriConstructionParameters ;
+  rdfs:comment "The selected method to construct URIs, defaulting to \"label\"." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Local name construct method" ;
+  rdfs:range [
+      a rdfs:Datatype ;
+      owl:oneOf (
+          "label"
+          "uuid"
+          "counter"
+          "custom"
+        ) ;
+    ] ;
+.
+cfg:edgURICounterOffset
+  a cfg:UriConstructionParameters ;
+  rdfs:comment "The default offset used in the case of counter being set to construct URIs, defaulting to 0." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "URI Counter Offset" ;
+  rdfs:range xsd:integer ;
+.
+cfg:edgURIPrefixSeparator
+  a cfg:UriConstructionParameters ;
+  rdfs:comment "The character(s) used to separate the prefix value from the rest of the URI value when prefix is set, defaulting to \"-\"." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "URI Prefix Separator" ;
+  rdfs:range xsd:string ;
+.
+cfg:edgUserCannotModifyURI
+  a cfg:UriConstructionParameters ;
+  rdfs:comment "If true then users cannot modify the suggested URIs." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Users cannot modify URI" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:editorServer
+  a owl:DatatypeProperty ;
+  rdfs:comment "URL of the Editor server that will receive feedback from published vocabularies. Needs to be specified on the Explorer server. Must end with /swp, e.g. \"http://myserver.org:8080/edg/tbl/swp\"." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Editor server" ;
+  rdfs:range xsd:string ;
+.
+cfg:editorServerUserName
+  a owl:DatatypeProperty ;
+  rdfs:comment "User name for authentication on Editor server.  Set this property only on the Explorer server." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Editor server user name" ;
+  rdfs:range xsd:string ;
+.
+cfg:enableFairLocks
+  a cfg:AdvancedParameters ;
+  rdfs:comment "If true, then locks taken by TBL will use a first in first out queue, if false (or empty) then order is less predictable." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Enable Fair Locks" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:enableOntologyOptimizations
+  a cfg:AdvancedParameters ;
+  rdfs:comment "If true, then some operations will use caches to improve their performance, under the assumption that the query operates on a graph with a base graph that does not define any classes, properties or shapes. If false (or empty), all graphs will be treated equally and may contain classes, properties or shapes." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Enable Ontology Optimizations" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:enableOptionForSWAForms
+  a cfg:AdvancedParameters ;
+  rdfs:comment "If true, then it is possible to switch back to the \"old\" SWA forms. By default (false) if a resource has the new forms available (via GraphQL) then only those are used, with no button to switch back." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Enable Option for SWA forms" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:enableSPARQLUpdates
+  a cfg:AdvancedParameters ;
+  rdfs:comment "If true, then the SPARQL end point (servlet) will allow update requests. Defaults to false." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Enable SPARQL updates" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:endpointTimeout
+  a cfg:AdvancedParameters ;
+  rdfs:comment "If not set or 0 then by default the SPARQL endpoint will have no timeout. Timeout is given in ms. If the timeout is reached the system will throw a CanceledQuery exception to the user letting them know the timeout has expired." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Timeout on the SPARQL Endpoint" ;
+  rdfs:range xsd:integer ;
+.
+cfg:evnEditorLicense
+  a cfg:TeamworkParameters ;
+  rdfs:comment "A license key for the legacy EVN Editor." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Legacy Editor license" ;
+  rdfs:range xsd:string ;
+.
+cfg:evnEditorServer
+  a owl:DatatypeProperty ;
+  rdfs:comment "URL of the legacy EVN Editor server that will receive the feedback from published vocabularies. Needs to be specified on the editor server which will send this info to the browser server when a vocabulary is published, basically pointing to itself. Must end with /swp, e.g. \"http://myserver.org:8080/evn/tbl/swp\"." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Legacy Editor server" ;
+  rdfs:range xsd:string ;
+.
+cfg:evnEditorServerPassword
+  a owl:DatatypeProperty ;
+  rdfs:comment "Password for authentication on legacy EVN Editor server." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Legacy Editor server password" ;
+  rdfs:range xsd:string ;
+.
+cfg:evnEditorServerUserName
+  a owl:DatatypeProperty ;
+  rdfs:comment "User name for authentication on legacy EVN Editor server." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Legacy Editor server user name" ;
+  rdfs:range xsd:string ;
+.
+cfg:evnTaggerLicense
+  a cfg:TeamworkParameters ;
+  rdfs:comment "A license key for Tagger." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Tagger license" ;
+  rdfs:range xsd:string ;
+.
+cfg:evnViewerLicense
+  a cfg:TeamworkParameters ;
+  rdfs:comment "A license key for the legacy Explorer." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Legacy Explorer license" ;
+  rdfs:range xsd:string ;
+.
+cfg:evnViewerServer
+  a owl:DatatypeProperty ;
+  rdfs:comment "URL of a legacy Explorer server to upload files to when a vocabulary is being published." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Legacy Explorer server" ;
+  rdfs:range xsd:string ;
+.
+cfg:evnViewerServerIsAnonymous
+  a owl:DatatypeProperty ;
+  rdfs:comment "True if the legacy EVN Explorer server does not require a user name and password." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Legacy Explorer server anonymous access" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:evnViewerServerPassword
+  a owl:DatatypeProperty ;
+  rdfs:comment "Password for authentication on legacy EVN Explorer server." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Legacy Explorer server password" ;
+  rdfs:range xsd:string ;
+.
+cfg:evnViewerServerUserName
+  a owl:DatatypeProperty ;
+  rdfs:comment "User name for authentication on legacy EVN Explorer server." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Legacy Explorer server user name" ;
+  rdfs:range xsd:string ;
+.
+cfg:explorerServer
+  a owl:DatatypeProperty ;
+  rdfs:comment "URL of an Explorer server to upload files to when a vocabulary is being published.  Set this property only on the Editor server." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Explorer server" ;
+  rdfs:range xsd:string ;
+.
+cfg:explorerServerUserName
+  a owl:DatatypeProperty ;
+  rdfs:comment "User name for authentication on Explorer server.  This must be a user with administrative privileges.  Set this property only on the Editor server." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Explorer server user name" ;
+  rdfs:range xsd:string ;
+.
+cfg:explorerUsersCanUseSPARQLEndpoint
+  a owl:DatatypeProperty ;
+  rdfs:comment "If set to true, read-only Explorer users can use the SPARQL endpoint. Defaults to false." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Explorer users can use SPARQL endpoint" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:explorerUsersCanViewWorkingCopies
+  a owl:DatatypeProperty ;
+  rdfs:comment "If set to true, read-only Explorer users can view all working copies. Defaults to false." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Explorer users can view working copies" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:googleMapsAPIKey
+  a cfg:AdvancedParameters ;
+  rdfs:comment "The API key to use to display Google Maps." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Google Maps API Key" ;
+  rdfs:range xsd:string ;
+.
+cfg:graph
+  a rdf:Property ;
+  rdfs:domain cfg:GraphName ;
+  rdfs:label "graph" ;
+  rdfs:range rdfs:Resource ;
+.
+cfg:graphName
+  a owl:ObjectProperty ;
+  rdfs:comment "A tuple consisting of a graph (URI) and a short name. Can be used to abbreviate graphs in servlet calls. For example the SPIN template servlet handles abbreviated names such as /tbl/template/swa/GetResourceValues/kennedys?... If you want to address the kennedys ontology with that URL, you need to add a short graph name that associates http://topbraid.org/examples/kennedys with the name \"kennedys\"." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "graph name" ;
+  rdfs:range cfg:GraphName ;
+.
+cfg:graphqlAggregationFields
+  a owl:DatatypeProperty ;
+  rdfs:comment "True to activate _COUNT and _CONCAT aggregation fields for the TopBraid GraphQL services." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Enable aggregation fields" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:graphqlDeriveFields
+  a owl:DatatypeProperty ;
+  rdfs:comment "True to activate deriveXY fields for the TopBraid GraphQL services." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Enable derive fields" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:isSSL
+  a cfg:SmtpServerParameters ;
+  rdfs:comment "If true then SSL for mail is on. Defaults to false." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "SSL Enabled" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:jiraStatuses
+  a owl:DatatypeProperty ;
+  rdfs:comment "The Status value(s) of issues that shall be searched over on JIRA. Multiple values will be interpreted as \"OR\" and need to be separated by commas. For example: OPEN,TODO would produce (status=\"OPEN\" OR status=\"TODO\") in the search string. Leave empty for no match status condition." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "JIRA Issue Statuses" ;
+  rdfs:range xsd:string ;
+.
+cfg:jiraURL
+  a owl:DatatypeProperty ;
+  rdfs:comment "The URL of a JIRA server to integrate with. Must end with a slash. For example: https://examplecompany.atlassian.net/" ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "JIRA Server URL" ;
+  rdfs:range xsd:string ;
+.
+cfg:jiraUser
+  a owl:DatatypeProperty ;
+  rdfs:comment "The name of a user valid on the JIRA server used for internal service requests." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "JIRA User Name" ;
+  rdfs:range xsd:string ;
+.
+cfg:jndiConfiguration
+  a owl:ObjectProperty ;
+  rdfs:comment "JNDI/LDAP Configuration" ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "JNDI/LDAP Configuration" ;
+  rdfs:range cfg:JNDIConfiguration ;
+.
+cfg:jndimembershipsearch
+  a cfg:LdapServerParameters ;
+  rdfs:comment "Search filter string for role memberships of a user in JNDI/LDAP" ;
+  rdfs:domain cfg:JNDIConfiguration ;
+  rdfs:label "Membership search string" ;
+  rdfs:range xsd:string ;
+.
+cfg:jndipasswd
+  a rdf:Property ;
+  rdfs:comment "Connection Password for JNDI/LDAP" ;
+  rdfs:domain cfg:JNDIConfiguration ;
+  rdfs:label "Password for server connection" ;
+  rdfs:range xsd:string ;
+.
+cfg:jndirolebase
+  a cfg:LdapServerParameters ;
+  rdfs:comment "Role base for JNDI/LDAP" ;
+  rdfs:domain cfg:JNDIConfiguration ;
+  rdfs:label "Role definition base" ;
+  rdfs:range xsd:string ;
+.
+cfg:jndirolename
+  a cfg:LdapServerParameters ;
+  rdfs:comment "Role name identifier for JNDI/LDAP" ;
+  rdfs:domain cfg:JNDIConfiguration ;
+  rdfs:label "Role name identifier" ;
+  rdfs:range xsd:string ;
+.
+cfg:jndirolesearch
+  a cfg:LdapServerParameters ;
+  rdfs:comment "Search filter string for members of a role in JNDI/LDAP" ;
+  rdfs:domain cfg:JNDIConfiguration ;
+  rdfs:label "Role search string" ;
+  rdfs:range xsd:string ;
+.
+cfg:jndiurl
+  a cfg:LdapServerParameters ;
+  rdfs:comment "LDAP server connection URL" ;
+  rdfs:domain cfg:JNDIConfiguration ;
+  rdfs:label "Connection URL" ;
+  rdfs:range xsd:string ;
+.
+cfg:jndiusername
+  a cfg:LdapServerParameters ;
+  rdfs:comment "Connection Username" ;
+  rdfs:domain cfg:JNDIConfiguration ;
+  rdfs:label "Username for server connection" ;
+  rdfs:range xsd:string ;
+.
+cfg:jndiuserpattern
+  a cfg:LdapServerParameters ;
+  rdfs:comment "Pattern for user searches in JNDI/LDAP" ;
+  rdfs:domain cfg:JNDIConfiguration ;
+  rdfs:label "User pattern string" ;
+  rdfs:range xsd:string ;
+.
+cfg:luceneIndexing
+  a cfg:DataPlatformParameters ;
+  rdfs:comment "Control for the Data Platform Feature." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:range xsd:boolean ;
+.
+cfg:mailControllerPassword
+  a cfg:SmtpServerParameters ;
+  rdfs:comment "Password for authenticating on smtp server." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "SMTP Password" ;
+  rdfs:range xsd:string ;
+.
+cfg:mailControllerUser
+  a cfg:SmtpServerParameters ;
+  rdfs:comment "Username for authenticating on smtp server." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "SMTP Username" ;
+  rdfs:range xsd:string ;
+.
+cfg:mauiServerPassword
+  a owl:DatatypeProperty ;
+  rdfs:comment "Password for authenticating against the Maui Server instance. Can be left unspecified if no authentication is required." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Maui Server Password" ;
+  rdfs:range xsd:string ;
+.
+cfg:mauiServerURL
+  a owl:DatatypeProperty ;
+  rdfs:comment "URL of a Maui Server instance to be used for auto-tagging." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Maui Server URL" ;
+  rdfs:range xsd:string ;
+.
+cfg:mauiServerUserName
+  a owl:DatatypeProperty ;
+  rdfs:comment "User name for authenticating against the Maui Server instance. Can be left unspecified if no authentication is required." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Maui Server user name" ;
+  rdfs:range xsd:string ;
+.
+cfg:maxBatchSort
+  a cfg:AdvancedParameters ;
+  rdfs:comment "The server pre-sorts this number of items for simple searches." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Max Server Pre-sort" ;
+  rdfs:range xsd:int ;
+.
+cfg:memoryPercentageForClean
+  a cfg:CleanerParameters ;
+  rdfs:comment "If less than this percentage of memory is used, then sessions will not be timed out." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Triggering Percentage of Memory" ;
+  rdfs:range xsd:double ;
+.
+cfg:memoryPercentageForCriticalClean
+  a cfg:CleanerParameters ;
+  rdfs:comment "If more than this percentage of memory is used, then sessions will be aggressively timed out." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Higher Triggering Percentage of Memory" ;
+  rdfs:range xsd:double ;
+.
+cfg:metricsDashboardsActivated
+  a cfg:TeamworkParameters ;
+  rdfs:comment "Enables or disables the Metrics Dashboard feature." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Metrics dashboards activated" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:mlURL
+  a cfg:TeamworkParameters ;
+  rdfs:comment "The URL of the MarkLogic database server." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "MarkLogic URL" ;
+  rdfs:range xsd:string ;
+.
+cfg:mlUserName
+  a cfg:TeamworkParameters ;
+  rdfs:comment "The MarkLogic user name." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "MarkLogic user name" ;
+  rdfs:range xsd:string ;
+.
+cfg:name
+  a rdf:Property ;
+  rdfs:domain cfg:GraphName ;
+  rdfs:label "name" ;
+  rdfs:range xsd:string ;
+.
+cfg:needsAuthentication
+  a cfg:SmtpServerParameters ;
+  rdfs:comment "If true, then smtp server requires authentication. Defaults to false." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "SMTP Authentication On" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:ontologyEditorLicense
+  a cfg:TeamworkParameters ;
+  rdfs:comment "A license key for EVN Ontology Editor" ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "EVN ontology editor license" ;
+  rdfs:range xsd:string ;
+.
+cfg:owl2shaclGraphURI
+  a cfg:AdvancedParameters ;
+  rdfs:comment "The URI of a named graph to use for the OWL-to-SHACL conversion features. Defaults to the graph stored in the file TopBraid/SHACL/owl2shacl.ttl. To restore that default, reset it to http://datashapes.org/owl2shacl instead of just deleting the value." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "OWL-to-SHACL rules graph" ;
+  rdfs:range xsd:string ;
+.
+cfg:preserveReificationStatements
+  a owl:DatatypeProperty ;
+  rdfs:comment "If true then EDG file importers will not attempt to convert rdf:Statement instances into corresponding reification URIs. Among the RDF file exporters, only the Sorted Turtle writer will observe this flag - all others do not convert reification URIs back to rdf:Statements." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Preserve reification statements" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:queryManagement
+  a cfg:AdvancedParameters ;
+  rdfs:comment "If set to true the process management page will display long running queries. Defaults to false." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Enable SPARQL Query Management" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:sdbBatchSize
+  a cfg:DatabaseParameters ;
+  rdfs:comment "The number of rows written to the SQL database in each batch.  The default is 1000 but adjusting it may improve bulk insert performance." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "RDBMS Update Batch Size" ;
+  rdfs:range xsd:int ;
+.
+cfg:sdbFetchSize
+  a cfg:DatabaseParameters ;
+  rdfs:comment "The number of rows returned from the SQL database on each network round trip.  Certain values have certain meaning to difference database types. Not all databases use this value." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "RDBMS Database Fetch Size" ;
+  rdfs:range xsd:int ;
+.
+cfg:sdbMaxConnections
+  a cfg:DatabaseParameters ;
+  rdfs:comment "For each RDBMS or D2RQ database, the maximum number of active connections permitted." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Max Connections per Database" ;
+  rdfs:range xsd:int ;
+.
+cfg:sdbType
+  a cfg:TeamworkParameters ;
+  rdfs:comment "The type of the RDBMS database to use. Must be \"MySQL\", \"Oracle\", or \"SQLServer\"." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "RDBMS database type" ;
+  rdfs:range [
+      a rdfs:Datatype ;
+      owl:oneOf (
+          "MySQL"
+          "Oracle"
+          "SQLServer"
+        ) ;
+    ] ;
+.
+cfg:sdbURL
+  a cfg:TeamworkParameters ;
+  rdfs:comment "The URL of the RDBMS database server." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "RDBMS URL" ;
+  rdfs:range xsd:string ;
+.
+cfg:sdbUserName
+  a cfg:TeamworkParameters ;
+  rdfs:comment "The RDBMS user name." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "RDBMS user name" ;
+  rdfs:range xsd:string ;
+.
+cfg:secureStorageEncryption
+  a cfg:AdvancedParameters ;
+  rdfs:comment "Encryption algorithm used to encrypt passwords in the secure storage file." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Secure Storage encryption" ;
+  rdfs:range [
+      a rdfs:Datatype ;
+      owl:oneOf (
+          "PBEWithSHA1AndDESede"
+          "PBEWithMD5AndDES"
+        ) ;
+    ] ;
+.
+cfg:serverURL
+  a cfg:BasicParameters ;
+  rdfs:comment "The base URL where the application is running (without /tbl/...), e.g., http://localhost:8083 or http://www.company.com/edg" ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Server URL" ;
+  rdfs:range xsd:anyURI ;
+.
+cfg:showHiddenFiles
+  a cfg:BasicParameters ;
+  rdfs:comment "If true, show all the files that are present on each project during data selection. Defaults to false." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Show Hidden Files" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:smtpServer
+  a cfg:SmtpServerParameters ;
+  rdfs:comment "Smtp Server to be used for sending emails in TopBraid Live." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "SMTP Server" ;
+  rdfs:range xsd:string ;
+.
+cfg:smtpServerFrom
+  a cfg:SmtpServerParameters ;
+  rdfs:comment "From email address to be used for sending emails in TopBraid Live." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "SMTP Server From Address" ;
+  rdfs:range xsd:string ;
+.
+cfg:smtpServerPort
+  a cfg:SmtpServerParameters ;
+  rdfs:comment "Port used by smtp Server." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "SMTP Server Port Number" ;
+  rdfs:range xsd:int ;
+.
+cfg:suppressVariousWarnings
+  a cfg:AdvancedParameters ;
+  rdfs:comment "When a possible software design inconsistency is detected, and the system is not configured to fail, then suppress the warnings.  Setting this parameter to false will result in logged error message of any design inconsistencies." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Suppress Warnings of Possible Design Inconsistency" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:tdbSafeIterators
+  a cfg:AdvancedParameters ;
+  rdfs:comment "If true, TDB-backed iterators take a copy to isolate themselves from the database." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Enable TDB safe iterators" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:teamworkActiveDatabaseDriver
+  a cfg:TeamworkParameters ;
+  rdfs:comment "The kind of persistence technology to be used by the application" ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Application data storage" ;
+  rdfs:range [
+      a rdfs:Datatype ;
+      owl:oneOf (
+          "SharedTDB"
+          "TDB"
+          "DataPlatform"
+          "SDB"
+        ) ;
+    ] ;
+  owl:versionInfo "NOTE: The values in the rdfs:range field should align with the instances of cfg:DatabaseDriver, so that the display labels work correctly." ;
+.
+cfg:teamworkAdminRole
+  a cfg:TeamworkParameters ;
+  rdfs:comment "A security role (such as from LDAP) assigned to Teamwork administrators." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Teamwork Administrator Role" ;
+  rdfs:range <http://rdfs.org/sioc/ns#Role> ;
+.
+cfg:teamworkArchiveProject
+  a cfg:TeamworkParameters ;
+  rdfs:comment "The name of a project in the workspace that shall contain any newly created working copy archives. MUST NOT contain spaces and SHOULD NOT contain other special characters." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Archives project" ;
+  rdfs:range xsd:string ;
+.
+cfg:teamworkCommentsActivated
+  a cfg:TeamworkParameters ;
+  rdfs:comment "If set to true, users can create Comments. There is a sibling configuration parameter to activate Tasks. Defaults to false if empty." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Comments activated" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:teamworkDefaultDefaultNamespace
+  a cfg:TeamworkParameters ;
+  rdfs:comment "The default value for the suggested default namespace for new asset collections. The string can use {type} as a placeholder for the plural of the lower-case asset type name, e.g. \"ontologies\", and {id} as a placeholder for the system ID of the asset collection as derived from the label." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Default namespace suggestion" ;
+  rdfs:range xsd:string ;
+.
+cfg:teamworkDisableSourceCodeEditing
+  a owl:DatatypeProperty ;
+  rdfs:comment "True to hide the source code editing window of the full-page resource editor, for all users." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Hide source code editors" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:teamworkEditorChoices
+  a cfg:TeamworkParameters ;
+  rdfs:comment "Determines the choices that users can make to switch between the \"old\" 6.2 editors and the new panel-based editors introduced with 6.3." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Available Editor Applications" ;
+  rdfs:range [
+      a rdfs:Datatype ;
+      owl:oneOf (
+          "Prefer New Editors"
+          "Prefer Old Editors"
+          "Disable Old Editors where New Editors available"
+        ) ;
+    ] ;
+.
+cfg:teamworkEnableJobTitles
+  a owl:DatatypeProperty ;
+  rdfs:comment "Allow the creation of job titles for organizations in the Governance Model, and assign users to those job titles, instead of assigning them directly to the organization. This feature may be removed in a future version and is not recommended for new deployments." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Enable job titles" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:teamworkRootProject
+  a cfg:TeamworkParameters ;
+  rdfs:comment "The name of a root project in the workspace that shall contain any newly created vocabularies. MUST NOT contain spaces and SHOULD NOT contain other special characters." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Repository project" ;
+  rdfs:range xsd:string ;
+.
+cfg:teamworkTaskEmails
+  a cfg:TeamworkParameters ;
+  rdfs:comment "If set to true, changes to Tasks will trigger email notifications to the task assignees. Defaults to false." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Send task emails" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:teamworkTasksActivated
+  a cfg:TeamworkParameters ;
+  rdfs:comment "If set to true, users can create Tasks. There is a sibling configuration parameter to activate Comments. Defaults to false if empty." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Tasks activated" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:tempGraphMinimumLife
+  a cfg:AdvancedParameters ;
+  rdfs:comment "The length of time to wait before a temporary graph can be garbage collected (minutes)." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Temporary Graphs Time Out" ;
+  rdfs:range xsd:long ;
+.
+cfg:uiEnableDebugMode
+  a cfg:UISPINParameters ;
+  rdfs:comment "True to activate debug mode (for ui:debug etc). Defaults to false." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Enable debug mode" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:uiGenerateComments
+  a cfg:UISPINParameters ;
+  rdfs:comment "True to preserve <!-- ... --> comments in the output. Defaults to false." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Generate <!-- ... --> comments" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:uiGenerateSourceAttributes
+  a cfg:UISPINParameters ;
+  rdfs:comment "True to inject swpsource attributes for debugging in (HTML/XML) source code. Defaults to false." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Inject swpsource attributes" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:uiLabelFunctionURI
+  a cfg:UISPINParameters ;
+  rdfs:comment "The URI of a SPARQL function that takes a resource as argument and returns a string representation. If set, this will be used whenever ui:label is called, making it possible to define custom label algorithms in a single place." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "ui label function URI" ;
+  rdfs:range xsd:string ;
+.
+cfg:uiLibConstant
+  a cfg:UISPINParameters ;
+  rdfs:comment "True to have ui:lib() always return the static value \"lib\"." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "ui:lib function is constant" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:uiMaxTableRows
+  a cfg:UISPINParameters ;
+  rdfs:comment "The maximum number of rows to be displayed by (search results) table widgets." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "maximum number of table rows" ;
+  rdfs:range xsd:integer ;
+.
+cfg:uiSPINConstraintViolationsErrorBlockEditing
+  a cfg:UISPINParameters ;
+  rdfs:comment "If true then the SWA edit forms will report those SPIN constraint violations marked as spin:Error or spin:Fatal as errors that cannot be OKed by the confirm dialog. By default (false), all SPIN constraint violations are non-Fatal are reported as warnings that the user can manually bypass." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Constraint violations block editing" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:uiStrictArgumentChecking
+  a cfg:UISPINParameters ;
+  rdfs:comment "True to have the system check for the presence of all non-optional arguments (a bit slower, but useful for debugging). Defaults to false." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Strict argument checking" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:uiTraceDynamicViews
+  a cfg:UISPINParameters ;
+  rdfs:comment "True to trace the actual SWP elements used by ui:classView and ui:resourceView in the log. Defaults to false." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Trace dynamic views" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:useSaxon
+  a cfg:AdvancedParameters ;
+  rdfs:comment "Use Saxon rather than Xalan for XSLT/XML processing. Defaults to false." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Use Saxon" ;
+  rdfs:range xsd:boolean ;
+.
+cfg:verboseLogging
+  a cfg:AdvancedParameters ;
+  rdfs:comment "If true, then some operations will send additional info to the log. This may slow down the server a bit. Defaults to false." ;
+  rdfs:domain cfg:ServerConfiguration ;
+  rdfs:label "Verbose logging" ;
+  rdfs:range xsd:boolean ;
+.

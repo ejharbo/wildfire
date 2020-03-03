@@ -1,0 +1,85 @@
+# baseURI: http://edg.topbraidlive.org/1.0/config/importers/ddl
+# imports: http://edg.topbraid.solutions/1.0/schema/base
+
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix edg: <http://edg.topbraidlive.org/model/> .
+@prefix edg-importer: <http://edg.topbraidlive.org/importer/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraidlive.org/1.0/config/importers/ddl>
+  rdf:type owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraidlive.org/config/importers/GMD_config-importers-ddl> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/base> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+<http://edg.topbraidlive.org/config/importers/GMD_config-importers-ddl>
+  rdf:type vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:ImporterGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraidlive.org/1.0/config/importers> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+edg-importer:TransformToOracleDatatypes
+  rdf:type edg:TransformGraphMapping ;
+  edg:description "A mapping for the post-processing of DDL imports to ORACLE datatypes" ;
+  edg:targetSchemaGraph <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  edg:transformGraph <http://edg.topbraid.solutions/1.0/transform/importer/oracle/ddl> ;
+  rdfs:label "Transform to oracle datatypes" ;
+.
+edg:TransformGraphMapping
+  rdf:type owl:Class ;
+  rdf:type sh:NodeShape ;
+  rdfs:label "Transform graph mapping" ;
+  rdfs:subClassOf <http://edg.topbraid.solutions/model/Construct> ;
+  sh:property [
+      sh:path edg:targetSchemaGraph ;
+      sh:class owl:Ontology ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      sh:path edg:transformGraph ;
+      sh:class owl:Ontology ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+.
+edg:description
+  rdf:type owl:AnnotationProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:label "description" ;
+.
+edg:targetSchemaGraph
+  rdf:type owl:ObjectProperty ;
+  rdfs:label "target schema graph" ;
+  rdfs:subPropertyOf <http://edg.topbraid.solutions/model/graph> ;
+.
+edg:transformGraph
+  rdf:type owl:ObjectProperty ;
+  rdfs:label "transform graph" ;
+  rdfs:subPropertyOf <http://edg.topbraid.solutions/model/graph> ;
+.

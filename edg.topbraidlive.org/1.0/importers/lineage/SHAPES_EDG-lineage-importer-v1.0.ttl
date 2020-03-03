@@ -1,0 +1,669 @@
+# baseURI: http://edg.topbraidlive.org/1.0/shapes/LineageImporter
+# imports: http://datashapes.org/dash
+# imports: http://edg.topbraid.solutions/1.0/proxy/importer/lineage
+
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix shapes: <http://edg.ext.topbraidlive.org/LineageImporter/shapes#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/proxy/importer/lineage#ExecutablesCustomTypeShape>
+  rdf:type sh:NodeShape ;
+  rdfs:label "Custom executables shape" ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#eXECUTABLENAME> ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "EXECUTABLE NAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#eXECUTABLESYSTEMTYPE> ;
+      sh:maxCount 1 ;
+      sh:name "EXECUTABLE SYSTEM NAME" ;
+    ] ;
+  sh:sparql [
+      sh:message "A Custom executable should not have a database name" ;
+      sh:prefixes <http://edg.topbraidlive.org/1.0/shapes/LineageImporter> ;
+      sh:select """SELECT $this
+WHERE {
+    ?this proxy-lineage:eXECUTABLEDATABASENAME ?executableServer.
+}""" ;
+    ] ;
+  sh:sparql [
+      sh:message "A Custom executable should not have a schema name" ;
+      sh:prefixes <http://edg.topbraidlive.org/1.0/shapes/LineageImporter> ;
+      sh:select """SELECT $this
+WHERE {
+    ?this proxy-lineage:eXECUTABLESCHEMANAME ?executableSchema.
+}""" ;
+    ] ;
+  sh:sparql [
+      sh:message "A Custom executable should not have a server name" ;
+      sh:prefixes <http://edg.topbraidlive.org/1.0/shapes/LineageImporter> ;
+      sh:select """SELECT $this
+WHERE {
+    ?this proxy-lineage:eXECUTABLESERVERNAME ?executableServer.
+}""" ;
+    ] ;
+  sh:target <http://edg.topbraid.solutions/proxy/importer/lineage#SparqlTargetCustomExecutable> ;
+.
+<http://edg.topbraid.solutions/proxy/importer/lineage#ExecutablesScriptTypeInformaticaSession>
+  rdf:type sh:NodeShape ;
+  rdfs:comment """Manta will send the IFPC info in the following columns 
+
+EXECUTABLE_SYSTEM_TYPE                      IFPC
+EXECUTABLE_SERVER_NAME                    IFPC Repository
+EXECUTABLE_DATABASE_NAME               IFPC Folder
+EXECUTABLE_SCHEMA_NAME                  IFPC Workflow
+EXECUTABLE_NAME                                    IFPC Session
+EXECUTABLE_TYPE                                       INFORMATICA SESSION""" ;
+  rdfs:label "ExecutablesScriptTypeInformaticaSession" ;
+  sh:property [
+      rdf:type sh:PropertyShape ;
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#eXECUTABLESCHEMANAME> ;
+      sh:description "IFPC Workflow" ;
+      sh:maxCount 1 ;
+      sh:name "e XECUTABLESCHEMANAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#eXECUTABLEDATABASENAME> ;
+      sh:description """IFPC Folder
+""" ;
+      sh:maxCount 1 ;
+      sh:name "e XECUTABLEDATABASENAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#eXECUTABLENAME> ;
+      sh:description "IFPC Session" ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "EXECUTABLE NAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#eXECUTABLESERVERNAME> ;
+      sh:description "IFPC Repository" ;
+      sh:maxCount 1 ;
+      sh:name "e XECUTABLESERVERNAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#eXECUTABLESYSTEMTYPE> ;
+      sh:description "If it is one of the supported executable types then the script will be created as such. If it is not, the script will not have a type. However for now we don't consider it a violation. To be revisited" ;
+      sh:maxCount 1 ;
+      sh:name "EXECUTABLE SYSTEM NAME" ;
+    ] ;
+  sh:target <http://edg.topbraid.solutions/proxy/importer/lineage#SparqlTargetExecutableInformaticaSession> ;
+.
+<http://edg.topbraid.solutions/proxy/importer/lineage#ExecutablesScriptTypeMicrosoftSSIS>
+  rdf:type sh:NodeShape ;
+  rdfs:comment """Manta will send the SSIS info in the following columns 
+
+EXECUTABLE_SYSTEM_TYPE                      SSIS
+EXECUTABLE_SERVER_NAME                    Server
+EXECUTABLE_DATABASE_NAME               SSIS Folder/SSIS Project
+EXECUTABLE_SCHEMA_NAME                  SSIS Package
+EXECUTABLE_NAME                                    SSIS DataFlowTask
+EXECUTABLE_TYPE                                       ETL JOB 
+
+""" ;
+  rdfs:label "ExecutablesScriptTypeInformaticaSession" ;
+  sh:property [
+      rdf:type sh:PropertyShape ;
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#eXECUTABLESCHEMANAME> ;
+      sh:description "IFPC Workflow" ;
+      sh:maxCount 1 ;
+      sh:name "e XECUTABLESCHEMANAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#eXECUTABLEDATABASENAME> ;
+      sh:description """IFPC Folder
+""" ;
+      sh:maxCount 1 ;
+      sh:name "e XECUTABLEDATABASENAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#eXECUTABLENAME> ;
+      sh:description "IFPC Session" ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "EXECUTABLE NAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#eXECUTABLESERVERNAME> ;
+      sh:description "IFPC Repository" ;
+      sh:maxCount 1 ;
+      sh:name "e XECUTABLESERVERNAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#eXECUTABLESYSTEMTYPE> ;
+      sh:description "If it is one of the supported executable types then the script will be created as such. If it is not, the script will not have a type. However for now we don't consider it a violation. To be revisited" ;
+      sh:maxCount 1 ;
+      sh:name "EXECUTABLE SYSTEM NAME" ;
+    ] ;
+  sh:target <http://edg.topbraid.solutions/proxy/importer/lineage#SparqlTargetExecutableMicrosoftSSIS> ;
+.
+<http://edg.topbraid.solutions/proxy/importer/lineage#ExecutablesScriptTypeShape>
+  rdf:type sh:NodeShape ;
+  rdfs:label "ExecutablesScriptTypeShape" ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#eXECUTABLEDATABASENAME> ;
+      sh:description """The directory structure that the script might reside
+""" ;
+      sh:maxCount 1 ;
+      sh:name "e XECUTABLEDATABASENAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#eXECUTABLENAME> ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "EXECUTABLE NAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#eXECUTABLESERVERNAME> ;
+      sh:maxCount 1 ;
+      sh:name "e XECUTABLESERVERNAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#eXECUTABLESYSTEMTYPE> ;
+      sh:description "If it is one of the supported executable types then the script will be created as such. If it is not, the script will not have a type. However for now we don't consider it a violation. To be revisited" ;
+      sh:maxCount 1 ;
+      sh:name "EXECUTABLE SYSTEM NAME" ;
+    ] ;
+  sh:sparql [
+      sh:message "A script executable should not have a schema name" ;
+      sh:prefixes <http://edg.topbraidlive.org/1.0/shapes/LineageImporter> ;
+      sh:select """SELECT $this
+WHERE {
+    ?this proxy-lineage:eXECUTABLESCHEMANAME ?executableSchema.
+}""" ;
+    ] ;
+  sh:target <http://edg.topbraid.solutions/proxy/importer/lineage#SparqlTargetExecutableScript> ;
+.
+<http://edg.topbraid.solutions/proxy/importer/lineage#LineageTemplateShape>
+  rdf:type sh:NodeShape ;
+  sh:property sh:PropertyShapeExecutableName ;
+  sh:property sh:PropertyShapeExecutableType ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#sOURCEDATABASETYPE> ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "s OURCEDATABASETYPE" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#tARGETDATABASETYPE> ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "t ARGETDATABASETYPE" ;
+    ] ;
+  sh:targetClass <http://edg.topbraid.solutions/proxy/importer/lineage#LineageTemplate> ;
+.
+<http://edg.topbraid.solutions/proxy/importer/lineage#RelationalDatabasesSourceShape>
+  rdf:type sh:NodeShape ;
+  rdfs:label "Relational databases source dataset shape" ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#sOURCEDATABASENAME> ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "s OURCEDATABASENAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#sOURCEDATABASESCHEMA> ;
+      sh:maxCount 1 ;
+      sh:name "s OURCEDATABASESCHEMA" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#sOURCEDATABASETYPE> ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "s OURCEDATABASETYPE" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#sOURCEDATAELEMENTNAME> ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "s OURCEDATAELEMENTNAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#sOURCEDATASETNAME> ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "s OURCEDATASETNAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#sOURCEDATASETTYPE> ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "s OURCEDATASETTYPE" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#sOURCESERVERNAME> ;
+      sh:maxCount 1 ;
+      sh:name "s OURCESERVERNAME" ;
+    ] ;
+  sh:sparql [
+      sh:message "Dataset Type should be TABLE, VIEW or SYNONYM in Relational Databases in source" ;
+      sh:prefixes <http://edg.topbraidlive.org/1.0/shapes/LineageImporter> ;
+      sh:select """SELECT $this
+WHERE {
+    ?this proxy-lineage:sOURCEDATASETTYPE ?datasetType. 
+?this proxy-lineage:sOURCEDATABASETYPE ?databaseType.
+FILTER ((?databaseType IN (\"TERADATA\", \"ORACLE\",\"MSSQL\", \"NETEZZA\",\"DB2\")) && (spif:upperCase(?datasetType) NOT IN (\"VIEW\",\"TABLE\",\"SYNONYM\"))).
+}""" ;
+    ] ;
+  sh:target <http://edg.topbraid.solutions/proxy/importer/lineage#SparqlTargetRelationalDatabasesSource> ;
+.
+<http://edg.topbraid.solutions/proxy/importer/lineage#RelationalDatabasesTargetShape>
+  rdf:type sh:NodeShape ;
+  rdfs:label "RelationalDatabasesTargetShape" ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#tARGETDATABASENAME> ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "t ARGETDATABASENAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#tARGETDATABASESCHEMA> ;
+      sh:maxCount 1 ;
+      sh:name "t ARGETDATABASESCHEMA" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#tARGETDATABASETYPE> ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "t ARGETDATABASETYPE" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#tARGETDATAELEMENTNAME> ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "t ARGETDATAELEMENTNAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#tARGETDATASETNAME> ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "t ARGETDATASETNAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#tARGETDATASETTYPE> ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "tARGETDATASETTYPE" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#tARGETSERVERNAME> ;
+      sh:maxCount 1 ;
+      sh:name "t ARGETSERVERNAME" ;
+    ] ;
+  sh:sparql [
+      sh:message "Target Dataset Type should be TABLE, VIEW or SYNONYM in Relational Databases" ;
+      sh:prefixes <http://edg.topbraidlive.org/1.0/shapes/LineageImporter> ;
+      sh:select """SELECT $this
+WHERE {
+    ?this proxy-lineage:tARGETDATASETTYPE ?datasetType. 
+?this proxy-lineage:tARGETDATABASETYPE ?databaseType.
+FILTER ((?databaseType IN (\"ORACLE\",\"MSSQL\", \"NETEZZA\",\"DB2\", \"TERADATA\")) && (spif:upperCase(?datasetType) NOT IN (\"VIEW\",\"TABLE\",\"SYNONYM\"))).
+}""" ;
+    ] ;
+  sh:target <http://edg.topbraid.solutions/proxy/importer/lineage#SparqlTargetRelationalDatabasesTarget> ;
+.
+<http://edg.topbraid.solutions/proxy/importer/lineage#SourceCustomTypeShape>
+  rdf:type sh:NodeShape ;
+  rdfs:comment "When csv has custom type, only dataset type, dataset name and dataelement name are taken into consideration. Schema and server should not be filled and if they are, we ignore them" ;
+  rdfs:label "SourceCustomTypeShape" ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#sOURCEDATAELEMENTNAME> ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "s OURCEDATAELEMENTNAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#sOURCEDATASETNAME> ;
+      sh:maxCount 1 ;
+      sh:minCount 0 ;
+      sh:name "s OURCEDATASETNAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#sOURCEDATASETTYPE> ;
+      sh:maxCount 1 ;
+      sh:minCount 0 ;
+      sh:name "s OURCEDATASETTYPE" ;
+    ] ;
+  sh:sparql [
+      sh:message "A Custom source object should not have a database name" ;
+      sh:prefixes <http://edg.topbraidlive.org/1.0/shapes/LineageImporter> ;
+      sh:select """SELECT $this
+WHERE {
+    ?this proxy-lineage:sOURCEDATABASENAME ?databaseName.
+}""" ;
+    ] ;
+  sh:sparql [
+      sh:message "A Custom source object should not have a schema name" ;
+      sh:prefixes <http://edg.topbraidlive.org/1.0/shapes/LineageImporter> ;
+      sh:select """SELECT $this
+WHERE {
+    ?this proxy-lineage:sOURCEDATABASESCHEMA ?databaseSchema.
+}""" ;
+    ] ;
+  sh:sparql [
+      sh:message "A Custom source object should not have a server name" ;
+      sh:prefixes <http://edg.topbraidlive.org/1.0/shapes/LineageImporter> ;
+      sh:select """SELECT $this
+WHERE {
+    ?this proxy-lineage:sOURCESERVERNAME ?databaseServer.
+}""" ;
+    ] ;
+  sh:target <http://edg.topbraid.solutions/proxy/importer/lineage#SparqlTargetCustomTypeSource> ;
+.
+<http://edg.topbraid.solutions/proxy/importer/lineage#SourceFileSystemShape>
+  rdf:type sh:NodeShape ;
+  rdfs:comment "A file system must always have the directory structure in the sourceDatabaseName, a filename in the sourceDatasetName and it might have a column in the sourceDataElementName. The directory structure may have a server" ;
+  rdfs:label "SourceFileSystemShape" ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#sOURCEDATABASENAME> ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "s OURCEDATABASENAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#sOURCEDATAELEMENTNAME> ;
+      sh:description "the column number in the file" ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "s OURCEDATAELEMENTNAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#sOURCEDATASETNAME> ;
+      sh:description "the name of the file should always be there" ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "s OURCEDATASETNAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#sOURCEDATASETTYPE> ;
+      sh:hasValue "FILE" ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#sOURCESERVERNAME> ;
+      sh:maxCount 1 ;
+      sh:name "s OURCESERVERNAME" ;
+    ] ;
+  sh:sparql [
+      sh:message "A source File System object cannot have a schema" ;
+      sh:prefixes <http://edg.topbraidlive.org/1.0/shapes/LineageImporter> ;
+      sh:select """SELECT $this
+WHERE {
+    ?this proxy-lineage:sOURCEDATABASESCHEMA  ?databaseSchema.
+}""" ;
+    ] ;
+  sh:target <http://edg.topbraid.solutions/proxy/importer/lineage#SparqlTargetFileSystemSource> ;
+.
+<http://edg.topbraid.solutions/proxy/importer/lineage#SparqlTargetCustomExecutable>
+  rdf:type sh:SPARQLTarget ;
+  rdfs:label "SparqlTargetCustomExecutable" ;
+  sh:select """SELECT ?this
+WHERE {
+?this <http://edg.topbraid.solutions/proxy/importer/lineage#eXECUTABLETYPE> ?executableType.
+   FILTER (UCASE(?executableType)=\"CUSTOM TRANSFORM\") .
+}""" ;
+.
+<http://edg.topbraid.solutions/proxy/importer/lineage#SparqlTargetCustomTypeSource>
+  rdf:type sh:SPARQLTarget ;
+  rdfs:label "SparqlTargetFileSystemSource" ;
+  sh:select """SELECT ?this
+WHERE {
+?this <http://edg.topbraid.solutions/proxy/importer/lineage#sOURCEDATABASETYPE> ?databaseType.
+   FILTER (ucase(?databaseType) NOT IN (\"ORACLE\", \"MSSQL\", \"NETEZZA\", \"DB2\", \"TERADATA\", \"FILE SYSTEM\", \"HIVE\")) .
+}""" ;
+.
+<http://edg.topbraid.solutions/proxy/importer/lineage#SparqlTargetCustomTypeTarget>
+  rdf:type sh:SPARQLTarget ;
+  rdfs:label "SparqlTargetCustomTypeTarget" ;
+  sh:select """SELECT ?this
+WHERE {
+?this <http://edg.topbraid.solutions/proxy/importer/lineage#tARGETDATABASETYPE> ?databaseType.
+   FILTER (ucase(?databaseType) NOT IN (\"ORACLE\", \"MSSQL\", \"NETEZZA\", \"DB2\", \"TERADATA\", \"FILE SYSTEM\", \"HIVE\")) .
+}""" ;
+.
+<http://edg.topbraid.solutions/proxy/importer/lineage#SparqlTargetExecutableInformaticaSession>
+  rdf:type sh:SPARQLTarget ;
+  rdfs:label "SparqlTargetExecutableInformaticaSession" ;
+  sh:select """SELECT ?this
+WHERE {
+?this <http://edg.topbraid.solutions/proxy/importer/lineage#eXECUTABLETYPE> ?executableType.
+   FILTER (UCASE(?executableType)=\"INFORMATICA SESSION\") .
+}""" ;
+.
+<http://edg.topbraid.solutions/proxy/importer/lineage#SparqlTargetExecutableMicrosoftSSIS>
+  rdf:type sh:SPARQLTarget ;
+  rdfs:label "SparqlTargetExecutableInformaticaSession" ;
+  sh:select """SELECT ?this
+WHERE {
+?this <http://edg.topbraid.solutions/proxy/importer/lineage#eXECUTABLETYPE> ?executableType.
+?this <http://edg.topbraid.solutions/proxy/importer/lineage#eXECUTABLESYSTEMTYPE> ?executableSystemType.
+   FILTER (UCASE(?executableType)=\"ETL JOB\" && UCASE(?executableSystemType='SSIS')) .
+
+}""" ;
+.
+<http://edg.topbraid.solutions/proxy/importer/lineage#SparqlTargetExecutableScript>
+  rdf:type sh:SPARQLTarget ;
+  rdfs:label "SparqlTargetExecutableScript" ;
+  sh:select """SELECT ?this
+WHERE {
+?this <http://edg.topbraid.solutions/proxy/importer/lineage#eXECUTABLETYPE> ?executableType.
+   FILTER (UCASE(?executableType)=\"SCRIPT\") .
+}""" ;
+.
+<http://edg.topbraid.solutions/proxy/importer/lineage#SparqlTargetFileSystemSource>
+  rdf:type sh:SPARQLTarget ;
+  rdfs:label "SparqlTargetFileSystemSource" ;
+  sh:select """SELECT ?this
+WHERE {
+?this <http://edg.topbraid.solutions/proxy/importer/lineage#sOURCEDATABASETYPE> ?databaseType.
+FILTER (?databaseType = \"FILE SYSTEM\").
+}""" ;
+.
+<http://edg.topbraid.solutions/proxy/importer/lineage#SparqlTargetFileSystemTarget>
+  rdf:type sh:SPARQLTarget ;
+  rdfs:label "SparqlTargetFileSystemTarget" ;
+  sh:select """SELECT ?this
+WHERE {
+?this <http://edg.topbraid.solutions/proxy/importer/lineage#tARGETDATABASETYPE> ?databaseType.
+FILTER (?databaseType = \"FILE SYSTEM\").
+}""" ;
+.
+<http://edg.topbraid.solutions/proxy/importer/lineage#SparqlTargetRelationalDatabasesSource>
+  rdf:type sh:SPARQLTarget ;
+  rdfs:label "SPARQLTargetRelationalDatabases" ;
+  sh:select """SELECT ?this
+WHERE {
+?this <http://edg.topbraid.solutions/proxy/importer/lineage#sOURCEDATABASETYPE> ?databaseType.
+    FILTER (ucase(?databaseType) IN (\"ORACLE\", \"MSSQL\", \"NETEZZA\", \"DB2\", \"TERADATA\")) .
+}""" ;
+.
+<http://edg.topbraid.solutions/proxy/importer/lineage#SparqlTargetRelationalDatabasesTarget>
+  rdf:type sh:SPARQLTarget ;
+  rdfs:label "SPARQLTargetRelationalDatabases" ;
+  sh:select """SELECT ?this
+WHERE {
+?this <http://edg.topbraid.solutions/proxy/importer/lineage#tARGETDATABASETYPE> ?databaseType.
+FILTER (ucase(?databaseType) IN (\"TERADATA\", \"ORACLE\",\"MSSQL\", \"NETEZZA\",\"DB2\")).
+}""" ;
+.
+<http://edg.topbraid.solutions/proxy/importer/lineage#TargetCustomTypeShape>
+  rdf:type sh:NodeShape ;
+  rdfs:comment "When csv has custom type, only dataset type, dataset name and dataelement name are taken into consideration. Database name, schema and server should not be filled and if they are, we raise a violation. " ;
+  rdfs:label "TargetCustomTypeShape" ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#tARGETDATAELEMENTNAME> ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name ":tARGETDATAELEMENTNAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#tARGETDATASETNAME> ;
+      sh:maxCount 1 ;
+      sh:minCount 0 ;
+      sh:name ":tARGETDATASETNAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#tARGETDATASETTYPE> ;
+      sh:maxCount 1 ;
+      sh:minCount 0 ;
+      sh:name "TARGETDATASETTYPE" ;
+    ] ;
+  sh:sparql [
+      sh:message "A Custom source object should not have a database name" ;
+      sh:prefixes <http://edg.topbraidlive.org/1.0/shapes/LineageImporter> ;
+      sh:select """SELECT $this
+WHERE {
+    ?this proxy-lineage:tARGETDATABASENAME ?databaseName.
+}""" ;
+    ] ;
+  sh:sparql [
+      sh:message "A Custom source object should not have a schema name" ;
+      sh:prefixes <http://edg.topbraidlive.org/1.0/shapes/LineageImporter> ;
+      sh:select """SELECT $this
+WHERE {
+    ?this proxy-lineage:tARGETDATABASESCHEMA ?schemaName.
+}""" ;
+    ] ;
+  sh:sparql [
+      sh:message "A Custom source object should not have a server name" ;
+      sh:prefixes <http://edg.topbraidlive.org/1.0/shapes/LineageImporter> ;
+      sh:select """SELECT $this
+WHERE {
+    ?this proxy-lineage:tARGETSERVERNAME ?serverName.
+}""" ;
+    ] ;
+  sh:target <http://edg.topbraid.solutions/proxy/importer/lineage#SparqlTargetCustomTypeTarget> ;
+.
+<http://edg.topbraid.solutions/proxy/importer/lineage#TargetFileSystemShape>
+  rdf:type sh:NodeShape ;
+  rdfs:comment "A file system must always have the directory structure in the targetDatabaseName, a filename in the targetDatasetName and it might have a column in the targetDataElementName. The directory structure may have a server" ;
+  rdfs:label "TargetFileSystemShape" ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#tARGETDATABASENAME> ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "t ARGETDATABASENAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#tARGETDATAELEMENTNAME> ;
+      sh:description "the column number in the file" ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "tARGETDATAELEMENTNAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#tARGETDATASETNAME> ;
+      sh:description "the name of the file should always be there" ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "tARGETDATASETNAME" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#tARGETDATASETTYPE> ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "t ARGETDATASETTYPE" ;
+      sh:value "FILE" ;
+    ] ;
+  sh:property [
+      sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#tARGETSERVERNAME> ;
+      sh:maxCount 1 ;
+      sh:name "t ARGETSERVERNAME" ;
+    ] ;
+  sh:target <http://edg.topbraid.solutions/proxy/importer/lineage#SparqlTargetFileSystemSource> ;
+.
+<http://edg.topbraidlive.org/1.0/shapes/LineageImporter>
+  rdf:type owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraidlive.org/shapes/LineageImporter/GMD_LineageImporter> ;
+  owl:imports <http://datashapes.org/dash> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/proxy/importer/lineage> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+  sh:declare [
+      rdf:type sh:PrefixDeclaration ;
+      sh:namespace "http://edg.topbraid.solutions/proxy/importer/lineage#"^^xsd:anyURI ;
+      sh:prefix "proxy-lineage" ;
+    ] ;
+  sh:declare [
+      rdf:type sh:PrefixDeclaration ;
+      sh:namespace "http://spinrdf.org/spl#"^^xsd:anyURI ;
+      sh:prefix "spl" ;
+    ] ;
+.
+<http://edg.topbraidlive.org/shapes/LineageImporter/GMD_LineageImporter>
+  rdf:type vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:ShapesGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraidlive.org/1.0/shapes/LineageImporter> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+sh:PropertyShapeExecutableName
+  rdf:type sh:PropertyShape ;
+  sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#eXECUTABLENAME> ;
+  rdfs:label "Property shape executable name" ;
+  sh:minCount 1 ;
+.
+sh:PropertyShapeExecutableType
+  rdf:type sh:PropertyShape ;
+  sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#eXECUTABLETYPE> ;
+  rdfs:comment """The executable type can be one of [\"SCRIPT\",
+\"SOFTWARE FUNCTION\",
+\"ETL JOB\",
+\"STORED PROCEDURE\",
+\"SOFTWARE MACRO\",
+\"SOFTWARE TRIGGER\",
+\"INFORMATICA SESSION\",
+\"VIEW\",
+\"SYNONYM\"]. If it is any other that means that it is a custom type""" ;
+  rdfs:label "Property shape executable type" ;
+  sh:minCount 1 ;
+.
+sh:PropertyShapeSourceDatasetType
+  rdf:type sh:PropertyShape ;
+  sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#sOURCEDATASETTYPE> ;
+  rdfs:label "Property shape source dataset type" ;
+  sh:in (
+      "TABLE"
+      "VIEW"
+      "SYNONYM"
+    ) ;
+  sh:minCount 1 ;
+.
+sh:PropertyShapeTargetDatasetType
+  rdf:type sh:PropertyShape ;
+  sh:path <http://edg.topbraid.solutions/proxy/importer/lineage#tARGETDATASETTYPE> ;
+  rdfs:label "Property shape target dataset type" ;
+  sh:in (
+      "TABLE"
+      "VIEW"
+      "BO REPORT"
+      "SYNONYM"
+    ) ;
+  sh:minCount 1 ;
+.

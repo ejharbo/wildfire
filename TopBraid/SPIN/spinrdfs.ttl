@@ -1,0 +1,262 @@
+# baseURI: http://topbraid.org/spin/spinrdfs
+# imports: http://spinrdf.org/spin
+# prefix: spinrdfs
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spinrdfs: <http://topbraid.org/spin/spinrdfs#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+sp:_label
+  a sp:Variable ;
+  sp:varName "label" ;
+.
+sp:_ns
+  a sp:Variable ;
+  sp:varName "ns" ;
+.
+sp:_p
+  a sp:Variable ;
+  sp:varName "p" ;
+.
+sp:_property
+  a sp:Variable ;
+  sp:varName "property" ;
+.
+sp:_range
+  a sp:Variable ;
+  sp:varName "range" ;
+.
+sp:_rdf
+  a sp:Variable ;
+  sp:varName "rdf" ;
+.
+sp:_value
+  a sp:Variable ;
+  sp:varName "value" ;
+.
+<http://topbraid.org/spin/spinrdfs>
+  a owl:Ontology ;
+  rdfs:comment "Contains axioms to run constraint checks on a subset of RDF Schema." ;
+  owl:imports <http://spinrdf.org/spin> ;
+  owl:versionInfo "0.1.1" ;
+.
+spinrdfs:RangeConstraint
+  a spin:Template ;
+  spin:body [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object spin:ConstraintViolation ;
+            sp:predicate rdf:type ;
+            sp:subject _:b36523 ;
+          ]
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate rdfs:label ;
+            sp:subject _:b36523 ;
+          ]
+          [
+            sp:object spin:_this ;
+            sp:predicate spin:violationRoot ;
+            sp:subject _:b36523 ;
+          ]
+          [
+            sp:object [
+                sp:varName "property" ;
+              ] ;
+            sp:predicate spin:violationPath ;
+            sp:subject _:b36523 ;
+          ]
+        ) ;
+      sp:where (
+          (
+            (
+              [
+                a sp:Filter ;
+                sp:expression [
+                    a sp:and ;
+                    sp:arg1 [
+                        a sp:isURI ;
+                        sp:arg1 spin:_this ;
+                      ] ;
+                    sp:arg2 [
+                        a sp:not ;
+                        sp:arg1 [
+                            a spinrdfs:isSystem ;
+                            sp:arg1 spin:_this ;
+                          ] ;
+                      ] ;
+                  ] ;
+              ]
+            )
+            [
+              sp:object [
+                  sp:varName "value" ;
+                ] ;
+              sp:predicate [
+                  sp:varName "property" ;
+                ] ;
+              sp:subject spin:_this ;
+            ]
+            [
+              a sp:Filter ;
+              sp:expression [
+                  a sp:isURI ;
+                  sp:arg1 [
+                      sp:varName "value" ;
+                    ] ;
+                ] ;
+            ]
+          )
+          [
+            a sp:TriplePath ;
+            sp:object [
+                sp:varName "p" ;
+              ] ;
+            sp:path [
+                a sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subPropertyOf ;
+              ] ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "range" ;
+              ] ;
+            sp:predicate rdfs:range ;
+            sp:subject [
+                sp:varName "p" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:ne ;
+                sp:arg1 [
+                    sp:varName "range" ;
+                  ] ;
+                sp:arg2 rdfs:Literal ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:and ;
+                sp:arg1 [
+                    a spl:hasValue ;
+                    sp:arg1 [
+                        sp:varName "value" ;
+                      ] ;
+                    sp:arg2 rdf:type ;
+                    sp:arg3 [
+                        sp:varName "anyType" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a sp:not ;
+                    sp:arg1 [
+                        a spl:instanceOf ;
+                        sp:arg1 [
+                            sp:varName "value" ;
+                          ] ;
+                        sp:arg2 [
+                            sp:varName "range" ;
+                          ] ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a smf:buildString ;
+                sp:arg1 "Range violation: {?range} expected for {?value} at {?property}" ;
+              ] ;
+            sp:variable [
+                sp:varName "label" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:labelTemplate "rdfs:range constraint" ;
+  rdfs:comment "Checks whether all property values of ?this have a type compatible with the declared rdfs:ranges on the property, or have no type." ;
+  rdfs:label "Range constraint" ;
+  rdfs:subClassOf spin:Templates ;
+.
+spinrdfs:isSystem
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:Let ;
+            sp:expression [
+                a afn:namespace ;
+                sp:arg1 spin:_arg1 ;
+              ] ;
+            sp:variable sp:_ns ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:or ;
+                sp:arg1 [
+                    a sp:or ;
+                    sp:arg1 [
+                        a sp:eq ;
+                        sp:arg1 sp:_ns ;
+                        sp:arg2 [
+                            a xsd:string ;
+                            sp:arg1 owl: ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        a sp:eq ;
+                        sp:arg1 sp:_ns ;
+                        sp:arg2 [
+                            a xsd:string ;
+                            sp:arg1 rdfs: ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a sp:eq ;
+                    sp:arg1 sp:_ns ;
+                    sp:arg2 [
+                        a xsd:string ;
+                        sp:arg1 rdf: ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "the resource to check" ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks whether a given resource (?arg1) is from the RDF, RDFS or OWL namespace." ;
+  rdfs:label "is system" ;
+  rdfs:subClassOf spin:Functions ;
+.
+rdfs:Resource
+  spin:constraint [
+      a spinrdfs:RangeConstraint ;
+    ] ;
+.

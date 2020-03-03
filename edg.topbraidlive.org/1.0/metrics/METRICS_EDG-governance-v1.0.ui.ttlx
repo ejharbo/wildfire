@@ -1,0 +1,1783 @@
+# baseURI: http://edg.topbraid.solutions/1.0/metrics/governance
+# imports: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://edg.topbraid.solutions/1.0/schema/governance
+# imports: http://edg.topbraid.solutions/1.0/spin/library
+# imports: http://spinrdf.org/spinx
+# imports: http://topbraid.org/swa
+# imports: http://topbraid.org/teamwork
+# imports: http://www.w3.org/ns/shacl#
+
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix default: <http://uispin.org/default#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/metrics/governance>
+  rdf:type owl:Ontology ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/metrics/governance> ;
+  rdfs:label "EDG METRICS governance" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/spin/library> ;
+  owl:imports <http://spinrdf.org/spinx> ;
+  owl:imports <http://topbraid.org/swa> ;
+  owl:imports <http://topbraid.org/teamwork> ;
+  owl:imports sh: ;
+.
+edg:Elements
+  rdf:type ui:NodeClass ;
+  rdfs:label "Elements" ;
+  rdfs:subClassOf ui:Element ;
+.
+edg:Formula
+  rdf:type ui:Function ;
+  rdfs:subClassOf ui:Functions ;
+.
+edg:NumberOfActiveWorkflows
+  rdf:type edg:FormulaClass ;
+  rdf:type ui:Function ;
+  ui:prototype """
+<ui:group>
+    <ui:return ui:result=\"123\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/metrics/governance> ;
+  rdfs:label "Number of Active Workflows" ;
+  rdfs:subClassOf edg:Formula ;
+.
+edg:PIIcountsForSubjectAreaDataElements
+  rdf:type edg:FormulaClass ;
+  rdf:type ui:Function ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType edg:SubjectArea ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:return ui:result=\"123\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/metrics/governance> ;
+  rdfs:label "PII counts for subject area data elements" ;
+  rdfs:subClassOf edg:Formula ;
+.
+edg:getCountOfInstancesOfClass
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                rdf:type sp:Count ;
+                sp:expression [
+                    sp:varName "element" ;
+                  ] ;
+              ] ;
+            sp:varName "count" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              rdf:type sp:Filter ;
+              sp:expression [
+                  rdf:type sp:bound ;
+                  sp:arg1 [
+                      sp:varName "graph" ;
+                    ] ;
+                ] ;
+            ]
+          )
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "class" ;
+                    ] ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "element" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "graph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:class ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:returnType xsd:integer ;
+  rdfs:label "get count of instances of class" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:getCriticalDataElementCountsForGivenSubjectAreaForCurrentUser
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:groupBy (
+          [
+            sp:varName "label" ;
+          ]
+          [
+            sp:varName "resource" ;
+          ]
+        ) ;
+      sp:orderBy (
+          [
+            rdf:type sp:Desc ;
+            sp:expression [
+                sp:varName "value" ;
+              ] ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                rdf:type sp:Count ;
+                sp:expression [
+                    sp:varName "dataElement" ;
+                  ] ;
+              ] ;
+            sp:varName "value" ;
+          ]
+          [
+            sp:varName "label" ;
+          ]
+          [
+            sp:varName "resource" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              sp:object [
+                  sp:varName "?0" ;
+                ] ;
+              sp:predicate teamwork:readableGraphsUnderTeamControl ;
+              sp:subject () ;
+            ]
+            [
+              sp:object [
+                  sp:varName "projectGraph" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?1" ;
+                ] ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "teamGraph" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              sp:object () ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              rdf:type sp:Filter ;
+              sp:expression [
+                  rdf:type sp:exists ;
+                  sp:elements (
+                      [
+                        rdf:type sp:NamedGraph ;
+                        sp:elements (
+                            [
+                              sp:object [
+                                  sp:varName "subjectArea" ;
+                                ] ;
+                              sp:predicate edg:subjectArea ;
+                              sp:subject [
+                                  sp:varName "projectGraph" ;
+                                ] ;
+                            ]
+                          ) ;
+                        sp:graphNameNode [
+                            sp:varName "projectGraph" ;
+                          ] ;
+                      ]
+                    ) ;
+                ] ;
+            ]
+            [
+              rdf:type sp:TriplePath ;
+              sp:object edg:DataElement ;
+              sp:path [
+                  rdf:type sp:ModPath ;
+                  sp:modMax -2 ;
+                  sp:modMin 1 ;
+                  sp:subPath rdfs:subClassOf ;
+                ] ;
+              sp:subject [
+                  sp:varName "myClass" ;
+                ] ;
+            ]
+            [
+              rdf:type sp:NamedGraph ;
+              sp:elements (
+                  [
+                    sp:object [
+                        sp:varName "myClass" ;
+                      ] ;
+                    sp:predicate rdf:type ;
+                    sp:subject [
+                        sp:varName "dataElement" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object "true"^^xsd:boolean ;
+                    sp:predicate edg:isCritical ;
+                    sp:subject [
+                        sp:varName "dataElement" ;
+                      ] ;
+                  ]
+                ) ;
+              sp:graphNameNode [
+                  sp:varName "projectGraph" ;
+                ] ;
+            ]
+          )
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type swa:labelInGraph ;
+                arg:resource [
+                    sp:varName "projectGraph" ;
+                  ] ;
+                arg:resourceGraph [
+                    sp:varName "projectGraph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "label" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression () ;
+            sp:variable [
+                sp:varName "resource" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  rdfs:comment "get critical data element counts for given subject area for current user" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:getCriticalDataElementsPerSubjectArea
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:groupBy (
+          [
+            sp:varName "projectGraph" ;
+          ]
+          [
+            sp:varName "teamGraph" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                rdf:type sp:Count ;
+                sp:expression [
+                    sp:varName "element" ;
+                  ] ;
+              ] ;
+            sp:varName "count" ;
+          ]
+          [
+            sp:varName "projectGraph" ;
+          ]
+          [
+            sp:varName "teamGraph" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              sp:object [
+                  sp:varName "?0" ;
+                ] ;
+              sp:predicate teamwork:readableGraphsUnderTeamControl ;
+              sp:subject () ;
+            ]
+            [
+              sp:object [
+                  sp:varName "projectGraph" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?1" ;
+                ] ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "teamGraph" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              sp:object () ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              rdf:type sp:Filter ;
+              sp:expression [
+                  rdf:type sp:exists ;
+                  sp:elements (
+                      [
+                        rdf:type sp:NamedGraph ;
+                        sp:elements (
+                            [
+                              sp:object [
+                                  sp:varName "subjectArea" ;
+                                ] ;
+                              sp:predicate edg:subjectArea ;
+                              sp:subject [
+                                  sp:varName "projectGraph" ;
+                                ] ;
+                            ]
+                          ) ;
+                        sp:graphNameNode [
+                            sp:varName "projectGraph" ;
+                          ] ;
+                      ]
+                    ) ;
+                ] ;
+            ]
+            [
+              rdf:type sp:TriplePath ;
+              sp:object edg:DataElement ;
+              sp:path [
+                  rdf:type sp:ModPath ;
+                  sp:modMax -2 ;
+                  sp:modMin 1 ;
+                  sp:subPath rdfs:subClassOf ;
+                ] ;
+              sp:subject [
+                  sp:varName "myClass" ;
+                ] ;
+            ]
+            [
+              rdf:type sp:NamedGraph ;
+              sp:elements (
+                  [
+                    sp:object [
+                        sp:varName "myClass" ;
+                      ] ;
+                    sp:predicate rdf:type ;
+                    sp:subject [
+                        sp:varName "element" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object "true"^^xsd:boolean ;
+                    sp:predicate edg:isCritical ;
+                    sp:subject [
+                        sp:varName "element" ;
+                      ] ;
+                  ]
+                ) ;
+              sp:graphNameNode [
+                  sp:varName "projectGraph" ;
+                ] ;
+            ]
+          )
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  rdfs:label "get critical data elements per subject area" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:getGovernanceRoles
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "role" ;
+          ]
+          [
+            sp:varName "label" ;
+          ]
+          [
+            sp:varName "assigned" ;
+          ]
+          [
+            sp:varName "resource" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "role" ;
+              ] ;
+            sp:predicate edg:workflowParticipantProperties ;
+            sp:subject () ;
+          ]
+          [
+            rdf:type sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "abbrev" ;
+                    ] ;
+                  sp:predicate edg:abbreviation ;
+                  sp:subject [
+                      sp:varName "role" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:concat ;
+                sp:arg1 [
+                    rdf:type spif:titleCase ;
+                    sp:arg1 [
+                        rdf:type ui:label ;
+                        sp:arg1 [
+                            sp:varName "role" ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    rdf:type sp:if ;
+                    sp:arg1 [
+                        rdf:type sp:bound ;
+                        sp:arg1 [
+                            sp:varName "abbrev" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        rdf:type sp:concat ;
+                        sp:arg1 " (" ;
+                        sp:arg2 [
+                            sp:varName "abbrev" ;
+                          ] ;
+                        sp:arg3 ")" ;
+                      ] ;
+                    sp:arg3 "" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "label" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "role" ;
+                    ] ;
+                  sp:predicate edg:requiredGovernanceRole ;
+                  sp:subject [
+                      sp:varName "resource" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:if ;
+                sp:arg1 [
+                    rdf:type sp:bound ;
+                    sp:arg1 [
+                        sp:varName "resource" ;
+                      ] ;
+                  ] ;
+                sp:arg2 "Assigned" ;
+                sp:arg3 "Unassigned" ;
+              ] ;
+            sp:variable [
+                sp:varName "assigned" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  rdfs:comment "get  governance roles" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:getGraphsInSubjectArea
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                rdf:type sp:Count ;
+                sp:expression [
+                    sp:varName "projectGraph" ;
+                  ] ;
+              ] ;
+            sp:varName "count" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              sp:object [
+                  sp:varName "?0" ;
+                ] ;
+              sp:predicate teamwork:readableGraphsUnderTeamControl ;
+              sp:subject () ;
+            ]
+            [
+              sp:object [
+                  sp:varName "projectGraph" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?1" ;
+                ] ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "teamGraph" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              sp:object () ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              rdf:type sp:Filter ;
+              sp:expression [
+                  rdf:type sp:exists ;
+                  sp:elements (
+                      [
+                        rdf:type sp:NamedGraph ;
+                        sp:elements (
+                            [
+                              sp:object [
+                                  sp:varName "subjectArea" ;
+                                ] ;
+                              sp:predicate edg:subjectArea ;
+                              sp:subject [
+                                  sp:varName "projectGraph" ;
+                                ] ;
+                            ]
+                          ) ;
+                        sp:graphNameNode [
+                            sp:varName "projectGraph" ;
+                          ] ;
+                      ]
+                    ) ;
+                ] ;
+            ]
+          )
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  rdfs:label "get graphs in subject area" ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:getMyGraphsAcrossSubjectAreas
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:groupBy (
+          [
+            sp:varName "subjectArea" ;
+          ]
+          [
+            sp:varName "projectGraphLabel" ;
+          ]
+          [
+            sp:varName "roles" ;
+          ]
+        ) ;
+      sp:orderBy (
+          [
+            sp:varName "subjectArea" ;
+          ]
+          [
+            sp:varName "projectGraphLabel" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                rdf:type sp:GroupConcat ;
+                sp:expression [
+                    rdf:type sp:str ;
+                    sp:arg1 [
+                        sp:varName "projectGraph" ;
+                      ] ;
+                  ] ;
+                sp:separator "," ;
+              ] ;
+            sp:varName "projectGraphs" ;
+          ]
+          [
+            sp:varName "subjectArea" ;
+          ]
+          [
+            sp:varName "projectGraphLabel" ;
+          ]
+          [
+            sp:varName "roles" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "?0" ;
+              ] ;
+            sp:predicate teamwork:readableGraphsUnderTeamControl ;
+            sp:subject () ;
+          ]
+          [
+            sp:object [
+                sp:varName "projectGraph" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "teamGraph" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "subjectArea" ;
+                    ] ;
+                  sp:predicate edg:subjectArea ;
+                  sp:subject [
+                      sp:varName "projectGraph" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "projectGraph" ;
+              ] ;
+          ]
+          (
+            [
+              rdf:type sp:Bind ;
+              sp:expression [
+                  rdf:type smf:userWithName ;
+                  sp:arg1 [
+                      rdf:type smf:currentUserName ;
+                    ] ;
+                ] ;
+              sp:variable [
+                  sp:varName "currentUser" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "subjectArea" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?2" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?3" ;
+                ] ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?2" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "currentUser" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?3" ;
+                ] ;
+            ]
+            [
+              sp:object () ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?3" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?4" ;
+                ] ;
+              sp:predicate edg:graphsAndRolesForGivenSubjectAreaAndUser ;
+              sp:subject [
+                  sp:varName "?2" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "projectGraph" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?4" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?5" ;
+                ] ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?4" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "teamGraph" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?5" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?6" ;
+                ] ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?5" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "roles" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?6" ;
+                ] ;
+            ]
+            [
+              sp:object () ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?6" ;
+                ] ;
+            ]
+            [
+              rdf:type sp:Filter ;
+              sp:expression [
+                  rdf:type sp:and ;
+                  sp:arg1 [
+                      rdf:type sp:bound ;
+                      sp:arg1 [
+                          sp:varName "teamGraph" ;
+                        ] ;
+                    ] ;
+                  sp:arg2 [
+                      rdf:type sp:ne ;
+                      sp:arg1 [
+                          sp:varName "roles" ;
+                        ] ;
+                      sp:arg2 "" ;
+                    ] ;
+                ] ;
+            ]
+          )
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type swa:labelInGraph ;
+                arg:resource [
+                    sp:varName "projectGraph" ;
+                  ] ;
+                arg:resourceGraph [
+                    sp:varName "projectGraph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "projectGraphLabel" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  rdfs:comment "get my graphs across subject areas" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:getMyGraphsInGivenSubjectArea
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:groupBy (
+          [
+            sp:varName "subjectArea" ;
+          ]
+          [
+            sp:varName "projectGraphLabel" ;
+          ]
+          [
+            sp:varName "roles" ;
+          ]
+        ) ;
+      sp:orderBy (
+          [
+            sp:varName "subjectArea" ;
+          ]
+          [
+            sp:varName "projectGraphLabel" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                rdf:type sp:GroupConcat ;
+                sp:expression [
+                    rdf:type sp:str ;
+                    sp:arg1 [
+                        sp:varName "projectGraph" ;
+                      ] ;
+                  ] ;
+                sp:separator "," ;
+              ] ;
+            sp:varName "projectGraphs" ;
+          ]
+          [
+            sp:varName "subjectArea" ;
+          ]
+          [
+            sp:varName "projectGraphLabel" ;
+          ]
+          [
+            sp:varName "roles" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              sp:object [
+                  sp:varName "subjectArea" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?1" ;
+                ] ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "user" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              sp:object () ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?2" ;
+                ] ;
+              sp:predicate edg:graphsAndRolesForGivenSubjectAreaAndUser ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "projectGraph" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?2" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?3" ;
+                ] ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?2" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "teamGraph" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?3" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?4" ;
+                ] ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?3" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "roles" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?4" ;
+                ] ;
+            ]
+            [
+              sp:object () ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?4" ;
+                ] ;
+            ]
+            [
+              rdf:type sp:Filter ;
+              sp:expression [
+                  rdf:type sp:and ;
+                  sp:arg1 [
+                      rdf:type sp:bound ;
+                      sp:arg1 [
+                          sp:varName "teamGraph" ;
+                        ] ;
+                    ] ;
+                  sp:arg2 [
+                      rdf:type sp:ne ;
+                      sp:arg1 [
+                          sp:varName "roles" ;
+                        ] ;
+                      sp:arg2 "" ;
+                    ] ;
+                ] ;
+            ]
+          )
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type swa:labelInGraph ;
+                arg:resource [
+                    sp:varName "projectGraph" ;
+                  ] ;
+                arg:resourceGraph [
+                    sp:varName "projectGraph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "projectGraphLabel" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType edg:SubjectArea ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  rdfs:comment "get my graphs in given subject area" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:getWorkflowCountsForGivenSubjectAreaForCurrentUser
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "value" ;
+          ]
+          [
+            sp:varName "label" ;
+          ]
+          [
+            sp:varName "resource" ;
+          ]
+          [
+            sp:varName "roles" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:bound ;
+                sp:arg1 [
+                    sp:varName "label" ;
+                  ] ;
+              ] ;
+          ]
+          [
+            rdf:type sp:SubQuery ;
+            sp:query [
+                rdf:type sp:Select ;
+                sp:groupBy (
+                    [
+                      sp:varName "label" ;
+                    ]
+                    [
+                      sp:varName "resource" ;
+                    ]
+                    [
+                      sp:varName "roles" ;
+                    ]
+                  ) ;
+                sp:orderBy (
+                    [
+                      sp:varName "label" ;
+                    ]
+                  ) ;
+                sp:resultVariables (
+                    [
+                      sp:expression [
+                          rdf:type sp:Count ;
+                          sp:expression [
+                              sp:varName "workflow" ;
+                            ] ;
+                        ] ;
+                      sp:varName "value" ;
+                    ]
+                    [
+                      sp:varName "label" ;
+                    ]
+                    [
+                      sp:varName "resource" ;
+                    ]
+                    [
+                      sp:varName "roles" ;
+                    ]
+                  ) ;
+                sp:where (
+                    [
+                      rdf:type sp:Bind ;
+                      sp:expression [
+                          rdf:type edg:currentUser ;
+                        ] ;
+                      sp:variable [
+                          sp:varName "user" ;
+                        ] ;
+                    ]
+                    (
+                      [
+                        sp:object [
+                            sp:varName "subjectArea" ;
+                          ] ;
+                        sp:predicate rdf:first ;
+                        sp:subject [
+                            sp:varName "?0" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "?1" ;
+                          ] ;
+                        sp:predicate rdf:rest ;
+                        sp:subject [
+                            sp:varName "?0" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "user" ;
+                          ] ;
+                        sp:predicate rdf:first ;
+                        sp:subject [
+                            sp:varName "?1" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object () ;
+                        sp:predicate rdf:rest ;
+                        sp:subject [
+                            sp:varName "?1" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "?2" ;
+                          ] ;
+                        sp:predicate edg:graphsAndRolesForGivenSubjectAreaAndUser ;
+                        sp:subject [
+                            sp:varName "?0" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "projectGraph" ;
+                          ] ;
+                        sp:predicate rdf:first ;
+                        sp:subject [
+                            sp:varName "?2" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "?3" ;
+                          ] ;
+                        sp:predicate rdf:rest ;
+                        sp:subject [
+                            sp:varName "?2" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "teamGraph" ;
+                          ] ;
+                        sp:predicate rdf:first ;
+                        sp:subject [
+                            sp:varName "?3" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "?4" ;
+                          ] ;
+                        sp:predicate rdf:rest ;
+                        sp:subject [
+                            sp:varName "?3" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object [
+                            sp:varName "roles" ;
+                          ] ;
+                        sp:predicate rdf:first ;
+                        sp:subject [
+                            sp:varName "?4" ;
+                          ] ;
+                      ]
+                      [
+                        sp:object () ;
+                        sp:predicate rdf:rest ;
+                        sp:subject [
+                            sp:varName "?4" ;
+                          ] ;
+                      ]
+                      [
+                        rdf:type sp:Filter ;
+                        sp:expression [
+                            rdf:type sp:bound ;
+                            sp:arg1 [
+                                sp:varName "teamGraph" ;
+                              ] ;
+                          ] ;
+                      ]
+                    )
+                    [
+                      rdf:type sp:NamedGraph ;
+                      sp:elements (
+                          (
+                            [
+                              sp:object teamwork:Tag ;
+                              sp:predicate rdf:type ;
+                              sp:subject [
+                                  sp:varName "tag" ;
+                                ] ;
+                            ]
+                            [
+                              sp:object [
+                                  sp:varName "status" ;
+                                ] ;
+                              sp:predicate teamwork:status ;
+                              sp:subject [
+                                  sp:varName "tag" ;
+                                ] ;
+                            ]
+                            [
+                              sp:object [
+                                  sp:varName "dateTime" ;
+                                ] ;
+                              sp:predicate dcterms:created ;
+                              sp:subject [
+                                  sp:varName "tag" ;
+                                ] ;
+                            ]
+                            [
+                              rdf:type sp:NamedGraph ;
+                              sp:elements (
+                                  [
+                                    sp:object [
+                                        sp:varName "subjectAreaOfGraph" ;
+                                      ] ;
+                                    sp:predicate edg:subjectArea ;
+                                    sp:subject [
+                                        sp:varName "projectGraph" ;
+                                      ] ;
+                                  ]
+                                  [
+                                    rdf:type sp:Filter ;
+                                    sp:expression [
+                                        rdf:type sp:eq ;
+                                        sp:arg1 [
+                                            sp:varName "subjectAreaOfGraph" ;
+                                          ] ;
+                                        sp:arg2 [
+                                            sp:varName "subjectArea" ;
+                                          ] ;
+                                      ] ;
+                                  ]
+                                ) ;
+                              sp:graphNameNode [
+                                  sp:varName "projectGraph" ;
+                                ] ;
+                            ]
+                          )
+                          [
+                            rdf:type sp:Bind ;
+                            sp:expression [
+                                rdf:type xsd:date ;
+                                sp:arg1 [
+                                    sp:varName "dateTime" ;
+                                  ] ;
+                              ] ;
+                            sp:variable [
+                                sp:varName "date" ;
+                              ] ;
+                          ]
+                          [
+                            rdf:type sp:Bind ;
+                            sp:expression [
+                                rdf:type ui:label ;
+                                sp:arg1 [
+                                    sp:varName "tag" ;
+                                  ] ;
+                              ] ;
+                            sp:variable [
+                                sp:varName "tagLabel" ;
+                              ] ;
+                          ]
+                          [
+                            rdf:type sp:Bind ;
+                            sp:expression [
+                                rdf:type spl:object ;
+                                sp:arg1 [
+                                    sp:varName "tag" ;
+                                  ] ;
+                                sp:arg2 teamwork:priority ;
+                              ] ;
+                            sp:variable [
+                                sp:varName "priority" ;
+                              ] ;
+                          ]
+                          [
+                            rdf:type sp:Bind ;
+                            sp:expression [
+                                rdf:type spl:object ;
+                                sp:arg1 [
+                                    sp:varName "tag" ;
+                                  ] ;
+                                sp:arg2 teamwork:workflowTemplate ;
+                              ] ;
+                            sp:variable [
+                                sp:varName "workflowTemplate" ;
+                              ] ;
+                          ]
+                          [
+                            rdf:type sp:Bind ;
+                            sp:expression [
+                                rdf:type teamwork:getTagWorkflowTemplate ;
+                                sp:arg1 [
+                                    sp:varName "tag" ;
+                                  ] ;
+                                sp:arg2 [
+                                    sp:varName "projectGraph" ;
+                                  ] ;
+                              ] ;
+                            sp:variable [
+                                sp:varName "template" ;
+                              ] ;
+                          ]
+                          [
+                            rdf:type sp:Bind ;
+                            sp:expression [
+                                rdf:type swa:labelInGraph ;
+                                arg:resource [
+                                    sp:varName "status" ;
+                                  ] ;
+                                arg:resourceGraph [
+                                    rdf:type teamwork:workflowsGraph ;
+                                  ] ;
+                              ] ;
+                            sp:variable [
+                                sp:varName "statusLabel" ;
+                              ] ;
+                          ]
+                          [
+                            rdf:type sp:Bind ;
+                            sp:expression [
+                                rdf:type swa:labelInGraph ;
+                                arg:resource [
+                                    sp:varName "template" ;
+                                  ] ;
+                                arg:resourceGraph [
+                                    rdf:type teamwork:workflowsGraph ;
+                                  ] ;
+                              ] ;
+                            sp:variable [
+                                sp:varName "workflow" ;
+                              ] ;
+                          ]
+                          [
+                            rdf:type sp:Bind ;
+                            sp:expression [
+                                rdf:type sp:concat ;
+                                sp:arg1 [
+                                    sp:varName "workflow" ;
+                                  ] ;
+                                sp:arg2 " - " ;
+                                sp:arg3 [
+                                    sp:varName "statusLabel" ;
+                                  ] ;
+                              ] ;
+                            sp:variable [
+                                sp:varName "element" ;
+                              ] ;
+                          ]
+                          [
+                            rdf:type sp:Bind ;
+                            sp:expression [
+                                rdf:type sp:concat ;
+                                sp:arg1 [
+                                    sp:varName "workflow" ;
+                                  ] ;
+                                sp:arg2 " - " ;
+                                sp:arg3 [
+                                    sp:varName "statusLabel" ;
+                                  ] ;
+                              ] ;
+                            sp:variable [
+                                sp:varName "label" ;
+                              ] ;
+                          ]
+                          [
+                            rdf:type sp:Bind ;
+                            sp:expression [
+                                sp:varName "template" ;
+                              ] ;
+                            sp:variable [
+                                sp:varName "resource" ;
+                              ] ;
+                          ]
+                        ) ;
+                      sp:graphNameNode [
+                          sp:varName "teamGraph" ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  rdfs:comment "get workflow counts for given subject area for current user" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:getlDataElementsPerSubjectArea
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:groupBy (
+          [
+            sp:varName "count" ;
+          ]
+          [
+            sp:varName "projectGraph" ;
+          ]
+          [
+            sp:varName "dataElementClass" ;
+          ]
+        ) ;
+      sp:orderBy (
+          [
+            rdf:type sp:Desc ;
+            sp:expression [
+                sp:varName "count" ;
+              ] ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                rdf:type sp:Count ;
+                sp:expression [
+                    sp:varName "element" ;
+                  ] ;
+              ] ;
+            sp:varName "count" ;
+          ]
+          [
+            sp:varName "projectGraph" ;
+          ]
+          [
+            sp:varName "dataElementClass" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              sp:object [
+                  sp:varName "?0" ;
+                ] ;
+              sp:predicate teamwork:readableGraphsUnderTeamControl ;
+              sp:subject () ;
+            ]
+            [
+              sp:object [
+                  sp:varName "projectGraph" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?1" ;
+                ] ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "teamGraph" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              sp:object () ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              rdf:type sp:Filter ;
+              sp:expression [
+                  rdf:type sp:exists ;
+                  sp:elements (
+                      [
+                        rdf:type sp:NamedGraph ;
+                        sp:elements (
+                            [
+                              sp:object [
+                                  sp:varName "subjectArea" ;
+                                ] ;
+                              sp:predicate edg:subjectArea ;
+                              sp:subject [
+                                  sp:varName "projectGraph" ;
+                                ] ;
+                            ]
+                          ) ;
+                        sp:graphNameNode [
+                            sp:varName "projectGraph" ;
+                          ] ;
+                      ]
+                    ) ;
+                ] ;
+            ]
+            [
+              rdf:type sp:TriplePath ;
+              sp:object edg:DataElement ;
+              sp:path [
+                  rdf:type sp:ModPath ;
+                  sp:modMax -2 ;
+                  sp:modMin 0 ;
+                  sp:subPath rdfs:subClassOf ;
+                ] ;
+              sp:subject [
+                  sp:varName "dataElementClass" ;
+                ] ;
+            ]
+            [
+              rdf:type sp:NamedGraph ;
+              sp:elements (
+                  [
+                    sp:object [
+                        sp:varName "dataElementClass" ;
+                      ] ;
+                    sp:predicate rdf:type ;
+                    sp:subject [
+                        sp:varName "element" ;
+                      ] ;
+                  ]
+                ) ;
+              sp:graphNameNode [
+                  sp:varName "projectGraph" ;
+                ] ;
+            ]
+          )
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  rdfs:label "get data elements per subject area" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.

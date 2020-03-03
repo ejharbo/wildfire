@@ -1,0 +1,3308 @@
+# baseURI: http://evn.topbraidlive.org/autotagger
+# imports: http://evn.topbraidlive.org/evnprojects
+# imports: http://evn.topbraidlive.org/tagger
+# imports: http://evn.topbraidlive.org/tagger/acjob
+# imports: http://evn.topbraidlive.org/ui
+# imports: http://server.topbraidlive.org/system-applications/teamworkconfig
+# imports: http://topbraid.org/corpus-spin
+# imports: http://topbraid.org/nlp/autoclassifier-preproc
+# imports: http://topbraid.org/teamwork.ui
+# prefix: autotagger
+
+@prefix acjob: <http://evn.topbraidlive.org/tagger/acjob#> .
+@prefix acpp: <http://topbraid.org/nlp/autoclassifier-preproc#> .
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix autotagger: <http://evn.topbraidlive.org/autotagger#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix conceptmatch: <http://topbraid.org/conceptmatch#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix core-soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix corpus: <http://topbraid.org/corpus#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkapp: <http://topbraid.org/swa/crosswalkapp#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dashboard: <http://example.org/dashboard#> .
+@prefix dataset: <http://teamwork.topbraidlive.org/dataset#> .
+@prefix datasetapp: <http://topbraid.org/swa/datasetapp#> .
+@prefix datasetviewer: <http://topbraid.org/swa/datasetviewer#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix default: <http://uispin.org/default#> .
+@prefix defaultapp: <http://topbraid.org/swa/defaultapp#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix eeh-lib: <http://www.environmenthub.no/spin/1.0/eeh-lib#> .
+@prefix eeh-reportlib: <http://www.environmenthub.no/spin/1.0/eeh-reportlib#> .
+@prefix elements: <http://purl.org/dc/elements/1.1/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evn: <http://topbraid.org/evn/evn#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evnimport: <http://evn.topbraidlive.org/uispin/evnimport#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix ex: <http://example.org/> .
+@prefix extjs: <http://uispin.com/extjs#> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix governance: <http://topbraid.org/teamworkgovernance.ui#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix graphql.search: <http://teamwork.topbraidlive.org/graphql.search#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix kennedys: <http://topbraid.org/examples/kennedys#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix ontologyviewer: <http://topbraid.org/swa/ontologyviewer#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmapp: <http://rdm.topbraidlive.org/rdmapp#> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix rdmviewer: <http://rdm.topbraidlive.org/rdmviewer#> .
+@prefix saf: <http://topbraid.org/saf/> .
+@prefix safconfig: <http://topbraid.org/safconfig/> .
+@prefix safm: <http://saf.topbraidlive.org/metaschema/> .
+@prefix savedQueries: <http://teamwork.topbraidlive.org/ui/savedQueries#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix server: <http://server.topbraidlive.org/server.ui#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sharepoint: <http://topbraid.org/sharepoint#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skosshapes: <http://topbraid.org/skos.shapes#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spin.ui: <http://spinrdf.org/spin.ui#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swadoc: <http://topbraid.org/swadoc#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix taggerspin: <http://evn.topbraidlive.org/taggerspin#> .
+@prefix taggerui: <http://evn.topbraidlive.org/taggerui#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix tblui: <http://server.topbraidlive.org/tblui#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkAdmin: <http://teamwork.topbraidlive.org/doc/teamworkAdmin#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworkconstraints: <http://topbraid.org/teamworkconstraints#> .
+@prefix teamworkdashboard: <http://topbraid.org/teamworkdashboard#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix teamworkupdate: <http://teamworkAPI.topbraid.com/teamworkUpdate#> .
+@prefix textindex: <http://topbraid.org/textindex#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix tracker: <http://teamwork.topbraidlive.org/ui/tracker#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uitest: <http://uispin.org/test#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix userdat: <http://teamwork.topbraidlive.org/ui/userdata> .
+@prefix userdata: <http://teamwork.topbraidlive.org/ui/userdata#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix victory: <http://edg.topbraid.solutions/victory/> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xhtml: <http://topbraid.org/xhtml#> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://evn.topbraidlive.org/autotagger>
+  a owl:Ontology ;
+  owl:imports <http://evn.topbraidlive.org/evnprojects> ;
+  owl:imports <http://evn.topbraidlive.org/tagger> ;
+  owl:imports <http://evn.topbraidlive.org/tagger/acjob> ;
+  owl:imports <http://evn.topbraidlive.org/ui> ;
+  owl:imports <http://server.topbraidlive.org/system-applications/teamworkconfig> ;
+  owl:imports <http://topbraid.org/corpus-spin> ;
+  owl:imports <http://topbraid.org/nlp/autoclassifier-preproc> ;
+  owl:imports <http://topbraid.org/teamwork.ui> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+autotagger:ApproveAllButton
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:status ;
+      spl:valueType teamwork:Status ;
+      rdfs:comment "The new status to set." ;
+    ] ;
+  ui:prototype """
+<teamwork:ActionLink arg:onClick=\"{= ui:functionCall(&quot;teamwork.commitTag&quot;, ?projectGraph, ?tag) }\" arg:title=\"Approve All\"/>
+"""^^ui:Literal ;
+  rdfs:label "Approve all button" ;
+  rdfs:subClassOf teamwork:TagStatusElements ;
+.
+autotagger:AutoClassifyChangedResources
+  a teamwork:CommitRule ;
+  a teamwork:EditRule ;
+  ui:prototype """
+<ui:group let:projectGraph=\"{= teamwork:currentMasterGraph() }\" let:tagId=\"{= teamwork:currentTagId() }\">
+    <ui:if ui:condition=\"{= (bound(?projectGraph) &amp;&amp; (!bound(?tagId))) &amp;&amp; (teamwork:getProjectType(?projectGraph) = &lt;http://topbraid.org/corpus-projects#ProjectType&gt;) }\">
+        <ui:group letrs:contentTagSets=\"{#
+                SELECT ?contentTagSet
+                WHERE {
+                    ?projectGraph tagger:triggerAutoClassifier ?contentTagSet .
+                } }\">
+            <ui:if ui:condition=\"{= !spr:isEmpty(?contentTagSets) }\">
+                <ui:log ui:debug=\"AutoClassifier rule triggered\"/>
+                <ui:group letrs:changedResources=\"{#
+                        SELECT DISTINCT ?resource
+                        WHERE {
+                            {
+                                GRAPH ui:addedGraph {
+                                    ?resource ?p ?o .
+                                } .
+                            }
+                            UNION
+                            {
+                                GRAPH ui:deletedGraph {
+                                    ?resource ?p ?o .
+                                } .
+                            } .
+                        } }\">
+                    <ui:if ui:condition=\"{= !spr:isEmpty(?changedResources) }\">
+                        <ui:forEach ui:resultSet=\"{= ?changedResources }\">
+                            <ui:log ui:debug=\"Triggering AutoClassifier for {= ?resource } in {= spr:rowCount(?contentTagSets) } content tag sets\"/>
+                            <ui:forEach ui:resultSet=\"{= ?contentTagSets }\">
+                                <ui:log ui:debug=\"Content tag set: {= ?contentTagSet }\"/>
+                                <ui:setContext ui:queryGraph=\"{= ?contentTagSet }\">
+                                    <autotagger:AutoClassifyResource autotagger:configuration=\"{= ?contentTagSet }\" autotagger:contentResource=\"{= ?resource }\"/>
+                                </ui:setContext>
+                            </ui:forEach>
+                        </ui:forEach>
+                    </ui:if>
+                </ui:group>
+            </ui:if>
+        </ui:group>
+    </ui:if>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A rule that fires when resources in a Corpus are changed, added or removed. The rule triggers the AutoClassifier of content tag sets that use the Corpus as their content graph." ;
+  rdfs:label "Auto-classify changed resources" ;
+  rdfs:subClassOf teamwork:EditRules ;
+.
+autotagger:AutoClassifyResource
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:configuration ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The AutoClassifier configuration resource (must be a content tag set resource in this case), a resource in the context graph described with tagger:xxx properties" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:contentResource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "A content resource to be auto-tagged, described in the content graph" ;
+    ] ;
+  rdfs:comment "A control element that runs the AutoClassifier on one content resource, and writes results straight to the production copy. Assumes all preconditions (Maui Server running, trained, etc.) have been checked." ;
+  rdfs:label "auto-classify resource" ;
+  rdfs:subClassOf ui:ControlElement ;
+.
+autotagger:AutoTagResourcesService
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resources ;
+      spl:valueType xsd:string ;
+      rdfs:comment "A space-separated list of resource URIs to auto-classify." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<swon:Object let:projectGraph=\"{= teamwork:currentMasterGraph() }\" let:teamGraph=\"{= teamwork:teamGraph(teamwork:currentMasterGraph()) }\">
+    <ui:if ui:condition=\"{= !teamwork:currentUserHasPrivilege(?teamGraph, teamwork:editor, ?teamGraph) }\">
+        <swon:Value arg:name=\"error\" arg:value=\"Current user doesn't have required access privileges.\"/>
+    </ui:if>
+    <ui:elseif ui:condition=\"{= !autotagger:isMauiServerConfigured() }\">
+        <swon:Value arg:name=\"error\" arg:value=\"Auto-tagging must first be enabled by the administrator.\"/>
+    </ui:elseif>
+    <ui:elseif ui:condition=\"{= !autotagger:isMauiServerRunning() }\">
+        <swon:Value arg:name=\"error\" arg:value=\"AutoClassifier is temporarily unavailable. Please contact the administrator.\"/>
+    </ui:elseif>
+    <ui:elseif ui:condition=\"{= !autotagger:isReady(?projectGraph) }\">
+        <swon:Value arg:name=\"error\" arg:value=\"AutoClassifier must be configured for this content tag set. This can be done from the content tag set's Manage tab.\"/>
+    </ui:elseif>
+    <ui:else>
+        <ui:group let:jobURI=\"{= autotagger:generateJobURI(?projectGraph) }\">
+            <ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+                <ui:call arg:resourceCount=\"{= autotagger:countResourcesFromList(?resources) }\" arg:scope=\"{= acjob:search }\" autotagger:configuration=\"{= ?projectGraph }\" autotagger:job=\"{= ?jobURI }\" ui:template=\"{= autotagger:InsertJobMetadata }\"/>
+            </ui:setContext>
+            <ui:setContext ui:queryGraph=\"{= ?projectGraph }\">
+                <autotagger:StartJob autotagger:configuration=\"{= ?projectGraph }\" autotagger:job=\"{= ?jobURI }\" autotagger:jobGraph=\"{= ?teamGraph }\" autotagger:resources=\"{= ?resources }\"/>
+            </ui:setContext>
+        </ui:group>
+    </ui:else>
+</swon:Object>
+"""^^ui:Literal ;
+  rdfs:comment """Starts an AutoClassifier job for a given set of resources.
+
+TODO: This could now be replaced by acsrv:StartJob, except for the privilege check.""" ;
+  rdfs:label "Auto tag resources service" ;
+  rdfs:subClassOf ui:JSONServices ;
+.
+autotagger:AutoTaggingManagePage
+  a ui:NodeClass ;
+  ui:headIncludes """
+<script type=\"text/javascript\">//
+
+var autotagger = {
+	beforeSubmit: function() {
+		var props = $('#AutoTaggingManageForm .contentProperty').filter(function() {
+			return $(this).prop('checked');
+		}).map(function() {
+			return $(this).val();
+		}).get().join(' ');
+		$('#contentProperties').val(props);
+	},
+};
+
+$(function() {
+	function toggleTrainingSampleSizeInput() {
+		$('#trainingSampleSize').attr('disabled', !$('#useTrainingSample').prop('checked'));
+	}
+	toggleTrainingSampleSizeInput();
+	$('#useTrainingSample').click(toggleTrainingSampleSizeInput);
+	$('#AutoTaggingManageForm')
+		.on('click', '#checkContentProperties', function() {
+			$('#AutoTaggingManageForm .contentProperty').prop('checked', true);
+		})
+		.on('click', '#uncheckContentProperties', function() {
+			$('#AutoTaggingManageForm .contentProperty').prop('checked', false);
+		});
+});</script>
+"""^^ui:Literal ;
+  ui:prototype """
+<ui:group let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+        <teamwork:Chrome arg:pageType=\"configure-auto-classifier-page\" arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= teamwork:ManageProjectTab }\">
+            <h1>Configure AutoClassifier for <em>{= teamwork:projectLabel(?projectGraph) }</em>
+            </h1>
+            <ui:if ui:condition=\"{= !autotagger:isMauiServerConfigured() }\">
+                <p>Auto-tagging must first be enabled by the administrator.</p>
+            </ui:if>
+            <ui:else>
+                <ui:setContext ui:queryGraph=\"{= ?projectGraph }\">
+                    <ui:group let:fetchContentLive=\"{= tagger:currentSubjectGraphHasObject(corpus:fetchContentLive) }\">
+                        <form action=\"swp\" id=\"AutoTaggingManageForm\" method=\"post\">
+                            <input name=\"_viewClass\" type=\"hidden\" value=\"{= autotagger:ConfigService }\"/>
+                            <input name=\"projectGraph\" type=\"hidden\" value=\"{= ?projectGraph }\"/>
+                            <input id=\"contentProperties\" name=\"contentProperties\" type=\"hidden\" value=\"\"/>
+                            <swa:LabeledElement arg:label=\"Content properties\" let:rootClass=\"{= tagger:currentContentRootClass() }\">
+                                <ui:loadable ui:loadLater=\"{= true }\">
+                                    <ui:call arg:fetchContentLive=\"{= ?fetchContentLive }\" arg:subjectGraph=\"{= ui:graphWithImports(tagger:currentSubjectGraph()) }\" arg:subjectRootClass=\"{= ?rootClass }\" ui:template=\"{= autotagger:PotentialContentProperties }\" ui:varName=\"properties\">
+                                        <ui:forEach ui:bindVars=\"?property, ?label\" ui:resultSet=\"{= ?properties }\">
+                                            <div class=\"checkbox\">
+                                                <label class=\"contentPropertyLabel\" title=\"{= ?property }\">
+                                                    <input autocomplete=\"off\" checked=\"{= IF(autotagger:isContentProperty(?projectGraph, ?property), &quot;checked&quot;, ?none) }\" class=\"contentProperty\" type=\"checkbox\" value=\"{= ?property }\"/>&nbsp;{= ?label }</label>
+                                            </div>
+                                        </ui:forEach>
+                                    </ui:call>
+                                    <input name=\"updateProperties\" type=\"hidden\" value=\"true\"/>
+                                    <p>&uarr; <a id=\"checkContentProperties\">Check all</a>&nbsp;
+<a id=\"uncheckContentProperties\">Uncheck all</a>
+                                    </p>
+                                </ui:loadable>
+                                <ui:setContext ui:queryGraph=\"{= tagger:currentSubjectGraph() }\">
+                                    <p>All properties used in the content graph<ui:if ui:condition=\"{= bound(?rootClass) }\">&nbsp;on resources of class <em>{= ui:label(?rootClass) }</em>
+                                        </ui:if> are shown. Selected properties will be used as input for the AutoClassifier. Only properties that contain potential keywords and topic names should be selected, such as title, abstract, or content. Unchecking any properties whose values are not helpful to a tagger will improve results and speed up training and classification.</p>
+                                </ui:setContext>
+                            </swa:LabeledElement>
+                            <swa:LabeledElement arg:label=\"Probability threshold\">
+                                <input class=\"form-control swa-text-align-right\" id=\"threshold\" name=\"threshold\" size=\"5\" type=\"text\" value=\"{#
+                                        SELECT (IF(bound(?x), ?x, 5) AS ?result)
+                                        WHERE {
+                                            OPTIONAL {
+                                                ?projectGraph tagger:autoTaggerProbabilityThreshold ?x .
+                                            } .
+                                        } }\"/>%
+						<p>Decrease the threshold to get more concept recommendations (but less accurate). Increase the threshold to get less concept recommendations (but more accurate).</p>
+                            </swa:LabeledElement>
+                            <swa:LabeledElement arg:label=\"Content language\" let:lang=\"{#
+                                    SELECT ?lang
+                                    WHERE {
+                                        OPTIONAL {
+                                            ?projectGraph tagger:autoTaggerLanguage ?lang .
+                                        } .
+                                    } }\">
+                                <autotagger:LanguageDropdown/>
+                                <script>$(\"#lang\").val(\"{= ?lang }\")</script>
+                            </swa:LabeledElement>
+                            <swa:LabeledElement arg:label=\"Training sample size\" let:sampleSize=\"{= spl:object(?projectGraph, tagger:trainingSampleSize) }\">
+                                <div class=\"checkbox\">
+                                    <ui:if ui:condition=\"{= bound(?sampleSize) }\">
+                                        <input checked=\"checked\" id=\"useTrainingSample\" type=\"checkbox\"/>
+                                    </ui:if>
+                                    <ui:else>
+                                        <input id=\"useTrainingSample\" type=\"checkbox\"/>
+                                    </ui:else>
+
+						Limit the training set to a random sample of <input class=\"form-control swa-text-align-right\" id=\"trainingSampleSize\" name=\"trainingSampleSize\" size=\"4\" type=\"text\" value=\"{= COALESCE(?sampleSize, 1000) }\"/> content resources. This may decrease accuracy, but will be faster and needs less memory.</div>
+                            </swa:LabeledElement>
+                            <ui:if ui:condition=\"{= autotagger:countContentProperties(?projectGraph) = 0 }\">
+                                <p>
+                                    <i class=\"fas fa-exclamation-triangle\"/>&nbsp;<em>Please select some content properties above.</em>
+                                </p>
+                            </ui:if>
+                            <p>
+                                <input class=\"btn btn-default btn-sm\" onclick=\"autotagger.beforeSubmit()\" type=\"submit\" value=\"Save Changes\"/>
+                            </p>
+                        </form>
+                    </ui:group>
+                </ui:setContext>
+                <autotagger:TrainingModelSection arg:projectGraph=\"{= ?projectGraph }\"/>
+            </ui:else>
+        </teamwork:Chrome>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Configure AutoClassifier" ;
+  rdfs:subClassOf taggerui:Elements ;
+  rdfs:subClassOf teamwork:MustHaveAccessToProjectPage ;
+.
+autotagger:AutoTaggingManagePlugin
+  a teamwork:ManagePlugin ;
+  ui:prototype """
+<ui:if ui:condition=\"{= teamwork:hasAutoClassifierLicense() }\">
+    <ui:createLink arg:projectGraph=\"{= ?projectGraph }\" ui:viewClass=\"{= autotagger:AutoTaggingManagePage }\">
+        <teamwork:ActionLink arg:comment=\"Configure AutoClassifier parameters, and create or select the AutoClassifier training model to use with this content tag set.\" arg:icon=\"lib/teamwork/build/images/tagger/configure-autoclassifier.svg\" arg:link=\"{= ?link }\" arg:title=\"Configure AutoClassifier\"/>
+    </ui:createLink>
+</ui:if>
+"""^^ui:Literal ;
+  rdfs:subClassOf teamwork:ManagePlugins ;
+.
+autotagger:AutoTaggingProjectTab
+  a teamwork:ProjectTab ;
+  teamwork:pluginIndex 35 ;
+  teamwork:pluginRequiresRole teamwork:editor ;
+  teamwork:pluginValidExpression [
+      a sp:and ;
+      sp:arg1 [
+          a teamwork:hasAutoClassifierLicense ;
+        ] ;
+      sp:arg2 [
+          a sp:eq ;
+          sp:arg1 [
+              sp:varName "projectType" ;
+            ] ;
+          sp:arg2 taggerprojects:ProjectType ;
+        ] ;
+    ] ;
+  teamwork:validForTags false ;
+  ui:prototype """
+<ui:loadable ui:loadId=\"AutoTaggingProjectTab\">
+    <ui:if ui:condition=\"{= !autotagger:isMauiServerConfigured() }\">
+        <p>AutoClassifier must first be configured by the administrator.</p>
+    </ui:if>
+    <ui:else>
+        <autotagger:StartJobSection arg:projectGraph=\"{= ?projectGraph }\" autotagger:loadId=\"AutoTaggingProjectTab\"/>
+        <hr/>
+        <h2>AutoClassifier Jobs</h2>
+        <autotagger:JobsTableSection arg:projectGraph=\"{= ?projectGraph }\"/>
+    </ui:else>
+</ui:loadable>
+"""^^ui:Literal ;
+  rdfs:label "AutoClassifier" ;
+  rdfs:subClassOf teamwork:ProjectTabs ;
+.
+autotagger:CancelJob
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional false ;
+      spl:predicate autotagger:job ;
+      spl:valueType acjob:AutoClassifierJob ;
+      rdfs:comment "The job resource of the job to be stopped, as specified when the job was started" ;
+    ] ;
+  rdfs:comment "A control element that cancels a running auto-classification job." ;
+  rdfs:label "cancel job" ;
+  rdfs:subClassOf ui:ControlElement ;
+.
+autotagger:ConfigFormPlugin
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group default:labelWidth=\"{= ?labelWidth }\" default:subject=\"{= ?subject }\">
+    <ui:if ui:condition=\"{= teamwork:hasAutoClassifierLicense() }\">
+        <swa:ObjectsEnum arg:label=\"AutoClassifier Configuration Parameters\">
+            <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= cfg:mauiServerURL }\" arg:viewWidget=\"{= autotagger:MauiServerURLViewer }\"/>
+            <swa:Object arg:editWidget=\"{= swa:PlainTextFieldEditor }\" arg:predicate=\"{= cfg:mauiServerUserName }\"/>
+            <tbladmin:PasswordSection arg:config=\"{= ?subject }\" arg:name=\"Maui Server password\" arg:urlProperty=\"{= cfg:mauiServerURL }\" arg:userNameProperty=\"{= cfg:mauiServerUserName }\"/>
+        </swa:ObjectsEnum>
+    </ui:if>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Config form plugin" ;
+  rdfs:subClassOf teamworkconfig:ConfigFormPlugins ;
+.
+autotagger:ConfigService
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional false ;
+      spl:predicate arg:threshold ;
+      spl:valueType xsd:float ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional false ;
+      spl:predicate arg:updateProperties ;
+      spl:valueType xsd:string ;
+      sml:hidden false ;
+      rdfs:comment "Content properties will only be updated if this is set to a non-empty value." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:lang ;
+      spl:valueType xsd:string ;
+      rdfs:comment "ISO 639-1 code of the language that the AutoClassifier will use." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:trainingSampleSize ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:contentProperties ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:prototype """
+<ui:setContext ui:queryGraph=\"{= ?projectGraph }\">
+    <ui:update ui:updateQuery=\"{!
+            DELETE {
+                ?projectGraph tagger:autoTaggerProbabilityThreshold ?old .
+            }
+            WHERE {
+                ?projectGraph tagger:autoTaggerProbabilityThreshold ?old .
+            } }\"/>
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                ?projectGraph tagger:autoTaggerProbabilityThreshold ?new .
+            }
+            WHERE {
+                BIND (xsd:float(?threshold) AS ?new) .
+            } }\"/>
+    <ui:update ui:updateQuery=\"{!
+            DELETE {
+                ?projectGraph tagger:autoTaggerLanguage ?old .
+            }
+            WHERE {
+                ?projectGraph tagger:autoTaggerLanguage ?old .
+            } }\"/>
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                ?projectGraph tagger:autoTaggerLanguage ?lang .
+            }
+            WHERE {
+                FILTER regex(?lang, &quot;^[a-z][a-z]$&quot;) .
+            } }\"/>
+    <ui:if ui:condition=\"{= ?updateProperties }\">
+        <ui:update ui:updateQuery=\"{!
+                DELETE {
+                    ?projectGraph tagger:trainingContentProperty ?old .
+                }
+                WHERE {
+                    ?projectGraph tagger:trainingContentProperty ?old .
+                } }\"/>
+        <ui:update ui:updateQuery=\"{!
+                INSERT {
+                    ?projectGraph tagger:trainingContentProperty ?new .
+                }
+                WHERE {
+                    BIND (IF(bound(?contentProperties), str(?contentProperties), &quot;&quot;) AS ?joint) .
+                    ?split spif:split ( ?joint &quot; &quot; ) .
+                    BIND (URI(?split) AS ?new) .
+                } }\"/>
+    </ui:if>
+    <ui:update ui:updateQuery=\"{!
+            DELETE {
+                ?projectGraph tagger:trainingSampleSize ?old .
+            }
+            WHERE {
+                ?projectGraph tagger:trainingSampleSize ?old .
+            } }\"/>
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                ?projectGraph tagger:trainingSampleSize ?new .
+            }
+            WHERE {
+                BIND (xsd:integer(?trainingSampleSize) AS ?new) .
+            } }\"/>
+    <autotagger:AutoTaggingManagePage arg:projectGraph=\"{= ?projectGraph }\"/>
+</ui:setContext>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:comment "Service that handles submissions from the auto-tagging configuration page of a content tag set." ;
+  rdfs:label "Config service" ;
+  rdfs:subClassOf teamwork:ProjectElements ;
+.
+autotagger:DeleteJobMetadata
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            sp:object [
+                sp:varName "job" ;
+              ] ;
+            sp:predicate acjob:job ;
+            sp:subject [
+                sp:varName "configuration" ;
+              ] ;
+          ]
+          [
+            sp:object acjob:AutoClassifierJob ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "job" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "status" ;
+              ] ;
+            sp:predicate acjob:status ;
+            sp:subject [
+                sp:varName "job" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "started" ;
+              ] ;
+            sp:predicate acjob:started ;
+            sp:subject [
+                sp:varName "job" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "finished" ;
+              ] ;
+            sp:predicate acjob:finished ;
+            sp:subject [
+                sp:varName "job" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "scope" ;
+              ] ;
+            sp:predicate acjob:scope ;
+            sp:subject [
+                sp:varName "job" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "resources" ;
+              ] ;
+            sp:predicate acjob:resources ;
+            sp:subject [
+                sp:varName "job" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "results" ;
+              ] ;
+            sp:predicate acjob:results ;
+            sp:subject [
+                sp:varName "job" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "job" ;
+                    ] ;
+                  sp:predicate acjob:job ;
+                  sp:subject [
+                      sp:varName "configuration" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+          [
+            a sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "status" ;
+                    ] ;
+                  sp:predicate acjob:status ;
+                  sp:subject [
+                      sp:varName "job" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+          [
+            a sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "started" ;
+                    ] ;
+                  sp:predicate acjob:started ;
+                  sp:subject [
+                      sp:varName "job" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+          [
+            a sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "finished" ;
+                    ] ;
+                  sp:predicate acjob:finished ;
+                  sp:subject [
+                      sp:varName "job" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+          [
+            a sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "scope" ;
+                    ] ;
+                  sp:predicate acjob:scope ;
+                  sp:subject [
+                      sp:varName "job" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+          [
+            a sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "resources" ;
+                    ] ;
+                  sp:predicate acjob:resources ;
+                  sp:subject [
+                      sp:varName "job" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+          [
+            a sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "results" ;
+                    ] ;
+                  sp:predicate acjob:results ;
+                  sp:subject [
+                      sp:varName "job" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional false ;
+      spl:predicate autotagger:job ;
+      spl:valueType acjob:AutoClassifierJob ;
+      rdfs:comment "The job's URI" ;
+    ] ;
+  rdfs:comment "Deletes metadata for one given job resource from the query graph." ;
+  rdfs:label "delete job metadata" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+autotagger:InsertJobMetadata
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:insertPattern (
+          [
+            sp:object [
+                sp:varName "job" ;
+              ] ;
+            sp:predicate acjob:job ;
+            sp:subject [
+                sp:varName "configuration" ;
+              ] ;
+          ]
+          [
+            sp:object acjob:AutoClassifierJob ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "job" ;
+              ] ;
+          ]
+          [
+            sp:object acjob:running ;
+            sp:predicate acjob:status ;
+            sp:subject [
+                sp:varName "job" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "started" ;
+              ] ;
+            sp:predicate acjob:started ;
+            sp:subject [
+                sp:varName "job" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "scope" ;
+              ] ;
+            sp:predicate acjob:scope ;
+            sp:subject [
+                sp:varName "job" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "resourceCount" ;
+              ] ;
+            sp:predicate acjob:resources ;
+            sp:subject [
+                sp:varName "job" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:now ;
+              ] ;
+            sp:variable [
+                sp:varName "started" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional false ;
+      spl:predicate autotagger:job ;
+      spl:valueType acjob:AutoClassifierJob ;
+      rdfs:comment "The new job's URI, chosen by the caller." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:configuration ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "Configuration resource associated with the job; often a content tag set" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:resourceCount ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "Number of content resources to be auto-classified in this job" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:scope ;
+      spl:valueType acjob:JobScope ;
+      rdfs:comment "A job scope instance that specified the scope of the job (e.g., all or search)" ;
+    ] ;
+  rdfs:comment "Updates the current graph with metadata for a new AutoClassifier job." ;
+  rdfs:label "insert job metadata" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+autotagger:JobsTableSection
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional false ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType owl:Ontology ;
+      rdfs:comment "The project graph (a content tag set) whose AutoClassifier jobs to display" ;
+    ] ;
+  ui:prototype """
+<ui:setContext ui:queryGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <ui:call ui:template=\"{= autotagger:SelectJobMetadata }\" ui:varName=\"jobs\">
+        <ui:if ui:condition=\"{= spr:rowCount(?jobs) &gt; 0 }\">
+            <table class=\"auto-tagging-jobs\">
+                <tr>
+                    <th>Status</th>
+                    <th>Started</th>
+                    <th>Duration</th>
+                    <th>Scope</th>
+                    <th>Resources</th>
+                    <th>Actions</th>
+                    <th>Results</th>
+                </tr>
+                <ui:forEach ui:resultSet=\"{= ?jobs }\">
+                    <tr>
+                        <td>
+                            <ui:if ui:condition=\"{= ?status = acjob:completed }\">Completed</ui:if>
+                            <ui:elseif ui:condition=\"{= ?status = acjob:running }\">Running</ui:elseif>
+                            <ui:elseif ui:condition=\"{= ?status = acjob:merged }\">Merged</ui:elseif>
+                            <ui:else>???</ui:else>
+                        </td>
+                        <td>{= spif:dateFormat(?started, \"yyyy-MM-dd HH:mm\") }</td>
+                        <td class=\"swa-text-align-right\" let:seconds=\"{= smf:duration(&quot;s&quot;, ?started, IF(bound(?finished), ?finished, now())) }\">{= floor((?seconds / 3600)) }h
+{= floor((spif:mod(?seconds, 3600) / 60)) }min
+{= spif:mod(?seconds, 60) }s</td>
+                        <td>{= spif:titleCase(afn:localname(?scope)) }</td>
+                        <td class=\"swa-text-align-right\">{= ?resources }</td>
+                        <td>
+                            <button class=\"btn btn-default btn-xs\">
+                                <ui:if ui:condition=\"{= ?status = acjob:running }\">Cancel</ui:if>
+                                <ui:else>Remove</ui:else>
+                                <ui:handle ui:event=\"onclick\" ui:thenLoadId=\"AutoTaggingProjectTab\">
+                                    <ui:if ui:condition=\"{= ?status = acjob:running }\">
+                                        <autotagger:CancelJob autotagger:job=\"{= ?job }\"/>
+                                    </ui:if>
+                                    <ui:call autotagger:job=\"{= ?job }\" ui:template=\"{= autotagger:DeleteJobMetadata }\"/>
+                                </ui:handle>
+                            </button>
+                        </td>
+                        <td>
+                            <ui:if ui:condition=\"{= (?status = acjob:completed) &amp;&amp; bound(?results) }\">
+                                <ui:createLink arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?results }\" ui:viewClass=\"{= autotagger:ResultReviewPage }\">
+                                    <strong>
+                                        <a href=\"{= ?link }\">Results</a>
+                                    </strong>
+                                </ui:createLink>
+                            </ui:if>
+                        </td>
+                    </tr>
+                </ui:forEach>
+            </table>
+        </ui:if>
+        <ui:else>
+            <p>No active jobs.</p>
+        </ui:else>
+    </ui:call>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:comment "Displays a table of running or completed auto-classification jobs for a content tag set." ;
+  rdfs:label "jobs table section" ;
+  rdfs:subClassOf ui:Element ;
+.
+autotagger:LanguageDropdown
+  a ui:NodeClass ;
+  ui:prototype """
+<select class=\"form-control\" id=\"lang\" name=\"lang\">
+    <option value=\"\">(default)</option>
+    <option value=\"en\">English</option>
+    <option value=\"fr\">French</option>
+    <option value=\"de\">German</option>
+    <option value=\"es\">Spanish</option>
+</select>
+"""^^ui:Literal ;
+  rdfs:label "Language dropdown" ;
+  rdfs:subClassOf teamwork:Elements ;
+.
+autotagger:MauiServerURLViewer
+  a swa:ObjectViewerClass ;
+  ui:private true ;
+  ui:prototype """
+<div class=\"swa-shifted-label\">
+    <div>{= ?object }</div>
+    <ui:if ui:condition=\"{= autotagger:isMauiServerConfigured() }\">
+        <ui:loadable ui:loadId=\"connection-report\" ui:loadLater=\"{= true }\">
+            <ui:group let:error=\"{= autotagger:checkMauiServerConnectionProblem() }\">
+                <ui:if ui:condition=\"{= !?error }\">
+                    <strong class=\"text-success\">(Connected to Maui Server v{= autotagger:mauiServerVersion() })</strong>
+                </ui:if>
+                <ui:else>
+                    <strong class=\"text-danger\">({= ?error })</strong>
+                </ui:else>
+            </ui:group>
+        </ui:loadable>
+    </ui:if>
+</div>
+"""^^ui:Literal ;
+  rdfs:comment "An object viewer for URI values that tries to connect to a Maui Server instance at the value URL and displays a connection status underneath the URL." ;
+  rdfs:label "Maui Server URL Viewer" ;
+  rdfs:subClassOf swa:ObjectViewer ;
+.
+autotagger:PotentialContentProperties
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "property" ;
+          ]
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  a sp:SubQuery ;
+                  sp:query [
+                      a sp:Select ;
+                      sp:distinct true ;
+                      sp:resultVariables (
+                          [
+                            sp:varName "property" ;
+                          ]
+                        ) ;
+                      sp:where (
+                          [
+                            a sp:Union ;
+                            sp:elements (
+                                (
+                                  [
+                                    sp:object [
+                                        sp:varName "o" ;
+                                      ] ;
+                                    sp:predicate [
+                                        sp:varName "property" ;
+                                      ] ;
+                                    sp:subject [
+                                        sp:varName "s" ;
+                                      ] ;
+                                  ]
+                                  [
+                                    a sp:Filter ;
+                                    sp:expression [
+                                        a sp:not ;
+                                        sp:arg1 [
+                                            a sp:bound ;
+                                            sp:arg1 [
+                                                sp:varName "subjectRootClass" ;
+                                              ] ;
+                                          ] ;
+                                      ] ;
+                                  ]
+                                )
+                                (
+                                  [
+                                    a sp:Bind ;
+                                    sp:expression corpus:content ;
+                                    sp:variable [
+                                        sp:varName "property" ;
+                                      ] ;
+                                  ]
+                                  [
+                                    a sp:Bind ;
+                                    sp:expression [
+                                        a ui:label ;
+                                        sp:arg1 corpus:content ;
+                                      ] ;
+                                    sp:variable [
+                                        sp:varName "label" ;
+                                      ] ;
+                                  ]
+                                  [
+                                    a sp:Filter ;
+                                    sp:expression [
+                                        a sp:and ;
+                                        sp:arg1 [
+                                            a sp:bound ;
+                                            sp:arg1 [
+                                                sp:varName "fetchContentLive" ;
+                                              ] ;
+                                          ] ;
+                                        sp:arg2 [
+                                            a sp:eq ;
+                                            sp:arg1 [
+                                                sp:varName "fetchContentLive" ;
+                                              ] ;
+                                            sp:arg2 true ;
+                                          ] ;
+                                      ] ;
+                                  ]
+                                )
+                                (
+                                  [
+                                    a sp:TriplePath ;
+                                    sp:object [
+                                        sp:varName "subjectRootClass" ;
+                                      ] ;
+                                    sp:path [
+                                        a sp:SeqPath ;
+                                        sp:path1 rdf:type ;
+                                        sp:path2 [
+                                            a sp:ModPath ;
+                                            sp:modMax -2 ;
+                                            sp:modMin 0 ;
+                                            sp:subPath rdfs:subClassOf ;
+                                          ] ;
+                                      ] ;
+                                    sp:subject [
+                                        sp:varName "s" ;
+                                      ] ;
+                                  ]
+                                  [
+                                    sp:object [
+                                        sp:varName "o" ;
+                                      ] ;
+                                    sp:predicate [
+                                        sp:varName "property" ;
+                                      ] ;
+                                    sp:subject [
+                                        sp:varName "s" ;
+                                      ] ;
+                                  ]
+                                )
+                              ) ;
+                          ]
+                        ) ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a ui:label ;
+                      sp:arg1 [
+                          sp:varName "property" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "label" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "subjectGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:fetchContentLive ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:subjectGraph ;
+      spl:valueType owl:Ontology ;
+      rdfs:comment "The graph to query for content properties." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:subjectRootClass ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The subject root class for this content graph, or unbound if none." ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "Returns all properties used on content resources in a content graph, with their labels." ;
+  rdfs:label "Potential content properties" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+autotagger:RecommendTopics
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:defaultValue "count" ;
+      spl:optional true ;
+      spl:predicate autotagger:countVar ;
+      spl:valueType xsd:string ;
+      rdfs:comment "Optional name of a variable to which the number of results will be bound (default: \"count\")" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:defaultValue "results" ;
+      spl:optional true ;
+      spl:predicate autotagger:resultsVar ;
+      spl:valueType xsd:string ;
+      rdfs:comment "Optional name of a variable to which the result set will be bound (default: \"results\")" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:configuration ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The AutoClassifier configuration resource (often a content tag set resource), a resource in the context graph described with tagger:xxx properties" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:contentGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "Graph containing the content resource to be tagged. Defaults to tagger:subjectGraph of configuration resource. Not used when the content to auto-tag is given via contentText." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:contentResource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "A content resource to be auto-tagged, described in the content graph; mutually exclusive with contentText" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:contentText ;
+      spl:valueType xsd:string ;
+      rdfs:comment "A text snippet to be auto-tagged; mutually exclusive with contentResource" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:trainingID ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The ID of a training result (see autoc:StartTraining) to be employed by the AutoClassifier; if not specified, use the URI of the configuration resource" ;
+    ] ;
+  rdfs:comment """A control element that runs the AutoClassifier on one content resource or text snippet, and delivers results as a result set bound to a variable. Assumes all preconditions (Maui Server running, trained, etc.) have been checked.
+
+The result set has the following variables:
+
+- ?concept: The concept's URI
+- ?label: The concept's label (literal with the configuration's language settings)
+- ?probability: The concept's probability (0..1, xsd:decimal)""" ;
+  rdfs:label "recommend topics" ;
+  rdfs:subClassOf ui:ControlElement ;
+.
+autotagger:RejectAllButton
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:status ;
+      spl:valueType teamwork:Status ;
+      rdfs:comment "The new status to set." ;
+    ] ;
+  ui:prototype """
+<teamwork:ActionLink arg:onClick=\"{= ui:functionCall(&quot;teamwork.changeTagStatus&quot;, ?projectGraph, ?tag, teamwork:Rejected) }\" arg:title=\"Reject All\"/>
+"""^^ui:Literal ;
+  rdfs:label "Reject all button" ;
+  rdfs:subClassOf teamwork:TagStatusElements ;
+.
+autotagger:ReportSubtitle
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+        <h2 class=\"autotagger-report-subtitle-padding\">{= teamwork:singularProjectTypeLabel(teamwork:getProjectType(?projectGraph)) } {= teamwork:projectLabel(?projectGraph) }</h2>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Report subtitle" ;
+  rdfs:subClassOf teamwork:TagReportElements ;
+.
+autotagger:ResultActions
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:change ;
+      spl:valueType teamwork:Change ;
+      rdfs:comment "The Change to display" ;
+    ] ;
+  ui:prototype """
+<div let:created=\"{= spl:object(?change, dcterms:created) }\" let:id=\"{= ui:uniqueId() }\" let:status=\"{= spl:object(?change, teamwork:status) }\" let:statusLoadId=\"{= ui:uniqueId() }\" let:teamGraph=\"{= ui:graphWithoutImports(ui:currentQueryGraph()) }\">
+    <ui:group let:masterGraph=\"{= teamwork:masterGraph(teamwork:graphIdFromTeamGraph(?teamGraph)) }\" let:tag=\"{= teamwork:getTagIfUncommitted(?change, ?teamGraph) }\">
+        <ui:if ui:condition=\"{= teamwork:Rejected = spl:object(?tag, teamwork:status) }\">
+            <div class=\"autotagger-result-actions-change-response\">
+                <span>The change was rejected</span>
+            </div>
+        </ui:if>
+        <ui:else>
+            <ui:group let:resource=\"{= COALESCE(?tag, ?teamGraph) }\">
+                <div class=\"autotagger-result-actions-change-response\">
+                    <ui:if ui:condition=\"{= bound(?tag) &amp;&amp; teamwork:currentUserHasPrivilege(?teamGraph, teamwork:editor, ?teamGraph) }\">
+                        <a id=\"{= ?id }commitButton\">
+                            <ui:handle ui:event=\"onclick\" ui:thenLoadId=\"{= ?id }commitMessage\">
+                                <ui:setContext ui:queryGraph=\"{= ?masterGraph }\">
+                                    <teamwork:CommitChangeHandler arg:change=\"{= ?change }\" arg:teamGraph=\"{= ?teamGraph }\"/>
+                                </ui:setContext>
+                            </ui:handle>
+                            <span>Approve</span>
+                            <!-- button class=\"btn btn-sm dt-inline-edit-submit btn-success\" tabindex=\"0\">✓</button -->
+                        </a>
+                        <teamwork:Spaces/>
+                    </ui:if>
+                    <ui:if ui:condition=\"{= teamwork:currentUserHasPrivilege(?resource, teamwork:editor, ?teamGraph) }\">
+                        <a id=\"{= ?id }revertButton\">
+                            <ui:handle ui:event=\"onclick\" ui:thenLoadId=\"{= ?id }undoMessage\">
+                                <ui:setContext ui:queryGraph=\"{= ?masterGraph }\">
+                                    <teamwork:UndoChangeHandler arg:change=\"{= ?change }\" arg:teamGraph=\"{= ?teamGraph }\"/>
+                                </ui:setContext>
+                            </ui:handle>
+                            <span>Reject</span>
+                            <!-- button class=\"btn btn-sm dt-inline-edit-cancel btn-danger\" tabindex=\"0\">✗</button -->
+                        </a>
+                        <ui:loadable ui:loadId=\"{= ?id }undoMessage\" ui:loadOnDemand=\"{= true }\">
+                            <span>The change has been reverted</span>
+                            <script>$(\"#{= ?id }revertButton\").remove();$(\"#{= ?id }commitButton\").remove();</script>
+                        </ui:loadable>
+                        <ui:loadable ui:loadId=\"{= ?id }commitMessage\" ui:loadOnDemand=\"{= true }\">
+                            <span>The change has been committed to production</span>
+                            <script>$(\"#{= ?id }commitButton\").remove();$(\"#{= ?id }revertButton\").remove();</script>
+                        </ui:loadable>
+                    </ui:if>
+                </div>
+            </ui:group>
+        </ui:else>
+    </ui:group>
+</div>
+"""^^ui:Literal ;
+  rdfs:comment "Displays links to either approve or reject a given Change." ;
+  rdfs:label "Result actions" ;
+  rdfs:subClassOf teamwork:ProjectElements ;
+.
+autotagger:ResultChangeView
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:change ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "A change to a working copy added by the AutoClassifier" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:object ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The object of a new triple added by the AutoClassifier" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subject ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The subject of a new triple added by the AutoClassifier" ;
+    ] ;
+  ui:prototype """
+<ui:group let:loadId=\"{= ui:uniqueId() }\">
+    <ui:loadable ui:loadId=\"{= ?loadId }\">
+        <div let:newLabel=\"{= ui:label(?object) }\" let:teamGraph=\"{= teamwork:currentTeamGraph() }\">
+            <ui:group let:dialogId=\"{= ui:uniqueId() }\">
+                <tr>
+                    <td class=\"autotagger-result-change-view-td-subject\">
+                        <ui:if ui:condition=\"{= isLiteral(?subject) }\">
+                            <ui:parse ui:str=\"{= ?subject }\"/>
+                        </ui:if>
+                        <ui:else>{= ui:label(?subject) }</ui:else>
+                    </td>
+                    <td class=\"autotagger-result-change-view-td-object\">
+                        <ui:if ui:condition=\"{= isLiteral(?object) }\">
+                            <ui:parse ui:str=\"{= ui:label(?object) }\"/>
+                        </ui:if>
+                        <ui:else>
+                            <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(spl:object(?projectGraph, tagger:objectGraph)) }\">{= ui:label(?object) }</ui:setContext>
+                        </ui:else>
+                    </td>
+                    <td class=\"autotagger-result-change-view-result-actions\">
+                        <ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+                            <div>
+                                <autotagger:ResultActions arg:change=\"{= ?change }\" arg:projectGraph=\"{= ?projectGraph }\"/>
+                            </div>
+                        </ui:setContext>
+                    </td>
+                </tr>
+            </ui:group>
+        </div>
+    </ui:loadable>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Displays a single row showing an automatically generated change." ;
+  rdfs:label "Result change view" ;
+  rdfs:subClassOf teamwork:TagReportElements ;
+.
+autotagger:ResultDocumentChangeView
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subject ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The subject of a new triple added by the AutoClassifier" ;
+    ] ;
+  ui:prototype """
+<ui:setContext ui:queryGraph=\"{= ui:graphWithImports(teamwork:projectOrTagGraph(?projectGraph, ?tag)) }\">
+    <div class=\"tagger-document-review-table\" let:teamGraph=\"{= teamwork:currentTeamGraph() }\" letrs:newTriples=\"{#
+            SELECT ?predicate ?object
+            WHERE {
+                {
+                    ?subject teamwork:diff ( ?predicate ?oldValue ?object ) .
+                } .
+            } }\" letrs:oldTriples=\"{#
+            SELECT ?object
+            WHERE {
+                GRAPH ?projectGraph {
+                    ?subject ?predicate ?object .
+                } .
+            } }\">
+        <table class=\"table tagger-document-review-table\" let:max=\"{= afn:max(spr:rowCount(?newTriples), spr:rowCount(?oldTriples)) }\" width=\"100%\">
+            <tr>
+                <th class=\"autotagger-result-review-page-th\">
+                    <b>Tags in Production</b>
+                </th>
+                <th class=\"autotagger-result-review-page-th\">
+                    <b>Proposed Tags</b>
+                </th>
+                <th class=\"autotagger-result-review-page-th-results\">
+                    <b>Actions</b>
+                </th>
+            </tr>
+            <ui:forEach ui:resultSet=\"{#
+                    SELECT ?index
+                    WHERE {
+                        ?index spif:for ( 1 ?max ) .
+                    } }\">
+                <tr>
+                    <td class=\"autotagger-result-document-change-view-td-tags\">
+                        <ui:if ui:condition=\"{= ?index &lt;= spr:rowCount(?oldTriples) }\">
+                            <ui:group let:object=\"{= spr:cell(?oldTriples, (?index - 1), 0) }\">
+                                <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(spl:object(?projectGraph, tagger:objectGraph)) }\">{= ui:label(?object) }</ui:setContext>
+                            </ui:group>
+                        </ui:if>
+                    </td>
+                    <ui:if ui:condition=\"{= ?index &lt;= spr:rowCount(?newTriples) }\">
+                        <td class=\"autotagger-result-document-change-view-td-label\">
+                            <ui:group let:object=\"{= spr:cell(?newTriples, (?index - 1), 1) }\">
+                                <ui:if ui:condition=\"{= isLiteral(?object) }\">
+                                    <ui:parse ui:str=\"{= ui:label(?object) }\"/>
+                                </ui:if>
+                                <ui:else>
+                                    <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(spl:object(?projectGraph, tagger:objectGraph)) }\">{= ui:label(?object) }</ui:setContext>
+                                </ui:else>
+                            </ui:group>
+                        </td>
+                        <td class=\"autotagger-result-document-change-view-td-results-action\">
+                            <ui:setContext ui:queryGraph=\"{= teamwork:currentTeamGraph() }\">
+                                <div>
+                                    <autotagger:ResultActions arg:change=\"{= teamwork:findChangeForTriple(?subject, ?predicate, ?object, teamwork:added, ?tag) }\" arg:projectGraph=\"{= ?projectGraph }\"/>
+                                </div>
+                            </ui:setContext>
+                        </td>
+                    </ui:if>
+                    <ui:else>
+                        <td class=\"col-md-3\"/>
+                        <td class=\"col-md-2\"/>
+                    </ui:else>
+                </tr>
+            </ui:forEach>
+        </table>
+    </div>
+</ui:setContext>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:comment "Display rows showing automatically generated changes to a document." ;
+  rdfs:label "Result document change view" ;
+  rdfs:subClassOf teamwork:TagReportElements ;
+.
+autotagger:ResultDocumentView
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:open ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "If true, display all taggings for this document (subject)" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subject ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The subject of a new triple added by the AutoClassifier" ;
+    ] ;
+  ui:headIncludes """
+<script src=\"{= ui:lib() }/tagger/js/autoClassifier.js\" type=\"text/javascript\"/>
+"""^^ui:Literal ;
+  ui:prototype """
+<ui:group let:loadId=\"{= ui:uniqueId() }\">
+    <tr>
+        <td class=\"autotagger-result-change-view-td-subject\">
+            <div class=\"swa-openable-object-icon ui-icon ui-icon-triangle-1-e\" id=\"{= ?loadId }-button\" onclick=\"acui.toggleACDocumentChangeView('{= ?loadId }-body', '{= ?loadId }-button', '{= ?projectGraph }', '{= ?tag }', '{= ?subject }')\"/>
+            <ui:if ui:condition=\"{= isLiteral(?subject) }\">
+                <ui:parse ui:str=\"{= ?subject }\"/>
+            </ui:if>
+            <ui:else>
+                <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(spl:object(?projectGraph, tagger:subjectGraph)) }\">
+                    <div let:conceptLink=\"{= CONCAT(afn:localname(?projectGraph), &quot;.&quot;, afn:localname(IRI(?tag)), &quot;.editor#&quot;, str(?subject)) }\" let:sourceLink=\"{= spl:object(?subject, elements:source) }\">
+                        <a href=\"{= COALESCE(?sourceLink, ?conceptLink) }\" target=\"_blank\">{= ui:label(?subject) }</a>
+                    </div>
+                </ui:setContext>
+            </ui:else>
+            <div class=\"ui-helper-hidden-accessible\" id=\"{= ?loadId }-body\"/>
+        </td>
+    </tr>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Displays rows showing automatically generated changes to a single document." ;
+  rdfs:label "Result document view" ;
+  rdfs:subClassOf teamwork:TagReportElements ;
+.
+autotagger:ResultReviewPage
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <teamwork:Chrome arg:pageType=\"auto-classifier-results-page\" arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= autotagger:AutoTaggingProjectTab }\">
+        <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?teamGraph) }\">
+            <h1>{= ui:label(?tag) }</h1>
+            <autotagger:ReportSubtitle arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\"/>
+            <div letrs:documents=\"{#
+                    SELECT DISTINCT ?subject
+                    WHERE {
+                        GRAPH ?teamGraph {
+                            {
+                                ?added teamwork:tag ?tag .
+                            } .
+                            ?added teamwork:added ?triple .
+                        } .
+                        ?triple teamwork:subject ?subject .
+                    }
+                    ORDER BY (?subject) }\">
+                <ui:if ui:condition=\"{= spr:rowCount(?documents) &gt; 0 }\">
+                    <table class=\"table outer-tagger-document-review-table\" let:canCommit=\"{= teamwork:currentUserHasPrivilege(?teamGraph, teamwork:editor, ?teamGraph) }\">
+                        <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(teamwork:projectOrTagGraph(?projectGraph, ?tag)) }\">
+                            <ui:forEach ui:resultSet=\"{= ?documents }\">
+                                <autotagger:ResultDocumentView arg:projectGraph=\"{= ?projectGraph }\" arg:subject=\"{= ?subject }\" arg:tag=\"{= ?tag }\"/>
+                            </ui:forEach>
+                        </ui:setContext>
+                    </table>
+                    <ui:if ui:condition=\"{= spl:object(?tag, teamwork:status) NOT IN (teamwork:Committed, teamwork:Rejected) }\">
+                        <div id=\"autoclassifier-approve-reject-all-buttons\">
+                            <table width=\"100%\">
+                                <tr>
+                                    <td width=\"80%\">
+                                        <swa:Space/>
+                                    </td>
+                                    <td align=\"right\" width=\"10%\">
+                                        <autotagger:ApproveAllButton arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\"/>
+                                    </td>
+                                    <td width=\"10%\">
+                                        <autotagger:RejectAllButton arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </ui:if>
+                </ui:if>
+                <ui:else>
+                    <p class=\"dataLightCell\">No changes found.</p>
+                </ui:else>
+            </div>
+        </ui:setContext>
+    </teamwork:Chrome>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A report displaying the changes in an auto-generated tag compared to the published version." ;
+  rdfs:label "Result review page" ;
+  rdfs:subClassOf teamwork:MustHaveAccessToTagPage ;
+.
+autotagger:ResultsReviewPlugin
+  a teamwork:ReportPlugin ;
+  teamwork:invalidForMaster true ;
+  teamwork:pluginIndex 4 ;
+  teamwork:validForACResults true ;
+  teamwork:validForTags false ;
+  ui:prototype """
+<ui:createLink arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\" ui:viewClass=\"{= autotagger:ResultReviewPage }\">
+    <teamwork:ActionLink arg:comment=\"Compares these AutoClassifier results with the production copy.\" arg:icon=\"lib/teamwork/build/images/teamwork/Comparison-48x48.svg\" arg:link=\"{= ?link }\" arg:title=\"Results Review\"/>
+</ui:createLink>
+"""^^ui:Literal ;
+  rdfs:label "Results review plugin" ;
+  rdfs:subClassOf teamwork:ReportPlugins ;
+.
+autotagger:RunAutoClassifierOnContentChanges
+  a teamwork:ManagePlugin ;
+  ui:prototype """
+<ui:setContext ui:queryGraph=\"{= ?projectGraph }\">
+    <ui:if ui:condition=\"{= teamwork:hasAutoClassifierLicense() &amp;&amp; (teamwork:getProjectType(tagger:currentSubjectGraph()) = &lt;http://topbraid.org/corpus-projects#ProjectType&gt;) }\">
+        <teamwork:ActionLink arg:icon=\"lib/teamwork/build/images/tagger/configure-autoclassifier.svg\" arg:title=\"Run AutoClassifier automatically on content changes\" let:contentGraph=\"{= tagger:currentSubjectGraph() }\">
+            <div class=\"checkbox\">
+                <input checked=\"{= IF(EXISTS {
+                    GRAPH ?contentGraph {
+                        ?contentGraph tagger:triggerAutoClassifier ?projectGraph .
+                    } .
+                }, &quot;checked&quot;, ?none) }\" type=\"checkbox\">
+                    <ui:handle arg:checked=\"this.checked\" ui:event=\"onclick\">
+                        <ui:if ui:condition=\"{= bound(?projectGraph) &amp;&amp; bound(?contentGraph) }\">
+                            <ui:setContext ui:queryGraph=\"{= ?contentGraph }\">
+                                <ui:if ui:condition=\"{= ?checked }\">
+                                    <ui:setPropertyValue arg:property=\"{= tagger:triggerAutoClassifier }\" arg:value=\"{= ?projectGraph }\" ui:this=\"{= ?contentGraph }\"/>
+                                </ui:if>
+                                <ui:else>
+                                    <ui:removePropertyValue arg:property=\"{= tagger:triggerAutoClassifier }\" arg:value=\"{= ?projectGraph }\" ui:this=\"{= ?contentGraph }\"/>
+                                </ui:else>
+                            </ui:setContext>
+                        </ui:if>
+                    </ui:handle>
+                </input>
+                <span>Run AutoClassifier automatically when content resources are added, removed or modified<br/>
+                    <small>The resulting taggings are stored in the production copy of this {= teamwork:singularProjectTypeLabel(teamwork:getProjectType(?projectGraph)) }.</small>
+                </span>
+            </div>
+        </teamwork:ActionLink>
+    </ui:if>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:subClassOf teamwork:ManagePlugins ;
+.
+autotagger:SelectJobMetadata
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            a sp:Desc ;
+            sp:expression [
+                sp:varName "started" ;
+              ] ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "job" ;
+          ]
+          [
+            sp:varName "status" ;
+          ]
+          [
+            sp:varName "started" ;
+          ]
+          [
+            sp:varName "finished" ;
+          ]
+          [
+            sp:varName "scope" ;
+          ]
+          [
+            sp:varName "resources" ;
+          ]
+          [
+            sp:varName "results" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "job" ;
+              ] ;
+            sp:predicate acjob:job ;
+            sp:subject [
+                sp:varName "projectGraph" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "status" ;
+              ] ;
+            sp:predicate acjob:status ;
+            sp:subject [
+                sp:varName "job" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "started" ;
+              ] ;
+            sp:predicate acjob:started ;
+            sp:subject [
+                sp:varName "job" ;
+              ] ;
+          ]
+          [
+            a sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "finished" ;
+                    ] ;
+                  sp:predicate acjob:finished ;
+                  sp:subject [
+                      sp:varName "job" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+          [
+            a sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "scope" ;
+                    ] ;
+                  sp:predicate acjob:scope ;
+                  sp:subject [
+                      sp:varName "job" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+          [
+            a sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "resources" ;
+                    ] ;
+                  sp:predicate acjob:resources ;
+                  sp:subject [
+                      sp:varName "job" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+          [
+            a sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "results" ;
+                    ] ;
+                  sp:predicate acjob:results ;
+                  sp:subject [
+                      sp:varName "job" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:isURI ;
+                sp:arg1 [
+                    sp:varName "job" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:job ;
+      spl:valueType acjob:AutoClassifierJob ;
+      rdfs:comment "URI of a job for which to return metadata; if unspecified, return metadata for all jobs" ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "Gets AutoClassifier job metadata for one or all of the jobs described in the query graph. Result header: ?job ?status ?started ?finished ?scope ?resources ?results" ;
+  rdfs:label "job metadata" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+autotagger:SelectTrainingModelService
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:trainingModel ;
+      spl:valueType taggerprojects:ContentTagSet ;
+      rdfs:comment "The content tag set whose training model to use, or empty to use our own training model." ;
+    ] ;
+  ui:prototype """
+<ui:setContext ui:queryGraph=\"{= ?projectGraph }\">
+    <ui:update ui:updateQuery=\"{!
+            DELETE {
+                ?projectGraph tagger:useTrainingModelFrom ?old .
+            }
+            WHERE {
+                ?projectGraph tagger:useTrainingModelFrom ?old .
+            } }\"/>
+    <ui:if ui:condition=\"{= bound(?trainingModel) }\">
+        <ui:update ui:updateQuery=\"{!
+                INSERT {
+                    ?projectGraph tagger:useTrainingModelFrom ?new .
+                }
+                WHERE {
+                    BIND (URI(?trainingModel) AS ?new) .
+                } }\"/>
+    </ui:if>
+    <swon:Object>
+        <swon:Value arg:name=\"status\" arg:value=\"ok\"/>
+        <swon:Value arg:name=\"projectGraph\" arg:value=\"{= ?projectGraph }\"/>
+        <swon:Value arg:name=\"trainingModel\" arg:value=\"{= ?trainingModel }\"/>
+    </swon:Object>
+</ui:setContext>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment "Service that is called when a different training model is selected in the AutoClassifier configuration page." ;
+  rdfs:label "select training model service" ;
+  rdfs:subClassOf teamwork:ProjectElements ;
+.
+autotagger:StartCrossValidation
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:configuration ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The AutoClassifier configuration resource (often a content tag set resource), a resource in the context graph described with tagger:xxx properties" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:contentGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "Graph containing the content resources that are tagged in the training data. Defaults to tagger:subjectGraph of configuration resource." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:tagProperty ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "Property of the tagging triples in the training data; if unspecified, assume tagger:defaultTagProperty of configuration resource" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:trainingDataGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph containing training taggings, that is, triples that connect content resources in the content graph with concepts in the vocabulary graph, using the tag property. If unspecified, assume the context graph." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:trainingID ;
+      spl:valueType xsd:string ;
+      rdfs:comment "Identifier for the cross-validation result; re-running cross-validation with the same trainingID will overwrite the previous cross-validation result; if unspecified, use the URI of the configuration resource" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:trainingSampleSize ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "Limit the number of documents used for training; if more are available, use an arbitrary subset. 0 or negative number means use all available documents (the default)." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:vocabularyGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "the graph containing concepts to be used as tags; defaults to tagger:objectGraph of the configuration resource" ;
+    ] ;
+  rdfs:comment "A control element that starts a cross-validation job for the AutoClassifier. Will throw exceptions if some precondition (Maui Server configured, content properties selected, training data present, etc.) is not met." ;
+  rdfs:label "start cross-validation" ;
+  rdfs:subClassOf ui:ControlElement ;
+.
+autotagger:StartJob
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional false ;
+      spl:predicate autotagger:configuration ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The AutoClassifier configuration resource (often a content tag set resource), a resource in the context graph described with tagger:xxx properties" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional false ;
+      spl:predicate autotagger:job ;
+      spl:valueType acjob:AutoClassifierJob ;
+      rdfs:comment "The job resource for the job to be started. Can be used to cancel the job. If a job graph is specified, metadata about this job will be updated there on job start and completion, and its status can be checked." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:contentGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "Graph containing the content resources to be tagged. Defaults to tagger:subjectGraph of configuration resource." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:jobGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "If specified, update metadata about the job in this graph on job start and completion" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:resources ;
+      spl:valueType xsd:string ;
+      rdfs:comment "An optional list of space-separated URIs of resources in the content graph to auto-classify. If unspecified, auto-classify all resources." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:tagProperty ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "Property to be used in generated tagging triples; if unspecified, use tagger:defaultTagProperty of configuration resource" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:targetGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "If specified, write taggings to the named graph. If unspecified, assume that the configuration is a content tag set, and write taggings to new working copy." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:trainingID ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The ID of a training result (see autoc:StartTraining) to be used in this job; if not specified, use the URI of the configuration resource" ;
+    ] ;
+  rdfs:comment "A control element that starts an auto-classification job. Assumes that all preconditions (Maui Server configured and trained, content properties selected, training data present, etc.) have been checked." ;
+  rdfs:label "start job" ;
+  rdfs:subClassOf ui:ControlElement ;
+.
+autotagger:StartJobSection
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional false ;
+      spl:predicate autotagger:loadId ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The id of a ui:loadable to reload after the start button has been clicked" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional false ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType owl:Ontology ;
+      rdfs:comment "The project graph (content tag set) that the job start button will apply to" ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:if ui:condition=\"{= !autotagger:isMauiServerRunning() }\">
+        <button class=\"btn btn-default btn-xs autotagger-start-job-section-margin-bottom-twelve\" disabled=\"disabled\">Run AutoClassifier</button>
+        <p>AutoClassifier is temporarily unavailable. Please contact the administrator.</p>
+    </ui:if>
+    <ui:elseif ui:condition=\"{= !autotagger:isReady(?projectGraph) }\">
+        <button class=\"btn btn-default btn-xs autotagger-start-job-section-margin-bottom-twelve\" disabled=\"disabled\">Run AutoClassifier</button>
+        <p>To use AutoClassifier, a training model for <em>{= teamwork:projectLabel(?projectGraph) }</em> must be created or selected on the <em>Manage</em> tab first.</p>
+    </ui:elseif>
+    <ui:elseif ui:condition=\"{= autotagger:existsRunningJobWithScopeAll(?projectGraph) }\">
+        <button class=\"btn btn-default btn-xs autotagger-start-job-section-margin-bottom-twelve\" disabled=\"disabled\">Run AutoClassifier</button>
+        <p>Auto-classification of all content resources in progress.</p>
+    </ui:elseif>
+    <ui:else>
+        <button class=\"btn btn-default btn-xs autotagger-start-job-section-margin-bottom-twelve\" let:jobURI=\"{= autotagger:generateJobURI(?projectGraph) }\" let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+			Run AutoClassifier
+			<ui:handle arg:useWorkflow=\"$('#start-ac-workflow').is(':checked')\" ui:event=\"onclick\" ui:thenLoadId=\"{= ?loadId }\">
+                <ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+                    <ui:call arg:resourceCount=\"{= autotagger:countContentResourcesInContentTagSet(?projectGraph) }\" arg:scope=\"{= acjob:all }\" autotagger:configuration=\"{= ?projectGraph }\" autotagger:job=\"{= ?jobURI }\" ui:template=\"{= autotagger:InsertJobMetadata }\"/>
+                </ui:setContext>
+                <ui:setContext ui:queryGraph=\"{= ?projectGraph }\">
+                    <autotagger:StartJob autotagger:configuration=\"{= ?projectGraph }\" autotagger:job=\"{= ?jobURI }\" autotagger:jobGraph=\"{= ?teamGraph }\" autotagger:targetGraph=\"{= IF(?useWorkflow, ?nil, ?projectGraph) }\"/>
+                </ui:setContext>
+            </ui:handle>
+        </button>
+        <swa:Space/>
+        <input checked=\"checked\" id=\"start-ac-workflow\" type=\"checkbox\"/>
+        <swa:Space/>
+        <label for=\"start-ac-workflow\">Start a new workflow for reviewing the results</label>
+        <p>This runs automatic classification on all content resources. If the 'Start a new workflow' checkbox is checked the results will be stored for review in a new working copy.</p>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Displays a button that starts an auto-classification job over all content resources in a content tag set, with explanatory text. The button will be disabled if a precondition is not met." ;
+  rdfs:label "start job section" ;
+  rdfs:subClassOf ui:Element ;
+.
+autotagger:StartTraining
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:configuration ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The AutoClassifier configuration resource (often a content tag set resource), a resource in the context graph described with tagger:xxx properties" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:contentGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "Graph containing the content resources that are tagged in the training data. Defaults to tagger:subjectGraph of configuration resource." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:tagProperty ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "Property of the tagging triples in the training data; if unspecified, assume tagger:defaultTagProperty of configuration resource" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:trainingDataGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph containing training taggings, that is, triples that connect content resources in the content graph with concepts in the vocabulary graph, using the tag property. If unspecified, assume the context graph." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:trainingID ;
+      spl:valueType xsd:string ;
+      rdfs:comment "Identifier for the training result; re-running training with the same trainingID will overwrite the previous training result; if unspecified, use the URI of the configuration resource" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:trainingSampleSize ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "Limit the number of documents used for training; if more are available, use an arbitrary subset. 0 or negative number means use all available documents (the default)." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:vocabularyGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "the graph containing concepts to be used as tags; defaults to tagger:objectGraph of the configuration resource" ;
+    ] ;
+  rdfs:comment "A control element that starts training the AutoClassifier. Will throw exceptions if some precondition (Maui Server configured, content properties selected, training data present, etc.) is not met." ;
+  rdfs:label "start training" ;
+  rdfs:subClassOf ui:ControlElement ;
+.
+autotagger:TrainingJobStatusSection
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional false ;
+      spl:predicate arg:activityName ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional false ;
+      spl:predicate arg:completed ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:finishTime ;
+      spl:valueType xsd:dateTime ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:serviceStatus ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:skippedDocuments ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:startTime ;
+      spl:valueType xsd:dateTime ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:totalDocuments ;
+      spl:valueType xsd:integer ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <p>
+        <ui:if ui:condition=\"{= ?serviceStatus = &quot;preparing&quot; }\">
+            <span>
+                <i class=\"fa fa-spinner fa-pulse fa-fw\"/>&nbsp;{= spif:titleCase(?activityName) }&nbsp;<strong>in progress</strong>.</span>
+        </ui:if>
+        <ui:elseif ui:condition=\"{= ?serviceStatus = &quot;running&quot; }\">
+            <span>
+                <i class=\"fa fa-spinner fa-pulse fa-fw\"/>&nbsp;{= spif:titleCase(?activityName) } on {= ?totalDocuments } content resources&nbsp;<strong>in progress</strong>
+                <ui:if ui:condition=\"{= bound(?startTime) }\">, started at {= spif:dateFormat(?startTime, \"HH:mm\") } on {= spif:dateFormat(?startTime, \"yyyy-MM-dd\") }</ui:if>.</span>
+        </ui:elseif>
+        <ui:elseif ui:condition=\"{= ?completed }\">
+            <span>
+                <i class=\"fa fa-check\"/>&nbsp;Completed<ui:if ui:condition=\"{= bound(?finishTime) }\">&nbsp;at {= spif:dateFormat(?finishTime, \"HH:mm\") } on {= spif:dateFormat(?finishTime, \"yyyy-MM-dd\") }</ui:if>,
+			using {= ?totalDocuments } content resources.&nbsp;</span>
+            <ui:if ui:condition=\"{= ?skippedDocuments &gt; 0 }\">
+                <strong class=\"text-danger\">Skipped {= ?skippedDocuments } due to lack of content or language tag mismatch.</strong>
+            </ui:if>
+        </ui:elseif>
+    </p>
+    <ui:if ui:condition=\"{ ?serviceStatus = &quot;preparing&quot; || ?serviceStatus = &quot;running&quot; }\">
+        <p>
+            <em>This process is running in the background. You can safely leave this page and check back later.</em>
+        </p>
+    </ui:if>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "training job status section" ;
+  rdfs:subClassOf ui:Element ;
+.
+autotagger:TrainingModelSection
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional false ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType owl:Ontology ;
+    ] ;
+  ui:headIncludes """
+<script type=\"text/javascript\">//
+
+var trainingModelSelector = {
+	projectGraph: null,
+	setProjectGraph: function(value) {
+		trainingModelSelector.projectGraph = value;
+	},
+	selectedTrainingModelChanged: function() {
+		var val = $('#trainingModel').val();
+		if (val == '') return;
+
+		var $jqXHR = $.ajax({
+			'url': 'swp',
+			'method': 'post',
+			'data': {
+				_viewClass: 'autotagger:SelectTrainingModelService',
+				projectGraph: trainingModelSelector.projectGraph,
+				trainingModel: val == 'this' ? null : val
+			}
+		});
+
+		$.when(
+			$jqXHR
+		).done(function (data, textStatus, jqXHR) {
+			swa.load('TrainingSection');
+		}).fail(function (jqXHR, textStatus, errorThrown) {
+			swa.populateModalDialog('Operation failed: ' + errorThrown, 'Operation failed', null);
+		});
+
+		return $jqXHR;
+	},
+}
+$(function() {
+	$('#trainingModel').change(trainingModelSelector.selectedTrainingModelChanged);
+});
+
+// Once called, this will keep running every 100ms forever.
+// It checks #TrainingSection for the string \"progress\".
+// If that string is seen, we wait 5000ms, then reload
+// the training section.
+$(function() {
+
+	var trainingInProgress = false;
+	var ticksSinceLoaded = 0;
+
+	function checkStatus() {
+		if (trainingInProgress) {
+			ticksSinceLoaded += 1;
+			if (ticksSinceLoaded &gt;= 50) {
+				ticksSinceLoaded = 0;
+				trainingInProgress = false;
+				swa.load('TrainingSection');
+			}
+		} else {
+			var text = $('#TrainingSection').text();
+			if (text &amp;&amp; text.match(/progress/i)) {
+				trainingInProgress = true;
+			}
+		}
+		window.setTimeout(checkStatus, 100);
+	};
+
+	checkStatus();
+});</script>
+"""^^ui:Literal ;
+  ui:prototype """
+<ui:setContext ui:queryGraph=\"{= ?projectGraph }\">
+    <h2>AutoClassifier Training Model</h2>
+    <ui:if ui:condition=\"{= !autotagger:isMauiServerRunning() }\">
+        <p>Training is temporarily unavailable. Please contact the administrator.</p>
+    </ui:if>
+    <ui:else>
+        <p>Use training model from content tag set:</p>
+        <p>
+            <script>{= ui:functionCall(\"trainingModelSelector.setProjectGraph\", ?projectGraph) };</script>
+            <select class=\"form-control\" id=\"trainingModel\" let:trainingModel=\"{= spl:object(?projectGraph, tagger:useTrainingModelFrom) }\" letrs:rs=\"{#
+                    SELECT ?other ?label
+                    WHERE {
+                        rdf:nil teamwork:readableGraphsUnderTeamControl ( ?other ?teamGraph ) .
+                        FILTER tagger:isContentTagSet(?other) .
+                        FILTER (?other != ?projectGraph) .
+                        BIND (teamwork:projectLabel(?other) AS ?label) .
+                    }
+                    ORDER BY (?other) }\">
+                <ui:if ui:condition=\"{= bound(?trainingModel) }\">
+                    <option value=\"this\">{= teamwork:projectLabel(?projectGraph) } (this)</option>
+                </ui:if>
+                <ui:else>
+                    <option selected=\"selected\" value=\"this\">{= teamwork:projectLabel(?projectGraph) } (this)</option>
+                </ui:else>
+                <ui:if ui:condition=\"{= spr:rowCount(?rs) &gt; 0 }\">
+                    <option disabled=\"disabled\">&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</option>
+                </ui:if>
+                <ui:forEach ui:resultSet=\"{= ?rs }\">
+                    <ui:if ui:condition=\"{= ?trainingModel = ?other }\">
+                        <option selected=\"selected\" value=\"{= ?other }\">{= ?label }</option>
+                    </ui:if>
+                    <ui:else>
+                        <option value=\"{= ?other }\">{= ?label }</option>
+                    </ui:else>
+                </ui:forEach>
+                <ui:if ui:condition=\"{= bound(?trainingModel) &amp;&amp; (!tagger:isContentTagSet(?trainingModel)) }\">
+                    <option selected=\"selected\" value=\"\">(Broken reference)</option>
+                </ui:if>
+            </select>
+        </p>
+        <ui:loadable ui:loadId=\"TrainingSection\">
+            <ui:group let:contentGraph=\"{= spl:object(?projectGraph, tagger:subjectGraph) }\" let:trainingModel=\"{= spl:object(?projectGraph, tagger:useTrainingModelFrom) }\">
+                <ui:if ui:condition=\"{= (!bound(?trainingModel)) &amp;&amp; corpus:fetchesContentLive(?contentGraph) }\">
+                    <p>
+                        <i class=\"fas fa-exclamation-triangle\"/>&nbsp;Only content tag sets whose content graphs are <strong>configured to store content locally</strong> can be used as training models.</p>
+                </ui:if>
+                <ui:elseif ui:condition=\"{= !bound(?trainingModel) }\">
+                    <ui:forEach ui:resultSet=\"{#
+                            SELECT *
+                            WHERE {
+                                OPTIONAL {
+                                    ?projectGraph autotagger:trainingStatus ( ?completed ?serviceStatus ?startTime ?finishTime ?runtime ?totalDocuments ?skippedDocuments ) .
+                                } .
+                            }
+                            LIMIT 1 }\">
+                        <ui:if ui:condition=\"{= ?completed }\">
+                            <p>
+                                <i class=\"fa fa-check\"/>&nbsp;Training model ready.</p>
+                        </ui:if>
+                        <ui:else>
+                            <p>
+                                <i class=\"fas fa-exclamation-triangle\"/>&nbsp;<em>{= teamwork:projectLabel(?projectGraph) }</em> currently has <strong>no associated training model</strong>.</p>
+                        </ui:else>
+                        <div class=\"autotagger-training-model-section-title\">
+                            <h2>Available training data</h2>
+                            <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?projectGraph) }\">
+                                <p let:count=\"{= autotagger:countTaggedContentResources(?projectGraph) }\">
+                                    <ui:if ui:condition=\"{= ?count = 0 }\">
+                                        <i class=\"fas fa-exclamation-triangle\"/>
+                                    </ui:if>
+                                    <ui:else>
+                                        <i class=\"fa fa-check\"/>
+                                    </ui:else>&nbsp;{= ?count } content resources tagged with property&nbsp;<em>{= ui:label(tagger:currentDefaultTagProperty()) }</em>&nbsp;(out of {= autotagger:countContentResourcesInContentTagSet(?projectGraph) } total content resources)</p>
+                            </ui:setContext>
+                            <ui:if ui:condition=\"{= autotagger:countTaggedContentResources(?projectGraph) = 0 }\">
+                                <p>
+                                    <i class=\"fa fa-info-circle\"/>&nbsp;<em>Before a training model can be created, some content resources must be manually tagged (or pre-existing taggings imported) to provide training data.</em>
+                                </p>
+                            </ui:if>
+                            <h2>Training</h2>
+                            <p>This creates a training model from the available training data in <em>{= teamwork:projectLabel(?projectGraph) }</em>.</p>
+                            <autotagger:TrainingJobStatusSection arg:activityName=\"training\" ui:args=\"*\"/>
+                            <ui:if ui:condition=\"{= (((autotagger:countContentProperties(?projectGraph) &gt; 0) &amp;&amp; (autotagger:countTaggedContentResources(?projectGraph) &gt; 0)) &amp;&amp; (COALESCE(?serviceStatus, &quot;not set up&quot;) != &quot;preparing&quot;)) &amp;&amp; (COALESCE(?serviceStatus, &quot;not set up&quot;) != &quot;running&quot;) }\">
+                                <button class=\"btn btn-default btn-sm\" id=\"startTraining\">
+								Start Training
+								<ui:handle ui:event=\"onclick\" ui:script=\"$('#startTraining').attr('disabled', true)\" ui:thenLoadId=\"TrainingSection\">
+                                        <ui:group let:targetGraph=\"{= ui:tempGraphAutoClassifierTraining }\">
+                                            <acpp:PreprocessContentTagSetForAutoClassifier arg:projectGraph=\"{= ?projectGraph }\" arg:targetGraph=\"{= ?targetGraph }\"/>
+                                            <autotagger:StartTraining autotagger:configuration=\"{= ?projectGraph }\" autotagger:vocabularyGraph=\"{= ?targetGraph }\"/>
+                                        </ui:group>
+                                    </ui:handle>
+                                </button>
+                            </ui:if>
+                            <ui:else>
+                                <button class=\"btn btn-default btn-sm\" disabled=\"disabled\">Start Training</button>
+                            </ui:else>
+                        </div>
+                    </ui:forEach>
+                    <ui:forEach ui:resultSet=\"{#
+                            SELECT *
+                            WHERE {
+                                OPTIONAL {
+                                    ?projectGraph autotagger:crossValidationStatus ( ?completed ?serviceStatus ?startTime ?finishTime ?runtime ?totalDocuments ?skippedDocuments ?precision ?recall ) .
+                                } .
+                            }
+                            LIMIT 1 }\">
+                        <div class=\"autotagger-training-model-section-title\">
+                            <h2>Evaluation</h2>
+                            <p>This assesses the performance of the AutoClassifier on the available training data using cross-validation.</p>
+                            <swa:LabeledElement arg:label=\"Precision\">
+                                <ui:if ui:condition=\"{= ?completed }\">{= round((?precision * 10000)) / 100 }%</ui:if>
+                                <ui:else>
+                                    <em>not calculated</em>
+                                </ui:else> (percentage of AutoClassifier-recommended tags that are correct according to the training data)
+</swa:LabeledElement>
+                            <swa:LabeledElement arg:label=\"Recall\">
+                                <ui:if ui:condition=\"{= ?completed }\">{= round((?recall * 10000)) / 100 }%</ui:if>
+                                <ui:else>
+                                    <em>not calculated</em>
+                                </ui:else> (percentage of tags in the training data found by the AutoClassifier)
+</swa:LabeledElement>
+                            <autotagger:TrainingJobStatusSection arg:activityName=\"evaluation\" ui:args=\"*\"/>
+                            <ui:if ui:condition=\"{= (((autotagger:countContentProperties(?projectGraph) &gt; 0) &amp;&amp; (autotagger:countTaggedContentResources(?projectGraph) &gt; 0)) &amp;&amp; (COALESCE(?serviceStatus, &quot;not set up&quot;) != &quot;preparing&quot;)) &amp;&amp; (COALESCE(?serviceStatus, &quot;not set up&quot;) != &quot;running&quot;) }\">
+                                <button class=\"btn btn-default btn-sm\" id=\"startCrossValidation\">
+								Calculate
+								<ui:handle ui:event=\"onclick\" ui:script=\"$('#startCrossValidation').attr('disabled', true)\" ui:thenLoadId=\"TrainingSection\">
+                                        <ui:group let:targetGraph=\"{= ui:tempGraphAutoClassifierCrossValidation }\">
+                                            <acpp:PreprocessContentTagSetForAutoClassifier arg:projectGraph=\"{= ?projectGraph }\" arg:targetGraph=\"{= ?targetGraph }\"/>
+                                            <autotagger:StartCrossValidation autotagger:configuration=\"{= ?projectGraph }\" autotagger:vocabularyGraph=\"{= ?targetGraph }\"/>
+                                        </ui:group>
+                                    </ui:handle>
+                                </button>
+                            </ui:if>
+                            <ui:else>
+                                <button class=\"btn btn-default btn-sm\" disabled=\"disabled\">Calculate</button>
+                            </ui:else>
+                        </div>
+                    </ui:forEach>
+                </ui:elseif>
+                <ui:elseif ui:condition=\"{= bound(?trainingModel) &amp;&amp; (!tagger:isContentTagSet(?trainingModel)) }\">
+                    <p>
+                        <i class=\"fas fa-exclamation-triangle\"/>&nbsp;The selected content tag set has been deleted or is corrupted.</p>
+                </ui:elseif>
+                <ui:elseif ui:condition=\"{= bound(?trainingModel) &amp;&amp; (!autotagger:isTrained(?trainingModel)) }\">
+                    <p>
+                        <i class=\"fas fa-exclamation-triangle\"/>&nbsp;The selected content tag set has <strong>no associated training model</strong>.</p>
+                </ui:elseif>
+                <ui:elseif ui:condition=\"{= bound(?trainingModel) &amp;&amp; (spl:object(?projectGraph, tagger:objectGraph) != spl:objectInGraph(?trainingModel, tagger:objectGraph, ?trainingModel)) }\">
+                    <p>
+                        <i class=\"fa fa-info-circle\"/>&nbsp;The selected content tag set and <em>{= teamwork:projectLabel(?projectGraph) }</em> use different concept vocabularies. The training model may not find applicable concepts.</p>
+                </ui:elseif>
+                <ui:else>
+                    <p>
+                        <i class=\"fa fa-check\"/>&nbsp;Training model ready.</p>
+                </ui:else>
+            </ui:group>
+        </ui:loadable>
+    </ui:else>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:comment "Displays the training section of the AutoClassifier Configuration page." ;
+  rdfs:label "training model section" ;
+  rdfs:subClassOf ui:Element ;
+.
+autotagger:TrainingStatus
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:configuration ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "AutoClassifier configuration resource (often a content tag set resource) that was given when starting the training job, if no trainingID was provided" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate autotagger:trainingID ;
+      spl:valueType xsd:string ;
+      rdfs:comment "Training result identifier that was given when starting the training job" ;
+    ] ;
+  rdfs:comment """A control element that gets the status of a training process previously started. The training process is identified by the trainingID that was specified when starting the training, or if none was specified, then by the AutoClassifier configuration resource. Will throw exceptions if some precondition (Maui Server configured, etc.) is not met.
+
+See also autoc:trainingStatus, a magic property.
+
+Results will be availabe to child elements as the following variables:
+
+- ?isTrained (xsd:boolean, only variable guaranteed to be bound)
+- ?trainerStatus (xsd:string)
+- ?startTime (xsd:dateTime)
+- ?endTime (xsd:dateTime)
+- ?runtime (xsd:integer, in milliseconds)
+- ?totalDocuments (xsd:integer)
+- ?skippedDocuments (xsd:integer)""" ;
+  rdfs:label "training status" ;
+  rdfs:subClassOf ui:ControlElement ;
+.
+autotagger:autoClassify
+  a spin:MagicProperty ;
+  rdfs:comment "A magic property of a content tag set that runs the associated AutoClassifier on a single document. The content tag set in the subject position must have a configured and trained AutoClassifier. The object is a three-element list: (?document ?concept ?probability). The ?document is the content resource to auto-classify. It must have content properties as configured for the content tag set. The results of auto-classification will be assigned to ?concept (the recommended concept) and ?proability (confidence between 0 and 1).	" ;
+  rdfs:label "auto-classify" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+autotagger:checkMauiServerConnectionProblem
+  a spin:Function ;
+  rdfs:comment "Tries to connect to a Maui Server instance, using the global TBL configuration, and returns an error message if any problem was encountered, or false otherwise." ;
+  rdfs:label "check Maui Server connection problem" ;
+  rdfs:subClassOf spin:Functions ;
+.
+autotagger:configuration
+  a rdf:Property ;
+.
+autotagger:contentGraph
+  a rdf:Property ;
+.
+autotagger:contentResource
+  a rdf:Property ;
+  rdfs:comment "The content resource to use as input." ;
+  rdfs:label "content resource" ;
+  rdfs:range rdfs:Resource ;
+.
+autotagger:contentText
+  a rdf:Property ;
+  rdfs:range xsd:string ;
+.
+autotagger:countContentProperties
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:Count ;
+                sp:expression [
+                    sp:varName "property" ;
+                  ] ;
+              ] ;
+            sp:varName "count" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "property" ;
+                    ] ;
+                  sp:predicate tagger:trainingContentProperty ;
+                  sp:subject [
+                      sp:varName "projectGraph" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "projectGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional false ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The project graph" ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:integer ;
+  rdfs:label "count content properties" ;
+  rdfs:subClassOf spin:Functions ;
+.
+autotagger:countContentResources
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "count" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:object ;
+                sp:arg1 spin:_arg1 ;
+                sp:arg2 tagger:subjectRootClass ;
+              ] ;
+            sp:variable [
+                sp:varName "contentRootClass" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a ui:graphWithImports ;
+                sp:arg1 [
+                    a sp:coalesce ;
+                    sp:arg1 spin:_arg2 ;
+                    sp:arg2 [
+                        a spl:object ;
+                        sp:arg1 spin:_arg1 ;
+                        sp:arg2 tagger:subjectGraph ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "contentGraph" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    a sp:bound ;
+                    sp:arg1 [
+                        sp:varName "contentRootClass" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a autotagger:countContentResourcesWithContentRootClass ;
+                    sp:arg1 [
+                        sp:varName "contentGraph" ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "contentRootClass" ;
+                      ] ;
+                  ] ;
+                sp:arg3 [
+                    a autotagger:countContentResourcesWithoutContentRootClass ;
+                    sp:arg1 [
+                        sp:varName "contentGraph" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "count" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "Optional content graph name; overrides the content graph specified in the configuration" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "An AutoClassifier configuration resource described in the query graph; may be a content tag set" ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:integer ;
+  rdfs:comment "Counts the number of content resources associated with an AutoClassifier configuration (?arg1) described in the query graph. The configured content graph may be overridden with the second argument (?arg2). Takes into account the configured root class." ;
+  rdfs:label "count content resources" ;
+  rdfs:subClassOf spin:Functions ;
+.
+autotagger:countContentResourcesInContentTagSet
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "count" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a autotagger:countContentResources ;
+                      sp:arg1 [
+                          sp:varName "projectGraph" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "count" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "projectGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The project graph" ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:integer ;
+  rdfs:comment "Counts the number of content resources in a content tag set's associated content graph (subject graph). If a content root class was defined, then only instances of that class and its subclasses will be counted." ;
+  rdfs:label "count content resources" ;
+  rdfs:subClassOf spin:Functions ;
+.
+autotagger:countContentResourcesWithContentRootClass
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:Count ;
+                sp:distinct true ;
+                sp:expression [
+                    sp:varName "resource" ;
+                  ] ;
+              ] ;
+            sp:varName "count" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  a sp:TriplePath ;
+                  sp:object spin:_arg2 ;
+                  sp:path [
+                      a sp:SeqPath ;
+                      sp:path1 rdf:type ;
+                      sp:path2 [
+                          a sp:ModPath ;
+                          sp:modMax -2 ;
+                          sp:modMin 0 ;
+                          sp:subPath rdfs:subClassOf ;
+                        ] ;
+                    ] ;
+                  sp:subject [
+                      sp:varName "resource" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode spin:_arg1 ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional false ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdfs:Class ;
+      sml:hidden false ;
+      rdfs:comment "Only instances of this class and its subclasses will be counted." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The content graph name" ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:integer ;
+  rdfs:label "count content resources with content root class" ;
+  rdfs:subClassOf spin:Functions ;
+.
+autotagger:countContentResourcesWithoutContentRootClass
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:Count ;
+                sp:distinct true ;
+                sp:expression [
+                    sp:varName "resource" ;
+                  ] ;
+              ] ;
+            sp:varName "count" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "o" ;
+                    ] ;
+                  sp:predicate [
+                      sp:varName "p" ;
+                    ] ;
+                  sp:subject [
+                      sp:varName "resource" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode spin:_arg1 ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The content graph name" ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:integer ;
+  rdfs:label "count content resources with content root class" ;
+  rdfs:subClassOf spin:Functions ;
+.
+autotagger:countResourcesFromList
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:Count ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "?0" ;
+              ] ;
+            sp:predicate spif:split ;
+            sp:subject [
+                sp:varName "uri" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "resources" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object """[
+]+""" ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resources ;
+      spl:valueType xsd:string ;
+      rdfs:comment "A space-separated list of resources." ;
+    ] ;
+  spin:returnType xsd:integer ;
+  rdfs:label "count resources from list" ;
+  rdfs:subClassOf spin:Functions ;
+.
+autotagger:countTaggedContentResources
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:Count ;
+                sp:distinct true ;
+                sp:expression [
+                    sp:varName "resource" ;
+                  ] ;
+              ] ;
+            sp:varName "count" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a tagger:currentDefaultTagProperty ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "tagProperty" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "any" ;
+                    ] ;
+                  sp:predicate [
+                      sp:varName "tagProperty" ;
+                    ] ;
+                  sp:subject [
+                      sp:varName "resource" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "projectGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The project graph" ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:integer ;
+  rdfs:label "count tagged content resources" ;
+  rdfs:subClassOf spin:Functions ;
+.
+autotagger:countVar
+  a rdf:Property ;
+  rdfs:label "count variable" ;
+  rdfs:range xsd:string ;
+.
+autotagger:crossValidationStatus
+  a spin:MagicProperty ;
+  rdfs:comment "Magic property of a content tag set that checks its auto-tagging cross-validation status and assigns a list of variables: (?completed ?serviceStatus ?started ?finished ?runtime ?totalDocuments ?skippedDocuments ?precision ?recall)." ;
+  rdfs:label "cross-validation status" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+autotagger:existsRunningJobWithScopeAll
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:teamGraph ;
+                sp:arg1 [
+                    sp:varName "projectGraph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "teamGraph" ;
+              ] ;
+          ]
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "job" ;
+                    ] ;
+                  sp:predicate acjob:job ;
+                  sp:subject [
+                      sp:varName "projectGraph" ;
+                    ] ;
+                ]
+                [
+                  sp:object acjob:running ;
+                  sp:predicate acjob:status ;
+                  sp:subject [
+                      sp:varName "job" ;
+                    ] ;
+                ]
+                [
+                  sp:object acjob:all ;
+                  sp:predicate acjob:scope ;
+                  sp:subject [
+                      sp:varName "job" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "teamGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional false ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The project graph" ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Examines a content tag set given as the argument, and returns true if there is a running auto-tagging job that is scoped to all resources." ;
+  rdfs:label "exists running job with scope all" ;
+  rdfs:subClassOf spin:Functions ;
+.
+autotagger:generateJobURI
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:uri ;
+                sp:arg1 [
+                    a sp:add ;
+                    sp:arg1 [
+                        a sp:add ;
+                        sp:arg1 [
+                            a sp:str ;
+                            sp:arg1 spin:_arg1 ;
+                          ] ;
+                        sp:arg2 "/job-" ;
+                      ] ;
+                    sp:arg2 [
+                        a spif:generateUUID ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where () ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The configuration URI" ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "Generates a new, unique URI for an AutoClassifier job, based on a configuration URI and a UUID." ;
+  rdfs:label "generate job URI" ;
+  rdfs:subClassOf spin:Functions ;
+.
+autotagger:isContentProperty
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "property" ;
+                    ] ;
+                  sp:predicate tagger:trainingContentProperty ;
+                  sp:subject [
+                      sp:varName "projectGraph" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "projectGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The project graph" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:property ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The property to test" ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:boolean ;
+  rdfs:label "is content property" ;
+  rdfs:subClassOf spin:Functions ;
+.
+autotagger:isMauiServerConfigured
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:Filter ;
+            sp:expression [
+                a spl:objectInGraph ;
+                sp:arg1 config:configuration ;
+                sp:arg2 cfg:mauiServerURL ;
+                sp:arg3 <http://server.topbraidlive.org/dynamic/config> ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:label "is Maui Server configured" ;
+  rdfs:subClassOf spin:Functions ;
+.
+autotagger:isMauiServerRunning
+  a spin:Function ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Tries to connect to a Maui Server instance, using the global TBL configuration, and returns true if successful, false otherwise." ;
+  rdfs:label "is Maui Server running" ;
+  rdfs:subClassOf spin:Functions ;
+.
+autotagger:isReady
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:and ;
+                sp:arg1 [
+                    a sp:and ;
+                    sp:arg1 [
+                        a sp:bound ;
+                        sp:arg1 [
+                            sp:varName "projectGraph" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        a autotagger:isTrained ;
+                        arg:projectGraph [
+                            a sp:coalesce ;
+                            sp:arg1 [
+                                a spl:objectInGraph ;
+                                sp:arg1 [
+                                    sp:varName "projectGraph" ;
+                                  ] ;
+                                sp:arg2 tagger:useTrainingModelFrom ;
+                                sp:arg3 [
+                                    sp:varName "projectGraph" ;
+                                  ] ;
+                              ] ;
+                            sp:arg2 [
+                                sp:varName "projectGraph" ;
+                              ] ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a sp:gt ;
+                    sp:arg1 [
+                        a autotagger:countContentProperties ;
+                        arg:projectGraph [
+                            sp:varName "projectGraph" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 0 ;
+                  ] ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where () ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional false ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The project graph" ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Examines a content tag set given as the argument, and returns true if an AutoClassifier training model has been selected for it." ;
+  rdfs:label "is ready" ;
+  rdfs:subClassOf spin:Functions ;
+.
+autotagger:isTrained
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "?0" ;
+                    ] ;
+                  sp:predicate autotagger:trainingStatus ;
+                  sp:subject [
+                      sp:varName "projectGraph" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "isTrained" ;
+                    ] ;
+                  sp:predicate rdf:first ;
+                  sp:subject [
+                      sp:varName "?0" ;
+                    ] ;
+                ]
+                [
+                  sp:object () ;
+                  sp:predicate rdf:rest ;
+                  sp:subject [
+                      sp:varName "?0" ;
+                    ] ;
+                ]
+                [
+                  a sp:Filter ;
+                  sp:expression [
+                      sp:varName "isTrained" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "projectGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional false ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The project graph" ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Examines a content tag set given as the argument, and returns true if it is trained." ;
+  rdfs:label "is trained" ;
+  rdfs:subClassOf spin:Functions ;
+.
+autotagger:job
+  a rdf:Property ;
+.
+autotagger:jobGraph
+  a rdf:Property ;
+.
+autotagger:loadId
+  a rdf:Property ;
+  rdfs:range xsd:string ;
+.
+autotagger:mauiServerVersion
+  a spin:Function ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Gets the Maui Server version number, as reported by the server. Versions before 1.1.0 are reported as \"1.0.x\"." ;
+  rdfs:label "Maui Server version" ;
+  rdfs:subClassOf spin:Functions ;
+.
+autotagger:resources
+  a rdf:Property ;
+.
+autotagger:resultsVar
+  a rdf:Property ;
+  rdfs:comment "Invokes the AutoClassifier to recommend topics for a content resource in the query graph. Stores results as a SPARQL result set available to child nodes, with variables ?concept (URI of a recommended concept), ?label (of the concept) and ?probability (xsd:decimal, 0..1)." ;
+  rdfs:label "results variable" ;
+  rdfs:range xsd:string ;
+.
+autotagger:tagProperty
+  a rdf:Property ;
+.
+autotagger:targetGraph
+  a rdf:Property ;
+.
+autotagger:trainingDataGraph
+  a rdf:Property ;
+.
+autotagger:trainingID
+  a rdf:Property ;
+.
+autotagger:trainingSampleSize
+  a rdf:Property ;
+.
+autotagger:trainingStatus
+  a spin:MagicProperty ;
+  rdfs:comment "Magic property of a content tag set that checks its auto-tagging training status and assigns a list of variables: (?isTrained ?trainerStatus ?started ?finished ?runtime ?totalDocuments ?skippedDocuments). Not to be confused with the control element autoc:TrainingStatus." ;
+  rdfs:label "training status" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+autotagger:vocabularyGraph
+  a rdf:Property ;
+.
+tagger:currentSubjectGraphHasObject
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "result" ;
+              ] ;
+            sp:predicate tagger:subjectGraph ;
+            sp:subject [
+                sp:varName "any" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:bound ;
+                sp:arg1 [
+                    sp:varName "result" ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "value" ;
+                    ] ;
+                  sp:predicate spin:_arg1 ;
+                  sp:subject [
+                      sp:varName "result" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "result" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The property to check for." ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks if the content graph of the current content tag has an Object for the requested property." ;
+  rdfs:label "current subject graph has type" ;
+  rdfs:subClassOf spin:Functions ;
+.
+arg:activityName
+  a rdf:Property ;
+  rdfs:label "activity name" ;
+  skos:prefLabel "activity name" ;
+.
+arg:completed
+  a rdf:Property ;
+.
+arg:contentProperties
+  a rdf:Property ;
+.
+arg:contentRootClass
+  a rdf:Property ;
+.
+arg:finishTime
+  a rdf:Property ;
+.
+arg:mauiServerURL
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:resourceCount
+  a rdf:Property ;
+.
+arg:scope
+  a rdf:Property ;
+.
+arg:serviceStatus
+  a rdf:Property ;
+.
+arg:skippedDocuments
+  a rdf:Property ;
+.
+arg:startTime
+  a rdf:Property ;
+.
+arg:threshold
+  a rdf:Property ;
+.
+arg:totalDocuments
+  a rdf:Property ;
+.
+arg:trainingModel
+  a rdf:Property ;
+.
+arg:trainingSampleSize
+  a rdf:Property ;
+  rdfs:range xsd:string ;
+.
+arg:updateProperties
+  a rdf:Property ;
+  rdfs:range xsd:string ;
+.

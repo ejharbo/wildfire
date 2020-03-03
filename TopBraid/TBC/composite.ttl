@@ -1,0 +1,29 @@
+# baseURI: http://www.topbraid.org/2007/05/composite.owl
+# prefix: composite
+
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://www.topbraid.org/2007/05/composite.owl>
+  a owl:Ontology ;
+  rdfs:comment "A simple ontology to help representing part-of (parent/child) relationships." ;
+  owl:versionInfo "Created with TopBraid Composer by Holger Knublauch" ;
+.
+composite:child
+  a owl:ObjectProperty ;
+  rdfs:comment "The object is the child of the subject." ;
+  owl:inverseOf composite:parent ;
+.
+composite:index
+  a owl:DatatypeProperty ;
+  rdfs:comment "The index of the subject among its siblings. Note that this could in principle take arbitrary numbers (including floats). We recommend using xsd:ints starting at 0." ;
+  rdfs:range xsd:int ;
+.
+composite:parent
+  a owl:ObjectProperty ;
+  rdfs:comment "The object is the parent of the subject." ;
+  owl:inverseOf composite:child ;
+.

@@ -1,0 +1,999 @@
+# baseURI: http://edg.topbraidlive.org/1.0/utility/tools
+# imports: http://edg.topbraid.solutions/1.0/editor/tabular
+# imports: http://edg.topbraid.solutions/1.0/project/edg
+# imports: http://topbraid.org/swa
+# imports: http://topbraid.org/teamwork.ui
+
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix autotagger: <http://evn.topbraidlive.org/autotagger#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix config-importers: <http://edg.topbraidlive.org/config/importers#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix core-soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dataset: <http://teamwork.topbraidlive.org/dataset#> .
+@prefix datasetapp: <http://topbraid.org/swa/datasetapp#> .
+@prefix datasetviewer: <http://topbraid.org/swa/datasetviewer#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ddl: <http://edg.topbraidlive.org/1.0/importers/ddl#> .
+@prefix default: <http://uispin.org/default#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg-config: <http://edg.ext.topbraidlive.org/schema/config/importers#> .
+@prefix edg-importer: <http://edg.topbraidlive.org/importer/> .
+@prefix edg-qa: <http://edg.topbraidlive.org/utility/qa/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix elements: <http://purl.org/dc/elements/1.1/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evn: <http://topbraid.org/evn/evn#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evnimport: <http://evn.topbraidlive.org/uispin/evnimport#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix ex: <http://example.org/> .
+@prefix extjs: <http://uispin.com/extjs#> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix forms: <http://www.topbraid.org/2007/01/forms.owl#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix inference: <http://www.topbraid.org/2007/06/inference.owl#> .
+@prefix jdbc: <http://edg.topbraidlive.org/1.0/importers/jdbc#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix lib-importer: <http://edg.topbraid.solutions/importer/lib#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix ontologyviewer: <http://topbraid.org/swa/ontologyviewer#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix proxy-lineage: <http://edg.topbraid.solutions/proxy/importer/lineage#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix rdmapp: <http://rdm.topbraidlive.org/rdmapp#> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix rdmviewer: <http://rdm.topbraidlive.org/rdmviewer#> .
+@prefix saf: <http://topbraid.org/saf/> .
+@prefix safconfig: <http://topbraid.org/safconfig/> .
+@prefix safm: <http://saf.topbraidlive.org/metaschema/> .
+@prefix savedQueries: <http://teamwork.topbraidlive.org/ui/savedQueries#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix server: <http://server.topbraidlive.org/server.ui#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sharepoint: <http://topbraid.org/sharepoint#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spinmap: <http://spinrdf.org/spinmap#> .
+@prefix spinmapl: <http://topbraid.org/spin/spinmapl#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix ss: <http://www.topbraidcomposer.org/owl/2006/08/spreadsheets.owl#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tablesmap: <http://topbraid.org/spin/tablesmap#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkAdmin: <http://teamwork.topbraidlive.org/doc/teamworkAdmin#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworkconstraints: <http://topbraid.org/teamworkconstraints#> .
+@prefix teamworkdashboard: <http://topbraid.org/teamworkdashboard#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix tracker: <http://teamwork.topbraidlive.org/ui/tracker#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uitest: <http://uispin.org/test#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix userdat: <http://teamwork.topbraidlive.org/ui/userdata> .
+@prefix userdata: <http://teamwork.topbraidlive.org/ui/userdata#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix visual: <http://topbraid.org/visual#> .
+@prefix voag: <http://voag.linkedmodel.org/voag#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+edg:DataTablesExample
+  rdf:type ui:NodeClass ;
+  ui:headIncludes """
+<ui:group>
+    <meta content=\"edg:DataTablesExample\" name=\"edg-manifest-start\"/>
+    <title>EDG Redux-React Data Tables Example</title>
+    <script>teamwork.initRichTextEditors(teamwork.injectLinkToConceptButton)</script>
+    <meta content=\"edg:DataTablesExample\" name=\"edg-manifest-end\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:prototype """
+<ui:setContext let:graph1=\"{= IRI(&quot;http://topbraid.org/test/kennedys&quot;) }\" ui:varName=\"swaCanDeleteResourceFunction\" ui:varValue=\"datasetapp:canDeleteResource\">
+    <ui:group let:resourceType=\"{= COALESCE(?resourceType, edg:getRootClass(?projectGraph)) }\">
+        <ui:setContext let:table1RowSelectedEvent=\"edg.test.table1RowSelected\" ui:queryGraph=\"{= ui:graphWithImports(?graph1) }\" ui:varName=\"swaAppName\" ui:varValue=\"Tabular,Editor\">
+            <div style=\"margin-left: 10px; margin-right:10px;\">
+                <style>[class*=\"col-\"] {border:1px solid black;}</style>
+                <h1>EDG Redux-React Data Tables Examples</h1>
+                <p>The following tests are demonstrated:</p>
+                <ol>
+                    <li>Form 1 only responds to events from Table 1</li>
+                    <li>Form 2 responds to events from Tables 1,2 and 3</li>
+                    <li>Form 3 only responds to events from Table 3</li>
+                    <li>Table 1 only responds to change events from Form 1</li>
+                    <li>Table 2 responds to change events from Forms 1, 2 and 3</li>
+                    <li>Table 3 only responds to change events from Form 3</li>
+                </ol>
+                <div class=\"container-fluid\">
+                    <div class=\"row\">
+                        <ui:setContext let:table1RowSelectedEvent=\"edg.test.table1RowSelected\" let:table2RowSelectedEvent=\"edg.test.table2RowSelected\" let:table3RowSelectedEvent=\"edg.test.table3RowSelected\">
+                            <div class=\"col-md-4\">
+                                <div class=\"row\">
+                                    <edg:TestTable arg:dataColumnsEndpoint=\"{= edg:TestDataTableColumnsJSON }\" arg:dataEndpoint=\"{= edg:TestDataTableJSON }\" arg:rowSelectedEvent=\"{= ?table1RowSelectedEvent }\" arg:title=\"Table 1\"/>
+                                </div>
+                                <div class=\"row\">
+                                    <div class=\"col-md-12\">
+                                        <edg:TestForm arg:defaultSubject=\"{= &lt;http://topbraid.org/examples/kennedys#AlfredTucker&gt; }\" arg:editing=\"{= ?editing }\" arg:resource=\"{= COALESCE(?resource, ?preselectedResource) }\" arg:rowSelectedEvent=\"{= ?table1RowSelectedEvent }\" arg:title=\"Form 1\"/>
+                                        <swa:Subscribe arg:code=\"edgqa.dataTableRowsSelected('edg:tableRowsSelected', JSON.stringify(data));\" arg:event=\"{= ?table1RowSelectedEvent }\"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=\"col-md-4\">
+                                <div class=\"row\">
+                                    <edg:TestTable arg:dataColumnsEndpoint=\"{= edg:TestDataTableColumnsJSON }\" arg:dataEndpoint=\"{= edg:TestDataTableJSON }\" arg:rowSelectedEvent=\"{= ?table2RowSelectedEvent }\" arg:title=\"Table 2\"/>
+                                </div>
+                                <div class=\"row\">
+                                    <div class=\"col-md-12\">
+                                        <edg:TestForm arg:defaultSubject=\"{= &lt;http://topbraid.org/examples/kennedys#AlfredTucker&gt; }\" arg:editing=\"{= ?editing }\" arg:resource=\"{= COALESCE(?resource, ?preselectedResource) }\" arg:rowSelectedEvent=\"{= ?table2RowSelectedEvent }\" arg:title=\"Form 2\"/>
+                                        <swa:Subscribe arg:code=\"swa.populateModalDialog('Table 2 responded to ' + '{= ?table1RowSelectedEvent }');\" arg:event=\"test.{= ?table1RowSelectedEvent }\"/>
+                                        <swa:Subscribe arg:code=\"swa.populateModalDialog('Table 2 responded to ' + '{= ?table2RowSelectedEvent }');\" arg:event=\"test.{= ?table2RowSelectedEvent }\"/>
+                                        <swa:Subscribe arg:code=\"swa.populateModalDialog('Table 2 responded to ' + '{= ?table3RowSelectedEvent }');\" arg:event=\"test.{= ?table3RowSelectedEvent }\"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=\"col-md-4\">
+                                <div class=\"row\">
+                                    <edg:TestTable arg:dataColumnsEndpoint=\"{= edg:TestDataTableColumnsJSON }\" arg:dataEndpoint=\"{= edg:TestDataTableJSON }\" arg:rowSelectedEvent=\"{= ?table3RowSelectedEvent }\" arg:title=\"Table 3\"/>
+                                </div>
+                                <div class=\"row\">
+                                    <div class=\"col-md-12\">
+                                        <edg:TestForm arg:defaultSubject=\"{= &lt;http://topbraid.org/examples/kennedys#AlfredTucker&gt; }\" arg:editing=\"{= ?editing }\" arg:resource=\"{= COALESCE(?resource, ?preselectedResource) }\" arg:rowSelectedEvent=\"{= ?table3RowSelectedEvent }\" arg:title=\"Form 3\"/>
+                                        <swa:Subscribe arg:code=\"swa.populateModalDialog('Table 3 responded to ' + '{= ?table3RowSelectedEvent }');\" arg:event=\"test.{= ?table3RowSelectedEvent }\"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </ui:setContext>
+                    </div>
+                </div>
+            </div>
+        </ui:setContext>
+    </ui:group>
+</ui:setContext>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:comment "swa.getAppState().dataTables.filter((dataTable) => {return dataTable.name === 'table1'}).selectedRowEvent" ;
+  rdfs:label "Data Tables Example" ;
+  rdfs:subClassOf edg:EditorApplications ;
+.
+edg:GenericDataTable
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:additionalClasses ;
+      spl:valueType xsd:string ;
+      rdfs:comment "Any additional classes to apply to the table's container." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:cmBaseGraph ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:cmViewClass ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:editable ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:hasCheckboxSelection ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:hasComparisonMatrix ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:hasViewableDetails ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:limit ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:queryParam ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:queryParamValues ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:dataColumnsEndpoint ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The endpoint to retrieve the columns of the DataTable." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:dataEndpoint ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The api endpoint for the data of the  DataTable." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:detailsViewClass ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:rowSelectedEvent ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The event that is published when a row is selected in the datatable." ;
+    ] ;
+  ui:prototype """
+<div class=\"table-container {= ?additionalClasses }\" data-columns-endpoint=\"{= ?dataColumnsEndpoint }\" data-comparison-matrix-base-graph=\"{= COALESCE(?cmBaseGraph, ?nil) }\" data-comparison-matrix-view-class=\"{= COALESCE(?cmViewClass, ?nil) }\" data-custom-btn-events=\"[{= edg:makeJSONforDataTablesEvent(?rowSelectedEvent, &quot;Show Details&quot;, &quot;btnText&quot;) }]\" data-datatable=\"true\" data-details-view-class=\"{= COALESCE(?detailsViewClass, &quot;teamwork:DetailsViewPage&quot;) }\" data-editable=\"{= ?editable }\" data-endpoint=\"{= ?dataEndpoint }\" data-has-checkbox-select=\"{= COALESCE(?hasCheckboxSelection, ?nil) }\" data-has-comparison-matrix=\"{= COALESCE(?hasComparisonMatrix, ?nil) }\" data-include-base=\"{= COALESCE(?includeBase, ?nil) }\" data-init-query-param=\"{= COALESCE(?queryParam, ?nil) }\" data-init-query-param-values=\"{= COALESCE(?queryParamValues, ?nil) }\" data-limit=\"{= COALESCE(?limit, ?nil) }\" data-scroll-collapse=\"{= COALESCE(?hasScrollCollapse, ?nil) }\" id=\"{= ui:uniqueId() }\"/>
+"""^^ui:Literal ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:SwitchableForm
+  rdf:type swa:FormClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:allowHistoryMode ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to have a \"Show history\" check box show up in view mode. This mode is currently only supported by the teamwork framework, not general SWA." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:allowLogMessage ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to also show a check box in edit mode, where the user can enter a commit message when pressing Save Changes" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:allowProvenanceMode ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to have a \"Show provenance\" check box show up in view mode. This mode is currently only supported by the Insight product, not general SWA." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:editable ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to add an option to allow the user to switch the form to edit mode." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:editing ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to make the form editing by default." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:formId ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The id of the form if this is in edit mode." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:matchIds ;
+      spl:valueType xsd:string ;
+      rdfs:comment "An optional list of matchIds that shall be tried first when selecting the actual view. This allows users to define multiple forms for the same class, while specific SwitchableForms can pick which one of them they would like to use. If specified, then there should not be any commas at the end, but are allowed between the values." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource to display." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:showFooter ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "If set to true, a footer will always show up, even if ?showResourceActions and ?editable are false." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:showResourceActions ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to also display a button to run ResourceActions." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:showURI ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to display the URI of the resource on the right hand side of the header. Even if left to false (default), the URI will be the tool tip text of the header." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:suppressHeader ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to suppress any header." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:suppressInlineEditing ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "If set to true then this deactivates inline editing by setting the context variable \"swa-no-edit-button\"." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:viewModeName ;
+      spl:valueType xsd:string ;
+      rdfs:comment "An optional name of the mode that shall be activated if the form is in view mode. This can be used to replace the default view with a specialized mode, e.g. history mode in EVN." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:resourceSelectedEvent ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:prototype """
+<ui:setContext let:extraMatchIds=\"{= IF(bound(?matchIds), CONCAT(?matchIds, &quot;,&quot;), ?none) }\" let:fid=\"{= COALESCE(?formId, ui:uniqueId()) }\" let:headerLabelFunction=\"{= COALESCE(ui:contextValue(&quot;headerLabelFunction&quot;), swa:DefaultHeaderLabelFunction) }\" ui:varName=\"{= IF(?suppressInlineEditing, &quot;swa-no-edit-button&quot;, ?none) }\" ui:varValue=\"{= true }\">
+    <ui:if ui:condition=\"{= (!bound(?suppressHeader)) || (!?suppressHeader) }\">
+        <swa:FormHeader arg:label=\"{= spif:invoke(?headerLabelFunction, ?resource) }\" arg:toolTip=\"{= ?resource }\">
+            <ui:if ui:condition=\"{= ?showURI }\">
+                <span class=\"swa-form-header-uri\">{= ?resource }</span>
+            </ui:if>
+        </swa:FormHeader>
+    </ui:if>
+    <ui:if let:ei=\"{= COALESCE(?editing, false) }\" ui:condition=\"{= (?editable || ?showResourceActions) || ?showFooter }\">
+        <div class=\"action-bar\">
+            <span class=\"{= IF(?ei, ?none, &quot;ui-helper-hidden-accessible&quot;) }\" id=\"{= ?fid }-editModeButtonBar\">
+                <ui:if ui:condition=\"{= ?allowLogMessage }\">
+                	<div class=\"checkbox\">
+                    	<input class=\"swa-switchable-form-log-message-checkbox log-message-box\" id=\"log-message-box\" onclick=\"swa.rememberLogMessageBoxStatus()\" type=\"checkbox\"/>
+                    </div>
+                    <script>swa.restoreLogMessageBoxStatus();</script>
+                    <swa:Space/>
+                    <label class=\"swa-base-font\" for=\"log-message-box\">Enter log message</label>
+                    <swa:Space/>
+                    <swa:Space/>
+                </ui:if>
+                <button class=\"btn btn-default btn-xs save-button\" data-formid=\"{= ?fid }\" onclick=\"swa.submitForm('{= ?fid }', null)\">
+                    <span aria-hidden=\"true\"/> Save Changes
+   				</button>
+                <swa:Space/>
+                <button class=\"btn btn-default btn-xs cancel-button\" data-formid=\"{= ?fid }\" onclick=\"swa.switchToViewForm('{= ?fid }')\">
+                    <span aria-hidden=\"true\"/> Cancel
+   				</button>
+            </span>
+            <span id=\"{= ?fid }-viewModeButtonBar\">
+                <ui:if ui:condition=\"{= ?showResourceActions }\">
+                    <swa:ResourceActionsButton arg:class=\"{= IF(?ei, &quot;swa-hidden&quot;, ?none) } btn btn-default btn-xs\" arg:editable=\"{= ?editable }\" arg:id=\"{= ?fid }-actionsButton\" arg:resource=\"{= ?resource }\" arg:resourceSelectedEvent=\"{= ?resourceSelectedEvent }\" arg:toolTip=\"Actions for {= ui:label(?resource) }\"/>
+                    <swa:Space/>
+                </ui:if>
+                <ui:if ui:condition=\"{= ?editable }\">
+                    <button class=\"{= IF(?ei, &quot;swa-hidden&quot;, ?none) } btn btn-default btn-xs edit-button\" data-formid=\"{= ?fid }\" onclick=\"swa.switchToEditForm('{= ?fid }')\">
+                        <span aria-hidden=\"true\"/> Edit</button>
+                    <swa:Space/>
+                </ui:if>
+                <swa:Space/>
+                <ui:if ui:condition=\"{= ?allowHistoryMode }\">
+                <div class=\"checkbox\">
+                    <label class=\"swa-history-checkbox {= IF(?ei, &quot;swa-hidden&quot;, ?none) }\" for=\"history-mode-box\">
+                        <input class=\"swa-switchable-form-checkbox history-mode-box\" data-formid=\"{= ?fid }\" id=\"history-mode-box\" onclick=\"swa.switchToViewForm('{= ?fid }')\" type=\"checkbox\"/>&nbsp;Show&nbsp;History</label>
+                </div>
+                </ui:if>
+                <ui:if ui:condition=\"{= ?allowProvenanceMode }\">
+                    <div class=\"checkbox swa-provenance-checkbox {= IF(?ei, &quot;swa-hidden&quot;, ?none) } \" id=\"provenance-mode-box\">
+                        <input class=\"swa-switchable-form-checkbox provenance-mode-box\" data-formid=\"{= ?fid }\" id=\"provenance-mode-box\" onclick=\"swa.switchToViewForm('{= ?fid }')\" type=\"checkbox\"/>&nbsp;Show&nbsp;Data&nbsp;Sources</div>
+                </ui:if>
+                <button class=\"{= IF(?ei, &quot;ui-helper-hidden-accessible&quot;, ?none) } btn btn-default btn-xs print-button\" data-formid=\"{= ?fid }\" onclick=\"swa.printView('{= ?fid }')\">
+                    <span aria-hidden=\"true\"/> Print View
+				</button>
+                <ui:insertionPoint ui:pointId=\"bottomBar\"/>
+            </span>
+        </div>
+    </ui:if>
+    <ui:loadable class=\"ui-layout-content\" ui:loadId=\"{= ?fid }-loadable\">
+        <ui:if ui:condition=\"{= ?showURI &amp;&amp; isIRI(?resource) }\">
+            <div class=\"swa-uri\">{= ?resource }</div>
+        </ui:if>
+        <ui:if ui:condition=\"{= ?editing }\">
+            <ui:debug>
+                <!--ui:dumpGraph ui:filePath=\"/www.sandbox.com/queryGraph-editing.ttl\"
+  ui:graph=\"{= ui:currentQueryGraph() }\"/-->
+            </ui:debug>
+            <ui:setContext ui:varName=\"mode\" ui:varValue=\"edit\">
+                <form autocomplete=\"off\" class=\"swa-form switchable-mode swa-form-edit\" id=\"{= ?fid }\" resource=\"{= swa:resourceURIOrBNodeId(?resource) }\">
+                    <ui:if ui:condition=\"{= ?editable }\">
+                        <input name=\"_base\" type=\"hidden\" value=\"{= ui:currentQueryGraph() }\"/>
+                    </ui:if>
+                    <ui:if ui:condition=\"{= !bound(?resource) }\">
+                        <input name=\"resourceType\" type=\"hidden\" value=\"{= swa:resourceType() }\"/>
+                    </ui:if>
+                    <div class=\"swa-form-body\">
+                        <ui:if ui:condition=\"{= bound(?resource) }\">
+                            <ui:resourceView ui:matchIds=\"{= ?extraMatchIds }edit,form\" ui:resource=\"{= ?resource }\"/>
+                        </ui:if>
+                        <ui:else>
+                            <ui:classView ui:class=\"{= swa:resourceType() }\" ui:matchIds=\"{= ?extraMatchIds }edit,form\"/>
+                        </ui:else>
+                    </div>
+                </form>
+            </ui:setContext>
+        </ui:if>
+        <ui:else>
+            <ui:debug>
+                <!--ui:dumpGraph ui:filePath=\"/www.sandbox.com/queryGraph-viewing.ttl\"
+  ui:graph=\"{= ui:currentQueryGraph() }\"/-->
+            </ui:debug>
+            <ui:setContext ui:varName=\"mode\" ui:varValue=\"{= COALESCE(?viewModeName, &quot;view&quot;) }\">
+                <form class=\"swa-form view-mode swa-form-view\" id=\"{= ?fid }\" resource=\"{= ?resource }\">
+                    <div class=\"swa-form-body\">
+                        <ui:setContext ui:varName=\"{= IF(?editable, ?none, &quot;swa-no-edit-button&quot;) }\" ui:varValue=\"{= true }\">
+                            <ui:resourceView ui:matchIds=\"{= ?extraMatchIds }view,form\" ui:resource=\"{= ?resource }\"/>
+                            <swa:DataViewsSection arg:resource=\"{= ?resource }\"/>
+                        </ui:setContext>
+                    </div>
+                </form>
+            </ui:setContext>
+        </ui:else>
+    </ui:loadable>
+    <div>
+        <ui:insertionPoint ui:pointId=\"extraFooter\"/>
+    </div>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:comment "A form displaying details of a given resource. The form displays a header on top, with label and type of the resource. If arg:editable is set to true, the form will have a button at the bottom to switch it to edit mode." ;
+  rdfs:label "View form" ;
+  rdfs:subClassOf swa:Form ;
+.
+edg:SwitchableFormGadget
+  rdf:type swa:Gadget ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:allowHistoryMode ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to have a \"Show history\" check box show up in view mode. This mode is currently only supported by the teamwork framework, not general SWA." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:allowLogMessage ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to provide an option to enter a log message when saving changes." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:allowProvenanceMode ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to have a \"Show provenance\" check box show up in view mode. This mode is currently only supported by the Insight product, not general SWA." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:editing ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to start in editing mode." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:footerPlugin ;
+      spl:valueType swa:SwitchableFormFooterPlugin ;
+      rdfs:comment "An optional component to show up in the lower right corner." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:matchIds ;
+      spl:valueType xsd:string ;
+      rdfs:comment "An optional list of matchIds that shall be tried first when selecting the actual view. This allows users to define multiple forms for the same class, while specific gadgets can pick which one of them they would like to use. If specified, then there should not be any commas at the end, but are allowed between the values." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:readOnly ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to disallow switching to edit mode." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:refreshFilterFunction ;
+      spl:valueType xsd:string ;
+      rdfs:comment "An optional JavaScript function that is injected into the filter code that ignores reloading on a refresh event." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource to display." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:showResourceActions ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to also display a button to run ResourceActions." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:showType ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to show the type of the resource behind its label." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:showURI ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to include the URI of the resource in the header." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:suppressInlineEditing ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "If set to true then this deactivates inline editing by setting the context variable \"swa-no-edit-button\"." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:resourceSelectedEvent ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The name of the event to subscribe to so that the window can be reloaded if the resource changes. The event will also be re-published whenever the user follows a hyperlink on the form. The data payload of the event needs to be the URI of a resource." ;
+    ] ;
+  ui:prototype """
+<ui:setContext ui:varName=\"createLinkFunction\" ui:varValue=\"{= swa:createEventOrNewTabLink }\">
+    <ui:setContext let:formId=\"{= ui:uniqueId() }\" ui:varName=\"createEventLinkEvent\" ui:varValue=\"{= ?resourceSelectedEvent }\">
+        <ui:if ui:condition=\"{= bound(?resource) }\">
+            <swa:WindowTitleSetter arg:title=\"{= IF(isIRI(?resource), ui:label(?resource), &quot;Selected Resource&quot;) }{= IF(?showType, swa:typeLabelList(?resource), ?none) }\"/>
+            <edg:SwitchableForm arg:allowHistoryMode=\"{= ?allowHistoryMode }\" arg:allowLogMessage=\"{= ?allowLogMessage }\" arg:allowProvenanceMode=\"{= ?allowProvenanceMode }\" arg:editable=\"{= (!bound(?readOnly)) || (!?readOnly) }\" arg:editing=\"{= ?editing }\" arg:formId=\"{= ?formId }\" arg:matchIds=\"{= ?matchIds }\" arg:resource=\"{= ?resource }\" arg:resourceSelectedEvent=\"{= ?resourceSelectedEvent }\" arg:showFooter=\"{= true }\" arg:showResourceActions=\"{= ?showResourceActions }\" arg:showURI=\"{= ?showURI }\" arg:suppressHeader=\"{= true }\" arg:suppressInlineEditing=\"{= ?suppressInlineEditing }\">
+                <ui:insert ui:into=\"bottomBar\">
+                    <ui:if ui:condition=\"{= bound(?footerPlugin) }\">
+                        <swa:Space/>
+                        <ui:dynamicView arg:resource=\"{= ?resource }\" ui:class=\"{= ?footerPlugin }\"/>
+                    </ui:if>
+                </ui:insert>
+            </edg:SwitchableForm>
+        </ui:if>
+        <swa:Subscribe arg:code=\"swa.handleChangeForSwitchableFormGadget(data, '{= ?formId }', '{= swa:currentWindowId() }')\" arg:event=\"org.topbraid.swa.change\"/>
+        <!--swa:SubscribeArgument arg:argumentName=\"resource\"
+           arg:event=\"{= ?resourceSelectedEvent }\"
+           arg:filter=\"swa.getFormResourceURI('{= ?formId }') != data {= IF(bound(?refreshFilterFunction), CONCAT(&quot; &amp;&amp; &quot;, ?refreshFilterFunction, &quot;(data)&quot;), ?none) }\"/-->
+    </ui:setContext>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:comment "A gadget consisting of a view form that can be switched to edit mode by the user." ;
+  rdfs:label "Switchable form gadget" ;
+  rdfs:subClassOf swa:Gadgets ;
+.
+edg:TestDataTableColumnsJSON
+  rdf:type ui:NodeClass ;
+  ui:prototype """
+<swon:Array>
+    <swon:Object>
+        <swon:Value arg:name=\"title\" arg:value=\"uri\"/>
+        <swon:Value arg:name=\"data\" arg:value=\"uri\"/>
+        <swon:Value arg:name=\"searchable\" arg:value=\"{= false }\"/>
+        <swon:Value arg:name=\"visible\" arg:value=\"{= false }\"/>
+        <swon:Value arg:name=\"orderable\" arg:value=\"{= false }\"/>
+    </swon:Object>
+    <swon:Object>
+        <swon:Value arg:name=\"data\" arg:value=\"firstName\"/>
+        <swon:Value arg:name=\"title\" arg:value=\"First Name\"/>
+    </swon:Object>
+    <swon:Object>
+        <swon:Value arg:name=\"data\" arg:value=\"middleInitial\"/>
+        <swon:Value arg:name=\"title\" arg:value=\"Middle Initial\"/>
+    </swon:Object>
+    <swon:Object>
+        <swon:Value arg:name=\"data\" arg:value=\"lastName\"/>
+        <swon:Value arg:name=\"title\" arg:value=\"Last Name\"/>
+    </swon:Object>
+</swon:Array>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:TestDataTableJSON
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group let:dataGraph=\"{= COALESCE(IRI(?graph), IRI(&quot;http://topbraid.org/examples/kennedys&quot;)) }\">
+    <ui:setContext ui:queryGraph=\"{= ?dataGraph }\">
+        <swon:Object>
+            <swon:Value arg:name=\"data\">
+                <swon:Array>
+                    <ui:forEach ui:resultSet=\"{#
+                            SELECT ?person ?firstName ?middleInitial ?lastName
+                            WHERE {
+                                ?person a &lt;http://topbraid.org/examples/kennedys#Person&gt; .
+                                ?person &lt;http://topbraid.org/examples/kennedys#firstName&gt; ?firstName .
+                                OPTIONAL {
+                                    ?person &lt;http://topbraid.org/examples/kennedys#middleInitial&gt; ?middleInitial .
+                                } .
+                                ?person &lt;http://topbraid.org/examples/kennedys#lastName&gt; ?lastName .
+                            } }\">
+                        <swon:Object>
+                            <swon:Value arg:name=\"uri\" arg:value=\"{= ?person }\"/>
+                            <swon:Value arg:name=\"firstName\" arg:value=\"{= ?firstName }\"/>
+                            <swon:Value arg:name=\"middleInitial\" arg:value=\"{= ?middleInitial }\"/>
+                            <swon:Value arg:name=\"lastName\" arg:value=\"{= ?lastName }\"/>
+                        </swon:Object>
+                    </ui:forEach>
+                </swon:Array>
+            </swon:Value>
+        </swon:Object>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:TestForm
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:defaultSubject ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:editing ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:rowSelectedEvent ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:title ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <edg:SwitchableFormGadget arg:allowHistoryMode=\"{= false }\" arg:allowLogMessage=\"{= false }\" arg:editing=\"{= ?editing }\" arg:readOnly=\"{= !?editing }\" arg:resource=\"{= COALESCE(?resource, ?defaultSubject) }\" arg:resourceSelectedEvent=\"{= ?rowSelectedEvent }\" arg:showResourceActions=\"{= true }\" arg:showType=\"{= true }\" arg:showURI=\"{= true }\" ui:args=\"*\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Test form" ;
+  rdfs:subClassOf edg:EditorApplications ;
+.
+edg:TestTable
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:dataColumnsEndpoint ;
+      spl:valueType ui:NodeClass ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:dataEndpoint ;
+      spl:valueType ui:NodeClass ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:rowSelectedEvent ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:title ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <swa:Window arg:id=\"Table_{= ui:uniqueId() }\" arg:layoutPanel=\"center\" arg:title=\"{= ?title }\">
+        <edg:ToolsHeader arg:rootClass=\"{= owl:Thing }\" arg:treeMode=\"{= false }\" ui:args=\"*\"/>
+        <ui:insert ui:into=\"header-buttons\">
+            <div class=\"swa-header-buttons-container\">
+                <button class=\"btn btn-primary btn-xs search-toggler\" onclick=\"{= swa:publishEvent(CONCAT(&quot;test.&quot;, ?rowSelectedEvent), &quot;'resource in table'&quot;) }\" type=\"button\">Test</button>
+                <button class=\"btn btn-primary btn-xs search-toggler\" type=\"button\">Dump Graph</button>
+            </div>
+        </ui:insert>
+        <edg:GenericDataTable arg:dataColumnsEndpoint=\"{= ?dataColumnsEndpoint }\" arg:dataEndpoint=\"{= ?dataEndpoint }\" arg:editable=\"{= false }\" arg:hasViewableDetails=\"{= true }\" arg:rowSelectedEvent=\"{= ?rowSelectedEvent }\"/>
+        <ui:insert ui:into=\"buttons\">
+            <div class=\"datasetapp-form-maximize-button\" onclick=\"datasetapp.maximizeForm()\" title=\"Show Details\"/>
+        </ui:insert>
+    </swa:Window>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Test table" ;
+  rdfs:subClassOf edg:EditorApplications ;
+.
+edg:ToolsHeader
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The type of objects being edited. Defaults to the configured rootClass." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:rootClass ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:treeMode ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to start in Tree explorer mode. Defaults to view with the Search on the left and the large grid in the center." ;
+    ] ;
+  ui:prototype """
+<ui:group/>
+"""^^ui:Literal ;
+  rdfs:label "Tools header" ;
+  rdfs:subClassOf teamwork:EditorHeader ;
+.
+edg:UIEC_01
+  rdf:type edg:UIeventContract ;
+  edg:description "data-custom-btn-events=\"[{= edg:makeJSONforDataTablesEvent(?rowSelectedEvent, &quot;Show Details&quot;, &quot;btnText&quot;) }]\""^^rdf:HTML ;
+  edg:eventClientHandler "JS code that will do specific handling for the event" ;
+  edg:eventLabel "Show Details" ;
+  edg:eventName "edg.test.table1RowSelected" ;
+  edg:eventServerHandler "edgqa.dataTableRowsSelected" ;
+  rdfs:label "UIEC 01" ;
+.
+edg:makeJSONforDataTablesEvent
+  rdf:type ui:Function ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:event ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:label ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:name ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:if ui:condition=\"{= ?event != &quot;&quot; }\">
+        <ui:bind>
+            <ui:stringify ui:varName=\"text\">
+                <swon:Object>
+                    <swon:Value arg:name=\"{= ?name }\" arg:value=\"{= ?label }\"/>
+                    <swon:Value arg:name=\"eventTopic\" arg:value=\"{= ?event }\"/>
+                </swon:Object>
+            </ui:stringify>
+            <ui:return ui:result=\"{= ?text }\"/>
+        </ui:bind>
+    </ui:if>
+    <ui:else>
+        <ui:return ui:result=\"{= ?nil }\"/>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:TEXT ;
+  rdfs:subClassOf edg:Functions ;
+.
+edg:onOpenResource
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:concat ;
+                sp:arg1 "teamwork.onOpenResource('swa:ViewFormGadgetWindow', { fixedResource: true, resourceSelectedEvent: '" ;
+                sp:arg2 [
+                    sp:varName "resourceSelectedEvent" ;
+                  ] ;
+                sp:arg3 "', resource: resource, showType: true, showURI: true }, 'east')" ;
+              ] ;
+            sp:variable [
+                sp:varName "result" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:resourceSelectedEvent ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The event to fire on resource selection." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "A convenience method that produces a JavaScript snippet to be used as context value of swaOnOpenResource." ;
+  rdfs:subClassOf swa:Functions ;
+.
+edg:tableRowsSelected
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:data ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <script>swa.populateModalDialog('reached edg:tableRowsSelected with ' + {= ?data });</script>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:TEXT ;
+  rdfs:label "table rows selected" ;
+  rdfs:subClassOf edg:Elements ;
+.
+<http://edg.topbraidlive.org/1.0/utility/tools>
+  rdf:type owl:Ontology ;
+  owl:imports <http://edg.topbraid.solutions/1.0/editor/tabular> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/project/edg> ;
+  owl:imports <http://topbraid.org/swa> ;
+  owl:imports <http://topbraid.org/teamwork.ui> ;
+.
+arg:rowSelectedEvent
+  rdf:type rdf:Property ;
+  rdfs:label "row selected event" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://topbraid.org/examples/kennedys#AlfredTucker>
+  <http://topbraid.org/examples/kennedys#almaMater> <http://topbraid.org/examples/kennedys#RosemontCollege> ;
+  <http://topbraid.org/examples/kennedys#birthYear> 1968 ;
+  <http://topbraid.org/examples/kennedys#middleName> "M" ;
+  <http://topbraid.org/examples/kennedys#middleName> "WWW" ;
+  <http://topbraid.org/examples/kennedys#middleName> "X" ;
+  <http://topbraid.org/examples/kennedys#middleName> "XXX" ;
+  <http://topbraid.org/examples/kennedys#middleName> "Z" ;
+  <http://topbraid.org/examples/kennedys#middleName> "ZZ" ;
+  <http://topbraid.org/examples/kennedys#middleName> "ZZZ" ;
+  <http://topbraid.org/examples/kennedys#middleName> "ZZZZ" ;
+  <http://topbraid.org/examples/kennedys#middleName> "ZZZZZZZZZZZZZZZZ" ;
+  <http://topbraid.org/examples/kennedys#profession> <http://topbraid.org/examples/kennedys#broadcaster> ;
+  <http://topbraid.org/examples/kennedys#profession> <http://topbraid.org/examples/kennedys#congressman> ;
+  <http://topbraid.org/examples/kennedys#profession> <http://topbraid.org/examples/kennedys#doctor> ;
+  <http://topbraid.org/examples/kennedys#profession> <http://topbraid.org/examples/kennedys#goverment> ;
+.

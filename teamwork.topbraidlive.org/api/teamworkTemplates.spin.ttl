@@ -1,0 +1,748 @@
+# baseURI: http://teamworkAPI.topbraid.com/teamworkTemplates
+# imports: http://spinrdf.org/spin
+# imports: http://topbraid.org/teamwork
+# imports: http://www.w3.org/2004/02/skos/core
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+arg:changeGraph
+  rdf:type rdf:Property ;
+  rdfs:label "change graph" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:concept
+  rdf:type rdf:Property ;
+  rdfs:label "concept" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:endDate
+  rdf:type rdf:Property ;
+  rdfs:label "end date" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:labelStr
+  rdf:type rdf:Property ;
+  rdfs:label "label string" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:labelType
+  rdf:type rdf:Property ;
+  rdfs:label "label type" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:master
+  rdf:type rdf:Property ;
+  rdfs:label "master" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:object
+  rdf:type rdf:Property ;
+  rdfs:label "object" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:predicate
+  rdf:type rdf:Property ;
+  rdfs:label "prop" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:startDate
+  rdf:type rdf:Property ;
+  rdfs:label "start date" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:subject
+  rdf:type rdf:Property ;
+  rdfs:label "subject" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:type
+  rdf:type rdf:Property ;
+  rdfs:label "type" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:userName
+  rdf:type rdf:Property ;
+  rdfs:label "user name" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://teamworkAPI.topbraid.com/teamworkTemplates>
+  rdf:type owl:Ontology ;
+  rdfs:comment "A collection of APIs implemented as SPIN templates that provide generic utility services operating on Teamwork (TCH) graphs." ;
+  rdfs:label "Teamwork SPIN Templates" ;
+  owl:imports <http://spinrdf.org/spin> ;
+  owl:imports <http://topbraid.org/teamwork> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+.
+<http://teamworkAPI.topbraid.com/teamworkUpdate#GetAllEVNProjects>
+  teamwork:exampleAPICall "http://localhost:8083/tbl/swp?_viewClass=teamworkupdate:GetAllEVNProjects" ;
+.
+teamwork:AllUncommittedWorkingCopyNames
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "wcName" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "workingCopy" ;
+          ]
+          [
+            sp:varName "wcName" ;
+          ]
+          [
+            sp:varName "comment" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type teamwork:teamGraph ;
+                sp:arg1 [
+                    sp:varName "master" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "team" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object teamwork:Tag ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "workingCopy" ;
+                    ] ;
+                ]
+                [
+                  sp:object teamwork:Uncommitted ;
+                  sp:predicate teamwork:status ;
+                  sp:subject [
+                      sp:varName "workingCopy" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "wcName" ;
+                    ] ;
+                  sp:predicate rdfs:label ;
+                  sp:subject [
+                      sp:varName "workingCopy" ;
+                    ] ;
+                ]
+                [
+                  rdf:type sp:Optional ;
+                  sp:elements (
+                      [
+                        sp:object [
+                            sp:varName "comment" ;
+                          ] ;
+                        sp:predicate rdfs:comment ;
+                        sp:subject [
+                            sp:varName "workingCopy" ;
+                          ] ;
+                      ]
+                    ) ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "team" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:master ;
+      spl:valueType owl:Ontology ;
+      rdfs:comment "The URI (URL or URN) of the master (aka \"production\") vocabulary." ;
+    ] ;
+  teamwork:exampleAPICall "http://localhost:8083/tbl/template/teamwork/AllUncommittedWorkingCopyNames?master=urn:x-evn-master:geo" ;
+  teamwork:exampleAPICall "http://localhost:8083/tbl/template/teamwork/AllUncommittedWorkingCopyNames?master=urn:x-evn-master:geo&_format=json" ;
+  teamwork:exampleAPICall "http://localhost:8083/tbl/template?_template=http://topbraid.org/teamwork%23AllUncommittedWorkingCopyNames&master=urn:x-evn-master:geo" ;
+  teamwork:exampleAPICall "http://localhost:8083/tbl/template?_template=http://topbraid.org/teamwork%23AllUncommittedWorkingCopyNames&master=urn:x-evn-master:geo&_format=csv" ;
+  rdfs:comment "Retrieves a list of all working copies for a vocabulary with uncommitted changes, and the working copy comment, if one exists." ;
+  rdfs:label "All uncommitted working copy names" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+teamwork:AllWorkingCopyNames
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:distinct "true"^^xsd:boolean ;
+      sp:resultVariables (
+          [
+            sp:varName "workingCopy" ;
+          ]
+          [
+            sp:varName "wcName" ;
+          ]
+          [
+            sp:varName "comment" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type teamwork:teamGraph ;
+                sp:arg1 [
+                    sp:varName "master" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "team" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object teamwork:Tag ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "workingCopy" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "wcName" ;
+                    ] ;
+                  sp:predicate rdfs:label ;
+                  sp:subject [
+                      sp:varName "workingCopy" ;
+                    ] ;
+                ]
+                [
+                  rdf:type sp:Optional ;
+                  sp:elements (
+                      [
+                        sp:object [
+                            sp:varName "comment" ;
+                          ] ;
+                        sp:predicate rdfs:comment ;
+                        sp:subject [
+                            sp:varName "workingCopy" ;
+                          ] ;
+                      ]
+                    ) ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "team" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:master ;
+      spl:valueType owl:Ontology ;
+      rdfs:comment "The URI (URL or URN) of the master (aka \"production\") vocabulary." ;
+    ] ;
+  teamwork:exampleAPICall "http://localhost:8083/tbl/template/teamwork/AllWorkingCopyNames?master=urn:x-evn-master:geo" ;
+  teamwork:exampleAPICall "http://localhost:8083/tbl/template/teamwork/AllWorkingCopyNames?master=urn:x-evn-master:geo&_format=json" ;
+  teamwork:exampleAPICall "http://localhost:8083/tbl/template?_template=http://topbraid.org/teamwork%23AllWorkingCopyNames&master=urn:x-evn-master:geo" ;
+  rdfs:comment "Retrieves a list of all working copies for a vocabulary, and the working copy comment, if one exists." ;
+  rdfs:label "All working copy names" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+teamwork:CreateChangeAndConcept
+  rdf:type spin:UpdateTemplate ;
+  spin:body [
+      rdf:type sp:Modify ;
+      sp:insertPattern (
+          [
+            sp:object teamwork:Change ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "change" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "tag" ;
+              ] ;
+            sp:predicate teamwork:tag ;
+            sp:subject [
+                sp:varName "change" ;
+              ] ;
+          ]
+          [
+            sp:object teamwork:Uncommitted ;
+            sp:predicate teamwork:status ;
+            sp:subject [
+                sp:varName "change" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "user" ;
+              ] ;
+            sp:predicate <http://rdfs.org/sioc/ns#has_creator> ;
+            sp:subject [
+                sp:varName "change" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "timestamp" ;
+              ] ;
+            sp:predicate <http://purl.org/dc/terms/created> ;
+            sp:subject [
+                sp:varName "change" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "comment" ;
+              ] ;
+            sp:predicate rdfs:comment ;
+            sp:subject [
+                sp:varName "change" ;
+              ] ;
+          ]
+          [
+            sp:object _:b9176 ;
+            sp:predicate teamwork:added ;
+            sp:subject [
+                sp:varName "change" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "concept" ;
+              ] ;
+            sp:predicate teamwork:subject ;
+            sp:subject _:b9176 ;
+          ]
+          [
+            sp:object rdf:type ;
+            sp:predicate teamwork:predicate ;
+            sp:subject _:b9176 ;
+          ]
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate teamwork:object ;
+            sp:subject _:b9176 ;
+          ]
+          [
+            sp:object _:b71203 ;
+            sp:predicate teamwork:added ;
+            sp:subject [
+                sp:varName "change" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "concept" ;
+              ] ;
+            sp:predicate teamwork:subject ;
+            sp:subject _:b71203 ;
+          ]
+          [
+            sp:object [
+                sp:varName "labelType" ;
+              ] ;
+            sp:predicate teamwork:predicate ;
+            sp:subject _:b71203 ;
+          ]
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate teamwork:object ;
+            sp:subject _:b71203 ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:now ;
+              ] ;
+            sp:variable [
+                sp:varName "timestamp" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:coalesce ;
+                sp:arg1 [
+                    sp:varName "labelStr" ;
+                  ] ;
+                sp:arg2 [
+                    rdf:type spif:unCamelCase ;
+                    sp:arg1 [
+                        rdf:type afn:localname ;
+                        sp:arg1 [
+                            sp:varName "concept" ;
+                          ] ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "label" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:defaultValue <http://www.w3.org/2004/02/skos/core#Concept> ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:type ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource type.  If none is provided the default skos:Concept will be used." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:defaultValue <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:labelType ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The label predicate type, such as rdfs:label, skos:prefLabel, etc.  If none provided the default is skos:prefLabel." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:labelStr ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The label for the added resource.  If none is provided a label will be created from the local name of the resource." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:change ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The change resource." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:comment ;
+      spl:valueType xsd:string ;
+      rdfs:comment "A comment about the change." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:concept ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The concept being added." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:tag ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The tag resource." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:type ;
+      spl:valueType owl:Class ;
+      rdfs:comment "The type of the concept being added." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:user ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The user resource." ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  rdfs:comment "Creates a new change tag and adds a resource and its label and type triples." ;
+  rdfs:label "Create change and concept" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+teamwork:FindChangesWithDates
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:orderBy (
+          [
+            rdf:type sp:Desc ;
+            sp:expression [
+                sp:varName "createDate" ;
+              ] ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "createDate" ;
+          ]
+          [
+            sp:varName "subject" ;
+          ]
+          [
+            sp:varName "predicate" ;
+          ]
+          [
+            sp:varName "object" ;
+          ]
+          [
+            sp:expression [
+                rdf:type afn:localname ;
+                sp:arg1 [
+                    sp:varName "prop" ;
+                  ] ;
+              ] ;
+            sp:varName "changeType" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type teamwork:teamGraph ;
+                sp:arg1 [
+                    sp:varName "master" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "teamGraph" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object teamwork:Change ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "change" ;
+                    ] ;
+                ]
+                [
+                  sp:object teamwork:Committed ;
+                  sp:predicate teamwork:status ;
+                  sp:subject [
+                      sp:varName "change" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "createDate" ;
+                    ] ;
+                  sp:predicate <http://purl.org/dc/terms/created> ;
+                  sp:subject [
+                      sp:varName "change" ;
+                    ] ;
+                ]
+                [
+                  rdf:type sp:TriplePath ;
+                  sp:object [
+                      sp:varName "changetriple" ;
+                    ] ;
+                  sp:path [
+                      rdf:type sp:AltPath ;
+                      sp:path1 teamwork:added ;
+                      sp:path2 teamwork:deleted ;
+                    ] ;
+                  sp:subject [
+                      sp:varName "change" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "subject" ;
+                    ] ;
+                  sp:predicate teamwork:subject ;
+                  sp:subject [
+                      sp:varName "changetriple" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "predicate" ;
+                    ] ;
+                  sp:predicate teamwork:predicate ;
+                  sp:subject [
+                      sp:varName "changetriple" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "object" ;
+                    ] ;
+                  sp:predicate teamwork:object ;
+                  sp:subject [
+                      sp:varName "changetriple" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "changetriple" ;
+                    ] ;
+                  sp:predicate [
+                      sp:varName "prop" ;
+                    ] ;
+                  sp:subject [
+                      sp:varName "change" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "teamGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:master ;
+      spl:valueType owl:Ontology ;
+      rdfs:comment "The named graph id (base URI) of the master vocabulary, also known as the production vocabulary." ;
+    ] ;
+  teamwork:exampleAPICall "http://localhost:8083/tbl/template/teamwork/FindChangesWithDates?master=urn:x-evn-master:geo" ;
+  teamwork:exampleAPICall "http://localhost:8083/tbl/template/teamwork/FindChangesWithDates?master=urn:x-evn-master:geo&_format=json" ;
+  teamwork:exampleAPICall "http://localhost:8083/tbl/template?_template=http://topbraid.org/teamwork%23FindChangesWithDates&master=urn:x-evn-master:geo&_format=csv" ;
+  rdfs:comment "Gets all committed changes together with their date, ordered by descending date.  Change type will be added or deleted." ;
+  rdfs:label "Find changes date range" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+teamwork:InsertTopConcept
+  rdf:type spin:UpdateTemplate ;
+  spin:body [
+      rdf:type sp:Modify ;
+      sp:insertPattern (
+          [
+            sp:object _:b22743 ;
+            sp:predicate teamwork:added ;
+            sp:subject [
+                sp:varName "changeURI" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "conceptScheme" ;
+              ] ;
+            sp:predicate teamwork:subject ;
+            sp:subject _:b22743 ;
+          ]
+          [
+            sp:object <http://www.w3.org/2004/02/skos/core#hasTopConcept> ;
+            sp:predicate teamwork:predicate ;
+            sp:subject _:b22743 ;
+          ]
+          [
+            sp:object [
+                sp:varName "object" ;
+              ] ;
+            sp:predicate teamwork:object ;
+            sp:subject _:b22743 ;
+          ]
+        ) ;
+      sp:where () ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:changeURI ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The change resource the insertion is associated with." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:conceptScheme ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The concept scheme object (URI)." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:object ;
+      spl:valueType <http://www.w3.org/2004/02/skos/core#ConceptScheme> ;
+      rdfs:comment "The object (concept) to be added as a root node of the concept scheme." ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  rdfs:comment "In a SKOS vocabulary, inserts a resource as the top concept for a given concept scheme." ;
+  rdfs:label "Insert top concept" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+teamwork:createWCURI
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "gURI" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:iri ;
+                sp:arg1 [
+                    rdf:type fn:concat ;
+                    sp:arg1 "urn:x-evn-tag:" ;
+                    sp:arg2 [
+                        rdf:type afn:localname ;
+                        sp:arg1 [
+                            sp:varName "master" ;
+                          ] ;
+                      ] ;
+                    sp:arg3 ":" ;
+                    sp:arg4 [
+                        rdf:type afn:localname ;
+                        sp:arg1 [
+                            sp:varName "tag" ;
+                          ] ;
+                      ] ;
+                    sp:arg5 ":" ;
+                    sp:arg6 [
+                        rdf:type afn:localname ;
+                        sp:arg1 [
+                            rdf:type smf:userWithName ;
+                            sp:arg1 [
+                                rdf:type smf:currentUserName ;
+                              ] ;
+                          ] ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "gURI" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:master ;
+      spl:valueType owl:Ontology ;
+      rdfs:comment "The named graph id (base URI) of the master vocabulary, also known as the production vocabulary." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:tag ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:returnType teamwork:Tag ;
+  rdfs:comment "Creates a change tag URI from the master and change tag that can be used for modifying working copies." ;
+  rdfs:label "Create Working Copy URI" ;
+  rdfs:subClassOf spin:Functions ;
+.
+teamwork:exampleAPICall
+  rdf:type owl:AnnotationProperty ;
+  rdfs:label "example APICall" ;
+  rdfs:subPropertyOf rdfs:comment ;
+.

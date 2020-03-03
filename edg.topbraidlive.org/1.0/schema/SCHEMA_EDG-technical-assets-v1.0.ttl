@@ -1,0 +1,2637 @@
+# baseURI: http://edg.topbraid.solutions/1.0/schema/technical-assets
+# imports: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://edg.topbraid.solutions/1.0/schema/datamodels
+# imports: http://edg.topbraid.solutions/1.0/schema/governance
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/schema/technical-assets>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/schema/technical-assets/GMD_technical-assets> ;
+  vaem:hasGraphRole vaem:SchemaGraph ;
+  rdfs:label "EDG Schema - Technical Assets" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+edg:AccessControllable
+  sh:property edg:AccessControllable-accessControlNotes ;
+  sh:property edg:AccessControllable-accessControlPolicy ;
+.
+edg:AmazonWebService
+  a edg:AssetClass ;
+  edg:acronym "AWS" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Amazon Web Service" ;
+  rdfs:subClassOf edg:CloudComputingService ;
+.
+edg:Broker
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Broker" ;
+  rdfs:subClassOf edg:SoftwareComponent ;
+.
+edg:BusinessActivity
+  rdfs:subClassOf edg:EnterpriseViewFromTechnicalAssets ;
+.
+edg:BusinessApplication
+  a edg:AssetClass ;
+  edg:name "BUSINESS APPLICATION" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Business Application" ;
+  rdfs:subClassOf edg:AccessControllable ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:Configurable ;
+  rdfs:subClassOf edg:EnterpriseCapable ;
+  rdfs:subClassOf edg:Interoperable ;
+  rdfs:subClassOf edg:Locatable ;
+  rdfs:subClassOf edg:ProducerConsumerAspect ;
+  rdfs:subClassOf edg:SoftwareAsset ;
+  rdfs:subClassOf edg:SoftwareCapable ;
+  rdfs:subClassOf edg:SoftwareExecutable ;
+.
+edg:BusinessCapability
+  rdfs:subClassOf edg:EnterpriseViewFromTechnicalAssets ;
+.
+edg:BusinessFunction
+  rdfs:subClassOf edg:EnterpriseViewFromTechnicalAssets ;
+.
+edg:CaseStatementMapping
+  a edg:AssetClass ;
+  edg:acronym "CASM" ;
+  edg:name "CASE STATEMENT MAPPING" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Case Statement Mapping" ;
+  rdfs:subClassOf edg:Mapping ;
+.
+edg:CloudComputingService
+  a edg:AssetClass ;
+  dcterms:source "https://support.rackspace.com/white-paper/understanding-the-cloud-computing-stack-saas-paas-iaas/"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Cloud Computing Service" ;
+  rdfs:subClassOf edg:SoftwareService ;
+  sh:property edg:CloudComputingService-cloudServiceProvider ;
+  sh:property edg:CloudComputingService-hostURI ;
+  sh:property edg:CloudComputingService-metricsSupport ;
+  sh:property edg:CloudComputingService-resourcePooling ;
+  sh:property edg:CloudComputingService-scalability ;
+.
+edg:CloudComputingService-cloudServiceProvider
+  a sh:PropertyShape ;
+  sh:path edg:cloudServiceProvider ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:Organization ;
+  sh:group edg:CloudComputingServicePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:name "cloud service provider" ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:CloudComputingService-hostURI
+  a sh:PropertyShape ;
+  sh:path edg:hostURL ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:datatype xsd:anyURI ;
+  sh:group edg:CloudComputingServicePropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:CloudComputingService-hostURL
+  a sh:PropertyShape ;
+  sh:path edg:hostURL ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:datatype xsd:anyURI ;
+  sh:maxCount 1 ;
+  sh:name "host url" ;
+.
+edg:CloudComputingService-metricsSupport
+  a sh:PropertyShape ;
+  sh:path edg:metricsSupport ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:datatype xsd:string ;
+  sh:group edg:CloudComputingServicePropertiesGroup ;
+  sh:name "metrics support" ;
+  sh:order "60"^^xsd:decimal ;
+.
+edg:CloudComputingService-resourcePooling
+  a sh:PropertyShape ;
+  sh:path edg:resourcePooling ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:datatype xsd:string ;
+  sh:group edg:CloudComputingServicePropertiesGroup ;
+  sh:name "resource pooling" ;
+  sh:order "70"^^xsd:decimal ;
+.
+edg:CloudComputingService-scalability
+  a sh:PropertyShape ;
+  sh:path edg:scalability ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:datatype xsd:string ;
+  sh:group edg:CloudComputingServicePropertiesGroup ;
+  sh:name "scalability" ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:CloudComputingServicePropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/technical-assets> ;
+  rdfs:label "Cloud Computing Service Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:CoalesceMapping
+  a edg:AssetClass ;
+  edg:acronym "COAM" ;
+  edg:name "COALESCE MAPPING" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Coalesce Mapping" ;
+  rdfs:subClassOf edg:Mapping ;
+.
+edg:ConditionalMapping
+  a edg:AssetClass ;
+  edg:acronym "CNDM" ;
+  edg:name "CONDITIONAL MAPPING" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Conditional Mapping" ;
+  rdfs:subClassOf edg:Mapping ;
+.
+edg:Configurable
+  a edg:AspectClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Configurable" ;
+  rdfs:subClassOf edg:Aspect ;
+  sh:property edg:Configurable-configurationFile ;
+  sh:property edg:Configurable-configurationNotes ;
+.
+edg:Configurable-configurationFile
+  a sh:PropertyShape ;
+  sh:path edg:configurationFile ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:datatype xsd:anyURI ;
+  sh:group edg:ConfigurablePropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Configurable-configurationNotes
+  a sh:PropertyShape ;
+  sh:path edg:configurationNotes ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:ConfigurablePropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:ConfigurablePropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/technical-assets> ;
+  rdfs:label "Configuration" ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:ConfigurationAsset
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Configuration Asset" ;
+  rdfs:subClassOf edg:Asset ;
+.
+edg:ConfigurationFile
+  a edg:AssetClass ;
+  rdfs:comment "A file that is needed to configure a technical asset."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Configuration File" ;
+  rdfs:subClassOf edg:FileAsset ;
+  rdfs:subClassOf edg:SoftwareAsset ;
+.
+edg:ConstantMapping
+  a edg:AssetClass ;
+  edg:acronym "CNSTM" ;
+  edg:name "CONSTANT MAPPING" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Constant Mapping" ;
+  rdfs:subClassOf edg:Mapping ;
+.
+edg:Consumer
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Consumer" ;
+  rdfs:subClassOf edg:SoftwareComponent ;
+.
+edg:Controlflow
+  a edg:AssetClass ;
+  edg:acronym "CFLOW" ;
+  rdfs:comment "A 'Controlflow' specifies the flow of control between entities that can interoperate. These can be applicationa, databasea, internal and external systems and parties." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Controlflow" ;
+  rdfs:subClassOf edg:Flow ;
+.
+edg:CustomConnector
+  a edg:AssetClass ;
+  edg:name "CUSTOM-CONNECTOR" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Custom Connector" ;
+  rdfs:subClassOf edg:SoftwareProgram ;
+.
+edg:DataAssetViewFromTechnicalAssets
+  a edg:ViewpointClass ;
+  dash:abstract true ;
+  rdfs:comment "A 'Data Asset' is an entity that contains valuable data. It can be a database, a document or any type of information that is managed as a single entity." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Data Asset Viewpoint" ;
+  rdfs:subClassOf edg:TechnicalViewpoint ;
+.
+edg:DataExchange
+  rdfs:subClassOf edg:EnterpriseViewFromTechnicalAssets ;
+.
+edg:DataStorageSystem
+  a edg:AssetClass ;
+  edg:acronym "DSS" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Data Storage System" ;
+  rdfs:subClassOf edg:Infrastructure ;
+.
+edg:DataWarehouse
+  rdfs:subClassOf edg:SoftwareExecutable ;
+.
+edg:DatabaseSynonym
+  edg:name "SYNONYM" ;
+.
+edg:DatabaseView
+  edg:name "VIEW" ;
+  rdfs:subClassOf edg:PhysicalFlowPayloadable ;
+.
+edg:Dataflow
+  a edg:AssetClass ;
+  edg:acronym "DFLOW" ;
+  edg:type "dataflow-link" ;
+  swa:instancesHaveRandomURI true ;
+  rdfs:comment "A 'Dataflow' is a direct flow of data between entities that can interoperate. These can be applications, databases, internal and external systems and parties." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Dataflow" ;
+  rdfs:subClassOf edg:PhysicalFlow ;
+  sh:property edg:Dataflow-summary-gadget ;
+.
+edg:Dataflow-summary-gadget
+  a sh:PropertyShape ;
+  sh:path edg:summary ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/controller/technical-assets> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:datatype xsd:boolean ;
+  sh:group edg:DataflowSummaryGadgetGroup ;
+  sh:name "flow overview" ;
+  sh:order "40"^^xsd:decimal ;
+  sh:values true ;
+.
+edg:DataflowSummaryGadgetGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  tosh:viewGadget edg:DataflowSummaryGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Flow Summary Report" ;
+  sh:order "110"^^xsd:decimal ;
+.
+edg:DirectMapping
+  a edg:AssetClass ;
+  edg:acronym "DIRM" ;
+  edg:name "DIRECT MAPPING" ;
+  swa:instancesHaveRandomURI true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Direct Mapping" ;
+  rdfs:subClassOf edg:SoftwareAsset ;
+  sh:property edg:DirectMapping-input ;
+  sh:property edg:DirectMapping-output ;
+.
+edg:DirectMapping-input
+  a sh:PropertyShape ;
+  sh:path edg:input ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:Processable ;
+  sh:description "A 'direct mapping input'  is the data asset that a mapping receives in order to expresses as an output of the mapping." ;
+  sh:group edg:MappingPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:DirectMapping-output
+  a sh:PropertyShape ;
+  sh:path edg:output ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:Processable ;
+  sh:description "A 'direct mapping output' is the data asset that a mapping produces." ;
+  sh:group edg:MappingPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:DirectMappingsCollection
+  a edg:AssetClass ;
+  edg:acronym "DMC" ;
+  swa:instancesHaveRandomURI true ;
+  rdfs:comment "A 'Mappings Collection' is a composite structure for holding individual mappings." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Direct Mappings Collection" ;
+  rdfs:subClassOf edg:SoftwareAsset ;
+  sh:property edg:MappingsCollection-mapping ;
+.
+edg:DirectMappingsPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  tosh:viewGadget edg:DirectMappingsCollectionGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Direct Mappings" ;
+  sh:order "25"^^xsd:decimal ;
+.
+edg:DockerAsset
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Docker Asset" ;
+  rdfs:subClassOf edg:ConfigurationAsset ;
+.
+edg:ELTjob
+  a edg:AssetClass ;
+  edg:name "ELT JOB" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "ELT Job" ;
+  rdfs:subClassOf edg:SoftwareJob ;
+.
+edg:ELTscript
+  a edg:AssetClass ;
+  edg:acronym "ELT" ;
+  edg:name "ELT SCRIPT" ;
+  rdfs:comment "An ELT script is a script that performs extract, transform and load process. Data extraction is where data is extracted from homogeneous or heterogeneous data sources; data transformation is where the data is transformed for storing in the proper format or structure for the purposes of querying and analysis; data loading where the data is loaded into the final target database, more specifically, an operational data store, data mart, or data warehouse. ELT scripts typically operate in cloud-based data warehouses with nearly infinitely scalable computing power. This lets businesses forgo preload transformations and replicate raw data into their data warehouses, where it can transform them as needed using SQL. With modern tools, ETL, in effect, becomes ELT. Many people still use \\\"ETL\\\" to refer to either kind of data pipeline." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:subClassOf edg:Script ;
+.
+edg:ETLjob
+  a edg:AssetClass ;
+  edg:name "ETL JOB" ;
+  rdfs:comment "<strong>ETL</strong> stands for \"extract, transform, load\". The process by which data is obtained from one or more sources, transformed into the destination data representations, and loaded into a data store. Business rules (logic) are applied for data selection and data transformations."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "ETL Job" ;
+  rdfs:subClassOf edg:SoftwareJob ;
+.
+edg:ETLscript
+  a edg:AssetClass ;
+  edg:acronym "ETL" ;
+  edg:name "ETL SCRIPT" ;
+  rdfs:comment "An ETL script is a script that performs extract, transform, load (ETL) process. Data extraction is where data is extracted from homogeneous or heterogeneous data sources; data transformation is where the data is transformed for storing in the proper format or structure for the purposes of querying and analysis; data loading where the data is loaded into the final target database, more specifically, an operational data store, data mart, or data warehouse. ETL scripts typically do as much prep work as possible (i.e. transformation) prior to loading data, to avoid consuming expensive compute cycles that analysts need on the dedicated hardware." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "ETL Script" ;
+  rdfs:subClassOf edg:Script ;
+.
+edg:Endpoint-interfaceOperation
+  a sh:PropertyShape ;
+  sh:path edg:interfaceOperation ;
+  vaem:comment "Deprecated?" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:InterfaceOperation ;
+  sh:group edg:EndpointPropertiesGroup ;
+  sh:minCount 0 ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:EndpointPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  tosh:viewGadget edg:InteroperableSummaryGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/technical-assets> ;
+  rdfs:label "Endpoint Details" ;
+  sh:order "25"^^xsd:decimal ;
+.
+edg:Enterprise
+  rdfs:subClassOf edg:Interoperable ;
+  rdfs:subClassOf edg:ProducerConsumerAspect ;
+.
+edg:EnterpriseCapable
+  sh:property edg:EnterpriseCapable-authorativeSourceFor ;
+  sh:property edg:EnterpriseCapable-servesPurpose ;
+  sh:property edg:EnterpriseCapable-supportsBusinessActivity ;
+  sh:property edg:EnterpriseCapable-supportsBusinessCapability ;
+  sh:property edg:EnterpriseCapable-supportsBusinessFunction ;
+  sh:property edg:EnterpriseCapable-supportsParty ;
+.
+edg:EnterpriseCapable-authorativeSourceFor
+  a sh:PropertyShape ;
+  sh:path edg:authorativeSourceFor ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:DataAsset ;
+  sh:group edg:EnterpriseRolePropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:EnterpriseCapable-servesPurpose
+  a sh:PropertyShape ;
+  sh:path edg:servesPurpose ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:Purpose ;
+  sh:group edg:EnterpriseRolePropertiesGroup ;
+.
+edg:EnterpriseCapable-supportsBusinessActivity
+  a sh:PropertyShape ;
+  sh:path edg:supportsBusinessActivity ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:BusinessActivity ;
+  sh:group edg:EnterpriseRolePropertiesGroup ;
+  sh:order "110"^^xsd:decimal ;
+.
+edg:EnterpriseCapable-supportsBusinessCapability
+  a sh:PropertyShape ;
+  sh:path edg:supportsBusinessCapability ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:BusinessCapability ;
+  sh:group edg:EnterpriseRolePropertiesGroup ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:EnterpriseCapable-supportsBusinessFunction
+  a sh:PropertyShape ;
+  sh:path edg:supportsBusinessFunction ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:BusinessFunction ;
+  sh:group edg:EnterpriseRolePropertiesGroup ;
+  sh:order "120"^^xsd:decimal ;
+.
+edg:EnterpriseCapable-supportsParty
+  a sh:PropertyShape ;
+  sh:path edg:supportsParty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:Party ;
+  sh:group edg:EnterpriseRolePropertiesGroup ;
+  sh:order "130"^^xsd:decimal ;
+.
+edg:EnterpriseServiceBus
+  a edg:AssetClass ;
+  edg:acronym "ESB" ;
+  rdfs:comment "An Enterprise Service Bus (ESB) implements a communication system between mutually interacting software applications in a service-oriented architecture (SOA). Most providers of message-oriented middleware have adopted the enterprise service bus concept as de facto standard for a service-oriented architecture. The implementations of ESB use event-driven and standards-based message-oriented middleware in combination with message queues as technology frameworks." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Enterprise Service Bus" ;
+  rdfs:subClassOf edg:Infrastructure ;
+  rdfs:subClassOf edg:SoftwareComponent ;
+.
+edg:EnterpriseViewFromTechnicalAssets
+  a edg:ViewpointClass ;
+  dash:abstract true ;
+  rdfs:comment "Provides a menu of enterprise-level object types that may have some involvement with technical assets." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Enterprise Viewpoint" ;
+  rdfs:subClassOf edg:TechnicalViewpoint ;
+  rdfs:subClassOf edg:Viewpoint ;
+.
+edg:Environment
+  a edg:AssetClass ;
+  a owl:Class ;
+  edg:acronym "ENV" ;
+  rdfs:comment "An <em>Environment</em> is a configuration of systems. Examples of environment are <em>DEV</em>, <em>UAT</em>, <em>QA</em> and <em>PROD</em>."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Environment" ;
+  rdfs:subClassOf edg:Asset ;
+  sh:property edg:Environment-system ;
+.
+edg:Environment-system
+  a sh:PropertyShape ;
+  sh:path edg:system ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:System ;
+  sh:minCount 1 ;
+.
+edg:ExecutionEngine
+  a edg:AssetClass ;
+  edg:acronym "VM" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Exection engine" ;
+  rdfs:subClassOf edg:Infrastructure ;
+  sh:property edg:VirtualMachine-operatingSystemType ;
+.
+edg:ExternalSystem
+  a edg:AssetClass ;
+  edg:acronym "EXTSYS" ;
+  rdfs:comment "An 'External System' is any provider of data to an application, or database from outside the enterprise." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "External System" ;
+  rdfs:subClassOf edg:System ;
+.
+edg:Feedline
+  a edg:AssetClass ;
+  edg:type "datafeed" ;
+  swa:instancesHaveRandomURI true ;
+  rdfs:comment "A 'Feedline' is an interface between entities that can interoperate. These can be applicationa, databasea, internal and external systems and parties." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Feedline" ;
+  rdfs:subClassOf edg:PhysicalFlow ;
+  sh:property edg:Feedline-dataExchange ;
+  sh:property edg:Feedline-gadget ;
+.
+edg:Feedline-dataExchange
+  a sh:PropertyShape ;
+  sh:path edg:dataExchange ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:Payloadable ;
+  sh:group edg:FlowPropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:Feedline-gadget
+  a sh:PropertyShape ;
+  sh:path edg:summary ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:Interoperable ;
+  sh:group edg:DataflowSummaryGadgetGroup ;
+  sh:name "flow overview" ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:Flow
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  rdfs:comment "A 'Flow' is an abstract class for subclasses that describe data and control flows between entities that can interoperate. These can be applicationa, databasea, internal and external systems and parties." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Flow" ;
+  rdfs:subClassOf edg:SoftwareAsset ;
+  sh:property edg:Flow-source ;
+  sh:property edg:Flow-target ;
+.
+edg:Flow-source
+  a sh:PropertyShape ;
+  sh:path edg:source ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:Interoperable ;
+  sh:group edg:FlowPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:Flow-target
+  a sh:PropertyShape ;
+  sh:path edg:target ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:Interoperable ;
+  sh:group edg:FlowPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:order "60"^^xsd:decimal ;
+.
+edg:FlowPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Flow Properties" ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:FlowStatement
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Flow statement" ;
+  rdfs:subClassOf rdf:Statement ;
+.
+edg:Flowline-incomingFlow-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:incomingFlow ;
+    ] ;
+  dash:composite true ;
+  rdfs:comment "Incoming reference to the source of the input data." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/technical-assets> ;
+  sh:class edg:Interoperable ;
+  sh:group edg:FlowPropertiesGroup ;
+  sh:name "destination" ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:Flowline-obfuscatedBy
+  sh:order "30"^^xsd:decimal ;
+.
+edg:Flowline-outgoingFlow-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:outgoingFlow ;
+    ] ;
+  dash:composite true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/technical-assets> ;
+  sh:class edg:Interoperable ;
+  sh:group edg:FlowPropertiesGroup ;
+  sh:name "source" ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:FormItem
+  rdfs:subClassOf edg:DataAssetViewFromTechnicalAssets ;
+.
+edg:FunctionalMapping
+  a edg:AssetClass ;
+  edg:acronym "FUNM" ;
+  edg:name "FUNCTIONAL MAPPING" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Functional Mapping" ;
+  rdfs:subClassOf edg:Mapping ;
+.
+edg:GovernanceViewpoint
+  rdfs:subClassOf edg:TechnicalViewpoint ;
+.
+edg:HyperVisor
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "HyperVisor" ;
+  rdfs:subClassOf edg:ExecutionEngine ;
+  sh:property edg:HyperVisor-virtualMachine ;
+.
+edg:HyperVisor-virtualMachine
+  a sh:PropertyShape ;
+  sh:path edg:virtualMachine ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Hyper visor-virtual machine" ;
+  sh:class edg:VirtualMachine ;
+.
+edg:IaaS
+  a edg:AssetClass ;
+  rdfs:comment "'Infrastructure as a Service' (IaaS) is a form of cloud computing that provides virtualized computing resources over the internet." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Infrastructure As A Service" ;
+  rdfs:subClassOf edg:CloudComputingService ;
+  rdfs:subClassOf edg:SoftwarePlatform ;
+.
+edg:Infrastructure
+  a edg:AssetClass ;
+  edg:hideSubClasses true ;
+  rdfs:comment "Infrastructure refers to the IT components that are the foundation of an IT service:. These are typically physical components (computer and networking hardware and facilities), but also various software and network components. Subclases include 'Data Storage System', 'Enerprise Service Bus', 'Message Queue System', 'Operating System', 'Software Platform', and 'Service Framework'." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Infrastructure" ;
+  rdfs:subClassOf edg:SoftwareAsset ;
+.
+edg:InterfaceModule
+  a edg:AssetClass ;
+  edg:acronym "IFMOD" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Interface Module" ;
+  rdfs:subClassOf edg:SoftwareComponent ;
+  sh:property edg:InterfaceModule-implementedUsing ;
+  sh:property edg:InterfaceModule-interfacesWIth ;
+.
+edg:InterfaceModule-implementedUsing
+  a sh:PropertyShape ;
+  sh:path edg:implementedUsing ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:Infrastructure ;
+  sh:group edg:InterfaceModulePropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:InterfaceModule-interfacesWIth
+  a sh:PropertyShape ;
+  sh:path edg:interfacesWith ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:BusinessApplication ;
+  sh:group edg:InterfaceModulePropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:InterfaceModulePropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/technical-assets> ;
+  rdfs:label "Interface Module Metadata" ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:InterfaceOperation
+  a edg:AssetClass ;
+  edg:acronym "IFOP" ;
+  edg:name "IFOP" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Interface Operation" ;
+  rdfs:subClassOf edg:SoftwareFunction ;
+.
+edg:InternalSystem
+  a edg:AssetClass ;
+  edg:acronym "INTSYS" ;
+  rdfs:comment "An 'Internal system' is any provider of data to an application, or database from inside the enterprise." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Internal System" ;
+  rdfs:subClassOf edg:System ;
+.
+edg:InteroperabilityDownstreamDependenciesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  tosh:viewGadget edg:InteroperableDownstreamDependenciesGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Downstream Dependencies" ;
+  sh:order "230"^^xsd:decimal ;
+.
+edg:InteroperabilityLogicalFlowsGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  tosh:viewGadget edg:InteroperableFlowOverviewGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/technical-assets> ;
+  rdfs:label "Logical Flows" ;
+  sh:order "240"^^xsd:decimal ;
+.
+edg:InteroperabilityPhysicalFlowsGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  tosh:viewGadget edg:InteroperableFlowOverviewGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/technical-assets> ;
+  rdfs:label "Physical Flows" ;
+  sh:order "250"^^xsd:decimal ;
+.
+edg:InteroperabilityPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/technical-assets> ;
+  rdfs:label "Interoperability Properties" ;
+.
+edg:InteroperabilityUpstreamDependenciesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  tosh:viewGadget edg:InteroperableUpstreamDependenciesGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Upstream Dependencies" ;
+  sh:order "210"^^xsd:decimal ;
+.
+edg:Interoperable
+  a edg:AspectClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Interoperable" ;
+  rdfs:subClassOf edg:Aspect ;
+  sh:property edg:Interoperable-downstreamDependencies ;
+  sh:property edg:Interoperable-logical-flows ;
+  sh:property edg:Interoperable-physical-flows ;
+  sh:property edg:Interoperable-serviceEndpoint ;
+  sh:property edg:Interoperable-upstreamDependencies ;
+.
+edg:Interoperable-downstreamDependencies
+  a sh:PropertyShape ;
+  sh:path edg:isInteroperableDownstreamDependenciesGadget ;
+  dash:viewer edg:InteroperableDownstreamDependenciesGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:datatype xsd:boolean ;
+  sh:group edg:InteroperabilityDownstreamDependenciesGroup ;
+  sh:maxCount 1 ;
+  sh:order "29"^^xsd:decimal ;
+  sh:values true ;
+.
+edg:Interoperable-incomingFlow
+  a sh:PropertyShape ;
+  sh:path edg:incomingFlow ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:Flow ;
+  sh:group edg:InteroperabilityPropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Interoperable-logical-flows
+  a sh:PropertyShape ;
+  sh:path edg:isLogicalFlowsGadget ;
+  dash:viewer edg:InteroperableFlowOverviewGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:datatype xsd:boolean ;
+  sh:group edg:InteroperabilityLogicalFlowsGroup ;
+  sh:maxCount 1 ;
+  sh:order "28"^^xsd:decimal ;
+  sh:values true ;
+.
+edg:Interoperable-outgoingFlow
+  a sh:PropertyShape ;
+  sh:path edg:outgoingFlow ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:Flow ;
+  sh:group edg:InteroperabilityPropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:Interoperable-physical-flows
+  a sh:PropertyShape ;
+  sh:path edg:isPhysicalFlowsGadget ;
+  dash:viewer edg:InteroperablePhysicalFlowOverviewGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:datatype xsd:boolean ;
+  sh:group edg:InteroperabilityPhysicalFlowsGroup ;
+  sh:maxCount 1 ;
+  sh:order "28"^^xsd:decimal ;
+  sh:values true ;
+.
+edg:Interoperable-responseService
+  a sh:PropertyShape ;
+  sh:path edg:responseService ;
+  dash:abstract true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:group edg:InteroperabilityPropertiesGroup ;
+  sh:order "60"^^xsd:decimal ;
+.
+edg:Interoperable-serviceEndpoint
+  a sh:PropertyShape ;
+  sh:path edg:serviceEndpoint ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:ServiceEndpoint ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:Interoperable-upstreamDependencies
+  a sh:PropertyShape ;
+  sh:path edg:isInteroperableUpstreamDependenciesGadget ;
+  dash:viewer edg:InteroperableUpstreamDependenciesGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:datatype xsd:boolean ;
+  sh:group edg:InteroperabilityUpstreamDependenciesGroup ;
+  sh:maxCount 1 ;
+  sh:order "28"^^xsd:decimal ;
+  sh:values true ;
+.
+edg:JobTitle
+  rdfs:subClassOf edg:Interoperable ;
+.
+edg:KafkaBroker
+  a edg:AssetClass ;
+  rdfs:comment "A <strong>Kafka Broker</strong> is responsible for persisting messages.  Relatively lightweight , the broker mostly handles TCP connections and keeps open file handles to the queue files.  A broker exposes an API for offset management to remove direct communication between consumers and ZooKeeper."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Kafka Broker" ;
+  rdfs:subClassOf edg:Broker ;
+.
+edg:KafkaConsumer
+  a edg:AssetClass ;
+  rdfs:comment "<strong>Consumers</strong> request a range of messages from a Broker. They are responsible for their own state. The default implementation uses ZooKeeper to manage state."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Kafka Consumer" ;
+  rdfs:subClassOf edg:Consumer ;
+.
+edg:KafkaConsumerGroup
+  a edg:AssetClass ;
+  rdfs:comment "'Kafka Consumer Group' is comprised of high-level consumers. A consumer group is coordinated using ZooKeeper, so it can span multiple machines. In a group, each partition will be consumed by exactly one consumer  that is, KafkaStream."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Kafka Consumer Group" ;
+  rdfs:subClassOf edg:SoftwareServiceConsumerGroup ;
+.
+edg:KafkaProducer
+  a edg:AssetClass ;
+  rdfs:comment "A <strong>Kafka Producer</strong> is responsible for load balancing messages to the various brokers. They can discover all brokers from any one broker."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Kafka Producer" ;
+  rdfs:subClassOf edg:Producer ;
+.
+edg:LoadBalancer
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Load balancer" ;
+  rdfs:subClassOf edg:SoftwareComponent ;
+.
+edg:LogicalDataAsset
+  rdfs:subClassOf edg:DataAssetViewFromTechnicalAssets ;
+.
+edg:LogicalFlow
+  a edg:AssetClass ;
+  edg:acronym "LFLOW" ;
+  swa:instancesHaveRandomURI true ;
+  rdfs:comment "A 'Logical Flow' is an informal specification of an interface between entities that can interoperate. These can be applicationa, databasea, internal and external systems and parties. The kinds of things that are flowing can be expressed as business glossary terms and information type. Logical flows cater for the information obtained from business analysts. Lineage discussions with the business will be at  the logical flow level. It will need to be connected to physical flows with their technical details. Connecting logical with physical can be automated based on the available data (e.g., what app runs on what server, etc.) and it could also be done manually. The overall approach is to support both automated discovery and manual entry at the various levels and the combination thereof. " ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Logical Flow" ;
+  rdfs:subClassOf edg:Flow ;
+  sh:property edg:LogicalFlow-exchangedEntities ;
+  sh:property edg:LogicalFlow-realizedAs ;
+  sh:property edg:LogicalFlow-summary-gadget ;
+  sh:property edg:LogicalFlow-transfersInformationAsset ;
+  sh:property edg:LogicalFlow-transfersPackage ;
+.
+edg:LogicalFlow-exchangedEntities
+  a sh:PropertyShape ;
+  sh:path edg:involvedEntity ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:ExchangeableEntity ;
+  sh:group edg:FlowPropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:LogicalFlow-realizedAs
+  a sh:PropertyShape ;
+  sh:path edg:realizedAs ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:PhysicalFlow ;
+  sh:group edg:FlowPropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:LogicalFlow-summary-gadget
+  a sh:PropertyShape ;
+  sh:path edg:isSummaryGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/controller/technical-assets> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:datatype xsd:boolean ;
+  sh:group edg:LogicalFlowSummaryGadgetGroup ;
+  sh:name "logical flow overview" ;
+  sh:order "10"^^xsd:decimal ;
+  sh:values true ;
+.
+edg:LogicalFlow-transfersInformationAsset
+  a sh:PropertyShape ;
+  sh:path edg:transfersInformationAsset ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:InformationAsset ;
+  sh:group edg:FlowPropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:LogicalFlow-transfersPackage
+  a sh:PropertyShape ;
+  sh:path edg:transfersPackage ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:InformationPackage ;
+  sh:group edg:FlowPropertiesGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:LogicalFlowSummaryGadgetGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  tosh:viewGadget edg:LogicalFlowSummaryGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Flow Summary Report" ;
+  sh:order "110"^^xsd:decimal ;
+.
+edg:MagicProperties
+  a spin:MagicProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "EDG Magic properties" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+edg:Mapping
+  a edg:AssetClass ;
+  edg:acronym "MPNG" ;
+  edg:name "MAPPING" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Mapping" ;
+  rdfs:subClassOf edg:SoftwareFunction ;
+.
+edg:MappingPropertiesGroup
+  a sh:PropertyGroup ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/technical-assets> ;
+  rdfs:label "Mapping Properties" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:MappingsCollection-mapping
+  a sh:PropertyShape ;
+  sh:path edg:mapping ;
+  dash:viewer edg:DirectMappingsCollectionGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:DirectMapping ;
+  sh:group edg:DirectMappingsPropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:MessageQueueSystem
+  a edg:AssetClass ;
+  edg:acronym "MQS" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Message Queue System" ;
+  rdfs:subClassOf edg:Infrastructure ;
+.
+edg:NetworkAttachedService
+  a edg:AssetClass ;
+  edg:acronym "NASRV" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Network Attached Service (NAS)" ;
+  rdfs:label "Network Attached Service" ;
+  rdfs:subClassOf edg:CloudComputingService ;
+.
+edg:NetworkAttachedStorage
+  a edg:AssetClass ;
+  edg:acronym "NAS" ;
+  rdfs:comment "<em>Network-attached storage (NAS)</em> is a type of dedicated file storage device that provides local-area network local area network (LAN) nodes with file-based shared storage through a standard Ethernet connection."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Network Attached Storage" ;
+  rdfs:subClassOf edg:DataStorageSystem ;
+.
+edg:OperatingSystemType
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  edg:acronym "OSTYPE" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Operating System" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:PaaS
+  a edg:AssetClass ;
+  rdfs:comment "'Platform as a Service' (PaaS) is a cloud computing model in which a third-party provider delivers hardware and software tools -- usually those needed for application development -- to users over the internet." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Platform As A Service" ;
+  rdfs:subClassOf edg:CloudComputingService ;
+  rdfs:subClassOf edg:SoftwarePlatform ;
+.
+edg:Party
+  rdfs:subClassOf edg:EnterpriseViewFromTechnicalAssets ;
+.
+edg:Payloadable
+  rdfs:subClassOf edg:Traceable ;
+.
+edg:Person
+  rdfs:subClassOf edg:Interoperable ;
+  rdfs:subClassOf edg:ProducerConsumerAspect ;
+.
+edg:PhysicalDataAsset
+  rdfs:subClassOf edg:DataAssetViewFromTechnicalAssets ;
+.
+edg:PhysicalFlow
+  a edg:AssetClass ;
+  dash:abstract true ;
+  edg:acronym "PFLOW" ;
+  edg:type "datafeed" ;
+  rdfs:comment "A 'Physical Flow' is an abstract class for types of data flow." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Physical Flow" ;
+  rdfs:subClassOf edg:Flow ;
+  sh:property edg:PhysicalFlow-realizedAs-inverse ;
+  sh:property edg:PhysicalFlow-transfersPackage ;
+.
+edg:PhysicalFlow-realizedAs-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:realizedAs ;
+    ] ;
+  graphql:name "logicalFlow" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:LogicalFlow ;
+  sh:description "associates a data flow with logical flow(s) it realizes." ;
+  sh:group edg:FlowPropertiesGroup ;
+  sh:name "physical flow for logical flow" ;
+  sh:order "80"^^xsd:decimal ;
+.
+edg:PhysicalFlow-transfersPackage
+  a sh:PropertyShape ;
+  sh:path edg:transfersPackage ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:DataPackage ;
+  sh:group edg:FlowPropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Pipeline
+  a edg:AssetClass ;
+  edg:acronym "PLINE" ;
+  rdfs:comment "A 'Pipeline' is a sequence of data processing steps involving data elements, transforms and jobs in the enterprise's ecosystem." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Pipeline" ;
+  rdfs:subClassOf edg:SoftwareAsset ;
+  sh:property edg:Pipeline-pipelineStep ;
+.
+edg:Pipeline-pipelineStep
+  a sh:PropertyShape ;
+  sh:path edg:pipelineStep ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:PipelineStep ;
+  sh:group edg:PipelinePropertiesGroup ;
+  sh:minCount 1 ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:Pipeline-usesJob
+  a sh:PropertyShape ;
+  sh:path edg:usesJob ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:SoftwareJob ;
+  sh:group edg:PipelinePropertiesGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:PipelinePropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/technical-assets> ;
+  rdfs:label "Pipeline Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:PipelineStep
+  a edg:AssetClass ;
+  edg:acronym "PLINESTEP" ;
+  rdfs:comment "A processing stage in a pipeline. Stages are ordered by their step numbers." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Pipeline Step" ;
+  rdfs:subClassOf edg:Interoperable ;
+  rdfs:subClassOf edg:SoftwareAsset ;
+  rdfs:subClassOf edg:SoftwareExecutable ;
+  sh:property edg:PipelineStep-stepNumber ;
+.
+edg:PipelineStep-stepNumber
+  a sh:PropertyShape ;
+  sh:path edg:stepNumber ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:PipelineStepPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:PipelineStepPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/technical-assets> ;
+  rdfs:label "Pipeline Step Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:Place
+  rdfs:subClassOf edg:EnterpriseViewFromTechnicalAssets ;
+.
+edg:Procedure
+  rdfs:comment "A 'Procedure' is a specification of a task in a business process activity. Procedures can have sub-procedures." ;
+  rdfs:subClassOf edg:EnterpriseViewFromTechnicalAssets ;
+.
+edg:Process
+  rdfs:subClassOf edg:EnterpriseViewFromTechnicalAssets ;
+.
+edg:ProcessActivity
+  rdfs:subClassOf edg:EnterpriseViewFromTechnicalAssets ;
+.
+edg:Producer
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Producer" ;
+  rdfs:subClassOf edg:SoftwareComponent ;
+.
+edg:QueryBasedMapping
+  a edg:AssetClass ;
+  edg:acronym "QYBM" ;
+  edg:name "QUERY-BASED MAPPING" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Query Based Mapping" ;
+  rdfs:subClassOf edg:Mapping ;
+.
+edg:RequestServiceEndpointPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/technical-assets> ;
+  rdfs:label "Request Service Properties" ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:ResponseServiceEndpoint-responseService-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:responseService ;
+    ] ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:Interoperable ;
+  sh:group edg:InteroperabilityPropertiesGroup ;
+  sh:name "service provider" ;
+  sh:order "90"^^xsd:decimal ;
+.
+edg:ResponseServiceEndpointPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/technical-assets> ;
+  rdfs:label "Response Service Properties" ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:SQLscript
+  a edg:AssetClass ;
+  edg:name "SQL SCRIPT" ;
+  rdfs:comment "An SQL script is a series of SQL commands and statements in a database specific language such as Transact-SQLor PL-SQL stored in a file." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "SQL Script" ;
+  rdfs:subClassOf edg:Script ;
+  sh:property edg:SQLscript-belongsToSchema ;
+.
+edg:SQLscript-belongsToSchema
+  a sh:PropertyShape ;
+  sh:path edg:belongsToSchema ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:Schema ;
+  sh:description "An SQL script might be part of a schema" ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:order "70"^^xsd:decimal ;
+.
+edg:SaaS
+  a edg:AssetClass ;
+  rdfs:comment "Software as a service (SaaS) is a software licensing and delivery model in which software is licensed on a subscription basis and is centrally hosted." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Software As A Service" ;
+  rdfs:subClassOf edg:CloudComputingService ;
+.
+edg:Scheduler
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Scheduler" ;
+  rdfs:subClassOf edg:SoftwareComponent ;
+.
+edg:Script
+  a edg:AssetClass ;
+  edg:name "SCRIPT" ;
+  rdfs:comment "Script is a program written for a special run-time environment that automate the execution of tasks that could alternatively be executed one-by-one by a human operator. Scripting languages are often interpreted (rather than compiled). Environments that can be automated through scripting include software applications, web pages within a web browser, usage of the shells of operating systems (OS), embedded systems, as well as numerous games. A scripting language can be viewed as a domain-specific language for a particular environment; in the case of scripting an application, it is also known as an extension language. Scripting languages are also sometimes referred to as very high-level programming languages, as they operate at a high level of abstraction, or as control languages, particularly for job control languages on mainframes. The term 'scripting language' is also used loosely to refer to dynamic high-level general-purpose languages, such as Perl, Tcl, and Python, with the term 'script' often used for small programs (up to a few thousand lines of code) in such languages, or in domain-specific languages such as the text-processing languages sed and AWK." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Script" ;
+  rdfs:subClassOf edg:SoftwareProgram ;
+.
+edg:Server
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Server" ;
+  rdfs:subClassOf edg:AccessControllable ;
+  rdfs:subClassOf edg:Infrastructure ;
+  rdfs:subClassOf edg:Locatable ;
+  sh:property edg:Server-usesSoftwarePlatform ;
+.
+edg:Server-realizes
+  sh:order "10"^^xsd:decimal ;
+.
+edg:Server-usesSoftwarePlatform
+  a sh:PropertyShape ;
+  sh:path edg:usesSoftwarePlatform ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:SoftwarePlatform ;
+  sh:group edg:ServerPropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:ServerPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/technical-assets> ;
+  rdfs:label "Server Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:ServiceEndpoint
+  a edg:AssetClass ;
+  a sh:NodeShape ;
+  edg:acronym "SEP" ;
+  swa:instancesHaveRandomURI true ;
+  rdfs:comment "A \"Service Endpoint\" specifies an interface that sends or receives data. In the case of a service request the data is provisioned as a response. In the case of a service requestor, the data is being received for ingestion." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Service Endpoint" ;
+  rdfs:subClassOf edg:AccessControllable ;
+  rdfs:subClassOf edg:Configurable ;
+  rdfs:subClassOf edg:Interoperable ;
+  rdfs:subClassOf edg:Locatable ;
+  rdfs:subClassOf edg:Protectable ;
+  rdfs:subClassOf edg:SoftwareAsset ;
+  sh:property edg:ServiceEndpoint-data-exchange-details ;
+  sh:property edg:ServiceEndpoint-directMappingsCollection ;
+  sh:property edg:ServiceEndpoint-usesDatabaseView ;
+  sh:property edg:ServiceEndpoint-usesSoftwareFunction ;
+  sh:property edg:ServiceEndpoint-usesSoftwareProgram ;
+.
+edg:ServiceEndpoint-data-exchange-details
+  a sh:PropertyShape ;
+  sh:path edg:isServiceEndpointDataExchangeDetailsGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:datatype xsd:boolean ;
+  sh:group edg:ServiceEndpointDataExchangeDetailsGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 0 ;
+  sh:name "service endpoint data exchange details" ;
+  sh:order "10"^^xsd:decimal ;
+  sh:values true ;
+.
+edg:ServiceEndpoint-directMappingsCollection
+  a sh:PropertyShape ;
+  sh:path edg:mappingsCollection ;
+  dash:viewer edg:DirectMappingsCollectionGadget ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:DirectMappingsCollection ;
+  sh:group edg:DirectMappingsPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 0 ;
+  sh:name "direct mappings" ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:ServiceEndpoint-usesDatabaseView
+  a sh:PropertyShape ;
+  sh:path edg:usesDatabaseView ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:DatabaseView ;
+  sh:group edg:ServiceEndpointPropertiesGroup ;
+  sh:order "60"^^xsd:decimal ;
+.
+edg:ServiceEndpoint-usesSoftwareFunction
+  a sh:PropertyShape ;
+  sh:path edg:usesSoftwareFunction ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:SoftwareFunction ;
+  sh:description "Specifies how a service endpoint uses a software function." ;
+  sh:group edg:ServiceEndpointPropertiesGroup ;
+  sh:order "70"^^xsd:decimal ;
+.
+edg:ServiceEndpoint-usesSoftwareProgram
+  a sh:PropertyShape ;
+  sh:path edg:usesSoftwareProgram ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:SoftwareProgram ;
+  sh:description "Specifies how a service endpoint uses a software program." ;
+  sh:group edg:ServiceEndpointPropertiesGroup ;
+  sh:order "60"^^xsd:decimal ;
+.
+edg:ServiceEndpointDataExchangeDetailsGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  tosh:viewGadget edg:ServiceEndpointDataExchangeDetailsGadget ;
+  tosh:viewGroupDescription "Shows the owning interoperable entity, for example, a business applicaiton, and the flows and exchangess defined on an endpoint." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/technical-assets> ;
+  rdfs:label "Service Endpoint Data Exchange Details" ;
+  sh:order "22"^^xsd:decimal ;
+.
+edg:ServiceEndpointPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/technical-assets> ;
+  rdfs:label "Software Dependencies" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:ServiceFramework
+  a edg:AssetClass ;
+  edg:acronym "SRVFW" ;
+  edg:hideSubClasses true ;
+  rdfs:comment "A \"ServiceFramework\" is an abstract super-class for software that provides one or more services."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Service Framework" ;
+  rdfs:subClassOf edg:Infrastructure ;
+.
+edg:SoftwareAsset
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Software Asset" ;
+  rdfs:subClassOf edg:TechnicalAsset ;
+.
+edg:SoftwareCapability
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Software Capability" ;
+  rdfs:subClassOf edg:Capability ;
+.
+edg:SoftwareCapabilityPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Capability" ;
+  sh:order "25"^^xsd:decimal ;
+.
+edg:SoftwareCapable
+  sh:property edg:SoftwareCapable-dependsOnDataFrom ;
+  sh:property edg:SoftwareCapable-hostedOn ;
+  sh:property edg:SoftwareCapable-providedAsService ;
+  sh:property edg:SoftwareCapable-usedByOrganization ;
+  sh:property edg:SoftwareCapable-usesModule ;
+  sh:property edg:SoftwareCapable-usesPersonallyIdentifiableInformation ;
+  sh:property edg:SoftwareCapable-usesService ;
+  sh:property edg:SoftwareCapable-usesSoftwareProgram ;
+  sh:property edg:SofwareCapable-isCustomerFacing ;
+.
+edg:SoftwareCapable-dependsOnDataFrom
+  a sh:PropertyShape ;
+  sh:path edg:dependsOnDataFrom ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:Interoperable ;
+  sh:description "Expresses a direct dependency for a business application. Dependency can be to anything that is interoperable. Typically this would be another application but could also be to a system, a stakeholder (or stakeholder gorup) or to a role or person." ;
+  sh:group edg:TraceableGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:SoftwareCapable-hostedOn
+  a sh:PropertyShape ;
+  sh:path edg:hostedOn ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:Server ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:order "110"^^xsd:decimal ;
+.
+edg:SoftwareCapable-providedAsService
+  a sh:PropertyShape ;
+  sh:path edg:providedAsService ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:SoftwareService ;
+  sh:description "Specifies that a softare capability is provided as a software service" ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:order "110"^^xsd:decimal ;
+.
+edg:SoftwareCapable-usedByOrganization
+  a sh:PropertyShape ;
+  sh:path edg:usedByOrganization ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:Organization ;
+  sh:group edg:TraceableGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:SoftwareCapable-usesModule
+  a sh:PropertyShape ;
+  sh:path edg:usesModule ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:SoftwareModule ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:order "90"^^xsd:decimal ;
+.
+edg:SoftwareCapable-usesPersonallyIdentifiableInformation
+  a sh:PropertyShape ;
+  sh:path edg:usesPersonallyIdentifiableInformation ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:datatype xsd:string ;
+  sh:group edg:EnterpriseRolePropertiesGroup ;
+  sh:in (
+      "Y"
+      "YES"
+      "N"
+      "NO"
+    ) ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:SoftwareCapable-usesService
+  a sh:PropertyShape ;
+  sh:path edg:usesService ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:SoftwareService ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:SoftwareCapable-usesSoftwareProgram
+  a sh:PropertyShape ;
+  sh:path edg:usesSoftwareProgram ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:SoftwareProgram ;
+  sh:description "Specifies that a business application uses a software program" ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:order "130"^^xsd:decimal ;
+.
+edg:SoftwareCapablePropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Capability" ;
+  sh:order "25"^^xsd:decimal ;
+.
+edg:SoftwareComponent
+  a edg:AssetClass ;
+  edg:acronym "SWCOMPT" ;
+  edg:hideSubClasses true ;
+  rdfs:comment "A software component is a software package, or a module that encapsulates a set of related functions (or data)." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Software Component" ;
+  rdfs:subClassOf edg:Configurable ;
+  rdfs:subClassOf edg:SoftwareAsset ;
+  rdfs:subClassOf edg:SoftwareExecutable ;
+  sh:property edg:SoftwareComponent-component ;
+.
+edg:SoftwareComponent-component
+  a sh:PropertyShape ;
+  sh:path edg:component ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:SoftwareComponent ;
+  sh:group edg:SoftwareComponentPropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:SoftwareComponentPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/technical-assets> ;
+  rdfs:label "Software Component Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:SoftwareExecutable
+  a edg:AspectClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Software Executable" ;
+  rdfs:subClassOf edg:Aspect ;
+  sh:property edg:SoftwareExecutable-executableType ;
+  sh:property edg:SoftwareExecutable-hasSoftwareProgram ;
+  sh:property edg:SoftwareExecutable-input ;
+  sh:property edg:SoftwareExecutable-output ;
+  sh:property edg:SoftwareExecutable-usesSoftwareExecutable ;
+.
+edg:SoftwareExecutable-executableType
+  a sh:PropertyShape ;
+  sh:path edg:executableType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:SoftwareExecutableType ;
+  sh:description "The executable type for the software" ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:order "5"^^xsd:decimal ;
+.
+edg:SoftwareExecutable-hasSoftwareProgram
+  a sh:PropertyShape ;
+  sh:path edg:hasSoftwareProgram ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:SoftwareExecutable ;
+  sh:description "Composite software structure" ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:SoftwareExecutable-hasSoftwareProgram-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:hasSoftwareProgram ;
+    ] ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:SoftwareExecutable ;
+  sh:description "Shows the software executable(s) that have a software program." ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:order "210"^^xsd:decimal ;
+.
+edg:SoftwareExecutable-input
+  a sh:PropertyShape ;
+  sh:path edg:input ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:Processable ;
+  sh:description "Software executables may have inputs that are data elements." ;
+  sh:disjoint edg:output ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:order "200"^^xsd:decimal ;
+.
+edg:SoftwareExecutable-output
+  a sh:PropertyShape ;
+  sh:path edg:output ;
+  edg:propertyPlacementConstraint "forward" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:Processable ;
+  sh:description "Software executables may have outputs that are data elements." ;
+  sh:disjoint edg:input ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:order "220"^^xsd:decimal ;
+.
+edg:SoftwareExecutable-path
+  a sh:PropertyShape ;
+  sh:path edg:path ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:datatype xsd:string ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 0 ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:SoftwareExecutable-runsOn
+  a sh:PropertyShape ;
+  sh:path edg:runsOn ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:SoftwarePlatform ;
+  sh:description "Specifies what infrastructure is running the software" ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:order "540"^^xsd:decimal ;
+.
+edg:SoftwareExecutable-storesDataIn
+  a sh:PropertyShape ;
+  sh:path edg:storesDataIn ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:Database ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:SoftwareExecutable-usesSoftwareExecutable
+  a sh:PropertyShape ;
+  sh:path edg:usesSoftwareExecutable ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:SoftwareExecutable ;
+  sh:description "Shows the software executables that use a software executable." ;
+  sh:group edg:TraceableGroup ;
+  sh:name "used by software" ;
+  sh:order "190"^^xsd:decimal ;
+  sh:values [
+      sh:path [
+          sh:inversePath edg:hasSoftwareProgram ;
+        ] ;
+    ] ;
+  sh:values [
+      sh:path [
+          sh:inversePath edg:usesModule ;
+        ] ;
+    ] ;
+  sh:values [
+      sh:path [
+          sh:inversePath edg:usesSoftwareExecutable ;
+        ] ;
+    ] ;
+  sh:values [
+      sh:path [
+          sh:inversePath edg:usesSoftwareFunction ;
+        ] ;
+    ] ;
+  sh:values [
+      sh:path [
+          sh:inversePath edg:usesSoftwareProgram ;
+        ] ;
+    ] ;
+.
+edg:SoftwareExecutable-usesSoftwareProgram-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:usesSoftwareProgram ;
+    ] ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:SoftwareExecutable ;
+  sh:description "Shows the software executable(s) that use a software program." ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:order "200"^^xsd:decimal ;
+.
+edg:SoftwareExecutablePropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/technical-assets> ;
+  rdfs:label "Software Properties" ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:SoftwareExecutableType
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  edg:acronym "SWEXTYPE" ;
+  rdfs:comment "A 'Software Executable Type' is an enumeration for categorizing kinds of software executables. The enumerated values are defined in a codelist asset collection. Examples might be ORACLE PL/SQL, HIVE Script, TERADATA Script, JAVA, SCALA and PYTHON." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Software Executable Type" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:SoftwareFunction
+  a edg:AssetClass ;
+  edg:acronym "SWFUN" ;
+  edg:hideSubClasses true ;
+  edg:name "SOFTWARE FUNCTION" ;
+  rdfs:comment "A software function can be a software-based capability for enacting a behavior in a system, or a data-specific transform for a conversion or mapping. Mappings are typically used to express how data is derived from other data in a system. The specific type of software function should be specified on each instance." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Software Function" ;
+  rdfs:subClassOf edg:SoftwareAsset ;
+  rdfs:subClassOf edg:SoftwareExecutable ;
+  sh:property edg:SoftwareExecutable-executableType ;
+  sh:property edg:SoftwareProgram-sourceLink ;
+  sh:property edg:SoftwareProgram-usesSoftwareFunction ;
+  sh:property edg:SoftwareProgram-usesSoftwareFunction-inverse ;
+.
+edg:SoftwareJob
+  a edg:AssetClass ;
+  edg:acronym "SWJOB" ;
+  rdfs:comment "Software jobs are units of work that break down into job steps where each step is implemented as a separate program." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Software Job" ;
+  rdfs:subClassOf edg:SoftwareProgram ;
+.
+edg:SoftwareMacro
+  a edg:AssetClass ;
+  edg:acronym "SWMACRO" ;
+  edg:name "SOFTWARE MACRO" ;
+  rdfs:comment "A software macro is a rule or pattern that specifies how a certain input sequence (often a sequence of characters) should be mapped to a replacement output sequence (also often a sequence of characters) according to a defined procedure. The mapping process that instantiates (transforms) a macro use into a specific sequence is known as macro expansion. A facility for writing macros may be provided as part of a software application or as a part of a programming language. In the former case, macros are used to make tasks using the application less repetitive. In the latter case, they are a tool that allows a programmer to enable code reuse or even to design domain-specific languages." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Software Macro" ;
+  rdfs:subClassOf edg:SoftwareProgram ;
+.
+edg:SoftwareModule
+  a edg:AssetClass ;
+  edg:acronym "SWMOD" ;
+  edg:name "SOFTWARE MODULE" ;
+  rdfs:comment "A software module is a component of a system that offers a software-based capability." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Software Module" ;
+  rdfs:subClassOf edg:EnterpriseCapable ;
+  rdfs:subClassOf edg:ProducerConsumerAspect ;
+  rdfs:subClassOf edg:SoftwareAsset ;
+  rdfs:subClassOf edg:SoftwareCapable ;
+  rdfs:subClassOf edg:SoftwareExecutable ;
+.
+edg:SoftwarePlatform
+  a edg:AssetClass ;
+  edg:acronym "SWPLAT" ;
+  rdfs:comment "A software platform is foundational software that serces as an operating system, or an operating environment, upon which various application programs can be run. Such a platform is also referred to as a solution stack or software stack made up of software subsystems or components. A business application runs on a software platform by being 'hosted on' a server (also referred to as an 'application server')." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Software Platform" ;
+  rdfs:subClassOf edg:AccessControllable ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:Configurable ;
+  rdfs:subClassOf edg:Infrastructure ;
+  rdfs:subClassOf edg:SoftwareAsset ;
+  prov:wasInfluencedBy "https://en.wikipedia.org/wiki/Solution_stack"^^xsd:anyURI ;
+  sh:property edg:SoftwarePlatform-interfacesWith ;
+  sh:property edg:SoftwarePlatform-operatingSystemType ;
+  sh:property edg:SoftwarePlatform-runsExecutionEngine ;
+  sh:property edg:SoftwarePlatform-solutionStackType ;
+  sh:property edg:SoftwarePlatform-usesInfrastructure ;
+.
+edg:SoftwarePlatform-interfacesWith
+  a sh:PropertyShape ;
+  sh:path edg:interfacesWith ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:SoftwareComponent ;
+  sh:group edg:SoftwarePlatformPropertiesGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:SoftwarePlatform-operatingSystemType
+  a sh:PropertyShape ;
+  sh:path edg:operatingSystemType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:OperatingSystemType ;
+  sh:group edg:SoftwarePlatformPropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:SoftwarePlatform-runsExecutionEngine
+  a sh:PropertyShape ;
+  sh:path edg:runsExecutionEngine ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:ExecutionEngine ;
+  sh:group edg:SoftwarePlatformPropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:SoftwarePlatform-solutionStackType
+  a sh:PropertyShape ;
+  sh:path edg:solutionStackType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:SolutionStackType ;
+  sh:group edg:SoftwarePlatformPropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:SoftwarePlatform-usesInfrastructure
+  a sh:PropertyShape ;
+  sh:path edg:usesInfrastructure ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:Infrastructure ;
+  sh:group edg:SoftwarePlatformPropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:SoftwarePlatformPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/technical-assets> ;
+  rdfs:label "Software Platform Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:SoftwareProgram
+  a edg:AssetClass ;
+  edg:acronym "SWPROG" ;
+  edg:hideSubClasses true ;
+  edg:name "SOFTWARE PROGRAM" ;
+  rdfs:comment "A \"Software Program\" is the parent class for any software entity that is executable. This includes scripts (ETL and ELT), jobs, Macros, Stored Procedures and Software Triggers." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Software Program" ;
+  rdfs:subClassOf edg:SoftwareAsset ;
+  rdfs:subClassOf edg:SoftwareExecutable ;
+  sh:property edg:SoftwareExecutable-hasSoftwareProgram-inverse ;
+  sh:property edg:SoftwareExecutable-runsOn ;
+  sh:property edg:SoftwareExecutable-usesSoftwareProgram-inverse ;
+  sh:property edg:SoftwareProgram-providedAsService ;
+  sh:property edg:SoftwareProgram-residesIn ;
+  sh:property edg:SoftwareProgram-sourceLink ;
+  sh:property edg:SoftwareProgram-usesDatabaseView ;
+  sh:property edg:SoftwareProgram-usesQuery ;
+  sh:property edg:SoftwareProgram-usesSoftwareFunction ;
+  sh:property edg:SoftwareProgram-usesSoftwareProgram ;
+  sh:property edg:SoftwareProgram-usesStoredProcedure ;
+  sh:sparql [
+      sh:deactivated true ;
+      sh:message "Inputs must be a subset of the inputs of the parent (as specified by edg:usesSoftwareFunction) -- DEACTIVATED" ;
+      sh:prefixes <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+      sh:select """SELECT $this (edg:input AS ?path) (?input AS ?value)
+WHERE {
+    ?parent edg:usesSoftwareFunction $this .
+	$this edg:input ?input .
+	FILTER NOT EXISTS { ?parent edg:input ?input }
+}""" ;
+    ] ;
+  sh:sparql [
+      sh:deactivated true ;
+      sh:message "Outputs must be a subset of the outputs of the parent (as specified by edg:usesSoftwareFunction) -- DEACTIVATED" ;
+      sh:prefixes <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+      sh:select """SELECT $this (edg:output AS ?path) (?output AS ?value)
+WHERE {
+    ?parent edg:usesSoftwareFunction $this .
+	$this edg:output ?output .
+	FILTER NOT EXISTS { ?parent edg:output ?output }
+}""" ;
+    ] ;
+.
+edg:SoftwareProgram-providedAsService
+  a sh:PropertyShape ;
+  sh:path edg:providedAsService ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:SoftwareService ;
+  sh:description "Specifies that a software program is provided as a software service" ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:SoftwareProgram-residesIn
+  a sh:PropertyShape ;
+  sh:path edg:residesIn ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:DataContainer ;
+  sh:description "The place where the software resides may be a file system, a database or another type of container." ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:SoftwareProgram-sourceLink
+  a sh:PropertyShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:datatype xsd:anyURI ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:order "90"^^xsd:decimal ;
+.
+edg:SoftwareProgram-usesDatabaseView
+  a sh:PropertyShape ;
+  sh:path edg:usesDatabaseView ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:DatabaseView ;
+  sh:description "Specifies that a software program uses a database view." ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:order "60"^^xsd:decimal ;
+.
+edg:SoftwareProgram-usesQuery
+  a sh:PropertyShape ;
+  sh:path edg:usesQuery ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:SoftwareFunction ;
+  sh:description "Specifies that a software program uses a query." ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:order "70"^^xsd:decimal ;
+.
+edg:SoftwareProgram-usesSoftwareFunction
+  a sh:PropertyShape ;
+  sh:path edg:usesSoftwareFunction ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:SoftwareFunction ;
+  sh:description "Specifies that a software program uses a software function." ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:SoftwareProgram-usesSoftwareFunction-inverse
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:usesSoftwareFunction ;
+    ] ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:SoftwareProgram ;
+  sh:description "Shows the software program(s) that use a software function." ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:SoftwareProgram-usesSoftwareProgram
+  a sh:PropertyShape ;
+  sh:path edg:usesSoftwareProgram ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:SoftwareProgram ;
+  sh:description "Specifies that a software program uses a software program" ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:order "35"^^xsd:decimal ;
+.
+edg:SoftwareProgram-usesStoredProcedure
+  a sh:PropertyShape ;
+  sh:path edg:usesStoredProcedure ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:SoftwareFunction ;
+  sh:description "Specifies that a software program uses a stored procedure." ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:SoftwareService
+  a edg:AssetClass ;
+  edg:acronym "SWSRV" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Software Service" ;
+  rdfs:subClassOf edg:AccessControllable ;
+  rdfs:subClassOf edg:Configurable ;
+  rdfs:subClassOf edg:Locatable ;
+  rdfs:subClassOf edg:SoftwareAsset ;
+  rdfs:subClassOf edg:SoftwareExecutable ;
+.
+edg:SoftwareServiceConsumerGroup
+  a edg:AssetClass ;
+  edg:acronym "SWSRVCGRP" ;
+  edg:hideSubClasses true ;
+  rdfs:comment "A 'Software Service Consumer Group' is a grouping of service consumers. For example, a 'Kafka Software Services Group', a subclass, is coordinated using ZooKeeper. This enables it to span multiple machines. In a group, each partition will be consumed by exactly one consumer  that is, KafkaStream." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Software Service Consumer Group" ;
+  rdfs:subClassOf edg:Infrastructure ;
+  rdfs:subClassOf owl:Thing ;
+  sh:property edg:SoftwareServiceGroup-includesConsumer ;
+.
+edg:SoftwareServiceGroup-includesConsumer
+  a sh:PropertyShape ;
+  sh:path edg:includesConsumer ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:Consumer ;
+.
+edg:SoftwareSystem-authorativeSourceFor
+  a sh:PropertyShape ;
+  sh:path edg:authorativeSourceFor ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:DataAsset ;
+  sh:group edg:SoftwareSystemPropertiesGroup ;
+.
+edg:SoftwareSystem-authoritiveSourceFor
+  a sh:PropertyShape ;
+  sh:path edg:authorativeSourceFor ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:DataAsset ;
+  sh:group edg:SoftwareSystemRoleGroup ;
+.
+edg:SoftwareSystem-enablesEnterpriseCapability
+  a sh:PropertyShape ;
+  sh:path edg:enablesEnterpriseCapability ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:EnterpriseCapability ;
+  sh:group edg:SoftwareSystemPropertiesGroup ;
+.
+edg:SoftwareSystem-hosts
+  a sh:PropertyShape ;
+  sh:path edg:hosts ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:BusinessApplication ;
+  sh:group edg:SoftwareSystemPropertiesGroup ;
+  sh:name "hosts" ;
+.
+edg:SoftwareSystem-systemOfRecordFor
+  sh:group edg:SoftwareSystemPropertiesGroup ;
+.
+edg:SoftwareSystemPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/technical-assets> ;
+  rdfs:label "Software System Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:SoftwareSystemRoleGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/technical-assets> ;
+  rdfs:label "Software System Role Metadata" ;
+  sh:order "58"^^xsd:decimal ;
+.
+edg:SofwareCapable-isCustomerFacing
+  a sh:PropertyShape ;
+  sh:path edg:isCustomerFacing ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:datatype xsd:boolean ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 0 ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:SolutionStackType
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  edg:acronym "SWSTACKTYPE" ;
+  rdfs:comment "Specifies the type of a software platform, such as LAMP and MEAN." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Solution Stack Type" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+  prov:wasInfluencedBy "https://en.wikipedia.org/wiki/Solution_stack"^^xsd:anyURI ;
+.
+edg:StakeholderGroup
+  rdfs:subClassOf edg:Interoperable ;
+  rdfs:subClassOf edg:ProducerConsumerAspect ;
+.
+edg:StorageAreaNetwork
+  a edg:AssetClass ;
+  edg:acronym "SAN" ;
+  rdfs:comment "A <em>Storage-Area Network (SAN)</em> is a dedicated high-speed network (or subnetwork) that interconnects and presents shared pools of storage devices to multiple servers."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Storage-Area Network" ;
+  rdfs:subClassOf edg:DataStorageSystem ;
+.
+edg:StoredProcedure
+  a edg:AssetClass ;
+  edg:acronym "STRDPROC" ;
+  edg:name "STORED PROCEDURE" ;
+  rdfs:comment "\"A stored procedure is a subroutine available to applications that access a relational database management system (RDBMS). Such procedures are stored in the database data dictionary." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Stored Procedure" ;
+  rdfs:subClassOf edg:SoftwareProgram ;
+  sh:property edg:StoredProcedure-belongsToSchema ;
+.
+edg:StoredProcedure-belongsToSchema
+  a sh:PropertyShape ;
+  sh:path edg:belongsToSchema ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:Schema ;
+  sh:description "A stored procedure might be part of a schema" ;
+.
+edg:SynonymMapping
+  a edg:AssetClass ;
+  edg:acronym "SYNM" ;
+  edg:name "SYNONYM MAPPING" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Synonym Mapping" ;
+  rdfs:subClassOf edg:DirectMapping ;
+.
+edg:System
+  a edg:AssetClass ;
+  edg:acronym "SYS" ;
+  rdfs:comment "A 'System' can be an internal or external source or destination for data." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "System" ;
+  rdfs:subClassOf edg:BusinessApplication ;
+  rdfs:subClassOf edg:SoftwareCapable ;
+.
+edg:System-input
+  a sh:PropertyShape ;
+  sh:path edg:input ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:Payloadable ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:System-output
+  a sh:PropertyShape ;
+  sh:path edg:output ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:Payloadable ;
+  sh:group edg:SoftwareExecutablePropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:SystemPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/technical-assets> ;
+  rdfs:label "System Properties" ;
+  sh:order "25"^^xsd:decimal ;
+.
+edg:Team
+  rdfs:subClassOf edg:Interoperable ;
+  rdfs:subClassOf edg:ProducerConsumerAspect ;
+.
+edg:TechnicalAsset
+  a edg:AssetClass ;
+  dash:abstract true ;
+  vaem:isElaboratedIn <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:subClassOf edg:Asset ;
+  rdfs:subClassOf edg:TechnicalViewpoint ;
+  sh:property edg:TechnicalAsset-derivedFrom ;
+  sh:property edg:TechnicalAsset-name ;
+.
+edg:TechnicalAsset-derivedFrom
+  a sh:PropertyShape ;
+  sh:path edg:derivedFrom ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/core> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:TechnicalAsset ;
+  sh:group edg:TraceableGroup ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:TechnicalAsset-name
+  a sh:PropertyShape ;
+  sh:path edg:name ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:datatype xsd:string ;
+  sh:group edg:IdentifiersGroup ;
+  sh:order "15"^^xsd:decimal ;
+.
+edg:TechnicalAssetsProject
+  graphql:publicClass edg:TechnicalViewpoint ;
+.
+edg:Thrift
+  a edg:AssetClass ;
+  rdfs:comment "Thrift provides a framework for developing and accessing remote services. It allows developers to create services that can be consumed by any application that is written in a language that there are Thrift bindings for. Thrift manages serialization of data to and from a service, as well as the protocol that describes a method invocation, response, etc. Instead of writing all the RPC code -- you can just get straight to your service logic. Thrift uses TCP and so a given service is bound to a particular port."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Thrift" ;
+  rdfs:subClassOf edg:ServiceFramework ;
+.
+edg:Traceable-requirement
+  sh:path edg:requirement ;
+.
+edg:Transform
+  a edg:AssetClass ;
+  edg:acronym "XFRM" ;
+  edg:name "TRANSFORM" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Transform" ;
+  rdfs:subClassOf edg:SoftwareFunction ;
+.
+edg:Transform-executes
+  a sh:PropertyShape ;
+  sh:path edg:executes ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  sh:class edg:SoftwareProgram ;
+.
+edg:TransformPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:closed true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/technical-assets> ;
+  rdfs:label "Transform Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:VirtualMachine
+  a edg:AssetClass ;
+  edg:acronym "VM" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Virtual Machine" ;
+  rdfs:subClassOf edg:ExecutionEngine ;
+  sh:property edg:VirtualMachine-operatingSystemType ;
+.
+edg:VirtualMachine-operatingSystemType
+  a sh:PropertyShape ;
+  sh:path edg:operatingSystemType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Virtual machine-operating system time" ;
+  sh:class edg:OperatingSystemType ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+.
+edg:accessControlNotes
+  a rdf:Property ;
+  rdfs:comment "A rich text property for documenting notes on access control" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "access control notes" ;
+  rdfs:range rdf:HTML ;
+.
+edg:authorativeSourceFor
+  a rdf:Property ;
+  rdfs:comment "Associates a data object with a software system which serves as the official source of information. This includes, but is not restricted to, a trusted source or a system of record. Authoritative source may refer to the source that creates the data or the best source for a specic data set, depending on context."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "authoritative source for" ;
+.
+edg:component
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "component" ;
+.
+edg:configurationFile
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "configuration file" ;
+.
+edg:configurationNotes
+  a owl:DatatypeProperty ;
+  rdfs:comment "A rich text property for documenting notes on configuration" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "configuration notes" ;
+  rdfs:range rdf:HTML ;
+.
+edg:enablesBusinessCapability
+  rdfs:label "enables business capability" ;
+.
+edg:environmentType
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "environment type" ;
+  rdfs:range edg:EnvironmentType ;
+.
+edg:exchangeFrequency
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "exchange frequency" ;
+.
+edg:executableType
+  a rdf:Property ;
+  rdfs:comment "Specifies the type of executable for a software program" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "executable type" ;
+.
+edg:executes
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "executes" ;
+.
+edg:flow
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "flow" ;
+.
+edg:generatesEvent
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "generates event" ;
+.
+edg:hasSoftwareProgram
+  a rdf:Property ;
+  rdfs:comment "Expresses a containership of a software program, which can be a script , a software program, a software job or a stored procedure." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "has software program" ;
+.
+edg:hostURL
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "host url" ;
+  rdfs:range xsd:anyURI ;
+.
+edg:hostedOn
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "hosted on" ;
+  rdfs:subPropertyOf edg:hosts ;
+.
+edg:hosts
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "hosts" ;
+  rdfs:subPropertyOf edg:hostedOn ;
+.
+edg:hostsApplication
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "hosts application" ;
+  rdfs:subPropertyOf edg:hosts ;
+.
+edg:implementedUsing
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "implemented using" ;
+.
+edg:includesConsumer
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "includes consumer" ;
+.
+edg:incomingFlow
+  a owl:ObjectProperty ;
+  rdfs:comment "A connection to a feed that is incoming" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "incoming flow" ;
+.
+edg:input
+  a owl:ObjectProperty ;
+  rdfs:comment "References a source data asset that serves as an input to a software program, transform or job. The data assets that can be consumed are sub-classes of the aspect 'Processable'." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "input data" ;
+.
+edg:interfaceOperation
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "interface operation" ;
+.
+edg:interfacesWith
+  a owl:ObjectProperty ;
+  rdfs:comment "Specifies that a software platform is integrated to an interface model" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "interfaces with" ;
+.
+edg:involvedEntity
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "involved entity" ;
+.
+edg:isCustomerFacing
+  a owl:DatatypeProperty ;
+  rdfs:comment "A 'Y', 'N' value to indicate that something is accessed by a customer." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "is customer facing" ;
+.
+edg:isInteroperableDownstreamDependenciesGadget
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "is interoperable downstream dependencies gadget" ;
+  rdfs:subPropertyOf edg:isGadget ;
+.
+edg:isInteroperableUpstreamDependenciesGadget
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "is interoperable upstream dependencies gadget" ;
+  rdfs:subPropertyOf edg:isGadget ;
+.
+edg:isLogicalFlowsGadget
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "is logical flows gadget" ;
+  rdfs:subPropertyOf edg:isGadget ;
+.
+edg:isPhysicalFlowsGadget
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "is physical flows gadget" ;
+  rdfs:subPropertyOf edg:isGadget ;
+.
+edg:livesIn
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "lives in" ;
+.
+edg:mapping
+  a owl:ObjectProperty ;
+  rdfs:comment "Used to reference a 2-tuple 'sameAs' relationship between two resources" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "mapping" ;
+.
+edg:mappingsCollection
+  a owl:ObjectProperty ;
+  rdfs:comment "Used to reference a 2-tuple 'sameAs' relationship between two resources" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "mappings" ;
+.
+edg:metricsSupport
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "metrics support" ;
+  rdfs:range xsd:string ;
+.
+edg:operatingSystemType
+  a owl:ObjectProperty ;
+  rdfs:comment "Specifies that a software platform is integrated to an interface model" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "operating system type" ;
+.
+edg:outgoingFlow
+  a owl:ObjectProperty ;
+  rdfs:comment "A connection to a flow that is outgoing" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "outgoing flow" ;
+.
+edg:output
+  a owl:ObjectProperty ;
+  rdfs:comment "References a taget data asset that is the output of a software program, transform or job. The data assets that can be targets are sub-classes of the aspect 'Processable'." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "output data" ;
+.
+edg:partOfApplication
+  a owl:ObjectProperty ;
+  rdfs:comment "Specifies that a software asset type belongs to an application" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "part of application" ;
+.
+edg:path
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "path" ;
+.
+edg:pipelineStep
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "pipeline step" ;
+.
+edg:poweredBy
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "powered by" ;
+.
+edg:provedAsService
+  a owl:ObjectProperty ;
+  rdfs:comment "Specifies that a software program is provided as a service." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "provided as service" ;
+.
+edg:providedAsService
+  a owl:ObjectProperty ;
+  rdfs:comment "Specifies a service that releases the functionality of a software executable or a database." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "provided as service" ;
+.
+edg:requiresPipeline
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "requires pipeline" ;
+.
+edg:resourcePooling
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "resource pooling" ;
+.
+edg:respondsToEvent
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "responds to event" ;
+.
+edg:responseService
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "response service" ;
+.
+edg:runsExecutionEngine
+  a owl:ObjectProperty ;
+  rdfs:comment "Specifies that a software platform executes one or more engines that can either be virtual machines or hypervisors" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "runs execution engine" ;
+.
+edg:runsOn
+  a owl:ObjectProperty ;
+  rdfs:comment "A solution stack or software stack is a set of software subsystems or components that make up a software platform to support applications. Business applications are said to \"run on\" or \"run on top of\" the platform." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "runs on" ;
+  rdfs:subPropertyOf edg:usesSoftwareExecutable ;
+  prov:wasInfluencedBy "https://en.wikipedia.org/wiki/Solution_stack"^^xsd:anyURI ;
+.
+edg:scalability
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "scalability" ;
+  rdfs:range xsd:string ;
+.
+edg:servesPurpose
+  a owl:ObjectProperty ;
+  rdfs:comment "Refers to a controlled list of purposes"^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "serves purpose" ;
+.
+edg:serviceEndpoint
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "service endpoint" ;
+.
+edg:solutionStackType
+  a owl:ObjectProperty ;
+  rdfs:comment "Specifies the type of a software platform, such as LAMP and MEAN." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "solution stack type" ;
+  prov:wasInfluencedBy "https://en.wikipedia.org/wiki/Solution_stack"^^xsd:anyURI ;
+.
+edg:source
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "source" ;
+.
+edg:sourceApplication
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "source application" ;
+  rdfs:subPropertyOf edg:source ;
+.
+edg:stepNumber
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "step number" ;
+.
+edg:storesDataIn
+  a owl:ObjectProperty ;
+  rdfs:comment "References a database where a software program stores its data" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "stores data in" ;
+.
+edg:subsystem
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "subsystem" ;
+  rdfs:subPropertyOf edg:system ;
+.
+edg:supportsBusinessFunction
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "supports business function" ;
+.
+edg:system
+  a owl:ObjectProperty ;
+  rdfs:domain edg:Environment ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "system" ;
+  rdfs:range edg:System ;
+.
+edg:target
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "target" ;
+.
+edg:targetApplication
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "target application" ;
+  rdfs:subPropertyOf edg:target ;
+.
+edg:targetSystem
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "target system" ;
+.
+edg:transfersAsset
+  a rdf:Property ;
+  rdfs:comment "A reference to an asset that is being exchanged on a flow." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "transfers asset" ;
+.
+edg:transfersInformationAsset
+  a rdf:Property ;
+  rdfs:comment "A reference to an information asset that is being exchanged on a logical flow." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "transfers information asset" ;
+  rdfs:subPropertyOf edg:transfersAsset ;
+.
+edg:transfersPackage
+  a rdf:Property ;
+  rdfs:comment "A reference to a data/info package that is being exchanged on a logical flow." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "transfers package" ;
+  rdfs:subPropertyOf edg:transfersAsset ;
+.
+edg:usesDatabaseView
+  a owl:ObjectProperty ;
+  rdfs:comment "Expresses a dependency on a software program, which can be a script , a software program, a software job or a stored procedure." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "uses database view" ;
+  rdfs:subPropertyOf edg:usesSoftwareExecutable ;
+.
+edg:usesInfrastructure
+  a owl:ObjectProperty ;
+  rdfs:comment "Specifies that a software platform is integrated to an interface model" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "uses infrastructure" ;
+.
+edg:usesJob
+  rdfs:subPropertyOf edg:usesSoftwareExecutable ;
+.
+edg:usesModule
+  a rdf:Property ;
+  rdfs:comment "Expresses a dependency on a software module." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "uses module" ;
+  rdfs:subPropertyOf edg:usesSoftwareExecutable ;
+.
+edg:usesPersonallyIdentifiableInformation
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "uses personally identifiable information" ;
+.
+edg:usesPipeline
+  rdfs:subPropertyOf edg:usesSoftwareExecutable ;
+.
+edg:usesQuery
+  a owl:ObjectProperty ;
+  rdfs:comment "Expresses a dependency on a software program, which can be a script , a software program, a software job or a stored procedure." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "uses query" ;
+  rdfs:subPropertyOf edg:usesSoftwareExecutable ;
+.
+edg:usesScript
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "uses script" ;
+  rdfs:subPropertyOf edg:usesSoftwareProgram ;
+.
+edg:usesService
+  a rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "uses service" ;
+.
+edg:usesSoftwareExecutable
+  a owl:ObjectProperty ;
+  rdfs:comment "Expresses a dependency on a software executable, which covers a broader range of software than a program. This range covers business applications, infrastructure, software components, software services as well as softtware programs." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "uses software executable" ;
+.
+edg:usesSoftwareFunction
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "uses software function" ;
+  rdfs:subPropertyOf edg:usesSoftwareExecutable ;
+.
+edg:usesSoftwarePlatform
+  a owl:ObjectProperty ;
+  rdfs:comment "Specifies how a physical concept implements a logical concept." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "uses software platform" ;
+  rdfs:subPropertyOf edg:usesSoftwareExecutable ;
+.
+edg:usesSoftwareProgram
+  a rdf:Property ;
+  rdfs:comment "Expresses a dependency on a software program, which can be a script , a software program, a software job or a stored procedure." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "uses software program" ;
+  rdfs:subPropertyOf edg:usesSoftwareExecutable ;
+.
+edg:usesStoredProcedure
+  a owl:ObjectProperty ;
+  rdfs:comment "Expresses a dependency on a software program, which can be a script , a software program, a software job or a stored procedure." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "uses stored procedure" ;
+  rdfs:subPropertyOf edg:usesSoftwareExecutable ;
+.
+edg:usesTransform
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "uses transform" ;
+  rdfs:subPropertyOf edg:usesSoftwareProgram ;
+.
+edg:virtualMachine
+  a rdf:Property ;
+  rdfs:comment "Associates a data object with a software system which serves as the official source of information. This includes, but is not restricted to, a trusted source or a system of record. Authoritative source may refer to the source that creates the data or the best source for a specic data set, depending on context."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "virtual machine" ;
+.
+<http://edg.topbraid.solutions/schema/technical-assets/GMD_technical-assets>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:SchemaGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.

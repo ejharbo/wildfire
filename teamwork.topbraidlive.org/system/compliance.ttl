@@ -1,0 +1,103 @@
+# baseURI: http://topbraid.org/compliance
+# imports: http://topbraid.org/metadata
+# imports: http://topbraid.org/status
+# prefix: compliance
+
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://topbraid.org/compliance>
+  rdf:type owl:Ontology ;
+  owl:imports <http://topbraid.org/metadata> ;
+  owl:imports <http://topbraid.org/status> ;
+.
+compliance:ComplianceResult
+  rdf:type rdfs:Class ;
+  rdfs:comment "Base class of results of compliance checking." ;
+  rdfs:label "Compliance result" ;
+.
+compliance:PropertyMismatch
+  rdf:type rdfs:Class ;
+  rdfs:comment "Indicates that a given resource has an unexpected value for a given property." ;
+  rdfs:label "Property mismatch" ;
+  rdfs:subClassOf compliance:ComplianceResult ;
+.
+compliance:Report
+  rdf:type rdfs:Class ;
+  rdfs:comment "A compliance report for a given system, pointing at result objects. Instances of this class are stored in a vocabulary's TCH graph." ;
+  rdfs:label "Report" ;
+.
+compliance:StatusResult
+  rdf:type rdfs:Class ;
+  rdfs:comment "Flags resources that have an unapproved status. The property compliance:status points at the status that the resource has in the reference data." ;
+  rdfs:label "Status result" ;
+  rdfs:subClassOf compliance:ComplianceResult ;
+.
+compliance:UnknownResource
+  rdf:type rdfs:Class ;
+  rdfs:comment "Used to state that the given resource is not present in the reference data." ;
+  rdfs:label "Unknown resource" ;
+  rdfs:subClassOf compliance:ComplianceResult ;
+.
+compliance:correctValue
+  rdf:type rdf:Property ;
+  rdfs:comment "A value that actually exists in the reference data." ;
+  rdfs:domain compliance:PropertyMismatch ;
+  rdfs:label "correct value" ;
+.
+compliance:incorrectValue
+  rdf:type rdf:Property ;
+  rdfs:comment "The incorrect value that does not exist in the reference data." ;
+  rdfs:domain compliance:PropertyMismatch ;
+  rdfs:label "incorrect value" ;
+.
+compliance:primaryKey
+  rdf:type rdf:Property ;
+  rdfs:comment "The primary key of the resource that this result is about. May be empty if the resource doesn't have a primary key." ;
+  rdfs:domain compliance:ComplianceResult ;
+  rdfs:label "primary key" ;
+.
+compliance:property
+  rdf:type rdf:Property ;
+  rdfs:domain compliance:PropertyMismatch ;
+  rdfs:label "property" ;
+  rdfs:range rdf:Property ;
+.
+compliance:resource
+  rdf:type rdf:Property ;
+  rdfs:comment "The resource that the result is about." ;
+  rdfs:domain compliance:ComplianceResult ;
+  rdfs:label "resource" ;
+  rdfs:range rdfs:Resource ;
+.
+compliance:result
+  rdf:type rdf:Property ;
+  rdfs:comment "The result instances contained in this report. No values means test passed." ;
+  rdfs:domain compliance:Report ;
+  rdfs:label "result" ;
+  rdfs:range compliance:ComplianceResult ;
+.
+compliance:status
+  rdf:type rdf:Property ;
+  rdfs:domain compliance:StatusResult ;
+  rdfs:label "status" ;
+  rdfs:range status:Status ;
+.
+compliance:timeStamp
+  rdf:type rdf:Property ;
+  rdfs:comment "The time when the report was created." ;
+  rdfs:domain compliance:Report ;
+  rdfs:label "time stamp" ;
+  rdfs:range xsd:dateTime ;
+.
+compliance:vocabulary
+  rdf:type rdf:Property ;
+  rdfs:comment "The vocabulary (dataset) that the report was created against." ;
+  rdfs:domain compliance:Report ;
+  rdfs:label "vocabulary" ;
+  rdfs:range rdfs:Resource ;
+.

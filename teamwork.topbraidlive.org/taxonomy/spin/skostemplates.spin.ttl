@@ -1,0 +1,1980 @@
+# baseURI: http://topbraid.org/spin/skostemplates
+# imports: http://spinrdf.org/spin
+# imports: http://www.w3.org/2004/02/skos/core
+# prefix: skostemplate
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://spinrdf.org/arg#broaderConcept>
+  rdf:type rdf:Property ;
+  rdfs:comment "broader concept" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://spinrdf.org/arg#concept>
+  rdf:type rdf:Property ;
+  rdfs:label "concept" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://spinrdf.org/arg#labelProperty>
+  rdf:type rdf:Property ;
+  rdfs:label "label property" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://spinrdf.org/arg#lang>
+  rdf:type rdf:Property ;
+  rdfs:label "lang" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://spinrdf.org/arg#narrowerConcept>
+  rdf:type rdf:Property ;
+  rdfs:label "narrower concept" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://spinrdf.org/arg#property>
+  rdf:type rdf:Property ;
+  rdfs:comment "property" ;
+  rdfs:label "property" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://spinrdf.org/arg#resource>
+  rdf:type rdf:Property ;
+  rdfs:label "resource" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://spinrdf.org/arg#string>
+  rdf:type rdf:Property ;
+  rdfs:label "string" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://topbraid.org/spin/skostemplates>
+  rdf:type owl:Ontology ;
+  rdfs:comment "A collection of APIs implemented as SPIN templates that are designed for retrieving information about taxonomy concepts. These APIs encapsulate typical SKOS-based query patterns such as finding all broader parents of a concept provided as an argument." ;
+  rdfs:label "TopBraid SKOS Templates" ;
+  owl:imports <http://spinrdf.org/spin> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+  owl:versionInfo "0.1.0" ;
+.
+skostemplate:AllBroaderConcepts
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:distinct "true"^^xsd:boolean ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "result" ;
+              ] ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 1 ;
+                sp:subPath <http://www.w3.org/2004/02/skos/core#broader> ;
+              ] ;
+            sp:subject [
+                sp:varName "narrowerConcept" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#narrowerConcept> ;
+      spl:valueType <http://www.w3.org/2004/02/skos/core#Concept> ;
+      rdfs:comment "The concept to get the broader (parent) concepts of." ;
+    ] ;
+  spin:labelTemplate "All broader concepts of {?narrowerConcept}" ;
+  rdfs:comment "Gets all concepts that are broader than the provided ?narrowerConcept, including the broader values of broader values." ;
+  rdfs:label "All broader concepts (including transitive parents)" ;
+  rdfs:subClassOf skostemplate:IntegratedTemplates ;
+.
+skostemplate:AllConcepts
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "concept" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:TriplePath ;
+            sp:object <http://www.w3.org/2004/02/skos/core#Concept> ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "type" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "concept" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "Gets all concepts in the vocabulary.  Performance will be impacted by the size of the vocabulary, with larger vocabularies producing large result sets." ;
+  rdfs:label "All concepts" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+skostemplate:AllConceptsAndSKOSLabels
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "concept" ;
+          ]
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:TriplePath ;
+            sp:object <http://www.w3.org/2004/02/skos/core#Concept> ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "type" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "concept" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:path [
+                rdf:type sp:AltPath ;
+                sp:path1 <http://www.w3.org/2004/02/skos/core#altLabel> ;
+                sp:path2 <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+              ] ;
+            sp:subject [
+                sp:varName "concept" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:or ;
+                sp:arg1 [
+                    rdf:type sp:not ;
+                    sp:arg1 [
+                        rdf:type sp:bound ;
+                        sp:arg1 [
+                            sp:varName "lang" ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    rdf:type sp:eq ;
+                    sp:arg1 [
+                        rdf:type sp:lang ;
+                        sp:arg1 [
+                            sp:varName "label" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "lang" ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate <http://spinrdf.org/arg#lang> ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The language tag.  This can be any string, but IETF language tags, RFC 5646, are recommended." ;
+    ] ;
+  rdfs:comment "Gets all concepts in the vocabulary and their preferred and alternative labels.  Only concepts with a label are returned.  If a language tag is specified, only the labels of the language tag are returned.  Otherwise, all labels are returned.  This query is computationally expensive due to the use of strings in the labels.  Performance will be impacted by the size of the vocabulary, with larger vocabularies producing large result sets.  This template is designed for entities that will create an index of vocabulary concepts by their labels." ;
+  rdfs:label "All concepts and SKOS labels" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+skostemplate:AllConnectedResources
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:distinct "true"^^xsd:boolean ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "concept" ;
+              ] ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath <http://www.w3.org/2004/02/skos/core#broader> ;
+              ] ;
+            sp:subject [
+                sp:varName "c" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "result" ;
+              ] ;
+            sp:predicate [
+                sp:varName "property" ;
+              ] ;
+            sp:subject [
+                sp:varName "c" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#concept> ;
+      spl:valueType <http://www.w3.org/2004/02/skos/core#Concept> ;
+      rdfs:comment "The concept to get the connected resources of." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#property> ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property to check the values of." ;
+    ] ;
+  spin:labelTemplate "All connected resources of {?concept} via {?property}" ;
+  rdfs:comment "This template looks for any resource connected to either ?concept or any of ?concept's narrower children using the predicate specified using the ?property argument. This function is not using skos:narrower predicate. Instead, it traverses down skos:broader relationships." ;
+  rdfs:label "All connected resources" ;
+  rdfs:subClassOf skostemplate:IntegratedTemplates ;
+.
+skostemplate:AllLeafConcepts
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:distinct "true"^^xsd:boolean ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "parent" ;
+              ] ;
+            sp:predicate <http://www.w3.org/2004/02/skos/core#broader> ;
+            sp:subject [
+                sp:varName "result" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:notExists ;
+                sp:elements (
+                    [
+                      sp:object [
+                          sp:varName "result" ;
+                        ] ;
+                      sp:predicate <http://www.w3.org/2004/02/skos/core#broader> ;
+                      sp:subject [
+                          sp:varName "child" ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "Gets all concepts that have parents, but no children. Only the skos:broader relationship is used to determine children and parents." ;
+  rdfs:label "All leaf concepts" ;
+  rdfs:subClassOf skostemplate:IntegratedTemplates ;
+.
+skostemplate:AllNarrowerConcepts
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "broaderConcept" ;
+              ] ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 1 ;
+                sp:subPath <http://www.w3.org/2004/02/skos/core#broader> ;
+              ] ;
+            sp:subject [
+                sp:varName "result" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#broaderConcept> ;
+      spl:valueType <http://www.w3.org/2004/02/skos/core#Concept> ;
+      rdfs:comment "The concept to get the narrower concepts of." ;
+    ] ;
+  spin:labelTemplate "All narrower concepts of {?broaderConcept}" ;
+  rdfs:comment "Gets all concepts that are children of the given ?broaderConcept. This template is not using the skos:narrower predicate to find children. Instead, it traverses down skos:broader relationships. " ;
+  rdfs:label "All narrower concepts (including transitive parents)" ;
+  rdfs:subClassOf skostemplate:IntegratedTemplates ;
+.
+skostemplate:AllOrphanConcepts
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:TriplePath ;
+            sp:object <http://www.w3.org/2004/02/skos/core#Concept> ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "type" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "result" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:notExists ;
+                sp:elements (
+                    [
+                      sp:object [
+                          sp:varName "parent" ;
+                        ] ;
+                      sp:predicate <http://www.w3.org/2004/02/skos/core#broader> ;
+                      sp:subject [
+                          sp:varName "result" ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:notExists ;
+                sp:elements (
+                    [
+                      sp:object [
+                          sp:varName "result" ;
+                        ] ;
+                      sp:predicate <http://www.w3.org/2004/02/skos/core#hasTopConcept> ;
+                      sp:subject [
+                          sp:varName "scheme" ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "Gets any concept that has no parents and is not declared as a top concept of some concept scheme. " ;
+  rdfs:label "All orphan concepts" ;
+  rdfs:subClassOf skostemplate:IntegratedTemplates ;
+.
+skostemplate:AllRelatedConcepts
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:distinct "true"^^xsd:boolean ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:Union ;
+            sp:elements (
+                (
+                  [
+                    rdf:type sp:TriplePath ;
+                    sp:object [
+                        sp:varName "result" ;
+                      ] ;
+                    sp:path [
+                        rdf:type sp:ModPath ;
+                        sp:modMax -2 ;
+                        sp:modMin 1 ;
+                        sp:subPath <http://www.w3.org/2004/02/skos/core#related> ;
+                      ] ;
+                    sp:subject [
+                        sp:varName "concept" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    rdf:type sp:TriplePath ;
+                    sp:object [
+                        sp:varName "concept" ;
+                      ] ;
+                    sp:path [
+                        rdf:type sp:ModPath ;
+                        sp:modMax -2 ;
+                        sp:modMin 1 ;
+                        sp:subPath <http://www.w3.org/2004/02/skos/core#related> ;
+                      ] ;
+                    sp:subject [
+                        sp:varName "result" ;
+                      ] ;
+                  ]
+                )
+              ) ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:ne ;
+                sp:arg1 [
+                    sp:varName "result" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "concept" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#concept> ;
+      spl:valueType <http://www.w3.org/2004/02/skos/core#Concept> ;
+      rdfs:comment "The concept to get the related concepts of." ;
+    ] ;
+  spin:labelTemplate "All related concepts of {?concept}" ;
+  rdfs:comment "Traverses skos:related links in both directions returning concepts that are related to the ?concept argument." ;
+  rdfs:label "All related concepts (including transitive closure)" ;
+  rdfs:subClassOf skostemplate:IntegratedTemplates ;
+.
+skostemplate:AllSKOSLabels
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:path [
+                rdf:type sp:AltPath ;
+                sp:path1 <http://www.w3.org/2004/02/skos/core#altLabel> ;
+                sp:path2 <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+              ] ;
+            sp:subject [
+                sp:varName "concept" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:or ;
+                sp:arg1 [
+                    rdf:type sp:not ;
+                    sp:arg1 [
+                        rdf:type sp:bound ;
+                        sp:arg1 [
+                            sp:varName "lang" ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    rdf:type sp:eq ;
+                    sp:arg1 [
+                        rdf:type sp:lang ;
+                        sp:arg1 [
+                            sp:varName "label" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "lang" ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate <http://spinrdf.org/arg#lang> ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The language tag.  This can be any string, but IETF language tags, RFC 5646, are recommended." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#concept> ;
+      spl:valueType <http://www.w3.org/2004/02/skos/core#Concept> ;
+      rdfs:comment "The concept to get the label of." ;
+    ] ;
+  spin:labelTemplate "Preferred label of {?concept}" ;
+  rdfs:comment "Gets the preferred and alternative labels of a SKOS concept.  If a language tag is specified, only the labels of the language tag are returned.  Otherwise, all labels are returned." ;
+  rdfs:label "All SKOS labels" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+skostemplate:AltLabels
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate <http://www.w3.org/2004/02/skos/core#altLabel> ;
+            sp:subject [
+                sp:varName "concept" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:or ;
+                sp:arg1 [
+                    rdf:type sp:not ;
+                    sp:arg1 [
+                        rdf:type sp:bound ;
+                        sp:arg1 [
+                            sp:varName "lang" ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    rdf:type sp:eq ;
+                    sp:arg1 [
+                        rdf:type sp:lang ;
+                        sp:arg1 [
+                            sp:varName "label" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "lang" ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate <http://spinrdf.org/arg#lang> ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The language tag.  This can be any string, but IETF language tags, RFC 5646, are recommended." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#concept> ;
+      spl:valueType <http://www.w3.org/2004/02/skos/core#Concept> ;
+      rdfs:comment "The concept to get the labels of." ;
+    ] ;
+  spin:labelTemplate "Alternative labels of {?concept}" ;
+  rdfs:comment "Gets the alternative labels of a SKOS concept.  If a language tag is specified, only the labels of the language tag are returned.  Otherwise, all labels are returned." ;
+  rdfs:label "Alternative labels" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+skostemplate:BroaderAndRelatedConcepts
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:distinct "true"^^xsd:boolean ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:Union ;
+            sp:elements (
+                (
+                  [
+                    sp:object [
+                        sp:varName "result" ;
+                      ] ;
+                    sp:predicate <http://www.w3.org/2004/02/skos/core#broader> ;
+                    sp:subject [
+                        sp:varName "concept" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    sp:object [
+                        sp:varName "result" ;
+                      ] ;
+                    sp:predicate <http://www.w3.org/2004/02/skos/core#related> ;
+                    sp:subject [
+                        sp:varName "concept" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    sp:object [
+                        sp:varName "concept" ;
+                      ] ;
+                    sp:predicate <http://www.w3.org/2004/02/skos/core#related> ;
+                    sp:subject [
+                        sp:varName "result" ;
+                      ] ;
+                  ]
+                )
+              ) ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#concept> ;
+      spl:valueType <http://www.w3.org/2004/02/skos/core#Concept> ;
+      rdfs:comment "The concept to get the broader and related concepts of." ;
+    ] ;
+  spin:labelTemplate "Broader and related concepts of {?concept}" ;
+  rdfs:comment "Gets concepts that are either broader or related (using skos:related) to the ?concept variable. Relationships are searched for in both directions." ;
+  rdfs:label "Broader concepts (immediate parents) and immediately related concepts." ;
+  rdfs:subClassOf skostemplate:IntegratedTemplates ;
+.
+skostemplate:BroaderConcepts
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "result" ;
+              ] ;
+            sp:predicate <http://www.w3.org/2004/02/skos/core#broader> ;
+            sp:subject [
+                sp:varName "narrowerConcept" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#narrowerConcept> ;
+      spl:valueType <http://www.w3.org/2004/02/skos/core#Concept> ;
+    ] ;
+  spin:labelTemplate "Broader concepts of {?narrowerConcept}" ;
+  rdfs:comment "Gets concepts that are broader than the provided ?narrowerConcept." ;
+  rdfs:label "Broader concepts (immediate parents)" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+skostemplate:ConceptsAndBroaderConceptsForResource
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:distinct "true"^^xsd:boolean ;
+      sp:resultVariables (
+          [
+            sp:varName "concept" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "broaderConcepts" ;
+              ] ;
+            sp:predicate [
+                sp:varName "property" ;
+              ] ;
+            sp:subject [
+                sp:varName "resource" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "concept" ;
+              ] ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath <http://www.w3.org/2004/02/skos/core#broader> ;
+              ] ;
+            sp:subject [
+                sp:varName "broaderConcepts" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "concept" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:TriplePath ;
+            sp:object <http://www.w3.org/2004/02/skos/core#Concept> ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "type" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#resource> ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The URI of the content object." ;
+    ] ;
+  spin:labelTemplate "Vocabulary concept and broader concepts for {?resource}" ;
+  rdfs:comment "Given a URI for a resource, return all vocabulary concepts, and all concepts broader than the matched concepts, referenced by the resource." ;
+  rdfs:label "Concepts and broader concepts for resource" ;
+  rdfs:subClassOf skostemplate:IntegratedTemplates ;
+.
+skostemplate:ConceptsAndBroaderConceptsForResourceAndProperty
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:distinct "true"^^xsd:boolean ;
+      sp:resultVariables (
+          [
+            sp:varName "concept" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "broaderConcepts" ;
+              ] ;
+            sp:predicate [
+                sp:varName "property" ;
+              ] ;
+            sp:subject [
+                sp:varName "resource" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "concept" ;
+              ] ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath <http://www.w3.org/2004/02/skos/core#broader> ;
+              ] ;
+            sp:subject [
+                sp:varName "broaderConcepts" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "concept" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:TriplePath ;
+            sp:object <http://www.w3.org/2004/02/skos/core#Concept> ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "type" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate <http://spinrdf.org/arg#property> ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#resource> ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The URI of the content object." ;
+    ] ;
+  spin:labelTemplate "Concepts and broader concepts for {?resource}/{?property} pair" ;
+  rdfs:comment "Given a resource and a property, return all vocabulary concepts, and all concepts broader than the matched concepts, referenced by the resource/property pair." ;
+  rdfs:label "Concepts and broader concepts for resource and property" ;
+  rdfs:subClassOf skostemplate:IntegratedTemplates ;
+.
+skostemplate:ConceptsForResource
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:distinct "true"^^xsd:boolean ;
+      sp:resultVariables (
+          [
+            sp:varName "concept" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "concept" ;
+              ] ;
+            sp:predicate [
+                sp:varName "property" ;
+              ] ;
+            sp:subject [
+                sp:varName "resource" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "concept" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:TriplePath ;
+            sp:object <http://www.w3.org/2004/02/skos/core#Concept> ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "type" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#resource> ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The URI of the content object." ;
+    ] ;
+  spin:labelTemplate "Concepts for {?resource}" ;
+  rdfs:comment "Given a URI for a resource, return all vocabulary concepts referenced by the resource via any property." ;
+  rdfs:label "Concepts for resource" ;
+  rdfs:subClassOf skostemplate:IntegratedTemplates ;
+.
+skostemplate:ConceptsForResourceAndProperty
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:distinct "true"^^xsd:boolean ;
+      sp:resultVariables (
+          [
+            sp:varName "concept" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "concept" ;
+              ] ;
+            sp:predicate [
+                sp:varName "property" ;
+              ] ;
+            sp:subject [
+                sp:varName "resource" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:TriplePath ;
+            sp:object <http://www.w3.org/2004/02/skos/core#Concept> ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "type" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "concept" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate <http://spinrdf.org/arg#property> ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#resource> ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The URI of the content object." ;
+    ] ;
+  spin:labelTemplate "Concepts for {?resource}/{?property}" ;
+  rdfs:comment "Given a URI for a resource and a property, return all vocabulary concepts referenced by the resource/property pair." ;
+  rdfs:label "Concepts for resource and property" ;
+  rdfs:subClassOf skostemplate:IntegratedTemplates ;
+.
+skostemplate:ConceptsWithMultipleParents
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:distinct "true"^^xsd:boolean ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "parent" ;
+              ] ;
+            sp:predicate <http://www.w3.org/2004/02/skos/core#broader> ;
+            sp:subject [
+                sp:varName "result" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "parent2" ;
+              ] ;
+            sp:predicate <http://www.w3.org/2004/02/skos/core#broader> ;
+            sp:subject [
+                sp:varName "result" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:ne ;
+                sp:arg1 [
+                    sp:varName "parent" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "parent2" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "Gets concepts that have multiple skos:broader relationships." ;
+  rdfs:label "Concepts with multiple parents" ;
+  rdfs:subClassOf skostemplate:IntegratedTemplates ;
+.
+skostemplate:ConceptsWithSameLocalName
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type afn:localname ;
+                sp:arg1 [
+                    sp:varName "concept" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "matchName" ;
+              ] ;
+          ]
+          (
+            [
+              rdf:type sp:TriplePath ;
+              sp:object <http://www.w3.org/2004/02/skos/core#Concept> ;
+              sp:path [
+                  rdf:type sp:ModPath ;
+                  sp:modMax -2 ;
+                  sp:modMin 0 ;
+                  sp:subPath rdfs:subClassOf ;
+                ] ;
+              sp:subject [
+                  sp:varName "type" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "type" ;
+                ] ;
+              sp:predicate rdf:type ;
+              sp:subject [
+                  sp:varName "result" ;
+                ] ;
+            ]
+            [
+              rdf:type sp:Filter ;
+              sp:expression [
+                  rdf:type sp:ne ;
+                  sp:arg1 [
+                      sp:varName "concept" ;
+                    ] ;
+                  sp:arg2 [
+                      sp:varName "result" ;
+                    ] ;
+                ] ;
+            ]
+            [
+              rdf:type sp:Filter ;
+              sp:expression [
+                  rdf:type sp:eq ;
+                  sp:arg1 [
+                      rdf:type afn:localname ;
+                      sp:arg1 [
+                          sp:varName "result" ;
+                        ] ;
+                    ] ;
+                  sp:arg2 [
+                      sp:varName "matchName" ;
+                    ] ;
+                ] ;
+            ]
+          )
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#concept> ;
+      spl:valueType <http://www.w3.org/2004/02/skos/core#Concept> ;
+      rdfs:comment "The argument Concept." ;
+    ] ;
+  spin:labelTemplate "Concepts with same local name as {?concept}" ;
+  rdfs:comment "Gets all skos:Concepts that have the same local name as the given ?concept. Usually the local name starts after the # or last / in the URI. Note that this operation may be slow because it needs to traverse and perform string comparison on all concept URIs in the whole graph." ;
+  rdfs:label "Concepts with same local name" ;
+  rdfs:subClassOf skostemplate:IntegratedTemplates ;
+.
+skostemplate:ConceptsWithSynonyms
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:distinct "true"^^xsd:boolean ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:TriplePath ;
+            sp:object <http://www.w3.org/2004/02/skos/core#Concept> ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "type" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "result" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+            sp:subject [
+                sp:varName "result" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+            sp:subject [
+                sp:varName "synonym" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:ne ;
+                sp:arg1 [
+                    sp:varName "result" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "synonym" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "Gets all concepts for which there is at least one other concept with the same skos:prefLabel." ;
+  rdfs:label "Concepts with synonyms" ;
+  rdfs:subClassOf skostemplate:IntegratedTemplates ;
+.
+skostemplate:ConnectedResources
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "result" ;
+              ] ;
+            sp:predicate [
+                sp:varName "property" ;
+              ] ;
+            sp:subject [
+                sp:varName "concept" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#concept> ;
+      spl:valueType <http://www.w3.org/2004/02/skos/core#Concept> ;
+      rdfs:comment "The concept to get the connected resources of." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#property> ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property to follow." ;
+    ] ;
+  spin:labelTemplate "Connected resources of {?concept} via {?property}" ;
+  rdfs:comment "Gets any resource connected to ?concept using ?property as predicate. " ;
+  rdfs:label "Connected resources" ;
+  rdfs:subClassOf skostemplate:IntegratedTemplates ;
+.
+skostemplate:HiddenLabels
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate <http://www.w3.org/2004/02/skos/core#hiddenLabel> ;
+            sp:subject [
+                sp:varName "concept" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:or ;
+                sp:arg1 [
+                    rdf:type sp:not ;
+                    sp:arg1 [
+                        rdf:type sp:bound ;
+                        sp:arg1 [
+                            sp:varName "lang" ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    rdf:type sp:eq ;
+                    sp:arg1 [
+                        rdf:type sp:lang ;
+                        sp:arg1 [
+                            sp:varName "label" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "lang" ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate <http://spinrdf.org/arg#lang> ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The language tag.  This can be any string, but IETF language tags, RFC 5646, are recommended." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#concept> ;
+      spl:valueType <http://www.w3.org/2004/02/skos/core#Concept> ;
+      rdfs:comment "The concept to get the labels of." ;
+    ] ;
+  spin:labelTemplate "Hidden labels of {?concept}" ;
+  rdfs:comment "Gets the hidden labels of a SKOS concept.  If a language tag is specified, only the labels of the language tag are returned.  Otherwise, all labels are returned." ;
+  rdfs:label "Hidden Labels" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+skostemplate:IntegratedTemplates
+  rdf:type spin:SelectTemplate ;
+  rdfs:label "Integrated templates" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+skostemplate:LabelsByProperty
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate [
+                sp:varName "labelProperty" ;
+              ] ;
+            sp:subject [
+                sp:varName "concept" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:or ;
+                sp:arg1 [
+                    rdf:type sp:not ;
+                    sp:arg1 [
+                        rdf:type sp:bound ;
+                        sp:arg1 [
+                            sp:varName "lang" ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    rdf:type sp:eq ;
+                    sp:arg1 [
+                        rdf:type sp:lang ;
+                        sp:arg1 [
+                            sp:varName "label" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "lang" ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:defaultValue <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate <http://spinrdf.org/arg#labelProperty> ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "Values for the property are queried.   Default is skos:prefLabel." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate <http://spinrdf.org/arg#lang> ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The language tag.  This can be any string, but IETF language tags, RFC 5646, are recommended." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#concept> ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The URI of the concept." ;
+    ] ;
+  spin:labelTemplate "Labels of {?concept} using {?labelProperty}" ;
+  rdfs:comment "Gets the labels of the property passed as an argument.  If a language tag is specified, only the  labels of the language tag are returned.  Otherwise, all labels are returned." ;
+  rdfs:label "All labels by property" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+skostemplate:LabelsByPropertyAndSubProperties
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:TriplePath ;
+            sp:object [
+                sp:varName "labelProperty" ;
+              ] ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subPropertyOf ;
+              ] ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate [
+                sp:varName "property" ;
+              ] ;
+            sp:subject [
+                sp:varName "concept" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:or ;
+                sp:arg1 [
+                    rdf:type sp:not ;
+                    sp:arg1 [
+                        rdf:type sp:bound ;
+                        sp:arg1 [
+                            sp:varName "lang" ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    rdf:type sp:eq ;
+                    sp:arg1 [
+                        rdf:type sp:lang ;
+                        sp:arg1 [
+                            sp:varName "label" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "lang" ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:defaultValue <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate <http://spinrdf.org/arg#labelProperty> ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property used as the root property to find labels.  Values for the property and all sub-properties are queried.   Default is skos:prefLabel." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate <http://spinrdf.org/arg#lang> ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The language tag.  This can be any string, but IETF language tags, RFC 5646, are recommended." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#concept> ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The concept to get the labels of." ;
+    ] ;
+  spin:labelTemplate "Labels of {?concept} using {?labelProperty} and its subproperties" ;
+  rdfs:comment "Gets the labels of the property passed as an argument, as well as all sub-properties of the propert.  If a language tag is specified, only the  labels of the language tag are returned.  Otherwise, all labels are returned.The property used as the root property to find labels." ;
+  rdfs:label "Labels by property and its subproperties" ;
+  rdfs:subClassOf skostemplate:IntegratedTemplates ;
+.
+skostemplate:NarrowerAndRelatedConcepts
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:distinct "true"^^xsd:boolean ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:Union ;
+            sp:elements (
+                (
+                  [
+                    sp:object [
+                        sp:varName "concept" ;
+                      ] ;
+                    sp:predicate <http://www.w3.org/2004/02/skos/core#broader> ;
+                    sp:subject [
+                        sp:varName "result" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    sp:object [
+                        sp:varName "result" ;
+                      ] ;
+                    sp:predicate <http://www.w3.org/2004/02/skos/core#related> ;
+                    sp:subject [
+                        sp:varName "concept" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    sp:object [
+                        sp:varName "concept" ;
+                      ] ;
+                    sp:predicate <http://www.w3.org/2004/02/skos/core#related> ;
+                    sp:subject [
+                        sp:varName "result" ;
+                      ] ;
+                  ]
+                )
+              ) ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#concept> ;
+      spl:valueType <http://www.w3.org/2004/02/skos/core#Concept> ;
+      rdfs:comment "The concept to get the narrower and related of." ;
+    ] ;
+  spin:labelTemplate "Narrower and related concepts of {?concept}" ;
+  rdfs:comment "Relationships are searched for in both directions. This function does not use skos:narrower. Instead it looks for incoming skos:broader links. " ;
+  rdfs:label "Narrower concepts (immediate children) and immediately related concepts. " ;
+  rdfs:subClassOf skostemplate:IntegratedTemplates ;
+.
+skostemplate:NarrowerConcepts
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "narrowerConcept" ;
+              ] ;
+            sp:predicate <http://www.w3.org/2004/02/skos/core#broader> ;
+            sp:subject [
+                sp:varName "result" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#narrowerConcept> ;
+      spl:valueType <http://www.w3.org/2004/02/skos/core#Concept> ;
+      rdfs:comment "The concept to get the narrower concepts of." ;
+    ] ;
+  spin:labelTemplate "Narrower concepts of {?broaderConcept}" ;
+  rdfs:comment "Looks for any incoming skos:broader links that are present for ?broaderConcept. It  is not using skos:narrower predicate. " ;
+  rdfs:label "Narrower concepts (immediate parents)" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+skostemplate:OrphanRootConcepts
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:distinct "true"^^xsd:boolean ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:TriplePath ;
+            sp:object <http://www.w3.org/2004/02/skos/core#Concept> ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "type" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "result" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:notExists ;
+                sp:elements (
+                    [
+                      sp:object [
+                          sp:varName "parent" ;
+                        ] ;
+                      sp:predicate <http://www.w3.org/2004/02/skos/core#broader> ;
+                      sp:subject [
+                          sp:varName "result" ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:notExists ;
+                sp:elements (
+                    [
+                      sp:object [
+                          sp:varName "result" ;
+                        ] ;
+                      sp:predicate <http://www.w3.org/2004/02/skos/core#hasTopConcept> ;
+                      sp:subject [
+                          sp:varName "scheme" ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "Gets all concepts that have no parents and are not declared as a top concept of some concept scheme." ;
+  rdfs:label "Orphan root concepts" ;
+  rdfs:subClassOf skostemplate:IntegratedTemplates ;
+.
+skostemplate:PrefLabels
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+            sp:subject [
+                sp:varName "concept" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:or ;
+                sp:arg1 [
+                    rdf:type sp:not ;
+                    sp:arg1 [
+                        rdf:type sp:bound ;
+                        sp:arg1 [
+                            sp:varName "lang" ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    rdf:type sp:eq ;
+                    sp:arg1 [
+                        rdf:type sp:lang ;
+                        sp:arg1 [
+                            sp:varName "label" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        sp:varName "lang" ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate <http://spinrdf.org/arg#lang> ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The language tag.  This can be any string, but IETF language tags, RFC 5646, are recommended." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#concept> ;
+      spl:valueType <http://www.w3.org/2004/02/skos/core#Concept> ;
+      rdfs:comment "The URI of the concept." ;
+    ] ;
+  spin:labelTemplate "Preferred labels of {?concept}" ;
+  rdfs:comment "Gets the preferred label of a SKOS concept.  If a language tag is specified, only the preferred label of the language tag is returned.  Otherwise, all preferred labels are returned." ;
+  rdfs:label "Preferred labels" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+skostemplate:RelatedConcepts
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:distinct "true"^^xsd:boolean ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:Union ;
+            sp:elements (
+                (
+                  [
+                    sp:object [
+                        sp:varName "result" ;
+                      ] ;
+                    sp:predicate <http://www.w3.org/2004/02/skos/core#related> ;
+                    sp:subject [
+                        sp:varName "concept" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    sp:object [
+                        sp:varName "concept" ;
+                      ] ;
+                    sp:predicate <http://www.w3.org/2004/02/skos/core#related> ;
+                    sp:subject [
+                        sp:varName "result" ;
+                      ] ;
+                  ]
+                )
+              ) ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#concept> ;
+      spl:valueType <http://www.w3.org/2004/02/skos/core#Concept> ;
+      rdfs:comment "The concept to get the related of." ;
+    ] ;
+  rdfs:comment "Gets all incoming and outgoing skos:related connections of the ?concept. " ;
+  rdfs:label "Related concepts (immediate links)" ;
+  rdfs:subClassOf skostemplate:IntegratedTemplates ;
+.
+skostemplate:RootConcepts
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:distinct "true"^^xsd:boolean ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:TriplePath ;
+            sp:object <http://www.w3.org/2004/02/skos/core#Concept> ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "type" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "result" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:notExists ;
+                sp:elements (
+                    [
+                      sp:object [
+                          sp:varName "parent" ;
+                        ] ;
+                      sp:predicate <http://www.w3.org/2004/02/skos/core#broader> ;
+                      sp:subject [
+                          sp:varName "result" ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "Gets all concepts that have no parents." ;
+  rdfs:label "Root concepts" ;
+  rdfs:subClassOf skostemplate:IntegratedTemplates ;
+.
+skostemplate:SynonymsOfConcept
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:distinct "true"^^xsd:boolean ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:TriplePath ;
+            sp:object rdfs:label ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subPropertyOf ;
+              ] ;
+            sp:subject [
+                sp:varName "labelProperty" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate [
+                sp:varName "labelProperty" ;
+              ] ;
+            sp:subject [
+                sp:varName "concept" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate [
+                sp:varName "labelProperty" ;
+              ] ;
+            sp:subject [
+                sp:varName "result" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:ne ;
+                sp:arg1 [
+                    sp:varName "concept" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "result" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#concept> ;
+      spl:valueType <http://www.w3.org/2004/02/skos/core#Concept> ;
+      rdfs:comment "The concept to get the synonyms of." ;
+    ] ;
+  spin:labelTemplate "Synonyms of {?concept}" ;
+  rdfs:comment "For the purpose of this template, synonym is a resource which label matches any of the labels of the given ?concept. " ;
+  rdfs:label "Synonyms of a concept provided as an argument" ;
+  rdfs:subClassOf skostemplate:IntegratedTemplates ;
+.
+skostemplate:SynonymsOfString
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:distinct "true"^^xsd:boolean ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:TriplePath ;
+            sp:object rdfs:label ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subPropertyOf ;
+              ] ;
+            sp:subject [
+                sp:varName "labelProperty" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "string" ;
+              ] ;
+            sp:predicate [
+                sp:varName "labelProperty" ;
+              ] ;
+            sp:subject [
+                sp:varName "result" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#string> ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The string to match." ;
+    ] ;
+  spin:labelTemplate "Synonyms of string \"{?string}\"" ;
+  rdfs:comment "For the purpose of this template, synonym is a resource which label matches exactly the given ?string. " ;
+  rdfs:label "Synonyms for a text string provided as an argument" ;
+  rdfs:subClassOf skostemplate:IntegratedTemplates ;
+.
+skostemplate:TopConcepts
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:distinct "true"^^xsd:boolean ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "result" ;
+              ] ;
+            sp:predicate <http://www.w3.org/2004/02/skos/core#hasTopConcept> ;
+            sp:subject [
+                sp:varName "scheme" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "Gets all top concepts under a specific conceptScheme" ;
+  rdfs:label "Top concepts" ;
+  rdfs:subClassOf skostemplate:IntegratedTemplates ;
+.

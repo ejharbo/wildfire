@@ -1,0 +1,206 @@
+# baseURI: http://edg.topbraidlive.org/1.0/transform/data-assets-to-shapes
+# imports: http://edg.topbraid.solutions/1.0/schema/datamodels
+
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+edg:DatabaseColumn2PropertyShape
+  rdf:type sh:NodeShape ;
+  rdfs:label "Database column to property shape" ;
+  sh:rule [
+      rdf:type sh:TripleRule ;
+      rdfs:comment "Copy edg:length of physical datatype into sh:maxLength." ;
+      sh:object [
+          sh:path (
+              edg:physicalDatatype
+              edg:length
+            ) ;
+        ] ;
+      sh:predicate sh:maxLength ;
+      sh:subject sh:this ;
+    ] ;
+  sh:rule [
+      rdf:type sh:TripleRule ;
+      rdfs:comment "Copy edg:maxLength into sh:maxLength." ;
+      sh:object [
+          sh:path edg:maxLength ;
+        ] ;
+      sh:predicate sh:maxLength ;
+      sh:subject sh:this ;
+    ] ;
+  sh:rule [
+      rdf:type sh:TripleRule ;
+      rdfs:comment "Copy edg:maxValue into sh:maxInclusive." ;
+      sh:object [
+          sh:path edg:maxValue ;
+        ] ;
+      sh:predicate sh:maxInclusive ;
+      sh:subject sh:this ;
+    ] ;
+  sh:rule [
+      rdf:type sh:TripleRule ;
+      rdfs:comment "Copy edg:minLength into sh:minLength." ;
+      sh:object [
+          sh:path edg:minLength ;
+        ] ;
+      sh:predicate sh:minLength ;
+      sh:subject sh:this ;
+    ] ;
+  sh:rule [
+      rdf:type sh:TripleRule ;
+      rdfs:comment "Copy edg:minValue into sh:minInclusive." ;
+      sh:object [
+          sh:path edg:minValue ;
+        ] ;
+      sh:predicate sh:minInclusive ;
+      sh:subject sh:this ;
+    ] ;
+  sh:rule [
+      rdf:type sh:TripleRule ;
+      rdfs:comment "Derive sh:datatype from physical datatype, where possible." ;
+      sh:object [
+          edg:datatypeToRDF (
+              [
+                sh:path edg:physicalDatatype ;
+              ]
+            ) ;
+        ] ;
+      sh:predicate sh:datatype ;
+      sh:subject sh:this ;
+    ] ;
+  sh:rule [
+      rdf:type sh:TripleRule ;
+      rdfs:comment "Set sh:maxCount to 1." ;
+      sh:object 1 ;
+      sh:predicate sh:maxCount ;
+      sh:subject sh:this ;
+    ] ;
+  sh:rule [
+      rdf:type sh:TripleRule ;
+      rdfs:comment "Set sh:minCount to 1 if edg:isNullable is not true." ;
+      sh:condition [
+          sh:not [
+              sh:property [
+                  sh:path edg:isNullable ;
+                  sh:hasValue "true"^^xsd:boolean ;
+                ] ;
+            ] ;
+        ] ;
+      sh:object 1 ;
+      sh:predicate sh:minCount ;
+      sh:subject sh:this ;
+    ] ;
+  sh:rule [
+      rdf:type sh:TripleRule ;
+      rdfs:comment "Set sh:path of this property shape to itself." ;
+      sh:object sh:this ;
+      sh:predicate sh:path ;
+      sh:subject sh:this ;
+    ] ;
+  sh:rule [
+      rdf:type sh:TripleRule ;
+      rdfs:comment "Set type sh:PropertyShape." ;
+      sh:object sh:PropertyShape ;
+      sh:predicate rdf:type ;
+      sh:subject sh:this ;
+    ] ;
+  sh:targetClass edg:DatabaseColumn ;
+.
+edg:DatabaseTable2NodeShape
+  rdf:type sh:NodeShape ;
+  rdfs:label "Database table to node shape" ;
+  sh:rule [
+      rdf:type sh:TripleRule ;
+      rdfs:comment "Add sh:NodeShape triple." ;
+      sh:object sh:NodeShape ;
+      sh:predicate rdf:type ;
+      sh:subject sh:this ;
+    ] ;
+  sh:rule [
+      rdf:type sh:TripleRule ;
+      rdfs:comment "Add sh:property link to property shapes derived from columns." ;
+      sh:object [
+          sh:path [
+              sh:inversePath edg:columnOf ;
+            ] ;
+        ] ;
+      sh:predicate sh:property ;
+      sh:subject sh:this ;
+    ] ;
+  sh:targetClass edg:DatabaseTable ;
+.
+edg:datatypeToRDF
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment """For a given edg:Datatype this attempts to find a matching RDF datatype (such as xsd:string, xsd:integer).
+
+NOT CORRECTLY IMPLEMENTED YET, see TBS-797.""" ;
+  rdfs:label "datatype to RDF" ;
+  sh:parameter [
+      sh:path edg:datatype ;
+      sh:class edg:Datatype ;
+      sh:description "The EDG datatype object." ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:prefixes <http://edg.topbraid.solutions/1.0/schema/core> ;
+  sh:returnType rdfs:Datatype ;
+  sh:select """SELECT ?result
+WHERE {
+	$datatype rdfs:label ?label .
+	BIND (spif:lowerCase(?label) AS ?str) .
+	BIND (IF(CONTAINS(?str, \"char\"), xsd:string, IF(CONTAINS(?str, \"int\"), xsd:integer, ?none)) AS ?result) .
+ }""" ;
+.
+edg:isIncompatibleColumnShape
+  rdf:type sh:SPARQLFunction ;
+  rdfs:comment "Checks whether a given shape $columnShape is \"compatible\" with a given shape $termShape. A column shape is compatible if it does not contain any constraint that indicates that its values cannot conform to the term shape. For example, if the term shape has sh:datatype xsd:integer but the column shape has sh:datatype xsd:string then its values cannot match." ;
+  rdfs:label "is incompatible column shape" ;
+  sh:ask """ASK {
+    {
+		# Columns must have identical sh:datatype, or one of them has to have none
+		$columnShape sh:datatype ?columnType .
+		$termShape sh:datatype ?termType .
+		FILTER (?columnType != ?termType) 
+	}
+	UNION
+	{
+		# The sh:minLength of the term shape cannot be > minLength of column shape
+		$termShape sh:minLength ?termLength .
+		$columnShape sh:minLength ?columnLength . 
+		FILTER (?termLength > ?columnLength)
+	}
+	UNION
+	{
+		# The sh:maxLength of the term shape cannot be < maxLength of column shape
+		$termShape sh:maxLength ?termLength .
+		$columnShape sh:maxLength ?columnLength . 
+		FILTER (?termLength < ?columnLength)
+	}
+}""" ;
+  sh:parameter [
+      sh:path edg:columnShape ;
+      sh:description "The shape derived from the EDG column." ;
+      sh:name "column shape" ;
+      sh:order 0 ;
+    ] ;
+  sh:parameter [
+      sh:path edg:termShape ;
+      sh:description "The shape to compare with." ;
+      sh:name "term shape" ;
+      sh:order 1 ;
+    ] ;
+  sh:prefixes <http://edg.topbraidlive.org/1.0/transform/data-assets-to-shapes> ;
+  sh:returnType xsd:boolean ;
+.
+<http://edg.topbraidlive.org/1.0/transform/data-assets-to-shapes>
+  rdf:type owl:Ontology ;
+  rdfs:comment "Contains shapes that can be used to generate SHACL shape definitions from EDG database tables and columns." ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+.

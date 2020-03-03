@@ -1,0 +1,310 @@
+# baseURI: http://edg.topbraid.solutions/1.0/datatypes/sql
+# imports: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://edg.topbraid.solutions/1.0/schema/datatypes
+# imports: http://qudt.org/2.0/refdata/scalar-datatypes
+# imports: http://qudt.org/2.0/schema/scalar-datatypes
+
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/datatypes/sql>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/datatypes/sql/GMD_sql> ;
+  rdfs:label "SQL Datatypes" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/datatypes> ;
+  owl:imports <http://qudt.org/2.0/refdata/scalar-datatypes> ;
+  owl:imports <http://qudt.org/2.0/schema/scalar-datatypes> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+<http://edg.topbraid.solutions/datatypes/sql/GMD_sql>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:DatatypesGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/datatypes/sql> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+edg:DTFT_SQL
+  a edg:DatatypeFamilyType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/sql> ;
+  rdfs:label "SQL Datatype Family Type" ;
+.
+edg:SQLNumericDatatype
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/sql> ;
+  rdfs:label "SQL Numeric Datatype" ;
+  rdfs:subClassOf edg:SQLdatatype ;
+.
+edg:SQL_ARRAY
+  a edg:SQLdatatype ;
+  edg:belongsTo edg:DTFT_SQL ;
+  edg:name "ARRAY" ;
+  edg:referenceLink "http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_datatypes_general.asp.html"^^xsd:anyURI ;
+  rdfs:comment "A set-length and ordered collection of elements" ;
+  rdfs:label "ARRAY (SQL)" ;
+.
+edg:SQL_BIGINT
+  a edg:SQLintegerDatatype ;
+  edg:belongsTo edg:DTFT_SQL ;
+  edg:name "BIGINT" ;
+  edg:normativeDatatype <http://qudt.org/schema/qudt/SIGNED-BIG-INTEGER> ;
+  edg:referenceLink "http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_datatypes_general.asp.html"^^xsd:anyURI ;
+  edg:xsdDataType xsd:integer ;
+  rdfs:comment "Integer numerical (no decimal). Precision 19" ;
+  rdfs:label "BIGINT (JDBC)" ;
+.
+edg:SQL_BINARY
+  a edg:SQLstringDatatype ;
+  edg:belongsTo edg:DTFT_SQL ;
+  edg:name "BINARY(n) (SQL)" ;
+  edg:normativeDatatype <http://qudt.org/schema/qudt/UTF8-STRING> ;
+  edg:referenceLink "http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_datatypes_general.asp.html"^^xsd:anyURI ;
+  edg:xsdDataType xsd:hexBinary ;
+  rdfs:comment "Binary string. Fixed-length n" ;
+  rdfs:label "BINARY(n) (SQL)" ;
+.
+edg:SQL_BOOLEAN
+  a edg:SQLdatatype ;
+  edg:belongsTo edg:DTFT_SQL ;
+  edg:name "BOOLEAN" ;
+  edg:normativeDatatype <http://qudt.org/schema/qudt/BOOLEAN> ;
+  edg:referenceLink "http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_datatypes_general.asp.html"^^xsd:anyURI ;
+  edg:xsdDataType xsd:boolean ;
+  rdfs:comment "Stores TRUE or FALSE values" ;
+  rdfs:label "BOOLEAN (SQL)" ;
+.
+edg:SQL_CHARACTER
+  a edg:SQLstringDatatype ;
+  edg:belongsTo edg:DTFT_SQL ;
+  edg:name "CHARACTER(n)" ;
+  edg:normativeDatatype <http://qudt.org/schema/qudt/STRING> ;
+  edg:referenceLink "http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_datatypes_general.asp.html"^^xsd:anyURI ;
+  edg:xsdDataType xsd:string ;
+  rdfs:comment "Character string. Fixed-length n" ;
+  rdfs:label "CHARACTER(n) (JDBC)" ;
+.
+edg:SQL_DATE
+  a edg:SQLdateDatatype ;
+  edg:belongsTo edg:DTFT_SQL ;
+  edg:name "DATE" ;
+  edg:normativeDatatype <http://qudt.org/schema/qudt/DATE> ;
+  edg:referenceLink "http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_datatypes_general.asp.html"^^xsd:anyURI ;
+  edg:xsdDataType xsd:date ;
+  rdfs:comment "Stores year, month, and day values" ;
+  rdfs:label "DATE (SQL)" ;
+.
+edg:SQL_DECIMAL
+  a edg:SQLNumericDatatype ;
+  edg:belongsTo edg:DTFT_SQL ;
+  edg:name "DECIMAL" ;
+  edg:normativeDatatype <http://qudt.org/schema/qudt/DECIMAL> ;
+  edg:referenceLink "http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_datatypes_general.asp.html"^^xsd:anyURI ;
+  edg:xsdDataType xsd:decimal ;
+  rdfs:comment "Exact numerical, precision p, scale s, specified as DECIMAL(p,s). Example: decimal(5,2) is a number that has 3 digits before the decimal and 2 digits after the decimal" ;
+  rdfs:label "DECIMAL (SQL)" ;
+  rdfs:seeAlso edg:SQL_NUMERIC ;
+.
+edg:SQL_DOUBLE-PRECISION
+  a edg:SQLrealDatatype ;
+  edg:belongsTo edg:DTFT_SQL ;
+  edg:name "DOUBLE PRECISION" ;
+  edg:normativeDatatype <http://qudt.org/schema/qudt/FLOAT-DP> ;
+  edg:referenceLink "http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_datatypes_general.asp.html"^^xsd:anyURI ;
+  edg:xsdDataType xsd:double ;
+  rdfs:comment "Approximate numerical, mantissa precision 16" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/sql> ;
+  rdfs:label "DOUBLE PRECISION" ;
+.
+edg:SQL_FLOAT
+  a edg:SQLrealDatatype ;
+  edg:belongsTo edg:DTFT_SQL ;
+  edg:name "FLOAT" ;
+  edg:normativeDatatype <http://qudt.org/schema/qudt/FLOAT-SP> ;
+  edg:referenceLink "http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_datatypes_general.asp.html"^^xsd:anyURI ;
+  edg:xsdDataType xsd:float ;
+  rdfs:comment "Approximate numerical. A floating number in base 10 exponential notation. The size argument for this type consists of a single number specifying the minimum precision" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/sql> ;
+  rdfs:label "FLOAT (SQL)" ;
+.
+edg:SQL_INTEGER
+  a edg:SQLintegerDatatype ;
+  edg:belongsTo edg:DTFT_SQL ;
+  edg:name "INTEGER" ;
+  edg:normativeDatatype <http://qudt.org/schema/qudt/SIGNED-LONG-INTEGER> ;
+  edg:referenceLink "http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_datatypes_general.asp.html"^^xsd:anyURI ;
+  edg:xsdDataType xsd:integer ;
+  rdfs:comment "Integer numerical (no decimal). Precision 10 or given precision" ;
+  rdfs:label "INTEGER (SQL)" ;
+.
+edg:SQL_INTERVAL
+  a edg:SQLstructuredDatatype ;
+  edg:belongsTo edg:DTFT_SQL ;
+  edg:name "INTERVAL" ;
+  edg:referenceLink "http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_datatypes_general.asp.html"^^xsd:anyURI ;
+  rdfs:comment "Composed of a number of integer fields, representing a period of time, depending on the type of interval" ;
+  rdfs:label "INTERVAL (SQL)" ;
+.
+edg:SQL_MULTISET
+  a edg:SQLstructuredDatatype ;
+  edg:belongsTo edg:DTFT_SQL ;
+  edg:name "MULTISET" ;
+  edg:referenceLink "http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_datatypes_general.asp.html"^^xsd:anyURI ;
+  rdfs:comment "A variable-length and unordered collection of elements" ;
+  rdfs:label "MULTISET (SQL)" ;
+.
+edg:SQL_NUMERIC
+  a edg:SQLNumericDatatype ;
+  edg:belongsTo edg:DTFT_SQL ;
+  edg:name "NUMERIC (SQL)" ;
+  edg:referenceLink "http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_datatypes_general.asp.html"^^xsd:anyURI ;
+  edg:xsdDataType xsd:decimal ;
+  rdfs:comment "Exact numerical, precision p, scale s. This is specifed as NUMERIC(p,s) as is  DECIMAL." ;
+  rdfs:label "NUMERIC (SQL)" ;
+  rdfs:seeAlso edg:SQL_DECIMAL ;
+.
+edg:SQL_REAL
+  a edg:SQLrealDatatype ;
+  edg:belongsTo edg:DTFT_SQL ;
+  edg:name "REAL" ;
+  edg:referenceLink "http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_datatypes_general.asp.html"^^xsd:anyURI ;
+  edg:xsdDataType xsd:float ;
+  rdfs:comment "Approximate numerical, mantissa precision 7" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/sql> ;
+  rdfs:label "REAL (SQL)" ;
+.
+edg:SQL_SMALLINT
+  a edg:SQLintegerDatatype ;
+  edg:belongsTo edg:DTFT_SQL ;
+  edg:name "SMALLINT (SQL)" ;
+  edg:normativeDatatype <http://qudt.org/schema/qudt/SIGNED-INTEGER> ;
+  edg:referenceLink "http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_datatypes_general.asp.html"^^xsd:anyURI ;
+  edg:xsdDataType xsd:integer ;
+  rdfs:comment "Integer numerical (no decimal). Precision 5" ;
+  rdfs:label "SMALLINT" ;
+.
+edg:SQL_TIME
+  a edg:SQLtimeDatatype ;
+  edg:belongsTo edg:DTFT_SQL ;
+  edg:name "TIME" ;
+  edg:normativeDatatype <http://qudt.org/schema/qudt/TIME> ;
+  edg:referenceLink "http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_datatypes_general.asp.html"^^xsd:anyURI ;
+  edg:xsdDataType xsd:time ;
+  rdfs:comment "Stores hour, minute, and second values" ;
+  rdfs:label "TIME (SQL)" ;
+.
+edg:SQL_TIMESTAMP
+  a edg:SQLtimeDatatype ;
+  edg:belongsTo edg:DTFT_SQL ;
+  edg:name "TIMESTAMP" ;
+  edg:normativeDatatype <http://qudt.org/schema/qudt/UTC-DATETIME> ;
+  edg:referenceLink "http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_datatypes_general.asp.html"^^xsd:anyURI ;
+  edg:xsdDataType xsd:dateTime ;
+  rdfs:comment "Stores year, month, day, hour, minute, and second values" ;
+  rdfs:label "TIMESTAMP (SQL)" ;
+.
+edg:SQL_VARBINARY
+  a edg:SQLstringDatatype ;
+  edg:belongsTo edg:DTFT_SQL ;
+  edg:name "VARBINARY" ;
+  edg:referenceLink "http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_datatypes_general.asp.html"^^xsd:anyURI ;
+  edg:xsdDataType xsd:base64Binary ;
+  rdfs:comment "Binary string. Variable length. Maximum length n, specified as VARBINARY(n)" ;
+  rdfs:label "VARBINARY (SQL)" ;
+.
+edg:SQL_VARCHAR
+  a edg:SQLstringDatatype ;
+  edg:belongsTo edg:DTFT_SQL ;
+  edg:name "VARCHAR" ;
+  edg:normativeDatatype <http://qudt.org/schema/qudt/STRING> ;
+  edg:referenceLink "http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_datatypes_general.asp.html"^^xsd:anyURI ;
+  edg:xsdDataType xsd:string ;
+  rdfs:comment "Character string. Variable length. Maximum length n, specified as VARCHAR(n)." ;
+  rdfs:label "VARCHAR(n) (SQL)" ;
+.
+edg:SQL_XML
+  a edg:SQLstructuredDatatype ;
+  edg:belongsTo edg:DTFT_SQL ;
+  edg:name "XML" ;
+  edg:referenceLink "http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_datatypes_general.asp.html"^^xsd:anyURI ;
+  rdfs:comment "Stores XML data" ;
+  rdfs:label "XML (SQL)" ;
+.
+edg:SQLdatatype
+  a owl:Class ;
+  rdfs:subClassOf edg:PhysicalDatatype ;
+.
+edg:SQLdateDatatype
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/sql> ;
+  rdfs:label "SQL Date Datatype" ;
+  rdfs:subClassOf edg:SQLdatatype ;
+.
+edg:SQLintegerDatatype
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/sql> ;
+  rdfs:label "SQL Integer Datatype" ;
+  rdfs:subClassOf edg:SQLNumericDatatype ;
+.
+edg:SQLrealDatatype
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/sql> ;
+  rdfs:label "SQL Real Datatype" ;
+  rdfs:subClassOf edg:SQLNumericDatatype ;
+.
+edg:SQLstringDatatype
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/sql> ;
+  rdfs:label "SQL String Datatype" ;
+  rdfs:subClassOf edg:SQLdatatype ;
+.
+edg:SQLstructuredDatatype
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/sql> ;
+  rdfs:label "SQL Structured Datatype" ;
+  rdfs:subClassOf edg:SQLdatatype ;
+.
+edg:SQLtimeDatatype
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/datatypes/sql> ;
+  rdfs:label "SQL Time Datatype" ;
+  rdfs:subClassOf edg:SQLdatatype ;
+.
+dcterms:description
+  a rdf:Property ;
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "description" ;
+  rdfs:range xsd:string ;
+.
+dcterms:source
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "source" ;
+  rdfs:range xsd:anyURI ;
+.

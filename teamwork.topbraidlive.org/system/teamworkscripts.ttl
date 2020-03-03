@@ -1,0 +1,57 @@
+# baseURI: http://topbraid.org/teamworkscripts
+# imports: http://topbraid.org/sparqlmotionfunctions
+# imports: http://topbraid.org/sparqlmotionlib-tb
+# imports: http://topbraid.org/teamwork
+# prefix: teamworkscripts
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://spinrdf.org/arg#file>
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://topbraid.org/teamworkscripts>
+  rdf:type owl:Ontology ;
+  rdfs:comment """A small vocabulary that can be used to annotate SPARQLMotion scripts so that they can be used in the \"Import File using Script\" feature with selected asset collections. The user interface of such script-based importers asks for a file to be uploaded and then uses a script created by a SPARQLMotion expert to produce RDF triples as output. These RDF triples then are added to the currently open production copy or working copy. The uploaded file may be of any text-based format including comma-separated values, JSON or XML, but may also be a binary file assuming teamworkscripts:fileUpload has been set to true (see below).
+
+To get started, create a SPARQLMotion file (with .sms.ttl ending) and import this teamworkscripts.ttl namespace into it. The file must define one sm:Function that takes exactly one argument of type string. The name of this argument is arbitrary. When called, the argument will by default have the text content of the uploaded file as its value. If teamworkscripts:fileUpload is true at the sm:Function then the value of this variable will be the path to the file.
+
+The script can access the current context graph (either the production or working copy) using sml:ImportCurrentRDF.
+
+The return module of the script must be of type sml:ReturnRDF.
+
+The script's function must use either teamworkscripts:suitableProjectType or teamworkscripts:suitableVocabulary to declare the scope of asset collections that it can be applied to.
+
+Once the script has been declared correctly, as above, and the .sms.* file is in the workspace of the EDG installation, users would see a fully clickable entry for the script on the Import tab. For custom teamwork:ProjectTypes, make sure that teamwork:ScriptBasedImportPlugin is declared as a teamwork:projectPlugin.""" ;
+  rdfs:label "Teamwork Scripts Vocabulary" ;
+  owl:imports <http://topbraid.org/sparqlmotionfunctions> ;
+  owl:imports <http://topbraid.org/sparqlmotionlib-tb> ;
+  owl:imports <http://topbraid.org/teamwork> ;
+.
+teamworkscripts:fileUpload
+  rdf:type rdf:Property ;
+  rdfs:comment "Indicates that a given SM function receives its file arguments as a file upload. If set to true, the value of the file argument will be a path to the temporary file in the workspace. This can be used to upload and process binary files such as Excel files (use sml:ImportExcelCellInstances to work with such files)." ;
+  rdfs:domain <http://topbraid.org/sparqlmotion#Function> ;
+  rdfs:label "file upload" ;
+  rdfs:range xsd:boolean ;
+.
+teamworkscripts:suitableProjectType
+  rdf:type rdf:Property ;
+  rdfs:comment "Indicates that a given SM function is suitable for all vocabularies of a given project type." ;
+  rdfs:domain <http://topbraid.org/sparqlmotion#Function> ;
+  rdfs:label "suitable vocabulary type" ;
+  rdfs:range <http://topbraid.org/teamwork#ProjectType> ;
+.
+teamworkscripts:suitableVocabulary
+  rdf:type rdf:Property ;
+  rdfs:comment "Indicates that a given SM function is suitable for a certain vocabulary." ;
+  rdfs:domain <http://topbraid.org/sparqlmotion#Function> ;
+  rdfs:label "suitable vocabulary" ;
+  rdfs:range <http://topbraid.org/teamwork#Vocabulary> ;
+.

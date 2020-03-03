@@ -1,0 +1,1525 @@
+# baseURI: http://teamwork.topbraidlive.org/EVNRoleManager
+# imports: http://server.topbraidlive.org/system-applications/tbladmin
+# imports: http://topbraid.org/teamwork
+# imports: http://topbraid.org/teamwork.ui
+# imports: http://uispin.org/html
+# prefix: rolemgr
+
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix autotagger: <http://evn.topbraidlive.org/autotagger#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix conceptmatch: <http://topbraid.org/conceptmatch#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix core-soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkapp: <http://topbraid.org/swa/crosswalkapp#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dashboard: <http://example.org/dashboard#> .
+@prefix dataset: <http://teamwork.topbraidlive.org/dataset#> .
+@prefix datasetapp: <http://topbraid.org/swa/datasetapp#> .
+@prefix datasetviewer: <http://topbraid.org/swa/datasetviewer#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix default: <http://uispin.org/default#> .
+@prefix defaultapp: <http://topbraid.org/swa/defaultapp#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix eeh-lib: <http://www.environmenthub.no/spin/1.0/eeh-lib#> .
+@prefix eeh-reportlib: <http://www.environmenthub.no/spin/1.0/eeh-reportlib#> .
+@prefix elements: <http://purl.org/dc/elements/1.1/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evn: <http://topbraid.org/evn/evn#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evnimport: <http://evn.topbraidlive.org/uispin/evnimport#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix ex: <http://example.org/> .
+@prefix extjs: <http://uispin.com/extjs#> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix governance: <http://topbraid.org/teamworkgovernance.ui#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix graphql.search: <http://teamwork.topbraidlive.org/graphql.search#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix kennedys: <http://topbraid.org/examples/kennedys#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix ontologyviewer: <http://topbraid.org/swa/ontologyviewer#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/dynamic/permissiongroups#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix puf: <http://Pearson.TopBraid.org/utilityFunctions#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmapp: <http://rdm.topbraidlive.org/rdmapp#> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix rdmviewer: <http://rdm.topbraidlive.org/rdmviewer#> .
+@prefix rolemgr: <http://teamwork.topbraidlive.org/EVNRoleManager#> .
+@prefix saf: <http://topbraid.org/saf/> .
+@prefix safconfig: <http://topbraid.org/safconfig/> .
+@prefix safm: <http://saf.topbraidlive.org/metaschema/> .
+@prefix savedQueries: <http://teamwork.topbraidlive.org/ui/savedQueries#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix server: <http://server.topbraidlive.org/server.ui#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sharepoint: <http://topbraid.org/sharepoint#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spin.ui: <http://spinrdf.org/spin.ui#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swadoc: <http://topbraid.org/swadoc#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix tblui: <http://server.topbraidlive.org/tblui#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkAdmin: <http://teamwork.topbraidlive.org/doc/teamworkAdmin#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworkconstraints: <http://topbraid.org/teamworkconstraints#> .
+@prefix teamworkdashboard: <http://topbraid.org/teamworkdashboard#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix teamworkupdate: <http://teamworkAPI.topbraid.com/teamworkUpdate#> .
+@prefix textindex: <http://topbraid.org/textindex#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix tracker: <http://teamwork.topbraidlive.org/ui/tracker#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uitest: <http://uispin.org/test#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix userdat: <http://teamwork.topbraidlive.org/ui/userdata> .
+@prefix userdata: <http://teamwork.topbraidlive.org/ui/userdata#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix victory: <http://edg.topbraid.solutions/victory/> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xhtml: <http://topbraid.org/xhtml#> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+arg:allUsers
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:cellStyle
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:domId
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:includeAll
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:initValue
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:isChecked
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:masterGraph
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:optionsTemplate
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:removeRoleMsg
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:replaceUserMsg
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:roleName
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:roleSimple
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:setRoleAllMsg
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:sourceUser
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:targetUser
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:teamGraph
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:user
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://teamwork.topbraidlive.org/EVNRoleManager>
+  a owl:Ontology ;
+  owl:imports <http://server.topbraidlive.org/system-applications/tbladmin> ;
+  owl:imports <http://topbraid.org/teamwork> ;
+  owl:imports <http://topbraid.org/teamwork.ui> ;
+  owl:imports <http://uispin.org/html> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+rolemgr:AddUsersToRoleService
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:masterGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The master graph for the vocabularies." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:roleName ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The role name to set." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:user ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The user to add." ;
+    ] ;
+  ui:prototype """
+<ui:group let:role=\"{= IRI(CONCAT(str(teamwork:rolesGraph()), &quot;#&quot;, ?roleName)) }\" let:teamGraph=\"{= teamwork:teamGraph(?masterGraph) }\">
+    <ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+        <ui:transaction>
+            <ui:update ui:updateQuery=\"{!
+                    INSERT {
+                        ?teamGraph ?role ?user .
+                    }
+                    WHERE {
+                    } }\"/>
+        </ui:transaction>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:label "Add users to role service" ;
+  rdfs:subClassOf tbladmin:AdminElements ;
+.
+rolemgr:AllEVNProjects
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "projectName" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "baseURI" ;
+          ]
+          [
+            sp:varName "teamGraph" ;
+          ]
+          [
+            sp:varName "projectName" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "?0" ;
+              ] ;
+            sp:predicate teamwork:graphsUnderTeamControl ;
+            sp:subject () ;
+          ]
+          [
+            sp:object [
+                sp:varName "baseURI" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "teamGraph" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:objectInGraph ;
+                sp:arg1 [
+                    sp:varName "baseURI" ;
+                  ] ;
+                sp:arg2 rdfs:label ;
+                sp:arg3 [
+                    sp:varName "baseURI" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "projectName" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  rdfs:label "All EVNProjects" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+rolemgr:AllProjectLinks
+  a ui:NodeClass ;
+  ui:prototype """
+<ul class=\"rolemgr-projects small\">
+    <ui:call ui:template=\"{= rolemgr:AllEVNProjects }\">
+        <ui:forEach ui:resultSet=\"{= ?rs }\">
+            <li>
+                <a href=\"#{= ?baseURI }\">{= ?projectName }</a>
+            </li>
+        </ui:forEach>
+    </ui:call>
+</ul>
+"""^^ui:Literal ;
+  rdfs:label "All project links" ;
+  rdfs:subClassOf rolemgr:EditProjectRoles ;
+.
+rolemgr:ChooseUserRoleCells
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:role ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The role being inspected." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:roleSimple ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:teamGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The teamwork graph (.tch) URI." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:uid ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:prototype """
+<td>
+    <ul class=\"user-list list-unstyled\">
+        <ui:loadable ui:loadId=\"{= CONCAT(?uid, ?roleSimple) }\">
+            <ui:call arg:role=\"{= ?role }\" arg:teamGraph=\"{= ?teamGraph }\" ui:template=\"{= rolemgr:GetUserForRoleForProject }\">
+                <ui:forEach ui:resultSet=\"{= ?rs }\">
+                    <li class=\"text-nowrap\">
+                        <label>
+                            <input checked=\"true\" onclick=\"teamwork.removeUserFromProject(this, '{= ?teamGraph }', '{= ?role }', '{= ?userOrRole }')\" type=\"checkbox\"/>
+                            <span>{= ?userName }</span>
+                        </label>
+                    </li>
+                </ui:forEach>
+            </ui:call>
+        </ui:loadable>
+    </ul>
+</td>
+"""^^ui:Literal ;
+  rdfs:label "Choose user role cells" ;
+  rdfs:subClassOf rolemgr:EditProjectRoles ;
+.
+rolemgr:ColCount
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "numCols" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    a sp:le ;
+                    sp:arg1 [
+                        sp:varName "count" ;
+                      ] ;
+                    sp:arg2 9 ;
+                  ] ;
+                sp:arg2 1 ;
+                sp:arg3 [
+                    a sp:if ;
+                    sp:arg1 [
+                        a sp:and ;
+                        sp:arg1 [
+                            a sp:gt ;
+                            sp:arg1 [
+                                sp:varName "count" ;
+                              ] ;
+                            sp:arg2 9 ;
+                          ] ;
+                        sp:arg2 [
+                            a sp:le ;
+                            sp:arg1 [
+                                sp:varName "count" ;
+                              ] ;
+                            sp:arg2 27 ;
+                          ] ;
+                      ] ;
+                    sp:arg2 3 ;
+                    sp:arg3 4 ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "numRows" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:count ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The count used to determine how many columns to display." ;
+    ] ;
+  rdfs:label "Col count" ;
+  rdfs:subClassOf spin:Functions ;
+.
+rolemgr:CreateRoleList
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:includeAll ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:domId ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The DOM id for the select tag" ;
+    ] ;
+  ui:prototype """
+<select class=\"form-control\" id=\"{= ?domId }\">
+    <option disabled=\"disabled\" selected=\"selected\" value=\"\">Select a permission profile</option>
+    <ui:if ui:condition=\"{= ?includeAll }\">
+        <option value=\"\">All</option>
+    </ui:if>
+    <ui:call ui:template=\"{= rolemgr:GetAllEVN_Roles }\">
+        <ui:forEach ui:resultSet=\"{= ?rs }\">
+            <option name=\"{= ?name }\" value=\"{= ?role }\">{= ?name }</option>
+        </ui:forEach>
+    </ui:call>
+</select>
+"""^^ui:Literal ;
+  rdfs:label "Create role list" ;
+  rdfs:subClassOf rolemgr:UserRoleAdmin ;
+.
+rolemgr:CreateUserList
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:initValue ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The initial value for the drop-down.  Will use a standard \"Select a user\" if none is provided." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:domId ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The DOM id for the select tag" ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <input id=\"{= ?domId }\" type=\"hidden\" value=\"{= ?initValue }\"/>
+    <div class=\"global-permission-user-select\" data-assigned-user=\"{= ?initValue }\" data-value-element-id=\"{= ?domId }\" id=\"{= ?domId }-selector\"/>
+    <script>gadgets.Hub.publish('org.topbraid.swa.populateGlobalPermissionUserDropdown', '{= ?domId }-selector');</script>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Create user list" ;
+  rdfs:subClassOf rolemgr:UserRoleAdmin ;
+.
+rolemgr:DeleteUser
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "o" ;
+                    ] ;
+                  sp:predicate [
+                      sp:varName "p" ;
+                    ] ;
+                  sp:subject [
+                      sp:varName "user" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode <http://server.topbraidlive.org/dynamic/users> ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object sioc:UserAccount ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "user" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "o" ;
+                    ] ;
+                  sp:predicate [
+                      sp:varName "p" ;
+                    ] ;
+                  sp:subject [
+                      sp:varName "user" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode <http://server.topbraidlive.org/dynamic/users> ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:user ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The user id to be deleted from users.ttl" ;
+    ] ;
+  rdfs:label "Delete user" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+rolemgr:DeleteUserRole
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            sp:object [
+                sp:varName "user" ;
+              ] ;
+            sp:predicate [
+                sp:varName "role" ;
+              ] ;
+            sp:subject [
+                sp:varName "subject" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "?0" ;
+              ] ;
+            sp:predicate teamwork:roleProperty ;
+            sp:subject () ;
+          ]
+          [
+            sp:object [
+                sp:varName "role" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            a sp:Union ;
+            sp:elements (
+                (
+                  [
+                    sp:object [
+                        sp:varName "roleName" ;
+                      ] ;
+                    sp:predicate rdfs:label ;
+                    sp:subject [
+                        sp:varName "role" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Filter ;
+                    sp:expression [
+                        a sp:ne ;
+                        sp:arg1 [
+                            sp:varName "roleName" ;
+                          ] ;
+                        sp:arg2 "All" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    sp:object [
+                        sp:varName "user" ;
+                      ] ;
+                    sp:predicate [
+                        sp:varName "role" ;
+                      ] ;
+                    sp:subject [
+                        sp:varName "subject" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Filter ;
+                    sp:expression [
+                        a sp:eq ;
+                        sp:arg1 [
+                            sp:varName "roleName" ;
+                          ] ;
+                        sp:arg2 "All" ;
+                      ] ;
+                  ]
+                )
+              ) ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:roleName ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The role name (string) the user will be se for all projects.  If not bound, remove all roles for the user." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subject ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:user ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The user resource string to set to manager for all vocabularies and working copies." ;
+    ] ;
+  rdfs:label "Delete user role" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+rolemgr:EditProjectRoles
+  a ui:NodeClass ;
+  ui:prototype """
+<tblui:Section arg:label=\"Edit User Permisson Profiles for Specific Collections\">
+    <p>
+To give a new user permissions for any of the collections listed below, choose the user from the dropdown list of users in a column that corresponds to the desired permission profile (Viewer, Editor, or Manager).<br/>
+To remove permissions for any of the collections listed below, uncheck the check box in the respective columns.<br/>
+To change permissions, first remove a permission and then give the user a new permission profile in the same way as you would for a new user.
+</p>
+    <p>Jump to collection:</p>
+    <rolemgr:AllProjectLinks/>
+    <ui:setContext ui:queryGraph=\"{= teamwork:usersGraph() }\">
+        <ui:call ui:template=\"{= rolemgr:AllEVNProjects }\">
+            <ui:forEach ui:resultSet=\"{= ?rs }\">
+                <ui:group let:uid=\"{= ui:uniqueId() }\">
+                    <form class=\"rolemgr-project\">
+                        <h3 id=\"{= ?baseURI }\">
+                            <span>{= ?projectName }</span>
+                            <swa:Space/>
+                            <small>{= ?baseURI }</small>
+                        </h3>
+                        <table>
+                            <tr>
+                                <th>Manager</th>
+                                <th>Editor</th>
+                                <th>Viewer</th>
+                            </tr>
+                            <tr>
+                                <rolemgr:ChooseUserRoleCells arg:role=\"{= teamwork:manager }\" arg:roleSimple=\"manager\" arg:teamGraph=\"{= ?teamGraph }\" arg:uid=\"{= ?uid }\"/>
+                                <rolemgr:ChooseUserRoleCells arg:role=\"{= teamwork:editor }\" arg:roleSimple=\"editor\" arg:teamGraph=\"{= ?teamGraph }\" arg:uid=\"{= ?uid }\"/>
+                                <rolemgr:ChooseUserRoleCells arg:role=\"{= teamwork:viewer }\" arg:roleSimple=\"viewer\" arg:teamGraph=\"{= ?teamGraph }\" arg:uid=\"{= ?uid }\"/>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <rolemgr:UserSelectWidget arg:masterGraph=\"{= ?baseURI }\" arg:role=\"{= teamwork:manager }\" arg:roleSimple=\"manager\" arg:teamGraph=\"{= ?teamGraph }\" arg:uid=\"{= ?uid }\"/>
+                                </td>
+                                <td>
+                                    <rolemgr:UserSelectWidget arg:masterGraph=\"{= ?baseURI }\" arg:role=\"{= teamwork:editor }\" arg:roleSimple=\"editor\" arg:teamGraph=\"{= ?teamGraph }\" arg:uid=\"{= ?uid }\"/>
+                                </td>
+                                <td>
+                                    <rolemgr:UserSelectWidget arg:masterGraph=\"{= ?baseURI }\" arg:role=\"{= teamwork:viewer }\" arg:roleSimple=\"viewer\" arg:teamGraph=\"{= ?teamGraph }\" arg:uid=\"{= ?uid }\"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </ui:group>
+            </ui:forEach>
+        </ui:call>
+    </ui:setContext>
+</tblui:Section>
+"""^^ui:Literal ;
+  rdfs:label "Edit users for collections" ;
+  rdfs:subClassOf ui:Element ;
+.
+rolemgr:GetAllEVN_Roles
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "role" ;
+          ]
+          [
+            sp:expression [
+                a teamwork:labelInTeamworkGraph ;
+                sp:arg1 [
+                    sp:varName "role" ;
+                  ] ;
+              ] ;
+            sp:varName "name" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "?0" ;
+              ] ;
+            sp:predicate teamwork:roleProperty ;
+            sp:subject () ;
+          ]
+          [
+            sp:object [
+                sp:varName "role" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  rdfs:label "Get all roles" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+rolemgr:GetUserForRoleForProject
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "userName" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "userOrRole" ;
+          ]
+          [
+            sp:varName "userName" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "userOrRole" ;
+                    ] ;
+                  sp:predicate [
+                      sp:varName "role" ;
+                    ] ;
+                  sp:subject [
+                      sp:varName "teamGraph" ;
+                    ] ;
+                ]
+                [
+                  a sp:Filter ;
+                  sp:expression [
+                      a sp:in ;
+                      sp:arg1 [
+                          sp:varName "role" ;
+                        ] ;
+                      sp:arg2 teamwork:manager ;
+                      sp:arg3 teamwork:editor ;
+                      sp:arg4 teamwork:viewer ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "teamGraph" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:userOrRoleLabel ;
+                arg:resource [
+                    sp:varName "userOrRole" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "userName" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:role ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The role being inspected." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:teamGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The teamwork graph (.tch) URI." ;
+    ] ;
+  spin:private true ;
+  rdfs:label "Get user for role for project" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+rolemgr:PublishableProjects
+  a ui:NodeClass ;
+  ui:prototype """
+<tblui:Section arg:label=\"Publish Collections\">
+    <p>To publish or unpublish collections to {= tbladmin:getNumberOfExplorerUsers() } TopBraid Explorer users, please visit the Export tab for each vocabulary or data asset.</p>
+</tblui:Section>
+"""^^ui:Literal ;
+  rdfs:comment "Acts as a reminder for how many Explorer users are licensed for publishing vocabularies." ;
+  rdfs:label "Publishable projects" ;
+  rdfs:subClassOf rolemgr:UserRoleAdmin ;
+.
+rolemgr:RemoveUserForRole
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:removeRoleMsg ;
+      spl:valueType xsd:string ;
+      rdfs:comment "Message to display informaiton about removing a user's role." ;
+    ] ;
+  ui:prototype """
+<tblui:Section arg:label=\"Revoke User Permission Profile\">
+    <p>Revokes the selected permission for the selected user or for an entire security role from any asset collection or working copy for which they have this permission.  Choosing 'All' in the dropdown removes all permissions the user/security role currently has.</p>
+    <p>
+        <strong>Note:</strong> Governance roles of the user may override direct permission profile settings.  If a user keeps a governance role for any asset collection or working copy, they will continue to have a Viewer permission profile for that collection.  They will also continue to have any permissions indicated for this role in workflow templates.</p>
+    <form id=\"remove_user\" method=\"post\">
+        <div class=\"roleContainer\">
+            <rolemgr:CreateUserList arg:domId=\"user_to_remove\"/>
+            <swa:Spaces/>
+            <rolemgr:CreateRoleList arg:domId=\"role_to_remove\" arg:includeAll=\"{= true }\"/>
+            <swa:Spaces/>
+            <button class=\"btn btn-default\" onclick=\"evnRoleAdmin.modifyUserRoleAllProjects('user_to_remove', 'role_to_remove','rolemgr:RemoveUserRoleHandler', 'remove')\" type=\"button\">Submit</button>
+            <ui:if ui:condition=\"{= bound(?removeRoleMsg) }\">
+                <p class=\"text-success\">{= ?removeRoleMsg }</p>
+            </ui:if>
+        </div>
+    </form>
+</tblui:Section>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Update user permissions profile" ;
+  rdfs:subClassOf rolemgr:UserRoleAdmin ;
+.
+rolemgr:RemoveUserFromProjectService
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:isChecked ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "Boolean set to true if checkbox is checked, false otherwise." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:role ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The EVN role to set." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:teamGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The teamwork file (.tch) to modify." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:user ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The id of the user to change." ;
+    ] ;
+  ui:prototype """
+<ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+    <ui:transaction>
+        <ui:if ui:condition=\"{= ?isChecked }\">
+            <ui:update ui:updateQuery=\"{!
+                    INSERT {
+                        ?teamGraph ?role ?user .
+                    }
+                    WHERE {
+                    } }\"/>
+        </ui:if>
+        <ui:else>
+            <ui:update ui:updateQuery=\"{!
+                    DELETE {
+                        ?teamGraph ?role ?user .
+                    }
+                    WHERE {
+                    } }\"/>
+        </ui:else>
+    </ui:transaction>
+</ui:setContext>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:label "Remove user from project service" ;
+  rdfs:subClassOf tbladmin:AdminElements ;
+.
+rolemgr:RemoveUserRoleHandler
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:roleName ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The role name (string) the user will be se for all EVN projects.  If not bound, remove all roles for the user." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:user ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The user resource string to set to manager for all vocabularies and working copies." ;
+    ] ;
+  ui:prototype """
+<ui:group let:userName=\"{= smf:userDisplayName(?user) }\">
+    <ui:forEach ui:resultSet=\"{#
+            SELECT ?teamGraph
+            WHERE {
+                rdf:nil teamwork:graphsUnderTeamControl ( ?baseURI ?teamGraph ) .
+            } }\">
+        <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?teamGraph) }\">
+            <ui:transaction ui:logMessage=\"User {= afn:localname(?user) } removed role {= ?roleName } for all vocabularies via rolemgr:RemoveUserRoleHandler\">
+                <ui:call arg:roleName=\"{= ?roleName }\" arg:subject=\"{= ?teamGraph }\" arg:user=\"{= ?user }\" ui:template=\"{= rolemgr:DeleteUserRole }\"/>
+            </ui:transaction>
+            <ui:forEach ui:resultSet=\"{#
+                    SELECT ?tag
+                    WHERE {
+                        ?tag a teamwork:Tag .
+                    } }\">
+                <ui:call arg:roleName=\"{= ?roleName }\" arg:subject=\"{= ?tag }\" arg:user=\"{= ?user }\" ui:template=\"{= rolemgr:DeleteUserRole }\"/>
+            </ui:forEach>
+        </ui:setContext>
+    </ui:forEach>
+    <ui:if ui:condition=\"{= (?roleName = &quot;All&quot;) || (!rolemgr:UserHasProjectRoles(?user)) }\">
+        <!--<ui:call arg:user=\"{= ?user }\" ui:template=\"rolemgr:DeleteUser\"/>-->
+        <rolemgr:UserRoleAdmin arg:removeRoleMsg=\"User '{= ?userName }' removed from all vocabularies and working copies.\"/>
+    </ui:if>
+    <ui:else>
+        <rolemgr:UserRoleAdmin arg:removeRoleMsg=\"User '{= ?userName }' removed as '{= ?roleName }' from all vocabularies and working copies.\"/>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Remove user role handler" ;
+  rdfs:subClassOf ui:Element ;
+.
+rolemgr:ReplaceUser
+  a ui:NodeClass ;
+  ui:prototype """
+<tblui:Section arg:label=\"Reassign User Permission Profile\">
+    <form id=\"replace_user\">
+        <p>Removes all permissions a user currently has and gives them to a new user.</p>
+        <p>
+            <strong>Note:</strong> This operation only updates permissions that are granted directly, not through governance roles.  If a user has any governance roles, they will continue to have permissions entailed by these roles.</p>
+        <div class=\"roleContainer\">
+            <rolemgr:CreateUserList arg:domId=\"user_replace_source\" arg:initValue=\"Select user/security role to replace\"/>
+            <rolemgr:CreateUserList arg:domId=\"user_replace_target\" arg:initValue=\"Select user/security role replacement\"/>
+            <swa:Spaces/>
+            <button class=\"btn btn-default\" onclick=\"evnRoleAdmin.replaceUserAllProjects('user_replace_source', 'user_replace_target','rolemgr:ReplaceUserHandler')\" type=\"button\">Submit</button>
+            <ui:if ui:condition=\"{= bound(?replaceUserMsg) }\">
+                <p class=\"text-success\">{= ?replaceUserMsg }</p>
+            </ui:if>
+        </div>
+    </form>
+</tblui:Section>
+"""^^ui:Literal ;
+  rdfs:label "Reassign user permissions profile" ;
+  rdfs:subClassOf rolemgr:UserRoleAdmin ;
+.
+rolemgr:ReplaceUserHandler
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:sourceUser ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The source user id, e.g. the user to be replaced." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:targetUser ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The target user id, e.g. the replacement user." ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:forEach ui:resultSet=\"{#
+            SELECT ?teamGraph
+            WHERE {
+                rdf:nil teamwork:graphsUnderTeamControl ( ?baseURI ?teamGraph ) .
+            } }\">
+        <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?teamGraph) }\">
+            <ui:transaction ui:logMessage=\"User {= afn:localname(?sourceUser) } replaced by {= afn:localname(?targetUser) } for all vocabularies via rolemgr:ReplaceUserHandler\">
+                <ui:call arg:sourceUser=\"{= ?sourceUser }\" arg:subject=\"{= ?teamGraph }\" arg:targetUser=\"{= ?targetUser }\" ui:template=\"{= rolemgr:UpdateUser_Replace }\"/>
+            </ui:transaction>
+            <ui:forEach ui:resultSet=\"{#
+                    SELECT ?tag
+                    WHERE {
+                        ?tag a teamwork:Tag .
+                    } }\">
+                <ui:call arg:sourceUser=\"{= ?sourceUser }\" arg:subject=\"{= ?tag }\" arg:targetUser=\"{= ?targetUser }\" ui:template=\"{= rolemgr:UpdateUser_Replace }\"/>
+            </ui:forEach>
+        </ui:setContext>
+    </ui:forEach>
+    <rolemgr:UserRoleAdmin arg:replaceUserMsg=\"User '{= smf:userDisplayName(?sourceUser) }' replaced with '{= smf:userDisplayName(?targetUser) }' for all vocabularies and working copies.\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Remove user handler" ;
+  rdfs:subClassOf ui:Element ;
+.
+rolemgr:SetRoleAllHandler
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:roleName ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The role name (string) the user will be set for all projects." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:user ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The user resource string to set to manager for all vocabularies and working copies." ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:forEach ui:resultSet=\"{#
+            SELECT ?teamGraph ?role
+            WHERE {
+                rdf:nil teamwork:graphsUnderTeamControl ( ?baseURI ?teamGraph ) .
+                rdf:nil teamwork:roleProperty ( ?role ) .
+                BIND (teamwork:roleLabel(?role) AS ?roleName) .
+            } }\">
+        <ui:setContext let:x=\"{= smf:trace(CONCAT(&quot;teamGraph:&quot;, ?teamGraph, &quot;, role:&quot;, ?role)) }\" ui:queryGraph=\"{= ui:graphWithImports(?teamGraph) }\">
+            <ui:transaction ui:logMessage=\"User {= afn:localname(?user) } added as {= afn:localname(?role) } for all vocabularies via rolemgr:SetRoleAllHandler\">
+                <ui:update ui:updateQuery=\"{!
+                        DELETE {
+                            ?teamGraph ?oldrole ?user .
+                        }
+                        INSERT {
+                            ?teamGraph ?role ?user .
+                        }
+                        WHERE {
+                            rdf:nil teamwork:roleProperty ( ?oldrole ) .
+                            OPTIONAL {
+                                ?teamGraph ?oldrole ?user .
+                                ?role (rdfs:subPropertyOf)+ ?oldrole .
+                            } .
+                        } }\"/>
+            </ui:transaction>
+            <ui:transaction ui:logMessage=\"User {= afn:localname(?user) } added as {= afn:localname(?role) } for all working copies in {= afn:localname(?teamGraph) } via rolemgr:SetRoleAllHandler\">
+                <ui:update ui:updateQuery=\"{!
+                        DELETE {
+                            ?tag ?oldrole ?user .
+                        }
+                        INSERT {
+                            ?tag ?role ?user .
+                        }
+                        WHERE {
+                            ?tag a teamwork:Tag .
+                            rdf:nil teamwork:roleProperty ( ?oldrole ) .
+                            OPTIONAL {
+                                ?tag ?oldrole ?user .
+                                ?role (rdfs:subPropertyOf)+ ?oldrole .
+                            } .
+                        } }\"/>
+            </ui:transaction>
+        </ui:setContext>
+    </ui:forEach>
+    <rolemgr:UserRoleAdmin arg:setRoleAllMsg=\"'{= smf:userDisplayName(?user) }' set to '{= ?roleName }' for all vocabularies and working copies.\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Set role all handler" ;
+  rdfs:subClassOf ui:Element ;
+.
+rolemgr:SetRoleForAllProjects
+  a ui:NodeClass ;
+  ui:prototype """
+<tblui:Section arg:label=\"Update User Permission Profile\">
+    <p>Sets the selected user to the selected permission profile for all production and working copies.</p>
+    <p>
+        <strong>Note:</strong> Governance roles of the user (if any) may give the user additional permissions.</p>
+    <form id=\"manage_all\">
+        <div class=\"roleContainer\">
+            <rolemgr:CreateUserList arg:domId=\"user_manage_all\"/>
+            <swa:Spaces/>
+            <rolemgr:CreateRoleList arg:domId=\"role_manage_all\"/>
+            <swa:Spaces/>
+            <button class=\"btn btn-default\" onclick=\"evnRoleAdmin.modifyUserRoleAllProjects('user_manage_all', 'role_manage_all', 'rolemgr:SetRoleAllHandler', 'set' )\" type=\"button\">Submit</button>
+            <ui:if ui:condition=\"{= bound(?setRoleAllMsg) }\">
+                <p class=\"text-success\">{= ?setRoleAllMsg }</p>
+            </ui:if>
+        </div>
+    </form>
+</tblui:Section>
+"""^^ui:Literal ;
+  rdfs:comment "Sets a user, selected from a drop-down list, as the chosen permission profile, from a drop-down list, for all vocabularies and working copies." ;
+  rdfs:label "Set permission profile for all" ;
+  rdfs:subClassOf rolemgr:UserRoleAdmin ;
+.
+rolemgr:UpdateUser_Replace
+  a spin:UpdateTemplate ;
+  spin:body [
+      a sp:Modify ;
+      sp:deletePattern (
+          [
+            sp:object [
+                sp:varName "sourceUser" ;
+              ] ;
+            sp:predicate [
+                sp:varName "role" ;
+              ] ;
+            sp:subject [
+                sp:varName "subject" ;
+              ] ;
+          ]
+        ) ;
+      sp:insertPattern (
+          [
+            sp:object [
+                sp:varName "targetUser" ;
+              ] ;
+            sp:predicate [
+                sp:varName "role" ;
+              ] ;
+            sp:subject [
+                sp:varName "subject" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "?0" ;
+              ] ;
+            sp:predicate teamwork:roleProperty ;
+            sp:subject () ;
+          ]
+          [
+            sp:object [
+                sp:varName "role" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "sourceUser" ;
+              ] ;
+            sp:predicate [
+                sp:varName "role" ;
+              ] ;
+            sp:subject [
+                sp:varName "subject" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:sourceUser ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The source user id, e.g. the user to be replaced." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subject ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The subject for the triple - usuall the team graph id." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:targetUser ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The target user id, e.g. the replacement user." ;
+    ] ;
+  rdfs:label "Update user - replace" ;
+  rdfs:subClassOf spin:UpdateTemplates ;
+.
+rolemgr:UserHasProjectRoles
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "?0" ;
+              ] ;
+            sp:predicate teamwork:graphsUnderTeamControl ;
+            sp:subject () ;
+          ]
+          [
+            sp:object [
+                sp:varName "baseURI" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "teamGraph" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  a sp:Union ;
+                  sp:elements (
+                      (
+                        [
+                          a sp:TriplePath ;
+                          sp:object [
+                              sp:varName "userWithRole" ;
+                            ] ;
+                          sp:path [
+                              a sp:AltPath ;
+                              sp:path1 [
+                                  a sp:AltPath ;
+                                  sp:path1 teamwork:editor ;
+                                  sp:path2 teamwork:manager ;
+                                ] ;
+                              sp:path2 teamwork:viewer ;
+                            ] ;
+                          sp:subject [
+                              sp:varName "teamGraph" ;
+                            ] ;
+                        ]
+                      )
+                      (
+                        [
+                          sp:object teamwork:Tag ;
+                          sp:predicate rdf:type ;
+                          sp:subject [
+                              sp:varName "tag" ;
+                            ] ;
+                        ]
+                        [
+                          a sp:TriplePath ;
+                          sp:object [
+                              sp:varName "userWithRole" ;
+                            ] ;
+                          sp:path [
+                              a sp:AltPath ;
+                              sp:path1 [
+                                  a sp:AltPath ;
+                                  sp:path1 teamwork:editor ;
+                                  sp:path2 teamwork:manager ;
+                                ] ;
+                              sp:path2 teamwork:viewer ;
+                            ] ;
+                          sp:subject [
+                              sp:varName "tag" ;
+                            ] ;
+                        ]
+                      )
+                    ) ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "teamGraph" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:eq ;
+                sp:arg1 [
+                    sp:varName "userWithRole" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "user" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:user ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The user to check whether it is used in any projects or working copies." ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:label "User has" ;
+  rdfs:subClassOf spin:Functions ;
+.
+rolemgr:UserRoleAdmin
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:removeRoleMsg ;
+      spl:valueType xsd:string ;
+      rdfs:comment "Message to display information about removing a user's role." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:replaceUserMsg ;
+      spl:valueType xsd:string ;
+      rdfs:comment "Message confirming that a user was replaced with another user." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:setRoleAllMsg ;
+      spl:valueType xsd:string ;
+      rdfs:comment "Message confirming that a user's role has been set for all projects." ;
+    ] ;
+  ui:headIncludes """
+<ui:group>
+    <title>{= teamwork:getProductAbbreviation() } Permissions Management</title>
+</ui:group>
+"""^^ui:Literal ;
+  ui:prototype """
+<tblui:PageContainer arg:title=\"{= teamwork:getProductAbbreviation() } Permissions Management\">
+    <ui:if ui:condition=\"{= teamwork:hasEVNViewerLicense() }\">
+        <rolemgr:PublishableProjects/>
+    </ui:if>
+    <rolemgr:SetRoleForAllProjects ui:args=\"*\"/>
+    <rolemgr:RemoveUserForRole ui:args=\"*\"/>
+    <rolemgr:ReplaceUser ui:args=\"*\"/>
+    <rolemgr:EditProjectRoles ui:args=\"*\"/>
+</tblui:PageContainer>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:comment "http://localhost:8083/tbl/swp?_viewClass=rolemgr:UserRoleAdmin" ;
+  rdfs:label "EDG Permissions Management Page" ;
+  rdfs:subClassOf tbladmin:AdminPages ;
+  rdfs:subClassOf teamwork:Elements ;
+.
+rolemgr:UserSelectWidget
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:masterGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The master graph for the project." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:role ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The role being inspected." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:roleSimple ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:teamGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:uid ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:prototype """
+<ui:group let:masterStr=\"{= str(?masterGraph) }\">
+    <ui:group let:domId=\"user_{= afn:localname(?role) }_{= afn:substr(?masterStr, (spif:lastIndexOf(?masterStr, &quot;:&quot;) + 1), fn:string-length(?masterStr)) }\">
+        <div class=\"admin-graph-permission-user-select\" data-graph-label=\"{= teamwork:graphLabel(?masterGraph) }\" data-master-graph=\"{= ?masterGraph }\" data-role=\"{= afn:localname(?role) }\" data-role-simple=\"{= ?roleSimple }\" data-uid=\"{= ?uid }\" id=\"{= ?domId }\"/>
+        <script>gadgets.Hub.publish('org.topbraid.swa.populateAdminGraphPermissionUserDropdown', '{= ?domId }');</script>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "User select widget" ;
+  rdfs:subClassOf ui:Element ;
+.

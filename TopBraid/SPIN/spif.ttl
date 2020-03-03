@@ -1,0 +1,1438 @@
+# baseURI: http://spinrdf.org/spif
+# imports: http://spinrdf.org/spin
+# imports: http://spinrdf.org/spl
+# prefix: spif
+
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+arg:data
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:datatype
+  a rdf:Property ;
+  rdfs:label "datatype" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:date
+  a rdf:Property ;
+  rdfs:label "date" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:graph
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:millis
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:number
+  a rdf:Property ;
+  rdfs:label "number" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:pattern
+  a rdf:Property ;
+  rdfs:label "pattern" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:regex
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://spinrdf.org/spif>
+  a spin:LibraryOntology ;
+  a owl:Ontology ;
+  rdfs:comment "A library of \"generally useful\" SPARQL functions defined using SPIN. This library consists of functions that are impossible or difficult to express in terms of other functions, but rather will require a native implementation in languages like Java. In contrast, the SPL (http://spinrdf.org/spl#) namespace is reserved for functions that can be expressed entirely in terms of other SPARQL expressions and standard built-ins." ;
+  owl:imports <http://spinrdf.org/spin> ;
+  owl:imports <http://spinrdf.org/spl> ;
+  owl:versionInfo "0.5.0" ;
+.
+spif:Test-dateFormat-1
+  a spl:TestCase ;
+  spl:testExpression [
+      a spif:dateFormat ;
+      arg:date "2008-02-13"^^xsd:date ;
+      arg:pattern "MMMMMMMMM dd, yyyy" ;
+    ] ;
+  spl:testResult "February 13, 2008" ;
+  rdfs:label "Test-date format" ;
+.
+spif:Test-dateFormat-2
+  a spl:TestCase ;
+  spl:testExpression [
+      a spif:dateFormat ;
+      arg:date "01:02:03"^^xsd:time ;
+      arg:pattern "hh::mm" ;
+    ] ;
+  spl:testResult "01::02" ;
+  rdfs:label "Test-date format-2" ;
+.
+spif:Test-decimalFormat-1
+  a spl:TestCase ;
+  spl:testExpression [
+      a spif:decimalFormat ;
+      arg:number 12.3456 ;
+      arg:pattern "#.##" ;
+    ] ;
+  spl:testResult "12.35" ;
+  rdfs:label "Test-decimal format-1" ;
+.
+spif:Test-generateLabel-1
+  a spl:TestCase ;
+  spl:testExpression [
+      a spif:generateLabel ;
+      sp:arg1 <http://example.org/test#LocalName> ;
+    ] ;
+  spl:testResult "Local name" ;
+  rdfs:label "Test-generate label-1" ;
+.
+spif:Test-generateLabel-2
+  a spl:TestCase ;
+  spl:testExpression [
+      a spif:generateLabel ;
+      sp:arg1 <http://example.org/test/123> ;
+    ] ;
+  spl:testResult "123" ;
+  rdfs:label "Test-generate label-2" ;
+.
+spif:Test-localName-1
+  a spl:TestCase ;
+  spl:testExpression [
+      a spif:localName ;
+      sp:arg1 <http://example.org/test#Aldi> ;
+    ] ;
+  spl:testResult "Aldi" ;
+  rdfs:label "Test-local name-1" ;
+.
+spif:Test-localName-2
+  a spl:TestCase ;
+  spl:testExpression [
+      a spif:localName ;
+      sp:arg1 <http://example.org/test/.123> ;
+    ] ;
+  spl:testResult ".123" ;
+  rdfs:label "Test-local name-2" ;
+.
+spif:Test-mod-1
+  a spl:TestCase ;
+  spl:testExpression [
+      a spif:mod ;
+      sp:arg1 3 ;
+      sp:arg2 2 ;
+    ] ;
+  spl:testResult 1 ;
+  rdfs:label "Test-mod-1" ;
+.
+spif:Test-parseDate-MMMMMMMMM_dd__yyyy
+  a spl:TestCase ;
+  spl:testExpression [
+      a spif:parseDate ;
+      arg:pattern "MMMMMMMMM dd, yyyy" ;
+      sp:arg1 "February 13, 2008" ;
+    ] ;
+  spl:testResult "2008-02-13"^^xsd:date ;
+.
+spif:Test-parseDate-MMMMMMMMM_dd_yyyy
+  a spl:TestCase ;
+  spl:testExpression [
+      a spif:parseDate ;
+      arg:pattern "MMMMMMMMM dd yyyy" ;
+      sp:arg1 "February 13 2008" ;
+    ] ;
+  spl:testResult "2008-02-13"^^xsd:date ;
+.
+spif:Test-parseDate-MM_dd_yyyy
+  a spl:TestCase ;
+  spl:testExpression [
+      a spif:parseDate ;
+      arg:pattern "MM/dd/yyyy" ;
+      sp:arg1 "2/13/2008" ;
+    ] ;
+  spl:testResult "2008-02-13"^^xsd:date ;
+.
+<http://spinrdf.org/spif#Test-parseDate-dd.MM.yyyy>
+  a spl:TestCase ;
+  spl:testExpression [
+      a spif:parseDate ;
+      arg:pattern "dd.MM.yyyy" ;
+      sp:arg1 "13.02.2008" ;
+    ] ;
+  spl:testResult "2008-02-13"^^xsd:date ;
+.
+spif:Test-parseDate-dd_MMMMMMMM__yyyy
+  a spl:TestCase ;
+  spl:testExpression [
+      a spif:parseDate ;
+      arg:pattern "dd MMMMMMMMM, yyyy" ;
+      sp:arg1 "13 February, 2008" ;
+    ] ;
+  spl:testResult "2008-02-13"^^xsd:date ;
+  rdfs:label "Test-parse date-dd MMMMMMMM  yyyy" ;
+.
+spif:Test-parseDate-dd_MMMMMMMM_yyyy
+  a spl:TestCase ;
+  spl:testExpression [
+      a spif:parseDate ;
+      arg:pattern "dd MMMMMMMMM yyyy" ;
+      sp:arg1 "13 February 2008" ;
+    ] ;
+  spl:testResult "2008-02-13"^^xsd:date ;
+  rdfs:label "Test-parse date-dd MMMMMMMM yyyy" ;
+.
+spif:Test-parseDate-dd_MM_yyyy
+  a spl:TestCase ;
+  spl:testExpression [
+      a spif:parseDate ;
+      arg:pattern "dd/MM/yyyy" ;
+      sp:arg1 "13/2/2008" ;
+    ] ;
+  spl:testResult "2008-02-13"^^xsd:date ;
+.
+spif:Test-parseDate-hhmm
+  a spl:TestCase ;
+  spl:testExpression [
+      a spif:parseDate ;
+      arg:pattern "hhmm" ;
+      sp:arg1 "1830" ;
+    ] ;
+  spl:testResult "18:30:00"^^xsd:time ;
+.
+spif:Test-parseDate-yyyyMMdd
+  a spl:TestCase ;
+  spl:testExpression [
+      a spif:parseDate ;
+      arg:pattern "yyyyMMdd" ;
+      sp:arg1 "20080213" ;
+    ] ;
+  spl:testResult "2008-02-13"^^xsd:date ;
+.
+spif:Test-parseDate-yyyyMMddhhmm
+  a spl:TestCase ;
+  spl:testExpression [
+      a spif:parseDate ;
+      arg:pattern "yyyyMMddhhmm" ;
+      sp:arg1 "200802131830" ;
+    ] ;
+  spl:testResult "2008-02-13T18:30:00"^^xsd:dateTime ;
+.
+spif:Test-unCamelCase-1
+  a spl:TestCase ;
+  spl:testExpression [
+      a spif:unCamelCase ;
+      sp:arg1 "SemanticWeb" ;
+    ] ;
+  spl:testResult "Semantic web" ;
+.
+spif:Test-unCamelCase-2
+  a spl:TestCase ;
+  spl:testExpression [
+      a spif:unCamelCase ;
+      sp:arg1 "semanTic_Web23" ;
+    ] ;
+  spl:testResult "seman tic Web23" ;
+.
+spif:buildString
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the template string" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Constructs a new string by inserting the existing variable bindings into a template. The template can mention variable names in curly braces, such as \"Hello {?index}\" would create \"Hello 42\" is ?index has the value 42. As an alternative to variable names, the function can take additional arguments after the template, the variables of which can be accessed using {?1}, {?2} etc. For example: smf:buildString(\"Hello-{?1}-{?2}\", ?day, ?month) would insert day and month at places {?1} and {?2}." ;
+  rdfs:label "build string" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spif:buildStringFromRDFList
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg3 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the separator to insert between each string" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdf:List ;
+      rdfs:comment "the head of the rdf:List to convert to string" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the template string" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Builds a string from the members of a given rdf:List (?arg1). The function iterates over all members of the list (which must be well-formed according to the RDF syntax rules). For each member, a string template (?arg2) is applied where the expression {?member} will be substituted with the current member. Optionally, a separator (?arg3) can be inserted between the list members in the result string, e.g. to insert a comma." ;
+  rdfs:label "build string from RDF list" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spif:buildURI
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The URI template such as \"<http://my.com/Instance-{?index}>\". If the template contains a full URI, then it must be wrapped by <...>, otherwise the system will treat it as a qname." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "Constructs a new URI resource by inserting the existing variable bindings into a template. The template can mention variable names in curly braces, such as \"my:Instance-{?index}\" would create \"my:Instance-42\" is ?index has the value 42. As an alternative to variable names, the function can take additional arguments after the template, the variables of which can be accessed using {?1}, {?2} etc. For example: smf:buildURI(\"my:Instance-{?1}-{?2}\", ?day, ?month) would insert day and month at places {?1} and {?2}." ;
+  rdfs:label "build URI" ;
+  rdfs:subClassOf spl:URIFunctions ;
+.
+spif:buildUniqueURI
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The URI template such as \"<http://my.com/Instance-{?index}>\". If the template contains a full URI, then it must be wrapped by <...>, otherwise the system will treat it as a qname." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "A variation of smf:buildURI that also makes sure that the created URI is unique in the current graph (that is, no triple contains the URI as either subject, predicate or object). This function is particularly useful for ontology mapping from a legacy data source into an RDF model." ;
+  rdfs:label "build unique URI" ;
+  rdfs:subClassOf spl:URIFunctions ;
+.
+spif:camelCase
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The match expression" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the input string" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """Converts an input string into camel case. 
+For example, \"semantic web\" becomes \"SemanticWeb\".
+An optional matching expression can be given to only convert the matched characters.""" ;
+  rdfs:label "camel case" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spif:canInvoke
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      rdfs:comment "The first argument of the function call." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg3 ;
+      rdfs:comment "The second argument of the function call." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg4 ;
+      rdfs:comment "The third argument of the function call." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg5 ;
+      rdfs:comment "The forth argument of the function call." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType spin:Function ;
+      rdfs:comment "The function to check." ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks whether a given SPIN function (?arg1) can be invoked with a given list of argument (?arg2, ?arg3, ...) without violating any of its declared SPIN constraints. In addition to the usual argument declarations, the SPIN function may declare ASK and CONSTRUCT queries to check additional pre-conditions." ;
+  rdfs:label "can invoke" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+spif:cast
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:datatype ;
+      spl:valueType rdfs:Datatype ;
+      rdfs:comment "The target datatype, e.g. xsd:integer. Leave blank for untyped literals." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Literal ;
+      rdfs:comment "the \"old\" literal that shall be converted" ;
+    ] ;
+  spin:returnType rdfs:Literal ;
+  rdfs:comment "Creates a new literal from an existing literal, but with a different datatype. This can, for example, be used to convert between floating point values and int values." ;
+  rdfs:label "cast" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+spif:checkRegexSyntax
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:regex ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The potential regular expression to check." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Takes a string and checks whether it would be a valid regular expression. Returns unbound if OK, or a string with an error message otherwise." ;
+  rdfs:label "check regex syntax" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spif:convertSPINRDFToString
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "true to embed HTML markup into the output" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType sp:Query ;
+      rdfs:comment "the root of the SPIN RDF query" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """Converts a SPARQL query encoded in SPIN RDF format to a SPARQL string in textual form. The SPIN query must be well-formed in the context graph at execution time, and the provided argument must be the root of the expression (e.g., an instance of sp:Select).
+
+This function is available as part of the TopBraid SPIN Libraries.""" ;
+  rdfs:label "convert SPIN RDF to string" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+spif:countMatches
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "the subject in the match triple, or an unbound variable for a wildcard" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "the predicate in the match triple, or an unbound variable for a wildcard" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg3 ;
+      rdfs:comment "the object in the match triple, or an unbound variable for a wildcard" ;
+    ] ;
+  spin:returnType xsd:integer ;
+  rdfs:comment """Counts all occurrences of a triple pattern based on subject (?arg1), predicate (?arg2) and object (?arg3) input. Any of those can be unbound variables.
+
+This function is available as part of the TopBraid SPIN Libraries.""" ;
+  rdfs:label "count matches" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+spif:countTransitiveObjects
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The predicate to walk." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The object to start traversal at." ;
+    ] ;
+  spin:returnType xsd:integer ;
+  rdfs:comment """Given a predicate and an object, this function computes the number of matches using
+
+SELECT (COUNT(DISTINCT ?object) AS ?result)
+WHERE {
+	?subject ?predicate* ?object .
+}
+
+The main purpose of this function is to optimize performance - this direction of * traversal is currently very slow in Jena. The function can be used to compute the number of superclasses of a given class.""" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+spif:countTransitiveSubjects
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The predicate to walk." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The object to start traversal at." ;
+    ] ;
+  spin:returnType xsd:integer ;
+  rdfs:comment """Given a predicate and an object, this function computes the number of matches using
+
+SELECT (COUNT(DISTINCT ?subject) AS ?result)
+WHERE {
+	?subject ?predicate* ?object .
+}
+
+The main purpose of this function is to optimize performance - this direction of * traversal is currently very slow in Jena. The function can be used to compute the number of subclasses of a given class.""" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+spif:currentTimeMillis
+  a spin:Function ;
+  spin:returnType xsd:long ;
+  rdfs:comment "Returns the current time in milliseconds. See System.currentTimeMillis() in Java." ;
+  rdfs:label "current time millis" ;
+  rdfs:subClassOf spl:DateFunctions ;
+.
+spif:dateFormat
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:date ;
+      rdfs:comment "An xsd:date, xsd:dateTime or xsd:time literal containing the date and time to render." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:pattern ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The output pattern." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Takes a date/time literal and a pattern and renders the date according to the pattern. This is a reverse of spif:parseDate and uses the same format." ;
+  rdfs:label "date format" ;
+  rdfs:subClassOf spl:DateFunctions ;
+.
+spif:decimalFormat
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:number ;
+      spl:valueType xsd:decimal ;
+      rdfs:comment "The number to format." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:pattern ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The pattern, following the syntax defined for the Java DecimalFormat class (see: http://download.oracle.com/javase/6/docs/api/java/text/DecimalFormat.html)." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Takes a number as its first argument and applies a given formatting string to it, for example, to convert a floating point into a number that has exactly two decimal places after the dot. For example, spif:decimalFormat(12.3456, \"#.##\") returns \"12.35\". The resulting string can then by cast back to a number, e.g. using xsd:double(?str)." ;
+  rdfs:label "decimal format" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spif:decodeURL
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:defaultValue "UTF-8" ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The (optional) encoding. Defaults to UTF-8." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The URL to decode." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Decodes a URL string - this is the inverse operation of spif:encodeURL." ;
+  rdfs:label "decode URL" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spif:encodeURL
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:defaultValue "UTF-8" ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The (optional) encoding. Defaults to UTF-8." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The URL to encode." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Encodes a URL string, for example so that it can be passed as an argument to REST services." ;
+  rdfs:label "encode URL" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spif:evalPath
+  a spin:MagicProperty ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The start node." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      rdfs:comment "The path expression, as a parsable string, or a IRI resource for a simple path consisting of a single property only." ;
+    ] ;
+  rdfs:comment "Takes a starting node (?arg1) and a SPARQL path expression (?arg2) and binds all matching results of the path evaluation. Also supports cases where the starting node is unbound, even both unbound." ;
+  rdfs:label "eval path" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+spif:for
+  a spin:MagicProperty ;
+  rdfs:comment """Can be used to iterate over a range of (integer) numbers similar to a for loop in iterative programming languages. An unbound variable must be placed on the left side of this magic property. On the right side, a list of two numbers needs to be placed.
+
+For example, ?index spif:for (1 10) binds ?index to all xsd:integers >= 1 and <= 10.
+
+By default it will add +1 to each step. It is possible to walk different steps and direction by specifying a third argument on the right, e.g. ?index spif:for (10 1 -1) will walk from 10 to 1 backwards.""" ;
+  rdfs:label "for" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+spif:foreach
+  a spin:MagicProperty ;
+  rdfs:comment """Can be used to \"iterate\" over a list of RDF nodes given as members of a list on the right. An unbound variable must be on the left side of the magic property. On the right side, a list of nodes with arbitrary length can be placed.
+
+For example, ?subject spif:foreach (owl:Thing owl:Nothing) will bind ?subject to owl:Thing and then owl:Nothing.""" ;
+  rdfs:label "for each" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+spif:generateLabel
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:localName ;
+                sp:arg1 spin:_arg1 ;
+              ] ;
+            sp:variable [
+                sp:varName "localName" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:unCamelCase ;
+                sp:arg1 [
+                    sp:varName "localName" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "label" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource to generate a label for." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Constructs a human-readable label for a URI resource by taking everything after the last '/' or the last '#' as starting point." ;
+  rdfs:label "generate label" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spif:generateUUID
+  a spin:Function ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Generates a new unique ID as a string literal. This is often useful for creating \"random\" URIs and other identifiers." ;
+  rdfs:label "generate UUID" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+spif:graphExists
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph (IRI) to test." ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks whether a given graph URI is known to the dataset. This also returns true for graphs that are empty." ;
+  rdfs:label "graph exists" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+spif:graphIsomorphicWith
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph to compare the current query graph with." ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks whether the current query graph is isomorphic with a given named graph. This compares all triples in the graphs, matching equivalent blank node structures even if they have different internal identities." ;
+  rdfs:label "graph isomorphic with" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+spif:graphSize
+  a spin:Function ;
+  spin:returnType xsd:integer ;
+  rdfs:comment "Counts the number of triples in the current query graph and returns that sum as an xsd:integer." ;
+  rdfs:label "graph size" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+spif:hasAllObjects
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "the match subject" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "the match predicate" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg3 ;
+      spl:valueType rdf:List ;
+      rdfs:comment "an rdf:List containing the match objects" ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks whether a given subject/predicate combination has all values enumerated from a given rdf:List. In other words, for each member ?object of the rdf:List, the triple (?arg1, ?arg2, ?object) must be in the model to return true. If the list is empty, true will also be returned." ;
+  rdfs:label "has all objects" ;
+  rdfs:subClassOf spl:BooleanFunctions ;
+.
+spif:indexOf
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg3 ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The optional index to start with." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the string to search in" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the sub string to search for" ;
+    ] ;
+  spin:returnType xsd:integer ;
+  rdfs:comment "Gets the index of the first occurrence of a certain substring in a given search string. Returns an error if the substring is not found." ;
+  rdfs:label "index of" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spif:invoke
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      rdfs:comment "The first argument of the function call." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg3 ;
+      rdfs:comment "The second argument of the function call." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg4 ;
+      rdfs:comment "The third argument of the function call." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg5 ;
+      rdfs:comment "The forth argument of the function call." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType spin:Function ;
+      rdfs:comment "The URI resource defining the function to call." ;
+    ] ;
+  rdfs:comment """Calls another SPARQL function specified by a URI resource (?arg1), with any number of additional arguments to be passed into the function (?arg2, ?arg3, ...). The result of the function call will be returned as result of the invoke call. This can be used to dynamically call functions when their URI is not known statically.
+
+The function can also be a binary built-in SPARQL function using the SPIN function identifiers from the SPL ontology. For example, sp:gt will be executed as ?left > ?right.""" ;
+  rdfs:label "invoke" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+spif:isReadOnlyTriple
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The subject of the triple to delete." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The predicate of the triple to delete." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg3 ;
+      rdfs:comment "The object of the triple to delete." ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks whether a given triple is read-only, that is, cannot be deleted. Triples that are in the system ontology are generally not deletable. TopBraid also enforces that on union graphs, all triples that are not from the base graph of the union are read-only. Other platforms may have different privilege rules for this function." ;
+  rdfs:label "is read only triple" ;
+  rdfs:subClassOf spl:BooleanFunctions ;
+.
+spif:isValidForDatatype
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:data ;
+      rdfs:comment "The data node." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:datatype ;
+      spl:valueType rdfs:Datatype ;
+      rdfs:comment "The XSD datatype to test against." ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks whether the lexical form of a given data literal would be a valid value for a given datatype." ;
+  rdfs:label "is valid for datatype" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+spif:isValidLangTag
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The string to check." ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks whether a given string is a valid language tag." ;
+  rdfs:label "is valid lang tag" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+spif:isValidURI
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The string to validate." ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks whether a given input string is a well-formed absolute URI. This can be used to validate user input before it is turned into a URI resource." ;
+  rdfs:label "is valid URI" ;
+  rdfs:subClassOf spl:URIFunctions ;
+.
+spif:labelTemplateSegment
+  a spin:MagicProperty ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType spin:Template ;
+      rdfs:comment "The template to get the label segments of." ;
+    ] ;
+  rdfs:comment "Takes a Template and splits its spin:labelTemplate into an iteration over string constants or properties. The properties align with the spl:predicates of the declared spl:Arguments of the template. Among others, this magic property can be used to render template calls into user interface components." ;
+  rdfs:label "label template segment" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+spif:lastIndexOf
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg3 ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The optional index to start with." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the string to search in" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the sub string to search for" ;
+    ] ;
+  spin:returnType xsd:integer ;
+  rdfs:comment "Gets the index of the last occurrence of a certain substring in a given search string. Returns an error if the substring is not found." ;
+  rdfs:label "last index of" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spif:localName
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "localName" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a xsd:string ;
+                sp:arg1 spin:_arg1 ;
+              ] ;
+            sp:variable [
+                sp:varName "uri" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:lastIndexOf ;
+                sp:arg1 [
+                    sp:varName "uri" ;
+                  ] ;
+                sp:arg2 "/" ;
+              ] ;
+            sp:variable [
+                sp:varName "slash" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:lastIndexOf ;
+                sp:arg1 [
+                    sp:varName "uri" ;
+                  ] ;
+                sp:arg2 "#" ;
+              ] ;
+            sp:variable [
+                sp:varName "hash" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    a sp:or ;
+                    sp:arg1 [
+                        a sp:not ;
+                        sp:arg1 [
+                            a sp:bound ;
+                            sp:arg1 [
+                                sp:varName "hash" ;
+                              ] ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        a sp:and ;
+                        sp:arg1 [
+                            a sp:bound ;
+                            sp:arg1 [
+                                sp:varName "slash" ;
+                              ] ;
+                          ] ;
+                        sp:arg2 [
+                            a sp:gt ;
+                            sp:arg1 [
+                                sp:varName "slash" ;
+                              ] ;
+                            sp:arg2 [
+                                sp:varName "hash" ;
+                              ] ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "slash" ;
+                  ] ;
+                sp:arg3 [
+                    sp:varName "hash" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "sep" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a fn:substring ;
+                sp:arg1 [
+                    sp:varName "uri" ;
+                  ] ;
+                sp:arg2 [
+                    a sp:add ;
+                    sp:arg1 [
+                        sp:varName "sep" ;
+                      ] ;
+                    sp:arg2 2 ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "localName" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The URI resource to get the local name of." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Gets a \"local name\" from a URI resource. This takes everything after the last '/' or '#' character of the URI. This function is a more intuitive alternative to afn:localname, which strictly follows the W3C namespace splitting algorithm that often leads to surprising results." ;
+  rdfs:label "local name" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spif:lowerCamelCase
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The match expression" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the input string" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """Converts an input string into lower camel case.
+For example, \"semantic web\" becomes \"semanticWeb\".
+An optional matching expression can be given to only convert the matched characters.""" ;
+  rdfs:label "lower camel case" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spif:lowerCase
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The match expression" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the input string" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """Converts an input string into lower case. 
+For example, \"SEMANTIC Web\" becomes \"semantic web\".
+An optional matching expression can be given to only convert the matched characters.""" ;
+  rdfs:label "lower case" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spif:lowerTitleCase
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The match expression" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the input string" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """Converts an input string into lower title case. 
+For example, \"semantic web\" becomes \"semantic Web\".
+An optional matching expression can be given to only convert the matched characters.""" ;
+  rdfs:label "lower title case" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spif:mod
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The first operand." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The second argument." ;
+    ] ;
+  spin:returnType xsd:integer ;
+  rdfs:comment "The mathematical modulo operator, aka % in Java." ;
+  rdfs:label "mod" ;
+  rdfs:subClassOf spl:MathematicalFunctions ;
+.
+spif:name
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      rdfs:comment "the node (literal or resource) that shall be rendered into a string" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Gets a human-readable string representation from an RDF node. If it's a literal, the function will return the literal's lexical text. If it's a resource the system will use the rdfs:label (if exists) or otherwise use the qname. For an unbound input, the function will return no value." ;
+  rdfs:label "name" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spif:parseDate
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:patternLanguage ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The code of the language (e.g. \"de\" for German) to use for parsing." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:pattern ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The template of the input string. This must conform to the pattern language implemented by the Java SimpleDateFormat class (http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html)." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the input text" ;
+    ] ;
+  spin:returnType rdfs:Literal ;
+  rdfs:comment "Converts a string in a semi-structured format into a xsd:date, xsd:dateTime or xsd:time literal. The input string must be in a given template format, e.g. \"yyyy.MM.dd G 'at' HH:mm:ss z\" for strings such as 2001.07.04 AD at 12:08:56 PDT." ;
+  rdfs:label "parse date" ;
+  rdfs:subClassOf spl:DateFunctions ;
+.
+spif:prefix
+  a spin:MagicProperty ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The namespace (string) or an unbound variable." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Can be used to get namespaces and their prefixes. This magic property takes the namespace (string) or a variable on the left and a prefix or a variable on the right. If both are unbound variables, then it will iterate over all namespaces and their prefixes. Otherwise it will bind the namespace or prefix. If both are bound, the system checks whether the given prefix is for the given namespace." ;
+  rdfs:label "prefix" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+spif:random
+  a spin:Function ;
+  spin:returnType xsd:double ;
+  rdfs:comment "Creates a random xsd:double between 0 and 1." ;
+  rdfs:label "random" ;
+  rdfs:subClassOf spl:MathematicalFunctions ;
+.
+spif:referencedVar
+  a spin:MagicProperty ;
+  rdfs:comment "For a given SPIN RDF expression or command (left hand side) this magic property delivers all used variables (right hand side). The algorithm basically walks into all depending blank nodes from the root and returns all unique values of sp:varName." ;
+  rdfs:label "referenced var" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+spif:regex
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg4 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The optional string returned as result string if no match occurs. If this string is empty and no match occurs, then the result string is unbound." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the input string" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The match expression" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg3 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The replacement expression" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """An input string is converted into a result string by applying a match and replacement expressions.
+For example, the input string \"semantic web\" with the match expression \"([A-z]+) ([A-z]+)\" and the replacement expression \"The $1 life\" returns the string \"The semantic life\".
+An optional input string is returned, if no match occurs. If this string is empty and no match occurs, then the result string is unbound.""" ;
+  rdfs:label "regex" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spif:replaceAll
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The string to operate on." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The regular expression to search for." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg3 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The replacement string." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Does a string replacement based on the Java function String.replaceAll()." ;
+  rdfs:label "replace all" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spif:shortestObjectsPath
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg3 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The optional target resource (root of the tree). If not specified, then the first node that has no further objects will be used." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The subject to start with." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The predicate to walk, e.g. rdfs:subClassOf or skos:broader." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Finds the shortest path from a given subject walking up a given predicate (for example, rdfs:subClassOf) and returns the path as a string of URIs separated with a space. This can be used to find the shortest path from a resource in a tree structure to the root resource." ;
+  rdfs:label "shortest objects path" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+spif:shortestSubjectsPath
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg3 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The optional target resource (root of the tree). If not specified, then the first node that has no further subjects will be used." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The object to start with." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The predicate to walk, e.g. schema:child." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Finds the shortest path from a given object walking up a given predicate (for example, schema:child) and returns the path as a string of URIs separated with a space. This can be used to find the shortest path from a resource in a tree structure to the root resource." ;
+  rdfs:label "shortest subjects path" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+spif:sparqlQueryType
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:queryString ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The SPARQL query string." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Attempts to parse a given SPARQL query string and returns \"ASK\", \"CONSTRUCT\", \"DESCRIBE\", \"SELECT\" or \"UPDATE\", or unbound if the query cannot be parsed." ;
+  rdfs:label "SPARQL query type" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+spif:split
+  a spin:MagicProperty ;
+  rdfs:comment """Splits a given string and iterates over all sub-strings. An unbound variable must be placed on the left side of this magic property. A list with two members must be on the right. The first is the string to split, and the second is a regular expression.
+
+For example, ?str spif:split (\"Hello World\" \" \") will bind ?str to \"Hello\" and \"World\".""" ;
+  rdfs:label "split" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+spif:timeMillis
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:dateTime ;
+      rdfs:comment "The xsd:dateTime to convert." ;
+    ] ;
+  spin:returnType xsd:long ;
+  rdfs:comment "Returns the time of a given xsd:dateTime value in milliseconds." ;
+  rdfs:label "time millis" ;
+  rdfs:subClassOf spl:DateFunctions ;
+.
+spif:timeMillisToDateTime
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:millis ;
+      spl:valueType xsd:long ;
+      rdfs:comment "The milliseconds to convert." ;
+    ] ;
+  rdfs:comment "Converts a given time milliseconds value (xsd:long or xsd:integer) into a corresponding xsd:dateTime literal." ;
+  rdfs:label "time millis to date time" ;
+  rdfs:subClassOf spl:DateFunctions ;
+.
+spif:titleCase
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The match expression" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The input string" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """Converts an input string to title case.
+For example, \"germany\" becomes \"Germany\".
+An optional matching expression can be given to only convert the matched characters.""" ;
+  rdfs:label "title case" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spif:toJavaIdentifier
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The input string." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Produces a valid Java identifier based on a given input string, dropping any characters that would not be valid Java identifiers. Produces the empty string if no character can be reused from the given string. Note that this function is even stricter than the normal Java identifier algorithm, as it only allows ASCII characters or digits." ;
+  rdfs:label "to Java identifier" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spif:trim
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the text to trim" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Creates a new string value by trimming an input string. Leading and trailing whitespaces are deleted." ;
+  rdfs:label "trim" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spif:unCamelCase
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the input string" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Converts an input string into a reverse camel case." ;
+  rdfs:label "un-camel case" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spif:upperCase
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The match expression" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The input string" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """Converts an input string into upper case. 
+For example, \"semantic web\" becomes \"SEMANTIC WEB\".
+An optional matching expression can be given to only convert the matched characters.""" ;
+  rdfs:label "upper case" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+spif:walkObjects
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The start node of the traversal." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property to walk up." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg3 ;
+      spl:valueType spin:Function ;
+      rdfs:comment "The SPIN/SPARQL function to execute for each node." ;
+    ] ;
+  rdfs:comment """Performs a depth-first tree traversal starting at a given node (?arg1) and then following the objects using a given predicate (?arg2). For each node it applies a given function (?arg3) that must take the current node as its first argument. All other arguments of the walkObjects function call will be passed into that function. The traversal stops on the first non-null result of the nested function calls.
+
+As use case of this function is to walk up superclasses, e.g. to find the \"nearest\" owl:Restriction of a certain kind.""" ;
+  rdfs:label "walk objects" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.

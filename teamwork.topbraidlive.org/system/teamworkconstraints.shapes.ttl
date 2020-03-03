@@ -1,0 +1,227 @@
+# baseURI: http://topbraid.org/teamworkconstraints
+# imports: http://datashapes.org/dash
+# imports: http://datashapes.org/graphql
+# imports: http://topbraid.org/metadata
+# prefix: teamworkconstraints
+
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkconstraints: <http://topbraid.org/teamworkconstraints#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://evn.topbraidlive.org/evnprojects#Taxonomy>
+  graphql:name "taxonomies" ;
+  graphql:publicClass skos:Concept ;
+  graphql:publicClass skos:ConceptScheme ;
+.
+<http://topbraid.org/teamworkconstraints>
+  a owl:Ontology ;
+  rdfs:comment "Implements default SHACL constraints that should apply to all vocabularies." ;
+  rdfs:label "Default constraints for EDG" ;
+  owl:imports <http://datashapes.org/dash> ;
+  owl:imports <http://datashapes.org/graphql> ;
+  owl:imports <http://topbraid.org/metadata> ;
+  sh:declare [
+      a sh:PrefixDeclaration ;
+      sh:namespace "http://spinrdf.org/spl#"^^xsd:anyURI ;
+      sh:prefix "spl" ;
+    ] ;
+  sh:declare [
+      a sh:PrefixDeclaration ;
+      sh:namespace "http://topbraid.org/sparqlmotionfunctions#"^^xsd:anyURI ;
+      sh:prefix "smf" ;
+    ] ;
+  sh:declare [
+      a sh:PrefixDeclaration ;
+      sh:namespace "http://topbraid.org/teamwork#"^^xsd:anyURI ;
+      sh:prefix "teamwork" ;
+    ] ;
+.
+teamworkconstraints:AllLiteralsShape
+  a sh:NodeShape ;
+  rdfs:label "All literals shape" ;
+  sh:sparql [
+      a sh:SPARQLConstraint ;
+      dash:suggestionGenerator tosh:DeleteTripleSuggestionGenerator ;
+      sh:message "Malformed literal for datatype {?datatype}" ;
+      sh:prefixes <http://topbraid.org/tosh> ;
+      sh:select """SELECT $this (?predicate AS ?path) (?object AS ?value) ?datatype
+WHERE {
+	{
+		{
+    		$this ?predicate ?object .
+			FILTER isLiteral(?object) .
+		}
+		BIND (datatype(?object) AS ?datatype) .
+		FILTER (?datatype != xsd:string && ?datatype != rdf:langString && ?datatype != rdf:HTML) .
+	}
+	FILTER (!spif:isValidForDatatype(?object, ?datatype))
+}""" ;
+    ] ;
+  sh:target dash:AllSubjects ;
+.
+teamworkconstraints:AllLocalSubjects
+  a teamworkconstraints:AllLocalSubjectsTarget ;
+  rdfs:label "All local subjects" ;
+.
+teamworkconstraints:AllLocalSubjectsShape
+  a sh:NodeShape ;
+  rdfs:label "All local subjects shape" ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path rdf:type ;
+      sh:minCount 1 ;
+    ] ;
+  sh:sparql teamworkconstraints:MissingLabelConstraint ;
+  sh:sparql teamworkconstraints:UndefinedPredicateConstraint ;
+  sh:target teamworkconstraints:AllLocalSubjects ;
+.
+teamworkconstraints:AllLocalSubjectsTarget
+  a sh:SPARQLTargetType ;
+  dash:requiredExecutionPlatform tosh:TopBraidPlatform ;
+  rdfs:comment "A target containing all URI subjects from the base graph of the data graph." ;
+  rdfs:label "All local subjects target" ;
+  rdfs:subClassOf sh:Target ;
+  sh:labelTemplate "All local subjects" ;
+  sh:prefixes <http://topbraid.org/teamworkconstraints> ;
+  sh:select """SELECT DISTINCT ?this
+WHERE {
+	() <http://topbraid.org/sparqlmotionfunctions#localSubjects> ?this .
+	FILTER (?this != teamwork:Vocabulary && NOT EXISTS {
+		?this rdfs:subClassOf teamwork:Vocabulary .
+	} && NOT EXISTS { ?this a owl:Ontology } && NOT EXISTS { ?this a teamwork:Vocabulary } && !tosh:isReificationURI(?this))
+}""" ;
+.
+teamworkconstraints:ClassShape
+  a sh:NodeShape ;
+  rdfs:comment "Checks constraints that apply to all classes." ;
+  rdfs:label "Class shape" ;
+  sh:severity sh:Warning ;
+  sh:sparql [
+      dash:suggestionGenerator [
+          a dash:SPARQLUpdateSuggestionGenerator ;
+          sh:message "Make {$focusNode} a subclass of owl:Thing" ;
+          sh:order 1 ;
+          sh:prefixes <http://datashapes.org/dash> ;
+          sh:update """	INSERT {
+		$focusNode rdfs:subClassOf owl:Thing ;
+	}
+	WHERE {
+	} """ ;
+        ] ;
+      dash:suggestionGenerator [
+          a dash:SPARQLUpdateSuggestionGenerator ;
+          sh:message "Make {$focusNode} a subclass of rdfs:Resource" ;
+          sh:order 2 ;
+          sh:prefixes <http://datashapes.org/dash> ;
+          sh:update """	INSERT {
+		$focusNode rdfs:subClassOf rdfs:Resource ;
+	}
+	WHERE {
+	} """ ;
+        ] ;
+      rdfs:comment "Each named class must have at least one other named superclass." ;
+      sh:message "Class has no named superclass." ;
+      sh:prefixes <http://topbraid.org/teamworkconstraints> ;
+      sh:select """SELECT $this
+WHERE {
+    FILTER (isIRI($this) && $this != rdfs:Resource && NOT EXISTS {
+			$this rdfs:subClassOf ?other .
+			FILTER isIRI(?other)
+		})
+}""" ;
+    ] ;
+  sh:targetClass rdfs:Class ;
+.
+teamworkconstraints:Global
+  rdfs:label "Global" ;
+.
+teamworkconstraints:GlobalConstraintsShape
+  a sh:NodeShape ;
+  teamworkconstraints:disallowedBaseClass rdf:Property ;
+  teamworkconstraints:disallowedBaseClass rdfs:Class ;
+  teamworkconstraints:disallowedBaseClass sh:Shape ;
+  rdfs:comment "A shape collecting constraints that apply to the whole data graph." ;
+  rdfs:label "Global constraints shape" ;
+  sh:targetNode teamworkconstraints:Global ;
+.
+teamworkconstraints:IndividualsConstraintComponent
+  a sh:ConstraintComponent ;
+  rdfs:label "Individuals constraint component" ;
+  sh:nodeValidator [
+      a sh:SPARQLSelectValidator ;
+      dash:requiredExecutionPlatform tosh:TeamworkPlatform ;
+      sh:message "{?pluralLabel} cannot declare instances of {$disallowedBaseClass}" ;
+      sh:prefixes <http://topbraid.org/teamworkconstraints> ;
+      sh:select """SELECT DISTINCT $this ?pluralLabel ?value
+WHERE {
+	{
+		BIND (teamwork:currentMasterGraph() AS ?projectGraph) 
+		FILTER smf:isIndividualsGraph(?projectGraph)
+	}
+	BIND (teamwork:pluralProjectTypeLabel(teamwork:getProjectType(?projectGraph)) AS ?pluralLabel)
+    ?type rdfs:subClassOf* $disallowedBaseClass .
+	GRAPH ?projectGraph {
+		?value a ?type .
+	}
+}""" ;
+    ] ;
+  sh:parameter [
+      sh:path teamworkconstraints:disallowedBaseClass ;
+      sh:class rdfs:Class ;
+      sh:description "The base class of disallowed instances." ;
+      sh:name "base class" ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:targetClass sh:NodeShape ;
+.
+teamworkconstraints:MissingLabelConstraint
+  a sh:SPARQLConstraint ;
+  dash:suggestionGenerator [
+      a dash:SPARQLUpdateSuggestionGenerator ;
+      sh:message "Generate a label for {$focusNode}" ;
+      sh:prefixes <http://topbraid.org/teamworkconstraints> ;
+      sh:update """	INSERT {
+		$focusNode ?predicate ?label .
+	}
+	WHERE {
+		BIND (IF(spl:instanceOf($focusNode, skos:Concept), skos:prefLabel, rdfs:label) AS ?predicate) .
+		BIND (smf:generateLabel($focusNode) AS ?label) 
+	} """ ;
+    ] ;
+  sh:message "Missing label" ;
+  sh:prefixes <http://topbraid.org/teamworkconstraints> ;
+  sh:select """SELECT $this
+WHERE {
+	FILTER NOT EXISTS {
+		$this a sh:PropertyShape .
+	}
+    FILTER NOT EXISTS {
+		$this ?predicate ?anyLabel .
+		?predicate rdfs:subPropertyOf* rdfs:label .
+	}
+}""" ;
+.
+teamworkconstraints:UndefinedPredicateConstraint
+  a sh:SPARQLConstraint ;
+  sh:message "Use of an undefined property that is neither the subject of any triple nor the sh:path of any property shape" ;
+  sh:prefixes <http://topbraid.org/teamworkconstraints> ;
+  sh:select """SELECT $this ?path ?value
+WHERE {
+	$this ?path ?value .
+	FILTER (?path NOT IN (<http://topbraid.org/search#defaultSearch>)) .
+    FILTER NOT EXISTS { ?path ?p ?o } 
+    FILTER NOT EXISTS { ?ps sh:path ?path } 
+}""" ;
+.

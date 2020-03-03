@@ -1,0 +1,532 @@
+# baseURI: http://topbraid.org/sparqlmotion/sm2wsdl.sms
+# imports: http://topbraid.org/sparqlmotionfunctions
+# imports: http://topbraid.org/sparqlmotionlib
+# prefix: sm2wsdl
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix sm2wsdl: <http://topbraid.org/sparqlmotion/sm2wsdl.sms#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix whttp: <http://www.w3.org/ns/wsdl/http#> .
+@prefix wsdl: <http://www.w3.org/ns/wsdl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://topbraid.org/sparqlmotion/sm2wsdl.sms>
+  a owl:Ontology ;
+  rdfs:comment "SPARQLMotion and SPIN functions that can be used to generate WSDL interfaces for SPARQLMotion functions." ;
+  owl:imports <http://topbraid.org/sparqlmotionfunctions> ;
+  owl:imports <http://topbraid.org/sparqlmotionlib> ;
+.
+sm2wsdl:CreateUISPINDocument_1
+  a sml:CreateSWPDocument ;
+  sm:next sm2wsdl:ReturnXML_1 ;
+  sm:nodeX 427 ;
+  sm:nodeY 190 ;
+  sm:outputVariable "xml" ;
+  sml:snippet true ;
+  sml:view [
+      a sm2wsdl:Description ;
+      sm2wsdl:function [
+          sp:varName "selectedResource" ;
+        ] ;
+    ] ;
+  rdfs:label "Create UISPINDocument 1" ;
+.
+sm2wsdl:Description
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sm2wsdl:function ;
+      spl:valueType spin:Function ;
+      rdfs:comment "The SPIN function to generate the WSDL for." ;
+    ] ;
+  ui:prototype [
+      a ui:let ;
+      let:name [
+          a afn:localname ;
+          sp:arg1 [
+              sp:varName "function" ;
+            ] ;
+        ] ;
+      ui:child [
+          a wsdl:description ;
+          let:bindingName [
+              a fn:concat ;
+              sp:arg1 [
+                  sp:varName "name" ;
+                ] ;
+              sp:arg2 "-HTTPBinding" ;
+            ] ;
+          let:interfaceName [
+              a fn:concat ;
+              sp:arg1 [
+                  sp:varName "name" ;
+                ] ;
+              sp:arg2 "-RESTfulInterface" ;
+            ] ;
+          ui:child [
+              a wsdl:binding ;
+              ui:child [
+                  a wsdl:operation ;
+                  ui:childIndex 0 ;
+                  wsdl:ref [
+                      sp:varName "name" ;
+                    ] ;
+                  whttp:method "GET" ;
+                ] ;
+              ui:childIndex 1 ;
+              wsdl:interface [
+                  sp:varName "interfaceName" ;
+                ] ;
+              wsdl:name [
+                  sp:varName "bindingName" ;
+                ] ;
+              wsdl:type "http://www.w3.org/ns/wsdl/http" ;
+            ] ;
+          ui:child [
+              a wsdl:interface ;
+              ui:child [
+                  a wsdl:operation ;
+                  ui:child [
+                      a sm2wsdl:Output ;
+                      sm2wsdl:function [
+                          sp:varName "function" ;
+                        ] ;
+                      ui:childIndex 1 ;
+                    ] ;
+                  ui:child [
+                      a ui:forEach ;
+                      ui:child [
+                          a sm2wsdl:Input ;
+                          sm2wsdl:arg [
+                              sp:varName "arg" ;
+                            ] ;
+                          ui:childIndex 0 ;
+                        ] ;
+                      ui:childIndex 0 ;
+                      ui:resultSet [
+                          a sp:Select ;
+                          sp:resultVariables (
+                              [
+                                sp:varName "arg" ;
+                              ]
+                            ) ;
+                          sp:where (
+                              [
+                                a sp:TriplePath ;
+                                sp:object [
+                                    sp:varName "cls" ;
+                                  ] ;
+                                sp:path [
+                                    a sp:ModPath ;
+                                    sp:modMax -2 ;
+                                    sp:modMin 0 ;
+                                    sp:subPath rdfs:subClassOf ;
+                                  ] ;
+                                sp:subject [
+                                    sp:varName "function" ;
+                                  ] ;
+                              ]
+                              [
+                                sp:object [
+                                    sp:varName "arg" ;
+                                  ] ;
+                                sp:predicate spin:constraint ;
+                                sp:subject [
+                                    sp:varName "cls" ;
+                                  ] ;
+                              ]
+                              [
+                                sp:object [
+                                    sp:varName "predicate" ;
+                                  ] ;
+                                sp:predicate spl:predicate ;
+                                sp:subject [
+                                    sp:varName "arg" ;
+                                  ] ;
+                              ]
+                              [
+                                a sp:Filter ;
+                                sp:expression [
+                                    a sp:ne ;
+                                    sp:arg1 [
+                                        sp:varName "predicate" ;
+                                      ] ;
+                                    sp:arg2 sm:outputVariable ;
+                                  ] ;
+                              ]
+                            ) ;
+                        ] ;
+                    ] ;
+                  ui:childIndex 0 ;
+                  wsdl:name [
+                      sp:varName "name" ;
+                    ] ;
+                  wsdl:pattern "http://www.w3.org/2003/11/wsdl/in-out" ;
+                ] ;
+              ui:childIndex 0 ;
+              wsdl:name [
+                  sp:varName "interfaceName" ;
+                ] ;
+            ] ;
+          ui:child [
+              a wsdl:service ;
+              ui:child [
+                  a wsdl:documentation ;
+                  ui:child [
+                      a ui:TextNode ;
+                      ui:childIndex 0 ;
+                      ui:text [
+                          a spl:object ;
+                          sp:arg1 [
+                              sp:varName "function" ;
+                            ] ;
+                          sp:arg2 rdfs:comment ;
+                        ] ;
+                    ] ;
+                  ui:childIndex 0 ;
+                ] ;
+              ui:child [
+                  a wsdl:endpoint ;
+                  ui:childIndex 1 ;
+                  wsdl:address [
+                      a fn:concat ;
+                      sp:arg1 "http://localhost:8083/tbl/sparqlmotion?id=" ;
+                      sp:arg2 [
+                          sp:varName "name" ;
+                        ] ;
+                    ] ;
+                  wsdl:binding [
+                      sp:varName "bindingName" ;
+                    ] ;
+                  wsdl:name [
+                      a fn:concat ;
+                      sp:arg1 [
+                          sp:varName "name" ;
+                        ] ;
+                      sp:arg2 "-HTTPEndpoint" ;
+                    ] ;
+                ] ;
+              ui:childIndex 2 ;
+              wsdl:name [
+                  a fn:concat ;
+                  sp:arg1 [
+                      sp:varName "name" ;
+                    ] ;
+                  sp:arg2 "-Service" ;
+                ] ;
+            ] ;
+          ui:childIndex 0 ;
+        ] ;
+    ] ;
+  rdfs:label "Description" ;
+  rdfs:subClassOf ui:Element ;
+.
+sm2wsdl:ImportCurrentRDF
+  a sml:ImportCurrentRDF ;
+  sm:next sm2wsdl:CreateUISPINDocument_1 ;
+  sm:nodeX 351 ;
+  sm:nodeY 70 ;
+  rdfs:label "Import current RDF" ;
+.
+sm2wsdl:Input
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sm2wsdl:arg ;
+      spl:valueType spl:Argument ;
+      rdfs:comment "The argument to render." ;
+    ] ;
+  ui:prototype [
+      a ui:let ;
+      let:predicate [
+          a spl:object ;
+          sp:arg1 [
+              sp:varName "arg" ;
+            ] ;
+          sp:arg2 spl:predicate ;
+        ] ;
+      let:valueType [
+          a spl:object ;
+          sp:arg1 [
+              sp:varName "arg" ;
+            ] ;
+          sp:arg2 spl:valueType ;
+        ] ;
+      ui:child [
+          a wsdl:input ;
+          ui:childIndex 0 ;
+          wsdl:messageLabel [
+              a afn:localname ;
+              sp:arg1 [
+                  sp:varName "predicate" ;
+                ] ;
+            ] ;
+          wsdl:type [
+              a sm2wsdl:typeName ;
+              sp:arg1 [
+                  sp:varName "valueType" ;
+                ] ;
+            ] ;
+        ] ;
+    ] ;
+  rdfs:label "Input" ;
+  rdfs:subClassOf ui:Element ;
+.
+sm2wsdl:Output
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sm2wsdl:function ;
+      spl:valueType sm:Function ;
+      rdfs:comment "The function to render the output of." ;
+    ] ;
+  ui:prototype [
+      a ui:let ;
+      let:returnType [
+          a spl:object ;
+          sp:arg1 [
+              sp:varName "function" ;
+            ] ;
+          sp:arg2 spin:returnType ;
+        ] ;
+      ui:child [
+          a ui:if ;
+          ui:child [
+              a wsdl:output ;
+              ui:childIndex 0 ;
+              wsdl:type [
+                  a sm2wsdl:typeName ;
+                  sp:arg1 [
+                      sp:varName "returnType" ;
+                    ] ;
+                ] ;
+            ] ;
+          ui:childIndex 0 ;
+          ui:condition [
+              a sp:bound ;
+              sp:arg1 [
+                  sp:varName "returnType" ;
+                ] ;
+            ] ;
+        ] ;
+    ] ;
+  rdfs:label "Output" ;
+  rdfs:subClassOf ui:Element ;
+.
+sm2wsdl:ReturnXML_1
+  a sml:ReturnXML ;
+  sm:nodeX 685 ;
+  sm:nodeY 257 ;
+  sml:mimeType "text/xml" ;
+  rdfs:label "Return XML 1" ;
+.
+sm2wsdl:arg
+  a rdf:Property ;
+  rdfs:label "arg" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+sm2wsdl:function
+  a rdf:Property ;
+  rdfs:label "function" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+sm2wsdl:getWSDL
+  a sm:Function ;
+  spin:constraint [
+      a sml:SelectedResourceArgument ;
+      spl:predicate sml:selectedResource ;
+      spl:valueType spin:Function ;
+      sm:next sm2wsdl:ImportCurrentRDF ;
+      sm:nodeX 43 ;
+      sm:nodeY 8 ;
+      rdfs:comment "The sm:Function to generate the WSDL for." ;
+    ] ;
+  spin:private true ;
+  spin:returnType rdf:XMLLiteral ;
+  sm:returnModule sm2wsdl:ReturnXML_1 ;
+  rdfs:comment "Takes a SM function as (selected) argument and generates a WSDL (XML) document for it." ;
+  rdfs:label "Generate WSDL" ;
+  rdfs:subClassOf sm:Functions ;
+.
+sm2wsdl:typeName
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "name" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject spin:_arg1 ;
+          ]
+          [
+            a sp:Union ;
+            sp:elements (
+                (
+                  [
+                    a sp:TriplePath ;
+                    sp:object rdfs:Datatype ;
+                    sp:path [
+                        a sp:ModPath ;
+                        sp:modMax -2 ;
+                        sp:modMin 0 ;
+                        sp:subPath rdfs:subClassOf ;
+                      ] ;
+                    sp:subject [
+                        sp:varName "type" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a smf:qname ;
+                        sp:arg1 spin:_arg1 ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "name" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    a sp:Bind ;
+                    sp:expression "xsd:anyURI" ;
+                    sp:variable [
+                        sp:varName "name" ;
+                      ] ;
+                  ]
+                )
+              ) ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The RDF type (e.g. xsd:string)." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "A helper function that creates a string name for an RDF type. The XSD datatypes will be rendered by their qname, and all other values become xsd:anyURI." ;
+  rdfs:label "type name" ;
+  rdfs:subClassOf spin:Functions ;
+.
+wsdl:Elements
+  a ui:NodeClass ;
+  ui:abstract true ;
+  rdfs:label "Elements" ;
+  rdfs:subClassOf ui:Element ;
+.
+wsdl:address
+  a rdf:Property ;
+  rdfs:label "address" ;
+  rdfs:subPropertyOf wsdl:properties ;
+.
+wsdl:binding
+  a ui:NodeClass ;
+  a rdf:Property ;
+  rdfs:label "Binding" ;
+  rdfs:label "binding" ;
+  rdfs:subClassOf wsdl:Elements ;
+  rdfs:subPropertyOf wsdl:properties ;
+.
+wsdl:description
+  a ui:NodeClass ;
+  rdfs:label "Description" ;
+  rdfs:subClassOf wsdl:Elements ;
+.
+wsdl:documentation
+  a ui:NodeClass ;
+  rdfs:label "Documentation" ;
+  rdfs:subClassOf wsdl:Elements ;
+.
+wsdl:element
+  a rdf:Property ;
+  rdfs:label "element" ;
+  rdfs:subPropertyOf wsdl:properties ;
+.
+wsdl:endpoint
+  a ui:NodeClass ;
+  rdfs:label "Endpoint" ;
+  rdfs:subClassOf wsdl:Elements ;
+.
+wsdl:input
+  a ui:NodeClass ;
+  rdfs:label "Input" ;
+  rdfs:subClassOf wsdl:Elements ;
+.
+wsdl:interface
+  a ui:NodeClass ;
+  a rdf:Property ;
+  rdfs:label "Interface" ;
+  rdfs:label "interface" ;
+  rdfs:subClassOf wsdl:Elements ;
+  rdfs:subPropertyOf wsdl:properties ;
+.
+wsdl:messageLabel
+  a rdf:Property ;
+  rdfs:label "message label" ;
+  rdfs:subPropertyOf wsdl:properties ;
+.
+wsdl:name
+  a rdf:Property ;
+  rdfs:label "name" ;
+  rdfs:subPropertyOf wsdl:properties ;
+.
+wsdl:operation
+  a ui:NodeClass ;
+  rdfs:label "Operation" ;
+  rdfs:subClassOf wsdl:Elements ;
+.
+wsdl:output
+  a ui:NodeClass ;
+  rdfs:label "Output" ;
+  rdfs:subClassOf wsdl:Elements ;
+.
+wsdl:pattern
+  a rdf:Property ;
+  rdfs:label "pattern" ;
+  rdfs:subPropertyOf wsdl:properties ;
+.
+wsdl:properties
+  a rdf:Property ;
+  rdfs:label "properties" ;
+.
+wsdl:ref
+  a rdf:Property ;
+  rdfs:label "ref" ;
+  rdfs:subPropertyOf wsdl:properties ;
+.
+wsdl:service
+  a ui:NodeClass ;
+  rdfs:label "Service" ;
+  rdfs:subClassOf wsdl:Elements ;
+.
+wsdl:type
+  a rdf:Property ;
+  rdfs:label "type" ;
+  rdfs:subPropertyOf wsdl:properties ;
+.
+whttp:method
+  a rdf:Property ;
+  rdfs:label "method" ;
+  rdfs:subPropertyOf wsdl:properties ;
+.

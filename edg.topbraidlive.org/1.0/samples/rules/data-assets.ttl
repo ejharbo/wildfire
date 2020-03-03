@@ -1,0 +1,147 @@
+# baseURI: http://edg.topbraidlive.org/1.0/samples/rules/data-assets
+# imports: http://edg.topbraid.solutions/1.0/shapes/datamodels
+
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/model/Database>
+  sh:property <http://edg.topbraid.solutions/model/Database-tableCount> ;
+  sh:property <http://edg.topbraid.solutions/model/Database-tableSummary> ;
+  sh:property <http://edg.topbraid.solutions/model/Database-totalColumnCount> ;
+  sh:property <http://edg.topbraid.solutions/model/Database-viewCount> ;
+.
+<http://edg.topbraid.solutions/model/Database-tableCount>
+  rdf:type sh:PropertyShape ;
+  sh:path <http://edg.topbraid.solutions/model/tableCount> ;
+  sh:datatype xsd:integer ;
+  sh:description "The number of tables in this database, automatically computed." ;
+  sh:group <http://edg.topbraid.solutions/model/StatisticsPropertyGroup> ;
+  sh:maxCount 1 ;
+  sh:name "number of tables" ;
+  sh:values [
+      sh:count [
+          sh:path [
+              sh:inversePath <http://edg.topbraid.solutions/model/tableOf> ;
+            ] ;
+        ] ;
+    ] ;
+.
+<http://edg.topbraid.solutions/model/Database-tableSummary>
+  rdf:type sh:PropertyShape ;
+  sh:path <http://edg.topbraid.solutions/model/tableSummary> ;
+  tosh:viewWidget <http://topbraid.org/swa#SummaryTableViewer> ;
+  sh:description "The tables in this database as summaries, automatically computed." ;
+  sh:group <http://edg.topbraid.solutions/model/OverviewPropertyGroup> ;
+  sh:name "table summary" ;
+  sh:node <http://edg.topbraid.solutions/model/DatabaseTableSummary> ;
+  sh:values [
+      sh:path [
+          sh:inversePath <http://edg.topbraid.solutions/model/tableOf> ;
+        ] ;
+    ] ;
+.
+<http://edg.topbraid.solutions/model/Database-totalColumnCount>
+  rdf:type sh:PropertyShape ;
+  sh:path <http://edg.topbraid.solutions/model/totalColumnCount> ;
+  sh:datatype xsd:integer ;
+  sh:description "The number of overall columns in this database, automatically computed." ;
+  sh:group <http://edg.topbraid.solutions/model/StatisticsPropertyGroup> ;
+  sh:maxCount 1 ;
+  sh:name "total number of columns" ;
+  sh:order 10 ;
+  sh:values [
+      sh:count [
+          sh:path (
+              [
+                sh:alternativePath (
+                    [
+                      sh:inversePath <http://edg.topbraid.solutions/model/tableOf> ;
+                    ]
+                    [
+                      sh:inversePath <http://edg.topbraid.solutions/model/viewOf> ;
+                    ]
+                  ) ;
+              ]
+              [
+                sh:inversePath <http://edg.topbraid.solutions/model/columnOf> ;
+              ]
+            ) ;
+        ] ;
+    ] ;
+.
+<http://edg.topbraid.solutions/model/Database-viewCount>
+  rdf:type sh:PropertyShape ;
+  sh:path <http://edg.topbraid.solutions/model/viewCount> ;
+  sh:datatype xsd:integer ;
+  sh:description "The number of views in this database, automatically computed." ;
+  sh:group <http://edg.topbraid.solutions/model/StatisticsPropertyGroup> ;
+  sh:maxCount 1 ;
+  sh:name "number of views" ;
+  sh:values [
+      sh:count [
+          sh:path [
+              sh:inversePath <http://edg.topbraid.solutions/model/viewOf> ;
+            ] ;
+        ] ;
+    ] ;
+.
+<http://edg.topbraid.solutions/model/DatabaseTableSummary>
+  rdf:type sh:NodeShape ;
+  rdfs:comment "A shape that can be applied to DatabaseTables to provide a summary view." ;
+  rdfs:label "Database table summary" ;
+  sh:property [
+      rdf:type sh:PropertyShape ;
+      sh:path <http://edg.topbraid.solutions/model/columnCount> ;
+      sh:datatype xsd:integer ;
+      sh:description "The number of columns, inferred from columnOf triples." ;
+      sh:maxCount 1 ;
+      sh:name "column count" ;
+      sh:order 1 ;
+      sh:values [
+          sh:count [
+              sh:path [
+                  sh:inversePath <http://edg.topbraid.solutions/model/columnOf> ;
+                ] ;
+            ] ;
+        ] ;
+    ] ;
+  sh:property [
+      rdf:type sh:PropertyShape ;
+      sh:path <http://edg.topbraid.solutions/model/name> ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "name" ;
+      sh:order 0 ;
+    ] ;
+  sh:property [
+      rdf:type sh:PropertyShape ;
+      sh:path <http://edg.topbraid.solutions/model/recordCount> ;
+      sh:datatype xsd:integer ;
+      sh:description "The number of records." ;
+      sh:maxCount 1 ;
+      sh:name "record count" ;
+      sh:order 2 ;
+    ] ;
+  sh:targetClass <http://edg.topbraid.solutions/model/DatabaseTable> ;
+.
+<http://edg.topbraid.solutions/model/OverviewPropertyGroup>
+  rdf:type sh:PropertyGroup ;
+  rdfs:label "Overview" ;
+  sh:order "21"^^xsd:decimal ;
+.
+<http://edg.topbraid.solutions/model/StatisticsPropertyGroup>
+  rdf:type sh:PropertyGroup ;
+  rdfs:label "Statistics" ;
+  sh:order "20"^^xsd:decimal ;
+.
+<http://edg.topbraidlive.org/1.0/samples/rules/data-assets>
+  rdf:type owl:Ontology ;
+  owl:imports <http://edg.topbraid.solutions/1.0/shapes/datamodels> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.

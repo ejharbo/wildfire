@@ -1,0 +1,2803 @@
+# baseURI: http://edg.topbraid.solutions/1.0/project/enumerations
+# imports: http://edg.topbraid.solutions/1.0/project/common
+# imports: http://edg.topbraid.solutions/1.0/schema/controllers
+# imports: http://edg.topbraid.solutions/1.0/schema/enumerations
+# imports: http://edg.topbraid.solutions/1.0/spin/library
+# imports: http://edg.topbraidlive.org/1.0/importers/ddl
+# imports: http://edg.topbraidlive.org/1.0/importers/jdbc
+# imports: http://spinrdf.org/spin
+# imports: http://topbraid.org/metadata
+# imports: http://topbraid.org/teamwork
+# imports: http://uispin.org/ui
+
+@prefix acjob: <http://evn.topbraidlive.org/tagger/acjob#> .
+@prefix acpp: <http://topbraid.org/nlp/autoclassifier-preproc#> .
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix autotagger: <http://evn.topbraidlive.org/autotagger#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix conceptmatch: <http://topbraid.org/conceptmatch#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix config-importers: <http://edg.topbraidlive.org/config/importers#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix core-soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix corpus: <http://topbraid.org/corpus#> .
+@prefix corpusprojects: <http://topbraid.org/corpus-projects#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkapp: <http://topbraid.org/swa/crosswalkapp#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dashboard: <http://example.org/dashboard#> .
+@prefix datagraph: <http://teamwork.topbraidlive.org/datagraph/datagraphprojects#> .
+@prefix dataset: <http://teamwork.topbraidlive.org/dataset#> .
+@prefix datasetapp: <http://topbraid.org/swa/datasetapp#> .
+@prefix datasetviewer: <http://topbraid.org/swa/datasetviewer#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ddl: <http://edg.topbraidlive.org/1.0/importers/ddl#> .
+@prefix default: <http://uispin.org/default#> .
+@prefix defaultapp: <http://topbraid.org/swa/defaultapp#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix document: <http://topbraid.org/document#> .
+@prefix documents: <http://edg.topbraid.solutions/1.0/shapes/documents#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg-config: <http://edg.ext.topbraidlive.org/schema/config/importers#> .
+@prefix edg-importer: <http://edg.topbraidlive.org/importer/> .
+@prefix edg-qa: <http://edg.topbraidlive.org/utility/qa/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.global: <urn:x-evn-global:> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix edgproduct: <http://edg.topbraidlive.org/edgproduct#> .
+@prefix eeh-lib: <http://www.environmenthub.no/spin/1.0/eeh-lib#> .
+@prefix eeh-reportlib: <http://www.environmenthub.no/spin/1.0/eeh-reportlib#> .
+@prefix elements: <http://purl.org/dc/elements/1.1/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evn: <http://topbraid.org/evn/evn#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evnimport: <http://evn.topbraidlive.org/uispin/evnimport#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix ex: <http://example.org/> .
+@prefix extjs: <http://uispin.com/extjs#> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix forms: <http://www.topbraid.org/2007/01/forms.owl#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix governance: <http://topbraid.org/teamworkgovernance.ui#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix graphql.search: <http://teamwork.topbraidlive.org/graphql.search#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix inference: <http://www.topbraid.org/2007/06/inference.owl#> .
+@prefix jdbc: <http://edg.topbraidlive.org/1.0/importers/jdbc#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix kennedys: <http://topbraid.org/examples/kennedys#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix lib-importer: <http://edg.topbraid.solutions/importer/lib#> .
+@prefix lineage-transform: <http://edg.topbraid.solutions/transform/importer/lineage#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix ontologyviewer: <http://topbraid.org/swa/ontologyviewer#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix proxy-lineage: <http://edg.topbraid.solutions/proxy/importer/lineage#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmapp: <http://rdm.topbraidlive.org/rdmapp#> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix rdmviewer: <http://rdm.topbraidlive.org/rdmviewer#> .
+@prefix saf: <http://topbraid.org/saf/> .
+@prefix safconfig: <http://topbraid.org/safconfig/> .
+@prefix safindex: <http://topbraid.org/safindex#> .
+@prefix safm: <http://saf.topbraidlive.org/metaschema/> .
+@prefix savedQueries: <http://teamwork.topbraidlive.org/ui/savedQueries#> .
+@prefix scheduler: <http://topbraid.org/scheduler#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix server: <http://server.topbraidlive.org/server.ui#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix shapesgraph: <http://teamwork.topbraidlive.org/shapesgraph/shapesgraphprojects#> .
+@prefix sharepoint: <http://topbraid.org/sharepoint#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skosshapes: <http://topbraid.org/skos.shapes#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparql: <http://datashapes.org/sparql#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spin.ui: <http://spinrdf.org/spin.ui#> .
+@prefix spinmap: <http://spinrdf.org/spinmap#> .
+@prefix spinmapl: <http://topbraid.org/spin/spinmapl#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix ss: <http://www.topbraidcomposer.org/owl/2006/08/spreadsheets.owl#> .
+@prefix stats: <http://topbraid.org/statistics#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swadoc: <http://topbraid.org/swadoc#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tablesmap: <http://topbraid.org/spin/tablesmap#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix taggerspin: <http://evn.topbraidlive.org/taggerspin#> .
+@prefix taggerui: <http://evn.topbraidlive.org/taggerui#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix tblui: <http://server.topbraidlive.org/tblui#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkAdmin: <http://teamwork.topbraidlive.org/doc/teamworkAdmin#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworkconstraints: <http://topbraid.org/teamworkconstraints#> .
+@prefix teamworkdashboard: <http://topbraid.org/teamworkdashboard#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix teamworkupdate: <http://teamworkAPI.topbraid.com/teamworkUpdate#> .
+@prefix textindex: <http://topbraid.org/textindex#> .
+@prefix tika-importer: <http://teamwork.topbraidlive.org/corpus/tika-importer#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix tracker: <http://teamwork.topbraidlive.org/ui/tracker#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uitest: <http://uispin.org/test#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix userdat: <http://teamwork.topbraidlive.org/ui/userdata> .
+@prefix userdata: <http://teamwork.topbraidlive.org/ui/userdata#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix victory: <http://edg.topbraid.solutions/victory/> .
+@prefix visual: <http://topbraid.org/visual#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xhtml: <http://topbraid.org/xhtml#> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/project/enumerations>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/project/datatypes/GMD_enumerations> ;
+  rdfs:label "EDG Controller - enumerations" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/project/common> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/controllers> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/enumerations> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/spin/library> ;
+  owl:imports <http://edg.topbraidlive.org/1.0/importers/ddl> ;
+  owl:imports <http://edg.topbraidlive.org/1.0/importers/jdbc> ;
+  owl:imports <http://spinrdf.org/spin> ;
+  owl:imports <http://topbraid.org/metadata> ;
+  owl:imports <http://topbraid.org/teamwork> ;
+  owl:imports <http://uispin.org/ui> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+edg:ConfirmEnumerationTypesOntologies
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resources ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <p class=\"text-info\">The following graphs will be used as the enumeration types:</p>
+    <ui:json ui:str=\"{= ?resources }\" ui:varName=\"resourcesArray\">
+        <ui:group letrs:enumTypesGraphs='{#
+                SELECT ?enumGraph
+                WHERE {
+                    ?resourcesArray ui:jsonArrayMembers ?graphObject .
+                    BIND (ui:jsonString(ui:jsonValue(?graphObject, \"resource\")) AS ?enumGraph) .
+                } }'>
+            <ui:group let:id=\"{= ui:uniqueId() }\">
+                <ui:group let:tableId=\"{= fn:concat(&quot;TBL_&quot;, ?id) }\">
+                    <div class=\"panel-body\">
+                        <div class=\"pb10px\">
+                            <button class=\"btn btn-primary btn-margin-right-8px\" onclick=\"edgAccordion.cancel()\">Cancel</button>
+                            <button class=\"btn btn-primary\" onclick=\"edgAccordion.executeJob1('edg:CreateEnumeratedValuesGraph','{= ?resources }',  '{= str(?subjectArea) }')\">
+                                <span>Create Enumeration Instances Graph</span>
+                            </button>
+                        </div>
+                        <table class=\"swa-relevant-properties\" id=\"{= ?tableId }\">
+                            <thead class=\"swa-relevant-properties\">
+                                <tr class=\"swa-relevant-properties\">
+                                    <th class=\"swa-relevant-properties\">#</th>
+                                    <th class=\"swa-relevant-properties\">Enumeration Types Ontologies</th>
+                                    <th class=\"swa-relevant-properties\">Enumeration Types</th>
+                                </tr>
+                            </thead>
+                            <tbody class=\"swa-relevant-properties\">
+                                <ui:forEach ui:indexVar=\"index\" ui:resultSet=\"{= ?enumTypesGraphs }\">
+                                    <ui:group let:enumGraphhURI=\"{= IRI(?enumGraph) }\" let:id=\"{= ui:uniqueId() }\">
+                                        <tr class=\"swa-relevant-properties\" let:rowId=\"{= fn:concat(&quot;CB_&quot;, ?id) }\">
+                                            <td class=\"swa-relevant-properties\">{= ?index + 1 }</td>
+                                            <td class=\"swa-relevant-properties\" let:description=\"{= spl:objectInGraph(?enumGraphhURI, rdfs:comment, ?enumGraphhURI) }\">
+                                                <label for=\"{= ?rowId }\" title=\"{= ?enumGraph }\">{= swa:labelInGraph(?enumGraphhURI, ?enumGraphhURI) }</label>
+                                            </td>
+                                            <td class=\"swa-relevant-properties\">
+                                                <edg:ListSubjectsForGivenPropertyAndObjectInGraph arg:class=\"{= edg:CustomEnumerationClass }\" arg:filterFunction=\"{= edg:isNotAbstract }\" arg:graph=\"{= ?enumGraphhURI }\" arg:object=\"{= edg:CustomEnumerationClass }\" arg:property=\"{= rdf:type }\"/>
+                                            </td>
+                                        </tr>
+                                    </ui:group>
+                                </ui:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </ui:group>
+            </ui:group>
+        </ui:group>
+    </ui:json>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Confirm enumeration types ontologies" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:ConfirmImporterBatchJobs
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resources ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:prototype """
+<ui:group let:targetGraph=\"{= IRI(?graph) }\">
+    <p class=\"text-info\">The following graphs will be imported into '{= ?graph }':</p>
+    <ui:json ui:str=\"{= ?resources }\" ui:varName=\"resourcesArray\">
+        <ui:group letrs:sourceGraphs='{#
+                SELECT ?sourceGraph
+                WHERE {
+                    ?resourcesArray ui:jsonArrayMembers ?graphObject .
+                    BIND (ui:jsonString(ui:jsonValue(?graphObject, \"resource\")) AS ?sourceGraph) .
+                } }'>
+            <ui:group let:id=\"{= ui:uniqueId() }\">
+                <ui:group let:tableId=\"{= fn:concat(&quot;TBL_&quot;, ?id) }\">
+                    <div class=\"panel-body\">
+                        <button class=\"btn btn-primary btn-margin-right-8px\" onclick=\"edgAccordianForBatchJobs.cancel()\">Cancel</button>
+                        <button class=\"btn btn-primary btn-margin-right-8px\" onclick=\"edgAccordianForBatchJobs.clearSelection('{= ?tableId }')\">Clear Selections</button>
+                        <button class=\"btn btn-primary btn-margin-right-8px\" onclick=\"edgAccordianForBatchJobs.selectAll('{= ?tableId }')\">Replace All</button>
+                        <table class=\"swa-relevant-properties\" id=\"{= ?tableId }\">
+                            <thead class=\"swa-relevant-properties\">
+                                <tr class=\"swa-relevant-properties\">
+                                    <th class=\"swa-relevant-properties\">#</th>
+                                    <th class=\"swa-relevant-properties\">Enumerations Graph</th>
+                                    <th class=\"swa-relevant-properties\">Existing Content</th>
+                                    <th class=\"swa-relevant-properties\">Replace?</th>
+                                </tr>
+                            </thead>
+                            <tbody class=\"swa-relevant-properties\">
+                                <ui:forEach ui:indexVar=\"index\" ui:resultSet=\"{= ?sourceGraphs }\">
+                                    <ui:group let:id=\"{= ui:uniqueId() }\" let:sourceGraphURI=\"{= IRI(?sourceGraph) }\">
+                                        <tr class=\"swa-relevant-properties\" let:rowId=\"{= fn:concat(&quot;CB_&quot;, ?id) }\">
+                                            <td class=\"swa-relevant-properties\">{= ?index + 1 }</td>
+                                            <td class=\"swa-relevant-properties\" let:description=\"{= spl:objectInGraph(?sourceGraphURI, rdfs:comment, ?sourceGraphURI) }\">
+                                                <label for=\"{= ?rowId }\" title=\"{= ?sourceGraph }\">{= swa:labelInGraph(?sourceGraphURI, ?sourceGraphURI) }</label>
+                                            </td>
+                                            <td class=\"swa-relevant-properties\">
+                                                <ui:if ui:condition=\"{= bound(?sourceGraphURI) }\">
+                                                    <ui:setContext ui:queryGraph=\"{= ui:unionOfGraphs(ui:graphWithImports(?sourceGraphURI), ui:unionGraph) }\">
+                                                        <ui:call arg:graph=\"{= ui:graphWithImports(?sourceGraphURI) }\" arg:metaclass=\"{= edg:EnumerationClass }\" ui:template=\"{= edg:getClassesWithInstances }\" ui:varName=\"enumClasses\">
+                                                            <ui:forEach ui:resultSet=\"{= ?enumClasses }\">
+                                                                <ui:if ui:condition=\"{= ?instanceCount != 0 }\">
+                                                                    <ui:if ui:condition=\"{= bound(?targetGraph) }\">
+                                                                        <ui:group let:existingInstanceCount=\"{= edg:getClassInstanceCount(?class, ?targetGraph) }\">{= ?label } [{= ?existingInstanceCount }]</ui:group>
+                                                                    </ui:if>
+                                                                </ui:if>
+                                                            </ui:forEach>
+                                                        </ui:call>
+                                                    </ui:setContext>
+                                                </ui:if>
+                                            </td>
+                                            <td class=\"swa-relevant-properties\">
+                                                <div class=\"checkbox\">
+                                                    <input class=\"enumeration-checkbox\" data-uri=\"{= ?sourceGraph }\" id=\"{= ?rowId }\" type=\"checkbox\"/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </ui:group>
+                                </ui:forEach>
+                            </tbody>
+                        </table>
+                        <button class=\"btn btn-primary swa-float-right swa-margn-top-five\" onclick=\"edgAccordianForBatchJobs.executeBatchJobs('edg:PerformImportTasks','{= ?tableId }', '{= ?graph }')\">Perform Imports</button>
+                    </div>
+                </ui:group>
+            </ui:group>
+        </ui:group>
+    </ui:json>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Confirm importer batch jobs" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:CreateEDGenumerationTypesProjectPage
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:defaultValue teamwork:CreateProjectService ;
+      spl:optional true ;
+      spl:predicate arg:service ;
+      spl:valueType ui:Element ;
+      rdfs:comment "An alternative service to invoke on form submission instead of the default project creation service." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:additionalFormFields ;
+      spl:valueType ui:ViewElement ;
+      rdfs:comment "An optional ui:Element that renders additional form fields to include in the form." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:initFunction ;
+      spl:valueType xsd:string ;
+      rdfs:comment "Name of a JavaScript function to use instead of the default for initializing any dynamic elements on the page" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:pageType ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:prototype """
+<teamwork:Chrome arg:pageType=\"create-project-page\" arg:projectType=\"{= ?projectType }\" let:comment=\"{= spl:objectInGraph(?projectType, rdfs:comment, ui:graph) }\" let:hideDefaultNamespace=\"{= spl:objectInGraph(?projectType, teamwork:hideDefaultNamespaceInput, ui:graph) }\" let:projectTypeLabel=\"{= teamwork:singularProjectTypeLabel(?projectType) }\">
+    <h1>Create New {= ?projectTypeLabel }</h1>
+    <ui:if ui:condition=\"{= bound(?comment) }\">
+        <p>
+            <small class=\"text-muted\">
+                <em>{= ?comment }</em>
+            </small>
+        </p>
+    </ui:if>
+    <p>A new {= ?projectTypeLabel } will be created with yourself as the manager.</p>
+    <br/>
+    <form action=\"swp\" id=\"theForm\" let:owlImports=\"{#
+            SELECT (GROUP_CONCAT(?import) AS ?result)
+            WHERE {
+                GRAPH ui:graph {
+                    ?projectType teamwork:owlImports ?import .
+                } .
+            } }\" let:spinImports=\"{= spl:objectInGraph(?projectType, teamwork:spinImports, ui:graph) }\">
+        <input name=\"_viewClass\" type=\"hidden\" value=\"{= COALESCE(?service, teamwork:CreateProjectService) }\"/>
+        <input name=\"projectType\" type=\"hidden\" value=\"{= ?projectType }\"/>
+        <!-- TBD: change JAVA to accept a property-value list-->
+        <input name=\"rootClass\" type=\"hidden\" value=\"http://edg.topbraid.solutions/model/CustomEnumeratedValue\"/>
+        <input name=\"propertyValues\" type=\"hidden\" value=\"{['property':'{= str(teamwork:rootClass) }','value' :'{= str(edg:CustomEnumeratedValue) }]}\"/>
+        <!-- TBD: Ends -->
+        <ui:if ui:condition=\"{= bound(?subjectArea) &amp;&amp; isIRI(?subjectArea) }\">
+            <input name=\"subjectArea\" type=\"hidden\" value=\"&lt;{= ?subjectArea }&gt;\"/>
+        </ui:if>
+        <ui:if ui:condition=\"{= bound(?owlImports) }\">
+            <input name=\"owlImports\" type=\"hidden\" value=\"{= ?owlImports }\"/>
+        </ui:if>
+        <ui:if ui:condition=\"{= bound(?spinImports) }\">
+            <input name=\"spinImports\" type=\"hidden\" value=\"{= ?spinImports }\"/>
+        </ui:if>
+        <teamwork:CreateProjectLabelElement/>
+        <br/>
+        <ui:if ui:condition=\"{= swa:falseOrUnbound(?hideDefaultNamespace) }\">
+            <swa:LabeledElement arg:label=\"Default namespace\" let:ddn=\"{= teamwork:defaultDefaultNamespaceForProjectType(?projectType) }\">
+                <input class=\"form-control teamwork-default-create-project-page-namespace-input\" id=\"default-namespace-text\" name=\"defaultNamespace\" type=\"text\" value=\"{= ?ddn }\"/>
+                <ui:if ui:condition=\"{= CONTAINS(?ddn, &quot;{id}&quot;) }\">
+                    <script>teamwork.initDefaultNamespaceField()</script>
+                </ui:if>
+            </swa:LabeledElement>
+            <br/>
+        </ui:if>
+        <swa:LabeledElement arg:label=\"Description\">
+            <textarea class=\"form-control\" cols=\"80\" id=\"comment-area\" name=\"comment\" rows=\"4\"/>
+        </swa:LabeledElement>
+        <br/>
+        <teamwork:CreateProjectOptionsSection/>
+        <ui:if ui:condition=\"{= bound(?additionalFormFields) }\">
+            <ui:dynamicView ui:class=\"{= ?additionalFormFields }\"/>
+        </ui:if>
+        <ui:setContext let:template=\"{= COALESCE(spl:objectInGraph(?projectType, teamwork:editableImportsTemplate, ui:graph), teamwork:DefaultEditableImports) }\" ui:queryGraph=\"{= ui:graphWithImports(&lt;http://edg.topbraidlive.org/edgproduct&gt;) }\">
+            <ui:call arg:predicate=\"{= edg:requiredProjectType }\" arg:projectType=\"{= ?projectType }\" ui:template=\"{= teamwork:GetGraphProjectTypes }\" ui:varName=\"requiredProjectTypes\">
+                <ui:if ui:condition=\"{= spr:rowCount(?requiredProjectTypes) &gt; 0 }\">
+                    <ui:forEach ui:indexVar=\"index\" ui:resultSet=\"{= ?requiredProjectTypes }\">
+                        <teamwork:DisplayCreateProjectDropdown arg:index=\"{= ?index }\" arg:pType=\"{= ?graphType }\"/>
+                    </ui:forEach>
+                    <script>$(\".vocabSelect\").on('change', function() {
+	var $owlImportsInput = $('[name=\"owlImports\"]');
+	var initialOwlImports = $owlImportsInput.val();
+	var selectValue = $(this).val();
+	$owlImportsInput.val(initialOwlImports + ' ' + selectValue);
+	});</script>
+                    <div class=\"swa-margin-top-fifty\"/>
+                </ui:if>
+            </ui:call>
+        </ui:setContext>
+        <button class=\"btn btn-primary\" type=\"submit\">Create {= ?projectTypeLabel }</button>
+    </form>
+    <script>{= COALESCE(?initFunction, \"teamwork.initCreateForm\") }()</script>
+</teamwork:Chrome>
+"""^^ui:Literal ;
+  rdfs:comment "The default form page for creating a new project. Custom form widgets can be added via an insertion point." ;
+  rdfs:label "Create enumeration types project page" ;
+  rdfs:subClassOf teamwork:CreateProjectPages ;
+.
+edg:CreateEDGenumerationsProjectPage
+  a teamwork:CreateProjectPage ;
+  ui:prototype """
+<ui:group>
+    <teamwork:Chrome arg:pageType=\"create-project-page\" arg:projectType=\"{= ?projectType }\">
+        <h1>Create New {= teamwork:singularProjectTypeLabel(?projectType) }</h1>
+        <p>This creates a new {= teamwork:singularProjectTypeLabel(?projectType) } with yourself as the manager.</p>
+        <br/>
+        <form action=\"swp\" id=\"theForm\" let:owlImports=\"{#
+                SELECT (GROUP_CONCAT(?import) AS ?result)
+                WHERE {
+                    GRAPH ui:graph {
+                        ?projectType teamwork:owlImports ?import .
+                    } .
+                } }\" let:spinImports=\"{= spl:objectInGraph(?projectType, teamwork:spinImports, ui:graph) }\">
+            <input name=\"_viewClass\" type=\"hidden\" value=\"{= teamwork:CreateProjectService }\"/>
+            <input name=\"_snippet\" type=\"hidden\" value=\"true\"/>
+            <input name=\"projectType\" type=\"hidden\" value=\"{= ?projectType }\"/>
+            <ui:if ui:condition=\"{= bound(?subjectArea) &amp;&amp; isIRI(?subjectArea) }\">
+                <input name=\"subjectArea\" type=\"hidden\" value=\"&lt;{= ?subjectArea }&gt;\"/>
+            </ui:if>
+            <input id=\"owlImports\" name=\"owlImports\" type=\"hidden\" value=\"{= ?owlImports }\"/>
+            <ui:if ui:condition=\"{= bound(?spinImports) }\">
+                <input name=\"spinImports\" type=\"hidden\" value=\"{= ?spinImports }\"/>
+            </ui:if>
+            <edg:LabeledElement arg:label=\"Label\">
+                <input class=\"form-control rdmprojects-create-project-page-label-input { width: 400px; }\" id=\"label-text\" name=\"name\" type=\"text\"/>
+            </edg:LabeledElement>
+            <swa:LabeledElement arg:label=\"Description\">
+                <textarea class=\"form-control\" cols=\"80\" id=\"comment-area\" name=\"comment\" rows=\"4\"/>
+            </swa:LabeledElement>
+            <br/>
+            <ui:if ui:condition=\"{= tbl:dpCreateOption() }\">
+                <edg:LabeledElement arg:label=\"Data Platform\">
+                    <div class=\"checkbox\">
+                        <input id=\"data-platform-flag\" name=\"dataPlatform\" type=\"checkbox\" value=\"true\"/>
+                    </div>
+                </edg:LabeledElement>
+                <br/>
+            </ui:if>
+            <ui:if ui:condition=\"{= !swa:falseOrUnbound(cfg:disableLuceneIndexing) }\">
+                <swa:LabeledElement arg:label=\"Include in Lucene Index\">
+                    <div class=\"checkbox\">
+                        <input id=\"lucene-index-flag\" name=\"luceneIndex\" type=\"checkbox\" value=\"true\"/>
+                    </div>
+                </swa:LabeledElement>
+                <br/>
+            </ui:if>
+            <input class=\"btn btn-primary\" type=\"submit\" value=\"Submit\"/>
+        </form>
+        <script>teamwork.initCreateForm()</script>
+    </teamwork:Chrome>
+    <script>$(document).ready(function() {teamwork.initPopover()})</script>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Create EDG Enumerations Asset Collection" ;
+  rdfs:subClassOf teamwork:CreateProjectPages ;
+.
+edg:CreateEnumeratedValuesGraph
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resources ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:subjectArea ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group let:projectType=\"{= edg:EnumerationsProjectType }\">
+    <!--ui:dumpScope ui:message=\"AAA1: edg:CreateEnumeratedValuesGraph\"/-->
+    <ui:json ui:str=\"{= ?resources }\" ui:varName=\"resourcesArray\">
+        <ui:group letrs:enumTypesOntologies='{#
+                SELECT ?enumOntology
+                WHERE {
+                    ?resourcesArray ui:jsonArrayMembers ?graphObject .
+                    BIND (ui:jsonString(ui:jsonValue(?graphObject, \"resource\")) AS ?enumOntology) .
+                } }'>
+            <ui:if ui:condition=\"{= !spr:isEmpty(?enumTypesOntologies) }\">
+                <ui:forEach ui:indexVar=\"index\" ui:resultSet=\"{= ?enumTypesOntologies }\">
+                    <edg:SetupEnumerationTypesOntologies arg:graph=\"{= IRI(?enumOntology) }\"/>
+                </ui:forEach>
+            </ui:if>
+            <ui:group let:hideDefaultNamespace=\"{= spl:objectInGraph(?projectType, teamwork:hideDefaultNamespaceInput, ui:graph) }\">
+                <form action=\"swp\" id=\"theForm\" let:owlImports='{#
+                        SELECT (GROUP_CONCAT(?import) AS ?result)
+                        WHERE {
+                            {
+                                GRAPH ui:graph {
+                                    ?projectType teamwork:owlImports ?import .
+                                } .
+                            }
+                            UNION
+                            {
+                                {
+                                    SELECT ?import
+                                    WHERE {
+                                        ?resourcesArray ui:jsonArrayMembers ?graphObject .
+                                        BIND (ui:jsonString(ui:jsonValue(?graphObject, \"resource\")) AS ?import) .
+                                    }
+                                } .
+                            } .
+                        } }' let:spinImports=\"{= spl:objectInGraph(?projectType, teamwork:spinImports, ui:graph) }\">
+                    <!--ui:dumpScope ui:message=\"AAA2: edg:CreateEnumeratedValuesGraph}\"/-->
+                    <input name=\"_viewClass\" type=\"hidden\" value=\"{= COALESCE(?service, teamwork:CreateProjectService) }\"/>
+                    <input name=\"projectType\" type=\"hidden\" value=\"{= ?projectType }\"/>
+                    <ui:if ui:condition=\"{= bound(?subjectArea) &amp;&amp; isIRI(?subjectArea) }\">
+                        <input name=\"subjectArea\" type=\"hidden\" value=\"&lt;{= ?subjectArea }&gt;\"/>
+                    </ui:if>
+                    <ui:if ui:condition=\"{= bound(?owlImports) }\">
+                        <input name=\"owlImports\" type=\"hidden\" value=\"{= ?owlImports }\"/>
+                    </ui:if>
+                    <ui:if ui:condition=\"{= bound(?spinImports) }\">
+                        <input name=\"spinImports\" type=\"hidden\" value=\"{= ?spinImports }\"/>
+                    </ui:if>
+                    <teamwork:CreateProjectLabelElement/>
+                    <br/>
+                    <ui:if ui:condition=\"{= swa:falseOrUnbound(?hideDefaultNamespace) }\">
+                        <swa:LabeledElement arg:label=\"Default namespace\" let:ddn=\"{= teamwork:defaultDefaultNamespaceForProjectType(?projectType) }\">
+                            <input class=\"form-control teamwork-default-create-project-page-namespace-input\" id=\"default-namespace-text\" name=\"defaultNamespace\" type=\"text\" value=\"{= ?ddn }\"/>
+                            <ui:if ui:condition=\"{= CONTAINS(?ddn, &quot;{id}&quot;) }\">
+                                <script>teamwork.initDefaultNamespaceField()</script>
+                            </ui:if>
+                        </swa:LabeledElement>
+                        <br/>
+                        <swa:LabeledElement arg:label=\"Description\">
+                            <textarea class=\"form-control\" cols=\"80\" id=\"comment-area\" name=\"comment\" rows=\"4\"/>
+                        </swa:LabeledElement>
+                        <br/>
+                    </ui:if>
+                    <!--edg:ShowConfirmedEnumerationTypesOntologies/-->
+                    <button class=\"btn btn-primary\" type=\"submit\">Create {= ?projectTypeLabel }</button>
+                </form>
+                <script>{= COALESCE(?initFunction, \"teamwork.initCreateForm\") }()</script>
+            </ui:group>
+        </ui:group>
+    </ui:json>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Create Enumerated Values Graph" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:CreateEnumerationCollection
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:additionalFormFields ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group let:hideDefaultNamespace=\"{= spl:objectInGraph(?projectType, teamwork:hideDefaultNamespaceInput, ui:graph) }\">
+    <form action=\"swp\" id=\"theForm\" let:owlImports=\"{#
+            SELECT (GROUP_CONCAT(?import) AS ?result)
+            WHERE {
+                GRAPH ui:graph {
+                    ?projectType teamwork:owlImports ?import .
+                } .
+            } }\" let:spinImports=\"{= spl:objectInGraph(?projectType, teamwork:spinImports, ui:graph) }\">
+        <input name=\"_viewClass\" type=\"hidden\" value=\"{= COALESCE(?service, teamwork:CreateProjectService) }\"/>
+        <input name=\"projectType\" type=\"hidden\" value=\"{= ?projectType }\"/>
+        <ui:if ui:condition=\"{= bound(?subjectArea) &amp;&amp; isIRI(?subjectArea) }\">
+            <input name=\"subjectArea\" type=\"hidden\" value=\"&lt;{= ?subjectArea }&gt;\"/>
+        </ui:if>
+        <ui:if ui:condition=\"{= bound(?owlImports) }\">
+            <input name=\"owlImports\" type=\"hidden\" value=\"{= ?owlImports }\"/>
+        </ui:if>
+        <ui:if ui:condition=\"{= bound(?spinImports) }\">
+            <input name=\"spinImports\" type=\"hidden\" value=\"{= ?spinImports }\"/>
+        </ui:if>
+        <teamwork:CreateProjectLabelElement/>
+        <br/>
+        <ui:if ui:condition=\"{= swa:falseOrUnbound(?hideDefaultNamespace) }\">
+            <swa:LabeledElement arg:label=\"Default namespace\" let:ddn=\"{= teamwork:defaultDefaultNamespaceForProjectType(?projectType) }\">
+                <input class=\"form-control teamwork-default-create-project-page-namespace-input\" id=\"default-namespace-text\" name=\"defaultNamespace\" type=\"text\" value=\"{= ?ddn }\"/>
+                <ui:if ui:condition=\"{= CONTAINS(?ddn, &quot;{id}&quot;) }\">
+                    <script>teamwork.initDefaultNamespaceField()</script>
+                </ui:if>
+            </swa:LabeledElement>
+            <br/>
+        </ui:if>
+        <swa:LabeledElement arg:label=\"Description\">
+            <textarea class=\"form-control\" cols=\"80\" id=\"comment-area\" name=\"comment\" rows=\"4\"/>
+        </swa:LabeledElement>
+        <br/>
+        <teamwork:CreateProjectOptionsSection/>
+        <ui:if ui:condition=\"{= bound(?additionalFormFields) }\">
+            <ui:dynamicView ui:class=\"{= ?additionalFormFields }\"/>
+        </ui:if>
+        <ui:setContext let:template=\"{= COALESCE(spl:objectInGraph(?projectType, teamwork:editableImportsTemplate, ui:graph), teamwork:DefaultEditableImports) }\" ui:queryGraph=\"{= ui:graphWithImports(&lt;http://edg.topbraidlive.org/edgproduct&gt;) }\">
+            <ui:call arg:predicate=\"{= edg:requiredProjectType }\" arg:projectType=\"{= ?projectType }\" ui:template=\"{= teamwork:GetGraphProjectTypes }\" ui:varName=\"requiredProjectTypes\">
+                <ui:if ui:condition=\"{= spr:rowCount(?requiredProjectTypes) &gt; 0 }\">
+                    <ui:forEach ui:indexVar=\"index\" ui:resultSet=\"{= ?requiredProjectTypes }\">
+                        <teamwork:DisplayCreateProjectDropdown arg:index=\"{= ?index }\" arg:pType=\"{= ?graphType }\"/>
+                    </ui:forEach>
+                    <script>$(\".vocabSelect\").on('change', function() {
+	var $owlImportsInput = $('[name=\"owlImports\"]');
+	var initialOwlImports = $owlImportsInput.val();
+	var selectValue = $(this).val();
+	$owlImportsInput.val(initialOwlImports + ' ' + selectValue);
+	});</script>
+                    <div class=\"swa-margin-top-fifty\"/>
+                </ui:if>
+            </ui:call>
+        </ui:setContext>
+        <button class=\"btn btn-primary\" type=\"submit\">Create {= ?projectTypeLabel }</button>
+    </form>
+    <script>{= COALESCE(?initFunction, \"teamwork.initCreateForm\") }()</script>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Create enumeration collection" ;
+  rdfs:subClassOf teamwork:CreateProjectPages ;
+.
+edg:CreateEnumerationsAssetCollectionIncludeOntologyForm
+  a teamwork:CreateProjectPage ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectType ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <edg:LabeledElement arg:label=\"Schema or Ontology to Include\" arg:title=\"Why an 'Include'?\" arg:toolTip=\"Importing enumerations typically requires a class for the instances that will be imported. A schema or ontology can be specified below. Changes can be made in the 'settings' tab.\">
+        <ui:call ui:template=\"{= edg:EnumerationsEditableImports }\" ui:varName=\"schemaGraphs\">
+            <select class=\"form-control\" id=\"ontology\">
+                <option/>
+                <ui:forEach ui:resultSet=\"{= ?schemaGraphs }\">
+                    <option value=\"{= ?graph }\">{= ?label } (Schema)</option>
+                </ui:forEach>
+                <option disabled=\"disabled\">---</option>
+                <ui:forEach ui:resultSet=\"{#
+                        SELECT ?ontology ?label
+                        WHERE {
+                            rdf:nil teamwork:readableGraphsUnderTeamControl ( ?ontology ?teamGraph ) .
+                            BIND (teamwork:getProjectType(?ontology) AS ?ontologyType) .
+                            FILTER (?ontologyType = ontologyprojects:ProjectType) .
+                            BIND (teamwork:projectLabel(?ontology) AS ?label) .
+                        }
+                        ORDER BY (?label) }\">
+                    <option value=\"{= ?ontology }\">{= ?label } (Ontology)</option>
+                </ui:forEach>
+            </select>
+        </ui:call>
+        <script>$(\"#ontology\").change(function() { var sel = $(this).val(); $(\"#owlImports\").val(\"{= ?owlImports } \" + (sel ? sel : \"\")); });</script>
+    </edg:LabeledElement>
+</ui:group>
+"""^^ui:Literal ;
+  vaem:todo "DEPRECATED?" ;
+  rdfs:label "Create Enumerations Asset Collection - Include Ontology Form" ;
+  rdfs:subClassOf teamwork:CreateProjectPages ;
+.
+edg:CreateResourceDialogBodyForCustomEnumeration
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:contextResource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The (optional) context resource that will be passed into the create handler." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:createHandler ;
+      spl:valueType ui:NodeClass ;
+      rdfs:comment "A subclass of swa:CreateResourceHandler that shall be called when the dialog completes. This only needs to be specified if the callback is the default function swa.createResource()." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:label ;
+      spl:valueType xsd:string ;
+      rdfs:comment "An optional label to override the default label \"Create <label-of-type>\"." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:resourceSelectedEvent ;
+      spl:valueType xsd:string ;
+      rdfs:comment "An optional event that shall be published after the new resource has been created. The payload of this event will be the new URI." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:suppressTypeSelection ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to suppress the type selection box." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:callback ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The name of a JavaScript function that shall be called if the user Oks the dialog. This must take arguments as: function(typeURI, resourceURI, label, labelLang) where label and labelLang are optional." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:loadId ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The ui:loadId of the resulting ui:loadable." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The type of resource to create. If the type has subclasses, then a drop down box is displaying those alternatives." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:loadable let:abstractClassDynamicView=\"{= COALESCE(swa:bestCreateResourceDialogPlugin(?contextResource, ?resourceType), swa:CreateResourceDialogForAbstractClassPlugin) }\" let:nonAbstractClassDynamicView=\"{= COALESCE(swa:bestCreateResourceDialogPlugin(?contextResource, ?resourceType), swa:DefaultCreateResourceDialogPluginForAssetCollection) }\" ui:loadId=\"create-resource-dialog-body\">
+    <!--ui:dumpScope ui:message=\"AAA: edg:CreateResourceDialogBodyForCustomEnumeration\"/-->
+    <p class=\"text-info\">Enumeration Types must be defined in an Enumeration Ontology.</p>
+</ui:loadable>
+"""^^ui:Literal ;
+  rdfs:comment "Create dialog that can be used to create a new resource for the type-in-focus. By default the dialog presents input fields for the new URI, the label and a select box for the type, if subclasses exist. The actual contents and behavior of this dialog can however be customized via a plug-in mechanism." ;
+  rdfs:label "Create resource dialog for custom enumeration" ;
+  rdfs:subClassOf swa:DialogElements ;
+.
+edg:CustomEnumeratedValue
+  ui:instanceView """
+<ui:group ui:id=\"datatables-results\" ui:priority=\"{= 9 }\">
+    <!--ui:dumpScope ui:message=\"AAA: edg:CustomEnumeratedValue\"/-->
+    <swa:SimpleDataTableResults arg:createResourceHandler=\"{= edg:CreateEnumerationClassResourceHandler }\" arg:createService=\"edg:CreateResourceDialogForEnumerations\" arg:frozen=\"{= ?frozen }\" ui:args=\"*\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:CustomEnumerationClass
+  ui:instanceView """
+<ui:group ui:id=\"datatables-builder\" ui:priority=\"{= 9 }\">
+    <!--ui:dumpScope ui:message=\"AAA: edg:CustomEnumerationClass - datatables-builder\"/-->
+    <edg:EditableGridGadget arg:createService=\"{= edg:CreateResourceDialogBodyForCustomEnumeration }\" arg:deleteHandler=\"{= ?deleteHandler }\" arg:readOnly=\"{= ?frozen }\" arg:resourceSelectedEvent=\"{= ?instanceSelectedEvent }\" arg:resourceType=\"{= ?this }\" arg:rowCount=\"{= 20 }\" ui:args=\"*\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"datatables-results\" ui:priority=\"{= 9 }\">
+    <!--ui:dumpScope ui:message=\"AAA: edg:CustomEnumerationClass - datatables-results\"/-->
+    <swa:SimpleDataTableResults arg:createResourceHandler=\"{= edg:CreateResourceDialogBodyForCustomEnumeration }\" arg:createService=\"edg:CreateResourceDialogForEnumerations\" arg:frozen=\"{= ?frozen }\" ui:args=\"*\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"results-table-config\" ui:priority=\"{= 9 }\">
+    <!--ui:dumpScope ui:message=\"AAA: edg:CustomEnumerationClass - results-table-config\"/-->
+    <swon:Array>
+        <swon:Object>
+            <swon:Value arg:name=\"createService\" arg:value=\"{= edg:CreateResourceDialogBodyForCustomEnumeration }\"/>
+            <swon:Value arg:name=\"createResourceHandler\" arg:value=\"{= edg:CreateEnumerationClassResourceHandler }\"/>
+            <swon:Value arg:name=\"isDefault\">
+                <swon:Literal arg:value=\"{= true }\"/>
+            </swon:Value>
+        </swon:Object>
+    </swon:Array>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:CustomEnumerationViewpoint
+  ui:instanceView """
+<ui:group let:queryGraph=\"{= ui:currentQueryGraph() }\" ui:id=\"datatables-results\" ui:priority=\"{= 9 }\">
+    <!--ui:dumpScope ui:message=\"AAA: edg:CustomEnumerationViewpoint - datatables-results\"/-->
+    <swa:SimpleDataTableResults arg:createResourceHandler=\"{= edg:CreateEnumerationClassResourceHandler }\" arg:createService=\"edg:CreateResourceDialogBodyForCustomEnumeration\" arg:frozen=\"{= ?frozen }\" ui:args=\"*\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:DataTableResultsCallbackForEnumeration
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:dataGraph=\"{= swa:dataGraph() }\" let:enumeration=\"{= IRI(ui:getSessionAttribute(&quot;persistresource&quot;)) }\" let:masterGraph=\"{= teamwork:currentMasterGraph() }\">
+    <ui:group let:graphId=\"{= teamwork:graphIdFromGraph(?masterGraph) }\">
+        <!--ui:dumpScope ui:message=\"AAA: edg:DataTableResultsCallbackForEnumeration\"/-->
+        <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+            <swon:Object>
+                <swon:Value arg:name=\"data\">
+                    <swon:Array>
+                        <ui:forEach ui:resultSet=\"{#
+                                SELECT ?enumValue ?label ?literal ?code ?order ?definition
+                                WHERE {
+                                    ?enumValue a ?enumeration .
+                                    OPTIONAL {
+                                        ?enumValue dtype:literal ?literal .
+                                    } .
+                                    OPTIONAL {
+                                        ?enumValue dtype:code ?code .
+                                    } .
+                                    OPTIONAL {
+                                        ?enumValue dtype:order ?order .
+                                    } .
+                                    OPTIONAL {
+                                        ?enumValue skos:definition ?definition .
+                                    } .
+                                    BIND (ui:label(?enumValue) AS ?label) .
+                                }
+                                ORDER BY DESC (?label) (?enumValue) }\">
+                            <swon:Object>
+                                <swon:Value arg:name=\"uri\" arg:value=\"{= ?enumValue }\"/>
+                                <swon:Value arg:name=\"type\" arg:value=\"{= ui:label(?enumValue) }\"/>
+                                <swon:Value arg:name=\"label\" arg:value=\"{= ?label }\"/>
+                                <swon:Value arg:name=\"literal\" arg:value=\"{= ?literal }\"/>
+                                <swon:Value arg:name=\"code\" arg:value=\"{= ?code }\"/>
+                                <swon:Value arg:name=\"order\" arg:value=\"{= ?order }\"/>
+                                <swon:Value arg:name=\"definition\" arg:value=\"{= ?definition }\"/>
+                            </swon:Object>
+                        </ui:forEach>
+                    </swon:Array>
+                </swon:Value>
+            </swon:Object>
+        </ui:setContext>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:label "Data table results for enumerations" ;
+  rdfs:seeAlso edg:ResourceDataTableEnumerationColumns ;
+  rdfs:subClassOf edg:JSONServices ;
+.
+edg:EDGenumerationClass
+  rdfs:subClassOf edg:EnumerationViewpoint ;
+.
+edg:EDGenumerationsProjectType
+  a edg:EnumerationsCollectionType ;
+  edg:permittedProjectType edg:GlossaryProjectType ;
+  edg:permittedProjectType ontologyprojects:ProjectType ;
+  teamwork:createProjectPageClass edg:CreateEDGenumerationsProjectPage ;
+  teamwork:dashboardGadget tasks:TaskStatusDashboardGadget ;
+  teamwork:dashboardGadget teamwork:CompletenessDashboardGadget ;
+  teamwork:dashboardGadget teamwork:TagStatusDashboardGadget ;
+  teamwork:dashboardGadget teamwork:ValidationDashboardGadget ;
+  teamwork:deletePlugin teamwork:RemoveFromLuceneIndexDeletePlugin ;
+  teamwork:editableImportsTemplate edg:EnumerationsEditableImports ;
+  teamwork:editorProjectTabLabel "Enumerations" ;
+  teamwork:isReadOnlyTypeFunction edg:isReadOnlyType ;
+  teamwork:mainClass edg:EDGenumeratedValue ;
+  teamwork:navMenuLabel "EDG Enumerations" ;
+  teamwork:navigationTreeChildSelectTemplate rdmprojects:NavigationTreeChildSelectTemplate ;
+  teamwork:navigationTreeRootSelectTemplate rdmprojects:NavigationTreeRootSelectTemplate ;
+  teamwork:owlImports "http://edg.topbraid.solutions/1.0/schema/base" ;
+  teamwork:owlImports "http://edg.topbraid.solutions/1.0/schema/edg" ;
+  teamwork:owlImports "http://edg.topbraid.solutions/1.0/schema/enumerations" ;
+  teamwork:owlImports "http://edg.topbraid.solutions/1.0/schema/governance" ;
+  teamwork:owlImports "http://topbraid.org/metadata" ;
+  teamwork:owlImports "http://www.w3.org/2004/02/skos/core" ;
+  teamwork:projectEditorClass edg:ResultsModelEditor ;
+  teamwork:projectPlugin edg:EnumerationsBatchRDFfileImporterPlugin ;
+  teamwork:projectPlugin edg:EnumerationsSpreadsheetImporterPlugin ;
+  teamwork:projectPlugin edg:MainClassOverrideManagePlugin ;
+  teamwork:projectPlugin savedQueries:ExportSavedSPARQLQueriesPlugin ;
+  teamwork:projectPlugin savedQueries:SPARQLEndpointPlugin ;
+  teamwork:projectPlugin teamwork:ComparisonReportPlugin ;
+  teamwork:projectPlugin teamwork:DefaultNamespacePlugin ;
+  teamwork:projectPlugin teamwork:ExportSavedSearchPlugin ;
+  teamwork:projectPlugin teamwork:GeneralPlugins ;
+  teamwork:projectPlugin teamwork:GraphURIPlugin ;
+  teamwork:projectPlugin teamwork:ImportedByGeneralPlugin ;
+  teamwork:projectPlugin teamwork:ImportsGeneralPlugin ;
+  teamwork:projectPlugin teamwork:LocalSearchManagePlugin ;
+  teamwork:projectPlugin teamwork:NotificationsManagePlugin ;
+  teamwork:projectPlugin teamwork:ProblemsAndSuggestionsReportPlugin ;
+  teamwork:projectPlugin teamwork:PublishExportPlugin ;
+  teamwork:projectPlugin teamwork:RDFFileImporterPlugin ;
+  teamwork:projectPlugin teamwork:ScriptBasedImportPlugin ;
+  teamwork:projectPlugin teamwork:SetImportSubjectAreaGraphsPlugin ;
+  teamwork:projectPlugin teamwork:SetPerResourceGovernanceRolesManagePlugin ;
+  teamwork:projectPlugin teamwork:SetSimpleSearchModePlugin ;
+  teamwork:projectPlugin teamwork:StatisticsReportPlugin ;
+  teamwork:projectPlugin teamwork:URIConstructionRulesManagePlugin ;
+  teamwork:projectTypeWeight 112 ;
+  teamwork:singletonDefaultNamespace "http://edg.topbraid.solutions/model/" ;
+  teamwork:singletonId "edg_enumerations_singleton" ;
+  teamwork:singularLabel "EDG Enumeration Collection" ;
+  teamwork:supportedNotification tasks:TaskCreatedNotification ;
+  teamwork:supportedNotification tasks:TaskStatusChangedNotification ;
+  teamwork:supportedNotification teamwork:FileImportedNotification ;
+  teamwork:supportedNotification teamwork:SpreadsheetImportedNotification ;
+  teamwork:supportedNotification teamwork:TagCreatedNotification ;
+  teamwork:supportedNotification teamwork:TagStatusChangedNotification ;
+  teamwork:supportedNotification teamwork:VocabularyClearedNotification ;
+  teamwork:supportedNotification teamwork:VocabularyStatusChangedNotification ;
+  teamwork:vocabularyType edg:EDGenumerationsProject ;
+  rdfs:comment "The EDG Enumeration Collection stores the specification of enumerated values and code lists needed by EDG" ;
+  rdfs:label "EDG Enumerations" ;
+.
+edg:EnumerationGadget
+  a ui:NodeClass ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:queryGraph=\"{= ui:currentQueryGraph() }\">
+    <!--ui:dumpScope ui:message=\"AAA1: edg:EnumerationGadget - {= ?focusNode }\"/-->
+    <ui:loadable class=\"swa-labeled-objects\" ui:loadId=\"{= ui:uniqueId() }\">
+        <!--div class=\"swa-objects-group\">
+<div class=\"swa-sub-title\">Enumerated Values</div>
+<swa:Subjects arg:object=\"{= ?focusNode }\" arg:predicate=\"rdf:type\"/>
+</div-->
+        <edg:ResourceInstancesDataTable arg:canEdit=\"{= true }\" arg:columnService=\"{= edg:ResourceDataTableEnumerationColumns }\" arg:createService=\"{= edg:EnumerationGadgetCreateEnumeratedValueDialog }\" arg:dataEndpoint=\"{= edg:DataTableResultsCallbackForEnumeration }\" arg:noneText=\"No enumerated values\" arg:resource=\"{= ?focusNode }\" arg:resourceType=\"{= edg:CustomEnumerationClass }\"/>
+    </ui:loadable>
+</ui:group>
+"""^^ui:Literal ;
+  vaem:todo """Why is this not possible?
+
+<edg:ResourceInstancesInlineEditingDataTable arg:columnService=\"edg:ResourceDataTableEnumerationColumns\"
+                                                     arg:createService=\"edg:CreateEnumeratedValueDialog\"
+                                                     arg:dataEndpoint=\"edg:DataTableResultsCallbackForEnumeration\"
+                                                     arg:noneText=\"No enumerated values\"
+                                                     arg:resource=\"{= ?focusNode }\"
+                                                     arg:resourceType=\"edg:CustomEnumerationClass\"/>""" ;
+  rdfs:comment "The gadget for enumerated values of an enumeration." ;
+  rdfs:label "Enumeration Gadget" ;
+  rdfs:subClassOf swa:PathElements ;
+.
+edg:EnumerationGadgetCreateEnumeratedValueDialog
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:contextResource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The (optional) context resource that will be passed into the create handler." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:createHandler ;
+      spl:valueType ui:NodeClass ;
+      rdfs:comment "A subclass of swa:CreateResourceHandler that shall be called when the dialog completes. This only needs to be specified if the callback is the default function swa.createResource()." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:label ;
+      spl:valueType xsd:string ;
+      rdfs:comment "An optional label to override the default label \"Create <label-of-type>\"." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:resourceSelectedEvent ;
+      spl:valueType xsd:string ;
+      rdfs:comment "An optional event that shall be published after the new resource has been created. The payload of this event will be the new URI." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:suppressTypeSelection ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to suppress the type selection box." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:callback ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The name of a JavaScript function that shall be called if the user Oks the dialog. This must take arguments as: function(typeURI, resourceURI, label, labelLang) where label and labelLang are optional." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:loadId ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The ui:loadId of the resulting ui:loadable." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The type of resource to create. If the type has subclasses, then a drop down box is displaying those alternatives." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <ui:group let:context=\"{= ui:contextValue(&quot;swaAppName&quot;) }\">
+        <!--ui:dumpScope ui:message=\"AAA1: edg:CreateEnumeratedValueDialog\"/-->
+        <ui:group let:ignoreURIconfigParameters=\"{= fn:contains(?context, &quot;Ontology&quot;) || fn:contains(?context, &quot;EVN&quot;) }\">
+            <ui:if ui:condition=\"{= ?ignoreURIconfigParameters }\">
+                <!--ui:dumpScope ui:message=\"AAA2: edg:CreateEnumeratedValueDialog\"/-->
+                <swa:CreateResourceDialogBody arg:resourceType=\"{= ?contextResource }\" ui:args=\"*\"/>
+            </ui:if>
+            <ui:else>
+                <!--ui:dumpScope ui:message=\"AAA3: edg:CreateEnumeratedValueDialog\"/-->
+                <swa:DefaultCreateResourceDialogPluginForAssetCollection arg:resourceType=\"{= ?contextResource }\" ui:args=\"*\"/>
+            </ui:else>
+        </ui:group>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "The EDG create dialog that creates a new instance of an enumeration specified in 'contextResource'." ;
+  rdfs:label "Enumeration gadget create enumerated value dialog" ;
+  rdfs:seeAlso swa:CreateResourceDialog ;
+  rdfs:subClassOf swa:DialogElements ;
+.
+edg:EnumerationSurrogate
+  ui:instanceView """
+<ui:group ui:id=\"spreadsheet-importer-type\" ui:priority=\"{= 10 }\">
+    <edg:EnumerationsSpreadsheetImportPreviewPage arg:customHandler=\"{= ?customHandler }\" arg:importId=\"{= ?importId }\" arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\" arg:targetType=\"{= ?targetType }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:EnumerationTypesAssetPage
+  a ui:NodeClass ;
+  ui:private true ;
+  ui:prototype """
+<div let:loadId=\"{= ui:uniqueId() }\" let:myProjectType=\"{= edg:EnumerationTypesOntologyProjectType }\" let:user=\"{= smf:userWithName(smf:currentUserName()) }\">
+    <!--ui:dumpScope ui:message=\"AAA: edg:EnumerationTypesAssetPage\"/-->
+    <swa:BrowserCheck/>
+    <teamwork:Chrome arg:pageType=\"project-type-page\" arg:projectType=\"{= ?myProjectType }\">
+        <ui:if ui:condition=\"{= teamwork:canCreateProject() }\">
+            <div>
+                <ui:if ui:condition=\"{= teamwork:isGraphStoreConfigured() }\">
+                    <ui:if ui:condition=\"{= !teamwork:isSingletonProjectType(?myProjectType) }\">
+                        <ui:createLink arg:projectType=\"{= ?myProjectType }\" ui:viewClass=\"{= COALESCE(spl:objectInGraph(?myProjectType, teamwork:createProjectPageClass, ui:graph), teamwork:DefaultCreateProjectPage) }\">
+                            <a class=\"btn btn-primary\" href=\"{= ?link }\">Create New {= teamwork:singularProjectTypeLabel(?myProjectType) }</a>
+                        </ui:createLink>
+                    </ui:if>
+                </ui:if>
+                <ui:else>
+                    <span title=\"Please contact your administrator to use the {= teamwork:getProductAbbreviation() } Configuration administration page as described in the documentation.\">Create New {= teamwork:singularProjectTypeLabel(?projectType) }</span>
+                </ui:else>
+            </div>
+        </ui:if>
+        <ui:loadable ui:loadId=\"{= ?loadId }\">
+            <ui:group>
+                <ui:dynamicView ui:class=\"{= spl:objectInGraph(?myProjectType, teamwork:extraCreateProjectSectionClass, ui:graph) }\"/>
+                <div class=\"teamwork-project-type-section-keyword-spacing\"/>
+                <section class=\"teamwork-with-icon\">
+                    <div class=\"icon\">
+                        <governance:Icon arg:type=\"{= ?myProjectType }\"/>
+                    </div>
+                    <h2 class=\"teamwork-assets-title\">{= teamwork:pluralProjectTypeLabel(?myProjectType) }</h2>
+                </section>
+                <div data-project-type=\"{= ?myProjectType }\" id=\"project-page-type\">
+                    <swa:SimpleDataTableResults/>
+                </div>
+                <ui:if ui:condition=\"{= teamwork:isExplorerUser(?user) &amp;&amp; teamwork:currentUserHasProjectTypeGraphs(?myProjectType) }\">
+                    <teamwork:PublishedProjectSummaryGroup arg:filterKeyword=\"{= ?filterKeyword }\" arg:projectType=\"{= ?myProjectType }\" arg:user=\"{= ?user }\"/>
+                </ui:if>
+            </ui:group>
+        </ui:loadable>
+    </teamwork:Chrome>
+</div>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:comment "Manages editing and creating of Enumeration Types ontologies." ;
+  rdfs:label "Enumeration types Asset Page" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:EnumerationTypesOntologyBuilder
+  a ui:NodeClass ;
+  ui:headIncludes """
+<ui:group>
+    <title>TopBraid {= teamwork:getProductAbbreviation() } Ontology Editor</title>
+    <script>(function(){ teamwork.initRichTextEditors(); })();</script>
+</ui:group>
+"""^^ui:Literal ;
+  ui:prototype """
+<ui:group>
+    <teamwork:EditorChrome arg:projectType=\"{= teamwork:getProjectType(teamwork:currentMasterGraph()) }\">
+        <p>Arrived in Enumeration Types Ontology for {= ?projectType }</p>
+        <p>Show a table of existing enumeration types using data tables</p>
+        <p>How do we get back to Enumerations project?</p>
+    </teamwork:EditorChrome>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Enumeration Types Ontology Builder" ;
+  rdfs:subClassOf swa:ClosableSearchBarEast ;
+  rdfs:subClassOf teamwork:EditorApplications ;
+.
+edg:EnumerationTypesOntologyProjectType
+  a teamwork:ProjectType ;
+  teamwork:createProjectPageClass edg:CreateEDGenumerationTypesProjectPage ;
+  teamwork:dashboardGadget tasks:TaskStatusDashboardGadget ;
+  teamwork:dashboardGadget teamwork:TagStatusDashboardGadget ;
+  teamwork:dashboardGadget teamwork:ValidationDashboardGadget ;
+  teamwork:deletePlugin teamwork:RemoveFromLuceneIndexDeletePlugin ;
+  teamwork:editableImportsTemplate ontologyprojects:EditableImports ;
+  teamwork:editorProjectTabLabel "Enumeration Types Ontology" ;
+  teamwork:isOntologyProjectType true ;
+  teamwork:isReadOnlyTypeFunction ontologyprojects:isReadOnlyType ;
+  teamwork:mainClass edg:CustomEnumeratedValue ;
+  teamwork:owlImports "http://datashapes.org/dash" ;
+  teamwork:owlImports "http://datashapes.org/graphql" ;
+  teamwork:owlImports "http://edg.topbraid.solutions/1.0/schema/enumerations" ;
+  teamwork:owlImports "http://topbraid.org/teamworkconstraints" ;
+  teamwork:pluralLabel "Enumeration Types Ontologies" ;
+  teamwork:projectEditorClass <http://topbraid.org/swa/ontologyapp#Application> ;
+  teamwork:projectPlugin crosswalkprojects:CrosswalksGeneralPlugin ;
+  teamwork:projectPlugin ontologyprojects:NoInstancesManagePlugin ;
+  teamwork:projectPlugin ontologyprojects:OWL2SHACLPlugin ;
+  teamwork:projectPlugin ontologyprojects:RootClassManagePlugin ;
+  teamwork:projectPlugin ontologyprojects:SHACLPreferredManagePlugin ;
+  teamwork:projectPlugin savedQueries:ExportSavedSPARQLQueriesPlugin ;
+  teamwork:projectPlugin savedQueries:SPARQLEndpointPlugin ;
+  teamwork:projectPlugin teamwork:ComparisonReportPlugin ;
+  teamwork:projectPlugin teamwork:DefaultNamespacePlugin ;
+  teamwork:projectPlugin teamwork:ExportSavedSearchPlugin ;
+  teamwork:projectPlugin teamwork:GeneralPlugins ;
+  teamwork:projectPlugin teamwork:GraphURIPlugin ;
+  teamwork:projectPlugin teamwork:ImportedByGeneralPlugin ;
+  teamwork:projectPlugin teamwork:ImportsGeneralPlugin ;
+  teamwork:projectPlugin teamwork:LocalSearchManagePlugin ;
+  teamwork:projectPlugin teamwork:NotificationsManagePlugin ;
+  teamwork:projectPlugin teamwork:ProblemsAndSuggestionsReportPlugin ;
+  teamwork:projectPlugin teamwork:PublishExportPlugin ;
+  teamwork:projectPlugin teamwork:RDFFileImporterPlugin ;
+  teamwork:projectPlugin teamwork:SchemaFromSpreadsheetImportPlugin ;
+  teamwork:projectPlugin teamwork:ScriptBasedImportPlugin ;
+  teamwork:projectPlugin teamwork:SpreadsheetImportPlugin ;
+  teamwork:projectPlugin teamwork:SpreadsheetUsingTemplateImportPlugin ;
+  teamwork:projectPlugin teamwork:StatisticsReportPlugin ;
+  teamwork:projectTypeSupportsUsageTab true ;
+  teamwork:projectTypeWeight 6 ;
+  teamwork:singularLabel "Enumeration Types Ontology" ;
+  teamwork:supportedNotification tasks:TaskCreatedNotification ;
+  teamwork:supportedNotification tasks:TaskStatusChangedNotification ;
+  teamwork:supportedNotification teamwork:FileImportedNotification ;
+  teamwork:supportedNotification teamwork:SpreadsheetImportedNotification ;
+  teamwork:supportedNotification teamwork:TagCreatedNotification ;
+  teamwork:supportedNotification teamwork:TagStatusChangedNotification ;
+  teamwork:supportedNotification teamwork:VocabularyClearedNotification ;
+  teamwork:supportedNotification teamwork:VocabularyStatusChangedNotification ;
+  teamwork:templateQuery teamwork:ResourceWithURI ;
+  teamwork:templateQuery teamwork:ResourcesByURIPart ;
+  teamwork:templateQuery teamwork:ResourcesByURIRegex ;
+  teamwork:vocabularyType edg:EnumerationTypesOntology ;
+  teamwork:vocabularyType ontologyprojects:Ontology ;
+  rdfs:comment "'Enumeration Types Ontologies' are models that define the enumeration classes for enumerated values (entities)." ;
+  rdfs:label "Enumeration Types Ontology Project Type" ;
+.
+edg:EnumerationsBatchRDFfileImporter
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:customHandler ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:errorPrototype """
+<ui:group let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+        <ui:if ui:condition=\"{= (!bound(?teamGraph)) || (!teamwork:currentUserHasPrivilege(COALESCE(?tag, ?teamGraph), teamwork:editor, ?teamGraph)) }\">
+            <teamwork:ErrorPage arg:message=\"You need to be editor of this {= IF(bound(?tag), &quot;working copy&quot;, &quot;vocabulary&quot;) } to upload files into it.\"/>
+        </ui:if>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  ui:headIncludes """
+<ui:group>
+    <meta content=\"edg:EnumerationsBatchRDFfileImporter\" name=\"edg-manifest-start\"/>
+    <script src=\"{= ui:lib() }/edg/js/edg-accordianForBatchJobs.js\"/>
+    <meta content=\"edg:EnumerationsBatchRDFfileImporter\" name=\"edg-manifest-end\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:prototype """
+<ui:group let:projectType=\"{= teamwork:getProjectType(?projectGraph) }\" let:targetGraph=\"{= ?projectGraph }\">
+    <ui:setContext ui:queryGraph=\"{= ui:unionOfGraphs(ui:graphWithImports(?targetGraph), ui:unionGraph) }\">
+        <ui:group let:editorLink=\"{= teamwork:makeEditorLink(?targetGraph, rdf:nil, ?tag) }\" let:graphId=\"{= teamwork:currentGraphId() }\" let:workflowName=\"{= teamwork:tagId(?tag) }\">
+            <teamwork:Chrome arg:pageType=\"accordian-for-batch-jobs\" arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= teamwork:ImportProjectTab }\" arg:tag=\"{= ?tag }\">
+                <ui:group let:collectionQualifier=\"{= IF(bound(?tag), CONCAT(?workflowName, IF(fn:contains(fn:lower-case(?workflowName), &quot;workflow&quot;), &quot;&quot;, &quot; workflow&quot;)), &quot;&quot;) }\" let:progressId=\"{= ui:uniqueId() }\">
+                    <h1>Batch Importer of Enumerations File(s)</h1>
+                    <p class=\"text-info\">Selected RDF files will be added to the <a href=\"{= ?editorLink }\">
+                            <span>
+                                <strong>{= swa:labelInGraph(?targetGraph, ?targetGraph) }</strong>
+                            </span>
+                        </a>&nbsp;{= teamwork:singularProjectTypeLabel(?projectType) }&nbsp;{= ?collectionQualifier }.</p>
+                    <div id=\"accordianForBatchJobs-canvas\">
+                        <ui:call arg:projectGraph=\"{= ?projectGraph }\" ui:template=\"{= edg:EnumerationsEditableImports }\" ui:varName=\"enumFiles\" vaem:hasGraphRole=\"{= vaem:CodelistGraph }\">
+                            <ui:group let:graphCount=\"{= spr:rowCount(?enumFiles) }\">
+                                <ui:if ui:condition=\"{= ?graphCount = 0 }\">
+                                    <p class=\"text-info\">No enumeration files were found. Check the source graphs have a metadata statement on the ontology instance using <em>vaem:hasGraphRole</em> with the value <em>vaem:CodelistGraph</em>
+                                    </p>
+                                </ui:if>
+                                <ui:else>
+                                    <div id=\"accordianForBatchJobs\">
+                                        <div class=\"panel-heading\">
+                                            <h4 class=\"text-info\">
+                                                <strong>1.</strong> Enumeration Sources</h4>
+                                        </div>
+                                        <div class=\"panel-body\" let:id=\"{= ui:uniqueId() }\">
+                                            <ui:group let:tableId=\"{= fn:concat(&quot;TBL_&quot;, ?id) }\">
+                                                <button class=\"btn btn-primary btn-margin-right-8px\" onclick=\"edgAccordianForBatchJobs.clearSelection('{= ?tableId }')\">Clear Selections</button>
+                                                <button class=\"btn btn-primary btn-margin-right-8px\" onclick=\"edgAccordianForBatchJobs.selectAll('{= ?tableId }')\">Select All</button>
+                                                <table class=\"swa-relevant-properties\" id=\"{= ?tableId }\">
+                                                    <thead class=\"swa-relevant-properties\">
+                                                        <tr class=\"swa-relevant-properties\">
+                                                            <th class=\"swa-relevant-properties\">Enumerations Graph</th>
+                                                            <th class=\"swa-relevant-properties\">Contents</th>
+                                                            <th class=\"swa-relevant-properties\">Accept?</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class=\"swa-relevant-properties\">
+                                                        <ui:forEach ui:indexVar=\"index\" ui:resultSet=\"{= ?enumFiles }\">
+                                                            <ui:group let:id=\"{= ui:uniqueId() }\" let:summaryText=\"{= edg:makeClassInstancesCountSummary(?graph, edg:EnumerationClass) }\">
+                                                                <ui:if ui:condition=\"{= fn:string-length(?summaryText) &gt; 1 }\">
+                                                                    <tr class=\"swa-relevant-properties\" let:rowId=\"{= fn:concat(&quot;CB_&quot;, ?id) }\">
+                                                                        <td class=\"swa-relevant-properties\" let:description=\"{= spl:objectInGraph(?graph, rdfs:comment, ?graph) }\">
+                                                                            <label for=\"{= ?rowId }\" title=\"{= str(?graph) }\">{= swa:labelInGraph(?graph, ?graph) }</label>
+                                                                        </td>
+                                                                        <td class=\"swa-relevant-properties\">{= ?summaryText }</td>
+                                                                        <td class=\"swa-relevant-properties\">
+                                                                            <div class=\"checkbox\">
+                                                                                <input class=\"enumeration-checkbox\" data-uri=\"{= str(?graph) }\" id=\"{= ?rowId }\" type=\"checkbox\"/>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </ui:if>
+                                                            </ui:group>
+                                                        </ui:forEach>
+                                                    </tbody>
+                                                </table>
+                                                <button class=\"btn btn-primary swa-float-right swa-margn-top-five\" onclick=\"edgAccordianForBatchJobs.acceptSelection('edg:ConfirmImporterBatchJobs', '{= str(?projectGraph) }','{= ?tableId }')\">Accept Selections</button>
+                                            </ui:group>
+                                        </div>
+                                        <div class=\"panel-heading\">
+                                            <h4 class=\"text-info\">
+                                                <strong>2.</strong> Confirm Imports</h4>
+                                        </div>
+                                        <div class=\"panel-body\" id=\"accordianForBatchJobs-jobs\"/>
+                                        <div class=\"panel-heading\">
+                                            <h4 class=\"text-info\">
+                                                <strong>3.</strong> Import Log</h4>
+                                        </div>
+                                        <div class=\"panel-body\" id=\"accordianForBatchJobs-log\"/>
+                                    </div>
+                                </ui:else>
+                            </ui:group>
+                        </ui:call>
+                    </div>
+                </ui:group>
+            </teamwork:Chrome>
+        </ui:group>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Imports one or more RDF files  having a specific graph role, such as 'CodeList' to the current project" ;
+  rdfs:label "Enumerations batch RDF file importer" ;
+  rdfs:subClassOf edg:Elements ;
+  rdfs:subClassOf teamwork:MustHaveAccessToTagPage ;
+.
+edg:EnumerationsBatchRDFfileImporterPlugin
+  a teamwork:ImportPlugin ;
+  teamwork:pluginIndex 10 ;
+  teamwork:validForACResults true ;
+  teamwork:validForTags true ;
+  ui:prototype """
+<ui:createLink arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\" ui:viewClass=\"{= edg:EnumerationsBatchRDFfileImporter }\">
+    <teamwork:ActionLink arg:comment=\"Adds RDF triples to an enumerations collection from one or more selected enumerations files.\" arg:icon=\"lib/teamwork/build/images/teamwork/icon-rdf.svg\" arg:link=\"{= ?link }\" arg:title=\"Enumerations Batch Importer\"/>
+</ui:createLink>
+"""^^ui:Literal ;
+  rdfs:label "Enumerations batch importer plugin" ;
+  rdfs:subClassOf teamwork:ImportPlugins ;
+.
+edg:EnumerationsCollectionType
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  ui:instanceView """
+<ui:group let:projectGraph=\"{= ?projGraph }\" ui:id=\"edg-edit-imports\" ui:priority=\"{= -1 }\">
+    <!--ui:dumpScope ui:message=\"AAA: edg:EnumerationsCollectionType\"/-->
+    <ui:setContext ui:queryGraph=\"{= ui:unionOfGraphs(ui:graphWithImports(?projectGraph), ui:graph) }\">
+        <swon:Object>
+            <ui:setContext let:template=\"{= COALESCE(spl:objectInGraph(?this, teamwork:editableImportsTemplate, ui:graph), teamwork:DefaultEditableImports) }\">
+                <ui:call arg:projectGraph=\"{= ?projectGraph }\" ui:template=\"{= ?template }\" ui:varName=\"initialGraphsList\">
+                    <ui:group letrs:allGraphs='{#
+                            SELECT DISTINCT ?graph ?label ?pType
+                            WHERE {
+                                {
+                                    ?initialGraphsList spr:rowIndices ?rowIndex .
+                                    BIND (spr:cell(?initialGraphsList, ?rowIndex, 0) AS ?graph) .
+                                    BIND (spr:cell(?initialGraphsList, ?rowIndex, 1) AS ?label) .
+                                } .
+                                BIND (teamwork:singularProjectTypeLabel(teamwork:getProjectType(?graph)) AS ?maybePtype) .
+                                BIND (COALESCE(?maybePtype, \"zzz\") AS ?pType) .
+                            }
+                            ORDER BY (?pType) }'>
+                        <swon:Value arg:name=\"projectGraph\" arg:value=\"{= ?projectGraph }\"/>
+                        <swon:Value arg:name=\"projectLabel\" arg:value=\"{= teamwork:projectLabel(?projectGraph) }\"/>
+                        <teamwork:GenerateJSONforAvailableGraphsInclusion arg:projectGraph=\"{= ?projectGraph }\" arg:projectType=\"{= ?this }\" arg:resultSet=\"{= ?allGraphs }\"/>
+                        <teamwork:GenerateJSONforRequiredProjectTypeGraphsInclusion arg:projectGraph=\"{= ?projectGraph }\" arg:projectType=\"{= ?this }\" arg:resultSet=\"{= ?allGraphs }\"/>
+                        <teamwork:GenerateJSONforImportedGraphs arg:projectGraph=\"{= ?projectGraph }\" arg:projectType=\"{= ?this }\" arg:resultSet=\"{= ?allGraphs }\"/>
+                    </ui:group>
+                </ui:call>
+            </ui:setContext>
+        </swon:Object>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  vaem:todo "[RH20190301] - Is this needed?" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/enumerations> ;
+  rdfs:subClassOf edg:ProjectType ;
+.
+edg:EnumerationsCreateProjectPage
+  a ui:NodeClass ;
+  ui:private true ;
+  ui:prototype """
+<edg:GuidedCreateEnumeratiedValuesProjectPage arg:additionalFormFields=\"{= edg:EnumerationsCreateProjectPageFormFields }\" ui:args=\"*\"/>
+"""^^ui:Literal ;
+  rdfs:label "Create project page" ;
+  rdfs:subClassOf teamwork:CreateProjectPages ;
+.
+edg:EnumerationsCreateProjectPageFormFields
+  a ui:NodeClass ;
+  ui:private true ;
+  ui:prototype """
+<swa:LabeledElement arg:label=\"Includes\">
+    <ui:forEach ui:resultSet=\"{#
+            SELECT ?schema ?schemaLabel
+            WHERE {
+                rdf:nil teamwork:readableGraphsUnderTeamControl ( ?schema ?tch ) .
+                BIND (teamwork:getProjectType(?schema) AS ?pt) .
+                GRAPH ?schema {
+                    ?schema vaem:hasGraphRole edg:EnumerationsOntology .
+                } .
+                BIND (teamwork:projectLabel(?schema) AS ?schemaLabel) .
+            }
+            ORDER BY (LCASE(?schemaLabel)) }\">
+        <div class=\"checkbox\" let:id=\"{= ui:uniqueId() }\">
+            <input class=\"teamwork-datagraph-imports-box\" id=\"{= ?id }\" type=\"checkbox\" value=\"{= ?schema }\"/>
+            <label for=\"{= ?id }\">
+                <a href=\"{= teamwork:editorLink(?schema) }\" target=\"_blank\">{= ?schemaLabel }</a>
+            </label>
+        </div>
+        <script>$('.teamwork-datagraph-imports-box').change(function() { teamwork.updateDataGraphOWLImports() })</script>
+    </ui:forEach>
+</swa:LabeledElement>
+"""^^ui:Literal ;
+  rdfs:label "Create project page form fields" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:EnumerationsEditableImports
+  a teamwork:EditableImportsTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:distinct true ;
+      sp:orderBy (
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "graph" ;
+          ]
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              a sp:Bind ;
+              sp:expression [
+                  a sp:coalesce ;
+                  sp:arg1 [
+                      sp:varName "hasGraphRole" ;
+                    ] ;
+                  sp:arg2 vaem:SchemaGraph ;
+                ] ;
+              sp:variable [
+                  sp:varName "graphRole" ;
+                ] ;
+            ]
+            (
+              (
+                [
+                  sp:object [
+                      sp:varName "?0" ;
+                    ] ;
+                  sp:predicate tops:files ;
+                  sp:subject [
+                      sp:varName "file" ;
+                    ] ;
+                ]
+                [
+                  sp:object "/" ;
+                  sp:predicate rdf:first ;
+                  sp:subject [
+                      sp:varName "?0" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "?1" ;
+                    ] ;
+                  sp:predicate rdf:rest ;
+                  sp:subject [
+                      sp:varName "?0" ;
+                    ] ;
+                ]
+                [
+                  sp:object true ;
+                  sp:predicate rdf:first ;
+                  sp:subject [
+                      sp:varName "?1" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "?2" ;
+                    ] ;
+                  sp:predicate rdf:rest ;
+                  sp:subject [
+                      sp:varName "?1" ;
+                    ] ;
+                ]
+                [
+                  sp:object false ;
+                  sp:predicate rdf:first ;
+                  sp:subject [
+                      sp:varName "?2" ;
+                    ] ;
+                ]
+                [
+                  sp:object () ;
+                  sp:predicate rdf:rest ;
+                  sp:subject [
+                      sp:varName "?2" ;
+                    ] ;
+                ]
+                [
+                  a sp:Filter ;
+                  sp:expression [
+                      a sp:and ;
+                      sp:arg1 [
+                          a sp:contains ;
+                          sp:arg1 [
+                              a sp:str ;
+                              sp:arg1 [
+                                  sp:varName "file" ;
+                                ] ;
+                            ] ;
+                          sp:arg2 ".ttl" ;
+                        ] ;
+                      sp:arg2 [
+                          a sp:contains ;
+                          sp:arg1 [
+                              a sp:str ;
+                              sp:arg1 [
+                                  sp:varName "file" ;
+                                ] ;
+                            ] ;
+                          sp:arg2 "CODELIST" ;
+                        ] ;
+                    ] ;
+                ]
+              )
+              [
+                a sp:Bind ;
+                sp:expression [
+                    a smf:baseURI ;
+                    sp:arg1 [
+                        sp:varName "file" ;
+                      ] ;
+                  ] ;
+                sp:variable [
+                    sp:varName "graph" ;
+                  ] ;
+              ]
+              [
+                a sp:Filter ;
+                sp:expression [
+                    a sp:and ;
+                    sp:arg1 [
+                        a sp:bound ;
+                        sp:arg1 [
+                            sp:varName "graph" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        a sp:not ;
+                        sp:arg1 [
+                            a fn:ends-with ;
+                            sp:arg1 [
+                                a sp:str ;
+                                sp:arg1 [
+                                    sp:varName "graph" ;
+                                  ] ;
+                              ] ;
+                            sp:arg2 ".tch" ;
+                          ] ;
+                      ] ;
+                  ] ;
+              ]
+            )
+            [
+              a sp:Bind ;
+              sp:expression [
+                  a sp:iri ;
+                  sp:arg1 [
+                      sp:varName "graph" ;
+                    ] ;
+                ] ;
+              sp:variable [
+                  sp:varName "graphURI" ;
+                ] ;
+            ]
+            [
+              a sp:Filter ;
+              sp:expression [
+                  a sp:eq ;
+                  sp:arg1 [
+                      a edg:getGraphRole ;
+                      arg:graph [
+                          sp:varName "graphURI" ;
+                        ] ;
+                    ] ;
+                  sp:arg2 [
+                      sp:varName "graphRole" ;
+                    ] ;
+                ] ;
+            ]
+            [
+              a sp:Filter ;
+              sp:expression [
+                  a sp:and ;
+                  sp:arg1 [
+                      a sp:bound ;
+                      sp:arg1 [
+                          sp:varName "projectGraph" ;
+                        ] ;
+                    ] ;
+                  sp:arg2 [
+                      a sp:ne ;
+                      sp:arg1 [
+                          sp:varName "graph" ;
+                        ] ;
+                      sp:arg2 [
+                          sp:varName "projectGraph" ;
+                        ] ;
+                    ] ;
+                ] ;
+            ]
+          )
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:coalesce ;
+                sp:arg1 [
+                    a teamwork:projectLabel ;
+                    arg:projectGraph [
+                        sp:varName "graph" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a swa:labelInGraph ;
+                    arg:resource [
+                        sp:varName "graph" ;
+                      ] ;
+                    arg:resourceGraph [
+                        sp:varName "graph" ;
+                      ] ;
+                  ] ;
+                sp:arg3 [
+                    a sp:str ;
+                    sp:arg1 [
+                        sp:varName "graph" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "label" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate vaem:hasGraphRole ;
+      spl:valueType vaem:GraphRole ;
+    ] ;
+  rdfs:label "Enumerations Collection Editable imports" ;
+  rdfs:subClassOf teamwork:EditableImportsTemplates ;
+.
+edg:EnumerationsHelpPage
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group let:userName=\"{= IF(smf:hasCurrentUser(), smf:currentUserName(), &quot;Anonymous&quot;) }\">
+    <ui:group let:user=\"{= IRI(CONCAT(&quot;urn:x-tb-users:&quot;, ?userName)) }\">
+        <div>
+            <p class=\"text-info\">Enumeration types are classes defined in an ontology. Only Ontologies that use GraphQL features can be used to define enumeration types. 
+Enumeration Classes must be identified in the Ontology, as follows:</p>
+            <ol>
+                <li class=\"text-info\">they must be defined as SHACL node shapes</li>
+                <li class=\"text-info\">they must define the property and value: <span class=\"edg-boxed-text\">vaem:hasGraphRole edg:EnumerationsOntology</span> on the ontology resource</li>
+                <li class=\"text-info\">they must be declared <em>public</em> for the open <em>Enumeration Ontology</em> in the GraphQL Schema section of the class form</li>
+            </ol>
+            <p class=\"text-info\">This page looks after all of these steps.</p>
+        </div>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/project/enumerations> ;
+  rdfs:label "Enumerations help page" ;
+  rdfs:subClassOf edg:HelpPage ;
+.
+edg:EnumerationsProject
+  a sh:NodeShape ;
+  rdfs:label "Enumerations" ;
+  rdfs:subClassOf ontologyprojects:Ontology ;
+.
+edg:EnumerationsProjectType
+  a edg:EnumerationsCollectionType ;
+  edg:permittedProjectType edg:EDGenumerationsProjectType ;
+  edg:permittedProjectType edg:EnumerationsProjectType ;
+  edg:permittedProjectType edg:GlossaryProjectType ;
+  edg:permittedProjectType rdmprojects:ProjectType ;
+  edg:requiredProjectType edg:EnumerationTypesOntologyProjectType ;
+  edg.v:icon "fa-list-ol" ;
+  teamwork:createProjectPageClass edg:EnumerationsCreateProjectPage ;
+  teamwork:dashboardGadget tasks:TaskStatusDashboardGadget ;
+  teamwork:dashboardGadget teamwork:CompletenessDashboardGadget ;
+  teamwork:dashboardGadget teamwork:TagStatusDashboardGadget ;
+  teamwork:dashboardGadget teamwork:ValidationDashboardGadget ;
+  teamwork:deletePlugin teamwork:RemoveFromLuceneIndexDeletePlugin ;
+  teamwork:editorProjectTabLabel "Enumerations" ;
+  teamwork:isDataGraphProjectType true ;
+  teamwork:isReadOnlyTypeFunction edg:isReadOnlyType ;
+  teamwork:mainClass edg:CustomEnumerationViewpoint ;
+  teamwork:navMenuLabel "Enumerations" ;
+  teamwork:navigationTreeChildSelectTemplate rdmprojects:NavigationTreeChildSelectTemplate ;
+  teamwork:navigationTreeRootSelectTemplate rdmprojects:NavigationTreeRootSelectTemplate ;
+  teamwork:owlImports "http://edg.topbraid.solutions/1.0/schema/base" ;
+  teamwork:owlImports "http://edg.topbraid.solutions/1.0/schema/edg" ;
+  teamwork:owlImports "http://edg.topbraid.solutions/1.0/schema/enumerations" ;
+  teamwork:owlImports "http://edg.topbraid.solutions/1.0/schema/governance" ;
+  teamwork:owlImports "http://topbraid.org/metadata" ;
+  teamwork:owlImports "http://www.w3.org/2004/02/skos/core" ;
+  teamwork:pluralLabel "Enumeration Collections" ;
+  teamwork:projectEditorClass edg:ResultsModelEditor ;
+  teamwork:projectPlugin edg:EnumerationsSpreadsheetImporterPlugin ;
+  teamwork:projectPlugin edg:MainClassOverrideManagePlugin ;
+  teamwork:projectPlugin savedQueries:ExportSavedSPARQLQueriesPlugin ;
+  teamwork:projectPlugin savedQueries:SPARQLEndpointPlugin ;
+  teamwork:projectPlugin teamwork:ComparisonReportPlugin ;
+  teamwork:projectPlugin teamwork:DefaultNamespacePlugin ;
+  teamwork:projectPlugin teamwork:ExportSavedSearchPlugin ;
+  teamwork:projectPlugin teamwork:GeneralPlugins ;
+  teamwork:projectPlugin teamwork:GraphURIPlugin ;
+  teamwork:projectPlugin teamwork:ImportedByGeneralPlugin ;
+  teamwork:projectPlugin teamwork:ImportsGeneralPlugin ;
+  teamwork:projectPlugin teamwork:LocalSearchManagePlugin ;
+  teamwork:projectPlugin teamwork:NotificationsManagePlugin ;
+  teamwork:projectPlugin teamwork:ProblemsAndSuggestionsReportPlugin ;
+  teamwork:projectPlugin teamwork:PublishExportPlugin ;
+  teamwork:projectPlugin teamwork:RDFFileImporterPlugin ;
+  teamwork:projectPlugin teamwork:ScriptBasedImportPlugin ;
+  teamwork:projectPlugin teamwork:SetImportSubjectAreaGraphsPlugin ;
+  teamwork:projectPlugin teamwork:SetPerResourceGovernanceRolesManagePlugin ;
+  teamwork:projectPlugin teamwork:StatisticsReportPlugin ;
+  teamwork:projectTypeWeight -65 ;
+  teamwork:singularLabel "Enumeration Collection" ;
+  teamwork:supportedNotification tasks:TaskCreatedNotification ;
+  teamwork:supportedNotification tasks:TaskStatusChangedNotification ;
+  teamwork:supportedNotification teamwork:FileImportedNotification ;
+  teamwork:supportedNotification teamwork:SpreadsheetImportedNotification ;
+  teamwork:supportedNotification teamwork:TagCreatedNotification ;
+  teamwork:supportedNotification teamwork:TagStatusChangedNotification ;
+  teamwork:supportedNotification teamwork:VocabularyClearedNotification ;
+  teamwork:supportedNotification teamwork:VocabularyStatusChangedNotification ;
+  teamwork:vocabularyType edg:EnumerationsProject ;
+  vaem:todo """[RH20191104]: Resolve the need for this statement which I have removed:
+
+teamwork:editableImportsTemplate edg:EnumerationsEditableImports ;""" ;
+  rdfs:comment "Enumeration Collections store the specification of enumerated values and code lists" ;
+  rdfs:label "Enumerations" ;
+.
+edg:EnumerationsSpreadsheetImportPreviewPage
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group let:importService=\"edg:EnumerationsSpreadsheetImporterService\">
+    <script src=\"{= ui:lib() }/edg/js/edg-accordianForBatchJobs.js\"/>
+    <h1>Spreadsheet Importer for Enumerations - Preview</h1>
+    <teamwork:SpreadsheetPreview arg:importId=\"{= ?importId }\"/>
+    <br/>
+    <button class=\"btn btn-primary btn-margin-right-8px\" id=\"cancelButton\" onclick=\"edgAccordianForBatchJobs.cancelImport('edg:SpreadsheetImporterForEnumerationsPage','{= ?projectGraph }')\" type=\"button\">Cancel</button>
+    <button class=\"btn btn-primary btn-margin-right-8px\" id=\"importButton\" onclick=\"edgAccordianForBatchJobs.executeImport('edg:SpreadsheetImporterForEnumerationsPage','{= ?projectGraph }','{= ?importService }','{= ?importId }')\" type=\"button\">Import</button>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Enumerations spreadsheet importer preview page" ;
+  rdfs:subClassOf teamwork:AbstractSpreadsheetImportPage ;
+.
+edg:EnumerationsSpreadsheetImporterPlugin
+  a teamwork:ImportPlugin ;
+  teamwork:pluginIndex 10 ;
+  teamwork:validForACResults true ;
+  teamwork:validForTags true ;
+  ui:prototype """
+<ui:createLink arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\" ui:viewClass=\"{= edg:SpreadsheetImporterForEnumerationsPage }\">
+    <teamwork:ActionLink arg:comment=\"Imports spreadsheet based on EDG-supplied template for enumerations.\" arg:icon=\"lib/teamwork/build/images/teamwork/icon-rdf.svg\" arg:link=\"{= ?link }\" arg:title=\"Enumerations Spreadsheet Importer\"/>
+</ui:createLink>
+"""^^ui:Literal ;
+  rdfs:label "Enumerations spreadsheet importer plugin" ;
+  rdfs:subClassOf teamwork:ImportPlugins ;
+.
+edg:EnumerationsSpreadsheetImporterService
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:fileName ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The file name, if available." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:file ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The serialization of an RDF file, according to the format." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:importId ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:overwrite ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:tag ;
+      spl:valueType teamwork:Tag ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:namespace=\"{= edg-importer:getDefaultNamespace(?projectGraph) }\">
+    <!--ui:dumpScope ui:message=\"AAA: edg:EnumerationsSpreadsheetImporterService\"/-->
+    <ui:group letrs:colRS=\"{#
+            SELECT *
+            WHERE {
+                ?property tables:columnIndex ?colIndex .
+                ?property rdfs:label ?label .
+            }
+            ORDER BY (?colIndex) }\">
+        <ui:setContext ui:queryGraph=\"{= teamwork:importGraphWithId(?importId) }\">
+            <ui:forEach ui:resultSet=\"{#
+                    SELECT ?row
+                    WHERE {
+                        ?row tables:rowIndex ?rowIndex .
+                    }
+                    ORDER BY (?rowIndex) }\">
+                <ui:update ui:updateQuery=\"{!
+                        INSERT {
+                            GRAPH ?projectGraph {
+                                ?enumClassURI a edg:CustomEnumerationClass .
+                                ?enumClassURI rdfs:label ?enumClassLabel .
+                                ?enumClassURI rdfs:subClassOf edg:EnumeratedValue .
+                                ?enumValueURI a ?enumClassURI .
+                                ?enumValueURI rdfs:label ?enumValueLabel .
+                                ?enumValueURI dtype:literal ?enumValueLiteral .
+                                ?enumValueURI dtype:code ?enumValueCode .
+                                ?enumValueURI dtype:order ?enumValueOrder .
+                                ?enumValueURI rdfs:comment ?enumValueDescription .
+                            } .
+                        }
+                        WHERE {
+                            ?enumClass tables:columnIndex 0 .
+                            BIND (spl:object(?row, ?enumClass) AS ?enumClassLabel) .
+                            BIND (IRI(CONCAT(?namespace, spif:camelCase(?enumClassLabel))) AS ?enumClassURI) .
+                            ?enumValue tables:columnIndex 1 .
+                            BIND (spl:object(?row, ?enumValue) AS ?enumValueLabel) .
+                            BIND (IRI(CONCAT(?namespace, spif:camelCase(?enumClassLabel), &quot;_&quot;, spif:camelCase(?enumValueLabel))) AS ?enumValueURI) .
+                            ?enumLiteral tables:columnIndex 2 .
+                            BIND (spl:object(?row, ?enumLiteral) AS ?enumValueLiteral) .
+                            ?enumCode tables:columnIndex 3 .
+                            BIND (spl:object(?row, ?enumCode) AS ?enumValueCode) .
+                            ?enumOrder tables:columnIndex 4 .
+                            BIND (spl:object(?row, ?enumOrder) AS ?enumValueOrder) .
+                            ?enumDesc tables:columnIndex 5 .
+                            BIND (spl:object(?row, ?enumDesc) AS ?enumValueDescription) .
+                        } }\"/>
+            </ui:forEach>
+            <!--ui:dumpGraph ui:filePath=\"/www.sandbox.com/enums.ttl\" ui:graph=\"{= ?projectGraph }\"/-->
+        </ui:setContext>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Enumerations spreadsheet importer service" ;
+  rdfs:subClassOf edg:Services ;
+.
+edg:GuidedCreateEnumeratiedValuesProjectPage
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:defaultValue teamwork:CreateProjectService ;
+      spl:optional true ;
+      spl:predicate arg:service ;
+      spl:valueType ui:Element ;
+      rdfs:comment "An alternative service to invoke on form submission instead of the default project creation service." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:additionalFormFields ;
+      spl:valueType ui:ViewElement ;
+      rdfs:comment "An optional ui:Element that renders additional form fields to include in the form." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:initFunction ;
+      spl:valueType xsd:string ;
+      rdfs:comment "Name of a JavaScript function to use instead of the default for initializing any dynamic elements on the page" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:pageType ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:headIncludes """
+<ui:group>
+    <meta content=\"edg:DefaultEnumerationtCreateProjectPage\" name=\"edg-manifest-start\"/>
+    <script src=\"{= ui:lib() }/edg/js/edg-accordion.js\"/>
+    <meta content=\"edg:DefaultEnumerationtCreateProjectPage\" name=\"edg-manifest-end\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:prototype """
+<teamwork:Chrome arg:pageType=\"create-project-page\" arg:projectType=\"{= ?projectType }\" let:comment=\"{= spl:objectInGraph(?projectType, rdfs:comment, ui:graph) }\" let:enumerationTypesOntologyProjectType=\"{= edg:EnumerationTypesOntologyProjectType }\" let:enumsId=\"{= ui:uniqueId() }\" let:projectTypeLabel=\"{= teamwork:singularProjectTypeLabel(?projectType) }\">
+    <div data-page-type=\"accordion\" id=\"accordion-canvas\">
+        <section class=\"teamwork-with-icon\">
+            <div class=\"icon\">
+                <i class=\"governance-icon icon-block fa fa-list-ol\"/>
+            </div>
+            <div class=\"size20px pt10px dark-blue\" style=\"font-weight: bold;\">New Enumeration Instances Collection</div>
+        </section>
+        <div class=\"size12px; blue\">
+            <p>Enumerations are based on one or more <em>Enumeration Ontologies</em>.
+<a data-icon=\"fa-question-circle\" onclick=\"javascript:swa.populateModalDialogAskingForBody('edg:EnumerationsHelpPage','Enumerations Help',null)\">
+                    <i class=\"fa-question-circle fa\"/>
+                </a>
+            </p>
+            <p>This dialog takes you through the steps to create a new {= ?projectTypeLabel } with yourself as the manager.</p>
+        </div>
+        <ui:call ui:template=\"{= edg:getEnumerationOntologies }\" ui:varName=\"enumOntologies\">
+            <div id=\"accordion-container\">
+                <div class=\"panel-heading\">
+                    <div class=\"text-info size18px\">
+                        <strong>1.</strong> Choose, or Create, Enumeration Ontologies</div>
+                </div>
+                <div class=\"panel-body\" let:id=\"{= ui:uniqueId() }\">
+                    <div class=\"size14px; blue\">
+                        <p>Enumerated values are instances of <em>Enumeration Types</em> specified in an <em>Enumeration Ontology</em>.</p>
+                    </div>
+                    <ui:group let:tableId=\"TABLE-{= ?id }\">
+                        <div class=\"pb10px\">
+                            <button class=\"btn btn-primary btn-margin-right-8px\" onclick=\"edgAccordion.clearSelection('{= ?tableId }')\">Clear Selections</button>
+                            <button class=\"btn btn-primary btn-margin-right-8px\" onclick=\"edgAccordion.selectAll('{= ?tableId }')\">Select All</button>
+                            <button class=\"btn btn-primary btn-margin-right-8px\" onclick=\"edgAccordion.acceptSelection('edg:ConfirmEnumerationTypesOntologies', '{= str(?subjectArea) }','{= ?tableId }')\">Accept Selections</button>
+                            <div class=\"float-right\">
+                                <ui:createLink arg:projectType=\"{= ?enumerationTypesOntologyProjectType }\" ui:viewClass=\"{= edg:EnumerationTypesAssetPage }\">
+                                    <a class=\"btn btn-primary\" href=\"{= ?link }\">Create {= teamwork:singularProjectTypeLabel(?enumerationTypesOntologyProjectType) }</a>
+                                </ui:createLink>
+                            </div>
+                        </div>
+                        <table class=\"swa-relevant-properties\" id=\"{= ?tableId }\">
+                            <thead class=\"swa-relevant-properties\">
+                                <tr class=\"swa-relevant-properties\">
+                                    <th class=\"swa-relevant-properties\">Enumeration Types Ontology</th>
+                                    <th class=\"swa-relevant-properties\">Enumeration Types</th>
+                                    <th class=\"swa-relevant-properties\">Accept?</th>
+                                </tr>
+                            </thead>
+                            <tbody class=\"swa-relevant-properties\">
+                                <ui:forEach ui:indexVar=\"index\" ui:resultSet=\"{= ?enumOntologies }\">
+                                    <ui:group let:id=\"{= ui:uniqueId() }\">
+                                        <tr class=\"swa-relevant-properties\" let:rowId=\"{= fn:concat(&quot;CB_&quot;, ?id) }\">
+                                            <td class=\"swa-relevant-properties\" let:description=\"{= spl:objectInGraph(?schema, rdfs:comment, ?schema) }\">
+                                                <label for=\"{= ?rowId }\" title=\"{= str(?graph) }\">
+                                                    <a class=\"underline\" href=\"{= edg:createEditorHref(?schema) }\">{= swa:labelInGraph(?schema, ?schema) }</a>
+                                                </label>
+                                            </td>
+                                            <td class=\"swa-relevant-properties\">
+                                                <edg:ListSubjectsForGivenPropertyAndObjectInGraph arg:class=\"{= edg:EnumerationClass }\" arg:filterFunction=\"{= edg:isNotAbstract }\" arg:graph=\"{= ?schema }\" arg:object=\"{= edg:CustomEnumerationClass }\" arg:property=\"{= rdf:type }\"/>
+                                            </td>
+                                            <td class=\"swa-relevant-properties\">
+                                                <div class=\"checkbox\">
+                                                    <input class=\"enumeration-checkbox\" data-uri=\"{= str(?schema) }\" id=\"{= ?rowId }\" type=\"checkbox\"/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </ui:group>
+                                </ui:forEach>
+                            </tbody>
+                        </table>
+                    </ui:group>
+                </div>
+                <div class=\"panel-heading\">
+                    <div class=\"text-info size18px\">
+                        <strong>2.</strong> Confirm Enumeration Types Ontologies</div>
+                </div>
+                <div class=\"panel-body\" id=\"accordion-job1\"/>
+                <div class=\"panel-heading\">
+                    <div class=\"text-info size18px\">
+                        <strong>3.</strong> Create Enumerated Values Instances Graph</div>
+                </div>
+                <div class=\"panel-body\" id=\"accordion-job2\">
+                    <edg:CreateEnumerationCollection arg:additionalFormFields=\"{= ?additionalFormFields }\" arg:projectType=\"{= ?projectType }\" arg:subjectArea=\"{= ?subjectArea }\" ui:args=\"*\"/>
+                </div>
+            </div>
+        </ui:call>
+    </div>
+</teamwork:Chrome>
+"""^^ui:Literal ;
+  rdfs:comment "The form page for creating a new enumerations collection." ;
+  rdfs:label "Guided Create Enumerated Values Project Page" ;
+  rdfs:seeAlso edg:ConfirmEnumerationTypesOntologies ;
+  rdfs:seeAlso edg:CreateEnumeratedValuesGraph ;
+  rdfs:seeAlso edg:EnumerationTypesAssetPage ;
+  rdfs:subClassOf teamwork:CreateProjectPages ;
+.
+edg:ImportSpreadsheet
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:tag ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:try>
+        <form action=\"evnimportFileUpload\" enctype=\"multipart/form-data\" id=\"theForm\" method=\"post\">
+            <input name=\"file\" onchange=\"document.getElementById('submitButton').removeAttribute('disabled');\" required=\"required\" type=\"file\"/>
+            <input name=\"projectGraph\" type=\"hidden\" value=\"{= ?projectGraph }\"/>
+            <input name=\"tag\" type=\"hidden\" value=\"{= ?tag }\"/>
+            <input name=\"customHandler\" type=\"hidden\" value=\"{= ?customHandler }\"/>
+            <br/>
+            <br/>
+            <teamwork:CustomHandlerArgs arg:handler=\"{= ?customHandler }\"/>
+            <teamwork:SpreadsheetFileTypesList/>
+            <br/>
+            <span title=\"Excel sheets are numbered starting at 1 for the leftmost sheet. Only one sheet can be imported at a time. To import multiple sheets, run this wizard multiple times.\">Sheet index (for Excel, optional): </span>
+            <input class=\"form-control\" name=\"sheetIndex\" type=\"text\" value=\"1\"/>
+            <br/>
+            <br/>
+            <span title=\"Each row of the spreadsheet will be imported as an instance of the entity (class) chosen here.  If no concepts appear here, go to the General tab and include an ontology with the Includes link.  The set of concepts will then appear as the set of classes defined in the ontology.\">Entity type for the imported data: </span>
+            <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(teamwork:projectOrTagGraph(?projectGraph, ?tag)) }\">
+                <select class=\"form-control vocabSelect\" let:mainClass=\"{= edg:EnumerationSurrogate }\" name=\"targetType\">
+                    <option selected=\"selected\" value=\"{= ?mainClass }\">{= ui:label(?mainClass) }</option>
+                </select>
+                <br/>
+                <br/>
+                <button class=\"btn btn-primary\" id=\"submitButton\" onclick=\"handleSubmit()\" type=\"submit\">Next</button>
+                <span id=\"loader\"/>
+            </ui:setContext>
+        </form>
+    </ui:try>
+    <ui:catch>
+        <div>The import can not proceed: {= STRAFTER(str(?exception), \"SWPException:\") }</div>
+    </ui:catch>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/dashboards/governance> ;
+  rdfs:label "Import spreadsheet" ;
+  rdfs:subClassOf edg:Elements ;
+  rdfs:subClassOf teamwork:AbstractSpreadsheetImportFileUploadPage ;
+  rdfs:subClassOf teamwork:AbstractSpreadsheetImportPage ;
+.
+edg:ListSubjectsForGivenPropertyAndObjectInGraph
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:filterFunction ;
+      spl:valueType spin:Function ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:limit ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:class ;
+      spl:valueType rdfs:Class ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:object ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:property ;
+      spl:valueType rdf:Property ;
+    ] ;
+  ui:prototype """
+<ui:group let:myLimit=\"{= COALESCE(?limit, 10) }\">
+    <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?graph) }\">
+        <ui:call arg:class=\"{= ?class }\" arg:filterFunction=\"{= ?filterFunction }\" arg:property=\"{= ?property }\" arg:resource=\"{= ?object }\" ui:template=\"{= edg:getSubjectsForGivenPropertyAndObject }\" ui:varName=\"resources\">
+            <ui:if ui:condition=\"{= spr:isEmpty(?resources) }\">
+                <span class=\"text-danger\">No Enumeration Types defined</span>
+            </ui:if>
+            <ui:else>
+                <ui:forEach ui:limit=\"{= ?myLimit }\" ui:resultSet=\"{= ?resources }\" ui:separator=\", \">
+                    <a href=\"{= edg:createEditorHref(?graph, ?value) }\">{= ?label }</a>
+                </ui:forEach>
+                <ui:group let:count=\"{= spr:rowCount(?resources) }\">
+                    <ui:if ui:condition=\"{= ?count &gt; ?myLimit }\">
+                        <span>&nbsp;[{= str((?count - ?myLimit)) } more]</span>
+                    </ui:if>
+                </ui:group>
+            </ui:else>
+        </ui:call>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "List subjects for given property and object in graph" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:PerformImportTasks
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:sourceAugmentGraphs ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:sourceReplaceGraphs ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:targetGraph ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:prototype """
+<ui:group let:targetGraphURI=\"{= IRI(?targetGraph) }\">
+    <ui:json ui:str=\"{= ?sourceAugmentGraphs }\" ui:varName=\"resourcesArray\">
+        <ui:group letrs:importSources='{#
+                SELECT ?sourceGraph
+                WHERE {
+                    ?resourcesArray ui:jsonArrayMembers ?graphObject .
+                    BIND (ui:jsonString(ui:jsonValue(?graphObject, \"resource\")) AS ?sourceGraph) .
+                } }'>
+            <ui:if ui:condition=\"{= !spr:isEmpty(?importSources) }\">
+                <p class=\"text-info\">The following augment graphs have been imported into '{= ?targetGraph }':</p>
+                <ui:task ui:taskName=\"Importing Enumerations...\" ui:totalWork=\"{= spr:rowCount(?importSources) }\">
+                    <ui:forEach ui:indexVar=\"index\" ui:resultSet=\"{= ?importSources }\">
+                        <ui:subTask ui:subTaskName=\"{= str(?sourceGraph) } ({= ?index + 1 } of {= spr:rowCount(?importSources) })\" ui:work=\"{= 1 }\">
+                            <p>Import augmented content with {= ?sourceGraph }</p>
+                            <edg:PerformSingleImportTask arg:delete=\"{= false }\" arg:sourceGraph=\"{= IRI(?sourceGraph) }\" arg:targetGraph=\"{= ?targetGraphURI }\"/>
+                        </ui:subTask>
+                    </ui:forEach>
+                </ui:task>
+            </ui:if>
+        </ui:group>
+    </ui:json>
+    <ui:json ui:str=\"{= ?sourceReplaceGraphs }\" ui:varName=\"resourcesArray\">
+        <ui:group letrs:importReplacesSources='{#
+                SELECT ?sourceGraph
+                WHERE {
+                    ?resourcesArray ui:jsonArrayMembers ?graphObject .
+                    BIND (ui:jsonString(ui:jsonValue(?graphObject, \"resource\")) AS ?sourceGraph) .
+                } }'>
+            <ui:if ui:condition=\"{= !spr:isEmpty(?importReplacesSources) }\">
+                <p class=\"text-info\">The following graphs have replaced content in '{= ?targetGraph }':</p>
+                <ui:task ui:taskName=\"Importing Enumerations (with replace)...\" ui:totalWork=\"{= spr:rowCount(?importReplacesSources) }\">
+                    <ui:forEach ui:indexVar=\"index\" ui:resultSet=\"{= ?importReplacesSources }\">
+                        <ui:subTask ui:subTaskName=\"{= str(?sourceGraph) } ({= ?index + 1 } of {= spr:rowCount(?importReplacesSources) })\" ui:work=\"{= 1 }\">
+                            <p>Import replaced content with {= ?sourceGraph }</p>
+                            <edg:PerformSingleImportTask arg:delete=\"{= true }\" arg:sourceGraph=\"{= IRI(?sourceGraph) }\" arg:targetGraph=\"{= ?targetGraphURI }\"/>
+                        </ui:subTask>
+                    </ui:forEach>
+                </ui:task>
+            </ui:if>
+        </ui:group>
+    </ui:json>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Perform import tasks" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:PerformSingleImportTask
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:delete ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:sourceGraph ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:targetGraph ;
+      spl:valueType xsd:string ;
+    ] ;
+  ui:prototype """
+<ui:group let:sourceGraphURI=\"{= IRI(?sourceGraph) }\" let:targetGraphURI=\"{= IRI(?targetGraph) }\">
+    <ui:setContext ui:queryGraph=\"{= ui:unionOfGraphs(ui:graphWithoutImports(?sourceGraphURI), ui:unionGraph) }\">
+        <ui:call arg:graph=\"{= ui:graphWithImports(?sourceGraphURI) }\" arg:metaclass=\"{= edg:EnumerationClass }\" ui:template=\"{= edg:getClassesWithInstances }\" ui:varName=\"enumClasses\">
+            <ui:group let:enumClassesCount=\"{= spr:rowCount(?enumClasses) }\">
+                <ui:setContext ui:silentTransactions=\"{= true }\">
+                    <ui:transaction ui:logMessage=\"Importing {= ?enumClasses } enumerations from {= ?sourceGraph } into {= ?targetGraph }\">
+                        <ui:if ui:condition=\"{= ?delete }\">
+                            <ui:update ui:updateQuery=\"{!
+                                    DELETE {
+                                        GRAPH ?targetGraphURI {
+                                            ?value ?vp ?vo .
+                                            ?enum ?ep ?eo .
+                                        } .
+                                    }
+                                    WHERE {
+                                        ?enumClasses spr:rowIndices ( ?row ) .
+                                        BIND (spr:cell(?enumClasses, ?row, 0) AS ?enum) .
+                                        ?value a ?enum .
+                                        ?value ?vp ?vo .
+                                        ?enum ?ep ?eo .
+                                    } }\"/>
+                        </ui:if>
+                        <ui:update ui:updateQuery=\"{!
+                                INSERT {
+                                    GRAPH ?targetGraphURI {
+                                        ?value ?vp ?vo .
+                                        ?enum ?ep ?eo .
+                                        ?targetGraphURI dcterms:modified ?timestamp .
+                                    } .
+                                }
+                                WHERE {
+                                    ?enumClasses spr:rowIndices ( ?row ) .
+                                    BIND (spr:cell(?enumClasses, ?row, 0) AS ?enum) .
+                                    {
+                                        FILTER (!edg:isKnownClass(?enum, ui:unionGraph)) .
+                                        ?enum ?ep ?eo .
+                                    }
+                                    UNION
+                                    {
+                                        ?value a ?enum .
+                                        ?value ?vp ?vo .
+                                        ?enum ?ep ?eo .
+                                    } .
+                                    BIND (afn:now() AS ?timestamp) .
+                                } }\"/>
+                    </ui:transaction>
+                </ui:setContext>
+            </ui:group>
+        </ui:call>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Perform single  import task" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:ResourceDataTableEnumerationColumns
+  a ui:NodeClass ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <!--ui:dumpScope ui:message=\"AAA: edg:ResourceDataTableEnumerationColumns\"/-->
+    <swon:Array>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"uri\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"uri\"/>
+            <swon:Value arg:name=\"searchable\" arg:value=\"{= false }\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= false }\"/>
+            <swon:Value arg:name=\"orderable\" arg:value=\"{= false }\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Enumerated Value\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"label\"/>
+            <swon:Value arg:name=\"searchable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+            <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"type\" arg:value=\"label\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Literal\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"literal\"/>
+            <swon:Value arg:name=\"searchable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+            <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"type\" arg:value=\"string\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Code\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"code\"/>
+            <swon:Value arg:name=\"searchable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+            <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"type\" arg:value=\"string\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Order\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"order\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+            <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+            <swon:Value arg:name=\"type\" arg:value=\"num\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Definition\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"definition\"/>
+            <swon:Value arg:name=\"searchable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"defaultContent\" arg:value=\"\"/>
+            <swon:Value arg:name=\"orderable\" arg:value=\"{= true }\"/>
+            <swon:Value arg:name=\"type\" arg:value=\"string\"/>
+        </swon:Object>
+    </swon:Array>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment "JSON representation of the columns needed for an enumeration. " ;
+  rdfs:seeAlso edg:DataTableResultsCallbackForEnumeration ;
+  rdfs:subClassOf edg:JSONServices ;
+.
+edg:ResourceInstancesDataTable
+  vaem:comment """                <swa:DataTable arg:additionalClasses=\"my-custom-table\"
+                                    arg:columnsService=\"{= ?myColumnService }\"
+                                    arg:createResourceHandler=\"{= COALESCE(?createResourceHandler, swa:CreateResourceHandler) }\"
+                                    arg:createService=\"{= ?myCreateService }\"
+                                    arg:dataEndpoint=\"{= ?myDataEndpoint }\"
+                                    arg:editButton=\"{= ?myCanEdit }\"
+                                    arg:editable=\"{= ?myCanEdit }\"
+                                    arg:exports=\"true\"
+                                    arg:hasViewDetails=\"{= ?myHasViewableDetails }\"
+                                    arg:id=\"{= ?tableId }\"
+                                    arg:multiSelect=\"true\"
+                                    arg:resourceSelectedEvent=\"{= ?rowSelectedEvent }\"
+                                    arg:resourceType=\"{= ?resourceType }\"
+                                    arg:selectAll=\"true\"/>""" ;
+.
+edg:Services
+  a ui:Service ;
+  rdfs:label "Services" ;
+  rdfs:subClassOf ui:Services ;
+.
+edg:SetupEnumerationTypesOntologies
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:if ui:condition=\"{= isIRI(?graph) }\">
+        <ui:group let:maybeExistingRootClass=\"{= spl:objectInGraph(?graph, teamwork:rootClass, ?graph) }\">
+            <ui:setContext ui:silentTransactions=\"{= true }\">
+                <ui:transaction ui:logMessage=\"Setting up {= ?graph } \">
+                    <ui:if ui:condition=\"{= bound(?maybeExistingRootClass) &amp;&amp; (?maybeExistingRootClass != edg:CustomEnumeratedValue) } \">
+                        <ui:update ui:updateQuery=\"{!
+                                DELETE {
+                                    GRAPH ?graph {
+                                        ?graph teamwork:rootClass ?maybeExistingRootClass .
+                                    } .
+                                }
+                                WHERE {
+                                    GRAPH ?graph {
+                                        ?graph teamwork:rootClass ?maybeExistingRootClass .
+                                    } .
+                                } }\"/>
+                    </ui:if>
+                    <ui:update ui:updateQuery=\"{!
+                            INSERT {
+                                GRAPH ?graph {
+                                    ?graph teamwork:rootClass edg:CustomEnumeratedValue .
+                                    ?graph graphql:publicClass edg:CustomEnumeratedValue .
+                                } .
+                            }
+                            WHERE {
+                            } }\"/>
+                </ui:transaction>
+            </ui:setContext>
+        </ui:group>
+    </ui:if>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:comment "Ensures the root class is defined to be 'end:CustomEnumeratedValue and that all the graphQL statements are specified." ;
+  rdfs:label "Setup enumeration types ontologies" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:ShowConfirmedEnumerationTypesOntologies
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group>
+    <swa:LabeledElement arg:label=\"Enumeration Types Ontologies\">
+        <ui:forEach ui:resultSet=\"{= ?resultSet }\">
+            <div checked=\"checked\" class=\"checkbox\" let:id=\"{= ui:uniqueId() }\">
+                <input class=\"teamwork-datagraph-imports-box\" id=\"{= ?id }\" type=\"checkbox\" value=\"{= ?schema }\"/>
+                <label for=\"{= ?id }\">
+                    <a href=\"{= teamwork:editorLink(?schema) }\" target=\"_blank\">{= ?schemaLabel }</a>
+                </label>
+            </div>
+            <script>$('.teamwork-datagraph-imports-box').change(function() { teamwork.updateDataGraphOWLImports() })</script>
+        </ui:forEach>
+    </swa:LabeledElement>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Show confirmed enumeration types ontologies" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:SpreadsheetImportUploadFilePage
+  a ui:NodeClass ;
+  ui:prototype """
+<teamwork:Chrome arg:pageType=\"import-page\" arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= teamwork:ImportProjectTab }\" arg:tag=\"{= ?tag }\">
+    <h1>Import Spreadsheet using Pattern</h1>
+    <p>
+			Select a spreadsheet to import.
+		</p>
+    <br/>
+    <form action=\"evnimportFileUpload\" enctype=\"multipart/form-data\" id=\"theForm\" method=\"post\">
+        <input name=\"file\" onchange=\"document.getElementById('submitButton').removeAttribute('disabled');\" required=\"required\" type=\"file\"/>
+        <input name=\"projectGraph\" type=\"hidden\" value=\"{= ?projectGraph }\"/>
+        <input name=\"tag\" type=\"hidden\" value=\"{= ?tag }\"/>
+        <input name=\"customHandler\" type=\"hidden\" value=\"{= ?customHandler }\"/>
+        <br/>
+        <br/>
+        <teamwork:CustomHandlerArgs arg:handler=\"{= ?customHandler }\"/>
+        <teamwork:SpreadsheetFileTypesList/>
+        <br/>
+        <span title=\"Excel sheets are numbered starting at 1 for the leftmost sheet. Only one sheet can be imported at a time. To import multiple sheets, run this wizard multiple times.\">Sheet index (for Excel, optional): </span>
+        <input class=\"form-control\" name=\"sheetIndex\" type=\"text\" value=\"1\"/>
+        <br/>
+        <br/>
+        <span title=\"Each row of the spreadsheet will be imported as an instance of the entity (class) chosen here.  If no concepts appear here, go to the General tab and include an ontology with the Includes link.  The set of concepts will then appear as the set of classes defined in the ontology.\">Entity type for the imported data: </span>
+        <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(teamwork:projectOrTagGraph(?projectGraph, ?tag)) }\">
+            <select class=\"form-control vocabSelect\" let:mainClass=\"{= edg:EnumerationSurrogate }\" name=\"targetType\">
+                <option selected=\"selected\" value=\"{= ?mainClass }\">{= ui:label(?mainClass) }</option>
+            </select>
+            <br/>
+            <br/>
+            <button class=\"btn btn-primary\" id=\"submitButton\" onclick=\"handleSubmit()\" type=\"submit\">Next</button>
+            <span id=\"loader\"/>
+        </ui:setContext>
+    </form>
+</teamwork:Chrome>
+"""^^ui:Literal ;
+  rdfs:subClassOf teamwork:AbstractSpreadsheetImportFileUploadPage ;
+  rdfs:subClassOf teamwork:AbstractSpreadsheetImportPage ;
+.
+edg:SpreadsheetImporterForEnumerationsPage
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:customHandler ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:errorPrototype """
+<ui:group let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+        <ui:if ui:condition=\"{= (!bound(?teamGraph)) || (!teamwork:currentUserHasPrivilege(COALESCE(?tag, ?teamGraph), teamwork:editor, ?teamGraph)) }\">
+            <teamwork:ErrorPage arg:message=\"You need to be editor of this {= IF(bound(?tag), &quot;working copy&quot;, &quot;vocabulary&quot;) } to upload files into it.\"/>
+        </ui:if>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  ui:headIncludes """
+<ui:group>
+    <meta content=\"edg:SpreadsheetImporterForEnumerations\" name=\"edg-manifest-start\"/>
+    <script src=\"{= ui:lib() }/edg/js/edg-accordianForBatchJobs.js\"/>
+    <meta content=\"edg:SpreadsheetImporterForEnumerations\" name=\"edg-manifest-end\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:prototype """
+<ui:group let:projectType=\"{= teamwork:getProjectType(?projectGraph) }\" let:targetGraph=\"{= ?projectGraph }\">
+    <ui:setContext ui:queryGraph=\"{= ui:unionOfGraphs(ui:graphWithImports(?targetGraph), ui:unionGraph) }\">
+        <ui:group let:editorLink=\"{= teamwork:makeEditorLink(?targetGraph, rdf:nil, ?tag) }\" let:graphId=\"{= teamwork:currentGraphId() }\" let:workflowName=\"{= teamwork:tagId(?tag) }\">
+            <teamwork:Chrome arg:pageType=\"accordian-for-batch-jobs\" arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= teamwork:ImportProjectTab }\" arg:tag=\"{= ?tag }\">
+                <ui:group let:collectionQualifier=\"{= IF(bound(?tag), CONCAT(?workflowName, IF(fn:contains(fn:lower-case(?workflowName), &quot;workflow&quot;), &quot;&quot;, &quot; workflow&quot;)), &quot;&quot;) }\" let:progressId=\"{= ui:uniqueId() }\">
+                    <h1>Spreadsheet Importer for Enumerations</h1>
+                    <p class=\"text-info\">Imported enumerations will be added to the <a href=\"{= ?editorLink }\">
+                            <span>
+                                <strong>{= swa:labelInGraph(?targetGraph, ?targetGraph) }</strong>
+                            </span>
+                        </a>&nbsp;{= teamwork:singularProjectTypeLabel(?projectType) }&nbsp;{= ?collectionQualifier }.</p>
+                    <ui:group>
+                        <p>The Excel file <strong>enumerations-template</strong> is the template for importing one or more enumerations.</p>
+                        <form>
+                            <button class=\"btn btn-primary btn-margin-right-8px\" formaction=\"{= ui:lib() }/edg/templates/enumerations/enumerations-template.xlsx\">Download Template</button>
+                        </form>
+                        <br/>
+                    </ui:group>
+                    <div id=\"accordianForBatchJobs-canvas\">
+                        <div id=\"accordianForBatchJobs\">
+                            <div class=\"panel-heading\">
+                                <h4 class=\"text-info\">Import Spreadsheet</h4>
+                            </div>
+                            <div class=\"panel-body\" id=\"accordianForBatchJobs-jobs\">
+                                <edg:ImportSpreadsheet arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\"/>
+                            </div>
+                            <!-- cannot use accordian because server callback replaces this page -->
+                            <!--div class=\"panel-heading\">
+<h4 class=\"text-info\">Import Results</h4>
+</div-->
+                            <!--div class=\"panel-body\" id=\"accordianForBatchJobs-log\"/-->
+                        </div>
+                    </div>
+                </ui:group>
+            </teamwork:Chrome>
+        </ui:group>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:HTML ;
+  rdfs:comment "Imports a spreadsheet using EDG-supplied template" ;
+  rdfs:label "Spreadsheet importer for enumerations page" ;
+  rdfs:subClassOf edg:Elements ;
+  rdfs:subClassOf teamwork:MustHaveAccessToTagPage ;
+.
+edg:createEditorHref
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:concat ;
+                sp:arg1 [
+                    a teamwork:graphIdFromGraph ;
+                    arg:graph [
+                        sp:varName "graph" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a sp:if ;
+                    sp:arg1 [
+                        a sp:bound ;
+                        sp:arg1 [
+                            sp:varName "tagId" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        a sp:concat ;
+                        sp:arg1 "." ;
+                        sp:arg2 [
+                            sp:varName "tagId" ;
+                          ] ;
+                      ] ;
+                    sp:arg3 "" ;
+                  ] ;
+                sp:arg3 ".editor" ;
+              ] ;
+            sp:variable [
+                sp:varName "editor" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    a sp:bound ;
+                    sp:arg1 [
+                        sp:varName "resource" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a sp:concat ;
+                    sp:arg1 [
+                        sp:varName "editor" ;
+                      ] ;
+                    sp:arg2 "?_editorClass=teamwork:SimpleFormEditorApplication&resource=" ;
+                    sp:arg3 [
+                        a sp:encode_for_uri ;
+                        sp:arg1 [
+                            a sp:str ;
+                            sp:arg1 [
+                                sp:varName "resource" ;
+                              ] ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg3 [
+                    sp:varName "editor" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "result" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:private true ;
+  rdfs:subClassOf swa:CreateHRefFunctions ;
+.
+edg:getEnumerationOntologies
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            a sp:lcase ;
+            sp:arg1 [
+                sp:varName "schemaLabel" ;
+              ] ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "schema" ;
+          ]
+          [
+            sp:varName "schemaLabel" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "?0" ;
+              ] ;
+            sp:predicate teamwork:readableGraphsUnderTeamControl ;
+            sp:subject () ;
+          ]
+          [
+            sp:object [
+                sp:varName "schema" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "tch" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:getProjectType ;
+                arg:projectGraph [
+                    sp:varName "schema" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "pt" ;
+              ] ;
+          ]
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  a sp:Union ;
+                  sp:elements (
+                      (
+                        [
+                          sp:object edg:EnumerationsOntology ;
+                          sp:predicate vaem:hasGraphRole ;
+                          sp:subject [
+                              sp:varName "schema" ;
+                            ] ;
+                        ]
+                      )
+                      (
+                        [
+                          sp:object edg:EnumerationTypesOntology ;
+                          sp:predicate rdf:type ;
+                          sp:subject [
+                              sp:varName "schema" ;
+                            ] ;
+                        ]
+                      )
+                    ) ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "schema" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:projectLabel ;
+                arg:projectGraph [
+                    sp:varName "schema" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "schemaLabel" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "returns a table of ontologies that define enumerated values." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/spin/governance> ;
+  rdfs:label "get enumeration ontologies" ;
+  rdfs:subClassOf edg:Templates ;
+.
+edg:getSubjectsForGivenPropertyAndObject
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:filterFunction ;
+      spl:valueType spin:Function ;
+    ] ;
+.
+<http://edg.topbraid.solutions/project/datatypes/GMD_enumerations>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:ProjectGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/project/enumerations> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+arg:sourceAugmentGraphs
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:sourceGraphs
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:sourceReplaceGraphs
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+dtype:EnumeratedValue
+  edg:instancesHeldInAssetCollectionType edg:EnumerationsProjectType ;
+.

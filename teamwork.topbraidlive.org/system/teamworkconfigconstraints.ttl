@@ -1,0 +1,30 @@
+# baseURI: http://teamwork.topbraidlive.org/system/configconstraints
+# imports: http://datashapes.org/dash
+# imports: http://server.topbraidlive.org/web/2009/config
+# prefix: configconstraints
+
+@prefix configconstraints: <http://teamwork.topbraidlive.org/system/configconstraints#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://teamwork.topbraidlive.org/system/configconstraints>
+  rdf:type owl:Ontology ;
+  owl:imports <http://datashapes.org/dash> ;
+  owl:imports <http://server.topbraidlive.org/web/2009/config> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+configconstraints:ConfigShape
+  rdf:type sh:NodeShape ;
+  rdfs:comment "A collection of constraints on the server configuration object." ;
+  rdfs:label "Config shape" ;
+  sh:property [
+      sh:path <http://server.topbraidlive.org/web/2009/config#teamworkRootProject> ;
+      sh:message "You can only use letters, digits, the underscore or the dot in the project name. Violating this pattern could cause errors in various aspects of the application." ;
+      sh:pattern "^[a-zA-Z0-9_\\.]+$" ;
+    ] ;
+  sh:targetClass <http://server.topbraidlive.org/web/2009/config#ServerConfiguration> ;
+.

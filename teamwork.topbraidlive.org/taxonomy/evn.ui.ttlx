@@ -1,0 +1,4377 @@
+# baseURI: http://evn.topbraidlive.org/ui
+# imports: http://edg.topbraid.solutions/1.0/editor/results
+# imports: http://evn.topbraidlive.org/evnprojects
+# imports: http://purl.org/dc/terms/
+# imports: http://server.topbraidlive.org/system-applications/teamworkconfig
+# imports: http://topbraid.org/imported
+# imports: http://topbraid.org/sharepoint.spin
+# imports: http://topbraid.org/spin/skostemplates
+# imports: http://topbraid.org/swa
+# imports: http://topbraid.org/teamwork
+# imports: http://www.w3.org/2003/01/geo/wgs84_pos
+# imports: http://www.w3.org/2004/02/skos/core
+# imports: http://www.w3.org/2008/05/skos-xl
+# imports: http://www.w3.org/ns/sparql-service-description
+# prefix: evnui
+
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix autotagger: <http://evn.topbraidlive.org/autotagger#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix conceptmatch: <http://topbraid.org/conceptmatch#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix core-soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkapp: <http://topbraid.org/swa/crosswalkapp#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dashboard: <http://example.org/dashboard#> .
+@prefix dataset: <http://teamwork.topbraidlive.org/dataset#> .
+@prefix datasetapp: <http://topbraid.org/swa/datasetapp#> .
+@prefix datasetviewer: <http://topbraid.org/swa/datasetviewer#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix default: <http://uispin.org/default#> .
+@prefix defaultapp: <http://topbraid.org/swa/defaultapp#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix eeh-lib: <http://www.environmenthub.no/spin/1.0/eeh-lib#> .
+@prefix eeh-reportlib: <http://www.environmenthub.no/spin/1.0/eeh-reportlib#> .
+@prefix elements: <http://purl.org/dc/elements/1.1/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evn: <http://topbraid.org/evn/evn#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evnimport: <http://evn.topbraidlive.org/uispin/evnimport#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix ex: <http://example.org/> .
+@prefix extjs: <http://uispin.com/extjs#> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix governance: <http://topbraid.org/teamworkgovernance.ui#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix graphql.search: <http://teamwork.topbraidlive.org/graphql.search#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix kennedys: <http://topbraid.org/examples/kennedys#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix ontologyviewer: <http://topbraid.org/swa/ontologyviewer#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmapp: <http://rdm.topbraidlive.org/rdmapp#> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix rdmviewer: <http://rdm.topbraidlive.org/rdmviewer#> .
+@prefix saf: <http://topbraid.org/saf/> .
+@prefix safconfig: <http://topbraid.org/safconfig/> .
+@prefix safm: <http://saf.topbraidlive.org/metaschema/> .
+@prefix savedQueries: <http://teamwork.topbraidlive.org/ui/savedQueries#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix server: <http://server.topbraidlive.org/server.ui#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sharepoint: <http://topbraid.org/sharepoint#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skosshapes: <http://topbraid.org/skos.shapes#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spin.ui: <http://spinrdf.org/spin.ui#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swadoc: <http://topbraid.org/swadoc#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix tblui: <http://server.topbraidlive.org/tblui#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkAdmin: <http://teamwork.topbraidlive.org/doc/teamworkAdmin#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworkconstraints: <http://topbraid.org/teamworkconstraints#> .
+@prefix teamworkdashboard: <http://topbraid.org/teamworkdashboard#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix teamworkupdate: <http://teamworkAPI.topbraid.com/teamworkUpdate#> .
+@prefix textindex: <http://topbraid.org/textindex#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix tracker: <http://teamwork.topbraidlive.org/ui/tracker#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uitest: <http://uispin.org/test#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix userdat: <http://teamwork.topbraidlive.org/ui/userdata> .
+@prefix userdata: <http://teamwork.topbraidlive.org/ui/userdata#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix victory: <http://edg.topbraid.solutions/victory/> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xhtml: <http://topbraid.org/xhtml#> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+taxonomies:HierarchicalEditor
+  a ui:NodeClass ;
+  teamwork:faIcon "indent" ;
+  ui:prototype """
+<evnui:Editor/>
+"""^^ui:Literal ;
+  rdfs:label "Hierarchical taxonomy app" ;
+  rdfs:subClassOf teamwork:EditorApplications ;
+.
+taxonomies:TabularEditor
+  a ui:NodeClass ;
+  teamwork:faIcon "list" ;
+  ui:prototype """
+<ui:setContext ui:varName=\"suppressHierarchyViewButton\" ui:varValue=\"{= true }\">
+    <edg:ResultsModelEditor/>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:label "Tabular taxonomy app" ;
+  rdfs:subClassOf teamwork:EditorApplications ;
+.
+<http://evn.topbraidlive.org/ui>
+  a owl:Ontology ;
+  rdfs:comment "The EDG taxonomy editing/viewing components." ;
+  owl:imports <http://edg.topbraid.solutions/1.0/editor/results> ;
+  owl:imports <http://evn.topbraidlive.org/evnprojects> ;
+  owl:imports dcterms: ;
+  owl:imports <http://server.topbraidlive.org/system-applications/teamworkconfig> ;
+  owl:imports <http://topbraid.org/imported> ;
+  owl:imports <http://topbraid.org/sharepoint.spin> ;
+  owl:imports <http://topbraid.org/spin/skostemplates> ;
+  owl:imports <http://topbraid.org/swa> ;
+  owl:imports <http://topbraid.org/teamwork> ;
+  owl:imports <http://www.w3.org/2003/01/geo/wgs84_pos> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+  owl:imports <http://www.w3.org/2008/05/skos-xl> ;
+  owl:imports <http://www.w3.org/ns/sparql-service-description> ;
+.
+evnui:Action
+  a rdfs:Class ;
+  rdfs:comment "Class of actions that are \"global\" to the EVN application. Show up in a drop down menu of the application's header. The selection of which actions will show up will use the condition. This should be a SPARQL expression that returns true if the action is to show up, false if it should show up grayed and unbound if it should not show up at all. In this expression, the variable ?classEditor will be true or false depending on whether the user is on the Class Editor or Concept Editor page." ;
+  rdfs:label "Action" ;
+  rdfs:subClassOf swa:Action ;
+.
+evnui:Actions
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "group" ;
+          ]
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "actionName" ;
+          ]
+          [
+            sp:varName "actionLocalName" ;
+          ]
+          [
+            sp:varName "onSelect" ;
+          ]
+          [
+            sp:varName "enabled" ;
+          ]
+          [
+            sp:varName "group" ;
+          ]
+          [
+            sp:varName "label" ;
+          ]
+          [
+            sp:varName "iconClass" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object evnui:Action ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "action" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "label" ;
+                    ] ;
+                  sp:predicate rdfs:label ;
+                  sp:subject [
+                      sp:varName "action" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a spl:object ;
+                      sp:arg1 [
+                          sp:varName "action" ;
+                        ] ;
+                      sp:arg2 arg:condition ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "condition" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a afn:localname ;
+                      sp:arg1 [
+                          sp:varName "action" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "actionLocalName" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a ui:encodeNode ;
+                      sp:arg1 [
+                          sp:varName "action" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "actionName" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a spl:object ;
+                      sp:arg1 [
+                          sp:varName "action" ;
+                        ] ;
+                      sp:arg2 arg:onSelect ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "onSelectRaw" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a sp:coalesce ;
+                      sp:arg1 [
+                          sp:varName "onSelectRaw" ;
+                        ] ;
+                      sp:arg2 [
+                          a sp:if ;
+                          sp:arg1 [
+                              a spl:hasArgument ;
+                              spl:class [
+                                  sp:varName "action" ;
+                                ] ;
+                            ] ;
+                          sp:arg2 [
+                              a sp:concat ;
+                              sp:arg1 "swa.openHandlerDialog(\"" ;
+                              sp:arg2 [
+                                  a ui:escapeJSON ;
+                                  sp:arg1 [
+                                      sp:varName "label" ;
+                                    ] ;
+                                ] ;
+                              sp:arg3 "\", \"<" ;
+                              sp:arg4 [
+                                  a xsd:string ;
+                                  sp:arg1 [
+                                      sp:varName "action" ;
+                                    ] ;
+                                ] ;
+                              sp:arg5 ">\")" ;
+                            ] ;
+                          sp:arg3 [
+                              sp:varName "none" ;
+                            ] ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "onSelect" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a sp:coalesce ;
+                      sp:arg1 [
+                          a spl:object ;
+                          sp:arg1 [
+                              sp:varName "action" ;
+                            ] ;
+                          sp:arg2 arg:group ;
+                        ] ;
+                      sp:arg2 "" ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "group" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a spl:object ;
+                      sp:arg1 [
+                          sp:varName "action" ;
+                        ] ;
+                      sp:arg2 arg:iconClass ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "iconClass" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a sp:or ;
+                      sp:arg1 [
+                          a sp:not ;
+                          sp:arg1 [
+                              a sp:bound ;
+                              sp:arg1 [
+                                  sp:varName "condition" ;
+                                ] ;
+                            ] ;
+                        ] ;
+                      sp:arg2 [
+                          a spin:eval ;
+                          sp:arg1 [
+                              sp:varName "condition" ;
+                            ] ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "enabled" ;
+                    ] ;
+                ]
+                [
+                  a sp:Filter ;
+                  sp:expression [
+                      a sp:bound ;
+                      sp:arg1 [
+                          sp:varName "enabled" ;
+                        ] ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode ui:unionGraph ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  rdfs:label "Actions" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+evnui:ActionsButton
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:toolTip ;
+      spl:valueType xsd:string ;
+      rdfs:comment "An optional tool tip text to appear on the button." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:id=\"evn-actions-button\">
+    <button id=\"{= ?id }\" onclick=\"evn.openActionsMenu('{= ?id }')\" title=\"{= ?toolTip }\">
+        <div class=\"fas fa-cog\"/>
+    </button>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A Button displaying a popup menu when pressed, consisting of evnui:Actions for the given context." ;
+  rdfs:label "EVN actions button" ;
+  rdfs:subClassOf swa:MenuElements ;
+.
+evnui:ActionsCallback
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:call ui:template=\"{= evnui:Actions }\">
+    <swon:RSObjectArray arg:resultSet=\"{= ?rs }\"/>
+</ui:call>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:label "EVN actions callback" ;
+  rdfs:subClassOf swa:MenuElements ;
+.
+evnui:Applications
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:selectedResource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The concept that shall be pre-selected in the form and tree when the application starts." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:tagId ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The id of the tag (working copy)." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graphId ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The id of the graph to edit. Used to determine the URIs of the query graphs. For example, \"geo\" is mapped to urn:x-evn-pub:geo in view mode." ;
+    ] ;
+  rdfs:comment "Abstract base class of the various application elements, grouping together the common arguments and head includes." ;
+  rdfs:subClassOf swa:Applications ;
+.
+evnui:CloneConceptAction
+  a swa:ResourceAction ;
+  a ui:NodeClass ;
+  arg:appName "EVN" ;
+  arg:condition [
+      a sp:if ;
+      sp:arg1 [
+          a spl:instanceOf ;
+          sp:arg1 [
+              sp:varName "resource" ;
+            ] ;
+          sp:arg2 skos:Concept ;
+        ] ;
+      sp:arg2 true ;
+      sp:arg3 [
+          sp:varName "none" ;
+        ] ;
+    ] ;
+  arg:group "main" ;
+  arg:iconClass "evn-icon-clone-concept" ;
+  ui:prototype """
+<ui:transaction let:new=\"{= swa:newResource(spl:object(?resource, rdf:type)) }\" ui:logMessage=\"Clone {= ui:label(?resource) }\">
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                ?new ?p ?newObject .
+            }
+            WHERE {
+                ?resource ?p ?oldObject .
+                BIND (IF((skos:prefLabel = ?p), teamwork:cloneLabel(?oldObject), ?oldObject) AS ?newObject) .
+            } }\"/>
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                ?s ?p ?new .
+            }
+            WHERE {
+                ?s ?p ?resource .
+            } }\"/>
+</ui:transaction>
+"""^^ui:Literal ;
+  rdfs:label "Clone concept" ;
+  rdfs:subClassOf swa:ResourceEditHandlers ;
+.
+evnui:CloneConceptTreeAction
+  a swa:ResourceAction ;
+  a ui:NodeClass ;
+  arg:appName "EVN" ;
+  arg:condition [
+      a sp:if ;
+      sp:arg1 [
+          a sp:and ;
+          sp:arg1 [
+              a spl:instanceOf ;
+              sp:arg1 [
+                  sp:varName "resource" ;
+                ] ;
+              sp:arg2 skos:Concept ;
+            ] ;
+          sp:arg2 [
+              a sp:exists ;
+              sp:elements (
+                  [
+                    sp:object [
+                        sp:varName "resource" ;
+                      ] ;
+                    sp:predicate skos:broader ;
+                    sp:subject [
+                        sp:varName "other" ;
+                      ] ;
+                  ]
+                ) ;
+            ] ;
+        ] ;
+      sp:arg2 true ;
+      sp:arg3 [
+          sp:varName "none" ;
+        ] ;
+    ] ;
+  arg:group "main" ;
+  ui:prototype """
+<ui:transaction ui:logMessage=\"Clone {= ui:label(?resource) } with children\">
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ui:tempGraph {
+                    ?c owl:sameAs ?new .
+                } .
+            }
+            WHERE {
+                ?c (skos:broader)* ?resource .
+                BIND (IRI(fn:concat(xsd:string(?c), spif:generateUUID())) AS ?new) .
+            } }\"/>
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                ?new ?p ?newObject .
+            }
+            WHERE {
+                GRAPH ui:tempGraph {
+                    ?old owl:sameAs ?new .
+                } .
+                ?old ?p ?oldObject .
+                BIND (IF((skos:prefLabel = ?p), teamwork:cloneLabel(?oldObject), evnui:tempClone(?oldObject)) AS ?newObject) .
+            } }\"/>
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                ?newSubject ?p ?new .
+            }
+            WHERE {
+                GRAPH ui:tempGraph {
+                    ?old owl:sameAs ?new .
+                } .
+                ?oldSubject ?p ?old .
+                BIND (evnui:tempClone(?oldSubject) AS ?newSubject) .
+            } }\"/>
+</ui:transaction>
+"""^^ui:Literal ;
+  rdfs:label "Clone concept and descendants" ;
+  rdfs:subClassOf swa:ResourceEditHandlers ;
+.
+evnui:ConceptCreateResourceDialogPlugin
+  a swa:CreateResourceDialogPlugin ;
+  swa:createResourceDialogPluginWeight [
+      a swa:WeightedExpression ;
+      swa:expression [
+          a sp:exists ;
+          sp:elements (
+              [
+                a sp:TriplePath ;
+                sp:object skos:Concept ;
+                sp:path [
+                    a sp:ModPath ;
+                    sp:modMax -2 ;
+                    sp:modMin 0 ;
+                    sp:subPath rdfs:subClassOf ;
+                  ] ;
+                sp:subject [
+                    sp:varName "resourceType" ;
+                  ] ;
+              ]
+            ) ;
+        ] ;
+      swa:weight 200 ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<swa:DefaultCreateResourceDialogPluginForAssetCollection ui:args=\"*\"/>
+"""^^ui:Literal ;
+  rdfs:comment """The swa:CreateResourceDialogPlugin used for skos:Concepts. The main difference is that this uses the URI generation policies, so it's just a placeholder for the corresponding widget elsewhere.
+
+Note that this solution has been put into place for 6.1 and it may change further in future versions.""" ;
+  rdfs:label "Concept create resource dialog plugin" ;
+  rdfs:subClassOf swa:CreateResourceDialogPlugins ;
+.
+evnui:ConceptDestructor
+  a ui:NodeClass ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <!-- Mark all child Concepts to be deletable -->
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ui:tempGraph {
+                    swa:DestructorMetadata swa:delete ?child .
+                } .
+            }
+            WHERE {
+                ?child (skos:broader)* ?resource .
+            } }\"/>
+    <!-- Mark all super Concepts to be not deletable -->
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ui:tempGraph {
+                    swa:DestructorMetadata swa:keep ?parent .
+                } .
+            }
+            WHERE {
+                ?resource (skos:broader)+ ?parent .
+            } }\"/>
+    <!-- Unmark all deletable Concepts that have a surviving parent -->
+    <ui:update ui:updateQuery=\"{!
+            DELETE {
+                GRAPH ui:tempGraph {
+                    swa:DestructorMetadata swa:delete ?child .
+                } .
+            }
+            WHERE {
+                ?resource evnui:childrenWithSurvivingParent ?child .
+            } }\"/>
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ui:tempGraph {
+                    ?c ?p ?o .
+                } .
+            }
+            WHERE {
+                GRAPH ui:tempGraph {
+                    swa:DestructorMetadata swa:delete ?c .
+                } .
+                ?c ?p ?o .
+            } }\"/>
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ui:tempGraph {
+                    ?s ?p ?c .
+                } .
+            }
+            WHERE {
+                GRAPH ui:tempGraph {
+                    swa:DestructorMetadata swa:delete ?c .
+                } .
+                ?s ?p ?c .
+            } }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Performs the DELETEs necessary to completely delete a given Concept and its dependants from the model." ;
+  rdfs:label "Concept destructor" ;
+  rdfs:subClassOf swa:Destructors ;
+.
+evnui:ConceptFormBody
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group>
+    <ui:if ui:condition=\"{= EXISTS {
+        skos:Concept a sh:NodeShape .
+    } }\">
+        <div default:hideIfEmpty=\"{= true }\" default:subject=\"{= ?resource }\" default:tabular=\"{= true }\">
+            <ui:if ui:condition=\"{= swa:isViewMode() }\">
+                <evnui:ResourceHistoryPanel arg:resource=\"{= ?resource }\"/>
+            </ui:if>
+            <swa:ObjectsPlaceholder arg:label=\"Other Properties\" arg:shapeSectionAbove=\"{= true }\"/>
+            <ui:if ui:condition=\"{= !swa:isEditMode() }\">
+                <ui:call arg:object=\"{= ?resource }\" ui:template=\"{= IF(swa:isSearchMode(), swa:SuitableSubjectPredicates, swa:UsedSubjectPredicates) }\">
+                    <swa:SubjectsGroup arg:filterFunction=\"{= swa:isNotUsedInInversePath }\" arg:label=\"Incoming References\" arg:object=\"{= ?resource }\" arg:predicates=\"{= ?rs }\"/>
+                </ui:call>
+            </ui:if>
+        </div>
+    </ui:if>
+    <ui:else>
+        <ui:group default:hideIfEmpty=\"{= swa:mode() != teamwork:HistoryMode }\" default:subject=\"{= ?resource }\" default:tabular=\"{= true }\" let:skosxl=\"{= evnui:isSKOSXL() }\">
+            <ui:if ui:condition=\"{= swa:isViewMode() }\">
+                <evnui:ResourceHistoryPanel arg:resource=\"{= ?resource }\"/>
+            </ui:if>
+            <swa:ObjectsEnum arg:hideIfEmpty=\"{= false }\" arg:label=\"Labels and Description\">
+                <swa:Objects arg:editWidget=\"{= swa:TextFieldEditor }\" arg:predicate=\"{= skos:prefLabel }\"/>
+                <swa:Objects arg:editWidget=\"{= swa:TextFieldEditor }\" arg:predicate=\"{= skos:altLabel }\"/>
+                <swa:Objects arg:editWidget=\"{= swa:TextFieldEditor }\" arg:predicate=\"{= skos:hiddenLabel }\"/>
+                <swa:Objects arg:editWidget=\"{= swa:TextFieldEditor }\" arg:predicate=\"{= skos:notation }\"/>
+                <swa:Objects arg:editWidget=\"{= evnui:ConceptTypeEditor }\" arg:predicate=\"{= rdf:type }\"/>
+                <swa:Objects arg:editWidget=\"{= swa:RichTextEditor }\" arg:predicate=\"{= skos:definition }\"/>
+                <swa:Objects arg:hideInModes=\"edit,search\" arg:predicate=\"{= skos:inScheme }\"/>
+                <swa:Objects arg:hideInModes=\"edit,search,view,history\" arg:predicate=\"{= skos:topConceptOf }\"/>
+                <swa:Subjects arg:label=\"top concept of\" arg:object=\"{= ?resource }\" arg:predicate=\"{= skos:hasTopConcept }\"/>
+                <swa:ObjectsPlaceholder arg:filterFunction=\"{= swa:isAnnotationProperty }\" arg:suppressShapeSection=\"{= true }\"/>
+            </swa:ObjectsEnum>
+            <ui:if ui:condition=\"{= ?skosxl }\">
+                <swa:ObjectsEnum arg:hideIfEmpty=\"{= true }\" arg:label=\"Label Objects (SKOS-XL)\">
+                    <swa:Objects arg:editWidget=\"{= swa:URIResourceEditor }\" arg:predicate=\"{= skosxl:altLabel }\"/>
+                    <swa:Objects arg:editWidget=\"{= swa:URIResourceEditor }\" arg:predicate=\"{= skosxl:hiddenLabel }\"/>
+                </swa:ObjectsEnum>
+            </ui:if>
+            <swa:ObjectsEnum arg:label=\"Standard Relationships\">
+                <swa:Objects arg:editWidget=\"{= swa:URIResourceEditor }\" arg:predicate=\"{= skos:broader }\"/>
+                <ui:if ui:condition=\"{= swa:isSearchMode() }\">
+                    <swa:Subject arg:label=\"has narrower\" arg:object=\"{= ?resource }\" arg:predicate=\"{= skos:broader }\"/>
+                </ui:if>
+                <swa:Objects arg:editWidget=\"{= swa:URIResourceEditor }\" arg:predicate=\"{= skos:related }\"/>
+            </swa:ObjectsEnum>
+            <ui:loadable ui:loadLater=\"{= swa:isEditMode() }\">
+                <swa:ObjectsPlaceholder arg:filterFunction=\"{= swa:isNonAnnotationProperty }\" arg:label=\"Custom Properties\"/>
+                <swa:ObjectsEnum arg:label=\"Notes\">
+                    <swa:Objects arg:editWidget=\"{= swa:RichTextEditor }\" arg:predicate=\"{= skos:note }\"/>
+                    <swa:Objects arg:editWidget=\"{= swa:RichTextEditor }\" arg:predicate=\"{= skos:changeNote }\"/>
+                    <swa:Objects arg:editWidget=\"{= swa:RichTextEditor }\" arg:predicate=\"{= skos:editorialNote }\"/>
+                    <swa:Objects arg:editWidget=\"{= swa:RichTextEditor }\" arg:predicate=\"{= skos:historyNote }\"/>
+                    <swa:Objects arg:editWidget=\"{= swa:RichTextEditor }\" arg:predicate=\"{= skos:scopeNote }\"/>
+                    <swa:Objects arg:editWidget=\"{= swa:RichTextEditor }\" arg:predicate=\"{= skos:example }\"/>
+                </swa:ObjectsEnum>
+                <swa:ObjectsEnum arg:label=\"Matching Relationships\">
+                    <swa:Objects arg:editWidget=\"{= swa:URIResourceEditor }\" arg:predicate=\"{= skos:broadMatch }\"/>
+                    <swa:Objects arg:editWidget=\"{= swa:URIResourceEditor }\" arg:predicate=\"{= skos:closeMatch }\"/>
+                    <swa:Objects arg:editWidget=\"{= swa:URIResourceEditor }\" arg:predicate=\"{= skos:exactMatch }\"/>
+                    <swa:Objects arg:editWidget=\"{= swa:URIResourceEditor }\" arg:predicate=\"{= skos:relatedMatch }\"/>
+                    <swa:Objects arg:hideInModes=\"edit,search,history\" arg:predicate=\"{= skos:broaderTransitive }\"/>
+                    <swa:Objects arg:hideInModes=\"edit,search,history\" arg:predicate=\"{= skos:narrower }\"/>
+                    <swa:Objects arg:hideInModes=\"edit,search,history\" arg:predicate=\"{= skos:narrowMatch }\"/>
+                    <swa:Objects arg:hideInModes=\"edit,search,history\" arg:predicate=\"{= skos:narrowerTransitive }\"/>
+                    <swa:Objects arg:hideInModes=\"edit,search,history\" arg:predicate=\"{= skos:mappingRelation }\"/>
+                    <swa:Objects arg:hideInModes=\"edit,search,history\" arg:predicate=\"{= skos:semanticRelation }\"/>
+                </swa:ObjectsEnum>
+                <swa:Objects arg:hideInModes=\"edit,search,history,view\" arg:predicate=\"{= imported:when }\"/>
+                <swa:Objects arg:hideInModes=\"edit,search,history,view\" arg:predicate=\"{= imported:fromEndPoint }\"/>
+                <swa:Objects arg:hideInModes=\"edit,search,history,view\" arg:predicate=\"{= imported:fromGraph }\"/>
+            </ui:loadable>
+        </ui:group>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment """The main (default) form layout for skos:Concept. Up to 5.5 this used to have a hard-coded references to properties, using swa:Objects etc. From 5.5 onwards this is trying to use SHACL shapes, as are defined in TopBraid/SKOS/skos.shapes.ttl. If these shapes are not imported then it will fall back to the hard-coded form.
+
+This element is left in the code base because several customers have defined customizations by adding a ui:override to this. These customers are encouraged to migrate to SHACL.""" ;
+  rdfs:label "Concept form body" ;
+  rdfs:subClassOf evnui:Elements ;
+  rdfs:subClassOf swa:FormBody ;
+.
+evnui:ConceptSchemeDestructor
+  a ui:NodeClass ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <!-- Mark all child Concepts to be deletable -->
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ui:tempGraph {
+                    swa:DestructorMetadata swa:delete ?concept .
+                } .
+            }
+            WHERE {
+                ?resource skos:hasTopConcept ?root .
+                ?concept (skos:broader)* ?root .
+            } }\"/>
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ui:tempGraph {
+                    ?c ?p ?o .
+                } .
+            }
+            WHERE {
+                GRAPH ui:tempGraph {
+                    swa:DestructorMetadata swa:delete ?c .
+                } .
+                ?c ?p ?o .
+            } }\"/>
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ui:tempGraph {
+                    ?s ?p ?c .
+                } .
+            }
+            WHERE {
+                GRAPH ui:tempGraph {
+                    swa:DestructorMetadata swa:delete ?c .
+                } .
+                ?s ?p ?c .
+            } }\"/>
+    <!-- Collect all triples of the schema itself -->
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ui:tempGraph {
+                    ?resource ?p ?o .
+                } .
+            }
+            WHERE {
+                ?resource ?p ?o .
+            } }\"/>
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ui:tempGraph {
+                    ?s ?p ?resource .
+                } .
+            }
+            WHERE {
+                ?s ?p ?resource .
+            } }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Performs the DELETEs necessary to completely delete a given ConceptScheme and its dependants from the model." ;
+  rdfs:label "Concept scheme destructor" ;
+  rdfs:subClassOf swa:Destructors ;
+.
+evnui:ConceptSchemeFormBody
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group>
+    <ui:if ui:condition=\"{= EXISTS {
+        skos:ConceptScheme a sh:NodeShape .
+    } }\">
+        <div default:hideIfEmpty=\"{= true }\" default:subject=\"{= ?resource }\" default:tabular=\"{= true }\">
+            <ui:if ui:condition=\"{= swa:isViewMode() }\">
+                <evnui:ResourceHistoryPanel arg:resource=\"{= ?resource }\"/>
+            </ui:if>
+            <swa:ObjectsPlaceholder arg:label=\"Other Properties\" arg:shapeSectionAbove=\"{= true }\"/>
+        </div>
+    </ui:if>
+    <ui:else>
+        <div>
+            <ui:if ui:condition=\"{= swa:isViewMode() }\">
+                <evnui:ResourceHistoryPanel arg:resource=\"{= ?resource }\"/>
+            </ui:if>
+            <ui:call arg:subject=\"{= ?resource }\" ui:template=\"{= swa:modeProperty(swa:formObjectPredicateSelectionTemplate) }\">
+                <swa:ObjectsGroup arg:filterFunction=\"{= swa:isAnnotationProperty }\" arg:label=\"Labels and Description\" arg:predicates=\"{= ?rs }\" arg:subject=\"{= ?resource }\"/>
+                <swa:ObjectsGroup arg:filterFunction=\"{= evnui:isNonAnnotationPropertyExceptType }\" arg:label=\"Properties\" arg:predicates=\"{= ?rs }\" arg:subject=\"{= ?resource }\"/>
+            </ui:call>
+        </div>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "The main (default) form layout for skos:ConceptScheme. This is left for backwards compatibility for graphs that do not import the SKOS shapes." ;
+  rdfs:label "Concept scheme form body" ;
+  rdfs:subClassOf evnui:Elements ;
+  rdfs:subClassOf swa:FormBody ;
+.
+evnui:ConceptTreeChildren
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "label" ;
+          ]
+          [
+            sp:varName "node" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "node" ;
+          ]
+          [
+            sp:varName "label" ;
+          ]
+          [
+            sp:expression [
+                a sp:notExists ;
+                sp:elements (
+                    [
+                      sp:object [
+                          sp:varName "node" ;
+                        ] ;
+                      sp:predicate skos:broader ;
+                      sp:subject [
+                          sp:varName "child" ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+            sp:varName "leaf" ;
+          ]
+          [
+            sp:varName "icon" ;
+          ]
+          [
+            sp:varName "movable" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:SubQuery ;
+            sp:query [
+                a sp:Select ;
+                sp:limit "5000"^^xsd:long ;
+                sp:where (
+                    [
+                      a sp:Union ;
+                      sp:elements (
+                          (
+                            [
+                              sp:object [
+                                  sp:varName "parent" ;
+                                ] ;
+                              sp:predicate skos:broader ;
+                              sp:subject [
+                                  sp:varName "node" ;
+                                ] ;
+                            ]
+                            [
+                              a sp:Bind ;
+                              sp:expression [
+                                  a sp:not ;
+                                  sp:arg1 [
+                                      a swa:isReadOnlyTriple ;
+                                      sp:arg1 [
+                                          sp:varName "node" ;
+                                        ] ;
+                                      sp:arg2 skos:broader ;
+                                      sp:arg3 [
+                                          sp:varName "parent" ;
+                                        ] ;
+                                    ] ;
+                                ] ;
+                              sp:variable [
+                                  sp:varName "movable" ;
+                                ] ;
+                            ]
+                            [
+                              a sp:Bind ;
+                              sp:expression [
+                                  a ui:label ;
+                                  sp:arg1 [
+                                      sp:varName "node" ;
+                                    ] ;
+                                ] ;
+                              sp:variable [
+                                  sp:varName "label" ;
+                                ] ;
+                            ]
+                          )
+                          (
+                            [
+                              sp:object [
+                                  sp:varName "node" ;
+                                ] ;
+                              sp:predicate skos:hasTopConcept ;
+                              sp:subject [
+                                  sp:varName "parent" ;
+                                ] ;
+                            ]
+                            [
+                              a sp:Bind ;
+                              sp:expression [
+                                  a sp:not ;
+                                  sp:arg1 [
+                                      a swa:isReadOnlyTriple ;
+                                      sp:arg1 [
+                                          sp:varName "parent" ;
+                                        ] ;
+                                      sp:arg2 skos:hasTopConcept ;
+                                      sp:arg3 [
+                                          sp:varName "node" ;
+                                        ] ;
+                                    ] ;
+                                ] ;
+                              sp:variable [
+                                  sp:varName "movable" ;
+                                ] ;
+                            ]
+                            [
+                              a sp:Bind ;
+                              sp:expression [
+                                  a ui:label ;
+                                  sp:arg1 [
+                                      sp:varName "node" ;
+                                    ] ;
+                                ] ;
+                              sp:variable [
+                                  sp:varName "label" ;
+                                ] ;
+                            ]
+                          )
+                        ) ;
+                    ]
+                    [
+                      a sp:Bind ;
+                      sp:expression [
+                          a swa:resourceIcon ;
+                          arg:resource [
+                              sp:varName "node" ;
+                            ] ;
+                        ] ;
+                      sp:variable [
+                          sp:varName "icon1" ;
+                        ] ;
+                    ]
+                    [
+                      a sp:Bind ;
+                      sp:expression [
+                          a sp:if ;
+                          sp:arg1 [
+                              a sp:and ;
+                              sp:arg1 [
+                                  a sp:eq ;
+                                  sp:arg1 [
+                                      sp:varName "icon1" ;
+                                    ] ;
+                                  sp:arg2 "swa-icon-resource" ;
+                                ] ;
+                              sp:arg2 [
+                                  a spl:instanceOf ;
+                                  sp:arg1 [
+                                      sp:varName "node" ;
+                                    ] ;
+                                  sp:arg2 skos:Concept ;
+                                ] ;
+                            ] ;
+                          sp:arg2 "swa-icon-concept" ;
+                          sp:arg3 [
+                              sp:varName "icon1" ;
+                            ] ;
+                        ] ;
+                      sp:variable [
+                          sp:varName "icon" ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  rdfs:comment """A TreeChildrenTemplate that delivers the children of a given node in the EVN concept tree. Note that ?parent is pre-bound from the outside - either to a skos:Concept or a skos:ConceptScheme (root node).
+
+This query is cutting off after 10000 matching children and the order of those may be unpredictable. This is to be robust against worst case scenarios in which a tree has thousands of children.
+
+Note the special logic for the icon, to cater for the case where skos:Concept is not the only parent class of the concepts, as in the geography example. In the latter, the system may walk up the wrong tree and end up returning the icon for rdfs:Resource.""" ;
+  rdfs:label "Concept tree children" ;
+  rdfs:subClassOf swa:TreeChildrenTemplates ;
+.
+evnui:ConceptTreeDataProvider
+  a swa:TreeDataProvider ;
+  arg:changeHandler "evn.handleChangeForConceptTree" ;
+  arg:treeChildrenTemplate evnui:ConceptTreeChildren ;
+  arg:treePathTemplate evnui:ConceptTreePath ;
+  arg:treeRootsTemplate evnui:ConceptTreeRoots ;
+  rdfs:comment "A data provider for a SKOS Concept tree, walking down skos:broader. The roots of the tree are instances of skos:ConceptScheme." ;
+  rdfs:label "Concept tree data provider" ;
+.
+evnui:ConceptTreeFooter
+  a ui:NodeClass ;
+  ui:prototype """
+<evnui:ConceptTreeToolBar ui:args=\"*\"/>
+"""^^ui:Literal ;
+  rdfs:comment "Left here for backwards compatibility - please switch to evnui:ConceptTreeToolBar." ;
+  rdfs:subClassOf evnui:ConceptTreeToolBar ;
+.
+evnui:ConceptTreeGadget
+  a swa:Gadget ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:frozen ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True if frozen" ;
+    ] ;
+  ui:prototype """
+<ui:group let:dataProvider=\"{= evnui:ConceptTreeDataProvider }\" let:treeId=\"{= COALESCE(?treeId, &quot;conceptTree&quot;) }\">
+    <evnui:ConceptTreeToolBar arg:frozen=\"{= ?frozen }\" arg:resourceSelectedEvent=\"{= ?resourceSelectedEvent }\"/>
+    <div class=\"ui-layout-content\" id=\"conceptTreeBody\">
+        <swa:Tree arg:dataProvider=\"{= ?dataProvider }\" arg:draggable=\"{= !?frozen }\" arg:id=\"{= ?treeId }\" arg:onSelect=\"{= swa:publishEvent(?resourceSelectedEvent, &quot;resource&quot;) }\" arg:treeMoveHandler=\"{= evnui:TreeMoveHandler }\"/>
+    </div>
+    <swa:Subscribe arg:code=\"{= spl:objectInGraph(?dataProvider, arg:changeHandler, ui:graph) }(data, '{= ?treeId }')\" arg:event=\"org.topbraid.swa.change\"/>
+    <swa:Subscribe arg:code=\"swa.selectTreeNode('{= ?treeId }', data)\" arg:event=\"{= ?resourceSelectedEvent }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Concept tree gadget" ;
+  rdfs:subClassOf swa:TreeGadgets ;
+.
+evnui:ConceptTreePath
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Union ;
+            sp:elements (
+                (
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a spif:shortestObjectsPath ;
+                        sp:arg1 [
+                            sp:varName "node" ;
+                          ] ;
+                        sp:arg2 skos:broader ;
+                        sp:arg3 [
+                            sp:varName "root" ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "path" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Filter ;
+                    sp:expression [
+                        a sp:bound ;
+                        sp:arg1 [
+                            sp:varName "path" ;
+                          ] ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a evnui:rootConceptFromPath ;
+                        arg:path [
+                            sp:varName "path" ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "r" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "r" ;
+                      ] ;
+                    sp:predicate skos:hasTopConcept ;
+                    sp:subject [
+                        sp:varName "scheme" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a fn:concat ;
+                        sp:arg1 [
+                            sp:varName "scheme" ;
+                          ] ;
+                        sp:arg2 " " ;
+                        sp:arg3 [
+                            sp:varName "path" ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "result" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    sp:object skos:ConceptScheme ;
+                    sp:predicate rdf:type ;
+                    sp:subject [
+                        sp:varName "node" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a xsd:string ;
+                        sp:arg1 [
+                            sp:varName "node" ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "result" ;
+                      ] ;
+                  ]
+                )
+              ) ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "Used to find a path from a given node to the root. This is needed to expand the concept tree, and to highlight the new resource, if the selection changes - for example if the user clicks the back button or navigates to a different concept via a form hyperlink." ;
+  rdfs:label "Concept tree path" ;
+  rdfs:subClassOf swa:TreePathTemplates ;
+.
+evnui:ConceptTreeRoots
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:distinct true ;
+      sp:orderBy (
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "node" ;
+          ]
+          [
+            sp:varName "label" ;
+          ]
+          [
+            sp:varName "leaf" ;
+          ]
+          [
+            sp:varName "icon" ;
+          ]
+          [
+            sp:varName "movable" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:TriplePath ;
+            sp:object skos:ConceptScheme ;
+            sp:path [
+                a sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "type" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "node" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:notExists ;
+                sp:elements (
+                    [
+                      sp:object [
+                          sp:varName "concept" ;
+                        ] ;
+                      sp:predicate skos:hasTopConcept ;
+                      sp:subject [
+                          sp:varName "node" ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+            sp:variable [
+                sp:varName "leaf" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a ui:label ;
+                sp:arg1 [
+                    sp:varName "node" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "label" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression "swa-icon-concept-scheme" ;
+            sp:variable [
+                sp:varName "icon" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression false ;
+            sp:variable [
+                sp:varName "movable" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "Delivers the root nodes of the EVN concept tree. The roots are all instances of skos:ConceptScheme." ;
+  rdfs:label "Concept tree roots" ;
+  rdfs:subClassOf swa:TreeRootsTemplates ;
+.
+evnui:ConceptTreeToolBar
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:frozen ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True if not editable." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resourceSelectedEvent ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The event to trigger when done." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<div class=\"swa-gadget-toolbar\" id=\"conceptTreeFooter\">
+    <swa:AutoComplete arg:id=\"conceptTreeAutoComplete\" arg:onSelect=\"{= swa:publishEvent(?resourceSelectedEvent, &quot;resource&quot;) };swa.selectTreeNode('conceptTree', resource, swa.queryGraphURI);\" arg:placeholder=\"{= swa:autoCompleteSearchPlaceholder(&quot;Concept&quot;) }\" arg:type=\"{= skos:Concept }\"/>
+    <ui:if ui:condition=\"{= !?frozen }\">
+        <div class=\"evn-tree-footer-buttons-panel\">
+            <evnui:CreateConceptButton arg:resourceSelectedEvent=\"{= ?resourceSelectedEvent }\"/>
+            <swa:CreateResourceButton arg:createHandler=\"{= evnui:CreateSchemeHandler }\" arg:iconClass=\"evn-icon-concept-scheme\" arg:resourceSelectedEvent=\"{= ?resourceSelectedEvent }\" arg:resourceType=\"{= skos:ConceptScheme }\" arg:toolTip=\"Create Concept Scheme...\"/>
+        </div>
+        <div class=\"swa-clear-right\"/>
+    </ui:if>
+</div>
+"""^^ui:Literal ;
+  rdfs:comment "The panel that shows up above the concept tree. It was formerly showing below the concept tree." ;
+  rdfs:subClassOf evnui:EditorElements ;
+.
+evnui:ConceptTypeEditor
+  a swa:ObjectEditorClass ;
+  ui:private true ;
+  ui:prototype """
+<ui:setContext ui:queryGraph=\"{= swa:dataGraph() }\">
+    <ui:if ui:condition=\"{= (!bound(?object)) || EXISTS {
+        ?object (rdfs:subClassOf)* skos:Concept .
+    } }\">
+        <select class=\"form-control\" name=\"new-{= ?uid }\">
+            <ui:if ui:condition=\"{= !bound(?object) }\">
+                <option/>
+            </ui:if>
+            <ui:forEach ui:indexVar=\"index\" ui:resultSet=\"{#
+                    SELECT ?item ?label
+                    WHERE {
+                        ?item (rdfs:subClassOf)* skos:Concept .
+                        BIND (ui:label(?item) AS ?label) .
+                    }
+                    ORDER BY (?label) }\">
+                <option selected=\"{= IF((?object = ?item), &quot;selected&quot;, ?none) }\" value=\"{= ui:encodeNode(?item) }\">{= ?label }</option>
+            </ui:forEach>
+        </select>
+    </ui:if>
+    <ui:else>
+        <swa:URIResourceEditor ui:args=\"*\"/>
+    </ui:else>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:comment "An auto-complete editor used for editing rdf:type triples, that only allows selecting subclasses of skos:Concept." ;
+  rdfs:label "Concept type editor" ;
+  rdfs:subClassOf swa:ObjectEditor ;
+.
+evnui:CopyConceptElements
+  a swa:EditHandlerClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:concept ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The concept to import. ValueType is rdfs:Resource because the concept may be (yet) untyped." ;
+    ] ;
+  ui:abstract true ;
+  ui:private true ;
+  rdfs:label "Copy concept elements" ;
+  rdfs:subClassOf swa:EditHandlers ;
+.
+evnui:CopyConceptFromSPARQLEndpointHandler
+  a evnui:Action ;
+  a swa:EditHandlerClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The named graph to load the resource from." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:endPoint ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The SPARQL end point to load from." ;
+    ] ;
+  ui:instanceView """
+<ui:group default:subject=\"{= ?this }\" default:tabular=\"{= true }\" ui:id=\"form\">
+    <div>This dialog can be used to establish relationships between local and external concepts. It will copy statements about concepts that are hosted on a SPARQL endpoint into the current vocabulary. SPARQL endpoints must have been pre-installed by the EDG administrator.</div>
+    <div>&nbsp;</div>
+    <swa:Object arg:editWidget=\"{= evnui:SPARQLEndpointSelector }\" arg:label=\"Endpoint\" arg:predicate=\"{= arg:endPoint }\"/>
+    <swa:Object arg:editWidget=\"{= swa:URIResourceTextFieldEditor }\" arg:label=\"Named Graph (optional)\" arg:predicate=\"{= arg:graph }\"/>
+    <swa:Object arg:editWidget=\"{= swa:URIResourceTextFieldEditor }\" arg:label=\"Concept URI\" arg:predicate=\"{= arg:concept }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:private true ;
+  ui:prototype """
+<evnui:CopyConceptHandlerHelper ui:args=\"*\"/>
+"""^^ui:Literal ;
+  rdfs:label "Copy Concept from SPARQL Endpoint..." ;
+  rdfs:subClassOf evnui:CopyConceptElements ;
+.
+evnui:CopyConceptFromURLHandler
+  a evnui:Action ;
+  a swa:EditHandlerClass ;
+  ui:instanceView """
+<ui:group default:subject=\"{= ?this }\" default:tabular=\"{= true }\" ui:id=\"form\">
+    <div>This dialog can be used to establish relationships between local and external concepts. It will copy statements about concepts that are defined on the web as Linked Data resources, i.e. at a URL that delivers RDF triples.</div>
+    <div>&nbsp;</div>
+    <swa:Object arg:editWidget=\"{= swa:URIResourceTextFieldEditor }\" arg:label=\"URL\" arg:predicate=\"{= arg:concept }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:private true ;
+  ui:prototype """
+<evnui:CopyConceptHandlerHelper ui:args=\"*\"/>
+"""^^ui:Literal ;
+  rdfs:label "Copy Concept from URL..." ;
+  rdfs:subClassOf evnui:CopyConceptElements ;
+.
+evnui:CopyConceptFromVocabularyHandler
+  a evnui:Action ;
+  a swa:EditHandlerClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The named graph to load the resource from." ;
+    ] ;
+  ui:instanceView """
+<ui:group default:subject=\"{= ?this }\" default:tabular=\"{= true }\" ui:id=\"form\">
+    <div>This dialog can be used to prepare relationships between local concepts and those defined in other vocabularies in the same EDG installation. The system will copy relevant statements about the external concept and all its parents (including the concept scheme it belongs to) into the current taxonomy.</div>
+    <div>&nbsp;</div>
+    <swa:Object arg:editWidget=\"{= evnui:OtherVocabularySelectionEditor }\" arg:label=\"Vocabulary\" arg:predicate=\"{= arg:graph }\"/>
+    <ui:loadable ui:loadId=\"concept-widget\">
+        <ui:if ui:condition=\"{= bound(?graph) }\">
+            <ui:setContext ui:varName=\"dataGraph\" ui:varValue=\"{= ui:graphWithImports(?graph) }\">
+                <swa:Object arg:editWidget=\"{= evnui:SKOSConceptAutoCompleteEditor }\" arg:label=\"Concept to import\" arg:predicate=\"{= arg:concept }\"/>
+            </ui:setContext>
+        </ui:if>
+        <ui:else>
+            <div>&nbsp;</div>
+        </ui:else>
+    </ui:loadable>
+</ui:group>
+"""^^ui:Literal ;
+  ui:private true ;
+  ui:prototype """
+<evnui:CopyConceptHandlerHelper ui:args=\"*\"/>
+"""^^ui:Literal ;
+  rdfs:label "Copy Concept from Vocabulary..." ;
+  rdfs:subClassOf evnui:CopyConceptElements ;
+.
+evnui:CopyConceptHandlerHelper
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:endPoint ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The SPARQL end point to load from." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The named graph to load the resource from." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:concept ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The concept to import. ValueType is rdfs:Resource because the concept may be (yet) untyped." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <!-- Collect all triples in temp graph before doing the real INSERT -->
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ui:tempGraph {
+                    ?s ?p ?o .
+                } .
+            }
+            WHERE {
+                ( ?concept ?graph ?endPoint ) teamwork:importConcept ( ?s ?p ?o ) .
+            } }\"/>
+    <ui:transaction ui:logMessage=\"Import Concept with URI {= ?concept }\">
+        <ui:update ui:updateQuery=\"{!
+                INSERT {
+                    ?s ?p ?o .
+                }
+                WHERE {
+                    GRAPH ui:tempGraph {
+                        ?s ?p ?o .
+                    } .
+                } }\"/>
+    </ui:transaction>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Attempts to copy a given concept from external graphs." ;
+  rdfs:label "Copy concept handler helper" ;
+  rdfs:subClassOf evnui:EditorElements ;
+.
+evnui:CreateConceptButton
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:resourceSelectedEvent ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The name of an event to fire if the new resource has been created." ;
+    ] ;
+  ui:prototype """
+<ui:group let:id=\"{= ui:uniqueId() }\">
+    <swa:Button arg:class=\"btn btn-default btn-xs\" arg:iconClass=\"swa-icon-concept\" arg:id=\"{= ?id }\" arg:label=\"{= ?label }\" arg:onClick=\"swa.openCreateResourceDialog('create-{= ?id }-dialog', evn.getSelectedConceptOrSchemeOrError('Error: Please select a parent concept or scheme first.'), false)\" arg:overlayImage=\"{= ui:lib() }/assets/build/images/CreateOverlay.png\" arg:toolTip=\"Create {= ui:label(skos:Concept) }...\"/>
+    <ui:group let:loadId=\"create-{= ?id }-dialog\">
+        <ui:loadable class=\"swa-float-left\" ui:loadId=\"{= ?loadId }\" ui:loadOnDemand=\"{= true }\">
+            <ui:group let:resourceType=\"{= IF(spl:instanceOf(?contextResource, skos:Concept), COALESCE(evnui:narrowerClass(?contextResource), skos:Concept), skos:Concept) }\">
+                <swa:CreateResourceDialog arg:callback=\"swa.createResource\" arg:contextResource=\"{= ?contextResource }\" arg:createHandler=\"{= evnui:CreateConceptHandler }\" arg:label=\"Create {= ui:label(?resourceType) }\" arg:loadId=\"{= ?loadId }\" arg:resourceSelectedEvent=\"{= ?resourceSelectedEvent }\" arg:resourceType=\"{= ?resourceType }\"/>
+            </ui:group>
+        </ui:loadable>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A button that opens a dialog to create a concept. Once the dialog is done, the new resource will be \"selected\" by issuing an event." ;
+  rdfs:label "Create concept button" ;
+  rdfs:subClassOf swa:ButtonElements ;
+.
+evnui:CreateConceptHandler
+  a ui:NodeClass ;
+  ui:private true ;
+  ui:prototype """
+<ui:transaction ui:logMessage=\"Create {= ui:label(?resourceType) } with URI {= ?uri }\" ui:metadata=\"{= ?metadata }\">
+    <ui:preCondition ui:errorMessage=\"{= COALESCE(swa:labelExistsPreCondition(?label), swa:validURIPreCondition(?uri), swa:unusedURIPreCondition(IRI(str(?uri)))) }\">
+        <ui:group let:concept=\"{= IRI(str(?uri)) }\">
+            <ui:update ui:updateQuery=\"{!
+                    INSERT {
+                        ?concept a ?resourceType .
+                        ?concept skos:prefLabel ?prefLabel .
+                    }
+                    WHERE {
+                        BIND (IF(bound(?labelLang), STRLANG(?label, ?labelLang), ?label) AS ?prefLabel) .
+                    } }\"/>
+            <ui:if ui:condition=\"{= bound(?contextResource) }\">
+                <ui:if ui:condition=\"{= spl:instanceOf(?contextResource, skos:ConceptScheme) }\">
+                    <ui:update ui:updateQuery=\"{!
+                            INSERT {
+                                ?contextResource skos:hasTopConcept ?concept .
+                            }
+                            WHERE {
+                            } }\"/>
+                </ui:if>
+                <ui:else>
+                    <ui:update ui:updateQuery=\"{!
+                            INSERT {
+                                ?concept skos:broader ?contextResource .
+                            }
+                            WHERE {
+                            } }\"/>
+                </ui:else>
+            </ui:if>
+            <swa:addDefaultValues arg:resource=\"{= ?concept }\"/>
+            <evnui:ExecuteCreateConceptPlugins arg:concept=\"{= ?concept }\"/>
+        </ui:group>
+    </ui:preCondition>
+</ui:transaction>
+"""^^ui:Literal ;
+  rdfs:comment "The Updates that need to happen to create a new skos:Concept." ;
+  rdfs:label "Create concept handler" ;
+  rdfs:subClassOf swa:CreateHandlers ;
+.
+evnui:CreateConceptPlugins
+  a ui:NodeClass ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:concept ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The Concept that is being created. This should be the subject of the ui:update commands." ;
+    ] ;
+  rdfs:comment "DEPRECATED: Use swa:AddDefaultValuesPlugin instead - the plugins here are not invoked consistently." ;
+  rdfs:label "Create concept plugins" ;
+  rdfs:subClassOf evnui:EditorElements ;
+.
+evnui:CreateMultipleConceptsHandler
+  a swa:ResourceAction ;
+  a ui:NodeClass ;
+  arg:appName "EVN" ;
+  arg:condition [
+      a sp:if ;
+      sp:arg1 [
+          a spl:instanceOf ;
+          sp:arg1 [
+              sp:varName "resource" ;
+            ] ;
+          sp:arg2 skos:Concept ;
+        ] ;
+      sp:arg2 true ;
+      sp:arg3 [
+          sp:varName "none" ;
+        ] ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:defaultValue skos:Concept ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The type of the new instances." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:labels ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The labels (one per row) of the new concepts" ;
+    ] ;
+  ui:instanceView """
+<swa:ObjectsEnum default:subject=\"{= ?this }\" default:tabular=\"{= true }\" ui:id=\"form\">
+    <swa:Object arg:editWidget=\"{= swa:TextAreaEditor }\" arg:label=\"labels (one per row)\" arg:predicate=\"{= arg:labels }\"/>
+    <swa:Object arg:editWidget=\"{= evnui:ConceptTypeEditor }\" arg:label=\"type\" arg:predicate=\"{= arg:resourceType }\"/>
+</swa:ObjectsEnum>
+"""^^ui:Literal ;
+  ui:private true ;
+  ui:prototype """
+<ui:transaction let:labelLang=\"{= lang(?labels) }\" ui:logMessage=\"Create multiple instances of {= ui:label(?resourceType) } with labels {= ?labels } as children of {= ui:label(?resource) }\">
+    <ui:forEach ui:resultSet='{#
+            SELECT ?label ?concept
+            WHERE {
+                ?l spif:split ( ?labels \"\\n\" ) .
+                BIND (spif:trim(?l) AS ?label) .
+                FILTER (?label != \"\") .
+            } }'>
+        <ui:group let:concept=\"{= swa:newResourceByLabel(?label) }\">
+            <ui:update ui:updateQuery=\"{!
+                    INSERT {
+                        ?concept a ?resourceType .
+                        ?concept skos:prefLabel ?prefLabel .
+                    }
+                    WHERE {
+                        BIND (IF((bound(?labelLang) &amp;&amp; (?labelLang != &quot;&quot;)), STRLANG(?label, ?labelLang), ?label) AS ?prefLabel) .
+                    } }\"/>
+            <ui:if ui:condition=\"{= spl:instanceOf(?resource, skos:ConceptScheme) }\">
+                <ui:update ui:updateQuery=\"{!
+                        INSERT {
+                            ?resource skos:hasTopConcept ?concept .
+                        }
+                        WHERE {
+                        } }\"/>
+            </ui:if>
+            <ui:else>
+                <ui:update ui:updateQuery=\"{!
+                        INSERT {
+                            ?concept skos:broader ?resource .
+                        }
+                        WHERE {
+                        } }\"/>
+            </ui:else>
+            <evnui:ExecuteCreateConceptPlugins arg:concept=\"{= ?concept }\"/>
+        </ui:group>
+    </ui:forEach>
+</ui:transaction>
+"""^^ui:Literal ;
+  rdfs:label "Create multiple concepts..." ;
+  rdfs:subClassOf swa:ResourceEditHandlers ;
+.
+evnui:CreateSchemeHandler
+  a ui:NodeClass ;
+  ui:private true ;
+  ui:prototype """
+<ui:transaction ui:logMessage=\"Create scheme with URI {= ?uri }\" ui:metadata=\"{= ?metadata }\">
+    <ui:preCondition ui:errorMessage=\"{= COALESCE(swa:labelExistsPreCondition(?label), swa:validURIPreCondition(?uri), swa:unusedURIPreCondition(IRI(str(?uri)))) }\">
+        <ui:update ui:updateQuery=\"{!
+                INSERT {
+                    ?scheme a skos:ConceptScheme .
+                    ?scheme skos:prefLabel ?prefLabel .
+                }
+                WHERE {
+                    BIND (IRI(str(?uri)) AS ?scheme) .
+                    BIND (IF(bound(?labelLang), STRLANG(?label, ?labelLang), ?label) AS ?prefLabel) .
+                } }\"/>
+    </ui:preCondition>
+</ui:transaction>
+"""^^ui:Literal ;
+  rdfs:comment "Creates a new skos:ConceptScheme." ;
+  rdfs:label "Create scheme handler" ;
+  rdfs:subClassOf swa:CreateHandlers ;
+.
+evnui:CreateSharePointSearchResults
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:uris ;
+      spl:valueType xsd:string ;
+      rdfs:comment "Space-separated URIs of search results." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:graph=\"{= ui:createSessionGraph() }\">
+    <ui:group let:teamGraph=\"{= teamwork:currentTeamGraph() }\" letrs:concepts='{#
+            SELECT ?concept
+            WHERE {
+                ?uri spif:split ( ?uris \" \" ) .
+                BIND (IRI(?uri) AS ?concept) .
+            } }'>
+        <ui:task let:server=\"{= spl:objectInGraph(?teamGraph, sharepoint:server, ?teamGraph) }\" ui:taskName=\"Finding SharePoint documents for {= spr:rowCount(?concepts) } terms\" ui:totalWork=\"{= spr:rowCount(?concepts) }\">
+            <ui:group let:url=\"{= spl:objectInGraph(?server, sharepoint:url, ?teamGraph) }\" let:userName=\"{= spl:objectInGraph(?server, sharepoint:userName, ?teamGraph) }\">
+                <ui:forEach ui:resultSet=\"{= ?concepts }\">
+                    <ui:subTask ui:subTaskName=\"{= ui:label(?concept) }\" ui:work=\"{= 1 }\">
+                        <ui:update ui:updateQuery=\"{!
+                                INSERT {
+                                    GRAPH ?graph {
+                                        ?document rdfs:label ?title .
+                                        ?document sharepoint:extension ?extension .
+                                        ?document sharepoint:author ?author .
+                                        ?document sharepoint:size ?size .
+                                        ?document sharepoint:lastMod ?lastMod .
+                                        ?document rdfs:seeAlso ?concept .
+                                    } .
+                                }
+                                WHERE {
+                                    {
+                                        BIND (ui:label(?concept) AS ?keyword) .
+                                        ( ?keyword ?url ?userName ) sharepoint:matchingDocument ( ?title ?path ?extension ?author ?size ?lastMod ) .
+                                    } .
+                                    BIND (IRI(?path) AS ?document) .
+                                } }\"/>
+                    </ui:subTask>
+                </ui:forEach>
+            </ui:group>
+        </ui:task>
+    </ui:group>
+    <swon:Object>
+        <swon:Value arg:name=\"graphURI\" arg:value=\"{= ?graph }\"/>
+    </swon:Object>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Creates a new session graph containing matching SharePoint documents based on a space-separated list of URIs coming from a search form." ;
+  rdfs:label "Create share point search results" ;
+  rdfs:subClassOf ui:JSONServices ;
+.
+evnui:D3RelationshipTreeAction
+  a swa:ResourceAction ;
+  arg:appName "Explorer" ;
+  arg:condition [
+      a swa:hasRelationshipTreeProperties ;
+      arg:resource [
+          sp:varName "resource" ;
+        ] ;
+    ] ;
+  arg:iconClass "relationship-tree-icon" ;
+  arg:onSelect "window.open(swa.servlet + '?_base=' + swa.queryGraphURI + '&_viewClass=evnui:RelationshipTreePage' + '&root=' + escape(resourceURI))" ;
+  swa:readOnly true ;
+  rdfs:label "Display relationship tree..." ;
+.
+evnui:EditableGenericTreeDesktopWindowForClassResourceAction
+  a swa:ResourceAction ;
+  arg:appName "EVN" ;
+  arg:condition [
+      a sp:if ;
+      sp:arg1 [
+          a spl:instanceOf ;
+          sp:arg1 [
+              sp:varName "resource" ;
+            ] ;
+          sp:arg2 rdfs:Class ;
+        ] ;
+      sp:arg2 true ;
+      sp:arg3 [
+          sp:varName "none" ;
+        ] ;
+    ] ;
+  arg:onSelect "swa.openGadgetWindow('swa:GenericTreeGadgetWindow', { resourceType: \"<\" + resourceURI + \">\", editable: true, resourceSelectedEvent: 'org.topbraidlive.evn.resourceSelected' }, \"west\")" ;
+  rdfs:label "Open hierarchy of instances" ;
+.
+evnui:Editor
+  a ui:NodeClass ;
+  ui:errorPrototype """
+<ui:if ui:condition=\"{= !teamwork:currentUserHasPrivilege(IF(bound(?tagId), teamwork:tagById(?tagId), teamwork:teamGraph(teamwork:masterGraph(?graphId))), teamwork:viewer, teamwork:teamGraph(teamwork:masterGraph(?graphId))) }\">
+    <ui:group let:published=\"{= teamwork:isPublishedToExplorerUsers(teamwork:teamGraph(teamwork:masterGraph(?graphId))) }\" let:user=\"{= smf:userWithName(?userName) }\">
+        <ui:if ui:condition=\"{= !((teamwork:isExplorerUser(?user) &amp;&amp; bound(?published)) &amp;&amp; ?published) }\">
+Not authorized
+</ui:if>
+    </ui:group>
+</ui:if>
+"""^^ui:Literal ;
+  ui:headIncludes """
+<ui:group>
+    <title>{= teamwork:graphLabel(teamwork:masterGraph(teamwork:currentGraphId())) } Editor</title>
+    <script>teamwork.initRichTextEditors(teamwork.injectLinkToConceptButton)</script>
+</ui:group>
+"""^^ui:Literal ;
+  ui:prototype """
+<ui:setContext let:classSelectedEvent=\"org.topbraidlive.evn.classSelected\" let:frozen=\"{= teamwork:isExplorerUser(smf:userWithName(smf:currentUserName())) || teamwork:isCurrentGraphFrozen() }\" let:instanceSelectedEvent=\"org.topbraidlive.evn.resourceSelected\" ui:varName=\"swaAppName\" ui:varValue=\"EVN,Editor{= IF(teamwork:isCurrentGraphFrozen(), &quot;,ReadOnly&quot;, ?none) }\">
+    <ui:setContext ui:varName=\"swaOnOpenResource\" ui:varValue=\"{= teamwork:onOpenResource(?instanceSelectedEvent) }\">
+        <ui:setContext ui:varName=\"suppressViewpointClass\" ui:varValue=\"{= false }\">
+            <ui:setContext ui:varName=\"suppressHierarchyViewButton\" ui:varValue=\"{= true }\">
+                <teamwork:EditorChrome arg:projectGraph=\"{= teamwork:currentMasterGraph() }\" arg:projectTab=\"{= COALESCE(?projectTab, teamwork:EditorProjectTab) }\" arg:projectType=\"{= teamwork:getProjectType(teamwork:currentMasterGraph()) }\" arg:tag=\"{= teamwork:currentTag() }\">
+                    <ui:insert ui:into=\"header\">
+                        <evnui:EditorHeader arg:frozen=\"{= ?frozen }\"/>
+                    </ui:insert>
+                    <ui:insert ui:into=\"main\">
+                        <teamwork:ChromeBorderLayout arg:deepLinkingEvent=\"{= ?instanceSelectedEvent }\" arg:eastClosed=\"{= true }\" arg:eastSize=\"{= 400 }\" arg:northFixed=\"{= true }\" arg:storageKey=\"org.topbraidlive.evn.Editor.5.2\" arg:westSize=\"{= 400 }\" default:editable=\"{= !?frozen }\" let:resourceSelectedEvent=\"{= ?instanceSelectedEvent }\">
+                            <swa:Window arg:id=\"treeWindow\" arg:layoutPanel=\"west\" arg:title=\"Concept Hierarchy\">
+                                <evnui:ConceptTreeGadget ui:args=\"*\"/>
+                            </swa:Window>
+                            <swa:Window arg:id=\"formWindow\" arg:layoutPanel=\"center\" arg:title=\"Selected Resource\">
+                                <teamwork:SwitchableFormGadget arg:readOnly=\"{= bound(?resource) &amp;&amp; swa:isOntologyResource(?resource) }\" arg:resourceSelectedEvent=\"{= ?instanceSelectedEvent }\" ui:args=\"*\"/>
+                            </swa:Window>
+                            <swa:BorderLayout arg:layoutPanel=\"east\" arg:southSize=\"{= 200 }\" arg:storageKey=\"org.topbraidlive.evn.Editor.east\">
+                                <swa:Window arg:id=\"searchWindow\" arg:layoutPanel=\"center\" arg:title=\"Search\">
+                                    <!--evnui:FormSearchGadget ui:args=\"*\"/-->
+                                    <teamwork:FilterSearchGadget arg:cacheId=\"taxonomy.main\" arg:containerId=\"searchWindow\" arg:localSearch=\"{= teamwork:isAlwaysLocalSearch() }\" arg:resourceType=\"{= COALESCE(?resourceType, skos:Concept) }\" arg:suppressAdvancedSearch=\"{= true }\" arg:suppressHierarchyViewButton=\"{= ui:contextValue(&quot;suppressHierarchyViewButton&quot;) }\" arg:suppressViewpointSelector=\"{= ui:contextValue(&quot;suppressViewpointClass&quot;) }\" ui:args=\"*\"/>
+                                </swa:Window>
+                                <!--swa:Window arg:id=\"searchResultsWindow\" arg:layoutPanel=\"south\" arg:title=\"Search Results\">
+<swa:DataTableSearchResultsGadget arg:multiSelect=\"false\"
+                      arg:resourceSelectedEvent=\"{= ?instanceSelectedEvent }\"
+                      ui:args=\"*\"/>
+</swa:Window-->
+                            </swa:BorderLayout>
+                        </teamwork:ChromeBorderLayout>
+                    </ui:insert>
+                </teamwork:EditorChrome>
+            </ui:setContext>
+        </ui:setContext>
+    </ui:setContext>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:comment """An application for browsing and/or editing SKOS vocabularies. Has a three-column layout. The left column can be switched between a concept (skos:broader) tree and a class tree (rdfs:subClassOf). The center column displays details of the selected resource. The right column contains an optional search form with a grid displaying the matching concepts/instances.
+
+NOTE: if you are referencing this directly (e.g. in clones of the taxonomy project type) please switch to taxonomies:HierarchicalEditor instead.""" ;
+  rdfs:label "Taxonomy Editor" ;
+  rdfs:subClassOf taxonomies:Elements ;
+  rdfs:subClassOf evnui:Applications ;
+  rdfs:subClassOf evnui:EditorElements ;
+  rdfs:subClassOf swa:ClosableSearchBarEast ;
+  rdfs:subClassOf teamwork:EditorApplications ;
+.
+evnui:EditorElements
+  a ui:NodeClass ;
+  rdfs:subClassOf evnui:Elements ;
+.
+evnui:EditorHeader
+  a ui:NodeClass ;
+  ui:prototype """
+<teamwork:EditorHeader arg:frozen=\"{= ?frozen }\" arg:pageType=\"search-app\">
+    <ui:insert ui:into=\"buttons\" ui:optional=\"{= true }\">
+        <ui:if ui:condition=\"{= !?frozen }\">
+            <swa:Space/>
+            <evnui:ActionsButton/>
+        </ui:if>
+    </ui:insert>
+    <teamwork:UndoButton arg:hidden=\"{= ?frozen }\"/>
+</teamwork:EditorHeader>
+"""^^ui:Literal ;
+  rdfs:label "Editor header" ;
+  rdfs:subClassOf teamwork:EditorHeader ;
+.
+evnui:Elements
+  a ui:NodeClass ;
+  ui:abstract true ;
+  rdfs:comment "Base class of EVN related SWP elements." ;
+  rdfs:label "EVN Elements" ;
+  rdfs:subClassOf swa:Elements ;
+.
+evnui:ExecuteCreateConceptPlugins
+  a ui:NodeClass ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:concept ;
+      spl:valueType skos:Concept ;
+      rdfs:comment "The newly created Concept." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:forEach ui:resultSet=\"{#
+        SELECT ?plugin
+        WHERE {
+            GRAPH ui:graph {
+                ?plugin rdfs:subClassOf evnui:CreateConceptPlugins .
+            } .
+        } }\">
+    <ui:dynamicView arg:concept=\"{= ?concept }\" ui:class=\"{= ?plugin }\"/>
+</ui:forEach>
+"""^^ui:Literal ;
+  rdfs:comment "DEPRECATED: Use swa:AddDefaultValuesPlugins instead." ;
+  rdfs:label "Execute create concept plugins" ;
+  rdfs:subClassOf evnui:EditorElements ;
+.
+evnui:FindMatchingSharePointDocumentsAction
+  a swa:SearchResultsAction ;
+  arg:appName "EVN" ;
+  arg:condition [
+      a evnui:isSharePointProject ;
+    ] ;
+  arg:onSelect "evn.findMatchingSharePointDocuments(formId)" ;
+  rdfs:label "Find matching SharePoint documents..." ;
+.
+evnui:FormSearchGadget
+  a swa:Gadget ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:frozen ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True if in frozen mode." ;
+    ] ;
+  ui:prototype """
+<swa:FormSearchGadget arg:cacheId=\"taxonomy.main\" arg:extraResourceType=\"{= IF(EXISTS {
+    skosxl:Label a ?any .
+}, skosxl:Label, ?none) }\" arg:footerPlugin=\"{= teamwork:SavedSearchesFooterPlugin }\" arg:localSearch=\"{= teamwork:isAlwaysLocalSearch() }\" arg:resourceType=\"{= COALESCE(?resourceType, skos:Concept) }\" arg:typeSelectable=\"{= true }\" ui:args=\"*\"/>
+"""^^ui:Literal ;
+  rdfs:label "Form search gadget" ;
+  rdfs:subClassOf swa:FormSearchGadget ;
+.
+evnui:ImportMTFilePage
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+        <teamwork:Chrome arg:projectTab=\"{= teamwork:ImportProjectTab }\" ui:args=\"*\">
+            <h1>Import MultiTes File</h1>
+            <p>Please select a MultiTes XML file that shall be added to the current vocabulary.</p>
+            <br/>
+            <form action=\"sparqlmotion\" enctype=\"multipart/form-data\" id=\"theForm\" method=\"post\">
+                <input name=\"file\" required=\"required\" type=\"file\"/>
+                <input name=\"projectGraph\" type=\"hidden\" value=\"{= ?projectGraph }\"/>
+                <input name=\"id\" type=\"hidden\" value=\"ImportMTFile\"/>
+                <br/>
+                <br/>
+                <button class=\"btn btn-primary\" id=\"submitButton\" type=\"submit\">Finish</button>
+            </form>
+        </teamwork:Chrome>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A page that can be used to upload a MultiTes file to the current project." ;
+  rdfs:label "Import MultiTes file page" ;
+  rdfs:subClassOf teamwork:MustHaveAccessToProjectPage ;
+.
+evnui:MatchingSharePointDocuments
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "title" ;
+          ]
+          [
+            sp:varName "path" ;
+          ]
+          [
+            sp:varName "extension" ;
+          ]
+          [
+            sp:varName "author" ;
+          ]
+          [
+            sp:varName "size" ;
+          ]
+          [
+            sp:varName "lastMod" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              a sp:Bind ;
+              sp:expression [
+                  a ui:label ;
+                  sp:arg1 spin:_this ;
+                ] ;
+              sp:variable [
+                  sp:varName "label" ;
+                ] ;
+            ]
+            [
+              a sp:Bind ;
+              sp:expression [
+                  a teamwork:currentTeamGraph ;
+                ] ;
+              sp:variable [
+                  sp:varName "teamGraph" ;
+                ] ;
+            ]
+            [
+              a sp:Bind ;
+              sp:expression [
+                  a spl:objectInGraph ;
+                  sp:arg1 [
+                      sp:varName "teamGraph" ;
+                    ] ;
+                  sp:arg2 sharepoint:server ;
+                  sp:arg3 [
+                      sp:varName "teamGraph" ;
+                    ] ;
+                ] ;
+              sp:variable [
+                  sp:varName "server" ;
+                ] ;
+            ]
+            [
+              a sp:Bind ;
+              sp:expression [
+                  a spl:objectInGraph ;
+                  sp:arg1 [
+                      sp:varName "server" ;
+                    ] ;
+                  sp:arg2 sharepoint:url ;
+                  sp:arg3 [
+                      sp:varName "teamGraph" ;
+                    ] ;
+                ] ;
+              sp:variable [
+                  sp:varName "url" ;
+                ] ;
+            ]
+            [
+              a sp:Bind ;
+              sp:expression [
+                  a spl:objectInGraph ;
+                  sp:arg1 [
+                      sp:varName "server" ;
+                    ] ;
+                  sp:arg2 sharepoint:userName ;
+                  sp:arg3 [
+                      sp:varName "teamGraph" ;
+                    ] ;
+                ] ;
+              sp:variable [
+                  sp:varName "userName" ;
+                ] ;
+            ]
+          )
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "url" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?2" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "userName" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?2" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?2" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?3" ;
+              ] ;
+            sp:predicate sharepoint:matchingDocument ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "title" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?3" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?4" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?3" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "path" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?4" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?5" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?4" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "extension" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?5" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?6" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?5" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "author" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?6" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?7" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?6" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "size" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?7" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?8" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?7" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "lastMod" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?8" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?8" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:column [
+      a spin:Column ;
+      spin:columnIndex 0 ;
+      spin:columnWidth 100 ;
+      rdfs:label "Title" ;
+    ] ;
+  spin:column [
+      a spin:Column ;
+      spin:columnIndex 1 ;
+      spin:columnWidth 200 ;
+      rdfs:label "Path" ;
+    ] ;
+  spin:column [
+      a spin:Column ;
+      spin:columnIndex 2 ;
+      spin:columnWidth 50 ;
+      rdfs:label "Extension" ;
+    ] ;
+  spin:column [
+      a spin:Column ;
+      spin:columnIndex 3 ;
+      spin:columnWidth 100 ;
+      rdfs:label "Author" ;
+    ] ;
+  spin:column [
+      a spin:Column ;
+      spin:columnIndex 4 ;
+      spin:columnType xsd:integer ;
+      spin:columnWidth 50 ;
+      rdfs:label "Size" ;
+    ] ;
+  spin:column [
+      a spin:Column ;
+      spin:columnIndex 5 ;
+      spin:columnType xsd:dateTime ;
+      spin:columnWidth 80 ;
+      rdfs:label "Last modified" ;
+    ] ;
+  spin:private true ;
+  rdfs:label "Matching SharePoint documents" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+evnui:MatchingSharePointDocumentsDialog
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The session graph containing the matching SharePoint documents." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:loadId ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The loadId" ;
+    ] ;
+  ui:prototype """
+<div id=\"div-{= ?loadId }\" let:progressId=\"swa-progress-{= spif:random() }\" title=\"Matching SharePoint Documents\">
+    <ui:call arg:graph=\"{= ?graph }\" ui:template=\"{= evnui:SharePointDocumentsFromTempGraph }\">
+        <swa:ResultSetGrid arg:onSelect=\"window.open(data['Path'],'_newtab')\" arg:resultSet=\"{= ?rs }\"/>
+    </ui:call>
+    <ui:group let:deleted=\"{= ui:deleteSessionGraph(?graph) }\"/>
+</div>
+"""^^ui:Literal ;
+  rdfs:label "Matching SharePoint documents dialog" ;
+  rdfs:subClassOf swa:DialogElements ;
+.
+evnui:MergeIntoConceptHandler
+  a swa:EditHandlerClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:target ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The target resource to merge into." ;
+    ] ;
+  ui:prototype """
+<ui:group let:tag=\"{= teamwork:currentTag() }\">
+    <ui:transaction ui:logMessage=\"Merge {= ui:label(?resource) } into {= ui:label(?target) }\">
+        <ui:update ui:updateQuery=\"{!
+                INSERT {
+                    ?target ?tp ?o .
+                }
+                WHERE {
+                    ?resource ?p ?o .
+                    BIND (IF((?p = skos:prefLabel), skos:altLabel, ?p) AS ?tp) .
+                } }\"/>
+        <ui:update ui:updateQuery=\"{!
+                INSERT {
+                    ?s ?p ?target .
+                }
+                WHERE {
+                    ?s ?p ?resource .
+                } }\"/>
+        <ui:update ui:updateQuery=\"{!
+                DELETE WHERE {
+                    ?resource ?p ?o .
+                } }\"/>
+        <ui:update ui:updateQuery=\"{!
+                DELETE WHERE {
+                    ?s ?p ?resource .
+                } }\"/>
+    </ui:transaction>
+    <ui:if ui:condition=\"{= !bound(?tag) }\">
+        <teamwork:replaceURIInImportingGraphs arg:new=\"{= ?target }\" arg:old=\"{= ?resource }\" arg:sourceGraph=\"{= teamwork:currentMasterGraph() }\"/>
+    </ui:if>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "The workhorse of the \"Merge into Concept...\" action. Moves all triples from source to target resource, making skos:prefLabel an altLabel." ;
+  rdfs:label "Merge into concept handler" ;
+  rdfs:subClassOf swa:ResourceEditHandlers ;
+.
+evnui:MergeIntoConceptResourceAction
+  a swa:ResourceAction ;
+  arg:appName "EVN" ;
+  arg:condition [
+      a sp:if ;
+      sp:arg1 [
+          a spl:instanceOf ;
+          sp:arg1 [
+              sp:varName "resource" ;
+            ] ;
+          sp:arg2 skos:Concept ;
+        ] ;
+      sp:arg2 [
+          a swa:canDeleteResource ;
+          arg:resource [
+              sp:varName "resource" ;
+            ] ;
+        ] ;
+      sp:arg3 [
+          sp:varName "none" ;
+        ] ;
+    ] ;
+  arg:group "main" ;
+  arg:iconClass "evn-icon-merge-into-concept" ;
+  arg:onSelect "evn.mergeIntoConcept(resourceURI)" ;
+  rdfs:label "Merge into concept..." ;
+.
+evnui:OpenSearchDialogAction
+  a swa:SearchResultsAction ;
+  arg:appName "EVN" ;
+  arg:condition true ;
+  arg:onSelect "swa.openDerivedSearchDialog(formId, 'org.topbraidlive.evn.resourceSelected')" ;
+  rdfs:label "Open search dialog..." ;
+.
+evnui:OtherVocabularySelectionEditor
+  a swa:ObjectEditorClass ;
+  ui:prototype """
+<select class=\"form-control\" id=\"new-{= ?uid }\" name=\"new-{= ?uid }\" onchange=\"swa.load('concept-widget', { graph: $('#new-{= ?uid }').val()})\">
+    <ui:if ui:condition=\"{= !bound(?object) }\">
+        <option/>
+    </ui:if>
+    <ui:forEach ui:indexVar=\"index\" ui:resultSet=\"{#
+            SELECT ?baseURI ?label
+            WHERE {
+                rdf:nil teamwork:readableGraphsUnderTeamControl ( ?baseURI ?teamGraph ) .
+                FILTER NOT EXISTS {
+                    ?baseURI a ?anyType .
+                } .
+                FILTER (teamwork:getProjectType(?baseURI) = taxonomies:ProjectType) .
+                BIND (teamwork:projectLabel(?baseURI) AS ?label) .
+            }
+            ORDER BY (?label) }\">
+        <option selected=\"{= IF((?object = ?baseURI), &quot;selected&quot;, ?none) }\" value=\"{= ui:encodeNode(?baseURI) }\">{= ?label }</option>
+    </ui:forEach>
+</select>
+"""^^ui:Literal ;
+  rdfs:comment "Can be used to select a vocabulary that is not imported by the currently active graph." ;
+  rdfs:label "Other vocabulary selection editor" ;
+  rdfs:subClassOf swa:ObjectEditor ;
+.
+evnui:RefreshResourceAction
+  a swa:ResourceAction ;
+  a ui:NodeClass ;
+  arg:appName "EVN" ;
+  arg:condition [
+      a teamwork:isImported ;
+      sp:arg1 [
+          sp:varName "resource" ;
+        ] ;
+    ] ;
+  ui:prototype """
+<ui:group let:endPoint=\"{= spl:object(?resource, imported:fromEndPoint) }\" let:graph=\"{= spl:object(?resource, imported:fromGraph) }\">
+    <ui:update ui:updateQuery=\"{!
+            INSERT {
+                GRAPH ui:tempGraph {
+                    ?resource ?p ?o .
+                } .
+            }
+            WHERE {
+                ( ?resource ?graph ?endPoint ) teamwork:importResourceObjects ( ?p ?o ) .
+            } }\"/>
+    <ui:transaction ui:logMessage=\"Refresh {= ui:label(?resource) }\">
+        <ui:update ui:updateQuery=\"{!
+                DELETE WHERE {
+                    ?resource ?p ?o .
+                } }\"/>
+        <ui:update ui:updateQuery=\"{!
+                INSERT {
+                    ?resource ?p ?o .
+                }
+                WHERE {
+                    GRAPH ui:tempGraph {
+                        ?resource ?p ?o .
+                    } .
+                } }\"/>
+    </ui:transaction>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Refreshes a resource from its import source." ;
+  rdfs:label "Refresh resource" ;
+  rdfs:subClassOf swa:ResourceEditHandlers ;
+.
+evnui:RegisteredSelectTemplates
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "templateLabel" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "template" ;
+          ]
+          [
+            sp:varName "templateGraph" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            (
+              [
+                sp:object [
+                    sp:varName "?0" ;
+                  ] ;
+                sp:predicate tops:files ;
+                sp:subject [
+                    sp:varName "file" ;
+                  ] ;
+              ]
+              [
+                sp:object "/" ;
+                sp:predicate rdf:first ;
+                sp:subject [
+                    sp:varName "?0" ;
+                  ] ;
+              ]
+              [
+                sp:object [
+                    sp:varName "?1" ;
+                  ] ;
+                sp:predicate rdf:rest ;
+                sp:subject [
+                    sp:varName "?0" ;
+                  ] ;
+              ]
+              [
+                sp:object true ;
+                sp:predicate rdf:first ;
+                sp:subject [
+                    sp:varName "?1" ;
+                  ] ;
+              ]
+              [
+                sp:object () ;
+                sp:predicate rdf:rest ;
+                sp:subject [
+                    sp:varName "?1" ;
+                  ] ;
+              ]
+              [
+                a sp:Filter ;
+                sp:expression [
+                    a sp:gt ;
+                    sp:arg1 [
+                        a spif:indexOf ;
+                        sp:arg1 [
+                            sp:varName "file" ;
+                          ] ;
+                        sp:arg2 ".spin." ;
+                      ] ;
+                    sp:arg2 0 ;
+                  ] ;
+              ]
+              [
+                a sp:Bind ;
+                sp:expression [
+                    a smf:baseURI ;
+                    sp:arg1 [
+                        sp:varName "file" ;
+                      ] ;
+                  ] ;
+                sp:variable [
+                    sp:varName "graph" ;
+                  ] ;
+              ]
+            )
+            [
+              a sp:Filter ;
+              sp:expression [
+                  a sp:bound ;
+                  sp:arg1 [
+                      sp:varName "graph" ;
+                    ] ;
+                ] ;
+            ]
+            [
+              a sp:Filter ;
+              sp:expression [
+                  a smf:canRead ;
+                  sp:arg1 [
+                      sp:varName "graph" ;
+                    ] ;
+                ] ;
+            ]
+          )
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  a sp:TriplePath ;
+                  sp:object skostemplate:IntegratedTemplates ;
+                  sp:path [
+                      a sp:ModPath ;
+                      sp:modMax -2 ;
+                      sp:modMin 1 ;
+                      sp:subPath rdfs:subClassOf ;
+                    ] ;
+                  sp:subject [
+                      sp:varName "template" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "anyBody" ;
+                    ] ;
+                  sp:predicate spin:body ;
+                  sp:subject [
+                      sp:varName "template" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a ui:label ;
+                      sp:arg1 [
+                          sp:varName "template" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "templateLabel" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "graph" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a ui:graphWithImports ;
+                sp:arg1 [
+                    sp:varName "graph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "templateGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "Gets the currently registered SPIN templates that can be executed through the SPIN templates dialog. This will walk through all .spin. files and deliver the subclasses of <http://topbraid.org/spin/skostemplates#IntegratedTemplates>." ;
+  rdfs:label "Registered select templates" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+evnui:ResourceHistoryPanel
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource to display." ;
+    ] ;
+  ui:prototype """
+<ui:group let:when=\"{= spl:object(?resource, imported:when) }\">
+    <ui:if ui:condition=\"{= bound(?when) }\">
+        <div class=\"evn-resource-imported-panel\" let:fromEndPoint=\"{= spl:object(?resource, imported:fromEndPoint) }\" let:fromGraph=\"{= spl:object(?resource, imported:fromGraph) }\">Copied&nbsp;<ui:if ui:condition=\"{= bound(?fromEndPoint) }\">from SPARQL endpoint {= ?fromEndPoint }</ui:if>
+            <ui:else>
+                <ui:if ui:condition=\"{= bound(?fromGraph) }\">from graph {= ?fromGraph }</ui:if>
+                <ui:else>from URL {= ?resource }</ui:else>
+            </ui:else>&nbsp;on {= ui:label(?when) }</div>
+    </ui:if>
+    <ui:else>
+        <teamwork:ResourceHistoryPanel arg:resource=\"{= ?resource }\"/>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Shows up at the top of forms to show most recent change date of a given resource, or - if applicable - information on where the resource has been imported from." ;
+  rdfs:label "Resource history panel" ;
+  rdfs:subClassOf evnui:EditorElements ;
+.
+evnui:RichTextEditor
+  a swa:ObjectEditorClass ;
+  ui:private true ;
+  ui:prototype """
+<swa:RichTextEditor ui:args=\"*\"/>
+"""^^ui:Literal ;
+  rdfs:comment "A multi-line text area to enter string literals as rich text. This is used for sub-properties of skos:note." ;
+  rdfs:label "Rich text editor (deprecated from EVN Vocabulary Editor)" ;
+  rdfs:subClassOf swa:ObjectEditor ;
+  owl:versionInfo "Deprecated: use swa:RichTextEditor instead." ;
+.
+evnui:RichTextViewer
+  a swa:ObjectViewerClass ;
+  ui:private true ;
+  ui:prototype """
+<swa:RichTextViewer ui:args=\"*\"/>
+"""^^ui:Literal ;
+  rdfs:comment "Deprecated: Use swa:RichTextViewer instead. Left here for customers who have manually hard-coded their forms to use evnui:RichTextViewer." ;
+  rdfs:label "Rich text viewer" ;
+  rdfs:subClassOf swa:RichTextViewer ;
+.
+evnui:SKOSConceptAutoCompleteEditor
+  a swa:ObjectEditorClass ;
+  ui:private true ;
+  ui:prototype """
+<ui:setContext ui:queryGraph=\"{= swa:dataGraph() }\">
+    <swa:AutoComplete arg:class=\"swa-text-field\" arg:id=\"new-{= ?uid }\" arg:initialValue=\"{= ?object }\" arg:type=\"{= skos:Concept }\"/>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:label "SKOS concept auto-complete editor" ;
+  rdfs:subClassOf swa:ObjectEditor ;
+.
+evnui:SPARQLEndpointSelector
+  a swa:ObjectEditorClass ;
+  ui:prototype """
+<select class=\"form-control evnui-sparql-endpoint-selector\" name=\"new-{= ?uid }\">
+    <ui:if ui:condition=\"{= !bound(?object) }\">
+        <option/>
+    </ui:if>
+    <ui:forEach ui:indexVar=\"index\" ui:resultSet=\"{#
+            SELECT ?endpoint ?label
+            WHERE {
+                GRAPH ui:graph {
+                    ?service sd:endpoint ?endpoint .
+                    BIND (ui:label(?service) AS ?label) .
+                } .
+            }
+            ORDER BY (?label) }\">
+        <option selected=\"{= IF((?object = ?endpoint), &quot;selected&quot;, ?none) }\" value=\"{= ui:encodeNode(?endpoint) }\">{= ?label }  ({= ?endpoint })</option>
+    </ui:forEach>
+</select>
+"""^^ui:Literal ;
+  rdfs:comment "A widget that allows users to select from a list of registered sd:Services that declare an sd:endpoint in any .ui. file or its imports." ;
+  rdfs:label "SPARQL endpoint selector" ;
+  rdfs:subClassOf swa:ObjectEditor ;
+.
+evnui:SharePointDocumentGridDataView
+  a ui:ViewElement ;
+  ui:prototype """
+<ui:call arg:this=\"{= ?this }\" ui:template=\"{= ?dataProvider }\">
+    <swa:ResultSetGrid arg:onSelect=\"window.open(data['Path'],'_newtab')\" arg:resultSet=\"{= ?rs }\"/>
+</ui:call>
+"""^^ui:Literal ;
+  rdfs:comment "A DataView displaying a grid of SharePoint documents. Clicking a row will open the document." ;
+  rdfs:label "Table view" ;
+  rdfs:subClassOf ui:DataViews ;
+.
+evnui:SharePointDocumentsFromTempGraph
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "title" ;
+          ]
+          [
+            sp:varName "path" ;
+          ]
+          [
+            sp:varName "extension" ;
+          ]
+          [
+            sp:varName "author" ;
+          ]
+          [
+            sp:varName "size" ;
+          ]
+          [
+            sp:varName "lastMod" ;
+          ]
+          [
+            sp:varName "term" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "title" ;
+                    ] ;
+                  sp:predicate rdfs:label ;
+                  sp:subject [
+                      sp:varName "document" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "term" ;
+                    ] ;
+                  sp:predicate rdfs:seeAlso ;
+                  sp:subject [
+                      sp:varName "document" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a xsd:string ;
+                      sp:arg1 [
+                          sp:varName "document" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "path" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a spl:object ;
+                      sp:arg1 [
+                          sp:varName "document" ;
+                        ] ;
+                      sp:arg2 sharepoint:author ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "author" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a spl:object ;
+                      sp:arg1 [
+                          sp:varName "document" ;
+                        ] ;
+                      sp:arg2 sharepoint:extension ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "extension" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a spl:object ;
+                      sp:arg1 [
+                          sp:varName "document" ;
+                        ] ;
+                      sp:arg2 sharepoint:lastMod ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "lastMod" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a spl:object ;
+                      sp:arg1 [
+                          sp:varName "document" ;
+                        ] ;
+                      sp:arg2 sharepoint:size ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "size" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "graph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:column [
+      a spin:Column ;
+      spin:columnIndex 0 ;
+      spin:columnWidth 200 ;
+      rdfs:label "Title" ;
+    ] ;
+  spin:column [
+      a spin:Column ;
+      spin:columnIndex 1 ;
+      spin:columnWidth 100 ;
+      rdfs:label "Path" ;
+    ] ;
+  spin:column [
+      a spin:Column ;
+      spin:columnIndex 2 ;
+      spin:columnWidth 50 ;
+      rdfs:label "Extension" ;
+    ] ;
+  spin:column [
+      a spin:Column ;
+      spin:columnIndex 3 ;
+      spin:columnWidth 100 ;
+      rdfs:label "Author" ;
+    ] ;
+  spin:column [
+      a spin:Column ;
+      spin:columnIndex 4 ;
+      spin:columnType xsd:integer ;
+      spin:columnWidth 50 ;
+      rdfs:label "Size" ;
+    ] ;
+  spin:column [
+      a spin:Column ;
+      spin:columnIndex 5 ;
+      spin:columnType xsd:dateTime ;
+      spin:columnWidth 80 ;
+      rdfs:label "Last modified" ;
+    ] ;
+  spin:column [
+      a spin:Column ;
+      spin:columnIndex 6 ;
+      spin:columnType skos:Concept ;
+      spin:columnWidth 150 ;
+      rdfs:label "Term" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph containing the documents." ;
+    ] ;
+  spin:private true ;
+  rdfs:label "SharePoint documents from temp graph" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+evnui:SigmaNeighborGramAction
+  a swa:ResourceAction ;
+  arg:appName "Explorer" ;
+  arg:condition true ;
+  arg:iconClass "neighborgram-icon" ;
+  arg:onSelect "window.open(swa.servlet + '?_base=' + swa.queryGraphURI + '&_viewClass=evnui:NeighborGramPage' + '&focusNode=' + escape(resourceURI))" ;
+  swa:readOnly true ;
+  rdfs:label "Display NeighborGram™..." ;
+.
+evnui:SimpleClassFormBody
+  a ui:ResourceViewClass ;
+  ui:private true ;
+  ui:prototype """
+<div default:hideIfEmpty=\"{= true }\" default:subject=\"{= ?resource }\" default:tabular=\"{= true }\">
+    <ui:if ui:condition=\"{= swa:isViewMode() }\">
+        <evnui:ResourceHistoryPanel arg:resource=\"{= ?resource }\"/>
+    </ui:if>
+    <swa:ObjectsEnum arg:label=\"Labels and Description\">
+        <swa:Objects arg:predicate=\"{= rdfs:label }\"/>
+        <swa:Objects arg:editWidget=\"{= swa:RichTextEditor }\" arg:predicate=\"{= rdfs:comment }\" arg:viewWidget=\"{= swa:RichTextViewer }\"/>
+    </swa:ObjectsEnum>
+    <swa:ObjectsEnum arg:label=\"Class Characteristics\">
+        <swa:Objects arg:label=\"sub-class of\" arg:predicate=\"{= rdfs:subClassOf }\"/>
+        <ui:if ui:condition=\"{= spl:instanceOf(spin:constraint, rdf:Property) }\">
+            <swa:Objects arg:predicate=\"{= spin:constraint }\"/>
+        </ui:if>
+    </swa:ObjectsEnum>
+</div>
+"""^^ui:Literal ;
+  rdfs:comment """A simple version of the default view for rdfs:Class, with widget groups for Annotation Properties and Class Axioms (only containing rdfs:subClassOf) and all other properties hidden.
+
+This implementation is identical to teamwork:SimpleClassFormBody, only that it uses the rich text editor that is currently only available in the EVN vocab editor.""" ;
+  rdfs:label "Simple class form body" ;
+  rdfs:subClassOf swa:FormBody ;
+.
+evnui:SimpleDatatypePropertyFormBody
+  a ui:ResourceViewClass ;
+  ui:private true ;
+  ui:prototype """
+<div default:hideIfEmpty=\"{= true }\" default:subject=\"{= ?resource }\" default:tabular=\"{= true }\">
+    <ui:if ui:condition=\"{= swa:isViewMode() }\">
+        <evnui:ResourceHistoryPanel arg:resource=\"{= ?resource }\"/>
+    </ui:if>
+    <swa:ObjectsEnum arg:label=\"Labels and Description\">
+        <swa:Objects arg:predicate=\"{= rdfs:label }\"/>
+        <swa:Objects arg:editWidget=\"{= swa:RichTextEditor }\" arg:predicate=\"{= rdfs:comment }\" arg:viewWidget=\"{= swa:RichTextViewer }\"/>
+    </swa:ObjectsEnum>
+    <swa:ObjectsEnum arg:label=\"Attribute Characteristics\">
+        <swa:Object arg:predicate=\"{= rdfs:domain }\"/>
+        <swa:Object arg:editWidget=\"{= teamwork:DatatypeRangeEditor }\" arg:predicate=\"{= rdfs:range }\" arg:viewWidget=\"{= teamwork:DatatypeRangeViewer }\"/>
+        <swa:Objects arg:label=\"sub-property of\" arg:predicate=\"{= rdfs:subPropertyOf }\"/>
+        <teamwork:FunctionalPropertyBox/>
+    </swa:ObjectsEnum>
+</div>
+"""^^ui:Literal ;
+  rdfs:comment "A simple version of the default view for owl:DatatypeProperty, with widget groups for Annotation Properties and Attribute Characteristics (only allowing single values for rdfs:domain and rdfs:range) and all other properties hidden." ;
+  rdfs:label "Simple datatype property form body" ;
+  rdfs:subClassOf swa:FormBody ;
+.
+evnui:SimplePropertyFormBody
+  a ui:ResourceViewClass ;
+  ui:private true ;
+  ui:prototype """
+<div default:hideIfEmpty=\"{= true }\" default:subject=\"{= ?resource }\" default:tabular=\"{= true }\">
+    <ui:if ui:condition=\"{= swa:isViewMode() }\">
+        <evnui:ResourceHistoryPanel arg:resource=\"{= ?resource }\"/>
+    </ui:if>
+    <swa:ObjectsEnum arg:label=\"Labels and Description\">
+        <swa:Objects arg:predicate=\"{= rdfs:label }\"/>
+        <swa:Objects arg:editWidget=\"{= swa:RichTextEditor }\" arg:predicate=\"{= rdfs:comment }\" arg:viewWidget=\"{= swa:RichTextViewer }\"/>
+    </swa:ObjectsEnum>
+    <swa:ObjectsEnum arg:label=\"Relationship Characteristics\">
+        <swa:Object arg:predicate=\"{= rdfs:domain }\"/>
+        <swa:Object arg:predicate=\"{= rdfs:range }\"/>
+        <swa:Objects arg:label=\"sub-property of\" arg:predicate=\"{= rdfs:subPropertyOf }\"/>
+        <teamwork:FunctionalPropertyBox/>
+    </swa:ObjectsEnum>
+</div>
+"""^^ui:Literal ;
+  rdfs:comment "A simple version of the default view for rdf:Property, with widget groups for Annotation Properties and Relationship Characteristics (only allowing single values for rdfs:domain and rdfs:range) and all other properties hidden." ;
+  rdfs:label "Simple property form body" ;
+  rdfs:subClassOf swa:FormBody ;
+.
+evnui:TemplateCallAction
+  a evnui:Action ;
+  arg:onSelect "swa.openTemplateCallDialog('http://evn.topbraidlive.org/ui#RegisteredSelectTemplates', 'http://evn.topbraidlive.org/ui#TemplateTreeDataProvider', evn.selectedResourceURI, 'org.topbraidlive.evn.resourceSelected')" ;
+  rdfs:label "Execute template query..." ;
+.
+evnui:TemplateTreeChildren
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "node" ;
+          ]
+          [
+            sp:varName "label" ;
+          ]
+          [
+            sp:varName "leaf" ;
+          ]
+          [
+            sp:varName "icon" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  a sp:TriplePath ;
+                  sp:object skostemplate:IntegratedTemplates ;
+                  sp:path [
+                      a sp:ModPath ;
+                      sp:modMax -2 ;
+                      sp:modMin 1 ;
+                      sp:subPath rdfs:subClassOf ;
+                    ] ;
+                  sp:subject [
+                      sp:varName "template" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "anyBody" ;
+                    ] ;
+                  sp:predicate spin:body ;
+                  sp:subject [
+                      sp:varName "template" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a ui:label ;
+                      sp:arg1 [
+                          sp:varName "template" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "label" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "parent" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression true ;
+            sp:variable [
+                sp:varName "leaf" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression "evn-icon-template" ;
+            sp:variable [
+                sp:varName "icon" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                sp:varName "template" ;
+              ] ;
+            sp:variable [
+                sp:varName "node" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  rdfs:label "Template tree children" ;
+  rdfs:subClassOf swa:TreeChildrenTemplates ;
+.
+evnui:TemplateTreeDataProvider
+  a swa:TreeDataProvider ;
+  arg:treeChildrenTemplate evnui:TemplateTreeChildren ;
+  arg:treeRootsTemplate evnui:TemplateTreeRoots ;
+  rdfs:label "Template tree data provider" ;
+.
+evnui:TemplateTreeRoots
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "node" ;
+          ]
+          [
+            sp:varName "label" ;
+          ]
+          [
+            sp:varName "leaf" ;
+          ]
+          [
+            sp:varName "icon" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            (
+              [
+                sp:object [
+                    sp:varName "?0" ;
+                  ] ;
+                sp:predicate tops:files ;
+                sp:subject [
+                    sp:varName "file" ;
+                  ] ;
+              ]
+              [
+                sp:object "/" ;
+                sp:predicate rdf:first ;
+                sp:subject [
+                    sp:varName "?0" ;
+                  ] ;
+              ]
+              [
+                sp:object [
+                    sp:varName "?1" ;
+                  ] ;
+                sp:predicate rdf:rest ;
+                sp:subject [
+                    sp:varName "?0" ;
+                  ] ;
+              ]
+              [
+                sp:object true ;
+                sp:predicate rdf:first ;
+                sp:subject [
+                    sp:varName "?1" ;
+                  ] ;
+              ]
+              [
+                sp:object () ;
+                sp:predicate rdf:rest ;
+                sp:subject [
+                    sp:varName "?1" ;
+                  ] ;
+              ]
+              [
+                a sp:Filter ;
+                sp:expression [
+                    a sp:gt ;
+                    sp:arg1 [
+                        a spif:indexOf ;
+                        sp:arg1 [
+                            sp:varName "file" ;
+                          ] ;
+                        sp:arg2 ".spin." ;
+                      ] ;
+                    sp:arg2 0 ;
+                  ] ;
+              ]
+            )
+            [
+              a sp:Bind ;
+              sp:expression [
+                  a smf:baseURI ;
+                  sp:arg1 [
+                      sp:varName "file" ;
+                    ] ;
+                ] ;
+              sp:variable [
+                  sp:varName "graph" ;
+                ] ;
+            ]
+            [
+              a sp:Filter ;
+              sp:expression [
+                  a smf:canRead ;
+                  sp:arg1 [
+                      sp:varName "graph" ;
+                    ] ;
+                ] ;
+            ]
+          )
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  a sp:Filter ;
+                  sp:expression [
+                      a sp:exists ;
+                      sp:elements (
+                          [
+                            a sp:TriplePath ;
+                            sp:object skostemplate:IntegratedTemplates ;
+                            sp:path [
+                                a sp:ModPath ;
+                                sp:modMax -2 ;
+                                sp:modMin 1 ;
+                                sp:subPath rdfs:subClassOf ;
+                              ] ;
+                            sp:subject [
+                                sp:varName "template" ;
+                              ] ;
+                          ]
+                          [
+                            sp:object [
+                                sp:varName "anyBody" ;
+                              ] ;
+                            sp:predicate spin:body ;
+                            sp:subject [
+                                sp:varName "template" ;
+                              ] ;
+                          ]
+                        ) ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a ui:label ;
+                      sp:arg1 [
+                          sp:varName "graph" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "label" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "graph" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                sp:varName "graph" ;
+              ] ;
+            sp:variable [
+                sp:varName "node" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression false ;
+            sp:variable [
+                sp:varName "leaf" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression "evn-icon-graph" ;
+            sp:variable [
+                sp:varName "icon" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  rdfs:label "Template tree roots" ;
+  rdfs:subClassOf swa:TreeRootsTemplates ;
+.
+evnui:TreeMoveHandler
+  a swa:TreeMoveHandlerClass ;
+  ui:prototype """
+<ui:transaction ui:logMessage=\"Move {= ui:label(?child) } under {= ui:label(?parent) }\">
+    <ui:if ui:condition=\"{= spl:instanceOf(?child, skos:Concept) }\">
+        <ui:update ui:updateQuery=\"{!
+                DELETE WHERE {
+                    ?child skos:broader ?oldParent .
+                } }\"/>
+        <ui:update ui:updateQuery=\"{!
+                DELETE WHERE {
+                    ?oldScheme skos:hasTopConcept ?child .
+                } }\"/>
+        <ui:if ui:condition=\"{= spl:instanceOf(?parent, skos:ConceptScheme) }\">
+            <ui:update ui:updateQuery=\"{!
+                    INSERT {
+                        ?parent skos:hasTopConcept ?child .
+                    }
+                    WHERE {
+                    } }\"/>
+        </ui:if>
+        <ui:else>
+            <ui:update ui:updateQuery=\"{!
+                    INSERT {
+                        ?child skos:broader ?parent .
+                    }
+                    WHERE {
+                    } }\"/>
+        </ui:else>
+    </ui:if>
+    <ui:else>
+        <ui:update ui:updateQuery=\"{!
+                DELETE WHERE {
+                    ?child rdfs:domain ?oldParent .
+                } }\"/>
+        <ui:update ui:updateQuery=\"{!
+                DELETE WHERE {
+                    ?oldParent rdfs:subClassOf ?child .
+                } }\"/>
+        <ui:if ui:condition=\"{= spl:instanceOf(?child, rdf:Property) }\">
+            <ui:update ui:updateQuery=\"{!
+                    INSERT {
+                        ?child rdfs:domain ?parent .
+                    }
+                    WHERE {
+                    } }\"/>
+        </ui:if>
+        <ui:else>
+            <ui:update ui:updateQuery=\"{!
+                    INSERT {
+                        ?child rdfs:subClassOf ?parent .
+                    }
+                    WHERE {
+                    } }\"/>
+        </ui:else>
+    </ui:else>
+</ui:transaction>
+"""^^ui:Literal ;
+  rdfs:label "EVN tree move handler" ;
+  rdfs:subClassOf swa:TreeMoveHandlers ;
+.
+evnui:TreeTableExportAction
+  a swa:ResourceAction ;
+  arg:appName "EVN" ;
+  arg:condition [
+      a sp:if ;
+      sp:arg1 [
+          a spl:instanceOf ;
+          sp:arg1 [
+              sp:varName "resource" ;
+            ] ;
+          sp:arg2 skos:Concept ;
+        ] ;
+      sp:arg2 true ;
+      sp:arg3 [
+          sp:varName "none" ;
+        ] ;
+    ] ;
+  arg:onSelect "window.open('swp?_base=' + encodeURIComponent(swa.queryGraphURI) + '&_viewClass=evnprojects:TreeTableExporterTask&root=' + encodeURIComponent(evn.selectedResourceURI))" ;
+  rdfs:label "Export hierarchy to spreadsheet" ;
+.
+evnui:bestDefinition
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            a sp:Desc ;
+            sp:expression [
+                sp:varName "langLength" ;
+              ] ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "definition" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "definition" ;
+              ] ;
+            sp:predicate skos:definition ;
+            sp:subject [
+                sp:varName "resource" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:lang ;
+                sp:arg1 [
+                    sp:varName "definition" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "lang" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:or ;
+                sp:arg1 [
+                    a sp:eq ;
+                    sp:arg1 [
+                        sp:varName "lang" ;
+                      ] ;
+                    sp:arg2 "" ;
+                  ] ;
+                sp:arg2 [
+                    a sp:langMatches ;
+                    sp:arg1 [
+                        sp:varName "lang" ;
+                      ] ;
+                    sp:arg2 [
+                        a ui:lang ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a fn:string-length ;
+                sp:arg1 [
+                    sp:varName "lang" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "langLength" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The resource to get the definition of." ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Gets the best skos:definition of a given resource, using the preferred language of the current SWP request." ;
+  rdfs:label "best definition" ;
+  rdfs:subClassOf spin:Functions ;
+.
+evnui:currentGraphIsTagGraph
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a ui:graphWithoutImports ;
+                sp:arg1 [
+                    a ui:currentQueryGraph ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "baseGraph" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:graphIdFromTagGraph ;
+                arg:graph [
+                    sp:varName "baseGraph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "graphId" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:bound ;
+                sp:arg1 [
+                    sp:varName "graphId" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Can be used to check whether the application is running with a query graph that is derived from a tag (working copy)." ;
+  rdfs:label "current graph is tag graph" ;
+  rdfs:subClassOf spin:Functions ;
+.
+evnui:definition
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:coalesce ;
+                sp:arg1 [
+                    sp:varName "definition" ;
+                  ] ;
+                sp:arg2 [
+                    a spl:object ;
+                    sp:arg1 [
+                        sp:varName "resource" ;
+                      ] ;
+                    sp:arg2 rdfs:comment ;
+                  ] ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a evnui:bestDefinition ;
+                arg:resource [
+                    sp:varName "resource" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "definition" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource to get the definition of." ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Gets skos:definition or rdfs:comment of a given resource." ;
+  rdfs:label "definition" ;
+  rdfs:subClassOf spin:Functions ;
+.
+evnui:filterSKOSResources
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a afn:namespace ;
+                sp:arg1 [
+                    sp:varName "node" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "ns" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:or ;
+                sp:arg1 [
+                    a sp:or ;
+                    sp:arg1 [
+                        a sp:eq ;
+                        sp:arg1 [
+                            sp:varName "node" ;
+                          ] ;
+                        sp:arg2 skos:Concept ;
+                      ] ;
+                    sp:arg2 [
+                        a sp:eq ;
+                        sp:arg1 [
+                            sp:varName "node" ;
+                          ] ;
+                        sp:arg2 skos:ConceptScheme ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a sp:ne ;
+                    sp:arg1 [
+                        sp:varName "ns" ;
+                      ] ;
+                    sp:arg2 "http://www.w3.org/2004/02/skos/core#" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "Filters out any resources from the SKOS namespace." ;
+  rdfs:label "filter SKOS resources" ;
+  rdfs:subClassOf swa:FilterFunctions ;
+.
+evnui:filterSubClassesOfConcept
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:TriplePath ;
+            sp:object skos:Concept ;
+            sp:path [
+                a sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "node" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "Only returns true for subclasses of skos:Concept." ;
+  rdfs:label "filter sub classes of concept" ;
+  rdfs:subClassOf swa:FilterFunctions ;
+.
+evnui:getRootClass
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "rootClass" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:currentTeamGraph ;
+              ] ;
+            sp:variable [
+                sp:varName "teamGraph" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:coalesce ;
+                sp:arg1 [
+                    a spl:objectInGraph ;
+                    sp:arg1 [
+                        sp:varName "teamGraph" ;
+                      ] ;
+                    sp:arg2 taxonomies:rootClass ;
+                    sp:arg3 [
+                        sp:varName "teamGraph" ;
+                      ] ;
+                  ] ;
+                sp:arg2 skos:Concept ;
+              ] ;
+            sp:variable [
+                sp:varName "rootClass" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  spin:returnType rdfs:Class ;
+  rdfs:comment "Gets the root class as configured using evnprojects:rootClass (on the edit page of the EVN vocabulary). Defaults to skos:Concept." ;
+  rdfs:label "get root class" ;
+  rdfs:subClassOf spin:Functions ;
+.
+evnui:isEVNEditor
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a ui:contextValue ;
+                sp:arg1 "swaAppName" ;
+              ] ;
+            sp:variable [
+                sp:varName "appName" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a swa:hasAppName ;
+                sp:arg1 [
+                    sp:varName "appName" ;
+                  ] ;
+                sp:arg2 "EVN" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks whether the currently executing SWP engine is inside of the EVN Editor application. This is using a context variable." ;
+  rdfs:label "is EVNEditor" ;
+  rdfs:subClassOf spin:Functions ;
+.
+evnui:isNonAnnotationPropertyExceptType
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:and ;
+                sp:arg1 [
+                    a sp:not ;
+                    sp:arg1 [
+                        a spl:instanceOf ;
+                        sp:arg1 [
+                            sp:varName "predicate" ;
+                          ] ;
+                        sp:arg2 owl:AnnotationProperty ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a sp:ne ;
+                    sp:arg1 [
+                        sp:varName "predicate" ;
+                      ] ;
+                    sp:arg2 rdf:type ;
+                  ] ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where () ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "Checks whether a property is not an annotation property and not rdf:type." ;
+  rdfs:label "is non annotation property except type" ;
+  rdfs:subClassOf swa:PropertyWidgetGroupFilterFunctions ;
+.
+evnui:isSKOSXL
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            sp:object owl:Ontology ;
+            sp:predicate rdf:type ;
+            sp:subject <http://www.w3.org/2008/05/skos-xl> ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "Checks whether SKOS-XL has been activated (owl:imported) for the current graph." ;
+  rdfs:label "is SKOSXL" ;
+  rdfs:subClassOf spin:Functions ;
+.
+evnui:isSharePointProject
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          (
+            [
+              a sp:Bind ;
+              sp:expression [
+                  a teamwork:currentTeamGraph ;
+                ] ;
+              sp:variable [
+                  sp:varName "teamGraph" ;
+                ] ;
+            ]
+            [
+              a sp:Filter ;
+              sp:expression [
+                  a sp:bound ;
+                  sp:arg1 [
+                      sp:varName "teamGraph" ;
+                    ] ;
+                ] ;
+            ]
+          )
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  a sp:TriplePath ;
+                  sp:object [
+                      sp:varName "anyURL" ;
+                    ] ;
+                  sp:path [
+                      a sp:SeqPath ;
+                      sp:path1 sharepoint:server ;
+                      sp:path2 sharepoint:url ;
+                    ] ;
+                  sp:subject [
+                      sp:varName "teamGraph" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "teamGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:boolean ;
+  rdfs:label "is SharePoint project" ;
+  rdfs:subClassOf spin:Functions ;
+.
+evnui:narrowerClass
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "concept" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:walkObjects ;
+                sp:arg1 [
+                    sp:varName "type" ;
+                  ] ;
+                sp:arg2 rdfs:subClassOf ;
+                sp:arg3 evnui:narrowerClassFunctor ;
+              ] ;
+            sp:variable [
+                sp:varName "result" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:bound ;
+                sp:arg1 [
+                    sp:varName "result" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:concept ;
+      spl:valueType skos:Concept ;
+      rdfs:comment "The parent concept." ;
+    ] ;
+  spin:private true ;
+  rdfs:comment """Gets the type specified for narrower concepts of a given concept. For example, all children of a Continent must be a Country. This must be expressed using
+
+ex:Continent
+	sh:property [
+		sh:path [ sh:inversePath skos:broader ] ;
+		sh:class ex:Country ;
+	] .
+
+If the above pattern is found then the sh:class is returned.""" ;
+  rdfs:label "narrower class" ;
+  rdfs:subClassOf spin:Functions ;
+.
+evnui:narrowerClassFunctor
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "cls" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Union ;
+            sp:elements (
+                (
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        sp:varName "class" ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "shape" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    sp:object [
+                        sp:varName "class" ;
+                      ] ;
+                    sp:predicate sh:targetClass ;
+                    sp:subject [
+                        sp:varName "shape" ;
+                      ] ;
+                  ]
+                )
+              ) ;
+          ]
+          [
+            sp:object [
+                sp:varName "ps" ;
+              ] ;
+            sp:predicate sh:property ;
+            sp:subject [
+                sp:varName "shape" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "path" ;
+              ] ;
+            sp:predicate sh:path ;
+            sp:subject [
+                sp:varName "ps" ;
+              ] ;
+          ]
+          [
+            sp:object skos:broader ;
+            sp:predicate sh:inversePath ;
+            sp:subject [
+                sp:varName "path" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "cls" ;
+              ] ;
+            sp:predicate sh:class ;
+            sp:subject [
+                sp:varName "ps" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:isBlank ;
+                sp:arg1 [
+                    sp:varName "path" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  rdfs:label "narrower class functor" ;
+  rdfs:subClassOf swa:ClassFunctorFunctions ;
+.
+evnui:rootConceptFromPath
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:iri ;
+                sp:arg1 [
+                    sp:varName "uri" ;
+                  ] ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spif:indexOf ;
+                sp:arg1 [
+                    sp:varName "path" ;
+                  ] ;
+                sp:arg2 " " ;
+              ] ;
+            sp:variable [
+                sp:varName "sep" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    a sp:bound ;
+                    sp:arg1 [
+                        sp:varName "sep" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a fn:substring ;
+                    sp:arg1 [
+                        sp:varName "path" ;
+                      ] ;
+                    sp:arg2 1 ;
+                    sp:arg3 [
+                        sp:varName "sep" ;
+                      ] ;
+                  ] ;
+                sp:arg3 [
+                    sp:varName "path" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "uri" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:path ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The path string, space-separated URIs." ;
+    ] ;
+  spin:private true ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "A helper that extracts the first URI from a shortest path." ;
+  rdfs:label "root concept from path" ;
+  rdfs:subClassOf spin:Functions ;
+.
+evnui:setSelectedResource
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "js" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Union ;
+            sp:elements (
+                (
+                  [
+                    a sp:Filter ;
+                    sp:expression [
+                        a sp:or ;
+                        sp:arg1 [
+                            a sp:or ;
+                            sp:arg1 [
+                                a sp:or ;
+                                sp:arg1 [
+                                    a spl:instanceOf ;
+                                    sp:arg1 [
+                                        sp:varName "resource" ;
+                                      ] ;
+                                    sp:arg2 skos:Concept ;
+                                  ] ;
+                                sp:arg2 [
+                                    a spl:instanceOf ;
+                                    sp:arg1 [
+                                        sp:varName "resource" ;
+                                      ] ;
+                                    sp:arg2 skos:ConceptScheme ;
+                                  ] ;
+                              ] ;
+                            sp:arg2 [
+                                a spl:subClassOf ;
+                                sp:arg1 [
+                                    sp:varName "resource" ;
+                                  ] ;
+                                sp:arg2 skos:Concept ;
+                              ] ;
+                          ] ;
+                        sp:arg2 [
+                            a spl:instanceOf ;
+                            sp:arg1 [
+                                sp:varName "resource" ;
+                              ] ;
+                            sp:arg2 rdf:Property ;
+                          ] ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a sp:concat ;
+                        sp:arg1 "evn.setSelectedResource('" ;
+                        sp:arg2 [
+                            a xsd:string ;
+                            sp:arg1 [
+                                sp:varName "resource" ;
+                              ] ;
+                          ] ;
+                        sp:arg3 "')" ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "js" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    a sp:Filter ;
+                    sp:expression [
+                        a sp:notExists ;
+                        sp:elements (
+                            [
+                              sp:object [
+                                  sp:varName "anytype" ;
+                                ] ;
+                              sp:predicate rdf:type ;
+                              sp:subject [
+                                  sp:varName "resource" ;
+                                ] ;
+                            ]
+                          ) ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a sp:concat ;
+                        sp:arg1 "window.open('" ;
+                        sp:arg2 [
+                            a xsd:string ;
+                            sp:arg1 [
+                                sp:varName "resource" ;
+                              ] ;
+                          ] ;
+                        sp:arg3 "')" ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "js" ;
+                      ] ;
+                  ]
+                )
+              ) ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "The default link creation function on the forms of EVN. This simply calls the namesake JavaScript function, but only if the given resource is an instance of skos:Concept. All other typed resources will not be turned into a hyperlink. Untyped resource will be treated as external link that will be opened in a new browser tab." ;
+  rdfs:label "set selected resource" ;
+  rdfs:subClassOf swa:CreateLinkFunctions ;
+.
+evnui:tempClone
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  a sp:Optional ;
+                  sp:elements (
+                      [
+                        sp:object [
+                            sp:varName "new" ;
+                          ] ;
+                        sp:predicate owl:sameAs ;
+                        sp:subject [
+                            sp:varName "node" ;
+                          ] ;
+                      ]
+                    ) ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a sp:coalesce ;
+                      sp:arg1 [
+                          sp:varName "new" ;
+                        ] ;
+                      sp:arg2 [
+                          sp:varName "node" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "result" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode ui:tempGraph ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:node ;
+      rdfs:comment "The node to clone." ;
+    ] ;
+  rdfs:label "temp clone" ;
+  rdfs:subClassOf spin:Functions ;
+.
+arg:classEditor
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:comment
+  a rdf:Property ;
+  rdfs:label "comment" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:concept
+  a rdf:Property ;
+  rdfs:label "concept" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:date
+  a rdf:Property ;
+  rdfs:label "date" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:domainClass
+  a rdf:Property ;
+  rdfs:label "domain class" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:endPoint
+  a rdf:Property ;
+  rdfs:label "end point" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:frozen
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:graph
+  a rdf:Property ;
+  rdfs:label "graph" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:graphId
+  a rdf:Property ;
+  rdfs:label "graph id" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:iconOnClick
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:iconToolTip
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:labelLang
+  a rdf:Property ;
+  rdfs:label "label lang" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:labels
+  a rdf:Property ;
+  rdfs:label "labels" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:masterGraph
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:path
+  a rdf:Property ;
+  rdfs:label "path" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:projectGraph
+  a rdf:Property ;
+  rdfs:label "project graph" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:scheme
+  a rdf:Property ;
+  rdfs:label "scheme" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:selectedResource
+  a rdf:Property ;
+  rdfs:label "selected resource" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:tag
+  a rdf:Property ;
+  rdfs:label "tag" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:tagId
+  a rdf:Property ;
+  rdfs:label "tag id" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:target
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:teamGraph
+  a rdf:Property ;
+  rdfs:label "team graph" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:terms
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:uri
+  a rdf:Property ;
+  rdfs:label "uri" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:uris
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:user
+  a rdf:Property ;
+  rdfs:label "user" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:userName
+  a rdf:Property ;
+  rdfs:label "user name" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+uix:hasBasicAuth
+  a spin:Function ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Returns true if servlet container security is using Basic authentication." ;
+  rdfs:label "has Basic Auth" ;
+  rdfs:subClassOf spin:Functions ;
+.
+rdf:Property
+  ui:instanceView """
+<evnui:SimplePropertyFormBody arg:resource=\"{= ?this }\" ui:id=\"form\" ui:priority=\"{= IF(swa:hasCurrentAppName(&quot;EVN&quot;), 0, ?none) }\"/>
+"""^^ui:Literal ;
+.
+rdfs:Class
+  ui:instanceView """
+<evnui:SimpleClassFormBody arg:resource=\"{= ?this }\" ui:id=\"form\" ui:priority=\"{= IF(swa:hasCurrentAppName(&quot;EVN&quot;), 0, ?none) }\"/>
+"""^^ui:Literal ;
+.
+owl:DatatypeProperty
+  ui:instanceView """
+<evnui:SimpleDatatypePropertyFormBody arg:resource=\"{= ?this }\" ui:id=\"form\" ui:priority=\"{= IF(swa:hasCurrentAppName(&quot;EVN&quot;), 0, ?none) }\"/>
+"""^^ui:Literal ;
+.
+skos:Concept
+  ui:dataView """
+<evnui:SharePointDocumentGridDataView arg:condition=\"{= evnui:isSharePointProject() }\" arg:dataProvider=\"{= evnui:MatchingSharePointDocuments }\"/>
+"""^^ui:Literal ;
+  ui:instanceView """
+<evnui:ConceptDestructor arg:resource=\"{= ?this }\" ui:id=\"destructor\"/>
+"""^^ui:Literal ;
+  ui:instanceView """
+<evnui:ConceptFormBody arg:resource=\"{= ?this }\" ui:id=\"form\"/>
+"""^^ui:Literal ;
+.
+skos:ConceptScheme
+  ui:instanceView """
+<evnui:ConceptSchemeDestructor arg:resource=\"{= ?this }\" ui:id=\"destructor\"/>
+"""^^ui:Literal ;
+  ui:instanceView """
+<evnui:ConceptSchemeFormBody arg:resource=\"{= ?this }\" ui:id=\"form\"/>
+"""^^ui:Literal ;
+.

@@ -1,0 +1,1090 @@
+# baseURI: http://edg.topbraid.solutions/1.0/shapes/qudt
+# imports: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://edg.topbraid.solutions/1.0/schema/quantities
+# imports: http://edg.topbraid.solutions/1.0/shapes/core
+# imports: http://edg.topbraid.solutions/1.0/shapes/datamodels
+# imports: http://edg.topbraid.solutions/1.0/shapes/datatypes
+# imports: http://edg.topbraid.solutions/1.0/shapes/governance
+# imports: http://topbraid.org/tosh
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix voag: <http://voag.linkedmodel.org/schema/voag#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/shapes/qudt>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/shapes/qudt/GMD_qudt> ;
+  rdfs:comment "The QUDT Shapes graph provides SHAPE specifications for OWL restrictions in QUDT. It also holds property groups for display purposes.  The latter probably should be moved to the SHAPES_EDG-datatypes graph." ;
+  rdfs:label "EDG SHAPES - QUDT" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/quantities> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/shapes/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/shapes/datamodels> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/shapes/datatypes> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/shapes/governance> ;
+  owl:imports <http://topbraid.org/tosh> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+<http://edg.topbraid.solutions/shapes/qudt/GMD_qudt>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:ShapesGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+qudt:ArrayType-byRow
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:order 50 ;
+.
+qudt:ArrayType-dataOrder
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:order 50 ;
+.
+qudt:ArrayType-dimensionVector
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:order 50 ;
+.
+qudt:ArrayType-dimensionality
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:order 50 ;
+.
+qudt:ArrayType-typeMatrix
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:order 50 ;
+.
+qudt:BooleanType
+  sh:property qudt:BooleanType-encoding ;
+.
+qudt:BooleanType-encoding
+  a sh:PropertyShape ;
+  sh:path qudt:encoding ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:BooleanEncodingType ;
+.
+qudt:CompositeDataStructure-dataElement
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:order "16"^^xsd:decimal ;
+.
+qudt:CompositeDatatype
+  sh:property qudt:CompositeDatatype-alignment ;
+  sh:property qudt:CompositeDatatype-padding ;
+.
+qudt:CompositeDatatype-alignment
+  a sh:PropertyShape ;
+  sh:path qudt:alignment ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:AlignmentType ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:order 50 ;
+.
+qudt:CompositeDatatype-elementType
+  sh:group edg:DataElementPropertiesGroup ;
+  sh:order "18"^^xsd:decimal ;
+.
+qudt:CompositeDatatype-padding
+  a sh:PropertyShape ;
+  sh:path qudt:padding ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:PaddingType ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 50 ;
+.
+qudt:Concept
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:property qudt:Concept-isoNormativeReference ;
+.
+qudt:Concept-abbreviation
+  a sh:PropertyShape ;
+  sh:path qudt:abbreviation ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:string ;
+  sh:group edg:IdentifiersGroup ;
+  sh:maxCount 1 ;
+  sh:order 50 ;
+.
+qudt:Concept-code
+  sh:path qudt:code ;
+  sh:datatype xsd:string ;
+  sh:group edg:IdentifiersGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 0 ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:Concept-description
+  a sh:PropertyShape ;
+  sh:path qudt:description ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype rdf:HTML ;
+  sh:group edg:NarratablePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 50 ;
+.
+qudt:Concept-figure
+  a sh:PropertyShape ;
+  sh:path qudt:figure ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:Figure ;
+  sh:deactivated true ;
+  sh:group qudt:ConceptPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 0 ;
+  sh:order 50 ;
+.
+qudt:Concept-guidance
+  a sh:PropertyShape ;
+  sh:path qudt:guidance ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype rdf:HTML ;
+  sh:group qudt:ConceptPropertiesGroup ;
+  sh:order 50 ;
+.
+qudt:Concept-hasRule
+  a sh:PropertyShape ;
+  sh:path qudt:hasRule ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:Rule ;
+  sh:group qudt:ConceptPropertiesGroup ;
+  sh:order 50 ;
+.
+qudt:Concept-id
+  a sh:PropertyShape ;
+  sh:path qudt:id ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:string ;
+  sh:group qudt:ConceptPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 50 ;
+.
+qudt:Concept-isoNormativeReference
+  a sh:PropertyShape ;
+  sh:path qudt:isoNormativeReference ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:group edg:ProvenanceGroup ;
+  sh:maxCount 1 ;
+  sh:order 50 ;
+.
+qudt:Concept-longDescription
+  a sh:PropertyShape ;
+  sh:path qudt:longDescription ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:string ;
+  sh:deactivated true ;
+  sh:group qudt:ConceptPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 50 ;
+.
+qudt:Concept-supersededBy
+  a sh:PropertyShape ;
+  sh:path voag:supersededBy ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:Concept ;
+  sh:deactivated true ;
+  sh:group qudt:ConceptPropertiesGroup ;
+  sh:order 50 ;
+.
+qudt:Concept-title
+  a sh:PropertyShape ;
+  sh:path vaem:title ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:string ;
+  sh:deactivated true ;
+  sh:group qudt:ConceptPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 50 ;
+.
+qudt:Concept-url
+  a sh:PropertyShape ;
+  sh:path qudt:url ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:anyURI ;
+  sh:group qudt:ConceptPropertiesGroup ;
+  sh:minCount 0 ;
+  sh:order 50 ;
+.
+qudt:ConceptPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:open true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  rdfs:label "QUDT Metadata" ;
+  sh:order 300 ;
+.
+qudt:Datatype-ansiSQLName
+  a sh:PropertyShape ;
+  sh:path qudt:ansiSQLName ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:string ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:minCount 0 ;
+  sh:order "100"^^xsd:decimal ;
+.
+qudt:Datatype-basis
+  a sh:PropertyShape ;
+  sh:path qudt:basis ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:Datatype ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "40"^^xsd:decimal ;
+.
+qudt:Datatype-bounded
+  a sh:PropertyShape ;
+  sh:path qudt:bounded ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:Datatype-cName
+  a sh:PropertyShape ;
+  sh:path qudt:cName ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:string ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:minCount 0 ;
+  sh:order "110"^^xsd:decimal ;
+.
+qudt:Datatype-cardinality
+  a sh:PropertyShape ;
+  sh:path qudt:cardinality ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:CardinalityType ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "20"^^xsd:decimal ;
+.
+qudt:Datatype-description
+  a sh:PropertyShape ;
+  sh:path vaem:description ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "30"^^xsd:decimal ;
+.
+qudt:Datatype-id
+  a sh:PropertyShape ;
+  sh:path qudt:id ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:string ;
+  sh:deactivated true ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+qudt:Datatype-javaName
+  a sh:PropertyShape ;
+  sh:path qudt:javaName ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:minCount 0 ;
+  sh:order "140"^^xsd:decimal ;
+.
+qudt:Datatype-jsName
+  a sh:PropertyShape ;
+  sh:path qudt:jsName ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:minCount 0 ;
+  sh:order "150"^^xsd:decimal ;
+.
+qudt:Datatype-matlabName
+  a sh:PropertyShape ;
+  sh:path qudt:matlabName ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:minCount 0 ;
+  sh:order "160"^^xsd:decimal ;
+.
+qudt:Datatype-microsoftSQLServerName
+  a sh:PropertyShape ;
+  sh:path qudt:microsoftSQLServerName ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:string ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:minCount 0 ;
+  sh:order "170"^^xsd:decimal ;
+.
+qudt:Datatype-mySQLName
+  a sh:PropertyShape ;
+  sh:path qudt:mySQLName ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:string ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:minCount 0 ;
+  sh:order 190 ;
+.
+qudt:Datatype-odbcName
+  a sh:PropertyShape ;
+  sh:path qudt:odbcName ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:string ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:minCount 0 ;
+  sh:order 200 ;
+.
+qudt:Datatype-oleDBName
+  a sh:PropertyShape ;
+  sh:path qudt:oleDBName ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:string ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:minCount 0 ;
+  sh:order 210 ;
+.
+qudt:Datatype-oracleSQLName
+  a sh:PropertyShape ;
+  sh:path qudt:oracleSQLName ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:string ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:minCount 0 ;
+  sh:order 220 ;
+.
+qudt:Datatype-orderedType
+  a sh:PropertyShape ;
+  sh:path qudt:orderedType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:OrderedType ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "30"^^xsd:decimal ;
+.
+qudt:Datatype-protocolBuffersName
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:order "230"^^xsd:decimal ;
+.
+qudt:Datatype-pythonName
+  a sh:PropertyShape ;
+  sh:path qudt:pythonName ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:minCount 0 ;
+  sh:order "240"^^xsd:decimal ;
+.
+qudt:Datatype-vbName
+  a sh:PropertyShape ;
+  sh:path qudt:vbName ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:minCount 0 ;
+  sh:order "250"^^xsd:decimal ;
+.
+qudt:DatatypeShape
+  a edg:AspectClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  rdfs:label "QUDT Datatype Shape" ;
+  rdfs:subClassOf edg:Aspect ;
+  sh:property qudt:Datatype-ansiSQLName ;
+  sh:property qudt:Datatype-basis ;
+  sh:property qudt:Datatype-bounded ;
+  sh:property qudt:Datatype-cName ;
+  sh:property qudt:Datatype-cardinality ;
+  sh:property qudt:Datatype-description ;
+  sh:property qudt:Datatype-id ;
+  sh:property qudt:Datatype-javaName ;
+  sh:property qudt:Datatype-jsName ;
+  sh:property qudt:Datatype-matlabName ;
+  sh:property qudt:Datatype-microsoftSQLServerName ;
+  sh:property qudt:Datatype-mySQLName ;
+  sh:property qudt:Datatype-odbcName ;
+  sh:property qudt:Datatype-oleDBName ;
+  sh:property qudt:Datatype-oracleSQLName ;
+  sh:property qudt:Datatype-orderedType ;
+  sh:property qudt:Datatype-pythonName ;
+  sh:property qudt:Datatype-vbName ;
+.
+qudt:DateTimeStringType
+  sh:property qudt:DateTimeStringType-encoding ;
+.
+qudt:DateTimeStringType-encoding
+  a sh:PropertyShape ;
+  sh:path qudt:encoding ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:DateTimeStringEncodingType ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:maxCount 1 ;
+.
+qudt:Enumeration
+  sh:property qudt:Enumeration-abbreviation ;
+  sh:property qudt:Enumeration-bits ;
+  sh:property qudt:Enumeration-default ;
+  sh:property qudt:Enumeration-defaultValue ;
+  sh:property qudt:Enumeration-element ;
+  sh:property qudt:Enumeration-encoding ;
+  sh:property qudt:Enumeration-value ;
+.
+qudt:Enumeration-abbreviation
+  a sh:PropertyShape ;
+  sh:path qudt:abbreviation ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:string ;
+  sh:maxCount 1 ;
+.
+qudt:Enumeration-bits
+  a sh:PropertyShape ;
+  sh:path qudt:bits ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:integer ;
+  sh:maxCount 1 ;
+.
+qudt:Enumeration-default
+  a sh:PropertyShape ;
+  sh:path qudt:default ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:EnumeratedValue ;
+  sh:maxCount 1 ;
+.
+qudt:Enumeration-defaultValue
+  a sh:PropertyShape ;
+  sh:path qudt:defaultValue ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:EnumeratedValue ;
+.
+qudt:Enumeration-element
+  a sh:PropertyShape ;
+  sh:path qudt:element ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:EnumeratedValue ;
+.
+qudt:Enumeration-encoding
+  a sh:PropertyShape ;
+  sh:path qudt:encoding ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:maxCount 1 ;
+.
+qudt:Enumeration-value
+  a sh:PropertyShape ;
+  sh:path dtype:value ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:EnumeratedValue ;
+.
+qudt:EnumerationScale
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+.
+qudt:HexBinaryType
+  sh:property qudt:HexBinaryType-length ;
+  sh:property qudt:HexBinaryType-maxLength ;
+  sh:property qudt:HexBinaryType-minLength ;
+  sh:property qudt:HexBinaryType-pattern ;
+.
+qudt:HexBinaryType-length
+  a sh:PropertyShape ;
+  sh:path qudt:length ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:integer ;
+  sh:maxCount 1 ;
+.
+qudt:HexBinaryType-maxLength
+  a sh:PropertyShape ;
+  sh:path qudt:maxLength ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:integer ;
+  sh:maxCount 1 ;
+.
+qudt:HexBinaryType-minLength
+  a sh:PropertyShape ;
+  sh:path qudt:minLength ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:integer ;
+  sh:maxCount 1 ;
+.
+qudt:HexBinaryType-pattern
+  a sh:PropertyShape ;
+  sh:path qudt:pattern ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:string ;
+  sh:maxCount 1 ;
+.
+qudt:IntervalScale
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+.
+qudt:NominalScale
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+.
+qudt:NumericType
+  rdfs:subClassOf edg:DatatypeAspect ;
+  rdfs:subClassOf qudt:DatatypeShape ;
+  sh:property qudt:NumericType-accuracy ;
+  sh:property qudt:NumericType-signedness ;
+.
+qudt:NumericType-accuracy
+  a sh:PropertyShape ;
+  sh:path qudt:accuracy ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:integer ;
+  sh:group qudt:NumericTypeProperties ;
+  sh:maxCount 1 ;
+  sh:order "20"^^xsd:decimal ;
+.
+qudt:NumericType-signedness
+  a sh:PropertyShape ;
+  sh:path qudt:signedness ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:SignednessType ;
+  sh:group qudt:NumericTypeProperties ;
+  sh:maxCount 1 ;
+  sh:order "30"^^xsd:decimal ;
+.
+qudt:NumericTypeProperties
+  a sh:PropertyGroup ;
+  tosh:open true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  rdfs:label "Numeric Type Properties" ;
+  sh:order "35"^^xsd:decimal ;
+.
+qudt:OrdinalScale
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+.
+qudt:OrdinalType
+  rdfs:subClassOf edg:DatatypeAspect ;
+  rdfs:subClassOf qudt:DatatypeShape ;
+.
+qudt:QuantityKind
+  sh:property qudt:QuantityKind-applicableCGSUnit ;
+  sh:property qudt:QuantityKind-applicableISOUnit ;
+  sh:property qudt:QuantityKind-applicableImperialUnit ;
+  sh:property qudt:QuantityKind-applicableSIUnit ;
+  sh:property qudt:QuantityKind-applicableUSCustomaryUnit ;
+  sh:property qudt:QuantityKind-applicableUnit ;
+  sh:property qudt:QuantityKind-baseCGSUnitDimensions ;
+  sh:property qudt:QuantityKind-baseISOUnitDimensions ;
+  sh:property qudt:QuantityKind-baseImperialUnitDimensions ;
+  sh:property qudt:QuantityKind-baseSIUnitDimensions ;
+  sh:property qudt:QuantityKind-baseUSCustomaryUnitDimensions ;
+  sh:property qudt:QuantityKind-baseUnitDimensions ;
+  sh:property qudt:QuantityKind-belongsToSystemOfQuantities ;
+  sh:property qudt:QuantityKind-broader ;
+  sh:property qudt:QuantityKind-generalization ;
+  sh:property qudt:QuantityKind-hasDimension ;
+  sh:property qudt:QuantityKind-hasDimensionVector ;
+  sh:property qudt:QuantityKind-id ;
+  sh:property qudt:QuantityKind-isQuantityKindOf ;
+  sh:property qudt:QuantityKind-latexSymbol ;
+  sh:property qudt:QuantityKind-mathMLdefinition ;
+  sh:property qudt:QuantityKind-symbol ;
+  sh:property qudt:QuantityKind-symbolToken ;
+.
+qudt:QuantityKind-applicableCGSUnit
+  a sh:PropertyShape ;
+  sh:path qudt:applicableCGSUnit ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:Unit ;
+  sh:group qudt:QuantityKindPropertiesGroup ;
+  sh:minCount 0 ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:QuantityKind-applicableISOUnit
+  a sh:PropertyShape ;
+  sh:path qudt:applicableISOUnit ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:Unit ;
+  sh:group qudt:QuantityKindPropertiesGroup ;
+  sh:minCount 0 ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:QuantityKind-applicableImperialUnit
+  a sh:PropertyShape ;
+  sh:path qudt:applicableImperialUnit ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:Unit ;
+  sh:group qudt:QuantityKindPropertiesGroup ;
+  sh:minCount 0 ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:QuantityKind-applicableSIUnit
+  a sh:PropertyShape ;
+  sh:path qudt:applicableSIUnit ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:Unit ;
+  sh:group qudt:QuantityKindPropertiesGroup ;
+  sh:minCount 0 ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:QuantityKind-applicableUSCustomaryUnit
+  a sh:PropertyShape ;
+  sh:path qudt:applicableUSCustomaryUnit ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:Unit ;
+  sh:group qudt:QuantityKindPropertiesGroup ;
+  sh:minCount 0 ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:QuantityKind-applicableUnit
+  a sh:PropertyShape ;
+  sh:path qudt:applicableUnit ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:Unit ;
+  sh:group qudt:QuantityKindPropertiesGroup ;
+  sh:minCount 0 ;
+  sh:order "20"^^xsd:decimal ;
+.
+qudt:QuantityKind-baseCGSUnitDimensions
+  a sh:PropertyShape ;
+  sh:path qudt:baseCGSUnitDimensions ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:string ;
+  sh:group qudt:QuantityKindPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:QuantityKind-baseISOUnitDimensions
+  a sh:PropertyShape ;
+  sh:path qudt:baseISOUnitDimensions ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:string ;
+  sh:group qudt:QuantityKindPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:QuantityKind-baseImperialUnitDimensions
+  a sh:PropertyShape ;
+  sh:path qudt:baseImperialUnitDimensions ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:string ;
+  sh:group qudt:QuantityKindPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:QuantityKind-baseSIUnitDimensions
+  a sh:PropertyShape ;
+  sh:path qudt:baseSIUnitDimensions ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:string ;
+  sh:group qudt:QuantityKindPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:QuantityKind-baseUSCustomaryUnitDimensions
+  a sh:PropertyShape ;
+  sh:path qudt:baseUSCustomaryUnitDimensions ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:string ;
+  sh:group qudt:QuantityKindPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:QuantityKind-baseUnitDimensions
+  a sh:PropertyShape ;
+  sh:path qudt:baseUnitDimensions ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:string ;
+  sh:group qudt:QuantityKindPropertiesGroup ;
+  sh:maxCount 4 ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:QuantityKind-belongsToSystemOfQuantities
+  a sh:PropertyShape ;
+  sh:path qudt:belongsToSystemOfQuantities ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:SystemOfQuantities ;
+  sh:group qudt:QuantityKindPropertiesGroup ;
+  sh:minCount 0 ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:QuantityKind-broader
+  a sh:PropertyShape ;
+  sh:path skos:broader ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:QuantityKind ;
+  sh:group qudt:QuantityKindPropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:QuantityKind-generalization
+  a sh:PropertyShape ;
+  sh:path qudt:generalization ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:QuantityKind ;
+  sh:group qudt:QuantityKindPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:QuantityKind-hasDimension
+  a sh:PropertyShape ;
+  sh:path qudt:hasDimension ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:Dimension ;
+  sh:group qudt:QuantityKindPropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:QuantityKind-hasDimensionVector
+  a sh:PropertyShape ;
+  sh:path qudt:hasDimensionVector ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:QuantityDimensionVector ;
+  sh:group qudt:QuantityKindPropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:QuantityKind-id
+  a sh:PropertyShape ;
+  sh:path qudt:id ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:string ;
+  sh:group qudt:QuantityKindPropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:QuantityKind-isQuantityKindOf
+  a sh:PropertyShape ;
+  sh:path qudt:isQuantityKindOf ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:SystemOfQuantities ;
+  sh:group qudt:QuantityKindPropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:QuantityKind-latexSymbol
+  a sh:PropertyShape ;
+  sh:path qudt:latexSymbol ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:string ;
+  sh:group qudt:QuantityKindPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:QuantityKind-mathMLdefinition
+  a sh:PropertyShape ;
+  sh:path qudt:mathMLdefinition ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:string ;
+  sh:group qudt:QuantityKindPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:QuantityKind-symbol
+  a sh:PropertyShape ;
+  sh:path qudt:symbol ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:string ;
+  sh:group qudt:QuantityKindPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:QuantityKind-symbolToken
+  a sh:PropertyShape ;
+  sh:path qudt:symbolToken ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:token ;
+  sh:group qudt:QuantityKindPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:QuantityKindPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:open true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  rdfs:label "Quantity Kind Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+qudt:RatioScale
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+.
+qudt:ScalarDatatype
+  sh:property qudt:ScalarDatatype-bitOrder ;
+  sh:property qudt:ScalarDatatype-bits ;
+  sh:property qudt:ScalarDatatype-byteOrder ;
+  sh:property qudt:ScalarDatatype-bytes ;
+  sh:property qudt:ScalarDatatype-encoding ;
+  sh:property qudt:ScalarDatatype-length ;
+  sh:property qudt:ScalarDatatype-maxExclusive ;
+  sh:property qudt:ScalarDatatype-maxInclusive ;
+  sh:property qudt:ScalarDatatype-minExclusive ;
+  sh:property qudt:ScalarDatatype-minInclusive ;
+  sh:property qudt:ScalarDatatype-rdfsDatatype ;
+.
+qudt:ScalarDatatype-bitOrder
+  a sh:PropertyShape ;
+  sh:path qudt:bitOrder ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:EndianType ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 50 ;
+.
+qudt:ScalarDatatype-bits
+  a sh:PropertyShape ;
+  sh:path qudt:bits ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 50 ;
+.
+qudt:ScalarDatatype-byteOrder
+  a sh:PropertyShape ;
+  sh:path qudt:byteOrder ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:EndianType ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 50 ;
+.
+qudt:ScalarDatatype-bytes
+  a sh:PropertyShape ;
+  sh:path qudt:bytes ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 50 ;
+.
+qudt:ScalarDatatype-encoding
+  a sh:PropertyShape ;
+  sh:path qudt:encoding ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:Encoding ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 50 ;
+.
+qudt:ScalarDatatype-length
+  a sh:PropertyShape ;
+  sh:path qudt:length ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 50 ;
+.
+qudt:ScalarDatatype-maxExclusive
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:order 50 ;
+.
+qudt:ScalarDatatype-maxInclusive
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:order 50 ;
+.
+qudt:ScalarDatatype-minExclusive
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:order 50 ;
+.
+qudt:ScalarDatatype-minInclusive
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:order 50 ;
+.
+qudt:ScalarDatatype-rdfsDatatype
+  a sh:PropertyShape ;
+  sh:path qudt:rdfsDatatype ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class rdfs:Datatype ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 50 ;
+.
+qudt:Scale
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  rdfs:subClassOf edg:DatatypeAspect ;
+  rdfs:subClassOf qudt:DatatypeShape ;
+  sh:property qudt:Scale-dataStructure ;
+  sh:property qudt:Scale-id ;
+  sh:property qudt:Scale-permissibleMaths ;
+  sh:property qudt:Scale-permissibleTransformation ;
+  sh:property qudt:Scale-scaleType ;
+.
+qudt:Scale-dataStructure
+  a sh:PropertyShape ;
+  sh:path qudt:dataStructure ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:string ;
+  sh:group qudt:ScalePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 50 ;
+.
+qudt:Scale-id
+  a sh:PropertyShape ;
+  sh:path qudt:id ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:string ;
+  sh:group qudt:ScalePropertiesGroup ;
+  sh:order 50 ;
+.
+qudt:Scale-permissibleMaths
+  a sh:PropertyShape ;
+  sh:path qudt:permissibleMaths ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:MathFunctionType ;
+  sh:group qudt:ScalePropertiesGroup ;
+  sh:order 50 ;
+.
+qudt:Scale-permissibleTransformation
+  a sh:PropertyShape ;
+  sh:path qudt:permissibleTransformation ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:TransformType ;
+  sh:group qudt:ScalePropertiesGroup ;
+  sh:order 50 ;
+.
+qudt:Scale-scaleType
+  a sh:PropertyShape ;
+  sh:path qudt:scaleType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:ScaleType ;
+  sh:group qudt:ScalePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 50 ;
+.
+qudt:ScalePropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:open true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  rdfs:label "Scales Metadata" ;
+  sh:order 30 ;
+.
+qudt:ScaleType
+  sh:property qudt:ScaleType-dataStructure ;
+  sh:property qudt:ScaleType-permissibleMaths ;
+  sh:property qudt:ScaleType-permissibleTransformation ;
+.
+qudt:ScaleType-dataStructure
+  a sh:PropertyShape ;
+  sh:path qudt:dataStructure ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:string ;
+  sh:group qudt:ScalePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 50 ;
+.
+qudt:ScaleType-permissibleMaths
+  a sh:PropertyShape ;
+  sh:path qudt:permissibleMaths ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:MathsFunctionType ;
+  sh:group qudt:ScalePropertiesGroup ;
+  sh:order 50 ;
+.
+qudt:ScaleType-permissibleTransformation
+  a sh:PropertyShape ;
+  sh:path qudt:permissibleTransformation ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:TransformType ;
+  sh:group qudt:ScalePropertiesGroup ;
+  sh:order 50 ;
+.
+qudt:StringType
+  rdfs:subClassOf edg:DatatypeAspect ;
+  rdfs:subClassOf qudt:DatatypeShape ;
+  sh:property qudt:StringType-dimensionality ;
+  sh:property qudt:StringType-elementType ;
+  sh:property qudt:StringType-maxLength ;
+.
+qudt:StringType-dimensionality
+  a sh:PropertyShape ;
+  sh:path qudt:dimensionality ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 0 ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:StringType-elementType
+  a sh:PropertyShape ;
+  sh:path qudt:elementType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:class qudt:CharacterType ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:StringType-isByteString
+  a sh:PropertyShape ;
+  sh:path qudt:isByteString ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 0 ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:StringType-maxLength
+  a sh:PropertyShape ;
+  sh:path qudt:maxLength ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:datatype xsd:integer ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "50"^^xsd:decimal ;
+.
+qudt:StringUTF16
+  sh:property qudt:StringUTF16-elementType ;
+.
+qudt:StringUTF16-elementType
+  a sh:PropertyShape ;
+  sh:path qudt:elementType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:hasValue qudt:UTF16-CHAR ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+.
+qudt:StringUTF8
+  sh:property qudt:StringUTF8-elementType ;
+.
+qudt:StringUTF8-elementType
+  a sh:PropertyShape ;
+  sh:path qudt:elementType ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/qudt> ;
+  sh:group edg:DatatypePropertiesGroup ;
+  sh:hasValue qudt:UTF8-CHAR ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+.

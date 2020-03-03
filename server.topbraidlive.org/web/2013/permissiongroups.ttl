@@ -1,0 +1,115 @@
+# baseURI: http://server.topbraidlive.org/web/2013/permissiongroups
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://server.topbraidlive.org/web/2013/permissiongroups>
+  rdf:type owl:Ontology ;
+  owl:versionInfo "Created with TopBraid Composer"^^xsd:string ;
+.
+pg:Asset
+  rdf:type owl:Class ;
+  rdfs:comment "Represents an asset that TopBraid products can handle. A graph, a SM module or a file are some of the examples of an asset. Some specialized asset identify a group of assets that can be used as wildcards when used to specify access rights."^^xsd:string ;
+  rdfs:subClassOf owl:Thing ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty pg:assetFamily ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty pg:assetID ;
+    ] ;
+.
+pg:Create
+  rdf:type pg:Permission ;
+  rdfs:label "Create Asset Permission" ;
+.
+pg:Delete
+  rdf:type pg:Permission ;
+  rdfs:label "Delete Asset Permission"^^xsd:string ;
+.
+pg:Execute
+  rdf:type pg:Permission ;
+  rdfs:label "Execute Asset Permission"^^xsd:string ;
+.
+pg:GroupAssetPermission
+  rdf:type owl:Class ;
+  rdfs:comment "Class which links assets, permissions and groups"^^xsd:string ;
+  rdfs:label "Group asset permission"^^xsd:string ;
+  rdfs:subClassOf owl:Thing ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty pg:forAsset ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty pg:hasPermission ;
+    ] ;
+.
+pg:Permission
+  rdf:type owl:Class ;
+  rdfs:comment "Identifies permissions that can be assigned to individual assets supported by TopBraid products"^^xsd:string ;
+  rdfs:subClassOf owl:Thing ;
+.
+pg:PermissionGroup
+  rdf:type owl:Class ;
+  rdfs:comment "A permission group identifies a set of roles that have specific permissions on specified assets."^^xsd:string ;
+  rdfs:label "Permission Group"^^xsd:string ;
+  rdfs:subClassOf owl:Thing ;
+.
+pg:Read
+  rdf:type pg:Permission ;
+  rdfs:label "Read Asset Permission" ;
+.
+pg:Role
+  rdf:type owl:Class ;
+  rdfs:comment "Every authenticated TopBraid user belongs to one or more roles. Roles are defined in external user directory."^^xsd:string ;
+  rdfs:subClassOf owl:Thing ;
+.
+pg:Update
+  rdf:type pg:Permission ;
+  rdfs:label "Update Asset Permission"^^xsd:string ;
+.
+pg:allowedRole
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain pg:PermissionGroup ;
+  rdfs:label "allowed role"^^xsd:string ;
+  rdfs:range pg:Role ;
+.
+pg:assetFamily
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain pg:Asset ;
+  rdfs:label "Family of the asset (file, graph, etc.)"^^xsd:string ;
+  rdfs:range xsd:string ;
+.
+pg:assetID
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain pg:Asset ;
+  rdfs:label "Unique id of an asset"^^xsd:string ;
+  rdfs:range xsd:string ;
+.
+pg:forAsset
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain pg:GroupAssetPermission ;
+  rdfs:label "for asset"^^xsd:string ;
+  rdfs:range pg:Asset ;
+.
+pg:hasPermission
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain pg:GroupAssetPermission ;
+  rdfs:label "has permission"^^xsd:string ;
+  rdfs:range pg:Permission ;
+.
+pg:hasPermissionForAsset
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain pg:PermissionGroup ;
+  rdfs:label "has permission for asset"^^xsd:string ;
+  rdfs:range pg:GroupAssetPermission ;
+.

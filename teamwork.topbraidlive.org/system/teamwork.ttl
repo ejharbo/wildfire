@@ -1,0 +1,2158 @@
+# baseURI: http://topbraid.org/teamwork
+# imports: http://datashapes.org/dash
+# imports: http://edg.topbraid.solutions/1.0/schema/governance/core
+# imports: http://rdfex.org/dcterms/created,creator,publisher,source
+# imports: http://rdfex.org/sioc/Container,Item,Post,Role,UserAccount,Usergroup,about,avatar,content,email,has_creator,has_member,reply_of
+# imports: http://spinrdf.org/spin
+# imports: http://topbraid.org/metadata
+# prefix: teamwork
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix voag: <http://voag.linkedmodel.org/schema/voag#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+dcterms:created
+  a rdf:Property ;
+  rdfs:domain teamwork:ValidationReport ;
+  rdfs:label "add time stamp" ;
+  rdfs:range xsd:dateTime ;
+.
+arg:parent
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:projectGraph
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://topbraid.org/teamwork>
+  a owl:Ontology ;
+  rdfs:comment "The main vocabulary of the TopBraid Teamwork Platform. Can be used to manage changes (to RDF graphs) by team members. Also includes classes to describe the available vocabulary/project types." ;
+  owl:imports <http://datashapes.org/dash> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  owl:imports <http://rdfex.org/dcterms/created,creator,publisher,source> ;
+  owl:imports <http://rdfex.org/sioc/Container,Item,Post,Role,UserAccount,Usergroup,about,avatar,content,email,has_creator,has_member,reply_of> ;
+  owl:imports <http://spinrdf.org/spin> ;
+  owl:imports <http://topbraid.org/metadata> ;
+  sh:declare [
+      a sh:PrefixDeclaration ;
+      sh:namespace "http://spinrdf.org/spl#"^^xsd:anyURI ;
+      sh:prefix "spl" ;
+    ] ;
+  sh:declare [
+      a sh:PrefixDeclaration ;
+      sh:namespace "http://topbraid.org/sparqlmotionfunctions#"^^xsd:anyURI ;
+      sh:prefix "smf" ;
+    ] ;
+  sh:declare [
+      a sh:PrefixDeclaration ;
+      sh:namespace "http://topbraid.org/teamwork#"^^xsd:anyURI ;
+      sh:prefix "teamwork" ;
+    ] ;
+  sh:declare [
+      a sh:PrefixDeclaration ;
+      sh:namespace "http://uispin.org/ui#"^^xsd:anyURI ;
+      sh:prefix "ui" ;
+    ] ;
+.
+teamwork:AbstentionVote
+  a teamwork:Vote ;
+  teamwork:voteValue 0 ;
+  rdfs:label "Abstain" ;
+.
+teamwork:ApprovalPending
+  a teamwork:TagStatus ;
+  dc:description "Example: A user may want to move a workflow from Submitted for Approval to Approval Pending state when they can't always quickly decide on the approval, but want to indicate that the approval request was received and decison is pending" ;
+  teamwork:faIcon "fa-coffee" ;
+  rdfs:comment "a decision is being made." ;
+  rdfs:label "Approval Pending" ;
+.
+teamwork:ApprovalVote
+  a teamwork:Vote ;
+  teamwork:voteValue 1 ;
+  rdfs:label "Approve" ;
+.
+teamwork:Approved
+  a teamwork:TagStatus ;
+  teamwork:color "#008000" ;
+  teamwork:faIcon "fa-thumbs-up" ;
+  rdfs:comment "the changes have been approved." ;
+  rdfs:label "Approved" ;
+.
+teamwork:AssetBookmark
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Asset bookmark" ;
+  rdfs:subClassOf teamwork:Bookmark ;
+.
+teamwork:AssetList
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "Instances of this class are stored in the users data graphs, and represent sets of assets that are exposed to users via Asset List panels. The users data graph only stores shared lists - the Asset List panel uses localStorage for temporarily created lists (if we would store every single list on the users graph then it would be hard to determine when to delete them)." ;
+  rdfs:label "Asset list" ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path teamwork:item ;
+      sh:class teamwork:AssetListItem ;
+      sh:description "The items in the list." ;
+      sh:name "item" ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path teamwork:listCreator ;
+      sh:description "The user that has created the list." ;
+      sh:name "list creator" ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path teamwork:listProjectGraph ;
+      sh:description "The master graph that a list has been created from. Can be used to determine which lists are typically opened from a given graph." ;
+      sh:maxCount 1 ;
+      sh:name "list project graph" ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path teamwork:listTag ;
+      sh:description "The working copy that this list was created in. May be used to determine and recommend Asset Lists for the current context." ;
+      sh:maxCount 1 ;
+      sh:name "list tag" ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path rdfs:label ;
+      sh:datatype xsd:string ;
+      sh:description "The display label, used by the Asset List panel. Defaults to \"Asset List\"." ;
+      sh:maxCount 1 ;
+    ] ;
+.
+teamwork:AssetListItem
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "An asset (RDF resource) that is stored in an AssetList." ;
+  rdfs:label "Asset list item" ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path dcterms:created ;
+      sh:datatype xsd:dateTime ;
+      sh:description "The time stamp when this item was added to the asset list." ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path teamwork:asset ;
+      sh:description "The reference to the resource. Note that the actual resource may not exist in the current graph when an Asset List is displayed, and in that case the human-readable label may be unavailable." ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "asset" ;
+      sh:nodeKind sh:BlankNodeOrIRI ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path teamwork:itemCreator ;
+      sh:description "The user that added the item." ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:name "item creator" ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+.
+teamwork:AssetSpecificRequirementsGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Asset-specific requirements" ;
+.
+teamwork:Bookmark
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  dash:abstract true ;
+  rdfs:label "Bookmark" ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:property [
+      sh:path dcterms:created ;
+      sh:datatype xsd:dateTime ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+  sh:property [
+      sh:path teamwork:hasResource ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+.
+teamwork:Bookmarks
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Bookmarks" ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:property [
+      sh:path teamwork:hasItem ;
+      sh:class teamwork:Bookmark ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+.
+teamwork:Change
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "Represents an atomic set of triple changes. The triples are stored as reified triples using the added and deleted properties. Each change should have a creator, which is the agent who submitted the change into the repository. Each change must have a time stamp (dcterms:created) to enable the system to apply changes in the correct order." ;
+  rdfs:label "Change" ;
+  rdfs:subClassOf sioc:Item ;
+  rdfs:subClassOf teamwork:HistoryObject ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path teamwork:added ;
+      sh:description "The added triples." ;
+      sh:node teamwork:Triple ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path teamwork:addedCount ;
+      sh:datatype xsd:integer ;
+      sh:defaultValue [
+          sh:count [
+              sh:path teamwork:added ;
+            ] ;
+        ] ;
+      sh:description "The number of added triples - this number does not always exist asserted in the data, but may exist for large changes to master graphs." ;
+      sh:maxCount 1 ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path teamwork:addedTurtleSourceCode ;
+      sh:datatype xsd:string ;
+      sh:description "A TTL snippet of the added triples in this change." ;
+      sh:maxCount 1 ;
+      sh:name "added turtle source code" ;
+      sh:values [
+          teamwork:turtleSourceCodeFromChange (
+              sh:this
+              teamwork:added
+            ) ;
+        ] ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path teamwork:deleted ;
+      sh:description "The deleted triples." ;
+      sh:node teamwork:Triple ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path teamwork:deletedCount ;
+      sh:datatype xsd:integer ;
+      sh:defaultValue [
+          sh:count [
+              sh:path teamwork:deleted ;
+            ] ;
+        ] ;
+      sh:description "The number of deleted triples - this number does not always exist in the data, but may exist for large changes to master graphs." ;
+      sh:maxCount 1 ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path teamwork:deletedTurtleSourceCode ;
+      sh:datatype xsd:string ;
+      sh:description "A TTL snippet of the deleted triples in this change." ;
+      sh:maxCount 1 ;
+      sh:name "deleted turtle source code" ;
+      sh:values [
+          teamwork:turtleSourceCodeFromChange (
+              sh:this
+              teamwork:deleted
+            ) ;
+        ] ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path teamwork:tag ;
+      sh:class teamwork:Tag ;
+      sh:description "The working copy that this change was done for (if any)." ;
+      sh:maxCount 1 ;
+      sh:name "tag" ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path rdfs:comment ;
+      sh:datatype xsd:string ;
+      sh:description "The comment associated with the change." ;
+      sh:maxCount 1 ;
+    ] ;
+  sh:property [
+      sh:path teamwork:status ;
+      sh:class teamwork:ChangeStatus ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+.
+teamwork:ChangeStatus
+  a rdfs:Class ;
+  rdfs:comment "The types status values for a Change." ;
+  rdfs:label "Change status" ;
+  rdfs:subClassOf teamwork:Status ;
+.
+teamwork:ChangesMustBeAboutEditedResourceShape
+  a sh:NodeShape ;
+  rdfs:comment "A shape that can be used as value of teamwork:tagShape to check a pre-condition that all edits in the working copy have a teamwork:editedResource as their subject." ;
+  rdfs:label "Changes must be about edited resource shape" ;
+  sh:sparql [
+      sh:message "Modifies \"{?predicate}\" of \"{?subject}\" which is out of scope for this working copy" ;
+      sh:prefixes <http://topbraid.org/teamwork> ;
+      sh:select """SELECT DISTINCT $this ?subject ?predicate
+WHERE {
+    ?change teamwork:tag $this .
+	?change teamwork:added|teamwork:deleted ?triple .
+	?triple teamwork:subject ?subject .
+	?triple teamwork:predicate ?predicate .
+	FILTER NOT EXISTS {
+		$this teamwork:editedResource ?subject .
+	}
+}""" ;
+    ] ;
+.
+teamwork:CollectionBookmark
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Collection bookmark" ;
+  rdfs:subClassOf teamwork:Bookmark ;
+.
+teamwork:Committed
+  a teamwork:ChangeStatus ;
+  a teamwork:TagStatus ;
+  teamwork:color "green" ;
+  teamwork:faIcon "fa-check-square" ;
+  teamwork:terminal true ;
+  rdfs:comment "the changes have been written to the production copy and no further edits are possible." ;
+  rdfs:label "Committed" ;
+.
+teamwork:Critical
+  a teamwork:Priority ;
+  rdfs:label "critical" ;
+  sh:order "1" ;
+.
+teamwork:CurrentUserRequirementsGroup
+  a sh:PropertyGroup ;
+  rdfs:label "General user-specific requirements" ;
+  sh:order "1"^^xsd:decimal ;
+.
+teamwork:DefaultTagWorkflowTemplate
+  a teamwork:TagWorkflowTemplate ;
+  teamwork:diagramViewClass teamwork:DefaultTagWorkflowDiagram ;
+  teamwork:initialStatus teamwork:Uncommitted ;
+  teamwork:transition [
+      a teamwork:TagStatusTransition ;
+      teamwork:fromStatus teamwork:Approved ;
+      teamwork:requiredProjectPermissionRole teamwork:editor ;
+      teamwork:toStatus teamwork:Committed ;
+      teamwork:transitionLabel "Accept changes to production" ;
+      ui:height 100 ;
+      ui:width 250 ;
+      ui:x 670 ;
+      ui:y 290 ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  teamwork:transition [
+      a teamwork:TagStatusTransition ;
+      teamwork:fromStatus teamwork:FrozenForReview ;
+      teamwork:requiredProjectPermissionRole teamwork:editor ;
+      teamwork:toStatus teamwork:Approved ;
+      teamwork:transitionLabel "Approve changes" ;
+      ui:height 100 ;
+      ui:width 150 ;
+      ui:x 720 ;
+      ui:y 20 ;
+      sh:order "1"^^xsd:decimal ;
+    ] ;
+  teamwork:transition [
+      a teamwork:TagStatusTransition ;
+      teamwork:fromStatus teamwork:FrozenForReview ;
+      teamwork:requiredTagPermissionRole teamwork:editor ;
+      teamwork:toStatus teamwork:Rejected ;
+      teamwork:transitionLabel "Reject changes" ;
+      ui:height 50 ;
+      ui:width 150 ;
+      ui:x 575 ;
+      ui:y 170 ;
+      sh:order "4"^^xsd:decimal ;
+    ] ;
+  teamwork:transition [
+      a teamwork:TagStatusTransition ;
+      teamwork:fromStatus teamwork:FrozenForReview ;
+      teamwork:requiredTagPermissionRole teamwork:editor ;
+      teamwork:toStatus teamwork:Uncommitted ;
+      teamwork:transitionLabel "Request further changes" ;
+      ui:height 100 ;
+      ui:width 210 ;
+      ui:x 200 ;
+      ui:y 170 ;
+      sh:order "2"^^xsd:decimal ;
+    ] ;
+  teamwork:transition [
+      a teamwork:TagStatusTransition ;
+      teamwork:fromStatus teamwork:Rejected ;
+      teamwork:requiredProjectPermissionRole teamwork:editor ;
+      teamwork:requiredTagPermissionRole teamwork:manager ;
+      teamwork:toStatus teamwork:Uncommitted ;
+      teamwork:transitionLabel "Allow further changes" ;
+      ui:height 100 ;
+      ui:width 190 ;
+      ui:x 390 ;
+      ui:y 290 ;
+      sh:order "2"^^xsd:decimal ;
+    ] ;
+  teamwork:transition [
+      a teamwork:TagStatusTransition ;
+      teamwork:fromStatus teamwork:Uncommitted ;
+      teamwork:requiredProjectPermissionRole teamwork:editor ;
+      teamwork:toStatus teamwork:Committed ;
+      teamwork:transitionLabel "Commit changes to production" ;
+      ui:height 100 ;
+      ui:width 250 ;
+      ui:x 20 ;
+      ui:y 420 ;
+      sh:order "0"^^xsd:decimal ;
+    ] ;
+  teamwork:transition [
+      a teamwork:TagStatusTransition ;
+      teamwork:fromStatus teamwork:Uncommitted ;
+      teamwork:requiredTagPermissionRole teamwork:manager ;
+      teamwork:requiresChanges true ;
+      teamwork:toStatus teamwork:FrozenForReview ;
+      teamwork:transitionLabel "Freeze for review" ;
+      ui:height 100 ;
+      ui:width 160 ;
+      ui:x 405 ;
+      ui:y 20 ;
+      sh:order "1"^^xsd:decimal ;
+    ] ;
+  rdfs:comment "The default workflow template used by working copies. Initially a working copy is uncommitted. From there it can be committed or frozen for review. A working copy that is frozen for review may be approved, rejected or sent back to uncommitted state for further edits." ;
+  rdfs:label "Basic workflow" ;
+.
+teamwork:DisapprovalVote
+  a teamwork:Vote ;
+  teamwork:voteValue -1 ;
+  rdfs:label "Disapprove" ;
+.
+teamwork:Duplicate
+  a teamwork:TagStatus ;
+  teamwork:faIcon "fa-object-ungroup" ;
+  rdfs:comment "the changes here are duplicates of other workflows." ;
+  rdfs:label "Duplicate" ;
+.
+teamwork:Escalated
+  a teamwork:TagStatus ;
+  dc:description "For example this could be a timer event - if there is no response after X time period." ;
+  teamwork:faIcon "fa-exclamation-triangle" ;
+  rdfs:comment "a decision has been escalated." ;
+  rdfs:label "Escalated" ;
+.
+teamwork:ExistingResourceTagWorkflowTemplate
+  a teamwork:WorkflowClass ;
+  a sh:NodeShape ;
+  rdfs:comment "A workflow template based on working copies, for editing an existing resource. The edited resource must have the specified shape(s)." ;
+  rdfs:label "Workflow template for an existing asset" ;
+  rdfs:subClassOf teamwork:TagWorkflowTemplate ;
+  sh:property [
+      sh:path teamwork:editedResourceShape ;
+      sh:nodeKind sh:BlankNodeOrIRI ;
+    ] ;
+.
+teamwork:FrozenForReview
+  a teamwork:TagStatus ;
+  teamwork:color "orange" ;
+  teamwork:faIcon "fa-pause" ;
+  rdfs:comment "the changes are being reviewed. Edits are not permitted while in this state, but comments can still be posted." ;
+  rdfs:label "Frozen for Review" ;
+.
+teamwork:GovernedResource
+  a rdfs:Class ;
+  rdfs:comment "A resource that can have roles attached to it, e.g. a creator, manager etc." ;
+  rdfs:label "Governed resource" ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+teamwork:GraphQLSchema
+  a graphql:Schema ;
+  graphql:protectedShape teamwork:Triple ;
+  graphql:publicShape teamwork:Change ;
+  rdfs:comment """The schema of the \"teamwork\" GraphQL service.
+
+Currently only used to expose the teamwork:Change entries to GraphQL clients.""" ;
+  rdfs:label "GraphQL schema" ;
+.
+teamwork:HistoryObject
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  dash:abstract true ;
+  rdfs:comment "Base class of objects that have a time stamp and a creator." ;
+  rdfs:label "History object" ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:property [
+      sh:path dcterms:created ;
+      sh:datatype xsd:dateTime ;
+      sh:description "The time stamp when the change happened." ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+  sh:property [
+      sh:path sioc:has_creator ;
+      graphql:name "creator" ;
+      sh:description "The agent that has caused the change." ;
+      sh:maxCount 1 ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+.
+teamwork:Implemented
+  a teamwork:TagStatus ;
+  dc:description "This could be used in a number of cases, for example, in the governance asset collection one may propose creation of a new glossary. If agreed, then, a person would actually go and create a business glossary and then mark the workflow status as implemented." ;
+  teamwork:faIcon "fa-certificate" ;
+  rdfs:comment "the task has been implemented." ;
+  rdfs:label "Implemented" ;
+.
+teamwork:InProgress
+  a teamwork:TagStatus ;
+  teamwork:editable true ;
+  teamwork:faIcon "fa-spinner" ;
+  rdfs:comment "work is happening." ;
+  rdfs:label "In Progress" ;
+.
+teamwork:Layout
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Layout" ;
+  rdfs:subClassOf teamwork:SavedItem ;
+.
+teamwork:Major
+  a teamwork:Priority ;
+  rdfs:label "major" ;
+  sh:order "2" ;
+.
+teamwork:MinVoteCountConstraintComponent
+  a sh:ConstraintComponent ;
+  rdfs:comment "A constraint component that can be used to specify that a transition requires a certain number of votes before it can be executed." ;
+  rdfs:label "Min vote count constraint component" ;
+  sh:labelTemplate "At least {$minVoteCount} votes have been received" ;
+  sh:nodeValidator [
+      a sh:SPARQLSelectValidator ;
+      sh:message "Requires at least {$minVoteCount} votes, so far has only {?count} votes." ;
+      sh:prefixes <http://topbraid.org/teamwork> ;
+      sh:select """SELECT $this ?count
+WHERE {
+	# Here, the $currentShape is the transition itself
+	BIND (IF(COALESCE($countApprovalsOnly, false), teamwork:ApprovalVote, ?none) AS ?vote) .
+	BIND (teamwork:currentVoteCount($this, $currentShape, ?vote) AS ?count) .
+	FILTER (?count < $minVoteCount) .
+}""" ;
+    ] ;
+  sh:parameter [
+      sh:path teamwork:countApprovalsOnly ;
+      sh:datatype xsd:boolean ;
+      sh:description "True to count approval votes only. If left empty then all votes will be counted." ;
+      sh:optional true ;
+    ] ;
+  sh:parameter [
+      sh:path teamwork:minVoteCount ;
+      sh:datatype xsd:integer ;
+    ] ;
+  sh:parameter [
+      sh:path teamwork:voteAutoTransitions ;
+      sh:datatype xsd:boolean ;
+      sh:description "If a transition has this set to true then it cannot have any other constraints, i.e. it must be possible to always perform the transition as soon as the sufficient number of votes comes in." ;
+      sh:optional true ;
+    ] ;
+  sh:targetClass teamwork:TagStatusTransition ;
+.
+teamwork:Minor
+  a teamwork:Priority ;
+  rdfs:label "minor" ;
+  sh:order "3" ;
+.
+teamwork:NavigationTreeSelectTemplate
+  a rdfs:Class ;
+  rdfs:label "Navigation tree select template" ;
+  rdfs:subClassOf spin:SelectTemplate ;
+.
+teamwork:NavigationTreeSelectTemplates
+  a teamwork:NavigationTreeSelectTemplate ;
+  spin:abstract true ;
+  spin:column [
+      a spin:Column ;
+      spin:columnIndex 0 ;
+      spin:columnType xsd:string ;
+      rdfs:label "Label" ;
+    ] ;
+  spin:column [
+      a spin:Column ;
+      spin:columnIndex 1 ;
+      spin:columnType xsd:string ;
+      rdfs:label "Icon" ;
+    ] ;
+  spin:column [
+      a spin:Column ;
+      spin:columnIndex 2 ;
+      spin:columnType rdfs:Resource ;
+      rdfs:label "Child" ;
+    ] ;
+  spin:column [
+      a spin:Column ;
+      spin:columnIndex 3 ;
+      spin:columnType xsd:string ;
+      rdfs:label "Link" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:parent ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The parent resource." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The project (master) graph." ;
+    ] ;
+  rdfs:comment """Superclass of templates that can be used to create a navigation tree or hierarchical menu based on nested items. Input is a parent resource and the projectGraph, output must be three columns:
+
+- ?label: the display label
+- ?icon: (optional) a display icon, see below for details on CSS styles. Icons should be 16x16 pixels big.
+- ?child: the child resource that would be used for recursive calls (may be unbound for leaves)
+- ?link: the hyperlink to follow if clicked (may be unbound for intermediate nodes that only serve as groups)
+
+The current UI implementation uses a context menu (), and the values of icon must match CSS styles as follows, assuming \"test\" is returned for ?icon by the query:
+
+.context-menu-item.icon-test {
+	background-image: url(\"images/test.png\");
+}
+
+Future implementations may use different visualizations, with different naming conventions.""" ;
+  rdfs:label "Navigation tree select templates" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+teamwork:New
+  a teamwork:TagStatus ;
+  teamwork:faIcon "fa-asterisk" ;
+  rdfs:comment "this is a new workflow." ;
+  rdfs:label "New" ;
+.
+teamwork:NewResourceTagWorkflowTemplate
+  a teamwork:WorkflowClass ;
+  a sh:NodeShape ;
+  rdfs:comment "A workflow template based on working copies for the creating of a new resource. It is up to the user to actually create the resource, and it will typically be an instance of the main class in the vocabulary." ;
+  rdfs:label "Workflow template for a new asset" ;
+  rdfs:subClassOf teamwork:TagWorkflowTemplate ;
+.
+teamwork:Pending
+  a teamwork:TagStatus ;
+  teamwork:faIcon "fa-hourglass-2" ;
+  rdfs:comment "workflow is in some waiting state until the final action takes place." ;
+  rdfs:label "Pending" ;
+.
+teamwork:PermissionRoleProperty
+  a rdfs:Class ;
+  rdfs:comment "The metaclass of properties that can be used as roles." ;
+  rdfs:label "Permission role property" ;
+  rdfs:subClassOf rdf:Property ;
+.
+teamwork:PostStatus
+  a rdfs:Class ;
+  rdfs:comment "The possible values of teamwork:postStatus." ;
+  rdfs:label "Post status" ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+teamwork:PostStatusDeclined
+  a teamwork:PostStatus ;
+  rdfs:label "declined" ;
+.
+teamwork:PostStatusOpen
+  a teamwork:PostStatus ;
+  rdfs:label "open" ;
+.
+teamwork:PostStatusResolved
+  a teamwork:PostStatus ;
+  rdfs:label "resolved" ;
+.
+teamwork:Priority
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Priority" ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:property [
+      sh:path sh:order ;
+      sh:maxCount 1 ;
+      sh:name "order" ;
+      sh:nodeKind sh:Literal ;
+    ] ;
+.
+teamwork:Product
+  a rdfs:Class ;
+  rdfs:comment "A configuration of the TopBraid Teamwork platform, providing name, logo etc. Installations can only have a single active teamwork:Product, which can be retrieved using the function teamwork:product(). All teamwork:Products are expected to be defined as part of the ui:graph." ;
+  rdfs:label "Product" ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+teamwork:ProjectType
+  a rdfs:Class ;
+  rdfs:comment """A type of graphs managed by TopBraid Teamworks framework. Examples include Taxonomies, Content Tag Sets (Tagger projects) and Ontologies. Each .TCH file points to one of these types so that the management pages can select appropriate features and editors.
+
+This is an extension point of the TopBraid platform, allowing users to build custom editing applications with their own requirements but shared features.""" ;
+  rdfs:label "Project type" ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+teamwork:Rejected
+  a teamwork:TagStatus ;
+  teamwork:color "red" ;
+  teamwork:faIcon "fa-thumbs-down" ;
+  rdfs:comment "review happened and changes were rejected. If changes are still desired, re-work is needed ." ;
+  rdfs:label "Rejected" ;
+.
+teamwork:RequiredGovernanceRoleForResourceTransitionConstraintComponent
+  a sh:ConstraintComponent ;
+  rdfs:comment "A constraint component that can be used to specify the minimum governance role (e.g. responsible) that the current user must have at the asset collection." ;
+  rdfs:label "Required governance role for resource transition constraint component" ;
+  sh:labelTemplate "Required governance role: {$requiredGovernanceRoleForResource}" ;
+  sh:nodeValidator [
+      a sh:SPARQLAskValidator ;
+      sh:ask """ASK {
+	BIND (teamwork:currentMasterGraph() AS ?projectGraph) .
+    FILTER teamwork:currentUserHasGovernanceRole(?projectGraph, $requiredGovernanceRoleForResource)
+}""" ;
+      sh:prefixes <http://topbraid.org/teamwork> ;
+    ] ;
+  sh:parameter [
+      sh:path teamwork:requiredGovernanceRoleForResource ;
+      sh:class edg:WorkflowParticipantProperty ;
+      sh:group teamwork:AssetSpecificRequirementsGroup ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:targetClass teamwork:ResourceStatusTransition ;
+.
+teamwork:RequiredGovernanceRoleForTagTransitionConstraintComponent
+  a sh:ConstraintComponent ;
+  rdfs:comment """A constraint component that can be used to specify the minimum governance role (e.g. responsible) that the current user must have at the asset collection.
+
+During validation, the focus node is expected to be the working copy.
+
+This constraint component can only be used if the result of ui:currentQueryGraph is the TCH graph containing the definition of the working copy.""" ;
+  rdfs:label "Required governance role for tag transition constraint component" ;
+  sh:labelTemplate "Required governance role: {$requiredGovernanceRole}" ;
+  sh:nodeValidator [
+      a sh:SPARQLAskValidator ;
+      sh:ask """ASK {
+    FILTER (teamwork:currentUserHasGovernanceRole(teamwork:masterGraphForTeamGraph(ui:graphWithoutImports(ui:currentQueryGraph())), $requiredGovernanceRole) || teamwork:currentUserHasGovernanceRoleAtEditedResource(teamwork:masterGraphForTeamGraph(ui:graphWithoutImports(ui:currentQueryGraph())), $requiredGovernanceRole, ?this))
+}""" ;
+      sh:prefixes <http://topbraid.org/teamwork> ;
+    ] ;
+  sh:parameter [
+      sh:path teamwork:requiredGovernanceRole ;
+      sh:class edg:WorkflowParticipantProperty ;
+      sh:group teamwork:AssetSpecificRequirementsGroup ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:targetClass teamwork:TagStatusTransition ;
+.
+teamwork:RequiredProjectPermissionRoleConstraintComponent
+  a sh:ConstraintComponent ;
+  rdfs:comment """A constraint component that can be used to specify the minimum permission role (e.g. editor) that the current user must have at the production copy. The focus node is the working copy.
+
+This constraint component can only be used if the result of ui:currentQueryGraph is the TCH graph containing the definition of the working copy.""" ;
+  rdfs:label "Required project permission role constraint component" ;
+  sh:labelTemplate "Required permission for the production copy: {$requiredProjectPermissionRole}" ;
+  sh:nodeValidator [
+      a sh:SPARQLAskValidator ;
+      sh:ask """ASK {
+    FILTER teamwork:currentUserHasPrivilegeOnMasterGraph($requiredProjectPermissionRole, ui:graphWithoutImports(ui:currentQueryGraph()))
+}""" ;
+      sh:prefixes <http://topbraid.org/teamwork> ;
+    ] ;
+  sh:parameter [
+      sh:path teamwork:requiredProjectPermissionRole ;
+      sh:class teamwork:PermissionRoleProperty ;
+      sh:group teamwork:AssetSpecificRequirementsGroup ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:targetClass teamwork:TagStatusTransition ;
+.
+teamwork:RequiredTagPermissionRoleConstraintComponent
+  a sh:ConstraintComponent ;
+  rdfs:comment """A constraint component that can be used to specify the minimum permission role (e.g. editor) that the current user must have at the working copy (which is expected to be the focus node).
+
+This constraint component can only be used if the result of ui:currentQueryGraph is the TCH graph containing the definition of the working copy.""" ;
+  rdfs:label "Required tag permission role constraint component" ;
+  sh:labelTemplate "Required permission for the working copy: {$requiredTagPermissionRole}" ;
+  sh:nodeValidator [
+      a sh:SPARQLAskValidator ;
+      sh:ask """ASK {
+    FILTER teamwork:currentUserHasPrivilege($this, $requiredTagPermissionRole, ui:graphWithoutImports(ui:currentQueryGraph()))
+}""" ;
+      sh:prefixes <http://topbraid.org/teamwork> ;
+    ] ;
+  sh:parameter [
+      sh:path teamwork:requiredTagPermissionRole ;
+      sh:class teamwork:PermissionRoleProperty ;
+      sh:group teamwork:AssetSpecificRequirementsGroup ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:targetClass teamwork:TagStatusTransition ;
+.
+teamwork:RequiresChangesConstraintComponent
+  a sh:ConstraintComponent ;
+  rdfs:comment "A constraint component that can be used to specify that a transition can only be performed if the working copy contains at least one change." ;
+  rdfs:label "Requires changes constraint component" ;
+  sh:labelTemplate "Working copy requires changes: {$requiresChanges}" ;
+  sh:nodeValidator [
+      a sh:SPARQLAskValidator ;
+      sh:ask """ASK
+WHERE {
+	FILTER (!$requiresChanges || EXISTS {
+		?change teamwork:tag $this .
+		?change a teamwork:Change .
+	})
+}""" ;
+      sh:message "Working copy does not contain any changes yet." ;
+      sh:prefixes <http://topbraid.org/teamwork> ;
+    ] ;
+  sh:parameter [
+      sh:path teamwork:requiresChanges ;
+      sh:datatype xsd:boolean ;
+      sh:description "True to only allow the transition if there have been changes to the working copy." ;
+    ] ;
+  sh:targetClass teamwork:TagStatusTransition ;
+.
+teamwork:ResourceStatusTransition
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "A transition that changes the status of a resource. The property teamwork:requiredGovernanceRole can be used here to select who is permitted to perform the transition. Future versions may support additional constraint checks, interpreting the whole transition as a shape (but this is not done due to performance concerns)." ;
+  rdfs:label "Resource status transition" ;
+  rdfs:subClassOf teamwork:Transition ;
+  rdfs:subClassOf sh:NodeShape ;
+  sh:property [
+      sh:path teamwork:fromStatus ;
+      sh:disjoint teamwork:toStatus ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+  sh:property [
+      sh:path teamwork:requiredGovernanceRole ;
+      sh:class edg:WorkflowParticipant ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      sh:path teamwork:toStatus ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+.
+teamwork:ResourceWorkflowTemplate
+  a teamwork:WorkflowClass ;
+  a sh:NodeShape ;
+  rdfs:comment "A template for workflows that govern the status of a given resource. The resource is the subject of at most one triple where the predicate is the \"status\" property associated to this workflow template." ;
+  rdfs:label "Resource workflow template" ;
+  rdfs:subClassOf teamwork:WorkflowTemplate ;
+  owl:versionInfo "THIS KIND OF WORKFLOWS IS CURRENTLY UNDER CONSTRUCTION AND SHOULD NOT BE USED YET." ;
+  sh:property [
+      sh:path teamwork:applicableResourceType ;
+      sh:class rdfs:Class ;
+      sh:minCount 1 ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      sh:path teamwork:initialStatus ;
+      sh:description "The initial value that new instances of the applicable resource type(s) will get for their status property when they are created." ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+  sh:property [
+      sh:path teamwork:statusProperty ;
+      sh:class rdf:Property ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      sh:path teamwork:transition ;
+      sh:class teamwork:ResourceStatusTransition ;
+    ] ;
+.
+teamwork:Reviewed
+  a teamwork:TagStatus ;
+  teamwork:faIcon "fa-binoculars" ;
+  rdfs:comment "review has happened." ;
+  rdfs:label "Reviewed" ;
+.
+teamwork:SPARQLQuery
+  a rdfs:Class ;
+  rdfs:comment "A saved SPARQL query, providing creator, queryGraph, queryString format and withImports. " ;
+  rdfs:label "SPARQL query" ;
+  rdfs:subClassOf teamwork:SavedItem ;
+.
+teamwork:SavedItem
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  dash:abstract true ;
+  rdfs:comment "Abstract base class for objects that are saved by a user, including SPARQL queries and layouts. Defines common properties." ;
+  rdfs:label "Saved item" ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+teamwork:Statement
+  a rdfs:Class ;
+  rdfs:comment "A replacement of rdf:Statement which leads to problems with some triple stores. Since we do not want to be at the merci of specific triple store features with the native RDF reification vocabulary, we are using our own vocabulary here. This may be revised at a future date, and we will provide automatic update code." ;
+  rdfs:label "Statement" ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+teamwork:Status
+  a rdfs:Class ;
+  rdfs:label "Status" ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+teamwork:StatusChange
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "Used to record status changes in a workflow subject. Basically records the new status together with a time stamp and the agent who has triggered the change." ;
+  rdfs:label "Status change" ;
+  rdfs:subClassOf teamwork:HistoryObject ;
+  sh:property [
+      sh:path teamwork:newStatus ;
+      sh:class teamwork:TagStatus ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+.
+teamwork:Stopped
+  a teamwork:TagStatus ;
+  teamwork:faIcon "fa-stop" ;
+  rdfs:comment "work on this has stopped (maybe temporarily)." ;
+  rdfs:label "Stopped" ;
+.
+teamwork:Tag
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:comment """A working copy is a URI in the teamwork graph that is referenced by various resources (including changes, comments and votes) to collectively represent the state of the working copy. A working copy is also a workflow, represented by its current state and historical state changes.
+
+The term \"Tag\" had been chosen historically, before the term \"Working copy\" was established.""" ;
+  rdfs:label "Working copy" ;
+  rdfs:subClassOf teamwork:GovernedResource ;
+  rdfs:subClassOf teamwork:Workflow ;
+  sh:property [
+      sh:path teamwork:editedResource ;
+      sh:maxCount 1 ;
+      sh:nodeKind sh:BlankNodeOrIRI ;
+    ] ;
+  sh:property [
+      sh:path teamwork:status ;
+      sh:class teamwork:TagStatus ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      sh:path teamwork:statusChange ;
+    ] ;
+.
+teamwork:TagStatus
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Tag status" ;
+  rdfs:subClassOf teamwork:Status ;
+  sh:property [
+      sh:path teamwork:editable ;
+      sh:datatype xsd:boolean ;
+      sh:maxCount 1 ;
+    ] ;
+  sh:property [
+      sh:path teamwork:terminal ;
+      sh:datatype xsd:boolean ;
+      sh:maxCount 1 ;
+    ] ;
+.
+teamwork:TagStatusTransition
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:comment """A transition that changes the state of a workflow (status of a working copy).
+
+This is a subclass of sh:NodeShape, which means that each TagStatusTransition also defines the shape that the working copy needs to have before the transition can happen. In particular, there are three properties that are frequently used with working copy status transitions to narrow down who can perform the transition: teamwork:requiredGovernanceRole, teamwork:requiredProjectPermissionRole and teamwork:requiredTagPermissionRole. The executable semantics of these properties are expressed as SHACL constraint components, and anyone can define additional conditions this way.""" ;
+  rdfs:label "Tag status transition" ;
+  rdfs:subClassOf teamwork:Transition ;
+  rdfs:subClassOf sh:NodeShape ;
+  sh:property [
+      sh:path teamwork:autoTransitionHours ;
+      sh:datatype xsd:integer ;
+      sh:maxCount 1 ;
+    ] ;
+  sh:property [
+      sh:path teamwork:fromStatus ;
+      sh:class teamwork:TagStatus ;
+      sh:disjoint teamwork:toStatus ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+      sh:not [
+          sh:property [
+              sh:path teamwork:terminal ;
+              sh:hasValue true ;
+            ] ;
+        ] ;
+    ] ;
+  sh:property [
+      sh:path teamwork:toStatus ;
+      sh:class teamwork:TagStatus ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+  sh:property [
+      sh:path teamwork:votingUserGovernanceRole ;
+      sh:class edg:WorkflowParticipantProperty ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:sparql [
+      sh:message "Auto-transitions cannot be used from the initial state of the surrounding workflow {?workflow}" ;
+      sh:prefixes <http://topbraid.org/teamwork> ;
+      sh:select """SELECT $this ?workflow
+WHERE {
+    $this teamwork:autoTransitionHours ?hours .
+	$this teamwork:fromStatus ?fromStatus .
+	?workflow teamwork:transition $this .
+	?workflow teamwork:initialStatus ?fromStatus .
+}""" ;
+    ] ;
+  sh:sparql [
+      sh:message "Cannot have auto-transition to committed state" ;
+      sh:prefixes <http://topbraid.org/teamwork> ;
+      sh:select """SELECT $this
+WHERE {
+    $this teamwork:autoTransitionHours ?hours .
+	$this teamwork:toStatus teamwork:Committed .
+}""" ;
+    ] ;
+  sh:sparql [
+      sh:message "If transition has voteAutoTransitions set to true then it cannot have any other constraints attached to it (that may block progress)" ;
+      sh:prefixes <http://topbraid.org/teamwork> ;
+      sh:select """SELECT $this
+WHERE {
+    $this teamwork:voteAutoTransitions true .
+	$this ?predicate ?any .
+	?cc sh:parameter/sh:path ?predicate .
+	FILTER (?cc != teamwork:MinVoteCountConstraintComponent) .
+}""" ;
+    ] ;
+  sh:sparql [
+      sh:message "If votingUserGovernanceRole is specified then the transition also needs a minVoteCount." ;
+      sh:prefixes <http://topbraid.org/teamwork> ;
+      sh:select """SELECT $this
+WHERE {
+    FILTER EXISTS { $this teamwork:votingUserGovernanceRole ?anyRole }
+	FILTER NOT EXISTS { $this teamwork:minVoteCount ?anyCount }
+}""" ;
+    ] ;
+.
+teamwork:TagWorkflowTemplate
+  a teamwork:WorkflowClass ;
+  a sh:NodeShape ;
+  teamwork:workflowPredicate teamwork:status ;
+  rdfs:comment "Represents the process of state transitions for a workflow that has an associated working copy. Working copies point to their governing Workflow Template via teamwork:workflowTemplate." ;
+  rdfs:label "Workflow template (for Working Copies)" ;
+  rdfs:subClassOf teamwork:WorkflowTemplate ;
+  sh:property [
+      sh:path teamwork:editorWorkflowParticipantProperty ;
+      sh:class edg:WorkflowParticipantProperty ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      sh:path teamwork:initialStatus ;
+      sh:class teamwork:TagStatus ;
+      sh:maxCount 1 ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      sh:path teamwork:managerWorkflowParticipantProperty ;
+      sh:class edg:WorkflowParticipantProperty ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      sh:path teamwork:tagShape ;
+      sh:nodeKind sh:BlankNodeOrIRI ;
+    ] ;
+  sh:property [
+      sh:path teamwork:transition ;
+      sh:class teamwork:TagStatusTransition ;
+    ] ;
+.
+teamwork:Transition
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "Defines an activity and associated resources and conditions (e.g., who can perform it) that transitions a workflow from one state to another." ;
+  rdfs:label "Transition" ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:property [
+      sh:path teamwork:transitionAction ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+    ] ;
+  sh:property [
+      sh:path teamwork:transitionLabel ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+  sh:property [
+      sh:path sh:order ;
+      sh:datatype xsd:decimal ;
+      sh:description "An optional order index (transitions with smaller values show up higher in the user interface)." ;
+      sh:maxCount 1 ;
+      sh:name "order" ;
+    ] ;
+.
+teamwork:Triple
+  a sh:NodeShape ;
+  rdfs:label "Triple" ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path teamwork:object ;
+      sh:description "The object of the triple." ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path teamwork:predicate ;
+      sh:description "The predicate of the triple." ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path teamwork:subject ;
+      sh:description "The subject of the triple." ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+.
+teamwork:Trivial
+  a teamwork:Priority ;
+  rdfs:label "trivial" ;
+  sh:order "5" ;
+.
+teamwork:URIConstructMethod
+  a rdf:Property ;
+  rdfs:comment "The selected method to construct URIs, defaulting to 'label'" ;
+  rdfs:label "new instances construct method" ;
+  rdfs:range xsd:string ;
+.
+teamwork:URICounterOffset
+  a rdf:Property ;
+  rdfs:comment "If set, and URIConstructMethod is set to counter, this property is used to set/determine the current offset" ;
+  rdfs:label "new instances counter offset" ;
+  rdfs:range xsd:integer ;
+.
+teamwork:URIPrefixSeparator
+  a rdf:Property ;
+  rdfs:comment "If set, and URIConstructMethod is set to label, uuid, or counter, this property is used to set/determine the separator between the two parts of the URI" ;
+  rdfs:label "new instances separator" ;
+  rdfs:range rdfs:Literal ;
+.
+teamwork:Uncommitted
+  a teamwork:ChangeStatus ;
+  a teamwork:TagStatus ;
+  teamwork:color "gray" ;
+  teamwork:editable true ;
+  teamwork:faIcon "fa-play" ;
+  rdfs:comment "changes are being made or are expected to be made. Any change created so far is \"work in progress\" and has not been written to the production copy." ;
+  rdfs:label "Uncommitted" ;
+.
+teamwork:ValidationReport
+  a rdfs:Class ;
+  rdfs:comment "Stores the (accumulated) results of a constraint validation report, with the number of errors and warnings, and the time stamp." ;
+  rdfs:label "Validation report" ;
+  rdfs:subClassOf rdfs:Resource ;
+.
+teamwork:Vocabulary
+  a rdfs:Class ;
+  rdfs:comment "The owl:Ontology resources in each teamwork graph are also instances of teamwork:Vocabulary. This can be used to distinguish teamwork vocabularies from other owl:Ontologies in a union graph, without having to rely on the URIs." ;
+  rdfs:label "Vocabulary" ;
+  rdfs:subClassOf owl:Ontology ;
+.
+teamwork:Vote
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "An enumeration of \"votes\" - responses such as \"approval\" or \"disapproval\". Votes are attached to a comment via the property teamwork:vote." ;
+  rdfs:label "Vote" ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:property [
+      sh:path teamwork:voteValue ;
+      sh:datatype xsd:integer ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+.
+teamwork:Workflow
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  dash:abstract true ;
+  rdfs:comment "An abstract class serving as superclass of actual workflow \"instances\". Each workflow points at a workflow template that defines which transitions between states are possible." ;
+  rdfs:label "Workflow" ;
+  rdfs:seeAlso teamwork:WorkflowTemplate ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:property [
+      sh:path teamwork:priority ;
+      sh:class teamwork:Priority ;
+      sh:maxCount 1 ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+  sh:property [
+      sh:path teamwork:workflowTemplate ;
+      sh:maxCount 1 ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+.
+teamwork:WorkflowClass
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "The metaclass of workflows." ;
+  rdfs:label "Workflow class" ;
+  rdfs:subClassOf rdfs:Class ;
+  sh:property [
+      sh:path teamwork:workflowPredicate ;
+      sh:class rdf:Property ;
+      sh:description "The predicate that holds the current state of a workflow at the workflow subject." ;
+      sh:maxCount 1 ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+.
+teamwork:WorkflowTemplate
+  a teamwork:WorkflowClass ;
+  a sh:NodeShape ;
+  rdfs:comment "Represents the process that a workflow can walk through. The instances of this class are specific processes, e.g. \"start with state X and then transition to state Y\". The actual executing workflows (with a specific state) are instances of teamwork:Workflow." ;
+  rdfs:label "Workflow template" ;
+  rdfs:seeAlso teamwork:Workflow ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:property [
+      sh:path teamwork:suitableWorkflowForSubjectArea ;
+      sh:class edg:SubjectArea ;
+      sh:maxCount 1 ;
+      sh:nodeKind sh:IRI ;
+    ] ;
+.
+teamwork:added
+  a rdf:Property ;
+  rdfs:comment "Links a change with zero or more added triples. See also teamwork:addedCount." ;
+  rdfs:domain teamwork:Change ;
+  rdfs:label "added" ;
+  rdfs:range teamwork:Statement ;
+.
+teamwork:addedCount
+  a rdf:Property ;
+  rdfs:comment "Can be used to record the number of triples that were added by a change, if the exact triples are not recorded to preserve space." ;
+  rdfs:domain teamwork:Change ;
+  rdfs:label "added count" ;
+  rdfs:range xsd:integer ;
+.
+teamwork:applicableResourceType
+  a rdf:Property ;
+  rdfs:comment "The type of resources that the given workflow template can be applied to. For example: edg:GlossaryTerm." ;
+  rdfs:label "applicable resource type" ;
+.
+teamwork:applicableToProjectType
+  a rdf:Property ;
+  rdfs:comment "Links a saved item to an asset collection type to which it applies to." ;
+  rdfs:domain teamwork:SavedItem ;
+  rdfs:label "applicable to project type" ;
+  rdfs:range teamwork:ProjectType ;
+.
+teamwork:archiveDate
+  a rdf:Property ;
+  rdfs:comment "Remembers the date when a working copy has been archived." ;
+  rdfs:domain teamwork:Tag ;
+  rdfs:label "archive date" ;
+  rdfs:range xsd:dateTime ;
+.
+teamwork:archiveOnCommit
+  a rdf:Property ;
+  rdfs:comment """If set to true then committed working copies will be automatically archived.
+
+Note that this has precedence over the \"record counts only\" option, i.e. the archive will contain the full history before being compacted.""" ;
+  rdfs:domain teamwork:Vocabulary ;
+  rdfs:label "archive on commit" ;
+  rdfs:range xsd:boolean ;
+.
+teamwork:archiver
+  a rdf:Property ;
+  rdfs:comment "For committed working copies, this stores the user who has performed the archiving. This property was introduced for TopBraid 5.4." ;
+  rdfs:domain teamwork:Tag ;
+  rdfs:label "archiver" ;
+  rdfs:range sioc:UserAccount ;
+.
+teamwork:autoTransitionHours
+  a rdf:Property ;
+  rdfs:comment """The number of hours after which a working copy will automatically transition to another state. For example this can be used to give users a chance to comment without explicitly waiting on such feedback.
+
+Note that this property can be combined with other constraint properties such as teamwork:requiredGovernanceRole, meaning that either the transition happens automatically or is performed manually by a qualified user. However, if you do not combine this property with any other constraint property then the transition can be performed by anyone (because there are no restrictions). In such cases, you may want to use a property such as teamwork:requiredGovernanceRole to point at a user role that does not even exist, so that there is really no manual way of progressing the workflow.""" ;
+  rdfs:label "auto transition hours" ;
+.
+teamwork:bookmarks
+  a rdf:Property ;
+  rdfs:comment "Users global bookmarks." ;
+  rdfs:domain sioc:UserAccount ;
+.
+teamwork:cannotCreateTags
+  a rdf:Property ;
+  rdfs:comment "If set to true then users who have the associated governance role at a given project graph cannot create new working copies." ;
+  rdfs:domain edg:WorkflowParticipantProperty ;
+  rdfs:label "cannot create tags" ;
+  rdfs:range xsd:boolean ;
+.
+teamwork:cannotEditSourceCode
+  a rdf:Property ;
+  rdfs:comment "If set to true then users who have the associated governance role at a given project graph cannot edit source code." ;
+  rdfs:domain edg:WorkflowParticipantProperty ;
+  rdfs:label "cannot edit source code" ;
+  rdfs:range xsd:boolean ;
+.
+teamwork:color
+  a rdf:Property ;
+  rdfs:comment "An (optional) color to display this status, for example in diagrams and status indicators. Values should be HTML color strings, e.g. \"red\" or \"#ff0000\"." ;
+  rdfs:domain teamwork:TagStatus ;
+  rdfs:label "color" ;
+  rdfs:range xsd:string ;
+.
+teamwork:commentTag
+  a rdf:Property ;
+  rdfs:comment "Links a comment Post with zero or one Tags." ;
+  rdfs:domain sioc:Post ;
+  rdfs:label "comment tag" ;
+  rdfs:range teamwork:Tag ;
+.
+teamwork:commitDate
+  a rdf:Property ;
+  rdfs:comment "Remembers the date when a working copy has been committed. This property was introduced for TopBraid 5.4." ;
+  rdfs:domain teamwork:Tag ;
+  rdfs:label "commit date" ;
+  rdfs:range xsd:dateTime ;
+.
+teamwork:committer
+  a rdf:Property ;
+  rdfs:comment "For committed working copies, this stores the user who has performed the commit. This property was introduced for TopBraid 5.4." ;
+  rdfs:domain teamwork:Tag ;
+  rdfs:label "committer" ;
+  rdfs:range sioc:UserAccount ;
+.
+teamwork:countApprovalsOnly
+  a rdf:Property ;
+  rdfs:label "count approvals only" ;
+.
+teamwork:creator
+  a rdf:Property ;
+  rdfs:comment "Stores the name of the user who created and saved the item." ;
+  rdfs:domain teamwork:SavedItem ;
+  rdfs:label "creator" ;
+  rdfs:range xsd:string ;
+.
+teamwork:defaultEditorClass
+  a rdf:Property ;
+  rdfs:comment "Links a TCH ontology with an editor class, remembering which editor shall be used by default. Can be configured by a manager for each asset collection." ;
+  rdfs:label "default editor class" ;
+.
+teamwork:defaultForProjectType
+  a rdf:Property ;
+  rdfs:comment """Points at the ProjectType that this layout is the default for. If the layout is marked private then it will only be used if the user name matches the creator. If there is a private and a non-private default layout then the private one will be preferred.
+
+Other types of values may be supported in the future, e.g. default layout per master graph, per user role or for the whole system.""" ;
+  rdfs:domain teamwork:Layout ;
+  rdfs:label "default for project type" ;
+  rdfs:range teamwork:ProjectType ;
+.
+teamwork:defaultLayout
+  a rdf:Property ;
+  rdfs:comment "The name of the default layout that shall be used in the \"new\" editor. Defaults to the layout centered around the Search panel. This has no effect if teamwork:newEditorDisabled is true for the project type, i.e. the new editor has not been activated." ;
+  rdfs:domain teamwork:ProjectType ;
+  rdfs:label "default layout" ;
+  rdfs:range xsd:string ;
+.
+teamwork:defaultProjectType
+  a rdf:Property ;
+  rdfs:comment "Links a Product with the ProjectTypes that are typically supported. These will be used in TBC testing mode." ;
+  rdfs:domain teamwork:Product ;
+  rdfs:label "default project type" ;
+  rdfs:range teamwork:ProjectType ;
+.
+teamwork:defaultSavedLayout
+  a owl:ObjectProperty ;
+  rdfs:label "Default Saved Layout" ;
+.
+teamwork:defaultTag
+  a rdf:Property ;
+  a owl:FunctionalProperty ;
+  rdfs:comment "Can be used to links a UserAccount with a Tag, so that the next time the user logs in, only the changes with matching tag will be activated. Currently only one value is allowed here, to simplify the architecture and improve query performance, but in the future this might be generalized." ;
+  rdfs:domain sioc:UserAccount ;
+  rdfs:label "default tag" ;
+  rdfs:range teamwork:Tag ;
+.
+teamwork:defaultTagWorkflowTemplateForProjectType
+  a rdf:Property ;
+  rdfs:comment "Enumerates the asset collection types that the workflow template is the default for. Asset collection types that don't have any default workflow template fall back to the system-wide default workflow template. For example, use edg:GlossaryProjectType as a value to make the workflow template the default for EDG Glossaries." ;
+  rdfs:domain teamwork:TagWorkflowTemplate ;
+  rdfs:label "default workflow tag template for asset collection type" ;
+  rdfs:range teamwork:ProjectType ;
+.
+teamwork:defaultTreeProperty
+  a rdf:Property ;
+  rdfs:comment "Links a class with one of its properties that shall be used as the default hierarchy in visual tools and importers." ;
+  rdfs:domain rdfs:Class ;
+  rdfs:label "default tree property" ;
+  rdfs:range rdf:Property ;
+.
+teamwork:defaultTreePropertyInverse
+  a rdf:Property ;
+  rdfs:comment "If teamwork:defaultTreeProperty is specified then this can be set to true to indicate that hierarchical displays shall walk the triples in the opposite direction." ;
+  rdfs:domain rdfs:Class ;
+  rdfs:label "default tree property inverse" ;
+  rdfs:range xsd:boolean ;
+.
+teamwork:defaultTreePropertyParentsOnly
+  a rdf:Property ;
+  rdfs:comment "If teamwork:defaultTreeProperty is specified then this can be set to true to indicate that hierarchical displays shall hide root nodes without children." ;
+  rdfs:domain rdfs:Class ;
+  rdfs:label "default tree property parents only" ;
+  rdfs:range xsd:boolean ;
+.
+teamwork:deleted
+  a rdf:Property ;
+  rdfs:comment "Links a change with zero or more deleted triples. See also teamwork:deletedCount." ;
+  rdfs:domain teamwork:Change ;
+  rdfs:label "deleted" ;
+  rdfs:range teamwork:Statement ;
+.
+teamwork:deletedCount
+  a rdf:Property ;
+  rdfs:comment "Can be used to record the number of triples that were deleted by a change, if the exact triples are not recorded to preserve space." ;
+  rdfs:domain teamwork:Change ;
+  rdfs:label "deleted count" ;
+  rdfs:range xsd:integer ;
+.
+teamwork:diagramViewClass
+  a rdf:Property ;
+  rdfs:comment "The class of a UI component to draw a diagram for a workflow." ;
+  rdfs:domain teamwork:WorkflowTemplate ;
+  rdfs:label "diagram view class" ;
+  rdfs:range ui:Node ;
+.
+teamwork:editable
+  a rdf:Property ;
+  rdfs:comment "Indicates whether a working copy that has the given status is editable. By default it is false, editing not allowed." ;
+  rdfs:domain teamwork:TagStatus ;
+  rdfs:label "editable" ;
+  rdfs:range xsd:boolean ;
+.
+teamwork:editedResource
+  a rdf:Property ;
+  rdfs:comment "The main resource that is being edited in a working copy." ;
+  rdfs:label "edited resource" ;
+.
+teamwork:editedResourceShape
+  a rdf:Property ;
+  rdfs:comment "The shape that edited resources need to have. Used to filter applicable workflows for a given resource. If multiple values are present then they are interpreted as a union, i.e. a candidate resource must conform to any one of them." ;
+  rdfs:label "edited resource shape" ;
+  rdfs:range sh:Shape ;
+.
+teamwork:editor
+  a teamwork:PermissionRoleProperty ;
+  rdfs:comment "A viewer that is also allowed to make edits to the resource he is an editor of." ;
+  rdfs:label "editor" ;
+  rdfs:subPropertyOf teamwork:viewer ;
+.
+teamwork:editorWorkflowParticipantProperty
+  a rdf:Property ;
+  rdfs:comment "Links a workflow template with the workflow participant properties (e.g. edg:responsible) that need, and automatically get, editing permission. By default, workflow participants only get viewer permission." ;
+  rdfs:label "editor workflow participant property" ;
+.
+teamwork:emailAddress
+  a rdf:Property ;
+  rdfs:comment "The email address of the user that submitted the post." ;
+  rdfs:domain sioc:Post ;
+  rdfs:label "email address" ;
+  rdfs:range xsd:string ;
+.
+teamwork:enableSimpleSearchMode
+  a rdf:Property ;
+  rdfs:comment "Can be set at the TCH graph (ontology instance) to remove search filters in editor and force users to go through lucene based text search." ;
+  rdfs:label "Enable Simple Search Mode" ;
+  rdfs:range xsd:string ;
+.
+teamwork:errorCount
+  a rdf:Property ;
+  rdfs:domain teamwork:ValidationReport ;
+  rdfs:label "error count" ;
+  rdfs:range xsd:integer ;
+.
+teamwork:external
+  a rdf:Property ;
+  rdfs:comment "Indicates whether a sioc:Post was public feedback (from an Explorer application)." ;
+  rdfs:domain sioc:Post ;
+  rdfs:label "external" ;
+  rdfs:range xsd:boolean ;
+.
+teamwork:externalGraphURI
+  a rdf:Property ;
+  rdfs:comment "Points from the owl:Ontology of a teamwork vocabulary to an external URI under which it can also be accessed. Exporting the vocabulary will (as an option) substitute the usages of such aliases, e.g. replacing owl:imports <urn:x-master...> with owl:imports <http://example.org/myvocab>." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "external graph URI" ;
+  rdfs:range rdfs:Resource ;
+.
+teamwork:faIcon
+  a rdf:Property ;
+  rdfs:comment "The name of an icon from http://fontawesome.io/icons/" ;
+  rdfs:domain teamwork:TagStatus ;
+  rdfs:label "fa icon" ;
+  rdfs:range xsd:string ;
+.
+teamwork:format
+  a rdf:Property ;
+  rdfs:comment "Represents format: CSV, XML, HTML, TSV that was chosen when saving a query in a SPARQL endpoint" ;
+  rdfs:domain teamwork:SPARQLQuery ;
+  rdfs:label "format" ;
+  rdfs:range xsd:string ;
+.
+teamwork:fromStatus
+  a rdf:Property ;
+  rdfs:comment "The \"from\" status in a Transition. If the governed resource has the given status then the Transition may be possible." ;
+  rdfs:domain teamwork:TagStatusTransition ;
+  rdfs:label "from status" ;
+.
+teamwork:hasItem
+  a owl:ObjectProperty ;
+  rdfs:domain teamwork:Bookmarks ;
+  rdfs:label "has item" ;
+  rdfs:range teamwork:Bookmark ;
+.
+teamwork:hasResource
+  a owl:ObjectProperty ;
+  rdfs:domain teamwork:Bookmark ;
+  rdfs:label "Has Resource" ;
+.
+teamwork:hideDefaultNamespaceInput
+  a rdf:Property ;
+  rdfs:comment "Set to true to hide the default namespace input on create page." ;
+  rdfs:domain teamwork:ProjectType ;
+  rdfs:label "hide default namespace input" ;
+  rdfs:range xsd:boolean ;
+.
+teamwork:incompleteCount
+  a rdf:Property ;
+  rdfs:comment "The number of focus nodes that had violations of sh:minCount constraints." ;
+  rdfs:domain teamwork:ValidationReport ;
+  rdfs:label "incomplete count" ;
+  rdfs:range xsd:integer ;
+.
+teamwork:incompleteTotal
+  a rdf:Property ;
+  rdfs:comment "The number of focus nodes that have sh:minCount constraints and thus could be incomplete." ;
+  rdfs:domain teamwork:ValidationReport ;
+  rdfs:label "incomplete total" ;
+  rdfs:range xsd:integer ;
+.
+teamwork:indexingServer
+  a rdf:Property ;
+  rdfs:comment "A server that can be used for indexing. The only supported value type right now is solr:Server, but other engines such as Elastic Search may follow, and the property may potentially have multiple values." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "indexing server" ;
+  rdfs:range rdfs:Resource ;
+.
+teamwork:initialChangeStatus
+  a rdf:Property ;
+  rdfs:comment "Specifies the status that new changes should get when they are added to this repository. Default is teamwork:Uncommitted. If teamwork:Committed is selected, then changes will be written through into the target graph immediately, and the change repository will only serve as a log. Uncommitted changes will just be stored in the repository and may be taken through a reviewing process separately." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "initial change status" ;
+  rdfs:range teamwork:ChangeStatus ;
+.
+teamwork:initialStatus
+  a rdf:Property ;
+  rdfs:comment "The initial status of a Workflow." ;
+  rdfs:label "initial status" ;
+.
+teamwork:isDataGraphProjectType
+  a rdf:Property ;
+  rdfs:comment "Set to true for each teamwork:ProjectType that exposes GraphQL in the same way that the Data Graph type does: The public and protected shapes are derived by walking all imports. For project types that do not have this flag, only the main graph (and its rdf:type) serves as starting point, while owl:imports are largely ignored to select which shapes get exposed." ;
+  rdfs:domain teamwork:ProjectType ;
+  rdfs:label "is data graph project type" ;
+  rdfs:range xsd:boolean ;
+.
+teamwork:isLinkProjectType
+  a rdf:Property ;
+  rdfs:comment "Used to mark project types that only contain links between resources. Such project types usually do not contain instances of their own. Examples include Crosswalks and Tagger projects." ;
+  rdfs:domain teamwork:ProjectType ;
+  rdfs:label "is link project type" ;
+  rdfs:range xsd:boolean ;
+.
+teamwork:isOntologyProjectType
+  a rdf:Property ;
+  rdfs:comment "Set to true for each teamwork:ProjectType that may declare new classes and properties. From the built-in ones this is only true for Ontologies and (for now at least) Enumerations." ;
+  rdfs:domain teamwork:ProjectType ;
+  rdfs:label "is ontology project type" ;
+  rdfs:range xsd:boolean ;
+.
+teamwork:isTag
+  a rdf:Property ;
+  rdfs:comment "Set to working copy name if true, otherwise false" ;
+  rdfs:domain teamwork:SPARQLQuery ;
+  rdfs:label "is Tag" ;
+  rdfs:range xsd:string ;
+.
+teamwork:json
+  a rdf:Property ;
+  rdfs:comment "A JSON encoded string of the layout including rows, columns and views. See examples for actual format." ;
+  rdfs:domain teamwork:Layout ;
+  rdfs:label "json" ;
+  rdfs:range xsd:string ;
+.
+teamwork:lastChange
+  a rdf:Property ;
+  rdfs:comment "Links the owl:Ontology of the TCH graph with the most recent teamwork:Change that was committed to master. This is populated automatically when a commit is performed against a teamwork graph such as urn:x-evn-master:geo:User. Other changes may not be recorded in the same way and this flag may need to be set explicitly, e.g. using <ui:setPropertyValue ...>." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "last change" ;
+  rdfs:range teamwork:Change ;
+.
+teamwork:mainClass
+  a rdf:Property ;
+  a owl:FunctionalProperty ;
+  rdfs:comment "Can link a vocabulary or project type with the main class of objects contained in it. If no value has been specified for the vocabulary, most places fall back to using the one defined on project type level." ;
+  rdfs:label "main entity (class)" ;
+  rdfs:range owl:Class ;
+.
+teamwork:manager
+  a teamwork:PermissionRoleProperty ;
+  rdfs:comment "An editor that has full control over a resource, including the ability to add or remove other users." ;
+  rdfs:label "manager" ;
+  rdfs:subPropertyOf teamwork:editor ;
+.
+teamwork:managerWorkflowParticipantProperty
+  a rdf:Property ;
+  rdfs:comment "Links a workflow template with the workflow participant properties that need, and automatically get, manager permission." ;
+  rdfs:label "manager workflow participant property" ;
+.
+teamwork:minVoteCount
+  a rdf:Property ;
+  rdfs:comment "The minimum number of votes required before the transition can be performed." ;
+  rdfs:label "min vote count" ;
+.
+teamwork:navigationTreeChildSelectTemplate
+  a rdf:Property ;
+  rdfs:comment "Can point to a teamwork:NavigationTreeSelectTemplate producing child nodes for a \"deep\" navigation tree. This template will receive the parent produced by a previous template call as its argument ?parent." ;
+  rdfs:domain teamwork:ProjectType ;
+  rdfs:label "navigation tree child select template" ;
+  rdfs:range teamwork:NavigationTreeSelectTemplate ;
+.
+teamwork:navigationTreeRootSelectTemplate
+  a rdf:Property ;
+  rdfs:comment "Can point to a teamwork:NavigationTreeSelectTemplate producing root nodes for a \"deep\" navigation tree. This template will receive the URI of the vocabulary (projectGraph) as its argument ?parent." ;
+  rdfs:domain teamwork:ProjectType ;
+  rdfs:label "navigation tree root select template" ;
+  rdfs:range teamwork:NavigationTreeSelectTemplate ;
+.
+teamwork:newEditorDisabled
+  a rdf:Property ;
+  rdfs:comment "If set to true then the new editor (introduced with 6.3) is not available for this project type." ;
+  rdfs:domain teamwork:ProjectType ;
+  rdfs:label "new editor disabled" ;
+  rdfs:range xsd:boolean ;
+.
+teamwork:newEditorInitService
+  a rdf:Property ;
+  rdfs:comment "Allows a project to override the init service." ;
+  rdfs:domain teamwork:ProjectType ;
+  rdfs:label "new editor init service" ;
+  rdfs:range xsd:string ;
+.
+teamwork:newInstancesClassPrefix
+  a rdf:Property ;
+  rdfs:comment "If set, overrides the default prefix settings for new URIs for this specific teamwork graph" ;
+  rdfs:label "new instances class prefix" ;
+  rdfs:range rdfs:Literal ;
+.
+teamwork:newStatus
+  a rdf:Property ;
+  rdfs:comment "The status that the working copy was changed to." ;
+  rdfs:label "new status" ;
+.
+teamwork:nextRecent
+  a owl:ObjectProperty ;
+  rdfs:comment "The next collection in the list of recently used collections for a user" ;
+  rdfs:label "Next Recent" ;
+.
+teamwork:object
+  a rdf:Property ;
+  rdfs:domain teamwork:Statement ;
+  rdfs:label "object" ;
+.
+teamwork:originalBaseURI
+  a rdf:Property ;
+  rdfs:comment "Used at the owl:Ontology object of a TCH graph to remember the original base URI of a urn:x-evn-master: graph. Used to map imports from external to internal, and to restore the original base URI if an edited graph is exported back to SKOS files." ;
+  rdfs:label "original base URI" ;
+  rdfs:range rdfs:Resource ;
+.
+teamwork:perResourceGovernanceRolesEnabled
+  a rdf:Property ;
+  rdfs:comment "Can be set to true at the master graph (teamwork:Vocabulary instance) to enable governance roles for individual assets. If activated then the forms will display an extra section at the bottom to view and edit any assigned governance roles for that resource." ;
+  rdfs:domain teamwork:Vocabulary ;
+  rdfs:label "per resource governance roles enabled" ;
+  rdfs:range xsd:boolean ;
+.
+teamwork:pluralLabel
+  a rdf:Property ;
+  rdfs:comment "The plural display name of a ProjectType, e.g. \"Vocabularies\"." ;
+  rdfs:domain teamwork:ProjectType ;
+  rdfs:label "project type name plural" ;
+  rdfs:range xsd:string ;
+.
+teamwork:postStatus
+  a rdf:Property ;
+  rdfs:comment "Indicates the status of a sioc:Post." ;
+  rdfs:domain sioc:Post ;
+  rdfs:label "post status" ;
+  rdfs:range teamwork:PostStatus ;
+.
+teamwork:predicate
+  a rdf:Property ;
+  rdfs:domain teamwork:Statement ;
+  rdfs:label "predicate" ;
+.
+teamwork:priority
+  a rdf:Property ;
+  rdfs:label "priority" ;
+.
+teamwork:private
+  a rdf:Property ;
+  rdfs:comment "True for items that are not shared with other users." ;
+  rdfs:domain teamwork:SavedItem ;
+  rdfs:label "private" ;
+  rdfs:range xsd:boolean ;
+.
+teamwork:productAbbreviation
+  a rdf:Property ;
+  rdfs:comment "An abbreviation such as \"EVN\" or \"EDGE\"." ;
+  rdfs:domain teamwork:Product ;
+  rdfs:label "product abbreviation" ;
+  rdfs:range xsd:string ;
+.
+teamwork:productCSSFile
+  a rdf:Property ;
+  rdfs:comment "The relative path to one or more CSS files in the workspace, the part after \".../lib/\". Any .ui.ttlx file can add extra CSS files to existing teamwork:Product instances, e.g. to override the logo class with an !important directive." ;
+  rdfs:domain teamwork:Product ;
+  rdfs:label "product CSS file" ;
+  rdfs:range xsd:string ;
+.
+teamwork:productHelpLink
+  a rdf:Property ;
+  rdfs:comment "Link to the start page of the product documentation for end users. This is either an abolute URL, or a relative URL with the part of the path after /tbl/lib/." ;
+  rdfs:domain teamwork:Product ;
+  rdfs:label "product help link" ;
+  rdfs:range xsd:string ;
+.
+teamwork:productLogoCSS
+  a rdf:Property ;
+  rdfs:comment "The name of a CSS class defining a background-image which will be used for the logo in the upper left corner. The logo should be transparent and have an exact height of 35 pixels. Typical width is between 200 and 300 pixels." ;
+  rdfs:domain teamwork:Product ;
+  rdfs:label "product logo CSS" ;
+  rdfs:range xsd:string ;
+.
+teamwork:projectType
+  a rdf:Property ;
+  rdfs:comment "Points from the owl:Ontology of a teamwork graph (TCH) to its teamwork:ProjectType." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "project type" ;
+  rdfs:range teamwork:ProjectType ;
+.
+teamwork:projectTypeDisabled
+  a rdf:Property ;
+  rdfs:comment "If set to true in the ui:graph (typically the uiconfig graph), then the UI will suppress this project type, even if a license exists." ;
+  rdfs:domain teamwork:ProjectType ;
+  rdfs:label "project type disabled" ;
+  rdfs:range xsd:boolean ;
+.
+teamwork:projectTypeIcon
+  a rdf:Property ;
+  rdfs:comment "An (optional) icon, sized 16x16 for use in the quick navigation menu(s). This should be the local name of a CSS style only, see teamwork:NavigationTreeSelectTemplates for details." ;
+  rdfs:domain teamwork:ProjectType ;
+  rdfs:label "project type icon" ;
+  rdfs:range xsd:string ;
+.
+teamwork:projectTypeSupportsUsageTab
+  a rdf:Property ;
+  rdfs:comment "True to specify that the Usages tab should show up for projects of this type." ;
+  rdfs:domain teamwork:ProjectType ;
+  rdfs:label "project type supports Usage Tab" ;
+  rdfs:range xsd:boolean ;
+.
+teamwork:projectTypeWeight
+  a rdf:Property ;
+  rdfs:comment "The relative weight for ordering the project types on the start page. Default is 0, and a larger index will appear further down." ;
+  rdfs:domain teamwork:ProjectType ;
+  rdfs:label "project type weight" ;
+  rdfs:range xsd:integer ;
+.
+teamwork:published
+  a rdf:Property ;
+  rdfs:comment "Determines if a vocabulary project has been published to Explorer users." ;
+  rdfs:label "published" ;
+  rdfs:range xsd:boolean ;
+.
+teamwork:queryGraph
+  a rdf:Property ;
+  rdfs:domain teamwork:SPARQLQuery ;
+  rdfs:label "query graph" ;
+  rdfs:range rdfs:Resource ;
+  owl:versionInfo "Note that this URI is (by accident) used both as a SPIN function and for saved SPARQL queries." ;
+.
+teamwork:queryParams
+  a rdf:Property ;
+  rdfs:comment "For creating SPARQL queries, this stores the custom properties of the SPARQL query string" ;
+  rdfs:domain teamwork:SPARQLQuery ;
+  rdfs:label "query params" ;
+  rdfs:range xsd:string ;
+.
+teamwork:queryString
+  a rdf:Property ;
+  rdfs:comment "For creating SPARQL queries, this stores the SPARQL query string" ;
+  rdfs:domain teamwork:SPARQLQuery ;
+  rdfs:label "query string" ;
+  rdfs:range xsd:string ;
+.
+teamwork:readOnly
+  a rdf:Property ;
+  rdfs:comment "If set to true at the owl:Ontology of a TCH graph then the associated asset collection is considered read-only. Read-only collections cannot be modified and features such as Import wizards should not even show up. Use the function teamwork:isReadOnlyProject(?projectGraph) to check this flag." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "read only" ;
+  rdfs:range xsd:boolean ;
+.
+teamwork:recent_collections
+  a rdf:Property ;
+  rdfs:comment "A list of recently used collections for a user" ;
+  rdfs:domain sioc:UserAccount ;
+  rdfs:label "Recent Collections" ;
+.
+teamwork:recordCountsOnly
+  a rdf:Property ;
+  rdfs:comment "If set to true then changes to the master graph will only use teamwork:addedCount and teamwork:deletedCount instead of the full reified triples. This leads to significantly smaller TCH graphs, however with no details about the changes available. This triple must be stored in the TCH graph at the teamwork:Vocabulary (owl:Ontology)." ;
+  rdfs:domain teamwork:Vocabulary ;
+  rdfs:label "record triple counts only" ;
+  rdfs:range xsd:boolean ;
+.
+teamwork:relatedClass
+  a rdf:Property ;
+  rdfs:comment "Points at classes that are indirectly referred to by a vocabulary: the subclasses of the main class and those used by relevant properties of that class." ;
+  rdfs:domain teamwork:Vocabulary ;
+  rdfs:label "related entity (class)" ;
+  rdfs:range owl:Class ;
+.
+teamwork:requiredGovernanceRole
+  a rdf:Property ;
+  rdfs:comment "The minimum governance role (e.g. informed) that a user must have on an asset to perform a Transition." ;
+  rdfs:label "required governance role" ;
+  rdfs:range edg:WorkflowParticipantProperty ;
+.
+teamwork:requiredProjectPermissionRole
+  a rdf:Property ;
+  rdfs:comment "The minimum permission role (e.g. editor) that a user must have on a master graph to perform a Transition. These are the roles defined on the User Roles tab of an asset collection." ;
+  rdfs:label "required permission role on assert collection" ;
+  rdfs:range teamwork:PermissionRoleProperty ;
+.
+teamwork:requiredTagPermissionRole
+  a rdf:Property ;
+  rdfs:comment "The minimum permission role (e.g. editor) that a user must have on a working copy to perform a Transition. These are the roles defined on the User Roles tab of a working copy/workflow." ;
+  rdfs:label "required permission role on working copy" ;
+  rdfs:range teamwork:PermissionRoleProperty ;
+.
+teamwork:requiresChanges
+  a rdf:Property ;
+  rdfs:label "requires changes" ;
+  rdfs:range xsd:boolean ;
+.
+teamwork:role
+  a rdf:Property ;
+  rdfs:comment "\"Abstract\" super-property of the roles that a given user (object) can take in the editing of a given resource (subject)." ;
+  rdfs:domain teamwork:GovernedResource ;
+  rdfs:label "role" ;
+  rdfs:range rdfs:Resource ;
+.
+teamwork:rootClass
+  a rdf:Property ;
+  rdfs:comment "An optional root class, to be used by the Ontology Editor and Explorer, and possibly other use cases." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "root class" ;
+  rdfs:range rdfs:Class ;
+.
+teamwork:saveTimeStamp
+  a rdf:Property ;
+  rdfs:comment "The time stamp when an item was saved. May not exist as value for queries created prior to 6.3." ;
+  rdfs:domain teamwork:SavedItem ;
+  rdfs:label "save time stamp" ;
+  rdfs:range xsd:dateTime ;
+.
+teamwork:savedLayout
+  a owl:ObjectProperty ;
+  rdfs:label "Saved Layout" ;
+.
+teamwork:shaclPreferred
+  a rdf:Property ;
+  rdfs:label "shacl preferred" ;
+  rdfs:range xsd:boolean ;
+.
+teamwork:singletonDefaultNamespace
+  a rdf:Property ;
+  rdfs:comment "The swa:defaultNamespace that a singleton of this project type should get." ;
+  rdfs:domain teamwork:ProjectType ;
+  rdfs:label "singleton default namespace" ;
+  rdfs:range xsd:string ;
+.
+teamwork:singletonId
+  a rdf:Property ;
+  rdfs:comment """If this property has a value then there can only be a single vocabulary of this type. The id of that vocabulary will be the value of this property here. The UI will prevent certain actions for singleton project types, especially forbid creating another graph.
+
+The ids should end with \"_singleton\" as a best practice, to minimize the risk of name clashes in existing installations.""" ;
+  rdfs:domain teamwork:ProjectType ;
+  rdfs:label "singleton id" ;
+  rdfs:range xsd:string ;
+.
+teamwork:singularLabel
+  a rdf:Property ;
+  rdfs:comment "The singular display name of a ProjectType, e.g. \"Vocabulary\"." ;
+  rdfs:domain teamwork:ProjectType ;
+  rdfs:label "project type name singular" ;
+  rdfs:range xsd:string ;
+.
+teamwork:skippedResultsGenerator
+  a rdf:Property ;
+  rdfs:comment "May link a ProjectType with the IDs of results generators (for Problems & Suggestions panel) that shall be skipped by default. For example, Crosswalks skip SHACL validation by default." ;
+  rdfs:domain teamwork:ProjectType ;
+  rdfs:label "skipped results generator" ;
+  rdfs:range xsd:string ;
+.
+teamwork:sourceProjectType
+  a rdf:Property ;
+  rdfs:comment "The teamwork:ProjectType that a published vocabulary was created from." ;
+  rdfs:domain owl:Ontology ;
+  rdfs:label "source project type" ;
+  rdfs:range teamwork:ProjectType ;
+.
+teamwork:status
+  a rdf:Property ;
+  rdfs:comment "The current status of a Change or Tag. May change over its life time, i.e. a change may switch from committed to uncommitted." ;
+  rdfs:label "status" ;
+  rdfs:range teamwork:Status ;
+.
+teamwork:statusChange
+  a rdf:Property ;
+  rdfs:comment "The (historical) changes that the working copy has gone through." ;
+  rdfs:label "status change" ;
+  rdfs:range teamwork:StatusChange ;
+.
+teamwork:statusProperty
+  a rdf:Property ;
+  rdfs:comment "The property that represents the status of a resource in a resource workflow." ;
+  rdfs:label "status property" ;
+.
+teamwork:subject
+  a rdf:Property ;
+  rdfs:domain teamwork:Statement ;
+  rdfs:label "subject" ;
+.
+teamwork:suitableWorkflowForProjectType
+  a rdf:Property ;
+  rdfs:comment "Enumerates the asset collection types that the workflow template is suitable for. If left empty, then it applies to all types." ;
+  rdfs:domain teamwork:WorkflowTemplate ;
+  rdfs:label "suitable for asset collection type" ;
+  rdfs:range teamwork:ProjectType ;
+.
+teamwork:suitableWorkflowForSubjectArea
+  a rdf:Property ;
+  rdfs:comment "Can point at the subject area that asset collection must have so that the workflow template is suitable for them. If left empty, then it applies to all subject areas." ;
+  rdfs:domain teamwork:WorkflowTemplate ;
+  rdfs:label "suitable workflow for subject area" ;
+  rdfs:range edg:SubjectArea ;
+.
+teamwork:tag
+  a rdf:Property ;
+  rdfs:comment "Links a Change with zero or more Tags. Note that the human-readable label is \"working copy\" because this is how this is known to users (e.g. in the Change History results grid)." ;
+  rdfs:domain teamwork:Change ;
+  rdfs:label "working copy" ;
+  rdfs:range teamwork:Tag ;
+.
+teamwork:tagShape
+  a rdf:Property ;
+  rdfs:comment "Shapes that the working copy needs to conform to before it can be committed. These are validated using the union of the working copy and the TCH graph as data graph, and the workflows definitions graph as shapes graph. The focus node is the teamwork:Tag instance." ;
+  rdfs:label "working copy shape" ;
+  rdfs:range sh:Shape ;
+.
+teamwork:taxonomyTreeOrderByExpr
+  a rdf:Property ;
+  rdfs:comment """A SPARQL expression that is used to order the nodes in a Taxonomy tree. The expression is evaluated with $value as a pre-bound value as the URI of the current tree node - note this is an xsd:string literal, not a IRI node. The expression can return any RDF node that can be compared to the results of other calls. For example, use COALESCE(<http://spinrdf.org/spl#object>(IRI($value), <http://example.org/property>), <http://uispin.org/ui#label>(IRI($value))) to sort by the values of a given example property, falling back to the display label (ui:label) if absent.
+
+Values of this property are expected to be attached to the owl:Ontology instance of the master graph of a taxonomy. Imported values are being ignored right now, pending user feedback.""" ;
+  rdfs:label "taxonomy tree order by expr" ;
+  rdfs:range xsd:string ;
+.
+teamwork:terminal
+  a rdf:Property ;
+  rdfs:comment "Used to mark a status as terminal, meaning that no workflow can have transitions from a terminal status." ;
+  rdfs:label "terminal" ;
+.
+teamwork:toStatus
+  a rdf:Property ;
+  rdfs:comment "The \"to\" status in a Transition. This is the status that the governed resource would transition to." ;
+  rdfs:domain teamwork:TagStatusTransition ;
+  rdfs:label "to status" ;
+.
+teamwork:transition
+  a rdf:Property ;
+  rdfs:comment "Links a Workflow with the Transitions that are supported by it. In theory the same Transition may belong to multiple Workflows." ;
+  rdfs:domain teamwork:WorkflowTemplate ;
+  rdfs:label "transition" ;
+  rdfs:range teamwork:Transition ;
+.
+teamwork:transitionAction
+  a rdf:Property ;
+  rdfs:comment "A display label of the transition for end users, used in places such as the My Workflows tables. Describes the steps needed to be taken before a transition can be marked as completed. If absent, the value of teamwork:transitionLabel is used." ;
+  rdfs:label "transition action" ;
+.
+teamwork:transitionLabel
+  a rdf:Property ;
+  rdfs:comment "A display label of the transition for end users. For example \"Commit to production\". This is different from the rdfs:label which may be a more internal name used to distinguish this transition from other instances." ;
+  rdfs:label "transition label" ;
+.
+teamwork:userCannotModifyURI
+  a rdf:Property ;
+  rdfs:comment "If set, disallows modification of the URI for this specific teamwork graph" ;
+  rdfs:label "new instances user cannot modify uri" ;
+  rdfs:range xsd:boolean ;
+.
+teamwork:viewer
+  a teamwork:PermissionRoleProperty ;
+  rdfs:comment "A user that can also see the change history (and make comments)." ;
+  rdfs:label "viewer" ;
+  rdfs:subPropertyOf teamwork:role ;
+.
+teamwork:vocabularyType
+  a rdf:Property ;
+  rdfs:comment "Must link a ProjectType with a subclass of teamwork:Vocabulary." ;
+  rdfs:domain teamwork:ProjectType ;
+  rdfs:label "vocabulary type" ;
+  rdfs:range rdfs:Class ;
+.
+teamwork:vote
+  a rdf:Property ;
+  rdfs:comment "Links a comment (sioc:Post) with a Vote." ;
+  rdfs:label "vote" ;
+  rdfs:range teamwork:Vote ;
+.
+teamwork:voteAutoTransitions
+  a rdf:Property ;
+  rdfs:comment "If true then the transition will be performed automatically, as soon as sufficient votes have been registered." ;
+  rdfs:label "vote auto transitions" ;
+.
+teamwork:voteValue
+  a rdf:Property ;
+  rdfs:comment "A value between -1 (strongly against) and +1 (strongly in favor) to indicate a numeric value for a Vote." ;
+  rdfs:label "vote value" ;
+.
+teamwork:votedToStatus
+  a rdf:Property ;
+  rdfs:comment "Links a comment (sioc:Post) with the \"to\" status of a transition." ;
+  rdfs:label "voted to status" ;
+  rdfs:range teamwork:TagStatus ;
+.
+teamwork:votingUserGovernanceRole
+  a rdf:Property ;
+  rdfs:comment "The governance role(s) that users need to have to cast their votes on a transition. Transitions that have a value for this property are displaying a corresponding \"voting\" user interface widget for those users. If this property is present at a transition then there also needs to be a teamwork:minVoteCount specified." ;
+  rdfs:label "voting user governance role" ;
+  rdfs:range edg:WorkflowParticipantProperty ;
+.
+teamwork:warningCount
+  a rdf:Property ;
+  rdfs:domain teamwork:ValidationReport ;
+  rdfs:label "warning count" ;
+  rdfs:range xsd:integer ;
+.
+teamwork:withImports
+  a rdf:Property ;
+  rdfs:comment "Set true if the saved query will run on a graph with imports." ;
+  rdfs:domain teamwork:SPARQLQuery ;
+  rdfs:label "with Imports" ;
+  rdfs:range xsd:boolean ;
+.
+teamwork:workflowPredicate
+  a rdf:Property ;
+  rdfs:domain teamwork:WorkflowClass ;
+  rdfs:label "workflow predicate" ;
+.
+teamwork:workflowTemplate
+  a rdf:Property ;
+  rdfs:comment "Links a workflow subject with the workflow template that it is governed by." ;
+  rdfs:domain teamwork:Workflow ;
+  rdfs:label "workflow template" ;
+  rdfs:range teamwork:WorkflowTemplate ;
+.
+owl:Ontology
+  rdfs:subClassOf teamwork:GovernedResource ;
+.
+sh:OrConstraintComponent
+  sh:targetClass teamwork:TagStatusTransition ;
+.

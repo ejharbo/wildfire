@@ -1,0 +1,3530 @@
+# baseURI: http://topbraid.org/teamworkflows
+# imports: http://teamworkAPI.topbraid.com/teamworkUpdate
+# imports: http://topbraid.org/swa
+# imports: http://topbraid.org/teamwork.ui
+
+@prefix acjob: <http://evn.topbraidlive.org/tagger/acjob#> .
+@prefix acpp: <http://topbraid.org/nlp/autoclassifier-preproc#> .
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix autotagger: <http://evn.topbraidlive.org/autotagger#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix conceptmatch: <http://topbraid.org/conceptmatch#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix config-importers: <http://edg.topbraidlive.org/config/importers#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix core-soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix corpus: <http://topbraid.org/corpus#> .
+@prefix corpusprojects: <http://topbraid.org/corpus-projects#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkapp: <http://topbraid.org/swa/crosswalkapp#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dashboard: <http://example.org/dashboard#> .
+@prefix datagraph: <http://teamwork.topbraidlive.org/datagraph/datagraphprojects#> .
+@prefix dataset: <http://teamwork.topbraidlive.org/dataset#> .
+@prefix datasetapp: <http://topbraid.org/swa/datasetapp#> .
+@prefix datasetviewer: <http://topbraid.org/swa/datasetviewer#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ddl: <http://edg.topbraidlive.org/1.0/importers/ddl#> .
+@prefix default: <http://uispin.org/default#> .
+@prefix defaultapp: <http://topbraid.org/swa/defaultapp#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix document: <http://topbraid.org/document#> .
+@prefix documents: <http://edg.topbraid.solutions/1.0/shapes/documents#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg-config: <http://edg.ext.topbraidlive.org/schema/config/importers#> .
+@prefix edg-importer: <http://edg.topbraidlive.org/importer/> .
+@prefix edg-qa: <http://edg.topbraidlive.org/utility/qa/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.global: <urn:x-evn-global:> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix edgproduct: <http://edg.topbraidlive.org/edgproduct#> .
+@prefix eeh-lib: <http://www.environmenthub.no/spin/1.0/eeh-lib#> .
+@prefix eeh-reportlib: <http://www.environmenthub.no/spin/1.0/eeh-reportlib#> .
+@prefix elements: <http://purl.org/dc/elements/1.1/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evn: <http://topbraid.org/evn/evn#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evnimport: <http://evn.topbraidlive.org/uispin/evnimport#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix ex: <http://example.org/> .
+@prefix extjs: <http://uispin.com/extjs#> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix forms: <http://www.topbraid.org/2007/01/forms.owl#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix governance: <http://topbraid.org/teamworkgovernance.ui#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix graphql.search: <http://teamwork.topbraidlive.org/graphql.search#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix inference: <http://www.topbraid.org/2007/06/inference.owl#> .
+@prefix jdbc: <http://edg.topbraidlive.org/1.0/importers/jdbc#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix kennedys: <http://topbraid.org/examples/kennedys#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix lib-importer: <http://edg.topbraid.solutions/importer/lib#> .
+@prefix lineage-transform: <http://edg.topbraid.solutions/transform/importer/lineage#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix ontologyviewer: <http://topbraid.org/swa/ontologyviewer#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix proxy-lineage: <http://edg.topbraid.solutions/proxy/importer/lineage#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmapp: <http://rdm.topbraidlive.org/rdmapp#> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix rdmviewer: <http://rdm.topbraidlive.org/rdmviewer#> .
+@prefix saf: <http://topbraid.org/saf/> .
+@prefix safconfig: <http://topbraid.org/safconfig/> .
+@prefix safindex: <http://topbraid.org/safindex#> .
+@prefix safm: <http://saf.topbraidlive.org/metaschema/> .
+@prefix savedQueries: <http://teamwork.topbraidlive.org/ui/savedQueries#> .
+@prefix scheduler: <http://topbraid.org/scheduler#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix server: <http://server.topbraidlive.org/server.ui#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix shapesgraph: <http://teamwork.topbraidlive.org/shapesgraph/shapesgraphprojects#> .
+@prefix sharepoint: <http://topbraid.org/sharepoint#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skosshapes: <http://topbraid.org/skos.shapes#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spin.ui: <http://spinrdf.org/spin.ui#> .
+@prefix spinmap: <http://spinrdf.org/spinmap#> .
+@prefix spinmapl: <http://topbraid.org/spin/spinmapl#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix ss: <http://www.topbraidcomposer.org/owl/2006/08/spreadsheets.owl#> .
+@prefix stats: <http://topbraid.org/statistics#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swadoc: <http://topbraid.org/swadoc#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tablesmap: <http://topbraid.org/spin/tablesmap#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix taggerspin: <http://evn.topbraidlive.org/taggerspin#> .
+@prefix taggerui: <http://evn.topbraidlive.org/taggerui#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix tblui: <http://server.topbraidlive.org/tblui#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkAdmin: <http://teamwork.topbraidlive.org/doc/teamworkAdmin#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworkconstraints: <http://topbraid.org/teamworkconstraints#> .
+@prefix teamworkdashboard: <http://topbraid.org/teamworkdashboard#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix teamworkupdate: <http://teamworkAPI.topbraid.com/teamworkUpdate#> .
+@prefix textindex: <http://topbraid.org/textindex#> .
+@prefix tika-importer: <http://teamwork.topbraidlive.org/corpus/tika-importer#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix tracker: <http://teamwork.topbraidlive.org/ui/tracker#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uitest: <http://uispin.org/test#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix userdat: <http://teamwork.topbraidlive.org/ui/userdata> .
+@prefix userdata: <http://teamwork.topbraidlive.org/ui/userdata#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix victory: <http://edg.topbraid.solutions/victory/> .
+@prefix visual: <http://topbraid.org/visual#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xhtml: <http://topbraid.org/xhtml#> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+arg:canPerform
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:canVote
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:editedResource
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:reloadId
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:workflow
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:workflowTemplate
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+teamwork:AddInitialResourceStatusPlugin
+  a swa:AddDefaultValuesPlugin ;
+  ui:prototype """
+<ui:if ui:condition=\"{= false }\">
+    <ui:group let:template=\"{= teamwork:getResourceWorkflowTemplate(?resource) }\">
+        <ui:if ui:condition=\"{= bound(?template) }\">
+            <ui:group let:initialStatus=\"{= spl:objectInGraph(?template, teamwork:initialStatus, teamwork:workflowsGraph()) }\" let:predicate=\"{= spl:objectInGraph(?template, teamwork:statusProperty, teamwork:workflowsGraph()) }\">
+                <ui:if ui:condition=\"{= bound(?initialStatus) }\">
+                    <ui:update ui:updateQuery=\"{!
+                            INSERT {
+                                ?resource ?predicate ?initialStatus .
+                            }
+                            WHERE {
+                            } }\"/>
+                </ui:if>
+            </ui:group>
+        </ui:if>
+    </ui:group>
+</ui:if>
+"""^^ui:Literal ;
+  rdfs:comment "If there is a workflow template governing the new resource, set its status property to the initial status specified by the workflow template." ;
+  rdfs:label "Add initial resource status plugin" ;
+  rdfs:subClassOf swa:AddDefaultValuesPlugins ;
+.
+teamwork:AddTagPage
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:editedResource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "An optional resource that is edited by the workflow. If specified then only suitable workflows for that resource will be displayed." ;
+    ] ;
+  ui:errorPrototype """
+<ui:if ui:condition=\"{= !teamwork:currentUserCanCreateTags(?projectGraph) }\">
+    <teamwork:ErrorPage arg:message=\"Insufficient permissions to create workflow\"/>
+</ui:if>
+"""^^ui:Literal ;
+  ui:prototype """
+<ui:group let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+        <teamwork:Chrome arg:pageType=\"add-tag-page\" arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= teamwork:TagsProjectTab }\">
+            <ui:if ui:condition=\"{= bound(?editedResource) }\">
+                <h1>Start new Workflow about <em>{= swa:labelInGraph(?editedResource, ui:graphWithImports(?projectGraph)) }</em> in <em>{= teamwork:projectLabel(?projectGraph) }</em>
+                </h1>
+            </ui:if>
+            <ui:else>
+                <h1>Start new Workflow on <em>{= teamwork:projectLabel(?projectGraph) }</em>
+                </h1>
+            </ui:else>
+            <form action=\"swp\" id=\"theForm\" let:resource=\"{= IF(bound(?tag), ?tag, ?projectGraph) }\">
+                <input name=\"_viewClass\" type=\"hidden\" value=\"{= teamwork:AddTagService }\"/>
+                <input name=\"projectGraph\" type=\"hidden\" value=\"{= ?projectGraph }\"/>
+                <ui:if ui:condition=\"{= bound(?tag) }\">
+                    <input name=\"tag\" type=\"hidden\" value=\"{= ?tag }\"/>
+                </ui:if>
+                <ui:if ui:condition=\"{= bound(?editedResource) }\">
+                    <input name=\"editedResource\" type=\"hidden\" value=\"{= ?editedResource }\"/>
+                </ui:if>
+                <teamwork:TagWorkflowTemplateSelectionBox arg:editedResource=\"{= ?editedResource }\" arg:projectGraph=\"{= ?projectGraph }\"/>
+                <ui:loadable ui:loadId=\"tag-name-loadable\">
+                    <ui:group let:wt=\"{= COALESCE(?wt, teamwork:getDefaultTagWorkflowTemplateForProject(?projectGraph), teamwork:getDefaultTagWorkflowTemplate()) }\">
+                        <swa:LabeledElement arg:label=\"{= IF(teamwork:isNewResourceTagWorkflowTemplate(?wt), &quot;Name of New Asset&quot;, &quot;Name&quot;) }\">
+                            <input autofocus=\"autofocus\" class=\"form-control teamwork-label-and-comment-form-name-input\" id=\"name-input\" name=\"name\" type=\"text\"/>
+                        </swa:LabeledElement>
+                    </ui:group>
+                </ui:loadable>
+                <swa:LabeledElement arg:label=\"Description\">
+                    <textarea class=\"form-control\" cols=\"80\" id=\"comment-area\" name=\"comment\" rows=\"4\"/>
+                </swa:LabeledElement>
+                <br/>
+                <button class=\"btn btn-primary\" type=\"submit\">Submit</button>
+            </form>
+            <script>teamwork.initCreateTagForm()</script>
+        </teamwork:Chrome>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "A page that can be used to create a new working copy." ;
+  rdfs:label "Add tag page" ;
+  rdfs:subClassOf teamwork:ProjectElements ;
+  rdfs:subClassOf teamwork:RestrictedPage ;
+.
+teamwork:AddTagService
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:editedResource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "An optional resource that is edited by the workflow. If specified then only suitable workflows for that resource will be displayed." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:workflow ;
+      spl:valueType teamwork:WorkflowTemplate ;
+      rdfs:comment "The governing workflow for the new working copy (uses default if unspecified)." ;
+    ] ;
+  ui:prototype """
+<ui:group let:wf=\"{= COALESCE(?workflow, teamwork:getDefaultTagWorkflowTemplateForProject(?projectGraph)) }\">
+    <ui:setContext let:name=\"{= IF(teamwork:isNewResourceTagWorkflowTemplate(?wf), CONCAT(&quot;Add &quot;, ?name), ?name) }\" ui:queryGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+        <ui:if ui:condition=\"{#
+                ASK 
+                WHERE {
+                    ?tag rdfs:label ?name .
+                    ?tag a teamwork:Tag .
+                } }\">
+            <swon:Object>
+                <swon:Value arg:name=\"error\" arg:value=\"A working copy with the label {= ?name } already exists.\"/>
+            </swon:Object>
+        </ui:if>
+        <ui:else>
+            <ui:group let:tagId=\"{= teamwork:createTagId(?name, ?projectGraph) }\">
+                <ui:transaction>
+                    <ui:update ui:updateQuery=\"{!
+                            INSERT {
+                                ?tag a teamwork:Tag .
+                                ?tag rdfs:label ?name .
+                                ?tag rdfs:comment ?comment .
+                                ?tag sioc:has_creator ?user .
+                                ?tag teamwork:manager ?user .
+                                ?tag teamwork:status ?initialStatus .
+                                ?tag teamwork:editedResource ?editedResource .
+                                ?tag dcterms:created ?timeStamp .
+                                ?tag teamwork:workflowTemplate ?wf .
+                            }
+                            WHERE {
+                                BIND (now() AS ?timeStamp) .
+                                BIND (smf:userWithName(smf:currentUserName()) AS ?user) .
+                                BIND (teamwork:tagById(?tagId) AS ?tag) .
+                                BIND (spl:objectInGraph(?wf, teamwork:initialStatus, teamwork:workflowsGraph()) AS ?initialStatus) .
+                            } }\"/>
+                </ui:transaction>
+            </ui:group>
+        </ui:else>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment "Creates a new Working Copy for the provided Project Graph." ;
+  rdfs:label "Add tag service" ;
+  rdfs:subClassOf teamwork:LabelAndCommentService ;
+.
+teamwork:CheckAutoTransitionsService
+  a ui:Service ;
+  ui:private true ;
+  ui:prototype """
+<ui:group letrs:ws=\"{#
+        SELECT ?workflow ?transition ?hours ?fromStatus ?toStatus
+        WHERE {
+            BIND (teamwork:workflowsGraph() AS ?wg) .
+            GRAPH ?wg {
+                ?workflow teamwork:transition ?transition .
+                ?transition teamwork:autoTransitionHours ?hours .
+                ?transition teamwork:fromStatus ?fromStatus .
+                ?transition teamwork:toStatus ?toStatus .
+            } .
+        } }\">
+    <ui:if ui:condition=\"{= !spr:isEmpty(?ws) }\">
+        <ui:forEach ui:resultSet=\"{#
+                SELECT ?projectGraph ?teamGraph
+                WHERE {
+                    rdf:nil teamwork:graphsUnderTeamControl ( ?projectGraph ?teamGraph ) .
+                } }\">
+            <ui:forEach ui:resultSet=\"{= ?ws }\">
+                <ui:forEach ui:resultSet='{#
+                        SELECT DISTINCT ?tag
+                        WHERE {
+                            GRAPH ?teamGraph {
+                                ?tag teamwork:workflowTemplate ?workflow .
+                                ?tag teamwork:status ?fromStatus .
+                                BIND (teamwork:mostRecentStatusChangeTime(?tag) AS ?changeTime) .
+                                BIND (smf:duration(\"h\", ?changeTime, now()) AS ?duration) .
+                                FILTER (?duration &gt;= ?hours) .
+                            } .
+                        } }'>
+                    <teamwork:SetTagStatusService arg:projectGraph=\"{= ?projectGraph }\" arg:status=\"{= ?toStatus }\" arg:tag=\"{= ?tag }\"/>
+                </ui:forEach>
+            </ui:forEach>
+        </ui:forEach>
+    </ui:if>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "For each active working copy (workflow) that is in a status that has an outgoing transition marked via teamwork:autoTransitionHours, this service checks whether enough time has passed to perform the transition. The service is called by the TopBraid platform once every 10 minutes." ;
+  rdfs:label "Check auto transitions service" ;
+  rdfs:subClassOf ui:JSONServices ;
+.
+teamwork:CommitTagButton
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:canPerform ;
+      spl:valueType xsd:boolean ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:canVote ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True if the current user can vote." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:transition ;
+      spl:valueType teamwork:TagStatusTransition ;
+      rdfs:comment "The transition to perform on commit." ;
+    ] ;
+  ui:prototype """
+<ui:group let:empty=\"{= NOT EXISTS {
+    BIND (teamwork:teamGraph(?projectGraph) AS ?teamGraph) .
+    GRAPH ?teamGraph {
+        ?change teamwork:tag ?tag .
+        ?change a teamwork:Change .
+    } .
+} }\" let:hasTag=\"{= teamwork:hasTagShape(?tag, teamwork:teamGraph(?projectGraph)) }\" let:loadId=\"{= ui:uniqueId() }\">
+    <ui:createLink arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\" ui:viewClass=\"{= teamwork:ValidateTagPage }\">
+        <ui:loadable ui:loadId=\"{= ?loadId }\">
+            <teamwork:ActionLink arg:comment=\"Committing a Working Copy will apply all its changes into the production copy.\" arg:faIcon=\"{= spl:objectInGraph(teamwork:Committed, teamwork:faIcon, teamwork:workflowsGraph()) }\" arg:link=\"{= IF(((?hasTag &amp;&amp; ?canPerform) &amp;&amp; (!?empty)), ?link, ?none) }\" arg:onClick=\"{= IF(((?empty || ?hasTag) || swa:falseOrUnbound(?canPerform)), ?none, ui:functionCall(&quot;teamwork.commitTag&quot;, ?projectGraph, ?tag)) }\" arg:title=\"{= spl:objectInGraph(?transition, teamwork:transitionLabel, teamwork:workflowsGraph()) }\">
+                <ui:insert ui:into=\"text\">
+                    <ui:if ui:condition=\"{= !?empty }\">
+                        <span> Use the </span>
+                        <ui:createLink arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\" ui:viewClass=\"{= teamwork:TagComparisonReportPage }\">
+                            <a href=\"{= ?link }\">Comparison Report</a>
+                        </ui:createLink>
+                        <span> or the </span>
+                        <ui:createLink arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\" ui:viewClass=\"{= teamwork:ChangeHistoryPage }\">
+                            <a href=\"{= ?link }\">Change History</a>
+                        </ui:createLink>
+                        <span> to commit individual changes.</span>
+                        <ui:if ui:condition=\"{= ?hasTag }\">
+                            <span> This working copy needs to conform to integrity constraints before it can be committed.
+<a href=\"{= ?link }\">Check these constraints now.</a>
+                            </span>
+                        </ui:if>
+                    </ui:if>
+                </ui:insert>
+                <ui:insert ui:into=\"body\">
+                    <ui:if ui:condition=\"{= ?empty }\">
+                        <p class=\"text-danger\"> This working copy does not contain any changes and therefore cannot be committed yet.</p>
+                    </ui:if>
+                    <ui:elseif ui:condition=\"{= ?canVote }\">
+                        <teamwork:TagStatusTransitionVoteElement arg:reloadId=\"{= ?loadId }\" ui:args=\"*\"/>
+                    </ui:elseif>
+                </ui:insert>
+            </teamwork:ActionLink>
+        </ui:loadable>
+    </ui:createLink>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Commit tag button" ;
+  rdfs:subClassOf teamwork:TagStatusElements ;
+.
+teamwork:CommitTagService
+  a ui:NodeClass ;
+  ui:private true ;
+  ui:prototype """
+<ui:setContext let:oldStatus=\"{= spl:objectInGraph(?tag, teamwork:status, teamwork:teamGraph(?projectGraph)) }\" let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\" ui:silentTransactions=\"{= true }\">
+    <ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+        <ui:transaction>
+            <ui:setPropertyValue arg:property=\"{= teamwork:status }\" arg:value=\"{= teamwork:Committed }\" ui:this=\"{= ?tag }\"/>
+        </ui:transaction>
+        <teamwork:executePreCommitRules arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\"/>
+    </ui:setContext>
+    <ui:setContext ui:queryGraph=\"{= ?projectGraph }\">
+        <ui:transaction letrs:changes=\"{#
+                SELECT ?change
+                WHERE {
+                    GRAPH ?teamGraph {
+                        ?change teamwork:tag ?tag .
+                        ?change teamwork:status teamwork:Uncommitted .
+                        ?change dcterms:created ?created .
+                    } .
+                }
+                ORDER BY (?created) }\">
+            <ui:forEach ui:resultSet=\"{= ?changes }\">
+                <teamwork:commitTagChange arg:change=\"{= ?change }\"/>
+                <!-- Delete old status of the change -->
+                <ui:update ui:updateQuery=\"{!
+                        DELETE {
+                            GRAPH ?teamGraph {
+                                ?change teamwork:status teamwork:Uncommitted .
+                            } .
+                        }
+                        WHERE {
+                        } }\"/>
+                <!-- Set status of the change to committed -->
+                <ui:update ui:updateQuery=\"{!
+                        INSERT {
+                            GRAPH ?teamGraph {
+                                ?change teamwork:status teamwork:Committed .
+                            } .
+                        }
+                        WHERE {
+                        } }\"/>
+            </ui:forEach>
+            <teamwork:executeCommitRules arg:addedResultSet=\"{#
+                    SELECT ?subject ?predicate ?object
+                    WHERE {
+                        {
+                            ?changes spr:rowIndices ?rowIndex .
+                            BIND (spr:cell(?changes, ?rowIndex, 0) AS ?change) .
+                        } .
+                        GRAPH ?teamGraph {
+                            ?change teamwork:added ?triple .
+                            ?triple teamwork:subject ?subject .
+                            ?triple teamwork:predicate ?predicate .
+                            ?triple teamwork:object ?object .
+                        } .
+                    } }\" arg:deletedResultSet=\"{#
+                    SELECT ?subject ?predicate ?object
+                    WHERE {
+                        {
+                            ?changes spr:rowIndices ?rowIndex .
+                            BIND (spr:cell(?changes, ?rowIndex, 0) AS ?change) .
+                        } .
+                        GRAPH ?teamGraph {
+                            ?change teamwork:deleted ?triple .
+                            ?triple teamwork:subject ?subject .
+                            ?triple teamwork:predicate ?predicate .
+                            ?triple teamwork:object ?object .
+                        } .
+                    } }\"/>
+            <ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+                <teamwork:RecordTagStatusChange arg:newStatus=\"{= teamwork:Committed }\" ui:args=\"*\"/>
+            </ui:setContext>
+            <teamwork:ExecuteStatusChangeRules arg:newStatus=\"{= teamwork:Committed }\" ui:args=\"*\"/>
+            <ui:if ui:condition=\"{= spl:objectInGraph(?teamGraph, teamwork:archiveOnCommit, ?teamGraph) }\">
+                <teamwork:ArchiveChangesToFile arg:master=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\"/>
+            </ui:if>
+            <ui:elseif ui:condition=\"{= teamwork:isRecordCountsOnly(?teamGraph) }\">
+                <ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+                    <ui:forEach ui:resultSet=\"{= ?changes }\">
+                        <teamwork:ConvertChangeTriplesToCounts arg:change=\"{= ?change }\"/>
+                    </ui:forEach>
+                </ui:setContext>
+            </ui:elseif>
+        </ui:transaction>
+    </ui:setContext>
+</ui:setContext>
+"""^^ui:Literal ;
+  ui:responseType ui:TEXT ;
+  rdfs:comment "Commits a working copy. This should not be called directly by client code - use teamwork:SetTagStatusService instead." ;
+  rdfs:label "Commit tag service" ;
+  rdfs:subClassOf teamwork:TagStatusElements ;
+.
+teamwork:DefaultTagWorkflowDiagram
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group>
+    <div id=\"paper\"/>
+    <script>$(document).ready(function() {
+		teamworkflows.defaultTagWorkflowDiagram('{= ?status }');
+	});</script>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Default tag workflow diagram" ;
+  rdfs:subClassOf teamwork:WorkflowDiagrams ;
+.
+teamwork:DefaultWorkflowDiagram
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group>
+    <div id=\"paper\"/>
+    <script>$(document).ready(function() {
+		teamworkflows.workflowDiagram('{= ?workflow }', '{= ?status }');
+	});</script>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Default workflow diagram" ;
+  rdfs:subClassOf teamwork:WorkflowDiagrams ;
+.
+teamwork:DeleteTagButton
+  a ui:NodeClass ;
+  ui:prototype """
+<teamwork:ActionLink arg:comment=\"Completely deletes the changes made in this workflow. This action can not be undone.\" arg:faIcon=\"fas fa-trash-alt\" arg:onClick=\"{= ui:functionCall(&quot;teamwork.deleteTag&quot;, ?projectGraph, ?tag, teamwork:editorLink(?projectGraph)) }\" arg:title=\"Cancel this workflow\"/>
+"""^^ui:Literal ;
+  rdfs:label "Delete tag button" ;
+  rdfs:subClassOf teamwork:TagStatusElements ;
+.
+teamwork:DeleteTagService
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:group let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+        <ui:transaction>
+            <ui:update ui:updateQuery=\"{!
+                    DELETE {
+                        ?triple ?tp ?to .
+                    }
+                    WHERE {
+                        ?change teamwork:tag ?tag .
+                        ?change teamwork:added|teamwork:deleted ?triple .
+                        ?triple ?tp ?to .
+                    } }\"/>
+            <ui:update ui:updateQuery=\"{!
+                    DELETE WHERE {
+                        ?change teamwork:tag ?tag .
+                        ?change ?p ?o .
+                    } }\"/>
+            <ui:update ui:updateQuery=\"{!
+                    DELETE WHERE {
+                        ?tag teamwork:statusChange ?sc .
+                        ?sc ?p ?o .
+                    } }\"/>
+            <ui:update ui:updateQuery=\"{!
+                    DELETE WHERE {
+                        ?comment teamwork:commentTag ?tag .
+                        ?comment ?p ?o .
+                    } }\"/>
+            <ui:update ui:updateQuery=\"{!
+                    DELETE WHERE {
+                        ?tag ?p ?o .
+                    } }\"/>
+        </ui:transaction>
+        <ui:group let:dummy=\"{= teamwork:unregisterTag(teamwork:graphIdFromMasterGraph(?projectGraph), teamwork:tagId(?tag)) }\"/>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment "Called when the user click on delete for a tag." ;
+  rdfs:label "Delete tag service" ;
+  rdfs:subClassOf teamwork:TagStatusElements ;
+.
+teamwork:GovernanceRolesSection
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:openable ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "True to have this be openable." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:subject ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The subject for the object display." ;
+    ] ;
+  ui:prototype """
+<ui:setContext default:hideIfEmpty=\"{= true }\" default:subject=\"{= ?subject }\" ui:queryGraph=\"{= ui:unionOfGraphs(ui:currentQueryGraph(), teamwork:workflowsGraph(), &lt;urn:x-tb-authgraph&gt;) }\">
+    <swa:ObjectsEnum arg:alwaysDisplay=\"{= true }\" arg:label=\"Governance Roles\" arg:open=\"{= false }\" arg:openable=\"{= ?openable }\" default:hideIfEmpty=\"{= true }\">
+        <ui:forEach ui:resultSet=\"{#
+                SELECT ?property
+                WHERE {
+                    rdf:nil edg:workflowParticipantProperties ?property .
+                } }\">
+            <swa:Objects arg:editWidget=\"{= teamwork:WorkflowParticipantSelectEditor }\" arg:predicate=\"{= ?property }\" arg:searchWidget=\"{= teamwork:WorkflowParticipantSelectFacet }\" arg:viewWidget=\"{= teamwork:WorkflowParticipantViewer }\"/>
+        </ui:forEach>
+    </swa:ObjectsEnum>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:comment "TODO: There is an almost-copy in governance:RolesAssignmentFormBody" ;
+  rdfs:label "Governance Roles Section" ;
+  rdfs:subClassOf ui:Element ;
+.
+teamwork:PotentialTagWorkflowsForResource
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:distinct true ;
+      sp:orderBy (
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "workflowTemplate" ;
+          ]
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:workflowsGraph ;
+              ] ;
+            sp:variable [
+                sp:varName "wg" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "projectGraph" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object teamwork:TagWorkflowTemplate ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "workflowTemplate" ;
+              ] ;
+            sp:predicate teamwork:suitableWorkflowTemplateForProject ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:or ;
+                sp:arg1 [
+                    a sp:and ;
+                    sp:arg1 [
+                        a sp:bound ;
+                        sp:arg1 [
+                            sp:varName "editedResource" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        a sp:exists ;
+                        sp:elements (
+                            [
+                              a sp:NamedGraph ;
+                              sp:elements (
+                                  [
+                                    sp:object [
+                                        sp:varName "shape" ;
+                                      ] ;
+                                    sp:predicate teamwork:editedResourceShape ;
+                                    sp:subject [
+                                        sp:varName "workflowTemplate" ;
+                                      ] ;
+                                  ]
+                                ) ;
+                              sp:graphNameNode [
+                                  sp:varName "wg" ;
+                                ] ;
+                            ]
+                            [
+                              a sp:Filter ;
+                              sp:expression [
+                                  a tosh:hasShape ;
+                                  sp:arg1 [
+                                      sp:varName "editedResource" ;
+                                    ] ;
+                                  sp:arg2 [
+                                      sp:varName "shape" ;
+                                    ] ;
+                                ] ;
+                            ]
+                          ) ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a sp:notExists ;
+                    sp:elements (
+                        [
+                          a sp:NamedGraph ;
+                          sp:elements (
+                              [
+                                sp:object [
+                                    sp:varName "anyShape" ;
+                                  ] ;
+                                sp:predicate teamwork:editedResourceShape ;
+                                sp:subject [
+                                    sp:varName "workflowTemplate" ;
+                                  ] ;
+                              ]
+                            ) ;
+                          sp:graphNameNode [
+                              sp:varName "wg" ;
+                            ] ;
+                        ]
+                      ) ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a swa:labelInGraph ;
+                arg:resource [
+                    sp:varName "workflowTemplate" ;
+                  ] ;
+                arg:resourceGraph [
+                    sp:varName "wg" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "label" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:editedResource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The edited resource or unbound." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The master graph." ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "Note: needs to be surrounded with <ui:setContext ui:shapesGraph=\"{= teamwork:workflowsGraph() }\">...</ui:setContext> when called." ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+teamwork:RecordTagStatusChange
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:newStatus ;
+      spl:valueType teamwork:TagStatus ;
+      rdfs:comment "The new status." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:update ui:updateQuery=\"{!
+        INSERT {
+            ?tag teamwork:statusChange ?sc .
+            ?sc teamwork:newStatus ?newStatus .
+            ?sc sioc:has_creator ?currentUser .
+            ?sc dcterms:created ?now .
+        }
+        WHERE {
+            BIND (BNODE() AS ?sc) .
+            BIND (now() AS ?now) .
+            BIND (smf:userWithName(smf:currentUserName()) AS ?currentUser) .
+        } }\"/>
+"""^^ui:Literal ;
+  rdfs:label "Record tag status change" ;
+  rdfs:subClassOf teamwork:TagStatusElements ;
+.
+teamwork:RefreshTagLink
+  a ui:NodeClass ;
+  ui:prototype """
+<teamwork:ActionLink arg:comment=\"If the change history of a working copy has been modified outside of the usual processes (for example, via a SPARQL update), changes may not be visible to all users. Use this link to refresh the working copies.\" arg:faIcon=\"fa-caret-square-right\" arg:onClick=\"swa.load('refresher')\" arg:title=\"Refresh Working Copy\" let:graphId=\"{= teamwork:graphIdFromMasterGraph(?projectGraph) }\" let:tagId=\"{= teamwork:tagId(?tag) }\">
+    <ui:loadable ui:loadId=\"refresher\" ui:loadOnDemand=\"{= true }\">
+        <ui:group let:dummy=\"{= teamwork:unregisterTBG(ui:graphWithoutImports(teamwork:queryGraph(true, ?graphId, ?tagId, smf:currentUserName()))) }\"/>
+        <script>swa.populateModalDialog(\"Your view of the working copy has been reset to match the current database.\").then(function() { location.reload() })</script>
+    </ui:loadable>
+</teamwork:ActionLink>
+"""^^ui:Literal ;
+  rdfs:label "Refresh tag link" ;
+  rdfs:subClassOf teamwork:TagStatusElements ;
+.
+teamwork:ResourceStatusEditor
+  a swa:ObjectEditorClass ;
+  ui:prototype """
+<ui:group let:workflowTemplate=\"{= teamwork:getResourceWorkflowTemplate(?subject) }\">
+    <ui:if ui:condition=\"{= !bound(?subject) }\">
+        <div>ERROR: teamwork:ResourceStatusEditor can only be used if the resource is governed by a workflow.</div>
+    </ui:if>
+    <ui:else let:statusProperty=\"{= spl:objectInGraph(?workflowTemplate, teamwork:statusProperty, teamwork:workflowsGraph()) }\">
+        <ui:if ui:condition=\"{= (!bound(?statusProperty)) || (?predicate != ?statusProperty) }\">
+            <div>ERROR: teamwork:ResourceStatusEditor can only be used if the predicate is the status property of the resource's workflow.</div>
+        </ui:if>
+        <ui:else let:projectGraph=\"{= teamwork:currentMasterGraph() }\">
+            <span let:name=\"new-{= ?uid }\" letrs:transitions=\"{#
+                    SELECT ?transition ?toStatus
+                    WHERE {
+                        ( ?subject ?projectGraph ) teamwork:possibleResourceTransition ?transition .
+                        BIND (spl:objectInGraph(?transition, teamwork:toStatus, teamwork:workflowsGraph()) AS ?toStatus) .
+                    } }\">
+                <ui:if ui:condition=\"{= spr:isEmpty(?transitions) }\">
+                    <swa:ObjectViewer ui:args=\"*\"/>
+                </ui:if>
+                <ui:else>
+                    <select class=\"form-control {= swa:testClass(?predicate) }\" name=\"{= ?name }\">
+                        <option selected=\"selected\" value=\"{= ui:encodeNode(?object, true, true) }\">{= ui:label(?object) }</option>
+                        <ui:forEach ui:indexVar=\"index\" ui:resultSet=\"{= ?transitions }\">
+                            <option value=\"{= ui:encodeNode(?toStatus, true, true) }\">{= ui:label(?toStatus) }</option>
+                        </ui:forEach>
+                    </select>
+                </ui:else>
+            </span>
+        </ui:else>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment """The editor for resource status fields, e.g. edg:status, that are governed by a workflow. This displays a read-only widget if the current user does not have sufficient permissions to change this field, and otherwise shows a drop down list of possible status transitions.
+
+DISABLED FOR NOW. To activate, add an objectWidgetWeight of 10 with expression:
+(bound(?object) && teamwork:isGraphStoreConfigured()) && teamwork:isResourceWorkflowStatusProperty(?predicate, ?subjectType)""" ;
+  rdfs:label "Resource status editor" ;
+  rdfs:subClassOf swa:ObjectEditor ;
+.
+teamwork:ResourceWorkflowsForCurrentUser
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "actions" ;
+          ]
+          [
+            sp:varName "projectLabel" ;
+          ]
+          [
+            sp:varName "resourceLabel" ;
+          ]
+          [
+            sp:varName "statusLabel" ;
+          ]
+          [
+            sp:varName "location" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "?0" ;
+              ] ;
+            sp:predicate teamwork:readableGraphsUnderTeamControl ;
+            sp:subject () ;
+          ]
+          [
+            sp:object [
+                sp:varName "projectGraph" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "teamGraph" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a ui:graphWithImports ;
+                sp:arg1 [
+                    sp:varName "projectGraph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "queryGraph" ;
+              ] ;
+          ]
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                (
+                  [
+                    sp:object [
+                        sp:varName "resource" ;
+                      ] ;
+                    sp:predicate teamwork:resourceUnderWorkflowForCurrentUser ;
+                    sp:subject [
+                        sp:varName "projectGraph" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a teamwork:getResourceWorkflowTemplate ;
+                        arg:resource [
+                            sp:varName "resource" ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "template" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a spl:objectInGraph ;
+                        sp:arg1 [
+                            sp:varName "template" ;
+                          ] ;
+                        sp:arg2 teamwork:statusProperty ;
+                        sp:arg3 [
+                            a teamwork:workflowsGraph ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "statusProperty" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a spl:objectInGraph ;
+                        sp:arg1 [
+                            sp:varName "resource" ;
+                          ] ;
+                        sp:arg2 [
+                            sp:varName "statusProperty" ;
+                          ] ;
+                        sp:arg3 [
+                            sp:varName "projectGraph" ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "status" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a ui:label ;
+                        sp:arg1 [
+                            sp:varName "resource" ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "resourceLabel" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Filter ;
+                    sp:expression [
+                        a sp:bound ;
+                        sp:arg1 [
+                            sp:varName "status" ;
+                          ] ;
+                      ] ;
+                  ]
+                )
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a ui:label ;
+                      sp:arg1 [
+                          sp:varName "status" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "statusLabel" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a teamwork:possibleResourceTransitionsString ;
+                      arg:projectGraph [
+                          sp:varName "projectGraph" ;
+                        ] ;
+                      arg:resource [
+                          sp:varName "resource" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "actions" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "queryGraph" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:ne ;
+                sp:arg1 [
+                    sp:varName "actions" ;
+                  ] ;
+                sp:arg2 "" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:editorLink ;
+                arg:projectGraph [
+                    sp:varName "projectGraph" ;
+                  ] ;
+                arg:resource [
+                    sp:varName "resource" ;
+                  ] ;
+                arg:tag [
+                    sp:varName "tag" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "location" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:projectLabel ;
+                arg:projectGraph [
+                    sp:varName "projectGraph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "projectLabel" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:column [
+      a spin:Column ;
+      spin:columnIndex 0 ;
+      spin:columnWidth 300 ;
+      rdfs:label "My Possible Actions" ;
+    ] ;
+  spin:column [
+      a spin:Column ;
+      spin:columnIndex 1 ;
+      spin:columnWidth 200 ;
+      rdfs:label "Asset Collection" ;
+    ] ;
+  spin:column [
+      a spin:Column ;
+      spin:columnIndex 2 ;
+      spin:columnWidth 200 ;
+      rdfs:label "Asset" ;
+    ] ;
+  spin:column [
+      a spin:Column ;
+      spin:columnIndex 3 ;
+      spin:columnWidth 150 ;
+      rdfs:label "Status" ;
+    ] ;
+  spin:column [
+      a spin:Column ;
+      spin:columnIndex 4 ;
+      rdfs:label "location" ;
+    ] ;
+  spin:private true ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+teamwork:SetTagStatusButton
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:transition ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The transition that will be executed." ;
+    ] ;
+  ui:prototype """
+<ui:group let:_=\"{#
+        SELECT ?canPerform ?canVote
+        WHERE {
+            BIND (teamwork:teamGraph(?projectGraph) AS ?teamGraph) .
+            GRAPH ?teamGraph {
+                BIND (teamwork:isPossibleTagTransition(?transition, ?tag) AS ?canPerform) .
+                BIND (teamwork:isPossibleTagVote(?teamGraph, ?transition) AS ?canVote) .
+            } .
+        } }\" let:status=\"{= spl:objectInGraph(?transition, teamwork:toStatus, teamwork:workflowsGraph()) }\">
+    <ui:if ui:condition=\"{= ?status = teamwork:Committed }\">
+        <teamwork:CommitTagButton ui:args=\"*\"/>
+    </ui:if>
+    <ui:else let:loadId=\"{= ui:uniqueId() }\">
+        <ui:loadable ui:loadId=\"{= ?loadId }\">
+            <teamwork:ActionLink arg:comment=\"Changing the status to {= swa:labelInGraph(?status, teamwork:workflowsGraph()) } means that {= spl:objectInGraph(?status, rdfs:comment, teamwork:workflowsGraph()) }\" arg:faIcon=\"{= spl:objectInGraph(?status, teamwork:faIcon, teamwork:workflowsGraph()) }\" arg:onClick=\"{= IF(?canPerform, ui:functionCall(&quot;teamwork.changeTagStatus&quot;, ?projectGraph, ?tag, ?status), ?none) }\" arg:title=\"{= spl:objectInGraph(?transition, teamwork:transitionLabel, teamwork:workflowsGraph()) }\">
+                <ui:if ui:condition=\"{= ?canVote }\">
+                    <teamwork:TagStatusTransitionVoteElement arg:reloadId=\"{= ?loadId }\" ui:args=\"*\"/>
+                </ui:if>
+            </teamwork:ActionLink>
+        </ui:loadable>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Set tag status button" ;
+  rdfs:subClassOf teamwork:TagStatusElements ;
+.
+teamwork:SetTagStatusService
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:status ;
+      spl:valueType teamwork:Status ;
+      rdfs:comment "The new status." ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:if ui:condition=\"{= ?status = teamwork:Committed }\">
+        <teamwork:CommitTagService arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\"/>
+    </ui:if>
+    <ui:else>
+        <ui:setContext ui:queryGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+            <ui:transaction let:oldStatus=\"{= spl:object(?tag, teamwork:status) }\" ui:logMessage=\"Change workflow status of working copy {= ?tag } to {= ?status }\">
+                <ui:update ui:updateQuery=\"{!
+                        DELETE {
+                            ?tag teamwork:status ?oldStatus .
+                        }
+                        WHERE {
+                        } }\"/>
+                <ui:update ui:updateQuery=\"{!
+                        INSERT {
+                            ?tag teamwork:status ?status .
+                        }
+                        WHERE {
+                        } }\"/>
+                <teamwork:RecordTagStatusChange arg:newStatus=\"{= ?status }\" ui:args=\"*\"/>
+                <teamwork:ExecuteStatusChangeRules arg:newStatus=\"{= ?status }\" arg:teamGraph=\"{= ui:currentQueryGraph() }\" ui:args=\"*\"/>
+            </ui:transaction>
+        </ui:setContext>
+    </ui:else>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:TEXT ;
+  rdfs:comment "Changes the status of a working copy, applying the correct side effects. Whenever this status changes, this SWP element should be used." ;
+  rdfs:label "Set tag status service" ;
+  rdfs:subClassOf teamwork:TagStatusElements ;
+.
+teamwork:StartTagWorkflowForResourceButton
+  a swa:SwitchableFormFooterPlugin ;
+  ui:prototype """
+<ui:if ui:condition=\"{= isIRI(?resource) &amp;&amp; (!teamwork:currentGraphIsTag()) }\">
+    <ui:if ui:condition=\"{= teamwork:currentUserCanCreateTags(teamwork:currentMasterGraph()) }\">
+        <ui:setContext ui:shapesGraph=\"{= teamwork:workflowsGraph() }\">
+            <ui:call arg:editedResource=\"{= ?resource }\" arg:projectGraph=\"{= teamwork:currentMasterGraph() }\" ui:template=\"{= teamwork:PotentialTagWorkflowsForResource }\">
+                <ui:if ui:condition=\"{= !spr:isEmpty(?rs) }\">
+                    <ui:createLink arg:editedResource=\"{= ?resource }\" arg:projectGraph=\"{= teamwork:currentMasterGraph() }\" ui:viewClass=\"{= teamwork:AddTagPage }\">
+                        <button class=\"btn btn-default btn-xs workflow-button\" data-link=\"{= ?link }\" onclick=\"window.open('{= ?link }', '_blank')\">
+                            <span aria-hidden=\"true\"/>Start Workflow</button>
+                        <ui:if ui:condition=\"{= teamwork:tasksActivated() || teamwork:commentsActivated() }\">
+                            <swa:Space/>
+                        </ui:if>
+                    </ui:createLink>
+                </ui:if>
+            </ui:call>
+        </ui:setContext>
+    </ui:if>
+</ui:if>
+"""^^ui:Literal ;
+  rdfs:subClassOf swa:SwitchableFormFooterPlugins ;
+.
+teamwork:StatusChangeHistory
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            a sp:Asc ;
+            sp:expression [
+                sp:varName "date" ;
+              ] ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "userName" ;
+          ]
+          [
+            sp:varName "date" ;
+          ]
+          [
+            sp:varName "newStatus" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "statusChange" ;
+              ] ;
+            sp:predicate teamwork:statusChange ;
+            sp:subject [
+                sp:varName "matchTag" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "newStatus" ;
+              ] ;
+            sp:predicate teamwork:newStatus ;
+            sp:subject [
+                sp:varName "statusChange" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "date" ;
+              ] ;
+            sp:predicate dcterms:created ;
+            sp:subject [
+                sp:varName "statusChange" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "user" ;
+              ] ;
+            sp:predicate sioc:has_creator ;
+            sp:subject [
+                sp:varName "statusChange" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:userName ;
+                arg:user [
+                    sp:varName "user" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "userName" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:matchTag ;
+      spl:valueType teamwork:Tag ;
+      rdfs:comment "The working copy to match." ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "Gets all recent status change items for a given teamwork:Tag as stored in the current (teamwork) graph." ;
+  rdfs:label "Status Change History" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+teamwork:StatusChangeHistoryPage
+  a ui:NodeClass ;
+  ui:prototype """
+<teamwork:Chrome arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= teamwork:ReportsProjectTab }\" arg:tag=\"{= ?tag }\">
+    <h1>Transition History of <em>{= teamwork:tagLabelWithWorkflow(?projectGraph, ?tag) }</em>
+    </h1>
+    <ui:setContext ui:queryGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+        <ui:call arg:matchTag=\"{= ?tag }\" ui:template=\"{= teamwork:StatusChangeHistory }\">
+            <ui:setContext ui:queryGraph=\"{= ?projectGraph }\">
+                <ui:forEach ui:resultSet=\"{= ?rs }\">
+                    <teamwork:StatusChangeView ui:args=\"*\"/>
+                </ui:forEach>
+            </ui:setContext>
+        </ui:call>
+    </ui:setContext>
+</teamwork:Chrome>
+"""^^ui:Literal ;
+  rdfs:comment "A (single) page to display the history of status transitions for a working copy, esp for those that have already been closed." ;
+  rdfs:subClassOf teamwork:MustHaveAccessToTagPage ;
+.
+teamwork:StatusTagTab
+  a teamwork:ProjectTab ;
+  teamwork:invalidForMaster true ;
+  teamwork:pluginIndex -100 ;
+  teamwork:pluginValidExpression true ;
+  teamwork:validForACResults true ;
+  teamwork:validForTags true ;
+  ui:prototype """
+<ui:group>
+    <ui:resourceView arg:projectGraph=\"{= ?projectGraph }\" ui:matchIds=\"workflow-details\" ui:resource=\"{= ?tag }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Displays the status of a given working copy, together with options to change it based on the workflow associated with the working copy." ;
+  rdfs:label "Workflow Status and Transitions" ;
+  rdfs:subClassOf teamwork:ProjectTabs ;
+  rdfs:subClassOf teamwork:TagStatusElements ;
+.
+teamwork:TagStatusElements
+  a ui:NodeClass ;
+  ui:abstract true ;
+  rdfs:label "Tag status elements" ;
+  rdfs:subClassOf teamwork:TagElements ;
+.
+teamwork:TagStatusTransitionVoteElement
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:reloadId ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The id of the surrounding loadable." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:transition ;
+      spl:valueType teamwork:TagStatusTransition ;
+      rdfs:comment "The transition to vote on." ;
+    ] ;
+  ui:prototype """
+<ui:group let:toStatus=\"{= spl:objectInGraph(?transition, teamwork:toStatus, teamwork:workflowsGraph()) }\">
+    <div let:wg=\"{= teamwork:workflowsGraph() }\">
+        <ui:group let:minVoteCount=\"{= spl:objectInGraph(?transition, teamwork:minVoteCount, ?wg) }\" let:v=\"{= teamwork:currentUsersTagTransitionVote(?projectGraph, ?tag, ?transition) }\">
+            <p>
+                <ui:if ui:condition=\"{= bound(?minVoteCount) }\">
+                    <span>This step requires a minimum of {= ?minVoteCount } positive votes.&nbsp;</span>
+                    <ui:if ui:condition=\"{= EXISTS {
+                        GRAPH ?wg {
+                            ?transition teamwork:voteAutoTransitions true .
+                        } .
+                    } &amp;&amp; (?minVoteCount &lt;= teamwork:currentVoteCount(?tag, ?transition, teamwork:ApprovalVote)) }\">
+                        <uix:asAdmin>
+                            <teamwork:SetTagStatusService arg:status=\"{= ?toStatus }\" ui:args=\"*\"/>
+                            <script>location.reload()</script>
+                        </uix:asAdmin>
+                    </ui:if>
+                </ui:if>
+                <span>So far there have been the following votes:</span>
+                <swa:Space/>
+                <ui:forEach ui:resultSet=\"{#
+                        SELECT ?vote
+                        WHERE {
+                            GRAPH ?wg {
+                                ?vote a teamwork:Vote .
+                                BIND (COALESCE(spl:object(?vote, teamwork:voteValue), 0) AS ?value) .
+                            } .
+                        }
+                        ORDER BY DESC (?value) }\" ui:separator=\", \">
+                    <b>{= teamwork:currentVoteCount(?tag, ?transition, ?vote) } x {= swa:labelInGraph(?vote, ?wg) }</b>
+                </ui:forEach>.</p>
+            <ui:if ui:condition=\"{= bound(?v) }\">
+                <p>
+                    <span>You have already voted </span>
+                    <b>{= swa:labelInGraph(?v, teamwork:workflowsGraph()) }</b> here.</p>
+            </ui:if>
+            <ui:else let:selectId=\"{= ui:uniqueId() }\">
+                <p>You may vote towards moving to {= swa:labelInGraph(?toStatus, teamwork:workflowsGraph()) }:</p>
+                <select class=\"form-control\" id=\"{= ?selectId }\">
+                    <ui:setContext ui:queryGraph=\"{= teamwork:workflowsGraph() }\">
+                        <ui:forEach ui:resultSet=\"{#
+                                SELECT ?vote ?label
+                                WHERE {
+                                    ?vote a teamwork:Vote .
+                                    BIND (ui:label(?vote) AS ?label) .
+                                    BIND (COALESCE(spl:object(?vote, teamwork:voteValue), 0) AS ?order) .
+                                }
+                                ORDER BY DESC (?order) (?label) }\">
+                            <option selected=\"{= IF((?vote = teamwork:AbstentionVote), &quot;selected&quot;, ?none) }\" value=\"{= ?vote }\">{= ?label }</option>
+                        </ui:forEach>
+                    </ui:setContext>
+                </select>
+                <br/>
+                <br/>
+                <p>Explanation of your vote (optional):</p>
+                <ui:group let:id=\"new-comment-{= ui:uniqueId() }\" let:queryGraph=\"{= teamwork:queryGraph(true, teamwork:graphIdFromMasterGraph(?projectGraph), teamwork:tagId(?tag), smf:currentUserName()) }\">
+                    <textarea class=\"form-control swa-width-one-hundred-percent\" id=\"{= ?id }\" rows=\"4\"/>
+                    <script>(function(){ setTimeout(function(){teamwork.initRichTextEditor('{= ?id }');},0);})()</script>
+                    <br/>
+                    <button class=\"btn btn-default btn-xs\" onclick=\"{= ui:functionCall(&quot;teamwork.addComment&quot;, ?id, ?queryGraph, ?reloadId, ?selectId, ?toStatus) }\">Cast Vote</button>
+                </ui:group>
+            </ui:else>
+        </ui:group>
+    </div>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:subClassOf teamwork:TagStatusElements ;
+.
+teamwork:TagWorkflowTemplateSelectionBox
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:editedResource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "An optional resource that is edited by the workflow. If specified then only suitable workflows for that resource will be displayed." ;
+    ] ;
+  ui:prototype """
+<ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?projectGraph) }\" ui:shapesGraph=\"{= teamwork:workflowsGraph() }\">
+    <ui:call arg:editedResource=\"{= ?editedResource }\" arg:projectGraph=\"{= ?projectGraph }\" let:default=\"{= COALESCE(teamwork:getDefaultTagWorkflowTemplateForProject(?projectGraph), teamwork:getDefaultTagWorkflowTemplate()) }\" ui:template=\"{= teamwork:PotentialTagWorkflowsForResource }\" ui:varName=\"workflows\">
+        <ui:if ui:condition=\"{= spr:rowCount(?workflows) &gt; 1 }\">
+            <swa:LabeledElement arg:label=\"Workflow Template\">
+                <select class=\"form-control\" id=\"workflow-select\" name=\"workflow\">
+                    <ui:forEach ui:resultSet=\"{= ?workflows }\">
+                        <option selected=\"{= IF((?workflowTemplate = ?default), &quot;selected&quot;, ?none) }\" value=\"{= ?workflowTemplate }\">{= ?label }</option>
+                    </ui:forEach>
+                </select>
+            </swa:LabeledElement>
+        </ui:if>
+        <ui:elseif ui:condition=\"{= !spr:isEmpty(?workflows) }\">
+            <swa:LabeledElement arg:label=\"Workflow\">
+                <span>{= spr:cell(?workflows, 0, 1) }</span>
+                <input name=\"workflow\" type=\"hidden\" value=\"{= spr:cell(?workflows, 0, 0) }\"/>
+            </swa:LabeledElement>
+        </ui:elseif>
+    </ui:call>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:comment "Displays a drop down box of available workflow templates for when a new working copy is created." ;
+  rdfs:subClassOf teamwork:ProjectElements ;
+.
+teamwork:TagsForCurrentUser
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "tagLabel" ;
+          ]
+          [
+            sp:varName "priorityLabel" ;
+          ]
+          [
+            sp:varName "actions" ;
+          ]
+          [
+            sp:varName "projectLabel" ;
+          ]
+          [
+            sp:varName "statusLabel" ;
+          ]
+          [
+            sp:varName "date" ;
+          ]
+          [
+            sp:varName "creator" ;
+          ]
+          [
+            sp:varName "resourceLabel" ;
+          ]
+          [
+            sp:varName "projectGraph" ;
+          ]
+          [
+            sp:varName "tag" ;
+          ]
+          [
+            sp:varName "location" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              sp:object [
+                  sp:varName "?0" ;
+                ] ;
+              sp:predicate teamwork:readableGraphsUnderTeamControl ;
+              sp:subject () ;
+            ]
+            [
+              sp:object [
+                  sp:varName "projectGraph" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?1" ;
+                ] ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "teamGraph" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              sp:object () ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              a sp:NamedGraph ;
+              sp:elements (
+                  [
+                    sp:object teamwork:Tag ;
+                    sp:predicate rdf:type ;
+                    sp:subject [
+                        sp:varName "tag" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "status" ;
+                      ] ;
+                    sp:predicate teamwork:status ;
+                    sp:subject [
+                        sp:varName "tag" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "dateTime" ;
+                      ] ;
+                    sp:predicate dcterms:created ;
+                    sp:subject [
+                        sp:varName "tag" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "creator" ;
+                      ] ;
+                    sp:predicate sioc:has_creator ;
+                    sp:subject [
+                        sp:varName "tag" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a xsd:date ;
+                        sp:arg1 [
+                            sp:varName "dateTime" ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "date" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a ui:label ;
+                        sp:arg1 [
+                            sp:varName "tag" ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "tagLabel" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a spl:object ;
+                        sp:arg1 [
+                            sp:varName "tag" ;
+                          ] ;
+                        sp:arg2 teamwork:priority ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "priority" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a spl:object ;
+                        sp:arg1 [
+                            sp:varName "tag" ;
+                          ] ;
+                        sp:arg2 teamwork:editedResource ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "resource" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a spl:object ;
+                        sp:arg1 [
+                            sp:varName "tag" ;
+                          ] ;
+                        sp:arg2 teamwork:workflowTemplate ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "wt" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Filter ;
+                    sp:expression [
+                        a teamwork:currentUserHasPrivilege ;
+                        arg:governedResource [
+                            sp:varName "tag" ;
+                          ] ;
+                        arg:role teamwork:viewer ;
+                        arg:teamGraph [
+                            sp:varName "teamGraph" ;
+                          ] ;
+                      ] ;
+                  ]
+                ) ;
+              sp:graphNameNode [
+                  sp:varName "teamGraph" ;
+                ] ;
+            ]
+          )
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:coalesce ;
+                sp:arg1 [
+                    sp:varName "wt" ;
+                  ] ;
+                sp:arg2 [
+                    a teamwork:getDefaultTagWorkflowTemplate ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "workflowTemplate" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a swa:labelInGraph ;
+                arg:resource [
+                    sp:varName "status" ;
+                  ] ;
+                arg:resourceGraph [
+                    a teamwork:workflowsGraph ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "statusLabel" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:possibleTagTransitionsString ;
+                arg:delimiter "," ;
+                arg:projectGraph [
+                    sp:varName "projectGraph" ;
+                  ] ;
+                arg:tag [
+                    sp:varName "tag" ;
+                  ] ;
+                arg:teamGraph [
+                    sp:varName "teamGraph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "actionsSpaced" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a smf:replaceAll ;
+                sp:arg1 [
+                    sp:varName "actionsSpaced" ;
+                  ] ;
+                sp:arg2 "," ;
+                sp:arg3 ", <br>" ;
+              ] ;
+            sp:variable [
+                sp:varName "actions" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    a sp:bound ;
+                    sp:arg1 [
+                        sp:varName "resource" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a swa:labelInGraph ;
+                    arg:resource [
+                        sp:varName "resource" ;
+                      ] ;
+                    arg:resourceGraph [
+                        a teamwork:queryGraph ;
+                        arg:editable true ;
+                        arg:graphId [
+                            a teamwork:graphIdFromMasterGraph ;
+                            arg:graph [
+                                sp:varName "projectGraph" ;
+                              ] ;
+                          ] ;
+                        arg:tagId [
+                            a teamwork:tagId ;
+                            arg:tag [
+                                sp:varName "tag" ;
+                              ] ;
+                          ] ;
+                        arg:userName [
+                            a smf:currentUserName ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg3 [
+                    sp:varName "none" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "resourceLabel" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:ne ;
+                sp:arg1 [
+                    sp:varName "actions" ;
+                  ] ;
+                sp:arg2 "" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:editorLink ;
+                arg:projectGraph [
+                    sp:varName "projectGraph" ;
+                  ] ;
+                arg:resource [
+                    sp:varName "resource" ;
+                  ] ;
+                arg:tag [
+                    sp:varName "tag" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "location" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:projectLabel ;
+                arg:projectGraph [
+                    sp:varName "projectGraph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "projectLabel" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    a sp:bound ;
+                    sp:arg1 [
+                        sp:varName "priority" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a swa:labelInGraph ;
+                    arg:resource [
+                        sp:varName "priority" ;
+                      ] ;
+                    arg:resourceGraph [
+                        a teamwork:workflowsGraph ;
+                      ] ;
+                  ] ;
+                sp:arg3 [
+                    sp:varName "none" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "priorityLabel" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+teamwork:TagsForCurrentUserColumns
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:private true ;
+  ui:prototype """
+<ui:group>
+    <swon:Array>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"uri\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"uri\"/>
+            <swon:Value arg:name=\"searchable\" arg:value=\"{= false }\"/>
+            <swon:Value arg:name=\"visible\" arg:value=\"{= false }\"/>
+            <swon:Value arg:name=\"orderable\" arg:value=\"{= false }\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Workflow\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"workflow\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Asset\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"asset\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Asset Collection\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"asset-collection\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"State\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"state\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Creator\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"creator\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Started\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"date-started\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Priority\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"priority\"/>
+        </swon:Object>
+        <swon:Object>
+            <swon:Value arg:name=\"title\" arg:value=\"Next Actions\"/>
+            <swon:Value arg:name=\"data\" arg:value=\"next-actions\"/>
+        </swon:Object>
+    </swon:Array>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:subClassOf teamwork:Elements ;
+.
+teamwork:TagsForCurrentUserWrapper
+  a ui:NodeClass ;
+  spin:private true ;
+  ui:prototype """
+<ui:group>
+    <ui:call ui:template=\"{= teamwork:TagsForCurrentUser }\">
+        <swon:Object>
+            <swon:Value arg:name=\"data\">
+                <swon:Array>
+                    <ui:forEach ui:resultSet=\"{= ?rs }\">
+                        <swon:Object>
+                            <swon:Value arg:name=\"uri\" arg:value=\"{= ?location }\"/>
+                            <swon:Value arg:name=\"workflow\" arg:value=\"{= ?tagLabel }\"/>
+                            <swon:Value arg:name=\"priority\" arg:value=\"{= ?priorityLabel }\"/>
+                            <swon:Value arg:name=\"next-actions\" arg:value=\"{= ?actions }\"/>
+                            <swon:Value arg:name=\"asset-collection\" arg:value=\"{= ?projectLabel }\"/>
+                            <swon:Value arg:name=\"state\" arg:value=\"{= ?statusLabel }\"/>
+                            <swon:Value arg:name=\"date-started\" arg:value=\"{= spif:dateFormat(?date, &quot;YYYY-MM-dd&quot;) }\"/>
+                            <swon:Value arg:name=\"creator\" arg:value=\"{= smf:userDisplayName(?creator) }\"/>
+                            <swon:Value arg:name=\"asset\" arg:value=\"{= ?resourceLabel }\"/>
+                            <swon:Value arg:name=\"graph\" arg:value=\"{= ?projectGraph }\"/>
+                            <swon:Value arg:name=\"tag\" arg:value=\"{= ?tag }\"/>
+                            <swon:Value arg:name=\"viewable\" arg:value=\"true\"/>
+                        </swon:Object>
+                    </ui:forEach>
+                </swon:Array>
+            </swon:Value>
+        </swon:Object>
+    </ui:call>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:subClassOf teamwork:Elements ;
+.
+teamwork:TheCheckAutoTransitionsService
+  a teamwork:CheckAutoTransitionsService ;
+.
+teamwork:TransitionConditionView
+  a ui:ViewElement ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:shape ;
+      spl:valueType sh:Shape ;
+      rdfs:comment "The shape to render the constraints of." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ul>
+    <ui:forEach ui:resultSet=\"{#
+            SELECT ?component ?value
+            WHERE {
+                ?shape swa:constraint ( ?component ?value ) .
+                ?component sh:targetClass teamwork:TagStatusTransition .
+            } }\">
+        <li>
+            <ui:if ui:condition=\"{= ?component = sh:OrConstraintComponent }\">
+                <span>If any of the following conditions is true:</span>
+                <ul>
+                    <ui:forEach ui:resultSet=\"{#
+                            SELECT ?member
+                            WHERE {
+                                ?value (rdf:rest)*/rdf:first ?member .
+                            } }\">
+                        <li>
+                            <teamwork:TransitionConditionView arg:shape=\"{= ?member }\"/>
+                        </li>
+                    </ui:forEach>
+                </ul>
+            </ui:if>
+            <ui:else>{= swa:constraintLabel(?component, ?value, ?shape) }</ui:else>
+        </li>
+    </ui:forEach>
+</ul>
+"""^^ui:Literal ;
+  rdfs:subClassOf ui:ViewElements ;
+.
+teamwork:ValidateTagPage
+  a ui:NodeClass ;
+  ui:prototype """
+<teamwork:Chrome arg:pageType=\"project-page\" arg:projectGraph=\"{= ?projectGraph }\" arg:projectTab=\"{= teamwork:ReportsProjectTab }\" arg:tag=\"{= ?tag }\" let:dataGraph=\"{= ui:graphWithImports(teamwork:teamGraph(?projectGraph)) }\" let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\" let:wg=\"{= teamwork:workflowsGraph() }\">
+    <ui:setContext ui:queryGraph=\"{= ui:tempGraph }\">
+        <ui:update ui:updateQuery=\"{!
+                INSERT {
+                    ?shape sh:targetNode ?tag .
+                }
+                WHERE {
+                    GRAPH ?teamGraph {
+                        BIND (teamwork:getTagWorkflowTemplate(?tag) AS ?workflow) .
+                    } .
+                    GRAPH ?wg {
+                        ?workflow teamwork:tagShape ?shape .
+                    } .
+                } }\"/>
+    </ui:setContext>
+    <h1>Working Copy Validation Report</h1>
+    <ui:setContext ui:queryGraph=\"{= ?dataGraph }\">
+        <sml:ValidateGraph sml:focusNode=\"{= ?tag }\" sml:ignoreSPLConstraints=\"{= true }\" sml:shapesGraph=\"{= ui:unionOfGraphs(ui:tempGraph, teamwork:workflowsGraph()) }\">
+            <ui:call arg:dataGraph=\"{= ?dataGraph }\" ui:template=\"{= tosh.ui:ValidationResults }\">
+                <p class=\"teamwork-validation-results-page-results\">Total results: {= spr:rowCount(?rs) }<br/>
+                </p>
+                <ui:if ui:condition=\"{= spr:isEmpty(?rs) }\">
+                    <p>The working copy can be committed to production.</p>
+                </ui:if>
+                <ui:else>
+                    <p>The working copy should not be committed before the following issues are fixed:</p>
+                </ui:else>
+                <ui:forEach ui:resultSet=\"{= ?rs }\">
+                    <swa:ValidationResultView arg:dataGraph=\"{= ?dataGraph }\" arg:result=\"{= ?result }\"/>
+                </ui:forEach>
+            </ui:call>
+        </sml:ValidateGraph>
+    </ui:setContext>
+    <button class=\"btn btn-default btn-xs\" onclick=\"{= ui:functionCall(&quot;teamwork.commitTag&quot;, ?projectGraph, ?tag) }\">Commit changes to production</button>
+</teamwork:Chrome>
+"""^^ui:Literal ;
+  rdfs:label "Validate tag page" ;
+  rdfs:subClassOf teamwork:MustHaveAccessToTagPage ;
+.
+teamwork:ViewStatusChangeHistoryPlugin
+  a teamwork:ReportPlugin ;
+  teamwork:invalidForMaster true ;
+  teamwork:pluginValidExpression true ;
+  teamwork:validForTags true ;
+  ui:prototype """
+<ui:createLink arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\" ui:viewClass=\"{= teamwork:StatusChangeHistoryPage }\">
+    <!-- <i aria-hidden=\"true\" class=\"far fa-clock\"/> -->
+    <teamwork:ActionLink arg:comment=\"Shows the history of status transitions.\" arg:icon=\"lib/teamwork/build/images/teamwork/Clock.svg\" arg:link=\"{= ?link }\" arg:title=\"View Transition History\"/>
+</ui:createLink>
+"""^^ui:Literal ;
+  rdfs:label "View transition history plugin" ;
+  rdfs:subClassOf teamwork:ReportPlugins ;
+.
+teamwork:WorkflowDiagramAction
+  a swa:ResourceAction ;
+  arg:appName "Workflows" ;
+  arg:condition [
+      a teamwork:workflowHasDimensions ;
+      sp:arg1 [
+          sp:varName "resource" ;
+        ] ;
+    ] ;
+  arg:onSelect "teamworkflows.showWorkflowDiagram(resourceURI)" ;
+  swa:readOnly true ;
+  rdfs:label "Show diagram..." ;
+.
+teamwork:WorkflowDiagramDialog
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflowTemplate ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "Workflow template" ;
+    ] ;
+  ui:prototype """
+<ui:setContext ui:queryGraph=\"{= teamwork:workflowsGraph() }\">
+    <div id=\"div-workflow-diagram-dialog\" title=\"{= ui:label(?workflowTemplate) }\">
+        <ui:loadable ui:loadId=\"workflow-diagram-dialog\">
+            <div id=\"workflowDiagram\">
+                <teamwork:DefaultWorkflowDiagram arg:workflow=\"{= ?workflowTemplate }\"/>
+            </div>
+        </ui:loadable>
+    </div>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:label "Workflow diagram dialog" ;
+  rdfs:subClassOf swa:DialogElements ;
+.
+teamwork:WorkflowDiagrams
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:status ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "Workflow status" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflow ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "Workflow template" ;
+    ] ;
+  ui:abstract true ;
+  ui:responseType ui:HTML ;
+  rdfs:label "Workflow diagrams" ;
+  rdfs:subClassOf teamwork:TagStatusElements ;
+.
+teamwork:WorkflowParticipantSelectEditor
+  a swa:ObjectEditorClass ;
+  ui:prototype """
+<span let:name=\"new-{= ?uid }\">
+    <input id=\"select-{= ?uid }\" name=\"{= ?name }\" type=\"hidden\" value=\"{= ?object }\"/>
+    <div class=\"workflow-participant-user-select\" data-new-value-element-id=\"select-{= ?uid }\" data-old-value-element-name=\"old-{= ?uid }\" id=\"select-{= ?name }\"/>
+    <script>gadgets.Hub.publish('org.topbraid.swa.populateWorkflowParticipantUserDropdown', 'select-{= ?name }');</script>
+</span>
+"""^^ui:Literal ;
+  rdfs:comment "Produces a simple HTML drop down (select) of all users or user groups." ;
+  rdfs:label "Workflow participant select editor" ;
+  rdfs:subClassOf swa:ObjectEditor ;
+.
+teamwork:WorkflowParticipantSelectFacet
+  a swa:ObjectFacetClass ;
+  ui:prototype """
+<span let:name=\"value{= ?uid }\">
+    <select class=\"form-control\" id=\"select-{= ?uid }\" name=\"{= ?name }\">
+        <option disabled=\"disabled\" selected=\"selected\" value=\"\"/>
+        <ui:call ui:template=\"{= teamwork:AllJobTitles }\">
+            <swa:Options arg:encodeValues=\"{= true }\" arg:resultSet=\"{= ?rs }\" arg:title=\"{= IF(governance:isJobTitlesEnabled(), &quot;Job titles&quot;, &quot;Organizations&quot;) }\"/>
+        </ui:call>
+    </select>
+    <teamwork:PopulateUsersDropdown arg:id=\"select-{= ?uid }\" arg:withRoles=\"{= true }\"/>
+</span>
+"""^^ui:Literal ;
+  rdfs:label "Workflow participant select facet" ;
+  rdfs:subClassOf swa:ObjectFacet ;
+.
+teamwork:WorkflowParticipantViewer
+  a swa:ObjectViewerClass ;
+  ui:private true ;
+  ui:prototype """
+<div class=\"swa-shifted-label\" title=\"{= ?object }\">
+    <span class=\"swa-label\">{= teamwork:workflowParticipantLabel(?object) }</span>
+</div>
+"""^^ui:Literal ;
+  rdfs:subClassOf swa:ObjectViewer ;
+.
+teamwork:WorkflowStatusDetails
+  a ui:NodeClass ;
+  teamwork:invalidForMaster true ;
+  teamwork:pluginIndex -100 ;
+  teamwork:pluginValidExpression true ;
+  teamwork:validForACResults true ;
+  teamwork:validForTags true ;
+  ui:prototype """
+<div let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\" let:tg=\"{= teamwork:workflowsGraph() }\">
+    <ui:setContext ui:queryGraph=\"{= ?teamGraph }\">
+        <ui:group let:workflowTemplate=\"{= teamwork:getTagWorkflowTemplate(?tag) }\">
+            <table class=\"swa-width-one-hundred-percent\">
+                <tr>
+                    <td>
+                        <ui:createLink arg:workflowTemplate=\"{= ?workflowTemplate }\" ui:viewClass=\"{= teamwork:WorkflowTemplateViewPage }\">
+                            <p>
+                                <span>This workflow is governed by the workflow template</span>
+                                <swa:Space/>
+                                <em>
+                                    <a href=\"{= ?link }\">{= swa:labelInGraph(?workflowTemplate, ?tg) }</a>
+                                </em>.
+</p>
+                        </ui:createLink>
+                        <ui:createLink arg:tag=\"{= ?tag }\" ui:sendQueryGraph=\"{= true }\" ui:viewClass=\"{= teamwork:SetTagCommentUpdateService }\">
+                            <div>
+                                <span style=\"vertical-align: 8px\">Description:</span>
+                                <swa:Space/>
+                                <div class=\"inline-block\">
+                                    <swa:TextAreaInlineEditor arg:placeholder=\"Click to enter a description of this workflow\" arg:readOnly=\"{= !teamwork:currentUserHasPrivilege(?tag, teamwork:manager, ?teamGraph) }\" arg:updateLink=\"{= ?link }\" arg:value=\"{= spl:object(?tag, rdfs:comment) }\"/>
+                                </div>
+                            </div>
+                        </ui:createLink>
+                    </td>
+                    <td class=\"swa-text-align-right\" let:selectId=\"{= ui:uniqueId() }\">
+                        <span>Priority: </span>
+                        <select class=\"form-control\" id=\"{= ?selectId }\">
+                            <ui:handle arg:newValue=\"$('#{= ?selectId }').val()\" ui:event=\"onchange\">
+                                <ui:if ui:condition=\"{= isIRI(?newValue) }\">
+                                    <ui:setPropertyValue arg:property=\"{= teamwork:priority }\" arg:value=\"{= ?newValue }\" ui:this=\"{= ?tag }\"/>
+                                </ui:if>
+                                <ui:else>
+                                    <ui:setPropertyValue arg:property=\"{= teamwork:priority }\" ui:this=\"{= ?tag }\"/>
+                                </ui:else>
+                            </ui:handle>
+                            <option value=\"0\"/>
+                            <ui:forEach ui:resultSet=\"{#
+                                    SELECT ?priority
+                                    WHERE {
+                                        GRAPH ?tg {
+                                            ?priority a teamwork:Priority .
+                                            BIND (spl:object(?priority, sh:order) AS ?order) .
+                                        } .
+                                    }
+                                    ORDER BY (?order) }\">
+                                <option selected=\"{= IF(EXISTS {
+                                    ?tag teamwork:priority ?priority .
+                                }, &quot;selected&quot;, ?none) }\" value=\"&lt;{= ?priority }&gt;\">{= swa:labelInGraph(?priority, ?tg) }</option>
+                            </ui:forEach>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <ui:group let:status=\"{= IF(spl:hasValue(?tag, teamwork:status), spl:object(?tag, teamwork:status), teamwork:Uncommitted) }\">
+                <teamwork:ActionLink arg:comment=\"This Working Copy is {= swa:labelInGraph(?status, ?tg) }, which means that {= spl:objectInGraph(?status, rdfs:comment, ?tg) }\" arg:faIcon=\"{= spl:objectInGraph(?status, teamwork:faIcon, ?tg) }\" arg:title=\"Status: {= swa:labelInGraph(?status, ?tg) }\">
+                    <br/>
+                    <ui:forEach ui:resultSet=\"{#
+                            SELECT ?transition
+                            WHERE {
+                                ?tag teamwork:possibleTagTransitionOrdered ?transition .
+                            } }\">
+                        <teamwork:SetTagStatusButton arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\" arg:transition=\"{= ?transition }\"/>
+                    </ui:forEach>
+                    <ui:if ui:condition=\"{= teamwork:workflowHasDimensions(?workflowTemplate) }\">
+                        <ui:insert ui:into=\"text\">
+                            <div id=\"workflowDiagram\">
+                                <teamwork:DefaultWorkflowDiagram arg:status=\"{= ?status }\" arg:workflow=\"{= ?workflowTemplate }\"/>
+                            </div>
+                        </ui:insert>
+                    </ui:if>
+                </teamwork:ActionLink>
+                <ui:if ui:condition=\"{= teamwork:currentUserHasPrivilegeOnMasterGraph(teamwork:manager, ?teamGraph) || teamwork:currentUserHasPrivilege(?tag, teamwork:manager, ?teamGraph) }\">
+                    <teamwork:DeleteTagButton arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?tag }\"/>
+                </ui:if>
+                <teamwork:RefreshTagLink ui:args=\"*\"/>
+                <teamwork:ActionLink arg:comment=\"This leaves the workflow and switches back to the production copy.\" arg:faIcon=\"fa-times-circle\" arg:onClick=\"$('a.teamwork-leave-workflow-link')[0].click()\" arg:title=\"Return to production copy\"/>
+            </ui:group>
+        </ui:group>
+    </ui:setContext>
+</div>
+"""^^ui:Literal ;
+  rdfs:comment "Displays the status of a given working copy, together with options to change it based on the workflow associated with the working copy." ;
+  rdfs:label "Workflow Status and Transitions" ;
+  rdfs:subClassOf teamwork:TagStatusElements ;
+.
+teamwork:WorkflowTemplate
+  ui:instanceView """
+<teamwork:WorkflowTemplateOverview arg:workflow=\"{= ?this }\" ui:id=\"view\"/>
+"""^^ui:Literal ;
+.
+teamwork:WorkflowTemplateOverview
+  a ui:ViewElement ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflow ;
+      spl:valueType teamwork:WorkflowTemplate ;
+      rdfs:comment "The workflow template to display." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<div let:isTag=\"{= spl:instanceOf(?workflow, teamwork:TagWorkflowTemplate) }\" letrs:projectTypes=\"{#
+        SELECT ?projectTypeLabel
+        WHERE {
+            ?workflow teamwork:suitableWorkflowForProjectType ?projectType .
+            BIND (teamwork:pluralProjectTypeLabel(?projectType) AS ?projectTypeLabel) .
+        }
+        ORDER BY (?projectTypeLabel) }\" letrs:shapes=\"{#
+        SELECT ?shape
+        WHERE {
+            ?workflow teamwork:editedResourceShape ?shape .
+        } }\" letrs:statuses=\"{#
+        SELECT DISTINCT ?status
+        WHERE {
+            ?workflow teamwork:transition ?transition .
+            ?transition teamwork:fromStatus|teamwork:toStatus ?status .
+            BIND (IF(EXISTS {
+                ?workflow teamwork:initialStatus ?status .
+            }, -1, IF(EXISTS {
+                ?status teamwork:terminal true .
+            }, 1, 0)) AS ?initial) .
+        }
+        ORDER BY (?initial) (ui:label(?status)) }\" letrs:subjectAreas=\"{#
+        SELECT ?subjectAreaLabel
+        WHERE {
+            ?workflow teamwork:suitableWorkflowForSubjectArea ?subjectArea .
+            BIND (ui:label(?subjectArea) AS ?subjectAreaLabel) .
+        }
+        ORDER BY (?subjectAreaLabel) }\">
+    <h2>{= ui:label(?workflow) }</h2>
+    <ui:if ui:condition=\"{= !spr:isEmpty(?projectTypes) }\">
+        <p>
+            <span>This workflow template can be applied to the following asset collection types:</span>
+            <swa:Space/>
+            <ui:forEach ui:resultSet=\"{= ?projectTypes }\" ui:separator=\", \">
+                <span>{= ?projectTypeLabel }</span>
+            </ui:forEach>
+            <ui:if ui:condition=\"{= spr:isEmpty(?projectTypes) }\">Any</ui:if>
+            <span>.</span>
+        </p>
+    </ui:if>
+    <ui:if ui:condition=\"{= !spr:isEmpty(?subjectAreas) }\">
+        <p>
+            <span>This workflow template can be applied to the following subject areas:</span>
+            <swa:Space/>
+            <ui:forEach ui:resultSet=\"{= ?subjectAreas }\" ui:separator=\", \">
+                <span>{= ?subjectAreaLabel }</span>
+            </ui:forEach>
+            <span>.</span>
+        </p>
+    </ui:if>
+    <ui:if ui:condition=\"{= spr:rowCount(?shapes) = 1 }\">
+        <p>This workflow template can be applied to assets that conform to the following constraint(s):</p>
+        <ui:forEach ui:resultSet=\"{= ?shapes }\">
+            <ul>
+                <ui:forEach ui:resultSet=\"{#
+                        SELECT ?component ?value
+                        WHERE {
+                            ?shape swa:constraint ( ?component ?value ) .
+                        } }\">
+                    <li>{= swa:constraintLabel(?component, ?value, ?shape) }</li>
+                </ui:forEach>
+            </ul>
+        </ui:forEach>
+    </ui:if>
+    <ui:elseif ui:condition=\"{= spr:rowCount(?shapes) &gt; 1 }\">
+        <p>This workflow template can be applied to assets that conform to any of the following shapes:</p>
+        <ui:forEach ui:indexVar=\"index\" ui:resultSet=\"{= ?shapes }\">
+            <ui:if ui:condition=\"{= ?index &gt; 0 }\">
+                <p>or</p>
+            </ui:if>
+            <ul>
+                <ui:forEach ui:resultSet=\"{#
+                        SELECT ?component ?value
+                        WHERE {
+                            ?shape swa:constraint ( ?component ?value ) .
+                        } }\">
+                    <li>{= swa:constraintLabel(?component, ?value, ?shape) }</li>
+                </ui:forEach>
+            </ul>
+        </ui:forEach>
+    </ui:elseif>
+    <teamwork:WorkflowTemplateOverviewHelper arg:predicate=\"{= teamwork:managerWorkflowParticipantProperty }\" arg:roleLabel=\"manager\" arg:workflow=\"{= ?workflow }\"/>
+    <teamwork:WorkflowTemplateOverviewHelper arg:predicate=\"{= teamwork:editorWorkflowParticipantProperty }\" arg:roleLabel=\"editor\" arg:workflow=\"{= ?workflow }\"/>
+    <p>
+		The workflow template consists of the following stages.
+	</p>
+    <br/>
+    <table>
+        <tr>
+            <ui:if ui:condition=\"{= ?isTag }\">
+                <th>Icon&nbsp;</th>
+            </ui:if>
+            <th>Status&nbsp;</th>
+            <th>
+                <swa:Spaces/>
+            </th>
+            <th>Description and Possible Transitions</th>
+        </tr>
+        <ui:forEach ui:resultSet=\"{= ?statuses }\">
+            <tr>
+                <td>
+                    <swa:Space/>
+                </td>
+            </tr>
+            <tr id=\"{= afn:localname(?status) }\" letrs:transitions=\"{#
+                    SELECT ?transition ?to
+                    WHERE {
+                        ?workflow teamwork:transition ?transition .
+                        ?transition teamwork:fromStatus ?status .
+                        ?transition teamwork:toStatus ?to .
+                    }
+                    ORDER BY (ui:label(?to)) (?transition) }\">
+                <ui:if ui:condition=\"{= ?isTag }\">
+                    <td class=\"swa-layout-td swa-nowrap\">
+                        <i aria-hidden=\"true\" class=\"teamwork-icon fa {= spl:object(?status, teamwork:faIcon) }\"/>
+                        <swa:Space/>
+                    </td>
+                </ui:if>
+                <td class=\"swa-layout-td\">
+                    <span class=\"swa-nowrap\">{= spif:titleCase(ui:label(?status)) }&nbsp;</span>
+                    <ui:if ui:condition=\"{= ?isTag }\">
+                        <br/>
+                        <ui:if ui:condition=\"{= EXISTS {
+                            ?status teamwork:editable true .
+                        } }\">(editable)</ui:if>
+                        <ui:else>(not editable)</ui:else>
+                    </ui:if>
+                </td>
+                <td/>
+                <td class=\"swa-layout-td\" let:comment=\"{= spl:object(?status, rdfs:comment) }\">
+                    <ui:if ui:condition=\"{= spl:object(?workflow, teamwork:initialStatus) = ?status }\">
+                        <p>This is the initial status.</p>
+                    </ui:if>
+                    <ui:if ui:condition=\"{= spr:isEmpty(?transitions) }\">
+                        <p>This is a terminal status with no possible transitions into other statuses.</p>
+                    </ui:if>
+                    <ui:if ui:condition=\"{= bound(?comment) }\">
+                        <p>It means that {= ?comment }</p>
+                    </ui:if>
+                    <ui:if ui:condition=\"{= !spr:isEmpty(?transitions) }\">
+                        <p>Possible Transitions:</p>
+                        <ul>
+                            <ui:forEach ui:resultSet=\"{= ?transitions }\">
+                                <li let:projectRole=\"{= spl:object(?transition, teamwork:requiredProjectPermissionRole) }\" let:tagRole=\"{= spl:object(?transition, teamwork:requiredTagPermissionRole) }\">
+                                    <span>{= IF(EXISTS {
+                                        ?transition teamwork:voteAutoTransitions true .
+                                    }, \"Automatically to \", \"To \") }<a href=\"#{= afn:localname(?to) }\">{= ui:label(?to) }</a> if the following conditions are satisfied:</span>
+                                    <teamwork:TransitionConditionView arg:shape=\"{= ?transition }\"/>
+                                </li>
+                            </ui:forEach>
+                        </ul>
+                    </ui:if>
+                </td>
+            </tr>
+        </ui:forEach>
+    </table>
+</div>
+"""^^ui:Literal ;
+  rdfs:label "Workflow template overview" ;
+  rdfs:subClassOf ui:ViewElements ;
+.
+teamwork:WorkflowTemplateOverviewHelper
+  a ui:ViewElement ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:predicate ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The predicate such as teamwork:editorWorkflowParticipantProperty." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:roleLabel ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The label of the granted permission, e.g. \"manager\"" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflow ;
+      spl:valueType teamwork:WorkflowTemplate ;
+      rdfs:comment "The workflow template to display." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group letrs:rs=\"{#
+        SELECT ?role ?label
+        WHERE {
+            ?workflow ?predicate ?role .
+            BIND (ui:label(?role) AS ?label) .
+        }
+        ORDER BY (?label) }\">
+    <ui:if ui:condition=\"{= !spr:isEmpty(?rs) }\">
+        <p>{= spif:titleCase(?roleLabel) } permission will be granted to users with the following governance roles:</p>
+        <ul>
+            <ui:forEach ui:resultSet=\"{= ?rs }\">
+                <li>{= ?label }</li>
+            </ui:forEach>
+        </ul>
+    </ui:if>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:label "Workflow template overview helper" ;
+  rdfs:subClassOf ui:ViewElements ;
+.
+teamwork:WorkflowTemplateViewPage
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflowTemplate ;
+      spl:valueType teamwork:WorkflowTemplate ;
+      rdfs:comment "The workflow template to render." ;
+    ] ;
+  ui:prototype """
+<teamwork:Chrome arg:parentPage=\"{= teamwork:WorkflowTemplatesHomePageTab }\">
+    <ui:setContext ui:queryGraph=\"{= teamwork:workflowsGraph() }\">
+        <ui:resourceView ui:matchIds=\"view\" ui:resource=\"{= ?workflowTemplate }\"/>
+    </ui:setContext>
+</teamwork:Chrome>
+"""^^ui:Literal ;
+  rdfs:subClassOf teamwork:Page ;
+.
+teamwork:WorkflowTemplatesFileOperations
+  a ui:NodeClass ;
+  ui:prototype """
+<ui:if ui:condition=\"{= teamwork:currentUserCanEditWorkflows() }\">
+    <div>
+        <br/>
+        <ui:createLink arg:graph=\"{= teamwork:workflowCustomizationsGraph() }\" ui:viewClass=\"{= tbladmin:Graph2TurtleService }\">
+            <a href=\"{= ?link }\">Download as Turtle File</a>
+        </ui:createLink>
+        <swa:Spaces/>
+        <ui:createLink ui:viewClass=\"{= teamwork:WorkflowTemplatesUploadPage }\">
+            <a href=\"{= ?link }\">Upload Turtle File</a>
+        </ui:createLink>
+    </div>
+</ui:if>
+"""^^ui:Literal ;
+  rdfs:comment "Allows a teamwork admin to download and upload the graph containing the workflow customizations, e.g. to edit them in TBC and then re-upload." ;
+  rdfs:subClassOf teamwork:Elements ;
+.
+teamwork:WorkflowTemplatesHomePageTab
+  a teamwork:HomePageTab ;
+  swa:tabIndex 200 ;
+  ui:headIncludes """
+<ui:group>
+    <script src=\"{= ui:lib() }/teamwork/build/teamworkflows.bundle.js\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:prototype """
+<teamwork:Chrome arg:pageType=\"chrome-with-ui-layout\" arg:parentPage=\"{= teamwork:WorkflowTemplatesHomePageTab }\">
+    <ui:setContext ui:queryGraph=\"{= teamwork:workflowsGraph() }\" ui:varName=\"swaAppName\" ui:varValue=\"Workflows\">
+        <ui:group let:graph=\"{= ui:currentQueryGraph() }\">
+            <swa:BorderLayout arg:westSize=\"{= 360 }\" let:resourceSelectedEvent=\"org.topbraid.teamwork.workflowSelected\">
+                <swa:Window arg:id=\"workflowInstancesWindow\" arg:layoutPanel=\"west\" arg:title=\"Available Workflow Templates\">
+                    <swa:InstancesGridGadget arg:instanceSelectedEvent=\"{= ?resourceSelectedEvent }\" arg:resourceType=\"{= teamwork:TagWorkflowTemplate }\" ui:args=\"*\"/>
+                </swa:Window>
+                <swa:Window arg:id=\"workflowFormWindow\" arg:layoutPanel=\"center\" arg:title=\"Selected Workflow Template\">
+                    <swa:SwitchableFormGadget arg:hideVisualizationsButton=\"{= true }\" arg:readOnly=\"{= true }\" arg:showResourceActions=\"{= true }\" ui:args=\"*\"/>
+                </swa:Window>
+            </swa:BorderLayout>
+            <swa:Initializer/>
+        </ui:group>
+    </ui:setContext>
+    <teamwork:WorkflowTemplatesFileOperations/>
+</teamwork:Chrome>
+"""^^ui:Literal ;
+  rdfs:comment "Workflow Template page lets you see all workflow templates that are currently available in TopBraid EDG. You can also download workflow template definitions and upload new, updated workflow template definitions." ;
+  rdfs:label "Workflow Templates" ;
+  rdfs:subClassOf teamwork:HomePageTabs ;
+.
+teamwork:WorkflowTemplatesUploadPage
+  a ui:NodeClass ;
+  ui:prototype """
+<teamwork:Chrome arg:parentPage=\"{= teamwork:WorkflowTemplatesHomePageTab }\">
+    <ui:if ui:condition=\"{= teamwork:currentUserCanEditWorkflows() }\">
+        <h2>Upload Workflow Templates Turtle File</h2>
+        <p>
+            <b>Warning:</b> This is a low level operation that will replace all the
+				user-defined workflow templates with the RDF triples from the
+				uploaded Turtle file.
+				You should only perform this operation if you are confident that existing
+				operational workflows are not impacted.
+				There is no way to undo this operation, so you should back up the previously
+				downloaded Turtle file so that you can restore it if something goes horribly wrong.
+			</p>
+        <form action=\"swp\" enctype=\"multipart/form-data\" id=\"theForm\" method=\"post\">
+            <input accept=\"text/turtle\" name=\"file\" required=\"required\" type=\"file\"/>
+            <input name=\"_viewClass\" type=\"hidden\" value=\"{= teamwork:WorkflowTemplatesUploadResultPage }\"/>
+            <br/>
+            <input class=\"btn btn-primary\" type=\"submit\"/>
+        </form>
+    </ui:if>
+</teamwork:Chrome>
+"""^^ui:Literal ;
+  rdfs:subClassOf teamwork:Page ;
+.
+teamwork:WorkflowTemplatesUploadResultPage
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:file ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The Turtle file (as a string)." ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <sml:ConvertTextToRDF sml:noStringSubstitution=\"{= true }\" sml:serialization=\"{= sml:Turtle }\" sml:text=\"{= ?file }\">
+        <ui:update ui:updateQuery=\"{!
+                INSERT {
+                    GRAPH ui:tempGraph {
+                        ?s ?p ?o .
+                    } .
+                }
+                WHERE {
+                    ?s ?p ?o .
+                } }\"/>
+    </sml:ConvertTextToRDF>
+    <ui:setContext ui:queryGraph=\"{= ui:unionOfGraphs(ui:tempGraph, ui:graphWithImports(&lt;http://topbraid.org/teamwork&gt;), ui:graphWithImports(teamwork:platformGovernanceGraph())) }\">
+        <sml:ValidateGraph sml:ignoreSPLConstraints=\"{= true }\">
+            <ui:if ui:condition=\"{= EXISTS {
+                ?report sh:conforms false .
+            } }\">
+                <teamwork:Chrome arg:pageType=\"error-page\" arg:title=\"Error\" let:data=\"{= ui:unionOfGraphs(ui:tempGraph, teamwork:workflowsGraph()) }\">
+                    <h1>Invalid Workflow Definitions</h1>
+                    <div class=\"text-danger\">The uploaded graph violates the constraints defined for workflows. Please apply corrections, e.g. using TopBraid Composer, and try again.</div>
+                    <br/>
+                    <ui:call arg:dataGraph=\"{= ?data }\" ui:template=\"{= tosh.ui:ValidationResults }\">
+                        <ui:forEach ui:resultSet=\"{= ?rs }\">
+                            <swa:ValidationResultView arg:dataGraph=\"{= ?data }\" arg:result=\"{= ?result }\"/>
+                        </ui:forEach>
+                    </ui:call>
+                </teamwork:Chrome>
+            </ui:if>
+            <ui:else>
+                <ui:setContext ui:queryGraph=\"{= teamwork:workflowCustomizationsGraph() }\">
+                    <ui:transaction>
+                        <ui:update ui:updateQuery=\"{!
+                                DELETE {
+                                    ?s ?p ?o .
+                                }
+                                WHERE {
+                                    ?s ?p ?o .
+                                } }\"/>
+                        <ui:update ui:updateQuery=\"{!
+                                INSERT {
+                                    ?s ?p ?o .
+                                }
+                                WHERE {
+                                    GRAPH ui:tempGraph {
+                                        ?s ?p ?o .
+                                    } .
+                                } }\"/>
+                        <ui:update ui:updateQuery=\"{!
+                                INSERT {
+                                    ?ontology owl:imports ?pg .
+                                }
+                                WHERE {
+                                    BIND (teamwork:workflowCustomizationsGraph() AS ?ontology) .
+                                    BIND (teamwork:platformGovernanceGraph() AS ?pg) .
+                                } }\"/>
+                    </ui:transaction>
+                </ui:setContext>
+                <teamwork:WorkflowTemplatesHomePageTab/>
+            </ui:else>
+        </sml:ValidateGraph>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:subClassOf teamwork:Page ;
+.
+teamwork:WorkflowsHomePageTab
+  a teamwork:HomePageTab ;
+  edg.v:icon "tq-workflow-icon" ;
+  arg:visibility [
+      a sp:not ;
+      sp:arg1 [
+          a teamwork:isExplorerUser ;
+          sp:arg1 [
+              a smf:userWithName ;
+              sp:arg1 [
+                  a smf:currentUserName ;
+                ] ;
+            ] ;
+        ] ;
+    ] ;
+  swa:tabIndex -205 ;
+  ui:prototype """
+<teamwork:Chrome arg:parentPage=\"{= teamwork:WorkflowsHomePageTab }\" let:uncommittedId=\"uncommittedWorkflows-{= ui:uniqueId() }\">
+    <h1>My Workflows</h1>
+    <div id=\"uncommittedWorkflows\">
+        <teamwork:DataTable arg:dataColumnsEndpoint=\"teamwork:TagsForCurrentUserColumns\" arg:dataEndpoint=\"teamwork:TagsForCurrentUserWrapper\" arg:dtType=\"workflowDataTable\" arg:editable=\"{= false }\" arg:hasWorkflowAsset=\"{= true }\" arg:hasWorkflowHome=\"{= true }\" arg:hideIfEmpty=\"{= true }\" arg:id=\"{= ?uncommittedId }\"/>
+        <div class=\"ui-helper-hidden-accessible\">None</div>
+    </div>
+    <script>gadgets.Hub.publish('org.topbraid.swa.rebuildTable', '{= ?uncommittedId }');</script>
+    <!-- ui:call ui:template=\"teamwork:ResourceWorkflowsForCurrentUser\" -->
+</teamwork:Chrome>
+"""^^ui:Literal ;
+  rdfs:comment "This lists the workflows for which the current user has potential status-transition actions pending." ;
+  rdfs:label "My Workflows" ;
+  rdfs:subClassOf teamwork:HomePageTabs ;
+.
+teamwork:getWorkflowGraph
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflow ;
+      spl:valueType teamwork:WorkflowTemplate ;
+      rdfs:comment "The teamwork:Workflow to render." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:setContext ui:queryGraph=\"{= teamwork:workflowsGraph() }\">
+    <swon:Object>
+        <swon:Value arg:name=\"nodes\">
+            <swon:Array>
+                <ui:forEach ui:resultSet=\"{#
+                        SELECT DISTINCT ?id ?label ?transition ?height ?width ?x ?y
+                        WHERE {
+                            ?workflow teamwork:transition ?transition .
+                            BIND (ui:encodeNode(?transition, true) AS ?id) .
+                            BIND (COALESCE(spl:object(?transition, teamwork:transitionLabel), ui:label(?transition)) AS ?label) .
+                            OPTIONAL {
+                                ?transition ui:height ?height .
+                                ?transition ui:width ?width .
+                                ?transition ui:x ?x .
+                                ?transition ui:y ?y .
+                            } .
+                        }
+                        ORDER BY (?label) }\">
+                    <swon:Object>
+                        <swon:Value arg:name=\"id\" arg:value=\"{= ?id }\"/>
+                        <swon:Value arg:name=\"label\" arg:value=\"{= ?label }\"/>
+                        <swon:Value arg:name=\"roles\">
+                            <teamwork:tagTransitionRolesArray arg:transition=\"{= ?transition }\"/>
+                        </swon:Value>
+                        <swon:Value arg:name=\"height\" arg:value=\"{= ?height }\"/>
+                        <swon:Value arg:name=\"width\" arg:value=\"{= ?width }\"/>
+                        <swon:Value arg:name=\"x\" arg:value=\"{= ?x }\"/>
+                        <swon:Value arg:name=\"y\" arg:value=\"{= ?y }\"/>
+                    </swon:Object>
+                </ui:forEach>
+            </swon:Array>
+        </swon:Value>
+        <swon:Value arg:name=\"edges\">
+            <swon:RSObjectArray arg:resultSet='{#
+                    SELECT DISTINCT ?status ?from ?to ?label
+                    WHERE {
+                        {
+                            ?workflow teamwork:initialStatus ?status .
+                            BIND (ui:label(?status) AS ?label) .
+                            BIND (\"workflowStart\" AS ?from) .
+                            ?workflow teamwork:transition ?transition .
+                            ?transition teamwork:fromStatus ?status .
+                            BIND (ui:encodeNode(?transition, true) AS ?to) .
+                        }
+                        UNION
+                        {
+                            ?workflow teamwork:transition ?transitionA .
+                            ?transitionA teamwork:toStatus ?status .
+                            ?transitionB teamwork:fromStatus ?status .
+                            ?workflow teamwork:transition ?transitionB .
+                            BIND (ui:encodeNode(?transitionA, true) AS ?from) .
+                            BIND (ui:encodeNode(?transitionB, true) AS ?to) .
+                            BIND (ui:label(?status) AS ?label) .
+                        } .
+                    } }'/>
+        </swon:Value>
+    </swon:Object>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:comment """For a given teamwork:Workflow, this returns a JSON such as
+
+{
+	nodes : [
+		{
+			id: \"node1\",
+			label: \"Freeze for review\",
+			roles: [\"Editor (PC)\", \"Manager (WC)\"]
+		},
+		{
+			id: \"node2\",
+			label: \"Request further changes\",
+			roles: [\"Data Steward Role\"]
+		},
+		... other nodes for each transition, but no node for \"Start\" is produced ...
+	],
+	edges : [
+		{
+			from: \"Start\",  // \"Start\" is a special node
+			to: \"node1\",
+			label: \"Uncommitted\"
+		},
+		... other edges for each status ...
+	]
+}
+
+This can be used by diagram-like visualizations.""" ;
+  rdfs:label "get workflow graph" ;
+  rdfs:seeAlso <http://localhost:8083/tbl/swp?_viewClass=teamwork:getWorkflowGraph&workflow=http://topbraid.org/teamwork%23DefaultTagWorkflowTemplate&_base=http://topbraid.org/teamwork&_withImports=true> ;
+  rdfs:subClassOf ui:JSONServices ;
+.
+teamwork:hasWorkflowDiagram
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:workflowsGraph ;
+              ] ;
+            sp:variable [
+                sp:varName "workflowsGraph" ;
+              ] ;
+          ]
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "diagram" ;
+                    ] ;
+                  sp:predicate teamwork:diagramViewClass ;
+                  sp:subject [
+                      sp:varName "workflowTemplate" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "workflowsGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workflowTemplate ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "Workflow template" ;
+    ] ;
+  rdfs:label "has workflow diagram" ;
+  rdfs:subClassOf spin:Functions ;
+.
+teamwork:isPossibleTagTransition
+  a ui:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:transition ;
+      spl:valueType teamwork:Transition ;
+      rdfs:comment "The transition to check." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:workingCopy ;
+      spl:valueType teamwork:Tag ;
+      rdfs:comment "The working copy to check." ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:boolean ;
+  ui:prototype """
+<ui:setContext ui:shapesGraph=\"{= ui:unionOfGraphs(ui:graphWithImports(ui:currentQueryGraph()), teamwork:workflowsGraph()) }\">
+    <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(ui:currentQueryGraph()) }\">
+        <ui:return ui:result=\"{= tosh:hasShape(?workingCopy, ?transition) }\"/>
+    </ui:setContext>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:comment "Checks whether a given tag transition is currently possible for the current user. Uses SHACL to validate the working copy against the transition (which is also a node shape). This must be called with the TCH graph containing the working copy as active graph." ;
+  rdfs:label "is possible tag transition" ;
+  rdfs:subClassOf spin:Functions ;
+.
+teamwork:isPossibleTagVote
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:workflowsGraph ;
+              ] ;
+            sp:variable [
+                sp:varName "wg" ;
+              ] ;
+          ]
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "role" ;
+                    ] ;
+                  sp:predicate teamwork:votingUserGovernanceRole ;
+                  sp:subject [
+                      sp:varName "transition" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "wg" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a teamwork:currentUserHasGovernanceRole ;
+                arg:projectGraph [
+                    a teamwork:masterGraphForTeamGraph ;
+                    arg:teamGraph [
+                        sp:varName "teamGraph" ;
+                      ] ;
+                  ] ;
+                arg:role [
+                    sp:varName "role" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:teamGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The TCH graph." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:transition ;
+      spl:valueType teamwork:Transition ;
+      rdfs:comment "The transition to check." ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks whether a given tag transition is allowing the current user to vote. Checks whether the current user has any of the governance roles specified via teamwork:votingUserGovernanceRole." ;
+  rdfs:label "is possible tag transition" ;
+  rdfs:subClassOf spin:Functions ;
+.
+teamwork:isResourceWorkflowStatusProperty
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a teamwork:workflowsGraph ;
+              ] ;
+            sp:variable [
+                sp:varName "wg" ;
+              ] ;
+          ]
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "property" ;
+                    ] ;
+                  sp:predicate teamwork:statusProperty ;
+                  sp:subject [
+                      sp:varName "template" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "applicableType" ;
+                    ] ;
+                  sp:predicate teamwork:applicableResourceType ;
+                  sp:subject [
+                      sp:varName "template" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "wg" ;
+              ] ;
+          ]
+          [
+            a sp:TriplePath ;
+            sp:object [
+                sp:varName "applicableType" ;
+              ] ;
+            sp:path [
+                a sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "resourceType" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:property ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property to check." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resourceType ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The rdf:type of the resource to check." ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:boolean ;
+  rdfs:label "is resource workflow status property" ;
+  rdfs:subClassOf spin:Functions ;
+.
+teamwork:possibleResourceTransitionsString
+  a ui:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The project graph." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource that is supposed to be changing its status." ;
+    ] ;
+  spin:returnType xsd:string ;
+  ui:prototype """
+<ui:forEach ui:resultSet=\"{#
+        SELECT ?transition
+        WHERE {
+            BIND (teamwork:getResourceWorkflowTemplate(?resource) AS ?workflowTemplate) .
+            ( ?resource ?projectGraph ) teamwork:possibleResourceTransition ?transition .
+            BIND (spl:objectInGraph(?transition, sh:order, teamwork:workflowsGraph()) AS ?order) .
+        }
+        ORDER BY (?order) }\" ui:separator=\"{= swa:lineBreak() }\">{= teamwork:resourceStatusTransitionTargetLabel(?transition, ?workflowTemplate) }</ui:forEach>
+"""^^ui:Literal ;
+  rdfs:label "possible resource transitions string" ;
+  rdfs:subClassOf ui:Functions ;
+.
+teamwork:possibleTagTransitionsString
+  a ui:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:delimiter ;
+      spl:valueType xsd:string ;
+      rdfs:comment "Delimiter for multiple values" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:tag ;
+      spl:valueType teamwork:Tag ;
+      rdfs:comment "The working copy." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:teamGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The TCH graph." ;
+    ] ;
+  spin:returnType xsd:string ;
+  ui:prototype """
+<ui:setContext let:wg=\"{= teamwork:workflowsGraph() }\" ui:queryGraph=\"{= ?teamGraph }\">
+    <ui:forEach ui:resultSet=\"{#
+            SELECT ?transition
+            WHERE {
+                ?tag teamwork:possibleTagTransitionOrdered ?transition .
+                BIND (spl:objectInGraph(?transition, sh:order, ?wg) AS ?order) .
+            }
+            ORDER BY (?order) }\" ui:separator=\"{= COALESCE(?delimiter, swa:lineBreak()) }\">{= COALESCE(spl:objectInGraph(?transition, teamwork:transitionAction, ?wg), spl:objectInGraph(?transition, teamwork:transitionLabel, ?wg)) }</ui:forEach>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:label "possible tag transitions string" ;
+  rdfs:subClassOf ui:Functions ;
+.
+teamwork:potentialTagTransitionRolesString
+  a ui:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The project graph." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:tag ;
+      spl:valueType teamwork:Tag ;
+      rdfs:comment "The working copy." ;
+    ] ;
+  spin:returnType xsd:string ;
+  ui:prototype """
+<ui:group let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <ui:setContext let:subject=\"{= IRI(CONCAT(&quot;urn:x-dummy:&quot;, ui:uniqueId())) }\" ui:queryGraph=\"{= ?teamGraph }\">
+        <ui:group let:template=\"{= teamwork:getTagWorkflowTemplate(?tag) }\" let:wg=\"{= teamwork:workflowsGraph() }\">
+            <ui:forEach ui:resultSet='{#
+                    SELECT DISTINCT ?string
+                    WHERE {
+                        BIND (spl:objectInGraph(?tag, teamwork:status, ?teamGraph) AS ?fromStatus) .
+                        GRAPH ?wg {
+                            {
+                                ?template teamwork:transition ?transition .
+                                ?transition teamwork:fromStatus ?fromStatus .
+                                ?transition teamwork:requiredGovernanceRole ?role .
+                                BIND (ui:label(?role) AS ?string) .
+                            }
+                            UNION
+                            {
+                                ?template teamwork:transition ?transition .
+                                ?transition teamwork:fromStatus ?fromStatus .
+                                ?transition teamwork:requiredProjectPermissionRole ?role .
+                                BIND (CONCAT(ui:label(?role), \" (PC)\") AS ?string) .
+                            }
+                            UNION
+                            {
+                                ?template teamwork:transition ?transition .
+                                ?transition teamwork:fromStatus ?fromStatus .
+                                ?transition teamwork:requiredTagPermissionRole ?role .
+                                BIND (CONCAT(ui:label(?role), \" (WC)\") AS ?string) .
+                            } .
+                            ?transition teamwork:toStatus ?toStatus .
+                            FILTER ((?toStatus != teamwork:Committed) || EXISTS {
+                                GRAPH ?teamGraph {
+                                    ?change teamwork:tag ?tag .
+                                    ?change a teamwork:Change .
+                                } .
+                            }) .
+                        } .
+                    }
+                    ORDER BY (?string) }' ui:separator=\", \">{= spif:titleCase(?string) }</ui:forEach>
+        </ui:group>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Gets a string with the names of roles/users that can perform any of the potential next transitions in a given working copy. If there is only one user per group, then this user is shown, otherwise the role." ;
+  rdfs:subClassOf ui:Functions ;
+.
+teamwork:potentialTagTransitionsString
+  a ui:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The project graph." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:tag ;
+      spl:valueType teamwork:Tag ;
+      rdfs:comment "The working copy." ;
+    ] ;
+  spin:returnType xsd:string ;
+  ui:prototype """
+<ui:group let:teamGraph=\"{= teamwork:teamGraph(?projectGraph) }\">
+    <ui:setContext let:subject=\"{= IRI(CONCAT(&quot;urn:x-dummy:&quot;, ui:uniqueId())) }\" ui:queryGraph=\"{= ?teamGraph }\">
+        <ui:group let:template=\"{= teamwork:getTagWorkflowTemplate(?tag) }\" let:wg=\"{= teamwork:workflowsGraph() }\">
+            <ui:forEach ui:resultSet='{#
+                    SELECT DISTINCT ?string
+                    WHERE {
+                        BIND (spl:objectInGraph(?tag, teamwork:status, ?teamGraph) AS ?fromStatus) .
+                        GRAPH ?wg {
+                            ?template teamwork:transition ?transition .
+                            ?transition teamwork:fromStatus ?fromStatus .
+                            ?transition teamwork:toStatus ?toStatus .
+                            FILTER ((?toStatus != teamwork:Committed) || EXISTS {
+                                GRAPH ?teamGraph {
+                                    ?change teamwork:tag ?tag .
+                                    ?change a teamwork:Change .
+                                } .
+                            }) .
+                            BIND (COALESCE(spl:object(?transition, teamwork:transitionAction), spl:object(?transition, teamwork:transitionLabel), \"(Missing transition label)\") AS ?string) .
+                            BIND (COALESCE(spl:object(?transition, sh:order), 0) AS ?order) .
+                        } .
+                    }
+                    ORDER BY (?order) (?string) }' ui:separator=\", \">{= ?string }</ui:forEach>
+        </ui:group>
+    </ui:setContext>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Gets a string with the label of any of the transitions that can be performed in a given working copy." ;
+  rdfs:subClassOf ui:Functions ;
+.
+teamwork:tagTransitionRolesArray
+  a ui:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:transition ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<swon:RSArray arg:resultSet='{#
+        SELECT ?result
+        WHERE {
+            {
+                ?transition teamwork:requiredGovernanceRole ?role .
+                BIND (spif:titleCase(ui:label(?role)) AS ?label) .
+                BIND (CONCAT(?label, \" Role\") AS ?result) .
+            }
+            UNION
+            {
+                ?transition teamwork:requiredProjectPermissionRole ?role .
+                BIND (spif:titleCase(ui:label(?role)) AS ?label) .
+                BIND (CONCAT(?label, \" (PC)\") AS ?result) .
+            }
+            UNION
+            {
+                ?transition teamwork:requiredTagPermissionRole ?role .
+                BIND (spif:titleCase(ui:label(?role)) AS ?label) .
+                BIND (CONCAT(?label, \" (WC)\") AS ?result) .
+            } .
+        }
+        ORDER BY (?result) }'/>
+"""^^ui:Literal ;
+  rdfs:label "tag transition roles array" ;
+  rdfs:subClassOf ui:JSONServices ;
+.
+teamwork:workflowParticipantLabel
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:concat ;
+                sp:arg1 [
+                    sp:varName "label" ;
+                  ] ;
+                sp:arg2 " (" ;
+                sp:arg3 [
+                    sp:varName "typeLabel" ;
+                  ] ;
+                sp:arg4 ")" ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "type" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "role" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    a sp:eq ;
+                    sp:arg1 [
+                        sp:varName "type" ;
+                      ] ;
+                    sp:arg2 sioc:UserAccount ;
+                  ] ;
+                sp:arg2 "User" ;
+                sp:arg3 [
+                    a sp:if ;
+                    sp:arg1 [
+                        a sp:eq ;
+                        sp:arg1 [
+                            sp:varName "type" ;
+                          ] ;
+                        sp:arg2 sioc:Role ;
+                      ] ;
+                    sp:arg2 "Security Role" ;
+                    sp:arg3 [
+                        a ui:label ;
+                        sp:arg1 [
+                            sp:varName "type" ;
+                          ] ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "typeLabel" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    a sp:eq ;
+                    sp:arg1 [
+                        sp:varName "type" ;
+                      ] ;
+                    sp:arg2 sioc:UserAccount ;
+                  ] ;
+                sp:arg2 [
+                    a smf:userDisplayName ;
+                    arg:user [
+                        sp:varName "role" ;
+                      ] ;
+                  ] ;
+                sp:arg3 [
+                    a sp:if ;
+                    sp:arg1 [
+                        a sp:eq ;
+                        sp:arg1 [
+                            sp:varName "type" ;
+                          ] ;
+                        sp:arg2 sioc:Role ;
+                      ] ;
+                    sp:arg2 [
+                        a smf:roleName ;
+                        arg:resource [
+                            sp:varName "role" ;
+                          ] ;
+                      ] ;
+                    sp:arg3 [
+                        a ui:label ;
+                        sp:arg1 [
+                            sp:varName "role" ;
+                          ] ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "label" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:role ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The role to get the label of." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Gets a human-readable label for a given workflow participant, including the type such as \"hknublau (User)\"." ;
+  rdfs:label "workflow participant label" ;
+  rdfs:subClassOf spin:Functions ;
+.
+teamwork:workflowParticipantLabelGlobal
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:concat ;
+                sp:arg1 [
+                    sp:varName "label" ;
+                  ] ;
+                sp:arg2 " (" ;
+                sp:arg3 [
+                    sp:varName "typeLabel" ;
+                  ] ;
+                sp:arg4 ")" ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a ui:unionOfGraphs ;
+                sp:arg1 [
+                    a teamwork:workflowsGraph ;
+                  ] ;
+                sp:arg2 <urn:x-tb-authgraph> ;
+              ] ;
+            sp:variable [
+                sp:varName "graph" ;
+              ] ;
+          ]
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "type" ;
+                    ] ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "role" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a sp:if ;
+                      sp:arg1 [
+                          a sp:eq ;
+                          sp:arg1 [
+                              sp:varName "type" ;
+                            ] ;
+                          sp:arg2 sioc:UserAccount ;
+                        ] ;
+                      sp:arg2 "User" ;
+                      sp:arg3 [
+                          a sp:if ;
+                          sp:arg1 [
+                              a sp:eq ;
+                              sp:arg1 [
+                                  sp:varName "type" ;
+                                ] ;
+                              sp:arg2 sioc:Role ;
+                            ] ;
+                          sp:arg2 "Security Role" ;
+                          sp:arg3 [
+                              a ui:label ;
+                              sp:arg1 [
+                                  sp:varName "type" ;
+                                ] ;
+                            ] ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "typeLabel" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a sp:if ;
+                      sp:arg1 [
+                          a sp:eq ;
+                          sp:arg1 [
+                              sp:varName "type" ;
+                            ] ;
+                          sp:arg2 sioc:UserAccount ;
+                        ] ;
+                      sp:arg2 [
+                          a smf:userDisplayName ;
+                          arg:user [
+                              sp:varName "role" ;
+                            ] ;
+                        ] ;
+                      sp:arg3 [
+                          a sp:if ;
+                          sp:arg1 [
+                              a sp:eq ;
+                              sp:arg1 [
+                                  sp:varName "type" ;
+                                ] ;
+                              sp:arg2 sioc:Role ;
+                            ] ;
+                          sp:arg2 [
+                              a smf:roleName ;
+                              arg:resource [
+                                  sp:varName "role" ;
+                                ] ;
+                            ] ;
+                          sp:arg3 [
+                              a ui:label ;
+                              sp:arg1 [
+                                  sp:varName "role" ;
+                                ] ;
+                            ] ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "label" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "graph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:role ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The role to get the label of." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Gets a human-readable label for a given workflow participant, including the type such as \"hknublau (User)\". In contrast to the non-global variant, this function does not need to be called from within a certain active query graph." ;
+  rdfs:label "workflow participant label (global)" ;
+  rdfs:subClassOf spin:Functions ;
+.
+<http://topbraid.org/teamworkflows>
+  a owl:Ontology ;
+  rdfs:comment "API for starting a workflow." ;
+  rdfs:label "Teamwork Workflows Support" ;
+  owl:imports <http://teamworkAPI.topbraid.com/teamworkUpdate> ;
+  owl:imports <http://topbraid.org/swa> ;
+  owl:imports <http://topbraid.org/teamwork.ui> ;
+.
+rdfs:Resource
+  ui:instanceView """
+<ui:group ui:id=\"workflow-details\" ui:priority=\"{= -9 }\">
+    <teamwork:WorkflowStatusDetails arg:projectGraph=\"{= ?projectGraph }\" arg:tag=\"{= ?this }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.

@@ -1,0 +1,232 @@
+# baseURI: http://edg.topbraid.solutions/1.0/schema/lineage-models
+# imports: http://edg.topbraid.solutions/1.0/schema/bigdata
+# imports: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://edg.topbraid.solutions/1.0/schema/datamodels
+# imports: http://edg.topbraid.solutions/1.0/schema/datatypes
+# imports: http://edg.topbraid.solutions/1.0/schema/enterprise-models
+# imports: http://edg.topbraid.solutions/1.0/schema/technical-assets
+# imports: http://topbraid.org/tosh
+# imports: http://www.linkedmodel.org/schema/vaem
+
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/schema/lineage-models>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/schema/lineage-models/GMD_lineage-models> ;
+  rdfs:label "EDG Schema - Lineage Models" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/datatypes> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  owl:imports <http://topbraid.org/tosh> ;
+  owl:imports <http://www.linkedmodel.org/schema/vaem> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+edg:AnalyticsLineageModel
+  a edg:AssetClass ;
+  edg:acronym "ANLYTCSLINMDL" ;
+  rdfs:comment "An <strong>Analytics Lineage Model</strong> specifies how pipelines are involved in assisting analytics of various kinds." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/lineage-models> ;
+  rdfs:label "Analytics Lineage Model" ;
+  rdfs:subClassOf edg:LineageModel ;
+.
+edg:BigDataViewpoint
+  rdfs:subClassOf edg:LineageViewpoint ;
+.
+edg:BusinessTerm
+  edg:hideSubClasses true ;
+.
+edg:DataAssetsViewpoint
+  rdfs:subClassOf edg:LineageViewpoint ;
+.
+edg:DataElement
+  edg:hideSubClasses true ;
+.
+edg:ELTjob
+  rdfs:subClassOf edg:Script ;
+.
+edg:EnterpriseViewpoint
+  rdfs:subClassOf edg:LineageViewpoint ;
+.
+edg:GlossaryViewpoint
+  rdfs:subClassOf edg:LineageViewpoint ;
+.
+edg:GovernanceViewpoint
+  rdfs:subClassOf edg:LineageViewpoint ;
+.
+edg:LineageModel
+  a edg:AssetClass ;
+  edg:acronym "LINMDL" ;
+  edg:hideSubClasses true ;
+  rdfs:comment "A 'Lineage Model' is a governance asset that expresses how enterprise capabilities, business functions and software systems are dependent on data flows, software jobs and data transformations across data sources and sinks." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/lineage-models> ;
+  rdfs:label "Lineage Model" ;
+  rdfs:subClassOf edg:Asset ;
+  rdfs:subClassOf edg:ComplianceAspect ;
+  rdfs:subClassOf edg:EnterpriseAsset ;
+  rdfs:subClassOf edg:GovernanceAsset ;
+  rdfs:subClassOf edg:Identifiable ;
+  rdfs:subClassOf edg:LineageViewpoint ;
+  rdfs:subClassOf edg:Narratable ;
+  rdfs:subClassOf edg:StatusAspect ;
+  sh:property edg:LineageModel-enablesBusinessCapability ;
+  sh:property edg:LineageModel-supportsBusinessActivity ;
+  sh:property edg:LineageModel-supportsBusinessFunction ;
+  sh:property edg:LineageModel-supportsJobTitle ;
+  sh:property edg:LineageModel-usesJob ;
+  sh:property edg:LineageModel-usesPipeline ;
+  sh:property edg:LineageModel-usesSoftwareExecutable ;
+.
+edg:LineageModel-enablesBusinessCapability
+  a sh:PropertyShape ;
+  sh:path edg:enablesEnterpriseCapability ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/lineage-models> ;
+  sh:class edg:BusinessCapability ;
+  sh:group edg:LineageModelPropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:LineageModel-requiresPipeline
+  a sh:PropertyShape ;
+  sh:path edg:requiresPipeline ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/lineage-models> ;
+  sh:class edg:Pipeline ;
+  sh:group edg:LineageModelPropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:LineageModel-supportsBusinessActivity
+  a sh:PropertyShape ;
+  sh:path edg:supportsBusinessActivity ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/lineage-models> ;
+  sh:class edg:BusinessActivity ;
+  sh:group edg:LineageModelPropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:LineageModel-supportsBusinessFunction
+  a sh:PropertyShape ;
+  sh:path edg:supportsBusinessFunction ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/lineage-models> ;
+  sh:class edg:BusinessFunction ;
+  sh:group edg:LineageModelPropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:LineageModel-supportsJobTitle
+  a sh:PropertyShape ;
+  sh:path edg:supportsJobTitle ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/lineage-models> ;
+  sh:class edg:JobTitle ;
+  sh:group edg:LineageModelPropertiesGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:LineageModel-usesJob
+  a sh:PropertyShape ;
+  sh:path edg:usesJob ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/lineage-models> ;
+  sh:class edg:SoftwareJob ;
+  sh:group edg:LineageModelPropertiesGroup ;
+  sh:order "110"^^xsd:decimal ;
+.
+edg:LineageModel-usesPipeline
+  a sh:PropertyShape ;
+  sh:path edg:usesPipeline ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/lineage-models> ;
+  sh:class edg:Pipeline ;
+  sh:group edg:LineageModelPropertiesGroup ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:LineageModel-usesSoftwareExecutable
+  a sh:PropertyShape ;
+  sh:path edg:usesSoftwareExecutable ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/lineage-models> ;
+  sh:class edg:SoftwareExecutable ;
+  sh:group edg:LineageModelPropertiesGroup ;
+  sh:order "130"^^xsd:decimal ;
+.
+edg:LineageModel-usesTransform
+  a sh:PropertyShape ;
+  sh:path edg:usesTransform ;
+.
+edg:LineageModelProject
+  graphql:name "lineageModels" ;
+  graphql:publicClass edg:LineageViewpoint ;
+.
+edg:LineageModelPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:openable true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/lineage-models> ;
+  rdfs:label "Lineage Model Metadata" ;
+  sh:description "The<em>Lineage Model Properties Group</em> holds properties for the metadata about a lineage specification. Examples of properties are <em>enables enterprise capability</em>, <em>supports job role</em> and <em>produces information asset</em>. The group also holds references to the pipeline and job(s) that participate in the lineage."^^rdf:HTML ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:LineageViewpoint
+  a edg:ViewpointClass ;
+  dash:abstract true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/lineage-models> ;
+  rdfs:label "Lineage Viewpoint" ;
+  rdfs:subClassOf edg:Viewpoint ;
+.
+edg:Party
+  edg:hideSubClasses true ;
+.
+edg:RegulatoryLineageModel
+  a edg:AssetClass ;
+  edg:acronym "REQLINMDL" ;
+  rdfs:comment "A <strong>Regulatory Lineage Model</strong> specifies how pipelines are involved in producing regulatory reports." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/lineage-models> ;
+  rdfs:label "Regulatory Lineage Model" ;
+  rdfs:subClassOf edg:LineageModel ;
+.
+edg:RequirementsViewpoint
+  rdfs:subClassOf edg:LineageViewpoint ;
+.
+edg:SoftwareProgram
+  edg:hideSubClasses true ;
+.
+edg:TechnicalViewpoint
+  rdfs:subClassOf edg:LineageViewpoint ;
+.
+edg:supportsJobTitle
+  a owl:ObjectProperty ;
+  rdfs:comment "Provides a link to a job title to express what assets are supporting the job title." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  rdfs:label "supports job title" ;
+.
+<http://edg.topbraid.solutions/schema/lineage-models/GMD_lineage-models>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:SchemaGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/schema/lineage-models> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.

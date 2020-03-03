@@ -1,0 +1,2226 @@
+# baseURI: http://topbraid.org/functions-smf
+# imports: http://spinrdf.org/spl
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+arg:attributeName
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:datatype
+  a rdf:Property ;
+  rdfs:label "datatype" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:fromIndex
+  a rdf:Property ;
+  rdfs:label "from index" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:graph
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:graphURI
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:language
+  a rdf:Property ;
+  rdfs:label "language" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:node
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:param
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:pattern
+  a rdf:Property ;
+  rdfs:label "pattern" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:resource
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:toIndex
+  a rdf:Property ;
+  rdfs:label "to index" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:user
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+sp:_uri
+  a sp:Variable ;
+  sp:varName "uri" ;
+.
+<http://topbraid.org/functions-smf>
+  a owl:Ontology ;
+  owl:imports <http://spinrdf.org/spl> ;
+  owl:versionInfo "1.3.0" ;
+.
+smf:Test-dbpedia-1
+  a spl:TestCase ;
+  spl:testExpression [
+      a smf:dbpedia ;
+      sp:arg1 "Dean Allemang" ;
+    ] ;
+  spl:testResult <http://dbpedia.org/resource/Dean_Allemang> ;
+.
+smf:Test-dbpedia-2
+  a spl:TestCase ;
+  spl:testExpression [
+      a smf:dbpedia ;
+      sp:arg1 "cycloyasi" ;
+    ] ;
+  spl:testResult false ;
+.
+smf:Test-dbpedia-3
+  a spl:TestCase ;
+  spl:testExpression [
+      a smf:dbpedia ;
+      sp:arg1 "Cyclone Yasi" ;
+    ] ;
+  spl:testResult <http://dbpedia.org/resource/Severe_Tropical_Cyclone_Yasi> ;
+.
+smf:applicableFamily
+  a spin:MagicProperty ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The wildcard asset that was returned using smf:wildcardAsset." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """A magic property that can be used to walk through all applicable AssetFamilies for a WildCardAsset in the current TopBraid workspace.
+
+Example usage:
+
+	?wildcardAsset smf:applicableFamily ?family .
+    
+An unbound variable is required on the right hand side.  ?wildcardAsset can be bound to a wildcard asset which was returned from the smf:wildcardAsset magic property.""" ;
+  rdfs:label "applicable family" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+smf:asInternationalPhoneNumber
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The default country code, as an upper-case two letter abbreviation." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The string to check." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Takes the string of a phone number from a variety of formats, and an optional two-letter uppercase country code, and produces a \"normalized\" string using international conventions. Returns nothing if the phone number cannot be handled (use smf:isPhoneNumber beforehand)." ;
+  rdfs:label "as international phone number" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:baseURI
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The path string, e.g. \"/MyProject/MyFolder/MyFile.rdf\"." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "Returns the base URI (resource) of a given file (?arg1), where the file is specified as a path string relative to the workspace root. This function might be used in conjunction with tops:files." ;
+  rdfs:label "base URI" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:buildString
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the template string" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """Constructs a new string by inserting the existing variable bindings into a template. The template can mention variable names in curly braces, such as \"Hello {?index}\" would create \"Hello 42\" is ?index has the value 42. As an alternative to variable names, the function can take additional arguments after the template, the variables of which can be accessed using {?1}, {?2} etc. For example: smf:buildString(\"Hello-{?1}-{?2}\", ?day, ?month) would insert day and month at places {?1} and {?2}.
+
+Deprecated: this function is available as part of the TopBraid SPIN Libraries as spif:buildString.""" ;
+  rdfs:label "buildString" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:buildStringFromRDFList
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg3 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the separator to insert between each string" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdf:List ;
+      rdfs:comment "the head of the rdf:List to convert to string" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the template string" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """Builds a string from the members of a given rdf:List (?arg1). The function iterates over all members of the list (which must be well-formed according to the RDF syntax rules). For each member, a string template (?arg2) is applied where the expression {?member} will be substituted with the current member. Optionally, a separator (?arg3) can be inserted between the list members in the result string, e.g. to insert a comma.
+
+Deprecated: this function is available as part of the TopBraid SPIN Libraries as spif:buildStringFromRDFList.""" ;
+  rdfs:label "buildStringFromRDFList" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:buildURI
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The URI template such as \"<http://my.com/Instance-{?index}>\". If the template contains a full URI, then it must be wrapped by <...>, otherwise the system will treat it as a qname." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment """Constructs a new URI resource by inserting the existing variable bindings into a template. The template can mention variable names in curly braces, such as \"my:Instance-{?index}\" would create \"my:Instance-42\" is ?index has the value 42. As an alternative to variable names, the function can take additional arguments after the template, the variables of which can be accessed using {?1}, {?2} etc. For example: smf:buildURI(\"my:Instance-{?1}-{?2}\", ?day, ?month) would insert day and month at places {?1} and {?2}.
+
+Deprecated: this function is available as part of the TopBraid SPIN Libraries as spif:buildURI.""" ;
+  rdfs:label "buildURI" ;
+  rdfs:subClassOf spl:URIFunctions ;
+.
+smf:buildUniqueURI
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The URI template such as \"<http://my.com/Instance-{?index}>\". If the template contains a full URI, then it must be wrapped by <...>, otherwise the system will treat it as a qname." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment """A variation of smf:buildURI that also makes sure that the created URI is unique in the current graph (that is, no triple contains the URI as either subject, predicate or object). This function is particularly useful for ontology mapping from a legacy data source into an RDF model.
+
+Deprecated: this function is now available as part of the TopBraid SPIN Libraries as spif:buildUniqueURI.""" ;
+  rdfs:label "buildUniqueURI" ;
+  rdfs:subClassOf spl:URIFunctions ;
+.
+smf:camelCase
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The match expression" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the input string" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """Converts an input string into camel case. 
+For example, \"semantic web\" becomes \"SemanticWeb\".
+An optional matching expression can be given to only convert the matched characters.
+
+Deprecated: use spif:camelCase instead.""" ;
+  rdfs:label "camelCase" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:canInvoke
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      rdfs:comment "The first argument of the function call." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg3 ;
+      rdfs:comment "The second argument of the function call." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg4 ;
+      rdfs:comment "The third argument of the function call." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg5 ;
+      rdfs:comment "The forth argument of the function call." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType spin:Function ;
+      rdfs:comment "The function to check." ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment """Checks whether a given SPIN function (?arg1) can be invoked with a given list of argument (?arg2, ?arg3, ...) without violating any of its declared SPIN constraints. In addition to the usual argument declarations, the SPIN function may declare ASK and CONSTRUCT queries to check additional pre-conditions.
+
+Deprecated: this function is available as part of the TopBraid SPIN Libraries as spif:canInvoke.""" ;
+  rdfs:label "can invoke" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:canRead
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "Graph base URI" ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks if a given graph can be read (by the current user)." ;
+  rdfs:label "canRead" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:canWrite
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "Graph base URI" ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks if a given graph can be modified (by the current user)." ;
+  rdfs:label "can write" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:cast
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate arg:datatype ;
+      spl:valueType rdfs:Datatype ;
+      rdfs:comment "The target datatype, e.g. xsd:integer. Leave blank for untyped literals." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Literal ;
+      rdfs:comment "the \"old\" literal that shall be converted" ;
+    ] ;
+  spin:returnType rdfs:Literal ;
+  rdfs:comment """Creates a new literal from an existing literal, but with a different datatype. This can, for example, be used to convert between floating point values and int values.
+
+Deprecated: this function is available as part of the TopBraid SPIN Libraries as spif:cast.""" ;
+  rdfs:label "cast" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:checkCurrentUserRole
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:roleName ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The name of the role to check." ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks if current user belongs to a named role." ;
+  rdfs:label "check if current user belongs to a role" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:configParam
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a sp:iri ;
+                      sp:arg1 [
+                          a sp:concat ;
+                          sp:arg1 "http://server.topbraidlive.org/web/2009/config#" ;
+                          sp:arg2 [
+                              sp:varName "param" ;
+                            ] ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "predicate" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "result" ;
+                    ] ;
+                  sp:predicate [
+                      sp:varName "predicate" ;
+                    ] ;
+                  sp:subject <http://server.topbraidlive.org/dynamic/config#configuration> ;
+                ]
+              ) ;
+            sp:graphNameNode <http://server.topbraidlive.org/dynamic/config> ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:param ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The local name of the parameter property, e.g. \"smtpServer\" for <http://server.topbraidlive.org/web/2009/config#smtpServer>." ;
+    ] ;
+  rdfs:comment "Gets the value of a system configuration parameter from the dynamic config graph." ;
+  rdfs:label "config param" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:convertRDFToText
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The optional serialization format of the output. By default, it is Turtle. This value should be an instance of \"sml:RDFSerialization\" from the sparqlmotionlib ontology, for example sml:RDFXML." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "An optional pointer to the URI of a .context.json file - only used for JSON-LD." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Converts the current RDF graph to text. Optionally the serialization of the RDF graph as text can be given. By default, the serialization is Turtle." ;
+  rdfs:label "convertRDFToText" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:convertSPINRDFToString
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "true to embed HTML markup into the output" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType sp:Query ;
+      rdfs:comment "the root of the SPIN RDF query" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """Converts a SPARQL query encoded in SPIN RDF format to a SPARQL string in textual form. The SPIN query must be well-formed in the context graph at execution time, and the provided argument must be the root of the expression (e.g., an instance of sp:Select).
+
+Deprecated: this function is available as part of the TopBraid SPIN Libraries as spif:convertSPINRDFToString.""" ;
+  rdfs:label "convertSPINRDFToString" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:countMatches
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "the subject in the match triple, or an unbound variable for a wildcard" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "the predicate in the match triple, or an unbound variable for a wildcard" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg3 ;
+      rdfs:comment "the object in the match triple, or an unbound variable for a wildcard" ;
+    ] ;
+  spin:returnType xsd:integer ;
+  rdfs:comment """Counts all occurrences of a triple pattern based on subject (?arg1), predicate (?arg2) and object (?arg3) input. Any of those can be unbound variables.
+
+Deprecated: this function is available as part of the TopBraid SPIN Libraries as spif:countMatches.""" ;
+  rdfs:label "countMatches" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:countResults
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the SPARQL select query string to execute" ;
+    ] ;
+  spin:returnType xsd:integer ;
+  rdfs:comment "Runs an nested SPARQL query and counts its results. Note that the nested query will reuse the variable bindings from its surrounding." ;
+  rdfs:label "countResults" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:createARFF
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:shape ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The shape defining the ARFF." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Takes a SHACL shape and produces a Weka ARFF file as a string. The shape needs to declare sh:property constraints for each attribute. sh:maxCount 1 should be used for single-valued properties, otherwise the system will produce a new column/attribute for each value. The shape must declare a target, and all target nodes that conform to the shape will be turned into rows/instances in the ARFF file." ;
+  rdfs:label "create ARFF" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:currentBaseURI
+  a spin:Function ;
+  spin:returnType owl:Ontology ;
+  rdfs:comment "Gets the base URI of the current TopBraid session, as a URI resource. The current session is the currently open domain model of TBE or TBC. If used in SPARQLMotion scripts, this function may return the script's URI itself if executed within TBC, but the TBE session if executed from TBE." ;
+  rdfs:label "current base URI" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:currentTimeMillis
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:returnType xsd:long ;
+  rdfs:comment """Returns the current time in milliseconds. See System.currentTimeMillis() in Java.
+
+Deprecated: this function is available as part of the TopBraid SPIN Libraries as spif:currentTimeMillis.""" ;
+  rdfs:label "currentTimeMillis" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:currentUserAttribute
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:attributeName ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The name of the attribute to get (e.g. \"company\")." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Gets a named attribute of the user that is currently logged into TopBraid. The attribute name must be present in the selected user management system (e.g. LDAP), and typical values include \"company\" and \"mail\"." ;
+  rdfs:label "current user attribute" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:currentUserName
+  a spin:Function ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Gets the name of the user that is currently logged into TopBraid. Should be preceeded by smf:hasCurrentUser to avoid exceptions." ;
+  rdfs:label "current user name" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:dbpedia
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the label to get a DBpedia resource for" ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "Attempts to get a DBPedia page for a string. Returns false if no matching DBPedia page could be found." ;
+  rdfs:label "dbpedia" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:definedIn
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The input resource" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Returns the base URI of the ontology that the input resource is defined in. If the resource is defined in an unnamed graph (e.g., inference graph), then this function returns no value." ;
+  rdfs:label "definedIn" ;
+  rdfs:subClassOf spl:OntologyFunctions ;
+.
+smf:definedInFile
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The input resource" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Returns the workspace file path of the ontology that the input resource is defined in, if it exists." ;
+  rdfs:label "definedInFile" ;
+  rdfs:subClassOf spl:OntologyFunctions ;
+.
+smf:deriveURI
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          _:b9425
+        ) ;
+      sp:where (
+          [
+            a sp:Let ;
+            sp:expression [
+                a smf:resource ;
+                sp:arg1 [
+                    a fn:concat ;
+                    sp:arg1 [
+                        a xsd:string ;
+                        sp:arg1 spin:_arg1 ;
+                      ] ;
+                    sp:arg2 spin:_arg2 ;
+                  ] ;
+              ] ;
+            sp:variable _:b9425 ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "the URI resource that constitutes the left part of the new URI" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the additional string that will be appended to the right of {?arg1}" ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment """Constructs a new URI resource by concatenating a string constant {?arg2} to the URI of a given resource {?arg1}. Example:
+
+smf:deriveURI(owl:Thing, \"-Child\") = owl:Thing-Child""" ;
+  rdfs:label "deriveURI" ;
+  rdfs:subClassOf spl:URIFunctions ;
+.
+smf:duration
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The type of the duration: It can be one of: \"ms\", \"s\", \"m\", \"h\", \"d\", \"mon\", \"y\", \"c\"." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      rdfs:comment "The begin date" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg3 ;
+      rdfs:comment "The end date" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """Returns the duration between two dates in terms of one of the given \"types\". \"type\" is a string constant, which indicates the type of duration. It can be:
+String value - Explanation
+ms - milliseconds
+s - seconds
+m - minutes
+h - hours
+d - days
+mon - months
+y - years
+c - centuries""" ;
+  rdfs:label "duration" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:encodeURL
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:defaultValue "UTF-8" ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The (optional) encoding. Defaults to UTF-8." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The URL to encode." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """Encodes a URL string, for example so that it can be passed as an argument to REST services.
+
+Deprecated: this function is available as part of the TopBraid SPIN Libraries as spif:encodeURL.""" ;
+  rdfs:label "encode URL" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:escapeXML
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The string to escape." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Encodes a string so that it can be inserted into XML documents. Special characters will be converted." ;
+  rdfs:label "escape XML" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:exec
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The command to execute." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Executes a named system command with an optional number of arguments. For example, on Windows you can call smf:exec(\"/my.bat\") to invoke a batch file in the root folder of your default hard drive. Note that \\ will be interpreted as an escape character - to insert a backslash, use \\\\ instead." ;
+  rdfs:label "exec" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:file
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      rdfs:comment "The base URI - either as string or a URI resource." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Gets the absolute path to the workspace file holding a given base URI (?arg1)." ;
+  rdfs:label "file" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:generateLabel
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment """An (optional) string template, that may include any of the following special commands:
+- {date} inserts the current date
+- {name} inserts the generated label
+- {name:lower-case} inserts the label as lower case
+- {name:upper-case} inserts the label as upper case
+- {name:title-case} insert the label as title case
+Any other characters will be inserted as they appear.""" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      rdfs:comment "A URI resource or string literal that is used to generate a label. For URI resources, the local name will be used, the full string otherwise." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Can be used to derive a \"human-readable\" label from a resource URI or local name. For example, with the input ex:firstName this will return \"first name\". The result can then be used in the rest of the SPARQL query, e.g. to create an rdfs:label." ;
+  rdfs:label "generate label" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:generateUUID
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:returnType xsd:string ;
+  rdfs:comment """Generates a new unique ID as a string literal. This is often useful for creating \"random\" URIs and other identifiers.
+
+Deprecated: this function is available as part of the TopBraid SPIN Libraries as spif:generateUUID.""" ;
+  rdfs:label "generateUUID" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:geoCode
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "An (optional) country code such as \"au\" to aid the search." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The address as a raw string, e.g. \"1600 Amphitheatre Parkway, Mountain View, CA\"." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Attempts to convert a textual address (?arg1) into a comma-separated pair of lat/long values. The implementation currently uses the Google API (http://code.google.com/apis/maps/documentation/geocoding/) to do the actual work." ;
+  rdfs:label "geo code" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:groupHasUser
+  a spin:MagicProperty ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The group to get the users of." ;
+    ] ;
+  rdfs:comment """A magic property that can be used to walk through all available TBUsers for a permission group in the current TopBraid workspace.
+
+Example usage:
+
+    ?group smf:groupHasUser ?user .
+    
+An unbound variable is required on the right hand side.  ?group can be bound to a permission group which was returned from the pg:group magic property.""" ;
+  rdfs:label "group has user" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+smf:hasAllObjects
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "the match subject" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "the match predicate" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg3 ;
+      spl:valueType rdf:List ;
+      rdfs:comment "an rdf:List containing the match objects" ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment """Checks whether a given subject/predicate combination has all values enumerated from a given rdf:List. In other words, for each member ?object of the rdf:List, the triple (?arg1, ?arg2, ?object) must be in the model to return true. If the list is empty, true will also be returned.
+
+Deprecated: this function is available as part of the TopBraid SPIN Libraries as spif:hasAllObjects.""" ;
+  rdfs:label "hasAllObjects" ;
+  rdfs:subClassOf spl:BooleanFunctions ;
+.
+smf:hasAsset
+  a spin:MagicProperty ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The project, e.g. retrieved using smf:project." ;
+    ] ;
+  rdfs:comment """A magic property that can be used to walk through all available Assets and each Asset's AssetFamily for a project in the current TopBraid workspace.
+
+Example usage:
+
+    ?project smf:hasAsset (?asset ?family) .
+    
+A pair of unbound variables is required on the right hand side.  ?project can be bound to a project which was returned from the smf:project magic property.""" ;
+  rdfs:label "has asset" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+smf:hasBaseURI
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The path string, e.g. \"/MyProject/MyFolder/MyFile.rdf\"." ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks if a given file (?arg1) is known to have a base URI in the current workspace, where the file is specified as a path string relative to the workspace root. This function might be used in conjunction with tops:files." ;
+  rdfs:label "has base URI" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:hasCurrentUser
+  a spin:Function ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks if there is a user that is currently logged into TopBraid." ;
+  rdfs:label "has current user" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:hasFile
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      rdfs:comment "The base URI - either as string or a URI resource." ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks if there is any workspace file holding a given base URI (?arg1)." ;
+  rdfs:label "has file" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:hasLabelsPlugin
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:node ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The (blank) node for which the test is performed." ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks whether there are any \"labels plugins\" for a given blank node. In the TopBraid platform, labels plugins provide special rendering of certain blank nodes. For example, OWL restrictions are rendered in Manchester Syntax." ;
+  rdfs:label "has labels plugin" ;
+  rdfs:subClassOf spl:BooleanFunctions ;
+.
+smf:htmlString
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the input string" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Converts an input string to an HTML string - that is, special characters are converted." ;
+  rdfs:label "htmlString" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:if
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "The condition that shall be evaluated. If true then return the ?arg2 argument, otherwise return ?arg3." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      rdfs:comment "the result if the condition is true" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg3 ;
+      rdfs:comment "the result if the condition is false" ;
+    ] ;
+  rdfs:comment """Evaluates a condition and depending on the outcome either returns the true argument or the false argument. This is comparable to Java's ... ? ... : ... notation.
+
+Note that SPARQL 1.1 introduces a built-in function IF with a very similar functionality. The only difference is that IF always requires three arguments, while smf:if can also be used with just two arguments. This case is equivalent to IF(?condition, ?trueCase, ?none) where ?none is an unbound variable.
+
+As of TopBraid 5.2, smf:if has been deprecated and should no longer be used. Replace usages with IF.""" ;
+  rdfs:label "if" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:importGraphCheck
+  a spin:MagicProperty ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The graph to search for missing or duplicate imports." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment """A magic property that can be used to find missing or duplicate imports given a base URI if no base URI is supplied the function will traverse all projects finding any missing or duplicate imports.
+
+Example usage:
+ 
+    ?projects smf:importGraphCheck ?results .  or  <http://baseUri/location> smf:importGraphCheck ?results .
+    
+An unbound variable is required on the right hand side.  ?projects can be assigned a base URI value if searching a specific graph.""" ;
+  rdfs:label "missing or duplicate imports" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+smf:indexOf
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg3 ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The optional index to start with." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the string to search in" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the sub string to search for" ;
+    ] ;
+  spin:returnType xsd:integer ;
+  rdfs:comment """Gets the index of the first occurrence of a certain substring in a given search string. Returns an error if the substring is not found.
+
+Deprecated: this function is available as part of the TopBraid SPIN Libraries as spif:indexOf.""" ;
+  rdfs:label "indexOf" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:invoke
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      rdfs:comment "The first argument of the function call." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg3 ;
+      rdfs:comment "The second argument of the function call." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg4 ;
+      rdfs:comment "The third argument of the function call." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg5 ;
+      rdfs:comment "The forth argument of the function call." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType spin:Function ;
+      rdfs:comment "The URI resource defining the function to call." ;
+    ] ;
+  rdfs:comment """Calls another SPARQL function specified by a URI resource (?arg1), with additional arguments passed into from ?arg2 onwards. This can be used to dynamically call functions, the URI of which is now known statically. The result of the function call will be passed on as result of the invoke call.
+
+The function can also be a binary built-in SPARQL function using the SPIN function identifiers from the SPL ontology. For example, sp:gt will be executed as ?left > ?right.
+
+Deprecated: this function is available as part of the TopBraid SPIN Libraries as spif:invoke.""" ;
+  rdfs:label "invoke" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:isBound
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "the argument or variable to evaluate" ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks whether the input expression evaluates to a bound variable. This is similar to the built-in bound function of SPARQL, but bound expects a variable as argument and therefore can not be used to evaluate arbitrary nested functions." ;
+  rdfs:label "isBound" ;
+  rdfs:subClassOf spl:BooleanFunctions ;
+.
+smf:isCachedGraph
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph (URI resource) to check." ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks if a given graph is cached. TopBraid applies a cache over all database graphs." ;
+  rdfs:label "is cached graph" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:isDomainName
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:string ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The string to validate." ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks whether a given string is a domain name as specified by RFC1034/RFC1123 and according to the IANA-recognized list of top-level domains (TLDs). Returns nothing if the provided argument is not a literal." ;
+  rdfs:label "is domain name" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:isEmailAddress
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:string ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The string to validate." ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks whether a given string is a valid Email address according to RFC 822 standards. Returns unbound if the given argument is not a literal." ;
+  rdfs:label "is email address" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:isIndividualsGraph
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graphURI ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The URI of the graph to test." ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment """Checks whether a given graph (contractually) only contains individuals, i.e. neither classes nor properties. This function does not actually look into the data, but currently assumes its result based on the following policies: In TBC-FE and SE, this always returns false. On the other platforms, it returns true for any graph under EVN/EDG teamwork control that is not an Ontology project (or of a similar asset type that declares teamwork:isOntologyProjectType=true.
+
+Note: For working copies or graphs containing the user name, this function will not work and needs to be called against the master graph instead.""" ;
+  rdfs:label "is individuals graph" ;
+  rdfs:subClassOf spl:OntologyFunctions ;
+.
+smf:isLDAPConfigured
+  a spin:Function ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Returns true if LDAP has been configured in the TBL server administration." ;
+  rdfs:label "is LDAP configured" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:isPhoneNumber
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The default country code, as an upper-case two letter abbreviation." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The string to check." ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks whether a given string is a valid phone number, possibly in the context of a given default country code." ;
+  rdfs:label "is phone number" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:isTBL
+  a spin:Function ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks whether the current working environment is TopBraid Live (stand-alone). False if we are in TopBraid Composer (including the personal server of Maestro Edition)." ;
+  rdfs:label "is TBL" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:isURL
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:string ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The string to check." ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks whether a given string is a well-formed URL by checking the scheme, authority, path, query, and fragment in turn." ;
+  rdfs:label "is URL" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:isUserAccount
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a smf:userName ;
+                sp:arg1 [
+                    sp:varName "node" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "userName" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:bound ;
+                sp:arg1 [
+                    sp:varName "userName" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:node ;
+      rdfs:comment "The node to check." ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks whether a given node represents a TopBraid user account (as produced by smf:userWithName)." ;
+  rdfs:label "is user account" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:lastIndexOf
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg3 ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The optional index to start with." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the string to search in" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the sub string to search for" ;
+    ] ;
+  spin:returnType xsd:integer ;
+  rdfs:comment """Gets the index of the last occurrence of a certain substring in a given search string. Returns an error if the substring is not found.
+
+Deprecated: this function is available as part of the TopBraid SPIN Libraries as spif:lastIndexOf.""" ;
+  rdfs:label "lastIndexOf" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:lastModified
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      rdfs:comment "The URI of the graph to get the last modification of. May be a string or a URI resource." ;
+    ] ;
+  spin:returnType xsd:dateTime ;
+  rdfs:comment "Gets the time stamp of last modification of the file associated with a given graph from the workspace." ;
+  rdfs:label "last modified" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:levenshteinDistance
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The first string." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The second string." ;
+    ] ;
+  spin:returnType xsd:integer ;
+  rdfs:comment "Computes the Levenshtein Distance between two strings." ;
+  rdfs:label "levenshtein distance" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:localRange
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "the class to get the local range at" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "the property to get the range of" ;
+    ] ;
+  spin:returnType rdfs:Class ;
+  rdfs:comment "Gets the local range of a property at a class. The function first checks for locally defined owl:allValuesFrom restrictions on the class or its superclasses. If none is found, it will try to use the global rdfs:range of the property. If this does not exist either, it will return rdfs:Resource." ;
+  rdfs:label "localRange" ;
+  rdfs:subClassOf spl:OntologyFunctions ;
+.
+smf:localSubjects
+  a spin:MagicProperty ;
+  rdfs:comment "If there is an unbound variable on the right hand side then this magic property assigns it to all subjects with a URI from the base graph of the current query graph (i.e. excluding those defined in imported sub-graphs). If there is a specific URI on the right hand side, the magic property checks whether that URI is a subject in the base graph." ;
+  rdfs:label "local subjects" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+smf:lowerCamelCase
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The match expression" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the input string" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """Converts an input string into lower camel case.
+For example, \"semantic web\" becomes \"semanticWeb\".
+An optional matching expression can be given to only convert the matched characters.
+
+Deprecated: use spif:lowerCamelCase instead.""" ;
+  rdfs:label "lowerCamelCase" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:lowerCase
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The match expression" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the input string" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """Converts an input string into lower case. 
+For example, \"SEMANTIC Web\" becomes \"semantic web\".
+An optional matching expression can be given to only convert the matched characters.
+
+Deprecated: use spif:lowerCase instead.""" ;
+  rdfs:label "lowerCase" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:lowerTitleCase
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The match expression" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the input string" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """Converts an input string into lower title case. 
+For example, \"semantic web\" becomes \"semantic Web\".
+An optional matching expression can be given to only convert the matched characters.
+
+Deprecated: use spif:lowerTitleCase instead.""" ;
+  rdfs:label "lowerTitleCase" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:luceneFacetQuery
+  a spin:MagicProperty ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The limit.  If none provided the limit will default to 10." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg3 ;
+      spl:valueType xsd:string ;
+      rdfs:comment """The query string expression.
+""" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg4 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The list of applied facet filters." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The target property value." ;
+    ] ;
+  rdfs:comment """A magic property that can be used to query the available facets for 'Search the EDG' system index.
+
+*This function is only available in TBC-ME and web products.*""" ;
+  rdfs:label "lucene facet query" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+smf:luceneQuery
+  a spin:MagicProperty ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "A list of facet filters." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg3 ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The offset. If none provided the offset will default to 0." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg4 ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The limit.  If none provided the limit default to 100." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The query string expression." ;
+    ] ;
+  rdfs:comment """A magic property that can be used to query the 'Search the EDG' system index.
+
+*This function is only available in TBC-ME and web products.*""" ;
+  rdfs:label "lucene query" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+smf:managedAssetsAndFamilies
+  a spin:MagicProperty ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The name of a group to get the available assets and asset families for." ;
+    ] ;
+  rdfs:comment """A magic property that can be used to walk through all available Assets and AssetFamilies for an asset permission group in the current TopBraid workspace.
+
+Example usage:
+ 
+     ?group smf:managedAssetsAndFamilies (?asset ?family) .
+     
+A pair of unbound variables is required on the right hand side.""" ;
+  rdfs:label "managed assets and families" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+smf:managedRole
+  a spin:MagicProperty ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The name of a group to get the roles of." ;
+    ] ;
+  rdfs:comment """A magic property that can be used to walk through all available roles for an asset permission group in the current TopBraid workspace.
+
+Example usage:
+ 
+    ?group smf:managedRole ?role .
+    
+An unbound variable is required on the right hand side.  ?group can be bound to a group which was returned from the smf:permissionGroup magic property.""" ;
+  rdfs:label "managed role" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+smf:maxCardinality
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "the class to get the cardinality at" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "the property to get the cardinality of" ;
+    ] ;
+  spin:returnType xsd:integer ;
+  rdfs:comment "Gets the maximum cardinality of a property at a class. The function checks for locally defined owl:maxCardinality restrictions on the class or its superclasses. If none is found, it will check if the property is functional and, if so, return 1. Otherwise it will return -1." ;
+  rdfs:label "maxCardinality" ;
+  rdfs:subClassOf spl:OntologyFunctions ;
+.
+smf:memberOf
+  a spin:MagicProperty ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The role to get the groups of." ;
+    ] ;
+  rdfs:comment """A magic property that can be used to walk through all available Asset Permission Groups for a role in the current TopBraid workspace.
+
+Example usage:
+
+    ?role smf:memberOf ?group .
+    
+An unbound variable is required on the right hand side.  ?role can be bound to a role which was returned from the smf:role magic property.""" ;
+  rdfs:label "member of" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+smf:minCardinality
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "the class to get the minimum cardinality at" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "the property to get the cardinality of" ;
+    ] ;
+  spin:returnType xsd:integer ;
+  rdfs:comment "Gets the minimum cardinality of a property at a class. The function checks for locally defined owl:minCardinality restrictions on the class or its superclasses. If none is found, it will return 0." ;
+  rdfs:label "minCardinality" ;
+  rdfs:subClassOf spl:OntologyFunctions ;
+.
+smf:name
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      rdfs:comment "the node (literal or resource) that shall be rendered into a string" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """Gets a human-readable string representation from an RDF node. If it's a literal, the function will return the literal's lexical text. If it's a resource the system will use the rdfs:label (if exists) or otherwise use the qname. For an unbound input, the function will return no value. 
+
+Deprecated: use spif:name instead.""" ;
+  rdfs:label "name" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:notManagedBy
+  a spin:MagicProperty ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The role to get the unassociated groups of." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """A magic property that can be used to walk through all available groups not currently associated with a specified role in the current TopBraid workspace.
+
+Example usage:
+ 
+    ?role smf:notManagedBy ?group .
+    
+An unbound variable is required on the right hand side.  ?role can be bound to a role which was returned from the smf:role magic property.""" ;
+  rdfs:label "not managed by" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+smf:parseDate
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:pattern ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The template of the input string. This must conform to the pattern language implemented by the Java SimpleDateFormat class (http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html)." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the input text" ;
+    ] ;
+  spin:returnType rdfs:Literal ;
+  rdfs:comment """Converts a string in a semi-structured format into a xsd:date, xsd:dateTime or xsd:time literal. The input string must be in a given template format, e.g. \"yyyy.MM.dd G 'at' HH:mm:ss z\" for strings such as 2001.07.04 AD at 12:08:56 PDT.
+
+Deprecated: this function is available as part of the TopBraid SPIN Libraries as spif:parseDate.""" ;
+  rdfs:label "parseDate" ;
+  rdfs:subClassOf spl:DateFunctions ;
+.
+smf:parseManchesterSyntax
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The string to parse." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Attempts to parse a string in OWL Manchester Syntax and returns an error string if something went wrong. Returns nothing (unbound) if the string could be parsed against the current query graph." ;
+  rdfs:label "parse Manchester Syntax" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:permissionGroup
+  a spin:MagicProperty ;
+  spin:returnType xsd:string ;
+  rdfs:comment """A magic property that can be used to walk through all available Asset Permission Groups for the current TopBraid workspace.
+
+Example usage:
+
+    () smf:permissionGroup ?group .
+    
+An unbound variable is required on the right hand side.""" ;
+  rdfs:label "permission group" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+smf:permissionsForAsset
+  a spin:MagicProperty ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The group to get the permissions for." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The asset to get the permissions of." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg3 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The asset family of the asset to get the permissions of." ;
+    ] ;
+  rdfs:comment """A magic property that can be used to walk through all available Permissions for an Asset in a group in the current TopBraid workspace.
+
+Example usage:
+
+    (?group ?assetId ?family) smf:permissionsForAsset ?permission
+  or
+    (?group ?assetId) smf:permissionsForAsset ?permission
+    
+An unbound variable is required on the right hand side.  If ?family is not
+specified, then the GRAPH asset family will be assumed.""" ;
+  rdfs:label "permissions for asset" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+smf:prefix
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          _:b22060
+        ) ;
+      sp:where (
+          [
+            a sp:Let ;
+            sp:expression [
+                a smf:qname ;
+                sp:arg1 spin:_arg1 ;
+              ] ;
+            sp:variable _:b88089 ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:not ;
+                sp:arg1 [
+                    a fn:starts-with ;
+                    sp:arg1 _:b88089 ;
+                    sp:arg2 "<" ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Let ;
+            sp:expression [
+                a smf:indexOf ;
+                sp:arg1 _:b88089 ;
+                sp:arg2 ":" ;
+              ] ;
+            sp:variable _:b81418 ;
+          ]
+          [
+            a sp:Let ;
+            sp:expression [
+                a afn:substr ;
+                sp:arg1 _:b88089 ;
+                sp:arg2 0 ;
+                sp:arg3 _:b81418 ;
+              ] ;
+            sp:variable _:b22060 ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource to get the prefix of." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Gets the prefix of a given resource (?arg1). Returns nothing if the argument is a URI that cannot be abbreviated with a prefix." ;
+  rdfs:label "prefix" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:project
+  a spin:MagicProperty ;
+  spin:returnType xsd:string ;
+  rdfs:comment """A magic property that can be used to walk through all known projects for the current TopBraid workspace.
+
+Example usage:
+ 
+     () smf:project ?project .
+     
+An unbound variable is required on the right hand side.""" ;
+  rdfs:label "project" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+smf:qname
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "the URI resource to get the qname of" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Gets the qname of a resource, using the defined namespace abbreviations. In contrast to the official specs, this function will drop the : character if it's the first character in the string. If the resource does not have a suitable prefix abbreviation, the function will return the URI wrapped by <...>." ;
+  rdfs:label "qname" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:random
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:returnType xsd:double ;
+  rdfs:comment """Creates a random xsd:double between 0 and 1.
+
+Deprecated: this function is available as part of the TopBraid SPIN Libraries as spif:random.""" ;
+  rdfs:label "random" ;
+  rdfs:subClassOf spl:MathematicalFunctions ;
+.
+smf:regex
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg4 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The optional string returned as result string if no match occurs. If this string is empty and no match occurs, then the result string is unbound." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the input string" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The match expression" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg3 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The replacement expression" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """An input string is converted into a result string by applying a match and replacement expressions.
+For example, the input string \"semantic web\" with the match expression \"([A-z]+) ([A-z]+)\" and the replacement expression \"The $1 life\" returns the string \"The semantic life\".
+An optional input string is returned, if no match occurs. If this string is empty and no match occurs, then the result string is unbound.
+
+Deprecated: use spif:regex instead.""" ;
+  rdfs:label "regex" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:replaceAll
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The string to operate on." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The regular expression to search for." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg3 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The replacement string." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """Does a string replacement based on the Java function String.replaceAll().
+
+Deprecated: this function is available as part of the TopBraid SPIN Libraries as spif:replaceAll.""" ;
+  rdfs:label "replace all" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:resetCachedGraph
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph (URI resource) to reset." ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Resets a given cached graph. This can be used to force a refresh of a TopBraid graph if the underlying database has been changed outside of TopBraid." ;
+  rdfs:label "reset cached graph" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:resource
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the URI to convert" ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "Converts a given URI string to an RDF resource with that URI. As of SPARQL 1.1, this function is no longer needed and can be substituted with IRI(?string)." ;
+  rdfs:label "resource" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:role
+  a spin:MagicProperty ;
+  spin:returnType xsd:string ;
+  rdfs:comment """A magic property that can be used to walk through all available Roles for the current TopBraid workspace.
+
+Example usage:
+
+    () smf:role ?role .
+    
+An unbound variable is required on the right hand side.""" ;
+  rdfs:label "role" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+smf:roleHasUser
+  a spin:MagicProperty ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The role to get the users of." ;
+    ] ;
+  rdfs:comment """A magic property that can be used to walk through all available TBUsers for a role in the current TopBraid workspace.
+
+Example usage:
+
+    ?role smf:roleHasUser ?user .
+    
+An unbound variable is required on the right hand side.  ?role can be bound to a role which was returned from the pg:role magic property.""" ;
+  rdfs:label "role has user" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+smf:rootURISubject
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource to find the reference to." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "Takes a resource (usually a blank node) as argument and finds a URI resource that is the root of a blank node tree that contains the blank node. For example, if there is a blank node inside of a SPIN RDF structure that is linked to a class via spin:rule, then this function will return the class that points to the root of the SPIN RDF structure. Another example is OWL expressions such as owl:Restrictions." ;
+  rdfs:label "root URI subject" ;
+  rdfs:subClassOf spl:OntologyFunctions ;
+.
+smf:setLanguage
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:language ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the language of the result literal; may be empty to delete any existing language" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the text to set the language of" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Creates a new string literal with a given language from an existing value. For example, smf:setLanguage(\"House\", \"en\") becomes \"House\"@en." ;
+  rdfs:label "setLanguage" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:splitTextFile
+  a spin:MagicProperty ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg3 ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The index of the first record to return, starting with 1." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg4 ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "The maximum number of records to return. May be left blank to get all entries." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The absolute path to the text file in the workspace (e.g., /myProject/myFolder/test.txt)." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The delimiter string, for example \",\" for comma-separated lists." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """Can be used to split a file into multiple sub-strings separated based on a delimiter from a start record to the end record.
+
+For example,
+
+    (\"/myProject/myfile.txt\" \"\\\\n\"  1 10) smf:splitTextFile ?result
+
+will open the file with the given absolute path, split its content for every new line, and return the first 10 entries starting with first one. An unbound variable must be placed on the right hand side of this magic property.""" ;
+  rdfs:label "split text file" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+smf:subGraph
+  a spin:MagicProperty ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The base graph to get the subgraphs of." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "Can be used to query all named subgraphs of a given (SDB) graph. For example, http://example.org/graph/mysub is a subgraph of http://example.org/graph. The magic property only works if the base graph is given." ;
+  rdfs:label "sub graph" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+smf:subString
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:fromIndex ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "the start index (0 is the first character); if not bound, then the function will return null" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:toIndex ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "the end index; if not bound, use the length of text - 1" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the input string" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Extracts a substring from an input string. This is similar to afn:substr but more robust against null values." ;
+  rdfs:label "subString" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:suitableResultsGenerators
+  a spin:MagicProperty ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The query graph." ;
+    ] ;
+  rdfs:comment "Returns info about the available ResultsGeneratorFactories (for Problems & Suggestions report) for a given query graph.  Must have the query graph URI on the left and two unbound variables for ID and label on the right." ;
+  rdfs:label "suitable results generators" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+smf:titleCase
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The match expression" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The input string" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """Converts an input string to title case.
+For example, \"germany\" becomes \"Germany\".
+An optional matching expression can be given to only convert the matched characters.
+
+Deprecated: use spif:titleCase instead.""" ;
+  rdfs:label "titleCase" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:trace
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the template string to print" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """Same as smf:buildString, but with the side effect of printing the string into TopBraid's Error Log. This can be used as a debugging aid. The result of the function is the evaluated template.
+
+You can control the log level by prefixing the template string with either of the following:
+- \"INFO:\" will record an info item in the log (default)
+- \"WARN:\" will record a warning in the log
+- \"ERROR:\" will actually throw and report an exeception
+
+For example: smf:trace(\"WARN: The value of {?1} is invalid\", -10) will log a warning \"smf:trace: The value of -10 is invalid\".""" ;
+  rdfs:label "trace" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:trim
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the text to trim" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """Creates a new string value by trimming an input string. Leading and trailing whitespaces are deleted.
+
+Deprecated: this function is available as part of the TopBraid SPIN Libraries as spif:trim.""" ;
+  rdfs:label "trim" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:tripleDefinedIn
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The subject of the triple." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The predicate of the triple." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg3 ;
+      rdfs:comment "The object of the triple." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "Returns the IRI of the subgraph that a given triple (subject, predicate, object) has been defined in. This is supported for graphs that are known to TopBraid's graph registry only, including union graphs such as those created with ui:graphWithImports." ;
+  rdfs:label "triple defined in" ;
+  rdfs:subClassOf spl:OntologyFunctions ;
+.
+smf:turtleString
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      rdfs:comment "The RDF node to render into Turtle." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Returns a Turtle (source code) representation of a given RDF node, using the prefixes from the current query graph. For blank nodes this includes depending triples, for URIs and literals just the single value rendering." ;
+  rdfs:label "turtle string" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:unmanagedRole
+  a spin:MagicProperty ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The group to get the unavailable roles." ;
+    ] ;
+  rdfs:comment """A magic property that can be used to walk through all available roles not currently associated with a specified asset permission group in the current TopBraid workspace.
+
+Example usage:
+
+    ?group smf:unmanagedRole ?role .
+     
+An unbound variable is required on the right hand side.  ?group can be bound to a group which was returned from the smf:permissionGroup magic property.""" ;
+  rdfs:label "unmanaged role" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+smf:upperCase
+  a spin:Function ;
+  a owl:DeprecatedClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate sp:arg2 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The match expression" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The input string" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment """Converts an input string into upper case. 
+For example, \"semantic web\" becomes \"SEMANTIC WEB\".
+An optional matching expression can be given to only convert the matched characters.
+
+Deprecated: use spif:upperCase instead.""" ;
+  rdfs:label "upperCase" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+smf:user
+  a spin:MagicProperty ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment """A magic property that can be used to walk through all available users in the current TopBraid workspace.
+
+Example usage:
+
+    () smf:user ?user .
+    
+An unbound variable is required on the right hand side.""" ;
+  rdfs:label "user" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+smf:userDisplayName
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:user ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The URI node of the user." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Gets the display name of a user with a given URI (of the form urn:x-tb-users:XY). Note that the result of this can not necessarily be used as input to smf:userwithName, because the display name may be different from the internal user name." ;
+  rdfs:label "user display name" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:userEmail
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:user ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The URI node of the user." ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Gets the email address associated with a user with a given URI (of the form urn:x-tb-users:XY). This could be retrieved from the LDAP directory, or from any property with local name \"email\" in the users.ttl file, or from the property edg:email in the active query graph." ;
+  rdfs:label "user email" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:userName
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The user resource to convert to a name." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "Converts a user URI resource into a user name. Returns nothing if the given node is not a URI that follows the URI naming pattern used by TopBraid. The inverse function is smf:userWithName." ;
+  rdfs:label "user name" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:userRole
+  a spin:MagicProperty ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The user resource." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "This magic property requires a user resource on the left hand and an unbound variable on the right. This variable will contain the URIs of the security roles (e.g. LDAP) that the given user is known to have." ;
+  rdfs:label "user role" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+smf:userWithName
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The user name to convert to a resource." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:comment "Converts a user name into a URI resource, following the default settings in TopBraid. Often used in conjunction with smf:currentUserName(). The inverse function is smf:userName." ;
+  rdfs:label "user with name" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:wekaClassifiers
+  a spin:MagicProperty ;
+  spin:returnType xsd:string ;
+  rdfs:comment """Gets the keys of all Weka classifiers that are currently on the configured Maui server. Usually they will have been created using sml:CreateWekaClassifier, but they may still be around from a previous run of a TopBraid product. The magic property takes nothing on the left hand side and needs an unbound variable on the right hand side, e.g.
+
+() smf:wekaClassifiers ?key .""" ;
+  rdfs:label "Weka classifiers" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+smf:wekaClassify
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:key ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The key of the Weka classifier. Must be the same as the sml:key used in sml:CreateWekaClassifier." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The resource to classify." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:shape ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The shape defining which properties/paths have to be sent to the Weka engine." ;
+    ] ;
+  rdfs:comment "Classifies a given resource via Weka. The classifier must be executing on the configured Maui server, typically created in a previous step using sml:CreateWekaClassifier. This function here uses the trained Weka classifier to produce a suggestion for the property/path that has been specified when the classifier was created." ;
+  rdfs:label "Weka classify" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+smf:wildcardAsset
+  a spin:MagicProperty ;
+  rdfs:comment """A magic property that can be used to walk through all available WildCardAssets for the current TopBraid workspace.
+
+Example usage:
+ 
+    () smf:wildcardAsset (?wildcardAsset ?family)
+
+A pair of unbound variables is required on the right hand side.""" ;
+  rdfs:label "wildcard asset" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+smf:workspacePath
+  a spin:Function ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Gets the absolute path of the workspace in the local hard disk." ;
+  rdfs:label "workspace path" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+_:b9425
+  sp:varName "uri" ;
+.
+_:b22060
+  sp:varName "prefix" ;
+.
+_:b81418
+  sp:varName "sep" ;
+.
+_:b88089
+  sp:varName "qname" ;
+.

@@ -1,0 +1,2249 @@
+# baseURI: http://edg.topbraid.solutions/1.0/diagram/lg/data-asset
+# imports: http://edg.topbraid.solutions/1.0/diagram/lg/library-common
+# imports: http://edg.topbraid.solutions/1.0/diagram/lg/software
+# imports: http://edg.topbraid.solutions/1.0/schema/lineage-models
+# imports: http://edg.topbraid.solutions/1.0/schema/technical-assets
+# imports: http://edg.topbraid.solutions/1.0/spin/jsfunctions
+# imports: http://edg.topbraid.solutions/1.0/spin/library
+# imports: http://spinrdf.org/spinx
+# imports: http://topbraid.org/swa
+# imports: http://topbraid.org/teamwork.ui
+
+@prefix acjob: <http://evn.topbraidlive.org/tagger/acjob#> .
+@prefix acpp: <http://topbraid.org/nlp/autoclassifier-preproc#> .
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix autotagger: <http://evn.topbraidlive.org/autotagger#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix conceptmatch: <http://topbraid.org/conceptmatch#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix config-importers: <http://edg.topbraidlive.org/config/importers#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix core-soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix corpus: <http://topbraid.org/corpus#> .
+@prefix corpusprojects: <http://topbraid.org/corpus-projects#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkapp: <http://topbraid.org/swa/crosswalkapp#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dashboard: <http://example.org/dashboard#> .
+@prefix datagraph: <http://teamwork.topbraidlive.org/datagraph/datagraphprojects#> .
+@prefix dataset: <http://teamwork.topbraidlive.org/dataset#> .
+@prefix datasetapp: <http://topbraid.org/swa/datasetapp#> .
+@prefix datasetviewer: <http://topbraid.org/swa/datasetviewer#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ddl: <http://edg.topbraidlive.org/1.0/importers/ddl#> .
+@prefix debug-swa: <http://debug.topbraidlive.org/1.0/swa/> .
+@prefix default: <http://uispin.org/default#> .
+@prefix defaultapp: <http://topbraid.org/swa/defaultapp#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix document: <http://topbraid.org/document#> .
+@prefix documents: <http://edg.topbraid.solutions/1.0/shapes/documents#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg-config: <http://edg.ext.topbraidlive.org/schema/config/importers#> .
+@prefix edg-importer: <http://edg.topbraidlive.org/importer/> .
+@prefix edg-qa: <http://edg.topbraidlive.org/utility/qa/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.global: <urn:x-evn-global:> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix edgproduct: <http://edg.topbraidlive.org/edgproduct#> .
+@prefix eeh-lib: <http://www.environmenthub.no/spin/1.0/eeh-lib#> .
+@prefix eeh-reportlib: <http://www.environmenthub.no/spin/1.0/eeh-reportlib#> .
+@prefix elements: <http://purl.org/dc/elements/1.1/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evn: <http://topbraid.org/evn/evn#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evnimport: <http://evn.topbraidlive.org/uispin/evnimport#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix ex: <http://example.org/> .
+@prefix extjs: <http://uispin.com/extjs#> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix forms: <http://www.topbraid.org/2007/01/forms.owl#> .
+@prefix frbr: <http://purl.org/vocab/frbr/core#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix governance: <http://topbraid.org/teamworkgovernance.ui#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix graphql.search: <http://teamwork.topbraidlive.org/graphql.search#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix inference: <http://www.topbraid.org/2007/06/inference.owl#> .
+@prefix jdbc: <http://edg.topbraidlive.org/1.0/importers/jdbc#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix kennedys: <http://topbraid.org/examples/kennedys#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix lib-importer: <http://edg.topbraid.solutions/importer/lib#> .
+@prefix lineage-transform: <http://edg.topbraid.solutions/transform/importer/lineage#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix o2o: <http://lib.topquadrant.com/owl/srg/o2o#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix ontologyviewer: <http://topbraid.org/swa/ontologyviewer#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix proxy-lineage: <http://edg.topbraid.solutions/proxy/importer/lineage#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmapp: <http://rdm.topbraidlive.org/rdmapp#> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix rdmviewer: <http://rdm.topbraidlive.org/rdmviewer#> .
+@prefix saf: <http://topbraid.org/saf/> .
+@prefix safconfig: <http://topbraid.org/safconfig/> .
+@prefix safindex: <http://topbraid.org/safindex#> .
+@prefix safm: <http://saf.topbraidlive.org/metaschema/> .
+@prefix savedQueries: <http://teamwork.topbraidlive.org/ui/savedQueries#> .
+@prefix scheduler: <http://topbraid.org/scheduler#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix server: <http://server.topbraidlive.org/server.ui#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix shapesgraph: <http://teamwork.topbraidlive.org/shapesgraph/shapesgraphprojects#> .
+@prefix sharepoint: <http://topbraid.org/sharepoint#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skosshapes: <http://topbraid.org/skos.shapes#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix soa: <http://www.semanticweb.org/ontologies/2010/01/core-soa.owl#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spin.ui: <http://spinrdf.org/spin.ui#> .
+@prefix spinmap: <http://spinrdf.org/spinmap#> .
+@prefix spinmapl: <http://topbraid.org/spin/spinmapl#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix ss: <http://www.topbraidcomposer.org/owl/2006/08/spreadsheets.owl#> .
+@prefix stats: <http://topbraid.org/statistics#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swadoc: <http://topbraid.org/swadoc#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tablesmap: <http://topbraid.org/spin/tablesmap#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix taggerspin: <http://evn.topbraidlive.org/taggerspin#> .
+@prefix taggerui: <http://evn.topbraidlive.org/taggerui#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix tblui: <http://server.topbraidlive.org/tblui#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkAdmin: <http://teamwork.topbraidlive.org/doc/teamworkAdmin#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworkconstraints: <http://topbraid.org/teamworkconstraints#> .
+@prefix teamworkdashboard: <http://topbraid.org/teamworkdashboard#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix teamworkupdate: <http://teamworkAPI.topbraid.com/teamworkUpdate#> .
+@prefix textindex: <http://topbraid.org/textindex#> .
+@prefix tika-importer: <http://teamwork.topbraidlive.org/corpus/tika-importer#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix tracker: <http://teamwork.topbraidlive.org/ui/tracker#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uitest: <http://uispin.org/test#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix userdat: <http://teamwork.topbraidlive.org/ui/userdata> .
+@prefix userdata: <http://teamwork.topbraidlive.org/ui/userdata#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix victory: <http://edg.topbraid.solutions/victory/> .
+@prefix visual: <http://topbraid.org/visual#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xhtml: <http://topbraid.org/xhtml#> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/diagram/lg/data-asset>
+  a owl:Ontology ;
+  owl:imports <http://edg.topbraid.solutions/1.0/diagram/lg/library-common> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/diagram/lg/software> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/lineage-models> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/spin/jsfunctions> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/spin/library> ;
+  owl:imports <http://spinrdf.org/spinx> ;
+  owl:imports <http://topbraid.org/swa> ;
+  owl:imports <http://topbraid.org/teamwork.ui> ;
+  owl:versionInfo "Created with TBC" ;
+.
+edg:Asset
+  ui:instanceView """
+<ui:group ui:id=\"information-asset-dependency\" ui:priority=\"{= 1 }\">
+    <!--ui:dumpScope ui:message=\"AAA: edg:Asset - dependency on {= ?this } of type {= edg:getEDGresourceType(?this) }\"/-->
+    <edg:MakeViewFrameResourceNodeLink arg:property=\"{= ?property }\" edg:dependencyType=\"{= ?dependencyType }\" edg:explanation=\"information asset dependency - edg:Asset\" edg:resource=\"{= ?this }\" edg:targetNode=\"{= ?targetNode }\" edg:targetViewFrame=\"{= ?targetViewFrame }\" edg:viewFrame=\"{= ?targetViewFrame }\"/>
+    <edg:MakeSingleViewFrameResourceOccurrence edg:activeResource=\"{= ?this }\" edg:resource=\"{= ?this }\" edg:viewFrame=\"{= ?targetViewFrame }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:BuildImpactGramForAsset
+  a ui:ViewElement ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:breadth ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:offset ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:reach ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:viewFrame ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:diagramType ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:focusNode ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group let:viewFrameStructure=\"{= COALESCE(ui:decodeNode(ui:getSessionAttribute(&quot;viewframes-structure&quot;)), edg:VFS_LG-ProvenanceModel) }\">
+    <ui:group let:dataGraph=\"{= teamwork:unionGraphForCurrentUser() }\" let:myBreadth=\"{= COALESCE(?breadth, 10) }\" let:myFocusNode=\"{= IRI(spif:decodeURL(?focusNode)) }\" let:myOffset=\"{= COALESCE(?offset, 0) }\" let:myReach=\"{= COALESCE(?reach, 10) }\">
+        <ui:try>
+            <ui:if ui:condition=\"{= !bound(?myFocusNode) }\">
+                <ui:throw ui:message=\"Error with focus node: {= ?focusNode }\"/>
+            </ui:if>
+            <ui:if ui:condition=\"{= !bound(?dataGraph) }\">
+                <ui:throw ui:message=\"No data graph provided\"/>
+            </ui:if>
+            <ui:if ui:condition=\"{= !bound(?focusNode) }\">
+                <ui:throw ui:message=\"No focus node specified\"/>
+            </ui:if>
+            <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?dataGraph) }\">
+                <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+                    <!--ui:dumpScope ui:message=\"AAA1: BuildImpactGramForAsset - {= ?myFocusNode }\"/-->
+                    <edg:DetermineImpactOfAsset arg:dependencyTemplate=\"{= edg:GetImpactOfTable }\" arg:focusNode=\"{= ?myFocusNode }\" edg:breadth=\"{= ?myBreadth }\" edg:dependencyType=\"{= edg:DEPTYPE_DATA-DERIVED-FROM }\" edg:offset=\"{= ?myOffset }\" edg:reach=\"{= ?myReach }\" edg:viewFrameStructure=\"{= ?viewFrameStructure }\"/>
+                    <edg:GenerateJSONforLineageGram arg:diagramType=\"{= edg:DIAGTYPE_DOWNSTREAM-LINEAGEGRAM }\" edg:activeResource=\"{= ?myFocusNode }\" edg:resource=\"{= ?depictedResourceForFocusNode }\"/>
+                </ui:setContext>
+            </ui:setContext>
+            <edg:DumpTempGraphForLineageGram/>
+        </ui:try>
+        <ui:catch>
+            <swon:Object>
+                <swon:Value arg:name=\"exception\" arg:value=\"{= ?exception }\"/>
+            </swon:Object>
+        </ui:catch>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment "Builds a diagram of downstream dependencies for an asset." ;
+  rdfs:label "Build impact diagram for asset" ;
+  rdfs:subClassOf edg:ImpactGramServices ;
+.
+edg:BuildJSONforDataElementLineageGram
+  a ui:ViewElement ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:breadth ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:offset ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:reach ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:focusNode ;
+      spl:valueType edg:DataElement ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group let:dataGraph=\"{= IRI(?graph) }\" let:myBreadth=\"{= COALESCE(?breadth, 10) }\" let:myFocusNode=\"{= IRI(spif:decodeURL(?focusNode)) }\" let:myOffset=\"{= COALESCE(?offset, 0) }\" let:myReach=\"{= COALESCE(?reach, 10) }\">
+    <ui:try>
+        <ui:if ui:condition=\"{= !bound(?dataGraph) }\">
+            <ui:throw ui:message=\"No data graph provided\"/>
+        </ui:if>
+        <ui:if ui:condition=\"{= !bound(?focusNode) }\">
+            <ui:throw ui:message=\"No focus node specified\"/>
+        </ui:if>
+        <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?dataGraph) }\">
+            <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+                <edg:DetermineDownstreamTransitiveImpact arg:focusNode=\"{= ?myFocusNode }\" edg:breadth=\"{= ?myBreadth }\" edg:offset=\"{= ?myOffset }\" edg:reach=\"{= ?myReach }\"/>
+                <edg:MakeResourceNodesAndLinksForFirstStageSoftwareExecutableInputs arg:focusNode=\"{= ?myFocusNode }\" edg:breadth=\"{= ?myBreadth }\" edg:maxTierNodeCount=\"{= ?myMaxTierNodeCount }\" edg:offset=\"{= ?myOffset }\" edg:reach=\"{= ?myReach }\" edg:viewFrameStructure=\"{= edg:VFS_LG-ProvenanceModel }\"/>
+                <edg:GenerateJSONforLineageGram arg:diagramType=\"{= edg:DIAGTYPE_DOWNSTREAM-DEPENDENTSGRAM }\" edg:activeResource=\"{= ?myFocusNode }\" edg:resource=\"{= ?myFocusNode }\"/>
+            </ui:setContext>
+        </ui:setContext>
+        <edg:DumpTempGraphForLineageGram/>
+    </ui:try>
+    <ui:catch>
+        <swon:Object>
+            <swon:Value arg:name=\"exception\" arg:value=\"{= ?exception }\"/>
+        </swon:Object>
+    </ui:catch>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment "Builds a lineagegram for a single data element" ;
+  rdfs:label "Build JSON for data element lineagegram" ;
+  rdfs:subClassOf edg:LineageGramServices ;
+.
+edg:BuildLineageGramForDataElement
+  a ui:ViewElement ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:breadth ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:offset ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:reach ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:viewFrameStructure ;
+      spl:valueType edg:ViewFramesShape ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:focusNode ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group let:dataGraph=\"{= IRI(?graph) }\" let:myBreadth=\"{= COALESCE(?breadth, 10) }\" let:myFocusNode=\"{= IRI(spif:decodeURL(?focusNode)) }\" let:myMaxTierNodeCount=\"{= COALESCE(?maxTierNodeCount, 20) }\" let:myOffset=\"{= COALESCE(?offset, 0) }\" let:myReach=\"{= COALESCE(?reach, 10) }\">
+    <ui:try>
+        <ui:if ui:condition=\"{= !bound(?dataGraph) }\">
+            <ui:throw ui:message=\"No data graph provided\"/>
+        </ui:if>
+        <ui:if ui:condition=\"{= !bound(?myFocusNode) }\">
+            <ui:throw ui:message=\"No Data Element specified\"/>
+        </ui:if>
+        <ui:group let:myViewFrameStructure=\"{= COALESCE(?viewFrameStructure, edg:VFS_LG-DataElementProvenanceModel) }\">
+            <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?dataGraph) }\">
+                <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+                    <ui:group let:viewFrameForFocusNode=\"{= edg:VF_TargetFrame }\">
+                        <!--ui:dumpScope ui:message=\"AAA1: BuildLineageGramForDataElement - {= ?myFocusNode }\"/-->
+                        <ui:if ui:condition=\"{= ?myReach &gt; 1 }\">
+                            <edg:MakeSingleViewFrameResourceOccurrence edg:resource=\"{= ?myFocusNode }\" edg:viewFrame=\"{= ?viewFrameForFocusNode }\"/>
+                            <ui:call arg:resource=\"{= ?myFocusNode }\" ui:limit=\"{= ?myBreadth }\" ui:offset=\"{= ?myOffset }\" ui:template=\"{= edg:GetDataElementDependency }\" ui:varName=\"dependencies\">
+                                <!--ui:dumpResultSet ui:message=\"AAA2: BuildLineageGramForDataElement {= ?myFocusNode }\"
+          ui:resultSet=\"{= ?dependencies }\"/-->
+                                <ui:forEach ui:resultSet=\"{= ?dependencies }\">
+                                    <ui:group>
+                                        <ui:resourceView arg:viewFrameStructure=\"{= ?myViewFrameStructure }\" edg:breadth=\"{= ?myBreadth }\" edg:dependencyType=\"{= ?dependencyType }\" edg:explanation=\"DetermineLineageForDataElement\" edg:offset=\"{= ?myOffset }\" edg:reach=\"{= ?myReach }\" edg:targetNode=\"{= ?myFocusNode }\" edg:targetViewFrame=\"{= ?viewFrameForFocusNode }\" edg:viewFrameStructure=\"{= ?myViewFrameStructure }\" ui:matchIds=\"asset-provenance\" ui:resource=\"{= ?dependency }\"/>
+                                    </ui:group>
+                                </ui:forEach>
+                            </ui:call>
+                        </ui:if>
+                    </ui:group>
+                    <edg:GenerateJSONforLineageGram arg:diagramType=\"{= edg:DIAGTYPE_UPSTREAM-LINEAGEGRAM }\" arg:focusNode=\"{= ?myFocusNode }\" edg:activeResource=\"{= ?myFocusNode }\" edg:resource=\"{= ?myFocusNode }\"/>
+                </ui:setContext>
+            </ui:setContext>
+        </ui:group>
+        <edg:DumpTempGraphForLineageGram/>
+    </ui:try>
+    <ui:catch>
+        <swon:Object>
+            <swon:Value arg:name=\"exception\" arg:value=\"{= ?exception }\"/>
+        </swon:Object>
+    </ui:catch>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment "Determines the upstrean dependencies fora data element" ;
+  rdfs:label "Build lineageGram for data element" ;
+  rdfs:seeAlso edg:DetermineImpactOfAsset ;
+  rdfs:seeAlso edg:DetermineProvenanceForAsset ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:BuildLineageGramForDataElement-DEPRECATED
+  a ui:ViewElement ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:breadth ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:offset ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:reach ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:viewFrame ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:diagramType ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:focusNode ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group let:viewFrameStructure=\"{= COALESCE(ui:decodeNode(ui:getSessionAttribute(&quot;viewframes-structure&quot;)), edg:VFS_LG-ProvenanceModel) }\">
+    <ui:group let:dataGraph=\"{= teamwork:unionGraphForCurrentUser() }\" let:myBreadth=\"{= COALESCE(?breadth, 10) }\" let:myFocusNode=\"{= IRI(spif:decodeURL(?focusNode)) }\" let:myOffset=\"{= COALESCE(?offset, 0) }\" let:myReach=\"{= COALESCE(?reach, 10) }\">
+        <ui:try>
+            <ui:if ui:condition=\"{= !bound(?myFocusNode) }\">
+                <ui:throw ui:message=\"Error with focus node: {= ?focusNode }\"/>
+            </ui:if>
+            <ui:if ui:condition=\"{= !bound(?dataGraph) }\">
+                <ui:throw ui:message=\"No data graph provided\"/>
+            </ui:if>
+            <ui:if ui:condition=\"{= !bound(?focusNode) }\">
+                <ui:throw ui:message=\"No focus node specified\"/>
+            </ui:if>
+            <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?dataGraph) }\">
+                <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+                    <!--ui:dumpScope ui:message=\"AAA1: BuildLineageGramForDataElement - {= ?myFocusNode }\"/-->
+                    <edg:MakeSingleViewFrameResourceOccurrence edg:resource=\"{= ?myFocusNode }\" edg:viewFrame=\"{= edg:VF_ResourcesFrame }\"/>
+                    <edg:DetermineDownstreamDependenciesForResource arg:dependencyTemplate=\"{= edg:GetDataElementDependency }\" arg:focusNode=\"{= ?myFocusNode }\" edg:breadth=\"{= ?myBreadth }\" edg:offset=\"{= ?myOffset }\" edg:reach=\"{= ?myReach }\"/>
+                    <!--edg:DetermineLineageForDataElement arg:focusNode=\"{= ?myFocusNode }\"
+edg:breadth=\"{= ?myBreadth }\"
+edg:dependencyType=\"edg:DEPTYPE_DATA-DERIVED-FROM\"
+edg:offset=\"{= ?myOffset }\"
+edg:reach=\"{= ?myReach }\"
+edg:viewFrameStructure=\"{= ?viewFrameStructure }\"/-->
+                    <edg:GenerateJSONforLineageGram arg:diagramType=\"{= edg:DIAGTYPE_UPSTREAM-LINEAGEGRAM }\" edg:activeResource=\"{= ?myFocusNode }\" edg:resource=\"{= ?myFocusNode }\"/>
+                </ui:setContext>
+            </ui:setContext>
+            <edg:DumpTempGraphForLineageGram/>
+        </ui:try>
+        <ui:catch>
+            <swon:Object>
+                <swon:Value arg:name=\"exception\" arg:value=\"{= ?exception }\"/>
+            </swon:Object>
+        </ui:catch>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment "Builds a diagram of upstrean dependencies for a single data element asset." ;
+  rdfs:label "Build lineage diagram for data element" ;
+  rdfs:subClassOf edg:LineageGramServices ;
+.
+edg:BuildLineageGramForInformationAsset-DEPRECATED
+  a ui:ViewElement ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:breadth ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:offset ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:reach ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:viewFrame ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:diagramType ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:focusNode ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group let:dataGraph=\"{= teamwork:unionGraphForCurrentUser() }\" let:myBreadth=\"{= COALESCE(?breadth, 10) }\" let:myFocusNode=\"{= IRI(spif:decodeURL(?focusNode)) }\" let:myOffset=\"{= COALESCE(?offset, 0) }\" let:myReach=\"{= COALESCE(?reach, 10) }\" let:myViewFrame=\"{= IRI(?viewFrame) }\">
+    <ui:try>
+        <ui:if ui:condition=\"{= !bound(?myFocusNode) }\">
+            <ui:throw ui:message=\"Error with focus node: {= ?focusNode }\"/>
+        </ui:if>
+        <ui:if ui:condition=\"{= !bound(?dataGraph) }\">
+            <ui:throw ui:message=\"No data graph provided\"/>
+        </ui:if>
+        <ui:if ui:condition=\"{= !bound(?focusNode) }\">
+            <ui:throw ui:message=\"No focus node specified\"/>
+        </ui:if>
+        <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?dataGraph) }\">
+            <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+                <!--ui:dumpScope ui:message=\"AAA1: BuildLineageGramForInformationAsset - {= ?myFocusNode }\"/-->
+                <edg:DetermineLineageForInformationAsset arg:focusNode=\"{= ?myFocusNode }\" edg:breadth=\"{= ?myBreadth }\" edg:offset=\"{= ?myOffset }\" edg:reach=\"{= ?myReach }\"/>
+                <edg:GenerateJSONforLineageGram arg:diagramType=\"{= edg:DIAGTYPE_UPSTREAM-LINEAGEGRAM }\" edg:activeResource=\"{= ?myFocusNode }\" edg:resource=\"{= ?depictedResourceForFocusNode }\"/>
+            </ui:setContext>
+        </ui:setContext>
+        <edg:DumpTempGraphForLineageGram/>
+    </ui:try>
+    <ui:catch>
+        <swon:Object>
+            <swon:Value arg:name=\"exception\" arg:value=\"{= ?exception }\"/>
+        </swon:Object>
+    </ui:catch>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment "Builds a diagram of upstrean dependencies for a single information asset." ;
+  rdfs:label "Build lineage diagram for resource" ;
+  rdfs:subClassOf edg:LineageGramServices ;
+.
+edg:BuildLineageGramForRelationalDatabase
+  a ui:ViewElement ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:breadth ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:offset ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:reach ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:viewFrame ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:diagramType ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:focusNode ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group let:viewFrameStructure=\"{= COALESCE(ui:decodeNode(ui:getSessionAttribute(&quot;viewframes-structure&quot;)), edg:VFS_LG-ProvenanceModel) }\">
+    <ui:group let:dataGraph=\"{= teamwork:unionGraphForCurrentUser() }\" let:myBreadth=\"{= COALESCE(?breadth, 10) }\" let:myFocusNode=\"{= IRI(spif:decodeURL(?focusNode)) }\" let:myOffset=\"{= COALESCE(?offset, 0) }\" let:myReach=\"{= COALESCE(?reach, 10) }\">
+        <ui:try>
+            <ui:if ui:condition=\"{= !bound(?myFocusNode) }\">
+                <ui:throw ui:message=\"Error with focus node: {= ?focusNode }\"/>
+            </ui:if>
+            <ui:if ui:condition=\"{= !bound(?dataGraph) }\">
+                <ui:throw ui:message=\"No data graph provided\"/>
+            </ui:if>
+            <ui:if ui:condition=\"{= !bound(?focusNode) }\">
+                <ui:throw ui:message=\"No focus node specified\"/>
+            </ui:if>
+            <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?dataGraph) }\">
+                <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+                    <!--ui:dumpScope ui:message=\"AAA1: BuildLineageGramForRelationalDatabase - {= ?myFocusNode }\"/-->
+                    <edg:DetermineProvenanceForAsset arg:dependencyTemplate=\"{= edg:GetRelationalDatabaseProvenance }\" arg:focusNode=\"{= ?myFocusNode }\" edg:breadth=\"{= ?myBreadth }\" edg:dependencyType=\"{= edg:DEPTYPE_DATA-DERIVED-FROM }\" edg:offset=\"{= ?myOffset }\" edg:reach=\"{= ?myReach }\" edg:viewFrameStructure=\"{= ?viewFrameStructure }\"/>
+                    <edg:GenerateJSONforLineageGram arg:diagramType=\"{= edg:DIAGTYPE_UPSTREAM-LINEAGEGRAM }\" edg:activeResource=\"{= ?myFocusNode }\" edg:resource=\"{= ?depictedResourceForFocusNode }\"/>
+                </ui:setContext>
+            </ui:setContext>
+            <edg:DumpTempGraphForLineageGram/>
+        </ui:try>
+        <ui:catch>
+            <swon:Object>
+                <swon:Value arg:name=\"exception\" arg:value=\"{= ?exception }\"/>
+            </swon:Object>
+        </ui:catch>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment "Builds a diagram of upstrean dependencies for a relational database asset" ;
+  rdfs:label "Build lineage diagram for relational database" ;
+  rdfs:subClassOf edg:LineageGramServices ;
+.
+edg:BuildLineageGramForTable
+  a ui:ViewElement ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:breadth ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:offset ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:reach ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:viewFrame ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:diagramType ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:focusNode ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:graph ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group let:viewFrameStructure=\"{= COALESCE(ui:decodeNode(ui:getSessionAttribute(&quot;viewframes-structure&quot;)), edg:VFS_LG-ProvenanceModel) }\">
+    <ui:group let:dataGraph=\"{= teamwork:unionGraphForCurrentUser() }\" let:myBreadth=\"{= COALESCE(?breadth, 10) }\" let:myFocusNode=\"{= IRI(spif:decodeURL(?focusNode)) }\" let:myOffset=\"{= COALESCE(?offset, 0) }\" let:myReach=\"{= COALESCE(?reach, 10) }\">
+        <ui:try>
+            <ui:if ui:condition=\"{= !bound(?myFocusNode) }\">
+                <ui:throw ui:message=\"Error with focus node: {= ?focusNode }\"/>
+            </ui:if>
+            <ui:if ui:condition=\"{= !bound(?dataGraph) }\">
+                <ui:throw ui:message=\"No data graph provided\"/>
+            </ui:if>
+            <ui:if ui:condition=\"{= !bound(?focusNode) }\">
+                <ui:throw ui:message=\"No focus node specified\"/>
+            </ui:if>
+            <ui:setContext ui:queryGraph=\"{= ui:graphWithImports(?dataGraph) }\">
+                <ui:setContext ui:queryGraph=\"{= ui:unionGraph }\">
+                    <!--ui:dumpScope ui:message=\"AAA1: BuildLineageGramForAsset - {= ?myFocusNode }\"/-->
+                    <edg:DetermineProvenanceForAsset arg:dependencyTemplate=\"{= edg:GetTableProvenance }\" arg:focusNode=\"{= ?myFocusNode }\" edg:breadth=\"{= ?myBreadth }\" edg:dependencyType=\"{= edg:DEPTYPE_DATA-DERIVED-FROM }\" edg:offset=\"{= ?myOffset }\" edg:reach=\"{= ?myReach }\" edg:viewFrame=\"{= edg:VF_TargetFrame }\" edg:viewFrameStructure=\"{= ?viewFrameStructure }\"/>
+                    <edg:GenerateJSONforLineageGram arg:diagramType=\"{= edg:DIAGTYPE_UPSTREAM-LINEAGEGRAM }\" edg:activeResource=\"{= ?myFocusNode }\" edg:resource=\"{= ?depictedResourceForFocusNode }\"/>
+                </ui:setContext>
+            </ui:setContext>
+            <edg:DumpTempGraphForLineageGram/>
+        </ui:try>
+        <ui:catch>
+            <swon:Object>
+                <swon:Value arg:name=\"exception\" arg:value=\"{= ?exception }\"/>
+            </swon:Object>
+        </ui:catch>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment "Builds a diagram of upstrean dependencies for a single table asset. " ;
+  rdfs:label "Build lineage diagram for table" ;
+  rdfs:subClassOf edg:LineageGramServices ;
+.
+edg:DataAsset
+  ui:instanceView """
+<ui:group ui:id=\"impact-diagram\" ui:priority=\"{= 10 }\">
+    <edg:LineageGramTemplate arg:dataProvider=\"{= edg:BuildDownstreamDiagramForResource }\" arg:focusNode=\"{= ?this }\" arg:graph=\"{= ?graph }\" edg:viewFrameStructure=\"{= edg:VFS_LG-ImpactDiagram }\" edg:viewFramesGraph=\"{= ?viewFramesGraph }\">
+        <ui:insert ui:into=\"header\">
+            <edg:LineageGramHeader arg:title=\"Downstream Impact of {= ui:label(spl:object(?this, rdf:type)) }: {= ui:label(?this) }\"/>
+        </ui:insert>
+    </edg:LineageGramTemplate>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:DataElement
+  ui:instanceView """
+<ui:group ui:id=\"derivation-map-data-service\" ui:priority=\"{= 10 }\">
+    <!--ui:dumpScope ui:message=\"AAA2: edg:DataElement - derivation-map-data-service\"/-->
+    <ui:resourceView arg:leftNode=\"{= ?leftNode }\" arg:rightNode=\"{= ?this }\" edg:dependencyType=\"{= ?dependencyType }\" edg:linkType=\"{= ?linkType }\" ui:matchIds=\"derivation-map-data-service-other-node-for-data-element\" ui:resource=\"{= ?leftNode }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"downstream-impact\" ui:priority=\"{= -1 }\">
+    <!--ui:dumpScope ui:message=\"AAA: edg:DataElement - downstream-impact\"/-->
+    <edg:DetermineDownstreamDependenciesForResource arg:dependencyTemplate=\"{= edg:GetDependenciesOfDataElement }\" arg:focusNode=\"{= ?this }\" edg:breadth=\"{= ?breadth }\" edg:offset=\"{= ?offset }\" edg:reach=\"{= ?reach }\" edg:sourceViewFrame=\"{= ?sourceViewFrame }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"lineagegram-data-provider\" ui:priority=\"{= 1 }\">
+    <edg:BuildJSONforLineageGramDataProviderDataService arg:dataProvider=\"{= edg:BuildLineageGramForDataElement }\" arg:provider=\"{= edg:DataElement }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"lineagegram-viewframes\" ui:priority=\"{= 10 }\">
+    <edg:BuildJSONforLineageGramViewFramesDataService arg:provider=\"{= edg:DataElement }\" edg:viewFrameStructure=\"{= edg:VFS_LG-DataElementProvenanceModel }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"lineagegram\" ui:priority=\"{= -1 }\">
+    <edg:LineageGramTemplate arg:dataProvider=\"{= edg:BuildLineageGramForDataElement }\" arg:focusNode=\"{= ?this }\" arg:graph=\"{= ?graph }\" edg:viewFrameStructure=\"{= edg:VFS_LG-DataElementProvenanceModel }\" edg:viewFramesGraph=\"{= ?viewFramesGraph }\">
+        <ui:insert ui:into=\"header\">
+            <edg:LineageGramHeader arg:title=\"Lineage for Data Element: {= ui:label(?this) }\"/>
+        </ui:insert>
+    </edg:LineageGramTemplate>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:Database
+  ui:instanceView """
+<ui:group ui:id=\"downstream-impact\" ui:priority=\"{= 10 }\">
+    <edg:DetermineDownstreamDependenciesForResource arg:dependencyTemplate=\"{= edg:GetDependenciesOfDatabase }\" arg:focusNode=\"{= ?this }\" edg:breadth=\"{= ?breadth }\" edg:reach=\"{= ?reach }\" edg:sourceViewFrame=\"{= ?sourceViewFrame }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"lineagegram-data-provider\" ui:priority=\"{= 10 }\">
+    <edg:BuildJSONforLineageGramDataProviderDataService arg:dataProvider=\"{= edg:BuildDownstreamDiagramForResource }\" arg:provider=\"{= edg:Database }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"lineagegram\" ui:priority=\"{= -1 }\">
+    <edg:LineageGramTemplate arg:dataProvider=\"{= edg:BuildDownstreamDiagramForResource }\" arg:focusNode=\"{= ?this }\" arg:graph=\"{= ?graph }\" edg:viewFrameStructure=\"{= edg:VFS_LG-LineageModel }\" edg:viewFramesGraph=\"{= ?viewFramesGraph }\">
+        <ui:insert ui:into=\"header\">
+            <edg:LineageGramHeader arg:title=\"Downstream Traceability Diagram for Database: {= ui:label(?this) }\"/>
+        </ui:insert>
+    </edg:LineageGramTemplate>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:DatabaseColumn
+  ui:instanceView """
+<ui:group ui:id=\"asset-provenance\" ui:priority=\"{= 10 }\">
+    <ui:group let:depictedResourceForFocusNode=\"{= ?this }\">
+        <ui:group let:viewFrameForDependent=\"{= edg:getViewFrameForResource(?this, edg:VFS_LG-ProvenanceModel) }\" let:viewFrameForDepictedResource=\"{= edg:getViewFrameForResource(?depictedResourceForFocusNode, edg:VFS_LG-ProvenanceModel) }\">
+            <!--ui:dumpScope ui:message=\"AAA: edg:DatabaseColumn - asset-provenance on {= ?this }\"/-->
+            <edg:MakeViewFrameResourceNodeLink arg:property=\"{= ?property }\" edg:dependencyType=\"{= ?dependencyType }\" edg:explanation=\"provenance link\" edg:resource=\"{= ?depictedResourceForFocusNode }\" edg:targetNode=\"{= ?targetNode }\" edg:targetViewFrame=\"{= ?viewFrameForDepictedResource }\" edg:viewFrame=\"{= ?viewFrameForDependent }\"/>
+            <edg:DetermineProvenanceForAsset arg:focusNode=\"{= ?this }\" edg:breadth=\"{= ?breadth }\" edg:offset=\"{= ?offset }\" edg:reach=\"{= ?reach - 1 }\" edg:viewFrameStructure=\"{= edg:VFS_LG-ProvenanceModel }\"/>
+        </ui:group>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"data-element-dependency\" ui:priority=\"{= 10 }\">
+    <!--ui:dumpScope ui:message=\"AAA3: edg:DatabaseColumn - dependency on {= ?this }\"/-->
+    <ui:group let:depictedResourceForFocusNode=\"{= ?this }\">
+        <edg:MakeViewFrameResourceNodeLink arg:property=\"{= ?property }\" edg:dependencyType=\"{= ?dependencyType }\" edg:explanation=\"infornation source\" edg:resource=\"{= ?depictedResourceForFocusNode }\" edg:targetNode=\"{= ?targetNode }\" edg:targetViewFrame=\"{= edg:VF_InfoAssetsFrame }\" edg:viewFrame=\"{= edg:VF_InfoAssetsFrame }\"/>
+        <edg:DetermineProvenanceForAsset arg:focusNode=\"{= ?this }\" edg:breadth=\"{= ?breadth }\" edg:offset=\"{= ?offset }\" edg:reach=\"{= ?reach - 1 }\"/>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"impact-diagram\" ui:priority=\"{= -1 }\">
+    <edg:LineageGramTemplate arg:dataProvider=\"{= edg:BuildDownstreamDiagramForResource }\" arg:focusNode=\"{= ?this }\" arg:graph=\"{= ?graph }\" edg:viewFrameStructure=\"{= edg:VFS_LG-DEFAULT }\" edg:viewFramesGraph=\"{= ?viewFramesGraph }\">
+        <ui:insert ui:into=\"header\">
+            <edg:LineageGramHeader arg:title=\"Downstream Traceability for Column: {= ui:label(?this) }\"/>
+        </ui:insert>
+    </edg:LineageGramTemplate>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"information-asset-dependency\" ui:priority=\"{= 10 }\">
+    <ui:group let:depictedResource=\"{= edg:getHighestParentOfResource(edg:columnOf, ?this) }\">
+        <!--ui:dumpScope ui:message=\"AAA: edg:DatabaseColumn - dependency on {= ?this }\"/-->
+        <edg:MakeSingleViewFrameResourceOccurrence edg:activeResource=\"{= ?this }\" edg:resource=\"{= ?depictedResource }\" edg:viewFrame=\"{= edg:VF_ResourcesFrame }\"/>
+        <edg:MakeViewFrameResourceNodeLink arg:property=\"{= ?property }\" edg:dependencyType=\"{= ?dependencyType }\" edg:explanation=\"information asset dependency on database column\" edg:resource=\"{= ?depictedResource }\" edg:targetNode=\"{= ?targetNode }\" edg:targetViewFrame=\"{= ?targetViewFrame }\" edg:viewFrame=\"{= edg:VF_ResourcesFrame }\"/>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"lineagegram-data-provider\" ui:priority=\"{= 10 }\">
+    <edg:BuildJSONforLineageGramDataProviderDataService arg:dataProvider=\"{= edg:BuildLineageGramForDataElement }\" arg:provider=\"{= edg:DatabaseColumn }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"lineagegram-viewframes\" ui:priority=\"{= 10 }\">
+    <edg:BuildJSONforLineageGramViewFramesDataService arg:provider=\"{= edg:DatabaseColumn }\" edg:viewFrameStructure=\"{= edg:VFS_LG-DataElementProvenanceModel }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"lineagegram\" ui:priority=\"{= -1 }\">
+    <edg:LineageGramTemplate arg:dataProvider=\"{= edg:BuildLineageGramForDataElement }\" arg:focusNode=\"{= ?this }\" arg:graph=\"{= ?graph }\" edg:viewFrameStructure=\"{= edg:VFS_LG-DataElementProvenanceModel }\" edg:viewFramesGraph=\"{= ?viewFramesGraph }\">
+        <ui:insert ui:into=\"header\">
+            <edg:LineageGramHeader arg:title=\"Lineage for Database Column: {= ui:label(?this) }\"/>
+        </ui:insert>
+    </edg:LineageGramTemplate>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"upstream-traceability-diagram\" ui:priority=\"{= -1 }\">
+    <edg:NothingKnownLineageGramTemplate arg:focusNode=\"{= ?this }\" arg:graph=\"{= ?graph }\">
+        <ui:insert ui:into=\"header\">
+            <edg:LineageGramHeader arg:title=\"Upstream Traceability Diagram for Column: {= ui:label(?this) }\"/>
+        </ui:insert>
+    </edg:NothingKnownLineageGramTemplate>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:DatabaseTable
+  ui:instanceView """
+<ui:group ui:id=\"downstream-impact\" ui:priority=\"{= 10 }\">
+    <edg:DetermineDownstreamDependenciesForResource arg:dependencyTemplate=\"{= edg:GetDependenciesOfDatabaseTable }\" arg:focusNode=\"{= ?this }\" edg:breadth=\"{= ?breadth }\" edg:reach=\"{= ?reach }\" edg:sourceViewFrame=\"{= ?sourceViewFrame }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"impact-diagram\" ui:priority=\"{= 10 }\">
+    <edg:LineageGramTemplate arg:dataProvider=\"{= edg:BuildImpactGramForAsset }\" arg:focusNode=\"{= ?this }\" arg:graph=\"{= ?graph }\" edg:viewFrameStructure=\"{= edg:VFS_LG-LineageModel }\" edg:viewFramesGraph=\"{= ?viewFramesGraph }\">
+        <ui:insert ui:into=\"header\">
+            <edg:LineageGramHeader arg:title=\"ImpactGram&trade; for Database Table: {= ui:label(?this) }\"/>
+        </ui:insert>
+    </edg:LineageGramTemplate>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:DetermineDownstreamDataElementMappings
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:breadth ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:offset ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:reach ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:focusNode ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group let:myBreadth=\"{= COALESCE(?breadth, 4) }\" let:myOffset=\"{= COALESCE(?offset, 0) }\">
+    <ui:call arg:software=\"{= ?focusNode }\" ui:limit=\"{= ?myBreadth }\" ui:offset=\"{= ?0 }\" ui:template=\"{= edg:GetDownstreamSoftwareDependencies }\" ui:varName=\"downstreamDependencies\">
+        <ui:forEach ui:resultSet=\"{= ?downstreamDependencies }\">
+            <edg:MakeViewFrameResourceNodeAndLinks edg:dependencyType=\"{= edg:DEPTYPE_DATA-INPUT }\" edg:resource=\"{= ?software }\" edg:targetNode=\"{= ?softwareDependency }\" edg:targetViewFrame=\"{= edg:VF_SoftwareFrame }\" edg:viewFrame=\"{= edg:VF_SoftwareFrame }\" edg:viewFrameTier=\"{= ?reach }\"/>
+            <ui:if ui:condition=\"{= ?reach &gt; 1 }\">
+                <ui:group let:knownDependenciesDownstream=\"{= edg:GetViewFrameResourceNodePropertyValue(edg:hasKnownDependenciesDownstream, ?softwareDependency, edg:VF_SoftwareFrame) }\">
+                    <ui:if ui:condition=\"{= (!bound(?knownDependenciesDownstream)) || (!?knownDependenciesDownstream) }\">
+                        <edg:DetermineDownstreamTransitiveImpact arg:focusNode=\"{= ?softwareDependency }\" edg:breadth=\"{= ?myBreadth }\" edg:reach=\"{= ?reach - 1 }\"/>
+                        <edg:SetViewFrameResourceNodePropertyValue arg:property=\"{= edg:knownDependenciesDownstream }\" arg:value=\"{= true }\" edg:resource=\"{= ?softwareDependency }\" edg:viewFrame=\"{= edg:VF_SoftwareFrame }\"/>
+                    </ui:if>
+                </ui:group>
+            </ui:if>
+            <ui:elseif ui:condition=\"{= ?reach = 1 }\">
+                <ui:if ui:condition=\"{= spr:rowCount(?upstreamDependencies) &gt; ?myBreadth }\">
+                    <edg:DetermineNeedForDownstreamPlaceholderNode arg:resource=\"{= ?softwareDependency }\" edg:breadth=\"{= ?myBreadth }\" edg:offset=\"{= ?myOffset }\"/>
+                </ui:if>
+            </ui:elseif>
+        </ui:forEach>
+        <ui:if ui:condition=\"{= (!spr:isEmpty(?downstreamDependencies)) &amp;&amp; (spr:rowCount(?downstreamDependencies) &gt; ?myBreadth) }\">
+            <edg:DetermineNeedForDownstreamPlaceholderNode arg:resource=\"{= ?focusNode }\" edg:breadth=\"{= ?myBreadth }\" edg:offset=\"{= ?myOffset }\"/>
+        </ui:if>
+    </ui:call>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment "Recurses over all impact paths from a data element. The recursion is limited to a specific reach defined by the parameter 'reach'.  The \"breadth\" parameter limits the exploratiom of fan-out. To explore fan-out an additional API parameter will be needed for offset and the downstream node to apply it to." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/diagram/lg/data-asset> ;
+  rdfs:label "Determine downstream data element mappings" ;
+  rdfs:subClassOf edg:LineageGramServices ;
+.
+edg:DetermineDownstreamDependenciesForResource
+  rdfs:seeAlso edg:GetDependenciesOfDatabaseTable ;
+.
+edg:DetermineDownstreamTransitiveImpact
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:breadth ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:offset ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:reach ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:focusNode ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group let:myBreadth=\"{= COALESCE(?breadth, 10) }\" let:myOffset=\"{= COALESCE(?offset, 0) }\">
+    <ui:call arg:resource=\"{= ?focusNode }\" ui:limit=\"{= ?myBreadth }\" ui:offset=\"{= ?myOffset }\" ui:template=\"{= edg:GetDownstreamSoftwareDependencies }\" ui:varName=\"downstreamDependencies\">
+        <ui:forEach ui:resultSet=\"{= ?downstreamDependencies }\">
+            <edg:MakeViewFrameResourceNodeAndLinks edg:dependencyType=\"{= edg:APPLICATION-IO }\" edg:resource=\"{= ?software }\" edg:targetNode=\"{= ?softwareDependency }\" edg:targetViewFrame=\"{= edg:VF_SoftwareFrame }\" edg:viewFrame=\"{= edg:VF_SoftwareFrame }\" edg:viewFrameTier=\"{= ?reach }\"/>
+            <ui:if ui:condition=\"{= ?reach &gt; 1 }\">
+                <ui:group let:knownDependenciesDownstream=\"{= edg:GetViewFrameResourceNodePropertyValue(edg:hasKnownDependenciesDownstream, ?softwareDependency, edg:VF_SoftwareFrame) }\">
+                    <ui:if ui:condition=\"{= (!bound(?knownDependenciesDownstream)) || (!?knownDependenciesDownstream) }\">
+                        <edg:DetermineDownstreamTransitiveImpact arg:focusNode=\"{= ?softwareDependency }\" edg:breadth=\"{= ?myBreadth }\" edg:offset=\"{= 0 }\" edg:reach=\"{= ?reach - 1 }\"/>
+                        <edg:SetViewFrameResourceNodePropertyValue arg:property=\"{= edg:knownDependenciesDownstream }\" arg:value=\"{= true }\" edg:resource=\"{= ?softwareDependency }\" edg:viewFrame=\"{= edg:VF_SoftwareFrame }\"/>
+                    </ui:if>
+                </ui:group>
+            </ui:if>
+        </ui:forEach>
+    </ui:call>
+    <ui:call arg:software=\"{= ?focusNode }\" ui:limit=\"{= 1 }\" ui:offset=\"{= ?myOffset + ?myBreadth }\" ui:template=\"{= edg:GetDownstreamSoftwareDependencies }\" ui:varName=\"lookAheadCheck\">
+        <!--ui:dumpResultSet ui:message=\"AAA: edg:DetermineDownstreamTransitiveImpact - {= ?focusNode }\"
+  ui:resultSet=\"{= ?lookAhedCheck }\"/-->
+        <ui:if ui:condition=\"{= spr:rowCount(?lookAheadCheck) &gt; 0 }\">
+            <edg:DetermineNeedForDownstreamPlaceholderNode arg:dependencyTemplate=\"{= edg:GetDownstreamSoftwareDependencies }\" arg:resource=\"{= ?focusNode }\" edg:breadth=\"{= ?myBreadth }\" edg:dependencyType=\"{= edg:DEPTYPE_MORE-FANOUT }\" edg:offset=\"{= ?myOffset }\" edg:outOfBreadth=\"{= ?moreBreadth }\" edg:placeholderType=\"{= edg:PlaceholderForMoreFanin }\" provo:wasGeneratedBy=\"{= edg:DetermineDownstreamTransitiveImpact }\"/>
+        </ui:if>
+    </ui:call>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment """Recurses over all impact paths from a resource. The recursion is limited to a specific reach defined by the parameter 'reach'.  The \"breadth\" parameter limits the exploratiom of fan-out. To explore fan-out an additional API parameter will be needed for offset and the downstream node to apply it to.
+
+This should be replaced with the new approach used with edg:GetSoftwareDependents.""" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/diagram/lg/data-asset> ;
+  rdfs:label "Determine downstream transitive impact of resource" ;
+  rdfs:seeAlso edg:GetSoftwareDependents ;
+  rdfs:subClassOf edg:LineageGramServices ;
+.
+edg:DetermineLineageForInformationAsset
+  a ui:ViewElement ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:breadth ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:offset ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:reach ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:focusNode ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <!--ui:dumpScope ui:message=\"AAA1: DetermineLineageForInformationAsset - {= ?focusNode }\"/-->
+    <ui:if ui:condition=\"{= ?reach &gt; 1 }\">
+        <edg:MakeSingleViewFrameResourceOccurrence edg:resource=\"{= ?focusNode }\" edg:viewFrame=\"{= edg:VF_InfoAssetsFrame }\"/>
+        <ui:call arg:resource=\"{= ?focusNode }\" ui:limit=\"{= ?breadth }\" ui:offset=\"{= ?offset }\" ui:template=\"{= edg:GetInformationAssetDependency }\" ui:varName=\"dependencies\">
+            <!--ui:dumpResultSet ui:message=\"AAA2: DetermineLineageForInformationAsset {= ?focusNode }\"
+  ui:resultSet=\"{= ?dependencies }\"/-->
+            <ui:forEach ui:resultSet=\"{= ?dependencies }\">
+                <ui:resourceView edg:breadth=\"{= ?breadth }\" edg:dependencyType=\"{= ?dependencyType }\" edg:offset=\"{= ?offset }\" edg:reach=\"{= ?reach }\" edg:targetNode=\"{= ?focusNode }\" edg:targetViewFrame=\"{= edg:VF_InfoAssetsFrame }\" ui:matchIds=\"information-asset-dependency\" ui:resource=\"{= ?dependency }\"/>
+            </ui:forEach>
+        </ui:call>
+    </ui:if>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment "Determines the upstrean dependencies for a chain of information assets." ;
+  rdfs:label "Determine lineage for information asset" ;
+  rdfs:subClassOf edg:Elements ;
+.
+edg:DetermineProvenanceForAsset
+  rdfs:seeAlso edg:BuildLineageGramForDataElement ;
+.
+edg:GenerateDependencyLineageGramForResource
+  a ui:ViewElement ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:breadth ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:reach ;
+      spl:valueType xsd:integer ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:focusNode ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:forEach ui:limit=\"{= ?breadth }\" ui:resultSet=\"{#
+            SELECT DISTINCT ?software
+            WHERE {
+                {
+                    ?lineageModel edg:producesInformationAsset ?focusNode .
+                    ?lineageModel ((edg:usesPipeline/(edg:pipelineStep)?))?/edg:usesSoftwareProgram ?software .
+                }
+                UNION
+                {
+                    FILTER NOT EXISTS {
+                        ?lineageModel edg:producesInformationAsset ?focusNode .
+                    } .
+                    {
+                        ?output edg:columnOf|edg:dataElementOf ?focusNode .
+                        ?softwareProgram edg:output ?output .
+                        ?softwareProgram a ?softwareProgramType .
+                        ?softwareProgramType (rdfs:subClassOf)* edg:SoftwareProgram .
+                        BIND (?softwareProgram AS ?software) .
+                    }
+                    UNION
+                    {
+                        {
+                            FILTER NOT EXISTS {
+                                ?output edg:columnOf|edg:dataElementOf ?focusNode .
+                            } .
+                        } .
+                        ?softwareFunction edg:output ?focusNode .
+                        ?softwareFunction a ?softwareFunctionType .
+                        ?softwareFunctionType (rdfs:subClassOf)* edg:SoftwareFunction .
+                        ?software edg:usesSoftwareFunction ?softwareFunction .
+                    } .
+                } .
+            } }\">
+        <edg:MakeViewFrameResourceNodeAndLinks edg:dependencyType=\"{= edg:DEPTYPE_INFO-OUTPUT }\" edg:resource=\"{= ?software }\" edg:targetNode=\"{= ?focusNode }\" edg:targetViewFrame=\"{= edg:VF_EnterpriseFrame }\" edg:viewFrame=\"{= edg:VF_SoftwareFrame }\" edg:viewFrameTier=\"{= ?reach }\"/>
+        <edg:DetermineDownstreamTransitiveImpact arg:focusNode=\"{= ?software }\" edg:breadth=\"{= ?breadth }\" edg:reach=\"{= ?reach }\"/>
+    </ui:forEach>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:comment "Builds a dependency lineagegram for a single resource. The resource could be a data element or an information asset." ;
+  rdfs:label "Generate impact  lineageGram for resource" ;
+  rdfs:subClassOf swa:Elements ;
+.
+edg:GenerateJSONforInformationAssetToInformationAsset
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:leftNode ;
+      spl:valueType edg:InformationAsset ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType edg:InformationAsset ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <swon:Object>
+        <swon:Values arg:name=\"nodes\">
+            <ui:resourceView arg:collapsed=\"false\" ui:matchIds=\"derivation-map-composite-node\" ui:resource=\"{= ?leftNode }\"/>
+            <ui:resourceView ui:matchIds=\"derivation-map-composite-node\" ui:resource=\"{= ?resource }\"/>
+        </swon:Values>
+        <swon:Value arg:name=\"edges\">
+            <swon:Array>
+                <edg:BuildJSONforDerviationMapLink arg:explanation=\"GenerateJSONforSoftwareExecutabeToInformationAsset\" arg:label=\"derived from\" arg:leftNode=\"{= ?leftNode }\" arg:reverseNodes=\"{= true }\" arg:rightNode=\"{= ?resource }\"/>
+                <edg:GenerateJSONforDerivationMapLinks arg:leftNode=\"{= ?leftNode }\" arg:rightNode=\"{= ?resource }\"/>
+            </swon:Array>
+        </swon:Value>
+    </swon:Object>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/diagram/lg/data-asset> ;
+  rdfs:label "Generate JSON for informatin asset to information asset" ;
+  rdfs:subClassOf edg:DerivationMapServices ;
+.
+edg:GenerateJSONforSoftwareExecutabeToInformationAsset
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType edg:InformationAsset ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:software ;
+      spl:valueType edg:SoftwareExecutable ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:containerId=\"OUTPUTS_{= ui:uniqueId() }\">
+    <ui:call arg:resource=\"{= ?resource }\" arg:software=\"{= ?software }\" ui:template=\"{= edg:GetOutputsNeededByInformationAsset }\" ui:varName=\"outputs\">
+        <!--ui:dumpResultSet ui:message=\"AAA1: edg:GenerateJSONforSoftwareExecutabeToInformationAsset\"
+
+  ui:resultSet=\"{= ?outputs }\"/-->
+        <swon:Object>
+            <swon:Values arg:name=\"nodes\">
+                <ui:resourceView arg:collapsed=\"false\" ui:matchIds=\"derivation-map-composite-node\" ui:resource=\"{= ?software }\"/>
+                <ui:resourceView ui:matchIds=\"derivation-map-composite-node\" ui:resource=\"{= ?resource }\"/>
+                <ui:if ui:condition=\"{= !spr:isEmpty(?outputs) }\">
+                    <edg:BuildJSONforLineageGramNode arg:icon=\"fa fa-table\" arg:label=\"Outputs\" arg:node=\"{= ?containerId }\"/>
+                    <ui:forEach ui:resultSet=\"{= ?outputs }\">
+                        <edg:BuildJSONforLineageGramNode arg:collapsed=\"{= true }\" arg:icon=\"fa fa-table\" arg:label=\"{= ui:label(?output) }\" arg:node=\"{= ?output }\" arg:parent=\"{= ?containerId }\"/>
+                    </ui:forEach>
+                </ui:if>
+            </swon:Values>
+            <swon:Value arg:name=\"edges\">
+                <swon:Array>
+                    <edg:BuildJSONforDerviationMapLink arg:explanation=\"GenerateJSONforSoftwareExecutabeToInformationAsset\" arg:label=\"contributes to\" arg:leftNode=\"{= ?software }\" arg:rightNode=\"{= ?resource }\"/>
+                    <ui:if ui:condition=\"{= !spr:isEmpty(?outputs) }\">
+                        <edg:BuildJSONforDerviationMapLink arg:explanation=\"GenerateJSONforSoftwareExecutabeToInformationAsset\" arg:label=\"outputs\" arg:leftNode=\"{= ?software }\" arg:rightNode=\"{= ?containerId }\"/>
+                        <edg:BuildJSONforDerviationMapLink arg:explanation=\"GenerateJSONforSoftwareExecutabeToInformationAsset\" arg:label=\"derived from\" arg:leftNode=\"{= ?resource }\" arg:rightNode=\"{= ?containerId }\"/>
+                    </ui:if>
+                    <edg:GenerateJSONforDerivationMapLinks arg:leftNode=\"{= ?software }\" arg:rightNode=\"{= ?resource }\"/>
+                </swon:Array>
+            </swon:Value>
+        </swon:Object>
+    </ui:call>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/diagram/lg/data-asset> ;
+  rdfs:label "Generate JSON for software executable to information asset" ;
+  rdfs:subClassOf edg:DerivationMapServices ;
+.
+edg:GenerateJSONforTableToTableDependencyDetails-DEPRECATED
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:linkType ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:leftNode ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:rightNode ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group>
+    <!--ui:dumpScope ui:message=\"AAA1: edg:GenerateJSONforTableToTableDependencyDetails\"/-->
+    <ui:call arg:source=\"{= ?leftNode }\" arg:target=\"{= ?rightNode }\" edg:linkType=\"{= ?linkType }\" ui:template=\"{= edg:GetTableToTableDirectMappingDetails }\" ui:varName=\"tableMappings\">
+        <!--ui:dumpResultSet ui:message=\"AAA2: edg:GenerateJSONforTableToTableDependencyDetails {= ?leftNode } to {= ?rightNode }\"
+  ui:resultSet=\"{= ?tableMappings }\"/-->
+        <ui:if ui:condition=\"{= !spr:isEmpty(?tableMappings) }\">
+            <ui:group let:countOfMappedColumns=\"{= edg:getCountOfResourcesFromResultSet(1, ?tableMappings) }\">
+                <ui:group let:countOfUnmappedColumns=\"{= spr:rowCount(?tableMappings) - ?countOfMappedColumns }\" let:mappedContainer=\"Mappings_{= ui:uniqueId() }\" let:sourceColumnsContainer=\"SOURCE-COLUMNS_{= ui:uniqueId() }\" let:unmappedContainer=\"NoMappings_{= ui:uniqueId() }\">
+                    <!--ui:dumpScope ui:message=\"AAA3: edg:GenerateJSONforTableToTableDependencyDetails\"/-->
+                    <swon:Object>
+                        <swon:Value arg:name=\"nodes\">
+                            <swon:Array>
+                                <ui:resourceView ui:matchIds=\"derivation-map-composite-node\" ui:resource=\"{= ?leftNode }\"/>
+                                <edg:BuildJSONforLineageGramNode arg:collapsed=\"{= true }\" arg:label=\"Columns\" arg:node=\"{= ?sourceColumnsContainer }\" arg:parent=\"{= ?leftNode }\"/>
+                                <ui:resourceView ui:matchIds=\"derivation-map-composite-node\" ui:resource=\"{= ?rightNode }\"/>
+                                <edg:BuildJSONforLineageGramNode arg:collapsed=\"{= true }\" arg:label=\"Mapped Columns [{= str(?countOfMappedColumns) }]\" arg:node=\"{= ?mappedContainer }\" arg:parent=\"{= ?rightNode }\"/>
+                                <edg:BuildJSONforLineageGramNode arg:collapsed=\"{= true }\" arg:label=\"Unmapped Columns [{= str(?countOfUnmappedColumns) }]\" arg:node=\"{= ?unmappedContainer }\" arg:parent=\"{= ?rightNode }\"/>
+                                <ui:forEach ui:resultSet=\"{= ?tableMappings }\">
+                                    <ui:if ui:condition=\"{= bound(?mappedToColumn) }\">
+                                        <ui:group let:mapping=\"mapping-{= ui:uniqueId() }\">
+                                            <edg:BuildJSONforLineageGramNode arg:collapsed=\"{= false }\" arg:node=\"{= ?column }\" arg:parent=\"{= ?mappedContainer }\"/>
+                                            <edg:BuildJSONforLineageGramNode arg:collapsed=\"{= false }\" arg:node=\"{= ?mappedToColumn }\" arg:parent=\"{= ?sourceColumnsContainer }\"/>
+                                            <edg:MakeDerivationMapLink arg:id=\"{= str(?mapping) }\" arg:label=\"=\" edg:source=\"{= str(?column) }\" edg:target=\"{= str(?mappedToColumn) }\"/>
+                                        </ui:group>
+                                    </ui:if>
+                                    <ui:else>
+                                        <edg:BuildJSONforLineageGramNode arg:collapsed=\"{= false }\" arg:node=\"{= ?column }\" arg:parent=\"{= ?unmappedContainer }\"/>
+                                    </ui:else>
+                                </ui:forEach>
+                            </swon:Array>
+                        </swon:Value>
+                        <swon:Value arg:name=\"edges\">
+                            <swon:Array>
+                                <edg:GenerateJSONforDerivationMapLinks arg:leftNode=\"{= ?leftNode }\" arg:rightNode=\"{= ?rightNode }\"/>
+                            </swon:Array>
+                        </swon:Value>
+                    </swon:Object>
+                </ui:group>
+            </ui:group>
+        </ui:if>
+        <ui:else>
+            <edg:BuildJSONforDerivationMapNodePair arg:inverse=\"{= true }\" arg:label=\"mappings\" arg:leftNode=\"{= ?leftNode }\" arg:rightNode=\"{= ?rightNode }\"/>
+        </ui:else>
+    </ui:call>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/diagram/lg/software> ;
+  rdfs:label "Generate JSON for table to table dependency details based on provenance and mappings showing mapped and unmapped columns." ;
+  rdfs:subClassOf edg:DerivationMapServices ;
+.
+edg:GenerateTableMappingNodes
+  a ui:Service ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:flow ;
+      spl:valueType edg:Flow ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:source ;
+      spl:valueType edg:ServiceEndpoint ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate edg:target ;
+      spl:valueType edg:ServiceEndpoint ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:leftNode ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:parent ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:rightNode ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:group let:sourceDirectMappings=\"SourceDirectMappings_{= ui:uniqueId() }\" let:sourceDirectMappingsCollection=\"{= spl:object(?source, edg:mappingsCollection) }\" let:targetDirectMappings=\"TargetDirectMappings_{= ui:uniqueId() }\" let:targetDirectMappingsCollection=\"{= spl:object(?target, edg:mappingsCollection) }\">
+    <ui:resourceView arg:leftNode=\"{= ?leftNode }\" arg:rightNode=\"{= ?rightNode }\" ui:matchIds=\"derivation-map-composite-node\" ui:resource=\"{= ?leftNode }\"/>
+    <ui:resourceView arg:leftNode=\"{= ?leftNode }\" arg:rightNode=\"{= ?rightNode }\" ui:matchIds=\"derivation-map-composite-node\" ui:resource=\"{= ?rightNode }\"/>
+    <edg:BuildJSONforLineageGramNode arg:collapsed=\"{= true }\" arg:label=\"{= CONCAT(&quot;Data Flow: &quot;, ui:label(?flow)) }\" arg:node=\"{= ?flow }\" arg:parent=\"{= ?parent }\"/>
+    <ui:call arg:class=\"{= edg:LogicalFlow }\" arg:property=\"{= edg:realizedAs }\" arg:resource=\"{= ?flow }\" ui:template=\"{= edg:getSubjectsForGivenPropertyAndObject }\" ui:varName=\"logicalFlows\">
+        <ui:if ui:condition=\"{= !spr:isEmpty(?logicalFlows) }\">
+            <ui:group let:logicalFlowsContainer=\"LFLOWS_{= ui:uniqueId() }\">
+                <edg:BuildJSONforLineageGramNode arg:collapsed=\"{= true }\" arg:icon=\"fa fa-map\" arg:label=\"Implements Logical Flows\" arg:node=\"{= ?logicalFlowsContainer }\" arg:parent=\"{= ?flow }\"/>
+                <ui:forEach ui:resultSet=\"{= ?logicalFlows }\">
+                    <ui:group let:logicalFlowOccurrence=\"{= CONCAT(&quot;~~&quot;, spif:camelCase(?label)) }\">
+                        <edg:BuildJSONforLineageGramNode arg:label=\"{= ?label }\" arg:node=\"{= ?value }\" arg:occurrence=\"{= ?logicalFlowOccurrence }\" arg:parent=\"{= ?logicalFlowsContainer }\"/>
+                    </ui:group>
+                </ui:forEach>
+            </ui:group>
+        </ui:if>
+    </ui:call>
+    <edg:GenerateContainerForResourceAndProperty arg:class=\"{= edg:DataPackage }\" arg:property=\"{= edg:transfersPackage }\" arg:resource=\"{= ?flow }\" arg:text=\"Transferred Data Packages\"/>
+    <ui:if ui:condition=\"{= bound(?source) }\">
+        <edg:BuildJSONforLineageGramNode arg:label=\"{= CONCAT(&quot;Endpoint: &quot;, ui:label(?source)) }\" arg:node=\"{= ?source }\" arg:parent=\"{= ?leftNode }\"/>
+        <ui:if ui:condition=\"{= bound(?sourceDirectMappingsCollection) }\">
+            <ui:call arg:resource=\"{= ?sourceDirectMappingsCollection }\" ui:template=\"{= edg:getDirectMappings }\" ui:varName=\"sourceMappings\">
+                <edg:BuildJSONforLineageGramNode arg:collapsed=\"{= true }\" arg:icon=\"fa fa-map\" arg:label=\"Direct Mappings - [{= spr:rowCount(?sourceMappings) }]\" arg:node=\"{= ?sourceDirectMappingsCollection }\" arg:parent=\"{= ?source }\"/>
+                <ui:forEach ui:resultSet=\"{= ?sourceMappings }\">
+                    <edg:BuildJSONforLineageGramNode arg:node=\"{= spl:object(?mapping, edg:output) }\" arg:parent=\"{= ?sourceDirectMappingsCollection }\"/>
+                </ui:forEach>
+            </ui:call>
+        </ui:if>
+    </ui:if>
+    <ui:if ui:condition=\"{= bound(?target) }\">
+        <edg:BuildJSONforLineageGramNode arg:label=\"{= CONCAT(&quot;Endpoint: &quot;, ui:label(?target)) }\" arg:node=\"{= ?target }\" arg:parent=\"{= ?rightNode }\"/>
+        <ui:if ui:condition=\"{= bound(?targetDirectMappingsCollection) }\">
+            <ui:call arg:resource=\"{= ?targetDirectMappingsCollection }\" ui:template=\"{= edg:getDirectMappings }\" ui:varName=\"targetMappings\">
+                <edg:BuildJSONforLineageGramNode arg:collapsed=\"{= true }\" arg:icon=\"fa fa-map\" arg:label=\"Direct Mappings - [{= spr:rowCount(?targetMappings) }]\" arg:node=\"{= ?targetDirectMappingsCollection }\" arg:parent=\"{= ?target }\"/>
+                <ui:forEach ui:resultSet=\"{= ?targetMappings }\">
+                    <edg:BuildJSONforLineageGramNode arg:node=\"{= spl:object(?mapping, edg:output) }\" arg:parent=\"{= ?targetDirectMappingsCollection }\"/>
+                </ui:forEach>
+            </ui:call>
+        </ui:if>
+    </ui:if>
+</ui:group>
+"""^^ui:Literal ;
+  ui:responseType ui:JSON ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/diagram/lg/software> ;
+  rdfs:label "Generate Table Mapping Nodes" ;
+  rdfs:subClassOf edg:DerivationMapServices ;
+.
+edg:GetDependenciesOfDatabase
+  a spin:Template ;
+  spin:body [
+      a sp:Select ;
+      sp:distinct true ;
+      sp:resultVariables (
+          [
+            sp:varName "software" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:TriplePath ;
+            sp:object [
+                sp:varName "focusNode" ;
+              ] ;
+            sp:path [
+                a sp:SeqPath ;
+                sp:path1 edg:input ;
+                sp:path2 [
+                    a sp:ModPath ;
+                    sp:modMax -1 ;
+                    sp:modMin 0 ;
+                    sp:subPath [
+                        a sp:SeqPath ;
+                        sp:path1 edg:columnOf ;
+                        sp:path2 edg:tableOf ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:subject [
+                sp:varName "software" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:focusNode ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:private true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/diagram/lg/software> ;
+  rdfs:label "Get dependencies of database" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:GetDependenciesOfDatabaseTable
+  a spin:Template ;
+  spin:body [
+      a sp:Select ;
+      sp:distinct true ;
+      sp:resultVariables (
+          [
+            sp:varName "software" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:TriplePath ;
+            sp:object [
+                sp:varName "focusNode" ;
+              ] ;
+            sp:path [
+                a sp:SeqPath ;
+                sp:path1 edg:input ;
+                sp:path2 [
+                    a sp:ModPath ;
+                    sp:modMax -1 ;
+                    sp:modMin 0 ;
+                    sp:subPath edg:columnOf ;
+                  ] ;
+              ] ;
+            sp:subject [
+                sp:varName "software" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:focusNode ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:private true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/diagram/lg/software> ;
+  rdfs:label "Get  dependencies of database table" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:GetRelationalDatabaseProvenance
+  a spin:Template ;
+  spin:body [
+      a sp:Select ;
+      sp:distinct true ;
+      sp:resultVariables (
+          [
+            sp:varName "dependency" ;
+          ]
+          [
+            sp:varName "property" ;
+          ]
+          [
+            sp:varName "countOfMappings" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Union ;
+            sp:elements (
+                (
+                  [
+                    a sp:SubQuery ;
+                    sp:query [
+                        a sp:Select ;
+                        sp:distinct true ;
+                        sp:groupBy (
+                            [
+                              sp:varName "dependency" ;
+                            ]
+                            [
+                              sp:varName "property" ;
+                            ]
+                          ) ;
+                        sp:resultVariables (
+                            [
+                              sp:varName "dependency" ;
+                            ]
+                            [
+                              sp:varName "property" ;
+                            ]
+                          ) ;
+                        sp:where (
+                            [
+                              a sp:TriplePath ;
+                              sp:object provo:wasDerivedFrom ;
+                              sp:path [
+                                  a sp:ModPath ;
+                                  sp:modMax -2 ;
+                                  sp:modMin 0 ;
+                                  sp:subPath rdfs:subPropertyOf ;
+                                ] ;
+                              sp:subject [
+                                  sp:varName "property" ;
+                                ] ;
+                            ]
+                            [
+                              sp:object [
+                                  sp:varName "dependency" ;
+                                ] ;
+                              sp:predicate [
+                                  sp:varName "property" ;
+                                ] ;
+                              sp:subject [
+                                  sp:varName "resource" ;
+                                ] ;
+                            ]
+                            [
+                              sp:object [
+                                  sp:varName "dependencyClass" ;
+                                ] ;
+                              sp:predicate rdf:type ;
+                              sp:subject [
+                                  sp:varName "dependency" ;
+                                ] ;
+                            ]
+                            [
+                              a sp:TriplePath ;
+                              sp:object provo:Entity ;
+                              sp:path [
+                                  a sp:ModPath ;
+                                  sp:modMax -2 ;
+                                  sp:modMin 1 ;
+                                  sp:subPath rdfs:subClassOf ;
+                                ] ;
+                              sp:subject [
+                                  sp:varName "dependencyClass" ;
+                                ] ;
+                            ]
+                          ) ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    a sp:SubQuery ;
+                    sp:query [
+                        a sp:Select ;
+                        sp:distinct true ;
+                        sp:groupBy (
+                            [
+                              sp:varName "dependency" ;
+                            ]
+                            [
+                              sp:varName "property" ;
+                            ]
+                          ) ;
+                        sp:resultVariables (
+                            [
+                              sp:varName "dependency" ;
+                            ]
+                            [
+                              sp:varName "property" ;
+                            ]
+                            [
+                              sp:expression [
+                                  a sp:Count ;
+                                  sp:expression [
+                                      sp:varName "sofwareFunction" ;
+                                    ] ;
+                                ] ;
+                              sp:varName "countOfMappings" ;
+                            ]
+                          ) ;
+                        sp:where (
+                            [
+                              sp:object [
+                                  sp:varName "resource" ;
+                                ] ;
+                              sp:predicate edg:tableOf ;
+                              sp:subject [
+                                  sp:varName "table" ;
+                                ] ;
+                            ]
+                            [
+                              sp:object [
+                                  sp:varName "table" ;
+                                ] ;
+                              sp:predicate edg:columnOf ;
+                              sp:subject [
+                                  sp:varName "column" ;
+                                ] ;
+                            ]
+                            [
+                              sp:object [
+                                  sp:varName "anotherColumn" ;
+                                ] ;
+                              sp:predicate edg:mapsToColumn ;
+                              sp:subject [
+                                  sp:varName "column" ;
+                                ] ;
+                            ]
+                            [
+                              sp:object [
+                                  sp:varName "dependencyOnTable" ;
+                                ] ;
+                              sp:predicate edg:columnOf ;
+                              sp:subject [
+                                  sp:varName "anotherColumn" ;
+                                ] ;
+                            ]
+                            [
+                              sp:object [
+                                  sp:varName "dependency" ;
+                                ] ;
+                              sp:predicate edg:tableOf ;
+                              sp:subject [
+                                  sp:varName "dependencyOnTable" ;
+                                ] ;
+                            ]
+                            [
+                              a sp:Bind ;
+                              sp:expression edg:mapsToColumn ;
+                              sp:variable [
+                                  sp:varName "property" ;
+                                ] ;
+                            ]
+                          ) ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    a sp:SubQuery ;
+                    sp:query [
+                        a sp:Select ;
+                        sp:distinct true ;
+                        sp:groupBy (
+                            [
+                              sp:varName "dependency" ;
+                            ]
+                            [
+                              sp:varName "property" ;
+                            ]
+                          ) ;
+                        sp:resultVariables (
+                            [
+                              sp:varName "dependency" ;
+                            ]
+                            [
+                              sp:varName "property" ;
+                            ]
+                            [
+                              sp:expression [
+                                  a sp:Count ;
+                                  sp:expression [
+                                      sp:varName "sofwareFunction" ;
+                                    ] ;
+                                ] ;
+                              sp:varName "countOfMappings" ;
+                            ]
+                          ) ;
+                        sp:where (
+                            [
+                              sp:object [
+                                  sp:varName "resource" ;
+                                ] ;
+                              sp:predicate edg:tableOf ;
+                              sp:subject [
+                                  sp:varName "table" ;
+                                ] ;
+                            ]
+                            [
+                              sp:object [
+                                  sp:varName "table" ;
+                                ] ;
+                              sp:predicate edg:columnOf ;
+                              sp:subject [
+                                  sp:varName "column" ;
+                                ] ;
+                            ]
+                            [
+                              sp:object [
+                                  sp:varName "column" ;
+                                ] ;
+                              sp:predicate edg:output ;
+                              sp:subject [
+                                  sp:varName "sofwareFunction" ;
+                                ] ;
+                            ]
+                            [
+                              sp:object [
+                                  sp:varName "anotherColumn" ;
+                                ] ;
+                              sp:predicate edg:input ;
+                              sp:subject [
+                                  sp:varName "sofwareFunction" ;
+                                ] ;
+                            ]
+                            [
+                              sp:object [
+                                  sp:varName "dependencyOnTable" ;
+                                ] ;
+                              sp:predicate edg:columnOf ;
+                              sp:subject [
+                                  sp:varName "anotherColumn" ;
+                                ] ;
+                            ]
+                            [
+                              sp:object [
+                                  sp:varName "dependency" ;
+                                ] ;
+                              sp:predicate edg:tableOf ;
+                              sp:subject [
+                                  sp:varName "dependencyOnTable" ;
+                                ] ;
+                            ]
+                            [
+                              a sp:Bind ;
+                              sp:expression edg:derivedByFunction ;
+                              sp:variable [
+                                  sp:varName "property" ;
+                                ] ;
+                            ]
+                          ) ;
+                      ] ;
+                  ]
+                )
+              ) ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType edg:RelationalDatabase ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "Returns the provenance of a relational database." ;
+  rdfs:label "Get relational database provenance" ;
+  rdfs:subClassOf edg:DerivationMapSelectTemplates ;
+.
+edg:GetTableSoftwareDependents
+  a spin:Template ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "software" ;
+          ]
+          [
+            sp:varName "softwareType" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "resource" ;
+              ] ;
+            sp:predicate edg:columnOf ;
+            sp:subject [
+                sp:varName "anInput" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "anInput" ;
+              ] ;
+            sp:predicate edg:input ;
+            sp:subject [
+                sp:varName "software" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "softwareType" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "software" ;
+              ] ;
+          ]
+          [
+            a sp:TriplePath ;
+            sp:object edg:SoftwareExecutable ;
+            sp:path [
+                a sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "softwareType" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType edg:InformationAsset ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "Returns all software executables that have a given resource as input" ;
+  rdfs:label "get table software dependents" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:GetTableToTableMappingDetails-DEPRECATED
+  a spin:Template ;
+  spin:body [
+      a sp:Select ;
+      sp:distinct true ;
+      sp:resultVariables (
+          [
+            sp:varName "column" ;
+          ]
+          [
+            sp:varName "mappedToColumn" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "rightNode" ;
+              ] ;
+            sp:predicate edg:columnOf ;
+            sp:subject [
+                sp:varName "column" ;
+              ] ;
+          ]
+          [
+            a sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "mappedToColumn" ;
+                    ] ;
+                  sp:predicate edg:mapsToColumn ;
+                  sp:subject [
+                      sp:varName "column" ;
+                    ] ;
+                ]
+                [
+                  sp:object [
+                      sp:varName "leftNode" ;
+                    ] ;
+                  sp:predicate edg:columnOf ;
+                  sp:subject [
+                      sp:varName "mappedToColumn" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:leftNode ;
+      spl:valueType edg:Table ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:rightNode ;
+      spl:valueType edg:Table ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "Returns the mapped columns of the right node table (the dependent table)." ;
+  rdfs:label "Get table to table mapping details." ;
+  rdfs:subClassOf edg:DerivationMapSelectTemplates ;
+.
+edg:InformationAsset
+  vaem:todo """Improve:
+
+<ui:group ui:id=\"derivation-map-data-service\" ui:priority=\"10\">
+    <edg:FallbackDerivationMapDataService arg:leftNode=\"{= ?leftNode }\"
+                                          arg:rightNode=\"{= ?rightNode }\"
+                                          edg:linkType=\"contributes to\"/>
+</ui:group>
+
+with:
+
+show what is produced be the software and how it contributes to the information asset.""" ;
+.
+edg:LogicalAttribute
+  ui:instanceView """
+<ui:group let:myResourceType=\"{= spl:object(?this, rdf:type) }\" ui:id=\"derivation-map-composite-node\" ui:priority=\"{= 10 }\">
+    <edg:BuildJSONforLogicalAttributeCompositeNode arg:node=\"{= ?this }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"derivation-map-data-service\" ui:priority=\"{= 10 }\">
+    <ui:resourceView arg:leftNode=\"{= ?leftNode }\" arg:rightNode=\"{= ?this }\" ui:matchIds=\"derivation-map-data-service-other-node\" ui:resource=\"{= ?leftNode }\"/>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:RelationalDatabase
+  ui:instanceView """
+<ui:group ui:id=\"asset-provenance\" ui:priority=\"{= 10 }\">
+    <ui:group let:depictedResourceForFocusNode=\"{= ?this }\" let:theExplanation=\"{= COALESCE(?explanation, &quot;provenance link&quot;) }\">
+        <ui:group let:viewFrameForDependent=\"{= edg:getViewFrameForResource(?this, edg:VFS_LG-ProvenanceModel) }\" let:viewFrameForDepictedResource=\"{= edg:getViewFrameForResource(?depictedResourceForFocusNode, edg:VFS_LG-ProvenanceModel) }\">
+            <!--ui:dumpScope ui:message=\"AAA: edg:RelationalDatabase - dependency on {= ?this }\"/-->
+            <edg:MakeViewFrameResourceNodeLink arg:property=\"{= ?property }\" edg:dependencyType=\"{= ?dependencyType }\" edg:explanation=\"{= ?theExplanation }\" edg:resource=\"{= ?depictedResourceForFocusNode }\" edg:targetNode=\"{= ?targetNode }\" edg:targetViewFrame=\"{= ?viewFrameForDepictedResource }\" edg:viewFrame=\"{= ?viewFrameForDependent }\"/>
+            <edg:DetermineProvenanceForAsset arg:dependencyTemplate=\"{= edg:GetRelationalDatabaseProvenance }\" arg:focusNode=\"{= ?this }\" edg:breadth=\"{= ?breadth }\" edg:offset=\"{= ?offset }\" edg:reach=\"{= ?reach - 1 }\" edg:viewFrameStructure=\"{= edg:VFS_LG-ProvenanceModel }\"/>
+        </ui:group>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"derivation-map-composite-node-maker\" ui:priority=\"{= 10 }\">
+    <edg:MakeDerivationMapNodesForDatabaseTableCompositeNode arg:node=\"{= ?this }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"lineagegram-data-provider\" ui:priority=\"{= 10 }\">
+    <edg:BuildJSONforLineageGramDataProviderDataService arg:dataProvider=\"{= edg:BuildLineageGramForRelationalDatabase }\" arg:provider=\"{= edg:RelationalDatabase }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"lineagegram-viewframes\" ui:priority=\"{= 10 }\">
+    <edg:BuildJSONforLineageGramViewFramesDataService arg:provider=\"{= edg:RelationalDatabase }\" edg:viewFrameStructure=\"{= edg:VFS_LG-ProvenanceModel }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"lineagegram\" ui:priority=\"{= 10 }\">
+    <edg:LineageGramTemplate arg:dataProvider=\"{= edg:BuildLineageGramForRelationalDatabase }\" arg:focusNode=\"{= ?this }\" arg:graph=\"{= ?graph }\" edg:viewFrameStructure=\"{= edg:VFS_LG-LineageModel }\" edg:viewFramesGraph=\"{= ?viewFramesGraph }\">
+        <ui:insert ui:into=\"header\">
+            <edg:LineageGramHeader arg:title=\"LineageGram&trade; for Relational Database: {= ui:label(?this) }\"/>
+        </ui:insert>
+    </edg:LineageGramTemplate>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:SoftwareExecutable
+  ui:instanceView """
+<ui:group let:depictedResourceForFocusNode=\"{= ?this }\" let:myViewFrameStructure=\"{= COALESCE(?viewFrameStructure, edg:VFS_LG-ProvenanceModel) }\" ui:id=\"asset-provenance\" ui:priority=\"{= 10 }\">
+    <ui:group let:viewFrameForDependent=\"{= COALESCE(?targetViewFrame, edg:getViewFrameForResource(?targetNode, ?myViewFrameStructure)) }\" let:viewFrameForDepictedResource=\"{= edg:getViewFrameForResource(?depictedResourceForFocusNode, ?myViewFrameStructure) }\">
+        <!--ui:dumpScope ui:message=\"AAA: edg:SoftwareExecutable - dependency on {= ?this }\"/-->
+        <edg:MakeViewFrameResourceNodeLink arg:property=\"{= ?property }\" edg:dependencyType=\"{= ?dependencyType }\" edg:explanation=\"provenance link\" edg:resource=\"{= ?depictedResourceForFocusNode }\" edg:targetNode=\"{= ?targetNode }\" edg:targetViewFrame=\"{= ?viewFrameForDependent }\" edg:viewFrame=\"{= ?viewFrameForDepictedResource }\"/>
+        <edg:MakeSingleViewFrameResourceOccurrence edg:activeResource=\"{= ?this }\" edg:resource=\"{= ?depictedResourceForFocusNode }\" edg:viewFrame=\"{= edg:VF_SoftwareFrame }\"/>
+        <edg:DetermineTransitiveUpstreamSoftwareExecutableDependencies arg:iteration=\"{= 1 }\" arg:traceabilityTemplate=\"{= edg:GetUpstreamDependencies }\" edg:activeResource=\"{= ?this }\" edg:breadth=\"{= ?breadth }\" edg:offset=\"{= ?offset }\" edg:reach=\"{= ?reach }\"/>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"derivation-map-data-service-other-node-from-information-asset\" ui:priority=\"{= 10 }\">
+    <edg:GenerateJSONforSoftwareExecutabeToInformationAsset arg:resource=\"{= ?rightNode }\" arg:software=\"{= ?leftNode }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"information-asset-dependency\" ui:priority=\"{= 30 }\">
+    <!--ui:dumpScope ui:message=\"AAA: edg:SoftwareExecutable - dependency on {= ?this }\"/-->
+    <ui:group let:depictedResourceForFocusNode=\"{= edg:highestDepictionForSoftwareExecutable(?this) }\">
+        <edg:MakeViewFrameResourceNodeLink arg:property=\"{= ?property }\" edg:dependencyType=\"{= ?dependencyType }\" edg:explanation=\"information-asset-dependency edg:SoftwareExecutable\" edg:resource=\"{= ?depictedResourceForFocusNode }\" edg:targetNode=\"{= ?targetNode }\" edg:targetViewFrame=\"{= ?targetViewFrame }\" edg:viewFrame=\"{= edg:VF_SoftwareFrame }\"/>
+        <edg:MakeSingleViewFrameResourceOccurrence edg:activeResource=\"{= ?this }\" edg:resource=\"{= ?depictedResourceForFocusNode }\" edg:viewFrame=\"{= edg:VF_SoftwareFrame }\"/>
+        <edg:DetermineTransitiveUpstreamSoftwareExecutableDependencies arg:iteration=\"{= 1 }\" arg:traceabilityTemplate=\"{= edg:GetUpstreamDependencies }\" edg:activeResource=\"{= ?this }\" edg:breadth=\"{= ?breadth }\" edg:offset=\"{= ?offset }\" edg:reach=\"{= ?reach }\"/>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:Table
+  ui:instanceView """
+<ui:group ui:id=\"asset-impact\" ui:priority=\"{= 10 }\">
+    <ui:group let:depictedResourceForFocusNode=\"{= ?this }\" let:myViewFrameStructure=\"{= COALESCE(?viewFrameStructure, edg:VFS_LG-ProvenanceModel) }\" let:theExplanation=\"{= COALESCE(?explanation, &quot;impact link&quot;) }\">
+        <ui:group let:viewFrameForDependent=\"{= edg:getViewFrameForResource(?this, ?myViewFrameStructurel) }\" let:viewFrameForDepictedResource=\"{= edg:getViewFrameForResource(?depictedResourceForFocusNode, ?myViewFrameStructure) }\">
+            <!--ui:dumpScope ui:message=\"AAA: edg:Table - impact of {= ?sourceNode } on {= ?this }\"/-->
+            <edg:MakeViewFrameResourceNodeLink arg:property=\"{= ?property }\" edg:dependencyType=\"{= ?dependencyType }\" edg:explanation=\"{= ?theExplanation }\" edg:resource=\"{= ?sourceNode }\" edg:targetNode=\"{= ?depictedResourceForFocusNode }\" edg:targetViewFrame=\"{= ?viewFrameForDependent }\" edg:viewFrame=\"{= ?viewFrameForDepictedResource }\"/>
+            <edg:DetermineImpactOfAsset arg:dependencyTemplate=\"{= edg:GetImpactOfTable }\" arg:focusNode=\"{= ?this }\" edg:breadth=\"{= ?breadth }\" edg:offset=\"{= ?offset }\" edg:reach=\"{= ?reach - 1 }\" edg:viewFrameStructure=\"{= ?myViewFrameStructure }\"/>
+        </ui:group>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"asset-provenance\" ui:priority=\"{= 10 }\">
+    <ui:group let:depictedResourceForFocusNode=\"{= ?this }\" let:myViewFrameStructure=\"{= COALESCE(?viewFrameStructure, edg:VFS_LG-ProvenanceModel) }\" let:theExplanation=\"{= COALESCE(?explanation, &quot;provenance link&quot;) }\">
+        <ui:group let:viewFrameForDependent=\"{= COALESCE(?targetViewFrame, edg:VF_ResourcesFrame) }\" let:viewFrameForDepictedResource=\"{= edg:VF_ResourcesFrame }\">
+            <!--ui:dumpScope ui:message=\"AAA: edg:Table - dependency on {= ?this }\"/-->
+            <edg:MakeViewFrameResourceNodeLink arg:property=\"{= ?property }\" edg:dependencyType=\"{= ?dependencyType }\" edg:explanation=\"{= ?theExplanation }\" edg:resource=\"{= ?depictedResourceForFocusNode }\" edg:targetNode=\"{= ?targetNode }\" edg:targetViewFrame=\"{= ?viewFrameForDependent }\" edg:viewFrame=\"{= ?viewFrameForDepictedResource }\"/>
+            <edg:DetermineProvenanceForAsset arg:dependencyTemplate=\"{= edg:GetTableProvenance }\" arg:focusNode=\"{= ?this }\" edg:breadth=\"{= ?breadth }\" edg:offset=\"{= ?offset }\" edg:reach=\"{= ?reach - 1 }\" edg:viewFrame=\"{= ?viewFrameForDepictedResource }\" edg:viewFrameStructure=\"{= ?myViewFrameStructure }\"/>
+        </ui:group>
+    </ui:group>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"derivation-map-data-service-other-node-for-table\" ui:priority=\"{= -1 }\">
+    <!--ui:dumpScope ui:message=\"AAA3: edg:DataElement - derivation-map-data-service-other-node-for-data-element\"/-->
+    <edg:GenerateJSONforTableToTableDerivationMap arg:leftNode=\"{= ?leftNode }\" arg:rightNode=\"{= ?rightNode }\" edg:linkType=\"{= ?linkType }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"derivation-map-data-service\" ui:priority=\"{= 10 }\">
+    <!--ui:dumpScope ui:message=\"AAA2: edg:Table - derivation-map-data-service\"/-->
+    <ui:resourceView arg:leftNode=\"{= ?leftNode }\" arg:rightNode=\"{= ?this }\" edg:dependencyType=\"{= ?dependencyType }\" edg:linkType=\"{= ?linkType }\" ui:matchIds=\"derivation-map-data-service-other-node-for-table\" ui:resource=\"{= ?leftNode }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"impact-diagram\" ui:priority=\"{= 10 }\">
+    <edg:LineageGramTemplate arg:dataProvider=\"{= edg:BuildImpactGramForAsset }\" arg:focusNode=\"{= ?this }\" arg:graph=\"{= ?graph }\" edg:viewFrameStructure=\"{= edg:VFS_LG-ImpactDiagram }\" edg:viewFramesGraph=\"{= ?viewFramesGraph }\">
+        <ui:insert ui:into=\"header\">
+            <edg:LineageGramHeader arg:title=\"ImpactGram&trade; for Table: {= ui:label(?this) }\"/>
+        </ui:insert>
+    </edg:LineageGramTemplate>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"lineagegram-data-provider\" ui:priority=\"{= 10 }\">
+    <edg:BuildJSONforLineageGramDataProviderDataService arg:dataProvider=\"{= edg:BuildLineageGramForTable }\" arg:provider=\"{= edg:Table }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"lineagegram-viewframes\" ui:priority=\"{= 10 }\">
+    <edg:BuildJSONforLineageGramViewFramesDataService arg:provider=\"{= edg:Table }\" edg:viewFrameStructure=\"{= edg:VFS_LG-DataElement }\"/>
+</ui:group>
+"""^^ui:Literal ;
+  ui:instanceView """
+<ui:group ui:id=\"lineagegram\" ui:priority=\"{= 10 }\">
+    <edg:LineageGramTemplate arg:dataProvider=\"{= edg:BuildLineageGramForTable }\" arg:focusNode=\"{= ?this }\" arg:graph=\"{= ?graph }\" edg:viewFrameStructure=\"{= edg:VFS_LG-ProvenanceModel }\" edg:viewFramesGraph=\"{= ?viewFramesGraph }\">
+        <ui:insert ui:into=\"header\">
+            <edg:LineageGramHeader arg:title=\"LineageGram&trade; for Table: {= ui:label(?this) }\"/>
+        </ui:insert>
+    </edg:LineageGramTemplate>
+</ui:group>
+"""^^ui:Literal ;
+.
+edg:getDownstreamDataElementMappings
+  a spin:Template ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "targetDataElement" ;
+          ]
+          [
+            sp:varName "mapping1" ;
+          ]
+          [
+            sp:varName "mapping2" ;
+          ]
+          [
+            sp:varName "dataflow" ;
+          ]
+          [
+            sp:varName "sourceEndpoint" ;
+          ]
+          [
+            sp:varName "targetEndpoint" ;
+          ]
+          [
+            sp:varName "sourceSoftware" ;
+          ]
+          [
+            sp:varName "targetSoftware" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "?0" ;
+              ] ;
+            sp:predicate edg:mappedDataElement ;
+            sp:subject [
+                sp:varName "resource" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "targetDataElement" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "mapping" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "targetDataElement" ;
+              ] ;
+            sp:predicate edg:input ;
+            sp:subject [
+                sp:varName "mapping2" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "mapping1" ;
+              ] ;
+            sp:predicate edg:mapping ;
+            sp:subject [
+                sp:varName "mappingCollection1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "mapping2" ;
+              ] ;
+            sp:predicate edg:mapping ;
+            sp:subject [
+                sp:varName "mappingCollection2" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "mappingCollection1" ;
+              ] ;
+            sp:predicate edg:mappingsCollection ;
+            sp:subject [
+                sp:varName "sourceEndpoint" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "sourceEndpoint" ;
+              ] ;
+            sp:predicate edg:source ;
+            sp:subject [
+                sp:varName "dataflow" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "targetEndpoint" ;
+              ] ;
+            sp:predicate edg:target ;
+            sp:subject [
+                sp:varName "dataflow" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "mappingCollection2" ;
+              ] ;
+            sp:predicate edg:mappingsCollection ;
+            sp:subject [
+                sp:varName "targetEndpoint" ;
+              ] ;
+          ]
+          [
+            a sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "sourceEndpoint" ;
+                    ] ;
+                  sp:predicate edg:serviceEndpoint ;
+                  sp:subject [
+                      sp:varName "sourceSoftware" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+          [
+            a sp:Optional ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "targetEndpoint" ;
+                    ] ;
+                  sp:predicate edg:serviceEndpoint ;
+                  sp:subject [
+                      sp:varName "targetSoftware" ;
+                    ] ;
+                ]
+              ) ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType edg:DataElement ;
+    ] ;
+  spin:private true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/diagram/lg/library-software> ;
+  rdfs:label "Get downstream data element mappings" ;
+  rdfs:subClassOf edg:SelectTemplates ;
+.
+edg:mappedDataElement
+  a spin:MagicProperty ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "targetDataElement" ;
+          ]
+          [
+            sp:varName "mapping" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "resource" ;
+              ] ;
+            sp:predicate edg:input ;
+            sp:subject [
+                sp:varName "mapping" ;
+              ] ;
+          ]
+          [
+            sp:object edg:DirectMapping ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "mapping" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "targetDataElement" ;
+              ] ;
+            sp:predicate edg:output ;
+            sp:subject [
+                sp:varName "mapping" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:resource ;
+      spl:valueType edg:DataElement ;
+    ] ;
+  spin:private true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/diagram/lg/library-software> ;
+  rdfs:label "mapped data element" ;
+  rdfs:subClassOf edg:MagicProperties ;
+.
+edg:numberOfChildrenOfGivenNodeInDerivationMap
+  spin:returnType xsd:integer ;
+.

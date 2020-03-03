@@ -1,0 +1,745 @@
+# baseURI: http://evn.topbraidlive.org/taggerspin
+# imports: http://evn.topbraidlive.org/tagger
+# imports: http://spinrdf.org/spin
+# imports: http://www.w3.org/2004/02/skos/core
+# prefix: taggerspin
+
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerspin: <http://evn.topbraidlive.org/taggerspin#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+tagger:PotentialTagProperties
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:distinct true ;
+      sp:orderBy (
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "property" ;
+          ]
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:or ;
+                sp:arg1 [
+                    a sp:not ;
+                    sp:arg1 [
+                        a sp:bound ;
+                        sp:arg1 [
+                            sp:varName "objectsAreFromOntology" ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a sp:not ;
+                    sp:arg1 [
+                        sp:varName "objectsAreFromOntology" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "rangeMustBeSkosConcept" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a sp:coalesce ;
+                sp:arg1 [
+                    sp:varName "contentRootClass" ;
+                  ] ;
+                sp:arg2 rdfs:Resource ;
+              ] ;
+            sp:variable [
+                sp:varName "root" ;
+              ] ;
+          ]
+          [
+            a sp:Union ;
+            sp:elements (
+                (
+                  [
+                    a sp:TriplePath ;
+                    sp:object [
+                        sp:varName "root" ;
+                      ] ;
+                    sp:path [
+                        a sp:ModPath ;
+                        sp:modMax -2 ;
+                        sp:modMin 0 ;
+                        sp:subPath rdfs:subClassOf ;
+                      ] ;
+                    sp:subject [
+                        sp:varName "domainClass" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Filter ;
+                    sp:expression [
+                        a teamwork:filterSystemResourcesExceptOWLThing ;
+                        sp:arg1 [
+                            sp:varName "domainClass" ;
+                          ] ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    a sp:Bind ;
+                    sp:expression rdfs:Resource ;
+                    sp:variable [
+                        sp:varName "domainClass" ;
+                      ] ;
+                  ]
+                )
+              ) ;
+          ]
+          [
+            sp:object [
+                sp:varName "superProperty" ;
+              ] ;
+            sp:predicate swa:relevantClassOfProperty ;
+            sp:subject [
+                sp:varName "domainClass" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a swa:localRangeAtClass ;
+                sp:arg1 [
+                    sp:varName "domainClass" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "superProperty" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "range" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:notExists ;
+                sp:elements (
+                    [
+                      sp:object rdfs:Datatype ;
+                      sp:predicate rdf:type ;
+                      sp:subject [
+                          sp:varName "range" ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:notExists ;
+                sp:elements (
+                    [
+                      a sp:NamedGraph ;
+                      sp:elements (
+                          [
+                            sp:object rdfs:Datatype ;
+                            sp:predicate rdf:type ;
+                            sp:subject [
+                                sp:varName "range" ;
+                              ] ;
+                          ]
+                        ) ;
+                      sp:graphNameNode ui:graph ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:ne ;
+                sp:arg1 [
+                    sp:varName "range" ;
+                  ] ;
+                sp:arg2 rdfs:Literal ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:or ;
+                sp:arg1 [
+                    a sp:exists ;
+                    sp:elements (
+                        [
+                          a sp:TriplePath ;
+                          sp:object <http://www.w3.org/2004/02/skos/core#Concept> ;
+                          sp:path [
+                              a sp:ModPath ;
+                              sp:modMax -2 ;
+                              sp:modMin 0 ;
+                              sp:subPath rdfs:subClassOf ;
+                            ] ;
+                          sp:subject [
+                              sp:varName "range" ;
+                            ] ;
+                        ]
+                      ) ;
+                  ] ;
+                sp:arg2 [
+                    a sp:not ;
+                    sp:arg1 [
+                        sp:varName "rangeMustBeSkosConcept" ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:TriplePath ;
+            sp:object [
+                sp:varName "superProperty" ;
+              ] ;
+            sp:path [
+                a sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subPropertyOf ;
+              ] ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a teamwork:filterSystemResourcesExceptOWLThing ;
+                sp:arg1 [
+                    sp:varName "property" ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:or ;
+                sp:arg1 [
+                    a sp:exists ;
+                    sp:elements (
+                        [
+                          sp:object rdf:Property ;
+                          sp:predicate rdf:type ;
+                          sp:subject [
+                              sp:varName "property" ;
+                            ] ;
+                        ]
+                      ) ;
+                  ] ;
+                sp:arg2 [
+                    a sp:exists ;
+                    sp:elements (
+                        [
+                          sp:object owl:ObjectProperty ;
+                          sp:predicate rdf:type ;
+                          sp:subject [
+                              sp:varName "property" ;
+                            ] ;
+                        ]
+                      ) ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a ui:label ;
+                sp:arg1 [
+                    sp:varName "property" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "label" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "Gets a list of all potential tag properties." ;
+  rdfs:label "Potential tag properties" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+tagger:TagProperties
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:distinct true ;
+      sp:orderBy (
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "property" ;
+          ]
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              a sp:Union ;
+              sp:elements (
+                  (
+                    [
+                      sp:object [
+                          sp:varName "property" ;
+                        ] ;
+                      sp:predicate tagger:defaultTagProperty ;
+                      sp:subject [
+                          sp:varName "any" ;
+                        ] ;
+                    ]
+                  )
+                  (
+                    [
+                      sp:object [
+                          sp:varName "property" ;
+                        ] ;
+                      sp:predicate tagger:tagProperty ;
+                      sp:subject [
+                          sp:varName "any" ;
+                        ] ;
+                    ]
+                  )
+                ) ;
+            ]
+          )
+          [
+            a sp:Bind ;
+            sp:expression [
+                a ui:unionOfGraphs ;
+                sp:arg1 [
+                    a ui:graphWithImports ;
+                    sp:arg1 [
+                        a tagger:currentSubjectGraph ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a ui:graphWithImports ;
+                    sp:arg1 tagger:currentObjectGraph ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "labelGraph" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a swa:labelInGraph ;
+                sp:arg1 [
+                    sp:varName "property" ;
+                  ] ;
+                sp:arg2 [
+                    sp:varName "labelGraph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "label" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  rdfs:comment "Gets a list of all available tag properties. Tag properties must have skos:Concept as their range." ;
+  rdfs:label "Tag properties" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+tagger:currentContentRootClass
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "result" ;
+              ] ;
+            sp:predicate tagger:subjectRootClass ;
+            sp:subject [
+                sp:varName "any" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  spin:returnType rdfs:Resource ;
+  rdfs:label "current content root class" ;
+  rdfs:subClassOf spin:Functions ;
+.
+tagger:currentDefaultTagProperty
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "result" ;
+              ] ;
+            sp:predicate tagger:defaultTagProperty ;
+            sp:subject [
+                sp:varName "any" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  spin:returnType rdfs:Resource ;
+  rdfs:label "current default tag property" ;
+  rdfs:subClassOf spin:Functions ;
+.
+tagger:currentObjectGraph
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "result" ;
+              ] ;
+            sp:predicate tagger:objectGraph ;
+            sp:subject [
+                sp:varName "any" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  spin:returnType rdfs:Resource ;
+  rdfs:label "current object graph" ;
+  rdfs:subClassOf spin:Functions ;
+.
+tagger:currentSubjectGraph
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "result" ;
+              ] ;
+            sp:predicate tagger:subjectGraph ;
+            sp:subject [
+                sp:varName "any" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private true ;
+  spin:returnType rdfs:Resource ;
+  rdfs:label "current subject graph" ;
+  rdfs:subClassOf spin:Functions ;
+.
+tagger:currentSubjectGraphHasType
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "result" ;
+              ] ;
+            sp:predicate <http://evn.topbraidlive.org/tagger#subjectGraph> ;
+            sp:subject [
+                sp:varName "any" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:bound ;
+                sp:arg1 [
+                    sp:varName "result" ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object spin:_arg1 ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "result" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "result" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The type to check for" ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks if the content graph of the current content tag set is of a specific type." ;
+  rdfs:label "current subject graph has type" ;
+  rdfs:subClassOf spin:Functions ;
+.
+tagger:getMainClass
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a ui:graphWithImports ;
+                sp:arg1 [
+                    sp:varName "graph" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "graphWithImports" ;
+              ] ;
+          ]
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a sp:if ;
+                      sp:arg1 [
+                          a teamwork:hasTeamGraph ;
+                          sp:arg1 [
+                              sp:varName "graph" ;
+                            ] ;
+                        ] ;
+                      sp:arg2 [
+                          a edg:getRootClass ;
+                          sp:arg1 [
+                              sp:varName "graph" ;
+                            ] ;
+                        ] ;
+                      sp:arg3 [
+                          sp:varName "null" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "teamworkRootClass" ;
+                    ] ;
+                ]
+                [
+                  a sp:Bind ;
+                  sp:expression [
+                      a sp:coalesce ;
+                      sp:arg1 [
+                          a sp:if ;
+                          sp:arg1 [
+                              a sp:ne ;
+                              sp:arg1 [
+                                  sp:varName "teamworkRootClass" ;
+                                ] ;
+                              sp:arg2 edg:Construct ;
+                            ] ;
+                          sp:arg2 [
+                              sp:varName "teamworkRootClass" ;
+                            ] ;
+                          sp:arg3 [
+                              sp:varName "null" ;
+                            ] ;
+                        ] ;
+                      sp:arg2 [
+                          a sp:if ;
+                          sp:arg1 [
+                              a sp:exists ;
+                              sp:elements (
+                                  [
+                                    sp:object rdfs:Class ;
+                                    sp:predicate rdf:type ;
+                                    sp:subject <http://topbraid.org/corpus#Document> ;
+                                  ]
+                                ) ;
+                            ] ;
+                          sp:arg2 <http://topbraid.org/corpus#Document> ;
+                          sp:arg3 [
+                              sp:varName "null" ;
+                            ] ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "result" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "graphWithImports" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#graph> ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The graph URI whose main class to determine" ;
+    ] ;
+  rdfs:comment "Given a graph URI, tries to determine the main content class of that graph. Returns teamwork:mainClass if it is a Teamwork project. Otherwise, check if corpus:Document is defined in the graph or its imports, and return it if so. Otherwise, unbound." ;
+  rdfs:label "get main class" ;
+  rdfs:subClassOf spin:Functions ;
+.
+tagger:isContentTagSet
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a sp:and ;
+                sp:arg1 [
+                    a sp:bound ;
+                    sp:arg1 [
+                        sp:varName "projectGraph" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a sp:eq ;
+                    sp:arg1 [
+                        a sp:coalesce ;
+                        sp:arg1 [
+                            a teamwork:getProjectType ;
+                            sp:arg1 [
+                                sp:varName "projectGraph" ;
+                              ] ;
+                          ] ;
+                        sp:arg2 "undefined" ;
+                      ] ;
+                    sp:arg2 <http://evn.topbraidlive.org/taggerprojects#ProjectType> ;
+                  ] ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where () ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional false ;
+      spl:predicate <http://spinrdf.org/arg#projectGraph> ;
+      spl:valueType owl:Ontology ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Returns true if the provided graph name is a content tag set (that is, a Tagger project)." ;
+  rdfs:label "is content tag set" ;
+  rdfs:subClassOf spin:Functions ;
+.
+tagger:isTagProperty
+  a spin:Function ;
+  spin:body [
+      a sp:Ask ;
+      sp:where (
+          [
+            a sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "property" ;
+                    ] ;
+                  sp:predicate tagger:tagProperty ;
+                  sp:subject [
+                      sp:varName "projectGraph" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "projectGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#projectGraph> ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The project graph" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate <http://spinrdf.org/arg#property> ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The property to test" ;
+    ] ;
+  spin:private true ;
+  spin:returnType xsd:boolean ;
+  rdfs:label "is tag property" ;
+  rdfs:subClassOf spin:Functions ;
+.
+<http://evn.topbraidlive.org/taggerspin>
+  a owl:Ontology ;
+  owl:imports <http://evn.topbraidlive.org/tagger> ;
+  owl:imports <http://spinrdf.org/spin> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+<http://spinrdf.org/arg#projectGraph>
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://spinrdf.org/arg#property>
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.

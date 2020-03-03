@@ -1,0 +1,1128 @@
+# baseURI: http://edg.topbraid.solutions/1.0/spin/governance
+# imports: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://edg.topbraid.solutions/1.0/schema/datamodels
+# imports: http://edg.topbraidlive.org/1.0/config/diagrams
+# imports: http://spinrdf.org/spinx
+# imports: http://topbraid.org/teamwork.spin
+# imports: http://www.w3.org/ns/shacl#
+
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix default: <http://uispin.org/default#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/spin/governance>
+  rdf:type owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/spin/library/GMD_governance> ;
+  rdfs:label "EDG SPIN Library - main" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  owl:imports <http://edg.topbraidlive.org/1.0/config/diagrams> ;
+  owl:imports <http://spinrdf.org/spinx> ;
+  owl:imports <http://topbraid.org/teamwork.spin> ;
+  owl:imports sh: ;
+.
+edg:AskTemplates
+  rdf:type spin:AskTemplate ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/spin/governance> ;
+  rdfs:label "Ask templates" ;
+  rdfs:subClassOf spin:AskTemplates ;
+.
+edg:MagicProperties
+  rdf:type spin:MagicProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/spin/governance> ;
+  rdfs:label "EDG Magic properties" ;
+  rdfs:subClassOf spin:MagicProperties ;
+.
+edg:Templates
+  rdf:type spin:Template ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/spin/governance> ;
+  rdfs:label "Templates" ;
+  rdfs:subClassOf spin:Templates ;
+.
+edg:getSubjectAreaGovernanceRolesAssignments
+  rdf:type spin:Template ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:groupBy (
+          [
+            sp:varName "subjectArea" ;
+          ]
+          [
+            sp:varName "aggregatedRoles" ;
+          ]
+          [
+            sp:varName "count" ;
+          ]
+        ) ;
+      sp:orderBy (
+          [
+            sp:varName "subjectArea" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "subjectArea" ;
+          ]
+          [
+            sp:expression [
+                rdf:type edg:sortStringListRemovingDuplicates ;
+                sp:arg1 [
+                    rdf:type sp:GroupConcat ;
+                    sp:expression [
+                        sp:varName "roles" ;
+                      ] ;
+                    sp:separator "," ;
+                  ] ;
+              ] ;
+            sp:varName "aggregatedRoles" ;
+          ]
+          [
+            sp:varName "count" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:SubQuery ;
+            sp:query [
+                rdf:type sp:Select ;
+                sp:groupBy (
+                    [
+                      sp:varName "subjectArea" ;
+                    ]
+                    [
+                      sp:varName "roles" ;
+                    ]
+                    [
+                      sp:varName "count" ;
+                    ]
+                  ) ;
+                sp:orderBy (
+                    [
+                      sp:varName "roleLabel" ;
+                    ]
+                    [
+                      sp:varName "subjectArea" ;
+                    ]
+                  ) ;
+                sp:resultVariables (
+                    [
+                      sp:varName "subjectArea" ;
+                    ]
+                    [
+                      sp:varName "roles" ;
+                    ]
+                    [
+                      sp:varName "count" ;
+                    ]
+                  ) ;
+                sp:where (
+                    [
+                      rdf:type sp:Filter ;
+                      sp:expression [
+                          rdf:type sp:ne ;
+                          sp:arg1 [
+                              sp:varName "count" ;
+                            ] ;
+                          sp:arg2 0 ;
+                        ] ;
+                    ]
+                    [
+                      rdf:type sp:SubQuery ;
+                      sp:query [
+                          rdf:type sp:Select ;
+                          sp:groupBy (
+                              [
+                                sp:varName "subjectArea" ;
+                              ]
+                              [
+                                sp:varName "roleLabel" ;
+                              ]
+                              [
+                                sp:varName "count" ;
+                              ]
+                            ) ;
+                          sp:resultVariables (
+                              [
+                                sp:varName "subjectArea" ;
+                              ]
+                              [
+                                sp:expression [
+                                    rdf:type sp:GroupConcat ;
+                                    sp:expression [
+                                        sp:varName "roleLabel" ;
+                                      ] ;
+                                    sp:separator "," ;
+                                  ] ;
+                                sp:varName "roles" ;
+                              ]
+                              [
+                                sp:expression [
+                                    rdf:type sp:Sum ;
+                                    sp:expression [
+                                        sp:varName "assigned" ;
+                                      ] ;
+                                  ] ;
+                                sp:varName "count" ;
+                              ]
+                            ) ;
+                          sp:where (
+                              [
+                                sp:object [
+                                    sp:varName "?0" ;
+                                  ] ;
+                                sp:predicate teamwork:readableGraphsUnderTeamControl ;
+                                sp:subject () ;
+                              ]
+                              [
+                                sp:object [
+                                    sp:varName "projectGraph" ;
+                                  ] ;
+                                sp:predicate rdf:first ;
+                                sp:subject [
+                                    sp:varName "?0" ;
+                                  ] ;
+                              ]
+                              [
+                                sp:object [
+                                    sp:varName "?1" ;
+                                  ] ;
+                                sp:predicate rdf:rest ;
+                                sp:subject [
+                                    sp:varName "?0" ;
+                                  ] ;
+                              ]
+                              [
+                                sp:object [
+                                    sp:varName "teamGraph" ;
+                                  ] ;
+                                sp:predicate rdf:first ;
+                                sp:subject [
+                                    sp:varName "?1" ;
+                                  ] ;
+                              ]
+                              [
+                                sp:object () ;
+                                sp:predicate rdf:rest ;
+                                sp:subject [
+                                    sp:varName "?1" ;
+                                  ] ;
+                              ]
+                              [
+                                rdf:type sp:NamedGraph ;
+                                sp:elements (
+                                    [
+                                      sp:object [
+                                          sp:varName "subjectArea" ;
+                                        ] ;
+                                      sp:predicate edg:subjectArea ;
+                                      sp:subject [
+                                          sp:varName "projectGraph" ;
+                                        ] ;
+                                    ]
+                                  ) ;
+                                sp:graphNameNode [
+                                    sp:varName "projectGraph" ;
+                                  ] ;
+                              ]
+                              [
+                                sp:object [
+                                    sp:varName "role" ;
+                                  ] ;
+                                sp:predicate edg:workflowParticipantProperties ;
+                                sp:subject () ;
+                              ]
+                              [
+                                rdf:type sp:Bind ;
+                                sp:expression [
+                                    rdf:type spif:titleCase ;
+                                    sp:arg1 [
+                                        rdf:type ui:label ;
+                                        sp:arg1 [
+                                            sp:varName "role" ;
+                                          ] ;
+                                      ] ;
+                                  ] ;
+                                sp:variable [
+                                    sp:varName "roleLabel" ;
+                                  ] ;
+                              ]
+                              [
+                                rdf:type sp:Bind ;
+                                sp:expression [
+                                    rdf:type teamwork:platformGovernanceGraph ;
+                                  ] ;
+                                sp:variable [
+                                    sp:varName "governanceGraph" ;
+                                  ] ;
+                              ]
+                              [
+                                rdf:type sp:NamedGraph ;
+                                sp:elements (
+                                    [
+                                      rdf:type sp:Bind ;
+                                      sp:expression [
+                                          rdf:type sp:if ;
+                                          sp:arg1 [
+                                              rdf:type sp:exists ;
+                                              sp:elements (
+                                                  [
+                                                    sp:object [
+                                                        sp:varName "role" ;
+                                                      ] ;
+                                                    sp:predicate edg:requiredGovernanceRole ;
+                                                    sp:subject [
+                                                        sp:varName "subjectArea" ;
+                                                      ] ;
+                                                  ]
+                                                ) ;
+                                            ] ;
+                                          sp:arg2 1 ;
+                                          sp:arg3 0 ;
+                                        ] ;
+                                      sp:variable [
+                                          sp:varName "assigned" ;
+                                        ] ;
+                                    ]
+                                  ) ;
+                                sp:graphNameNode [
+                                    sp:varName "governanceGraph" ;
+                                  ] ;
+                              ]
+                            ) ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/spin/governance> ;
+  rdfs:label "get subject area governance role assignments" ;
+  rdfs:subClassOf edg:Templates ;
+.
+edg:getSubjectAreas
+  rdf:type spin:SelectTemplate ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "subjectAreaLabel" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "subjectAreaLabel" ;
+          ]
+          [
+            sp:varName "subjectArea" ;
+          ]
+          [
+            sp:varName "subjectAreaClass" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:TriplePath ;
+            sp:object edg:SubjectArea ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "subjectAreaClass" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type teamwork:platformGovernanceGraph ;
+              ] ;
+            sp:variable [
+                sp:varName "governanceGraph" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "subjectAreaClass" ;
+                    ] ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "subjectArea" ;
+                    ] ;
+                ]
+                [
+                  rdf:type sp:Bind ;
+                  sp:expression [
+                      rdf:type spl:object ;
+                      sp:arg1 [
+                          sp:varName "subjectArea" ;
+                        ] ;
+                      sp:arg2 rdfs:label ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "subjectAreaLabel" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "governanceGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  rdfs:comment "There are three kinds of nodes: business areas, data subject areas, and governance roles. The area hierarchy for both kinds of areas is expressed through edg:subArea. Top-level areas don't have an incoming edg:subArea triple." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/spin/governance> ;
+  rdfs:label "get subject areas" ;
+  rdfs:subClassOf edg:Templates ;
+.
+edg:getSubjectAreasFromPlatformGovernanceGraph
+  rdf:type spin:MagicProperty ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:orderBy (
+          [
+            sp:varName "subjectAreaLabel" ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "subjectAreaLabel" ;
+          ]
+          [
+            sp:varName "subjectArea" ;
+          ]
+          [
+            sp:varName "subjectAreaClass" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:TriplePath ;
+            sp:object edg:SubjectArea ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "subjectAreaClass" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type teamwork:platformGovernanceGraph ;
+              ] ;
+            sp:variable [
+                sp:varName "governanceGraph" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "subjectAreaClass" ;
+                    ] ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "subjectArea" ;
+                    ] ;
+                ]
+                [
+                  rdf:type sp:Bind ;
+                  sp:expression [
+                      rdf:type spl:object ;
+                      sp:arg1 [
+                          sp:varName "subjectArea" ;
+                        ] ;
+                      sp:arg2 rdfs:label ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "subjectAreaLabel" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "governanceGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  rdfs:comment "There are three kinds of nodes: business areas, data subject areas, and governance roles. The area hierarchy for both kinds of areas is expressed through edg:subArea. Top-level areas don't have an incoming edg:subArea triple." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/spin/governance> ;
+  rdfs:label "get subject areas from platform governance graph" ;
+  rdfs:subClassOf edg:MagicProperties ;
+.
+edg:hasAssignedJobTitle
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Ask ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "role" ;
+              ] ;
+            sp:predicate edg:assignedJobTitle ;
+            sp:subject [
+                sp:varName "person" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:person ;
+      spl:valueType edg:Person ;
+      rdfs:comment "The person to check." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:role ;
+      spl:valueType edg:JobTitle ;
+      rdfs:comment "The job title." ;
+    ] ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Checks whether a given person has been assigned a given job title." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/spin/governance> ;
+  rdfs:label "has assigned job title" ;
+  rdfs:subClassOf spin:Functions ;
+  owl:versionInfo "Although this is a simple query, it was turned into a function in case we want to make the logic more complex in the future." ;
+.
+edg:isHiddenObjectWidget
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Ask ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "role" ;
+              ] ;
+            sp:predicate edg:hiddenPropertyForRole ;
+            sp:subject [
+                sp:varName "predicate" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type teamwork:currentMasterGraph ;
+              ] ;
+            sp:variable [
+                sp:varName "projectGraph" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:bound ;
+                sp:arg1 [
+                    sp:varName "projectGraph" ;
+                  ] ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type teamwork:currentUserHasGovernanceRole ;
+                arg:projectGraph [
+                    sp:varName "projectGraph" ;
+                  ] ;
+                arg:role [
+                    sp:varName "role" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:focusNode ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The focus node (subject). Is unbound on search forms." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:predicate ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The predicate to check." ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  spin:returnType xsd:boolean ;
+  rdfs:comment "Used by EDG applications to filter out properties depending on governance roles." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/spin/governance> ;
+  rdfs:label "is hidden object widget" ;
+  rdfs:subClassOf spin:Functions ;
+.
+edg:partyLabel
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                rdf:type sp:if ;
+                sp:arg1 [
+                    rdf:type sp:or ;
+                    sp:arg1 [
+                        rdf:type smf:isUserAccount ;
+                        arg:node [
+                            sp:varName "party" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        rdf:type smf:isRole ;
+                        arg:resource [
+                            sp:varName "party" ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    rdf:type teamwork:userOrRoleLabel ;
+                    arg:resource [
+                        sp:varName "party" ;
+                      ] ;
+                  ] ;
+                sp:arg3 [
+                    rdf:type ui:label ;
+                    sp:arg1 [
+                        sp:varName "party" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:where () ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate arg:party ;
+      spl:valueType edg:Party ;
+    ] ;
+  rdfs:comment "Returns a label for a edg:Party; attempts to first call ui:label, and then teamwork:userOrRoleLabel." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/spin/governance> ;
+  rdfs:label "party label" ;
+  rdfs:subClassOf spin:Functions ;
+.
+edg:projectSubjectAreas
+  rdf:type spin:MagicProperty ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:distinct "true"^^xsd:boolean ;
+      sp:resultVariables (
+          [
+            sp:varName "area" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "subjectArea" ;
+                    ] ;
+                  sp:predicate edg:subjectArea ;
+                  sp:subject spin:_arg1 ;
+                ]
+              ) ;
+            sp:graphNameNode spin:_arg1 ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type ui:graphWithImports ;
+                sp:arg1 [
+                    rdf:type teamwork:platformGovernanceGraph ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "pg" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  rdf:type sp:TriplePath ;
+                  sp:object [
+                      sp:varName "subjectArea" ;
+                    ] ;
+                  sp:path [
+                      rdf:type sp:ModPath ;
+                      sp:modMax -2 ;
+                      sp:modMin 0 ;
+                      sp:subPath edg:subArea ;
+                    ] ;
+                  sp:subject [
+                      sp:varName "area" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "pg" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The project graph to get the subject areas of." ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  spin:returnType edg:SubjectArea ;
+  rdfs:comment "For a given project graph (?arg1) this magic property delivers the subject areas including their super-areas." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/spin/governance> ;
+  rdfs:label "project subject areas" ;
+  rdfs:subClassOf edg:MagicProperties ;
+.
+edg:userWorkflowParticipantRolesOnProjectGraph
+  rdf:type spin:MagicProperty ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:distinct "true"^^xsd:boolean ;
+      sp:resultVariables (
+          [
+            sp:varName "role" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:Union ;
+            sp:elements (
+                (
+                  [
+                    rdf:type sp:NamedGraph ;
+                    sp:elements (
+                        [
+                          sp:object spin:_arg1 ;
+                          sp:predicate [
+                              sp:varName "role" ;
+                            ] ;
+                          sp:subject spin:_arg2 ;
+                        ]
+                      ) ;
+                    sp:graphNameNode spin:_arg2 ;
+                  ]
+                )
+                (
+                  [
+                    sp:object [
+                        sp:varName "userGroup" ;
+                      ] ;
+                    sp:predicate smf:userRole ;
+                    sp:subject spin:_arg1 ;
+                  ]
+                  [
+                    rdf:type sp:NamedGraph ;
+                    sp:elements (
+                        [
+                          sp:object [
+                              sp:varName "userGroup" ;
+                            ] ;
+                          sp:predicate [
+                              sp:varName "role" ;
+                            ] ;
+                          sp:subject spin:_arg2 ;
+                        ]
+                      ) ;
+                    sp:graphNameNode spin:_arg2 ;
+                  ]
+                )
+                (
+                  [
+                    rdf:type sp:Bind ;
+                    sp:expression [
+                        rdf:type teamwork:workflowsGraph ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "wg" ;
+                      ] ;
+                  ]
+                  [
+                    rdf:type sp:NamedGraph ;
+                    sp:elements (
+                        [
+                          sp:object [
+                              sp:varName "jobRole" ;
+                            ] ;
+                          sp:predicate edg:assignedJobTitle ;
+                          sp:subject spin:_arg1 ;
+                        ]
+                      ) ;
+                    sp:graphNameNode [
+                        sp:varName "wg" ;
+                      ] ;
+                  ]
+                  [
+                    rdf:type sp:NamedGraph ;
+                    sp:elements (
+                        [
+                          sp:object [
+                              sp:varName "jobRole" ;
+                            ] ;
+                          sp:predicate [
+                              sp:varName "role" ;
+                            ] ;
+                          sp:subject spin:_arg2 ;
+                        ]
+                      ) ;
+                    sp:graphNameNode spin:_arg2 ;
+                  ]
+                )
+                (
+                  [
+                    sp:object [
+                        sp:varName "area" ;
+                      ] ;
+                    sp:predicate edg:projectSubjectAreas ;
+                    sp:subject spin:_arg2 ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "userOrRole" ;
+                      ] ;
+                    sp:predicate teamwork:userOrRoleOrJobTitle ;
+                    sp:subject spin:_arg1 ;
+                  ]
+                  [
+                    rdf:type sp:Bind ;
+                    sp:expression [
+                        rdf:type ui:graphWithImports ;
+                        sp:arg1 [
+                            rdf:type teamwork:platformGovernanceGraph ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "pg" ;
+                      ] ;
+                  ]
+                  [
+                    rdf:type sp:NamedGraph ;
+                    sp:elements (
+                        [
+                          sp:object [
+                              sp:varName "userOrRole" ;
+                            ] ;
+                          sp:predicate [
+                              sp:varName "role" ;
+                            ] ;
+                          sp:subject [
+                              sp:varName "area" ;
+                            ] ;
+                        ]
+                      ) ;
+                    sp:graphNameNode [
+                        sp:varName "pg" ;
+                      ] ;
+                  ]
+                )
+              ) ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type teamwork:isWorkflowParticipantProperty ;
+                arg:property [
+                    sp:varName "role" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The user resource." ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate sp:arg2 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The master graph." ;
+    ] ;
+  rdfs:comment "For a given user (?arg1) and a given master graph (?arg2), this magic property returns the governance role properties that the user is playing in the master graph. The algorithm considers job titles and security roles that the user is involved in, as well as the roles associated with the subject areas of the master graph." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/spin/governance> ;
+  rdfs:label "user workflow participant roles on project graph" ;
+  rdfs:subClassOf edg:MagicProperties ;
+  owl:versionInfo "Note that this function is called by TopBraid's native implementation of teamwork:currentUserHasPrivilege from Java." ;
+.
+edg:workflowParticipantProperties
+  rdf:type spin:MagicProperty ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:distinct "true"^^xsd:boolean ;
+      sp:orderBy (
+          [
+            sp:varName "order" ;
+          ]
+          [
+            rdf:type ui:label ;
+            sp:arg1 [
+                sp:varName "property" ;
+              ] ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "property" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object edg:WorkflowParticipantProperty ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "ps" ;
+              ] ;
+            sp:predicate sh:property ;
+            sp:subject edg:Stewardship ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:notExists ;
+                sp:elements (
+                    [
+                      sp:object "true"^^xsd:boolean ;
+                      sp:predicate sh:deactivated ;
+                      sp:subject [
+                          sp:varName "ps" ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "property" ;
+              ] ;
+            sp:predicate sh:path ;
+            sp:subject [
+                sp:varName "ps" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:coalesce ;
+                sp:arg1 [
+                    rdf:type spl:object ;
+                    sp:arg1 [
+                        sp:varName "ps" ;
+                      ] ;
+                    sp:arg2 sh:order ;
+                  ] ;
+                sp:arg2 0 ;
+              ] ;
+            sp:variable [
+                sp:varName "order" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "Gets all known edg:WorkflowParticipantProperties, ordered by their declared sh:order and then labels." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/spin/governance> ;
+  rdfs:subClassOf edg:MagicProperties ;
+.
+edg:workflowParticipantPropertyAbbreviation
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "result" ;
+              ] ;
+            sp:predicate edg:abbreviation ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:property ;
+      spl:valueType edg:WorkflowParticipantProperty ;
+      rdfs:comment "The property to get the abbreviation of." ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  spin:returnType xsd:string ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/spin/governance> ;
+  rdfs:subClassOf spin:Functions ;
+.
+<http://edg.topbraid.solutions/spin/library/GMD_governance>
+  rdf:type vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:SPINlibraryGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/spin/governance> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+arg:member
+  rdf:type rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/spin/governance> ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:organization
+  rdf:type rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/spin/governance> ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:person
+  rdf:type rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/spin/governance> ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:role
+  rdf:type rdf:Property ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/spin/governance> ;
+  rdfs:subPropertyOf sp:arg ;
+.

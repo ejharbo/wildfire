@@ -1,0 +1,40 @@
+# baseURI: http://topbraid.org/imported
+# prefix: imported
+
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://topbraid.org/imported>
+  rdf:type owl:Ontology ;
+  rdfs:comment """A vocabulary that can be used to track resources that were imported from external data sources. The main use case is for editing and browsing applications that allow users to import individual resources from an external Linked Data source or SPARQL end point. If a resource is imported, then the property imported:when points to the time stamp of the most recent import. The presence of this time stamp also doubles as flag to distinguish imported resources from others. Among others, this can be used to disallow editing the imported resources.
+
+In addition to the imported:when property, the property imported:fromGraph can be used to identify the named graph or Linked Data URL that the resource has been imported from. The property imported:fromEndPoint can point to a SPARQL end point.
+
+To summarize there are the following use cases:
+
+a) Only imported:when is present: resource has been imported from a Linked Data source at the URL of the subject.
+b) imported:fromGraph is present, but not imported:fromEndPoint: resource has been loaded from the Linked Data source at the graph.
+c) imported:fromEndPoint is present, but not imported:fromGraph: resource has been imported from the default graph of the SPARQL end point.
+d) both imported:fromGraph and imported:fromEndPoint are present: resource has been imported from the given named graph at the SPARQL end point.""" ;
+.
+imported:fromEndPoint
+  rdf:type owl:AnnotationProperty ;
+  rdfs:comment "A SPARQL end point that the subject has been imported from. Use fromGraph to specify the named graph on the end point that contains the resource." ;
+  rdfs:label "imported from end point" ;
+  rdfs:range rdfs:Resource ;
+.
+imported:fromGraph
+  rdf:type owl:AnnotationProperty ;
+  rdfs:comment "The named graph that the subject has been imported from. Used in conjunction with fromEndPoint to specify the named graph on a SPARQL end point. If no value for fromEndPoint exists, then this is assumed to point at the URI of the named graph on the web." ;
+  rdfs:label "imported from graph" ;
+  rdfs:range rdfs:Resource ;
+.
+imported:when
+  rdf:type owl:AnnotationProperty ;
+  rdfs:comment "The time stamp when the subject was imported. This can be used to keep track of outdated data, to periodically reload data from its remote location." ;
+  rdfs:label "imported when" ;
+  rdfs:range xsd:dateTime ;
+.

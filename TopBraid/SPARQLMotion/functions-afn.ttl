@@ -1,0 +1,166 @@
+# baseURI: http://topbraid.org/functions-afn
+# imports: http://spinrdf.org/spl
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+afn:e
+  a spin:Function ;
+  spin:returnType xsd:double ;
+  rdfs:comment "Returns the value of e, as xsd:double." ;
+  rdfs:label "e" ;
+  rdfs:subClassOf spl:MathematicalFunctions ;
+.
+afn:localname
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate <http://spinrdf.org/sp#arg1> ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "the URI resource to get the local name of" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Returns the local name of a URI resource. Based on splitting the IRI, not on any prefixes in the query or dataset. For example, the local name of http://test.com/my#Example is Example." ;
+  rdfs:label "localname" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+afn:max
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate <http://spinrdf.org/sp#arg1> ;
+      spl:valueType rdfs:Literal ;
+      rdfs:comment "the first value to compare" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate <http://spinrdf.org/sp#arg2> ;
+      spl:valueType rdfs:Literal ;
+      rdfs:comment "the second value to compare" ;
+    ] ;
+  spin:returnType rdfs:Literal ;
+  rdfs:comment "Gets the max value of two numeric arguments." ;
+  rdfs:label "max" ;
+  rdfs:subClassOf spl:MathematicalFunctions ;
+.
+afn:min
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate <http://spinrdf.org/sp#arg1> ;
+      spl:valueType rdfs:Literal ;
+      rdfs:comment "the first value to compare" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate <http://spinrdf.org/sp#arg2> ;
+      spl:valueType rdfs:Literal ;
+      rdfs:comment "the second value to compare" ;
+    ] ;
+  spin:returnType rdfs:Literal ;
+  rdfs:comment "Gets the min value of two numeric arguments." ;
+  rdfs:label "min" ;
+  rdfs:subClassOf spl:MathematicalFunctions ;
+.
+afn:namespace
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate <http://spinrdf.org/sp#arg1> ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "the URI resource to get the namespace of" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Returns the namespace of a URI resource. Based on splitting the IRI, not on any prefixes in the query or dataset. For example, the namespace of http://test.com/my#Example is http://test.com/my#." ;
+  rdfs:label "namespace" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+afn:now
+  a spin:Function ;
+  spin:returnType xsd:dateTime ;
+  rdfs:comment "Gets the current time as xsd:dateTime.  Actually, the time the query started. Constant throughout a query execution." ;
+  rdfs:label "now" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+afn:pi
+  a spin:Function ;
+  spin:returnType xsd:double ;
+  rdfs:comment "Returns the value of pi, as an xsd:double." ;
+  rdfs:label "pi" ;
+  rdfs:subClassOf spl:MathematicalFunctions ;
+.
+afn:sha1sum
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate <http://spinrdf.org/sp#arg1> ;
+      rdfs:comment "the value to get the sha1sum of" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Computes the sha1sum of a given input value (?arg1)." ;
+  rdfs:label "sha1sum" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+afn:sprintf
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate <http://spinrdf.org/sp#arg1> ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The format" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Make a string from the format string and the RDF terms." ;
+  rdfs:label "sprintf" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+afn:sqrt
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate <http://spinrdf.org/sp#arg1> ;
+      spl:valueType rdfs:Literal ;
+      rdfs:comment "The number to get the square root of." ;
+    ] ;
+  spin:returnType xsd:double ;
+  rdfs:comment "The square root of num." ;
+  rdfs:label "sqrt" ;
+  rdfs:subClassOf spl:MathematicalFunctions ;
+.
+afn:substr
+  a spin:Function ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:optional true ;
+      spl:predicate <http://spinrdf.org/sp#arg3> ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "the index of the last character to include in the result" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate <http://spinrdf.org/sp#arg1> ;
+      spl:valueType xsd:string ;
+      rdfs:comment "the text to get a sub string of" ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate <http://spinrdf.org/sp#arg2> ;
+      spl:valueType xsd:integer ;
+      rdfs:comment "the index of the first character (text starts with index 0)" ;
+    ] ;
+  spin:returnType xsd:string ;
+  rdfs:comment "Extracts a substring, Java style using startIndex and endIndex." ;
+  rdfs:label "substr" ;
+  rdfs:subClassOf spl:StringFunctions ;
+.
+<http://topbraid.org/functions-afn>
+  a owl:Ontology ;
+  owl:imports <http://spinrdf.org/spl> ;
+  owl:versionInfo "1.0.0" ;
+.

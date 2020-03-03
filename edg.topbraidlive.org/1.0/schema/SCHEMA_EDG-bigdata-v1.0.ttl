@@ -1,0 +1,927 @@
+# baseURI: http://edg.topbraid.solutions/1.0/schema/bigdata
+# imports: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://edg.topbraid.solutions/1.0/schema/requirements-model
+# imports: http://edg.topbraid.solutions/1.0/schema/technical-assets
+# imports: http://topbraid.org/metadata
+
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/schema/bigdata>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/schema/bigdata/GMD_bigdata> ;
+  rdfs:label "EDG SCHEMA - Big Data" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/requirements-model> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  owl:imports <http://topbraid.org/metadata> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+edg:Atlas
+  a edg:AssetClass ;
+  dcterms:source "http://atlas.incubator.apache.org/0.7.0-incubating/api/rest.html"^^xsd:anyURI ;
+  rdfs:comment "<strong>Apache Atlas</strong> is a scalable and extensible set of core foundational governance services – enabling enterprises to effectively and efficiently meet their compliance requirements within Hadoop and allows integration with the whole enterprise data ecosystem."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Atlas" ;
+  rdfs:subClassOf edg:BigDataSoftwareSystem ;
+  prov:wasInfluencedBy "http://atlas.incubator.apache.org/"^^xsd:anyURI ;
+.
+edg:Avro
+  a edg:AssetClass ;
+  rdfs:comment "<strong>Apache Avro</strong> is a framework for modeling, serializing and making Remote Procedure Calls (RPC). Avro data is described by a schema, and one notable feature is that the schema is stored in the same file as the data it describes, so files are self-describing. Avro does not require code generation. This framework can compete with other similar tools like: Apache Thrift, Google Protocol Buffers, ZeroC ICE. Avro creates data containers that have schema associated with them and that can serialized into binary and then deserialized very efficiently."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Avro" ;
+  rdfs:seeAlso edg:Sqoop ;
+  rdfs:seeAlso edg:Thrift ;
+  rdfs:subClassOf edg:BigDataSoftwareSystem ;
+  sh:property edg:Avro-authorativeSourceFor ;
+.
+edg:Avro-authorativeSourceFor
+  a sh:PropertyShape ;
+  sh:path edg:authorativeSourceFor ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+.
+edg:BigDataAsset
+  a edg:AssetClass ;
+  a edg:ViewpointClass ;
+  dash:abstract true ;
+  edg:acronym "BIGDA" ;
+  rdfs:comment "An<em>Big Data Asset</em> is an abstract superclass for EDG Big Data entities. This is the parent class for things such as <em>Big Data Data Assets</em>, <em>Big Data Configuraiton Assets</em>, <em>Big Data  Jobs</em> and <em>Big Data Files</em>."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data Asset" ;
+  rdfs:subClassOf edg:Asset ;
+  rdfs:subClassOf edg:Configurable ;
+  rdfs:subClassOf edg:Identifiable ;
+  rdfs:subClassOf edg:Narratable ;
+  rdfs:subClassOf edg:Traceable ;
+  prov:wasInfluencedBy "http://hadoopecosystemtable.github.io/"^^xsd:anyURI ;
+  sh:group edg:TraceableGroup ;
+  sh:order "100"^^xsd:decimal ;
+  sh:property edg:BigDataAsset-derivedFrom ;
+.
+edg:BigDataAsset-derivedFrom
+  a sh:PropertyShape ;
+  sh:path edg:derivedFrom ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  sh:or (
+      [
+        sh:class edg:DataAsset ;
+      ]
+      [
+        sh:class edg:BigDataAsset ;
+      ]
+    ) ;
+.
+edg:BigDataAsset-ownedBy
+  a sh:PropertyShape ;
+  sh:path edg:ownedBy ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  sh:class edg:Organization ;
+.
+edg:BigDataAssetsProject
+  graphql:publicClass edg:BigDataAsset ;
+.
+edg:BigDataCatalog
+  a edg:AssetClass ;
+  edg:acronym "BIGDC" ;
+  edg:hideSubClasses true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data Catalog" ;
+  rdfs:subClassOf edg:BigDataAsset ;
+  rdfs:subClassOf edg:BigDataViewpoint ;
+.
+edg:BigDataCluster
+  a edg:AssetClass ;
+  edg:acronym "BIGDCLSTR" ;
+  rdfs:comment "An <em>Hadoop cluster</em> is a type of computational cluster for processing unstructured data in a distributed computing environment. Hadoop is an open-source framework."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data Cluster" ;
+  rdfs:subClassOf edg:BigDataConfiguration ;
+  sh:property edg:BigDataCluster-BigDataMasterNode ;
+  sh:property edg:BigDataCluster-bigDataNode ;
+  sh:property edg:BigDataCluster-bigDataResourceManager ;
+.
+edg:BigDataCluster-BigDataMasterNode
+  a sh:PropertyShape ;
+  sh:path edg:BigDataMasterNode ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+.
+edg:BigDataCluster-bigDataNode
+  a sh:PropertyShape ;
+  sh:path edg:usesBigDataNode ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  sh:class edg:BigDataNode ;
+  sh:minCount 1 ;
+.
+edg:BigDataCluster-bigDataResourceManager
+  a sh:PropertyShape ;
+  sh:path edg:bigDataResourceManager ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  sh:class edg:BigDataResourceManager ;
+  sh:maxCount 1 ;
+.
+edg:BigDataClusterManager
+  a edg:AssetClass ;
+  edg:acronym "BIGDCM" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data Cluster Manager" ;
+  rdfs:subClassOf edg:BigDataManager ;
+.
+edg:BigDataConfiguration
+  a edg:AssetClass ;
+  edg:acronym "BIGDCNFG" ;
+  edg:hideSubClasses true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data Configuration" ;
+  rdfs:subClassOf edg:BigDataAsset ;
+  rdfs:subClassOf edg:BigDataViewpoint ;
+.
+edg:BigDataContainer
+  a edg:AssetClass ;
+  edg:acronym "BIGDCNTNR" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data - Container" ;
+  rdfs:subClassOf edg:BigDataDataAsset ;
+.
+edg:BigDataDataAsset
+  a edg:AssetClass ;
+  edg:acronym "BIGDDA" ;
+  edg:hideSubClasses true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data Data Asset" ;
+  rdfs:subClassOf edg:BigDataAsset ;
+  rdfs:subClassOf edg:BigDataViewpoint ;
+.
+edg:BigDataDataNode
+  a edg:AssetClass ;
+  edg:acronym "BIGDDN" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data Data Node" ;
+  rdfs:subClassOf edg:BigDataNode ;
+.
+edg:BigDataEdgeNode
+  a edg:AssetClass ;
+  edg:acronym "BIGDEN" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data Edge Node" ;
+  rdfs:subClassOf edg:BigDataNode ;
+.
+edg:BigDataFile
+  a edg:AssetClass ;
+  edg:acronym "BIGDF" ;
+  edg:hideSubClasses true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data File" ;
+  rdfs:subClassOf edg:BigDataAsset ;
+  rdfs:subClassOf edg:BigDataViewpoint ;
+.
+edg:BigDataJob
+  a edg:AssetClass ;
+  edg:acronym "BIGDJ" ;
+  edg:hideSubClasses true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data Job" ;
+  rdfs:subClassOf edg:BigDataAsset ;
+  rdfs:subClassOf edg:BigDataViewpoint ;
+.
+edg:BigDataJobTracker
+  a edg:AssetClass ;
+  edg:acronym "BIGDJTRKR" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data Job Tracker" ;
+  rdfs:subClassOf edg:BigDataTracker ;
+.
+edg:BigDataLongLivedJob
+  a edg:AssetClass ;
+  edg:acronym "BIGDLLJ" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data Long Lived Job" ;
+  rdfs:subClassOf edg:BigDataJob ;
+.
+edg:BigDataManager
+  a edg:AssetClass ;
+  edg:acronym "BIGDMNGR" ;
+  edg:hideSubClasses true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data Manager" ;
+  rdfs:subClassOf edg:BigDataAsset ;
+  rdfs:subClassOf edg:BigDataViewpoint ;
+  rdfs:subClassOf edg:Infrastructure ;
+.
+edg:BigDataMasterNode
+  a edg:AssetClass ;
+  edg:acronym "BIGDMN" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data Master Node" ;
+  rdfs:subClassOf edg:BigDataNode ;
+  sh:property edg:BigDataMasterNode-bigDataNode ;
+.
+edg:BigDataMasterNode-bigDataNode
+  a sh:PropertyShape ;
+  sh:path edg:usesBigDataNode ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  sh:class edg:BigDataDataNode ;
+  sh:class edg:BigDataNameNode ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+.
+edg:BigDataNameNode
+  a edg:AssetClass ;
+  edg:acronym "BIGDNN" ;
+  rdfs:comment "The <strong>NameNode</strong> is the master of HDFS that directs the slave DataNode daemons to perform the low-level I/O tasks. The NameNode is the bookkeeper of HDFS; it keeps track of how  files are broken down into file blocks, which nodes store those blocks, and the overall health of the distributed filesystem. The function of the NameNode is memory and I/O intensive. As such, the server hosting the NameNode typically doesn’t store any user data or perform any computations for a MapReduce or other Hadoop programs to lower the workload on the machine. This means that the NameNode server doesn’t double as a DataNode (source: Chuck P. Lam, Mark W. Davis. “Hadoop in Action, Second Edition MEAP V07.” iBooks. “Hadoop in Action, Second Edition MEAP V07.” iBooks)."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data Name Node" ;
+  rdfs:subClassOf edg:BigDataNode ;
+.
+edg:BigDataNode
+  a edg:AssetClass ;
+  edg:acronym "BIGDN" ;
+  edg:hideSubClasses true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data Node" ;
+  rdfs:subClassOf edg:BigDataAsset ;
+  rdfs:subClassOf edg:BigDataViewpoint ;
+  rdfs:subClassOf edg:Infrastructure ;
+  sh:property edg:BigDataNode-bigDataNode ;
+  sh:property edg:BigDataNode-brokerId ;
+  sh:property edg:BigDataNode-hostName ;
+  sh:property edg:BigDataNode-port ;
+  sh:property edg:BigDataNode-rackId ;
+  sh:property edg:BigDataNode-rackName ;
+.
+edg:BigDataNode-bigDataNode
+  a sh:PropertyShape ;
+  sh:path edg:usesBigDataNode ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  sh:class edg:BigDataNode ;
+  sh:group edg:BigDataNodePropertiesGroup ;
+  sh:minCount 1 ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:BigDataNode-brokerId
+  a sh:PropertyShape ;
+  sh:path edg:brokerId ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  sh:datatype xsd:string ;
+  sh:group edg:BigDataNodePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:BigDataNode-hostName
+  a sh:PropertyShape ;
+  sh:path edg:hostName ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  sh:datatype xsd:string ;
+  sh:group edg:BigDataNodePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:BigDataNode-port
+  a sh:PropertyShape ;
+  sh:path edg:port ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  sh:datatype xsd:string ;
+  sh:group edg:BigDataNodePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:BigDataNode-rackId
+  a sh:PropertyShape ;
+  sh:path edg:rackId ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  sh:datatype xsd:string ;
+  sh:group edg:BigDataNodePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "110"^^xsd:decimal ;
+.
+edg:BigDataNode-rackName
+  a sh:PropertyShape ;
+  sh:path edg:rackName ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  sh:datatype xsd:string ;
+  sh:group edg:BigDataNodePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:BigDataNodePropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:openable true ;
+  rdfs:label "Big Data Node Metadata" ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:BigDataProperty
+  a edg:AssetClass ;
+  edg:acronym "BIGDP" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data Property" ;
+  rdfs:subClassOf edg:BigDataDataAsset ;
+  rdfs:subClassOf edg:Processable ;
+  sh:property edg:BigDataProperty-datatype ;
+.
+edg:BigDataProperty-datatype
+  a sh:PropertyShape ;
+  sh:path edg:datatype ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  sh:class qudt:ScalarDatatype ;
+  sh:maxCount 1 ;
+.
+edg:BigDataRecipe
+  a edg:AssetClass ;
+  edg:acronym "BIGDRCP" ;
+  edg:hideSubClasses true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data Recipe" ;
+  rdfs:subClassOf edg:BigDataAsset ;
+  rdfs:subClassOf edg:BigDataViewpoint ;
+.
+edg:BigDataRegion
+  a edg:AssetClass ;
+  edg:acronym "BIGDRGN" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data Region" ;
+  rdfs:subClassOf edg:BigDataConfiguration ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path edg:livesIn ;
+      sh:class edg:BigDataContainer ;
+    ] ;
+.
+edg:BigDataResourceManager
+  a edg:AssetClass ;
+  edg:acronym "BIGDRM" ;
+  rdfs:comment "The <strong>ResourceManager</strong> in Hadoop 2 takes the place of JobTrackers in previous versions. The <em>ResourceManager</em> is part of YARN and assigns compute resources to different applications that run on the cluster. Unlike the JobTracker/TaskTracker framework, the YARN system supports applications beyond MapReduce jobs, like Spark in-memory computing and graph databases. When you create an application (or have a MapReduce job), your client contacts the ResourceManager to create an execution plan and allocate resources to the application. The ResourceManager creates ApplicationMasters that reside on DataNodes and carry out the execution of your job. It remains the liaison between your application and Hadoop. There is only one ResourceManager daemon per Hadoop cluster. It’s typically run on a server as a master node of the cluster (Source: Chuck P. Lam, Mark W. Davis. “Hadoop in Action, Second Edition MEAP V07.” iBooks)."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data Resource Manager" ;
+  rdfs:subClassOf edg:BigDataManager ;
+.
+edg:BigDataSecondaryNameNode
+  a edg:AssetClass ;
+  edg:acronym "BIGDSNN" ;
+  rdfs:comment "The <strong>Secondary NameNode</strong> (SNN) is an assistant daemon for monitoring the state of the cluster HDFS. Like the NameNode, each cluster has one SNN, and it typically resides on its own machine as well. No other DataNode of other daemons run on the same server. The SNN differs from the NameNode in that this process doesn’t receive or record any real-time changes to HDFS. Instead, it communicates with the NameNode to take snapshots of the HDFS metadata at intervals defined by the cluster configuration (source: Chuck P. Lam, Mark W. Davis. “Hadoop in Action, Second Edition MEAP V07.” iBooks. “Hadoop in Action, Second Edition MEAP V07.” iBooks)."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data Secondary Name Node" ;
+  rdfs:subClassOf edg:BigDataNode ;
+.
+edg:BigDataShortLivedJob
+  a edg:AssetClass ;
+  edg:acronym "BIGDSLJ" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data Short Lived Job" ;
+  rdfs:subClassOf edg:BigDataJob ;
+.
+edg:BigDataSoftwareSystem
+  a edg:AssetClass ;
+  edg:acronym "BIGDSS" ;
+  edg:hideSubClasses true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data Software System" ;
+  rdfs:subClassOf edg:BigDataAsset ;
+  rdfs:subClassOf edg:BigDataViewpoint ;
+  sh:property edg:BigDataSoftwareSystem-authorativeSourceFor ;
+.
+edg:BigDataSoftwareSystem-authorativeSourceFor
+  a sh:PropertyShape ;
+  sh:path edg:authorativeSourceFor ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+.
+edg:BigDataSoftwareSystem-systemOfRecordFor
+  a sh:PropertyShape ;
+  sh:path edg:systemOfRecordFor ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+.
+edg:BigDataStore
+  a edg:AssetClass ;
+  dash:abstract true ;
+  edg:acronym "BIGDS" ;
+  edg:hideSubClasses true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data - Store" ;
+  rdfs:subClassOf edg:BigDataAsset ;
+  rdfs:subClassOf edg:BigDataViewpoint ;
+  rdfs:subClassOf edg:Database ;
+.
+edg:BigDataTable
+  a edg:AssetClass ;
+  edg:acronym "BIGDTBL" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data Table" ;
+  rdfs:subClassOf edg:BigDataDataAsset ;
+.
+edg:BigDataTaskTracker
+  a edg:AssetClass ;
+  edg:acronym "BIGDTTRKR" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data Task Tracker" ;
+  rdfs:subClassOf edg:BigDataTracker ;
+.
+edg:BigDataTracker
+  a edg:AssetClass ;
+  edg:acronym "BIGDTRKR" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data Tracker" ;
+  rdfs:subClassOf edg:BigDataManager ;
+.
+edg:BigDataUtilityNode
+  a edg:AssetClass ;
+  edg:acronym "BIGDUN" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data Utility Node" ;
+  rdfs:subClassOf edg:BigDataNode ;
+.
+edg:BigDataViewpoint
+  a edg:ViewpointClass ;
+  dash:abstract true ;
+  rdfs:comment "Provides a menu container for all big data asset types." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "BigData Viewpoint" ;
+  rdfs:subClassOf edg:Viewpoint ;
+.
+edg:BigDataWorkerNode
+  a edg:AssetClass ;
+  edg:acronym "BIGDWN" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data Worker Node" ;
+  rdfs:subClassOf edg:BigDataNode ;
+.
+edg:Camus
+  a edg:AssetClass ;
+  edg:description "<em>Camus</em> is a Kafka to HDFS pipeline ingestor released by LinkedIn. Camus is now replaced by Gobblin, see <a href=\"https://github.com/linkedin/gobblin\">https://github.com/linkedin/gobblin</a> for more details."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datatypes> ;
+  rdfs:label "Camus" ;
+  rdfs:subClassOf edg:DataIngestor ;
+.
+edg:ChefCluster
+  a edg:AssetClass ;
+  edg:acronym "CHEFCLSTR" ;
+  rdfs:comment "<strong>Chef</strong> is a systems and cloud infrastructure automation framework that makes it easy to deploy servers and applications to any physical, virtual, or cloud location, no matter the size of the infrastructure. Each organization is comprised of one (or more) workstations, a single server, and every node that will be configured and maintained by the chef-client. Cookbooks (and recipes) are used to tell the chef-client how each node in your organization should be configured. The chef-client (which is installed on every node) does the actual configuration. See <a href=\"http://chef.io\">http://chef.io</a> for more information."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Chef Cluster" ;
+  rdfs:subClassOf edg:BigDataCluster ;
+.
+edg:DataIngestor
+  a edg:AssetClass ;
+  a owl:Class ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/technical-assets> ;
+  rdfs:label "Data Ingestor" ;
+  rdfs:subClassOf edg:Infrastructure ;
+.
+edg:Drill
+  a owl:Class ;
+  rdfs:comment "<strong>Drill</strong> is the open source version of Google's Dremel system which is available as an infrastructure service called Google BigQuery. In recent years open source systems have emerged to address the need for scalable batch processing (Apache Hadoop) and stream processing (Storm, Apache S4). Apache Hadoop, originally inspired by Google's internal MapReduce system, is used by thousands of organizations processing large-scale datasets. Apache Hadoop is designed to achieve very high throughput, but is not designed to achieve the sub-second latency needed for interactive data analysis and exploration. Drill, inspired by Google's internal Dremel system, is intended to address this need"^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Drill" ;
+  rdfs:subClassOf edg:ServiceFramework ;
+.
+edg:Flume
+  a edg:AssetClass ;
+  rdfs:comment "<strong>Flume</strong> is a system for moving data into HDFS from remote systems using configurable memory-resident daemons that watch for data on those systems and then forward the data to Hadoop. Flume is used to transfer web server log files into Hadoop for analysis, for example, but can also be applied to other data producers and customized for other needs using a data flow language (Source: Chuck P. Lam, Mark W. Davis. “Hadoop in Action, Second Edition MEAP V07.” iBooks)."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Flume" ;
+  rdfs:seeAlso edg:Sqoop ;
+  rdfs:subClassOf edg:BigDataSoftwareSystem ;
+  sh:property edg:Flume-authorativeSourceFor ;
+  sh:property edg:Flume-systemOfRecordFor ;
+.
+edg:Flume-authorativeSourceFor
+  a sh:PropertyShape ;
+  sh:path edg:authorativeSourceFor ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+.
+edg:Flume-systemOfRecordFor
+  a sh:PropertyShape ;
+  sh:path edg:systemOfRecordFor ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+.
+edg:Goblin
+  a edg:AssetClass ;
+  edg:description "<em>Goblin</em> is a universal data ingestion framework for extracting, transforming, and loading large volume of data from a variety of data sources, e.g., databases, rest APIs, FTP/SFTP servers, filers, etc., onto Hadoop. Gobblin handles the common routine tasks required for all data ingestion ETLs, including job/task scheduling, task partitioning, error handling, state management, data quality checking, data publishing, etc. Gobblin ingests data from different data sources in the same execution framework, and manages metadata of different sources all in one place. This, combined with other features such as auto scalability, fault tolerance, data quality assurance, extensibility, and the ability of handling data model evolution, makes Gobblin an easy-to-use, self-serving, and efficient data ingestion framework (reference: <a href=\"https://github.com/linkedin/gobblin/wiki\">https://github.com/linkedin/gobblin/wiki</a>)."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Goblin" ;
+  rdfs:subClassOf edg:DataIngestor ;
+.
+edg:HBase
+  a edg:AssetClass ;
+  dcterms:source "https://hbase.apache.org"^^xsd:anyURI ;
+  rdfs:comment "HBase is an open source, non-relational, distributed database modeled after Google's BigTable and written in Java. It is developed as part of Apache Software Foundation's Apache Hadoop project and runs on top of HDFS (Hadoop Distributed Filesystem), providing BigTable-like capabilities for Hadoop.  	HBase is Google BigTable Inspired. As a non-relational distributed database, Hbase offers ramdom, real-time r/w operations in column-oriented very large tables (BDDB: Big Data Data Base). It’s the backing system for MR jobs outputs. It’s the Hadoop database. It’s for backing Hadoop MapReduce jobs with Apache HBase tables."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "HBase" ;
+  rdfs:seeAlso <https://hadoop.apache.org> ;
+  rdfs:subClassOf edg:BigDataStore ;
+  sh:property edg:HBase-rowKeySpecification ;
+.
+edg:HBase-rowKeySpecification
+  a sh:PropertyShape ;
+  sh:path edg:rowKeySpecification ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  sh:maxCount 1 ;
+.
+edg:HCatalog
+  a edg:AssetClass ;
+  edg:acronym "HCTLG" ;
+  rdfs:comment "<p><strong>HCatalog</strong> is a table abstraction that  presents users with a relational view of data in the Hadoop Distributed File System (HDFS) and ensures that users need not worry about where or in what format their data is stored.  HCatalog is part of Hive. HCatalog exposes the tabular data of Hive metastore to other Hadoop applications. It enables users with different data processing tools (Pig, MapReduce) to easily write data onto a grid.</p>"^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "HCatalog" ;
+  rdfs:subClassOf edg:BigDataCatalog ;
+  rdfs:subClassOf edg:Configurable ;
+  rdfs:subClassOf edg:Identifiable ;
+.
+edg:HDFS
+  a edg:AssetClass ;
+  edg:acronym "HFDS" ;
+  rdfs:comment "HDFS, the Hadoop Distributed File System, offers a way to store large files across multiple machines. Hadoop and HDFS was derived from Google File System (GFS) paper. Prior to Hadoop 2.0.0, the NameNode was a single point of failure (SPOF) in an HDFS cluster. With Zookeeper the HDFS High Availability feature addresses this problem by providing the option of running two redundant NameNodes in the same cluster in an Active/Passive configuration with a hot standby."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "HDFS" ;
+  rdfs:subClassOf edg:BigDataStore ;
+.
+edg:HadoopFile
+  a edg:AssetClass ;
+  edg:acronym "HADOOPF" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Hadoop File" ;
+  rdfs:subClassOf edg:BigDataFile ;
+.
+edg:ImpalaCatalog
+  a owl:Class ;
+  rdfs:comment "<strong>Impala</strong> is an accelerator for Hive  that  Cloudera, an Hadoop vendor, sells commercially but have also licensed under Apache open-source terms. Impala adds query planning to each data node, and queries can coordinate between nodes. This emulates the way many commercial parallel data warehouses operate and provides significant speedups for certain types of queries. (referece: Chuck P. Lam, Mark W. Davis. “Hadoop in Action, Second Edition MEAP V07.” iBooks)."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Impala Catalog" ;
+  rdfs:subClassOf edg:BigDataCatalog ;
+.
+edg:KafkaServer
+  a owl:Class ;
+  rdfs:comment "<strong>Kafka</strong> is designed to allow a single cluster to serve as the central data backbone for a large organization. It can be elastically and transparently expanded without downtime. Data streams are partitioned and spread over a cluster of machines to allow data streams larger than the capability of any single machine and to allow clusters of co-ordinated consumers.  Brokers receive messages from Producers (push) and deliver messages to Consumers (pull). For more details of Kafka see <a href=\"http://kafka.apache.org/\">http://kafka.apache.org/</a>."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Kafka Server" ;
+  rdfs:subClassOf edg:Server ;
+.
+edg:Kudu
+  a edg:AssetClass ;
+  dcterms:source "https://hbase.apache.org"^^xsd:anyURI ;
+  rdfs:comment "Kudu is a distributed, columnar, relational data store optimized for analytical use cases requiring very fast read and write speeds. Kudu is a relational data model (tables) with strongly-typed columns and a fast, online alter table operation. It is sharded with support for partitioning based on key ranges and/or hashing; fault-tolerant and consistent due to its implementation of Raft consensus. Kudu is fast for SQL reads and writes with Apache Impala and Apache Dril. Is is integrated with MapReduce and Spark and provides \"NoSQL\" APIs in Java, Python, and C++."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Kudu" ;
+  rdfs:seeAlso <https://hadoop.apache.org> ;
+  rdfs:subClassOf edg:BigDataStore ;
+  sh:property edg:Kudu-rowKeySpecification ;
+.
+edg:Kudu-rowKeySpecification
+  a sh:PropertyShape ;
+  sh:path edg:rowKeySpecification ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  sh:maxCount 1 ;
+.
+edg:M7Container
+  a edg:AssetClass ;
+  edg:acronym "M7CNTR" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "M7 Container" ;
+  rdfs:subClassOf edg:BigDataContainer ;
+.
+edg:Marathon
+  a edg:AssetClass ;
+  edg:acronym "MRTHN" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Marathon" ;
+  rdfs:subClassOf edg:MesosAsset ;
+.
+edg:MesosAsset
+  a edg:AssetClass ;
+  edg:acronym "MESOSA" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Mesos Asset" ;
+  rdfs:subClassOf edg:BigDataConfiguration ;
+.
+edg:MesosClusterManager
+  a edg:AssetClass ;
+  edg:acronym "MESOSCM" ;
+  rdfs:comment "<strong>Mesos</strong> is a cluster manager that provides resource sharing and isolation across cluster applications. Like HTCondor, SGE or Troque can do it. However Mesos is an hadoop-centred design."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Mesos Cluster Manager" ;
+  rdfs:subClassOf edg:BigDataCluster ;
+.
+edg:MesosDNS
+  a edg:AssetClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Mesos DNS" ;
+  rdfs:subClassOf edg:MesosAsset ;
+.
+edg:MesosMaster
+  a edg:AssetClass ;
+  edg:acronym "MESOSMSTR" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Mesos Master" ;
+  rdfs:subClassOf edg:MesosAsset ;
+.
+edg:MesosScheduler
+  a edg:AssetClass ;
+  edg:acronym "MESOSSCHLDR" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Mesos Scheduler" ;
+  rdfs:subClassOf edg:MesosAsset ;
+.
+edg:ORCFile
+  a edg:AssetClass ;
+  edg:acronym "ORCF" ;
+  rdfs:comment "The <em>Optimized Row Columnar (ORC)</em> format was created to address some of the short comings with the RCFile format, specifically around query performance and storage efficiency."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "ORCFile" ;
+  rdfs:subClassOf edg:HadoopFile ;
+.
+edg:ParquetFile
+  a edg:AssetClass ;
+  edg:acronym "PARQUETF" ;
+  rdfs:comment "<strong>Parquet</strong> shares many of the same design goals as ORC, but is intended to be a general purpose storage format for Hadoop. As such, the goal is to create a format that is suitable for different MapReduce interfaces such as Java, Hive, and Pig, and also suitable for other processing engines such as Impala."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Parquet File" ;
+  rdfs:subClassOf edg:HadoopFile ;
+.
+edg:RCFile
+  a edg:AssetClass ;
+  rdfs:comment "The <strong>RCFile</strong> format was developed specifically to provide efficient processing for MapReduce applications, although in practice is only seen use as a Hive storage format. The RCFile format was developed to provide fast data loading, fast query processing, highly efficient storage space utilization, and strong adaptivity to highly dynamic work-load patterns. RCFiles are similar to SequenceFiles, except data is stored in a column- oriented fashion. The RCFile format breaks files into row splits, then within each split uses column oriented storage. Although the RCFile format provides advantages in terms of query and compression performance compared to SequenceFiles, it also has some deficiencies that prevent optimal performance for query times and compression. Newer columnar formats such as ORC and Parquet address many of these deficiencies, and for most newer applications will likely replace the use of RCFile. RCFile is still a fairly common format used with Hive storage."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "RCFile" ;
+  rdfs:subClassOf edg:HadoopFile ;
+.
+edg:RegionServer
+  a edg:AssetClass ;
+  edg:acronym "RGNSRVR" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Region Server" ;
+  rdfs:subClassOf edg:BigDataSoftwareSystem ;
+  sh:property edg:RegionServer-regionServerFor ;
+.
+edg:RegionServer-regionServerFor
+  a sh:PropertyShape ;
+  sh:path edg:regionServerFor ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  sh:class edg:BigDataNode ;
+  sh:maxCount 1 ;
+.
+edg:ResilientDistibutedDataSet
+  a edg:AssetClass ;
+  edg:acronym "RDD" ;
+  rdfs:comment """<p>A RDD is a resilient and distributed collection of records. One could compare RDD to a Scala collection (that sits on a single JVM) to its distributed variant (that sits on many JVMs, possibly on separate nodes in a cluster).</p>
+<p>Spark revolves around the concept of a resilient distributed dataset (RDD), which is a fault-tolerant collection of elements that can be operated on in parallel. There are two ways to create RDDs: parallelizing an existing collection in your driver program, or referencing a dataset in an external storage system, such as a shared filesystem, HDFS, HBase, or any data source offering a Hadoop InputFormat.</p>"""^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Resilient Distributed Dataset (RDD)" ;
+  rdfs:subClassOf edg:BigDataFile ;
+.
+edg:SequenceFile
+  a edg:AssetClass ;
+  edg:acronym "SEQF" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Sequence File" ;
+  rdfs:subClassOf edg:HadoopFile ;
+.
+edg:Sqoop
+  a edg:AssetClass ;
+  edg:acronym "SQP" ;
+  rdfs:comment "<strong>Sqoop</strong>, is like Flume, but is specifically targeted at moving data from databases to Hadoop for processing there. Sqoop can pull data from the transactional database to make it available on Hadoop (Source: Chuck P. Lam, Mark W. Davis. “Hadoop in Action, Second Edition MEAP V07.” iBooks)."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Sqoop" ;
+  rdfs:seeAlso edg:Flume ;
+  rdfs:subClassOf edg:BigDataSoftwareSystem ;
+  sh:property edg:Sqoop-authorativeSourceFor ;
+  sh:property edg:Sqoop-systemOfRecordFor ;
+.
+edg:Sqoop-authorativeSourceFor
+  a sh:PropertyShape ;
+  sh:path edg:authorativeSourceFor ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+.
+edg:Sqoop-systemOfRecordFor
+  a sh:PropertyShape ;
+  sh:path edg:systemOfRecordFor ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+.
+edg:SqoopConfiguration
+  a edg:AssetClass ;
+  edg:acronym "SQPCFGN" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Sqoop Configuration" ;
+  rdfs:subClassOf edg:BigDataConfiguration ;
+  sh:property [
+      sh:path edg:id ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+  sh:property [
+      sh:path edg:input ;
+      sh:class edg:SqoopInput ;
+    ] ;
+  sh:property [
+      sh:path edg:name ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+  sh:property [
+      sh:path edg:sqoopType ;
+      spl:defaultValue "JOB" ;
+      rdfs:comment "can only be \"JOB\" or \"LINK'" ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+.
+edg:SqoopInput
+  a edg:AssetClass ;
+  edg:acronym "SQPIP" ;
+  dcterms:source "http://sqoop.apache.org/docs/1.99.6/RESTAPI.html"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Sqoop Input" ;
+  rdfs:subClassOf edg:DataElement ;
+  sh:property [
+      sh:path edg:datatype ;
+      spl:defaultValue "STRING" ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+  sh:property [
+      sh:path edg:id ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+  sh:property [
+      sh:path edg:name ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+  sh:property [
+      sh:path edg:sensitive ;
+      sh:datatype xsd:boolean ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+.
+edg:SqoopJob
+  a edg:AssetClass ;
+  edg:acronym "SQPJ" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Sqoop Job" ;
+  rdfs:subClassOf edg:BigDataJob ;
+.
+edg:YARN
+  a edg:AssetClass ;
+  rdfs:comment "<strong>YARN</strong> is Hadoops distributed resource scheduler."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "YARN" ;
+  rdfs:subClassOf edg:Scheduler ;
+.
+edg:ZooKeeper
+  a owl:Class ;
+  edg:referenceLink "http://hadoopecosystemtable.github.io/"^^xsd:anyURI ;
+  edg:referenceLink "https://zookeeper.apache.org"^^xsd:anyURI ;
+  rdfs:comment "'ZooKeeper' is a coordination service that gives you the tools you need to write correct distributed applications. ZooKeeper was developed at Yahoo! Research. Several Hadoop projects are already using ZooKeeper to coordinate the cluster and provide highly-available distributed services. Perhaps most famous of those are Apache HBase, Storm, Kafka. ZooKeeper is an application library with two principal implementations of the APIsJava and Cand a service component implemented in Java that runs on an ensemble of dedicated servers. Zookeeper is for building distributed systems, simplifies the development process, making it more agile and enabling more robust implementations. Back in 2006, Google published a paper on \"Chubby\", a distributed lock service which gained wide adoption within their data centers. Zookeeper, not surprisingly, is a close clone of Chubby designed to fulfill many of the same roles for HDFS and other Hadoop infrastructure." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "ZooKeeper" ;
+  rdfs:subClassOf edg:ServiceFramework ;
+.
+edg:applicableRegionServer
+  a owl:ObjectProperty ;
+  rdfs:domain edg:BigDataRegion ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "applicable region server" ;
+  rdfs:range edg:RegionServer ;
+.
+edg:belongsToRegion
+  a owl:ObjectProperty ;
+  rdfs:domain edg:BigDataTable ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "belongs to region" ;
+  rdfs:range edg:BigDataRegion ;
+.
+edg:bigDataResourceManager
+  a owl:ObjectProperty ;
+  rdfs:domain edg:BigDataCluster ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "Big Data resource manager" ;
+  rdfs:range edg:BigDataResourceManager ;
+.
+edg:brokerId
+  a owl:DatatypeProperty ;
+  rdfs:domain edg:BigDataNode ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "broker.id" ;
+  rdfs:range xsd:string ;
+.
+edg:hostName
+  a owl:DatatypeProperty ;
+  rdfs:domain edg:BigDataNode ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "host name" ;
+  rdfs:range xsd:string ;
+.
+edg:port
+  a owl:DatatypeProperty ;
+  rdfs:domain edg:BigDataNode ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "port" ;
+  rdfs:range xsd:string ;
+.
+edg:producer
+  rdfs:domain edg:KafkaServer ;
+.
+edg:rackId
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "rack id" ;
+  rdfs:range xsd:string ;
+.
+edg:rackName
+  a owl:DatatypeProperty ;
+  rdfs:domain edg:BigDataNode ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "rack name" ;
+  rdfs:range xsd:string ;
+.
+edg:regionServerFor
+  a owl:ObjectProperty ;
+  rdfs:domain edg:RegionServer ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "region server for" ;
+  rdfs:range edg:BigDataNode ;
+.
+edg:rowKeySpecification
+  a owl:DatatypeProperty ;
+  rdfs:domain edg:HBase ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "row key specification" ;
+  rdfs:range xsd:string ;
+.
+edg:sensitive
+  a owl:DatatypeProperty ;
+  rdfs:domain edg:SqoopInput ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "sensitive" ;
+  rdfs:range xsd:boolean ;
+.
+edg:sqoopType
+  a owl:DatatypeProperty ;
+  rdfs:domain edg:SqoopConfiguration ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "sqoop type" ;
+  rdfs:range xsd:string ;
+.
+edg:usesBigDataNode
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  rdfs:label "uses big data node" ;
+  rdfs:range edg:BigDataNode ;
+.
+<http://edg.topbraid.solutions/schema/bigdata/GMD_bigdata>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:SchemaGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/schema/bigdata> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+dtype:GMD_DTYPE
+  vaem:id "9f26bb9fe32a780fe72aff04fa81af5ec905eb25" ;
+.
+vaem:GMD_QUDT-SCHEMA
+  vaem:id "9f26bb9fe32a780fe72aff04fa81af5ec905eb25" ;
+.
+vaem:GMD_VAEM
+  vaem:id "9f26bb9fe32a780fe72aff04fa81af5ec905eb25" ;
+.

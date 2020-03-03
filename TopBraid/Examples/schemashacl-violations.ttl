@@ -1,0 +1,77 @@
+# baseURI: http://topbraid.org/examples/schemashacl-violations
+# imports: http://topbraid.org/examples/schemashacl
+# prefix: ex
+
+@prefix ex: <http://topbraid.org/examples/schemashacl-violations#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://topbraid.org/examples/schemashacl-violations>
+  a owl:Ontology ;
+  rdfs:comment "A file containing instances of schema.org classes that violate constraints from the schemashacl shapes file." ;
+  owl:imports <http://topbraid.org/examples/schemashacl> ;
+.
+ex:AussieAusborne
+  a schema:Person ;
+  schema:address ex:AussiesAddress ;
+  schema:familyName "Ausborne" ;
+  schema:gender "male" ;
+  schema:givenName "Aussie" ;
+  rdfs:label "Aussie Ausborne" ;
+.
+ex:AussiesAddress
+  a schema:PostalAddress ;
+  schema:addressCountry "au" ;
+  schema:addressRegion "CA" ;
+  schema:postalCode "58093" ;
+  rdfs:label "Aussie's address" ;
+.
+ex:DaisyDuck
+  a schema:Person ;
+  schema:address ex:DaisysUSAddress ;
+  schema:familyName "Duck" ;
+  schema:gender "female" ;
+  schema:givenName "Daisy" ;
+  rdfs:label "Daisy Duck" ;
+.
+ex:DaisysUSAddress
+  a schema:PostalAddress ;
+  schema:addressCountry "us" ;
+  schema:postalCode "12345-qwert" ;
+  rdfs:label "Daisy's US address" ;
+.
+ex:DonaldDuck
+  a schema:Person ;
+  schema:additionalName "J." ;
+  schema:birthDate "1942-09-10T10:32:10"^^xsd:dateTime ;
+  schema:familyName "Duck" ;
+  schema:gender "male" ;
+  schema:givenName "Donald" ;
+  rdfs:label "Donald Duck" ;
+.
+ex:MitoChondrial
+  a schema:Person ;
+  schema:familyName "Chondrial" ;
+  schema:givenName "Mito" ;
+  schema:parent ex:AussieAusborne ;
+  schema:parent ex:DaisyDuck ;
+  schema:parent ex:DonaldDuck ;
+  rdfs:label "Mito Chondrial" ;
+.
+ex:SunshineBeachHotel
+  a schema:Hotel ;
+  schema:starRating [
+      a schema:Rating ;
+      schema:author ex:DonaldDuck ;
+      schema:ratingValue "4"^^xsd:float ;
+    ] ;
+  schema:starRating [
+      a schema:Rating ;
+      schema:author ex:DonaldDuck ;
+      schema:ratingValue "5"^^xsd:float ;
+    ] ;
+  rdfs:label "Sunshine Beach Hotel" ;
+.

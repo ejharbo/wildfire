@@ -1,0 +1,756 @@
+# baseURI: http://topbraid.org/corpus-ui
+# imports: http://topbraid.org/corpus
+# imports: http://topbraid.org/swa
+# imports: http://topbraid.org/teamwork.ui
+
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix autotagger: <http://evn.topbraidlive.org/autotagger#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix compliance: <http://topbraid.org/compliance#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix conceptmatch: <http://topbraid.org/conceptmatch#> .
+@prefix config: <http://server.topbraidlive.org/dynamic/config#> .
+@prefix contact: <http://www.w3.org/2000/10/swap/pim/contact#> .
+@prefix corpus: <http://topbraid.org/corpus#> .
+@prefix crosswalk: <http://topbraid.org/crosswalk#> .
+@prefix crosswalk.spin: <http://topbraid.org/crosswalk.spin#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix default: <http://uispin.org/default#> .
+@prefix deployProjectToServer: <http://server.topbraidlive.org/doc/deployProjectToServer#> .
+@prefix devguide: <http://evn.topbraidlive.org/evndoc.www/devguide#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix doc: <http://www.w3.org/2000/10/swap/pim/doc#> .
+@prefix document: <http://topbraid.org/document#> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg.c: <http://edg.topbraid.solutions/controller/> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix elements: <http://purl.org/dc/elements/1.1/> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix evn: <http://topbraid.org/evn/evn#> .
+@prefix evnAdminIndex: <http://evn.topbraidlive.org/evnAdminIndex#> .
+@prefix evnIntro: <http://evn.topbraidlive.org/evndoc.www/evnIntro#> .
+@prefix evndoc: <http://evn.topbraidlive.org/evndoc.www/evndoc#> .
+@prefix evnimport: <http://evn.topbraidlive.org/uispin/evnimport#> .
+@prefix evninstallguide: <http://teamwork.topbraidlive.org/doc/evninstallguide#> .
+@prefix evnui: <http://evn.topbraidlive.org/ui#> .
+@prefix ex: <http://example.org/> .
+@prefix extjs: <http://uispin.com/extjs#> .
+@prefix flow: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix formTemplate: <http://teamwork.topbraidlive.org/system/formTemplate#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix gettingstarted: <http://evn.topbraidlive.org/evndoc.www/gettingstarted#> .
+@prefix glossary: <http://evn.topbraidlive.org/evndoc.www/glossary#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix ontologyviewer: <http://topbraid.org/swa/ontologyviewer#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix permissionGroupMgmt: <http://server.topbraidlive.org/doc/permissionGroupMgmt#> .
+@prefix pg: <http://server.topbraidlive.org/web/2013/permissiongroups#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix raci.spin: <http://topbraid.org/raci.spin#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix saf: <http://topbraid.org/saf/> .
+@prefix safconfig: <http://topbraid.org/safconfig/> .
+@prefix safm: <http://saf.topbraidlive.org/metaschema/> .
+@prefix savedQueries: <http://teamwork.topbraidlive.org/ui/savedQueries#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix server: <http://server.topbraidlive.org/server.ui#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sharepoint: <http://topbraid.org/sharepoint#> .
+@prefix sharepoint.spin: <http://topbraid.org/sharepoint.spin#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spinx: <http://spinrdf.org/spinx#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix tagger: <http://evn.topbraidlive.org/tagger#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tasks.spin: <http://topbraid.org/tasks.spin#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix tbladmin: <http://server.topbraidlive.org/system-applications/tbladmin#> .
+@prefix tbladmindoc: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix tblinstallguide: <http://server.topbraidlive.org/doc/tblinstallguide#> .
+@prefix teaminstallsec: <http://teamwork.topbraidlive.org/doc/teamworkInstallGuideSections#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix teamworkconfig: <http://server.topbraidlive.org/system-applications/teamworkconfig#> .
+@prefix teamworkconstraints: <http://topbraid.org/teamworkconstraints#> .
+@prefix teamworkdashboard: <http://topbraid.org/teamworkdashboard#> .
+@prefix teamworknotifications: <http://topbraid.org/teamworknotifications#> .
+@prefix teamworkrules: <http://topbraid.org/teamworkrules#> .
+@prefix teamworkscripts: <http://topbraid.org/teamworkscripts#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix tracker: <http://teamwork.topbraidlive.org/ui/tracker#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uitest: <http://uispin.org/test#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix userAdminIndex: <http://evn.topbraidlive.org/userAdminIndex#> .
+@prefix userIndex: <http://evn.topbraidlive.org/evndoc.www/userIndex#> .
+@prefix userdat: <http://teamwork.topbraidlive.org/ui/userdata> .
+@prefix userdata: <http://teamwork.topbraidlive.org/ui/userdata#> .
+@prefix usingtagger: <http://evn.topbraidlive.org/taggerdoc.www/usingtagger#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wf: <http://www.w3.org/2005/01/wf/flow#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+arg:cmisBindingType
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:cmisPassword
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:cmisRepositoryUrl
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:cmisUsername
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:corpus
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:directoryPath
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:repositoryId
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+corpus:Cancel
+  rdf:type ui:NodeClass ;
+  rdfs:comment "Instructs the Repository connector of the corpus to stop crawling/fetching, if it is currently doing so." ;
+  rdfs:label "cancel" ;
+  rdfs:subClassOf corpus:CorpusControlElement ;
+.
+corpus:CheckForUpdates
+  rdf:type ui:NodeClass ;
+  rdfs:comment "Instructs the Repository connector of the corpus to check the remote repository for any updated documents. This will generally start a crawl job that does the updates in the background." ;
+  rdfs:label "check for updates" ;
+  rdfs:subClassOf corpus:CorpusControlElement ;
+.
+corpus:ClearCrawlStore
+  rdf:type ui:NodeClass ;
+  rdfs:comment "Clears the crawl store of the corpus, that is, removes all documents and their metadata." ;
+  rdfs:label "clear crawl store" ;
+  rdfs:subClassOf corpus:CorpusControlElement ;
+.
+corpus:CorpusControlElement
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate arg:corpus ;
+      spl:valueType corpus:Corpus ;
+      rdfs:comment "The corpus to operate on. Typically this is a Teamwork project graph." ;
+    ] ;
+  ui:abstract "true"^^xsd:boolean ;
+  ui:private "true"^^xsd:boolean ;
+  rdfs:label "Corpus control element" ;
+  rdfs:subClassOf ui:ControlElement ;
+.
+corpus:DeleteCrawlStore
+  rdf:type ui:NodeClass ;
+  rdfs:comment "Deletes any persistent resources associated with the crawl store of the corpus, e.g., files on disk." ;
+  rdfs:label "delete crawl store" ;
+  rdfs:subClassOf corpus:CorpusControlElement ;
+.
+corpus:Document
+  ui:instanceView """
+<corpus:DocumentFormBody arg:resource=\"{= ?this }\" ui:id=\"form\" ui:priority=\"{= -9 }\"/>
+"""^^ui:Literal ;
+.
+corpus:DocumentFormBody
+  rdf:type ui:ResourceViewClass ;
+  ui:private "true"^^xsd:boolean ;
+  ui:prototype """
+<ui:group let:content=\"{= spl:object(?resource, corpus:content) }\">
+    <ui:call arg:subject=\"{= ?resource }\" ui:template=\"{= swa:modeProperty(swa:formObjectPredicateSelectionTemplate) }\">
+        <swa:ObjectsGroup arg:filterFunction=\"{= corpus:isMetadataProperty }\" arg:label=\"Metadata Properties\" arg:predicates=\"{= ?rs }\" arg:subject=\"{= ?resource }\"/>
+        <ui:if ui:condition=\"{= bound(?content) || (!swa:isViewMode()) }\">
+            <div class=\"swa-objects-group\">
+                <div class=\"swa-sub-title\">{= smf:titleCase(ui:label(corpus:content)) }</div>
+                <ui:setContext ui:varName=\"editWidget\" ui:varValue=\"{= swa:RichTextEditor }\">
+                    <swa:ObjectsBody arg:predicate=\"{= corpus:content }\" arg:subject=\"{= ?resource }\"/>
+                </ui:setContext>
+            </div>
+        </ui:if>
+        <swa:ObjectsGroup arg:filterFunction=\"{= corpus:isOtherTikaProperty }\" arg:label=\"Other Properties\" arg:predicates=\"{= ?rs }\" arg:subject=\"{= ?resource }\"/>
+    </ui:call>
+    <ui:call arg:object=\"{= ?resource }\" ui:template=\"{= swa:modeProperty(swa:formSubjectPredicateSelectionTemplate) }\">
+        <swa:SubjectsGroup arg:label=\"Incoming References\" arg:object=\"{= ?resource }\" arg:predicates=\"{= ?rs }\"/>
+    </ui:call>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "The enhanced view for rdfs:Resource in Tagger, including widget groups for Annotation Properties and Other Properties." ;
+  rdfs:label "Resource form body" ;
+  rdfs:subClassOf swa:FormBody ;
+.
+corpus:GetCmisDirectoryIdService
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:repositoryId ;
+      spl:valueType xsd:string ;
+      rdfs:comment "retrieve information about a specific repository" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:authEnabled ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "boolean indicating if the connection requires authentication" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:cmisBindingType ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:cmisPassword ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:cmisRepositoryUrl ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:cmisUsername ;
+      spl:valueType xsd:string ;
+      rdfs:comment "username" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:directoryPath ;
+      spl:valueType xsd:string ;
+      rdfs:comment "path of the directory to retrieve" ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:try>
+        <swon:Object letrs:directory=\"{#
+                SELECT ?directoryId
+                WHERE {
+                    ( ?cmisRepositoryUrl ?cmisBindingType ?repositoryId ?directoryPath ?authEnabled ?cmisUsername ?cmisPassword ) corpus:getCmisDirectoryId ( ?directoryId ) .
+                } }\">
+            <ui:forEach ui:resultSet=\"{= ?directory }\">
+                <swon:Value arg:name=\"id\" arg:value=\"{= ?directoryId }\"/>
+            </ui:forEach>
+        </swon:Object>
+    </ui:try>
+    <ui:catch>
+        <ui:setResponseHeader ui:statusCode=\"{= 500 }\"/>
+        <div>Error establishing a CMIS connection. Please check the configuration details.</div>
+    </ui:catch>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Service to return the id of a directory in the CMS repository" ;
+  rdfs:label "get directory ids" ;
+  rdfs:subClassOf ui:JSONServices ;
+.
+corpus:GetCmisRepositoryInformationService
+  rdf:type ui:NodeClass ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "true"^^xsd:boolean ;
+      spl:predicate arg:repositoryId ;
+      spl:valueType xsd:string ;
+      rdfs:comment "retrieve information about a specific repository" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:authEnabled ;
+      spl:valueType xsd:boolean ;
+      rdfs:comment "boolean indicating if the connection requires authentication" ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:cmisBindingType ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:cmisPassword ;
+      spl:valueType xsd:string ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:cmisRepositoryUrl ;
+      spl:valueType rdfs:Resource ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:cmisUsername ;
+      spl:valueType xsd:string ;
+      rdfs:comment "username" ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <ui:try>
+        <swon:Object letrs:repositories=\"{#
+                SELECT ?repositoryId ?repositoryName
+                WHERE {
+                    ( ?cmisRepositoryUrl ?cmisBindingType ?authEnabled ?cmisUsername ?cmisPassword ) corpus:getCmisRepositoryInformation ( ?repositoryId ?repositoryName ) .
+                } }\">
+            <swon:Values arg:name=\"repositories\">
+                <ui:forEach ui:resultSet=\"{= ?repositories }\" ui:separator=\",\">
+                    <swon:Object>
+                        <swon:Value arg:name=\"id\" arg:value=\"{= ?repositoryId }\"/>
+                        <swon:Value arg:name=\"name\" arg:value=\"{= ?repositoryName }\"/>
+                    </swon:Object>
+                </ui:forEach>
+            </swon:Values>
+        </swon:Object>
+    </ui:try>
+    <ui:catch>
+        <ui:setResponseHeader ui:statusCode=\"{= 500 }\"/>
+        <div>Error establishing a CMIS connection. Please check the configuration details.</div>
+    </ui:catch>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:comment "Service to return the list of existing repository ids in the cms in JSON format" ;
+  rdfs:label "get repository ids" ;
+  rdfs:subClassOf ui:JSONServices ;
+.
+corpus:RefreshAll
+  rdf:type ui:NodeClass ;
+  rdfs:comment "Instructs the Repository connector of the corpus to refresh all documents from the remote repository. This will generally start a crawl job that does the updates in the background." ;
+  rdfs:label "refresh all" ;
+  rdfs:subClassOf corpus:CorpusControlElement ;
+.
+corpus:ReloadConfiguration
+  rdf:type ui:NodeClass ;
+  rdfs:comment "Reloads corpus configuration." ;
+  rdfs:label "reload configuration" ;
+  rdfs:subClassOf corpus:CorpusControlElement ;
+.
+corpus:ReparseStoredDocuments
+  rdf:type ui:NodeClass ;
+  rdfs:comment "Updates the project graph by re-parsing all documents currently in the store. Does not re-fetch from the remote repository. Useful after parser configuration has changed." ;
+  rdfs:label "reparse stored documents" ;
+  rdfs:subClassOf corpus:CorpusControlElement ;
+.
+corpus:getConnectorType
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "type" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "type" ;
+                    ] ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "projectGraph" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "projectGraph" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  rdf:type sp:TriplePath ;
+                  sp:object corpus:Corpus ;
+                  sp:path [
+                      rdf:type sp:ModPath ;
+                      sp:modMax -2 ;
+                      sp:modMin 1 ;
+                      sp:subPath rdfs:subClassOf ;
+                    ] ;
+                  sp:subject [
+                      sp:varName "type" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode ui:graph ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType corpus:Corpus ;
+    ] ;
+  rdfs:comment "Returns the connector type of a Corpus project." ;
+  rdfs:label "get connector type" ;
+  rdfs:subClassOf spin:Functions ;
+.
+corpus:getConnectorTypeLabel
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "label" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object [
+                      sp:varName "type" ;
+                    ] ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "projectGraph" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "projectGraph" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  rdf:type sp:TriplePath ;
+                  sp:object corpus:Corpus ;
+                  sp:path [
+                      rdf:type sp:ModPath ;
+                      sp:modMax -2 ;
+                      sp:modMin 1 ;
+                      sp:subPath rdfs:subClassOf ;
+                    ] ;
+                  sp:subject [
+                      sp:varName "type" ;
+                    ] ;
+                ]
+                [
+                  rdf:type sp:Bind ;
+                  sp:expression [
+                      rdf:type ui:label ;
+                      sp:arg1 [
+                          sp:varName "type" ;
+                        ] ;
+                    ] ;
+                  sp:variable [
+                      sp:varName "label" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode ui:graph ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:optional "false"^^xsd:boolean ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType corpus:Corpus ;
+    ] ;
+  rdfs:comment "Returns a label for the connector type of a Corpus project." ;
+  rdfs:label "get connector type label" ;
+  rdfs:subClassOf spin:Functions ;
+.
+corpus:hasRemoteConnector
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Ask ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "connectorType" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "projectGraph" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  rdf:type sp:TriplePath ;
+                  sp:object corpus:Corpus ;
+                  sp:path [
+                      rdf:type sp:ModPath ;
+                      sp:modMax -2 ;
+                      sp:modMin 1 ;
+                      sp:subPath rdfs:subClassOf ;
+                    ] ;
+                  sp:subject [
+                      sp:varName "connectorType" ;
+                    ] ;
+                ]
+                [
+                  rdf:type sp:Filter ;
+                  sp:expression [
+                      rdf:type sp:ne ;
+                      sp:arg1 [
+                          sp:varName "connectorType" ;
+                        ] ;
+                      sp:arg2 corpus:DefaultCorpus ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode ui:graph ;
+          ]
+        ) ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  rdfs:comment "Determines if the query graph, which must be a Corpus project, has a connector that reads remote data. Excludes corpus:DefaultCorpus" ;
+  rdfs:label "has remote connector" ;
+  rdfs:subClassOf spin:Functions ;
+.
+corpus:isDefaultCorpus
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Ask ;
+      sp:where (
+          [
+            rdf:type sp:NamedGraph ;
+            sp:elements (
+                [
+                  sp:object corpus:DefaultCorpus ;
+                  sp:predicate rdf:type ;
+                  sp:subject [
+                      sp:varName "projectGraph" ;
+                    ] ;
+                ]
+              ) ;
+            sp:graphNameNode [
+                sp:varName "projectGraph" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:projectGraph ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "the project graph" ;
+    ] ;
+  rdfs:comment "Determines if the project graph, which must be a Corpus project, is of type corpus:DefaultCorpus" ;
+  rdfs:label "is default corpus" ;
+  rdfs:subClassOf spin:Function ;
+.
+corpus:isDefinedProperty
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Ask ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "property" ;
+              ] ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "predicate" ;
+              ] ;
+          ]
+          [
+            rdf:type sp:TriplePath ;
+            sp:object rdf:Property ;
+            sp:path [
+                rdf:type sp:ModPath ;
+                sp:modMax -2 ;
+                sp:modMin 0 ;
+                sp:subPath rdfs:subClassOf ;
+              ] ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  rdfs:comment "Lists all the properties defined in the project graph and its imports" ;
+  rdfs:subClassOf swa:PropertyWidgetGroupFilterFunctions ;
+.
+corpus:isMetadataProperty
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Ask ;
+      sp:where (
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:and ;
+                sp:arg1 [
+                    rdf:type sp:or ;
+                    sp:arg1 [
+                        rdf:type swa:isAnnotationProperty ;
+                        arg:predicate [
+                            sp:varName "predicate" ;
+                          ] ;
+                      ] ;
+                    sp:arg2 [
+                        rdf:type corpus:isDefinedProperty ;
+                        arg:predicate [
+                            sp:varName "predicate" ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    rdf:type sp:ne ;
+                    sp:arg1 [
+                        sp:varName "predicate" ;
+                      ] ;
+                    sp:arg2 corpus:content ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:label "is metadata property" ;
+  rdfs:subClassOf swa:PropertyWidgetGroupFilterFunctions ;
+.
+corpus:isOtherTikaProperty
+  rdf:type spin:Function ;
+  spin:body [
+      rdf:type sp:Select ;
+      sp:resultVariables (
+          [
+            rdf:type sp:and ;
+            sp:arg1 [
+                rdf:type sp:and ;
+                sp:arg1 [
+                    rdf:type sp:not ;
+                    sp:arg1 [
+                        rdf:type corpus:isDefinedProperty ;
+                        arg:predicate [
+                            sp:varName "predicate" ;
+                          ] ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    rdf:type sp:not ;
+                    sp:arg1 [
+                        rdf:type swa:isAnnotationProperty ;
+                        arg:predicate [
+                            sp:varName "predicate" ;
+                          ] ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:arg2 [
+                rdf:type sp:ne ;
+                sp:arg1 [
+                    sp:varName "predicate" ;
+                  ] ;
+                sp:arg2 corpus:content ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "object" ;
+              ] ;
+            sp:predicate [
+                sp:varName "predicate" ;
+              ] ;
+            sp:subject [
+                sp:varName "s" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:private "true"^^xsd:boolean ;
+  rdfs:subClassOf swa:PropertyWidgetGroupFilterFunctions ;
+.
+<http://topbraid.org/corpus-ui>
+  rdf:type owl:Ontology ;
+  owl:imports <http://topbraid.org/corpus> ;
+  owl:imports <http://topbraid.org/swa> ;
+  owl:imports <http://topbraid.org/teamwork.ui> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.

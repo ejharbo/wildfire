@@ -1,0 +1,604 @@
+# baseURI: http://topbraid.org/swaclasses
+# imports: http://topbraid.org/swa
+# imports: http://topbraid.org/swaowl
+# prefix: swaclasses
+
+@prefix adminguide: <http://server.topbraidlive.org/doc/adminguide#> .
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix cfg: <http://server.topbraidlive.org/web/2009/config#> .
+@prefix charts: <http://uispin.org/charts#> .
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix css: <http://uispin.org/css#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix default: <http://uispin.org/default#> .
+@prefix email: <http://topbraid.org/email#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix imported: <http://topbraid.org/imported#> .
+@prefix json: <http://topbraid.org/json#> .
+@prefix let: <http://uispin.org/let#> .
+@prefix letrs: <http://uispin.org/letrs#> .
+@prefix list: <http://jena.hpl.hp.com/ARQ/list#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix search.spin: <http://topbraid.org/search.spin#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosapp: <http://evn.topbraidlive.org/uiplugins#> .
+@prefix skostemplate: <http://topbraid.org/spin/skostemplates#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix sm: <http://topbraid.org/sparqlmotion#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sml: <http://topbraid.org/sparqlmotionlib#> .
+@prefix solr: <http://topbraid.org/solr#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix sparqlmotionlib-swp: <http://topbraid.org/sparqlmotionlib-swp#> .
+@prefix sparqlmotionlib-tbc: <http://topbraid.org/sparqlmotionlib-tbc#> .
+@prefix spell: <http://topbraid.org/spellcheckresults#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spl-dynamic-ranges: <http://spinrdf.org/spl-dynamic-ranges#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix spra: <http://spinrdf.org/spra#> .
+@prefix style: <http://uispin.org/style#> .
+@prefix svg: <http://uispin.org/svg#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swaclasses: <http://topbraid.org/swaclasses#> .
+@prefix swaeditor: <http://topbraid.org/swaeditor#> .
+@prefix swaowl: <http://topbraid.org/swaowl#> .
+@prefix swashacl: <http://topbraid.org/swashacl#> .
+@prefix swauml: <http://topbraid.org/swauml#> .
+@prefix swon: <http://uispin.org/swon#> .
+@prefix sxml: <http://topbraid.org/sxml#> .
+@prefix tables: <http://topbraid.org/tables#> .
+@prefix task: <http://topbraid.org/task#> .
+@prefix tasks: <http://topbraid.org/tasks#> .
+@prefix tbl: <http://topbraidlive.org/functions#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix tops: <http://www.topbraid.org/tops#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix tosh.ui: <http://topbraid.org/tosh.ui#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix uix: <http://topbraidlive.org/uix#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xlink: <http://www.w3.org/1999/xlink#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+arg:pid
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+arg:propertyShape
+  a rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://topbraid.org/swaclasses>
+  a owl:Ontology ;
+  owl:imports <http://topbraid.org/swa> ;
+  owl:imports <http://topbraid.org/swaowl> ;
+.
+swaclasses:PropertyRestrictions
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:varName "range" ;
+          ]
+          [
+            sp:varName "restriction" ;
+          ]
+          [
+            sp:varName "propertyShape" ;
+          ]
+          [
+            sp:varName "origin" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Union ;
+            sp:elements (
+                (
+                  [
+                    a sp:Bind ;
+                    sp:expression [
+                        a swa:globalRange ;
+                        arg:property [
+                            sp:varName "property" ;
+                          ] ;
+                      ] ;
+                    sp:variable [
+                        sp:varName "range" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Filter ;
+                    sp:expression [
+                        a sp:bound ;
+                        sp:arg1 [
+                            sp:varName "range" ;
+                          ] ;
+                      ] ;
+                  ]
+                )
+                (
+                  (
+                    [
+                      a sp:TriplePath ;
+                      sp:object [
+                          sp:varName "restriction" ;
+                        ] ;
+                      sp:path [
+                          a sp:ModPath ;
+                          sp:modMax -2 ;
+                          sp:modMin 0 ;
+                          sp:subPath rdfs:subClassOf ;
+                        ] ;
+                      sp:subject [
+                          sp:varName "class" ;
+                        ] ;
+                    ]
+                    [
+                      sp:object [
+                          sp:varName "property" ;
+                        ] ;
+                      sp:predicate owl:onProperty ;
+                      sp:subject [
+                          sp:varName "restriction" ;
+                        ] ;
+                    ]
+                    [
+                      sp:object owl:Restriction ;
+                      sp:predicate rdf:type ;
+                      sp:subject [
+                          sp:varName "restriction" ;
+                        ] ;
+                    ]
+                    [
+                      a sp:Filter ;
+                      sp:expression [
+                          a sp:isBlank ;
+                          sp:arg1 [
+                              sp:varName "restriction" ;
+                            ] ;
+                        ] ;
+                    ]
+                  )
+                  [
+                    sp:object [
+                        sp:varName "restriction" ;
+                      ] ;
+                    sp:predicate rdfs:subClassOf ;
+                    sp:subject [
+                        sp:varName "origin" ;
+                      ] ;
+                  ]
+                )
+                (
+                  [
+                    a sp:TriplePath ;
+                    sp:object [
+                        sp:varName "origin" ;
+                      ] ;
+                    sp:path [
+                        a sp:ModPath ;
+                        sp:modMax -2 ;
+                        sp:modMin 0 ;
+                        sp:subPath rdfs:subClassOf ;
+                      ] ;
+                    sp:subject [
+                        sp:varName "class" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "propertyShape" ;
+                      ] ;
+                    sp:predicate sh:property ;
+                    sp:subject [
+                        sp:varName "origin" ;
+                      ] ;
+                  ]
+                  [
+                    sp:object [
+                        sp:varName "property" ;
+                      ] ;
+                    sp:predicate sh:path ;
+                    sp:subject [
+                        sp:varName "propertyShape" ;
+                      ] ;
+                  ]
+                  [
+                    a sp:Filter ;
+                    sp:expression [
+                        a sp:not ;
+                        sp:arg1 [
+                            a dash:isDeactivated ;
+                            sp:arg1 [
+                                sp:varName "propertyShape" ;
+                              ] ;
+                          ] ;
+                      ] ;
+                  ]
+                )
+              ) ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:class ;
+      spl:valueType owl:Class ;
+      rdfs:comment "The class to get the restrictions at." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:property ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property to get the restrictions of." ;
+    ] ;
+  spin:private true ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+swaclasses:PropertyShapeCell
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:propertyShape ;
+      spl:valueType sh:PropertyShape ;
+      rdfs:comment "The sh:PropertyShape." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:forEach ui:resultSet=\"{#
+        SELECT ?parameter ?parameterLabel ?value ?valueLabel
+        WHERE {
+            ?propertyShape ?parameter ?value .
+            FILTER EXISTS {
+                ?paramDef sh:path ?parameter .
+                ?any sh:parameter ?paramDef .
+            } .
+            FILTER (?parameter != sh:shapesGraph) .
+            BIND (ui:label(?parameter) AS ?parameterLabel) .
+            BIND (ui:label(?value) AS ?valueLabel) .
+        }
+        ORDER BY (?parameterLabel) (?valueLabel) }\">
+    <div>
+        <span class=\"swa-keyword\">{= ?parameterLabel }</span>
+        <span>:</span>
+        <swa:Space/>
+        <ui:if ui:condition=\"{= isIRI(?value) }\">
+            <swa:Link arg:resource=\"{= ?value }\"/>
+        </ui:if>
+        <ui:else>{= ?valueLabel }</ui:else>
+    </div>
+</ui:forEach>
+"""^^ui:Literal ;
+  rdfs:comment "Displays all parameters of a given sh:PropertyShape, one row at a time." ;
+  rdfs:label "Property shape cell" ;
+  rdfs:subClassOf swa:FormElements ;
+.
+swaclasses:RelevantDatatypeProperties
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            a ui:label ;
+            sp:arg1 [
+                sp:varName "property" ;
+              ] ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "property" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "property" ;
+              ] ;
+            sp:predicate swa:relevantClassOfProperty ;
+            sp:subject [
+                sp:varName "class" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a swa:isNotHiddenProperty ;
+                arg:property [
+                    sp:varName "property" ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a swa:isDatatypeRange ;
+                arg:range [
+                    a swa:localRangeAtClass ;
+                    arg:class [
+                        sp:varName "class" ;
+                      ] ;
+                    arg:property [
+                        sp:varName "property" ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:class ;
+      spl:valueType owl:Class ;
+      rdfs:comment "The class with possible qualified cardinality restrictions" ;
+    ] ;
+  spin:private true ;
+  rdfs:label "Relevant datatype properties" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+swaclasses:RelevantObjectProperties
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            a ui:label ;
+            sp:arg1 [
+                sp:varName "property" ;
+              ] ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "property" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "property" ;
+              ] ;
+            sp:predicate swa:relevantClassOfProperty ;
+            sp:subject [
+                sp:varName "class" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a swa:isNotHiddenProperty ;
+                arg:property [
+                    sp:varName "property" ;
+                  ] ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:not ;
+                sp:arg1 [
+                    a swa:isDatatypeRange ;
+                    arg:range [
+                        a swa:localRangeAtClass ;
+                        arg:class [
+                            sp:varName "class" ;
+                          ] ;
+                        arg:property [
+                            sp:varName "property" ;
+                          ] ;
+                      ] ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:class ;
+      spl:valueType owl:Class ;
+      rdfs:comment "The class with possible qualified cardinality restrictions" ;
+    ] ;
+  spin:private true ;
+  rdfs:label "Relevant object properties" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+swaclasses:RelevantProperties
+  a spin:SelectTemplate ;
+  spin:body [
+      a sp:Select ;
+      sp:orderBy (
+          [
+            a ui:label ;
+            sp:arg1 [
+                sp:varName "property" ;
+              ] ;
+          ]
+        ) ;
+      sp:resultVariables (
+          [
+            sp:varName "property" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "class" ;
+              ] ;
+            sp:predicate spl:relevantPropertyAtClass ;
+            sp:subject [
+                sp:varName "property" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a swa:isNotHiddenProperty ;
+                arg:property [
+                    sp:varName "property" ;
+                  ] ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:class ;
+      spl:valueType owl:Class ;
+      rdfs:comment "The class with possible qualified cardinality restrictions" ;
+    ] ;
+  spin:private true ;
+  rdfs:label "Relevant properties" ;
+  rdfs:subClassOf spin:SelectTemplates ;
+.
+swaclasses:RelevantPropertiesWidget
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:class ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The class to display the relevant properties of." ;
+    ] ;
+  ui:prototype """
+<ui:group>
+    <swaclasses:RelevantPropertiesWidgetSection arg:class=\"{= ?class }\" arg:template=\"{= swaclasses:RelevantDatatypeProperties }\" arg:title=\"Attributes (Datatype Properties)\"/>
+    <swaclasses:RelevantPropertiesWidgetSection arg:class=\"{= ?class }\" arg:template=\"{= swaclasses:RelevantObjectProperties }\" arg:title=\"Relationships (Object Properties)\"/>
+</ui:group>
+"""^^ui:Literal ;
+  rdfs:subClassOf swa:FormElements ;
+.
+swaclasses:RelevantPropertiesWidgetSection
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:class ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The class to display the relevant properties of." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:template ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The template delivering the properties." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:title ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The title of the heading." ;
+    ] ;
+  ui:prototype """
+<ui:call arg:class=\"{= ?class }\" ui:template=\"{= ?template }\">
+    <ui:if ui:condition=\"{= !spr:isEmpty(?rs) }\">
+        <div class=\"swa-relevant-properties-header\">{= ?title }:</div>
+        <table class=\"swa-relevant-properties\">
+            <tr>
+                <th class=\"swa-relevant-properties\">Property</th>
+                <th class=\"swa-relevant-properties\">Value Constraints</th>
+                <th class=\"swa-relevant-properties\">Origin</th>
+            </tr>
+            <ui:forEach ui:resultSet=\"{= ?rs }\">
+                <ui:call arg:class=\"{= ?class }\" arg:property=\"{= ?property }\" ui:template=\"{= swaclasses:PropertyRestrictions }\" ui:varName=\"rows\">
+                    <ui:forEach ui:indexVar=\"index\" ui:resultSet=\"{= ?rows }\">
+                        <tr>
+                            <td class=\"swa-relevant-properties swaclasses-relevant-properties-widget-section-min-width\">
+                                <ui:if ui:condition=\"{= ?index = 0 }\">
+                                    <swa:Link arg:resource=\"{= ?property }\"/>
+                                </ui:if>
+                            </td>
+                            <ui:if ui:condition=\"{= bound(?range) }\">
+                                <td class=\"swa-relevant-properties\">
+                                    <span class=\"swa-keyword\">range</span>
+                                    <span>: </span>
+                                    <ui:if ui:condition=\"{= isIRI(?range) &amp;&amp; (!spl:instanceOf(?range, rdfs:Datatype)) }\">
+                                        <swa:Link arg:resource=\"{= ?range }\"/>
+                                    </ui:if>
+                                    <ui:else>{= ui:label(?range) }</ui:else>
+                                </td>
+                                <td class=\"swa-relevant-properties\">global</td>
+                            </ui:if>
+                            <ui:else>
+                                <td class=\"swa-relevant-properties\">
+                                    <ui:if ui:condition=\"{= bound(?restriction) }\">
+                                        <ui:setContext ui:varName=\"inOWLLabel\" ui:varValue=\"{= true }\">
+                                            <swa:OWLRestrictionLabel arg:resource=\"{= ?restriction }\" arg:suppressProperty=\"{= true }\"/>
+                                        </ui:setContext>
+                                    </ui:if>
+                                    <ui:else>
+                                        <swaclasses:PropertyShapeCell arg:propertyShape=\"{= ?propertyShape }\"/>
+                                    </ui:else>
+                                </td>
+                                <td class=\"swa-relevant-properties\">
+                                    <ui:if ui:condition=\"{= ?class = ?origin }\">self</ui:if>
+                                    <ui:else>
+                                        <swa:Link arg:resource=\"{= ?origin }\"/>
+                                    </ui:else>
+                                </td>
+                            </ui:else>
+                        </tr>
+                    </ui:forEach>
+                </ui:call>
+            </ui:forEach>
+        </table>
+    </ui:if>
+</ui:call>
+"""^^ui:Literal ;
+  rdfs:subClassOf swa:FormElements ;
+.
+swaclasses:RestrictionsCell
+  a ui:NodeClass ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:class ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The class to display the relevant properties of." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate arg:property ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property to display." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate ui:resultSet ;
+      spl:valueType sp:Select ;
+      rdfs:comment "The result set with ?restriction and ?origin columns." ;
+    ] ;
+  ui:private true ;
+  ui:prototype """
+<ui:setContext ui:varName=\"inOWLLabel\" ui:varValue=\"{= true }\">
+    <ui:if ui:condition=\"{= bound(?range) }\">
+        <div class=\"swa-relevant-property-row\">
+            <swa:OWLClassLabel arg:resource=\"{= ?range }\"/>
+        </div>
+    </ui:if>
+    <ui:forEach ui:resultSet=\"{= ?resultSet }\">
+        <div class=\"swa-relevant-property-row\">
+            <swa:OWLRestrictionLabel arg:resource=\"{= ?restriction }\" arg:suppressProperty=\"{= true }\"/>
+        </div>
+    </ui:forEach>
+</ui:setContext>
+"""^^ui:Literal ;
+  rdfs:subClassOf swa:FormElements ;
+.

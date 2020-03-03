@@ -1,0 +1,1074 @@
+# baseURI: http://spinrdf.org/spinmap
+# imports: http://spinrdf.org/spif
+# prefix: spinmap
+
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spinmap: <http://spinrdf.org/spinmap#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://spinrdf.org/spinmap>
+  a owl:Ontology ;
+  rdfs:comment "A library of SPIN functions and templates to support ontology mapping tasks." ;
+  owl:imports <http://spinrdf.org/spif> ;
+  owl:versionInfo "0.8.0" ;
+.
+spinmap:Conditional-Mapping-1
+  a spin:ConstructTemplate ;
+  spin:abstract true ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmap:condition ;
+      spl:valueType sp:Ask ;
+    ] ;
+  rdfs:comment "Abstract superclass for conditional mappings into a single target property." ;
+  rdfs:label "Conditional Property mapping" ;
+  rdfs:subClassOf spinmap:Mapping-1 ;
+.
+spinmap:Conditional-Mapping-1-1
+  a spin:ConstructTemplate ;
+  spin:body [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "newValue" ;
+              ] ;
+            sp:predicate [
+                sp:varName "targetPredicate1" ;
+              ] ;
+            sp:subject [
+                sp:varName "target" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "oldValue" ;
+              ] ;
+            sp:predicate [
+                sp:varName "sourcePredicate1" ;
+              ] ;
+            sp:subject spin:_this ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spin:eval ;
+                sp:arg1 [
+                    sp:varName "expression" ;
+                  ] ;
+                sp:arg2 sp:arg1 ;
+                sp:arg3 [
+                    sp:varName "oldValue" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "newValue" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spinmap:targetResource ;
+                sp:arg1 spin:_this ;
+                spinmap:context [
+                    sp:varName "context" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "target" ;
+              ] ;
+          ]
+          [
+            a sp:Filter ;
+            sp:expression [
+                a sp:if ;
+                sp:arg1 [
+                    a sp:bound ;
+                    sp:arg1 [
+                        sp:varName "condition" ;
+                      ] ;
+                  ] ;
+                sp:arg2 [
+                    a spin:ask ;
+                    sp:arg1 [
+                        sp:varName "condition" ;
+                      ] ;
+                    sp:arg2 "source" ;
+                    sp:arg3 spin:_this ;
+                  ] ;
+                sp:arg3 true ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmap:expression ;
+      rdfs:comment "The transformation function to use. Must take one argument, sp:arg1." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmap:sourcePredicate1 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property to map from (in the source object)." ;
+    ] ;
+  spin:labelTemplate "Map into {?context}: derive {?targetPredicate1} from {?sourcePredicate1} using {?expression} where {?condition}" ;
+  rdfs:comment "A mapping that takes one source property and conditionally maps it into one target property." ;
+  rdfs:label "Property mapping" ;
+  rdfs:subClassOf spinmap:Conditional-Mapping-1 ;
+.
+spinmap:Context
+  a rdfs:Class ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmap:sourceClass ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The source class of the mapping (mainly for visual displays)." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmap:target ;
+      rdfs:comment "The expression that delivers the target of the mapping. This expression can reference the variable ?source for the source resource, and the variable ?targetClass for the type of the target." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmap:targetClass ;
+      spl:valueType rdfs:Class ;
+      rdfs:comment "The target class, mainly to visualize mappings on a diagram." ;
+    ] ;
+  rdfs:comment "Groups together multiple mappings so that they have a shared target resolution algorithm." ;
+  rdfs:label "Context" ;
+.
+spinmap:Mapping
+  a spin:ConstructTemplate ;
+  spin:abstract true ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmap:context ;
+      spl:valueType spinmap:Context ;
+      rdfs:comment "The context of this mapping." ;
+    ] ;
+  rdfs:comment "An abstract base class that acts as superclass of various kinds of mapping templates. Each Mapping is linked to a targetFunction that computes the target resource from a source resource." ;
+  rdfs:label "Mapping" ;
+  rdfs:subClassOf spin:ConstructTemplates ;
+.
+spinmap:Mapping-0-1
+  a spin:ConstructTemplate ;
+  spin:body [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "newValue" ;
+              ] ;
+            sp:predicate [
+                sp:varName "targetPredicate1" ;
+              ] ;
+            sp:subject [
+                sp:varName "target" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spin:eval ;
+                sp:arg1 [
+                    sp:varName "expression" ;
+                  ] ;
+                sp:arg2 sp:arg1 ;
+                sp:arg3 spin:_this ;
+              ] ;
+            sp:variable [
+                sp:varName "newValue" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spinmap:targetResource ;
+                sp:arg1 spin:_this ;
+                spinmap:context [
+                    sp:varName "context" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "target" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmap:expression ;
+      rdfs:comment "The transformation function to use. Must take one argument, sp:arg1, which will be the source resource of the mapping." ;
+    ] ;
+  spin:labelTemplate "Map into {?context}: derive {?targetPredicate1} using {?expression}" ;
+  rdfs:comment "A mapping that requires no source property and creates a value for one target property. The value is derived using a provided transformation function based on the source resource." ;
+  rdfs:label "Mapping-0-1" ;
+  rdfs:subClassOf spinmap:Mapping-1 ;
+.
+spinmap:Mapping-1
+  a spin:ConstructTemplate ;
+  spin:abstract true ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmap:targetPredicate1 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The predicate to map into." ;
+    ] ;
+  rdfs:comment "Abstract superclass for mappings into a single target property." ;
+  rdfs:label "Mapping-1" ;
+  rdfs:subClassOf spinmap:Mapping ;
+.
+spinmap:Mapping-1-1
+  a spin:ConstructTemplate ;
+  spin:body [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "newValue" ;
+              ] ;
+            sp:predicate [
+                sp:varName "targetPredicate1" ;
+              ] ;
+            sp:subject [
+                sp:varName "target" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "oldValue" ;
+              ] ;
+            sp:predicate [
+                sp:varName "sourcePredicate1" ;
+              ] ;
+            sp:subject spin:_this ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spin:eval ;
+                sp:arg1 [
+                    sp:varName "expression" ;
+                  ] ;
+                sp:arg2 sp:arg1 ;
+                sp:arg3 [
+                    sp:varName "oldValue" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "newValue" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spinmap:targetResource ;
+                sp:arg1 spin:_this ;
+                spinmap:context [
+                    sp:varName "context" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "target" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmap:expression ;
+      rdfs:comment "The transformation function to use. Must take one argument, sp:arg1." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmap:sourcePredicate1 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property to map from (in the source object)." ;
+    ] ;
+  spin:labelTemplate "Map into {?context}: derive {?targetPredicate1} from {?sourcePredicate1} using {?expression}" ;
+  rdfs:comment "A mapping that takes one source property and maps it into one target property." ;
+  rdfs:label "Property mapping" ;
+  rdfs:subClassOf spinmap:Mapping-1 ;
+.
+spinmap:Mapping-1-1-Inverse
+  a spin:ConstructTemplate ;
+  spin:body [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "target" ;
+              ] ;
+            sp:predicate [
+                sp:varName "targetPredicate1" ;
+              ] ;
+            sp:subject [
+                sp:varName "newValue" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "oldValue" ;
+              ] ;
+            sp:predicate [
+                sp:varName "sourcePredicate1" ;
+              ] ;
+            sp:subject spin:_this ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spin:eval ;
+                sp:arg1 [
+                    sp:varName "expression" ;
+                  ] ;
+                sp:arg2 sp:arg1 ;
+                sp:arg3 [
+                    sp:varName "oldValue" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "newValue" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spinmap:targetResource ;
+                sp:arg1 spin:_this ;
+                spinmap:context [
+                    sp:varName "context" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "target" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmap:expression ;
+      rdfs:comment "The transformation function to use. Must take one argument, sp:arg1." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmap:sourcePredicate1 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property to map from (in the source object)." ;
+    ] ;
+  spin:labelTemplate "Map into inverse of {?context}: derive {?targetPredicate1} from {?sourcePredicate1} using {?expression}" ;
+  rdfs:comment "A mapping that takes one source property and maps it into one target property, with the target predicate used in the inverse direction." ;
+  rdfs:label "Inverse property mapping" ;
+  rdfs:subClassOf spinmap:Mapping-1 ;
+.
+spinmap:Mapping-1-Path-1
+  a spin:ConstructTemplate ;
+  spin:body [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "newValue" ;
+              ] ;
+            sp:predicate [
+                sp:varName "targetPredicate1" ;
+              ] ;
+            sp:subject [
+                sp:varName "target" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object spin:_this ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "?1" ;
+              ] ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "sourcePath" ;
+              ] ;
+            sp:predicate rdf:first ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object () ;
+            sp:predicate rdf:rest ;
+            sp:subject [
+                sp:varName "?1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "oldValue" ;
+              ] ;
+            sp:predicate spif:evalPath ;
+            sp:subject [
+                sp:varName "?0" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spin:eval ;
+                sp:arg1 [
+                    sp:varName "expression" ;
+                  ] ;
+                sp:arg2 sp:arg1 ;
+                sp:arg3 [
+                    sp:varName "oldValue" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "newValue" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spinmap:targetResource ;
+                sp:arg1 spin:_this ;
+                spinmap:context [
+                    sp:varName "context" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "target" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmap:expression ;
+      rdfs:comment "The transformation function to use. Must take one argument, sp:arg1." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmap:sourcePath ;
+      spl:valueType xsd:string ;
+      rdfs:comment "A SPARQL 1.1 path expression (as a string) starting at the source node of the mapping." ;
+    ] ;
+  spin:labelTemplate "Map into {?context}: derive {?targetPredicate1} from path {?sourcePath} using {?expression}" ;
+  rdfs:comment "A mapping that contains a SPARQL 1.1 path expression to figure out which values to get (from the left hand side of the mapping)." ;
+  rdfs:label "Mapping-1-Path-1" ;
+  rdfs:subClassOf spinmap:Mapping-1 ;
+.
+spinmap:Mapping-2-1
+  a spin:ConstructTemplate ;
+  spin:body [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "newValue" ;
+              ] ;
+            sp:predicate [
+                sp:varName "targetPredicate1" ;
+              ] ;
+            sp:subject [
+                sp:varName "target" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "oldValue1" ;
+              ] ;
+            sp:predicate [
+                sp:varName "sourcePredicate1" ;
+              ] ;
+            sp:subject spin:_this ;
+          ]
+          [
+            sp:object [
+                sp:varName "oldValue2" ;
+              ] ;
+            sp:predicate [
+                sp:varName "sourcePredicate2" ;
+              ] ;
+            sp:subject spin:_this ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spin:eval ;
+                sp:arg1 [
+                    sp:varName "expression" ;
+                  ] ;
+                sp:arg2 sp:arg1 ;
+                sp:arg3 [
+                    sp:varName "oldValue1" ;
+                  ] ;
+                sp:arg4 sp:arg2 ;
+                sp:arg5 [
+                    sp:varName "oldValue2" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "newValue" ;
+              ] ;
+          ]
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spinmap:targetResource ;
+                sp:arg1 spin:_this ;
+                spinmap:context [
+                    sp:varName "context" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "target" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmap:expression ;
+      rdfs:comment "An instance of a transformation function taking two arguments and returning the new value for the target property." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmap:sourcePredicate1 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The first source property." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmap:sourcePredicate2 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The second source property." ;
+    ] ;
+  spin:labelTemplate "Map into {?context}: derive {?targetPredicate1} from {?sourcePredicate1} and {?sourcePredicate2} using {?expression}" ;
+  rdfs:comment "A mapping that takes two source predicates and transforms them into a single target property." ;
+  rdfs:label "Mapping-2-1" ;
+  rdfs:subClassOf spinmap:Mapping-1 ;
+.
+spinmap:SplitMapping-1-1
+  a spin:ConstructTemplate ;
+  spin:body [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object [
+                sp:varName "newValue" ;
+              ] ;
+            sp:predicate [
+                sp:varName "targetPredicate1" ;
+              ] ;
+            sp:subject [
+                sp:varName "target" ;
+              ] ;
+          ]
+        ) ;
+      sp:where (
+          (
+            [
+              sp:object [
+                  sp:varName "oldValue" ;
+                ] ;
+              sp:predicate [
+                  sp:varName "sourcePredicate1" ;
+                ] ;
+              sp:subject spin:_this ;
+            ]
+            [
+              a sp:Bind ;
+              sp:expression [
+                  a spinmap:targetResource ;
+                  sp:arg1 spin:_this ;
+                  spinmap:context [
+                      sp:varName "context" ;
+                    ] ;
+                ] ;
+              sp:variable [
+                  sp:varName "target" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?0" ;
+                ] ;
+              sp:predicate spif:split ;
+              sp:subject [
+                  sp:varName "token" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "oldValue" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "?1" ;
+                ] ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?0" ;
+                ] ;
+            ]
+            [
+              sp:object [
+                  sp:varName "separator" ;
+                ] ;
+              sp:predicate rdf:first ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              sp:object () ;
+              sp:predicate rdf:rest ;
+              sp:subject [
+                  sp:varName "?1" ;
+                ] ;
+            ]
+            [
+              a sp:Bind ;
+              sp:expression [
+                  a spif:trim ;
+                  sp:arg1 [
+                      sp:varName "token" ;
+                    ] ;
+                ] ;
+              sp:variable [
+                  sp:varName "trimmed" ;
+                ] ;
+            ]
+            [
+              a sp:Filter ;
+              sp:expression [
+                  a sp:ne ;
+                  sp:arg1 [
+                      sp:varName "trimmed" ;
+                    ] ;
+                  sp:arg2 "" ;
+                ] ;
+            ]
+          )
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spin:eval ;
+                sp:arg1 [
+                    sp:varName "expression" ;
+                  ] ;
+                sp:arg2 sp:arg1 ;
+                sp:arg3 [
+                    sp:varName "trimmed" ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "newValue" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:defaultValue "," ;
+      spl:optional true ;
+      spl:predicate spinmap:separator ;
+      spl:valueType xsd:string ;
+      rdfs:comment "The separator used to split the source values, e.g. \",\" or \" \". Defaults to \",\"." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmap:expression ;
+      rdfs:comment "The transformation function to use. Must take one argument, sp:arg1." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmap:sourcePredicate1 ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property to map from (in the source object)." ;
+    ] ;
+  spin:labelTemplate "Map into {?context}: derive {?targetPredicate1} from {?sourcePredicate1} split with separator \"{?separator}\" using {?expression}" ;
+  rdfs:comment "A mapping that takes one source property (with string values) and maps it into one target property by splitting the source values into individual tokens that are individually converted using a provided expression. For example, this can be used to turn a single value \"A,B,C\" into multiple target values \"A\", \"B\", \"C\"." ;
+  rdfs:label "Split mapping" ;
+  rdfs:subClassOf spinmap:Mapping-1 ;
+.
+spinmap:TargetFunction
+  a rdfs:Class ;
+  rdfs:comment "Class of SPIN functions used to get the target resource of a mapping." ;
+  rdfs:label "Target function" ;
+  rdfs:subClassOf spin:Function ;
+.
+spinmap:TargetFunctions
+  a spinmap:TargetFunction ;
+  spin:abstract true ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmap:source ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The source resource." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  rdfs:label "Target functions" ;
+  rdfs:subClassOf spin:Functions ;
+.
+spinmap:_source
+  a sp:Variable ;
+  sp:varName "source" ;
+.
+spinmap:condition
+  a rdf:Property ;
+  rdfs:comment "The ASK query used in a conditional mapping.  This query should use the variable ?source to reference the source resource being mapped." ;
+  rdfs:domain spinmap:Conditional-Mapping-1 ;
+  rdfs:label "Mapping Condition" ;
+  rdfs:range sp:Ask ;
+  rdfs:subPropertyOf spin:systemProperty ;
+.
+spinmap:context
+  a rdf:Property ;
+  rdfs:label "context" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+spinmap:equals
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          spin:_arg1
+        ) ;
+      sp:where () ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      rdfs:comment "The value to copy." ;
+    ] ;
+  rdfs:comment "Returns the input value unchanged. This is a placeholder to indicate that a direct link between two properties shall be created. Technically, it creates the value(s) for the target property using the value(s) of the source property as provided by the argument (?arg1)." ;
+  rdfs:label "equals" ;
+  rdfs:subClassOf spl:MiscFunctions ;
+.
+spinmap:expression
+  a rdf:Property ;
+  rdfs:label "expression" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+spinmap:function
+  a rdf:Property ;
+  rdfs:label "function" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+spinmap:postRule
+  a spin:RuleProperty ;
+  spin:rulePropertyMaxIterationCount 1 ;
+  rdfs:comment "A sub-property of spin:rule for mapping rules, that will only be executed once and after any spinmap:rules. This can be used to clean up any build auxiliary data structures created during the mapping." ;
+  rdfs:label "post rule" ;
+  rdfs:subPropertyOf spin:rule ;
+.
+spinmap:prepRule
+  a spin:RuleProperty ;
+  spin:nextRuleProperty spinmap:rule ;
+  spin:rulePropertyMaxIterationCount 1 ;
+  rdfs:comment "A sub-property of spin:rule for mapping rules, that will only be executed once and before any spinmap:rules. This can be used to build auxiliary data structures or otherwise prepare the existing data for processing." ;
+  rdfs:label "prep rule" ;
+  rdfs:subPropertyOf spin:rule ;
+.
+spinmap:rule
+  a spin:RuleProperty ;
+  spin:nextRuleProperty spinmap:postRule ;
+  spin:rulePropertyMaxIterationCount 1 ;
+  rdfs:comment "A sub-property of spin:rule for mapping rules, that will only be executed once." ;
+  rdfs:label "rule" ;
+  rdfs:subPropertyOf spin:rule ;
+.
+spinmap:separator
+  a rdf:Property ;
+  rdfs:label "separator" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+spinmap:shortLabel
+  a owl:AnnotationProperty ;
+  rdfs:comment "Can be attached to transformation functions and target functions to define a compact human-readable label for use in diagrams." ;
+  rdfs:label "short label" ;
+  rdfs:range xsd:string ;
+  rdfs:subPropertyOf rdfs:label ;
+.
+spinmap:source
+  a rdf:Property ;
+  rdfs:label "source" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+spinmap:sourceClass
+  a rdf:Property ;
+  rdfs:label "source class" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+spinmap:sourcePath
+  a rdf:Property ;
+  rdfs:label "source path" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+spinmap:sourcePredicate1
+  a rdf:Property ;
+  rdfs:label "source predicate1" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+spinmap:sourcePredicate2
+  a rdf:Property ;
+  rdfs:label "source predicate2" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+spinmap:sourcePredicate3
+  a rdf:Property ;
+  rdfs:label "source predicate3" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+spinmap:suggestion-0-1
+  a rdf:Property ;
+  rdfs:comment """Can be linked to SPIN functions to build suggestions for its use, in the context of a given pair of classes and a target property. The following variables will be pre-bound if the query is executed:
+- ?sourceClass: the source class of the mapping
+- ?targetClass: the target class of the mapping
+- ?targetPredicate1: the target property""" ;
+  rdfs:domain spin:Function ;
+  rdfs:label "suggestion 0-1" ;
+  rdfs:range sp:Construct ;
+  rdfs:subPropertyOf spin:query ;
+.
+spinmap:suggestion-1-1
+  a rdf:Property ;
+  rdfs:comment """Can be linked to SPIN functions to build suggestions for its use, in the context of a given pair of classes and properties. The following variables will be pre-bound if the query is executed:
+- ?sourceClass: the source class of the mapping
+- ?sourcePredicate1: the source predicate
+- ?targetClass: the target class of the mapping
+- ?targetPredicate1: the target property""" ;
+  rdfs:domain spin:Function ;
+  rdfs:label "suggestion 1-1" ;
+  rdfs:range sp:Construct ;
+  rdfs:subPropertyOf spin:query ;
+.
+spinmap:suggestionScore
+  a rdf:Property ;
+  rdfs:comment "An (optional) value between 0 and 100 that can be constructed for a function call created as spinmap:suggestion." ;
+  rdfs:label "suggestion score" ;
+  rdfs:range xsd:integer ;
+.
+spinmap:target
+  a rdf:Property ;
+  rdfs:label "target" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+spinmap:targetClass
+  a rdf:Property ;
+  rdfs:label "target class" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+spinmap:targetPredicate1
+  a rdf:Property ;
+  rdfs:label "target predicate 1" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+spinmap:targetPredicate2
+  a rdf:Property ;
+  rdfs:label "target predicate 2" ;
+  rdfs:subPropertyOf sp:arg ;
+.
+spinmap:targetResource
+  a spin:Function ;
+  spin:body [
+      a sp:Select ;
+      sp:resultVariables (
+          [
+            sp:expression [
+                a spin:eval ;
+                sp:arg1 [
+                    sp:varName "targetExpr" ;
+                  ] ;
+                sp:arg2 spinmap:source ;
+                sp:arg3 spin:_arg1 ;
+              ] ;
+            sp:varName "result" ;
+          ]
+        ) ;
+      sp:where (
+          [
+            a sp:Bind ;
+            sp:expression [
+                a spl:object ;
+                sp:arg1 [
+                    sp:varName "context" ;
+                  ] ;
+                sp:arg2 spinmap:target ;
+              ] ;
+            sp:variable [
+                sp:varName "targetExpr" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate sp:arg1 ;
+      spl:valueType rdfs:Resource ;
+      rdfs:comment "The source resource that will be passed into the function." ;
+    ] ;
+  spin:constraint [
+      a spl:Argument ;
+      spl:predicate spinmap:context ;
+      spl:valueType spinmap:Context ;
+      rdfs:comment "The Context that will deliver an instance of a function that delivers the target resource from a source resource (?sourceResource)." ;
+    ] ;
+  spin:returnType rdfs:Resource ;
+  spinmap:suggestion-0-1 [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object spinmap:targetResource ;
+            sp:predicate rdf:type ;
+            sp:subject _:b48835 ;
+          ]
+          [
+            sp:object [
+                sp:varName "context" ;
+              ] ;
+            sp:predicate spinmap:context ;
+            sp:subject _:b48835 ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "range" ;
+              ] ;
+            sp:predicate rdfs:range ;
+            sp:subject [
+                sp:varName "targetPredicate1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "sourceClass" ;
+              ] ;
+            sp:predicate spinmap:sourceClass ;
+            sp:subject [
+                sp:varName "context" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "range" ;
+              ] ;
+            sp:predicate spinmap:targetClass ;
+            sp:subject [
+                sp:varName "context" ;
+              ] ;
+          ]
+          [
+            sp:object spinmap:Context ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "context" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spinmap:suggestion-1-1 [
+      a sp:Construct ;
+      sp:templates (
+          [
+            sp:object spinmap:targetResource ;
+            sp:predicate rdf:type ;
+            sp:subject _:b7019 ;
+          ]
+          [
+            sp:object [
+                sp:varName "context" ;
+              ] ;
+            sp:predicate spinmap:context ;
+            sp:subject _:b7019 ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "sourceRange" ;
+              ] ;
+            sp:predicate rdfs:range ;
+            sp:subject [
+                sp:varName "sourcePredicate1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "targetRange" ;
+              ] ;
+            sp:predicate rdfs:range ;
+            sp:subject [
+                sp:varName "targetPredicate1" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "sourceRange" ;
+              ] ;
+            sp:predicate spinmap:sourceClass ;
+            sp:subject [
+                sp:varName "context" ;
+              ] ;
+          ]
+          [
+            sp:object [
+                sp:varName "targetRange" ;
+              ] ;
+            sp:predicate spinmap:targetClass ;
+            sp:subject [
+                sp:varName "context" ;
+              ] ;
+          ]
+          [
+            sp:object spinmap:Context ;
+            sp:predicate rdf:type ;
+            sp:subject [
+                sp:varName "context" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  rdfs:comment "Gets the resource that is target of a mapping, based on a provided mapping context (?context) and a source resource (?arg1)." ;
+  rdfs:label "target resource" ;
+  rdfs:subClassOf spl:URIFunctions ;
+.

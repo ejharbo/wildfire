@@ -1,0 +1,377 @@
+# baseURI: http://edg.topbraid.solutions/1.0/schema/datatypes
+# imports: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://qudt.org/2.0/schema/datatype
+# imports: http://qudt.org/2.0/schema/qudt
+# imports: http://www.linkedmodel.org/schema/dtype
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix voag: <http://voag.linkedmodel.org/voag#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/schema/datatypes>
+  a graphql:Service ;
+  a owl:Ontology ;
+  graphql:excludeShape qudt:Datatype ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/schema/datatypes/GMD_datatypes> ;
+  rdfs:label "EDG Schema - Datatypes" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/core> ;
+  owl:imports <http://qudt.org/2.0/schema/datatype> ;
+  owl:imports <http://qudt.org/2.0/schema/qudt> ;
+  owl:imports <http://www.linkedmodel.org/schema/dtype> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+edg:Datatype
+  sh:property edg:Datatype-belongsToDatatypeFamily ;
+  sh:property edg:Datatype-normativeDatatype ;
+.
+edg:Datatype-belongsToDatatypeFamily
+  a sh:PropertyShape ;
+  sh:path edg:belongsTo ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datatypes> ;
+  sh:class edg:DatatypeFamilyType ;
+  sh:name "belongs to dataype family" ;
+.
+edg:Datatype-normativeDatatype
+  a sh:PropertyShape ;
+  sh:path edg:normativeDatatype ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datatypes> ;
+  sh:class qudt:Datatype ;
+  sh:maxCount 1 ;
+  sh:name "normative datatype (QUDT)" ;
+.
+edg:DatatypeFamilyType
+  a edg:EDGenumerationClass ;
+  edg:acronym "DTFT" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datatypes> ;
+  rdfs:label "Datatype Family Type" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:DatatypeViewpoint
+  a edg:ViewpointClass ;
+  dash:abstract true ;
+  rdfs:comment "Provides a menu container for all data asset types." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datatypes> ;
+  rdfs:label "Datatype Viewpoint" ;
+  rdfs:subClassOf edg:Viewpoint ;
+.
+edg:JDBCdatatype
+  a edg:AssetClass ;
+  dash:abstract true ;
+  edg:acronym "JDBCDT" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datatypes> ;
+  rdfs:label "JDBC Datatype" ;
+  rdfs:subClassOf edg:PhysicalDatatype ;
+.
+edg:PhysicalDatatype
+  dash:abstract true ;
+  sh:property edg:PhysicalDatatype-compatibleWith ;
+  sh:property edg:PhysicalDatatype-realizes ;
+.
+edg:PhysicalDatatype-compatibleWith
+  a sh:PropertyShape ;
+  sh:path edg:compatibleWith ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datatypes> ;
+  sh:class edg:Datatype ;
+.
+edg:PhysicalDatatype-realizes
+  a sh:PropertyShape ;
+  sh:path edg:realizes ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datatypes> ;
+  sh:class qudt:Datatype ;
+  sh:maxCount 1 ;
+  sh:minCount 0 ;
+.
+edg:SQLdatatype
+  a edg:AssetClass ;
+  dash:abstract true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datatypes> ;
+  rdfs:label "SQL Datatype" ;
+  rdfs:subClassOf edg:PhysicalDatatype ;
+.
+edg:ScalarDatatypeUnion
+  a edg:ConstructClass ;
+  a sh:NodeShape ;
+  rdfs:label "Scalar datatype union" ;
+  rdfs:subClassOf edg:Construct ;
+.
+edg:javaClassName
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datatypes> ;
+  rdfs:label "Java Class Name" ;
+.
+edg:jdbcType
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datatypes> ;
+  rdfs:label "JDBC type" ;
+.
+edg:logicalDatatype
+  a owl:ObjectProperty ;
+  rdfs:comment "Specifies an implementation-free datatype, that is independent of a specific technology. One use is for specifying a logical attribute." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datatypes> ;
+  rdfs:label "logical datatype" ;
+  rdfs:subPropertyOf edg:datatype ;
+.
+edg:normativeDatatype
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datatypes> ;
+  rdfs:label "normative datatype" ;
+.
+edg:physicalDatatype
+  a owl:ObjectProperty ;
+  rdfs:comment "Specifies a realization of a datatype in a specific technology, for example ORACLE, of a physical data element. This is applicable for physical datatbase column, report column, and dataset column." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datatypes> ;
+  rdfs:label "physical datatype" ;
+  rdfs:subPropertyOf edg:datatype ;
+.
+edg:precision
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datatypes> ;
+  rdfs:label "precision" ;
+.
+edg:scale
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datatypes> ;
+  rdfs:label "scale" ;
+.
+edg:typeName
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datatypes> ;
+  rdfs:label "Type Name" ;
+.
+edg:xsdDataType
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datatypes> ;
+  rdfs:label "xsd datatype" ;
+.
+edg:xsdType
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datatypes> ;
+  rdfs:label "XSD Type" ;
+.
+<http://edg.topbraid.solutions/schema/datatypes/GMD_datatypes>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:SchemaGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:intent "The intent of this graph is to add 'edg:AssetClass' type statements, and other EDG constructs where necessary, to QUDT classes. No new classes are defined." ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/schema/datatypes> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource voag:TopQuadrant_ONTOLOGY-LICENSE ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+qudt:BigIntegerType
+  a edg:AssetClass ;
+.
+qudt:BitFieldType
+  dash:abstract true ;
+.
+qudt:BooleanType
+  a edg:AssetClass ;
+.
+qudt:CharacterType
+  a edg:AssetClass ;
+.
+qudt:Datatype
+  a edg:AssetClass ;
+  dash:abstract true ;
+  rdfs:subClassOf edg:LogicalDatatype ;
+  rdfs:subClassOf qudt:Concept ;
+.
+qudt:DateStringType
+  a edg:AssetClass ;
+.
+qudt:DateTimeStringType
+  a edg:AssetClass ;
+.
+qudt:DiscreteStateEnumeration
+  a edg:AssetClass ;
+  rdfs:subClassOf dtype:Enumeration ;
+.
+qudt:DoublePrecisionType
+  a edg:AssetClass ;
+.
+qudt:EnumeratedValue
+  a edg:AssetClass ;
+.
+qudt:Enumeration
+  a edg:AssetClass ;
+.
+qudt:HexBinaryType
+  a edg:AssetClass ;
+.
+qudt:IntegerDatatype
+  a edg:AssetClass ;
+.
+qudt:LongIntegerType
+  a edg:AssetClass ;
+.
+qudt:NumericType
+  a edg:AssetClass ;
+  dash:abstract true ;
+.
+qudt:OctetType
+  a edg:AssetClass ;
+.
+qudt:OrdinalType
+  a edg:AssetClass ;
+  dash:abstract true ;
+.
+qudt:Percentage
+  a edg:AssetClass ;
+.
+qudt:RealDatatype
+  a edg:AssetClass ;
+.
+qudt:RealDoublePrecisionType
+  a edg:AssetClass ;
+.
+qudt:RealSinglePrecisionType
+  a edg:AssetClass ;
+.
+qudt:ScalarDatatype
+  a edg:AssetClass ;
+  dash:abstract true ;
+  rdfs:subClassOf edg:ScalarDatatypeUnion ;
+.
+qudt:ShortIntegerType
+  a edg:AssetClass ;
+.
+qudt:SignedBigIntegerType
+  a edg:AssetClass ;
+.
+qudt:SignedIntegerType
+  a edg:AssetClass ;
+.
+qudt:SignedLongIntegerType
+  a edg:AssetClass ;
+.
+qudt:SignedMediumIntegerType
+  a edg:AssetClass ;
+.
+qudt:SignedShortIntegerType
+  a edg:AssetClass ;
+.
+qudt:SignedType
+  a edg:AssetClass ;
+.
+qudt:SignedVariableLengthIntegerType
+  a edg:AssetClass ;
+.
+qudt:SinglePrecisionType
+  a edg:AssetClass ;
+.
+qudt:StringType
+  a edg:AssetClass ;
+  dash:abstract true ;
+  rdfs:subClassOf edg:ScalarDatatypeUnion ;
+.
+qudt:StringUTF16
+  a edg:AssetClass ;
+.
+qudt:StringUTF8
+  a edg:AssetClass ;
+.
+qudt:TextStringType
+  a edg:AssetClass ;
+.
+qudt:TimeDataType
+  dash:abstract true ;
+.
+qudt:UnsignedBigIntegerType
+  a edg:AssetClass ;
+.
+qudt:UnsignedIntegerType
+  a edg:AssetClass ;
+.
+qudt:UnsignedLongIntegerType
+  a edg:AssetClass ;
+.
+qudt:UnsignedMediumIntegerType
+  a edg:AssetClass ;
+.
+qudt:UnsignedShortIntegerType
+  a edg:AssetClass ;
+.
+qudt:UnsignedType
+  a edg:AssetClass ;
+.
+qudt:UnsignedVariableLengthIntegerType
+  a edg:AssetClass ;
+.
+qudt:VariableLengthIntegerType
+  a edg:AssetClass ;
+.
+qudt:isByteString
+  rdfs:comment "A boolean flag to specify that the length of a string is determined either by a fixed number of bytes or whatever is needed to represent characters that may need more than one byte. An example of use is ORACLE's VARCHAR2, An example would be \"VARCHAR2(20 BYTE)\" stipulating that 20 bytes would be the maximum length irrespective of how many bytes individual characters might need." ;
+.
+dtype:EnumeratedValue
+  a edg:AssetClass ;
+  dash:abstract true ;
+.

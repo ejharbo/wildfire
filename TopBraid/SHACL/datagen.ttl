@@ -1,0 +1,45 @@
+# baseURI: http://datashapes.org/datagen
+# imports: http://datashapes.org/dash
+# prefix: datagen
+
+@prefix datagen: <http://datashapes.org/datagen#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://datashapes.org/datagen>
+  a owl:Ontology ;
+  rdfs:comment "A vocabulary extending SHACL with properties to instruct a data generator on how to produce triples for a given set of shapes." ;
+  rdfs:label "Data Generator Vocabulary for SHACL" ;
+  owl:imports <http://datashapes.org/dash> ;
+  owl:versionInfo "In TopBraid, see the SPARQLMotion sml:GenerateRandomData and the Composer help page \"Random Data Generator\"." ;
+.
+datagen:maxInstanceCount
+  a rdf:Property ;
+  rdfs:comment "The maximum number of instances that shall be created for the associated class." ;
+  rdfs:domain rdfs:Class ;
+  rdfs:label "max instance count" ;
+  rdfs:range xsd:integer ;
+.
+datagen:maxValueCount
+  a rdf:Property ;
+  rdfs:comment "The maximum number of values that shall be created for an instance for the associated property. The system will use the minimum value of this or any applicable sh:maxCount constraint on the same property." ;
+  rdfs:domain <http://www.w3.org/ns/shacl#PropertyShape> ;
+  rdfs:label "max value count" ;
+  rdfs:range xsd:integer ;
+.
+datagen:minInstanceCount
+  a rdf:Property ;
+  rdfs:comment "The minimum number of instances that shall be created for the associated class." ;
+  rdfs:domain rdfs:Class ;
+  rdfs:label "min instance count" ;
+  rdfs:range xsd:integer ;
+.
+datagen:minValueCount
+  a rdf:Property ;
+  rdfs:comment "The minimum number of values that shall be created for an instance for the associated property. The system will use the maximum value of this or any applicable sh:minCount constraint on the same property." ;
+  rdfs:domain <http://www.w3.org/ns/shacl#PropertyShape> ;
+  rdfs:label "min value count" ;
+  rdfs:range xsd:integer ;
+.

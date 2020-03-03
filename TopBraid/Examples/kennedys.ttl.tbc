@@ -1,0 +1,140 @@
+# baseURI: null
+
+@prefix composite: <http://www.topbraid.org/2007/05/composite.owl#> .
+@prefix daml: <http://www.daml.org/2001/03/daml+oil#> .
+@prefix forms: <http://www.topbraid.org/2007/01/forms.owl#> .
+@prefix inference: <http://www.topbraid.org/2007/06/inference.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix simple: <http://topbraid.org/examples/kennedys#> .
+@prefix visual: <http://topbraid.org/visual#> .
+@prefix wizards: <http://www.topbraid.org/2008/02/wizards.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://local/kennedys.owl.tbc>
+  a owl:Ontology ;
+  owl:imports <http://www.topbraid.org/2007/01/forms.owl> ;
+  owl:imports <http://www.topbraid.org/2007/05/composite.owl> ;
+  owl:imports <http://www.topbraid.org/2007/06/inference.owl> ;
+.
+simple:Person
+  forms:keyProperties (
+      rdfs:label
+      rdfs:comment
+      simple:birthYear
+      simple:deathYear
+    ) ;
+.
+[
+  a forms:Form ;
+  forms:numColumns "2" ;
+  forms:parentOf [
+      a forms:Panel ;
+      forms:childIndex "0" ;
+      forms:parentOf [
+          a forms:PropertyWidget ;
+          forms:childIndex "0" ;
+          forms:predicate simple:ivyLeague ;
+        ] ;
+    ] ;
+  forms:parentOf [
+      a forms:Panel ;
+      forms:childIndex "1" ;
+      forms:parentOf [
+          a forms:PropertyWidget ;
+          forms:childIndex "0" ;
+          forms:predicate rdfs:label ;
+        ] ;
+    ] ;
+  forms:subjectType simple:College ;
+  forms:useDomain "true" ;
+  rdfs:label "Resource Form" ;
+].
+[
+  a forms:Form ;
+  forms:numColumns "2" ;
+  forms:parentOf [
+      a forms:Section ;
+      forms:childIndex "0"^^xsd:int ;
+      forms:parentOf [
+          a forms:PropertyWidget ;
+          forms:childIndex "0"^^xsd:int ;
+          forms:predicate simple:photo ;
+        ] ;
+      forms:parentOf [
+          a forms:PropertyWidget ;
+          forms:childIndex "1"^^xsd:int ;
+          forms:predicate simple:firstName ;
+        ] ;
+      forms:parentOf [
+          a forms:PropertyWidget ;
+          forms:childIndex "2"^^xsd:int ;
+          forms:predicate simple:middleInitial ;
+        ] ;
+      forms:parentOf [
+          a forms:PropertyWidget ;
+          forms:childIndex "3"^^xsd:int ;
+          forms:predicate simple:lastName ;
+        ] ;
+      forms:parentOf [
+          a forms:PropertyWidget ;
+          forms:childIndex "4"^^xsd:int ;
+          forms:predicate simple:suffix ;
+        ] ;
+      forms:parentOf [
+          a forms:PropertyWidget ;
+          forms:childIndex 5 ;
+          forms:predicate simple:gender ;
+        ] ;
+      forms:parentOf [
+          a forms:PropertyWidget ;
+          forms:childIndex 6 ;
+          forms:predicate simple:birthYear ;
+        ] ;
+      forms:parentOf [
+          a forms:PropertyWidget ;
+          forms:childIndex 7 ;
+          forms:predicate simple:deathYear ;
+        ] ;
+      forms:parentOf [
+          a forms:PropertyWidget ;
+          forms:childIndex 8 ;
+          forms:predicate simple:almaMater ;
+        ] ;
+      forms:parentOf [
+          a forms:PropertyWidget ;
+          forms:childIndex 9 ;
+          forms:predicate simple:profession ;
+        ] ;
+      rdfs:label "Person" ;
+    ] ;
+  forms:parentOf [
+      a forms:Section ;
+      forms:childIndex "1"^^xsd:int ;
+      forms:parentOf [
+          a forms:PropertyWidget ;
+          forms:childIndex "0" ;
+          forms:predicate simple:spouse ;
+        ] ;
+      forms:parentOf [
+          a forms:PropertyWidget ;
+          forms:childIndex "1" ;
+          forms:predicate simple:child ;
+        ] ;
+      forms:parentOf [
+          a forms:PropertyWidget ;
+          forms:childIndex "2" ;
+          forms:predicate simple:parent ;
+        ] ;
+      forms:parentOf [
+          a forms:PropertyWidgetGroup ;
+          forms:childIndex "3" ;
+          forms:predicateType rdf:Property ;
+        ] ;
+      rdfs:label "Family" ;
+    ] ;
+  forms:subjectType simple:Person ;
+  forms:useDomain "true" ;
+  rdfs:label "Resource Form" ;
+].

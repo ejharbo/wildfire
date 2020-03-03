@@ -1,0 +1,240 @@
+# baseURI: http://topbraid.org/spin/evnconstraints
+# imports: http://datashapes.org/graphql
+# imports: http://spinrdf.org/spin
+# imports: http://topbraid.org/skos.shapes
+# imports: http://topbraid.org/teamworkconstraints
+# imports: http://www.w3.org/2004/02/skos/core
+# prefix: evnconstraints
+
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix evnconstraints: <http://topbraid.org/spin/evnconstraints#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+arg:property
+  rdf:type rdf:Property ;
+  rdfs:subPropertyOf sp:arg ;
+.
+<http://topbraid.org/spin/evnconstraints>
+  rdf:type owl:Ontology ;
+  rdfs:comment "A SPIN file that was formely used by EVN and is left here for legacy reasons. Graphs that import this should switch to http://topbraid.org/teamworkconstraints." ;
+  rdfs:label "EVN SPIN library (outdated - please replace with Default constraints for EDG." ;
+  owl:imports <http://datashapes.org/graphql> ;
+  owl:imports <http://spinrdf.org/spin> ;
+  owl:imports <http://topbraid.org/skos.shapes> ;
+  owl:imports <http://topbraid.org/teamworkconstraints> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+.
+evnconstraints:ValuesOfPropertyMustBeBroaderConceptsOfThis
+  rdf:type spin:ConstructTemplate ;
+  spin:body [
+      rdf:type sp:Construct ;
+      sp:templates (
+          [
+            sp:object spin:ConstraintViolation ;
+            sp:predicate rdf:type ;
+            sp:subject _:b98498 ;
+          ]
+          [
+            sp:object [
+                sp:varName "property" ;
+              ] ;
+            sp:predicate spin:violationPath ;
+            sp:subject _:b98498 ;
+          ]
+          [
+            sp:object spin:_this ;
+            sp:predicate spin:violationRoot ;
+            sp:subject _:b98498 ;
+          ]
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate rdfs:label ;
+            sp:subject _:b98498 ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "object" ;
+              ] ;
+            sp:predicate [
+                sp:varName "property" ;
+              ] ;
+            sp:subject spin:_this ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:notExists ;
+                sp:elements (
+                    [
+                      rdf:type sp:TriplePath ;
+                      sp:object [
+                          sp:varName "object" ;
+                        ] ;
+                      sp:path [
+                          rdf:type sp:ModPath ;
+                          sp:modMax -2 ;
+                          sp:modMin 0 ;
+                          sp:subPath skos:broader ;
+                        ] ;
+                      sp:subject spin:_this ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:concat ;
+                sp:arg1 "Values of " ;
+                sp:arg2 [
+                    rdf:type ui:label ;
+                    sp:arg1 [
+                        sp:varName "property" ;
+                      ] ;
+                  ] ;
+                sp:arg3 " must be broader concepts of " ;
+                sp:arg4 [
+                    rdf:type ui:label ;
+                    sp:arg1 spin:_this ;
+                  ] ;
+                sp:arg5 ", but found " ;
+                sp:arg6 [
+                    rdf:type ui:label ;
+                    sp:arg1 [
+                        sp:varName "object" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "label" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:property ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property to constrain." ;
+    ] ;
+  spin:labelTemplate "Values of {?property} must be broader concepts of this" ;
+  rdfs:comment "A template that can be used as spin:constraint on a given property to specify that all values of the property (?property) must be broader concepts (via skos:broader) of the constrained subject (?this)." ;
+  rdfs:label "Values of property must be broader concepts of this" ;
+  rdfs:subClassOf spin:ConstructTemplates ;
+.
+evnconstraints:ValuesOfPropertyMustBeNarrowerConceptsOfThis
+  rdf:type spin:ConstructTemplate ;
+  spin:body [
+      rdf:type sp:Construct ;
+      sp:templates (
+          [
+            sp:object spin:ConstraintViolation ;
+            sp:predicate rdf:type ;
+            sp:subject _:b97174 ;
+          ]
+          [
+            sp:object [
+                sp:varName "property" ;
+              ] ;
+            sp:predicate spin:violationPath ;
+            sp:subject _:b97174 ;
+          ]
+          [
+            sp:object spin:_this ;
+            sp:predicate spin:violationRoot ;
+            sp:subject _:b97174 ;
+          ]
+          [
+            sp:object [
+                sp:varName "label" ;
+              ] ;
+            sp:predicate rdfs:label ;
+            sp:subject _:b97174 ;
+          ]
+        ) ;
+      sp:where (
+          [
+            sp:object [
+                sp:varName "object" ;
+              ] ;
+            sp:predicate [
+                sp:varName "property" ;
+              ] ;
+            sp:subject spin:_this ;
+          ]
+          [
+            rdf:type sp:Filter ;
+            sp:expression [
+                rdf:type sp:notExists ;
+                sp:elements (
+                    [
+                      rdf:type sp:TriplePath ;
+                      sp:object spin:_this ;
+                      sp:path [
+                          rdf:type sp:ModPath ;
+                          sp:modMax -2 ;
+                          sp:modMin 0 ;
+                          sp:subPath skos:broader ;
+                        ] ;
+                      sp:subject [
+                          sp:varName "object" ;
+                        ] ;
+                    ]
+                  ) ;
+              ] ;
+          ]
+          [
+            rdf:type sp:Bind ;
+            sp:expression [
+                rdf:type sp:concat ;
+                sp:arg1 "Values of " ;
+                sp:arg2 [
+                    rdf:type ui:label ;
+                    sp:arg1 [
+                        sp:varName "property" ;
+                      ] ;
+                  ] ;
+                sp:arg3 " must be narrower concepts of " ;
+                sp:arg4 [
+                    rdf:type ui:label ;
+                    sp:arg1 spin:_this ;
+                  ] ;
+                sp:arg5 ", but found " ;
+                sp:arg6 [
+                    rdf:type ui:label ;
+                    sp:arg1 [
+                        sp:varName "object" ;
+                      ] ;
+                  ] ;
+              ] ;
+            sp:variable [
+                sp:varName "label" ;
+              ] ;
+          ]
+        ) ;
+    ] ;
+  spin:constraint [
+      rdf:type spl:Argument ;
+      spl:predicate arg:property ;
+      spl:valueType rdf:Property ;
+      rdfs:comment "The property to constrain." ;
+    ] ;
+  spin:labelTemplate "Values of {?property} must be narrower concepts of this" ;
+  rdfs:comment "A template that can be used as spin:constraint on a given property to specify that all values of the property (?property) must be narrower concepts (via skos:broader) of the constrained subject (?this)." ;
+  rdfs:label "Values of property must be narrower concepts of this" ;
+  rdfs:subClassOf spin:ConstructTemplates ;
+.

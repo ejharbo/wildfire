@@ -1,0 +1,1051 @@
+# baseURI: http://healthcare.edg.topbraid.solutions/models/1.0/healthcare
+# imports: http://edg.topbraid.solutions/1.0/schema/core
+# imports: http://edg.topbraid.solutions/1.0/schema/datamodels
+# imports: http://edg.topbraid.solutions/1.0/schema/enterprise-models
+# imports: http://edg.topbraid.solutions/1.0/schema/glossary
+# imports: http://edg.topbraid.solutions/1.0/schema/governance
+# imports: http://www.w3.org/2004/02/skos/core
+
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix hcare: <http://healthcare.edg.topbraid.solutions/hcare/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+hcare:Association
+  rdf:type hcare:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Association" ;
+  rdfs:subClassOf hcare:Organization ;
+  skos:broader hcare:Organization ;
+.
+hcare:Benefit
+  rdf:type hcare:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Healthcare Benefit" ;
+  rdfs:subClassOf hcare:Concept ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty hcare:title ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty edg:description ;
+    ] ;
+.
+hcare:BenefitsManagementOrganization
+  rdf:type hcare:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Benefits management organization" ;
+  rdfs:subClassOf hcare:Provider ;
+  skos:broader hcare:Provider ;
+.
+hcare:COBRA
+  rdf:type hcare:Class ;
+  edg:description "The Consolidated Omnibus Budget Reconciliation Act of 1985, commonly known as COBRA, requires group health plans with 20 or more employees to offer continued health coverage for you and your dependents for 18 months after you leave your job. Longer durations of continuance are available under certain circumstances. If you opt to continue coverage, you must pay the entire premium, plus a two percent administration charge."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "COBRA" ;
+  rdfs:subClassOf hcare:LegislativeAct ;
+  skos:broader hcare:LegislativeAct ;
+.
+hcare:Category
+  rdf:type hcare:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Category" ;
+  rdfs:subClassOf hcare:Concept ;
+.
+hcare:Class
+  rdf:type rdfs:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Healthcare Class" ;
+  rdfs:label "Organization Class" ;
+  rdfs:label "Plan Class" ;
+  rdfs:subClassOf owl:Class ;
+  rdfs:subClassOf skos:Concept ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:description ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:description ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:description ;
+    ] ;
+.
+hcare:CoInsurancePayment
+  rdf:type hcare:Class ;
+  edg:description "The amount you are required to pay for medical care in a fee-for-service plan or preferred provider organization (PPO) after you have met your deductible. The coinsurance rate is usually expressed as a percentage of charges. For example, if the insurance company pays 80 percent of the claim, you pay 20 percent."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Co insurance payment" ;
+  rdfs:subClassOf hcare:Payment ;
+  skos:broader hcare:Payment ;
+.
+hcare:CoInsuranceProvision
+  rdf:type hcare:Class ;
+  edg:description "A stipulation found in most health insurance policies that requires an insured to pay a stated percentage, in excess of the deductible, of all eligible medical expenses."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "CoInsurance provision" ;
+  rdfs:subClassOf hcare:Provision ;
+  skos:broader hcare:Provision ;
+.
+hcare:CoPayment
+  rdf:type hcare:Class ;
+  edg:description "A cost sharing arrangement in which a person pays a specific charge for a specific medical service . Typically $10 for an office visit or $5 for a prescription."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Co-Payment" ;
+  rdfs:subClassOf hcare:Payment ;
+  skos:broader hcare:Payment ;
+.
+hcare:Concept
+  rdf:type owl:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Healthcare Concept" ;
+  rdfs:subClassOf skos:Concept ;
+.
+hcare:Contract
+  rdf:type hcare:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Contract" ;
+  rdfs:subClassOf hcare:Concept ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom hcare:HealthCareProvider ;
+      owl:onProperty hcare:provider ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom hcare:HealthInsurer ;
+      owl:onProperty hcare:insurer ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom hcare:Policy ;
+      owl:onProperty hcare:policy ;
+    ] ;
+.
+hcare:Deductible
+  rdf:type hcare:Class ;
+  edg:description "The amount of money, or value of certain services (such as one physician visit), a patient or family must pay before costs (or percentages of costs) are covered by the health plan or insurance company, usually per year. "^^rdf:HTML ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Deductible" ;
+  rdfs:subClassOf hcare:Payment ;
+  skos:broader hcare:Payment ;
+.
+hcare:DentalPlan
+  rdf:type hcare:Class ;
+  edg:description "A dental plan which is part of a major medical policy."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Dental plan" ;
+  rdfs:subClassOf hcare:Plan ;
+  skos:broader hcare:Plan ;
+.
+hcare:DisabilityInsurance
+  rdf:type hcare:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Disability insurance" ;
+  rdfs:subClassOf hcare:HealthInsurance ;
+  skos:broader hcare:HealthInsurance ;
+.
+hcare:Doctor
+  rdf:type hcare:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Doctor" ;
+  rdfs:subClassOf hcare:Person ;
+  skos:broader hcare:Person ;
+.
+hcare:EPO-Plan
+  rdf:type hcare:Class ;
+  edg:description "An EPO is similar to an HMO, except that it is regulated by the California Department of Insurance and generally pays physicians and other healthcare providers differently. EPOs will only cover your expenses if you see a physician that is in the EPO's network, unless it is an emergency." ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "EPO-Plan" ;
+  rdfs:subClassOf hcare:Plan ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom hcare:DentalPlan ;
+      owl:onProperty hcare:dentalCoverage ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:hasValue hcare:EPO-PlanType ;
+      owl:onProperty hcare:coverageType ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty hcare:dentalCoverage ;
+    ] ;
+  owl:disjointWith hcare:HMO-Plan ;
+  owl:disjointWith hcare:POS-Plan ;
+  owl:disjointWith hcare:PPO-Plan ;
+  owl:disjointWith hcare:TraditionalPlan ;
+  owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          hcare:Plan
+          [
+            rdf:type owl:Restriction ;
+            owl:hasValue hcare:EPO-PlanType ;
+            owl:onProperty hcare:coverageType ;
+          ]
+        ) ;
+    ] ;
+  skos:broader hcare:Plan ;
+.
+hcare:EPO-PlanType
+  rdf:type hcare:PlanType ;
+  edg:description "An EPO is similar to an HMO, except that it is regulated by the California Department of Insurance and generally pays physicians and other healthcare providers differently. EPOs will only cover your expenses if you see a physician that is in the EPO's network, unless it is an emergency." ;
+  hcare:title "Exclusive Provider Organization Plan" ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Exclusive Provider Organization Plan" ;
+.
+hcare:GroupModelHMO-Plan
+  rdf:type hcare:Class ;
+  edg:description "An HMO that contracts with an independent group practice to provide medical services"^^rdf:HTML ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Group model HMO-Plan" ;
+  rdfs:subClassOf hcare:HMO-Plan ;
+  skos:broader hcare:HMO-Plan ;
+.
+hcare:HIPAA
+  rdf:type hcare:Class ;
+  edg:description "The Health Insurance Portability and Accountability Act (HIPAA), also known as Kennedy-Kassebaum law,  guarantees that people who lose their group health insurance will have access to individual insurance, regardless of pre-existing medical problems. The law also allows employees to secure health insurance from their new employer when they switch jobs even if they have a pre-existing medical condition."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "HIPAA" ;
+  rdfs:subClassOf hcare:LegislativeAct ;
+  skos:broader hcare:LegislativeAct ;
+.
+hcare:HMO-Plan
+  rdf:type hcare:Class ;
+  edg:description "There are several types of HMOs. Most will only cover your expenses if you go to a health care provider within their organization (unless it's an emergency or you're out-of-town). They may require that you choose a primary care physician who will coordinate your care. And you will probably have to get approval from that physician before seeing a specialist. You must get approval from the HMO before entering a hospital or receiving some other kinds of non-emergency care. Most HMOs do not require that you meet a deductible each year and require only a small co-payment (for example, $5 per visit or prescription). Most of the paperwork is handled by the organization." ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "HMO-Plan" ;
+  rdfs:subClassOf hcare:Plan ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom hcare:DentalPlan ;
+      owl:onProperty hcare:dentalCoverage ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty hcare:dentalCoverage ;
+    ] ;
+  owl:disjointWith hcare:EPO-Plan ;
+  owl:disjointWith hcare:POS-Plan ;
+  owl:disjointWith hcare:PPO-Plan ;
+  owl:disjointWith hcare:TraditionalPlan ;
+  skos:broader hcare:Plan ;
+.
+hcare:HMO-PlanType
+  rdf:type hcare:PlanType ;
+  edg:description "There are several types of HMOs. Most will only cover your expenses if you go to a health care provider within their organization (unless it's an emergency or you're out-of-town). They may require that you choose a primary care physician who will coordinate your care. And you will probably have to get approval from that physician before seeing a specialist. You must get approval from the HMO before entering a hospital or receiving some other kinds of non-emergency care. Most HMOs do not require that you meet a deductible each year and require only a small co-payment (for example, $5 per visit or prescription). Most of the paperwork is handled by the organization." ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "HMO-Plan" ;
+.
+hcare:HealthCare
+  rdf:type hcare:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Health care" ;
+  rdfs:subClassOf hcare:Concept ;
+.
+hcare:HealthCareProvider
+  rdf:type hcare:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Health care provider" ;
+  rdfs:subClassOf hcare:Organization ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom hcare:Contract ;
+      owl:onProperty hcare:contract ;
+    ] ;
+.
+hcare:HealthInsurance
+  rdf:type hcare:Class ;
+  edg:description "Protection that provides payment of benefits for covered sickness or injury. Included under this heading are various types of insurance, such as accident insurance, disability income insurance, medical expense insurance, and accidental death and dismemberment insurance."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Health Insurance" ;
+  rdfs:subClassOf hcare:Concept ;
+.
+hcare:HealthInsurer
+  rdf:type hcare:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Health Insurer" ;
+  rdfs:subClassOf hcare:Provider ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom <http://healthcare.topquadrant.com/models/1.0.0/osg/plan#Plan> ;
+      owl:onProperty hcare:plan ;
+    ] ;
+.
+hcare:HospitalConfinementInsurance
+  rdf:type hcare:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Hospital confinement insurance" ;
+  rdfs:subClassOf hcare:MedicalExpenseInsurance ;
+  skos:broader hcare:MedicalExpenseInsurance ;
+  skos:definition "A type of health insurance that provides a predetermined flat benefit amount for each day an insured is hospitalized. The benefit amount does not vary according to the amount of medical expenses the insured incurs, although some policies provide higher benefit amounts if the insured is in an intensive or cardiac care unit. Also called hospital indemnity insurance." ;
+.
+hcare:HospitalSurgicalExpenseInsurance
+  rdf:type hcare:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Hospital surgical expense insurance" ;
+  rdfs:subClassOf hcare:MedicalExpenseInsurance ;
+  skos:broader hcare:MedicalExpenseInsurance ;
+.
+hcare:InsuredPatient
+  rdf:type hcare:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Insured patient" ;
+  rdfs:subClassOf hcare:InsuredPerson ;
+  rdfs:subClassOf hcare:Patient ;
+  owl:equivalentClass [
+      rdf:type owl:Class ;
+      owl:intersectionOf (
+          hcare:InsuredPerson
+          hcare:Patient
+        ) ;
+    ] ;
+  skos:broader hcare:InsuredPerson ;
+  skos:broader hcare:Patient ;
+.
+hcare:InsuredPerson
+  rdf:type hcare:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Insured person" ;
+  rdfs:subClassOf hcare:Person ;
+  skos:broader hcare:Person ;
+.
+hcare:LegislativeAct
+  rdf:type hcare:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Legislative act" ;
+  rdfs:subClassOf hcare:Concept ;
+.
+hcare:MajorMedicalInsurance
+  rdf:type hcare:Class ;
+  edg:description "A type of medical expense insurance that provides broad coverage for most of the expenses associated with treating a covered illness or injury."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Major medical insurance" ;
+  rdfs:subClassOf hcare:MedicalExpenseInsurance ;
+  skos:broader hcare:MedicalExpenseInsurance ;
+.
+hcare:ManagedCare
+  rdf:type hcare:Class ;
+  edg:description "An organized way to manage costs, use, and quality of the health-care system. The major types of managed care plans are health maintenance organizations (HMOs), point-of-service (POS) plans, and preferred provider organizations (PPOs). "^^rdf:HTML ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Managed care" ;
+  rdfs:subClassOf hcare:HealthCare ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:onProperty hcare:plan ;
+      owl:someValuesFrom [
+          rdf:type owl:Class ;
+          owl:unionOf (
+              <http://healthcare.topquadrant.com/models/1.0.0/osg/plan#EPO-Plan>
+              <http://healthcare.topquadrant.com/models/1.0.0/osg/plan#HMO-Plan>
+              <http://healthcare.topquadrant.com/models/1.0.0/osg/plan#POS-Plan>
+              <http://healthcare.topquadrant.com/models/1.0.0/osg/plan#PPO-Plan>
+            ) ;
+        ] ;
+    ] ;
+  skos:broader hcare:HealthCare ;
+.
+hcare:Medicaid
+  rdf:type hcare:Class ;
+  edg:description "A joint federal-state health insurance program that is run by the states and covers certain low-income people (especially children and pregnant women) and disabled people."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Medicaid" ;
+  rdfs:subClassOf hcare:Program ;
+  skos:broader hcare:Program ;
+.
+hcare:MedicalExpenseInsurance
+  rdf:type hcare:Class ;
+  edg:description "Any of several types of health insurance designed to pay for part or all of an insured's health care expenses, such as hospital room and board, surgeon's fees, visits to doctors' offices, prescribed drugs, treatments, and nursing care. See also hospital confinement insurance, hospital-surgical expense insurance, major medical insurance, and specified expense coverage."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Medical expense insurance" ;
+  rdfs:subClassOf hcare:HealthInsurance ;
+  skos:broader hcare:HealthInsurance ;
+.
+hcare:Medicare
+  rdf:type hcare:Class ;
+  edg:description "The federally sponsored health insurance program of hospital and medical insurance primarily for people aged 65 and older."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Medicare" ;
+  rdfs:subClassOf hcare:Program ;
+  skos:broader hcare:Program ;
+.
+hcare:Network
+  rdf:type hcare:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Network" ;
+  rdfs:subClassOf hcare:Organization ;
+  skos:broader hcare:Organization ;
+.
+hcare:Nurse
+  rdf:type hcare:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Nurse" ;
+  rdfs:subClassOf hcare:Person ;
+  skos:broader hcare:Person ;
+.
+hcare:Offering
+  rdf:type hcare:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Offering" ;
+  rdfs:subClassOf hcare:Concept ;
+.
+hcare:Organization
+  rdf:type hcare:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Organization" ;
+  rdfs:subClassOf edg:Organization ;
+  skos:broader hcare:Party ;
+.
+hcare:POS-Plan
+  rdf:type hcare:Class ;
+  edg:description "A POS plan is similar to an HMO in that you can see physicians within a network and pay only a small co-payment. But you can also see physicians that aren't in the network and pay a percentage of the charge, after you've met your deductible, as you would with a PPO plan. There may be restrictions on the services you can receive outside the network with a POS plan. For example, prescription drugs, organ transplants, treatment for infertility, and mental health services may not be included." ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Point of service plan" ;
+  rdfs:subClassOf hcare:Plan ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom hcare:DentalPlan ;
+      owl:onProperty hcare:dentalCoverage ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty hcare:dentalCoverage ;
+    ] ;
+  owl:disjointWith hcare:EPO-Plan ;
+  owl:disjointWith hcare:HMO-Plan ;
+  owl:disjointWith hcare:PPO-Plan ;
+  owl:disjointWith hcare:TraditionalPlan ;
+  skos:broader hcare:Plan ;
+.
+hcare:POS-PlanType
+  rdf:type hcare:PlanType ;
+  edg:description "A POS plan is similar to an HMO in that you can see physicians within a network and pay only a small co-payment. But you can also see physicians that aren't in the network and pay a percentage of the charge, after you've met your deductible, as you would with a PPO plan. There may be restrictions on the services you can receive outside the network with a POS plan. For example, prescription drugs, organ transplants, treatment for infertility, and mental health services may not be included." ;
+  hcare:title " Point-of-Service plan" ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label " Point-of-Service plan" ;
+.
+hcare:PPO-Network
+  rdf:type hcare:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "PPO-Network" ;
+  rdfs:subClassOf hcare:Network ;
+  skos:broader hcare:Network ;
+.
+hcare:PPO-Plan
+  rdf:type hcare:Class ;
+  edg:description "PPOs are generally less flexible than traditional health insurance plans but more flexible than HMOs. You can see any health care provider you want to (including a specialist), but your co-payment will be higher if the physician you choose is not a \"preferred provider\", that is, a physician hat the health plan has a contract with.  PPOs will almost always require that you get their approval before entering a hospital. But they are more likely to cover checkups and other preventive medical services than traditional health insurance plans, and most preferred providers will file your claims for you." ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "PPO-Plan" ;
+  rdfs:subClassOf hcare:Plan ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom hcare:DentalPlan ;
+      owl:onProperty hcare:dentalCoverage ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty hcare:dentalCoverage ;
+    ] ;
+  owl:disjointWith hcare:EPO-Plan ;
+  owl:disjointWith hcare:HMO-Plan ;
+  owl:disjointWith hcare:POS-Plan ;
+  owl:disjointWith hcare:TraditionalPlan ;
+  skos:broader hcare:Plan ;
+.
+hcare:PPO-PlanType
+  rdf:type hcare:PlanType ;
+  edg:description "PPOs are generally less flexible than traditional health insurance plans but more flexible than HMOs. You can see any health care provider you want to (including a specialist), but your co-payment will be higher if the physician you choose is not a \"preferred provider\", that is, a physician hat the health plan has a contract with.  PPOs will almost always require that you get their approval before entering a hospital. But they are more likely to cover checkups and other preventive medical services than traditional health insurance plans, and most preferred providers will file your claims for you." ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Preferred ProviderOrganizations Plan" ;
+.
+hcare:Party
+  rdf:type hcare:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Party" ;
+  rdfs:subClassOf hcare:Concept ;
+.
+hcare:Patient
+  rdf:type hcare:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Patient" ;
+  rdfs:subClassOf hcare:Person ;
+  skos:broader hcare:Person ;
+.
+hcare:Payment
+  rdf:type hcare:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Payment" ;
+  rdfs:subClassOf hcare:Concept ;
+.
+hcare:Person
+  rdf:type hcare:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Person" ;
+  rdfs:subClassOf hcare:Party ;
+.
+hcare:Plan
+  rdf:type edg:Plan ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Healthcare Plan" ;
+  rdfs:subClassOf hcare:Concept ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom hcare:Benefit ;
+      owl:onProperty hcare:benefit ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom hcare:PlanType ;
+      owl:onProperty hcare:coverageType ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom hcare:Provision ;
+      owl:onProperty hcare:provision ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty hcare:coverageType ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty hcare:title ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty edg:description ;
+    ] ;
+.
+hcare:PlanType
+  rdf:type hcare:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Coverage type" ;
+  rdfs:subClassOf edg:InformationType ;
+  rdfs:subClassOf hcare:Category ;
+  skos:broader hcare:Category ;
+.
+hcare:Policy
+  rdf:type hcare:Class ;
+  edg:description "A written document that serves as evidence of an insurance contract and contains the pertinent facts about the policyowner, the insurance coverage, the insured, and the insurer."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Policy" ;
+  rdfs:subClassOf hcare:Concept ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom hcare:HealthInsurer ;
+      owl:onProperty hcare:insurer ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom hcare:InsuredPerson ;
+      owl:onProperty hcare:insuree ;
+    ] ;
+.
+hcare:PreferredProviderOrganization
+  rdf:type hcare:Class ;
+  edg:description "A network of health-care providers with which a health insurer has negotiated contracts for its insured population to receive health services at discounted costs. Health-care decisions generally remain with the patient as he or she selects providers and determines his or her own need for services. Patients have financial incentives to select providers within the PPO network."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Preferred provider organization" ;
+  rdfs:subClassOf hcare:Provider ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom hcare:HealthCareProvider ;
+      owl:onProperty hcare:network ;
+    ] ;
+  skos:broader hcare:Provider ;
+.
+hcare:Premium
+  rdf:type hcare:Class ;
+  edg:description "The monthly amount you or your employer pays in exchange for insurance coverage."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Premium" ;
+  rdfs:subClassOf hcare:Payment ;
+  skos:broader hcare:Payment ;
+.
+hcare:PrescriptionDrugPlanProvision
+  rdf:type hcare:Class ;
+  edg:description "Usually a provision under medical coverage plans whereby the beneficiary can obtain prescription drugs without incurring potentially large out-of-pocket expense. Different types of prescription drug plans are available. Examples are discount plan, closed panel drug plan, service-delivered plan, mail-order plan and maintenance drug option with major medical plan."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Prescription drug plan provision" ;
+  rdfs:subClassOf hcare:Provision ;
+  skos:broader hcare:Provision ;
+.
+hcare:PreventiveCare
+  rdf:type hcare:Class ;
+  edg:description "Comprehensive care emphasizing priorities for prevention, early detection and early treatment of conditions, generally including routine physical examinations, immunization and well-person care."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Preventive care" ;
+  rdfs:subClassOf hcare:HealthCare ;
+  skos:broader hcare:HealthCare ;
+.
+hcare:PrimaryCare
+  rdf:type hcare:Class ;
+  edg:description "Basic or general healthcare as opposed to specialist or subspecialist care. Primary care providers often oversee the total care of patients, referring the patient to other professionals as appropriate. Physicians whose practices are predominantly primary care include general or family practitioners, internists and pediatricians. Primary care also may be provided by nurse practitioners, physicians’ assistants or other midlevel practitioners."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Primary care" ;
+  rdfs:subClassOf hcare:HealthCare ;
+  skos:broader hcare:HealthCare ;
+.
+hcare:PrimaryCarePhysician
+  rdf:type hcare:Class ;
+  edg:description "The first contact for health care under a health maintenance organization (HMO) or point-of-service (POS) plan. This is often a family physician, internist, or pediatrician. A primary care physician monitors your health, treats most health problems, and authorizes referrals to specialists, if necessary."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Primary care physician" ;
+  rdfs:subClassOf hcare:Doctor ;
+  skos:broader hcare:Doctor ;
+.
+hcare:Program
+  rdf:type hcare:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Program" ;
+  rdfs:subClassOf hcare:Concept ;
+.
+hcare:Provider
+  rdf:type hcare:Class ;
+  edg:description "Any person (doctor, nurse) or institution (hospital, clinic, laboratory) that provides medical care."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Provider" ;
+  rdfs:subClassOf hcare:Organization ;
+  skos:broader hcare:Organization ;
+.
+hcare:Provision
+  rdf:type hcare:Class ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Provision" ;
+  rdfs:subClassOf hcare:Concept ;
+.
+hcare:ShortTermDisabilityIncomeInsuranceProvision
+  rdf:type hcare:Class ;
+  edg:description "A provision to pay benefits to a covered disabled person as long as he or she remains disabled up to a specified period."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Short term disability income insurance provision" ;
+  rdfs:subClassOf hcare:Provision ;
+  skos:broader hcare:Provision ;
+.
+hcare:ShortTermDisabilityInsurance
+  rdf:type hcare:Class ;
+  edg:description "Often considered to be a disability lasting usually not longer than two years."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Short term disability insurance" ;
+  rdfs:subClassOf hcare:DisabilityInsurance ;
+  skos:broader hcare:DisabilityInsurance ;
+.
+hcare:Term
+  rdf:type owl:Class ;
+  edg:description "Defined narrowly, consumer driven health care (CDHC) refers to health insurance plans that allow members to use personal Health Savings Accounts (HSAs), Health Reimbursement Arrangements (HRAs), or similar medical payment products to pay routine health care expenses directly, while a high-deductible health insurance policy protects them from catastrophic medical expenses. High-deductible policies cost less, but the user pays routine medical claims using a pre-funded spending account, often with a special debit card provided by a bank or insurance plan. If the balance on this account runs out, the user then pays claims just like under a regular deductible. Users keep any unused balance or \"rollover\" at the end of the year to increase future balances, or to invest for future expenses."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Healthcare Term" ;
+  rdfs:subClassOf edg:IndustryTerm ;
+  rdfs:subClassOf skos:Concept ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty hcare:acronym ;
+    ] ;
+.
+hcare:TraditionalPlan
+  rdf:type hcare:Class ;
+  edg:description "Traditional health insurance is generally the most flexible type of health plan. It allows you to choose any doctor you want to and see specialists without getting approval from a \"primary care physician\" or \"gatekeeper\" first. However, depending on the plan, certain restrictions may apply. For example, you may need to get the insurance company's approval before checking into a hospital, unless it is an emergency. Traditional health insurance is generally the most flexible type of health plan. It allows you to choose any doctor you want to and see specialists without getting approval from a \"primary care physician\" or \"gatekeeper\" first. However, depending on the plan, certain restrictions may apply. For example, you may need to get the insurance company's approval before checking into a hospital, unless it is an emergency. With traditional health insurance, you will usually have to spend a certain amount on medical bills each year before your insurance starts to pay. This is called a deductible. After that, you will have to pay a percentage of each charge, called a co-payment. The insurance company will pay the rest of the charge based on what it considers reasonable. Many insurance plans protect you from large medical expenses by limiting your total expenses in any given year, called your out-of-pocket expenses. There may also be a cap on total benefits--a maximum amount the insurance company will pay in your lifetime. Traditional health insurance is generally more expensive than other types of health plans and may require  more paperwork to file claims." ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Traditional plan" ;
+  rdfs:subClassOf hcare:Plan ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:allValuesFrom hcare:DentalPlan ;
+      owl:onProperty hcare:dentalCoverage ;
+    ] ;
+  rdfs:subClassOf [
+      rdf:type owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty hcare:dentalCoverage ;
+    ] ;
+  owl:disjointWith hcare:EPO-Plan ;
+  owl:disjointWith hcare:HMO-Plan ;
+  owl:disjointWith hcare:POS-Plan ;
+  owl:disjointWith hcare:PPO-Plan ;
+  skos:broader hcare:Plan ;
+.
+hcare:TraditionalPlanType
+  rdf:type hcare:PlanType ;
+  edg:description "Traditional health insurance is generally the most flexible type of health plan. It allows you to choose any doctor you want to and see specialists without getting approval from a \"primary care physician\" or \"gatekeeper\" first. However, depending on the plan, certain restrictions may apply. For example, you may need to get the insurance company's approval before checking into a hospital, unless it is an emergency. Traditional health insurance is generally the most flexible type of health plan. It allows you to choose any doctor you want to and see specialists without getting approval from a \"primary care physician\" or \"gatekeeper\" first. However, depending on the plan, certain restrictions may apply. For example, you may need to get the insurance company's approval before checking into a hospital, unless it is an emergency. With traditional health insurance, you will usually have to spend a certain amount on medical bills each year before your insurance starts to pay. This is called a deductible. After that, you will have to pay a percentage of each charge, called a co-payment. The insurance company will pay the rest of the charge based on what it considers reasonable. Many insurance plans protect you from large medical expenses by limiting your total expenses in any given year, called your out-of-pocket expenses. There may also be a cap on total benefits--a maximum amount the insurance company will pay in your lifetime. Traditional health insurance is generally more expensive than other types of health plans and may require  more paperwork to file claims." ;
+  hcare:title "Traditional Health Care Insurance Plan" ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "Traditional health care insurance plan" ;
+.
+hcare:acronym
+  rdf:type owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "acronym" ;
+  rdfs:range xsd:string ;
+.
+hcare:benefit
+  rdf:type owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "healthcare benefit" ;
+.
+hcare:contract
+  rdf:type owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "contract" ;
+.
+hcare:coverageType
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain hcare:Plan ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "healthcare coverage type" ;
+  rdfs:range hcare:PlanType ;
+.
+hcare:dentalCoverage
+  rdf:type owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "dental coverage" ;
+  rdfs:subPropertyOf hcare:part ;
+.
+hcare:insuree
+  rdf:type owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "insuree" ;
+.
+hcare:insurer
+  rdf:type owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "insurer" ;
+.
+hcare:network
+  rdf:type owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "healthcare network" ;
+.
+hcare:part
+  rdf:type owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "part" ;
+.
+hcare:plan
+  rdf:type owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "healthcare plan" ;
+.
+hcare:policy
+  rdf:type owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "healthcare policy" ;
+.
+hcare:provider
+  rdf:type owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "provider" ;
+.
+hcare:provision
+  rdf:type owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "healthcare provision" ;
+.
+hcare:solution
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain hcare:Organization ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "solution" ;
+  rdfs:range hcare:Offering ;
+.
+hcare:state
+  rdf:type owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "state" ;
+  rdfs:range xsd:string ;
+.
+hcare:title
+  rdf:type owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "title" ;
+  rdfs:range xsd:string ;
+.
+hcare:type
+  rdf:type owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  rdfs:label "type" ;
+.
+<http://healthcare.edg.topbraid.solutions/models/1.0/healthcare>
+  rdf:type owl:Ontology ;
+  <http://www.linkedmodel.org/schema/vaem#hasGraphMetadata> <http://healthcare.edg.topbraid.solutions/models/healthcare/GMD_healthcare> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/governance> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+  owl:versionInfo "1.0" ;
+.
+<http://healthcare.edg.topbraid.solutions/models/healthcare/GMD_healthcare>
+  rdf:type <http://www.linkedmodel.org/schema/vaem#GraphMetaData> ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  <http://www.linkedmodel.org/schema/vaem#hasGraphRole> <http://www.linkedmodel.org/schema/vaem#ModelGraph> ;
+  <http://www.linkedmodel.org/schema/vaem#hasLicenseType> <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  <http://www.linkedmodel.org/schema/vaem#hasOwner> <http://www.linkedmodel.org/schema/vaem#TopQuadrant> ;
+  <http://www.linkedmodel.org/schema/vaem#hasSteward> <http://www.linkedmodel.org/schema/vaem#TopQuadrant> ;
+  <http://www.linkedmodel.org/schema/vaem#isMetadataFor> <http://healthcare.edg.topbraid.solutions/models/1.0/healthcare> ;
+  <http://www.linkedmodel.org/schema/vaem#name> "EDG" ;
+  <http://www.linkedmodel.org/schema/vaem#namespace> "http://edg.topbraid.solutions/model/" ;
+  <http://www.linkedmodel.org/schema/vaem#namespacePrefix> "edg" ;
+  <http://www.linkedmodel.org/schema/vaem#owner> "TopQuadrant, Inc." ;
+  <http://www.linkedmodel.org/schema/vaem#releaseDate> "2016-12-18"^^xsd:date ;
+  <http://www.linkedmodel.org/schema/vaem#revision> "1.0" ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> dcterms:abstract ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> dcterms:author ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> dcterms:created ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> dcterms:modified ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> dcterms:rights ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> dcterms:title ;
+  <http://www.linkedmodel.org/schema/vaem#usesNonImportedResource> <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  <http://www.linkedmodel.org/schema/vaem#withAttributionTo> "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+<http://healthcare.topquadrant.com/glossary/Accounting>
+  rdf:type hcare:Term ;
+.
+dcterms:author
+  rdf:type owl:AnnotationProperty ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "author" ;
+  rdfs:range xsd:string ;
+.
+dcterms:source
+  rdf:type owl:AnnotationProperty ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "source" ;
+  rdfs:range xsd:string ;
+.
+<http://www.linkedmodel.org/schema/dtype#CodeList>
+  edg:description "A codelist is a controlled vocabulary of terms that are used to represent permissible values of a variable in information systems. The representaiton of codes in \"dtype\" has been influenced by CCTS and UBL."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/dtype#CompositeCodeList>
+  edg:description "A composite codelist is a codelist made up of other codelists. It does not introduce any new codes."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/dtype#DerivedCodeList>
+  edg:description "A derived codelist is a sublist of another codelist. The members that it has must be members of the source list."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/dtype#EnumeratedValue>
+  edg:description "The base class for datatypes that have values that are restriced to a set of literals or tokens. The members of the restriction may themselve be restriced by facets that apply to scalar data types."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/dtype#Enumeration>
+  edg:description "A type that serves as a container for the enumerated values of an enumeration. This enables the enumeration itself to be referenceable. One need for this is in determing the default value of an enumeration , another need is in the management of sub-enumerations and composite enumerations."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/dtype#SimpleCodeList>
+  edg:description "A simple codelist is one made up only of enumerated values."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/dtype#ValueReference>
+  edg:description "A value reference is a pointer to an Enumerated Value. The original order of the value can be overridden by the \"order\" attribute."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/dtype#code>
+  edg:description "A property for expressing an encoded value. The range has been set to \"xsd:anySimpleType\" to allow for a variety of scalar datatypes."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/dtype#compositeOf>
+  edg:description "A property for constructing composite data structures"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/dtype#defaultValue>
+  edg:description "The property \"dtype:defaultValue\" is a general property for specifying a value in situations where none is specified, or can be determined. In some cases of use, this property could have a scalar value and in other cases may need to refer to a first class concept that holds a \"value object\".  For this reason, the  type of this property is set as \"rdf:Property\" and the property is rangeless."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/dtype#derivedFrom>
+  edg:description "A property for specifying a derivation relationship."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/dtype#hasMember>
+  edg:description "A property for specifying how member elements make up a data structure."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/dtype#isInvalid>
+  edg:description "A boolean flag to state that a value is invalid with respect to its type."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/dtype#literal>
+  edg:description "A general purpose property for holding string literals."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/dtype#numericUnion>
+  edg:description "A datatype that is the union of numeric xsd data types. \"numericUnion\" is equivalent to the xsd specification that uses an xsd:union of memberTypes=\"xsd:decimal xsd:double xsd:float xsd:integer\"."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/dtype#order>
+  edg:description "The property \"dtype:order\" provides a means to specify a precedence. One use of order is in specifying ordered enumerations such as \"voag:ConfidentialityLevel\".  A similar property, but with an important type difference, is \"vaem:orderIndex\". This is for use on property occurrences in class axioms where it can be placed on a restriction to specify how that property may be transformed into other representations where ordering has some importance, for example, in XML Schema sequences.  Whereas \"vaem:order\" is a datatype property, \"vaem:orderIndex\" is an annotation property."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/dtype#orderIndex>
+  edg:description "The property \"dtype:orderIndex\" is an annotation property to specify a position that some value or structure will have. One use is to specify the place that a resource has in a sequence. One use is on property occurrences in class axioms. Here \"vaem:orderIndex\" is placed on a restriction to specify how that property may be transformed into a representation where ordering has some importance, for example, in XML Schema sequences."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/dtype#refersTo>
+  edg:description "An indirection pointer for relating a slot in am occurrence data structure, such as \"dtype:ValueReference\" with another resource."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/dtype#value>
+  edg:description "The property \"dtype:value\" is a general property that in some cases could have scalar values and in other cases may refer to a first class concept that is a \"value object\". For this reason, the  type of this property is set as \"rdf:Property\" and the property is rangeless."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#Aspect>
+  edg:description "Aspect is used to distinguish among sets of features of a domain or subject area. The term is borrowed from \"aspect-oriented\" programming, where it is used to separate concerns. An ontology may be characterized by this dimension so as to parition features that are orthogonal. For example,  in a systems ontology there may be aspects for \"structure\", \"function\", \"behavior\" and \"interface\" or \"interoperability\". A viewpoint can be distinguished by \"aspects\". For example the \"information viewpoint\" of an application can be partitioned into separate graphs for the \"security\", \"operational\" and\"data retention\" aspects."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#CatalogEntry>
+  edg:description "VAEM Governed Object class is a placeholder for concepts that are fully defined by the voag:GovernedObject concept hierarchy for building a catalog of ontologies and graphs"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#Dimension>
+  edg:description "A dimension identifies a separation of concens that serves as a way to categorize an ontology graph. In VAEM,  the notion of \"Dimension\" is partitioned into \"Aspect\", \"Discipline\", \"Domain\" and \"Viewpoint\". "^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#Discipline>
+  edg:description "A discipline is a specific area of work or study. Examples of disciplines in the engineering domain are electrical engineering, mechanical engineering and, in the financial domain, risk assessment, investment analysis.  In VAEM, discipline is used as a dimension for characterizing an ontology graph"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#Domain>
+  edg:description "A domain is a subject area of interest. Examples of domains are \"enterprise\", \"process\", \"organization\" and \"system\". In VAEM, \"Domain\" is used as a dimension for characterizing an ontology graph"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#GraphMetaData>
+  edg:description "\"vaem:GraphMetaData\" defines basic metadata for the registration and publishing of a graph.  For specificaiton of governance the vocabulary \"VOAG\" may be used."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#GraphRole>
+  edg:description "GraphRole is used to characterize how a graph of resources participates in an ontology set.  For example, a graph can be a schema, vocabulary, dataset, script, or ruleset"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#Party>
+  edg:description "A \"Party\" is a generalization for an actor that may be realized as a person, organizaiton or named role."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#Viewpoint>
+  edg:description "Viewpoint is used to denote how a set of resources, or an individual resource, is relevant to a context of use. The term \"viewpoint\" is adopted from the ISO RM-ODP specifications and its more recent use in enterprise architecture descriptions. The RM-ODP introducesd the concept of viewpoint to describe a system from a particular set of concerns. RM-ODP defines five viewpoints. Together they provide a complete description of a system: enterprise viewpoint, information viewpoint, computational viewpoint, engineering viewpoint, and technology viewpoint.  In VAEM, \"Viewpoint\" is used as a dimension for characterizing an ontology graph.  The viewpoints of an ontology may not always correpsond directly to those of a system but the idea of describing a subject area of interest from distinct viewpoints is still relevant. A viewpoint can be further distinguished by \"aspects\". For example the \"information viewpoint\" of an application can be partitioned into separate graphs for the \"security\", \"operational\" and\"data retention\" aspects."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#abbreviation>
+  edg:description "The property \"vaem:abbreviation\" provides a common way to define a commonly used abbreviation on a resource"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#acronym>
+  edg:description "The property \"vaem:acronym\" provides a common way to define a commonly used abbreviation on a resource"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#comment>
+  edg:description "An annotation property that can be freely used on any kind of resource. The range of the property is \"xsd:string\""^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#date>
+  edg:description "The property \"vaem:date\" is intended for general use as the name implies.  The range of the property is set as \"vaem:dateUnion\" so as to allow a value to have a number of forms from a  year only to a full timestamp. The property is also the parent of all dates so that queries can be made for any date on an ontology"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#dateCreated>
+  edg:description "The property \"vaem:dateCreated\" is intended for general use as the name implies.  The range of the property is set as \"vaem:dateUnion\" so as to allow a value to have a number of forms from a  year only to a full timestamp"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#filePrefix>
+  edg:description "The property \"vaem:filePrefix\" is for specifying a preferred file prefix for a graph. For example a schema graph may be given the file prefix \"SCHEMA\" followed by an underscore \"_\"."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#hasAspect>
+  edg:description "The property \"vaem:hasAspect\" is used to distinguish among sets of features of a domain or subject area. The term is borrowed from \"aspect-oriented\" programming, where it is used to separate concerns. An ontology may be characterized by this dimension so as to parition features that are orthogonal. For example,  in a systems ontology we can distinguish aspects for \"structure\", \"function\", \"behavior\" and \"interface\".  The property is an \"rdf:Property\" to allow both scalar and object values"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#hasDimension>
+  edg:description "The property \"vaem:hasDimension\" is used categorize an ontology.  In VAEM, the property is used to characterize an ontology graph."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#hasDiscipline>
+  edg:description "The property \"vaem:hasDiscipline\" is used to indicate relevance of a set of resources, or a resource itself, to a specific discipline of work or study. Examples of disciplines in the engineering domain are electrical engineering, mechanical engineering and, in the financial domain, risk assessment, investment analysis.  In VAEM, the property is used as a dimension for characterizing an ontology graph.  The property is an \"rdf:Property\" to allow both scalar and object values"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#hasDomain>
+  edg:description "The property \"vaem:hasDomain\" is used to specify how  a set of resources, or an individual resource is grounded in a domain, that is, a subject area of interest. Examples of domains are \"enterprise\", \"process\", \"organization\" and \"system\". In VAEM, the property is used as a dimension for characterizing an ontology graph. The property is an \"rdf:Property\" to allow both scalar and object values"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#hasGraphRole>
+  edg:description "The property \"lms:hasGraphRole\" is used to characterize how a resource participates in an ontology set.  The property is used to specify the role that a graph plays, for example, an ontology graph can be a schema, vocabulary, dataset, script, or ruleset"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#hasIdentifier>
+  edg:description "The property \"vaemhasIdentifier\" is intended for general use as a means to specifiy a unique reference to something. This is an object property that is a sub-property of \"vame:id\""^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#hasLicenseType>
+  edg:description "The property \"vaem:hasLicenseType\" points to an entry in the VOAG ontology for licenses"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#hasSteward>
+  edg:description "A property that is used to refer to a \"Steward\", that is, the party or role that is responsible for maintaining an asset, in the case of VAEM, an ontology graph."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#hasViewpoint>
+  edg:description "The property \"vaem:hasViewpoint\" is used to denote how a set of resources, or an individual resource, is relevant to a context of use. The term \"viewpoint\" is adopted from the ISO RM-ODP specifications and its more recent use in enterprise architecture descriptions.  In VAEM, the property is used as a dimension for characterizing an ontology graph.  The property is an \"rdf:Property\" to allow both scalar and object values"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#id>
+  edg:description "The property \"vaem:id\" is intended for general use as a means to specifiy an identifier. The type of this property is intentionally set to \"rdf:Property\" so that use of the property can allow both object and scaler values.  For this reason, the property is rangeless"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#idString>
+  edg:description "The property \"vaem:idString\" is intended for general use as a means to specifiy a unique reference to something. This is a data property with a string range and is a sub-property of \"vame:id\""^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#intent>
+  edg:description "The property \"vaem:intent\" is used to outline  a statement of purpose. This typically expresses one or more desired outcomes"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#isElaboratedIn>
+  edg:description "An annotation used to reference a graph that elaborates (adds properties and axioms to) a resource"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#isMetadataFor>
+  edg:description "An annotation used to reference the graph that is being described with metadata."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#lastUpdated>
+  edg:description "The property \"vaem:lastUpdated\" is intended for general use as the name implies.  The range of the property is set as \"vaem:dateUnion\" so as to allow a value to have a number of forms from a  year only to a full timestamp"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#latestPublishedVersion>
+  edg:description "The property \"vaem:latestPublishedVersion\"is a URL to documentation for the latest version of a graph."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#logo>
+  edg:description "The property \"vaem:logo\" is a reference to an image that is used for publishing the ontology\""^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#name>
+  edg:description "The property \"vaem:name\" is intended for general use. In many cases \"rdfs:label\" could be used give names to resources. In the case where compliance with a specific naming rule is needed,  \"vaem:name\" allows  a resource to carry a name that is used in more specific contexts."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#namespace>
+  edg:description "The property \"vaem:namespace\" is the onotlogy URI with which a graph is primarily associated. The intent is to allow multiple graphs to define statements for resources in the same Ontology namespace. For example, a foundation level graph with the base URI of \"http://www.somesite.com/1.0/schema/OurOntology\"  may define general  concepts for \"OurOntology\". Another graph with the base URI \"http://www.somesite.com/1.0/schema/level2/OurOntology\"  may add more specific details to the same \"OurOntology\". Each of these two graphs would carry the same value for \"vaem:namespace\", that is, \"http://www.somesite.com/schema/OurOntology\".    In other words, an ontology URI is the URI associated with the resources of a controlled namespace. On the other hand the graph URIs (the base URIs) identify the graphs that hold resources that make up an ontology"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#namespacePrefix>
+  edg:description "The property \"vaem:namespacePrefix\" specifes a short handle or label for the URI of an Ontology.  Multiple graphs can define statements for resources in the same Ontololgy namespace. For example, a foundation level graph with the base URI of \"http://www.somesite.com/1.0/schema/OurOntology\"  may define general  concepts for \"OurOntology\". Another graph with the base URI \"http://www.somesite.com/1.0/schema/level2/OurOntology\"  may add more specific details to the same \"OurOntology\". Each of these two graphs would carry the same value for \"vaem:namespacePrefix\", for this example, perhaps, \"ourOntology\""^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#ownedBy>
+  edg:description "The property \"vaem:ownedBy\" is a general property that in some cases could have scalar values or may refer to some concept of \"Party\".  For this reason, the  type of this property is set as \"rdf:Property\" and the property is rangeless. There are two sub-properties of \"vaem:ownedBy\", namely \"vaem:owner\" for string values and \"vaem:owningParty\" for referencing a party.  Ownership applies to those ontologies that are proprietary"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#owningParty>
+  edg:description "The property \"vaem:owningParty\" is used to refer to some concept of \"Party\" and is a sub-property of \"vaem:ownedBy\""^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#previousPublishedVersion>
+  edg:description "The property \"vaem:previousPublishedVersion\"is a URL to documentation for the previous version of a graph."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#rationale>
+  edg:description "A description of a justification for some other assertion or value"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#rdfxmlFileURL>
+  edg:description "The property \"vaem:rdfxmlFileURL\" is used to provide a link to the location of the ontology's RDF/XML file"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#reifiableBy>
+  edg:description "To express how statements in a model can be reifiable, this property is used to explicitly associate a property with a user-defined sub-class of \"rdf:Statement\". A recommended way of using this is to declare the properties that share the same reification constructs as sub-properties of a parent property that carries the \"vaem:reifiableBy\" property. The parent property should be of type \"rdf:Property\" so that it can have both datatype and object properties as sub-properties. By this means use and transformations of a model can be understood through a fully specified metamodel. \"vaem:reifiableBy\" is rangeless in order to comply with OWL DL semantics. Its range would have been rdfs:Class in order to refer to \"rdf:Statement\" sub-classes"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#releaseDate>
+  edg:description "The property \"vaem:releaseDate\" is intended for general use as the name implies.  The range of the property is set as \"vaem:dateUnion\" so as to allow a value to have a number of forms from a  year only to a full timestamp"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#revision>
+  edg:description "The property \"vaem:revision\" is a property intended for general use as the name implies."^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#specificity>
+  edg:description "The property \"vaem:specificity\" is intended to specify the level of detail of an ontology.  The values that can be set for this property are restriced to an integer from 1 to 5. An ontology at level 1 has concepts of more general applicability than one at level 5. By having graphs at different levels of specificity it is possible to support greater modularity for selective imports"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#todo>
+  edg:description "As it name implies, a way to attach an annotation about a \"todo\" task"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#turtleFileURL>
+  edg:description "The property \"vaem:turtleFileURL\" is used to provide a link to the location of the ontology's turtle file"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#url>
+  edg:description "The property \"vaem:url\" is intended for general use as the name implies.  The range of the property is set as an XSD URI"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#usesNonImportedResource>
+  edg:description "The property \"vaem:usesNonImportedResource\" is used to express dependencies on resources from graphs that are not imported"^^rdf:HTML ;
+.
+<http://www.linkedmodel.org/schema/vaem#withAttributionTo>
+  edg:description "The property \"vaem:withAttributionTo\" is an annotation property that is either used to hold either a string or a reference to an instance of \"voag:Attribution\", from the VOAG ontology"^^rdf:HTML ;
+.
+<http://www.w3.org/2004/02/skos/core>
+  edg:description "An RDF vocabulary for describing the basic structure and content of concept schemes such as thesauri, classification schemes, subject heading lists, taxonomies, 'folksonomies', other types of controlled vocabulary, and also concept schemes embedded in glossaries and terminologies."^^rdf:HTML ;
+.
+skos:definition
+  rdfs:range xsd:string ;
+.
+skos:prefLabel
+  rdfs:range xsd:string ;
+.

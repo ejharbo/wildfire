@@ -1,0 +1,1077 @@
+# baseURI: http://edg.topbraid.solutions/1.0/schema/governance/core
+# imports: http://edg.topbraid.solutions/1.0/schema/enterprise-models
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix crosswalkprojects: <http://teamwork.topbraidlive.org/crosswalkprojects#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.v: <http://edg.topbraid.solutions/view/> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix html: <http://uispin.org/html#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudd: <http://qudt.org/schema/datastructure/> .
+@prefix quds: <http://qudt.org/schema/datastructure/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix rdmprojects: <http://rdm.topbraidlive.org/rdmprojects#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix smf: <http://topbraid.org/sparqlmotionfunctions#> .
+@prefix softwareprojects: <http://teamwork.topbraidlive.org/software/softwareprojects#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix spr: <http://spinrdf.org/spr#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix taggerprojects: <http://evn.topbraidlive.org/taggerprojects#> .
+@prefix taxonomies: <http://evn.topbraidlive.org/evnprojects#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/schema/governance/core>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/schema/GMD_platform-governance> ;
+  rdfs:comment "A schema for EDG governance execution" ;
+  rdfs:label "EDG Schema - Platform Governance" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/enterprise-models> ;
+.
+edg:Approvable
+  a edg:AspectClass ;
+  rdfs:comment "<p><em>Approvable</em> is an aspect class that gives properties to asset classes that require approval workflows. An example is the <em>Data Exchange</em> class.</p>"^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "Approval Aspect" ;
+  rdfs:subClassOf edg:Aspect ;
+  sh:property edg:Approval-approvalDate ;
+  sh:property edg:Approval-approvalNotes ;
+  sh:property edg:Approval-approvalStatus ;
+  sh:property edg:Approval-approver ;
+.
+edg:Approval-approvalDate
+  a sh:PropertyShape ;
+  sh:path edg:approvalDate ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  sh:datatype xsd:date ;
+.
+edg:Approval-approvalNotes
+  a sh:PropertyShape ;
+  sh:path edg:approvalNotes ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  sh:datatype rdf:HTML ;
+.
+edg:Approval-approvalStatus
+  a sh:PropertyShape ;
+  sh:path edg:approvalStatus ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  sh:class edg:ApprovalStatus ;
+.
+edg:Approval-approver
+  a sh:PropertyShape ;
+  sh:path edg:approver ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  sh:class edg:Person ;
+.
+edg:ApprovalStatus
+  a edg:EDGenumerationClass ;
+  a sh:NodeShape ;
+  graphql:name "approvalStatus" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "Approval Status" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:AssetCollection
+  a edg:AssetClass ;
+  a edg:ModelClass ;
+  a sh:NodeShape ;
+  edg:acronym "ASSETC" ;
+  rdfs:comment """<p>An <em>Asset Collection</em> is a graph that holds assets whose types are defined by a specific asset collection type. All asset collections are organized according to a business area and/or data subject area. Data asset collections are categorized by the data subject area. Other asset collections can be organized by the business area or data subject area - as appropriate. Data subject areas are sub-aseas of the business areas.</p>
+<p>Users can see all asset collections for a business area, so, in addition to anything that is directly connected to the business area, they can see anything that is connected to any of the sub areas and anything that is connected to the data subject areas that are subs of the business areas.</p>"""^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "Asset Collection" ;
+  rdfs:subClassOf graphql:Schema ;
+  rdfs:subClassOf edg:StatusAspect ;
+  rdfs:subClassOf edg:Stewardship ;
+  rdfs:subClassOf owl:Ontology ;
+.
+edg:BigDataAssetsProject
+  a edg:ModelClass ;
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  vaem:isElaboratedIn "http://edg.topbraid.solutions/1.0/schema/edg"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "Bigdata Asset Model" ;
+  rdfs:subClassOf edg:AssetCollection ;
+.
+edg:BusinessArea-subArea
+  a sh:PropertyShape ;
+  sh:path edg:subArea ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  sh:class edg:SubjectArea ;
+.
+edg:Consent
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "Consent" ;
+  rdfs:subClassOf edg:Event ;
+.
+edg:DataAssetsProject
+  a edg:ModelClass ;
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  vaem:isElaboratedIn "http://edg.topbraid.solutions/1.0/schema/edg"^^xsd:anyURI ;
+  rdfs:comment "The <em>Data Asset Project</em> holds metadata for data assets. Examples of data assets are databases, database tables, database columns, datasets and their elements."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "Data Asset Model" ;
+  rdfs:subClassOf edg:AssetCollection ;
+.
+edg:DataProtectionGuard-requiredForPurpose
+  a sh:PropertyShape ;
+  sh:path edg:requiredForPurpose ;
+  sh:class edg:PersonalDataUseConsent ;
+.
+edg:DataSetsRegistryProject
+  a edg:ModelClass ;
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "This project type is intended for graphs that hold metadat about external datasets. An external dataset is one that is not stored in EDG but elsewhere. The structure of the dataset is defined in a \"Data Assets Model\" graph as a \"DataSet Type\"." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "DataSets Registry Project" ;
+  rdfs:subClassOf edg:AssetCollection ;
+.
+edg:DataSubjectArea
+  a owl:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "A 'Data Subject Area' is a specific group of data assets aligned with a business area such as Accounts Payable (a sub-area of finance), Inventory (a sub-area of material management).  Data subject areas have a 'sub-area' relationship to a business area. Granularity of data subject areas can vary and data subject areas can have sub areas. The greater the depth and complexity of the data in your business, the larger the number of data subject area you may need to define. All asset collections are associated with either a business area or a data subject area. You may decide to have a single data asset collection per data subject area or have multiple data asset collections per subject area."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "Data Subject Area" ;
+  rdfs:subClassOf edg:Identifiable ;
+  rdfs:subClassOf edg:Narratable ;
+  rdfs:subClassOf edg:StatusAspect ;
+  rdfs:subClassOf edg:SubjectArea ;
+  sh:property edg:DataSubjectArea-subArea ;
+.
+edg:DataSubjectArea-subArea
+  a sh:PropertyShape ;
+  sh:path edg:subArea ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  sh:class edg:DataSubjectArea ;
+.
+edg:DataUseProtectionPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:openable true ;
+  rdfs:label "Data Use Protection Governance" ;
+  sh:order "35"^^xsd:decimal ;
+.
+edg:DatatypesProject
+  a edg:ModelClass ;
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  vaem:isElaboratedIn "http://edg.topbraid.solutions/1.0/schema/edg"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "Datatypes" ;
+  rdfs:subClassOf edg:AssetCollection ;
+.
+edg:DomainGovernanceTeam-domain
+  a sh:PropertyShape ;
+  sh:path edg:domain ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  sh:class edg:DataSubjectArea ;
+  sh:group edg:OrganizationPropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:EDG
+  a edg:AssetClass ;
+  a owl:Class ;
+  rdfs:comment "<em>EDG</em> is the schema for the configuration of EDG models. For each type of environment, such as <em>DEV</em>, <em>UAT</em>, <em>QA</em> and <em>PROD</em>, there can be instances of <em>edg:EDG</em> that hold the configuration of graph instances that make up the environment instance."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "Environment" ;
+  rdfs:subClassOf edg:Identifiable ;
+  sh:property [
+      sh:path edg:system ;
+      sh:class edg:System ;
+      sh:minCount 1 ;
+    ] ;
+  sh:property [
+      sh:path edg:system ;
+      sh:class edg:System ;
+      sh:minCount 1 ;
+    ] ;
+.
+edg:EDGenumerationsProject
+  a edg:ModelClass ;
+  a sh:NodeShape ;
+  rdfs:label "Enumerations" ;
+  rdfs:subClassOf teamwork:Vocabulary ;
+.
+edg:EnterpriseModelsProject
+  a edg:ModelClass ;
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  vaem:isElaboratedIn "http://edg.topbraid.solutions/1.0/schema/edg"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "Enterprise Assets Model" ;
+  rdfs:subClassOf edg:AssetCollection ;
+.
+edg:EnumerationsProject
+  a edg:ModelClass ;
+  a sh:NodeShape ;
+  vaem:isElaboratedIn "http://edg.topbraid.solutions/1.0/schema/edg"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "Enumerations" ;
+  rdfs:subClassOf edg:AssetCollection ;
+.
+edg:EnvironmentsModelType
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  vaem:isElaboratedIn "http://edg.topbraid.solutions/1.0/schema/edg"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "Environments model" ;
+  rdfs:subClassOf teamwork:Vocabulary ;
+.
+edg:GlossaryProject
+  a edg:ModelClass ;
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  vaem:isElaboratedIn "http://edg.topbraid.solutions/1.0/schema/edg"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "Glossary" ;
+  rdfs:subClassOf edg:AssetCollection ;
+.
+edg:Governance-issue
+  a sh:PropertyShape ;
+  sh:path edg:issue ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  sh:class edg:Issue ;
+.
+edg:GovernanceActivity-governanceFunction
+  sh:group edg:GovernanceActivityPropertiesGroup ;
+  sh:order "20"^^xsd:decimal ;
+.
+edg:GovernanceActivity-governs
+  sh:group edg:GovernanceActivityPropertiesGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:GovernanceActivity-subActivity
+  sh:group edg:GovernanceActivityPropertiesGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:GovernanceFramework
+  edg:hideClass true ;
+.
+edg:GovernanceGroup
+  edg:hideClass true ;
+.
+edg:GovernanceMeasure
+  edg:hideSubClasses true ;
+.
+edg:GovernanceModelProject
+  a edg:ModelClass ;
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  graphql:name "governanceAssets" ;
+  graphql:publicClass edg:DashboardModelsViewpoint ;
+  graphql:publicClass edg:GovernanceViewpoint ;
+  vaem:isElaboratedIn "http://edg.topbraid.solutions/1.0/schema/edg"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "Governance Model" ;
+  rdfs:subClassOf edg:AssetCollection ;
+.
+edg:GovernanceRolesPropertyGroup
+  a sh:PropertyGroup ;
+  rdfs:label "Governance Roles" ;
+  sh:order "120"^^xsd:decimal ;
+.
+edg:InformationUsePurpose-isConsentRequired
+  a sh:PropertyShape ;
+  sh:path edg:isConsentRequired ;
+  sh:datatype xsd:boolean ;
+  sh:group edg:DataUseProtectionPropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order "110"^^xsd:decimal ;
+.
+edg:InformationUsePurpose-requiresConsent
+  sh:group edg:DataUseProtectionPropertiesGroup ;
+  sh:order "120"^^xsd:decimal ;
+.
+edg:Issue
+  edg:hideSubClasses true ;
+.
+edg:JobTitle
+  rdfs:subClassOf edg:Party ;
+  rdfs:subClassOf edg:WorkflowParticipant ;
+.
+edg:LineageModelProject
+  a edg:ModelClass ;
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  vaem:isElaboratedIn "http://edg.topbraid.solutions/1.0/schema/edg"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "Lineage Model" ;
+  rdfs:subClassOf edg:AssetCollection ;
+.
+edg:ModelClass
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "ModelClass is a metaclass for distinguishing Project classes, that is asset collection classes. Each class has a corresponding 'ProjectType' and a controller. To find the 'Project Type' from an instance of a 'Project Class' the function 'teamwork:getProjectType' is used." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "Model class" ;
+  rdfs:subClassOf graphql:Schema ;
+  rdfs:subClassOf owl:Class ;
+.
+edg:Organization
+  edg:hideSubClasses true ;
+  rdfs:subClassOf edg:GovernanceViewpoint ;
+.
+edg:PermissionGovernanceRoleProperty
+  a rdfs:Class ;
+  rdfs:comment "The metaclass of properties that can be used to specify different permissions for governance roles." ;
+  rdfs:label "Permission governance role property" ;
+  rdfs:subClassOf owl:ObjectProperty ;
+.
+edg:PersonalDataUseConsent
+  a edg:EDGenumerationClass ;
+  edg:acronym "PDUC" ;
+  rdfs:comment "An enumeration of consent governance mechanisms" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "Personal Data Use Consent" ;
+  rdfs:subClassOf edg:EDGenumeratedValue ;
+.
+edg:PersonalDataUseProtection
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:label "Personal Data Use Protection" ;
+  rdfs:subClassOf rdf:Statement ;
+  sh:property edg:PersonalDataUseProtection-consentGovernance ;
+.
+edg:PersonalDataUseProtection-consentGovernance
+  a sh:PropertyShape ;
+  sh:path edg:personalDataUseConsent ;
+  sh:class edg:PersonalDataUseConsent ;
+.
+edg:Policy
+  edg:hideSubClasses true ;
+.
+edg:Protectable
+  a edg:AspectClass ;
+  a rdfs:Class ;
+  rdfs:comment "'Protectable' is an aspect that holds properties that govern the intents, obligations for consents that are needed to make use of a specific piece of data."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "Protectable" ;
+  rdfs:subClassOf edg:Aspect ;
+  sh:property edg:Protectable-isPersonallyIdentifiableInformation ;
+  sh:property edg:Protectable-obfuscatedBy ;
+  sh:property edg:Protectable-personalDataCategory ;
+  sh:property edg:Protectable-personalDataUseConsent ;
+.
+edg:Protectable-isPersonallyIdentifiableInformation
+  a sh:PropertyShape ;
+  sh:path edg:isPersonallyIdentifiableInformation ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  sh:datatype xsd:boolean ;
+  sh:group edg:ProtectablePropertiesGroup ;
+  sh:maxCount 1 ;
+  sh:order 10 ;
+.
+edg:Protectable-obfuscatedBy
+  a sh:PropertyShape ;
+  sh:path edg:obfuscatedBy ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  sh:class edg:ProtectionMethod ;
+  sh:group edg:ProtectablePropertiesGroup ;
+  sh:order 40 ;
+.
+edg:Protectable-personalDataCategory
+  a sh:PropertyShape ;
+  sh:path edg:personalDataCategory ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  sh:class edg:PersonalDataCategory ;
+  sh:group edg:ProtectablePropertiesGroup ;
+  sh:order 20 ;
+.
+edg:Protectable-personalDataUseConsent
+  a sh:PropertyShape ;
+  sh:path edg:personalDataUseConsent ;
+  sh:class edg:PersonalDataUseConsent ;
+  sh:group edg:ProtectablePropertiesGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:ProtectablePropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:openable true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "Data Protection Properties" ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:Publication
+  edg:hideSubClasses true ;
+.
+edg:Report
+  edg:hideSubClasses true ;
+.
+edg:RequirementsModelProject
+  a edg:ModelClass ;
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  vaem:isElaboratedIn "http://edg.topbraid.solutions/1.0/schema/edg"^^xsd:anyURI ;
+  rdfs:comment "The <em>Requirements Model Project</em> holds metadata for requirement assets."^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "Requirements Model" ;
+  rdfs:subClassOf edg:AssetCollection ;
+.
+edg:ResponsibilityMatrix
+  edg:hideSubClasses true ;
+.
+edg:Risk
+  edg:hideSubClasses true ;
+.
+edg:SecurityRequirement
+  edg:acronym "SECREQ" ;
+.
+edg:Stewardship
+  a edg:AspectClass ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "Stewardship" ;
+  rdfs:subClassOf edg:Aspect ;
+  sh:property edg:Stewardship-accountable ;
+  sh:property edg:Stewardship-applicationSteward ;
+  sh:property edg:Stewardship-businessSteward ;
+  sh:property edg:Stewardship-consulted ;
+  sh:property edg:Stewardship-dataConsumer ;
+  sh:property edg:Stewardship-dataGovernor ;
+  sh:property edg:Stewardship-dataProducer ;
+  sh:property edg:Stewardship-dataSteward ;
+  sh:property edg:Stewardship-informed ;
+  sh:property edg:Stewardship-responsible ;
+  sh:property edg:Stewardship-subjectMatterExpert ;
+  sh:property edg:Stewardship-technicalSteward ;
+.
+edg:Stewardship-accountable
+  a sh:PropertyShape ;
+  sh:path edg:accountable ;
+  dash:editor edg:WorkflowParticipantEditor ;
+  dash:viewer edg:WorkflowParticipantViewer ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  sh:group edg:GovernanceRolesPropertyGroup ;
+  sh:nodeKind sh:IRI ;
+  sh:order "101"^^xsd:decimal ;
+.
+edg:Stewardship-applicationSteward
+  a sh:PropertyShape ;
+  sh:path edg:applicationSteward ;
+  dash:editor edg:WorkflowParticipantEditor ;
+  dash:viewer edg:WorkflowParticipantViewer ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  sh:group edg:GovernanceRolesPropertyGroup ;
+  sh:nodeKind sh:IRI ;
+  sh:order "-70"^^xsd:decimal ;
+.
+edg:Stewardship-businessSteward
+  a sh:PropertyShape ;
+  sh:path edg:businessSteward ;
+  dash:editor edg:WorkflowParticipantEditor ;
+  dash:viewer edg:WorkflowParticipantViewer ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  sh:group edg:GovernanceRolesPropertyGroup ;
+  sh:nodeKind sh:IRI ;
+  sh:order "-90"^^xsd:decimal ;
+.
+edg:Stewardship-consulted
+  a sh:PropertyShape ;
+  sh:path edg:consulted ;
+  dash:editor edg:WorkflowParticipantEditor ;
+  dash:viewer edg:WorkflowParticipantViewer ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  sh:group edg:GovernanceRolesPropertyGroup ;
+  sh:nodeKind sh:IRI ;
+  sh:order "102"^^xsd:decimal ;
+.
+edg:Stewardship-dataConsumer
+  a sh:PropertyShape ;
+  sh:path edg:dataConsumer ;
+  dash:editor edg:WorkflowParticipantEditor ;
+  dash:viewer edg:WorkflowParticipantViewer ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  sh:group edg:GovernanceRolesPropertyGroup ;
+  sh:nodeKind sh:IRI ;
+  sh:order "-40"^^xsd:decimal ;
+.
+edg:Stewardship-dataGovernor
+  a sh:PropertyShape ;
+  sh:path edg:dataGovernor ;
+  dash:editor edg:WorkflowParticipantEditor ;
+  dash:viewer edg:WorkflowParticipantViewer ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  sh:group edg:GovernanceRolesPropertyGroup ;
+  sh:nodeKind sh:IRI ;
+  sh:order "-60"^^xsd:decimal ;
+.
+edg:Stewardship-dataProducer
+  a sh:PropertyShape ;
+  sh:path edg:dataProducer ;
+  dash:editor edg:WorkflowParticipantEditor ;
+  dash:viewer edg:WorkflowParticipantViewer ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  sh:group edg:GovernanceRolesPropertyGroup ;
+  sh:nodeKind sh:IRI ;
+  sh:order "-50"^^xsd:decimal ;
+.
+edg:Stewardship-dataSteward
+  a sh:PropertyShape ;
+  sh:path edg:dataSteward ;
+  dash:editor edg:WorkflowParticipantEditor ;
+  dash:viewer edg:WorkflowParticipantViewer ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  sh:group edg:GovernanceRolesPropertyGroup ;
+  sh:nodeKind sh:IRI ;
+  sh:order "-100"^^xsd:decimal ;
+.
+edg:Stewardship-informed
+  a sh:PropertyShape ;
+  sh:path edg:informed ;
+  dash:editor edg:WorkflowParticipantEditor ;
+  dash:viewer edg:WorkflowParticipantViewer ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  sh:group edg:GovernanceRolesPropertyGroup ;
+  sh:nodeKind sh:IRI ;
+  sh:order "103"^^xsd:decimal ;
+.
+edg:Stewardship-responsible
+  a sh:PropertyShape ;
+  sh:path edg:responsible ;
+  dash:editor edg:WorkflowParticipantEditor ;
+  dash:viewer edg:WorkflowParticipantViewer ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  sh:group edg:GovernanceRolesPropertyGroup ;
+  sh:nodeKind sh:IRI ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:Stewardship-subjectMatterExpert
+  a sh:PropertyShape ;
+  sh:path edg:subjectMatterExpert ;
+  dash:editor edg:WorkflowParticipantEditor ;
+  dash:viewer edg:WorkflowParticipantViewer ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  sh:group edg:GovernanceRolesPropertyGroup ;
+  sh:nodeKind sh:IRI ;
+  sh:order "-30"^^xsd:decimal ;
+.
+edg:Stewardship-technicalSteward
+  a sh:PropertyShape ;
+  sh:path edg:technicalSteward ;
+  dash:editor edg:WorkflowParticipantEditor ;
+  dash:viewer edg:WorkflowParticipantViewer ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  sh:group edg:GovernanceRolesPropertyGroup ;
+  sh:nodeKind sh:IRI ;
+  sh:order "-80"^^xsd:decimal ;
+.
+edg:SubjectArea
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:subClassOf edg:GovernanceViewpoint ;
+  rdfs:subClassOf edg:Narratable ;
+  rdfs:subClassOf edg:Stewardship ;
+  sh:property edg:SubjectArea-governanceRoleWithEditorPermission ;
+  sh:property edg:SubjectArea-governanceRoleWithManagerPermission ;
+  sh:property edg:SubjectArea-requiredGovernanceRole ;
+  sh:property edg:SubjectArea-subArea ;
+.
+edg:SubjectArea-governanceRoleWithEditorPermission
+  a sh:PropertyShape ;
+  sh:path edg:governanceRoleWithEditorPermission ;
+  sh:class edg:WorkflowParticipantProperty ;
+  sh:nodeKind sh:IRI ;
+.
+edg:SubjectArea-governanceRoleWithManagerPermission
+  a sh:PropertyShape ;
+  sh:path edg:governanceRoleWithManagerPermission ;
+  sh:class edg:WorkflowParticipantProperty ;
+  sh:nodeKind sh:IRI ;
+.
+edg:SubjectArea-requiredGovernanceRole
+  a sh:PropertyShape ;
+  sh:path edg:requiredGovernanceRole ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  sh:class edg:WorkflowParticipantProperty ;
+.
+edg:SubjectArea-subArea
+  a sh:PropertyShape ;
+  sh:path edg:subArea ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  sh:class edg:SubjectArea ;
+.
+edg:TechnicalAssetsProject
+  a edg:ModelClass ;
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  vaem:isElaboratedIn "http://edg.topbraid.solutions/1.0/schema/edg"^^xsd:anyURI ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "Technical Assets Model" ;
+  rdfs:subClassOf edg:AssetCollection ;
+.
+edg:Viewpoint
+  rdfs:subClassOf owl:Thing ;
+.
+edg:WorkflowParticipant
+  a edg:AssetClass ;
+  edg:acronym "WFPRTT" ;
+  rdfs:comment "<p><em>Workflow Participant</em> is a resource that can be given a workflow participation role. This provides a way to refer, using role properties, to users and job roles and possibly other organizational constructs that  participate in workflows.</p>"^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "Workflow Participant" ;
+  rdfs:subClassOf edg:Aspect ;
+.
+edg:WorkflowParticipantEditor
+  a dash:Editor ;
+  rdfs:comment "A selection widget for workflow participants." ;
+  rdfs:label "Workflow participant editor" ;
+.
+edg:WorkflowParticipantProperty
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:comment "Instances of this class are roles that can be used in workflow steps as \"notification roles\"" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "Workflow property" ;
+  rdfs:subClassOf owl:ObjectProperty ;
+  skos:example """# Query to produce matching property shapes
+CONSTRUCT {
+	edg:Stewardship sh:property ?ps .
+	?ps a sh:PropertyShape .
+	?ps sh:nodeKind sh:IRI .  # Optional
+	?ps sh:path ?property .
+	?ps rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> .
+}
+WHERE {
+	?property a edg:WorkflowParticipantProperty .
+	BIND (IRI(CONCAT(str(edg:Stewardship), '-', afn:localname(?property))) AS ?ps) .
+}""" ;
+  sh:property [
+      sh:path edg:abbreviation ;
+      sh:datatype xsd:string ;
+      sh:description "A short abbreviation, usually consisting of one or two upper-case letters." ;
+      sh:maxCount 1 ;
+      sh:minCount 1 ;
+    ] ;
+  sh:sparql [
+      sh:message "edg:WorkflowParticipantProperty {$this} needs to be accompanied by a corresponding sh:property shape" ;
+      sh:prefixes <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+      sh:select """SELECT $this
+WHERE {
+	BIND (IRI(CONCAT(str(edg:Stewardship), '-', afn:localname($this))) AS ?ps) .
+    FILTER NOT EXISTS {
+		edg:Stewardship sh:property ?ps .
+		?ps a sh:PropertyShape .
+		?ps sh:path $this .
+	}
+}""" ;
+    ] ;
+.
+edg:WorkflowParticipantViewer
+  a dash:Viewer ;
+  rdfs:comment "A viewer widget for workflow participants." ;
+  rdfs:label "Workflow participant viewer" ;
+.
+edg:accountable
+  a edg:WorkflowParticipantProperty ;
+  edg:abbreviation "A" ;
+  rdfs:comment "The individual or organizational unit that must ensure a task is carried out successfully. Only one \"A\" should be specified." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "accountable" ;
+.
+edg:applicableWorkflow
+  a owl:ObjectProperty ;
+  rdfs:comment "This property determines a scope of a workflow. Would the scope be an asset type? Or an asset collection? Or a subject area? I would say an asset type. Then, we should have a flag on an asset collection level which says \"use applicable workflows\" or not. This would allow for informal processing - for example when something is still in development." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "applicable workflow" ;
+.
+edg:applicationSteward
+  a edg:WorkflowParticipantProperty ;
+  edg:abbreviation "AS" ;
+  rdfs:comment "A role responsible for the management of technology solutions utilized in the processing, storage and/or transport of data. " ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "application steward" ;
+.
+edg:approvalDate
+  a owl:DatatypeProperty ;
+  rdfs:comment "Specifies a date after when something that needs approval was approved." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "appproval date" ;
+  rdfs:range xsd:date ;
+.
+edg:approvalNotes
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "approval notes" ;
+.
+edg:approvalStatus
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "approval status" ;
+.
+edg:approver
+  a owl:ObjectProperty ;
+  rdfs:comment "refers to the person that approves something." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "approver" ;
+.
+edg:businessSteward
+  a edg:WorkflowParticipantProperty ;
+  edg:abbreviation "BS" ;
+  rdfs:comment "A role responsible for the definition of business glossary terms and their metadata." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "business steward" ;
+.
+edg:consulted
+  a edg:WorkflowParticipantProperty ;
+  edg:abbreviation "C" ;
+  rdfs:comment "An individual or organizational unit whose feedback is solicited during the task. There can be multiple parties involved." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "consulted" ;
+.
+edg:dataConsumer
+  a edg:WorkflowParticipantProperty ;
+  edg:abbreviation "DC" ;
+  rdfs:comment "A role that needs access to a certain category of data in the performance of their job." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "data consumer" ;
+.
+edg:dataGovernor
+  a edg:WorkflowParticipantProperty ;
+  edg:abbreviation "DG" ;
+  rdfs:comment "A role that is accountable for the data assets aligned with one or more business areas. This is typically an executive role appointed by the Data Governance Steering Committee of an organization or by some other senior executive or executive team." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "data governor" ;
+.
+edg:dataProducer
+  a edg:WorkflowParticipantProperty ;
+  edg:abbreviation "DP" ;
+  rdfs:comment "A role that generates a certain category of data as part of their job." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "data producer" ;
+.
+edg:dataRequiredForBusinessActivity
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "data required for business activity" ;
+.
+edg:dataSteward
+  a edg:WorkflowParticipantProperty ;
+  edg:abbreviation "DS" ;
+  rdfs:comment "A role responsible for utilizing an organization's data governance processes to ensure fitness and quality of data elements - both their content and their metadata." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "data steward" ;
+.
+edg:disposition
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "disposition" ;
+.
+edg:domain
+  a owl:ObjectProperty ;
+  rdfs:comment "<p>The <em>domain</em> property associates an entity with a domain.</p>"^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "domain" ;
+.
+edg:domainTeam
+  a owl:ObjectProperty ;
+  rdfs:comment "<p>The <em>domain team</em> property associates an organization with domain teams</p>"^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "domain team" ;
+.
+edg:equivlentTeamworkPermissionRole
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "business steward" ;
+  rdfs:range teamwork:PermissionRoleProperty ;
+.
+edg:executiveCommittee
+  a owl:ObjectProperty ;
+  rdfs:comment "TBD"^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "executive committee" ;
+.
+edg:governanceCouncil
+  a owl:ObjectProperty ;
+  rdfs:comment "TBD"^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "governance council" ;
+.
+edg:governanceOffice
+  a owl:ObjectProperty ;
+  rdfs:comment "TBD"^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "governance office" ;
+.
+edg:governanceRoleWithEditorPermission
+  a edg:PermissionGovernanceRoleProperty ;
+  edg:equivlentTeamworkPermissionRole teamwork:editor ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "governance role with editor permission" ;
+.
+edg:governanceRoleWithManagerPermission
+  a edg:PermissionGovernanceRoleProperty ;
+  edg:equivlentTeamworkPermissionRole teamwork:manager ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "governance role with manager permission" ;
+.
+edg:governs
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "governs" ;
+.
+edg:governsInformationUse
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "governs information use" ;
+.
+edg:hiddenPropertyForRole
+  a owl:ObjectProperty ;
+  rdfs:comment "Links a property with the governance roles (instances of edg:WorkflowParticipantProperty) for which the property should be hidden (on forms)." ;
+  rdfs:domain rdf:Property ;
+  rdfs:label "hidden property for role" ;
+  rdfs:range edg:WorkflowParticipantProperty ;
+.
+edg:informed
+  a edg:WorkflowParticipantProperty ;
+  edg:abbreviation "I" ;
+  rdfs:comment "An individual or organizational unit that is told about the task, but whose feedback is not solicited. There can be multiple parties involved." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "informed" ;
+.
+edg:isConsentRequired
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "is consent required" ;
+.
+edg:issue
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "issue" ;
+.
+edg:issueNotes
+  a owl:DatatypeProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "issue notes" ;
+.
+edg:issueStatus
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "issue status" ;
+.
+edg:modelType
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "model type" ;
+.
+edg:notificationRole
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "notification role" ;
+  rdfs:range edg:WorkflowParticipantProperty ;
+.
+edg:permittedProjectType
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "permitted project type" ;
+.
+edg:personalDataUseConsent
+  a owl:ObjectProperty ;
+  rdfs:comment "Specifies how consent is governed for personal data use" ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "personal data use consent" ;
+.
+edg:program
+  a owl:ObjectProperty ;
+  rdfs:comment "TBD"^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "program" ;
+.
+edg:requiredForPurpose
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "required for purpose" ;
+.
+edg:requiredGovernanceRole
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "required governance role" ;
+.
+edg:requiredProjectType
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "required project type" ;
+.
+edg:requiresConsent
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "requires consent" ;
+.
+edg:responsible
+  a edg:WorkflowParticipantProperty ;
+  edg:abbreviation "R" ;
+  rdfs:comment "An individual or organizational unit that works on a task at the direction of the \"A\" party. More than one \"R\" can be specified." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "responsible" ;
+.
+edg:selectResourceType
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "select resource type" ;
+.
+edg:step
+  a owl:ObjectProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "step" ;
+.
+edg:subArea
+  a owl:ObjectProperty ;
+  a owl:TransitiveProperty ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "sub-area" ;
+.
+edg:subjectArea
+  a owl:ObjectProperty ;
+  rdfs:domain edg:AssetCollection ;
+  rdfs:label "subject area" ;
+  rdfs:range edg:SubjectArea ;
+.
+edg:subjectMatterExpert
+  a edg:WorkflowParticipantProperty ;
+  edg:abbreviation "SME" ;
+  rdfs:comment "A role that is consulted for guidance and feedback on assets or data governance responsibilities." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "subject matter expert" ;
+.
+edg:technicalSteward
+  a edg:WorkflowParticipantProperty ;
+  edg:abbreviation "TS" ;
+  rdfs:comment "A technical steward implements business decisions and is responsible for the technical aspects of stewardship." ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "technical steward" ;
+.
+<http://edg.topbraid.solutions/schema/GMD_platform-governance>
+  a vaem:GraphMetaData ;
+  edg:description "The <em>EDG Platform Governance</em> ontology specifies resources and properties that are needed for governance in the TopBraid EDG platform. At the platform level, governance is concerned with workflows and notifications."^^rdf:HTML ;
+  dcterms:modified "2017-07-19"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  dcterms:title "EDG Platform Governance Ontology Version 1.0" ;
+  vaem:hasGraphRole vaem:SchemaGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  vaem:logo "http://www.topquadrant.com/resources/logos/TopBraid%20Enterpise%20Data%20Governance%20one%20line%20Logo_707%20x%2080.png"^^xsd:anyURI ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2018-07-26"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:title "EDG Platform Governance Ontology Version 1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+taxonomies:Taxonomy
+  a edg:ModelClass ;
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:subClassOf edg:AssetCollection ;
+.
+taggerprojects:ContentTagSet
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:subClassOf edg:AssetCollection ;
+.
+dcterms:description
+  a rdf:Property ;
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:range rdf:HTML ;
+.
+dcterms:source
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "source" ;
+  rdfs:range xsd:anyURI ;
+.
+sioc:Role
+  a owl:Class ;
+  edg:description "Security roles in TopBraid typically represent LDAP groups." ;
+  rdfs:label "Security (LDAP) Group" ;
+  rdfs:subClassOf edg:Party ;
+  rdfs:subClassOf edg:WorkflowParticipant ;
+.
+sioc:UserAccount
+  a edg:AssetClass ;
+  a owl:Class ;
+  edg:acronym "USRACCNT" ;
+  rdfs:comment "<p>A <em>User Account</em> is a person who can log into TopBraid. All instances of this class must be URIs starting with \"urn:x-tb-users:\".</p>"^^rdf:HTML ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "User Account" ;
+  rdfs:subClassOf edg:Person ;
+  rdfs:subClassOf edg:WorkflowParticipant ;
+  sh:property sioc:UserAccount-assignedJobTitle ;
+.
+sioc:UserAccount-assignedJobTitle
+  a sh:PropertyShape ;
+  sh:path edg:assignedJobTitle ;
+  sh:class edg:JobTitle ;
+.
+rdmprojects:ReferenceDataset
+  rdfs:label "Reference Dataset" ;
+  rdfs:subClassOf edg:AssetCollection ;
+.
+ontologyprojects:Ontology
+  a edg:ModelClass ;
+  a rdfs:Class ;
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:label "Ontology" ;
+  rdfs:subClassOf edg:AssetCollection ;
+.
+teamwork:ProjectType
+  a sh:NodeShape ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/schema/governance/core> ;
+  rdfs:subClassOf owl:Ontology ;
+.

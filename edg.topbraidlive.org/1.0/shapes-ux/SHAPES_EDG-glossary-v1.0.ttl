@@ -1,0 +1,258 @@
+# baseURI: http://edg.topbraid.solutions/1.0/shapes/glossary
+# imports: http://edg.topbraid.solutions/1.0/schema/glossary
+# imports: http://edg.topbraid.solutions/1.0/shapes/core
+# imports: http://edg.topbraid.solutions/1.0/shapes/governance/core
+# imports: http://topbraid.org/tosh
+# imports: http://www.w3.org/2004/02/skos/core
+
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix graphql: <http://datashapes.org/graphql#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix search: <http://topbraid.org/search#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix swash: <http://topbraid.org/swash#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/shapes/glossary>
+  a owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/shapes/glossary/GMD_glossary> ;
+  rdfs:label "EDG SHAPES - Glossary" ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/glossary> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/shapes/core> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/shapes/governance/core> ;
+  owl:imports <http://topbraid.org/tosh> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+edg:Asset-isDefinedBy-hide
+  sh:deactivated true ;
+.
+edg:GlossaryAlignmentGroup
+  tosh:openable true ;
+.
+edg:GlossaryProject
+  graphql:name "glossaries" ;
+  graphql:publicClass edg:GlossaryViewpoint ;
+.
+edg:GlossaryTerm
+  rdfs:subClassOf edg:GlossaryViewpoint ;
+  rdfs:subClassOf edg:Narratable ;
+  sh:property edg:GlossaryTerm-inverseOfMapsToTerm ;
+.
+edg:GlossaryTerm-broaderTransitive
+  sh:order "3"^^xsd:decimal ;
+.
+edg:GlossaryTerm-businessRule
+  sh:group edg:GlossaryTermPropertiesGroup ;
+  sh:order "90"^^xsd:decimal ;
+.
+edg:GlossaryTerm-changeNote
+  sh:group edg:NarratablePropertiesGroup ;
+  sh:order "70"^^xsd:decimal ;
+.
+edg:GlossaryTerm-dataRequiredForBusinessActivity
+  sh:group edg:GlossaryTermPropertiesGroup ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:GlossaryTerm-dataValueRule
+  sh:group edg:GlossaryTermPropertiesGroup ;
+  sh:order "100"^^xsd:decimal ;
+.
+edg:GlossaryTerm-definition
+  sh:group edg:IdentifiersGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:GlossaryTerm-description
+  sh:order "5"^^xsd:decimal ;
+.
+edg:GlossaryTerm-editorialNote
+  sh:group edg:NarratablePropertiesGroup ;
+  sh:order "72"^^xsd:decimal ;
+.
+edg:GlossaryTerm-hiddenLabel
+  sh:filterShape dash:None ;
+  sh:order "4"^^xsd:decimal ;
+.
+edg:GlossaryTerm-historyNote
+  sh:group edg:NarratablePropertiesGroup ;
+  sh:order "74"^^xsd:decimal ;
+.
+edg:GlossaryTerm-inverseOfMapsToTerm
+  a sh:PropertyShape ;
+  sh:path [
+      sh:inversePath edg:mapsToTerm ;
+    ] ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/glossary> ;
+  sh:class edg:Asset ;
+  sh:group edg:GlossaryTermTraceabilityGroup ;
+  sh:name "traces to" ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:GlossaryTerm-mappingRelation
+  sh:order "9"^^xsd:decimal ;
+.
+edg:GlossaryTerm-narrowMatch
+  sh:order "7"^^xsd:decimal ;
+.
+edg:GlossaryTerm-narrower
+  sh:order "5"^^xsd:decimal ;
+.
+edg:GlossaryTerm-narrowerTransitive
+  sh:order "6"^^xsd:decimal ;
+.
+edg:GlossaryTerm-prefLabel
+  sh:order "2"^^xsd:decimal ;
+.
+edg:GlossaryTerm-scopeNote
+  sh:group edg:NarratablePropertiesGroup ;
+  sh:order "76"^^xsd:decimal ;
+.
+edg:GlossaryTerm-semanticRelation
+  sh:order "10"^^xsd:decimal ;
+.
+edg:GlossaryTerm-source
+  sh:order "1"^^xsd:decimal ;
+.
+edg:GlossaryTerm-supercededBy
+  sh:order "5"^^xsd:decimal ;
+.
+edg:GlossaryTerm-termUsedBy
+  sh:group edg:GlossaryTermTraceabilityGroup ;
+  sh:order "60"^^xsd:decimal ;
+.
+edg:GlossaryTerm-topConceptOf
+  sh:order "11"^^xsd:decimal ;
+.
+edg:GlossaryTerm-type
+  a sh:PropertyShape ;
+  sh:path rdf:type ;
+  tosh:editWidget edg:RDFTypeEditor ;
+  tosh:searchWidget edg:RDFTypeSelectFacet ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/glossary> ;
+  sh:class rdfs:Class ;
+  sh:group edg:GlossaryTermPropertiesGroup ;
+  sh:order "0"^^xsd:decimal ;
+.
+edg:GlossaryTermAspect-originatedBy
+  sh:order "5"^^xsd:decimal ;
+.
+edg:GlossaryTermPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:openable true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/glossary> ;
+  rdfs:label "Glossary Term Metadata" ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:GlossaryTermRelatable-broadMatch
+  sh:group edg:TermRelationshipsGroup ;
+  sh:order "60"^^xsd:decimal ;
+.
+edg:GlossaryTermRelatable-broaderTerm
+  sh:group edg:TermRelationshipsGroup ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:GlossaryTermRelatable-closeMatch
+  sh:group edg:TermRelationshipsGroup ;
+  sh:order "50"^^xsd:decimal ;
+.
+edg:GlossaryTermRelatable-exactMatch
+  sh:group edg:TermRelationshipsGroup ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:GlossaryTermRelatable-relatedMatch
+  sh:group edg:TermRelationshipsGroup ;
+  sh:order "70"^^xsd:decimal ;
+.
+edg:GlossaryTermRelatable-relatedTerm
+  sh:group edg:TermRelationshipsGroup ;
+  sh:order "30"^^xsd:decimal ;
+.
+edg:GlossaryTermTraceabilityGroup
+  a sh:PropertyGroup ;
+  tosh:openable true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/glossary> ;
+  rdfs:label "Glossary Term Traceability" ;
+  sh:order "40"^^xsd:decimal ;
+.
+edg:GlossaryViewpoint
+  a edg:ViewpointClass ;
+  dash:abstract true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/glossary> ;
+  rdfs:label "Glossary Asset" ;
+  rdfs:subClassOf edg:Viewpoint ;
+.
+edg:NarratablePropertiesGroup
+  tosh:openable true ;
+.
+edg:Provenance-derivedFrom
+  sh:order "4"^^xsd:decimal ;
+.
+edg:Provenance-originatedBy
+  sh:group edg:ProvenanceGroup ;
+.
+edg:Provenance-source
+  sh:group edg:ProvenanceGroup ;
+.
+edg:Provenance-wasInfluencedBy
+  sh:group edg:ProvenanceGroup ;
+.
+edg:TermCategoryPropertiesGroup
+  a sh:PropertyGroup ;
+  tosh:openable true ;
+  rdfs:label "Term Category Metadata" ;
+  sh:order "10"^^xsd:decimal ;
+.
+edg:TermRelationshipsGroup
+  a sh:PropertyGroup ;
+  tosh:openable true ;
+  rdfs:isDefinedBy <http://edg.topbraid.solutions/1.0/shapes/glossary> ;
+  rdfs:label "Term Relationships" ;
+  sh:order 30 ;
+.
+<http://edg.topbraid.solutions/shapes/glossary/GMD_glossary>
+  a vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:ShapesGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/shapes/glossary> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+dcterms:description
+  a rdf:Property ;
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "description" ;
+  rdfs:range xsd:string ;
+.
+dcterms:source
+  a owl:AnnotationProperty ;
+  rdfs:isDefinedBy dcterms: ;
+  rdfs:label "source" ;
+  rdfs:range xsd:anyURI ;
+.

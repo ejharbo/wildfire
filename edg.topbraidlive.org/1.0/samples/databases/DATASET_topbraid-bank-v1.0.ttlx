@@ -1,0 +1,924 @@
+# baseURI: http://edg.topbraid.solutions/1.0/model/topbraid-bank
+# imports: http://edg.topbraid.solutions/1.0/datatypes/oracle
+# imports: http://edg.topbraid.solutions/1.0/schema/datamodels
+# imports: http://www.linkedmodel.org/schema/vaem
+
+@prefix afn: <http://jena.hpl.hp.com/ARQ/function#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix datatype: <http://qudt.org/vocab/datatype/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dtype: <http://www.linkedmodel.org/schema/dtype#> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix edg.glossary: <http://edg.topbraid.solutions/glossary/> .
+@prefix edg.sqoop: <http://edg.topbraid.solutions/model/sqoop/> .
+@prefix edg.tq: <http://edg.tq.topbraid.solutions/data-assets-model/> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provo: <http://www.w3.org/ns/prov#> .
+@prefix quantity: <http://qudt.org/vocab/quantity/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix qudt-refdata: <http://qudt.org/vocab/refdata/> .
+@prefix qudt.type: <http://qudt.org/vocab/type/> .
+@prefix raci: <http://topbraid.org/raci#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdm: <http://rdm.topbraidlive.org/rdm/> .
+@prefix rdmfact: <http://topbraid.org/rdmfact#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spif: <http://spinrdf.org/spif#> .
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix vaem: <http://www.linkedmodel.org/schema/vaem#> .
+@prefix voag: <http://voag.linkedmodel.org/voag/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://edg.topbraid.solutions/1.0/model/topbraid-bank>
+  rdf:type owl:Ontology ;
+  vaem:hasGraphMetadata <http://edg.topbraid.solutions/model/topbraid-bank/GMD_topbraid-bank> ;
+  vaem:releaseDate "2016-09-27"^^xsd:date ;
+  owl:imports <http://edg.topbraid.solutions/1.0/datatypes/oracle> ;
+  owl:imports <http://edg.topbraid.solutions/1.0/schema/datamodels> ;
+  owl:imports <http://www.linkedmodel.org/schema/vaem> ;
+  owl:versionInfo "Created using TopBraid EDG SQL to RDF Transformer" ;
+.
+edg:ORACLE_DATE
+  edg:name "ORACLE DATE" ;
+  rdfs:label "ORACLE_DATE" ;
+.
+edg:ORACLE_NUMBER-15-0
+  rdf:type edg:OracleNumericDatatype ;
+  edg:name "ORACLE_NUMBER-15-0" ;
+  edg:precision 15 ;
+  edg:scale 0 ;
+  rdfs:label "ORACLE_NUMBER-15-0" ;
+.
+edg:ORACLE_VARCHAR2-1
+  rdf:type edg:OracleVarchar2 ;
+  edg:length 1 ;
+  edg:name "ORACLE_VARCHAR2-1" ;
+  rdfs:label "ORACLE_VARCHAR2-1" ;
+.
+edg:ORACLE_VARCHAR2-12
+  rdf:type edg:OracleVarchar2 ;
+  edg:length 12 ;
+  edg:name "ORACLE_VARCHAR2-12" ;
+  rdfs:label "ORACLE_VARCHAR2-12" ;
+.
+edg:ORACLE_VARCHAR2-15
+  rdf:type edg:OracleVarchar2 ;
+  edg:length 15 ;
+  edg:name "ORACLE_VARCHAR2-15" ;
+  rdfs:label "ORACLE_VARCHAR2-15" ;
+.
+edg:ORACLE_VARCHAR2-50
+  rdf:type edg:OracleVarchar2 ;
+  edg:length 50 ;
+  edg:name "ORACLE_VARCHAR2-50" ;
+  rdfs:label "ORACLE_VARCHAR2-50" ;
+.
+<http://edg.topbraid.solutions/model/topbraid-bank/GMD_topbraid-bank>
+  rdf:type vaem:GraphMetaData ;
+  dcterms:modified "2016-12-18"^^xsd:date ;
+  dcterms:rights "<p>This ontology is issued under a restricted copyright license that prohibits reproduction, distribution, copying and any other form of sharing. The license agreement can be found at <a href='http://www.topquadrant.com/docs/legal/EULA.pdf'>http://www.topquadrant.com/docs/legal/EULA.pdf.</p>"^^rdf:HTML ;
+  vaem:hasGraphRole vaem:ModelGraph ;
+  vaem:hasLicenseType <voag:TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:hasOwner vaem:TopQuadrant ;
+  vaem:hasSteward vaem:TopQuadrant ;
+  vaem:isMetadataFor <http://edg.topbraid.solutions/1.0/model/topbraid-bank> ;
+  vaem:name "EDG" ;
+  vaem:namespace "http://edg.topbraid.solutions/model/" ;
+  vaem:namespacePrefix "edg" ;
+  vaem:owner "TopQuadrant, Inc." ;
+  vaem:releaseDate "2016-12-18"^^xsd:date ;
+  vaem:revision "1.0" ;
+  vaem:usesNonImportedResource dcterms:abstract ;
+  vaem:usesNonImportedResource dcterms:author ;
+  vaem:usesNonImportedResource dcterms:created ;
+  vaem:usesNonImportedResource dcterms:modified ;
+  vaem:usesNonImportedResource dcterms:rights ;
+  vaem:usesNonImportedResource dcterms:title ;
+  vaem:usesNonImportedResource <http://voag.linkedmodel.org/voag#TopQuadrant_ONTOLOGY-LICENSE> ;
+  vaem:withAttributionTo "Any references to this ontology should give attribution to TopQuadrant, Inc." ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.ACCOUNT.ACCOUNT_NUMBER>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.ACCOUNT> ;
+  edg:isNullable "false"^^xsd:boolean ;
+  edg:isPrimaryKey "true"^^xsd:boolean ;
+  edg:name "ACCOUNT_NUMBER" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-15 ;
+  rdfs:label "ACCOUNT_NUMBER (TOPBRAID-BANK.ACCOUNT)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.ACCOUNT.BALANCE>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.ACCOUNT> ;
+  edg:isNullable "false"^^xsd:boolean ;
+  edg:name "BALANCE" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "BALANCE (TOPBRAID-BANK.ACCOUNT)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.ACCOUNT.BRANCH_NAME>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.ACCOUNT> ;
+  edg:isNullable "false"^^xsd:boolean ;
+  edg:name "BRANCH_NAME" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-15 ;
+  rdfs:label "BRANCH_NAME (TOPBRAID-BANK.ACCOUNT)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE.AFS_COLLATERALIZED_DEPOSIT_BANK>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE> ;
+  edg:name "AFS_COLLATERALIZED_DEPOSIT_BANK" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "AFS_COLLATERALIZED_DEPOSIT_BANK (TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE.AFS_COLLATERALIZED_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE> ;
+  edg:name "AFS_COLLATERALIZED_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "AFS_COLLATERALIZED_ID (TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE.AFS_COLLATERALIZED_PORTION>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE> ;
+  edg:name "AFS_COLLATERALIZED_PORTION" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "AFS_COLLATERALIZED_PORTION (TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE.AFS_SECURITIZATION_EXPOSURE_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE> ;
+  edg:isPrimaryKey "true"^^xsd:boolean ;
+  edg:name "AFS_SECURITIZATION_EXPOSURE_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "AFS_SECURITIZATION_EXPOSURE_ID (TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE.AOCI-OPT-OUT-ELECTION>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE> ;
+  edg:name "AOCI-OPT-OUT-ELECTION" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-1 ;
+  rdfs:label "AOCI-OPT-OUT-ELECTION (TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE.AUDIT_LOG_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE> ;
+  edg:name "AUDIT_LOG_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "AUDIT_LOG_ID (TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE.CLEARED-DERIVATIVE-XACTION>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE> ;
+  edg:name "CLEARED-DERIVATIVE-XACTION" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-1 ;
+  rdfs:label "CLEARED-DERIVATIVE-XACTION (TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE.CRC_RATING>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE> ;
+  edg:name "CRC_RATING" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "CRC_RATING (TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE.CREATED_BY>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE> ;
+  edg:name "CREATED_BY" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "CREATED_BY (TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE.CREATED_DATE>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE> ;
+  edg:name "CREATED_DATE" ;
+  edg:physicalDatatype edg:ORACLE_DATE ;
+  rdfs:label "CREATED_DATE (TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE.CUSTOMER_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE> ;
+  edg:name "CUSTOMER_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "CUSTOMER_ID (TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE.EXPOSURE_AMT>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE> ;
+  edg:description "Securitization exposure amount."^^rdf:HTML ;
+  edg:name "EXPOSURE_AMT" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "EXPOSURE_AMT (TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE.EXPOSURE_CALCULATION_METHOD>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE> ;
+  edg:name "EXPOSURE_CALCULATION_METHOD" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "EXPOSURE_CALCULATION_METHOD (TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE.EXPOSURE_RISK_WEIGHTED_AMT>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE> ;
+  edg:name "EXPOSURE_RISK_WEIGHTED_AMT" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "EXPOSURE_RISK_WEIGHTED_AMT (TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE.EXPOSURE_TYPE>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE> ;
+  edg:name "EXPOSURE_TYPE" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "EXPOSURE_TYPE (TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE.LOAN_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE> ;
+  edg:name "LOAN_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "LOAN_ID (TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE.OTC-DERIVATIVE>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE> ;
+  edg:name "OTC-DERIVATIVE" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-1 ;
+  rdfs:label "OTC-DERIVATIVE (TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE.PROCESS_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE> ;
+  edg:name "PROCESS_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "PROCESS_ID (TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE.SECURITY_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE> ;
+  edg:name "SECURITY_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "SECURITY_ID (TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE.TIME_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE> ;
+  edg:name "TIME_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "TIME_ID (TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.ASSET.ASSET_AMT>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.ASSET> ;
+  edg:name "ASSET_AMT" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "ASSET_AMT (TOPBRAID-BANK.ASSET)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.ASSET.ASSET_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.ASSET> ;
+  edg:isPrimaryKey "true"^^xsd:boolean ;
+  edg:name "ASSET_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "ASSET_ID (TOPBRAID-BANK.ASSET)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.ASSET.ASSET_TYPE>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.ASSET> ;
+  edg:name "ASSET_TYPE" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "ASSET_TYPE (TOPBRAID-BANK.ASSET)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.ASSET.AUDIT_LOG_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.ASSET> ;
+  edg:name "AUDIT_LOG_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "AUDIT_LOG_ID (TOPBRAID-BANK.ASSET)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.ASSET.CREATED_BY>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.ASSET> ;
+  edg:name "CREATED_BY" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "CREATED_BY (TOPBRAID-BANK.ASSET)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.ASSET.CREATED_DATE>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.ASSET> ;
+  edg:name "CREATED_DATE" ;
+  edg:physicalDatatype edg:ORACLE_DATE ;
+  rdfs:label "CREATED_DATE (TOPBRAID-BANK.ASSET)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.ASSET.PROCESS_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.ASSET> ;
+  edg:name "PROCESS_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "PROCESS_ID (TOPBRAID-BANK.ASSET)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.ASSET.TIME_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.ASSET> ;
+  edg:name "TIME_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "TIME_ID (TOPBRAID-BANK.ASSET)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.BORROWER.CUSTOMER_NAME>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.BORROWER> ;
+  edg:isNullable "false"^^xsd:boolean ;
+  edg:isPrimaryKey "true"^^xsd:boolean ;
+  edg:name "CUSTOMER_NAME" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-15 ;
+  rdfs:label "CUSTOMER_NAME (TOPBRAID-BANK.BORROWER)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.BORROWER.LOAN_NUMBER>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.BORROWER> ;
+  edg:isNullable "false"^^xsd:boolean ;
+  edg:isPrimaryKey "true"^^xsd:boolean ;
+  edg:name "LOAN_NUMBER" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-15 ;
+  rdfs:label "LOAN_NUMBER (TOPBRAID-BANK.BORROWER)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.BRANCH.ASSETS>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.BRANCH> ;
+  edg:isNullable "false"^^xsd:boolean ;
+  edg:name "ASSETS" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "ASSETS (TOPBRAID-BANK.BRANCH)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.BRANCH.BRANCH_CITY>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.BRANCH> ;
+  edg:isNullable "false"^^xsd:boolean ;
+  edg:name "BRANCH_CITY" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-15 ;
+  rdfs:label "BRANCH_CITY (TOPBRAID-BANK.BRANCH)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.BRANCH.BRANCH_NAME>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.BRANCH> ;
+  edg:isNullable "false"^^xsd:boolean ;
+  edg:isPrimaryKey "true"^^xsd:boolean ;
+  edg:name "BRANCH_NAME" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-15 ;
+  rdfs:label "BRANCH_NAME (TOPBRAID-BANK.BRANCH)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.CUSTOMER.CUSTOMER_CITY>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.CUSTOMER> ;
+  edg:isNullable "false"^^xsd:boolean ;
+  edg:name "CUSTOMER_CITY" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-15 ;
+  rdfs:label "CUSTOMER_CITY (TOPBRAID-BANK.CUSTOMER)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.CUSTOMER.CUSTOMER_NAME>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.CUSTOMER> ;
+  edg:isNullable "false"^^xsd:boolean ;
+  edg:isPrimaryKey "true"^^xsd:boolean ;
+  edg:name "CUSTOMER_NAME" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-15 ;
+  rdfs:label "CUSTOMER_NAME (TOPBRAID-BANK.CUSTOMER)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.CUSTOMER.CUSTOMER_STREET>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.CUSTOMER> ;
+  edg:isNullable "false"^^xsd:boolean ;
+  edg:name "CUSTOMER_STREET" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-12 ;
+  rdfs:label "CUSTOMER_STREET (TOPBRAID-BANK.CUSTOMER)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.DEPOSITOR.ACCOUNT_NUMBER>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.DEPOSITOR> ;
+  edg:isNullable "false"^^xsd:boolean ;
+  edg:isPrimaryKey "true"^^xsd:boolean ;
+  edg:name "ACCOUNT_NUMBER" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-15 ;
+  rdfs:label "ACCOUNT_NUMBER (TOPBRAID-BANK.DEPOSITOR)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.DEPOSITOR.CUSTOMER_NAME>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.DEPOSITOR> ;
+  edg:isNullable "false"^^xsd:boolean ;
+  edg:isPrimaryKey "true"^^xsd:boolean ;
+  edg:name "CUSTOMER_NAME" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-15 ;
+  rdfs:label "CUSTOMER_NAME (TOPBRAID-BANK.DEPOSITOR)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE.AOCI-OPT-OUT-ELECTION>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE> ;
+  edg:name "AOCI-OPT-OUT-ELECTION" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-1 ;
+  rdfs:label "AOCI-OPT-OUT-ELECTION (TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE.AUDIT_LOG_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE> ;
+  edg:name "AUDIT_LOG_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "AUDIT_LOG_ID (TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE.CREATED_BY>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE> ;
+  edg:name "CREATED_BY" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "CREATED_BY (TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE.CREATED_DATE>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE> ;
+  edg:name "CREATED_DATE" ;
+  edg:physicalDatatype edg:ORACLE_DATE ;
+  rdfs:label "CREATED_DATE (TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE.CUSTOMER_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE> ;
+  edg:name "CUSTOMER_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "CUSTOMER_ID (TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE.EXPOSURE_AMT>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE> ;
+  edg:name "EXPOSURE_AMT" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "EXPOSURE_AMT (TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE.EXPOSURE_CALCULATION_METHOD>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE> ;
+  edg:name "EXPOSURE_CALCULATION_METHOD" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "EXPOSURE_CALCULATION_METHOD (TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE.EXPOSURE_RISK_WEIGHTED_AMT>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE> ;
+  edg:name "EXPOSURE_RISK_WEIGHTED_AMT" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "EXPOSURE_RISK_WEIGHTED_AMT (TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE.EXPOSURE_TYPE>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE> ;
+  edg:name "EXPOSURE_TYPE" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "EXPOSURE_TYPE (TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE.HTM_SECURITIZATION_EXPOSURE_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE> ;
+  edg:isPrimaryKey "true"^^xsd:boolean ;
+  edg:name "HTM_SECURITIZATION_EXPOSURE_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "HTM_SECURITIZATION_EXPOSURE_ID (TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE.LOAN_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE> ;
+  edg:name "LOAN_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "LOAN_ID (TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE.PROCESS_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE> ;
+  edg:name "PROCESS_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "PROCESS_ID (TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE.SECURITY_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE> ;
+  edg:name "SECURITY_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "SECURITY_ID (TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE.TIME_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE> ;
+  edg:name "TIME_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "TIME_ID (TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.LOAN.AUDIT_LOG_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.LOAN> ;
+  edg:name "AUDIT_LOG_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "AUDIT_LOG_ID (TOPBRAID-BANK.LOAN)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.LOAN.CREATED_BY>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.LOAN> ;
+  edg:name "CREATED_BY" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "CREATED_BY (TOPBRAID-BANK.LOAN)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.LOAN.CREATED_DATE>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.LOAN> ;
+  edg:name "CREATED_DATE" ;
+  edg:physicalDatatype edg:ORACLE_DATE ;
+  rdfs:label "CREATED_DATE (TOPBRAID-BANK.LOAN)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.LOAN.CUSTOMER_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.LOAN> ;
+  edg:isPrimaryKey "true"^^xsd:boolean ;
+  edg:name "CUSTOMER_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "CUSTOMER_ID (TOPBRAID-BANK.LOAN)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.LOAN.LOAN_AMT>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.LOAN> ;
+  edg:name "LOAN_AMT" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "LOAN_AMT (TOPBRAID-BANK.LOAN)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.LOAN.LOAN_ID>
+  edg:isPrimaryKey "true"^^xsd:boolean ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.LOAN.LOAN_TYPE>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.LOAN> ;
+  edg:name "LOAN_TYPE" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "LOAN_TYPE (TOPBRAID-BANK.LOAN)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.LOAN.PROCESS_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.LOAN> ;
+  edg:name "PROCESS_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "PROCESS_ID (TOPBRAID-BANK.LOAN)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.LOAN.SUPPLIER_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.LOAN> ;
+  edg:name "SUPPLIER_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "SUPPLIER_ID (TOPBRAID-BANK.LOAN)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.LOAN.TIME_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.LOAN> ;
+  edg:name "TIME_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "TIME_ID (TOPBRAID-BANK.LOAN)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.LOAN_SECURITY.AUDIT_LOG_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.LOAN_SECURITY> ;
+  edg:name "AUDIT_LOG_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "AUDIT_LOG_ID (TOPBRAID-BANK.LOAN_SECURITY)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.LOAN_SECURITY.CREATED_BY>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.LOAN_SECURITY> ;
+  edg:name "CREATED_BY" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "CREATED_BY (TOPBRAID-BANK.LOAN_SECURITY)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.LOAN_SECURITY.CREATED_DATE>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.LOAN_SECURITY> ;
+  edg:name "CREATED_DATE" ;
+  edg:physicalDatatype edg:ORACLE_DATE ;
+  rdfs:label "CREATED_DATE (TOPBRAID-BANK.LOAN_SECURITY)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.LOAN_SECURITY.CUSTOMER_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.LOAN_SECURITY> ;
+  edg:isPrimaryKey "true"^^xsd:boolean ;
+  edg:name "CUSTOMER_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "CUSTOMER_ID (TOPBRAID-BANK.LOAN_SECURITY)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.LOAN_SECURITY.LOAN_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.LOAN_SECURITY> ;
+  edg:name "LOAN_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "LOAN_ID (TOPBRAID-BANK.LOAN_SECURITY)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.LOAN_SECURITY.PROCESS_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.LOAN_SECURITY> ;
+  edg:name "PROCESS_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "PROCESS_ID (TOPBRAID-BANK.LOAN_SECURITY)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.LOAN_SECURITY.SECURITY_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.LOAN_SECURITY> ;
+  edg:isPrimaryKey "true"^^xsd:boolean ;
+  edg:name "SECURITY_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "SECURITY_ID (TOPBRAID-BANK.LOAN_SECURITY)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.LOAN_SECURITY.SECURITY_TYPE>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.LOAN_SECURITY> ;
+  edg:name "SECURITY_TYPE" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "SECURITY_TYPE (TOPBRAID-BANK.LOAN_SECURITY)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.LOAN_SECURITY.TIME_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.LOAN_SECURITY> ;
+  edg:name "TIME_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "TIME_ID (TOPBRAID-BANK.LOAN_SECURITY)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.SECURITIZATION_EXPOSURE.AOCI-OPT-OUT-ELECTION>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.SECURITIZATION_EXPOSURE> ;
+  edg:name "AOCI-OPT-OUT-ELECTION" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-1 ;
+  rdfs:label "AOCI-OPT-OUT-ELECTION (TOPBRAID-BANK.SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.SECURITIZATION_EXPOSURE.AUDIT_LOG_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.SECURITIZATION_EXPOSURE> ;
+  edg:name "AUDIT_LOG_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "AUDIT_LOG_ID (TOPBRAID-BANK.SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.SECURITIZATION_EXPOSURE.CREATED_BY>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.SECURITIZATION_EXPOSURE> ;
+  edg:name "CREATED_BY" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "CREATED_BY (TOPBRAID-BANK.SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.SECURITIZATION_EXPOSURE.CREATED_DATE>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.SECURITIZATION_EXPOSURE> ;
+  edg:name "CREATED_DATE" ;
+  edg:physicalDatatype edg:ORACLE_DATE ;
+  rdfs:label "CREATED_DATE (TOPBRAID-BANK.SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.SECURITIZATION_EXPOSURE.CUSTOMER_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.SECURITIZATION_EXPOSURE> ;
+  edg:name "CUSTOMER_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "CUSTOMER_ID (TOPBRAID-BANK.SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.SECURITIZATION_EXPOSURE.EXPOSURE_AMT>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.SECURITIZATION_EXPOSURE> ;
+  edg:name "EXPOSURE_AMT" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "EXPOSURE_AMT (TOPBRAID-BANK.SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.SECURITIZATION_EXPOSURE.EXPOSURE_CALCULATION_METHOD>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.SECURITIZATION_EXPOSURE> ;
+  edg:name "EXPOSURE_CALCULATION_METHOD" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "EXPOSURE_CALCULATION_METHOD (TOPBRAID-BANK.SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.SECURITIZATION_EXPOSURE.EXPOSURE_RISK_WEIGHTED_AMT>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.SECURITIZATION_EXPOSURE> ;
+  edg:name "EXPOSURE_RISK_WEIGHTED_AMT" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "EXPOSURE_RISK_WEIGHTED_AMT (TOPBRAID-BANK.SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.SECURITIZATION_EXPOSURE.EXPOSURE_TYPE>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.SECURITIZATION_EXPOSURE> ;
+  edg:name "EXPOSURE_TYPE" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "EXPOSURE_TYPE (TOPBRAID-BANK.SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.SECURITIZATION_EXPOSURE.LOAN_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.SECURITIZATION_EXPOSURE> ;
+  edg:name "LOAN_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "LOAN_ID (TOPBRAID-BANK.SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.SECURITIZATION_EXPOSURE.PROCESS_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.SECURITIZATION_EXPOSURE> ;
+  edg:name "PROCESS_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "PROCESS_ID (TOPBRAID-BANK.SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.SECURITIZATION_EXPOSURE.SECURITIZATION_EXPOSURE_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.SECURITIZATION_EXPOSURE> ;
+  edg:isPrimaryKey "true"^^xsd:boolean ;
+  edg:name "SECURITIZATION_EXPOSURE_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "SECURITIZATION_EXPOSURE_ID (TOPBRAID-BANK.SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.SECURITIZATION_EXPOSURE.SECURITY_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.SECURITIZATION_EXPOSURE> ;
+  edg:name "SECURITY_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "SECURITY_ID (TOPBRAID-BANK.SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.SECURITIZATION_EXPOSURE.SUPPLY_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.SECURITIZATION_EXPOSURE> ;
+  edg:name "SUPPLY_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "SUPPLY_ID (TOPBRAID-BANK.SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.SECURITIZATION_EXPOSURE.TIME_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.SECURITIZATION_EXPOSURE> ;
+  edg:name "TIME_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "TIME_ID (TOPBRAID-BANK.SECURITIZATION_EXPOSURE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.TRADE.AUDIT_LOG_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.TRADE> ;
+  edg:name "AUDIT_LOG_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "AUDIT_LOG_ID (TOPBRAID-BANK.TRADE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.TRADE.CREATED_BY>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.TRADE> ;
+  edg:name "CREATED_BY" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "CREATED_BY (TOPBRAID-BANK.TRADE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.TRADE.CREATED_DATE>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.TRADE> ;
+  edg:name "CREATED_DATE" ;
+  edg:physicalDatatype edg:ORACLE_DATE ;
+  rdfs:label "CREATED_DATE (TOPBRAID-BANK.TRADE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.TRADE.CUSTOMER_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.TRADE> ;
+  edg:name "CUSTOMER_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "CUSTOMER_ID (TOPBRAID-BANK.TRADE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.TRADE.EXCHANGE_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.TRADE> ;
+  edg:name "EXCHANGE_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "EXCHANGE_ID (TOPBRAID-BANK.TRADE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.TRADE.FEE_AMT>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.TRADE> ;
+  edg:name "FEE_AMT" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "FEE_AMT (TOPBRAID-BANK.TRADE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.TRADE.INSTRUMENT_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.TRADE> ;
+  edg:name "INSTRUMENT_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "INSTRUMENT_ID (TOPBRAID-BANK.TRADE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.TRADE.NET_SETTLE_AMT>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.TRADE> ;
+  edg:name "NET_SETTLE_AMT" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "NET_SETTLE_AMT (TOPBRAID-BANK.TRADE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.TRADE.PROCESS_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.TRADE> ;
+  edg:name "PROCESS_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "PROCESS_ID (TOPBRAID-BANK.TRADE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.TRADE.TRADE_ID>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.TRADE> ;
+  edg:isPrimaryKey "true"^^xsd:boolean ;
+  edg:name "TRADE_ID" ;
+  edg:physicalDatatype edg:ORACLE_NUMBER-15-0 ;
+  rdfs:label "TRADE_ID (TOPBRAID-BANK.TRADE)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/COL_TOPBRAID-BANK.TRADE.TRADE_TYPE>
+  rdf:type edg:DatabaseColumn ;
+  edg:columnOf <http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.TRADE> ;
+  edg:name "TRADE_TYPE" ;
+  edg:physicalDatatype edg:ORACLE_VARCHAR2-50 ;
+  rdfs:label "TRADE_TYPE (TOPBRAID-BANK.TRADE)" ;
+.
+edg.tq:PDM_TOPBRAID-BANK
+  rdf:type edg:PhysicalDataModel ;
+  edg:realizedAs edg.tq:RDB_TOPBRAID-BANK ;
+  rdfs:label "TOPBRAID-BANK Physical Data Model" ;
+.
+edg.tq:RDB_TOPBRAID-BANK
+  rdf:type edg:RelationalDatabase ;
+  edg:name "TOPBRAID-BANK" ;
+  rdfs:label "TOPBRAID-BANK" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.ACCOUNT>
+  rdf:type edg:DatabaseTable ;
+  edg:name "ACCOUNT" ;
+  edg:tableOf edg.tq:PDM_TOPBRAID-BANK ;
+  rdfs:label "ACCOUNT (TOPBRAID-BANK)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.AFS_SECURITIZATION_EXPOSURE>
+  rdf:type edg:DatabaseTable ;
+  edg:name "AFS_SECURITIZATION_EXPOSURE" ;
+  edg:tableOf edg.tq:PDM_TOPBRAID-BANK ;
+  rdfs:label "AFS_SECURITIZATION_EXPOSURE (TOPBRAID-BANK)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.ASSET>
+  rdf:type edg:DatabaseTable ;
+  edg:name "ASSET" ;
+  edg:tableOf edg.tq:PDM_TOPBRAID-BANK ;
+  rdfs:label "ASSET (TOPBRAID-BANK)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.BORROWER>
+  rdf:type edg:DatabaseTable ;
+  edg:name "BORROWER" ;
+  edg:tableOf edg.tq:PDM_TOPBRAID-BANK ;
+  rdfs:label "BORROWER (TOPBRAID-BANK)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.BRANCH>
+  rdf:type edg:DatabaseTable ;
+  edg:name "BRANCH" ;
+  edg:tableOf edg.tq:PDM_TOPBRAID-BANK ;
+  rdfs:label "BRANCH (TOPBRAID-BANK)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.CUSTOMER>
+  rdf:type edg:DatabaseTable ;
+  edg:name "CUSTOMER" ;
+  edg:tableOf edg.tq:PDM_TOPBRAID-BANK ;
+  rdfs:label "CUSTOMER (TOPBRAID-BANK)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.DEPOSITOR>
+  rdf:type edg:DatabaseTable ;
+  edg:name "DEPOSITOR" ;
+  edg:tableOf edg.tq:PDM_TOPBRAID-BANK ;
+  rdfs:label "DEPOSITOR (TOPBRAID-BANK)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.HTM_SECURITIZATION_EXPOSURE>
+  rdf:type edg:DatabaseTable ;
+  edg:name "HTM_SECURITIZATION_EXPOSURE" ;
+  edg:tableOf edg.tq:PDM_TOPBRAID-BANK ;
+  rdfs:label "HTM_SECURITIZATION_EXPOSURE (TOPBRAID-BANK)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.LOAN>
+  rdf:type edg:DatabaseTable ;
+  edg:name "LOAN" ;
+  edg:tableOf edg.tq:PDM_TOPBRAID-BANK ;
+  rdfs:label "LOAN (TOPBRAID-BANK)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.LOAN_SECURITY>
+  rdf:type edg:DatabaseTable ;
+  edg:name "LOAN_SECURITY" ;
+  edg:tableOf edg.tq:PDM_TOPBRAID-BANK ;
+  rdfs:label "LOAN_SECURITY (TOPBRAID-BANK)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.SECURITIZATION_EXPOSURE>
+  rdf:type edg:DatabaseTable ;
+  edg:name "SECURITIZATION_EXPOSURE" ;
+  edg:tableOf edg.tq:PDM_TOPBRAID-BANK ;
+  rdfs:label "SECURITIZATION_EXPOSURE (TOPBRAID-BANK)" ;
+.
+<http://edg.tq.topbraid.solutions/data-assets-model/TABLE_TOPBRAID-BANK.TRADE>
+  rdf:type edg:DatabaseTable ;
+  edg:name "TRADE" ;
+  edg:tableOf edg.tq:PDM_TOPBRAID-BANK ;
+  rdfs:label "TRADE (TOPBRAID-BANK)" ;
+.

@@ -1,0 +1,85 @@
+# baseURI: http://topbraid.org/status
+# imports: http://datashapes.org/dash
+# prefix: status
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix status: <http://topbraid.org/status#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://topbraid.org/status>
+  rdf:type owl:Ontology ;
+  rdfs:comment """A simple \"status\" vocabulary that can be used to assign a workflow status to any resource.
+
+As of TopBraid 5.4 this namespace has been marked deprecated and may be deleted in future versions. Use EDG status properties instead.""" ;
+  rdfs:label "Status Vocabulary (for codes, concepts, instances, etc.) - [Deprecated]" ;
+  owl:imports <http://datashapes.org/dash> ;
+.
+status:Status
+  rdf:type owl:DeprecatedClass ;
+  rdfs:label "Status" ;
+  rdfs:subClassOf owl:Thing ;
+  owl:deprecated "true"^^xsd:boolean ;
+  owl:oneOf (
+      status:candidate
+      status:approved
+      status:deprecated
+    ) ;
+.
+status:StatusGroup
+  rdf:type sh:PropertyGroup ;
+  rdfs:label "Code Status" ;
+  sh:order "120"^^xsd:decimal ;
+.
+status:StatusShape
+  rdf:type sh:NodeShape ;
+  rdfs:label "Status Shape" ;
+  sh:property [
+      sh:path status:status ;
+      tosh:editWidget <http://topbraid.org/swa#InstancesSelectEditor> ;
+      sh:group status:StatusGroup ;
+      sh:maxCount 1 ;
+      sh:order 0 ;
+    ] ;
+  sh:property [
+      sh:path status:statusEffectiveDate ;
+      sh:group status:StatusGroup ;
+      sh:maxCount 1 ;
+      sh:order 1 ;
+    ] ;
+  sh:targetClass owl:Thing ;
+.
+status:approved
+  rdf:type status:Status ;
+  rdfs:label "approved" ;
+  owl:deprecated "true"^^xsd:boolean ;
+.
+status:candidate
+  rdf:type status:Status ;
+  rdfs:label "candidate" ;
+  owl:deprecated "true"^^xsd:boolean ;
+.
+status:deprecated
+  rdf:type status:Status ;
+  rdfs:label "deprecated" ;
+  owl:deprecated "true"^^xsd:boolean ;
+.
+status:status
+  rdf:type owl:FunctionalProperty ;
+  rdf:type owl:ObjectProperty ;
+  rdfs:comment "The status of a code, concept or instance." ;
+  rdfs:domain owl:Thing ;
+  rdfs:label "status" ;
+  rdfs:range status:Status ;
+  owl:deprecated "true"^^xsd:boolean ;
+.
+status:statusEffectiveDate
+  rdf:type owl:DatatypeProperty ;
+  rdfs:domain owl:Thing ;
+  rdfs:label "status effective date" ;
+  rdfs:range xsd:date ;
+  owl:deprecated "true"^^xsd:boolean ;
+.
